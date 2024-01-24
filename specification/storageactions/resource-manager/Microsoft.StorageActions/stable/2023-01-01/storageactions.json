@@ -423,7 +423,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}/reports/{resourceGroupName}/{storageTaskName}/{subscriptionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}/reports": {
       "get": {
         "operationId": "StorageTasksReport_List",
         "tags": [
@@ -432,16 +432,13 @@
         "description": "Fetch the storage tasks run report summary for each assignment.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storageTaskName",
@@ -466,18 +463,11 @@
             "description": "Optional. When specified, it can be used to query using reporting properties.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PagedStorageTaskReportInstance"
             }
@@ -485,13 +475,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -505,7 +489,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}/storageTaskAssignments/{resourceGroupName}/{storageTaskName}/{subscriptionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}/storageTaskAssignments": {
       "get": {
         "operationId": "StorageTaskAssignment_List",
         "tags": [
@@ -514,16 +498,13 @@
         "description": "Lists all the storage tasks available under the given resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storageTaskName",
@@ -541,18 +522,11 @@
             "description": "Optional, specifies the maximum number of storage task assignment Ids to be included in the list response.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PagedStorageTaskAssignment"
             }
@@ -560,13 +534,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -582,67 +550,6 @@
     }
   },
   "definitions": {
-    "Azure.Core.Foundations.Error": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "description": "A response containing error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Azure.Core.Foundations.InnerError": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
-        }
-      }
-    },
     "Azure.ResourceManager.ManagedServiceIdentity": {
       "type": "object",
       "description": "The managed service identities envelope.",
@@ -1383,16 +1290,5 @@
       }
     }
   },
-  "parameters": {
-    "Azure.Core.Foundations.ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The API version to use for this operation.",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "apiVersion"
-    }
-  }
+  "parameters": {}
 }

@@ -61,70 +61,32 @@ interface StorageTasks {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("StorageTaskAssignment_List")
   @doc("Lists all the storage tasks available under the given resource group.")
-  // FIXME: StorageTaskAssignment_List could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}/storageTaskAssignments")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+  @segment("storageTaskAssignments")
+  list(
+    ...ResourceInstanceParameters<StorageTask, BaseParameters<StorageTask>>,
 
-      @doc("The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.")
-      @maxLength(18)
-      @minLength(3)
-      @pattern("^[a-z0-9]{3,18}$")
-      @path
-      storageTaskName: string;
-
-      @doc("Optional, specifies the maximum number of storage task assignment Ids to be included in the list response.")
-      @query("$maxpagesize")
-      $maxpagesize?: string;
-
-      @doc("The ID of the target subscription. The value must be an UUID.")
-      @path
-      subscriptionId: string;
-    },
-    StorageTaskAssignmentsListResult
-  >;
+    @doc("Optional, specifies the maximum number of storage task assignment Ids to be included in the list response.")
+    @query("$maxpagesize")
+    $maxpagesize?: string,
+  ): ArmResponse<StorageTaskAssignmentsListResult> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("StorageTasksReport_List")
   @doc("Fetch the storage tasks run report summary for each assignment.")
-  // FIXME: StorageTasksReport_List could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}/reports")
   @get
-  reports is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+  @segment("reports")
+  reports(
+    ...ResourceInstanceParameters<StorageTask, BaseParameters<StorageTask>>,
 
-      @doc("The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.")
-      @maxLength(18)
-      @minLength(3)
-      @pattern("^[a-z0-9]{3,18}$")
-      @path
-      storageTaskName: string;
+    @doc("Optional, specifies the maximum number of storage task assignment Ids to be included in the list response.")
+    @query("$maxpagesize")
+    $maxpagesize?: string,
 
-      @doc("Optional, specifies the maximum number of storage task assignment Ids to be included in the list response.")
-      @query("$maxpagesize")
-      $maxpagesize?: string;
-
-      @doc("Optional. When specified, it can be used to query using reporting properties.")
-      @query("$filter")
-      $filter?: string;
-
-      @doc("The ID of the target subscription. The value must be an UUID.")
-      @path
-      subscriptionId: string;
-    },
-    StorageTaskReportSummary
-  >;
+    @doc("Optional. When specified, it can be used to query using reporting properties.")
+    @query("$filter")
+    $filter?: string,
+  ): ArmResponse<StorageTaskReportSummary> | ErrorResponse;
 }
 
 @@projectedName(StorageTasks.create::parameters.resource, "json", "parameters");
