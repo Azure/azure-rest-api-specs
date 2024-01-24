@@ -15,7 +15,7 @@ model AzureMonitorWorkspaceLogsExporter {
   concurrency?: ConcurrencyConfiguration;
 
   @doc("Cache configurations.")
-  cache?: CacheConfig;
+  cache?: CacheConfiguration;
 }
 
 @doc("Azure Monitor Workspace Logs Api configurations.")
@@ -88,7 +88,7 @@ model ConcurrencyConfiguration {
 }
 
 @doc("Cache configurations.")
-model CacheConfig {
+model CacheConfiguration {
   @doc("Max storage usage in megabytes.")
   maxStorageUsage?: int32;
 
