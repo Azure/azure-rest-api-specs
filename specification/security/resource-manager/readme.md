@@ -12,7 +12,7 @@ To build the SDK for Security, simply [Install AutoRest](https://aka.ms/autorest
 
 > `autorest`
 
-To see additional help and options, run: 
+To see additional help and options, run:
 
 > `autorest --help`
 
@@ -65,6 +65,7 @@ directive:
     from: pricings.json
     reason: It does have a LIST API, but it is wrapped with PricingList object.
 ```
+
 ``` yaml
 suppressions:
   - code: ResourceNameRestriction
@@ -77,6 +78,7 @@ suppressions:
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
 ```
+
 ### Basic Information
 
 These are the global settings for the Security API.
@@ -101,6 +103,7 @@ These settings apply only when `--tag=package-2023-11-15` is specified on the co
 input-file:
   - Microsoft.Security/stable/2023-11-15/apiCollections.json
 ```
+
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
@@ -109,6 +112,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 input-file:
   - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
 ```
+
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
@@ -674,20 +678,6 @@ override-info:
   title: SecurityCenter
 ```
 
-### Tag: package-2020-01-preview-only
-
-These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2020-01-preview-only'
-input-file:
-- Microsoft.Security/preview/2020-01-01-preview/connectors.json
-- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
 ### Tag: package-2017-08-only
 
 These settings apply only when `--tag=package-2017-08-only` is specified on the command line. This tag is used for Ruby SDK.
@@ -780,6 +770,7 @@ These settings apply only when `--tag=package-2020-01-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2020-01-preview-only'
 input-file:
+- Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 
