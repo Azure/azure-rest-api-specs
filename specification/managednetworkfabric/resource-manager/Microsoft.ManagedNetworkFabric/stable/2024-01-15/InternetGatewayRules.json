@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Network Fabric Management Service API",
     "description": "Self service experience for Azure Network Fabric API.",
-    "version": "2023-06-15"
+    "version": "2024-01-15"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -268,6 +268,9 @@
         "x-ms-examples": {
           "InternetGatewayRules_Delete_MaximumSet_Gen": {
             "$ref": "./examples/InternetGatewayRules_Delete_MaximumSet_Gen.json"
+          },
+          "InternetGatewayRules_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -438,7 +441,10 @@
       "description": "Rules for the InternetGateways",
       "required": [
         "action",
-        "addressList"
+        "addressList",
+        "condition",
+        "destinationAddressList",
+        "sourceAddressList"
       ],
       "properties": {
         "action": {
@@ -455,6 +461,20 @@
           },
           "example": "Deny"
         },
+        "condition": {
+          "type": "string",
+          "description": "Specify condition.",
+          "minLength": 1,
+          "enum": [
+            "and",
+            "or"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "condition"
+          },
+          "example": "or"
+        },
         "addressList": {
           "type": "array",
           "description": "List of Addresses to be allowed or denied.",
@@ -464,6 +484,28 @@
             "type": "string",
             "minLength": 1,
             "example": "10.10.10.10:22 | www.foo.com"
+          }
+        },
+        "destinationAddressList": {
+          "type": "array",
+          "description": "List of destination Addresses to be allowed or denied.",
+          "minItems": 1,
+          "items": {
+            "description": "DestinationAddresses to be allowed or denied.",
+            "type": "string",
+            "minLength": 1,
+            "example": "10.10.10.10:22 | www.foo.com"
+          }
+        },
+        "sourceAddressList": {
+          "type": "array",
+          "description": "List of source remote ip to be allowed or denied.",
+          "minItems": 1,
+          "items": {
+            "description": "Source remote ip to be allowed or denied.",
+            "type": "string",
+            "minLength": 1,
+            "example": "10.10.10.10"
           }
         }
       }
