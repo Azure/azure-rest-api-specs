@@ -108,7 +108,7 @@
     },
     "/language/analyze-text/jobs": {
       "post": {
-        "operationId": "Language_SubmitJob",
+        "operationId": "Language_AnalyzeTextubmitJob",
         "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.",
         "parameters": [
           {
@@ -147,20 +147,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulAbstractiveSummarizationTaskSubmit": {
-            "$ref": "./examples/SuccessfulAbstractiveSummarizationTaskSubmit.json"
-          },
-          "SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
-          }
-        },
+        "x-ms-examples": {},
         "x-ms-long-running-operation": true
       }
     },
     "/language/analyze-text/jobs/{jobId}": {
       "get": {
-        "operationId": "Language_JobStatus",
+        "operationId": "Language_AnalyzeTextJobStatus",
         "summary": "Get analysis status and results",
         "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
         "parameters": [
@@ -230,7 +223,7 @@
     },
     "/language/analyze-text/jobs/{jobId}:cancel": {
       "post": {
-        "operationId": "Language_Cancel",
+        "operationId": "Language_AnalyzeTextCancelJob",
         "summary": "Cancel a long-running Text Analysis job.",
         "description": "Cancel a long-running Text Analysis job.",
         "parameters": [
@@ -557,7 +550,7 @@
           },
           "x-ms-identifiers": []
         },
-        "nextlink": {
+        "nextLink": {
           "type": "string",
           "description": "next link"
         },
@@ -938,19 +931,6 @@
           }
         }
       }
-    },
-    "ApiVersionParameter": {
-      "type": "object",
-      "description": "Api Version Parameter",
-      "properties": {
-        "api-version": {
-          "type": "string",
-          "description": "Client Api Version."
-        }
-      },
-      "required": [
-        "api-version"
-      ]
     },
     "Association": {
       "type": "string",
@@ -2341,7 +2321,7 @@
           },
           "x-ms-identifiers": []
         },
-        "nextlink": {
+        "nextLink": {
           "type": "string",
           "description": "next link"
         }

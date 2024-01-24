@@ -88,7 +88,7 @@
     },
     "/language/language/analyze-conversations/jobs": {
       "post": {
-        "operationId": "Language_SubmitJob",
+        "operationId": "Language_AnalyzeConversationsSubmitJob",
         "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
@@ -145,6 +145,9 @@
           },
           "SuccessfulConversationSummarySubmit": {
             "$ref": "./examples/SuccessfulConversationSummarySubmit.json"
+          },
+          "SuccessfulCustomConversationSummarizationTaskSubmit": {
+            "$ref": "./examples/SuccessfulCustomConversationSummarizationTaskSubmit.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -152,7 +155,7 @@
     },
     "/language/language/analyze-conversations/jobs/{jobId}": {
       "get": {
-        "operationId": "Language_JobStatus",
+        "operationId": "Language_AnalyzeConversationsJobStatus",
         "summary": "Get analysis status and results",
         "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
         "parameters": [
@@ -215,16 +218,13 @@
           },
           "SuccessfulCustomConversationSummarizationTaskResult": {
             "$ref": "./examples/SuccessfulCustomConversationSummarizationTaskResult.json"
-          },
-          "SuccessfulCustomConversationSummarizationTaskSubmit": {
-            "$ref": "./examples/SuccessfulCustomConversationSummarizationTaskSubmit.json"
           }
         }
       }
     },
     "/language/language/analyze-conversations/jobs/{jobId}:cancel": {
       "post": {
-        "operationId": "Language_Cancel",
+        "operationId": "Language_AnalyzeConversationsCancelJob",
         "summary": "Cancel a long-running Text Analysis conversations job",
         "description": "Cancel a long-running job for text analysis of conversations.",
         "parameters": [

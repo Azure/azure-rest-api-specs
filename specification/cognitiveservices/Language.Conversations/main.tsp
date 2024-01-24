@@ -1749,7 +1749,7 @@ interface Language {
   @example("./SuccessfulConversationSummarizationTaskStatusRequest.json", "SuccessfulConversationSummarizationTaskStatusRequest")
   @example("./SuccessfulCustomConversationSummarizationTaskResult.json", "SuccessfulCustomConversationSummarizationTaskResult")
   @example("./SuccessfulConversationSummarizationTaskResult.json", "SuccessfulConversationSummarizationTaskResult")
-  op jobStatus is Operations.ResourceRead<
+  op analyzeConversationsJobStatus is Operations.ResourceRead<
     AnalyzeConversationJobState, 
     ShowStatsQueryParameter
   >;
@@ -1758,7 +1758,7 @@ interface Language {
   @added(Versions.v2023_04_01)
   @doc("Analyzes the input conversation utterance.")
   @route("/language/analyze-conversations/jobs")
-  @pollingOperation(Language.jobStatus)
+  @pollingOperation(Language.analyzeConversationsJobStatus)
   @example("./SuccessfulConversationPIIExclusionSubmit.json", "SuccessfulConversationPIIExclusionSubmit")
   @example("./SuccessfulConversationPIIRedactionCharSubmit.json", "SuccessfulConversationPIIRedactionCharSubmit")
   @example("./SuccessfulConversationPIISubmit.json", "SuccessfulConversationPIISubmit")
@@ -1766,16 +1766,16 @@ interface Language {
   @example("./SuccessfulConversationSummarySubmit.json", "SuccessfulConversationSummarySubmit")
   @example("./SuccessfulCustomConversationSummarizationTaskSubmit.json", "SuccessfulCustomConversationSummarizationTaskSubmit")
   @example("./SuccessfulConversationSummarizationTaskSubmit.json", "SuccessfulConversationSummarizationTaskSubmit")
-  op submitJob is LanguageLongRunningOperation<AnalyzeConversationJobsInput, AnalyzeConversationJobState>;
+  op analyzeConversationsSubmitJob is LanguageLongRunningOperation<AnalyzeConversationJobsInput, AnalyzeConversationJobState>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @added(Versions.v2023_04_01)
   @doc("Cancel a long-running job for text analysis of conversations.")
   @summary("Cancel a long-running Text Analysis conversations job")
-  @pollingOperation(Language.jobStatus)
+  @pollingOperation(Language.analyzeConversationsJobStatus)
   @actionSeparator(":")
   @action("cancel")
   @example("./SuccessfulAnalyzeConversationsJobsCancelRequest.json", "SuccessfulAnalyzeConversationsJobsCancelRequest")
-  op cancel is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;
+  op analyzeConversationsCancelJob is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;
 
 }
