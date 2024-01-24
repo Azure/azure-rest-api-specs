@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service({
-  title: "SecurityPlatformClient",
+  title: "SecurityPlatformMgmtClient",
   version: "2023-12-01-preview",
 })
 @doc("SecurityPlatform Resource Provider management API.")
