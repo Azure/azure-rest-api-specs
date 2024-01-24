@@ -87,6 +87,10 @@ input-file:
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimtags.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimtenant.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2023-09-01-preview/apimworkspacebackends.json
+  - Microsoft.ApiManagement/preview/2023-09-01-preview/apimworkspacecertificates.json
+  - Microsoft.ApiManagement/preview/2023-09-01-preview/apimworkspacediagnostics.json
+  - Microsoft.ApiManagement/preview/2023-09-01-preview/apimworkspaceloggers.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimworkspaces.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/definitions.json
 ```
