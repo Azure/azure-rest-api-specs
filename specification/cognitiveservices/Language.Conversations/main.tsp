@@ -3,7 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
-// import "@azure-tools/typespec-autorest"; 
+// import "@azure-tools/typespec-autorest";
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -84,7 +84,7 @@ enum AnalyzeConversationTaskResultsKind {
 @resource("language")
 model AnalyzeConversationTask {
   @key
-  @visibility("read", "create", "query" )
+  @visibility("read", "create", "query")
   @doc("The base class of a conversation input task.")
   kind: AnalyzeConversationTaskKind;
 }
@@ -137,7 +137,7 @@ model ConversationItemBase is Record<unknown> {
 
 @added(Versions.v2023_04_01)
 @doc("Role of the participant.")
-enum Role{
+enum Role {
   @added(Versions.v2023_04_01)
   @doc("The participant is a customer.")
   customer,
@@ -614,7 +614,7 @@ model AnalyzeConversationJobsInput {
   displayName?: string;
 
   @key
-  @visibility("read", "create", "query" )
+  @visibility("read", "create", "query")
   @doc("Analysis Input")
   analysisInput: MultiLanguageConversationAnalysisInput;
 
@@ -641,11 +641,11 @@ enum AnalyzeConversationLROTaskKind {
   @added(Versions.v2023_04_15_preview)
   @doc("Conversational PII Task")
   ConversationalPIITask,
-  
+
   @added(Versions.v2023_04_15_preview)
   @doc("Custom Conversational Summarization Task")
   CustomConversationalSummarizationTask,
-  
+
   @added(Versions.v2023_04_15_preview)
   @doc("Conversational Sentiment Task")
   ConversationalSentimentTask,
@@ -657,18 +657,18 @@ enum AnalyzeConversationResultsKind {
   @added(Versions.v2023_04_01)
   @doc("Conversational Summarization Results")
   ConversationalSummarizationResults,
-  
+
   @added(Versions.v2023_04_15_preview)
   @doc("Conversational PII Results")
   ConversationalPIIResults,
-  
+
   @added(Versions.v2023_04_15_preview)
   @doc("Custom Conversational Summarization Results")
   CustomConversationalSummarizationResults,
-  
+
   @added(Versions.v2023_04_15_preview)
   @doc("Conversational Sentiment Results")
-  ConversationalSentimentResults
+  ConversationalSentimentResults,
 }
 
 @doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
@@ -711,8 +711,7 @@ model Tasks {
 
   @doc("List of results from tasks (if available).")
   items?: Array<AnalyzeConversationJobResult>;
-};
-
+}
 
 @doc("Container for results of all tasks in the conversation job.")
 @discriminator("kind")
@@ -875,16 +874,16 @@ model ConversationRequestStatistics is RequestStatistics {
 
 @doc("Audio timing at the conversation item level.")
 @added(Versions.v2023_04_01)
-model ConversationItemLevelTiming is AudioTiming {}
+model ConversationItemLevelTiming is AudioTiming;
 
 @added(Versions.v2023_04_15_preview)
 @doc("Task definition for conversational sentiment.")
 model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
-  kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask,
+  kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask;
 
   @doc("Supported parameters for a conversational sentiment task.")
-  parameters?: ConversationalSentimentTaskParameters,
+  parameters?: ConversationalSentimentTaskParameters;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -902,14 +901,14 @@ model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
   kind: AnalyzeConversationResultsKind.ConversationalSentimentResults;
 
   @doc("The result from sentiment analysis operation for each conversation.")
-  results: ConversationSentimentResults
+  results: ConversationSentimentResults;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
 model ConversationSentimentResults is PreBuiltResult {
   @doc("Array of ConversationSentimentResults")
-  conversations: Array<ConversationSentimentResultsConversation>
+  conversations: Array<ConversationSentimentResultsConversation>;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -923,50 +922,51 @@ model ConversationSentimentResultsConversation {
 @doc("The result from sentiment analysis operation for each conversation item.")
 model ConversationSentimentResult {
   @doc("Enumeration of Sentiment operation results for all the conversation items in a conversation.")
-  conversationItems: Array<ConversationSentimentItemResult>
+  conversationItems: Array<ConversationSentimentItemResult>;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Sentiment operation results for a conversation items")
 model ConversationSentimentItemResult {
   @doc("The identifier for the conversation item")
-  id: string,
+  id: string;
 
   @doc("The identifier for the speaker")
-  participantId: string,
+  participantId: string;
 
   @doc("Predicted sentiment")
-  sentiment: Sentiment,
+  sentiment: Sentiment;
 
   @doc("Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.")
-  confidenceScores: SentimentConfidenceScores,
+  confidenceScores: SentimentConfidenceScores;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Text that has been categorized into pre-defined classes or types such as: person, location, event, product, and organization.")
 model Entity {
   @doc("Entity text as appears in the request.")
-  text: string,
+  text: string;
 
   @doc("Entity type.")
-  category: string,
+  category: string;
 
   @doc("(Optional) Entity sub type.")
-  subcategory?: string,
+  subcategory?: string;
 
   @doc("Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned.")
-  offset: int32,
+  offset: int32;
 
   @doc("Length for the entity text. Use of different 'stringIndexType' values can affect the length returned.")
-  length: int32,
+  length: int32;
 
   @doc("Confidence score between 0 and 1 of the extracted entity.")
-  confidenceScore: float64,
+  confidenceScore: float64;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Result from the personally identifiable information detection and redaction operation performed on a list of conversations.")
-model AnalyzeConversationConversationPiiResult extends AnalyzeConversationJobResult {
+model AnalyzeConversationConversationPiiResult
+  extends AnalyzeConversationJobResult {
   @doc("discriminator kind")
   kind: AnalyzeConversationResultsKind.ConversationalPIIResults;
 
@@ -999,13 +999,13 @@ model ConversationPiiResult {
 @doc("The result from PII detection and redaction operation for each conversation.")
 model ConversationPiiItemResult {
   @doc("Id of the result")
-  id: string,
+  id: string;
 
   @doc("Transcript content response that the service generates, with all necessary personally identifiable information redacted.")
   redactedContent: RedactedTranscriptContent;
 
   @doc("Array of Entities")
-  entities: Array<Entity>
+  entities: Array<Entity>;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -1100,7 +1100,8 @@ enum TranscriptContentType {
 
 @doc("Task definition for custom conversational summarization.")
 @added(Versions.v2023_04_15_preview)
-model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLROTask {
+model AnalyzeCustomConversationSummarizationTask
+  extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.CustomConversationalSummarizationTask;
 
@@ -1120,8 +1121,8 @@ model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
 
 @doc("Supported parameters for a conversational summarization task.")
 @added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParametersBase  is AbstractiveSummarizationTaskParametersBase {
-
+model ConversationSummarizationTaskParametersBase
+  is AbstractiveSummarizationTaskParametersBase {
   @doc("Array of Summary Aspects")
   summaryAspects: Array<SummaryAspect>;
 }
@@ -1164,7 +1165,8 @@ enum SummaryAspect {
 
 @doc("Result for the summarization task on the conversation.")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationSummarizationResult extends AnalyzeConversationJobResult {
+model AnalyzeConversationSummarizationResult
+  extends AnalyzeConversationJobResult {
   @doc("discriminator kind")
   kind: AnalyzeConversationResultsKind.ConversationalSummarizationResults;
 
@@ -1174,12 +1176,13 @@ model AnalyzeConversationSummarizationResult extends AnalyzeConversationJobResul
 
 @doc("Result for the custom summarization task on the conversation.")
 @added(Versions.v2023_04_15_preview)
-model AnalyzeCustomConversationSummarizationResult extends AnalyzeConversationJobResult {
+model AnalyzeCustomConversationSummarizationResult
+  extends AnalyzeConversationJobResult {
   @doc("discriminator kind")
   kind: AnalyzeConversationResultsKind.CustomConversationalSummarizationResults;
 
   @doc("Custom Summary Result")
-  results: CustomSummaryResult
+  results: CustomSummaryResult;
 }
 
 @doc("Summary Results Base")
@@ -1207,6 +1210,7 @@ model CustomSummaryResult {
 @added(Versions.v2023_04_01)
 model ConversationsSummaryResult {
   ...ConversationResultBase;
+
   @doc("array of summaries")
   summaries: Array<SummaryResultItem>;
 }
@@ -1732,13 +1736,14 @@ enum WeightUnit {
   Dram,
 }
 
-alias ServiceTraits = NoRepeatableRequests & NoConditionalRequests & NoClientRequestId;
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @route("/language")
 interface Language {
-
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @post
   @doc("Analyzes the input conversation utterance.")
@@ -1748,8 +1753,10 @@ interface Language {
   // @example("./SuccessfulAnalyzeConversationsArbitrationDirectTarget.json", "SuccessfulAnalyzeConversationsArbitrationDirectTarget")
   analyzeConversations(
     @doc("Collection of conversations to analyze and a single task to execute.")
-    @body body: AnalyzeConversationTask,
-    ...Azure.Core.Foundations.ApiVersionParameter
+    @body
+    body: AnalyzeConversationTask,
+
+    ...Azure.Core.Foundations.ApiVersionParameter,
   ): AnalyzeConversationTaskResult | Azure.Core.Foundations.ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -1763,8 +1770,8 @@ interface Language {
   // @example("./SuccessfulConversationSummarizationTaskStatusRequest.json", "SuccessfulConversationSummarizationTaskStatusRequest")
   // @example("./SuccessfulCustomConversationSummarizationTaskResult.json", "SuccessfulCustomConversationSummarizationTaskResult")
   // @example("./SuccessfulConversationSummarizationTaskResult.json", "SuccessfulConversationSummarizationTaskResult")
-  op analyzeConversationsJobStatus is Operations.ResourceRead<
-    AnalyzeConversationJobState, 
+  analyzeConversationsJobStatus is Operations.ResourceRead<
+    AnalyzeConversationJobState,
     ShowStatsQueryParameter
   >;
 
@@ -1780,7 +1787,10 @@ interface Language {
   // @example("./SuccessfulConversationSummarySubmit.json", "SuccessfulConversationSummarySubmit")
   // @example("./SuccessfulCustomConversationSummarizationTaskSubmit.json", "SuccessfulCustomConversationSummarizationTaskSubmit")
   // @example("./SuccessfulConversationSummarizationTaskSubmit.json", "SuccessfulConversationSummarizationTaskSubmit")
-  op analyzeConversationsSubmitJob is LanguageLongRunningOperation<AnalyzeConversationJobsInput, AnalyzeConversationJobState>;
+  analyzeConversationsSubmitJob is LanguageLongRunningOperation<
+    AnalyzeConversationJobsInput,
+    AnalyzeConversationJobState
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @added(Versions.v2023_04_01)
@@ -1790,6 +1800,5 @@ interface Language {
   @actionSeparator(":")
   @action("cancel")
   // @example("./SuccessfulAnalyzeConversationsJobsCancelRequest.json", "SuccessfulAnalyzeConversationsJobsCancelRequest")
-  op analyzeConversationsCancelJob is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;
-
+  analyzeConversationsCancelJob is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;
 }

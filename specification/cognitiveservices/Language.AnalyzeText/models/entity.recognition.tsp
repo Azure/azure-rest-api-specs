@@ -8,10 +8,8 @@ namespace Language.AnalyzeText;
 model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskKind.EntityRecognition;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   analysisInput?: MultiLanguageAnalysisInput;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: EntitiesTaskParameters;
 }
@@ -38,12 +36,11 @@ model EntitiesTaskParameters is PreBuiltTaskParameters {
   inferenceOptions?: EntityInferenceOptions;
 }
 
-@doc("An object representing the task definition for an Entities Recognition task.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("An object representing the task definition for an Entities Recognition task.")
 model EntitiesLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROTaskKind.EntityRecognition;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: EntitiesTaskParameters;
 }
@@ -52,7 +49,6 @@ model EntitiesLROTask extends AnalyzeTextLROTask {
 model EntitiesTaskResult extends AnalyzeTextTaskResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskResultsKind.EntityRecognitionResults;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: EntitiesResult;
 }
@@ -70,10 +66,11 @@ model EntitiesDocumentResult is DocumentResult {
   entities: Array<Entity>;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntitiesDocumentResultWithMetadataDetectedLanguage is EntitiesDocumentResultWithMetadata {
-  ...DocumentDetectedLanguage
+@added(Versions.v2023_04_15_preview)
+model EntitiesDocumentResultWithMetadataDetectedLanguage
+  is EntitiesDocumentResultWithMetadata {
+  ...DocumentDetectedLanguage;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -102,13 +99,12 @@ model Entity {
 model EntityRecognitionLROResult extends AnalyzeTextLROResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROResultsKind.EntityRecognitionLROResults;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: EntitiesResult;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 enum EntityCategory {
   @doc("Specific street-level mentions of locations: house/building numbers, streets, avenues, highways, intersections referenced by name.")
   Address,
@@ -118,151 +114,151 @@ enum EntityCategory {
 
   @doc("Age-related values.")
   Age,
-  
+
   @doc("Currency-related values.")
   Currency,
-  
+
   @doc("Numbers without a unit")
   Number,
-  
+
   @doc("Range of Numbers")
   NumberRange,
-  
+
   @doc("Percentage-related values.")
   Percentage,
-  
+
   @doc("Ordinal numbers.")
   Ordinal,
-  
+
   @doc("Temperature-related values.")
   Temperature,
-  
+
   @doc("Dimension of measurements")
   Dimension,
-  
+
   @doc("Length of an object.")
   Length,
-  
+
   @doc("Weight of an object.")
   Weight,
-  
+
   @doc("Height of an object.")
   Height,
-  
+
   @doc("Speed of an object.")
   Speed,
-  
+
   @doc("Area of an object.")
   Area,
-  
+
   @doc("Volume of an object.")
   Volume,
-  
+
   @doc("Unit of measure for digital information.")
   Information,
-  
+
   @doc("Items relating to time.")
   Temporal,
-  
+
   @doc("Calendar dates.")
   Date,
-  
+
   @doc("Times of day.")
   Time,
-  
+
   @doc("Calendar dates with time.")
   DateTime,
-  
+
   @doc("Range of dates.")
   DateRange,
-  
+
   @doc("Range of times.")
   TimeRange,
-  
+
   @doc("Range of date and time.")
   DateTimeRange,
-  
+
   @doc("Duration of time.")
   Duration,
-  
+
   @doc("Set of time-related values.")
   SetTemporal,
-  
+
   @doc("Social, sports, business, political, educational, natural, historical, criminal, violent, legal, military events with a timed period.")
   Event,
-  
+
   @doc("Sports event-related values.")
   SportsEvent,
-  
+
   @doc("Cultural event-related values.")
   CulturalEvent,
-  
+
   @doc("Natural event-related values.")
   NaturalEvent,
-  
+
   @doc("Particular point or place in physical space.")
   Location,
-  
+
   @doc("Cities, countries/regions, states.")
   GPE,
-  
+
   @doc("City-related values.")
   City,
-  
+
   @doc("State-related values.")
   State,
-  
+
   @doc("Country or region-related values.")
   CountryRegion,
-  
+
   @doc("Continent-related values.")
   Continent,
-  
+
   @doc("Manmade structures.")
   Structural,
-  
+
   @doc("Airports.")
   Airport,
-  
+
   @doc("Geographic and natural features such as rivers, oceans, and deserts.")
   Geological,
-  
+
   @doc("Corporations, agencies, and other groups of people defined by some established organizational structure. These labels can include companies, political parties/movements, musical bands, sport clubs, government bodies, and public organizations. Nationalities or religions are not ORGANIZATION.")
   Organization,
-  
+
   @doc("Medical companies and groups.")
   OrganizationMedical,
-  
+
   @doc("Stock exchange groups.")
   OrganizationStockExchange,
-  
+
   @doc("Sports-related organizations.")
   OrganizationSports,
-  
+
   @doc("First, last, and middle names, names of fictional characters, and aliases. Titles, such as 'Mr.' or 'President', are not considered part of the named entity.")
   Person,
-  
+
   @doc("Human roles classified by a group membership.")
   PersonType,
-  
+
   @doc("Email addresses.")
   Email,
-  
+
   @doc("URLs to websites.")
   URL,
-  
+
   @doc("network IP addresses.")
   IP,
-  
+
   @doc("Phone numbers (US and EU phone numbers only).")
   PhoneNumber,
-  
+
   @doc("Single or group of commercial, consumable objects, electronics, vehicles, food groups.")
   Product,
-  
+
   @doc("Computing products.")
   ComputingProduct,
-  
+
   @doc("A capability, skill, or expertise.")
   Skill,
 }
@@ -284,8 +280,8 @@ model BaseEntityOverlapPolicy {
   policyKind: EntityOverlapPolicyKind;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 enum EntityOverlapPolicyKind {
   @doc("Represents MatchLongestEntityPolicyType")
   matchLongest,
@@ -308,15 +304,15 @@ model AllowOverlapEntityPolicyType extends BaseEntityOverlapPolicy {
   policyKind: EntityOverlapPolicyKind.allowOverlap;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model EntitiesDocumentResultWithMetadata is DocumentResult {
   @doc("Recognized entities in the document.")
   entities: Array<EntityWithMetadata>;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model EntityTag {
   @doc("Tags are to express some similarities/affinity between entities. Entity Tags will be unique globally.")
   name: string;
@@ -325,8 +321,8 @@ model EntityTag {
   confidenceScore?: float64;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model EntityWithTags is Entity {
   @doc("An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected.")
   type: string;
@@ -335,8 +331,8 @@ model EntityWithTags is Entity {
   tags: Array<EntityTag>;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model EntityWithMetadata is EntityWithTags {
   @doc("The entity metadata object.")
   metadata?: BaseMetadata;
@@ -767,113 +763,95 @@ model QuantityMetadata {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the Age entity Metadata model.")
-model AgeMetadata  extends BaseMetadata {
+model AgeMetadata extends BaseMetadata {
   ...QuantityMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.AgeMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   unit: AgeUnit;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the Volume entity Metadata model.")
-model VolumeMetadata  extends BaseMetadata {
+model VolumeMetadata extends BaseMetadata {
   ...QuantityMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.VolumeMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   unit: VolumeUnit;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the Speed entity Metadata model.")
-model SpeedMetadata  extends BaseMetadata {
+model SpeedMetadata extends BaseMetadata {
   ...QuantityMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.SpeedMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   unit: SpeedUnit;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the Area entity Metadata model.")
-model AreaMetadata  extends BaseMetadata {
+model AreaMetadata extends BaseMetadata {
   ...QuantityMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.AreaMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   unit: AreaUnit;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the Length entity Metadata model.")
-model LengthMetadata  extends BaseMetadata {
+model LengthMetadata extends BaseMetadata {
   ...QuantityMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.LengthMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   unit: LengthUnit;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the Information (data) entity Metadata model.")
-model InformationMetadata  extends BaseMetadata {
+model InformationMetadata extends BaseMetadata {
   ...QuantityMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.InformationMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   unit: InformationUnit;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the Information entity Metadata model.")
-model TemperatureMetadata  extends BaseMetadata {
+model TemperatureMetadata extends BaseMetadata {
   ...QuantityMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.TemperatureMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   unit: TemperatureUnit;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the Weight ) entity Metadata model.")
-model WeightMetadata  extends BaseMetadata {
+model WeightMetadata extends BaseMetadata {
   ...QuantityMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.WeightMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   unit: WeightUnit;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the Currency ) entity Metadata model.")
-model CurrencyMetadata  extends BaseMetadata {
+model CurrencyMetadata extends BaseMetadata {
   ...QuantityMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.CurrencyMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   unit: string;
 
   @doc("The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name.")
-  iso4217?: string
+  iso4217?: string;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -886,21 +864,20 @@ model DateValue {
   value: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  modifier?: TemporalModifier
+  modifier?: TemporalModifier;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model BaseTemporalMetadata {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  dateValues: Array<DateValue>
+  dateValues: Array<DateValue>;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("A Metadata for date entity instances.")
 model DateMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.DateMetadata;
 }
@@ -909,7 +886,6 @@ model DateMetadata extends BaseMetadata {
 @doc("A Metadata for datetime entity instances.")
 model DateTimeMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
-  
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.DateTimeMetadata;
 }
@@ -918,7 +894,6 @@ model DateTimeMetadata extends BaseMetadata {
 @doc("A Metadata for temporal set entity instances.")
 model TemporalSetMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
-  
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.TemporalSetMetadata;
 }
@@ -927,7 +902,6 @@ model TemporalSetMetadata extends BaseMetadata {
 @doc("A Metadata for time entity instances.")
 model TimeMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
-  
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.TimeMetadata;
 }
@@ -937,7 +911,6 @@ model TimeMetadata extends BaseMetadata {
 model NumberMetadata extends BaseMetadata {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.NumberMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   numberKind: NumberKind;
 
@@ -966,17 +939,15 @@ model OrdinalMetadata extends BaseMetadata {
 model TemporalSpanMetadata extends BaseMetadata {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.TemporalSpanMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   spanValues: TemporalSpanValues;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model TemporalSpanValues {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   begin?: utcDateTime;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   end?: utcDateTime;
 
@@ -987,7 +958,7 @@ model TemporalSpanValues {
   modifier?: TemporalModifier;
 
   @doc("An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings.")
-  timex?: string
+  timex?: string;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -995,7 +966,6 @@ model TemporalSpanValues {
 model NumericRangeMetadata extends BaseMetadata {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.NumericRangeMetadata;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   rangeKind: NumericRangeKind;
 
@@ -1008,4 +978,3 @@ model NumericRangeMetadata extends BaseMetadata {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   rangeInclusivity?: RangeInclusivity;
 }
-

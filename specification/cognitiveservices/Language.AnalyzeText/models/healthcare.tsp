@@ -5,29 +5,29 @@ using TypeSpec.Versioning;
 namespace Language.AnalyzeText;
 
 @doc("Supported parameters for a Healthcare task.")
-model HealthcareTaskParameters is PreBuiltTaskParameters { 
+model HealthcareTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType;
 
-  @added(Versions.v2023_04_15_preview)
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  @added(Versions.v2023_04_15_preview)
   @doc("The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.")
   fhirVersion?: fhirVersion;
 
   @added(Versions.v2023_04_15_preview)
   @doc("Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter.")
-  documentType?: healthcareDocumentType
+  documentType?: healthcareDocumentType;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 enum fhirVersion {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  "4.0.1"
+  `4.0.1`,
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 enum healthcareDocumentType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   None,
@@ -54,22 +54,23 @@ enum healthcareDocumentType {
 model HealthcareLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROTaskKind.Healthcare;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: HealthcareTaskParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model HealthcareResult is AnalyzeTextPreBuiltResult {
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @typeChangedFrom(Versions.v2023_04_15_preview, Array<HealthcareEntitiesDocumentResult>)
+  @typeChangedFrom(
+    Versions.v2023_04_15_preview,
+    Array<HealthcareEntitiesDocumentResult>
+  )
   documents: Array<HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model HealthcareEntitiesDocumentResult is DocumentResult {
-  @doc("Healthcare entities.",)
+  @doc("Healthcare entities.")
   entities: Array<HealthcareEntity>;
 
   @doc("Healthcare entity relations.")
@@ -78,7 +79,7 @@ model HealthcareEntitiesDocumentResult is DocumentResult {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @added(Versions.v2023_04_15_preview)
   @doc("JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.")
-  fhirBundle?: Record<unknown>
+  fhirBundle?: Record<unknown>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -91,7 +92,7 @@ model HealthcareEntity {
 
   @doc("(Optional) Entity sub type.")
   subcategory?: string;
-  
+
   @doc("Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned.")
   offset: int32;
 
@@ -115,79 +116,54 @@ model HealthcareEntity {
 enum HealthcareEntityCategory {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   BodyStructure,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Age,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Gender,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   ExaminationName,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Date,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Direction,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Frequency,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   MeasurementValue,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   MeasurementUnit,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   RelationalOperator,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Time,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   GeneOrProtein,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Variant,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   AdministrativeEvent,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   CareEnvironment,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   HealthcareProfession,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Diagnosis,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SymptomOrSign,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   ConditionQualifier,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   MedicationClass,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   MedicationName,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Dosage,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   MedicationForm,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   MedicationRoute,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   FamilyRelation,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   TreatmentName,
 
@@ -249,64 +225,44 @@ model HealthcareRelation {
 enum HealthRelationType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Abbreviation,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   DirectionOfBodyStructure,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   DirectionOfCondition,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   DirectionOfExamination,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   DirectionOfTreatment,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   DosageOfMedication,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   FormOfMedication,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   FrequencyOfMedication,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   FrequencyOfTreatment,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   QualifierOfCondition,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   RelationOfExamination,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   RouteOfMedication,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   TimeOfCondition,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   TimeOfEvent,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   TimeOfExamination,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   TimeOfMedication,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   TimeOfTreatment,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   UnitOfCondition,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   UnitOfExamination,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   ValueOfCondition,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   ValueOfExamination,
 
@@ -369,12 +325,12 @@ enum HealthRelationType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model HealthcareAssertion {
-  @doc( "Describes any conditionality on the entity.")
+  @doc("Describes any conditionality on the entity.")
   conditionality?: Conditionality;
 
   @doc("Describes the entities certainty and polarity.")
   certainty?: Certainty;
-  
+
   @doc("Describes if the entity is the subject of the text or if it describes someone else.")
   association?: Association;
 
@@ -391,42 +347,36 @@ enum Temporality {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   past,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  future
+  future,
 }
 
-@doc( "Describes any conditionality on the entity.")
+@doc("Describes any conditionality on the entity.")
 enum Conditionality {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   hypothetical,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  conditional
+  conditional,
 }
 @doc("Describes the entities certainty and polarity.")
 enum Certainty {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positivePossible,
-  
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   neutralPossible,
-  
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   negativePossible,
-  
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  negative
+  negative,
 }
 
 @doc("Describes if the entity is the subject of the text or if it describes someone else.")
 enum Association {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   subject,
-  
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  other
+  other,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -452,13 +402,13 @@ model HealthcareEntityLink {
 model HealthcareLROResult extends AnalyzeTextLROResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROResultsKind.HealthcareLROResults;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: HealthcareResult;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage is HealthcareEntitiesDocumentResult {
+@added(Versions.v2023_04_15_preview)
+model HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
+  is HealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;
 }

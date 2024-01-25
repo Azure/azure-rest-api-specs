@@ -23,19 +23,14 @@ model AADToken
 enum AnalyzeTextTaskKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SentimentAnalysis,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   EntityRecognition,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   PiiEntityRecognition,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   KeyPhraseExtraction,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   LanguageDetection,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   EntityLinking,
 
@@ -48,28 +43,20 @@ enum AnalyzeTextTaskKind {
 enum AnalyzeTextLROTaskKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SentimentAnalysis,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   EntityRecognition,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   PiiEntityRecognition,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   KeyPhraseExtraction,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   EntityLinking,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Healthcare,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   CustomEntityRecognition,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   CustomSingleLabelClassification,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   CustomMultiLabelClassification,
 
@@ -98,19 +85,14 @@ enum AnalyzeTextLROTaskKind {
 enum AnalyzeTextTaskResultsKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SentimentAnalysisResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   EntityRecognitionResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   PiiEntityRecognitionResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   KeyPhraseExtractionResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   LanguageDetectionResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   EntityLinkingResults,
 
@@ -123,30 +105,21 @@ enum AnalyzeTextTaskResultsKind {
 enum AnalyzeTextLROResultsKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SentimentAnalysisLROResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   EntityRecognitionLROResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   PiiEntityRecognitionLROResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   KeyPhraseExtractionLROResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   EntityLinkingLROResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   HealthcareLROResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   CustomEntityRecognitionLROResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   CustomSingleLabelClassificationLROResults,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   CustomMultiLabelClassificationLROResults,
 
@@ -187,7 +160,7 @@ model AnalyzeTextTask {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("kind")
-model AnalyzeTextLROTask is TaskIdentifier{
+model AnalyzeTextLROTask is TaskIdentifier {
   @doc("The kind of task to perform.")
   kind: AnalyzeTextLROTaskKind;
 }
@@ -203,22 +176,20 @@ model AnalyzeTextTaskResult {
 model AnalyzeTextJobsInput {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   displayName?: string;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   analysisInput: MultiLanguageAnalysisInput;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   tasks: Array<AnalyzeTextLROTask>;
 
   @doc("Default language to use for records requesting automatic language detection.")
-  defaultLanguage?: string
+  defaultLanguage?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AnalyzeTextPreBuiltResult {
   @doc("Errors by document id.")
   errors: Array<AnalyzeTextDocumentError>;
-  
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   statistics?: RequestStatistics;
 
@@ -262,16 +233,12 @@ model TasksState {
 model Tasks {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   completed: int32;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   failed: int32;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   inProgress: int32;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   total: int32;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   items?: Array<AnalyzeTextLROResult>;
 }
@@ -280,21 +247,16 @@ model Tasks {
 enum Status {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   notStarted,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   running,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   succeeded,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   failed,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   cancelled,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  cancelling
+  cancelling,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -302,7 +264,6 @@ enum Status {
 @discriminator("kind")
 model AnalyzeTextLROResult is TaskState {
   ...TaskIdentifier;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROResultsKind;
 }
@@ -319,10 +280,8 @@ model DocumentResult {
   warnings: Array<DocumentWarning>;
 
   @doc("if showStats=true was specified in the request this field will contain information about the document payload.")
-  statistics?: DocumentStatistics
+  statistics?: DocumentStatistics;
 }
-
-
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AnalyzeTextDocumentError {
@@ -342,28 +301,25 @@ model DocumentWarning {
   message: string;
 
   @doc("A JSON pointer reference indicating the target object.")
-  targetRef?: string
+  targetRef?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 enum Code {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   LongWordsInDocument,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  DocumentTruncated
+  DocumentTruncated,
 }
 
 @doc("if showStats=true was specified in the request this field will contain information about the document payload.")
 model DocumentStatistics {
-
   @doc("Number of text elements recognized in the document.")
   charactersCount: int32;
 
   @doc("Number of transactions for the document.")
   transactionsCount: int32;
 }
-
 
 @doc("Contains an input document to be analyzed by the service.")
 model MultiLanguageInput {
@@ -377,8 +333,8 @@ model MultiLanguageInput {
   language?: string;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model DocumentDetectedLanguage {
   @doc("If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document.")
   detectedLanguage?: string;

@@ -8,10 +8,8 @@ namespace Language.AnalyzeText;
 model AnalyzeTextEntityLinkingInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskKind.EntityLinking;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   analysisInput?: MultiLanguageAnalysisInput;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: EntityLinkingTaskParameters;
 }
@@ -26,7 +24,6 @@ model EntityLinkingTaskParameters is PreBuiltTaskParameters {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model EntityLinkingLROTask extends AnalyzeTextLROTask {
   kind: AnalyzeTextLROTaskKind.EntityLinking;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: EntityLinkingTaskParameters;
 }
@@ -34,7 +31,6 @@ model EntityLinkingLROTask extends AnalyzeTextLROTask {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
   kind: AnalyzeTextTaskResultsKind.EntityLinkingResults;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: EntityLinkingResult;
 }
@@ -42,7 +38,10 @@ model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model EntityLinkingResult is AnalyzeTextPreBuiltResult {
   @doc("Response by document")
-  @typeChangedFrom(Versions.v2023_04_15_preview, Array<LinkedEntitiesDocumentResult>)
+  @typeChangedFrom(
+    Versions.v2023_04_15_preview,
+    Array<LinkedEntitiesDocumentResult>
+  )
   documents: Array<EntityLinkingResultWithDetectedLanguage>;
 }
 
@@ -52,10 +51,10 @@ model LinkedEntitiesDocumentResult is DocumentResult {
   entities: Array<LinkedEntity>;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model EntityLinkingResultWithDetectedLanguage is LinkedEntitiesDocumentResult {
-  ...DocumentDetectedLanguage
+  ...DocumentDetectedLanguage;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -102,7 +101,6 @@ model Match {
 model EntityLinkingLROResult extends AnalyzeTextLROResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROResultsKind.EntityLinkingLROResults;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: EntityLinkingResult;
 }

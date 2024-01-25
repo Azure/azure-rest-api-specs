@@ -65,13 +65,14 @@ enum Versions {
   v2023_11_15_preview: "2023-11-15-preview",
 }
 
-alias ServiceTraits = NoRepeatableRequests & NoConditionalRequests & NoClientRequestId;
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @route("/language")
 interface Language {
-  
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @post
   @route("/:analyze-text")
@@ -91,10 +92,11 @@ interface Language {
   // @example("./SuccessfulEntityRecognitionInferenceOptionsRequest.json", "SuccessfulEntityRecognitionInferenceOptionsRequest")
   analyzeText(
     @doc("Collection of documents to analyze and a single task to execute.")
-    @body body: AnalyzeTextTask,
-    ...Azure.Core.Foundations.ApiVersionParameter
-  ): AnalyzeTextTaskResult | Azure.Core.Foundations.ErrorResponse;
+    @body
+    body: AnalyzeTextTask,
 
+    ...Azure.Core.Foundations.ApiVersionParameter,
+  ): AnalyzeTextTaskResult | Azure.Core.Foundations.ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
@@ -106,8 +108,8 @@ interface Language {
   // @example("./SuccessfulCustomSentimentAnalysisTaskStatusRequest.json", "SuccessfulCustomSentimentAnalysisTaskStatusRequest")
   // @example("./SuccessfulHealthcareDocumentTypeTaskStatusRequest.json", "SuccessfulHealthcareDocumentTypeTaskStatusRequest")
   // @example("./SuccessfulHealthcareTaskStatusRequest.json", "SuccessfulHealthcareTaskStatusRequest")
-  op analyzeTextJobStatus is Operations.ResourceRead<
-    AnalyzeTextJobState, 
+  analyzeTextJobStatus is Operations.ResourceRead<
+    AnalyzeTextJobState,
     AnalyzeTextQueryParameters
   >;
 
@@ -122,7 +124,10 @@ interface Language {
   // @example("./SuccessfulCustomSentimentAnalysisTaskSubmit.json", "SuccessfulCustomSentimentAnalysisTaskSubmit")
   // @example("./SuccessfulHealthcareDocumentTypePostRequest.json", "SuccessfulHealthcareDocumentTypePostRequest")
   // @example("./SuccessfulHealthcarePostRequest.json", "SuccessfulHealthcarePostRequest")
-  op analyzeTextSubmitJob is LanguageLongRunningOperation<AnalyzeTextJobsInput, AnalyzeTextJobState>;
+  analyzeTextSubmitJob is LanguageLongRunningOperation<
+    AnalyzeTextJobsInput,
+    AnalyzeTextJobState
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Cancel a long-running Text Analysis job.")
@@ -131,5 +136,5 @@ interface Language {
   @actionSeparator(":")
   @action("cancel")
   // @example("./SuccessfulAnalyzeTextJobsCancelRequest.json", "SuccessfulAnalyzeTextJobsCancelRequest")
-  op analyzeTextCancelJob is LanguageLongRunningResourceCancel<AnalyzeTextJobState>;
+  analyzeTextCancelJob is LanguageLongRunningResourceCancel<AnalyzeTextJobState>;
 }

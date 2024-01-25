@@ -7,39 +7,34 @@ namespace Language.AnalyzeText;
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    kind: AnalyzeTextTaskKind.SentimentAnalysis;
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    analysisInput?: MultiLanguageAnalysisInput;
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    parameters?: SentimentAnalysisTaskParameters;
+  kind: AnalyzeTextTaskKind.SentimentAnalysis;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  analysisInput?: MultiLanguageAnalysisInput;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  parameters?: SentimentAnalysisTaskParameters;
 }
 
 @doc("Supported parameters for a Sentiment Analysis task.")
 model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   opinionMining?: boolean = false;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType?: StringIndexType
+  stringIndexType?: StringIndexType;
 }
 
-@doc("An object representing the task definition for a Sentiment Analysis task.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("An object representing the task definition for a Sentiment Analysis task.")
 model SentimentAnalysisLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROTaskKind.SentimentAnalysis;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  parameters?: SentimentAnalysisTaskParameters
+  parameters?: SentimentAnalysisTaskParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentimentTaskResult extends AnalyzeTextTaskResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskResultsKind.SentimentAnalysisResults;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: SentimentResponse;
 }
@@ -48,12 +43,10 @@ model SentimentTaskResult extends AnalyzeTextTaskResult {
 enum SentimentValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   neutral,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  negative
+  negative,
 }
 
 @doc("Sentiment analysis per document.")
@@ -63,7 +56,8 @@ model SentimentResponse is AnalyzeTextPreBuiltResult {
 }
 
 @doc("Sentiment analysis per document.")
-model SentimentResponseWithDocumentDetectedLanguage is AnalyzeTextPreBuiltResult {
+model SentimentResponseWithDocumentDetectedLanguage
+  is AnalyzeTextPreBuiltResult {
   ...DocumentDetectedLanguage;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<SentimentDocumentResult>;
@@ -76,20 +70,19 @@ model SentimentDocumentResult is DocumentResult {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   confidenceScores: SentimentConfidenceScores;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   sentences: Array<SentenceSentiment>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
- model SentenceSentiment {
+model SentenceSentiment {
   @doc("The sentence text.")
   text: string;
 
   @doc("The predicted Sentiment for the sentence.")
   sentiment: SentimentValue;
 
-  @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.",)
+  @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.")
   confidenceScores: SentimentConfidenceScores;
 
   @doc("The target offset from the start of the sentence.")
@@ -103,41 +96,39 @@ model SentimentDocumentResult is DocumentResult {
 
   @doc("The array of assessments for the sentence.")
   assessments?: Array<SentenceAssessment>;
- }
+}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentenceTarget {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   sentiment: SentimentValue;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   confidenceScores: TargetConfidenceScoreLabel;
 
   @doc("The target offset from the start of the sentence.")
   offset: int32;
 
-  @doc( "The length of the target.")
+  @doc("The length of the target.")
   length: int32;
 
   @doc("The target text detected.")
   text: string;
 
   @doc("The array of either assessment or target objects which is related to the target.")
-  relations: Array<TargetRelation>
+  relations: Array<TargetRelation>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentenceAssessment {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   sentiment: SentimentValue;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   confidenceScores: TargetConfidenceScoreLabel;
 
   @doc("The target offset from the start of the sentence.")
   offset: int32;
 
-  @doc( "The length of the target.")
+  @doc("The length of the target.")
   length: int32;
 
   @doc("The target text detected.")
@@ -154,7 +145,6 @@ model TargetRelation {
 
   @doc("The type related to the target.")
   relationType: SentimentRelationType;
-
 }
 
 @doc("The type related to the target.")
@@ -162,7 +152,7 @@ enum SentimentRelationType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   assessment,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  target
+  target,
 }
 
 @doc("Represents the confidence scores across all sentiment classes: positive and negative.")
@@ -185,8 +175,8 @@ model SentimentLROResult extends AnalyzeTextLROResult {
   results: SentimentResponseWithDocumentDetectedLanguage;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model CustomSentenceSentiment {
   @doc("The sentence text.")
   text: string;
@@ -194,23 +184,23 @@ model CustomSentenceSentiment {
   @doc("The predicted Sentiment for the sentence.")
   sentiment: SentimentValue;
 
-  @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.",)
+  @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.")
   confidenceScores: SentimentConfidenceScores;
 
   @doc("The target offset from the start of the sentence.")
   offset: int32;
 
-  @doc( "The length of the target.")
+  @doc("The length of the target.")
   length: int32;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model CustomSentimentDocumentResult is DocumentResult {
   @doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
   sentiment: Sentiment;
 
-  @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.",)
+  @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.")
   confidenceScores: SentimentConfidenceScores;
 
   sentences: Array<CustomSentenceSentiment>;
@@ -218,43 +208,40 @@ model CustomSentimentDocumentResult is DocumentResult {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a Custom Sentiment Analysis task.")
-model CustomSentimentAnalysisTaskParameters is  CustomTaskParameters {
+model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2023_04_15_preview)
 @doc("Use custom models to ease the process of sentiment analysis from documents like product reviews")
 model CustomSentimentAnalysisLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROTaskKind.CustomSentimentAnalysis;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: CustomSentimentAnalysisTaskParameters;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model CustomSentimentAnalysisResult is CustomResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<CustomSentimentAnalysisResultDocument>;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2023_04_15_preview)
 model CustomSentimentAnalysisResultDocument is CustomSentimentDocumentResult {
   ...DocumentDetectedLanguage;
 }
 
-@added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2023_04_15_preview)
 model CustomSentimentAnalysisLROResult extends AnalyzeTextLROResult {
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROResultsKind.CustomSentimentAnalysisLROResults;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: CustomSentimentAnalysisResult;
 }
