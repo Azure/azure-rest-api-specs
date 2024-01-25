@@ -113,6 +113,9 @@ suppressions:
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
       - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
+      - $.definitions.SetInformationJobProperties.properties.priorityValue8021Action_Cluster
+      - $.definitions.SetInformationJobProperties.properties.priorityValue8021Action_SMB
+      - $.definitions.SetInformationJobProperties.properties.bandwidthPercentage_SMB
 
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
