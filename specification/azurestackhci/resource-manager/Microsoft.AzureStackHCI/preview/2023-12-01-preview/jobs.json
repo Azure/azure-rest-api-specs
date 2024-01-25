@@ -260,7 +260,6 @@
   "definitions": {
     "AddServerJob": {
       "type": "object",
-      "description": "AddServerJob to add node to AzureStackHCI cluster.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AddServerJobProperties"
@@ -277,7 +276,6 @@
     },
     "AddServerJobProperties": {
       "type": "object",
-      "description": "Properties for AddServerJob of AzureStackHCI cluster.",
       "properties": {
         "arcNodeResourceId": {
           "type": "string",
@@ -471,8 +469,8 @@
           ]
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "DeploymentSetting provisioning state",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "Job provisioning state",
           "readOnly": true
         },
         "jobId": {
@@ -651,66 +649,6 @@
         }
       ],
       "x-ms-discriminator-value": "RepairServer"
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "NotSpecified",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The resource provision state is not specified"
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource create request has been accepted"
-          }
-        ]
-      }
     },
     "ResumeServerJob": {
       "type": "object",
