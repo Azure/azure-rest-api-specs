@@ -1890,10 +1890,10 @@
             "icon"
           ],
           "description": "List icons and their usages.",
-          "operationId": "Icon_List",
+          "operationId": "Type_ListIcons",
           "x-ms-examples": {
             "Icon_List": {
-              "$ref": "./examples/Icon_List.json"
+              "$ref": "./examples/Type_ListIcons.json"
             }
           },
           "parameters": [
@@ -7554,494 +7554,494 @@
           }
         }
       }
+    }
+  },
+  "parameters": {
+    "endpoint": {
+      "name": "endpoint",
+      "description": "The datamap endpoint of your Purview account. Example: https://{accountName}.purview.azure.com",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     },
-    "parameters": {
-      "endpoint": {
-        "name": "endpoint",
-        "description": "The datamap endpoint of your Purview account. Example: https://{accountName}.purview.azure.com",
-        "x-ms-parameter-location": "client",
-        "required": true,
-        "type": "string",
-        "format": "url",
-        "in": "path",
-        "x-ms-skip-url-encoding": true
-      },
-      "guid": {
-        "name": "guid",
-        "description": "The globally unique identifier of the entity.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "classificationName": {
-        "name": "classificationName",
-        "description": "The name of the classification.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "typeName": {
-        "name": "typeName",
-        "description": "The name of the type.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "categoryGuid": {
-        "name": "categoryGuid",
-        "description": "The globally unique identifier of the category.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "limit": {
-        "name": "limit",
-        "description": "The page size - by default there is no paging.",
-        "in": "query",
-        "required": false,
-        "type": "integer",
-        "format": "int32",
-        "x-ms-parameter-location": "method"
-      },
-      "offset": {
-        "name": "offset",
-        "description": "The offset for pagination purpose.",
-        "in": "query",
-        "required": false,
-        "type": "integer",
-        "format": "int32",
-        "x-ms-parameter-location": "method"
-      },
-      "sort": {
-        "name": "sort",
-        "description": "The sort order, ASC (default) or DESC.",
-        "in": "query",
-        "required": false,
-        "type": "string",
-        "default": "ASC",
-        "x-ms-parameter-location": "method"
-      },
-      "termGuid": {
-        "name": "termGuid",
-        "in": "path",
-        "description": "The globally unique identifier for glossary term.",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "fileId": {
-        "name": "fileId",
-        "in": "path",
-        "description": "The globally unique identifier for file.",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "glossaryGuid": {
-        "name": "glossaryGuid",
-        "in": "path",
-        "description": "The globally unique identifier for glossary.",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "operationId": {
-        "name": "operationId",
-        "in": "path",
-        "description": "The globally unique identifier for async operation job.",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "glossaryName": {
-        "name": "glossaryName",
-        "in": "path",
-        "description": "The name of the glossary.",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "searchLimit": {
-        "name": "limit",
-        "description": "Limits the result set to only include the specified number of entries.",
-        "in": "query",
-        "required": false,
-        "type": "integer",
-        "format": "int32",
-        "x-ms-parameter-location": "method"
-      },
-      "searchKeyword": {
-        "name": "keyword",
-        "description": "The keyword to get auto complete.",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "depth": {
-        "name": "depth",
-        "description": "The number of hops for lineage.",
-        "in": "query",
-        "required": false,
-        "type": "integer",
-        "default": 3,
-        "format": "int32",
-        "x-ms-parameter-location": "method"
-      },
-      "direction": {
+    "guid": {
+      "name": "guid",
+      "description": "The globally unique identifier of the entity.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "classificationName": {
+      "name": "classificationName",
+      "description": "The name of the classification.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "typeName": {
+      "name": "typeName",
+      "description": "The name of the type.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "categoryGuid": {
+      "name": "categoryGuid",
+      "description": "The globally unique identifier of the category.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "limit": {
+      "name": "limit",
+      "description": "The page size - by default there is no paging.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "offset": {
+      "name": "offset",
+      "description": "The offset for pagination purpose.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "sort": {
+      "name": "sort",
+      "description": "The sort order, ASC (default) or DESC.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "default": "ASC",
+      "x-ms-parameter-location": "method"
+    },
+    "termGuid": {
+      "name": "termGuid",
+      "in": "path",
+      "description": "The globally unique identifier for glossary term.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "fileId": {
+      "name": "fileId",
+      "in": "path",
+      "description": "The globally unique identifier for file.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "glossaryGuid": {
+      "name": "glossaryGuid",
+      "in": "path",
+      "description": "The globally unique identifier for glossary.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "operationId": {
+      "name": "operationId",
+      "in": "path",
+      "description": "The globally unique identifier for async operation job.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "glossaryName": {
+      "name": "glossaryName",
+      "in": "path",
+      "description": "The name of the glossary.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "searchLimit": {
+      "name": "limit",
+      "description": "Limits the result set to only include the specified number of entries.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "searchKeyword": {
+      "name": "keyword",
+      "description": "The keyword to get auto complete.",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "depth": {
+      "name": "depth",
+      "description": "The number of hops for lineage.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "default": 3,
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "direction": {
+      "name": "direction",
+      "description": "The direction of the lineage, which could be INPUT, OUTPUT or BOTH.",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "BOTH",
+        "INPUT",
+        "OUTPUT"
+      ],
+      "x-ms-enum": {
         "name": "direction",
-        "description": "The direction of the lineage, which could be INPUT, OUTPUT or BOTH.",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "enum": [
-          "BOTH",
-          "INPUT",
-          "OUTPUT"
-        ],
-        "x-ms-enum": {
-          "name": "direction",
-          "modelAsString": true
-        },
-        "x-ms-parameter-location": "method"
+        "modelAsString": true
       },
-      "extendedInfo": {
-        "name": "extendedInfo",
-        "description": "Limits whether includes extended information.",
-        "in": "query",
-        "required": false,
-        "type": "boolean",
-        "x-ms-parameter-location": "method"
-      },
-      "relationshipGuid": {
-        "name": "guid",
-        "description": "The globally unique identifier of the relationship.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "classificationDefGuid": {
-        "name": "guid",
-        "description": "The globally unique identifier of the classification.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "classificationDefName": {
-        "name": "name",
-        "description": "The name of the classification.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "entityDefGuid": {
-        "name": "guid",
-        "description": "The globally unique identifier of the entity.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "entityDefName": {
-        "name": "name",
-        "description": "The name of the entity.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "termTemplateDefGuid": {
-        "name": "guid",
-        "description": "The globally unique identifier of the term template.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "termTemplateDefName": {
-        "name": "name",
-        "description": "The name of the term template.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "enumDefGuid": {
-        "name": "guid",
-        "description": "The globally unique identifier of the enum.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "enumDefName": {
-        "name": "name",
-        "description": "The name of the enum.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "relationshipDefGuid": {
-        "name": "guid",
-        "description": "The globally unique identifier of the relationship.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "relationshipDefName": {
-        "name": "name",
-        "description": "The name of the relationship.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "structDefGuid": {
-        "name": "guid",
-        "description": "The globally unique identifier of the struct.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "structDefName": {
-        "name": "name",
-        "description": "The name of the struct.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "typeDefGuid": {
-        "name": "guid",
-        "description": "The globally unique identifier of the type.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "typeDefName": {
-        "name": "name",
-        "description": "The name of the type.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 4096,
-        "x-ms-parameter-location": "method"
-      },
-      "userId": {
-        "name": "userId",
-        "description": "The user ID.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "principalId": {
-        "name": "principalId",
-        "description": "The principal ID.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "minExtInfo": {
-        "name": "minExtInfo",
-        "description": "Whether to return minimal information for referred entities.",
-        "in": "query",
-        "required": false,
-        "type": "boolean",
-        "default": false,
-        "x-ms-parameter-location": "method"
-      },
-      "ignoreRelationships": {
-        "name": "ignoreRelationships",
-        "description": "Whether to ignore relationship attributes.",
-        "in": "query",
-        "required": false,
-        "type": "boolean",
-        "default": false,
-        "x-ms-parameter-location": "method"
-      },
-      "includeTermTemplate": {
-        "name": "includeTermTemplate",
-        "description": "Whether include termtemplatedef when return all typedefs.\nThis is always true when search filter type=term_template",
-        "in": "query",
-        "required": false,
-        "type": "boolean",
-        "default": false,
-        "x-ms-parameter-location": "method"
-      },
-      "includeTermHierarchy": {
-        "name": "includeTermHierarchy",
-        "description": "Whether include term hierarchy",
-        "in": "query",
-        "required": false,
-        "type": "boolean",
-        "default": false,
-        "x-ms-parameter-location": "method"
-      },
-      "extInfo": {
-        "name": "extInfo",
-        "description": "Whether include extended information like contact display name and attribute values",
-        "in": "query",
-        "required": false,
-        "type": "boolean",
-        "default": false,
-        "x-ms-parameter-location": "method"
-      },
-      "ignoreTermsAndCategories": {
-        "name": "ignoreTermsAndCategories",
-        "description": "Whether ignore terms and categories",
-        "in": "query",
-        "required": false,
-        "type": "boolean",
-        "default": false,
-        "x-ms-parameter-location": "method"
-      },
-      "purviewAPIVersion": {
-        "name": "api-version",
-        "description": "The version of the API.",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "atlasAPIVersion": {
-        "name": "api-version",
-        "description": "The version of the API.",
-        "in": "query",
-        "required": false,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "type": {
+      "x-ms-parameter-location": "method"
+    },
+    "extendedInfo": {
+      "name": "extendedInfo",
+      "description": "Limits whether includes extended information.",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "relationshipGuid": {
+      "name": "guid",
+      "description": "The globally unique identifier of the relationship.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "classificationDefGuid": {
+      "name": "guid",
+      "description": "The globally unique identifier of the classification.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "classificationDefName": {
+      "name": "name",
+      "description": "The name of the classification.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "entityDefGuid": {
+      "name": "guid",
+      "description": "The globally unique identifier of the entity.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "entityDefName": {
+      "name": "name",
+      "description": "The name of the entity.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "termTemplateDefGuid": {
+      "name": "guid",
+      "description": "The globally unique identifier of the term template.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "termTemplateDefName": {
+      "name": "name",
+      "description": "The name of the term template.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "enumDefGuid": {
+      "name": "guid",
+      "description": "The globally unique identifier of the enum.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "enumDefName": {
+      "name": "name",
+      "description": "The name of the enum.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "relationshipDefGuid": {
+      "name": "guid",
+      "description": "The globally unique identifier of the relationship.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "relationshipDefName": {
+      "name": "name",
+      "description": "The name of the relationship.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "structDefGuid": {
+      "name": "guid",
+      "description": "The globally unique identifier of the struct.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "structDefName": {
+      "name": "name",
+      "description": "The name of the struct.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "typeDefGuid": {
+      "name": "guid",
+      "description": "The globally unique identifier of the type.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "typeDefName": {
+      "name": "name",
+      "description": "The name of the type.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "userId": {
+      "name": "userId",
+      "description": "The user ID.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "principalId": {
+      "name": "principalId",
+      "description": "The principal ID.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "minExtInfo": {
+      "name": "minExtInfo",
+      "description": "Whether to return minimal information for referred entities.",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "ignoreRelationships": {
+      "name": "ignoreRelationships",
+      "description": "Whether to ignore relationship attributes.",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "includeTermTemplate": {
+      "name": "includeTermTemplate",
+      "description": "Whether include termtemplatedef when return all typedefs.\nThis is always true when search filter type=term_template",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "includeTermHierarchy": {
+      "name": "includeTermHierarchy",
+      "description": "Whether include term hierarchy",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "extInfo": {
+      "name": "extInfo",
+      "description": "Whether include extended information like contact display name and attribute values",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "ignoreTermsAndCategories": {
+      "name": "ignoreTermsAndCategories",
+      "description": "Whether ignore terms and categories",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "purviewAPIVersion": {
+      "name": "api-version",
+      "description": "The version of the API.",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "atlasAPIVersion": {
+      "name": "api-version",
+      "description": "The version of the API.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "type": {
+      "name": "type",
+      "description": "Typedef name as search filter when get typedefs.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "enum",
+        "entity",
+        "classification",
+        "relationship",
+        "struct",
+        "term_template"
+      ],
+      "x-ms-enum": {
         "name": "type",
-        "description": "Typedef name as search filter when get typedefs.",
-        "in": "query",
-        "required": false,
-        "type": "string",
-        "enum": [
-          "enum",
-          "entity",
-          "classification",
-          "relationship",
-          "struct",
-          "term_template"
-        ],
-        "x-ms-enum": {
-          "name": "type",
-          "modelAsString": true
-        },
-        "x-ms-parameter-location": "method"
+        "modelAsString": true
       },
-      "requiredCollectionId": {
-        "name": "collectionId",
-        "description": "The collection where entities will be moved to.",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "collectionId": {
-        "name": "collectionId",
-        "description": "The collection where entities will be moved to. Only specify a value if you need to move an entity to another collection.",
-        "in": "query",
-        "required": false,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "forceDeleteEntityAssignment": {
-        "name": "forceDeleteEntityAssignment",
-        "description": "Whether delete entity assignment",
-        "in": "query",
-        "required": false,
-        "type": "boolean",
-        "default": false,
-        "x-ms-parameter-location": "method"
-      },
-      "forceDeleteChild": {
-        "name": "forceDeleteChild",
-        "description": "Whether delete child terms together with the parent term",
-        "in": "query",
-        "required": false,
-        "type": "boolean",
-        "default": false,
-        "x-ms-parameter-location": "method"
-      },
-      "businessAttributeUpdateBehavior": {
+      "x-ms-parameter-location": "method"
+    },
+    "requiredCollectionId": {
+      "name": "collectionId",
+      "description": "The collection where entities will be moved to.",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "collectionId": {
+      "name": "collectionId",
+      "description": "The collection where entities will be moved to. Only specify a value if you need to move an entity to another collection.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "forceDeleteEntityAssignment": {
+      "name": "forceDeleteEntityAssignment",
+      "description": "Whether delete entity assignment",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "forceDeleteChild": {
+      "name": "forceDeleteChild",
+      "description": "Whether delete child terms together with the parent term",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "businessAttributeUpdateBehavior": {
+      "name": "businessAttributeUpdateBehavior",
+      "description": "Used to define the update behavior for business attributes when updating entities.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "ignore",
+        "replace",
+        "merge"
+      ],
+      "x-ms-enum": {
         "name": "businessAttributeUpdateBehavior",
-        "description": "Used to define the update behavior for business attributes when updating entities.",
-        "in": "query",
-        "required": false,
-        "type": "string",
-        "enum": [
-          "ignore",
-          "replace",
-          "merge"
-        ],
-        "x-ms-enum": {
-          "name": "businessAttributeUpdateBehavior",
-          "modelAsString": true
-        },
-        "x-ms-parameter-location": "method"
-      }
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }
