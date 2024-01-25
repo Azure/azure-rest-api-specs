@@ -1,0 +1,275 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "5.0",
+    "title": "Common types - Network Security Perimeter (NSP) feature"
+  },
+  "paths": {},
+  "definitions": {
+    "NetworkSecurityPerimeterAssociation": {
+      "description": "Shows an association between a network security perimeter configuration and an existing resource.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "The name of the resource associated with this configuration.",
+          "type": "string"
+        },
+        "accessMode": {
+          "description": "The initial set of supported access modes are 'enforced', 'audit' and 'learning'. More may be added in the future.",
+          "type": "string",
+          "enum": [
+            "enforced",
+            "audit",
+            "learning"
+          ],
+          "x-ms-enum": {
+            "name": "AccessMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "The properties of a network security perimeter (NSP) configuration.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the network security perimeter (NSP) configuration. The set of states varies by implementation such as 'Creating', 'Updating', Accepted', 'Deleting', but the final state after creating or updating must be one of 'Succeeded', 'Canceled', or 'Failed'.\",",
+          "type": "string",
+          "readonly": true
+        },
+        "networkSecurityPerimeter": {
+          "description": "The network security perimeter (NSP) that this configuration applies to.",
+          "$ref": "#/definitions/ConfigPerimeter"
+        },
+        "resourceAssociation": {
+          "description": "The resource associated with this configuration.",
+          "$ref": "#/definitions/NetworkSecurityPerimeterAssociation"
+        },
+        "profile": {
+          "description": "The profile associated with this configuration.",
+          "$ref": "#/definitions/NetworkSecurityPerimeterProfile"
+        },
+        "provisioningIssues": {
+          "description": "List of provisioning issues, if any",
+          "type": "array",
+          "readonly": true,
+          "items": {
+            "$ref": "#/definitions/ProvisioningIssue"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "Network security perimeter (NSP) configuration. (This configures the network security of a parent resource.)",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": false
+        }
+      },
+      "NetworkSecurityPerimeterConfigurationList": {
+        "description": "A list of network security perimeter (NSP) configurations for a resource.",
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "description": "Array of results.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            },
+            "readOnly": true,
+            "x-nullable": false
+          },
+          "nextLink": {
+            "description": "Link to retrieve next page of results.",
+            "type": "string",
+            "format": "uri",
+            "readOnly": true,
+            "x-nullable": false
+          }
+        }
+      },
+      "AccessRule": {
+        "type": "object",
+        "description": "A network security access rule that can allow or deny, incoming or outgoing requests",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the access rule."
+          },
+          "properties": {
+            "$ref": "#/definitions/AccessRuleProperties"
+          }
+        }
+      },
+      "AccessRuleProperties":{
+        "type": "object",
+        "description": "Properties of an access rule.",
+        "properties": {
+          "direction": {
+            "type": "string",
+            "description": "The direction of traffic to match",
+            "enum": [
+              "Inbound",
+              "Outbound"
+            ]
+          },
+          "addressPrefixes": {
+            "type": "array",
+            "description": "The IPv4 or IPv6 address prefixes to match",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fullyQualifiedDomainNames": {
+            "type": "array",
+            "description": "Fully qualified domain names to match",
+            "items": {
+              "type": "string"
+            }
+          },
+          "subscriptions": {
+            "type": "array",
+            "description": "Azure subscriptions to match",
+            "items": {
+              "type": "string"
+            }
+          },
+          "networkSecurityPerimeters": {
+            "type": "array",
+            "description": "References the associated network security perimeters",
+            "items": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterReference"
+            }
+          }
+        }
+      },
+      "NetworkSecurityPerimeterReference": {
+        "type": "object",
+        "description": "A reference to an existing network security perimeter (NSP).",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The Azure resource ID of the network security perimeter."
+          },
+          "perimeterGuid": {
+            "type": "string",
+            "description": "Unique ID of the network security perimeter."
+          },
+          "location": {
+            "type": "string",
+            "description": "The Azure region of the network security perimeter."
+          }
+        }
+      },
+      "NetworkSecurityPerimeterProfile": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "accessRulesVersion": {
+            "type": "string",
+            "description": "Version of the access rules, affecting their interpretation"
+          },
+          "accessRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AccessRule"
+            },
+            "x-ms-identifiers": []
+          }
+        }
+      },
+      "ProvisioningIssue": {
+        "type": "object",
+        "description": "Records an issue which occurred while trying to apply network security perimeter configuration changes",
+        "readonly": true,
+        "properties": {
+          "name": {
+            "type": "string",
+            "readonly": true
+          },
+          "properties": {
+            "$ref": "#/definitions/ProvisioningIssueProperties"
+          }
+        }
+      },
+      "ProvisioningIssueProperties": {
+        "type": "object",
+        "readOnly": true,
+        "description": "The properties of a provisioning issue.",
+        "properties": {
+          "issueType": {
+            "description": "Type of provisioning issue",
+            "type": "string",
+            "readOnly": true
+          },
+          "severity": {
+            "description": "Provisioning state of network security perimeter configuration propagation",
+            "enum": [
+              "Warning",
+              "Error"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "Severity",
+              "modelAsString": true
+            }
+          },
+          "description": {
+            "description": "Description of the issue",
+            "type": "string",
+            "readOnly": true
+          },
+          "suggestedResourceIds": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "readOnly": true,
+              "type": "string",
+              "format": "arm-id",
+              "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+            },
+            "description": "ARM IDs of resources that can be associated to the same perimeter to remediate the issue."
+          },
+          "suggestedAccessRules": {
+            "description": "Access rules that can be added to the same profile to remediate the issue.",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/definitions/AccessRule"
+            },
+            "x-ms-identifiers": []
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "NetworkSecurityPerimeterConfigurationName": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network security perimeter configuration.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
