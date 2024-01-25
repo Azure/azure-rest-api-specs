@@ -4,10 +4,11 @@ namespace Azure.AI.OpenAI.Assistants;
 
 using TypeSpec.Versioning;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @doc("Represents an assistant that can call the model and use tools.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 @projectedName("javascript", "InputFile")
-model File {
+model OpenAIFile {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
 
@@ -27,7 +28,7 @@ model File {
 }
 
 @doc("The possible values denoting the intended usage of a file.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 enum FilePurpose {
   @doc("Indicates a file is used for fine tuning input.")
   fineTune: "fine-tune",
@@ -43,16 +44,18 @@ enum FilePurpose {
 }
 
 @doc("The response data from a file list operation.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model FileListResponse {
   @doc("The files returned for the request.")
-  data: File[];
+  data: OpenAIFile[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"
 @doc("A status response from a file deletion operation.")
-@added(ServiceApiVersions.v2023_11_06_beta)
-model FileDeletionStatus extends DeletionStatus {
-  @doc("The ID of the deleted file.")
-  id: string;
+@added(ServiceApiVersions.v2024_02_15_preview)
+model FileDeletionStatus {
+  ...DeletionStatus;
+
+  @doc("The object type, which is always 'file'.")
+  object: "file";
 }

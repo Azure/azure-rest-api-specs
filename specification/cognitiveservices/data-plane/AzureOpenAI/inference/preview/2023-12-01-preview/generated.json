@@ -1167,7 +1167,7 @@
     },
     "AzureCognitiveSearchChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension.",
+      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension. The supported authentication types are APIKey, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -1315,7 +1315,7 @@
     },
     "AzureCosmosDBChatExtensionConfiguration": {
       "type": "object",
-      "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
+      "description": "A specific representation of configurable options for Azure Cosmos DB when using it as an Azure OpenAI chat\nextension.",
       "properties": {
         "parameters": {
           "$ref": "#/definitions/AzureCosmosDBChatExtensionParameters",
@@ -1334,7 +1334,7 @@
     },
     "AzureCosmosDBChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for\nMongoDB vCore.",
+      "description": "Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for\nMongoDB vCore. The supported authentication type is ConnectionString.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -1385,13 +1385,37 @@
         "databaseName",
         "containerName",
         "indexName",
-        "fieldsMapping"
+        "fieldsMapping",
+        "embeddingDependency"
       ]
     },
     "AzureCosmosDBFieldMappingOptions": {
       "type": "object",
       "description": "Optional settings to control how fields are processed when using a configured Azure Cosmos DB resource.",
       "properties": {
+        "titleField": {
+          "type": "string",
+          "description": "The name of the index field to use as a title."
+        },
+        "urlField": {
+          "type": "string",
+          "description": "The name of the index field to use as a URL."
+        },
+        "filepathField": {
+          "type": "string",
+          "description": "The name of the index field to use as a filepath."
+        },
+        "contentFields": {
+          "type": "array",
+          "description": "The names of index fields that should be treated as content.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contentFieldsSeparator": {
+          "type": "string",
+          "description": "The separator pattern that content fields should use."
+        },
         "vectorFields": {
           "type": "array",
           "description": "The names of fields that represent vector data.",
@@ -1401,6 +1425,7 @@
         }
       },
       "required": [
+        "contentFields",
         "vectorFields"
       ]
     },
@@ -1518,7 +1543,7 @@
     },
     "AzureMachineLearningIndexChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters for the Azure Machine Learning vector index chat extension.",
+      "description": "Parameters for the Azure Machine Learning vector index chat extension. The supported authentication types are AccessToken, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -2637,7 +2662,7 @@
     },
     "ElasticsearchChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension.",
+      "description": "Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are KeyAndKeyId and EncodedAPIKey.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -3095,6 +3120,25 @@
       ],
       "x-ms-discriminator-value": "max_tokens"
     },
+    "OnYourDataAccessTokenAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using access token.",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "description": "The access token to use for authentication."
+        }
+      },
+      "required": [
+        "accessToken"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessToken"
+    },
     "OnYourDataApiKeyAuthenticationOptions": {
       "type": "object",
       "description": "The authentication options for Azure OpenAI On Your Data when using an API key.",
@@ -3135,6 +3179,8 @@
         "APIKey",
         "ConnectionString",
         "KeyAndKeyId",
+        "EncodedAPIKey",
+        "AccessToken",
         "SystemAssignedManagedIdentity",
         "UserAssignedManagedIdentity"
       ],
@@ -3156,6 +3202,16 @@
             "name": "keyAndKeyId",
             "value": "KeyAndKeyId",
             "description": "Authentication via key and key ID pair."
+          },
+          {
+            "name": "encodedApiKey",
+            "value": "EncodedAPIKey",
+            "description": "Authentication via encoded API key."
+          },
+          {
+            "name": "accessToken",
+            "value": "AccessToken",
+            "description": "Authentication via access token."
           },
           {
             "name": "systemAssignedManagedIdentity",
@@ -3207,6 +3263,25 @@
         }
       ],
       "x-ms-discriminator-value": "DeploymentName"
+    },
+    "OnYourDataEncodedApiKeyAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an Elasticsearch encoded API key.",
+      "properties": {
+        "encodedApiKey": {
+          "type": "string",
+          "description": "The encoded API key to use for authentication."
+        }
+      },
+      "required": [
+        "encodedApiKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "EncodedAPIKey"
     },
     "OnYourDataEndpointVectorizationSource": {
       "type": "object",
@@ -3351,7 +3426,7 @@
     },
     "PineconeChatExtensionConfiguration": {
       "type": "object",
-      "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
+      "description": "A specific representation of configurable options for Pinecone when using it as an Azure OpenAI chat\nextension.",
       "properties": {
         "parameters": {
           "$ref": "#/definitions/PineconeChatExtensionParameters",
@@ -3370,7 +3445,7 @@
     },
     "PineconeChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters for configuring Azure OpenAI Pinecone chat extensions.",
+      "description": "Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is APIKey.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -3416,7 +3491,8 @@
       "required": [
         "environment",
         "indexName",
-        "fieldsMapping"
+        "fieldsMapping",
+        "embeddingDependency"
       ]
     },
     "PineconeFieldMappingOptions": {
@@ -3445,22 +3521,11 @@
         "contentFieldsSeparator": {
           "type": "string",
           "description": "The separator pattern that content fields should use."
-        },
-        "vectorFields": {
-          "type": "array",
-          "description": "The names of fields that represent vector data.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "imageVectorFields": {
-          "type": "array",
-          "description": "The names of fields that represent image vector data.",
-          "items": {
-            "type": "string"
-          }
         }
-      }
+      },
+      "required": [
+        "contentFields"
+      ]
     },
     "StopFinishDetails": {
       "type": "object",

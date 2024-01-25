@@ -6,7 +6,7 @@ namespace Azure.AI.OpenAI.Assistants;
 using TypeSpec.Versioning;
 
 @doc("Detailed information about a single step of an assistant thread run.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model RunStep {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -33,7 +33,7 @@ model RunStep {
   @doc("The details for this run step.")
   stepDetails: RunStepDetails;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly required+nullable in mirrored API"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @projectedName("json", "last_error")
   @doc("If applicable, information about the last error encountered by this run step.")
   lastError: RunStepError | null;
@@ -43,35 +43,35 @@ model RunStep {
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly required+nullable in mirrored API"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @projectedName("json", "expired_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this item expired.")
   expiredAt: utcDateTime | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly required+nullable in mirrored API"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @projectedName("json", "completed_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this completed.")
   completedAt: utcDateTime | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly required+nullable in mirrored API"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @projectedName("json", "cancelled_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this was cancelled.")
   cancelledAt: utcDateTime | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly required+nullable in mirrored API"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @projectedName("json", "failed_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this failed.")
   failedAt: utcDateTime | null;
 
-  ...OptionalMetadata;
+  ...RequiredNullableMetadata;
 }
 
 @doc("The possible types of run steps.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 enum RunStepType {
   @doc("Represents a run step to create a message.")
   messageCreation: "message_creation",
@@ -82,14 +82,14 @@ enum RunStepType {
 
 @discriminator("type")
 @doc("An abstract representation of the details for a run step.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepDetails {
   @doc("The object type.")
   type: RunStepType;
 }
 
 @doc("The detailed information associated with a message creation run step.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepMessageCreationDetails extends RunStepDetails {
   @doc("The object type, which is always 'message_creation'.")
   type: RunStepType.messageCreation;
@@ -100,18 +100,18 @@ model RunStepMessageCreationDetails extends RunStepDetails {
 }
 
 @doc("The detailed information associated with a run step calling tools.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepToolCallDetails extends RunStepDetails {
   @doc("The object type, which is always 'tool_calls'.")
   type: RunStepType.toolCalls;
 
   @projectedName("json", "tool_calls")
-  @doc("A list tool call details for this run step.")
+  @doc("A list of tool call details for this run step.")
   toolCalls: ToolCall[];
 }
 
 @doc("The details of a message created as a part of a run step.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepMessageCreationReference {
   @projectedName("json", "message_id")
   @doc("The ID of the message created by this run step.")
@@ -119,7 +119,7 @@ model RunStepMessageCreationReference {
 }
 
 @doc("Possible values for the status of a run step.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 enum RunStepStatus {
   @doc("Represents a run step still in progress.")
   inProgress: "in_progress",
@@ -138,7 +138,7 @@ enum RunStepStatus {
 }
 
 @doc("Possible error code values attributable to a failed run step.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 enum RunStepErrorCode {
   @doc("Represents a server error.")
   serverError: "server_error",
@@ -148,7 +148,7 @@ enum RunStepErrorCode {
 }
 
 @doc("The error information associated with a failed run step.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepError {
   @doc("The error code for this error.")
   code: RunStepErrorCode;

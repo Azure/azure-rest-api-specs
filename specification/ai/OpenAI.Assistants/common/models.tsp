@@ -7,7 +7,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.OpenAI.Assistants;
 
 @doc("The possible values for roles attributed to messages in a thread.")
-@added(ServiceApiVersions.v2023_11_06_beta)
+@added(ServiceApiVersions.v2024_02_15_preview)
 enum MessageRole {
   @doc("The role representing the end-user.")
   user: "user",
@@ -62,16 +62,26 @@ model OpenAIPageableListOf<T> {
   hasMore: boolean;
 }
 
-@doc("An abstract representation of an OpenAI deletion operation result status.")
-// @discriminator("object")
-model DeletionStatus {
+alias DeletionStatus = {
+  @doc("The ID of the resource specified for deletion.")
+  id: string;
+
   @doc("A value indicating whether deletion was successful.")
   deleted: boolean;
-}
+};
 
-alias OptionalMetadata = {
+alias RequiredNullableMetadata = {
   /**
    * A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
    */
-  metadata?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  metadata: Record<string> | null;
+};
+
+alias OptionalNullableMetadata = {
+  /**
+   * A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  metadata?: Record<string> | null;
 };

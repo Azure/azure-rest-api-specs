@@ -14,7 +14,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/openai",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -61,7 +61,7 @@
   "paths": {
     "/assistants": {
       "get": {
-        "operationId": "Assistants_ListAssistants",
+        "operationId": "ListAssistants",
         "description": "Gets a list of assistants that were previously created.",
         "parameters": [
           {
@@ -168,7 +168,7 @@
         }
       },
       "post": {
-        "operationId": "Assistants_CreateAssistant",
+        "operationId": "CreateAssistant",
         "description": "Creates a new assistant.",
         "parameters": [
           {
@@ -187,17 +187,12 @@
               "$ref": "#/definitions/Assistant"
             }
           }
-        },
-        "x-ms-examples": {
-          "Assistants_CreateAssistant": {
-            "$ref": "./examples/create_assistant.json"
-          }
         }
       }
     },
     "/assistants/{assistantId}": {
       "get": {
-        "operationId": "Assistants_RetrieveAssistant",
+        "operationId": "GetAssistant",
         "description": "Retrieves an existing assistant.",
         "parameters": [
           {
@@ -218,7 +213,7 @@
         }
       },
       "post": {
-        "operationId": "Assistants_ModifyAssistant",
+        "operationId": "ModifyAssistant",
         "description": "Modifies an existing assistant.",
         "parameters": [
           {
@@ -248,7 +243,7 @@
         }
       },
       "delete": {
-        "operationId": "Assistants_DeleteAssistant",
+        "operationId": "DeleteAssistant",
         "description": "Deletes an assistant.",
         "parameters": [
           {
@@ -271,7 +266,7 @@
     },
     "/assistants/{assistantId}/files": {
       "get": {
-        "operationId": "Assistants_ListAssistantFiles",
+        "operationId": "ListAssistantFiles",
         "description": "Gets a list of files attached to a specific assistant, as used by tools that can read files.",
         "parameters": [
           {
@@ -385,7 +380,7 @@
         }
       },
       "post": {
-        "operationId": "Assistants_CreateAssistantFile",
+        "operationId": "CreateAssistantFile",
         "description": "Attaches a previously uploaded file to an assistant for use by tools that can read files.",
         "parameters": [
           {
@@ -426,7 +421,7 @@
     },
     "/assistants/{assistantId}/files/{fileId}": {
       "get": {
-        "operationId": "Assistants_RetrieveAssistantFile",
+        "operationId": "GetAssistantFile",
         "description": "Retrieves a file attached to an assistant.",
         "parameters": [
           {
@@ -454,7 +449,7 @@
         }
       },
       "delete": {
-        "operationId": "Assistants_DeleteAssistantFile",
+        "operationId": "DeleteAssistantFile",
         "description": "Unlinks a previously attached file from an assistant, rendering it unavailable for use by tools that can read\nfiles.",
         "parameters": [
           {
@@ -484,7 +479,7 @@
     },
     "/files": {
       "get": {
-        "operationId": "Files_ListFiles",
+        "operationId": "ListFiles",
         "description": "Gets a list of previously uploaded files.",
         "parameters": [
           {
@@ -537,7 +532,7 @@
         }
       },
       "post": {
-        "operationId": "Files_UploadFile",
+        "operationId": "CreateFile",
         "description": "Uploads a file for use by other operations.",
         "consumes": [
           "multipart/form-data"
@@ -601,7 +596,7 @@
           "200": {
             "description": "A representation of the uploaded file.",
             "schema": {
-              "$ref": "#/definitions/File"
+              "$ref": "#/definitions/OpenAIFile"
             }
           }
         }
@@ -609,7 +604,7 @@
     },
     "/files/{fileId}": {
       "get": {
-        "operationId": "Files_RetrieveFile",
+        "operationId": "RetrieveFile",
         "description": "Returns information about a specific file. Does not retrieve file content.",
         "parameters": [
           {
@@ -624,13 +619,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/File"
+              "$ref": "#/definitions/OpenAIFile"
             }
           }
         }
       },
       "delete": {
-        "operationId": "Files_DeleteFile",
+        "operationId": "DeleteFile",
         "description": "Delete a previously uploaded file.",
         "parameters": [
           {
@@ -651,33 +646,9 @@
         }
       }
     },
-    "/files/{fileId}/content": {
-      "get": {
-        "operationId": "Files_RetrieveFileContent",
-        "description": "Returns the contents of a specified file.",
-        "parameters": [
-          {
-            "name": "fileId",
-            "in": "path",
-            "description": "The ID of the file to retrieve the contents of.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
-          }
-        }
-      }
-    },
     "/threads": {
       "post": {
-        "operationId": "AssistantThreads_CreateThread",
+        "operationId": "CreateThread",
         "description": "Creates a new thread. Threads contain messages and can be run by assistants.",
         "parameters": [
           {
@@ -701,7 +672,7 @@
     },
     "/threads/{threadId}": {
       "get": {
-        "operationId": "AssistantThreads_RetrieveThread",
+        "operationId": "GetThread",
         "description": "Gets information about an existing thread.",
         "parameters": [
           {
@@ -722,7 +693,7 @@
         }
       },
       "post": {
-        "operationId": "AssistantThreads_ModifyThread",
+        "operationId": "ModifyThread",
         "description": "Modifies an existing thread.",
         "parameters": [
           {
@@ -742,6 +713,7 @@
                 "metadata": {
                   "type": "object",
                   "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+                  "x-nullable": true,
                   "additionalProperties": {
                     "type": "string"
                   }
@@ -760,7 +732,7 @@
         }
       },
       "delete": {
-        "operationId": "AssistantThreads_DeleteThread",
+        "operationId": "DeleteThread",
         "description": "Deletes an existing thread.",
         "parameters": [
           {
@@ -783,7 +755,7 @@
     },
     "/threads/{threadId}/messages": {
       "get": {
-        "operationId": "ThreadMessages_ListMessages",
+        "operationId": "ListMessages",
         "description": "Gets a list of messages that exist on a thread.",
         "parameters": [
           {
@@ -897,7 +869,7 @@
         }
       },
       "post": {
-        "operationId": "ThreadMessages_CreateMessage",
+        "operationId": "CreateMessage",
         "description": "Creates a new message on a specified thread.",
         "parameters": [
           {
@@ -933,6 +905,7 @@
                 "metadata": {
                   "type": "object",
                   "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+                  "x-nullable": true,
                   "additionalProperties": {
                     "type": "string"
                   }
@@ -957,7 +930,7 @@
     },
     "/threads/{threadId}/messages/{messageId}": {
       "get": {
-        "operationId": "ThreadMessages_RetrieveMessage",
+        "operationId": "GetMessage",
         "description": "Gets an existing message from an existing thread.",
         "parameters": [
           {
@@ -985,7 +958,7 @@
         }
       },
       "post": {
-        "operationId": "ThreadMessages_ModifyMessage",
+        "operationId": "ModifyMessage",
         "description": "Modifies an existing message on an existing thread.",
         "parameters": [
           {
@@ -1012,6 +985,7 @@
                 "metadata": {
                   "type": "object",
                   "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+                  "x-nullable": true,
                   "additionalProperties": {
                     "type": "string"
                   }
@@ -1032,7 +1006,7 @@
     },
     "/threads/{threadId}/messages/{messageId}/files": {
       "get": {
-        "operationId": "ThreadMessages_ListMessageFiles",
+        "operationId": "ListMessageFiles",
         "description": "Gets a list of previously uploaded files associated with a message from a thread.",
         "parameters": [
           {
@@ -1155,7 +1129,7 @@
     },
     "/threads/{threadId}/messages/{messageId}/files/{fileId}": {
       "get": {
-        "operationId": "ThreadMessages_RetrieveMessageFile",
+        "operationId": "GetMessageFile",
         "description": "Gets information about a file attachment to a message within a thread.",
         "parameters": [
           {
@@ -1192,7 +1166,7 @@
     },
     "/threads/{threadId}/runs": {
       "get": {
-        "operationId": "ThreadRuns_ListRuns",
+        "operationId": "ListRuns",
         "description": "Gets a list of runs for a specified thread.",
         "parameters": [
           {
@@ -1306,7 +1280,7 @@
         }
       },
       "post": {
-        "operationId": "ThreadRuns_CreateRun",
+        "operationId": "CreateRun",
         "description": "Creates a new run for an assistant thread.",
         "parameters": [
           {
@@ -1330,7 +1304,7 @@
                 },
                 "model": {
                   "type": "string",
-                  "description": "The overriden model name that the assistant should use to run the thread."
+                  "description": "The overridden model name that the assistant should use to run the thread."
                 },
                 "instructions": {
                   "type": "string",
@@ -1347,6 +1321,7 @@
                 "metadata": {
                   "type": "object",
                   "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+                  "x-nullable": true,
                   "additionalProperties": {
                     "type": "string"
                   }
@@ -1370,7 +1345,7 @@
     },
     "/threads/{threadId}/runs/{runId}": {
       "get": {
-        "operationId": "ThreadRuns_RetrieveRun",
+        "operationId": "GetRun",
         "description": "Gets an existing run from an existing thread.",
         "parameters": [
           {
@@ -1398,7 +1373,7 @@
         }
       },
       "post": {
-        "operationId": "ThreadRuns_ModifyRun",
+        "operationId": "ModifyRun",
         "description": "Modifies an existing thread run.",
         "parameters": [
           {
@@ -1425,6 +1400,7 @@
                 "metadata": {
                   "type": "object",
                   "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+                  "x-nullable": true,
                   "additionalProperties": {
                     "type": "string"
                   }
@@ -1445,8 +1421,8 @@
     },
     "/threads/{threadId}/runs/{runId}/cancel": {
       "post": {
-        "operationId": "ThreadRuns_CancelRun",
-        "description": "Cancels a thread run.",
+        "operationId": "CancelRun",
+        "description": "Cancels a run of an in progress thread.",
         "parameters": [
           {
             "name": "threadId",
@@ -1475,7 +1451,7 @@
     },
     "/threads/{threadId}/runs/{runId}/steps": {
       "get": {
-        "operationId": "RunSteps_ListRunSteps",
+        "operationId": "ListRunSteps",
         "description": "Gets a list of run steps from a thread run.",
         "parameters": [
           {
@@ -1598,7 +1574,7 @@
     },
     "/threads/{threadId}/runs/{runId}/steps/{stepId}": {
       "get": {
-        "operationId": "RunSteps_RetrieveRunStep",
+        "operationId": "GetRunStep",
         "description": "Gets a single run step from a thread run.",
         "parameters": [
           {
@@ -1635,13 +1611,13 @@
     },
     "/threads/{threadId}/runs/{runId}/submit_tool_outputs": {
       "post": {
-        "operationId": "ThreadRuns_SubmitRunToolOutputs",
+        "operationId": "SubmitToolOutputsToRun",
         "description": "Submits outputs from tools as requested by tool calls in a run. Runs that need submitted tool outputs will have a status of 'requires_action' with a required_action.type of 'submit_tool_outputs'.",
         "parameters": [
           {
             "name": "threadId",
             "in": "path",
-            "description": "The ID of the the thread that was run.",
+            "description": "The ID of the thread that was run.",
             "required": true,
             "type": "string"
           },
@@ -1687,7 +1663,7 @@
     },
     "/threads/runs": {
       "post": {
-        "operationId": "ThreadRuns_CreateThreadAndRun",
+        "operationId": "CreateThreadAndRun",
         "description": "Creates a new assistant thread and immediately starts a run using that new thread.",
         "parameters": [
           {
@@ -1757,6 +1733,7 @@
         "tools": {
           "type": "array",
           "description": "The collection of tools enabled for the assistant.",
+          "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
           },
@@ -1765,6 +1742,7 @@
         "file_ids": {
           "type": "array",
           "description": "A list of attached file IDs, ordered by creation date in ascending order.",
+          "default": [],
           "items": {
             "type": "string"
           },
@@ -1773,6 +1751,7 @@
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -1787,7 +1766,8 @@
         "model",
         "instructions",
         "tools",
-        "file_ids"
+        "file_ids",
+        "metadata"
       ]
     },
     "AssistantCreationOptions": {
@@ -1800,19 +1780,23 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the new assistant."
+          "description": "The name of the new assistant.",
+          "x-nullable": true
         },
         "description": {
           "type": "string",
-          "description": "The description of the new assistant."
+          "description": "The description of the new assistant.",
+          "x-nullable": true
         },
         "instructions": {
           "type": "string",
-          "description": "The system instructions for the new assistant to use."
+          "description": "The system instructions for the new assistant to use.",
+          "x-nullable": true
         },
         "tools": {
           "type": "array",
           "description": "The collection of tools to enable for the new assistant.",
+          "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
           },
@@ -1821,6 +1805,7 @@
         "file_ids": {
           "type": "array",
           "description": "A list of previously uploaded file IDs to attach to the assistant.",
+          "default": [],
           "items": {
             "type": "string"
           },
@@ -1829,6 +1814,7 @@
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -1842,6 +1828,14 @@
       "type": "object",
       "description": "The status of an assistant deletion operation.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
         "object": {
           "type": "string",
           "description": "The object type, which is always 'assistant.deleted'.",
@@ -1854,12 +1848,9 @@
         }
       },
       "required": [
+        "id",
+        "deleted",
         "object"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeletionStatus"
-        }
       ]
     },
     "AssistantFile": {
@@ -1903,6 +1894,14 @@
       "type": "object",
       "description": "The status of an assistant file deletion operation.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
         "object": {
           "type": "string",
           "description": "The object type, which is always 'assistant.file.deleted'.",
@@ -1915,12 +1914,9 @@
         }
       },
       "required": [
+        "id",
+        "deleted",
         "object"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeletionStatus"
-        }
       ]
     },
     "AssistantModificationOptions": {
@@ -1933,19 +1929,23 @@
         },
         "name": {
           "type": "string",
-          "description": "The modified name for the assistant to use."
+          "description": "The modified name for the assistant to use.",
+          "x-nullable": true
         },
         "description": {
           "type": "string",
-          "description": "The modified description for the assistant to use."
+          "description": "The modified description for the assistant to use.",
+          "x-nullable": true
         },
         "instructions": {
           "type": "string",
-          "description": "The modified system instructions for the new assistant to use."
+          "description": "The modified system instructions for the new assistant to use.",
+          "x-nullable": true
         },
         "tools": {
           "type": "array",
           "description": "The modified collection of tools to enable for the assistant.",
+          "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
           },
@@ -1954,6 +1954,7 @@
         "file_ids": {
           "type": "array",
           "description": "The modified list of previously uploaded fileIDs to attach to the assistant.",
+          "default": [],
           "items": {
             "type": "string"
           },
@@ -1962,6 +1963,7 @@
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -1995,6 +1997,7 @@
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -2003,7 +2006,8 @@
       "required": [
         "id",
         "object",
-        "created_at"
+        "created_at",
+        "metadata"
       ]
     },
     "AssistantThreadCreationOptions": {
@@ -2020,6 +2024,7 @@
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -2176,6 +2181,7 @@
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -2185,70 +2191,18 @@
         "assistant_id"
       ]
     },
-    "DeletionStatus": {
-      "type": "object",
-      "description": "An abstract representation of an OpenAI deletion operation result status.",
-      "properties": {
-        "deleted": {
-          "type": "boolean",
-          "description": "A value indicating whether deletion was successful."
-        }
-      },
-      "required": [
-        "deleted"
-      ]
-    },
-    "File": {
-      "type": "object",
-      "description": "Represents an assistant that can call the model and use tools.",
-      "properties": {
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always 'file'.",
-          "enum": [
-            "file"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
-        },
-        "bytes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The size of the file, in bytes."
-        },
-        "filename": {
-          "type": "string",
-          "description": "The name of the file."
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The Unix timestamp, in seconds, representing when this object was created.",
-          "x-ms-client-name": "createdAt"
-        },
-        "purpose": {
-          "$ref": "#/definitions/FilePurpose",
-          "description": "The intended purpose of a file."
-        }
-      },
-      "required": [
-        "object",
-        "id",
-        "bytes",
-        "filename",
-        "created_at",
-        "purpose"
-      ]
-    },
     "FileDeletionStatus": {
       "type": "object",
       "description": "A status response from a file deletion operation.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
         "object": {
           "type": "string",
           "description": "The object type, which is always 'file'.",
@@ -2258,20 +2212,12 @@
           "x-ms-enum": {
             "modelAsString": false
           }
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the deleted file."
         }
       },
       "required": [
-        "object",
-        "id"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeletionStatus"
-        }
+        "id",
+        "deleted",
+        "object"
       ]
     },
     "FileListResponse": {
@@ -2292,7 +2238,7 @@
           "type": "array",
           "description": "The files returned for the request.",
           "items": {
-            "$ref": "#/definitions/File"
+            "$ref": "#/definitions/OpenAIFile"
           }
         }
       },
@@ -2355,7 +2301,6 @@
       },
       "required": [
         "name",
-        "description",
         "parameters"
       ]
     },
@@ -2398,7 +2343,8 @@
       },
       "required": [
         "name",
-        "arguments"
+        "arguments",
+        "output"
       ]
     },
     "FunctionToolDefinition": {
@@ -2690,6 +2636,53 @@
         "quote"
       ]
     },
+    "OpenAIFile": {
+      "type": "object",
+      "description": "Represents an assistant that can call the model and use tools.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'file'.",
+          "enum": [
+            "file"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The identifier, which can be referenced in API endpoints."
+        },
+        "bytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the file, in bytes."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The name of the file."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp, in seconds, representing when this object was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "purpose": {
+          "$ref": "#/definitions/FilePurpose",
+          "description": "The intended purpose of a file."
+        }
+      },
+      "required": [
+        "object",
+        "id",
+        "bytes",
+        "filename",
+        "created_at",
+        "purpose"
+      ]
+    },
     "RequiredAction": {
       "type": "object",
       "description": "An abstract representation of a required action for an assistant thread run to continue.",
@@ -2908,6 +2901,7 @@
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -2927,7 +2921,8 @@
         "expired_at",
         "completed_at",
         "cancelled_at",
-        "failed_at"
+        "failed_at",
+        "metadata"
       ]
     },
     "RunStepDetails": {
@@ -3150,6 +3145,14 @@
       "type": "object",
       "description": "The status of a thread deletion operation.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
         "object": {
           "type": "string",
           "description": "The object type, which is always 'thread.deleted'.",
@@ -3162,12 +3165,9 @@
         }
       },
       "required": [
+        "id",
+        "deleted",
         "object"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeletionStatus"
-        }
       ]
     },
     "ThreadMessage": {
@@ -3232,6 +3232,7 @@
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -3244,7 +3245,8 @@
         "thread_id",
         "role",
         "content",
-        "file_ids"
+        "file_ids",
+        "metadata"
       ]
     },
     "ThreadRun": {
@@ -3312,6 +3314,7 @@
         "tools": {
           "type": "array",
           "description": "The overridden enabled tools used for this assistant thread run.",
+          "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
           },
@@ -3320,6 +3323,7 @@
         "file_ids": {
           "type": "array",
           "description": "A list of attached file IDs, ordered by creation date in ascending order.",
+          "default": [],
           "items": {
             "type": "string"
           },
@@ -3369,6 +3373,7 @@
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -3390,7 +3395,8 @@
         "started_at",
         "completed_at",
         "cancelled_at",
-        "failed_at"
+        "failed_at",
+        "metadata"
       ]
     },
     "ToolCall": {

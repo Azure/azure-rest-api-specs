@@ -26,17 +26,40 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-2023-11
 ```
 
 ---
 
 
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.SecurityInsights/stable/2023-11-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/SourceControls.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/Watchlists.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/operations.json
+```
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.SecurityInsights/preview/2023-10-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2023-10-01-preview/AutomationRules.json
@@ -71,6 +94,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-10-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2023-10-01-preview/operations.json
 ```
+
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
