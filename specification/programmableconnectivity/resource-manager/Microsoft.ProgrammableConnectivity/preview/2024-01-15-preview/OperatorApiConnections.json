@@ -461,14 +461,21 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/OperatorApiConnectionProperties",
           "description": "Operator API Connection resource properties.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read",
             "create"
           ]
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/OperatorApiConnectionNonUpdateableProperties"
+          },
+          {
+            "$ref": "#/definitions/OperatorApiConnectionUpdateableProperties"
+          }
+        ]
       },
       "allOf": [
         {
