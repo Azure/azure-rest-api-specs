@@ -49,6 +49,7 @@ model PatientTimelineInference is Fhir.R4.Extendible {
   @doc("The type of the Patient Timeline inference.")
   type: PatientTimelineInferenceType;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   @doc("""
   FHIR 4.0 representation of the piece of clinical info.
   additional dependent resources maybe contained (e.g. MedicationStatement may contain Medication)
