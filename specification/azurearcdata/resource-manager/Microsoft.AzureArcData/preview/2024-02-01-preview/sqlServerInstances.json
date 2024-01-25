@@ -238,6 +238,10 @@
         "monitoring": {
           "description": "The monitoring configuration.",
           "$ref": "#/definitions/Monitoring"
+        },
+        "migration": {
+          "description": "Migration related configuration.",
+          "$ref": "#/definitions/Migration"
         }
       }
     },
@@ -456,6 +460,10 @@
         "monitoring": {
           "description": "The monitoring configuration.",
           "$ref": "#/definitions/Monitoring"
+        },
+        "migration": {
+          "description": "Migration related configuration.",
+          "$ref": "#/definitions/Migration"
         }
       }
     },
@@ -575,6 +583,26 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates if monitoring is enabled for this SQL Server instance."
+        }
+      }
+    },
+    "Migration": {
+      "description": "Migration related configuration.",
+      "type": "object",
+      "properties": {
+        "assessment": {
+          "description": "Migration assessments related configuration.",
+          "$ref": "#/definitions/MigrationAssessment"
+        }
+      }
+    },
+    "MigrationAssessment": {
+      "description": "The migration assessment related configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if migration assessment is enabled for this SQL Server instance."
         }
       }
     },
