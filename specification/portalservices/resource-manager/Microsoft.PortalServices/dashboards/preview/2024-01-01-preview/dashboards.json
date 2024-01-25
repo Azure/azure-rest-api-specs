@@ -1496,7 +1496,8 @@
       "enum": [
         "arg",
         "app-insights",
-        "policy"
+        "policy",
+        "recent-resources"
       ],
       "x-ms-enum": {
         "name": "QueryTileKind",
@@ -1516,6 +1517,11 @@
             "name": "policy",
             "value": "policy",
             "description": "The kind type for policy."
+          },
+          {
+            "name": "recent-resources",
+            "value": "recent-resources",
+            "description": "The kind type for recent-resources."
           }
         ]
       }
@@ -1573,6 +1579,16 @@
           "description": "Options for Query Tile visualizations."
         }
       }
+    },
+    "RecentRecourcesDataDefinition": {
+      "type": "object",
+      "description": "The data definition of recent resources Query Tile.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueryTileData"
+        }
+      ],
+      "x-ms-discriminator-value": "recent-resources"
     },
     "ResourceTile": {
       "type": "object",
@@ -1647,6 +1663,7 @@
         "line",
         "multistat",
         "pie",
+        "snapshot",
         "scatter",
         "table",
         "timechart"
@@ -1694,6 +1711,11 @@
             "name": "pie",
             "value": "pie",
             "description": "The visualization type for pie."
+          },
+          {
+            "name": "snapshot",
+            "value": "snapshot",
+            "description": "The visualization type for snapshot."
           },
           {
             "name": "scatter",

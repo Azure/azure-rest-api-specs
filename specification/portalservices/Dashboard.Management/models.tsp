@@ -103,6 +103,9 @@ enum VisualizationType {
   @doc("The visualization type for pie.")
   pie,
 
+  @doc("The visualization type for snapshot.")
+  snapshot,
+
   @doc("The visualization type for scatter.")
   scatter,
 
@@ -132,6 +135,9 @@ enum QueryTileKind {
 
   @doc("The kind type for policy.")
   policy,
+
+  @doc("The kind type for recent-resources.")
+  `recent-resources`,
 }
 
 @doc("The types of Dashboard Query tile aggregation types.")
@@ -570,6 +576,12 @@ model QueryTileMetricsItemResourceMetadata {
 model PolicyTileDataDefinition extends QueryTileData {
   @doc("Dashboard Query tile kind.")
   kind: QueryTileKind.policy;
+}
+
+@doc("The data definition of recent resources Query Tile.")
+model RecentRecourcesDataDefinition extends QueryTileData {
+  @doc("Dashboard Query tile kind.")
+  kind: QueryTileKind.`recent-resources`;
 }
 
 @doc("A resource tile.")
