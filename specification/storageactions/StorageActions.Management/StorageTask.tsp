@@ -22,7 +22,8 @@ model StorageTask is TrackedResource<StorageTaskProperties> {
   @segment("storageTasks")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  @doc("The managed service identity of the resource.")
+  identity?: ManagedIdentityProperties;
 }
 
 @armResourceOperations

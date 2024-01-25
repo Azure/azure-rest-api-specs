@@ -597,16 +597,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.ManagedServiceIdentity": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
     "ElseCondition": {
       "type": "object",
       "description": "The else block of storage task operation",
@@ -835,7 +825,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed service identity of the resource."
         }
       },
       "allOf": [
@@ -1304,7 +1294,7 @@
       "description": "Parameters of the storage task update request",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         },
         "tags": {
