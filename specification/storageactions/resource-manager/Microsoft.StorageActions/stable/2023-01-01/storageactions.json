@@ -668,20 +668,6 @@
         }
       }
     },
-    "ManagedServiceIdentityType": {
-      "type": "string",
-      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned,UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true
-      }
-    },
     "MatchedBlockName": {
       "type": "string",
       "description": "Represents the condition block name that matched blob properties.",
@@ -754,36 +740,6 @@
         "modelAsString": false
       },
       "readOnly": true
-    },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      }
     },
     "RunResult": {
       "type": "string",

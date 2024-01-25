@@ -13,14 +13,6 @@ namespace Microsoft.StorageActions;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).")
-enum ManagedServiceIdentityType {
-  None,
-  SystemAssigned,
-  UserAssigned,
-  `SystemAssigned,UserAssigned`,
-}
-
 @doc("The operation to be performed on the object.")
 enum StorageTaskOperationName {
   SetBlobTier,
@@ -127,25 +119,6 @@ model StorageTaskOperation {
 model ElseCondition {
   @doc("List of operations to execute in the else block")
   operations: StorageTaskOperation[];
-}
-
-@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
-model Resource {
-  @doc("Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"")
-  @visibility("read")
-  id?: ResourceIdentifier;
-
-  @doc("The name of the resource")
-  @visibility("read")
-  name?: string;
-
-  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
-  @visibility("read")
-  type?: string;
-
-  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
 }
 
 @doc("Parameters of the storage task update request")
