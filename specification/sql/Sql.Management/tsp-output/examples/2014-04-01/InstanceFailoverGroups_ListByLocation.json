@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01-preview",
+    "locationName": "Japan East",
+    "resourceGroupName": "Default",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "failover-group-test",
+            "type": "Microsoft.Sql/locations/instanceFailoverGroups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/JapanEast/instanceFailoverGroups/failover-group-test",
+            "properties": {
+              "managedInstancePairs": [
+                {
+                  "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-secondary-mngdInstance",
+                  "primaryManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-primary-mngdInstance"
+                }
+              ],
+              "partnerRegions": [
+                {
+                  "location": "Japan West",
+                  "replicationRole": "Secondary"
+                }
+              ],
+              "readOnlyEndpoint": {
+                "failoverPolicy": "Disabled"
+              },
+              "readWriteEndpoint": {
+                "failoverPolicy": "Automatic",
+                "failoverWithDataLossGracePeriodMinutes": 480
+              },
+              "replicationRole": "Primary",
+              "replicationState": "CATCH_UP",
+              "secondaryType": "Geo"
+            }
+          },
+          {
+            "name": "failover-group-test-1",
+            "type": "Microsoft.Sql/locations/instanceFailoverGroups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/JapanEast/instanceFailoverGroups/failover-group-test-1",
+            "properties": {
+              "managedInstancePairs": [
+                {
+                  "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-secondary-mngdInstance-1",
+                  "primaryManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-primary-mngdInstance-1"
+                }
+              ],
+              "partnerRegions": [
+                {
+                  "location": "Japan West",
+                  "replicationRole": "Secondary"
+                }
+              ],
+              "readOnlyEndpoint": {
+                "failoverPolicy": "Disabled"
+              },
+              "readWriteEndpoint": {
+                "failoverPolicy": "Automatic",
+                "failoverWithDataLossGracePeriodMinutes": 480
+              },
+              "replicationRole": "Primary",
+              "replicationState": "CATCH_UP",
+              "secondaryType": "Geo"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "InstanceFailoverGroups_ListByLocation",
+  "title": "List failover group"
+}

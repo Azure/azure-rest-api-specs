@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myWebPubSubService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "capacity": {
+              "default": 1,
+              "allowedValues": [
+                0,
+                1
+              ],
+              "maximum": 1,
+              "minimum": 0,
+              "scaleType": "Manual"
+            },
+            "resourceType": "Microsoft.SignalRService/WebPubSub",
+            "sku": {
+              "name": "Free_F1",
+              "tier": "Free"
+            }
+          },
+          {
+            "capacity": {
+              "default": 1,
+              "allowedValues": [
+                0,
+                1,
+                2,
+                5,
+                10,
+                20,
+                50,
+                100
+              ],
+              "maximum": 100,
+              "minimum": 0,
+              "scaleType": "Automatic"
+            },
+            "resourceType": "Microsoft.SignalRService/WebPubSub",
+            "sku": {
+              "name": "Standard_S1",
+              "tier": "Standard"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WebPubSub_ListSkus",
+  "title": "WebPubSub_ListSkus"
+}

@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "input": {
+      "properties": {
+        "type": "Reference",
+        "datasource": {
+          "type": "Microsoft.Storage/Blob",
+          "properties": {
+            "container": "differentContainer"
+          }
+        },
+        "serialization": {
+          "type": "Csv",
+          "properties": {
+            "encoding": "UTF8",
+            "fieldDelimiter": "|"
+          }
+        }
+      }
+    },
+    "inputName": "input7225",
+    "jobName": "sj9597",
+    "resourceGroupName": "sjrg8440",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "input7225",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg8440/providers/Microsoft.StreamAnalytics/streamingjobs/sj9597/inputs/input7225",
+        "properties": {
+          "type": "Reference",
+          "datasource": {
+            "type": "Microsoft.Storage/Blob",
+            "properties": {
+              "container": "differentContainer",
+              "dateFormat": "yyyy/MM/dd",
+              "pathPattern": "{date}/{time}",
+              "storageAccounts": [
+                {
+                  "accountName": "someAccountName"
+                }
+              ],
+              "timeFormat": "HH"
+            }
+          },
+          "serialization": {
+            "type": "Csv",
+            "properties": {
+              "encoding": "UTF8",
+              "fieldDelimiter": "|"
+            }
+          }
+        }
+      },
+      "headers": {
+        "ETag": "a4ceb697-1c8f-40c8-b951-fb5ee4757437"
+      }
+    }
+  },
+  "operationId": "Inputs_Update",
+  "title": "Update a reference blob input"
+}

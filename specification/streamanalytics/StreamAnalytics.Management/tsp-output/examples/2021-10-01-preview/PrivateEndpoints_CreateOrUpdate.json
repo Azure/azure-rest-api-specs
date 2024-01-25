@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "clusterName": "testcluster",
+    "privateEndpoint": {
+      "properties": {
+        "manualPrivateLinkServiceConnections": [
+          {
+            "properties": {
+              "groupIds": [
+                "groupIdFromResource"
+              ],
+              "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls"
+            }
+          }
+        ]
+      }
+    },
+    "privateEndpointName": "testpe",
+    "resourceGroupName": "sjrg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "An Example Private Endpoint",
+        "type": "Microsoft.StreamAnalytics/clusters/privateEndpoints",
+        "etag": "F86B9B70-D5B1-451D-AFC8-0B42D4729B8C",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/clusters/testcluster/privateEndpoints/AnExamplePrivateEndpoint",
+        "properties": {
+          "createdDate": "2020-03-01T01:00Z",
+          "manualPrivateLinkServiceConnections": [
+            {
+              "properties": {
+                "groupIds": [
+                  "groupIdFromResource"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "description": "Awaiting approval",
+                  "actionsRequired": "None",
+                  "status": "Pending"
+                },
+                "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+                "requestMessage": "Please approve my connection."
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "An Example Private Endpoint",
+        "type": "Microsoft.StreamAnalytics/clusters/privateEndpoints",
+        "etag": "F86B9B70-D5B1-451D-AFC8-0B42D4729B8C",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/clusters/testcluster/privateEndpoints/AnExamplePrivateEndpoint",
+        "properties": {
+          "createdDate": "2020-03-01T01:00Z",
+          "manualPrivateLinkServiceConnections": [
+            {
+              "properties": {
+                "groupIds": [
+                  "groupIdFromResource"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "description": "Awaiting approval",
+                  "actionsRequired": "None",
+                  "status": "Pending"
+                },
+                "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+                "requestMessage": "Please approve my connection."
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "PrivateEndpoints_CreateOrUpdate",
+  "title": "Create a private endpoint"
+}

@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "databaseName": "testdb",
+    "maintenanceWindowName": "current",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "serverName": "testsvr",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.Sql/servers/databases/maintenancewindows",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb/maintenancewindows/current",
+        "properties": {
+          "timeRanges": [
+            {
+              "dayOfWeek": "Saturday",
+              "duration": "PT60M",
+              "startTime": "00:00:00"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "MaintenanceWindows_Get",
+  "title": "Gets maintenance window settings for a selected database."
+}

@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2014-04-01",
+    "dataMaskingPolicyName": "Default",
+    "databaseName": "sqlcrudtest-331",
+    "resourceGroupName": "sqlcrudtest-6852",
+    "serverName": "sqlcrudtest-2080",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": null,
+            "type": "Microsoft.Sql/servers/databases/dataMaskingPolicies/rules",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/",
+            "kind": null,
+            "location": "Central US",
+            "properties": {
+              "aliasName": null,
+              "columnName": "test1",
+              "id": "dbo_Table_1_test1",
+              "maskingFunction": "Text",
+              "numberFrom": null,
+              "numberTo": null,
+              "prefixSize": "1",
+              "replacementString": "asdf",
+              "ruleState": "Enabled",
+              "schemaName": "dbo",
+              "suffixSize": "0",
+              "tableName": "Table_1"
+            }
+          },
+          {
+            "name": null,
+            "type": "Microsoft.Sql/servers/databases/dataMaskingPolicies/rules",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/",
+            "kind": null,
+            "location": "Central US",
+            "properties": {
+              "aliasName": null,
+              "columnName": "test1",
+              "id": "dbo_Table_1_test1",
+              "maskingFunction": "Number",
+              "numberFrom": "0",
+              "numberTo": "2",
+              "prefixSize": null,
+              "replacementString": null,
+              "ruleState": "Enabled",
+              "schemaName": "dbo",
+              "suffixSize": null,
+              "tableName": "Table_1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DataMaskingRules_List",
+  "title": "List data masking rules"
+}

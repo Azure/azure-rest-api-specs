@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "managedInstanceName": "testcl",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "dag",
+            "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups",
+            "id": "/subscriptions/f2669dff-5f08-45dd-b857-b2a60b72cdc9/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
+            "properties": {
+              "distributedAvailabilityGroupId": "6bc05a51-aa36-a196-09bd-481d7a0973c0",
+              "lastHardenedLsn": "39000000030400001",
+              "linkState": "Catchup",
+              "replicationMode": "Async",
+              "sourceEndpoint": "TCP://SERVER:7022",
+              "sourceReplicaId": "543dd519-7585-faff-6ad2-11fb826d4f4d",
+              "targetDatabase": "testdb",
+              "targetReplicaId": "7e218aba-0a53-6231-be09-895d99f96bf2"
+            }
+          },
+          {
+            "name": "dag2",
+            "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups",
+            "id": "/subscriptions/f2669dff-5f08-45dd-b857-b2a60b72cdc9/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag2",
+            "properties": {
+              "distributedAvailabilityGroupId": "7ec05a51-aa36-a196-09bd-481d7a0973c0",
+              "lastHardenedLsn": "39000000030400001",
+              "linkState": "Catchup",
+              "replicationMode": "Async",
+              "sourceEndpoint": "TCP://SERVER:7022",
+              "sourceReplicaId": "d423d519-7585-faff-6ad2-11fb826d4f4d",
+              "targetDatabase": "testdb2",
+              "targetReplicaId": "32578aba-0a53-6231-be09-895d99f96bf2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DistributedAvailabilityGroups_ListByInstance",
+  "title": "Lists all distributed availability groups in instance."
+}

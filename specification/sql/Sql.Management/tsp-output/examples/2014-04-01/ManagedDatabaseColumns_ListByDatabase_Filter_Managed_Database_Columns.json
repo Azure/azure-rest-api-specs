@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "schema": [
+      "dbo"
+    ],
+    "$skip": "5",
+    "$top": "50",
+    "api-version": "2020-11-01-preview",
+    "column": [
+      "username"
+    ],
+    "databaseName": "myDatabase",
+    "managedInstanceName": "serverName",
+    "orderBy": [
+      "schema asc",
+      "table",
+      "column desc"
+    ],
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "table": [
+      "customer",
+      "address"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "username",
+            "type": "Microsoft.Sql/managedInstances/databases/schemas/tables/columns",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/managedInstances/serverName/databases/myDatabase/schemas/dbo/tables/customer/columns/username",
+            "properties": {
+              "columnType": "nvarchar",
+              "isComputed": false,
+              "memoryOptimized": false,
+              "temporalType": "NonTemporalTable"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedDatabaseColumns_ListByDatabase",
+  "title": "Filter managed database columns"
+}

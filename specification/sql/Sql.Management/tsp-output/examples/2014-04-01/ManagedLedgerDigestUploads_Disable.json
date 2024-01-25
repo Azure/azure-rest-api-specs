@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "databaseName": "testdb",
+    "ledgerDigestUploads": "current",
+    "managedInstanceName": "ledgertestserver",
+    "resourceGroupName": "ledgertestrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.Sql/managedInstances/databases/ledgerDigestUploads",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/ledgertestrg/providers/Microsoft.Sql/managedInstances/ledgertestserver/databases/testdb/ledgerDigestUploads/current/disable",
+        "properties": {
+          "state": "Disabled"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/ledgertestrg/providers/Microsoft.Sql/locations/eastus/managedLedgerDigestUploadsOperationResults/11111111-1111-1111-1111-111111111111"
+      }
+    }
+  },
+  "operationId": "ManagedLedgerDigestUploads_Disable",
+  "title": "Disables uploading ledger digests for a database"
+}

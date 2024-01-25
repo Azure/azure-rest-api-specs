@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "managedInstanceName": "schedulemi",
+    "resourceGroupName": "schedulerg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.Sql/managedInstances/startStopSchedules",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/schedulerg/providers/Microsoft.Sql/managedInstances/schedulemi/startStopSchedules",
+            "properties": {
+              "description": "This is a schedule for our Dev/Test environment.",
+              "nextExecutionTime": "2021-08-26T14:00:00",
+              "nextRunAction": "Stop",
+              "scheduleList": [
+                {
+                  "startDay": "Thursday",
+                  "startTime": "06:00 PM",
+                  "stopDay": "Thursday",
+                  "stopTime": "05:00 PM"
+                },
+                {
+                  "startDay": "Thursday",
+                  "startTime": "03:00 PM",
+                  "stopDay": "Thursday",
+                  "stopTime": "02:00 PM"
+                }
+              ],
+              "timeZoneId": "Central European Standard Time"
+            },
+            "systemData": {
+              "createdAt": "2021-08-26T04:41:33.937Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-27T04:41:33.937Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "StartStopManagedInstanceSchedules_ListByInstance",
+  "title": "Lists the managed instance's Start/Stop schedules."
+}

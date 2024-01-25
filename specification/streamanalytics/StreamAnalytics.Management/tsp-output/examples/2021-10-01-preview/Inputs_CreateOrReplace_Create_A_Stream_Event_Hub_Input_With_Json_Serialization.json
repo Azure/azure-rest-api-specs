@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "input": {
+      "properties": {
+        "type": "Stream",
+        "datasource": {
+          "type": "Microsoft.ServiceBus/EventHub",
+          "properties": {
+            "consumerGroupName": "sdkconsumergroup",
+            "eventHubName": "sdkeventhub",
+            "serviceBusNamespace": "sdktest",
+            "sharedAccessPolicyKey": "someSharedAccessPolicyKey==",
+            "sharedAccessPolicyName": "RootManageSharedAccessKey"
+          }
+        },
+        "serialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        },
+        "watermarkSettings": {
+          "watermarkMode": "ReadWatermark"
+        }
+      }
+    },
+    "inputName": "input7425",
+    "jobName": "sj197",
+    "resourceGroupName": "sjrg3139",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "input7425",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg3139/providers/Microsoft.StreamAnalytics/streamingjobs/sj197/inputs/input7425",
+        "properties": {
+          "type": "Stream",
+          "datasource": {
+            "type": "Microsoft.ServiceBus/EventHub",
+            "properties": {
+              "consumerGroupName": "sdkconsumergroup",
+              "eventHubName": "sdkeventhub",
+              "serviceBusNamespace": "sdktest",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey"
+            }
+          },
+          "serialization": {
+            "type": "Json",
+            "properties": {
+              "encoding": "UTF8"
+            }
+          }
+        }
+      },
+      "headers": {
+        "ETag": "afd0d184-37e9-4370-9e55-32501bc4de3a"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "input7425",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg3139/providers/Microsoft.StreamAnalytics/streamingjobs/sj197/inputs/input7425",
+        "properties": {
+          "type": "Stream",
+          "datasource": {
+            "type": "Microsoft.ServiceBus/EventHub",
+            "properties": {
+              "consumerGroupName": "sdkconsumergroup",
+              "eventHubName": "sdkeventhub",
+              "serviceBusNamespace": "sdktest",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey"
+            }
+          },
+          "serialization": {
+            "type": "Json",
+            "properties": {
+              "encoding": "UTF8"
+            }
+          }
+        }
+      },
+      "headers": {
+        "ETag": "afd0d184-37e9-4370-9e55-32501bc4de3a"
+      }
+    }
+  },
+  "operationId": "Inputs_CreateOrReplace",
+  "title": "Create a stream Event Hub input with JSON serialization"
+}

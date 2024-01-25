@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "jobAgentName": "agent1",
+    "resourceGroupName": "group1",
+    "serverName": "server1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "agent1",
+        "type": "Microsoft.Sql/servers/jobAgents",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1",
+        "location": "southeastasia",
+        "properties": {
+          "databaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/db1"
+        },
+        "sku": {
+          "name": "Agent",
+          "capacity": 400
+        }
+      }
+    }
+  },
+  "operationId": "JobAgents_Get",
+  "title": "Get a job agent"
+}

@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2023-02-01-preview",
+    "parameters": {
+      "properties": {
+        "administratorLogin": "dummylogin",
+        "administratorLoginPassword": "placeholder",
+        "isIPv6Enabled": "Enabled",
+        "publicNetworkAccess": "Disabled",
+        "restrictOutboundNetworkAccess": "Enabled"
+      }
+    },
+    "resourceGroupName": "sqlcrudtest-7398",
+    "serverName": "sqlcrudtest-4645",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sqlcrudtest-4645",
+        "type": "Microsoft.Sql/servers",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645",
+        "kind": "v12.0",
+        "location": "japaneast",
+        "properties": {
+          "administratorLogin": "dummylogin",
+          "fullyQualifiedDomainName": "sqlcrudtest-4645.database.windows.net",
+          "isIPv6Enabled": "Enabled",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/privateEndpointConnections/private-endpoint-name-00000000-1111-2222-3333-444444444444",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "Auto-approved",
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                },
+                "provisioningState": "Ready"
+              }
+            }
+          ],
+          "publicNetworkAccess": "Disabled",
+          "restrictOutboundNetworkAccess": "Enabled",
+          "state": "Ready",
+          "version": "12.0"
+        },
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Sql/locations/japaneast/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2023-02-01"
+      }
+    }
+  },
+  "operationId": "Servers_Update",
+  "title": "Update a server"
+}

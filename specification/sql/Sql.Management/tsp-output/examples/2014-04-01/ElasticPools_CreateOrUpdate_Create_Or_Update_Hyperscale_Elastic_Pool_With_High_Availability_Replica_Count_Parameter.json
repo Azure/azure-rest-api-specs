@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "elasticPoolName": "sqlcrudtest-8102",
+    "parameters": {
+      "location": "Japan East",
+      "properties": {
+        "highAvailabilityReplicaCount": 2
+      },
+      "sku": {
+        "name": "HS_Gen5_4"
+      }
+    },
+    "resourceGroupName": "sqlcrudtest-2369",
+    "serverName": "sqlcrudtest-8069",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sqlcrudtest-8102",
+        "type": "Microsoft.Sql/servers/elasticPools",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102",
+        "kind": "vcore,pool",
+        "location": "Japan East",
+        "properties": {
+          "creationDate": "2021-08-26T03:46:20.57Z",
+          "highAvailabilityReplicaCount": 2,
+          "licenseType": "LicenseIncluded",
+          "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default",
+          "maxSizeBytes": 0,
+          "perDatabaseSettings": {
+            "maxCapacity": 4,
+            "minCapacity": 0
+          },
+          "state": "Ready",
+          "zoneRedundant": false
+        },
+        "sku": {
+          "name": "HS_Gen5",
+          "capacity": 4,
+          "family": "Gen5",
+          "tier": "Hyperscale"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sqlcrudtest-8102",
+        "type": "Microsoft.Sql/servers/elasticPools",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102",
+        "kind": "vcore,pool",
+        "location": "Japan East",
+        "properties": {
+          "creationDate": "2021-08-26T03:46:20.57Z",
+          "highAvailabilityReplicaCount": 2,
+          "licenseType": "LicenseIncluded",
+          "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default",
+          "maxSizeBytes": 0,
+          "perDatabaseSettings": {
+            "maxCapacity": 4,
+            "minCapacity": 0
+          },
+          "state": "Ready",
+          "zoneRedundant": false
+        },
+        "sku": {
+          "name": "HS_Gen5",
+          "capacity": 4,
+          "family": "Gen5",
+          "tier": "Hyperscale"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/locations/japaneast1/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2021-08-01"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/locations/japaneast1/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2021-08-01"
+      }
+    }
+  },
+  "operationId": "ElasticPools_CreateOrUpdate",
+  "title": "Create or update Hyperscale elastic pool with high availability replica count parameter"
+}

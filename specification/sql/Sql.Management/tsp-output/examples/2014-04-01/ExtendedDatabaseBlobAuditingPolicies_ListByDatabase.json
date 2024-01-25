@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "databaseName": "testdb",
+    "resourceGroupName": "blobauditingtest-6852",
+    "serverName": "blobauditingtest-2080",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.Sql/servers/databases/extendedAuditingSettings",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb/extendedAuditingSettings/default",
+            "properties": {
+              "auditActionsAndGroups": [],
+              "isAzureMonitorTargetEnabled": false,
+              "isManagedIdentityInUse": false,
+              "isStorageSecondaryKeyInUse": false,
+              "predicateExpression": "statement = 'select 1'",
+              "retentionDays": 0,
+              "state": "Disabled",
+              "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+              "storageEndpoint": ""
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ExtendedDatabaseBlobAuditingPolicies_ListByDatabase",
+  "title": "List extended auditing settings of a database"
+}
