@@ -2769,72 +2769,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/validateSessionHostUpdate": {
-      "post": {
-        "tags": [
-          "SessionHostManagement"
-        ],
-        "operationId": "ValidateSessionHostUpdate_Post",
-        "description": "Validates a session host update operation for validation errors. When Session Host Configuration and Session Host Management values are not provided the ones saved in the Host Pool will be used.",
-        "x-ms-examples": {
-          "HostPools_Update_Post": {
-            "$ref": "./examples/SessionHostManagements_ValidateSessionHostUpdate_Post.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "name": "validateSessionHostUpdateRequestBody",
-            "description": "Object containing the definition for properties to be used in the sessionHostUpdate validation.",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/ValidateSessionHostUpdateRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Successfully initiated hostpool update.",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/initiateSessionHostUpdate": {
       "post": {
         "tags": [
@@ -3169,7 +3103,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
@@ -6416,25 +6350,6 @@
         "faultContext": {
           "type": "string",
           "description": "SessionHostManagement operation fault context."
-        }
-      }
-    },
-    "ValidateSessionHostUpdateRequestBody": {
-      "description": "Object containing the definition for properties to be used in the sessionHostUpdate validation.",
-      "type": "object",
-      "properties": {
-        "sessionHostConfiguration": {
-          "description": "Object containing the definition for the SessionHostConfiguration to be validated.  If none is provided the update will use the SessionHostConfiguration settings associated with the HostPool.",
-          "$ref": "#/definitions/SessionHostConfiguration"
-        },
-        "sessionHostManagement": {
-          "description": "Object containing the definition for the SessionHostManagement to be validated. If none is provided the update will use the settings saved in the sessionHostManagement object.",
-          "$ref": "#/definitions/SessionHostManagement"
-        },
-        "scheduledDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp that the update validation is scheduled for. If none is provided, the update will be executed immediately"
         }
       }
     },

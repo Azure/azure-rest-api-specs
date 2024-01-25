@@ -28,15 +28,14 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2023-11
+tag: package-2023-12
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
 suppressions:
-    - code: ResourceNameRestriction
-      reason: BackupInstance Resource is created by DPP Service, so regex wont add much value here.
-    
+  - code: ResourceNameRestriction
+    reason: 'BackupInstance Resource is created by DPP Service, so regex wont add much value here.'
 ```
 
 ### Validations
@@ -51,11 +50,19 @@ message-format: json
 ```
 
 
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12'
+input-file:
+  - Microsoft.DataProtection/stable/2023-12-01/dataprotection.json
+```
 ### Tag: package-2023-11
 
 These settings apply only when `--tag=package-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11'
+``` yaml $(tag) == 'package-2023-11'
 input-file:
   - Microsoft.DataProtection/stable/2023-11-01/dataprotection.json
 ```
@@ -64,7 +71,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-08'
+``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
   - Microsoft.DataProtection/preview/2023-08-01-preview/dataprotection.json
 ```
@@ -300,6 +307,7 @@ See configuration in [readme.go.md](./readme.go.md)
 See configuration in [readme.java.md](./readme.java.md)
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: ParametersInPost
