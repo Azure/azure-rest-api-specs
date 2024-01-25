@@ -3591,15 +3591,15 @@
       }
     },
     "FunctionsDeployment": {
-      "description": "Configuration section for Azure Function app deployment.",
+      "description": "Configuration section for the function app deployment.",
       "type": "object",
       "properties": {
         "storage": {
-          "description": "Storage for deployed package used by the Azure Function app.",
+          "description": "Storage for deployed package used by the function app.",
           "type": "object",
           "properties": {
             "type": {
-              "description": "Property to select Azure Storage Type. Available options: blobContainer.",
+              "description": "Property to select Azure Storage type. Available options: blobContainer.",
               "type": "string",
               "enum": [
                 "blobContainer"
@@ -3610,16 +3610,16 @@
               }
             },
             "value": {
-              "description": "Property to set the URL for the selected Azure Storage Type. Example: For blobContainer, value will be like https://<storageAccountName>.blob.core.windows.net/<containerName>.",
+              "description": "Property to set the URL for the selected Azure Storage type. Example: For blobContainer, the value could be https://<storageAccountName>.blob.core.windows.net/<containerName>.",
               "type": "string",
               "format": "uri"
             },
             "authentication": {
-              "description": "Authentication method to access the storage for deployment.",
+              "description": "Authentication method to access the storage account for deployment.",
               "type": "object",
               "properties": {
                 "type": {
-                  "description": "Property to select Authentication Type to access the selected storage. Available options: SystemAssignedIdentity, UserAssignedIdentity, StorageAccountConnectionString.",
+                  "description": "Property to select authentication type to access the selected storage account. Available options: SystemAssignedIdentity, UserAssignedIdentity, StorageAccountConnectionString.",
                   "type": "string",
                   "enum": [
                     "SystemAssignedIdentity",
@@ -3646,41 +3646,41 @@
       }
     },
     "FunctionsAlwaysReadyConfig": {
-      "description": "Sets the number of 'Always Ready' instances for a specific function or a specific trigger group.",
+      "description": "Sets the number of 'Always Ready' instances for a function group or a specific function.",
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Either a trigger group or a function name is required. For additional information see https://aka.ms/flexconsumption/alwaysready."
+          "description": "Either a function group or a function name is required. For additional information see https://aka.ms/flexconsumption/alwaysready."
         },
         "instanceCount": {
           "type": "number",
-          "description": "Sets the number of 'Always Ready' instances for a given trigger group or a specific function. For additional information see https://aka.ms/flexconsumption/alwaysready."
+          "description": "Sets the number of 'Always Ready' instances for a given function group or a specific function. For additional information see https://aka.ms/flexconsumption/alwaysready."
         }
       }
     },
     "FunctionsScaleAndConcurrency": {
-      "description": "Scale and concurrency settings for an Azure Functions app.",
+      "description": "Scale and concurrency settings for the function app.",
       "type": "object",
       "properties": {
         "alwaysReady": {
-          "description": "'Always Ready' configuration for an Azure Function app.",
+          "description": "'Always Ready' configuration for the function app.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FunctionsAlwaysReadyConfig"
           }
         },
         "maximumInstanceCount": {
-          "description": "The maximum number of VM instances for the Azure Functions app.",
+          "description": "The maximum number of instances for the function app.",
           "type": "number"
         },
         "instanceMemoryMB": {
-          "description": "Set the amount of memory allocated to each instance of the function app in MiB; CPU and network bandwidth are allocated proportionally.",
+          "description": "Set the amount of memory allocated to each instance of the function app in MB. CPU and network bandwidth are allocated proportionally.",
           "type": "number"
         },
         "triggers": {
           "type": "object",
-          "description": "Scale and concurrency settings for Azure Functions triggers.",
+          "description": "Scale and concurrency settings for the function app triggers.",
           "properties": {
             "http": {
               "type": "object",
@@ -3688,7 +3688,7 @@
               "properties": {
                 "perInstanceConcurrency": {
                   "type": "number",
-                  "description": "The maximum number of concurrent HTTP trigger invocations per VM instance."
+                  "description": "The maximum number of concurrent HTTP trigger invocations per instance."
                 }
               }
             }
@@ -3697,7 +3697,7 @@
       }
     },
     "FunctionsRuntime": {
-      "description": "Azure Function app runtime name and version.",
+      "description": "Function app runtime name and version.",
       "type": "object",
       "properties": {
         "name": {
@@ -3717,27 +3717,27 @@
           }
         },
         "version": {
-          "description": "Function app runtime version. Example: 3.10 (for Python)",
+          "description": "Function app runtime version. Example: 8 (for dotnet-isolated)",
           "type": "string",
           "x-nullable": true
         }
       }
     },
     "FunctionAppConfig": {
-      "description": "Function App configuration.",
+      "description": "Function app configuration.",
       "type": "object",
       "properties": {
         "deployment": {
           "$ref": "#/definitions/FunctionsDeployment",
-          "description": "Azure Functions deployment configuration."
+          "description": "Function app deployment configuration."
         },
         "runtime": {
           "$ref": "#/definitions/FunctionsRuntime",
-          "description": "Azure Function runtime settings."
+          "description": "Function app runtime settings."
         },
         "scaleAndConcurrency": {
           "$ref": "#/definitions/FunctionsScaleAndConcurrency",
-          "description": "Azure Functions scale and concurrency settings."
+          "description": "Function app scale and concurrency settings."
         }
       }
     },
