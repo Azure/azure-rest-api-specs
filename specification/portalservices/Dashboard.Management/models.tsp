@@ -167,10 +167,10 @@ enum AggregationType {
 @doc("The shared dashboard properties.")
 model DashboardProperties {
   @doc("The title of dashboard.")
-  title?: string;
+  title: string;
 
   @doc("The dashboard pages.")
-  pages?: DashboardPage[];
+  pages: DashboardPage[];
 
   @doc("The dashboard parameters.")
   parameters?: DashboardParameter[];
