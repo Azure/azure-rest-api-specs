@@ -88,9 +88,9 @@ These settings apply only when `--tag=package-2024-02-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-02-15-preview'
 input-file:
-  - Microsoft.ManagedNetworkFabric/stable/2024-02-15-preview/InternetGatewayRules.json
-  - Microsoft.ManagedNetworkFabric/stable/2024-02-15-preview/common.json
-  - Microsoft.ManagedNetworkFabric/stable/2024-02-15-preview/Operations.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/InternetGatewayRules.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/common.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/Operations.json
 ```
 
 ---
