@@ -528,42 +528,41 @@
           "$ref": "#/definitions/SaasProperties"
         }
       }
-    }
-  },
-  "OperatorApiConnectionNonUpdateableProperties": {
-    "type": "object",
-    "description": "Operator API Connection resource properties that cannot be updated once a resource has been created.",
-    "properties": {
-      "gatewayId": {
-        "$ref": "./common.json#/definitions/GatewayResourceId",
-        "description": "Reference to the APC Gateway resource ID."
-      },
-      "operatorName": {
-        "type": "string",
-        "description": "Name of the Operator in the linked Operator API Plan belongs to.",
-        "readOnly": true
-      },
-      "camaraApiName": {
-        "type": "string",
-        "description": "The Network API for the current operator in the country/region provided in the linked Operator API Plan.",
-        "readOnly": true
-      },
-      "accountType": {
-        "$ref": "#/definitions/AccountType",
-        "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged."
-      },
-      "provisioningState": {
-        "$ref": "./common.json#/definitions/ProvisioningState",
-        "description": "The status of the last operation.",
-        "readOnly": true
-      }
     },
-    "required": [
-      "gatewayId",
-      "operatorApiPlanId",
-      "accountType"
-    ]
-  },
+    "OperatorApiConnectionNonUpdateableProperties": {
+      "type": "object",
+      "description": "Operator API Connection resource properties that cannot be updated once a resource has been created.",
+      "properties": {
+        "gatewayId": {
+          "$ref": "./common.json#/definitions/GatewayResourceId",
+          "description": "Reference to the APC Gateway resource ID."
+        },
+        "operatorName": {
+          "type": "string",
+          "description": "Name of the Operator in the linked Operator API Plan belongs to.",
+          "readOnly": true
+        },
+        "camaraApiName": {
+          "type": "string",
+          "description": "The Network API for the current operator in the country/region provided in the linked Operator API Plan.",
+          "readOnly": true
+        },
+        "accountType": {
+          "$ref": "#/definitions/AccountType",
+          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "gatewayId",
+        "operatorApiPlanId",
+        "accountType"
+      ]
+    },
     "OperatorApiConnectionUpdate": {
       "type": "object",
       "description": "The type used for update operations of the OperatorApiConnection.",
