@@ -13,7 +13,7 @@ namespace Microsoft.PortalServices;
 @resource("dashboards")
 model Dashboard is TrackedResource<DashboardPropertiesWithProvisioningState> {
   @doc("The name of the dashboard.")
-  @maxLength(260)
+  @maxLength(64)
   @minLength(1)
   @pattern("^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$")
   @key("dashboardName")
