@@ -621,7 +621,7 @@ enum DiscoveryRuleShowEntityBehavior {
 @doc("Discovery rule relationship discovery behavior")
 enum DiscoveryRuleRelationshipDiscoveryBehavior {
   AutomaticallyDiscoverRelationships,
-  DoNotDiscoverRelationships
+  DoNotDiscoverRelationships,
 }
 
 alias TimestampQueryParam = {
