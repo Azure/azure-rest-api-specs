@@ -25,7 +25,7 @@ model AzureMonitorWorkspaceLogsApiConfig {
   dataCollectionEndpointUrl: string;
 
   @doc("Stream name in destination. Azure Monitor stream is related to the destination table.")
-  @pattern("^(?!-)[a-zA-Z0-9.-]{1,1000}[^-]$")
+  @pattern("^(?!-)[a-zA-Z0-9._-]{1,1000}[^-]$")
   stream: string;
 
   @doc("Data Collection Rule (DCR) immutable id.")
