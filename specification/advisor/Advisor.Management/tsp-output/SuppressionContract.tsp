@@ -20,7 +20,7 @@ namespace Microsoft.Advisor;
 @parentResource(ResourceRecommendationBase)
 @Azure.ResourceManager.Private.armResourceInternal(SuppressionProperties)
 @includeInapplicableMetadataInPayload(false)
-model SuppressionContract extends Resource {
+model SuppressionContract extends TrackedResourceBase {
   /**
    * The name of the suppression.
    */

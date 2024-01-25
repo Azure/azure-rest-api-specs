@@ -18,7 +18,7 @@ namespace Microsoft.Advisor;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(RecommendationProperties)
 @includeInapplicableMetadataInPayload(false)
-model ResourceRecommendationBase extends Resource {
+model ResourceRecommendationBase extends TrackedResourceBase {
   /**
    * The recommendation ID.
    */
@@ -53,11 +53,11 @@ interface ResourceRecommendationBases {
     {
       ...BaseParameters<ResourceRecommendationBase>;
 
-      /**
-       * The Azure subscription ID.
-       */
-      @path
-      subscriptionId: string;
+      // /**
+      //  * The Azure subscription ID.
+      //  */
+      // @path
+      // subscriptionId: string;
 
       /**
        * The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'
