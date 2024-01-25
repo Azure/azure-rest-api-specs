@@ -1,5 +1,5 @@
 /*
-  Definitions of elements defined for different TCP receivers.
+  Definitions of elements defined for OTLP receiver.
 */
 
 using OpenAPI;

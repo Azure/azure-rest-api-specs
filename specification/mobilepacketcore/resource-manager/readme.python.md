@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.MobilePacketCore
   package-name: mobileCore
-  package-version: 2023-04-15-preview
+  package-version: 2023-10-15-preview
   clear-output-folder: true
 ```
 
