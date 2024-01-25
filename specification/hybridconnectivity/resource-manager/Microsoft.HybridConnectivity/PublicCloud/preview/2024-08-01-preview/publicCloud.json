@@ -249,7 +249,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/inventoryId": {
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/inventory": {
       "get": {
         "operationId": "Inventory_ListBySolutionConfiguration",
         "tags": [
@@ -295,7 +295,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/inventoryId/{inventory}": {
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/inventory/{inventory}": {
       "get": {
         "operationId": "Inventory_Get",
         "tags": [
@@ -1245,12 +1245,6 @@
         "statusDetails": {
           "type": "string",
           "description": "The detailed message of status details",
-          "readOnly": true
-        },
-        "lastExecutionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last execution time of solution configuration",
           "readOnly": true
         },
         "lastSyncTime": {
