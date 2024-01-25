@@ -468,13 +468,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/routingInfo/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/routingInfo": {
       "get": {
         "tags": [
           "RoutingInfo"
         ],
-        "operationId": "RoutingInfo_PacketCoreControlPlane",
-        "description": "Get the routing information for the control plane access interface on the packet core.",
+        "operationId": "RoutingInfoList_PacketCoreControlPlane",
+        "description": "List all of the routing information for the packet core.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -491,7 +491,52 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the routing information for the control plane access interface on the packet core.",
+            "description": "Request successful. The operation returns a list of the routing information for the packet core.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RoutingInfoListResult"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List routing information for the packet core": {
+            "$ref": "./examples/RoutingInfoPacketCoreControlPlane.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/routingInfo/default": {
+      "get": {
+        "tags": [
+          "RoutingInfo"
+        ],
+        "operationId": "RoutingInfo_PacketCoreControlPlane",
+        "description": "Get the routing information for the packet core.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the routing information for the packet core.",
             "schema": {
               "$ref": "#/definitions/RoutingInfoModel"
             }
@@ -504,7 +549,7 @@
           }
         },
         "x-ms-examples": {
-          "Get routing information for the control plane access interface on the packet core": {
+          "Get routing information for the packet core": {
             "$ref": "./examples/RoutingInfoPacketCoreControlPlane.json"
           }
         }
@@ -1440,6 +1485,19 @@
           "description": "The URL to get the next set of results."
         }
       }
+    },
+    "RoutingInfoListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoutingInfoModel"
+          },
+          "description": "A list of the routing information for the packet core control plane"
+        }
+      },
+      "description": "Response for the list routing information API service call."
     },
     "RoutingInfoModel": {
       "type": "object",
