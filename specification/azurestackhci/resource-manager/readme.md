@@ -60,6 +60,8 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - jobs.json
+      - common.json
 
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
@@ -117,7 +119,7 @@ suppressions:
 
 ### Tag: package-preview-2023-12
 
-These settings apply only when `--tag=package-2023-12-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2023-12'
 input-file:
