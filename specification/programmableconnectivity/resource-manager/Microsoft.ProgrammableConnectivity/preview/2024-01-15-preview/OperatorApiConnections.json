@@ -186,12 +186,21 @@
             "$ref": "#/parameters/OperatorApiConnectionName"
           },
           {
-            "name": "body",
+            "name": "non_updateable_properties",
             "in": "body",
             "description": "Operator API Connection resource create or update request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OperatorApiConnection"
+              "$ref": "#/definitions/OperatorApiConnectionNonUpdateableProperties"
+            }
+          },
+          {
+            "name": "updateable_properties",
+            "in": "body",
+            "description": "Operator API Connection properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperatorApiConnectionUpdateableProperties"
             }
           }
         ],
@@ -252,12 +261,12 @@
             "$ref": "#/parameters/OperatorApiConnectionName"
           },
           {
-            "name": "body",
+            "name": "updateable_properties",
             "in": "body",
             "description": "Operator API Connection properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OperatorApiConnectionUpdate"
+              "$ref": "#/definitions/OperatorApiConnectionUpdateableProperties"
             }
           }
         ],
@@ -488,22 +497,13 @@
         "value"
       ]
     },
-    "OperatorApiConnectionProperties": {
+    "OperatorApiConnectionNonUpdateableProperties": {
       "type": "object",
-      "description": "Operator API Connection resource properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AppCredentials"
-        }
-      ],
+      "description": "Operator API Connection resource properties that cannot be updated once a resource has been created.",
       "properties": {
         "gatewayId": {
           "$ref": "./common.json#/definitions/GatewayResourceId",
           "description": "Reference to the APC Gateway resource ID."
-        },
-        "operatorApiPlanId": {
-          "$ref": "./common.json#/definitions/OperatorApiPlanResourceId",
-          "description": "Reference to the Operator API Plan Resource ID."
         },
         "operatorName": {
           "type": "string",
@@ -523,14 +523,6 @@
           "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
-        },
-        "configuredApplication": {
-          "description": "Details about the Application that would use the Operator's Network APIs.",
-          "$ref": "#/definitions/ApplicationProperties"
-        },
-        "saasProperties": {
-          "description": "Details about the SaaS offer purchased from the marketplace.",
-          "$ref": "#/definitions/SaasProperties"
         }
       },
       "required": [
@@ -539,31 +531,28 @@
         "accountType"
       ]
     },
-    "OperatorApiConnectionUpdate": {
+    "OperatorApiConnectionUpdateableProperties": {
       "type": "object",
-      "description": "The type used for update operations of the OperatorApiConnection.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/OperatorApiConnectionUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "OperatorApiConnectionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the OperatorApiConnection. These properties can be updated only when the `accountType` is `UserManaged`.",
+      "description": "Operator API Connection resource properties that can be updated after creation.",
       "allOf": [
         {
           "$ref": "#/definitions/AppCredentials"
         }
-      ]
+      ],
+      "properties": {
+        "configuredApplication": {
+          "description": "Details about the Application that would use the Operator's Network APIs.",
+          "$ref": "#/definitions/ApplicationProperties"
+        },
+        "operatorApiPlanId": {
+          "$ref": "./common.json#/definitions/OperatorApiPlanResourceId",
+          "description": "Reference to the Operator API Plan Resource ID."
+        },
+        "saasProperties": {
+          "description": "Details about the SaaS offer purchased from the marketplace.",
+          "$ref": "#/definitions/SaasProperties"
+        }
+      }
     }
   },
   "parameters": {
