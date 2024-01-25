@@ -473,7 +473,7 @@
         "tags": [
           "RoutingInfo"
         ],
-        "operationId": "RoutingInfoList_PacketCoreControlPlane",
+        "operationId": "RoutingInfo_List",
         "description": "List all of the routing information for the packet core.",
         "parameters": [
           {
@@ -499,6 +499,9 @@
               }
             }
           },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -518,7 +521,7 @@
         "tags": [
           "RoutingInfo"
         ],
-        "operationId": "RoutingInfo_PacketCoreControlPlane",
+        "operationId": "RoutingInfo_Get",
         "description": "Get the routing information for the packet core.",
         "parameters": [
           {
@@ -1495,6 +1498,11 @@
             "$ref": "#/definitions/RoutingInfoModel"
           },
           "description": "A list of the routing information for the packet core control plane"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "Response for the list routing information API service call."
