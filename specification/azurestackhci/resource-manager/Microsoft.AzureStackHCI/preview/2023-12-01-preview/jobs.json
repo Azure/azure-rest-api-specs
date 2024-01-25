@@ -260,6 +260,7 @@
   "definitions": {
     "AddServerJob": {
       "type": "object",
+      "description": "AddServerJob to add node to AzureStackHCI cluster.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AddServerJobProperties"
@@ -276,6 +277,7 @@
     },
     "AddServerJobProperties": {
       "type": "object",
+      "description": "Properties for AddServerJob of AzureStackHCI cluster.",
       "properties": {
         "arcNodeResourceId": {
           "type": "string",
@@ -431,27 +433,27 @@
           {
             "name": "AddServer",
             "value": "AddServer",
-            "description": "AddServer"
+            "description": "AddServer job type to add node to AzureStackHCI cluster."
           },
           {
             "name": "RepairServer",
             "value": "RepairServer",
-            "description": "RepairServer"
+            "description": "RepairServer job type to repair given node in AzureStackHCI cluster."
           },
           {
             "name": "ResumeServer",
             "value": "ResumeServer",
-            "description": "ResumeServer"
+            "description": "ResumeServer job type to resume given node in AzureStackHCI cluster."
           },
           {
             "name": "PauseServer",
             "value": "PauseServer",
-            "description": "PauseServer"
+            "description": "PauseServer job type to pause given node in AzureStackHCI cluster."
           },
           {
             "name": "SetInformation",
             "value": "SetInformation",
-            "description": "SetInformation"
+            "description": "SetInformation job type to set deployment information of AzureStackHCI cluster."
           }
         ]
       }
@@ -540,6 +542,7 @@
     },
     "PauseServerJob": {
       "type": "object",
+      "description": "PauseServerJob to pause given node in AzureStackHCI cluster.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PauseServerJobProperties"
@@ -556,6 +559,7 @@
     },
     "PauseServerJobProperties": {
       "type": "object",
+      "description": "Properties for PauseServerJob of AzureStackHCI cluster.",
       "properties": {
         "arcNodeResourceId": {
           "type": "string",
@@ -589,6 +593,7 @@
     },
     "RepairServerJob": {
       "type": "object",
+      "description": "RepairServerJob to repair given node in AzureStackHCI cluster.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RepairServerJobProperties"
@@ -605,6 +610,7 @@
     },
     "RepairServerJobProperties": {
       "type": "object",
+      "description": "Properties for RepairServerJob of AzureStackHCI cluster.",
       "properties": {
         "arcNodeResourceId": {
           "type": "string",
@@ -664,6 +670,7 @@
     },
     "ResumeServerJobProperties": {
       "type": "object",
+      "description": "Properties for ResumeServerJob of AzureStackHCI cluster.",
       "properties": {
         "arcNodeResourceId": {
           "type": "string",
@@ -697,6 +704,7 @@
     },
     "SetInformationJob": {
       "type": "object",
+      "description": "SetInformationJob to set deployment information of AzureStackHCI cluster.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SetInformationJobProperties"
@@ -713,6 +721,7 @@
     },
     "SetInformationJobProperties": {
       "type": "object",
+      "description": "Properties of SetInformationJob of AzureStackHCI cluster.",
       "properties": {
         "switchless": {
           "type": "boolean",
@@ -774,7 +783,8 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "SetInformation"
     }
   },
   "parameters": {

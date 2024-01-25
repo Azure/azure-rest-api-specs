@@ -104,7 +104,9 @@ suppressions:
 
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
-    from: deploymentSettings.json, jobs.json
+    from:
+      - deploymentSettings.json
+      - jobs.json
     where:
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
