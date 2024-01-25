@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-05-01",
+    "api-version": "2024-02-01",
     "subscriptionId": "subid",
     "resourceGroupName": "RG",
     "profileName": "profile1"
@@ -19,6 +19,10 @@
         "kind": "frontdoor",
         "properties": {
           "originResponseTimeoutSeconds": 30,
+          "logScrubbing": {
+            "state": "Enabled",
+            "scrubbingRules": []
+          },
           "frontDoorId": "3b4682da-b3e2-47a1-96ca-08ab3cb7294e",
           "provisioningState": "Succeeded",
           "resourceState": "Active"

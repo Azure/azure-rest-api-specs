@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-05-01",
+    "version": "2024-02-01",
     "title": "CdnManagementClient",
     "description": "Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
   },
@@ -2821,6 +2821,32 @@
           "format": "int32",
           "minimum": 16,
           "exclusiveMinimum": false
+        },
+        "logScrubbing": {
+          "description": "Defines rules to scrub sensitive fields in logs",
+          "type": "object",
+          "properties": {
+            "state": {
+              "type": "string",
+              "description": "State of the log scrub config. Default value is Enabled.",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "x-ms-enum": {
+                "name": "ProfileScrubbingState",
+                "modelAsString": true
+              }
+            },
+            "scrubbingRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProfileScrubbingRules"
+              },
+              "x-ms-identifiers": [],
+              "description": "List of log scrub rules applied to logs."
+            }
+          }
         }
       }
     },
@@ -2874,6 +2900,82 @@
           "format": "int32",
           "minimum": 16,
           "exclusiveMinimum": false
+        },
+        "logScrubbing": {
+          "description": "Defines rules to scrub sensitive fields in logs",
+          "type": "object",
+          "properties": {
+            "state": {
+              "type": "string",
+              "description": "State of the log scrub config. Default value is Enabled.",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "x-ms-enum": {
+                "name": "ProfileScrubbingState",
+                "modelAsString": true
+              }
+            },
+            "scrubbingRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProfileScrubbingRules"
+              },
+              "x-ms-identifiers": [],
+              "description": "List of log scrub rules applied to logs."
+            }
+          }
+        }
+      }
+    },
+    "ProfileScrubbingRules": {
+      "description": "Defines contents of a log scrub rules.",
+      "type": "object",
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator"
+      ],
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestIPAddress",
+            "RequestUri",
+            "QueryStringArgNames"
+          ],
+          "description": "The variable to be scrubbed from the logs.",
+          "x-ms-enum": {
+            "name": "scrubbingRuleEntryMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "EqualsAny"
+          ],
+          "description": "Comparison type to use for matching with the variable value in log.",
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string",
+          "description": "Match against a specific key from the QueryString variables in the log. Default value is null."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Defines the state of log scrubbing rule. Default value is Enabled.",
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -7083,7 +7185,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2023-05-01."
+      "description": "Version of the API to be used with the client request. Current version is 2024-02-01."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
