@@ -115,7 +115,7 @@ suppressions:
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
 ```
 
-### Tag: package-2023-12-01
+### Tag: package-preview-2023-12
 
 These settings apply only when `--tag=package-2023-12-01` is specified on the command line.
 
