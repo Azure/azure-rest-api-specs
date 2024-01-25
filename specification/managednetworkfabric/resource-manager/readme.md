@@ -27,7 +27,7 @@ These are the global settings for the Managed Network Fabric.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-06-15
+tag: package-2024-02-15
 ```
 
 
