@@ -1792,6 +1792,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1836,6 +1839,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1925,6 +1931,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1938,6 +1947,53 @@
           "example": "Bob Admin"
         }
       }
+    },
+    "RetentionPolicy": {
+      "description": "Data retention policy for auto deletion.",
+      "type": "object",
+      "discriminator": "policyType",
+      "properties": {
+        "policyType": {
+          "description": "Retention Policy Type",
+          "enum": [
+            "threadCreationDate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "policyType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "threadCreationDate",
+                "description": "Thread retention policy based on thread creation date."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "policyType"
+      ]
+    },
+    "ThreadCreationDateRetentionPolicy": {
+      "description": "Thread retention policy based on thread creation date.",
+      "type": "object",
+      "x-ms-discriminator-value": "threadCreationDate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RetentionPolicy"
+        }
+      ],
+      "properties": {
+        "daysAfterCreation": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicates how many days after the thread creation the thread will be deleted."
+        }
+      },
+      "required": [
+        "daysAfterCreation"
+      ]
     },
     "ChatImageFile": {
       "description": "The image binary data.",
