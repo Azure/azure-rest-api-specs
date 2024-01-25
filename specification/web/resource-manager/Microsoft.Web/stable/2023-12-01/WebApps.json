@@ -6331,7 +6331,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkProxy"
             }
           },
           "default": {
@@ -6366,7 +6366,7 @@
             "description": "Properties of the Virtual Network connection. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkProxy"
             }
           },
           {
@@ -6380,7 +6380,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkProxy"
             }
           },
           "default": {
@@ -6456,7 +6456,7 @@
             "description": "Properties of the Virtual Network connection. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkProxy"
             }
           },
           {
@@ -6470,7 +6470,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkProxy"
             }
           },
           "default": {
@@ -15452,7 +15452,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkProxy"
             }
           },
           "default": {
@@ -15487,7 +15487,7 @@
             "description": "Properties of the Virtual Network connection. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkProxy"
             }
           },
           {
@@ -15508,7 +15508,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkProxy"
             }
           },
           "default": {
@@ -15591,7 +15591,7 @@
             "description": "Properties of the Virtual Network connection. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkProxy"
             }
           },
           {
@@ -15612,7 +15612,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkProxy"
             }
           },
           "default": {
@@ -29117,32 +29117,6 @@
       },
       "x-ms-azure-resource": true,
       "description": "The sub resource type."
-    },
-    "SwiftVirtualNetwork": {
-      "description": "Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "SwiftVirtualNetwork resource specific properties",
-          "type": "object",
-          "properties": {
-            "subnetResourceId": {
-              "description": "The Virtual Network subnet's resource ID. This is the subnet that this Web App will join. This subnet must have a delegation to Microsoft.Web/serverFarms defined first.",
-              "type": "string"
-            },
-            "swiftSupported": {
-              "description": "A flag that specifies if the scale unit this Web App is on supports Swift integration.",
-              "type": "boolean"
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
     },
     "TokenStore": {
       "description": "The configuration settings of the token store.",
