@@ -76,8 +76,65 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageActions/locations/{location}/previewActions": {
+      "post": {
+        "operationId": "StorageTasks_PreviewActions",
+        "tags": [
+          "StorageTasks"
+        ],
+        "description": "Runs the input conditions against input object metadata properties and designates matched objects in response.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location to perform preview of the actions.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to preview action condition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageTaskPreviewAction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskPreviewAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PerformStorageTaskActionsPreview": {
+            "$ref": "./examples/PerformStorageTaskActionsPreview.json"
+          }
         }
       }
     },
@@ -1004,7 +1061,7 @@
       "properties": {
         "taskVersion": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Storage task version.",
           "minimum": 1,
           "maximum": 1,

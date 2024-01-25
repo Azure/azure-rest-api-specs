@@ -61,7 +61,7 @@ model StorageTaskProperties {
   @visibility("read")
   @maxValue(1)
   @minValue(1)
-  taskVersion?: int32;
+  taskVersion?: int64;
 
   @doc("Storage Task is enabled when set to true and disabled when set to false")
   enabled: boolean;

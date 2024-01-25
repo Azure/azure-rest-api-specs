@@ -87,6 +87,26 @@ interface StorageTasks {
     @query("$maxpagesize")
     $maxpagesize?: string,
   ): ArmResponse<StorageTaskAssignmentsListResult> | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("StorageTasks_PreviewActions")
+  @doc("Runs the input conditions against input object metadata properties and designates matched objects in response.")
+  @post
+  @segment("previewActions")
+  previewActions(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...DefaultProviderNamespace,
+
+    @path
+    @doc("The location to perform preview of the actions.")
+    @segment("locations")
+    location: string,
+
+    @body
+    @doc("The parameters to preview action condition.")
+    parameters: StorageTaskPreviewAction,
+  ):ArmResponse<StorageTaskPreviewAction> | ErrorResponse;
 }
 
 @@projectedName(StorageTasks.create::parameters.resource, "json", "parameters");
