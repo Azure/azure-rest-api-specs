@@ -24,13 +24,19 @@ using Azure.Core.Traits;
   title: "Azure Machine Learning Services",
 })
 @server(
-  "{endpoint}/assets",
+  "{endpoint}/assets/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}",
   "Machinelearning Services Asset APIs",
   {
     @doc("""
 Supported Azure-AI asset endpoints.
 """)
     endpoint: string,
+
+    @doc("The ID of the target subscription.")
+    subscriptionId: string,
+
+    @doc("The name of the Resource Group.")
+    resourceGroupName: string,
   }
 )
 @versioned(Versions)
