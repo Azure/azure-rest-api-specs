@@ -493,52 +493,77 @@
       "description": "Operator API Connection resource properties",
       "allOf": [
         {
-          "$ref": "#/definitions/AppCredentials"
+          "$ref": "#/definitions/OperatorApiConnectionNonUpdateableProperties"
+        },
+        {
+          "$ref": "#/definitions/OperatorApiConnectionUpdateableProperties"
         }
       ],
-      "properties": {
-        "gatewayId": {
-          "$ref": "./common.json#/definitions/GatewayResourceId",
-          "description": "Reference to the APC Gateway resource ID."
-        },
-        "operatorApiPlanId": {
-          "$ref": "./common.json#/definitions/OperatorApiPlanResourceId",
-          "description": "Reference to the Operator API Plan Resource ID."
-        },
-        "operatorName": {
-          "type": "string",
-          "description": "Name of the Operator in the linked Operator API Plan belongs to.",
-          "readOnly": true
-        },
-        "camaraApiName": {
-          "type": "string",
-          "description": "The Network API for the current operator in the country/region provided in the linked Operator API Plan.",
-          "readOnly": true
-        },
-        "accountType": {
-          "$ref": "#/definitions/AccountType",
-          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged."
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "configuredApplication": {
-          "description": "Details about the Application that would use the Operator's Network APIs.",
-          "$ref": "#/definitions/ApplicationProperties"
-        },
-        "saasProperties": {
-          "description": "Details about the SaaS offer purchased from the marketplace.",
-          "$ref": "#/definitions/SaasProperties"
-        }
-      },
+      "properties": {},
       "required": [
         "gatewayId",
         "operatorApiPlanId",
         "accountType"
       ]
     },
+    "OperatorApiConnectionUpdateableProperties": {
+      "type": "object",
+      "description": "Operator API Connection resource properties that can be updated after creation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AppCredentials"
+        }
+      ],
+      "properties": {
+        "configuredApplication": {
+          "description": "Details about the Application that would use the Operator's Network APIs.",
+          "$ref": "#/definitions/ApplicationProperties"
+        },
+        "operatorApiPlanId": {
+          "$ref": "./common.json#/definitions/OperatorApiPlanResourceId",
+          "description": "Reference to the Operator API Plan Resource ID."
+        },
+        "saasProperties": {
+          "description": "Details about the SaaS offer purchased from the marketplace.",
+          "$ref": "#/definitions/SaasProperties"
+        }
+      }
+    }
+  },
+  "OperatorApiConnectionNonUpdateableProperties": {
+    "type": "object",
+    "description": "Operator API Connection resource properties that cannot be updated once a resource has been created.",
+    "properties": {
+      "gatewayId": {
+        "$ref": "./common.json#/definitions/GatewayResourceId",
+        "description": "Reference to the APC Gateway resource ID."
+      },
+      "operatorName": {
+        "type": "string",
+        "description": "Name of the Operator in the linked Operator API Plan belongs to.",
+        "readOnly": true
+      },
+      "camaraApiName": {
+        "type": "string",
+        "description": "The Network API for the current operator in the country/region provided in the linked Operator API Plan.",
+        "readOnly": true
+      },
+      "accountType": {
+        "$ref": "#/definitions/AccountType",
+        "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged."
+      },
+      "provisioningState": {
+        "$ref": "./common.json#/definitions/ProvisioningState",
+        "description": "The status of the last operation.",
+        "readOnly": true
+      }
+    },
+    "required": [
+      "gatewayId",
+      "operatorApiPlanId",
+      "accountType"
+    ]
+  },
     "OperatorApiConnectionUpdate": {
       "type": "object",
       "description": "The type used for update operations of the OperatorApiConnection.",
