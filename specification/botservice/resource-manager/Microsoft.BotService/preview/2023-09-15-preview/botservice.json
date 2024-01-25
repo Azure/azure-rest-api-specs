@@ -1531,7 +1531,7 @@
             "$ref": "#/parameters/resourceNameParameter"
           },
           {
-            "$ref": "./networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/network-security-parameter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1541,7 +1541,7 @@
           "200": {
             "description": "OK -- Get the Network Security Perimeter configuration successfully.",
             "schema": {
-              "$ref": "./networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+              "$ref": "../../../../../../common-types/resource-management/v5/network-security-parameter.json#/definitions/NetworkSecurityPerimeterConfiguration"
             }
           },
           "default": {
@@ -1587,7 +1587,7 @@
           "200": {
             "description": "OK -- List the Network Security Perimeter configurations successfully.",
             "schema": {
-              "$ref": "./networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationList"
+              "$ref": "../../../../../../common-types/resource-management/v5/network-security-parameter.json#/definitions/NetworkSecurityPerimeterConfigurationList"
             }
           },
           "default": {
@@ -1623,7 +1623,7 @@
             "$ref": "#/parameters/resourceNameParameter"
           },
           {
-            "$ref": "./networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/network-security-parameter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1633,7 +1633,7 @@
           "200": {
             "description": "Request to reconcile the configuration succeeded.",
             "schema": {
-              "$ref": "./networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+              "$ref": "../../../../../../common-types/resource-management/v5/network-security-parameter.json#/definitions/NetworkSecurityPerimeterConfiguration"
             }
           },
           "202": {
@@ -1919,18 +1919,7 @@
           ]
         },
         "publicNetworkAccess": {
-          "description": "Whether the bot is in an isolated network",
-          "enum": [
-            "Enabled",
-            "Disabled",
-            "SecuredByPerimeter"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          },
-          "default": "Enabled"
+          "$ref": "../../../../../../common-types/resource-management/v5/network-security-parameter.json#/definitions/PublicNetworkAccess"
         },
         "isStreamingSupported": {
           "type": "boolean",
