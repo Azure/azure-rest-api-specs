@@ -176,10 +176,6 @@ model SolutionConfigurationProperties {
   @doc("The last time resources were inventoried")
   @visibility("read")
   lastSyncTime?: utcDateTime;
-
-  @doc("The next time resources will be inventories")
-  @visibility("read")
-  nextSyncTime?: utcDateTime;
 }
 
 @doc("Solution Configuration Status.")
