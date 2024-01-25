@@ -193,10 +193,10 @@ enum DashboardProvisioningState {
 @doc("A dashboard page.")
 model DashboardPage {
   @doc("The title of dashboard page.")
-  title?: string;
+  title: string;
 
   @doc("The dashboard tiles.")
-  tiles?: DashboardTile[];
+  tiles: DashboardTile[];
 }
 
 @doc("A dashboard tile.")
@@ -329,9 +329,6 @@ model BladeReferenceWithContextPane {
 
   @doc("Whether the blade should be opened in the context pane.")
   inContextPane?: boolean;
-
-  @doc("Specify whether to open this blade as Provisioning blade")
-  doesProvisioning?: boolean;
 }
 
 @doc("Model for actions on click update parameters")
