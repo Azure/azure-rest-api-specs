@@ -119,7 +119,7 @@ suppressions:
 
 These settings apply only when `--tag=package-2023-12-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-12-01'
+```yaml $(tag) == 'package-preview-2023-12'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/clusters.json
