@@ -32,11 +32,27 @@ interface StorageTasks {
   get is ArmResourceRead<StorageTask>;
 
   @doc("Asynchronously creates a new storage task resource with the specified parameters. If a storage task is already created and a subsequent create request is issued with different properties, the storage task properties will be updated. If a storage task is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.")
-  create is ArmResourceCreateOrUpdateAsync<
-    StorageTask,
-    BaseParameters<StorageTask>,
-    ArmLroLocationHeader
-  >;
+  @autoRoute
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  @armResourceCreateOrUpdate(StorageTask)
+  @put
+  create(
+    ...ResourceInstanceParameters<StorageTask, BaseParameters<StorageTask>>,
+
+    @doc("Resource create parameters.")
+    @body
+    resource: StorageTask,
+  ):
+    | ArmResourceUpdatedResponse<StorageTask>
+    | ArmResourceCreatedResponse<StorageTask, {}>
+    | ArmAcceptedLroResponse<"Accepted -- Create or update request accepted; operation will complete asynchronously.">
+    | ErrorResponse;
 
   @doc("Update storage task properties")
   update is ArmCustomPatchAsync<
@@ -71,43 +87,6 @@ interface StorageTasks {
     @query("$maxpagesize")
     $maxpagesize?: string,
   ): ArmResponse<StorageTaskAssignmentsListResult> | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("StorageTasksReport_List")
-  @doc("Fetch the storage tasks run report summary for each assignment.")
-  @get
-  @segment("reports")
-  reports(
-    ...ResourceInstanceParameters<StorageTask, BaseParameters<StorageTask>>,
-
-    @doc("Optional, specifies the maximum number of storage task assignment Ids to be included in the list response.")
-    @query("$maxpagesize")
-    $maxpagesize?: string,
-
-    @doc("Optional. When specified, it can be used to query using reporting properties.")
-    @query("$filter")
-    $filter?: string,
-  ): ArmResponse<StorageTaskReportSummary> | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("StorageTasks_PreviewActions")
-  @doc("Runs the input conditions against input object metadata properties and designates matched objects in response.")
-  @post
-  @segment("previewActions")
-  previewActions(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...DefaultProviderNamespace,
-
-    @path
-    @doc("The location to perform preview of the actions.")
-    @segment("locations")
-    location: string,
-
-    @body
-    @doc("The parameters to preview action condition.")
-    parameters: StorageTaskPreviewAction,
-  ):ArmResponse<StorageTaskPreviewAction> | ErrorResponse;
 }
 
 @@projectedName(StorageTasks.create::parameters.resource, "json", "parameters");

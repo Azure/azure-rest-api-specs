@@ -144,15 +144,6 @@ model StorageTaskAssignment {
   id?: ResourceIdentifier;
 }
 
-@doc("Fetch Storage Tasks Run Summary.")
-model StorageTaskReportSummary is Azure.Core.Page<StorageTaskReportInstance>;
-
-@doc("Storage Tasks run report instance")
-model StorageTaskReportInstance extends ProxyResource<{}> {
-  @doc("Storage task execution report for a run instance.")
-  properties?: StorageTaskReportProperties;
-}
-
 @doc("Storage task execution report for a run instance.")
 model StorageTaskReportProperties {
   @doc("Represents the Storage Task Assignment Id associated with the storage task that provided an execution context.")
