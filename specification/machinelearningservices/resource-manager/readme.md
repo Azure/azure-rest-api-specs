@@ -46,6 +46,10 @@ suppressions:
     reason: Keep identical to stable GA version to avoid breaking changes. https://dev.azure.com/msdata/Vienna/_workitems/edit/2803196
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}"].post
+  - code: AvoidAdditionalProperties
+    reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have strictly typed properties.
+    where:
+      - $.definitions.CustomModelFineTuning.properties.hyperparameters
 ```
 ### Tag: package-preview-2023-08
 
