@@ -5,11 +5,12 @@ using TypeSpec.Versioning;
 namespace Language.AnalyzeText;
 
 @doc("Supported parameters for a Healthcare task.")
-model HealthcareTaskParameters extends PreBuiltTaskParameters { 
+model HealthcareTaskParameters is PreBuiltTaskParameters { 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType;
 
   @added(Versions.v2023_04_15_preview)
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.")
   fhirVersion?: fhirVersion;
 
@@ -59,7 +60,7 @@ model HealthcareLROTask extends AnalyzeTextLROTask {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model HealthcareResult extends AnalyzeTextPreBuiltResult {
+model HealthcareResult is AnalyzeTextPreBuiltResult {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<HealthcareEntitiesDocumentResult>)
@@ -67,13 +68,14 @@ model HealthcareResult extends AnalyzeTextPreBuiltResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model HealthcareEntitiesDocumentResult extends DocumentResult {
+model HealthcareEntitiesDocumentResult is DocumentResult {
   @doc("Healthcare entities.",)
   entities: Array<HealthcareEntity>;
 
   @doc("Healthcare entity relations.")
   relations: Array<HealthcareRelation>;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @added(Versions.v2023_04_15_preview)
   @doc("JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.")
   fhirBundle?: Record<unknown>
@@ -457,6 +459,6 @@ model HealthcareLROResult extends AnalyzeTextLROResult {
 
 @added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage extends HealthcareEntitiesDocumentResult {
+model HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage is HealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;
 }

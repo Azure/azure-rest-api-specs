@@ -17,7 +17,7 @@ model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask {
 }
 
 @doc("Supported parameters for a Key Phrase Extraction task.")
-model KeyPhraseTaskParameters extends PreBuiltTaskParameters {}
+model KeyPhraseTaskParameters is PreBuiltTaskParameters {}
 
 @doc("An object representing the task definition for a Key Phrase Extraction task.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -39,21 +39,21 @@ model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model KeyPhraseResult extends AnalyzeTextPreBuiltResult {
+model KeyPhraseResult is AnalyzeTextPreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<KeyPhrasesDocumentResult>)
   documents: Array<KeyPhrasesDocumentResultWithDetectedLanguage>
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model KeyPhrasesDocumentResult extends DocumentResult {
+model KeyPhrasesDocumentResult is DocumentResult {
   @doc("A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.")
   keyPhrases: Array<string>;
 }
 
 @added(Versions.v2023_04_01)
 @doc("A ranked list of sentences representing the extracted summary.")
-model KeyPhrasesDocumentResultWithDetectedLanguage extends KeyPhrasesDocumentResult {
+model KeyPhrasesDocumentResultWithDetectedLanguage is KeyPhrasesDocumentResult {
   ...DocumentDetectedLanguage;
 }
 

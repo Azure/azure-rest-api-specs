@@ -49,6 +49,7 @@
     "/language/:analyze-conversations": {
       "post": {
         "operationId": "Language_AnalyzeConversations",
+        "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -354,6 +355,15 @@
       "type": "object",
       "description": "Container for results of all tasks in the conversation job.",
       "properties": {
+        "lastUpdateDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last updated time in UTC for the task."
+        },
+        "status": {
+          "$ref": "#/definitions/State",
+          "description": "The status of the task at the mentioned last update time."
+        },
         "taskName": {
           "type": "string",
           "description": "task name"
@@ -365,12 +375,9 @@
       },
       "discriminator": "kind",
       "required": [
+        "lastUpdateDateTime",
+        "status",
         "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskState"
-        }
       ]
     },
     "AnalyzeConversationJobState": {
@@ -468,6 +475,10 @@
       "type": "object",
       "description": "Base class for a long-running conversation input task.",
       "properties": {
+        "taskName": {
+          "type": "string",
+          "description": "task name"
+        },
         "kind": {
           "$ref": "#/definitions/AnalyzeConversationLROTaskKind",
           "description": "Enumeration of supported analysis tasks on a collection of conversations."
@@ -476,11 +487,6 @@
       "discriminator": "kind",
       "required": [
         "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskIdentifier"
-        }
       ]
     },
     "AnalyzeConversationLROTaskKind": {
@@ -1230,21 +1236,23 @@
         "id",
         "participantId"
       ],
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      ]
+      "additionalProperties": {}
     },
     "ConversationItemLevelTiming": {
       "type": "object",
       "description": "Audio timing at the conversation item level.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AudioTiming"
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Offset from the start of speech audio, in ticks. 1 tick = 100 nanoseconds."
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration of word articulation, in ticks. 1 tick = 100 nanoseconds."
         }
-      ]
+      }
     },
     "ConversationPIICategories": {
       "type": "string",
@@ -1330,6 +1338,21 @@
       "type": "object",
       "description": "The result from PII detection and redaction operation for each conversation.",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "conversations": {
           "type": "array",
           "description": "array of conversations",
@@ -1339,18 +1362,25 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "conversations"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "ConversationPiiTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a conversational pii task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
         "piiCategories": {
           "type": "array",
           "description": "Array of ConversationPIICategories",
@@ -1377,12 +1407,7 @@
             "$ref": "#/definitions/ConversationPIICategoriesExclude"
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
+      }
     },
     "ConversationPrediction": {
       "type": "object",
@@ -1420,6 +1445,26 @@
       "type": "object",
       "description": "if showStats=true was specified in the request, this field contains information about the request payload.",
       "properties": {
+        "documentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents submitted in the request."
+        },
+        "validDocumentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
+        },
+        "erroneousDocumentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+        },
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of transactions for the request."
+        },
         "conversationsCount": {
           "type": "integer",
           "format": "int32",
@@ -1437,14 +1482,13 @@
         }
       },
       "required": [
+        "documentsCount",
+        "validDocumentCount",
+        "erroneousDocumentCount",
+        "transactionsCount",
         "conversationsCount",
         "validConversationCount",
         "erroneousConversationsCount"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RequestStatistics"
-        }
       ]
     },
     "ConversationResult": {
@@ -1500,6 +1544,21 @@
       "type": "object",
       "description": "The result from sentiment analysis operation for each conversation.",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "conversations": {
           "type": "array",
           "description": "Array of ConversationSentimentResults",
@@ -1509,12 +1568,9 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "conversations"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "ConversationSentimentResultsConversation": {
@@ -1569,12 +1625,15 @@
       "type": "object",
       "description": "Supported parameters for pre-build conversational summarization task.",
       "properties": {
-        "summaryAspects": {
-          "type": "array",
-          "description": "Array of Summary Aspects",
-          "items": {
-            "$ref": "#/definitions/SummaryAspect"
-          }
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
         },
         "sentenceCount": {
           "type": "integer",
@@ -1584,15 +1643,17 @@
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType",
           "description": "String index type"
+        },
+        "summaryAspects": {
+          "type": "array",
+          "description": "Array of Summary Aspects",
+          "items": {
+            "$ref": "#/definitions/SummaryAspect"
+          }
         }
       },
       "required": [
         "summaryAspects"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
       ]
     },
     "ConversationTargetIntentResult": {
@@ -1690,16 +1751,21 @@
       "type": "object",
       "description": "Supported parameters for a conversational sentiment task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
         "predictionSource": {
           "$ref": "#/definitions/TranscriptContentType",
           "description": "For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
+      }
     },
     "ConversationalTask": {
       "type": "object",
@@ -1813,12 +1879,18 @@
       "type": "object",
       "description": "Supported parameters for a custom conversation summarization task.",
       "properties": {
-        "summaryAspects": {
-          "type": "array",
-          "description": "Array of Summary Aspects",
-          "items": {
-            "$ref": "#/definitions/SummaryAspect"
-          }
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
         },
         "sentenceCount": {
           "type": "integer",
@@ -1828,15 +1900,19 @@
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType",
           "description": "String index type"
+        },
+        "summaryAspects": {
+          "type": "array",
+          "description": "Array of Summary Aspects",
+          "items": {
+            "$ref": "#/definitions/SummaryAspect"
+          }
         }
       },
       "required": [
+        "projectName",
+        "deploymentName",
         "summaryAspects"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomTaskParameters"
-        }
       ]
     },
     "CustomSummaryResult": {
@@ -1873,29 +1949,6 @@
       "required": [
         "conversations",
         "errors",
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "CustomTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using custom models.",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "required": [
         "projectName",
         "deploymentName"
       ]
@@ -2088,69 +2141,6 @@
         "modelAsString": true
       }
     },
-    "InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue",
-        "KnowledgeBaseNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchThrottling",
-        "ExtractionFailure",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputDocuments",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode",
-        "InvalidCountryHint"
-      ],
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true
-      }
-    },
-    "InnerErrorModel": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/InnerErrorCode",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "object",
-          "description": "Error details.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ],
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      ]
-    },
     "InputWarning": {
       "type": "object",
       "description": "Contains details of warnings encountered during a job execution.",
@@ -2177,18 +2167,25 @@
       "type": "object",
       "description": "Context of the summary with a conversation item ID.",
       "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the context. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
+        },
         "conversationItemId": {
           "type": "string",
           "description": "Reference to the ID of ConversationItem."
         }
       },
       "required": [
+        "offset",
+        "length",
         "conversationItemId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SummaryContext"
-        }
       ]
     },
     "KnowledgeBaseAnswer": {
@@ -2419,14 +2416,6 @@
       "type": "object",
       "description": "This is a set of request parameters for LUIS Generally Available projects.",
       "properties": {
-        "targetProjectKind": {
-          "$ref": "#/definitions/targetProjectKind",
-          "description": "The type of a target service"
-        },
-        "apiVersion": {
-          "type": "string",
-          "description": "The API version to use when call a specific target service."
-        },
         "query": {
           "type": "string",
           "description": "The utterance to predict.",
@@ -2437,15 +2426,12 @@
           "description": "This customizes how the service calls LUIS Generally Available projects."
         }
       },
-      "required": [
-        "targetProjectKind"
-      ],
       "allOf": [
         {
-          "type": "object",
-          "additionalProperties": {}
+          "$ref": "#/definitions/AnalysisParameters"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Luis"
     },
     "LuisTargetIntentResult": {
       "type": "object",
@@ -2667,47 +2653,6 @@
         }
       ],
       "x-ms-discriminator-value": "OrdinalResolution"
-    },
-    "PreBuiltResult": {
-      "type": "object",
-      "description": "Pre built result",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion"
-      ]
-    },
-    "PreBuiltTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using pre-built models.",
-      "properties": {
-        "modelVersion": {
-          "type": "string",
-          "description": "model version",
-          "default": "latest"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        }
-      ]
     },
     "QueryFilters": {
       "type": "object",
@@ -2983,6 +2928,7 @@
     },
     "Role": {
       "type": "string",
+      "description": "Role of the participant.",
       "enum": [
         "customer",
         "agent",
@@ -3240,26 +3186,6 @@
         ]
       }
     },
-    "SummaryContext": {
-      "type": "object",
-      "description": "The context of the summary.",
-      "properties": {
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the context. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
-        }
-      },
-      "required": [
-        "offset",
-        "length"
-      ]
-    },
     "SummaryResult": {
       "type": "object",
       "description": "Summary Results",
@@ -3344,46 +3270,6 @@
       "required": [
         "targetProjectKind",
         "confidenceScore"
-      ]
-    },
-    "TaskIdentifier": {
-      "type": "object",
-      "description": "Base task object.",
-      "properties": {
-        "taskName": {
-          "type": "string",
-          "description": "task name"
-        }
-      }
-    },
-    "TaskParameters": {
-      "type": "object",
-      "description": "Base parameters object for a text analysis task.",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        }
-      }
-    },
-    "TaskState": {
-      "type": "object",
-      "description": "Returns the current state of the task.",
-      "properties": {
-        "lastUpdateDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last updated time in UTC for the task."
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "The status of the task at the mentioned last update time."
-        }
-      },
-      "required": [
-        "lastUpdateDateTime",
-        "status"
       ]
     },
     "Tasks": {
@@ -3555,19 +3441,37 @@
       "type": "object",
       "description": "The text modality of an input conversation.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of a conversation item."
+        },
+        "participantId": {
+          "type": "string",
+          "description": "The participant ID of a conversation item."
+        },
+        "language": {
+          "type": "string",
+          "description": "The override language of a conversation item in BCP 47 language representation."
+        },
+        "modality": {
+          "$ref": "#/definitions/Modality",
+          "description": "Enumeration of supported conversational modalities."
+        },
+        "role": {
+          "$ref": "#/definitions/Role",
+          "description": "Role of the participant."
+        },
         "text": {
           "type": "string",
           "description": "The text input"
         }
       },
       "required": [
+        "id",
+        "participantId",
         "text"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationItemBase"
-        }
-      ]
+      "additionalProperties": {}
     },
     "TranscriptContentType": {
       "type": "string",
@@ -3609,6 +3513,26 @@
       "type": "object",
       "description": "Additional properties for supporting transcript conversation.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of a conversation item."
+        },
+        "participantId": {
+          "type": "string",
+          "description": "The participant ID of a conversation item."
+        },
+        "language": {
+          "type": "string",
+          "description": "The override language of a conversation item in BCP 47 language representation."
+        },
+        "modality": {
+          "$ref": "#/definitions/Modality",
+          "description": "Enumeration of supported conversational modalities."
+        },
+        "role": {
+          "$ref": "#/definitions/Role",
+          "description": "Role of the participant."
+        },
         "itn": {
           "type": "string",
           "description": "Inverse text normalization (ITN) representation of input. The inverse-text-normalized form is the recognized text from Microsoft's speech-to-text API, with phone numbers, numbers, abbreviations, and other transformations applied."
@@ -3639,16 +3563,14 @@
         }
       },
       "required": [
+        "id",
+        "participantId",
         "itn",
         "maskedItn",
         "text",
         "lexical"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationItemBase"
-        }
-      ]
+      "additionalProperties": {}
     },
     "VolumeResolution": {
       "type": "object",
@@ -3768,16 +3690,21 @@
       "type": "object",
       "description": "Word-level timing information that the speech-to-text API generates. The words in this object should have 1:1 correspondence with the lexical input to allow for audio redaction.",
       "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Offset from the start of speech audio, in ticks. 1 tick = 100 nanoseconds."
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration of word articulation, in ticks. 1 tick = 100 nanoseconds."
+        },
         "word": {
           "type": "string",
           "description": "Recognized word."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AudioTiming"
-        }
-      ]
+      }
     },
     "extraInformationKind": {
       "type": "string",

@@ -14,9 +14,9 @@ namespace Language.Conversations;
 @doc("Error response.")
 model ErrorResponse is Azure.Core.Foundations.ErrorResponse;
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "InnerErrorModel should not use 'extends Record<unknown>'. Use 'extends Record<string>' instead."
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
-model InnerErrorModel extends Record<unknown> {
+model InnerErrorModel is Record<unknown> {
     @doc("One of a server-defined set of error codes.")
     code: InnerErrorCode;
 
@@ -29,6 +29,7 @@ model InnerErrorModel extends Record<unknown> {
     @doc("Error target.")
     target?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/bad-record-type"
     @doc("An object containing more specific information than the current object about the error.")
     innererror?: InnerErrorModel;
 }
@@ -100,7 +101,7 @@ model TaskParameters {
 
 @doc("Parameters object for a text analysis task using pre-built models.")
 @added(Versions.v2023_04_01)
-model PreBuiltTaskParameters extends TaskParameters {
+model PreBuiltTaskParameters is TaskParameters {
     @doc("model version")
     modelVersion?: string = "latest";
 }

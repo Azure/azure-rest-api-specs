@@ -23,7 +23,7 @@ model AnalyzeTextLanguageDetectionInput extends AnalyzeTextTask{
 }
 
 @doc("Supported parameters for a Language Detection task.")
-model LanguageDetectionTaskParameters extends PreBuiltTaskParameters {}
+model LanguageDetectionTaskParameters is PreBuiltTaskParameters {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model LanguageDetectionTaskResult extends AnalyzeTextTaskResult {
@@ -35,13 +35,13 @@ model LanguageDetectionTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model LanguageDetectionResult extends AnalyzeTextPreBuiltResult {
+model LanguageDetectionResult is AnalyzeTextPreBuiltResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents?: Array<LanguageDetectionDocumentResult>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model LanguageDetectionDocumentResult extends DocumentResult {
+model LanguageDetectionDocumentResult is DocumentResult {
   @doc("Detected Language.")
   detectedLanguage: DetectedLanguage;
 }

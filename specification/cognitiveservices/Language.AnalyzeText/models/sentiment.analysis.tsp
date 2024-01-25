@@ -17,7 +17,7 @@ model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {
 }
 
 @doc("Supported parameters for a Sentiment Analysis task.")
-model SentimentAnalysisTaskParameters extends PreBuiltTaskParameters {
+model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   opinionMining?: boolean = false;
 
@@ -57,20 +57,20 @@ enum SentimentValue {
 }
 
 @doc("Sentiment analysis per document.")
-model SentimentResponse extends AnalyzeTextPreBuiltResult {
+model SentimentResponse is AnalyzeTextPreBuiltResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<SentimentDocumentResult>;
 }
 
 @doc("Sentiment analysis per document.")
-model SentimentResponseWithDocumentDetectedLanguage extends AnalyzeTextPreBuiltResult {
+model SentimentResponseWithDocumentDetectedLanguage is AnalyzeTextPreBuiltResult {
   ...DocumentDetectedLanguage;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<SentimentDocumentResult>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model SentimentDocumentResult extends DocumentResult {
+model SentimentDocumentResult is DocumentResult {
   @doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
   sentiment: Sentiment;
 
@@ -206,7 +206,7 @@ model CustomSentenceSentiment {
 
 @added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model CustomSentimentDocumentResult extends DocumentResult {
+model CustomSentimentDocumentResult is DocumentResult {
   @doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
   sentiment: Sentiment;
 
@@ -218,7 +218,7 @@ model CustomSentimentDocumentResult extends DocumentResult {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a Custom Sentiment Analysis task.")
-model CustomSentimentAnalysisTaskParameters extends  CustomTaskParameters {
+model CustomSentimentAnalysisTaskParameters is  CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType;
 }
@@ -236,14 +236,14 @@ model CustomSentimentAnalysisLROTask extends AnalyzeTextLROTask {
 
 @added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model CustomSentimentAnalysisResult extends CustomResult {
+model CustomSentimentAnalysisResult is CustomResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<CustomSentimentAnalysisResultDocument>;
 }
 
 @added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model CustomSentimentAnalysisResultDocument extends CustomSentimentDocumentResult {
+model CustomSentimentAnalysisResultDocument is CustomSentimentDocumentResult {
   ...DocumentDetectedLanguage;
 }
 

@@ -17,7 +17,7 @@ model AnalyzeTextEntityLinkingInput extends AnalyzeTextTask {
 }
 
 @doc("Supported parameters for an Entity Linking task.")
-model EntityLinkingTaskParameters extends PreBuiltTaskParameters {
+model EntityLinkingTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType;
 }
@@ -40,21 +40,21 @@ model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntityLinkingResult extends AnalyzeTextPreBuiltResult {
+model EntityLinkingResult is AnalyzeTextPreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<LinkedEntitiesDocumentResult>)
   documents: Array<EntityLinkingResultWithDetectedLanguage>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model LinkedEntitiesDocumentResult extends DocumentResult {
+model LinkedEntitiesDocumentResult is DocumentResult {
   @doc("Recognized well known entities in the document.")
   entities: Array<LinkedEntity>;
 }
 
 @added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntityLinkingResultWithDetectedLanguage extends LinkedEntitiesDocumentResult {
+model EntityLinkingResultWithDetectedLanguage is LinkedEntitiesDocumentResult {
   ...DocumentDetectedLanguage
 }
 

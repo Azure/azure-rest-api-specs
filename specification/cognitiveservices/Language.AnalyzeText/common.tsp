@@ -14,9 +14,9 @@ namespace Language.AnalyzeText;
 @doc("Error response.")
 model ErrorResponse is Azure.Core.Foundations.ErrorResponse;
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "InnerErrorModel should not use 'extends Record<unknown>'. Use 'extends Record<string>' instead."
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
-model InnerErrorModel extends Record<unknown> {
+model InnerErrorModel is Record<unknown> {
     @doc("One of a server-defined set of error codes.")
     code: InnerErrorCode;
 
@@ -95,7 +95,7 @@ model TaskParameters {
 }
 
 @doc("Parameters object for a text analysis task using pre-built models.")
-model PreBuiltTaskParameters extends TaskParameters {
+model PreBuiltTaskParameters is TaskParameters {
     @doc("model version")
     modelVersion?: string = "latest";
 }
@@ -178,10 +178,10 @@ model RequestStatistics {
     documentsCount: int32;
 
     @doc("Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.")
-    validDocumentCount: int32;
+    validDocumentsCount: int32;
 
     @doc("Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.")
-    erroneousDocumentCount: int32;
+    erroneousDocumentsCount: int32;
 
     @doc("Number of transactions for the request.")
     transactionsCount: int64;
@@ -619,6 +619,7 @@ model Error {
   details?: Array<Error>;
 
   @doc("An object containing more specific information than the current object about the error.")
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   innererror?: InnerErrorModel;
 }
 

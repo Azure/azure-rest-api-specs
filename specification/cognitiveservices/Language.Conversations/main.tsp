@@ -110,13 +110,14 @@ model ConversationalTask extends AnalyzeConversationTask {
 
 @doc("The input ConversationItem and its optional parameters")
 model ConversationAnalysisOptions {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("The abstract base for a user input formatted conversation (e.g., Text, Transcript).")
   conversationItem: ConversationItemBase;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "ConversationItemBase should not use 'extends Record<unknown>'. Use 'extends Record<string>' instead."
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("The abstract base for a user input formatted conversation (e.g., Text, Transcript).")
-model ConversationItemBase extends Record<unknown> {
+model ConversationItemBase is Record<unknown> {
   @doc("The ID of a conversation item.")
   id: string;
 
@@ -135,6 +136,7 @@ model ConversationItemBase extends Record<unknown> {
 }
 
 @added(Versions.v2023_04_01)
+@doc("Role of the participant.")
 enum Role{
   @added(Versions.v2023_04_01)
   @doc("The participant is a customer.")
@@ -149,8 +151,9 @@ enum Role{
   generic,
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("The text modality of an input conversation.")
-model TextConversationItem extends ConversationItemBase {
+model TextConversationItem is ConversationItemBase {
   @doc("The text input")
   text: string;
 }
@@ -175,8 +178,11 @@ model NoneLinkedTargetIntentResult extends TargetIntentResult {
 }
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "LuisParameters should not use 'extends Record<unknown>'. Use 'extends Record<string>' instead."
 @doc("This is a set of request parameters for LUIS Generally Available projects.")
-model LuisParameters extends Record<unknown> {
-  ...AnalysisParameters;
+model LuisParameters extends AnalysisParameters {
+  ...Record<unknown>;
+
+  @doc("The type of a target service")
+  targetProjectKind: targetProjectKind.Luis;
 
   @doc("The utterance to predict.")
   @maxLength(500)
@@ -190,7 +196,6 @@ model LuisParameters extends Record<unknown> {
 model LuisCallingOptions {
   @doc("Enable verbose response.")
   verbose?: boolean;
-
 
   @doc("Save log to add in training utterances later.")
   log?: boolean;
@@ -621,7 +626,7 @@ model AnalyzeConversationJobsInput {
 @doc("Base class for a long-running conversation input task.")
 @discriminator("kind")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationLROTask extends TaskIdentifier {
+model AnalyzeConversationLROTask is TaskIdentifier {
   @doc("Enumeration of supported analysis tasks on a collection of conversations.")
   kind: AnalyzeConversationLROTaskKind;
 }
@@ -712,7 +717,7 @@ model Tasks {
 @doc("Container for results of all tasks in the conversation job.")
 @discriminator("kind")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationJobResult extends TaskState {
+model AnalyzeConversationJobResult is TaskState {
   ...TaskIdentifier;
 
   @doc("discriminator kind")
@@ -776,9 +781,10 @@ model TranscriptConversation extends Conversation {
   conversationItems: Array<TranscriptConversationItem>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Additional properties for supporting transcript conversation.")
 @added(Versions.v2023_04_01)
-model TranscriptConversationItem extends ConversationItemBase {
+model TranscriptConversationItem is ConversationItemBase {
   @doc("Inverse text normalization (ITN) representation of input. The inverse-text-normalized form is the recognized text from Microsoft's speech-to-text API, with phone numbers, numbers, abbreviations, and other transformations applied.")
   itn: string;
 
@@ -819,7 +825,7 @@ model RedactedTranscriptContent {
 
 @doc("Word-level timing information that the speech-to-text API generates. The words in this object should have 1:1 correspondence with the lexical input to allow for audio redaction.")
 @added(Versions.v2023_04_01)
-model WordLevelTiming extends AudioTiming {
+model WordLevelTiming is AudioTiming {
   @doc("Recognized word.")
   word?: string;
 }
@@ -856,7 +862,7 @@ model ConversationStatistics {
 
 @doc("if showStats=true was specified in the request, this field contains information about the request payload.")
 @added(Versions.v2023_04_01)
-model ConversationRequestStatistics extends RequestStatistics {
+model ConversationRequestStatistics is RequestStatistics {
   @doc("Number of conversations submitted in the request.")
   conversationsCount: int32;
 
@@ -869,7 +875,7 @@ model ConversationRequestStatistics extends RequestStatistics {
 
 @doc("Audio timing at the conversation item level.")
 @added(Versions.v2023_04_01)
-model ConversationItemLevelTiming extends AudioTiming {}
+model ConversationItemLevelTiming is AudioTiming {}
 
 @added(Versions.v2023_04_15_preview)
 @doc("Task definition for conversational sentiment.")
@@ -883,7 +889,8 @@ model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a conversational sentiment task.")
-model ConversationalSentimentTaskParameters extends PreBuiltTaskParameters {
+model ConversationalSentimentTaskParameters is PreBuiltTaskParameters {
+  @added(Versions.v2023_04_15_preview)
   @doc("For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.")
   predictionSource?: TranscriptContentType;
 }
@@ -900,7 +907,7 @@ model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResults extends PreBuiltResult {
+model ConversationSentimentResults is PreBuiltResult {
   @doc("Array of ConversationSentimentResults")
   conversations: Array<ConversationSentimentResultsConversation>
 }
@@ -969,7 +976,7 @@ model AnalyzeConversationConversationPiiResult extends AnalyzeConversationJobRes
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from PII detection and redaction operation for each conversation.")
-model ConversationPiiResults extends PreBuiltResult {
+model ConversationPiiResults is PreBuiltResult {
   @doc("array of conversations")
   conversations: Array<ConversationalPiiResultWithResultBase>;
 }
@@ -1013,19 +1020,23 @@ model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a conversational pii task.")
-model ConversationPiiTaskParameters extends PreBuiltTaskParameters {
+model ConversationPiiTaskParameters is PreBuiltTaskParameters {
+  @added(Versions.v2023_04_15_preview)
   @doc("Array of ConversationPIICategories")
   piiCategories?: Array<ConversationPIICategories>;
 
   @doc("Flag to indicate if response should include audio stream offset and duration for any detected entities to be redacted. By default, audio timing of redacted entities are not included.")
   redactAudioTiming?: boolean;
 
+  @added(Versions.v2023_04_15_preview)
   @doc("For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for entity detection. The details of the entities detected - like the offset, length and the text itself - will correspond to the text type selected here.")
   redactionSource?: TranscriptContentType;
 
+  @added(Versions.v2023_04_15_preview)
   @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
   redactionCharacter?: RedactionCharacter;
 
+  @added(Versions.v2023_04_15_preview)
   @doc("List of categories that need to be excluded instead of included.")
   excludePiiCategories?: Array<ConversationPIICategoriesExclude>;
 }
@@ -1109,7 +1120,7 @@ model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
 
 @doc("Supported parameters for a conversational summarization task.")
 @added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParametersBase  extends AbstractiveSummarizationTaskParametersBase {
+model ConversationSummarizationTaskParametersBase  is AbstractiveSummarizationTaskParametersBase {
 
   @doc("Array of Summary Aspects")
   summaryAspects: Array<SummaryAspect>;
@@ -1117,13 +1128,13 @@ model ConversationSummarizationTaskParametersBase  extends AbstractiveSummarizat
 
 @doc("Supported parameters for pre-build conversational summarization task.")
 @added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParameters extends PreBuiltTaskParameters {
+model ConversationSummarizationTaskParameters is PreBuiltTaskParameters {
   ...ConversationSummarizationTaskParametersBase;
 }
 
 @doc("Supported parameters for a custom conversation summarization task.")
 @added(Versions.v2023_04_15_preview)
-model CustomConversationSummarizationTaskParameters extends CustomTaskParameters {
+model CustomConversationSummarizationTaskParameters is CustomTaskParameters {
   ...ConversationSummarizationTaskParametersBase;
 }
 
@@ -1215,7 +1226,7 @@ model SummaryResultItem {
 
 @doc("Context of the summary with a conversation item ID.")
 @added(Versions.v2023_04_01)
-model ItemizedSummaryContext extends SummaryContext {
+model ItemizedSummaryContext is SummaryContext {
   @doc("Reference to the ID of ConversationItem.")
   conversationItemId: string;
 }
@@ -1728,7 +1739,9 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 @route("/language")
 interface Language {
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @post
+  @doc("Analyzes the input conversation utterance.")
   @route("/:analyze-conversations")
   @example("./SuccessfulAnalyzeConversations.json", "SuccessfulAnalyzeConversations")
   @example("./SuccessfulAnalyzeConversationsArbitration.json", "SuccessfulAnalyzeConversationsArbitration")
@@ -1739,6 +1752,7 @@ interface Language {
     ...Azure.Core.Foundations.ApiVersionParameter
   ): AnalyzeConversationTaskResult | Azure.Core.Foundations.ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @added(Versions.v2023_04_01)
   @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
   @summary("Get analysis status and results")

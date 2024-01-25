@@ -187,7 +187,7 @@ model AnalyzeTextTask {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("kind")
-model AnalyzeTextLROTask extends TaskIdentifier{
+model AnalyzeTextLROTask is TaskIdentifier{
   @doc("The kind of task to perform.")
   kind: AnalyzeTextLROTaskKind;
 }
@@ -252,6 +252,7 @@ model AnalyzeTextJobStatistics {
   statistics?: RequestStatistics;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 model TasksState {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   tasks: Tasks;
@@ -381,17 +382,4 @@ model MultiLanguageInput {
 model DocumentDetectedLanguage {
   @doc("If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document.")
   detectedLanguage?: string;
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("if showStats=true was specified in the request this field will contain information about the document request payload.")
-model DocumentRequestStatistics extends RequestStatistics {
-  @doc("Number of documents submitted in the request.")
-  documentsCount: int32;
-
-  @doc("Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.")
-  validDocumentsCount: int32;
-
-  @doc("Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.")
-  erroneousDocumentsCount: int32;
 }

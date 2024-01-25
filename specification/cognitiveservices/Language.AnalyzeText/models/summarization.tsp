@@ -6,7 +6,7 @@ namespace Language.AnalyzeText;
 
 @added(Versions.v2023_04_01)
 @doc("Supported parameters for an Extractive Summarization task.")
-model ExtractiveSummarizationTaskParameters extends PreBuiltTaskParameters {
+model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   sentenceCount?: int64 = 3;
 
@@ -34,7 +34,7 @@ model ExtractiveSummarizationLROTask extends AnalyzeTextLROTask {
 
 @added(Versions.v2023_04_01)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model ExtractiveSummarizationResult extends PreBuiltResult {
+model ExtractiveSummarizationResult is PreBuiltResult {
   @added(Versions.v2023_04_01)
   @doc("Response by document")
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<ExtractedSummaryDocumentResult>)
@@ -53,14 +53,14 @@ enum ExtractiveSummarizationSortingCriteria {
 
 @added(Versions.v2023_04_01)
 @doc("A ranked list of sentences representing the extracted summary.")
-model ExtractedSummaryDocumentResult extends DocumentResult {
+model ExtractedSummaryDocumentResult is DocumentResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   sentences: Array<ExtractedSummarySentence>;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("A ranked list of sentences representing the extracted summary.")
-model ExtractedSummaryDocumentResultWithDetectedLanguage extends ExtractedSummaryDocumentResult {
+model ExtractedSummaryDocumentResultWithDetectedLanguage is ExtractedSummaryDocumentResult {
   ...DocumentDetectedLanguage;
 }
 
@@ -104,7 +104,7 @@ model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
 
 @added(Versions.v2023_04_01)
 @doc("Supported parameters for the pre-build Abstractive Summarization task.")
-model AbstractiveSummarizationTaskParameters extends PreBuiltTaskParameters {
+model AbstractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   ...AbstractiveSummarizationTaskParametersBase;
 }
 
@@ -130,20 +130,20 @@ model AbstractiveSummarizationResultBase {
 
 @added(Versions.v2023_04_01)
 @doc("An object representing the pre-build summarization results of each document.")
-model AbstractiveSummarizationResult extends PreBuiltResult {
+model AbstractiveSummarizationResult is PreBuiltResult {
   ... AbstractiveSummarizationResultBase;
 }
 
 @added(Versions.v2023_04_01)
 @doc("An object representing the pre-build summarization results of each document.")
-model AbstractiveSummaryDocumentResult extends DocumentResult {
+model AbstractiveSummaryDocumentResult is DocumentResult {
   @doc("A list of abstractive summaries.",)
   summaries: Array<AbstractiveSummary>;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("An object representing the summarization result of a single document with detected language.")
-model AbstractiveSummaryDocumentResultWithDetectedLanguage extends AbstractiveSummaryDocumentResult {
+model AbstractiveSummaryDocumentResultWithDetectedLanguage is AbstractiveSummaryDocumentResult {
   ...DocumentDetectedLanguage;
 }
 
@@ -171,7 +171,7 @@ model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for the Custom Abstractive Summarization task.") 
-model CustomAbstractiveSummarizationTaskParameters extends AbstractiveSummarizationTaskParametersBase {
+model CustomAbstractiveSummarizationTaskParameters is AbstractiveSummarizationTaskParametersBase {
   ...CustomTaskParameters;
 }
 
@@ -188,6 +188,6 @@ model CustomAbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
 
 @added(Versions.v2023_04_15_preview)
 @doc("An object representing the custom summarization results of each document.")
-model CustomAbstractiveSummarizationResult extends AbstractiveSummarizationResultBase {
+model CustomAbstractiveSummarizationResult is AbstractiveSummarizationResultBase {
   ...CustomResult;
 }

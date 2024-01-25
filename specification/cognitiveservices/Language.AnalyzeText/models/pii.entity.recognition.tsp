@@ -19,7 +19,7 @@ model AnalyzeTextPIIEntitiesRecognitionInput extends AnalyzeTextTask {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Supported parameters for a PII Entities Recognition task.")
-model PIITaskParameters extends PreBuiltTaskParameters {
+model PIITaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   domain?: PiiDomain = PiiDomain.none;
 
@@ -61,7 +61,7 @@ model PIITaskResult extends AnalyzeTextTaskResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model PIIResult extends AnalyzeTextPreBuiltResult {
+model PIIResult is AnalyzeTextPreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<PIIEntitiesDocumentResult>)
   documents: Array<PIIResultWithDetectedLanguage>;
@@ -78,7 +78,7 @@ enum PiiDomain {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model PIIEntitiesDocumentResult extends DocumentResult {
+model PIIEntitiesDocumentResult is DocumentResult {
   @doc("Returns redacted text.")
   redactedText: string;
 
@@ -88,7 +88,7 @@ model PIIEntitiesDocumentResult extends DocumentResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model PIIResultWithDetectedLanguage extends PIIEntitiesDocumentResult {
+model PIIResultWithDetectedLanguage is PIIEntitiesDocumentResult {
   ...DocumentDetectedLanguage;
 }
 

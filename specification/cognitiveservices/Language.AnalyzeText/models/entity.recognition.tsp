@@ -17,7 +17,7 @@ model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
 }
 
 @doc("Supported parameters for an Entity Recognition task.")
-model EntitiesTaskParameters extends PreBuiltTaskParameters {
+model EntitiesTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType;
 
@@ -58,21 +58,21 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntitiesResult extends AnalyzeTextPreBuiltResult {
+model EntitiesResult is AnalyzeTextPreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<EntitiesDocumentResult>)
   documents: Array<EntitiesDocumentResultWithMetadataDetectedLanguage>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntitiesDocumentResult extends DocumentResult {
+model EntitiesDocumentResult is DocumentResult {
   @doc("Recognized entities in the document.")
   entities: Array<Entity>;
 }
 
 @added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntitiesDocumentResultWithMetadataDetectedLanguage extends EntitiesDocumentResultWithMetadata {
+model EntitiesDocumentResultWithMetadataDetectedLanguage is EntitiesDocumentResultWithMetadata {
   ...DocumentDetectedLanguage
 }
 
@@ -310,7 +310,7 @@ model AllowOverlapEntityPolicyType extends BaseEntityOverlapPolicy {
 
 @added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntitiesDocumentResultWithMetadata extends DocumentResult {
+model EntitiesDocumentResultWithMetadata is DocumentResult {
   @doc("Recognized entities in the document.")
   entities: Array<EntityWithMetadata>;
 }
@@ -327,7 +327,7 @@ model EntityTag {
 
 @added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntityWithTags extends Entity {
+model EntityWithTags is Entity {
   @doc("An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected.")
   type: string;
 
@@ -337,7 +337,7 @@ model EntityWithTags extends Entity {
 
 @added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntityWithMetadata extends EntityWithTags {
+model EntityWithMetadata is EntityWithTags {
   @doc("The entity metadata object.")
   metadata?: BaseMetadata;
 }
