@@ -52,9 +52,6 @@ model HealthModel is TrackedResource<HealthModelProperties> {
 
 @doc("HealthModel properties")
 model HealthModelProperties {
-  @doc("Enabled state of the health model. When disabled, no health data is collected and no health state is propagated.")
-  enabledState: EnabledState;
-
   @visibility("read")
   @doc("The data plane endpoint for interacting with health data")
   dataplaneEndpoint?: string;
@@ -62,13 +59,6 @@ model HealthModelProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
-@doc("Enabled state of the health model")
-enum EnabledState {
-  Enabled,
-  Disabled,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
@@ -607,17 +597,31 @@ model DiscoveryRuleProperties {
   resourceGraphQuery: string;
 
   @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
-  authenticationSetting: string;
+  authenticationSetting: stringResourceName;
 
-  @doc("Whether to create an entity for the discovery rule itself.")
-  showEntity?: boolean = true;
+  @doc("Whether to create an entity for the discovery rule itself. If set, all discovered entities will be children of this entity.")
+  showEntity: DiscoveryRuleShowEntityBehavior;
 
   @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
-  discoverRelationships?: boolean = true;
+  discoverRelationships: DiscoveryRuleRelationshipDiscoveryBehavior;
 
   // Will be added later
   //  @doc("Whether to add all suggested signals to the discovered entities.")
   //  addAllSuggestedSignals?: boolean;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
+@doc("Discovery rule show entity behavior")
+enum DiscoveryRuleShowEntityBehavior {
+  CreateEntityForDiscoveryRule,
+  NoEntityForDiscoveryRule,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
+@doc("Discovery rule relationship discovery behavior")
+enum DiscoveryRuleRelationshipDiscoveryBehavior {
+  AutomaticallyDiscoverRelationships,
+  DoNotDiscoverRelationships
 }
 
 alias TimestampQueryParam = {
