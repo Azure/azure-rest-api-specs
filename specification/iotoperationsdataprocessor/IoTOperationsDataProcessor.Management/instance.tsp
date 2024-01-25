@@ -52,7 +52,7 @@ interface Instances {
   listByResourceGroup is ArmResourceListByParent<Instance>;
   listBySubscription is ArmListBySubscription<Instance>;
 
-  @doc("Execute a test run.")
+  @doc("Execute a pipeline test run.")
   @added(Versions.Preview20240201)
   @armResourceAction(Instance)
   testRuns is ArmResourceActionAsync<Instance, TestRunRequest, TestRunResponse>;
