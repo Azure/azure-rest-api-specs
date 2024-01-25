@@ -5,12 +5,15 @@ import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
+import "./pipeline.tsp";
+import "./testruns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Microsoft.IoTOperationsDataProcessor;
 
@@ -48,4 +51,9 @@ interface Instances {
   delete is ArmResourceDeleteWithoutOkAsync<Instance>;
   listByResourceGroup is ArmResourceListByParent<Instance>;
   listBySubscription is ArmListBySubscription<Instance>;
+
+  @doc("Execute a test run.")
+  @added(Versions.Preview20240201)
+  @armResourceAction(Instance)
+  testRuns is ArmResourceActionAsync<Instance, TestRunRequest, TestRunResponse>;
 }
