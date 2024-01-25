@@ -50,6 +50,7 @@ interface Environment {
   listBySubscription is ArmListBySubscription<EnvironmentResource>;
   listByResourceGroup is ArmResourceListByParent<EnvironmentResource>;
   get is ArmResourceRead<EnvironmentResource>;
+  delete is ArmResourceDeleteSync<EnvironmentResource>;
 }
 
 @doc("Provisioning status of the resource.")
