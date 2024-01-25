@@ -90,12 +90,8 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
-
-  - code: ResourceNameRestriction
-    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
-    from: clusters.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/addNodes"]
+      - jobs.json
+      - common.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -103,7 +99,6 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}/deploy"]
 
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
@@ -126,6 +121,8 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/clusters.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/jobs.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/common.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/edgeDevices.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/extensions.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/offers.json
@@ -136,8 +133,6 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
-  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/jobs.json
-  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/common.json
 
 ### Tag: package-2024-01
 
