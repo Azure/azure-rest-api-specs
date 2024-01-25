@@ -576,7 +576,7 @@ model PolicyTileDataDefinition extends QueryTileData {
 }
 
 @doc("The data definition of recent resources Query Tile.")
-model RecentRecourcesDataDefinition extends QueryTileData {
+model RecentResourcesDataDefinition extends QueryTileData {
   @doc("Dashboard Query tile kind.")
   kind: QueryTileKind.`recent-resources`;
 }
