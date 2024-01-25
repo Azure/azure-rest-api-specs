@@ -18,9 +18,6 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(
-  ConfigurationServiceProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model ConfigurationServiceResource extends ProxyResource {
   /**
@@ -29,6 +26,7 @@ model ConfigurationServiceResource extends ProxyResource {
   @path
   @key("configurationServiceName")
   @segment("configurationServices")
+  @visibility("read")
   name: string;
 
   /**

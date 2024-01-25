@@ -16,8 +16,8 @@ namespace Microsoft.DesktopVirtualization;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ScalingPlanProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ScalingPlanProperties)
 model ScalingPlan extends TrackedResourceBase {
   /**
    * The name of the scaling plan.
@@ -27,6 +27,7 @@ model ScalingPlan extends TrackedResourceBase {
   @path
   @key("scalingPlanName")
   @segment("scalingPlans")
+  @visibility("read")
   name: string;
 
   /**

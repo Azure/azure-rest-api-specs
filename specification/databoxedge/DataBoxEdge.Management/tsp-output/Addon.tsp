@@ -24,6 +24,7 @@ model Addon is ProxyResource<{}> {
   @path
   @key("addonName")
   @segment("addons")
+  @visibility("read")
   name: string;
 
   /**

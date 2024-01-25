@@ -18,8 +18,8 @@ namespace Microsoft.OperationalInsights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(LinkedServiceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(LinkedServiceProperties)
 model LinkedService extends ProxyResourceBase {
   /**
    * Name of the linked service.
@@ -27,6 +27,7 @@ model LinkedService extends ProxyResourceBase {
   @path
   @key("linkedServiceName")
   @segment("linkedServices")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,8 +16,8 @@ namespace Microsoft.ConnectedVMwarevSphere;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ResourcePoolProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ResourcePoolProperties)
 model ResourcePool extends TrackedResourceBase {
   /**
    * Name of the resourcePool.
@@ -25,6 +25,7 @@ model ResourcePool extends TrackedResourceBase {
   @path
   @key("resourcePoolName")
   @segment("resourcePools")
+  @visibility("read")
   name: string;
 
   /**

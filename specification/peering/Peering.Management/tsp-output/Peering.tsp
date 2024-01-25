@@ -16,7 +16,6 @@ namespace Microsoft.Peering;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(PeeringProperties)
 @includeInapplicableMetadataInPayload(false)
 model Peering extends Resource {
   /**
@@ -25,6 +24,7 @@ model Peering extends Resource {
   @path
   @key("peeringName")
   @segment("peerings")
+  @visibility("read")
   name: string;
 
   /**
@@ -36,6 +36,17 @@ model Peering extends Resource {
    * The kind of the peering.
    */
   kind: Kind;
+
+  /**
+   * The location of the resource.
+   */
+  @visibility("read", "create")
+  location: string;
+
+  /**
+   * The resource tags.
+   */
+  tags?: Record<string>;
 
   /**
    * The properties that define a peering.

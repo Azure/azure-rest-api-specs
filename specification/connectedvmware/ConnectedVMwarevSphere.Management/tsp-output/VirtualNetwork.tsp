@@ -16,8 +16,8 @@ namespace Microsoft.ConnectedVMwarevSphere;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkProperties)
 model VirtualNetwork extends TrackedResourceBase {
   /**
    * Name of the virtual network resource.
@@ -25,6 +25,7 @@ model VirtualNetwork extends TrackedResourceBase {
   @path
   @key("virtualNetworkName")
   @segment("virtualNetworks")
+  @visibility("read")
   name: string;
 
   /**

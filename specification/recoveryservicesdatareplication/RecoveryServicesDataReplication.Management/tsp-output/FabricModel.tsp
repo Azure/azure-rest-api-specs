@@ -16,8 +16,8 @@ namespace Microsoft.DataReplication;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(FabricModelProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(FabricModelProperties)
 model FabricModel extends TrackedResourceBase {
   /**
    * The fabric name.
@@ -26,6 +26,7 @@ model FabricModel extends TrackedResourceBase {
   @path
   @key("fabricName")
   @segment("replicationFabrics")
+  @visibility("read")
   name: string;
 
   /**

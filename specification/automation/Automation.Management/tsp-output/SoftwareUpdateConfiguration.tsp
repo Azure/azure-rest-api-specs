@@ -18,10 +18,10 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   SoftwareUpdateConfigurationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model SoftwareUpdateConfiguration extends ProxyResourceBase {
   /**
    * The name of the software update configuration to be created.
@@ -29,6 +29,7 @@ model SoftwareUpdateConfiguration extends ProxyResourceBase {
   @path
   @key("softwareUpdateConfigurationName")
   @segment("softwareUpdateConfigurations")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,10 +16,10 @@ namespace Microsoft.ConnectedVMwarevSphere;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   VirtualMachineTemplateProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model VirtualMachineTemplate extends TrackedResourceBase {
   /**
    * Name of the virtual machine template resource.
@@ -27,6 +27,7 @@ model VirtualMachineTemplate extends TrackedResourceBase {
   @path
   @key("virtualMachineTemplateName")
   @segment("virtualMachineTemplates")
+  @visibility("read")
   name: string;
 
   /**

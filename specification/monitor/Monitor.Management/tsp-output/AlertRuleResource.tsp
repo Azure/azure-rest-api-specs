@@ -16,8 +16,8 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AlertRule)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AlertRule)
 model AlertRuleResource extends TrackedResourceBase {
   /**
    * The name of the rule.
@@ -25,6 +25,7 @@ model AlertRuleResource extends TrackedResourceBase {
   @path
   @key("ruleName")
   @segment("alertrules")
+  @visibility("read")
   name: string;
 
   /**

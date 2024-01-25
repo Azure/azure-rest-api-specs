@@ -19,13 +19,14 @@ namespace Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("latest")
 @parentResource(NetworkConnection)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   HealthCheckStatusDetailsProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model HealthCheckStatusDetails extends ProxyResourceBase {
   @key("healthCheck")
   @segment("healthChecks")
+  @visibility("read")
   name: string;
 
   /**

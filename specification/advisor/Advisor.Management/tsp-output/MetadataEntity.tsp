@@ -17,16 +17,26 @@ namespace Microsoft.Advisor;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-@Azure.ResourceManager.Private.armResourceInternal(MetadataEntityProperties)
 @includeInapplicableMetadataInPayload(false)
-model MetadataEntity extends ProxyResourceBase {
+model MetadataEntity {
   /**
    * Name of metadata entity.
    */
   @path
   @key("name")
   @segment("metadata")
+  @visibility("read")
   name: string;
+
+  /**
+   * The resource Id of the metadata entity.
+   */
+  id?: string;
+
+  /**
+   * The type of the metadata entity.
+   */
+  type?: string;
 
   /**
    * The metadata entity properties.

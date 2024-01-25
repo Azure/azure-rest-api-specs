@@ -16,8 +16,8 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AccessControlListProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AccessControlListProperties)
 model AccessControlList extends TrackedResourceBase {
   /**
    * Name of the Access Control List.
@@ -25,6 +25,7 @@ model AccessControlList extends TrackedResourceBase {
   @path
   @key("accessControlListName")
   @segment("accessControlLists")
+  @visibility("read")
   name: string;
 
   /**

@@ -17,8 +17,8 @@ namespace Microsoft.Insights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@Azure.ResourceManager.Private.armResourceInternal(LogProfileProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(LogProfileProperties)
 model LogProfileResource extends TrackedResourceBase {
   /**
    * The name of the log profile.
@@ -26,6 +26,7 @@ model LogProfileResource extends TrackedResourceBase {
   @path
   @key("logProfileName")
   @segment("logprofiles")
+  @visibility("read")
   name: string;
 
   /**

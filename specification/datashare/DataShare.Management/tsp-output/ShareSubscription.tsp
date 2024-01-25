@@ -18,7 +18,6 @@ namespace Microsoft.DataShare;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-@Azure.ResourceManager.Private.armResourceInternal(ShareSubscriptionProperties)
 @includeInapplicableMetadataInPayload(false)
 model ShareSubscription extends ProxyDto {
   /**
@@ -27,6 +26,7 @@ model ShareSubscription extends ProxyDto {
   @path
   @key("shareSubscriptionName")
   @segment("shareSubscriptions")
+  @visibility("read")
   name: string;
 
   /**

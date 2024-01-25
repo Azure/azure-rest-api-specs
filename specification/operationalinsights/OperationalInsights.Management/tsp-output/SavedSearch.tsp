@@ -18,8 +18,8 @@ namespace Microsoft.OperationalInsights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(SavedSearchProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SavedSearchProperties)
 model SavedSearch extends ProxyResourceBase {
   /**
    * The id of the saved search.
@@ -27,6 +27,7 @@ model SavedSearch extends ProxyResourceBase {
   @path
   @key("savedSearchId")
   @segment("savedSearches")
+  @visibility("read")
   name: string;
 
   /**

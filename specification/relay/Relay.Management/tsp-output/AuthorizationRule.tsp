@@ -18,8 +18,8 @@ namespace Microsoft.Relay;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(RelayNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(AuthorizationRuleProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AuthorizationRuleProperties)
 model AuthorizationRule extends ProxyResourceBase {
   /**
    * The authorization rule name.
@@ -28,6 +28,7 @@ model AuthorizationRule extends ProxyResourceBase {
   @path
   @key("authorizationRuleName")
   @segment("authorizationRules")
+  @visibility("read")
   name: string;
 
   /**

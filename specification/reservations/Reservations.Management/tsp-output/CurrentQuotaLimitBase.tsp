@@ -17,8 +17,8 @@ namespace Microsoft.Capacity;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-@Azure.ResourceManager.Private.armResourceInternal(QuotaProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(QuotaProperties)
 model CurrentQuotaLimitBase extends ProxyResourceBase {
   /**
    * The resource name for a resource provider, such as SKU name for Microsoft.Compute, Sku or TotalLowPriorityCores for Microsoft.MachineLearningServices
@@ -26,6 +26,7 @@ model CurrentQuotaLimitBase extends ProxyResourceBase {
   @path
   @key("resourceName")
   @segment("serviceLimits")
+  @visibility("read")
   name: string;
 
   /**

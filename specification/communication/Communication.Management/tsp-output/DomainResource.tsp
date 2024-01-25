@@ -18,8 +18,8 @@ namespace Microsoft.Communication;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EmailServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(DomainProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DomainProperties)
 model DomainResource extends TrackedResourceBase {
   /**
    * The name of the Domains resource.
@@ -29,6 +29,7 @@ model DomainResource extends TrackedResourceBase {
   @path
   @key("domainName")
   @segment("domains")
+  @visibility("read")
   name: string;
 
   /**

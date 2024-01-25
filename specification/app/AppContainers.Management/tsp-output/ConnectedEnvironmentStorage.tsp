@@ -18,10 +18,10 @@ namespace Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ConnectedEnvironment)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ConnectedEnvironmentStorageProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ConnectedEnvironmentStorage extends ProxyResourceBase {
   /**
    * Name of the storage.
@@ -29,6 +29,7 @@ model ConnectedEnvironmentStorage extends ProxyResourceBase {
   @path
   @key("storageName")
   @segment("storages")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,7 +16,6 @@ namespace Microsoft.ServiceBus;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(SBNamespaceProperties)
 @includeInapplicableMetadataInPayload(false)
 model ServiceBusNamespace extends TrackedResource {
   /**
@@ -27,6 +26,7 @@ model ServiceBusNamespace extends TrackedResource {
   @path
   @key("namespaceName")
   @segment("namespaces")
+  @visibility("read")
   name: string;
 
   /**
@@ -38,6 +38,12 @@ model ServiceBusNamespace extends TrackedResource {
    * Properties of BYOK Identity description
    */
   identity?: Identity;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Properties of the namespace.

@@ -14,7 +14,6 @@ namespace Microsoft.DevSpaces;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ControllerProperties)
 @includeInapplicableMetadataInPayload(false)
 model Controller extends TrackedResource {
   /**
@@ -26,6 +25,7 @@ model Controller extends TrackedResource {
   @path
   @key("name")
   @segment("controllers")
+  @visibility("read")
   name: string;
 
   /**

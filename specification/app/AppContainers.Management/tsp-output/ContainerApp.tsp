@@ -16,8 +16,8 @@ namespace Microsoft.App;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ContainerAppProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ContainerAppProperties)
 model ContainerApp extends TrackedResourceBase {
   /**
    * Name of the Container App.
@@ -25,6 +25,7 @@ model ContainerApp extends TrackedResourceBase {
   @path
   @key("containerAppName")
   @segment("containerApps")
+  @visibility("read")
   name: string;
 
   /**

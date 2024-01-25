@@ -16,9 +16,6 @@ namespace Microsoft.DataMigration;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(
-  DatabaseMigrationSqlVmProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model DatabaseMigrationSqlVm extends ProxyResource {
   /**
@@ -27,7 +24,14 @@ model DatabaseMigrationSqlVm extends ProxyResource {
   @path
   @key("targetDbName")
   @segment("databaseMigrations")
+  @visibility("read")
   name: string;
+
+  /**
+   * Metadata pertaining to creation and last modification of the resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Database Migration Resource properties for SQL Virtual Machine.

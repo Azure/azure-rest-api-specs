@@ -14,8 +14,8 @@ namespace Microsoft.DataProtection;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ResourceGuard)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ResourceGuard)
 model ResourceGuardResource extends TrackedResourceBase {
   /**
    * The name of ResourceGuard
@@ -23,6 +23,7 @@ model ResourceGuardResource extends TrackedResourceBase {
   @path
   @key("resourceGuardsName")
   @segment("resourceGuards")
+  @visibility("read")
   name: string;
 
   /**

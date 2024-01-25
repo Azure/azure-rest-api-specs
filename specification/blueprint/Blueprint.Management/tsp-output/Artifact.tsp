@@ -24,6 +24,7 @@ model Artifact is ProxyResource<{}> {
   @path
   @key("artifactName")
   @segment("artifacts")
+  @visibility("read")
   name: string;
 
   /**

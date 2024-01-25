@@ -18,8 +18,8 @@ namespace Microsoft.HybridNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetworkFunction)
-@Azure.ResourceManager.Private.armResourceInternal(ComponentProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ComponentProperties)
 model Component extends ProxyResourceBase {
   /**
    * The name of the component.
@@ -29,6 +29,7 @@ model Component extends ProxyResourceBase {
   @path
   @key("componentName")
   @segment("components")
+  @visibility("read")
   name: string;
 
   /**

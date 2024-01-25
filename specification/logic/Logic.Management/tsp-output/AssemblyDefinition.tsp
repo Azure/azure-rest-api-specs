@@ -18,7 +18,6 @@ namespace Microsoft.Logic;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(AssemblyProperties)
 @includeInapplicableMetadataInPayload(false)
 model AssemblyDefinition extends Resource {
   /**
@@ -27,6 +26,7 @@ model AssemblyDefinition extends Resource {
   @path
   @key("assemblyArtifactName")
   @segment("assemblies")
+  @visibility("read")
   name: string;
 
   /**

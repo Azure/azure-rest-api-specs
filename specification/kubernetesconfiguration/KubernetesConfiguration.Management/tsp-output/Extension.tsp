@@ -16,8 +16,8 @@ namespace Microsoft.KubernetesConfiguration;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ExtensionProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ExtensionProperties)
 model Extension extends ProxyResourceBase {
   /**
    * Name of the Extension.
@@ -25,6 +25,7 @@ model Extension extends ProxyResourceBase {
   @path
   @key("extensionName")
   @segment("extensions")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,8 +16,8 @@ namespace Microsoft.Communication;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(EmailServiceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(EmailServiceProperties)
 model EmailServiceResource extends TrackedResourceBase {
   /**
    * The name of the EmailService resource.
@@ -28,6 +28,7 @@ model EmailServiceResource extends TrackedResourceBase {
   @path
   @key("emailServiceName")
   @segment("emailServices")
+  @visibility("read")
   name: string;
 
   /**

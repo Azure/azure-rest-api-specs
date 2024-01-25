@@ -16,8 +16,8 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(NeighborGroupProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NeighborGroupProperties)
 model NeighborGroup extends TrackedResourceBase {
   /**
    * Name of the Neighbor Group.
@@ -25,6 +25,7 @@ model NeighborGroup extends TrackedResourceBase {
   @path
   @key("neighborGroupName")
   @segment("neighborGroups")
+  @visibility("read")
   name: string;
 
   /**

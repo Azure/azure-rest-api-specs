@@ -18,7 +18,6 @@ namespace Microsoft.Cdn;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CdnEndpoint)
-@Azure.ResourceManager.Private.armResourceInternal(OriginProperties)
 @includeInapplicableMetadataInPayload(false)
 model CdnOrigin extends ProxyResource {
   /**
@@ -27,6 +26,7 @@ model CdnOrigin extends ProxyResource {
   @path
   @key("originName")
   @segment("origins")
+  @visibility("read")
   name: string;
 
   /**

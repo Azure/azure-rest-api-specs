@@ -16,7 +16,6 @@ namespace Microsoft.KeyVault;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ManagedHsmProperties)
 @includeInapplicableMetadataInPayload(false)
 model ManagedHsm extends ManagedHsmResource {
   /**
@@ -25,6 +24,7 @@ model ManagedHsm extends ManagedHsmResource {
   @path
   @key("name")
   @segment("managedHSMs")
+  @visibility("read")
   name: string;
 
   /**

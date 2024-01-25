@@ -18,10 +18,10 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   HybridRunbookWorkerGroupProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model HybridRunbookWorkerGroup extends ProxyResourceBase {
   /**
    * The hybrid runbook worker group name
@@ -29,6 +29,7 @@ model HybridRunbookWorkerGroup extends ProxyResourceBase {
   @path
   @key("hybridRunbookWorkerGroupName")
   @segment("hybridRunbookWorkerGroups")
+  @visibility("read")
   name: string;
 
   /**

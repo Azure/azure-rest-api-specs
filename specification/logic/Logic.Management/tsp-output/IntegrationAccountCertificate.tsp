@@ -18,9 +18,6 @@ namespace Microsoft.Logic;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(
-  IntegrationAccountCertificateProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model IntegrationAccountCertificate extends Resource {
   /**
@@ -29,6 +26,7 @@ model IntegrationAccountCertificate extends Resource {
   @path
   @key("certificateName")
   @segment("certificates")
+  @visibility("read")
   name: string;
 
   /**

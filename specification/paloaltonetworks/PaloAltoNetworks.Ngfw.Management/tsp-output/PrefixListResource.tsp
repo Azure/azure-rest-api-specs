@@ -18,8 +18,8 @@ namespace PaloAltoNetworks.Cloudngfw;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(LocalRulestackResource)
-@Azure.ResourceManager.Private.armResourceInternal(PrefixObject)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(PrefixObject)
 model PrefixListResource extends ProxyResourceBase {
   /**
    * Local Rule priority
@@ -27,6 +27,7 @@ model PrefixListResource extends ProxyResourceBase {
   @path
   @key("name")
   @segment("prefixlists")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,10 +16,10 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ApplicationInsightsComponentProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ApplicationInsightsComponent extends TrackedResourceBase {
   /**
    * The name of the Application Insights component resource.
@@ -27,6 +27,7 @@ model ApplicationInsightsComponent extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("components")
+  @visibility("read")
   name: string;
 
   /**

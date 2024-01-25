@@ -18,8 +18,8 @@ namespace Microsoft.DataBoxEdge;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataBoxEdgeDevice)
-@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
 model Alert extends ProxyResourceBase {
   /**
    * The alert name.
@@ -27,6 +27,7 @@ model Alert extends ProxyResourceBase {
   @path
   @key("name")
   @segment("alerts")
+  @visibility("read")
   name: string;
 
   /**

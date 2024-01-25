@@ -19,12 +19,18 @@ namespace Microsoft.ServiceBus;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(ServiceBusNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(NetworkRuleSetProperties)
 @includeInapplicableMetadataInPayload(false)
 model ServiceBusNetworkRuleSet extends ProxyResource {
   @key("networkRuleSet")
   @segment("networkRuleSets")
+  @visibility("read")
   name: string;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * NetworkRuleSet properties

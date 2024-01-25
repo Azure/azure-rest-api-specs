@@ -7491,6 +7491,29 @@ model DiskRestorePointReplicationStatus {
 }
 
 /**
+ * The resource model definition for an Azure Resource Manager proxy resource. It will not have tags and a location
+ */
+model ProxyResource {
+  /**
+   * Resource Id
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility("read")
+  type?: string;
+}
+
+/**
  * Update Restore Point collection parameters.
  */
 model RestorePointCollectionUpdate extends UpdateResource {

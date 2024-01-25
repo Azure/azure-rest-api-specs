@@ -150,6 +150,23 @@ model KeyVaultProperties {
 /**
  * The resource model definition for a ARM tracked top level resource
  */
+model TrackedResource extends Resource {
+  /**
+   * Resource tags.
+   */
+  @visibility("read", "create", "update")
+  tags?: Record<string>;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  @visibility("read", "create")
+  location: string;
+}
+
+/**
+ * The resource model definition for a ARM tracked top level resource
+ */
 model Resource {
   /**
    * Fully qualified resource Id for the resource.

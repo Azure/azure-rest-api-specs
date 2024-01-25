@@ -18,10 +18,10 @@ namespace Microsoft.OperationalInsights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   LinkedStorageAccountsProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model LinkedStorageAccountsResource extends ProxyResourceBase {
   /**
    * Linked storage accounts type.
@@ -29,6 +29,7 @@ model LinkedStorageAccountsResource extends ProxyResourceBase {
   @path
   @key("dataSourceType")
   @segment("linkedStorageAccounts")
+  @visibility("read")
   name: DataSourceType;
 
   /**

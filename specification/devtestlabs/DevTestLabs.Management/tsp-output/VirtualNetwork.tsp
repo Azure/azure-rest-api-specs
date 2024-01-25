@@ -18,7 +18,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkProperties)
 @includeInapplicableMetadataInPayload(false)
 model VirtualNetwork extends Resource {
   /**
@@ -27,6 +26,7 @@ model VirtualNetwork extends Resource {
   @path
   @key("name")
   @segment("virtualnetworks")
+  @visibility("read")
   name: string;
 
   /**

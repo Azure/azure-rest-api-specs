@@ -16,8 +16,8 @@ namespace Microsoft.ScVmm;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(VMMServerProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VMMServerProperties)
 model VMMServer extends TrackedResourceBase {
   /**
    * Name of the VMMServer.
@@ -25,6 +25,7 @@ model VMMServer extends TrackedResourceBase {
   @path
   @key("vmmServerName")
   @segment("vmmServers")
+  @visibility("read")
   name: string;
 
   /**

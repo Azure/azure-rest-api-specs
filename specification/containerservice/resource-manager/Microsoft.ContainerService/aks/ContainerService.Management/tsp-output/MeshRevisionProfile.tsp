@@ -17,10 +17,10 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   MeshRevisionProfileProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model MeshRevisionProfile extends ProxyResourceBase {
   /**
    * The mode of the mesh.
@@ -31,6 +31,7 @@ model MeshRevisionProfile extends ProxyResourceBase {
   @path
   @key("mode")
   @segment("meshRevisionProfiles")
+  @visibility("read")
   name: string;
 
   /**

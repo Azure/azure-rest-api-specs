@@ -16,8 +16,8 @@ namespace Microsoft.Relay;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(RelayNamespaceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RelayNamespaceProperties)
 model RelayNamespace extends TrackedResourceBase {
   /**
    * The namespace name
@@ -27,6 +27,7 @@ model RelayNamespace extends TrackedResourceBase {
   @path
   @key("namespaceName")
   @segment("namespaces")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,10 +18,10 @@ namespace Microsoft.ResourceHealth;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Event)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   EventImpactedResourceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model EventImpactedResource extends ProxyResourceBase {
   /**
    * Name of the Impacted Resource.
@@ -30,6 +30,7 @@ model EventImpactedResource extends ProxyResourceBase {
   @path
   @key("impactedResourceName")
   @segment("impactedResources")
+  @visibility("read")
   name: string;
 
   /**

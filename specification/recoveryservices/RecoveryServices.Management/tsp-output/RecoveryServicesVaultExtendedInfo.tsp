@@ -19,11 +19,12 @@ namespace Microsoft.RecoveryServices;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("vaultExtendedInfo")
 @parentResource(Vault)
-@Azure.ResourceManager.Private.armResourceInternal(VaultExtendedInfoProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VaultExtendedInfoProperties)
 model RecoveryServicesVaultExtendedInfo extends ProxyResourceBase {
   @key("extendedInformation")
   @segment("extendedInformation")
+  @visibility("read")
   name: string;
 
   /**

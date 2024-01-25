@@ -18,8 +18,8 @@ namespace Microsoft.MobileNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MobileNetwork)
-@Azure.ResourceManager.Private.armResourceInternal(SlicePropertiesFormat)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SlicePropertiesFormat)
 model Slice extends TrackedResourceBase {
   /**
    * The name of the network slice.
@@ -29,6 +29,7 @@ model Slice extends TrackedResourceBase {
   @path
   @key("sliceName")
   @segment("slices")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,7 +18,6 @@ namespace Microsoft.DataFactory;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-@Azure.ResourceManager.Private.armResourceInternal(IntegrationRuntime)
 @includeInapplicableMetadataInPayload(false)
 model IntegrationRuntimeResource extends SubResource {
   /**
@@ -30,6 +29,7 @@ model IntegrationRuntimeResource extends SubResource {
   @path
   @key("integrationRuntimeName")
   @segment("integrationRuntimes")
+  @visibility("read")
   name: string;
 
   /**

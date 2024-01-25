@@ -16,9 +16,6 @@ namespace Microsoft.Cdn;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(
-  CdnWebApplicationFirewallPolicyProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model CdnWebApplicationFirewallPolicy extends TrackedResource {
   /**
@@ -28,6 +25,7 @@ model CdnWebApplicationFirewallPolicy extends TrackedResource {
   @path
   @key("policyName")
   @segment("cdnWebApplicationFirewallPolicies")
+  @visibility("read")
   name: string;
 
   /**

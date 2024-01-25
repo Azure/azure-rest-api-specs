@@ -17,8 +17,8 @@ namespace Microsoft.PolicyInsights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-@Azure.ResourceManager.Private.armResourceInternal(PolicyMetadataProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(PolicyMetadataProperties)
 model PolicyMetadata extends ProxyResourceBase {
   /**
    * The name of the policy metadata resource.
@@ -26,6 +26,7 @@ model PolicyMetadata extends ProxyResourceBase {
   @path
   @key("resourceName")
   @segment("policyMetadata")
+  @visibility("read")
   name: string;
 
   /**

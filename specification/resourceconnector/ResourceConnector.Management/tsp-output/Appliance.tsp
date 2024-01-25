@@ -16,8 +16,8 @@ namespace Microsoft.ResourceConnector;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ApplianceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ApplianceProperties)
 model Appliance extends TrackedResourceBase {
   /**
    * Appliances name.
@@ -28,6 +28,7 @@ model Appliance extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("appliances")
+  @visibility("read")
   name: string;
 
   /**

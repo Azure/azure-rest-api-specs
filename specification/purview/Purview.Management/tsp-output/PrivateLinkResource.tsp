@@ -18,18 +18,28 @@ namespace Microsoft.Purview;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PrivateLinkResourceProperties
-)
 @includeInapplicableMetadataInPayload(false)
-model PrivateLinkResource extends ProxyResourceBase {
+model PrivateLinkResource {
   /**
    * The group identifier.
    */
   @path
   @key("groupId")
   @segment("privateLinkResources")
+  @visibility("read")
   name: string;
+
+  /**
+   * The private link resource identifier.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The private link resource type.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * The private link resource properties.

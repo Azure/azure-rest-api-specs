@@ -16,8 +16,8 @@ namespace Microsoft.Devices;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(IotDpsPropertiesDescription)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(IotDpsPropertiesDescription)
 model ProvisioningServiceDescription extends TrackedResourceBase {
   /**
    * Name of the provisioning service to retrieve.
@@ -25,6 +25,7 @@ model ProvisioningServiceDescription extends TrackedResourceBase {
   @path
   @key("provisioningServiceName")
   @segment("provisioningServices")
+  @visibility("read")
   name: string;
 
   /**

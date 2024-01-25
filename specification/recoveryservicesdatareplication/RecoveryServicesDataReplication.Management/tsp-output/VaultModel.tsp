@@ -16,8 +16,8 @@ namespace Microsoft.DataReplication;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(VaultModelProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VaultModelProperties)
 model VaultModel extends TrackedResourceBase {
   /**
    * The vault name.
@@ -26,6 +26,7 @@ model VaultModel extends TrackedResourceBase {
   @path
   @key("vaultName")
   @segment("replicationVaults")
+  @visibility("read")
   name: string;
 
   /**

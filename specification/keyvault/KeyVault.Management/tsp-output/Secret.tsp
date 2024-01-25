@@ -18,7 +18,6 @@ namespace Microsoft.KeyVault;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Vault)
-@Azure.ResourceManager.Private.armResourceInternal(SecretProperties)
 @includeInapplicableMetadataInPayload(false)
 model Secret extends Resource {
   /**
@@ -27,6 +26,7 @@ model Secret extends Resource {
   @path
   @key("secretName")
   @segment("secrets")
+  @visibility("read")
   name: string;
 
   /**

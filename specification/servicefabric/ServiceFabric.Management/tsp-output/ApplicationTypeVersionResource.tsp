@@ -18,9 +18,6 @@ namespace Microsoft.ServiceFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApplicationTypeResource)
-@Azure.ResourceManager.Private.armResourceInternal(
-  ApplicationTypeVersionResourceProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model ApplicationTypeVersionResource extends ProxyResource {
   /**
@@ -29,6 +26,7 @@ model ApplicationTypeVersionResource extends ProxyResource {
   @path
   @key("version")
   @segment("versions")
+  @visibility("read")
   name: string;
 
   /**

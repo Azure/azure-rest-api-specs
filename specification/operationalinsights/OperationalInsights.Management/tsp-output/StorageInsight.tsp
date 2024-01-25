@@ -18,8 +18,8 @@ namespace Microsoft.OperationalInsights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(StorageInsightProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(StorageInsightProperties)
 model StorageInsight extends ProxyResourceBase {
   /**
    * Name of the storageInsightsConfigs resource
@@ -27,6 +27,7 @@ model StorageInsight extends ProxyResourceBase {
   @path
   @key("storageInsightName")
   @segment("storageInsightConfigs")
+  @visibility("read")
   name: string;
 
   /**

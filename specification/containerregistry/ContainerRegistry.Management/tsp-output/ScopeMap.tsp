@@ -18,8 +18,8 @@ namespace Microsoft.ContainerRegistry;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-@Azure.ResourceManager.Private.armResourceInternal(ScopeMapProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ScopeMapProperties)
 model ScopeMap extends ProxyResourceBase {
   /**
    * The name of the scope map.
@@ -30,6 +30,7 @@ model ScopeMap extends ProxyResourceBase {
   @path
   @key("scopeMapName")
   @segment("scopeMaps")
+  @visibility("read")
   name: string;
 
   /**

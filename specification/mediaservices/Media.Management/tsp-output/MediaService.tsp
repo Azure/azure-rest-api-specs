@@ -16,8 +16,8 @@ namespace Microsoft.Media;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(MediaServiceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MediaServiceProperties)
 model MediaService extends TrackedResourceBase {
   /**
    * The Media Services account name.
@@ -25,6 +25,7 @@ model MediaService extends TrackedResourceBase {
   @path
   @key("accountName")
   @segment("mediaservices")
+  @visibility("read")
   name: string;
 
   /**

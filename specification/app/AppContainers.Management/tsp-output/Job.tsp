@@ -16,8 +16,8 @@ namespace Microsoft.App;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
 model Job extends TrackedResourceBase {
   /**
    * Job Name
@@ -26,6 +26,7 @@ model Job extends TrackedResourceBase {
   @path
   @key("jobName")
   @segment("jobs")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,9 +18,6 @@ namespace Microsoft.NetworkFunction;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AzureTrafficCollector)
-@Azure.ResourceManager.Private.armResourceInternal(
-  CollectorPolicyPropertiesFormat
-)
 @includeInapplicableMetadataInPayload(false)
 model CollectorPolicy extends TrackedResource {
   /**
@@ -29,6 +26,7 @@ model CollectorPolicy extends TrackedResource {
   @path
   @key("collectorPolicyName")
   @segment("collectorPolicies")
+  @visibility("read")
   name: string;
 
   /**

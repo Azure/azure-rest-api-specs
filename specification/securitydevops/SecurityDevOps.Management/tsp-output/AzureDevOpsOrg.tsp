@@ -18,8 +18,8 @@ namespace Microsoft.SecurityDevOps;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AzureDevOpsConnector)
-@Azure.ResourceManager.Private.armResourceInternal(AzureDevOpsOrgProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AzureDevOpsOrgProperties)
 model AzureDevOpsOrg extends ProxyResourceBase {
   /**
    * Name of the AzureDevOps Org.
@@ -27,6 +27,7 @@ model AzureDevOpsOrg extends ProxyResourceBase {
   @path
   @key("azureDevOpsOrgName")
   @segment("orgs")
+  @visibility("read")
   name: string;
 
   /**

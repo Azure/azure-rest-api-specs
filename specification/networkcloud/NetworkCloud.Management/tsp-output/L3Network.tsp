@@ -16,8 +16,8 @@ namespace Microsoft.NetworkCloud;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(L3NetworkProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(L3NetworkProperties)
 model L3Network extends TrackedResourceBase {
   /**
    * The name of the L3 network.
@@ -26,6 +26,7 @@ model L3Network extends TrackedResourceBase {
   @path
   @key("l3NetworkName")
   @segment("l3Networks")
+  @visibility("read")
   name: string;
 
   /**

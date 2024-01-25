@@ -18,8 +18,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(L3IsolationDomain)
-@Azure.ResourceManager.Private.armResourceInternal(ExternalNetworkProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ExternalNetworkProperties)
 model ExternalNetwork extends ProxyResourceBase {
   /**
    * Name of the External Network.
@@ -27,6 +27,7 @@ model ExternalNetwork extends ProxyResourceBase {
   @path
   @key("externalNetworkName")
   @segment("externalNetworks")
+  @visibility("read")
   name: string;
 
   /**

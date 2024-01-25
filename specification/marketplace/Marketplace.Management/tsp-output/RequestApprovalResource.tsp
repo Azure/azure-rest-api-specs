@@ -18,7 +18,6 @@ namespace Microsoft.Marketplace;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateStore)
-@Azure.ResourceManager.Private.armResourceInternal(RequestApprovalProperties)
 @includeInapplicableMetadataInPayload(false)
 model RequestApprovalResource extends Resource {
   /**
@@ -27,6 +26,7 @@ model RequestApprovalResource extends Resource {
   @path
   @key("requestApprovalId")
   @segment("requestApprovals")
+  @visibility("read")
   name: string;
 
   /**

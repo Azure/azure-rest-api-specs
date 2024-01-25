@@ -16,8 +16,8 @@ namespace Microsoft.SecurityDevOps;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(GitHubConnectorProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(GitHubConnectorProperties)
 model GitHubConnector extends TrackedResourceBase {
   /**
    * Name of the GitHub Connector.
@@ -25,6 +25,7 @@ model GitHubConnector extends TrackedResourceBase {
   @path
   @key("gitHubConnectorName")
   @segment("gitHubConnectors")
+  @visibility("read")
   name: string;
 
   /**

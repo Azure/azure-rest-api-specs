@@ -18,8 +18,8 @@ namespace Microsoft.Media;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MediaService)
-@Azure.ResourceManager.Private.armResourceInternal(LiveEventProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(LiveEventProperties)
 model LiveEvent extends TrackedResourceBase {
   /**
    * The name of the live event, maximum length is 32.
@@ -30,6 +30,7 @@ model LiveEvent extends TrackedResourceBase {
   @path
   @key("liveEventName")
   @segment("liveEvents")
+  @visibility("read")
   name: string;
 
   /**

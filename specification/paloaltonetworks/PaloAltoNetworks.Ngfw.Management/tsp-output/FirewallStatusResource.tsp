@@ -19,11 +19,12 @@ namespace PaloAltoNetworks.Cloudngfw;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(FirewallResource)
-@Azure.ResourceManager.Private.armResourceInternal(FirewallStatusProperty)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(FirewallStatusProperty)
 model FirewallStatusResource extends ProxyResourceBase {
   @key("status")
   @segment("statuses")
+  @visibility("read")
   name: string;
 
   /**

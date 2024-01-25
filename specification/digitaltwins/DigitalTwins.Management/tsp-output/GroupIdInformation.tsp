@@ -18,16 +18,27 @@ namespace Microsoft.DigitalTwins;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DigitalTwinsDescription)
-@Azure.ResourceManager.Private.armResourceInternal(GroupIdInformationProperties)
 @includeInapplicableMetadataInPayload(false)
-model GroupIdInformation extends ProxyResourceBase {
+model GroupIdInformation {
   /**
    * The name of the private link resource.
    */
   @path
   @key("resourceId")
   @segment("privateLinkResources")
+  @visibility("read")
   name: string;
+
+  /**
+   * The resource identifier.
+   */
+  id?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * The group information properties.

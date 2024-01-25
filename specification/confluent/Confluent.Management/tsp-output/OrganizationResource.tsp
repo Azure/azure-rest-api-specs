@@ -16,10 +16,10 @@ namespace Microsoft.Confluent;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   OrganizationResourceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model OrganizationResource extends TrackedResourceBase {
   /**
    * Organization resource name
@@ -27,6 +27,7 @@ model OrganizationResource extends TrackedResourceBase {
   @path
   @key("organizationName")
   @segment("organizations")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Revision)
-@Azure.ResourceManager.Private.armResourceInternal(ReplicaProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ReplicaProperties)
 model Replica extends ProxyResourceBase {
   /**
    * Name of the Container App Revision Replica.
@@ -27,6 +27,7 @@ model Replica extends ProxyResourceBase {
   @path
   @key("replicaName")
   @segment("replicas")
+  @visibility("read")
   name: string;
 
   /**

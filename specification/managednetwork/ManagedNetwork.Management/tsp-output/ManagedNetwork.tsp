@@ -16,7 +16,6 @@ namespace Microsoft.ManagedNetwork;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ManagedNetworkProperties)
 @includeInapplicableMetadataInPayload(false)
 model ManagedNetwork extends TrackedResource {
   /**
@@ -25,6 +24,7 @@ model ManagedNetwork extends TrackedResource {
   @path
   @key("managedNetworkName")
   @segment("managedNetworks")
+  @visibility("read")
   name: string;
 
   /**

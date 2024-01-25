@@ -172,6 +172,23 @@ model Sku {
 }
 
 /**
+ * The resource model definition for a ARM tracked top level resource.
+ */
+model TrackedResource extends Resource {
+  /**
+   * Tags for the Azure resource.
+   */
+  @visibility("read", "create", "update")
+  tags?: Record<string>;
+
+  /**
+   * Region where the Azure resource is located.
+   */
+  @visibility("read", "create")
+  location?: string;
+}
+
+/**
  * An Azure resource.
  */
 model Resource {

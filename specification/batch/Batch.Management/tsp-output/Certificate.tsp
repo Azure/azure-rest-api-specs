@@ -18,7 +18,6 @@ namespace Microsoft.Batch;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BatchAccount)
-@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
 @includeInapplicableMetadataInPayload(false)
 model Certificate extends ProxyResource {
   /**
@@ -30,6 +29,7 @@ model Certificate extends ProxyResource {
   @path
   @key("certificateName")
   @segment("certificates")
+  @visibility("read")
   name: string;
 
   /**

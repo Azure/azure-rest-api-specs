@@ -17,8 +17,8 @@ namespace Microsoft.LoadTestService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-@Azure.ResourceManager.Private.armResourceInternal(QuotaResourceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(QuotaResourceProperties)
 model QuotaResource extends ProxyResourceBase {
   /**
    * Quota Bucket name.
@@ -26,6 +26,7 @@ model QuotaResource extends ProxyResourceBase {
   @path
   @key("quotaBucketName")
   @segment("quotas")
+  @visibility("read")
   name: string;
 
   /**

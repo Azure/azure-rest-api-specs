@@ -16,8 +16,8 @@ namespace Microsoft.Migrate;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(MoveCollectionProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MoveCollectionProperties)
 model MoveCollection extends TrackedResourceBase {
   /**
    * The Move Collection Name.
@@ -25,6 +25,7 @@ model MoveCollection extends TrackedResourceBase {
   @path
   @key("moveCollectionName")
   @segment("moveCollections")
+  @visibility("read")
   name: string;
 
   /**

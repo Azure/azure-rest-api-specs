@@ -16,10 +16,10 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   AzureMonitorPrivateLinkScopeProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model AzureMonitorPrivateLinkScope extends TrackedResourceBase {
   /**
    * The name of the Azure Monitor PrivateLinkScope resource.
@@ -27,6 +27,7 @@ model AzureMonitorPrivateLinkScope extends TrackedResourceBase {
   @path
   @key("scopeName")
   @segment("privateLinkScopes")
+  @visibility("read")
   name: string;
 
   /**

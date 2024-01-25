@@ -151,7 +151,7 @@ model BotProperties {
   /**
    * The Icon Url of the bot
    */
-  iconUrl?: string;
+  iconUrl?: string = "";
 
   /**
    * The bot's endpoint
@@ -561,12 +561,12 @@ model ChannelSettings {
   /**
    * The extensionKey1
    */
-  extensionKey1?: string;
+  extensionKey1?: string = "";
 
   /**
    * The extensionKey2
    */
-  extensionKey2?: string;
+  extensionKey2?: string = "";
 
   /**
    * The list of sites
@@ -888,7 +888,7 @@ model ServiceProviderProperties {
   /**
    * The URL of icon
    */
-  iconUrl?: string;
+  iconUrl?: string = "";
 
   /**
    * The list of parameters for the Service Provider
@@ -1026,7 +1026,7 @@ model ConnectionSettingProperties {
   /**
    * Scopes associated with the Connection Setting
    */
-  scopes?: string;
+  scopes?: string = "";
 
   /**
    * Service Provider Id associated with the Connection Setting
@@ -1547,12 +1547,12 @@ model DirectLineChannelProperties {
   /**
    * The extensionKey1
    */
-  extensionKey1?: string;
+  extensionKey1?: string = "";
 
   /**
    * The extensionKey2
    */
-  extensionKey2?: string;
+  extensionKey2?: string = "";
 
   /**
    * Direct Line embed code of the resource

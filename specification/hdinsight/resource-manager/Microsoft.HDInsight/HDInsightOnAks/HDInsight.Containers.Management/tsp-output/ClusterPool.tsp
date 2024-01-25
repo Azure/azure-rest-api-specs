@@ -16,10 +16,10 @@ namespace Microsoft.HDInsight;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ClusterPoolResourceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ClusterPool extends TrackedResourceBase {
   /**
    * The name of the cluster pool.
@@ -27,6 +27,7 @@ model ClusterPool extends TrackedResourceBase {
   @path
   @key("clusterPoolName")
   @segment("clusterpools")
+  @visibility("read")
   name: string;
 
   /**

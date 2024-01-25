@@ -16,8 +16,8 @@ namespace Microsoft.BotService;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(BotProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BotProperties)
 model Bot extends TrackedResourceBase {
   /**
    * The name of the Bot resource.
@@ -28,6 +28,7 @@ model Bot extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("botServices")
+  @visibility("read")
   name: string;
 
   /**

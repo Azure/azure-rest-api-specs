@@ -16,8 +16,8 @@ namespace Microsoft.ContainerService;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(SnapshotProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SnapshotProperties)
 model Snapshot extends TrackedResourceBase {
   /**
    * The name of the managed cluster resource.
@@ -28,6 +28,7 @@ model Snapshot extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("snapshots")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.MobileNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MobileNetwork)
-@Azure.ResourceManager.Private.armResourceInternal(SitePropertiesFormat)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SitePropertiesFormat)
 model Site extends TrackedResourceBase {
   /**
    * The name of the mobile network site.
@@ -29,6 +29,7 @@ model Site extends TrackedResourceBase {
   @path
   @key("siteName")
   @segment("sites")
+  @visibility("read")
   name: string;
 
   /**

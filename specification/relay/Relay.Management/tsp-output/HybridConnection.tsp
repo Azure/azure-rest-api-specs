@@ -18,8 +18,8 @@ namespace Microsoft.Relay;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(RelayNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(HybridConnectionProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(HybridConnectionProperties)
 model HybridConnection extends ProxyResourceBase {
   /**
    * The hybrid connection name.
@@ -28,6 +28,7 @@ model HybridConnection extends ProxyResourceBase {
   @path
   @key("hybridConnectionName")
   @segment("hybridConnections")
+  @visibility("read")
   name: string;
 
   /**

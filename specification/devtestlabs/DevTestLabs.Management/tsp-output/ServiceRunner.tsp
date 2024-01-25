@@ -19,7 +19,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-@Azure.ResourceManager.Private.armResourceInternal({})
 @includeInapplicableMetadataInPayload(false)
 model ServiceRunner extends Resource {
   /**
@@ -28,6 +27,7 @@ model ServiceRunner extends Resource {
   @path
   @key("name")
   @segment("servicerunners")
+  @visibility("read")
   name: string;
 
   /**

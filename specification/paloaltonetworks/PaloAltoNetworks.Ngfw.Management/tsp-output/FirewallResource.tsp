@@ -16,8 +16,8 @@ namespace PaloAltoNetworks.Cloudngfw;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(FirewallDeploymentProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(FirewallDeploymentProperties)
 model FirewallResource extends TrackedResourceBase {
   /**
    * Firewall resource name
@@ -25,6 +25,7 @@ model FirewallResource extends TrackedResourceBase {
   @path
   @key("firewallName")
   @segment("firewalls")
+  @visibility("read")
   name: string;
 
   /**

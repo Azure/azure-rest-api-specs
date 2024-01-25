@@ -18,9 +18,6 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiPortalResource)
-@Azure.ResourceManager.Private.armResourceInternal(
-  ApiPortalCustomDomainProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model ApiPortalCustomDomainResource extends ProxyResource {
   /**
@@ -29,6 +26,7 @@ model ApiPortalCustomDomainResource extends ProxyResource {
   @path
   @key("domainName")
   @segment("domains")
+  @visibility("read")
   name: string;
 
   /**

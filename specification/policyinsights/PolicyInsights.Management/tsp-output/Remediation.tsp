@@ -16,8 +16,8 @@ namespace Microsoft.PolicyInsights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(RemediationProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RemediationProperties)
 model Remediation extends ExtensionResourceBase {
   /**
    * The name of the remediation.
@@ -25,6 +25,7 @@ model Remediation extends ExtensionResourceBase {
   @path
   @key("remediationName")
   @segment("remediations")
+  @visibility("read")
   name: string;
 
   /**

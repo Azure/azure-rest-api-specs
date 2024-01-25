@@ -25,6 +25,7 @@ model JobExecution is ProxyResource<{}> {
   @path
   @key("jobExecutionName")
   @segment("executions")
+  @visibility("read")
   name: string;
 
   /**

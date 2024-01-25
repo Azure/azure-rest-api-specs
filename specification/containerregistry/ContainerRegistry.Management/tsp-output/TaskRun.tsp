@@ -19,8 +19,8 @@ namespace Microsoft.ContainerRegistry;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-@Azure.ResourceManager.Private.armResourceInternal(TaskRunProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(TaskRunProperties)
 model TaskRun extends ProxyResourceBase {
   /**
    * The name of the task run.
@@ -31,6 +31,7 @@ model TaskRun extends ProxyResourceBase {
   @path
   @key("taskRunName")
   @segment("taskRuns")
+  @visibility("read")
   name: string;
 
   /**

@@ -31,8 +31,8 @@ using TypeSpec.Versioning;
   title: "OperationalInsightsManagementClient",
 })
 @versioned(Versions)
-// FIXME: Common type version v2 is not supported for now.
-// @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+// FIXME: Common type version v1 is not supported for now.
+// @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v1)
 namespace Microsoft.OperationalInsights;
 
 /**

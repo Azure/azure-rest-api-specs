@@ -18,8 +18,8 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(ConnectionTypeProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ConnectionTypeProperties)
 model ConnectionType extends ProxyResourceBase {
   /**
    * The name of connection type.
@@ -27,6 +27,7 @@ model ConnectionType extends ProxyResourceBase {
   @path
   @key("connectionTypeName")
   @segment("connectionTypes")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,10 +18,10 @@ namespace Microsoft.FluidRelay;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FluidRelayServer)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   FluidRelayContainerProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model FluidRelayContainer extends ProxyResourceBase {
   /**
    * The Fluid Relay container resource name.
@@ -29,6 +29,7 @@ model FluidRelayContainer extends ProxyResourceBase {
   @path
   @key("fluidRelayContainerName")
   @segment("fluidRelayContainers")
+  @visibility("read")
   name: string;
 
   /**

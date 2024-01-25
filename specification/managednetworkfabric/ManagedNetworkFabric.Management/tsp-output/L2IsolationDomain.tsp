@@ -16,8 +16,8 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(L2IsolationDomainProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(L2IsolationDomainProperties)
 model L2IsolationDomain extends TrackedResourceBase {
   /**
    * Name of the L2 Isolation Domain.
@@ -25,6 +25,7 @@ model L2IsolationDomain extends TrackedResourceBase {
   @path
   @key("l2IsolationDomainName")
   @segment("l2IsolationDomains")
+  @visibility("read")
   name: string;
 
   /**

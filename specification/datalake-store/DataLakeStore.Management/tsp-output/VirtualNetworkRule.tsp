@@ -18,7 +18,6 @@ namespace Microsoft.DataLakeStore;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataLakeStoreAccount)
-@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkRuleProperties)
 @includeInapplicableMetadataInPayload(false)
 model VirtualNetworkRule extends SubResource {
   /**
@@ -27,6 +26,7 @@ model VirtualNetworkRule extends SubResource {
   @path
   @key("virtualNetworkRuleName")
   @segment("virtualNetworkRules")
+  @visibility("read")
   name: string;
 
   /**

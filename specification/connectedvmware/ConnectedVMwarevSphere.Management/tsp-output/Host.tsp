@@ -16,8 +16,8 @@ namespace Microsoft.ConnectedVMwarevSphere;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(HostProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(HostProperties)
 model Host extends TrackedResourceBase {
   /**
    * Name of the host.
@@ -25,6 +25,7 @@ model Host extends TrackedResourceBase {
   @path
   @key("hostName")
   @segment("hosts")
+  @visibility("read")
   name: string;
 
   /**

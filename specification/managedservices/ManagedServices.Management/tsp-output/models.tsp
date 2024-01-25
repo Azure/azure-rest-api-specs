@@ -153,7 +153,7 @@ model JustInTimeAccessPolicy {
   /**
    * The maximum access duration in ISO 8601 format for just-in-time access requests.
    */
-  maximumActivationDuration?: duration = duration.PT8H;
+  maximumActivationDuration?: duration = "PT8H";
 
   /**
    * The list of managedByTenant approvers for the eligible authorization.

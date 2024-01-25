@@ -18,7 +18,6 @@ namespace Microsoft.Cdn;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AFDEndpoint)
-@Azure.ResourceManager.Private.armResourceInternal(RouteProperties)
 @includeInapplicableMetadataInPayload(false)
 model FrontDoorRoute extends ProxyResource {
   /**
@@ -27,6 +26,7 @@ model FrontDoorRoute extends ProxyResource {
   @path
   @key("routeName")
   @segment("routes")
+  @visibility("read")
   name: string;
 
   /**

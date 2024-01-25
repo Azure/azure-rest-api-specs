@@ -19,11 +19,11 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(ServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(MonitoringSettingProperties)
 @includeInapplicableMetadataInPayload(false)
 model MonitoringSettingResource extends ProxyResource {
   @key("monitoringSetting")
   @segment("monitoringSettings")
+  @visibility("read")
   name: string;
 
   /**

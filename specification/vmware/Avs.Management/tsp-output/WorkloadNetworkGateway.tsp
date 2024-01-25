@@ -18,10 +18,10 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   WorkloadNetworkGatewayProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model WorkloadNetworkGateway extends ProxyResourceBase {
   /**
    * NSX Gateway identifier. Generally the same as the Gateway's display name
@@ -29,6 +29,7 @@ model WorkloadNetworkGateway extends ProxyResourceBase {
   @path
   @key("gatewayId")
   @segment("gateways")
+  @visibility("read")
   name: string;
 
   /**

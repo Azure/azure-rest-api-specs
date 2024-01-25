@@ -16,8 +16,8 @@ namespace Microsoft.Maintenance;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ApplyUpdateProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ApplyUpdateProperties)
 model ApplyUpdate extends ProxyResourceBase {
   /**
    * applyUpdate Id
@@ -25,6 +25,7 @@ model ApplyUpdate extends ProxyResourceBase {
   @path
   @key("applyUpdateName")
   @segment("applyUpdates")
+  @visibility("read")
   name: string;
 
   /**

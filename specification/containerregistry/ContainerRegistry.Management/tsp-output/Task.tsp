@@ -19,8 +19,8 @@ namespace Microsoft.ContainerRegistry;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-@Azure.ResourceManager.Private.armResourceInternal(TaskProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(TaskProperties)
 model Task extends TrackedResourceBase {
   /**
    * The name of the container registry task.
@@ -31,6 +31,7 @@ model Task extends TrackedResourceBase {
   @path
   @key("taskName")
   @segment("tasks")
+  @visibility("read")
   name: string;
 
   /**

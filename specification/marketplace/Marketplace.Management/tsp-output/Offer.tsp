@@ -18,7 +18,6 @@ namespace Microsoft.Marketplace;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Collection)
-@Azure.ResourceManager.Private.armResourceInternal(OfferProperties)
 @includeInapplicableMetadataInPayload(false)
 model Offer extends Resource {
   /**
@@ -27,6 +26,7 @@ model Offer extends Resource {
   @path
   @key("offerId")
   @segment("offers")
+  @visibility("read")
   name: string;
 
   /**

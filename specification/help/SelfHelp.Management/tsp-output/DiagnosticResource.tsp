@@ -16,8 +16,8 @@ namespace Microsoft.Help;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(DiagnosticResourceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DiagnosticResourceProperties)
 model DiagnosticResource extends ExtensionResourceBase {
   /**
    * Unique resource name for insight resources
@@ -28,6 +28,7 @@ model DiagnosticResource extends ExtensionResourceBase {
   @path
   @key("diagnosticsResourceName")
   @segment("diagnostics")
+  @visibility("read")
   name: string;
 
   /**

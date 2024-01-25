@@ -24,6 +24,7 @@ model PrivateLinkResourceDescription is ProxyResource<{}> {
   @path
   @key("groupName")
   @segment("privateLinkResources")
+  @visibility("read")
   name: string;
 }
 

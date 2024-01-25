@@ -18,8 +18,8 @@ namespace Microsoft.DataReplication;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VaultModel)
-@Azure.ResourceManager.Private.armResourceInternal(EventModelProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(EventModelProperties)
 model EventModel extends ProxyResourceBase {
   /**
    * The event name.
@@ -28,6 +28,7 @@ model EventModel extends ProxyResourceBase {
   @path
   @key("eventName")
   @segment("events")
+  @visibility("read")
   name: string;
 
   /**

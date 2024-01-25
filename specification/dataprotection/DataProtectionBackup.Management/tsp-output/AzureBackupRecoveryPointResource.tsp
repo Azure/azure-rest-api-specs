@@ -18,12 +18,13 @@ namespace Microsoft.DataProtection;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BackupInstanceResource)
-@Azure.ResourceManager.Private.armResourceInternal(AzureBackupRecoveryPoint)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AzureBackupRecoveryPoint)
 model AzureBackupRecoveryPointResource extends ProxyResourceBase {
   @path
   @key("recoveryPointId")
   @segment("recoveryPoints")
+  @visibility("read")
   name: string;
 
   /**

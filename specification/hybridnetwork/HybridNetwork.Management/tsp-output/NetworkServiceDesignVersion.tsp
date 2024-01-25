@@ -18,10 +18,10 @@ namespace Microsoft.HybridNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetworkServiceDesignGroup)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   NetworkServiceDesignVersionPropertiesFormat
 )
-@includeInapplicableMetadataInPayload(false)
 model NetworkServiceDesignVersion extends TrackedResourceBase {
   /**
    * The name of the network service design version. The name should conform to the SemVer 2.0.0 specification: https://semver.org/spec/v2.0.0.html.
@@ -31,6 +31,7 @@ model NetworkServiceDesignVersion extends TrackedResourceBase {
   @path
   @key("networkServiceDesignVersionName")
   @segment("networkServiceDesignVersions")
+  @visibility("read")
   name: string;
 
   /**

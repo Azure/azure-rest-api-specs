@@ -16,8 +16,8 @@ namespace Microsoft.NetApp;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AccountProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AccountProperties)
 model NetAppAccount extends TrackedResourceBase {
   /**
    * The name of the NetApp account
@@ -26,6 +26,7 @@ model NetAppAccount extends TrackedResourceBase {
   @path
   @key("accountName")
   @segment("netAppAccounts")
+  @visibility("read")
   name: string;
 
   /**

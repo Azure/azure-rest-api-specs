@@ -18,7 +18,6 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AppResource)
-@Azure.ResourceManager.Private.armResourceInternal(CustomDomainProperties)
 @includeInapplicableMetadataInPayload(false)
 model CustomDomainResource extends ProxyResource {
   /**
@@ -27,6 +26,7 @@ model CustomDomainResource extends ProxyResource {
   @path
   @key("domainName")
   @segment("domains")
+  @visibility("read")
   name: string;
 
   /**

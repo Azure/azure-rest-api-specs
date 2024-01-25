@@ -18,8 +18,8 @@ namespace Microsoft.HybridCompute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Machine)
-@Azure.ResourceManager.Private.armResourceInternal(MachineRunCommandProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MachineRunCommandProperties)
 model MachineRunCommand extends TrackedResourceBase {
   /**
    * The name of the run command.
@@ -28,6 +28,7 @@ model MachineRunCommand extends TrackedResourceBase {
   @path
   @key("runCommandName")
   @segment("runCommands")
+  @visibility("read")
   name: string;
 
   /**

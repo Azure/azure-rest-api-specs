@@ -18,8 +18,8 @@ namespace Microsoft.Capacity;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ReservationOrderResponse)
-@Azure.ResourceManager.Private.armResourceInternal(ReservationsProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ReservationsProperties)
 model ReservationResponse extends ProxyResourceBase {
   /**
    * Id of the reservation item
@@ -27,6 +27,7 @@ model ReservationResponse extends ProxyResourceBase {
   @path
   @key("reservationId")
   @segment("reservations")
+  @visibility("read")
   name: string;
 
   etag?: int32;

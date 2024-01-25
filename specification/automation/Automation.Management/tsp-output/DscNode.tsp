@@ -18,8 +18,8 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(DscNodeProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DscNodeProperties)
 model DscNode extends ProxyResourceBase {
   /**
    * The node id.
@@ -27,6 +27,7 @@ model DscNode extends ProxyResourceBase {
   @path
   @key("nodeId")
   @segment("nodes")
+  @visibility("read")
   name: string;
 
   /**

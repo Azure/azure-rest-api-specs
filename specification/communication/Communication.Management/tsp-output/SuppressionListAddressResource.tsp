@@ -18,10 +18,10 @@ namespace Microsoft.Communication;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SuppressionListResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   SuppressionListAddressProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model SuppressionListAddressResource extends ProxyResourceBase {
   /**
    * The id of the address in a suppression list.
@@ -32,6 +32,7 @@ model SuppressionListAddressResource extends ProxyResourceBase {
   @path
   @key("addressId")
   @segment("suppressionListAddresses")
+  @visibility("read")
   name: string;
 
   /**

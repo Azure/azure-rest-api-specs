@@ -17,11 +17,12 @@ namespace Microsoft.HybridContainerService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
-@Azure.ResourceManager.Private.armResourceInternal(VmSkuProfileProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VmSkuProfileProperties)
 model VmSkuProfile extends ExtensionResourceBase {
   @key("skus")
   @segment("skus")
+  @visibility("read")
   name: string;
 
   /**

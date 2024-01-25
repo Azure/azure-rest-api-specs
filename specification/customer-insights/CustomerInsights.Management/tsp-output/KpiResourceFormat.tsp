@@ -18,7 +18,6 @@ namespace Microsoft.CustomerInsights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Hub)
-@Azure.ResourceManager.Private.armResourceInternal(KpiDefinition)
 @includeInapplicableMetadataInPayload(false)
 model KpiResourceFormat extends ProxyResource {
   /**
@@ -27,6 +26,7 @@ model KpiResourceFormat extends ProxyResource {
   @path
   @key("kpiName")
   @segment("kpi")
+  @visibility("read")
   name: string;
 
   /**

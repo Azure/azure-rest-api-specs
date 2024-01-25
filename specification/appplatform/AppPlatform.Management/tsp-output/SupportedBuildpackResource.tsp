@@ -18,9 +18,6 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BuildService)
-@Azure.ResourceManager.Private.armResourceInternal(
-  SupportedBuildpackResourceProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model SupportedBuildpackResource extends ProxyResource {
   /**
@@ -29,6 +26,7 @@ model SupportedBuildpackResource extends ProxyResource {
   @path
   @key("buildpackName")
   @segment("supportedBuildpacks")
+  @visibility("read")
   name: string;
 
   /**

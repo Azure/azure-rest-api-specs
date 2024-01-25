@@ -18,8 +18,8 @@ namespace Microsoft.OffAzureSpringBoot;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SpringbootsitesModel)
-@Azure.ResourceManager.Private.armResourceInternal(ErrorSummariesProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ErrorSummariesProperties)
 model ErrorSummary extends ProxyResourceBase {
   /**
    * The name of error summary
@@ -30,6 +30,7 @@ model ErrorSummary extends ProxyResourceBase {
   @path
   @key("errorSummaryName")
   @segment("errorSummaries")
+  @visibility("read")
   name: string;
 
   /**

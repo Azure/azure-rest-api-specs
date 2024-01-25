@@ -18,9 +18,6 @@ namespace Microsoft.Logic;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WorkflowRunAction)
-@Azure.ResourceManager.Private.armResourceInternal(
-  WorkflowRunActionRepetitionProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model WorkflowRunActionRepetitionDefinition extends Resource {
   /**
@@ -29,6 +26,7 @@ model WorkflowRunActionRepetitionDefinition extends Resource {
   @path
   @key("repetitionName")
   @segment("repetitions")
+  @visibility("read")
   name: string;
 
   /**

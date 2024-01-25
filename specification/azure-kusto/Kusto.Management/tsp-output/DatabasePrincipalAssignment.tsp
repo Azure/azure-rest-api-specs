@@ -18,8 +18,8 @@ namespace Microsoft.Kusto;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-@Azure.ResourceManager.Private.armResourceInternal(DatabasePrincipalProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DatabasePrincipalProperties)
 model DatabasePrincipalAssignment extends ProxyResourceBase {
   /**
    * The name of the Kusto principalAssignment.
@@ -28,6 +28,7 @@ model DatabasePrincipalAssignment extends ProxyResourceBase {
   @path
   @key("principalAssignmentName")
   @segment("principalAssignments")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,7 +18,6 @@ namespace Microsoft.Logic;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workflow)
-@Azure.ResourceManager.Private.armResourceInternal(WorkflowRunProperties)
 @includeInapplicableMetadataInPayload(false)
 model WorkflowRun extends SubResource {
   /**
@@ -27,7 +26,14 @@ model WorkflowRun extends SubResource {
   @path
   @key("runName")
   @segment("runs")
+  @visibility("read")
   name: string;
+
+  /**
+   * Gets the workflow run type.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * The workflow run properties.

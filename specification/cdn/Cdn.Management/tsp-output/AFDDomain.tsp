@@ -18,7 +18,6 @@ namespace Microsoft.Cdn;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Profile)
-@Azure.ResourceManager.Private.armResourceInternal(AFDDomainProperties)
 @includeInapplicableMetadataInPayload(false)
 model AFDDomain extends ProxyResource {
   /**
@@ -27,6 +26,7 @@ model AFDDomain extends ProxyResource {
   @path
   @key("customDomainName")
   @segment("customDomains")
+  @visibility("read")
   name: string;
 
   /**

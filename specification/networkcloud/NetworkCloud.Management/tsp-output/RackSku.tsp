@@ -17,8 +17,8 @@ namespace Microsoft.NetworkCloud;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@Azure.ResourceManager.Private.armResourceInternal(RackSkuProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RackSkuProperties)
 model RackSku extends ProxyResourceBase {
   /**
    * The name of the rack SKU.
@@ -26,6 +26,7 @@ model RackSku extends ProxyResourceBase {
   @path
   @key("rackSkuName")
   @segment("rackSkus")
+  @visibility("read")
   name: string;
 
   /**

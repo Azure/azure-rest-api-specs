@@ -16,8 +16,8 @@ namespace Microsoft.GraphServices;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AccountResourceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AccountResourceProperties)
 model AccountResource extends TrackedResourceBase {
   /**
    * The name of the resource.
@@ -25,6 +25,7 @@ model AccountResource extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("accounts")
+  @visibility("read")
   name: string;
 
   /**

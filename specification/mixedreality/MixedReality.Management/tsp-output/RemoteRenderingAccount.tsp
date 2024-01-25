@@ -16,10 +16,10 @@ namespace Microsoft.MixedReality;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   MixedRealityAccountProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model RemoteRenderingAccount extends TrackedResourceBase {
   /**
    * Name of an Mixed Reality Account.
@@ -30,6 +30,7 @@ model RemoteRenderingAccount extends TrackedResourceBase {
   @path
   @key("accountName")
   @segment("remoteRenderingAccounts")
+  @visibility("read")
   name: string;
 
   /**

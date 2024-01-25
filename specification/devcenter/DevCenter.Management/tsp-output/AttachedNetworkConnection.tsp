@@ -18,10 +18,10 @@ namespace Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Project)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   AttachedNetworkConnectionProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model AttachedNetworkConnection extends ProxyResourceBase {
   /**
    * The name of the attached NetworkConnection.
@@ -29,6 +29,7 @@ model AttachedNetworkConnection extends ProxyResourceBase {
   @path
   @key("attachedNetworkConnectionName")
   @segment("attachednetworks")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,7 +18,6 @@ namespace Microsoft.ServiceBus;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceBusNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(SBTopicProperties)
 @includeInapplicableMetadataInPayload(false)
 model ServiceBusTopic extends ProxyResource {
   /**
@@ -28,7 +27,14 @@ model ServiceBusTopic extends ProxyResource {
   @path
   @key("topicName")
   @segment("topics")
+  @visibility("read")
   name: string;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Properties of topic resource.

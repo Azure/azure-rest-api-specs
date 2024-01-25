@@ -18,8 +18,8 @@ namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ArcSetting)
-@Azure.ResourceManager.Private.armResourceInternal(ExtensionProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ExtensionProperties)
 model Extension extends ProxyResourceBase {
   /**
    * The name of the machine extension.
@@ -27,6 +27,7 @@ model Extension extends ProxyResourceBase {
   @path
   @key("extensionName")
   @segment("extensions")
+  @visibility("read")
   name: string;
 
   /**

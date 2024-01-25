@@ -18,8 +18,8 @@ namespace Microsoft.NetApp;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetAppAccount)
-@Azure.ResourceManager.Private.armResourceInternal(PoolProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(PoolProperties)
 model CapacityPool extends TrackedResourceBase {
   /**
    * The name of the capacity pool
@@ -30,6 +30,7 @@ model CapacityPool extends TrackedResourceBase {
   @path
   @key("poolName")
   @segment("capacityPools")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,9 +18,6 @@ namespace Microsoft.EventHub;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EventHubsNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(
-  ArmDisasterRecoveryProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model EventHubsDisasterRecovery extends ProxyResource {
   /**
@@ -31,7 +28,14 @@ model EventHubsDisasterRecovery extends ProxyResource {
   @path
   @key("alias")
   @segment("disasterRecoveryConfigs")
+  @visibility("read")
   name: string;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Properties required to the Create Or Update Alias(Disaster Recovery configurations)

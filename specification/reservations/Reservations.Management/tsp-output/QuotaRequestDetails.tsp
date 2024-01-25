@@ -17,8 +17,8 @@ namespace Microsoft.Capacity;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-@Azure.ResourceManager.Private.armResourceInternal(QuotaRequestProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(QuotaRequestProperties)
 model QuotaRequestDetails extends ProxyResourceBase {
   /**
    * Quota Request ID.
@@ -26,6 +26,7 @@ model QuotaRequestDetails extends ProxyResourceBase {
   @path
   @key("id")
   @segment("serviceLimitsRequests")
+  @visibility("read")
   name: string;
 
   /**

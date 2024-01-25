@@ -20,8 +20,8 @@ namespace Microsoft.Cache;
 @parentResource(Cluster)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(DatabaseProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DatabaseProperties)
 model Database extends ProxyResourceBase {
 /**
 * The name of the database.
@@ -29,6 +29,7 @@ model Database extends ProxyResourceBase {
 @path
 @key("databaseName")
 @segment("databases")
+@visibility("read")
 "name": string;
 /**
 * Other properties of the database.

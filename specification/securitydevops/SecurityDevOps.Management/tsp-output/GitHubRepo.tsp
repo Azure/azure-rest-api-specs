@@ -18,8 +18,8 @@ namespace Microsoft.SecurityDevOps;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GitHubOwner)
-@Azure.ResourceManager.Private.armResourceInternal(GitHubRepoProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(GitHubRepoProperties)
 model GitHubRepo extends ProxyResourceBase {
   /**
    * Name of the GitHub Repo.
@@ -27,6 +27,7 @@ model GitHubRepo extends ProxyResourceBase {
   @path
   @key("gitHubRepoName")
   @segment("repos")
+  @visibility("read")
   name: string;
 
   /**

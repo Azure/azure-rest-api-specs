@@ -18,9 +18,6 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GatewayResource)
-@Azure.ResourceManager.Private.armResourceInternal(
-  GatewayCustomDomainProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model GatewayCustomDomainResource extends ProxyResource {
   /**
@@ -29,6 +26,7 @@ model GatewayCustomDomainResource extends ProxyResource {
   @path
   @key("domainName")
   @segment("domains")
+  @visibility("read")
   name: string;
 
   /**

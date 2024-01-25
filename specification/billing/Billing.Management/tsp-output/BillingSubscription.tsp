@@ -17,9 +17,6 @@ namespace Microsoft.Billing;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-@Azure.ResourceManager.Private.armResourceInternal(
-  BillingSubscriptionProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model BillingSubscription extends Resource {
   /**
@@ -28,6 +25,7 @@ model BillingSubscription extends Resource {
   @path
   @key("billingSubscriptionName")
   @segment("billingSubscriptions")
+  @visibility("read")
   name: string;
 
   /**

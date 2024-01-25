@@ -18,7 +18,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(User)
-@Azure.ResourceManager.Private.armResourceInternal(DiskProperties)
 @includeInapplicableMetadataInPayload(false)
 model Disk extends Resource {
   /**
@@ -27,6 +26,7 @@ model Disk extends Resource {
   @path
   @key("name")
   @segment("disks")
+  @visibility("read")
   name: string;
 
   /**

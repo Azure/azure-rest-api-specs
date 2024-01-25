@@ -16,8 +16,8 @@ namespace Microsoft.Maps;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(MapsAccountProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MapsAccountProperties)
 model MapsAccount extends TrackedResourceBase {
   /**
    * The name of the Maps Account.
@@ -25,6 +25,7 @@ model MapsAccount extends TrackedResourceBase {
   @path
   @key("accountName")
   @segment("accounts")
+  @visibility("read")
   name: string;
 
   /**

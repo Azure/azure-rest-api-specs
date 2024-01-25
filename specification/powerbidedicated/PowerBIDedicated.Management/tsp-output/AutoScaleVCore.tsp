@@ -16,7 +16,6 @@ namespace Microsoft.PowerBIDedicated;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AutoScaleVCoreProperties)
 @includeInapplicableMetadataInPayload(false)
 model AutoScaleVCore extends Resource {
   /**
@@ -28,6 +27,7 @@ model AutoScaleVCore extends Resource {
   @path
   @key("vcoreName")
   @segment("autoScaleVCores")
+  @visibility("read")
   name: string;
 
   /**

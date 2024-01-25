@@ -18,7 +18,6 @@ namespace Microsoft.DataLakeStore;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataLakeStoreAccount)
-@Azure.ResourceManager.Private.armResourceInternal(FirewallRuleProperties)
 @includeInapplicableMetadataInPayload(false)
 model FirewallRule extends SubResource {
   /**
@@ -27,6 +26,7 @@ model FirewallRule extends SubResource {
   @path
   @key("firewallRuleName")
   @segment("firewallRules")
+  @visibility("read")
   name: string;
 
   /**

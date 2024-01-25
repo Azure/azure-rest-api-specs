@@ -16,8 +16,8 @@ namespace Microsoft.DesktopVirtualization;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ApplicationGroupProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ApplicationGroupProperties)
 model ApplicationGroup extends TrackedResourceBase {
   /**
    * The name of the application group
@@ -27,6 +27,7 @@ model ApplicationGroup extends TrackedResourceBase {
   @path
   @key("applicationGroupName")
   @segment("applicationGroups")
+  @visibility("read")
   name: string;
 
   /**

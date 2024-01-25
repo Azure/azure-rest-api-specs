@@ -18,15 +18,15 @@ namespace Microsoft.Advisor;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ResourceRecommendationBase)
-@Azure.ResourceManager.Private.armResourceInternal(SuppressionProperties)
 @includeInapplicableMetadataInPayload(false)
-model SuppressionContract extends TrackedResourceBase {
+model SuppressionContract extends Resource {
   /**
    * The name of the suppression.
    */
   @path
   @key("name")
   @segment("suppressions")
+  @visibility("read")
   name: string;
 
   /**

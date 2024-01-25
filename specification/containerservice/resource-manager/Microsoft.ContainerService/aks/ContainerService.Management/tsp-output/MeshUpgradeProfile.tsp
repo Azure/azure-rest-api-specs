@@ -18,8 +18,8 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedCluster)
-@Azure.ResourceManager.Private.armResourceInternal(MeshUpgradeProfileProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MeshUpgradeProfileProperties)
 model MeshUpgradeProfile extends ProxyResourceBase {
   /**
    * The mode of the mesh.
@@ -30,6 +30,7 @@ model MeshUpgradeProfile extends ProxyResourceBase {
   @path
   @key("mode")
   @segment("meshUpgradeProfiles")
+  @visibility("read")
   name: string;
 
   /**

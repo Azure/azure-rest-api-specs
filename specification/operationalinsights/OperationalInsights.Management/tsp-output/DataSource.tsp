@@ -23,6 +23,7 @@ model DataSource is ProxyResource<AnyObject> {
   @path
   @key("dataSourceName")
   @segment("dataSources")
+  @visibility("read")
   name: string;
 
   /**

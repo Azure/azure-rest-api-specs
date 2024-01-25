@@ -26,6 +26,7 @@ model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
   @path
   @key("updateStrategyName")
   @segment("updateStrategies")
+  @visibility("read")
   name: string;
 
   ...Azure.ResourceManager.EntityTag;

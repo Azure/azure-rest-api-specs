@@ -19,11 +19,12 @@ namespace Microsoft.DataBoxEdge;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(DataBoxEdgeDevice)
-@Azure.ResourceManager.Private.armResourceInternal(OrderProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(OrderProperties)
 model Order extends ProxyResourceBase {
   @key("order")
   @segment("orders")
+  @visibility("read")
   name: string;
 
   /**

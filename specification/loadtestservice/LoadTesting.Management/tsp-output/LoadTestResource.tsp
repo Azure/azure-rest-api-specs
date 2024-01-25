@@ -16,8 +16,8 @@ namespace Microsoft.LoadTestService;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(LoadTestProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(LoadTestProperties)
 model LoadTestResource extends TrackedResourceBase {
   /**
    * Load Test name.
@@ -25,6 +25,7 @@ model LoadTestResource extends TrackedResourceBase {
   @path
   @key("loadTestName")
   @segment("loadTests")
+  @visibility("read")
   name: string;
 
   /**

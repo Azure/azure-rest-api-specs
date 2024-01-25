@@ -18,8 +18,8 @@ namespace Microsoft.DeviceUpdate;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-@Azure.ResourceManager.Private.armResourceInternal(InstanceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(InstanceProperties)
 model Instance extends TrackedResourceBase {
   /**
    * Instance name.
@@ -30,6 +30,7 @@ model Instance extends TrackedResourceBase {
   @path
   @key("instanceName")
   @segment("instances")
+  @visibility("read")
   name: string;
 
   /**

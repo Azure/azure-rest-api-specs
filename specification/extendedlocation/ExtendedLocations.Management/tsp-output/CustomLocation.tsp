@@ -16,8 +16,8 @@ namespace Microsoft.ExtendedLocation;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(CustomLocationProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CustomLocationProperties)
 model CustomLocation extends TrackedResourceBase {
   /**
    * Custom Locations name.
@@ -28,6 +28,7 @@ model CustomLocation extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("customLocations")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,10 +18,10 @@ namespace Microsoft.Chaos;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Experiment)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ExperimentExecutionProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ExperimentExecution extends ProxyResourceBase {
   /**
    * GUID that represents a Experiment execution detail.
@@ -30,6 +30,7 @@ model ExperimentExecution extends ProxyResourceBase {
   @path
   @key("executionId")
   @segment("executions")
+  @visibility("read")
   name: string;
 
   /**

@@ -19,13 +19,14 @@ namespace Microsoft.DataBoxEdge;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(DataBoxEdgeDevice)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   DiagnosticRemoteSupportSettingsProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model DiagnosticRemoteSupportSettings extends ProxyResourceBase {
   @key("diagnosticRemoteSupportSetting")
   @segment("diagnosticRemoteSupportSettings")
+  @visibility("read")
   name: string;
 
   /**

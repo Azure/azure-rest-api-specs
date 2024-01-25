@@ -16,8 +16,8 @@ namespace Microsoft.Blueprint;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(BlueprintProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BlueprintProperties)
 model Blueprint extends ExtensionResourceBase {
   /**
    * Name of the blueprint definition.
@@ -25,6 +25,7 @@ model Blueprint extends ExtensionResourceBase {
   @path
   @key("blueprintName")
   @segment("blueprints")
+  @visibility("read")
   name: string;
 
   /**

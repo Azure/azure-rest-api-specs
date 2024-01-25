@@ -18,10 +18,10 @@ namespace Microsoft.HybridCompute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(HybridComputePrivateLinkScope)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateLinkResourceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model PrivateLinkResource extends ProxyResourceBase {
   /**
    * The name of the private link resource.
@@ -29,6 +29,7 @@ model PrivateLinkResource extends ProxyResourceBase {
   @path
   @key("groupName")
   @segment("privateLinkResources")
+  @visibility("read")
   name: string;
 
   /**

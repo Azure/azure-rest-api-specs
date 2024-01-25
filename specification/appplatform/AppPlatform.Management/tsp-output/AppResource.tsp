@@ -18,7 +18,6 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(AppResourceProperties)
 @includeInapplicableMetadataInPayload(false)
 model AppResource extends ProxyResource {
   /**
@@ -27,12 +26,18 @@ model AppResource extends ProxyResource {
   @path
   @key("appName")
   @segment("apps")
+  @visibility("read")
   name: string;
 
   /**
    * The Managed Identity type of the app resource
    */
   identity?: ManagedIdentityProperties;
+
+  /**
+   * The GEO location of the application, always the same with its parent resource
+   */
+  location?: string;
 
   /**
    * Properties of the App resource

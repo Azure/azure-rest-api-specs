@@ -18,8 +18,8 @@ namespace Microsoft.OffAzureSpringBoot;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SpringbootsitesModel)
-@Azure.ResourceManager.Private.armResourceInternal(SummariesProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SummariesProperties)
 model Summary extends ProxyResourceBase {
   /**
    * The name of summary
@@ -30,6 +30,7 @@ model Summary extends ProxyResourceBase {
   @path
   @key("summaryName")
   @segment("summaries")
+  @visibility("read")
   name: string;
 
   /**

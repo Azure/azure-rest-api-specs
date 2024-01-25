@@ -18,7 +18,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-@Azure.ResourceManager.Private.armResourceInternal(FormulaProperties)
 @includeInapplicableMetadataInPayload(false)
 model Formula extends Resource {
   /**
@@ -27,6 +26,7 @@ model Formula extends Resource {
   @path
   @key("name")
   @segment("formulas")
+  @visibility("read")
   name: string;
 
   /**

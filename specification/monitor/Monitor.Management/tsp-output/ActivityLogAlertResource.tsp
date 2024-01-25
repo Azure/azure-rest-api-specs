@@ -16,8 +16,8 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AlertRuleProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AlertRuleProperties)
 model ActivityLogAlertResource extends TrackedResourceBase {
   /**
    * The name of the Activity Log Alert rule.
@@ -25,6 +25,7 @@ model ActivityLogAlertResource extends TrackedResourceBase {
   @path
   @key("activityLogAlertName")
   @segment("activityLogAlerts")
+  @visibility("read")
   name: string;
 
   /**

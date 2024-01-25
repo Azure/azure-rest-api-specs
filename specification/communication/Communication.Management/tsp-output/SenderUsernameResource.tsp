@@ -18,8 +18,8 @@ namespace Microsoft.Communication;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DomainResource)
-@Azure.ResourceManager.Private.armResourceInternal(SenderUsernameProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SenderUsernameProperties)
 model SenderUsernameResource extends ProxyResourceBase {
   /**
    * The valid sender Username.
@@ -29,6 +29,7 @@ model SenderUsernameResource extends ProxyResourceBase {
   @path
   @key("senderUsername")
   @segment("senderUsernames")
+  @visibility("read")
   name: string;
 
   /**

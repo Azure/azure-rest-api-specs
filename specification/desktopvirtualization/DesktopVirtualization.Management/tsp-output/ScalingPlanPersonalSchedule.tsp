@@ -18,10 +18,10 @@ namespace Microsoft.DesktopVirtualization;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ScalingPlan)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ScalingPlanPersonalScheduleProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ScalingPlanPersonalSchedule extends ProxyResourceBase {
   /**
    * The name of the ScalingPlanSchedule
@@ -31,6 +31,7 @@ model ScalingPlanPersonalSchedule extends ProxyResourceBase {
   @path
   @key("scalingPlanScheduleName")
   @segment("personalSchedules")
+  @visibility("read")
   name: string;
 
   /**

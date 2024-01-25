@@ -18,9 +18,6 @@ namespace Microsoft.Peering;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PeeringService)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PeeringServicePrefixProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model PeeringServicePrefix extends Resource {
   /**
@@ -29,6 +26,7 @@ model PeeringServicePrefix extends Resource {
   @path
   @key("prefixName")
   @segment("prefixes")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,7 +16,6 @@ namespace Microsoft.DataFactory;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(FactoryProperties)
 @includeInapplicableMetadataInPayload(false)
 model Factory extends Resource {
   /**
@@ -28,6 +27,7 @@ model Factory extends Resource {
   @path
   @key("factoryName")
   @segment("factories")
+  @visibility("read")
   name: string;
 
   /**

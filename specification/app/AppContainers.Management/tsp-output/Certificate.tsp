@@ -18,8 +18,8 @@ namespace Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ConnectedEnvironment)
-@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
 model Certificate extends TrackedResourceBase {
   /**
    * Name of the Certificate.
@@ -27,6 +27,7 @@ model Certificate extends TrackedResourceBase {
   @path
   @key("certificateName")
   @segment("certificates")
+  @visibility("read")
   name: string;
 
   /**

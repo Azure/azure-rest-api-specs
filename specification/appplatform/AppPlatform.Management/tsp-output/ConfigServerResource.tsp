@@ -19,11 +19,11 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(ServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(ConfigServerProperties)
 @includeInapplicableMetadataInPayload(false)
 model ConfigServerResource extends ProxyResource {
   @key("configServer")
   @segment("configServers")
+  @visibility("read")
   name: string;
 
   /**

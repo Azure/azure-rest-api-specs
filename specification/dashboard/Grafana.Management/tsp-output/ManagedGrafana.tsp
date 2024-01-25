@@ -16,8 +16,8 @@ namespace Microsoft.Dashboard;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ManagedGrafanaProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ManagedGrafanaProperties)
 model ManagedGrafana extends TrackedResourceBase {
   /**
    * The workspace name of Azure Managed Grafana.
@@ -25,6 +25,7 @@ model ManagedGrafana extends TrackedResourceBase {
   @path
   @key("workspaceName")
   @segment("grafana")
+  @visibility("read")
   name: string;
 
   /**

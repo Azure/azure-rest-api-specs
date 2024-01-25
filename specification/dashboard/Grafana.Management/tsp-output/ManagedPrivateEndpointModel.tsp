@@ -18,10 +18,10 @@ namespace Microsoft.Dashboard;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedGrafana)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ManagedPrivateEndpointModelProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ManagedPrivateEndpointModel extends TrackedResourceBase {
   /**
    * The managed private endpoint name of Azure Managed Grafana.
@@ -29,6 +29,7 @@ model ManagedPrivateEndpointModel extends TrackedResourceBase {
   @path
   @key("managedPrivateEndpointName")
   @segment("managedPrivateEndpoints")
+  @visibility("read")
   name: string;
 
   /**

@@ -89,6 +89,45 @@ model ResourceReference {
 }
 
 /**
+ * Common resource representation.
+ */
+model TrackedResource {
+  /**
+   * Resource ID.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource location.
+   */
+  location: string;
+
+  /**
+   * Resource tags.
+   */
+  tags?: Record<string>;
+
+  /**
+   * Metadata pertaining to creation and last modification of the resource.
+   */
+  @visibility("read")
+  systemData?: TrackedResourceSystemData;
+}
+
+/**
  * Metadata pertaining to creation and last modification of the resource.
  */
 model TrackedResourceSystemData extends SystemData {}
@@ -213,4 +252,27 @@ model EmissionPolicyDestination {
    * Emission destination type.
    */
   destinationType?: EmissionDestinationType;
+}
+
+/**
+ * An azure resource object
+ */
+model ProxyResource {
+  /**
+   * Azure resource Id
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Azure resource type
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Azure resource name
+   */
+  @visibility("read")
+  name?: string;
 }

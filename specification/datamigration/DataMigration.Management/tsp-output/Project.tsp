@@ -18,7 +18,6 @@ namespace Microsoft.DataMigration;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataMigrationService)
-@Azure.ResourceManager.Private.armResourceInternal(ProjectProperties)
 @includeInapplicableMetadataInPayload(false)
 model Project extends TrackedResource {
   /**
@@ -27,6 +26,7 @@ model Project extends TrackedResource {
   @path
   @key("projectName")
   @segment("projects")
+  @visibility("read")
   name: string;
 
   /**

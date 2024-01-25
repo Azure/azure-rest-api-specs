@@ -17,8 +17,8 @@ namespace Microsoft.HybridCompute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-@Azure.ResourceManager.Private.armResourceInternal(ExtensionValueProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ExtensionValueProperties)
 model ExtensionValue extends ProxyResourceBase {
   /**
    * The version of the Extension being received.
@@ -26,6 +26,7 @@ model ExtensionValue extends ProxyResourceBase {
   @path
   @key("version")
   @segment("versions")
+  @visibility("read")
   name: string;
 
   /**

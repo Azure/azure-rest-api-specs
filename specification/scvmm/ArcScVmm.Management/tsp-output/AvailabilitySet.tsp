@@ -16,8 +16,8 @@ namespace Microsoft.ScVmm;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AvailabilitySetProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AvailabilitySetProperties)
 model AvailabilitySet extends TrackedResourceBase {
   /**
    * Name of the AvailabilitySet.
@@ -25,6 +25,7 @@ model AvailabilitySet extends TrackedResourceBase {
   @path
   @key("availabilitySetName")
   @segment("availabilitySets")
+  @visibility("read")
   name: string;
 
   /**

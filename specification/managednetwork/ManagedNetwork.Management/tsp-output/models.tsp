@@ -147,6 +147,11 @@ model ResourceProperties {
 }
 
 /**
+ * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
+ */
+model ProxyResource extends Resource {}
+
+/**
  * The general resource model definition
  */
 model Resource {
@@ -199,6 +204,17 @@ model ManagedNetworkPeeringPolicyProperties extends ResourceProperties {
    * Gets or sets the mesh group IDs
    */
   mesh?: ResourceId[];
+}
+
+/**
+ * The resource model definition for a ARM tracked top level resource
+ */
+model TrackedResource extends Resource {
+  /**
+   * Resource tags
+   */
+  @visibility("read", "create", "update")
+  tags?: Record<string>;
 }
 
 /**

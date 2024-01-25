@@ -18,7 +18,6 @@ namespace Microsoft.Cdn;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Profile)
-@Azure.ResourceManager.Private.armResourceInternal(EndpointProperties)
 @includeInapplicableMetadataInPayload(false)
 model CdnEndpoint extends TrackedResource {
   /**
@@ -27,6 +26,7 @@ model CdnEndpoint extends TrackedResource {
   @path
   @key("endpointName")
   @segment("endpoints")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.ContainerRegistry;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-@Azure.ResourceManager.Private.armResourceInternal(ReplicationProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ReplicationProperties)
 model Replication extends TrackedResourceBase {
   /**
    * The name of the replication.
@@ -30,6 +30,7 @@ model Replication extends TrackedResourceBase {
   @path
   @key("replicationName")
   @segment("replications")
+  @visibility("read")
   name: string;
 
   /**

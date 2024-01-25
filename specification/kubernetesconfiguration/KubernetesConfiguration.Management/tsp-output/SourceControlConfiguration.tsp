@@ -16,10 +16,10 @@ namespace Microsoft.KubernetesConfiguration;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   SourceControlConfigurationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model SourceControlConfiguration extends ProxyResourceBase {
   /**
    * Name of the Source Control Configuration.
@@ -27,6 +27,7 @@ model SourceControlConfiguration extends ProxyResourceBase {
   @path
   @key("sourceControlConfigurationName")
   @segment("sourceControlConfigurations")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,10 +18,10 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedCluster)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ManagedClusterAgentPoolProfileProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model AgentPool extends ProxyResourceBase {
   /**
    * The name of the agent pool.
@@ -32,6 +32,7 @@ model AgentPool extends ProxyResourceBase {
   @path
   @key("agentPoolName")
   @segment("agentPools")
+  @visibility("read")
   name: string;
 
   /**

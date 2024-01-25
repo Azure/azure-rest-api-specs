@@ -18,8 +18,8 @@ namespace Microsoft.NetApp;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CapacityPool)
-@Azure.ResourceManager.Private.armResourceInternal(VolumeProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VolumeProperties)
 model Volume extends TrackedResourceBase {
   /**
    * The name of the volume
@@ -30,6 +30,7 @@ model Volume extends TrackedResourceBase {
   @path
   @key("volumeName")
   @segment("volumes")
+  @visibility("read")
   name: string;
 
   /**

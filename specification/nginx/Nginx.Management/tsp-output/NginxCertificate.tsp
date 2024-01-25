@@ -16,8 +16,8 @@ namespace Nginx.NginxPlus;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NginxDeployment)
-@Azure.ResourceManager.Private.armResourceInternal(NginxCertificateProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NginxCertificateProperties)
 model NginxCertificate extends ProxyResourceBase {
   /**
    * The name of certificate
@@ -25,6 +25,7 @@ model NginxCertificate extends ProxyResourceBase {
   @path
   @key("certificateName")
   @segment("certificates")
+  @visibility("read")
   name: string;
 
   @extension("x-ms-client-flatten", true)

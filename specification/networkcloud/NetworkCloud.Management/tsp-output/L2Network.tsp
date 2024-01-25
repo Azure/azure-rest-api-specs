@@ -16,8 +16,8 @@ namespace Microsoft.NetworkCloud;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(L2NetworkProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(L2NetworkProperties)
 model L2Network extends TrackedResourceBase {
   /**
    * The name of the L2 network.
@@ -26,6 +26,7 @@ model L2Network extends TrackedResourceBase {
   @path
   @key("l2NetworkName")
   @segment("l2Networks")
+  @visibility("read")
   name: string;
 
   /**

@@ -14,10 +14,10 @@ namespace Microsoft.ManagedServices;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   MarketplaceRegistrationDefinitionProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model MarketplaceRegistrationDefinition extends ExtensionResourceBase {
   /**
    * The Azure Marketplace identifier. Expected formats: {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher}).
@@ -25,6 +25,7 @@ model MarketplaceRegistrationDefinition extends ExtensionResourceBase {
   @path
   @key("marketplaceIdentifier")
   @segment("marketplaceRegistrationDefinitions")
+  @visibility("read")
   name: string;
 
   /**

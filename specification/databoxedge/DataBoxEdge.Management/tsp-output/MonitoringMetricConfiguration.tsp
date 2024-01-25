@@ -19,13 +19,14 @@ namespace Microsoft.DataBoxEdge;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(Role)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   MonitoringMetricConfigurationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model MonitoringMetricConfiguration extends ProxyResourceBase {
   @key("monitoringConfig")
   @segment("monitoringConfig")
+  @visibility("read")
   name: string;
 
   /**

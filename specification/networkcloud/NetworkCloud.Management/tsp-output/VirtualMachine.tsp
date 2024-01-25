@@ -16,8 +16,8 @@ namespace Microsoft.NetworkCloud;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(VirtualMachineProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VirtualMachineProperties)
 model VirtualMachine extends TrackedResourceBase {
   /**
    * The name of the virtual machine.
@@ -26,6 +26,7 @@ model VirtualMachine extends TrackedResourceBase {
   @path
   @key("virtualMachineName")
   @segment("virtualMachines")
+  @visibility("read")
   name: string;
 
   /**

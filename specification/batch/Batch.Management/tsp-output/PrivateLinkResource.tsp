@@ -18,9 +18,6 @@ namespace Microsoft.Batch;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BatchAccount)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PrivateLinkResourceProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model PrivateLinkResource extends ProxyResource {
   /**
@@ -32,6 +29,7 @@ model PrivateLinkResource extends ProxyResource {
   @path
   @key("privateLinkResourceName")
   @segment("privateLinkResources")
+  @visibility("read")
   name: string;
 
   /**

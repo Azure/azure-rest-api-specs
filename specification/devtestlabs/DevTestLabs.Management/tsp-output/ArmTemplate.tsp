@@ -18,7 +18,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ArtifactSource)
-@Azure.ResourceManager.Private.armResourceInternal(ArmTemplateProperties)
 @includeInapplicableMetadataInPayload(false)
 model ArmTemplate extends Resource {
   /**
@@ -27,6 +26,7 @@ model ArmTemplate extends Resource {
   @path
   @key("name")
   @segment("armtemplates")
+  @visibility("read")
   name: string;
 
   /**

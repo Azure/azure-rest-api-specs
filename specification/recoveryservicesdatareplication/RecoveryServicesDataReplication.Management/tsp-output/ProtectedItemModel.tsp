@@ -18,8 +18,8 @@ namespace Microsoft.DataReplication;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VaultModel)
-@Azure.ResourceManager.Private.armResourceInternal(ProtectedItemModelProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ProtectedItemModelProperties)
 model ProtectedItemModel extends ProxyResourceBase {
   /**
    * The protected item name.
@@ -28,6 +28,7 @@ model ProtectedItemModel extends ProxyResourceBase {
   @path
   @key("protectedItemName")
   @segment("protectedItems")
+  @visibility("read")
   name: string;
 
   /**

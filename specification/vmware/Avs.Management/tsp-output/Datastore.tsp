@@ -18,8 +18,8 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-@Azure.ResourceManager.Private.armResourceInternal(DatastoreProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DatastoreProperties)
 model Datastore extends ProxyResourceBase {
   /**
    * Name of the datastore in the private cloud cluster
@@ -28,6 +28,7 @@ model Datastore extends ProxyResourceBase {
   @path
   @key("datastoreName")
   @segment("datastores")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,8 +16,8 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(MyWorkbookProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MyWorkbookProperties)
 model MyWorkbook extends ProxyResourceBase {
   /**
    * The name of the Application Insights component resource.
@@ -25,6 +25,7 @@ model MyWorkbook extends ProxyResourceBase {
   @path
   @key("resourceName")
   @segment("myWorkbooks")
+  @visibility("read")
   name: string;
 
   /**

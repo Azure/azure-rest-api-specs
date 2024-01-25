@@ -18,8 +18,8 @@ namespace Microsoft.Relay;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(RelayNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(WcfRelayProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(WcfRelayProperties)
 model WcfRelay extends ProxyResourceBase {
   /**
    * The relay name.
@@ -28,6 +28,7 @@ model WcfRelay extends ProxyResourceBase {
   @path
   @key("relayName")
   @segment("wcfRelays")
+  @visibility("read")
   name: string;
 
   /**

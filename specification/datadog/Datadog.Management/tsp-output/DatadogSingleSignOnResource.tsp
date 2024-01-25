@@ -16,10 +16,10 @@ namespace Microsoft.Datadog;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DatadogMonitorResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   DatadogSingleSignOnProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model DatadogSingleSignOnResource extends ProxyResourceBase {
   /**
    * Configuration name
@@ -27,6 +27,7 @@ model DatadogSingleSignOnResource extends ProxyResourceBase {
   @path
   @key("configurationName")
   @segment("singleSignOnConfigurations")
+  @visibility("read")
   name: string;
 
   @extension("x-ms-client-flatten", true)

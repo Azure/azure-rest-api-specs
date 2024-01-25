@@ -18,8 +18,8 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-@Azure.ResourceManager.Private.armResourceInternal(HcxEnterpriseSiteProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(HcxEnterpriseSiteProperties)
 model HcxEnterpriseSite extends ProxyResourceBase {
   /**
    * Name of the HCX Enterprise Site in the private cloud
@@ -28,6 +28,7 @@ model HcxEnterpriseSite extends ProxyResourceBase {
   @path
   @key("hcxEnterpriseSiteName")
   @segment("hcxEnterpriseSites")
+  @visibility("read")
   name: string;
 
   /**

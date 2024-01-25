@@ -18,7 +18,6 @@ namespace Microsoft.Logic;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workflow)
-@Azure.ResourceManager.Private.armResourceInternal(WorkflowVersionProperties)
 @includeInapplicableMetadataInPayload(false)
 model WorkflowVersion extends Resource {
   /**
@@ -27,6 +26,7 @@ model WorkflowVersion extends Resource {
   @path
   @key("versionId")
   @segment("versions")
+  @visibility("read")
   name: string;
 
   /**

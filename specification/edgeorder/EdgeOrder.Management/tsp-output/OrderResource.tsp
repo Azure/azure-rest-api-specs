@@ -16,8 +16,8 @@ namespace Microsoft.EdgeOrder;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(OrderProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(OrderProperties)
 model OrderResource extends ProxyResourceBase {
   /**
    * The name of the order
@@ -25,6 +25,7 @@ model OrderResource extends ProxyResourceBase {
   @path
   @key("orderName")
   @segment("orders")
+  @visibility("read")
   name: string;
 
   /**

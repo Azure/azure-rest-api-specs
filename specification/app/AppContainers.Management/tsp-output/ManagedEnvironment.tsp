@@ -17,11 +17,12 @@ namespace Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("rootApi")
-@Azure.ResourceManager.Private.armResourceInternal(ManagedEnvironmentProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ManagedEnvironmentProperties)
 model ManagedEnvironment extends TrackedResourceBase {
   @key("detectorProperty")
   @segment("detectorProperties")
+  @visibility("read")
   name: string;
 
   /**

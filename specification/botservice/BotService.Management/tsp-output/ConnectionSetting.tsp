@@ -18,8 +18,8 @@ namespace Microsoft.BotService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Bot)
-@Azure.ResourceManager.Private.armResourceInternal(ConnectionSettingProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ConnectionSettingProperties)
 model ConnectionSetting extends TrackedResourceBase {
   /**
    * The name of the Bot Service Connection Setting resource.
@@ -30,6 +30,7 @@ model ConnectionSetting extends TrackedResourceBase {
   @path
   @key("connectionName")
   @segment("connections")
+  @visibility("read")
   name: string;
 
   /**

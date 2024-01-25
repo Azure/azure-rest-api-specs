@@ -16,10 +16,10 @@ namespace Microsoft.CognitiveServices;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   CommitmentPlanAccountAssociationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model CommitmentPlanAccountAssociation extends ProxyResourceBase {
   /**
    * The name of the commitment plan association with the Cognitive Services Account
@@ -28,6 +28,7 @@ model CommitmentPlanAccountAssociation extends ProxyResourceBase {
   @path
   @key("commitmentPlanAssociationName")
   @segment("accountAssociations")
+  @visibility("read")
   name: string;
 
   /**

@@ -14,8 +14,8 @@ namespace Microsoft.Datadog;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(MonitorProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MonitorProperties)
 model DatadogMonitorResource extends TrackedResourceBase {
   /**
    * Monitor resource name
@@ -23,6 +23,7 @@ model DatadogMonitorResource extends TrackedResourceBase {
   @path
   @key("monitorName")
   @segment("monitors")
+  @visibility("read")
   name: string;
 
   /**

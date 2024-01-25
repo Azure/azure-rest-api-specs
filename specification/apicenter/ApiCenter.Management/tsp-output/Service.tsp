@@ -22,6 +22,7 @@ model Service is TrackedResource<ServiceProperties> {
   @path
   @key("serviceName")
   @segment("services")
+  @visibility("read")
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;

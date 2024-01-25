@@ -18,8 +18,8 @@ namespace Microsoft.LabServices;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-@Azure.ResourceManager.Private.armResourceInternal(UserProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(UserProperties)
 model User extends ProxyResourceBase {
   /**
    * The name of the user that uniquely identifies it within containing lab. Used in resource URIs.
@@ -30,6 +30,7 @@ model User extends ProxyResourceBase {
   @path
   @key("userName")
   @segment("users")
+  @visibility("read")
   name: string;
 
   /**

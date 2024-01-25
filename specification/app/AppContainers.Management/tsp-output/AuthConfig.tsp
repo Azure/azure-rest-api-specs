@@ -18,8 +18,8 @@ namespace Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ContainerApp)
-@Azure.ResourceManager.Private.armResourceInternal(AuthConfigProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AuthConfigProperties)
 model AuthConfig extends ProxyResourceBase {
   /**
    * Name of the Container App AuthConfig.
@@ -27,6 +27,7 @@ model AuthConfig extends ProxyResourceBase {
   @path
   @key("authConfigName")
   @segment("authConfigs")
+  @visibility("read")
   name: string;
 
   /**

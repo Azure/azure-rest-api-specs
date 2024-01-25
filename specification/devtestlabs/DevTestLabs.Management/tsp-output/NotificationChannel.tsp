@@ -18,9 +18,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-@Azure.ResourceManager.Private.armResourceInternal(
-  NotificationChannelProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model NotificationChannel extends Resource {
   /**
@@ -29,6 +26,7 @@ model NotificationChannel extends Resource {
   @path
   @key("name")
   @segment("notificationchannels")
+  @visibility("read")
   name: string;
 
   /**

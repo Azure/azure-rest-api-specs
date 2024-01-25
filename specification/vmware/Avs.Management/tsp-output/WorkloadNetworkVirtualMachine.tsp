@@ -18,10 +18,10 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   WorkloadNetworkVirtualMachineProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model WorkloadNetworkVirtualMachine extends ProxyResourceBase {
   /**
    * Virtual Machine identifier
@@ -29,6 +29,7 @@ model WorkloadNetworkVirtualMachine extends ProxyResourceBase {
   @path
   @key("virtualMachineId")
   @segment("virtualMachines")
+  @visibility("read")
   name: string;
 
   /**

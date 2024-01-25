@@ -16,10 +16,10 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   DataCollectionEndpointResourceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model DataCollectionEndpointResource extends TrackedResourceBase {
   /**
    * The name of the data collection endpoint. The name is case insensitive.
@@ -27,6 +27,7 @@ model DataCollectionEndpointResource extends TrackedResourceBase {
   @path
   @key("dataCollectionEndpointName")
   @segment("dataCollectionEndpoints")
+  @visibility("read")
   name: string;
 
   /**

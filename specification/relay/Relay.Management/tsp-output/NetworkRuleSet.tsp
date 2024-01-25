@@ -19,11 +19,12 @@ namespace Microsoft.Relay;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(RelayNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(NetworkRuleSetProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NetworkRuleSetProperties)
 model NetworkRuleSet extends ProxyResourceBase {
   @key("networkRuleSet")
   @segment("networkRuleSets")
+  @visibility("read")
   name: string;
 
   /**

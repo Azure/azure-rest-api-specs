@@ -16,8 +16,8 @@ namespace Microsoft.EdgeOrder;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(OrderItemProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(OrderItemProperties)
 model OrderItemResource extends TrackedResourceBase {
   /**
    * The name of the order item
@@ -25,6 +25,7 @@ model OrderItemResource extends TrackedResourceBase {
   @path
   @key("orderItemName")
   @segment("orderItems")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.DataBoxEdge;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataBoxEdgeDevice)
-@Azure.ResourceManager.Private.armResourceInternal(UserProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(UserProperties)
 model User extends ProxyResourceBase {
   /**
    * The user name.
@@ -27,6 +27,7 @@ model User extends ProxyResourceBase {
   @path
   @key("name")
   @segment("users")
+  @visibility("read")
   name: string;
 
   /**

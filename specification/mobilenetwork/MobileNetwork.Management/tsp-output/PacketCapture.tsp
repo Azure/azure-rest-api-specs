@@ -18,10 +18,10 @@ namespace Microsoft.MobileNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PacketCoreControlPlane)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   PacketCapturePropertiesFormat
 )
-@includeInapplicableMetadataInPayload(false)
 model PacketCapture extends ProxyResourceBase {
   /**
    * The name of the packet capture session.
@@ -31,6 +31,7 @@ model PacketCapture extends ProxyResourceBase {
   @path
   @key("packetCaptureName")
   @segment("packetCaptures")
+  @visibility("read")
   name: string;
 
   /**

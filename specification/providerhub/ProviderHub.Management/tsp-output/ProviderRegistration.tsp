@@ -15,10 +15,10 @@ namespace Microsoft.ProviderHub;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ProviderRegistrationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ProviderRegistration extends ProxyResourceBase {
   /**
    * The name of the resource provider hosted within ProviderHub.
@@ -26,6 +26,7 @@ model ProviderRegistration extends ProxyResourceBase {
   @path
   @key("providerNamespace")
   @segment("providerRegistrations")
+  @visibility("read")
   name: string;
 
   @extension("x-ms-client-flatten", true)

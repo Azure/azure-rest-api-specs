@@ -17,7 +17,6 @@ namespace Microsoft.ContainerInstance;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal({})
 @includeInapplicableMetadataInPayload(false)
 model ContainerGroup extends Resource {
   /**
@@ -26,6 +25,7 @@ model ContainerGroup extends Resource {
   @path
   @key("containerGroupName")
   @segment("containerGroups")
+  @visibility("read")
   name: string;
 
   @extension("x-ms-client-flatten", true)

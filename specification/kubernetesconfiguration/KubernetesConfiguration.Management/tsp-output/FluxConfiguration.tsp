@@ -16,8 +16,8 @@ namespace Microsoft.KubernetesConfiguration;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(FluxConfigurationProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(FluxConfigurationProperties)
 model FluxConfiguration extends ProxyResourceBase {
   /**
    * Name of the Flux Configuration.
@@ -25,6 +25,7 @@ model FluxConfiguration extends ProxyResourceBase {
   @path
   @key("fluxConfigurationName")
   @segment("fluxConfigurations")
+  @visibility("read")
   name: string;
 
   /**

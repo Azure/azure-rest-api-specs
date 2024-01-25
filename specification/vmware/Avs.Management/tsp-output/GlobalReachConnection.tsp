@@ -18,10 +18,10 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   GlobalReachConnectionProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model GlobalReachConnection extends ProxyResourceBase {
   /**
    * Name of the global reach connection in the private cloud
@@ -30,6 +30,7 @@ model GlobalReachConnection extends ProxyResourceBase {
   @path
   @key("globalReachConnectionName")
   @segment("globalReachConnections")
+  @visibility("read")
   name: string;
 
   /**

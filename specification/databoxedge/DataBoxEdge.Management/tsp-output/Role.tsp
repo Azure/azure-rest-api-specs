@@ -24,6 +24,7 @@ model Role is ProxyResource<{}> {
   @path
   @key("name")
   @segment("roles")
+  @visibility("read")
   name: string;
 
   /**

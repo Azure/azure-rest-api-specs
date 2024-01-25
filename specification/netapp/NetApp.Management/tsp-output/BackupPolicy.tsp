@@ -18,8 +18,8 @@ namespace Microsoft.NetApp;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetAppAccount)
-@Azure.ResourceManager.Private.armResourceInternal(BackupPolicyProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BackupPolicyProperties)
 model BackupPolicy extends TrackedResourceBase {
   /**
    * Backup policy Name which uniquely identify backup policy.
@@ -27,6 +27,7 @@ model BackupPolicy extends TrackedResourceBase {
   @path
   @key("backupPolicyName")
   @segment("backupPolicies")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.Communication;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DomainResource)
-@Azure.ResourceManager.Private.armResourceInternal(SuppressionListProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SuppressionListProperties)
 model SuppressionListResource extends ProxyResourceBase {
   /**
    * The name of the suppression list.
@@ -30,6 +30,7 @@ model SuppressionListResource extends ProxyResourceBase {
   @path
   @key("suppressionListName")
   @segment("suppressionLists")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-@Azure.ResourceManager.Private.armResourceInternal(AddonProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AddonProperties)
 model Addon extends ProxyResourceBase {
   /**
    * Name of the addon for the private cloud
@@ -28,6 +28,7 @@ model Addon extends ProxyResourceBase {
   @path
   @key("addonName")
   @segment("addons")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,7 +18,6 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(GatewayProperties)
 @includeInapplicableMetadataInPayload(false)
 model GatewayResource extends ProxyResource {
   /**
@@ -27,6 +26,7 @@ model GatewayResource extends ProxyResource {
   @path
   @key("gatewayName")
   @segment("gateways")
+  @visibility("read")
   name: string;
 
   /**

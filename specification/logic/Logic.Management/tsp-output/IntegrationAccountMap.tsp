@@ -18,9 +18,6 @@ namespace Microsoft.Logic;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(
-  IntegrationAccountMapProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model IntegrationAccountMap extends Resource {
   /**
@@ -29,6 +26,7 @@ model IntegrationAccountMap extends Resource {
   @path
   @key("mapName")
   @segment("maps")
+  @visibility("read")
   name: string;
 
   /**

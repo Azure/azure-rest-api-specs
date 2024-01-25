@@ -18,8 +18,8 @@ namespace Microsoft.HDInsight;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-@Azure.ResourceManager.Private.armResourceInternal(ApplicationProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ApplicationProperties)
 model Application extends ProxyResourceBase {
   /**
    * The constant value for the application name.
@@ -27,6 +27,7 @@ model Application extends ProxyResourceBase {
   @path
   @key("applicationName")
   @segment("applications")
+  @visibility("read")
   name: string;
 
   /**

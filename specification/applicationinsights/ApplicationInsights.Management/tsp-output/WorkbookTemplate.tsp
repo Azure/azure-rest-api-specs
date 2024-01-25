@@ -16,8 +16,8 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(WorkbookTemplateProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(WorkbookTemplateProperties)
 model WorkbookTemplate extends TrackedResourceBase {
   /**
    * The name of the Application Insights component resource.
@@ -25,6 +25,7 @@ model WorkbookTemplate extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("workbooktemplates")
+  @visibility("read")
   name: string;
 
   /**

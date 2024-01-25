@@ -18,7 +18,6 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FrontDoor)
-@Azure.ResourceManager.Private.armResourceInternal(FrontendEndpointProperties)
 @includeInapplicableMetadataInPayload(false)
 model FrontendEndpoint extends FrontDoorResourceData {
   /**
@@ -30,6 +29,7 @@ model FrontendEndpoint extends FrontDoorResourceData {
   @path
   @key("frontendEndpointName")
   @segment("frontendEndpoints")
+  @visibility("read")
   name: string;
 
   /**

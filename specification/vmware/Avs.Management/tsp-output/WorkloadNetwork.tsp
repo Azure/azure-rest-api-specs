@@ -24,6 +24,7 @@ model WorkloadNetwork is ProxyResource<{}> {
   @path
   @key("workloadNetworkName")
   @segment("workloadNetworks")
+  @visibility("read")
   name: WorkloadNetworkName;
 }
 

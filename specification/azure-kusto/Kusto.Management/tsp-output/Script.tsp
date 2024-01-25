@@ -18,8 +18,8 @@ namespace Microsoft.Kusto;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-@Azure.ResourceManager.Private.armResourceInternal(ScriptProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ScriptProperties)
 model Script extends ProxyResourceBase {
   /**
    * The name of the Kusto database script.
@@ -28,6 +28,7 @@ model Script extends ProxyResourceBase {
   @path
   @key("scriptName")
   @segment("scripts")
+  @visibility("read")
   name: string;
 
   /**

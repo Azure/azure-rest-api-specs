@@ -15,21 +15,41 @@ namespace Microsoft.Devices;
 /**
  * The properties of the EventHubConsumerGroupInfo object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IotHubDescription)
-model EventHubConsumerGroupInfo is ProxyResource<Record<unknown>> {
+@includeInapplicableMetadataInPayload(false)
+model EventHubConsumerGroupInfo {
   /**
    * The name of the consumer group to retrieve.
    */
   @path
   @key("name")
   @segment("ConsumerGroups")
+  @visibility("read")
   name: string;
+
+  /**
+   * The Event Hub-compatible consumer group identifier.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * the resource type.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * The etag.
    */
   @visibility("read")
   etag?: string;
+
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties?: Record<unknown>;
 }
 
 @armResourceOperations

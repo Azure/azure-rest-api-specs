@@ -16,7 +16,6 @@ namespace Microsoft.Network;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ProfileProperties)
 @includeInapplicableMetadataInPayload(false)
 model Profile extends FrontDoorResourceModel {
   /**
@@ -26,6 +25,7 @@ model Profile extends FrontDoorResourceModel {
   @path
   @key("profileName")
   @segment("NetworkExperimentProfiles")
+  @visibility("read")
   name: string;
 
   /**

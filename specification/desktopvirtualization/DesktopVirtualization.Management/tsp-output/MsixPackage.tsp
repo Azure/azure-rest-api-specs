@@ -18,8 +18,8 @@ namespace Microsoft.DesktopVirtualization;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(HostPool)
-@Azure.ResourceManager.Private.armResourceInternal(MsixPackageProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MsixPackageProperties)
 model MsixPackage extends ProxyResourceBase {
   /**
    * The version specific package full name of the MSIX package within specified hostpool
@@ -29,6 +29,7 @@ model MsixPackage extends ProxyResourceBase {
   @path
   @key("msixPackageFullName")
   @segment("msixPackages")
+  @visibility("read")
   name: string;
 
   /**

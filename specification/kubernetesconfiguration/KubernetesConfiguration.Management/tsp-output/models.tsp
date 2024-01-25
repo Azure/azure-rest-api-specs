@@ -737,7 +737,7 @@ model KustomizationDefinition {
   /**
    * The path in the source reference to reconcile on the cluster.
    */
-  path?: string;
+  path?: string = "";
 
   /**
    * Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.

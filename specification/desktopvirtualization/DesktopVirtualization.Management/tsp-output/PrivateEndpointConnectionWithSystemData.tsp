@@ -24,6 +24,7 @@ model PrivateEndpointConnectionWithSystemData is ProxyResource<{}> {
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
+  @visibility("read")
   name: string;
 }
 

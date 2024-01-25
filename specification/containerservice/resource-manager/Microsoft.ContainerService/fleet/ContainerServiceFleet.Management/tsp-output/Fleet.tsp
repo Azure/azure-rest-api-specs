@@ -24,6 +24,7 @@ model Fleet is TrackedResource<FleetProperties> {
   @path
   @key("fleetName")
   @segment("fleets")
+  @visibility("read")
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;

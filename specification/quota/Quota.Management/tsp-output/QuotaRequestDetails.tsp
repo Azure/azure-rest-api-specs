@@ -16,16 +16,29 @@ namespace Microsoft.Quota;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(QuotaRequestProperties)
+@extensionResource
 @includeInapplicableMetadataInPayload(false)
-model QuotaRequestDetails extends ExtensionResourceBase {
+model QuotaRequestDetails {
   /**
    * Quota request ID.
    */
   @path
   @key("id")
   @segment("quotaRequests")
+  @visibility("read")
   name: string;
+
+  /**
+   * Quota request ID.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource type. "Microsoft.Quota/quotas".
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * Quota request details.

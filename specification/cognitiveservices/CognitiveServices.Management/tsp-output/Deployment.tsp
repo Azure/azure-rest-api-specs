@@ -18,8 +18,8 @@ namespace Microsoft.CognitiveServices;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-@Azure.ResourceManager.Private.armResourceInternal(DeploymentProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DeploymentProperties)
 model Deployment extends ProxyResourceBase {
   /**
    * The name of the deployment associated with the Cognitive Services Account
@@ -27,6 +27,7 @@ model Deployment extends ProxyResourceBase {
   @path
   @key("deploymentName")
   @segment("deployments")
+  @visibility("read")
   name: string;
 
   /**

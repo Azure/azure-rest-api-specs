@@ -16,8 +16,8 @@ namespace Microsoft.MobileNetwork;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(SimGroupPropertiesFormat)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SimGroupPropertiesFormat)
 model SimGroup extends TrackedResourceBase {
   /**
    * The name of the SIM Group.
@@ -27,6 +27,7 @@ model SimGroup extends TrackedResourceBase {
   @path
   @key("simGroupName")
   @segment("simGroups")
+  @visibility("read")
   name: string;
 
   /**

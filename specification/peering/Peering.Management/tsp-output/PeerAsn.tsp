@@ -17,7 +17,6 @@ namespace Microsoft.Peering;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@Azure.ResourceManager.Private.armResourceInternal(PeerAsnProperties)
 @includeInapplicableMetadataInPayload(false)
 model PeerAsn extends Resource {
   /**
@@ -26,6 +25,7 @@ model PeerAsn extends Resource {
   @path
   @key("peerAsnName")
   @segment("peerAsns")
+  @visibility("read")
   name: string;
 
   /**

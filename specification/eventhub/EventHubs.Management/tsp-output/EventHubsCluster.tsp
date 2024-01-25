@@ -16,7 +16,6 @@ namespace Microsoft.EventHub;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
 @includeInapplicableMetadataInPayload(false)
 model EventHubsCluster extends TrackedResource {
   /**
@@ -27,12 +26,19 @@ model EventHubsCluster extends TrackedResource {
   @path
   @key("clusterName")
   @segment("clusters")
+  @visibility("read")
   name: string;
 
   /**
    * Properties of the cluster SKU.
    */
   sku?: EventHubsClusterSku;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Event Hubs Cluster properties supplied in responses in List or Get operations.

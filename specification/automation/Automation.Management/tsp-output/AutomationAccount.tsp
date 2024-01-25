@@ -16,8 +16,8 @@ namespace Microsoft.Automation;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AutomationAccountProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AutomationAccountProperties)
 model AutomationAccount extends TrackedResourceBase {
   /**
    * The name of the automation account.
@@ -25,6 +25,7 @@ model AutomationAccount extends TrackedResourceBase {
   @path
   @key("automationAccountName")
   @segment("automationAccounts")
+  @visibility("read")
   name: string;
 
   /**

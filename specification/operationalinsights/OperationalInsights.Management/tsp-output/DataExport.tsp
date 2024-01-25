@@ -18,8 +18,8 @@ namespace Microsoft.OperationalInsights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(DataExportProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DataExportProperties)
 model DataExport extends ProxyResourceBase {
   /**
    * The data export rule name.
@@ -27,6 +27,7 @@ model DataExport extends ProxyResourceBase {
   @path
   @key("dataExportName")
   @segment("dataExports")
+  @visibility("read")
   name: string;
 
   /**

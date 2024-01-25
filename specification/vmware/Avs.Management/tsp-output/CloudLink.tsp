@@ -18,8 +18,8 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-@Azure.ResourceManager.Private.armResourceInternal(CloudLinkProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CloudLinkProperties)
 model CloudLink extends ProxyResourceBase {
   /**
    * Name of the cloud link resource
@@ -28,6 +28,7 @@ model CloudLink extends ProxyResourceBase {
   @path
   @key("cloudLinkName")
   @segment("cloudLinks")
+  @visibility("read")
   name: string;
 
   /**

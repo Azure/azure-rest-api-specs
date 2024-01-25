@@ -25,6 +25,7 @@ model Database is ProxyResource<{}> {
   @path
   @key("databaseName")
   @segment("databases")
+  @visibility("read")
   name: string;
 
   /**

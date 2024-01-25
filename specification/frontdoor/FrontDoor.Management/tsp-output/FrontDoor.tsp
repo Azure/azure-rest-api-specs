@@ -16,7 +16,6 @@ namespace Microsoft.Network;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(FrontDoorProperties)
 @includeInapplicableMetadataInPayload(false)
 model FrontDoor extends FrontDoorResourceModel {
   /**
@@ -28,6 +27,7 @@ model FrontDoor extends FrontDoorResourceModel {
   @path
   @key("frontDoorName")
   @segment("frontDoors")
+  @visibility("read")
   name: string;
 
   /**

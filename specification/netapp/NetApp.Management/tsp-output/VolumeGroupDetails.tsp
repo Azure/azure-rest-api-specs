@@ -18,8 +18,8 @@ namespace Microsoft.NetApp;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetAppAccount)
-@Azure.ResourceManager.Private.armResourceInternal(VolumeGroupProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VolumeGroupProperties)
 model VolumeGroupDetails extends ProxyResourceBase {
   /**
    * The name of the volumeGroup
@@ -30,6 +30,7 @@ model VolumeGroupDetails extends ProxyResourceBase {
   @path
   @key("volumeGroupName")
   @segment("volumeGroups")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DevCenter)
-@Azure.ResourceManager.Private.armResourceInternal(DevBoxDefinitionProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DevBoxDefinitionProperties)
 model DevBoxDefinition extends TrackedResourceBase {
   /**
    * The name of the Dev Box definition.
@@ -27,6 +27,7 @@ model DevBoxDefinition extends TrackedResourceBase {
   @path
   @key("devBoxDefinitionName")
   @segment("devboxdefinitions")
+  @visibility("read")
   name: string;
 
   /**

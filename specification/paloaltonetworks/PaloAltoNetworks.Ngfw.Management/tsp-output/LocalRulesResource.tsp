@@ -18,8 +18,8 @@ namespace PaloAltoNetworks.Cloudngfw;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(LocalRulestackResource)
-@Azure.ResourceManager.Private.armResourceInternal(RuleEntry)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RuleEntry)
 model LocalRulesResource extends ProxyResourceBase {
   /**
    * Local Rule priority
@@ -27,6 +27,7 @@ model LocalRulesResource extends ProxyResourceBase {
   @path
   @key("priority")
   @segment("localRules")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,7 +18,6 @@ namespace Microsoft.EventHub;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EventHubsNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(EventhubProperties)
 @includeInapplicableMetadataInPayload(false)
 model EventHub extends ProxyResource {
   /**
@@ -29,7 +28,14 @@ model EventHub extends ProxyResource {
   @path
   @key("eventHubName")
   @segment("eventhubs")
+  @visibility("read")
   name: string;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Properties supplied to the Create Or Update Event Hub operation.

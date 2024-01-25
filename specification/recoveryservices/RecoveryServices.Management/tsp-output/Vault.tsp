@@ -16,8 +16,8 @@ namespace Microsoft.RecoveryServices;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(VaultProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VaultProperties)
 model Vault extends TrackedResourceBase {
   /**
    * The name of the recovery services vault.
@@ -25,6 +25,7 @@ model Vault extends TrackedResourceBase {
   @path
   @key("vaultName")
   @segment("vaults")
+  @visibility("read")
   name: string;
 
   /**

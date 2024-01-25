@@ -24,6 +24,7 @@ model Trigger is ProxyResource<{}> {
   @path
   @key("name")
   @segment("triggers")
+  @visibility("read")
   name: string;
 
   /**

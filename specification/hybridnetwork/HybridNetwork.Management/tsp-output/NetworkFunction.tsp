@@ -16,10 +16,10 @@ namespace Microsoft.HybridNetwork;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   NetworkFunctionPropertiesFormat
 )
-@includeInapplicableMetadataInPayload(false)
 model NetworkFunction extends TrackedResourceBase {
   /**
    * The name of the network function resource.
@@ -27,6 +27,7 @@ model NetworkFunction extends TrackedResourceBase {
   @path
   @key("networkFunctionName")
   @segment("networkFunctions")
+  @visibility("read")
   name: string;
 
   /**

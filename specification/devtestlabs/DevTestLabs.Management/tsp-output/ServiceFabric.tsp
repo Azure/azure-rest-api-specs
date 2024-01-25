@@ -18,7 +18,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(User)
-@Azure.ResourceManager.Private.armResourceInternal(ServiceFabricProperties)
 @includeInapplicableMetadataInPayload(false)
 model ServiceFabric extends Resource {
   /**
@@ -27,6 +26,7 @@ model ServiceFabric extends Resource {
   @path
   @key("name")
   @segment("servicefabrics")
+  @visibility("read")
   name: string;
 
   /**

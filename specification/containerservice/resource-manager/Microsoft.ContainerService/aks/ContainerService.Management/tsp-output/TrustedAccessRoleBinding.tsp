@@ -18,10 +18,10 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedCluster)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   TrustedAccessRoleBindingProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model TrustedAccessRoleBinding extends ProxyResourceBase {
   /**
    * The name of trusted access role binding.
@@ -32,6 +32,7 @@ model TrustedAccessRoleBinding extends ProxyResourceBase {
   @path
   @key("trustedAccessRoleBindingName")
   @segment("trustedAccessRoleBindings")
+  @visibility("read")
   name: string;
 
   /**

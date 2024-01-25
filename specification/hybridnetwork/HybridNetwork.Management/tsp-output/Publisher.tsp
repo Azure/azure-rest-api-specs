@@ -16,8 +16,8 @@ namespace Microsoft.HybridNetwork;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(PublisherPropertiesFormat)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(PublisherPropertiesFormat)
 model Publisher extends TrackedResourceBase {
   /**
    * The name of the publisher.
@@ -27,6 +27,7 @@ model Publisher extends TrackedResourceBase {
   @path
   @key("publisherName")
   @segment("publishers")
+  @visibility("read")
   name: string;
 
   /**

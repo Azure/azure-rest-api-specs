@@ -19,13 +19,14 @@ namespace Microsoft.ConnectedVMwarevSphere;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(VirtualMachineInstance)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   VmInstanceHybridIdentityMetadataProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model VmInstanceHybridIdentityMetadata extends ProxyResourceBase {
   @key("hybridIdentityMetadatum")
   @segment("hybridIdentityMetadata")
+  @visibility("read")
   name: string;
 
   /**

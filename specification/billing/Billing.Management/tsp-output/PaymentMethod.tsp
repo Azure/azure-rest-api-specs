@@ -17,7 +17,6 @@ namespace Microsoft.Billing;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-@Azure.ResourceManager.Private.armResourceInternal(PaymentMethodProperties)
 @includeInapplicableMetadataInPayload(false)
 model PaymentMethod extends Resource {
   /**
@@ -26,6 +25,7 @@ model PaymentMethod extends Resource {
   @path
   @key("paymentMethodName")
   @segment("paymentMethods")
+  @visibility("read")
   name: string;
 
   /**

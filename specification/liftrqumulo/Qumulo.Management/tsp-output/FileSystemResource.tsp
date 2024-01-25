@@ -16,8 +16,8 @@ namespace Qumulo.Storage;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(FileSystemResourceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(FileSystemResourceProperties)
 model FileSystemResource extends TrackedResourceBase {
   /**
    * Name of the File System resource
@@ -25,6 +25,7 @@ model FileSystemResource extends TrackedResourceBase {
   @path
   @key("fileSystemName")
   @segment("fileSystems")
+  @visibility("read")
   name: string;
 
   /**

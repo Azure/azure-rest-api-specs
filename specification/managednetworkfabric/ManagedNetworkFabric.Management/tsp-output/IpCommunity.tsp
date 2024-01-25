@@ -16,8 +16,8 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(IpCommunityProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(IpCommunityProperties)
 model IpCommunity extends TrackedResourceBase {
   /**
    * Name of the IP Community.
@@ -25,6 +25,7 @@ model IpCommunity extends TrackedResourceBase {
   @path
   @key("ipCommunityName")
   @segment("ipCommunities")
+  @visibility("read")
   name: string;
 
   /**

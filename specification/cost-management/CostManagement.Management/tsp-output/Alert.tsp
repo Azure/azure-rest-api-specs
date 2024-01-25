@@ -16,8 +16,8 @@ namespace Microsoft.CostManagement;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
 model Alert extends ExtensionResourceBase {
   /**
    * Alert ID
@@ -25,6 +25,7 @@ model Alert extends ExtensionResourceBase {
   @path
   @key("alertId")
   @segment("alerts")
+  @visibility("read")
   name: string;
 
   /**

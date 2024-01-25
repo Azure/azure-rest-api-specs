@@ -17,8 +17,8 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-@Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
 model ReportResource extends ProxyResourceBase {
   /**
    * Report Name.
@@ -27,6 +27,7 @@ model ReportResource extends ProxyResourceBase {
   @path
   @key("reportName")
   @segment("reports")
+  @visibility("read")
   name: string;
 
   /**

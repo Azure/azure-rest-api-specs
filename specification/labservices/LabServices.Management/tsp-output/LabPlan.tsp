@@ -16,8 +16,8 @@ namespace Microsoft.LabServices;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(LabPlanProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(LabPlanProperties)
 model LabPlan extends TrackedResourceBase {
   /**
    * The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.
@@ -27,6 +27,7 @@ model LabPlan extends TrackedResourceBase {
   @path
   @key("labPlanName")
   @segment("labPlans")
+  @visibility("read")
   name: string;
 
   /**

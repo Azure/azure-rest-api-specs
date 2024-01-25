@@ -18,14 +18,15 @@ namespace Microsoft.Media;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MediaService)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateLinkResourceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model PrivateLinkResource extends ProxyResourceBase {
   @path
   @key("name")
   @segment("privateLinkResources")
+  @visibility("read")
   name: string;
 
   /**

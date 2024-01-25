@@ -18,8 +18,8 @@ namespace Microsoft.DeviceUpdate;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-@Azure.ResourceManager.Private.armResourceInternal(GroupInformationProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(GroupInformationProperties)
 model GroupInformation extends ProxyResourceBase {
   /**
    * The group ID of the private link resource.
@@ -27,6 +27,7 @@ model GroupInformation extends ProxyResourceBase {
   @path
   @key("groupId")
   @segment("privateLinkResources")
+  @visibility("read")
   name: string;
 
   /**

@@ -25,6 +25,7 @@ model DataConnection is ProxyResource<{}> {
   @path
   @key("dataConnectionName")
   @segment("dataConnections")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.MobileNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MobileNetwork)
-@Azure.ResourceManager.Private.armResourceInternal(ServicePropertiesFormat)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ServicePropertiesFormat)
 model Service extends TrackedResourceBase {
   /**
    * The name of the service. You must not use any of the following reserved strings - `default`, `requested` or `service`
@@ -29,6 +29,7 @@ model Service extends TrackedResourceBase {
   @path
   @key("serviceName")
   @segment("services")
+  @visibility("read")
   name: string;
 
   /**

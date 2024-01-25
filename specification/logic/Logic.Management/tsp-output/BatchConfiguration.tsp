@@ -18,7 +18,6 @@ namespace Microsoft.Logic;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(BatchConfigurationProperties)
 @includeInapplicableMetadataInPayload(false)
 model BatchConfiguration extends Resource {
   /**
@@ -27,6 +26,7 @@ model BatchConfiguration extends Resource {
   @path
   @key("batchConfigurationName")
   @segment("batchConfigurations")
+  @visibility("read")
   name: string;
 
   /**

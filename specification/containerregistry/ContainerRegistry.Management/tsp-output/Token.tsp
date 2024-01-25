@@ -18,8 +18,8 @@ namespace Microsoft.ContainerRegistry;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-@Azure.ResourceManager.Private.armResourceInternal(TokenProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(TokenProperties)
 model Token extends ProxyResourceBase {
   /**
    * The name of the token.
@@ -30,6 +30,7 @@ model Token extends ProxyResourceBase {
   @path
   @key("tokenName")
   @segment("tokens")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.DesktopVirtualization;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(HostPool)
-@Azure.ResourceManager.Private.armResourceInternal(SessionHostProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SessionHostProperties)
 model SessionHost extends ProxyResourceBase {
   /**
    * The name of the session host within the specified host pool
@@ -29,6 +29,7 @@ model SessionHost extends ProxyResourceBase {
   @path
   @key("sessionHostName")
   @segment("sessionHosts")
+  @visibility("read")
   name: string;
 
   /**

@@ -22,6 +22,7 @@ model Target is ProxyResource<Record<unknown>> {
   @path
   @key("targetName")
   @segment("targets")
+  @visibility("read")
   name: string;
 }
 

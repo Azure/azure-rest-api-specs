@@ -16,8 +16,8 @@ namespace Microsoft.DataBoxEdge;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(DataBoxEdgeDeviceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DataBoxEdgeDeviceProperties)
 model DataBoxEdgeDevice extends TrackedResourceBase {
   /**
    * The device name.
@@ -25,6 +25,7 @@ model DataBoxEdgeDevice extends TrackedResourceBase {
   @path
   @key("deviceName")
   @segment("dataBoxEdgeDevices")
+  @visibility("read")
   name: string;
 
   /**

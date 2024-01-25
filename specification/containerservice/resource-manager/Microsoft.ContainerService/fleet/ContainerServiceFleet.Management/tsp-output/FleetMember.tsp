@@ -26,6 +26,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @path
   @key("fleetMemberName")
   @segment("members")
+  @visibility("read")
   name: string;
 
   ...Azure.ResourceManager.EntityTag;

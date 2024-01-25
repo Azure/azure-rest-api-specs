@@ -17,13 +17,14 @@ namespace Microsoft.ConnectedVMwarevSphere;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   VirtualMachineInstanceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model VirtualMachineInstance extends ExtensionResourceBase {
   @key("virtualMachineInstance")
   @segment("virtualMachineInstances")
+  @visibility("read")
   name: string;
 
   /**

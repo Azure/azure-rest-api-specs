@@ -16,8 +16,8 @@ namespace Microsoft.AppConfiguration;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ConfigurationStoreProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ConfigurationStoreProperties)
 model ConfigurationStore extends TrackedResourceBase {
   /**
    * The name of the configuration store.
@@ -28,6 +28,7 @@ model ConfigurationStore extends TrackedResourceBase {
   @path
   @key("configStoreName")
   @segment("configurationStores")
+  @visibility("read")
   name: string;
 
   /**

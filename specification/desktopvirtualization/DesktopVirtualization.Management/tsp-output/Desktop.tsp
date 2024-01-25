@@ -18,8 +18,8 @@ namespace Microsoft.DesktopVirtualization;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApplicationGroup)
-@Azure.ResourceManager.Private.armResourceInternal(DesktopProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DesktopProperties)
 model Desktop extends ProxyResourceBase {
   /**
    * The name of the desktop within the specified desktop group
@@ -29,6 +29,7 @@ model Desktop extends ProxyResourceBase {
   @path
   @key("desktopName")
   @segment("desktops")
+  @visibility("read")
   name: string;
 
   /**

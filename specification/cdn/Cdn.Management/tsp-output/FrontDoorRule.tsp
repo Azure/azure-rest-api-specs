@@ -18,7 +18,6 @@ namespace Microsoft.Cdn;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FrontDoorRuleSet)
-@Azure.ResourceManager.Private.armResourceInternal(RuleProperties)
 @includeInapplicableMetadataInPayload(false)
 model FrontDoorRule extends ProxyResource {
   /**
@@ -27,6 +26,7 @@ model FrontDoorRule extends ProxyResource {
   @path
   @key("ruleName")
   @segment("rules")
+  @visibility("read")
   name: string;
 
   /**

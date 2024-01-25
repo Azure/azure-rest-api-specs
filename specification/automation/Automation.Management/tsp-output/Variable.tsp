@@ -18,8 +18,8 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(VariableProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VariableProperties)
 model Variable extends ProxyResourceBase {
   /**
    * The name of variable.
@@ -27,6 +27,7 @@ model Variable extends ProxyResourceBase {
   @path
   @key("variableName")
   @segment("variables")
+  @visibility("read")
   name: string;
 
   /**

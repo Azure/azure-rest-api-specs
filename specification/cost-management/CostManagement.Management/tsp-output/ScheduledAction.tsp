@@ -17,8 +17,8 @@ namespace Microsoft.CostManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-@Azure.ResourceManager.Private.armResourceInternal(ScheduledActionProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ScheduledActionProperties)
 model ScheduledAction extends ProxyResourceBase {
   /**
    * Scheduled action name.
@@ -26,6 +26,7 @@ model ScheduledAction extends ProxyResourceBase {
   @path
   @key("name")
   @segment("scheduledActions")
+  @visibility("read")
   name: string;
 
   /**

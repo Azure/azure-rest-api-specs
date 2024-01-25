@@ -18,9 +18,8 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FrontDoor)
-@Azure.ResourceManager.Private.armResourceInternal(RulesEngineProperties)
 @includeInapplicableMetadataInPayload(false)
-model RulesEngine extends ProxyResourceBase {
+model RulesEngine {
   /**
    * Name of the Rules Engine which is unique within the Front Door.
    */
@@ -30,7 +29,20 @@ model RulesEngine extends ProxyResourceBase {
   @path
   @key("rulesEngineName")
   @segment("rulesEngines")
+  @visibility("read")
   name: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource ID.
+   */
+  @visibility("read")
+  id?: string;
 
   /**
    * Properties of the Rules Engine Configuration.

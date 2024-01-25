@@ -17,8 +17,8 @@ namespace Microsoft.ResourceHealth;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-@Azure.ResourceManager.Private.armResourceInternal(MetadataEntityProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MetadataEntityProperties)
 model MetadataEntity extends ProxyResourceBase {
   /**
    * Name of metadata entity.
@@ -26,6 +26,7 @@ model MetadataEntity extends ProxyResourceBase {
   @path
   @key("name")
   @segment("metadata")
+  @visibility("read")
   name: string;
 
   /**

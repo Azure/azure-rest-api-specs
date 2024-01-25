@@ -18,8 +18,8 @@ namespace Microsoft.Media;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Transform)
-@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
 model Job extends ProxyResourceBase {
   /**
    * The Job name.
@@ -27,6 +27,7 @@ model Job extends ProxyResourceBase {
   @path
   @key("jobName")
   @segment("jobs")
+  @visibility("read")
   name: string;
 
   /**

@@ -17,21 +17,33 @@ namespace Microsoft.ManagementPartner;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-@Azure.ResourceManager.Private.armResourceInternal(PartnerProperties)
 @includeInapplicableMetadataInPayload(false)
-model PartnerResponse extends ProxyResourceBase {
+model PartnerResponse {
   /**
    * Id of the Partner
    */
   @path
   @key("partnerId")
   @segment("partners")
+  @visibility("read")
   name: string;
 
   /**
    * Type of the partner
    */
   etag?: int32;
+
+  /**
+   * Identifier of the partner
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Type of resource. "Microsoft.ManagementPartner/partners"
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * Properties of the partner

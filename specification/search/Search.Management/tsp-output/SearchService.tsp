@@ -16,8 +16,8 @@ namespace Microsoft.Search;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(SearchServiceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SearchServiceProperties)
 model SearchService extends TrackedResourceBase {
   /**
    * The name of the Azure Cognitive Search service associated with the specified resource group.
@@ -25,6 +25,7 @@ model SearchService extends TrackedResourceBase {
   @path
   @key("searchServiceName")
   @segment("searchServices")
+  @visibility("read")
   name: string;
 
   /**

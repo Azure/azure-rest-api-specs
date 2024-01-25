@@ -18,8 +18,8 @@ namespace Microsoft.Automanage;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ConfigurationProfileAssignment)
-@Azure.ResourceManager.Private.armResourceInternal(AssignmentReportProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AssignmentReportProperties)
 model Report extends ProxyResourceBase {
   /**
    * The report name.
@@ -27,6 +27,7 @@ model Report extends ProxyResourceBase {
   @path
   @key("reportName")
   @segment("reports")
+  @visibility("read")
   name: string;
 
   /**

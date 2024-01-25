@@ -384,5 +384,5 @@ model AccountKeyRegenerateRequest {
   /**
    * serial of key to be regenerated
    */
-  serial?: Serial = Serial.`1`;
+  serial?: Serial;
 }

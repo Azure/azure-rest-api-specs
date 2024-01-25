@@ -17,16 +17,28 @@ namespace Microsoft.KeyVault;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-@Azure.ResourceManager.Private.armResourceInternal(DeletedVaultProperties)
 @includeInapplicableMetadataInPayload(false)
-model DeletedVault extends ProxyResourceBase {
+model DeletedVault {
   /**
    * The name of the vault.
    */
   @path
   @key("vaultName")
   @segment("deletedVaults")
+  @visibility("read")
   name: string;
+
+  /**
+   * The resource ID for the deleted key vault.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The resource type of the key vault.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * Properties of the vault

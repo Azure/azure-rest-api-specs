@@ -18,10 +18,10 @@ namespace Microsoft.HybridNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Publisher)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   NetworkServiceDesignGroupPropertiesFormat
 )
-@includeInapplicableMetadataInPayload(false)
 model NetworkServiceDesignGroup extends TrackedResourceBase {
   /**
    * The name of the network service design group.
@@ -31,6 +31,7 @@ model NetworkServiceDesignGroup extends TrackedResourceBase {
   @path
   @key("networkServiceDesignGroupName")
   @segment("networkServiceDesignGroups")
+  @visibility("read")
   name: string;
 
   /**

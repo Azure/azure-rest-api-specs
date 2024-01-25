@@ -18,8 +18,8 @@ namespace Microsoft.NetApp;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Volume)
-@Azure.ResourceManager.Private.armResourceInternal(SnapshotProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SnapshotProperties)
 model Snapshot extends ProxyResourceBase {
   /**
    * The name of the snapshot
@@ -27,6 +27,7 @@ model Snapshot extends ProxyResourceBase {
   @path
   @key("snapshotName")
   @segment("snapshots")
+  @visibility("read")
   name: string;
 
   /**

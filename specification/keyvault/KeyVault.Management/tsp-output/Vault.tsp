@@ -16,16 +16,44 @@ namespace Microsoft.KeyVault;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(VaultProperties)
 @includeInapplicableMetadataInPayload(false)
-model Vault extends TrackedResourceBase {
+model Vault {
   /**
    * The name of the vault.
    */
   @path
   @key("vaultName")
   @segment("vaults")
+  @visibility("read")
   name: string;
+
+  /**
+   * Fully qualified identifier of the key vault resource.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource type of the key vault resource.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Azure location of the key vault resource.
+   */
+  location?: string;
+
+  /**
+   * Tags assigned to the key vault resource.
+   */
+  tags?: Record<string>;
+
+  /**
+   * System metadata for the key vault.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Properties of the vault

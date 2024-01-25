@@ -19,11 +19,12 @@ namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(Cluster)
-@Azure.ResourceManager.Private.armResourceInternal(UpdateSummariesProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(UpdateSummariesProperties)
 model UpdateSummaries extends ProxyResourceBase {
   @key("updateSummary")
   @segment("updateSummaries")
+  @visibility("read")
   name: string;
 
   /**

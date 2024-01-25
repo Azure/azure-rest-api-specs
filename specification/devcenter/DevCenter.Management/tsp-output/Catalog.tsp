@@ -18,8 +18,8 @@ namespace Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DevCenter)
-@Azure.ResourceManager.Private.armResourceInternal(CatalogProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CatalogProperties)
 model Catalog extends ProxyResourceBase {
   /**
    * The name of the Catalog.
@@ -27,6 +27,7 @@ model Catalog extends ProxyResourceBase {
   @path
   @key("catalogName")
   @segment("catalogs")
+  @visibility("read")
   name: string;
 
   /**

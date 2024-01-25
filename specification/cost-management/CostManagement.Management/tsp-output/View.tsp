@@ -17,8 +17,8 @@ namespace Microsoft.CostManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-@Azure.ResourceManager.Private.armResourceInternal(ViewProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ViewProperties)
 model View extends ProxyResourceBase {
   /**
    * View name
@@ -26,6 +26,7 @@ model View extends ProxyResourceBase {
   @path
   @key("viewName")
   @segment("views")
+  @visibility("read")
   name: string;
 
   /**

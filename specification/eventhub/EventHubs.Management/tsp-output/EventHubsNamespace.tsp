@@ -16,7 +16,6 @@ namespace Microsoft.EventHub;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(EHNamespaceProperties)
 @includeInapplicableMetadataInPayload(false)
 model EventHubsNamespace extends TrackedResource {
   /**
@@ -27,6 +26,7 @@ model EventHubsNamespace extends TrackedResource {
   @path
   @key("namespaceName")
   @segment("namespaces")
+  @visibility("read")
   name: string;
 
   /**
@@ -38,6 +38,12 @@ model EventHubsNamespace extends TrackedResource {
    * Properties of BYOK Identity description
    */
   identity?: Identity;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Namespace properties supplied for create namespace operation.

@@ -16,8 +16,8 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(DiagnosticSettingsCategory)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DiagnosticSettingsCategory)
 model DiagnosticSettingsCategoryResource extends ExtensionResourceBase {
   /**
    * The name of the diagnostic setting.
@@ -25,6 +25,7 @@ model DiagnosticSettingsCategoryResource extends ExtensionResourceBase {
   @path
   @key("name")
   @segment("diagnosticSettingsCategories")
+  @visibility("read")
   name: string;
 
   /**

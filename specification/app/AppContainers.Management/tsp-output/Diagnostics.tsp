@@ -18,8 +18,8 @@ namespace Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ContainerApp)
-@Azure.ResourceManager.Private.armResourceInternal(DiagnosticsProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DiagnosticsProperties)
 model Diagnostics extends ProxyResourceBase {
   /**
    * Name of the Container App Detector.
@@ -27,6 +27,7 @@ model Diagnostics extends ProxyResourceBase {
   @path
   @key("detectorName")
   @segment("detectors")
+  @visibility("read")
   name: string;
 
   /**

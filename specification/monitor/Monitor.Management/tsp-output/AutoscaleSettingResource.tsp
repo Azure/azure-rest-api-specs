@@ -16,8 +16,8 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AutoscaleSetting)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AutoscaleSetting)
 model AutoscaleSettingResource extends TrackedResourceBase {
   /**
    * The autoscale setting name.
@@ -25,6 +25,7 @@ model AutoscaleSettingResource extends TrackedResourceBase {
   @path
   @key("autoscaleSettingName")
   @segment("autoscalesettings")
+  @visibility("read")
   name: string;
 
   /**

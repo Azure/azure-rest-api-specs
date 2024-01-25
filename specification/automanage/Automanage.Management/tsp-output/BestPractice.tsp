@@ -17,10 +17,10 @@ namespace Microsoft.Automanage;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ConfigurationProfileProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model BestPractice extends ProxyResourceBase {
   /**
    * The Automanage best practice name.
@@ -28,6 +28,7 @@ model BestPractice extends ProxyResourceBase {
   @path
   @key("bestPracticeName")
   @segment("bestPractices")
+  @visibility("read")
   name: string;
 
   /**

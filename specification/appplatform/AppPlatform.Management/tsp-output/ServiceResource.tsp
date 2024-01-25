@@ -16,7 +16,6 @@ namespace Microsoft.AppPlatform;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ClusterResourceProperties)
 @includeInapplicableMetadataInPayload(false)
 model ServiceResource extends TrackedResource {
   /**
@@ -25,6 +24,7 @@ model ServiceResource extends TrackedResource {
   @path
   @key("serviceName")
   @segment("Spring")
+  @visibility("read")
   name: string;
 
   /**

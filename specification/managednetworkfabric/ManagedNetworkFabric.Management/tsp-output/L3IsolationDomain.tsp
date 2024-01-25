@@ -16,8 +16,8 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(L3IsolationDomainProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(L3IsolationDomainProperties)
 model L3IsolationDomain extends TrackedResourceBase {
   /**
    * Name of the L3 Isolation Domain.
@@ -25,6 +25,7 @@ model L3IsolationDomain extends TrackedResourceBase {
   @path
   @key("l3IsolationDomainName")
   @segment("l3IsolationDomains")
+  @visibility("read")
   name: string;
 
   /**

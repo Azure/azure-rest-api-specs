@@ -16,10 +16,10 @@ namespace Microsoft.ProviderHub;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ProviderRegistration)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ResourceTypeRegistrationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ResourceTypeRegistration extends ProxyResourceBase {
   /**
    * The resource type.
@@ -27,6 +27,7 @@ model ResourceTypeRegistration extends ProxyResourceBase {
   @path
   @key("resourceType")
   @segment("resourcetypeRegistrations")
+  @visibility("read")
   name: string;
 
   @extension("x-ms-client-flatten", true)

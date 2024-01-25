@@ -18,16 +18,28 @@ namespace Microsoft.Devices;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IotHubDescription)
-@Azure.ResourceManager.Private.armResourceInternal(GroupIdInformationProperties)
 @includeInapplicableMetadataInPayload(false)
-model GroupIdInformation extends ProxyResourceBase {
+model GroupIdInformation {
   /**
    * The name of the private link resource
    */
   @path
   @key("groupId")
   @segment("privateLinkResources")
+  @visibility("read")
   name: string;
+
+  /**
+   * The resource identifier.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * The properties for a group information object

@@ -16,8 +16,8 @@ namespace Microsoft.DevCenter;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(NetworkProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NetworkProperties)
 model NetworkConnection extends TrackedResourceBase {
   /**
    * Name of the Network Connection that can be applied to a Pool.
@@ -25,6 +25,7 @@ model NetworkConnection extends TrackedResourceBase {
   @path
   @key("networkConnectionName")
   @segment("networkConnections")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,10 +18,10 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   WorkloadNetworkSegmentProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model WorkloadNetworkSegment extends ProxyResourceBase {
   /**
    * NSX Segment identifier. Generally the same as the Segment's display name
@@ -29,6 +29,7 @@ model WorkloadNetworkSegment extends ProxyResourceBase {
   @path
   @key("segmentId")
   @segment("segments")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,8 +16,8 @@ namespace PaloAltoNetworks.Cloudngfw;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(RulestackProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RulestackProperties)
 model LocalRulestackResource extends TrackedResourceBase {
   /**
    * LocalRulestack resource name
@@ -25,6 +25,7 @@ model LocalRulestackResource extends TrackedResourceBase {
   @path
   @key("localRulestackName")
   @segment("localRulestacks")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Update)
-@Azure.ResourceManager.Private.armResourceInternal(UpdateRunProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(UpdateRunProperties)
 model UpdateRun extends ProxyResourceBase {
   /**
    * The name of the Update Run
@@ -27,6 +27,7 @@ model UpdateRun extends ProxyResourceBase {
   @path
   @key("updateRunName")
   @segment("updateRuns")
+  @visibility("read")
   name: string;
 
   /**

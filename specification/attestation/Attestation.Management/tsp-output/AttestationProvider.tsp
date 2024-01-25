@@ -16,8 +16,8 @@ namespace Microsoft.Attestation;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(StatusResult)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(StatusResult)
 model AttestationProvider extends TrackedResourceBase {
   /**
    * Name of the attestation provider.
@@ -25,6 +25,7 @@ model AttestationProvider extends TrackedResourceBase {
   @path
   @key("providerName")
   @segment("attestationProviders")
+  @visibility("read")
   name: string;
 
   /**

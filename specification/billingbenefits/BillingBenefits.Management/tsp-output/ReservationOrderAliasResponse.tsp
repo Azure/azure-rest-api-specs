@@ -17,10 +17,10 @@ namespace Microsoft.BillingBenefits;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ReservationOrderAliasResponseProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ReservationOrderAliasResponse extends ProxyResourceBase {
   /**
    * Name of the reservation order alias
@@ -29,6 +29,7 @@ model ReservationOrderAliasResponse extends ProxyResourceBase {
   @path
   @key("reservationOrderAliasName")
   @segment("reservationOrderAliases")
+  @visibility("read")
   name: string;
 
   /**

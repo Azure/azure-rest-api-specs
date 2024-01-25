@@ -18,7 +18,6 @@ namespace Microsoft.DataMigration;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Project)
-@Azure.ResourceManager.Private.armResourceInternal(ProjectFileProperties)
 @includeInapplicableMetadataInPayload(false)
 model ProjectFile extends Resource {
   /**
@@ -27,12 +26,19 @@ model ProjectFile extends Resource {
   @path
   @key("fileName")
   @segment("files")
+  @visibility("read")
   name: string;
 
   /**
    * HTTP strong entity tag value. This is ignored if submitted.
    */
   etag?: string;
+
+  /**
+   * Metadata pertaining to creation and last modification of the resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Custom file properties

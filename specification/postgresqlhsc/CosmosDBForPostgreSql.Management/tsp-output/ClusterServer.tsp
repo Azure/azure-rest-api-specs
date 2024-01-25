@@ -18,8 +18,8 @@ namespace Microsoft.DBforPostgreSQL;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-@Azure.ResourceManager.Private.armResourceInternal(ClusterServerProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ClusterServerProperties)
 model ClusterServer extends ProxyResourceBase {
   /**
    * The name of the server.
@@ -30,6 +30,7 @@ model ClusterServer extends ProxyResourceBase {
   @path
   @key("serverName")
   @segment("servers")
+  @visibility("read")
   name: string;
 
   /**

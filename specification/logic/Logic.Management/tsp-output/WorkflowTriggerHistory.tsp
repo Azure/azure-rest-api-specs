@@ -18,9 +18,6 @@ namespace Microsoft.Logic;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WorkflowTrigger)
-@Azure.ResourceManager.Private.armResourceInternal(
-  WorkflowTriggerHistoryProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model WorkflowTriggerHistory extends SubResource {
   /**
@@ -29,7 +26,14 @@ model WorkflowTriggerHistory extends SubResource {
   @path
   @key("historyName")
   @segment("histories")
+  @visibility("read")
   name: string;
+
+  /**
+   * Gets the workflow trigger history type.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * Gets the workflow trigger history properties.

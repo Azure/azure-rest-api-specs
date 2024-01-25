@@ -18,8 +18,8 @@ namespace Microsoft.NetApp;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Volume)
-@Azure.ResourceManager.Private.armResourceInternal(VolumeQuotaRulesProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(VolumeQuotaRulesProperties)
 model VolumeQuotaRule extends TrackedResourceBase {
   /**
    * The name of volume quota rule
@@ -27,6 +27,7 @@ model VolumeQuotaRule extends TrackedResourceBase {
   @path
   @key("volumeQuotaRuleName")
   @segment("volumeQuotaRules")
+  @visibility("read")
   name: string;
 
   /**

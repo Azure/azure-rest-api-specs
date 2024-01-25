@@ -18,8 +18,8 @@ namespace Microsoft.NetApp;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetAppAccount)
-@Azure.ResourceManager.Private.armResourceInternal(SnapshotPolicyProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SnapshotPolicyProperties)
 model SnapshotPolicy extends TrackedResourceBase {
   /**
    * The name of the snapshot policy
@@ -27,6 +27,7 @@ model SnapshotPolicy extends TrackedResourceBase {
   @path
   @key("snapshotPolicyName")
   @segment("snapshotPolicies")
+  @visibility("read")
   name: string;
 
   /**

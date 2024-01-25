@@ -18,8 +18,8 @@ namespace Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Image)
-@Azure.ResourceManager.Private.armResourceInternal(ImageVersionProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ImageVersionProperties)
 model ImageVersion extends ProxyResourceBase {
   /**
    * The version of the image.
@@ -27,6 +27,7 @@ model ImageVersion extends ProxyResourceBase {
   @path
   @key("versionName")
   @segment("versions")
+  @visibility("read")
   name: string;
 
   /**

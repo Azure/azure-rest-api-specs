@@ -18,8 +18,8 @@ namespace Microsoft.Insights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AzureMonitorPrivateLinkScope)
-@Azure.ResourceManager.Private.armResourceInternal(ScopedResourceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ScopedResourceProperties)
 model ScopedResource extends ProxyResourceBase {
   /**
    * The name of the scoped resource object.
@@ -27,6 +27,7 @@ model ScopedResource extends ProxyResourceBase {
   @path
   @key("name")
   @segment("scopedResources")
+  @visibility("read")
   name: string;
 
   /**

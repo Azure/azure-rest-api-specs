@@ -18,9 +18,6 @@ namespace Microsoft.ManagedNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedNetwork)
-@Azure.ResourceManager.Private.armResourceInternal(
-  ManagedNetworkPeeringPolicyProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model ManagedNetworkPeeringPolicy extends ProxyResource {
   /**
@@ -29,6 +26,7 @@ model ManagedNetworkPeeringPolicy extends ProxyResource {
   @path
   @key("managedNetworkPeeringPolicyName")
   @segment("managedNetworkPeeringPolicies")
+  @visibility("read")
   name: string;
 
   /**

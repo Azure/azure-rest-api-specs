@@ -18,8 +18,8 @@ namespace Microsoft.NetworkCloud;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(KubernetesCluster)
-@Azure.ResourceManager.Private.armResourceInternal(AgentPoolProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AgentPoolProperties)
 model AgentPool extends TrackedResourceBase {
   /**
    * The name of the Kubernetes cluster agent pool.
@@ -28,6 +28,7 @@ model AgentPool extends TrackedResourceBase {
   @path
   @key("agentPoolName")
   @segment("agentPools")
+  @visibility("read")
   name: string;
 
   /**

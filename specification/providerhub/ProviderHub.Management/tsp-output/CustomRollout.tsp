@@ -18,8 +18,8 @@ namespace Microsoft.ProviderHub;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ProviderRegistration)
-@Azure.ResourceManager.Private.armResourceInternal(CustomRolloutProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CustomRolloutProperties)
 model CustomRollout extends ProxyResourceBase {
   /**
    * The rollout name.
@@ -27,6 +27,7 @@ model CustomRollout extends ProxyResourceBase {
   @path
   @key("rolloutName")
   @segment("customRollouts")
+  @visibility("read")
   name: string;
 
   /**

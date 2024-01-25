@@ -16,8 +16,8 @@ namespace Microsoft.NetworkCloud;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(KubernetesClusterProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(KubernetesClusterProperties)
 model KubernetesCluster extends TrackedResourceBase {
   /**
    * The name of the Kubernetes cluster.
@@ -26,6 +26,7 @@ model KubernetesCluster extends TrackedResourceBase {
   @path
   @key("kubernetesClusterName")
   @segment("kubernetesClusters")
+  @visibility("read")
   name: string;
 
   /**

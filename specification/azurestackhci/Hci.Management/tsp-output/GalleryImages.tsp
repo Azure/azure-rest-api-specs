@@ -16,8 +16,8 @@ namespace Microsoft.AzureStackHCI;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(GalleryImageProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(GalleryImageProperties)
 model GalleryImages extends TrackedResourceBase {
   /**
    * Name of the gallery image
@@ -28,6 +28,7 @@ model GalleryImages extends TrackedResourceBase {
   @path
   @key("galleryImageName")
   @segment("galleryImages")
+  @visibility("read")
   name: string;
 
   /**

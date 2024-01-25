@@ -18,9 +18,6 @@ namespace Microsoft.NotificationHubs;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NamespaceResource)
-@Azure.ResourceManager.Private.armResourceInternal(
-  SharedAccessAuthorizationRuleProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model SharedAccessAuthorizationRuleResource extends Resource {
   /**
@@ -29,6 +26,7 @@ model SharedAccessAuthorizationRuleResource extends Resource {
   @path
   @key("authorizationRuleName")
   @segment("AuthorizationRules")
+  @visibility("read")
   name: string;
 
   /**

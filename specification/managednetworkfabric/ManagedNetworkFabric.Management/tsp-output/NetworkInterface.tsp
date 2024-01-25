@@ -18,8 +18,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetworkDevice)
-@Azure.ResourceManager.Private.armResourceInternal(NetworkInterfaceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NetworkInterfaceProperties)
 model NetworkInterface extends ProxyResourceBase {
   /**
    * Name of the Network Interface.
@@ -27,6 +27,7 @@ model NetworkInterface extends ProxyResourceBase {
   @path
   @key("networkInterfaceName")
   @segment("networkInterfaces")
+  @visibility("read")
   name: string;
 
   /**

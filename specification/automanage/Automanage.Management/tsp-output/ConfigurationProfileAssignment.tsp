@@ -16,10 +16,10 @@ namespace Microsoft.Automanage;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ConfigurationProfileAssignmentProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ConfigurationProfileAssignment extends ExtensionResourceBase {
   /**
    * The configuration profile assignment name.
@@ -27,6 +27,7 @@ model ConfigurationProfileAssignment extends ExtensionResourceBase {
   @path
   @key("configurationProfileAssignmentName")
   @segment("configurationProfileAssignments")
+  @visibility("read")
   name: string;
 
   /**

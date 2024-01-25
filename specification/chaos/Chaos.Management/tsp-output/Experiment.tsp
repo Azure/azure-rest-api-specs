@@ -16,8 +16,8 @@ namespace Microsoft.Chaos;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ExperimentProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ExperimentProperties)
 model Experiment extends TrackedResourceBase {
   /**
    * String that represents a Experiment resource name.
@@ -27,6 +27,7 @@ model Experiment extends TrackedResourceBase {
   @path
   @key("experimentName")
   @segment("experiments")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,7 +18,6 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(StorageProperties)
 @includeInapplicableMetadataInPayload(false)
 model StorageResource extends ProxyResource {
   /**
@@ -27,6 +26,7 @@ model StorageResource extends ProxyResource {
   @path
   @key("storageName")
   @segment("storages")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,8 +16,8 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(WebTestProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(WebTestProperties)
 model WebTest extends TrackedResourceBase {
   /**
    * The name of the Application Insights WebTest resource.
@@ -25,6 +25,7 @@ model WebTest extends TrackedResourceBase {
   @path
   @key("webTestName")
   @segment("webtests")
+  @visibility("read")
   name: string;
 
   /**

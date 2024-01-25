@@ -18,9 +18,6 @@ namespace Microsoft.DigitalTwins;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DigitalTwinsDescription)
-@Azure.ResourceManager.Private.armResourceInternal(
-  TimeSeriesDatabaseConnectionProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model TimeSeriesDatabaseConnection extends ExternalResource {
   /**
@@ -32,6 +29,7 @@ model TimeSeriesDatabaseConnection extends ExternalResource {
   @path
   @key("timeSeriesDatabaseConnectionName")
   @segment("timeSeriesDatabaseConnections")
+  @visibility("read")
   name: string;
 
   /**

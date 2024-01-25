@@ -16,8 +16,8 @@ namespace Microsoft.Quantum;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(WorkspaceResourceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(WorkspaceResourceProperties)
 model QuantumWorkspace extends TrackedResourceBase {
   /**
    * The name of the quantum workspace resource.
@@ -25,6 +25,7 @@ model QuantumWorkspace extends TrackedResourceBase {
   @path
   @key("workspaceName")
   @segment("workspaces")
+  @visibility("read")
   name: string;
 
   /**

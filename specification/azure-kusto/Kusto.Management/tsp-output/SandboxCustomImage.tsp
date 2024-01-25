@@ -18,8 +18,8 @@ namespace Microsoft.Kusto;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-@Azure.ResourceManager.Private.armResourceInternal(SandboxCustomImageProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SandboxCustomImageProperties)
 model SandboxCustomImage extends ProxyResourceBase {
   /**
    * The name of the sandbox custom image.
@@ -28,6 +28,7 @@ model SandboxCustomImage extends ProxyResourceBase {
   @path
   @key("sandboxCustomImageName")
   @segment("sandboxCustomImages")
+  @visibility("read")
   name: string;
 
   /**

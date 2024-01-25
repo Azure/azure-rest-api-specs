@@ -18,8 +18,8 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(SourceControlProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SourceControlProperties)
 model SourceControl extends ProxyResourceBase {
   /**
    * The name of source control.
@@ -27,6 +27,7 @@ model SourceControl extends ProxyResourceBase {
   @path
   @key("sourceControlName")
   @segment("sourceControls")
+  @visibility("read")
   name: string;
 
   /**

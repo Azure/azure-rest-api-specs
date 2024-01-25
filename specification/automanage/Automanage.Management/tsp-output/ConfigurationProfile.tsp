@@ -16,10 +16,10 @@ namespace Microsoft.Automanage;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ConfigurationProfileProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ConfigurationProfile extends TrackedResourceBase {
   /**
    * The configuration profile name.
@@ -27,6 +27,7 @@ model ConfigurationProfile extends TrackedResourceBase {
   @path
   @key("configurationProfileName")
   @segment("configurationProfiles")
+  @visibility("read")
   name: string;
 
   /**

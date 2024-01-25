@@ -18,10 +18,10 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ExpressRouteAuthorizationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ExpressRouteAuthorization extends ProxyResourceBase {
   /**
    * Name of the ExpressRoute Circuit Authorization in the private cloud
@@ -30,6 +30,7 @@ model ExpressRouteAuthorization extends ProxyResourceBase {
   @path
   @key("authorizationName")
   @segment("authorizations")
+  @visibility("read")
   name: string;
 
   /**

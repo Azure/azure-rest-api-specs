@@ -18,8 +18,8 @@ namespace PaloAltoNetworks.Cloudngfw;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(LocalRulestackResource)
-@Azure.ResourceManager.Private.armResourceInternal(CertificateObject)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CertificateObject)
 model CertificateObjectLocalRulestackResource extends ProxyResourceBase {
   /**
    * certificate name
@@ -27,6 +27,7 @@ model CertificateObjectLocalRulestackResource extends ProxyResourceBase {
   @path
   @key("name")
   @segment("certificates")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.HealthcareApis;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(IotConnectorProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(IotConnectorProperties)
 model IotConnector extends TrackedResourceBase {
   /**
    * The name of IoT Connector resource.
@@ -29,6 +29,7 @@ model IotConnector extends TrackedResourceBase {
   @path
   @key("iotConnectorName")
   @segment("iotconnectors")
+  @visibility("read")
   name: string;
 
   /**

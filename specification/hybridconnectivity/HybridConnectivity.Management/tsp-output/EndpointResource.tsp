@@ -16,8 +16,8 @@ namespace Microsoft.HybridConnectivity;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(EndpointProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(EndpointProperties)
 model EndpointResource extends ExtensionResourceBase {
   /**
    * The endpoint name.
@@ -25,6 +25,7 @@ model EndpointResource extends ExtensionResourceBase {
   @path
   @key("endpointName")
   @segment("endpoints")
+  @visibility("read")
   name: string;
 
   /**

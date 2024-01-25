@@ -16,8 +16,8 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(RoutePolicyProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RoutePolicyProperties)
 model RoutePolicy extends TrackedResourceBase {
   /**
    * Name of the Route Policy.
@@ -25,6 +25,7 @@ model RoutePolicy extends TrackedResourceBase {
   @path
   @key("routePolicyName")
   @segment("routePolicies")
+  @visibility("read")
   name: string;
 
   /**

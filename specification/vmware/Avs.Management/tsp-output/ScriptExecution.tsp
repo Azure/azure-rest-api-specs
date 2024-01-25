@@ -20,8 +20,8 @@ namespace Microsoft.AVS;
 @parentResource(PrivateCloud)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ScriptExecutionProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ScriptExecutionProperties)
 model ScriptExecution extends ProxyResourceBase {
 /**
 * Name of the user-invoked script execution resource
@@ -30,6 +30,7 @@ model ScriptExecution extends ProxyResourceBase {
 @path
 @key("scriptExecutionName")
 @segment("scriptExecutions")
+@visibility("read")
 "name": string;
 /**
 * The properties of a script execution resource

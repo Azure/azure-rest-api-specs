@@ -18,7 +18,6 @@ namespace Microsoft.CustomerInsights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Hub)
-@Azure.ResourceManager.Private.armResourceInternal(ProfileTypeDefinition)
 @includeInapplicableMetadataInPayload(false)
 model ProfileResourceFormat extends ProxyResource {
   /**
@@ -27,6 +26,7 @@ model ProfileResourceFormat extends ProxyResource {
   @path
   @key("profileName")
   @segment("profiles")
+  @visibility("read")
   name: string;
 
   /**

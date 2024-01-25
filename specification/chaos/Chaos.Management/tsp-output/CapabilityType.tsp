@@ -18,8 +18,8 @@ namespace Microsoft.Chaos;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(TargetType)
-@Azure.ResourceManager.Private.armResourceInternal(CapabilityTypeProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CapabilityTypeProperties)
 model CapabilityType extends ProxyResourceBase {
   /**
    * String that represents a Capability Type resource name.
@@ -28,6 +28,7 @@ model CapabilityType extends ProxyResourceBase {
   @path
   @key("capabilityTypeName")
   @segment("capabilityTypes")
+  @visibility("read")
   name: string;
 
   /**

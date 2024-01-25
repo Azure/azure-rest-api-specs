@@ -18,9 +18,6 @@ namespace Microsoft.Peering;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PeeringService)
-@Azure.ResourceManager.Private.armResourceInternal(
-  ConnectionMonitorTestProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model ConnectionMonitorTest extends Resource {
   /**
@@ -29,6 +26,7 @@ model ConnectionMonitorTest extends Resource {
   @path
   @key("connectionMonitorTestName")
   @segment("connectionMonitorTests")
+  @visibility("read")
   name: string;
 
   /**

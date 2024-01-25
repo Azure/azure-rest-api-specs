@@ -18,11 +18,12 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @locationResource
-@Azure.ResourceManager.Private.armResourceInternal(OSOptionPropertyList)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(OSOptionPropertyList)
 model OSOptionProfile extends ProxyResourceBase {
   @key("osOption")
   @segment("osOptions")
+  @visibility("read")
   name: string;
 
   /**

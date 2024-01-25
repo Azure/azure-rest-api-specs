@@ -18,10 +18,10 @@ namespace Microsoft.MobileNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PacketCoreControlPlane)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   DiagnosticsPackagePropertiesFormat
 )
-@includeInapplicableMetadataInPayload(false)
 model DiagnosticsPackage extends ProxyResourceBase {
   /**
    * The name of the diagnostics package.
@@ -31,6 +31,7 @@ model DiagnosticsPackage extends ProxyResourceBase {
   @path
   @key("diagnosticsPackageName")
   @segment("diagnosticsPackages")
+  @visibility("read")
   name: string;
 
   /**

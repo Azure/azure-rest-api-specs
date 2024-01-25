@@ -19,13 +19,14 @@ namespace Microsoft.HybridContainerService;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(ProvisionedCluster)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   HybridIdentityMetadataProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model HybridIdentityMetadata extends ProxyResourceBase {
   @key("hybridIdentityMetadatum")
   @segment("hybridIdentityMetadata")
+  @visibility("read")
   name: string;
 
   /**

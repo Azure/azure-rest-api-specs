@@ -16,8 +16,8 @@ namespace Microsoft.NetworkCloud;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(StorageApplianceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(StorageApplianceProperties)
 model StorageAppliance extends TrackedResourceBase {
   /**
    * The name of the storage appliance.
@@ -26,6 +26,7 @@ model StorageAppliance extends TrackedResourceBase {
   @path
   @key("storageApplianceName")
   @segment("storageAppliances")
+  @visibility("read")
   name: string;
 
   /**

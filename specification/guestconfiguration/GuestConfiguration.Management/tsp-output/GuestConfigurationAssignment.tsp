@@ -16,10 +16,10 @@ namespace Microsoft.GuestConfiguration;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   GuestConfigurationAssignmentProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model GuestConfigurationAssignment extends ExtensionResourceBase {
   /**
    * The guest configuration assignment name.
@@ -27,6 +27,7 @@ model GuestConfigurationAssignment extends ExtensionResourceBase {
   @path
   @key("guestConfigurationAssignmentName")
   @segment("guestConfigurationAssignments")
+  @visibility("read")
   name: string;
 
   /**

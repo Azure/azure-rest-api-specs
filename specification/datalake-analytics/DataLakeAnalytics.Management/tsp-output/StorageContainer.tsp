@@ -18,8 +18,8 @@ namespace Microsoft.DataLakeAnalytics;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccountInformation)
-@Azure.ResourceManager.Private.armResourceInternal(StorageContainerProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(StorageContainerProperties)
 model StorageContainer extends ProxyResourceBase {
   /**
    * The name of the Azure storage container to retrieve
@@ -27,6 +27,7 @@ model StorageContainer extends ProxyResourceBase {
   @path
   @key("containerName")
   @segment("containers")
+  @visibility("read")
   name: string;
 
   /**

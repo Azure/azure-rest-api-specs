@@ -16,10 +16,10 @@ namespace Microsoft.ManagedIdentity;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   UserAssignedIdentityProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model Identity extends TrackedResourceBase {
   /**
    * The name of the identity resource.
@@ -27,6 +27,7 @@ model Identity extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("userAssignedIdentities")
+  @visibility("read")
   name: string;
 
   /**

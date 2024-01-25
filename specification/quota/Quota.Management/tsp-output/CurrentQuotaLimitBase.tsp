@@ -16,9 +16,9 @@ namespace Microsoft.Quota;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(QuotaProperties)
+@extensionResource
 @includeInapplicableMetadataInPayload(false)
-model CurrentQuotaLimitBase extends ExtensionResourceBase {
+model CurrentQuotaLimitBase {
   /**
    * Resource name for a given resource provider. For example:
    * - SKU name for Microsoft.Compute
@@ -28,7 +28,20 @@ model CurrentQuotaLimitBase extends ExtensionResourceBase {
   @path
   @key("resourceName")
   @segment("quotas")
+  @visibility("read")
   name: string;
+
+  /**
+   * The resource ID.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * Quota properties for the specified resource, based on the API called, Quotas or Usages.

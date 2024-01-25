@@ -18,8 +18,8 @@ namespace Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ConnectedEnvironment)
-@Azure.ResourceManager.Private.armResourceInternal(DaprComponentProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DaprComponentProperties)
 model DaprComponent extends ProxyResourceBase {
   /**
    * Name of the Dapr Component.
@@ -27,6 +27,7 @@ model DaprComponent extends ProxyResourceBase {
   @path
   @key("componentName")
   @segment("daprComponents")
+  @visibility("read")
   name: string;
 
   /**

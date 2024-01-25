@@ -37,7 +37,7 @@ using TypeSpec.Versioning;
   title: "DevCenter",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.DevCenter;
 
 /**

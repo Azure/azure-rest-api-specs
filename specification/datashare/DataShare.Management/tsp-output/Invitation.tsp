@@ -18,7 +18,6 @@ namespace Microsoft.DataShare;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Share)
-@Azure.ResourceManager.Private.armResourceInternal(InvitationProperties)
 @includeInapplicableMetadataInPayload(false)
 model Invitation extends ProxyDto {
   /**
@@ -27,6 +26,7 @@ model Invitation extends ProxyDto {
   @path
   @key("invitationName")
   @segment("invitations")
+  @visibility("read")
   name: string;
 
   /**

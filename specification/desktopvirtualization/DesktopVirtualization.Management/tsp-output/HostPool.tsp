@@ -16,8 +16,8 @@ namespace Microsoft.DesktopVirtualization;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(HostPoolProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(HostPoolProperties)
 model HostPool extends TrackedResourceBase {
   /**
    * The name of the host pool within the specified resource group
@@ -27,6 +27,7 @@ model HostPool extends TrackedResourceBase {
   @path
   @key("hostPoolName")
   @segment("hostPools")
+  @visibility("read")
   name: string;
 
   /**

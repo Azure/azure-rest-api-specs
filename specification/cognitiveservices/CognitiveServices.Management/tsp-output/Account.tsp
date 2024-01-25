@@ -16,8 +16,8 @@ namespace Microsoft.CognitiveServices;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AccountProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AccountProperties)
 model Account extends TrackedResourceBase {
   /**
    * The name of Cognitive Services account.
@@ -28,6 +28,7 @@ model Account extends TrackedResourceBase {
   @path
   @key("accountName")
   @segment("accounts")
+  @visibility("read")
   name: string;
 
   /**

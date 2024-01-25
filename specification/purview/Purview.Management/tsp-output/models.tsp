@@ -269,6 +269,29 @@ model PrivateLinkServiceConnectionState {
 }
 
 /**
+ * Proxy Azure Resource
+ */
+model ProxyResource {
+  /**
+   * Gets or sets the identifier.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Gets or sets the name.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Gets or sets the type.
+   */
+  @visibility("read")
+  type?: string;
+}
+
+/**
  * The Sku
  */
 model PurviewAccountSku {
@@ -281,6 +304,50 @@ model PurviewAccountSku {
    * Gets or sets the sku name.
    */
   name?: Name;
+}
+
+/**
+ * Azure ARM Tracked Resource
+ */
+model TrackedResource {
+  /**
+   * Gets or sets the identifier.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Identity Info on the tracked resource
+   */
+  identity?: Identity;
+
+  /**
+   * Gets or sets the location.
+   */
+  location?: string;
+
+  /**
+   * Gets or sets the name.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Metadata pertaining to creation and last modification of the resource.
+   */
+  @visibility("read")
+  systemData?: TrackedResourceSystemData;
+
+  /**
+   * Tags on the azure resource.
+   */
+  tags?: Record<string>;
+
+  /**
+   * Gets or sets the type.
+   */
+  @visibility("read")
+  type?: string;
 }
 
 /**

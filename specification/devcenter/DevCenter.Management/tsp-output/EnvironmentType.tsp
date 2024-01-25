@@ -18,8 +18,8 @@ namespace Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DevCenter)
-@Azure.ResourceManager.Private.armResourceInternal(EnvironmentTypeProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(EnvironmentTypeProperties)
 model EnvironmentType extends ProxyResourceBase {
   /**
    * The name of the environment type.
@@ -27,6 +27,7 @@ model EnvironmentType extends ProxyResourceBase {
   @path
   @key("environmentTypeName")
   @segment("environmentTypes")
+  @visibility("read")
   name: string;
 
   /**

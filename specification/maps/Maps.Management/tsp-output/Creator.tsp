@@ -18,8 +18,8 @@ namespace Microsoft.Maps;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MapsAccount)
-@Azure.ResourceManager.Private.armResourceInternal(CreatorProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CreatorProperties)
 model Creator extends TrackedResourceBase {
   /**
    * The name of the Maps Creator instance.
@@ -27,6 +27,7 @@ model Creator extends TrackedResourceBase {
   @path
   @key("creatorName")
   @segment("creators")
+  @visibility("read")
   name: string;
 
   /**

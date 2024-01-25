@@ -14,8 +14,8 @@ namespace Microsoft.OpenEnergyPlatform;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(EnergyServiceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(EnergyServiceProperties)
 model EnergyService extends TrackedResourceBase {
   /**
    * The resource name.
@@ -23,6 +23,7 @@ model EnergyService extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("energyServices")
+  @visibility("read")
   name: string;
 
   @extension("x-ms-client-flatten", true)

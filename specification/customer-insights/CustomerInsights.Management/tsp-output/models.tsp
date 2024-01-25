@@ -627,6 +627,29 @@ model MetadataDefinitionBase {
 }
 
 /**
+ * Common properties of proxy resource.
+ */
+model ProxyResource {
+  /**
+   * Resource ID.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility("read")
+  type?: string;
+}
+
+/**
  * Defines the KPI Threshold limits.
  */
 model KpiDefinition {

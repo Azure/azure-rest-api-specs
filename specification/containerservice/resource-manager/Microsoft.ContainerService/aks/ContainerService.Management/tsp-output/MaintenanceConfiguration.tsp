@@ -18,10 +18,10 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedCluster)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   MaintenanceConfigurationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model MaintenanceConfiguration extends ProxyResourceBase {
   /**
    * The name of the maintenance configuration.
@@ -29,6 +29,7 @@ model MaintenanceConfiguration extends ProxyResourceBase {
   @path
   @key("configName")
   @segment("maintenanceConfigurations")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.ContainerRegistry;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-@Azure.ResourceManager.Private.armResourceInternal(WebhookProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(WebhookProperties)
 model Webhook extends TrackedResourceBase {
   /**
    * The name of the webhook.
@@ -30,6 +30,7 @@ model Webhook extends TrackedResourceBase {
   @path
   @key("webhookName")
   @segment("webhooks")
+  @visibility("read")
   name: string;
 
   /**

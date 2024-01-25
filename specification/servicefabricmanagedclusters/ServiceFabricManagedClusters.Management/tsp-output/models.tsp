@@ -588,6 +588,47 @@ model ApplicationTypeResourceProperties {
 }
 
 /**
+ * The resource model definition for proxy-only resource.
+ */
+model ProxyResource {
+  /**
+   * Azure resource identifier.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Azure resource name.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Azure resource type.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource location depends on the parent resource.
+   */
+  @visibility("read", "create")
+  location?: string;
+
+  /**
+   * Azure resource tags.
+   */
+  @visibility("read", "create")
+  tags?: Record<string>;
+
+  /**
+   * Metadata pertaining to creation and last modification of the resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
+}
+
+/**
  * The structure of the error.
  */
 @error

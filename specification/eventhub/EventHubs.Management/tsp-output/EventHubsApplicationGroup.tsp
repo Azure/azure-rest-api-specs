@@ -18,7 +18,6 @@ namespace Microsoft.EventHub;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EventHubsNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(ApplicationGroupProperties)
 @includeInapplicableMetadataInPayload(false)
 model EventHubsApplicationGroup extends ProxyResource {
   /**
@@ -29,7 +28,14 @@ model EventHubsApplicationGroup extends ProxyResource {
   @path
   @key("applicationGroupName")
   @segment("applicationGroups")
+  @visibility("read")
   name: string;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   @extension("x-ms-client-flatten", true)
   properties?: ApplicationGroupProperties;

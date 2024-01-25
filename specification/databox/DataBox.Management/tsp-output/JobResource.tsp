@@ -16,7 +16,6 @@ namespace Microsoft.DataBox;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
 @includeInapplicableMetadataInPayload(false)
 model JobResource extends Resource {
   /**
@@ -28,7 +27,26 @@ model JobResource extends Resource {
   @path
   @key("jobName")
   @segment("jobs")
+  @visibility("read")
   name: string;
+
+  /**
+   * Id of the object.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Type of the object.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Metadata pertaining to creation and last modification of the resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Properties of a job.

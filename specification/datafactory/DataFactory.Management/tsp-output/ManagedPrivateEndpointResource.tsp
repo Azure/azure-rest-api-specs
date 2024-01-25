@@ -18,7 +18,6 @@ namespace Microsoft.DataFactory;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedVirtualNetworkResource)
-@Azure.ResourceManager.Private.armResourceInternal(ManagedPrivateEndpoint)
 @includeInapplicableMetadataInPayload(false)
 model ManagedPrivateEndpointResource extends SubResource {
   /**
@@ -30,6 +29,7 @@ model ManagedPrivateEndpointResource extends SubResource {
   @path
   @key("managedPrivateEndpointName")
   @segment("managedPrivateEndpoints")
+  @visibility("read")
   name: string;
 
   /**

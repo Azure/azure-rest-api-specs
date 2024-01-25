@@ -16,8 +16,8 @@ namespace Microsoft.ContainerService;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ManagedClusterProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ManagedClusterProperties)
 model ManagedCluster extends TrackedResourceBase {
   /**
    * The name of the managed cluster resource.
@@ -28,6 +28,7 @@ model ManagedCluster extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("managedClusters")
+  @visibility("read")
   name: string;
 
   /**

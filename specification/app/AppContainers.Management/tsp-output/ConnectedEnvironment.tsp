@@ -16,10 +16,10 @@ namespace Microsoft.App;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ConnectedEnvironmentProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ConnectedEnvironment extends TrackedResourceBase {
   /**
    * Name of the connectedEnvironment.
@@ -27,6 +27,7 @@ model ConnectedEnvironment extends TrackedResourceBase {
   @path
   @key("connectedEnvironmentName")
   @segment("connectedEnvironments")
+  @visibility("read")
   name: string;
 
   /**

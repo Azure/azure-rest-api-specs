@@ -18,7 +18,6 @@ namespace Microsoft.DataFactory;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-@Azure.ResourceManager.Private.armResourceInternal(Trigger)
 @includeInapplicableMetadataInPayload(false)
 model TriggerResource extends SubResource {
   /**
@@ -30,6 +29,7 @@ model TriggerResource extends SubResource {
   @path
   @key("triggerName")
   @segment("triggers")
+  @visibility("read")
   name: string;
 
   /**

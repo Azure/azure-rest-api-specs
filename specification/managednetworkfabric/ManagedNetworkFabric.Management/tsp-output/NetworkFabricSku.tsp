@@ -17,8 +17,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricSkuProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricSkuProperties)
 model NetworkFabricSku extends ProxyResourceBase {
   /**
    * Name of the Network Fabric SKU.
@@ -26,6 +26,7 @@ model NetworkFabricSku extends ProxyResourceBase {
   @path
   @key("networkFabricSkuName")
   @segment("networkFabricSkus")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.Blueprint;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Blueprint)
-@Azure.ResourceManager.Private.armResourceInternal(PublishedBlueprintProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(PublishedBlueprintProperties)
 model PublishedBlueprint extends ProxyResourceBase {
   /**
    * Version of the published blueprint definition.
@@ -27,6 +27,7 @@ model PublishedBlueprint extends ProxyResourceBase {
   @path
   @key("versionId")
   @segment("versions")
+  @visibility("read")
   name: string;
 
   /**

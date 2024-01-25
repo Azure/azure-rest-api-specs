@@ -16,8 +16,8 @@ namespace Microsoft.ConnectedVMwarevSphere;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(DatastoreProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DatastoreProperties)
 model Datastore extends TrackedResourceBase {
   /**
    * Name of the datastore.
@@ -25,6 +25,7 @@ model Datastore extends TrackedResourceBase {
   @path
   @key("datastoreName")
   @segment("datastores")
+  @visibility("read")
   name: string;
 
   /**

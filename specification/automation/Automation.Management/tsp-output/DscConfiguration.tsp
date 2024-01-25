@@ -18,8 +18,8 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(DscConfigurationProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DscConfigurationProperties)
 model DscConfiguration extends TrackedResourceBase {
   /**
    * The configuration name.
@@ -27,6 +27,7 @@ model DscConfiguration extends TrackedResourceBase {
   @path
   @key("configurationName")
   @segment("configurations")
+  @visibility("read")
   name: string;
 
   /**

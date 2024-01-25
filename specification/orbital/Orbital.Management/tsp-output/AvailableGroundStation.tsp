@@ -17,10 +17,10 @@ namespace Microsoft.Orbital;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   AvailableGroundStationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model AvailableGroundStation extends ProxyResourceBase {
   /**
    * Ground Station name.
@@ -28,6 +28,7 @@ model AvailableGroundStation extends ProxyResourceBase {
   @path
   @key("groundStationName")
   @segment("availableGroundStations")
+  @visibility("read")
   name: string;
 
   /**

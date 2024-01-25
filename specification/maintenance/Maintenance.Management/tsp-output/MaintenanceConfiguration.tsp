@@ -17,10 +17,10 @@ namespace Microsoft.Maintenance;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   MaintenanceConfigurationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model MaintenanceConfiguration extends TrackedResourceBase {
   /**
    * Maintenance Configuration Name
@@ -28,6 +28,7 @@ model MaintenanceConfiguration extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("publicMaintenanceConfigurations")
+  @visibility("read")
   name: string;
 
   /**

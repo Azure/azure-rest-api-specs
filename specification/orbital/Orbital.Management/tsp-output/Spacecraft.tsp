@@ -16,8 +16,8 @@ namespace Microsoft.Orbital;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(SpacecraftsProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SpacecraftsProperties)
 model Spacecraft extends TrackedResourceBase {
   /**
    * Spacecraft ID.
@@ -25,6 +25,7 @@ model Spacecraft extends TrackedResourceBase {
   @path
   @key("spacecraftName")
   @segment("spacecrafts")
+  @visibility("read")
   name: string;
 
   /**

@@ -19,13 +19,14 @@ namespace Microsoft.HybridContainerService;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(ProvisionedCluster)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ProvisionedClusterUpgradeProfileProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ProvisionedClusterUpgradeProfile extends ProxyResourceBase {
   @key("upgradeProfile")
   @segment("upgradeProfiles")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,7 +18,6 @@ namespace Microsoft.Marketplace;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateStore)
-@Azure.ResourceManager.Private.armResourceInternal(CollectionProperties)
 @includeInapplicableMetadataInPayload(false)
 model Collection extends Resource {
   /**
@@ -27,6 +26,7 @@ model Collection extends Resource {
   @path
   @key("collectionId")
   @segment("collections")
+  @visibility("read")
   name: string;
 
   /**

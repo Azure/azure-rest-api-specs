@@ -16,10 +16,10 @@ namespace Microsoft.HybridNetwork;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   SiteNetworkServicePropertiesFormat
 )
-@includeInapplicableMetadataInPayload(false)
 model SiteNetworkService extends TrackedResourceBase {
   /**
    * The name of the site network service.
@@ -29,6 +29,7 @@ model SiteNetworkService extends TrackedResourceBase {
   @path
   @key("siteNetworkServiceName")
   @segment("siteNetworkServices")
+  @visibility("read")
   name: string;
 
   /**

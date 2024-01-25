@@ -16,7 +16,6 @@ namespace Microsoft.DevTestLab;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(LabProperties)
 @includeInapplicableMetadataInPayload(false)
 model Lab extends Resource {
   /**
@@ -25,6 +24,7 @@ model Lab extends Resource {
   @path
   @key("name")
   @segment("labs")
+  @visibility("read")
   name: string;
 
   /**

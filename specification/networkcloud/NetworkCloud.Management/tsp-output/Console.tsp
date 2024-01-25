@@ -18,8 +18,8 @@ namespace Microsoft.NetworkCloud;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VirtualMachine)
-@Azure.ResourceManager.Private.armResourceInternal(ConsoleProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ConsoleProperties)
 model Console extends TrackedResourceBase {
   /**
    * The name of the virtual machine console.
@@ -28,6 +28,7 @@ model Console extends TrackedResourceBase {
   @path
   @key("consoleName")
   @segment("consoles")
+  @visibility("read")
   name: string;
 
   /**

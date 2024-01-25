@@ -16,7 +16,6 @@ namespace Microsoft.Devices;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(IotHubProperties)
 @includeInapplicableMetadataInPayload(false)
 model IotHubDescription extends Resource {
   /**
@@ -25,6 +24,7 @@ model IotHubDescription extends Resource {
   @path
   @key("resourceName")
   @segment("IotHubs")
+  @visibility("read")
   name: string;
 
   /**
@@ -41,6 +41,12 @@ model IotHubDescription extends Resource {
    * The managed identities for the IotHub.
    */
   identity?: ArmIdentity;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * IotHub properties

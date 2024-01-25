@@ -16,8 +16,8 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricProperties)
 model NetworkFabric extends TrackedResourceBase {
   /**
    * Name of the Network Fabric.
@@ -25,6 +25,7 @@ model NetworkFabric extends TrackedResourceBase {
   @path
   @key("networkFabricName")
   @segment("networkFabrics")
+  @visibility("read")
   name: string;
 
   /**

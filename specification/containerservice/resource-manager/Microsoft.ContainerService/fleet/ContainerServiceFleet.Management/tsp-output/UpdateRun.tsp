@@ -26,6 +26,7 @@ model UpdateRun is ProxyResource<UpdateRunProperties> {
   @path
   @key("updateRunName")
   @segment("updateRuns")
+  @visibility("read")
   name: string;
 
   ...Azure.ResourceManager.EntityTag;

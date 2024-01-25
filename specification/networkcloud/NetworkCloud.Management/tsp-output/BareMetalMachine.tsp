@@ -16,8 +16,8 @@ namespace Microsoft.NetworkCloud;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(BareMetalMachineProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BareMetalMachineProperties)
 model BareMetalMachine extends TrackedResourceBase {
   /**
    * The name of the bare metal machine.
@@ -26,6 +26,7 @@ model BareMetalMachine extends TrackedResourceBase {
   @path
   @key("bareMetalMachineName")
   @segment("bareMetalMachines")
+  @visibility("read")
   name: string;
 
   /**

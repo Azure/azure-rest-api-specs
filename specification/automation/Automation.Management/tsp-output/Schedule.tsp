@@ -18,8 +18,8 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(ScheduleProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ScheduleProperties)
 model Schedule extends ProxyResourceBase {
   /**
    * The schedule name.
@@ -27,6 +27,7 @@ model Schedule extends ProxyResourceBase {
   @path
   @key("scheduleName")
   @segment("schedules")
+  @visibility("read")
   name: string;
 
   /**

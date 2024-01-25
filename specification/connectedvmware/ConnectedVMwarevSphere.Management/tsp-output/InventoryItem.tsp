@@ -18,8 +18,8 @@ namespace Microsoft.ConnectedVMwarevSphere;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VCenter)
-@Azure.ResourceManager.Private.armResourceInternal(InventoryItemProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(InventoryItemProperties)
 model InventoryItem extends ProxyResourceBase {
   /**
    * Name of the inventoryItem.
@@ -27,6 +27,7 @@ model InventoryItem extends ProxyResourceBase {
   @path
   @key("inventoryItemName")
   @segment("inventoryItems")
+  @visibility("read")
   name: string;
 
   /**

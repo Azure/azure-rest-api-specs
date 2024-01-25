@@ -16,9 +16,6 @@ namespace Microsoft.Logic;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(
-  IntegrationServiceEnvironmentProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model IntegrationServiceEnvironment extends Resource {
   /**
@@ -27,6 +24,7 @@ model IntegrationServiceEnvironment extends Resource {
   @path
   @key("integrationServiceEnvironmentName")
   @segment("integrationServiceEnvironments")
+  @visibility("read")
   name: string;
 
   /**

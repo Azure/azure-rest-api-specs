@@ -1103,6 +1103,35 @@ model PrivateLinkServiceConnectionState {
 }
 
 /**
+ * A definition of an Azure resource.
+ */
+model ProxyResource {
+  /**
+   * The ID of the resource.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * The type of the resource.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * The ETag of the resource, used for concurrency statements.
+   */
+  @visibility("read")
+  etag?: string;
+}
+
+/**
  * Contains information about the auto-storage account associated with a Batch account.
  */
 model AutoStorageProperties extends AutoStorageBaseProperties {
@@ -2152,7 +2181,7 @@ model FixedScaleSettings {
   /**
    * The default value is 15 minutes. Timeout values use ISO 8601 format. For example, use PT10M for 10 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).
    */
-  resizeTimeout?: duration = duration.PT15M;
+  resizeTimeout?: duration = "PT15M";
 
   /**
    * At least one of targetDedicatedNodes, targetLowPriorityNodes must be set.

@@ -18,7 +18,6 @@ namespace Microsoft.NotificationHubs;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NamespaceResource)
-@Azure.ResourceManager.Private.armResourceInternal(NotificationHubProperties)
 @includeInapplicableMetadataInPayload(false)
 model NotificationHubResource extends Resource {
   /**
@@ -27,6 +26,7 @@ model NotificationHubResource extends Resource {
   @path
   @key("notificationHubName")
   @segment("notificationHubs")
+  @visibility("read")
   name: string;
 
   /**

@@ -14,8 +14,8 @@ namespace Nginx.NginxPlus;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(NginxDeploymentProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NginxDeploymentProperties)
 model NginxDeployment extends TrackedResourceBase {
   /**
    * The name of targeted NGINX deployment
@@ -23,6 +23,7 @@ model NginxDeployment extends TrackedResourceBase {
   @path
   @key("deploymentName")
   @segment("nginxDeployments")
+  @visibility("read")
   name: string;
 
   @extension("x-ms-client-flatten", true)

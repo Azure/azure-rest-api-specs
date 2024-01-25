@@ -18,10 +18,10 @@ namespace Microsoft.OperationalInsights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(LogAnalyticsQueryPack)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   LogAnalyticsQueryPackQueryProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model LogAnalyticsQueryPackQuery extends ProxyResourceBase {
   /**
    * The id of a specific query defined in the Log Analytics QueryPack
@@ -29,6 +29,7 @@ model LogAnalyticsQueryPackQuery extends ProxyResourceBase {
   @path
   @key("id")
   @segment("queries")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,8 +16,8 @@ namespace Microsoft.ScVmm;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(CloudProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CloudProperties)
 model Cloud extends TrackedResourceBase {
   /**
    * Name of the Cloud.
@@ -25,6 +25,7 @@ model Cloud extends TrackedResourceBase {
   @path
   @key("cloudName")
   @segment("clouds")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,8 +16,8 @@ namespace Nginx.NginxPlus;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NginxDeployment)
-@Azure.ResourceManager.Private.armResourceInternal(NginxConfigurationProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NginxConfigurationProperties)
 model NginxConfiguration extends ProxyResourceBase {
   /**
    * The name of configuration, only 'default' is supported value due to the singleton of NGINX conf
@@ -25,6 +25,7 @@ model NginxConfiguration extends ProxyResourceBase {
   @path
   @key("configurationName")
   @segment("configurations")
+  @visibility("read")
   name: string;
 
   @extension("x-ms-client-flatten", true)

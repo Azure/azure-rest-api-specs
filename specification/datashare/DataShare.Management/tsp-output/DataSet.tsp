@@ -19,7 +19,6 @@ namespace Microsoft.DataShare;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Share)
-@Azure.ResourceManager.Private.armResourceInternal({})
 @includeInapplicableMetadataInPayload(false)
 model DataSet extends ProxyDto {
   /**
@@ -28,6 +27,7 @@ model DataSet extends ProxyDto {
   @path
   @key("dataSetName")
   @segment("dataSets")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,7 +18,6 @@ namespace Microsoft.Batch;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Application)
-@Azure.ResourceManager.Private.armResourceInternal(ApplicationPackageProperties)
 @includeInapplicableMetadataInPayload(false)
 model ApplicationPackage extends ProxyResource {
   /**
@@ -30,6 +29,7 @@ model ApplicationPackage extends ProxyResource {
   @path
   @key("versionName")
   @segment("versions")
+  @visibility("read")
   name: string;
 
   /**

@@ -19,13 +19,14 @@ namespace Microsoft.DataBoxEdge;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(DataBoxEdgeDevice)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ProactiveLogCollectionSettingsProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model DiagnosticProactiveLogCollectionSettings extends ProxyResourceBase {
   @key("diagnosticProactiveLogCollectionSetting")
   @segment("diagnosticProactiveLogCollectionSettings")
+  @visibility("read")
   name: string;
 
   /**

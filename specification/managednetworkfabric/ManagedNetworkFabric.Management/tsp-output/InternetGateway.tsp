@@ -16,8 +16,8 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(InternetGatewayProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(InternetGatewayProperties)
 model InternetGateway extends TrackedResourceBase {
   /**
    * Name of the Internet Gateway.
@@ -25,6 +25,7 @@ model InternetGateway extends TrackedResourceBase {
   @path
   @key("internetGatewayName")
   @segment("internetGateways")
+  @visibility("read")
   name: string;
 
   /**

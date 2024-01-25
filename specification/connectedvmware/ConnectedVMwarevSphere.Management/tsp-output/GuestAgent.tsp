@@ -19,11 +19,12 @@ namespace Microsoft.ConnectedVMwarevSphere;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(VirtualMachineInstance)
-@Azure.ResourceManager.Private.armResourceInternal(GuestAgentProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(GuestAgentProperties)
 model GuestAgent extends ProxyResourceBase {
   @key("guestAgent")
   @segment("guestAgents")
+  @visibility("read")
   name: string;
 
   /**

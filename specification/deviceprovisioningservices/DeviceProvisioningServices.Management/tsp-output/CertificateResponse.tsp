@@ -18,8 +18,8 @@ namespace Microsoft.Devices;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ProvisioningServiceDescription)
-@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
 model CertificateResponse extends ProxyResourceBase {
   /**
    * Name of the certificate to retrieve.
@@ -27,6 +27,7 @@ model CertificateResponse extends ProxyResourceBase {
   @path
   @key("certificateName")
   @segment("certificates")
+  @visibility("read")
   name: string;
 
   /**

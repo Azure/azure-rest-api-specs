@@ -18,8 +18,8 @@ namespace Microsoft.ContainerRegistry;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-@Azure.ResourceManager.Private.armResourceInternal(RunProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RunProperties)
 model Run extends ProxyResourceBase {
   /**
    * The run ID.
@@ -27,6 +27,7 @@ model Run extends ProxyResourceBase {
   @path
   @key("runId")
   @segment("runs")
+  @visibility("read")
   name: string;
 
   /**

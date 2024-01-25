@@ -18,8 +18,8 @@ namespace Microsoft.DataBoxEdge;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataBoxEdgeDevice)
-@Azure.ResourceManager.Private.armResourceInternal(BandwidthScheduleProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BandwidthScheduleProperties)
 model BandwidthSchedule extends ProxyResourceBase {
   /**
    * The bandwidth schedule name.
@@ -27,6 +27,7 @@ model BandwidthSchedule extends ProxyResourceBase {
   @path
   @key("name")
   @segment("bandwidthSchedules")
+  @visibility("read")
   name: string;
 
   /**

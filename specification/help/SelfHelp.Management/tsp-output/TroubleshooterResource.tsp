@@ -16,10 +16,10 @@ namespace Microsoft.Help;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   TroubleshooterInstanceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model TroubleshooterResource extends ExtensionResourceBase {
   /**
    * Troubleshooter resource Name.
@@ -30,6 +30,7 @@ model TroubleshooterResource extends ExtensionResourceBase {
   @path
   @key("troubleshooterName")
   @segment("troubleshooters")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,8 +16,8 @@ namespace Microsoft.DataProtection;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(BackupVault)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BackupVault)
 model BackupVaultResource extends TrackedResourceBase {
   /**
    * The name of the backup vault.
@@ -25,6 +25,7 @@ model BackupVaultResource extends TrackedResourceBase {
   @path
   @key("vaultName")
   @segment("backupVaults")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Microsoft.HealthcareApis;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IotConnector)
-@Azure.ResourceManager.Private.armResourceInternal(IotFhirDestinationProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(IotFhirDestinationProperties)
 model IotFhirDestination extends ProxyResourceBase {
   /**
    * The name of IoT Connector FHIR destination resource.
@@ -29,6 +29,7 @@ model IotFhirDestination extends ProxyResourceBase {
   @path
   @key("fhirDestinationName")
   @segment("fhirdestinations")
+  @visibility("read")
   name: string;
 
   /**

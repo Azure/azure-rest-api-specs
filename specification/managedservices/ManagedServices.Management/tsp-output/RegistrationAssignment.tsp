@@ -16,10 +16,10 @@ namespace Microsoft.ManagedServices;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   RegistrationAssignmentProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model RegistrationAssignment extends ExtensionResourceBase {
   /**
    * The GUID of the registration assignment.
@@ -27,6 +27,7 @@ model RegistrationAssignment extends ExtensionResourceBase {
   @path
   @key("registrationAssignmentId")
   @segment("registrationAssignments")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,10 +18,10 @@ namespace Microsoft.SignalRService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SignalRResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateEndpointConnectionProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model PrivateEndpointConnection extends ProxyResourceBase {
   /**
    * The name of the private endpoint connection
@@ -29,6 +29,7 @@ model PrivateEndpointConnection extends ProxyResourceBase {
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
+  @visibility("read")
   name: string;
 
   /**

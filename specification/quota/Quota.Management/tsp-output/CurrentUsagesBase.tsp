@@ -16,9 +16,9 @@ namespace Microsoft.Quota;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(UsagesProperties)
+@extensionResource
 @includeInapplicableMetadataInPayload(false)
-model CurrentUsagesBase extends ExtensionResourceBase {
+model CurrentUsagesBase {
   /**
    * Resource name for a given resource provider. For example:
    * - SKU name for Microsoft.Compute
@@ -28,7 +28,20 @@ model CurrentUsagesBase extends ExtensionResourceBase {
   @path
   @key("resourceName")
   @segment("usages")
+  @visibility("read")
   name: string;
+
+  /**
+   * The resource ID.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * Usage properties for the specified resource.

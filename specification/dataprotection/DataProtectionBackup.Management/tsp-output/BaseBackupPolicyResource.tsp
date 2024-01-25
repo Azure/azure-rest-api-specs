@@ -18,12 +18,13 @@ namespace Microsoft.DataProtection;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BackupVaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(BaseBackupPolicy)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BaseBackupPolicy)
 model BaseBackupPolicyResource extends ProxyResourceBase {
   @path
   @key("backupPolicyName")
   @segment("backupPolicies")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,8 +16,8 @@ namespace Microsoft.NetworkCloud;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ClusterManagerProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ClusterManagerProperties)
 model ClusterManager extends TrackedResourceBase {
   /**
    * The name of the cluster manager.
@@ -26,6 +26,7 @@ model ClusterManager extends TrackedResourceBase {
   @path
   @key("clusterManagerName")
   @segment("clusterManagers")
+  @visibility("read")
   name: string;
 
   /**

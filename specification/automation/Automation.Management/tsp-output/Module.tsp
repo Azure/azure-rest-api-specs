@@ -18,8 +18,8 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(ModuleProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ModuleProperties)
 model Module extends TrackedResourceBase {
   /**
    * The python package name.
@@ -27,6 +27,7 @@ model Module extends TrackedResourceBase {
   @path
   @key("packageName")
   @segment("python2Packages")
+  @visibility("read")
   name: string;
 
   /**

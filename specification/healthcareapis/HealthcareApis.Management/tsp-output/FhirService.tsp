@@ -18,8 +18,8 @@ namespace Microsoft.HealthcareApis;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(FhirServiceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(FhirServiceProperties)
 model FhirService extends TrackedResourceBase {
   /**
    * The name of FHIR Service resource.
@@ -29,6 +29,7 @@ model FhirService extends TrackedResourceBase {
   @path
   @key("fhirServiceName")
   @segment("fhirservices")
+  @visibility("read")
   name: string;
 
   /**

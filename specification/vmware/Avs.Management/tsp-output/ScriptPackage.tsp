@@ -18,8 +18,8 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-@Azure.ResourceManager.Private.armResourceInternal(ScriptPackageProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ScriptPackageProperties)
 model ScriptPackage extends ProxyResourceBase {
   /**
    * Name of the script package in the private cloud
@@ -28,6 +28,7 @@ model ScriptPackage extends ProxyResourceBase {
   @path
   @key("scriptPackageName")
   @segment("scriptPackages")
+  @visibility("read")
   name: string;
 
   /**

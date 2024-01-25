@@ -19,13 +19,14 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(AgentPool)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   AgentPoolUpgradeProfileProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model AgentPoolUpgradeProfile extends ProxyResourceBase {
   @key("upgradeProfile")
   @segment("upgradeProfiles")
+  @visibility("read")
   name: string;
 
   /**

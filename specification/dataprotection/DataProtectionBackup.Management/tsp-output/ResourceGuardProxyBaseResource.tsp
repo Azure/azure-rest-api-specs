@@ -18,8 +18,8 @@ namespace Microsoft.DataProtection;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BackupVaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(ResourceGuardProxyBase)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ResourceGuardProxyBase)
 model ResourceGuardProxyBaseResource extends ProxyResourceBase {
   /**
    * name of the resource guard proxy
@@ -28,6 +28,7 @@ model ResourceGuardProxyBaseResource extends ProxyResourceBase {
   @path
   @key("resourceGuardProxyName")
   @segment("backupResourceGuardProxies")
+  @visibility("read")
   name: string;
 
   /**

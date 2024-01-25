@@ -16,8 +16,8 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(NetworkTapProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NetworkTapProperties)
 model NetworkTap extends TrackedResourceBase {
   /**
    * Name of the Network Tap.
@@ -25,6 +25,7 @@ model NetworkTap extends TrackedResourceBase {
   @path
   @key("networkTapName")
   @segment("networkTaps")
+  @visibility("read")
   name: string;
 
   /**

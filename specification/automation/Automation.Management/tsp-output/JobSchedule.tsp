@@ -18,8 +18,8 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(JobScheduleProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(JobScheduleProperties)
 model JobSchedule extends ProxyResourceBase {
   /**
    * The job schedule name.
@@ -27,6 +27,7 @@ model JobSchedule extends ProxyResourceBase {
   @path
   @key("jobScheduleId")
   @segment("jobSchedules")
+  @visibility("read")
   name: string;
 
   /**

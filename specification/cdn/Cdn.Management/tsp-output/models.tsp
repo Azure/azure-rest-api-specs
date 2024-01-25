@@ -1510,6 +1510,11 @@ model AFDStateProperties {
 }
 
 /**
+ * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
+ */
+model ProxyResource extends Resource {}
+
+/**
  * The core properties of ARM resources
  */
 model Resource {
@@ -1582,6 +1587,22 @@ model AFDEndpointPropertiesUpdateParameters {
    * Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'
    */
   enabledState?: EnabledState;
+}
+
+/**
+ * The resource model definition for a ARM tracked top level resource.
+ */
+model TrackedResource extends Resource {
+  /**
+   * Resource location.
+   */
+  location: string;
+
+  /**
+   * Resource tags.
+   */
+  @visibility("read", "create", "update")
+  tags?: Record<string>;
 }
 
 /**

@@ -16,8 +16,8 @@ namespace Microsoft.SignalRService;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(SignalRProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SignalRProperties)
 model SignalRResource extends TrackedResourceBase {
   /**
    * The name of the resource.
@@ -25,6 +25,7 @@ model SignalRResource extends TrackedResourceBase {
   @path
   @key("resourceName")
   @segment("signalR")
+  @visibility("read")
   name: string;
 
   /**

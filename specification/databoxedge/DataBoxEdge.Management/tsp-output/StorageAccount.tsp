@@ -18,8 +18,8 @@ namespace Microsoft.DataBoxEdge;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataBoxEdgeDevice)
-@Azure.ResourceManager.Private.armResourceInternal(StorageAccountProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(StorageAccountProperties)
 model StorageAccount extends ProxyResourceBase {
   /**
    * The storage account name.
@@ -27,6 +27,7 @@ model StorageAccount extends ProxyResourceBase {
   @path
   @key("storageAccountName")
   @segment("storageAccounts")
+  @visibility("read")
   name: string;
 
   /**

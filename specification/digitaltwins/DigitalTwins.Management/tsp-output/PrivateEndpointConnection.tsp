@@ -18,16 +18,34 @@ namespace Microsoft.DigitalTwins;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DigitalTwinsDescription)
-@Azure.ResourceManager.Private.armResourceInternal(ConnectionProperties)
 @includeInapplicableMetadataInPayload(false)
-model PrivateEndpointConnection extends ProxyResourceBase {
+model PrivateEndpointConnection {
   /**
    * The name of the private endpoint connection.
    */
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
+  @visibility("read")
   name: string;
+
+  /**
+   * The resource identifier.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Metadata pertaining to creation and last modification of the private endpoint connection.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * The connection properties.

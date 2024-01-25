@@ -17,10 +17,10 @@ namespace Microsoft.BillingBenefits;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   SavingsPlanOrderAliasProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model SavingsPlanOrderAliasModel extends ProxyResourceBase {
   /**
    * Name of the savings plan order alias
@@ -29,6 +29,7 @@ model SavingsPlanOrderAliasModel extends ProxyResourceBase {
   @path
   @key("savingsPlanOrderAliasName")
   @segment("savingsPlanOrderAliases")
+  @visibility("read")
   name: string;
 
   /**

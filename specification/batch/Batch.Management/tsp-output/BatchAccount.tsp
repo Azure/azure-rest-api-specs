@@ -16,7 +16,6 @@ namespace Microsoft.Batch;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(BatchAccountProperties)
 @includeInapplicableMetadataInPayload(false)
 model BatchAccount extends Resource {
   /**
@@ -28,6 +27,7 @@ model BatchAccount extends Resource {
   @path
   @key("accountName")
   @segment("batchAccounts")
+  @visibility("read")
   name: string;
 
   /**

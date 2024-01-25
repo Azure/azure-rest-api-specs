@@ -21,6 +21,7 @@ model FluidRelayServer is TrackedResource<FluidRelayServerProperties> {
   @path
   @key("fluidRelayServerName")
   @segment("fluidRelayServers")
+  @visibility("read")
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;

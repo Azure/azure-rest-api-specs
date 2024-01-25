@@ -18,8 +18,8 @@ namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-@Azure.ResourceManager.Private.armResourceInternal(ArcSettingProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ArcSettingProperties)
 model ArcSetting extends ProxyResourceBase {
   /**
    * The name of the proxy resource holding details of HCI ArcSetting information.
@@ -27,6 +27,7 @@ model ArcSetting extends ProxyResourceBase {
   @path
   @key("arcSettingName")
   @segment("arcSettings")
+  @visibility("read")
   name: string;
 
   /**

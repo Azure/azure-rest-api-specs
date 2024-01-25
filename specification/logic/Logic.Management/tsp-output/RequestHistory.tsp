@@ -18,7 +18,6 @@ namespace Microsoft.Logic;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WorkflowRunActionRepetitionDefinition)
-@Azure.ResourceManager.Private.armResourceInternal(RequestHistoryProperties)
 @includeInapplicableMetadataInPayload(false)
 model RequestHistory extends Resource {
   /**
@@ -27,6 +26,7 @@ model RequestHistory extends Resource {
   @path
   @key("requestHistoryName")
   @segment("requestHistories")
+  @visibility("read")
   name: string;
 
   /**

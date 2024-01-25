@@ -18,8 +18,8 @@ namespace NewRelic.Observability;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NewRelicMonitorResource)
-@Azure.ResourceManager.Private.armResourceInternal(MonitoringTagRulesProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MonitoringTagRulesProperties)
 model TagRule extends ProxyResourceBase {
   /**
    * Name of the TagRule
@@ -27,6 +27,7 @@ model TagRule extends ProxyResourceBase {
   @path
   @key("ruleSetName")
   @segment("tagRules")
+  @visibility("read")
   name: string;
 
   /**

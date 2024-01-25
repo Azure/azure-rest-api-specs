@@ -18,8 +18,8 @@ namespace Microsoft.DataProtection;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BackupVaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(BackupInstance)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BackupInstance)
 model BackupInstanceResource extends ProxyResourceBase {
   /**
    * The name of the backup instance.
@@ -27,6 +27,7 @@ model BackupInstanceResource extends ProxyResourceBase {
   @path
   @key("backupInstanceName")
   @segment("backupInstances")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,10 +18,10 @@ namespace Microsoft.NetworkCloud;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ClusterMetricsConfigurationProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ClusterMetricsConfiguration extends TrackedResourceBase {
   /**
    * The name of the metrics configuration for the cluster.
@@ -30,6 +30,7 @@ model ClusterMetricsConfiguration extends TrackedResourceBase {
   @path
   @key("metricsConfigurationName")
   @segment("metricsConfigurations")
+  @visibility("read")
   name: string;
 
   /**

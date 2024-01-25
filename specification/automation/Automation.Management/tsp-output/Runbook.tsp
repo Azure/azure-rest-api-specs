@@ -18,8 +18,8 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-@Azure.ResourceManager.Private.armResourceInternal(RunbookProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RunbookProperties)
 model Runbook extends TrackedResourceBase {
   /**
    * The runbook name.
@@ -27,6 +27,7 @@ model Runbook extends TrackedResourceBase {
   @path
   @key("runbookName")
   @segment("runbooks")
+  @visibility("read")
   name: string;
 
   /**

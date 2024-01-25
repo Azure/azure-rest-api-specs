@@ -16,8 +16,8 @@ namespace Microsoft.AzureStackHCI;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(StorageContainerProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(StorageContainerProperties)
 model StorageContainers extends TrackedResourceBase {
   /**
    * Name of the storage container
@@ -28,6 +28,7 @@ model StorageContainers extends TrackedResourceBase {
   @path
   @key("storageContainerName")
   @segment("storageContainers")
+  @visibility("read")
   name: string;
 
   /**

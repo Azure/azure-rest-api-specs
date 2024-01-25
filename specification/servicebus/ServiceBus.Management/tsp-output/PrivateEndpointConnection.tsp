@@ -18,9 +18,6 @@ namespace Microsoft.ServiceBus;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceBusNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PrivateEndpointConnectionProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model PrivateEndpointConnection extends ProxyResource {
   /**
@@ -29,7 +26,14 @@ model PrivateEndpointConnection extends ProxyResource {
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
+  @visibility("read")
   name: string;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Properties of the PrivateEndpointConnection.

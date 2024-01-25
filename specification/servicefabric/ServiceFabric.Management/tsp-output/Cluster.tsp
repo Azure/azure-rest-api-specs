@@ -17,7 +17,6 @@ namespace Microsoft.ServiceFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
 @includeInapplicableMetadataInPayload(false)
 model Cluster extends Resource {
   /**
@@ -26,6 +25,7 @@ model Cluster extends Resource {
   @path
   @key("clusterName")
   @segment("clusters")
+  @visibility("read")
   name: string;
 
   /**

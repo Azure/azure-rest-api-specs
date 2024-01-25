@@ -17,13 +17,14 @@ namespace Microsoft.HybridContainerService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   KubernetesVersionProfileProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model KubernetesVersionProfile extends ExtensionResourceBase {
   @key("kubernetesVersion")
   @segment("kubernetesVersions")
+  @visibility("read")
   name: string;
 
   /**

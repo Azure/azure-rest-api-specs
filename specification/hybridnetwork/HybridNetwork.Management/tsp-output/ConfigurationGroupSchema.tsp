@@ -18,10 +18,10 @@ namespace Microsoft.HybridNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Publisher)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ConfigurationGroupSchemaPropertiesFormat
 )
-@includeInapplicableMetadataInPayload(false)
 model ConfigurationGroupSchema extends TrackedResourceBase {
   /**
    * The name of the configuration group schema.
@@ -31,6 +31,7 @@ model ConfigurationGroupSchema extends TrackedResourceBase {
   @path
   @key("configurationGroupSchemaName")
   @segment("configurationGroupSchemas")
+  @visibility("read")
   name: string;
 
   /**

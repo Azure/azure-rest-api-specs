@@ -18,10 +18,10 @@ namespace Microsoft.NetworkCloud;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   BareMetalMachineKeySetProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model BareMetalMachineKeySet extends TrackedResourceBase {
   /**
    * The name of the bare metal machine key set.
@@ -30,6 +30,7 @@ model BareMetalMachineKeySet extends TrackedResourceBase {
   @path
   @key("bareMetalMachineKeySetName")
   @segment("bareMetalMachineKeySets")
+  @visibility("read")
   name: string;
 
   /**

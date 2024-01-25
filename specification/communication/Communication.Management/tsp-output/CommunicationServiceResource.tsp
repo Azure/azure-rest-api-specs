@@ -16,10 +16,10 @@ namespace Microsoft.Communication;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   CommunicationServiceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model CommunicationServiceResource extends TrackedResourceBase {
   /**
    * The name of the CommunicationService resource.
@@ -30,6 +30,7 @@ model CommunicationServiceResource extends TrackedResourceBase {
   @path
   @key("communicationServiceName")
   @segment("communicationServices")
+  @visibility("read")
   name: string;
 
   /**

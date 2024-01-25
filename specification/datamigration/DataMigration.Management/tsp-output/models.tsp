@@ -907,6 +907,17 @@ model ErrorInfo {
   message?: string;
 }
 
+model ProxyResource {
+  @visibility("read")
+  id?: string;
+
+  @visibility("read")
+  name?: string;
+
+  @visibility("read")
+  type?: string;
+}
+
 /**
  * Migration Operation Input
  */
@@ -1331,6 +1342,28 @@ model SqlMigrationServiceProperties {
    */
   @visibility("read")
   integrationRuntimeState?: string;
+}
+
+model TrackedResource {
+  @visibility("read", "create")
+  location?: string;
+
+  /**
+   * Dictionary of <string>
+   */
+  tags?: Record<string>;
+
+  @visibility("read")
+  id?: string;
+
+  @visibility("read")
+  name?: string;
+
+  @visibility("read")
+  type?: string;
+
+  @visibility("read")
+  systemData?: SystemData;
 }
 
 /**

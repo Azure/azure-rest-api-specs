@@ -16,10 +16,10 @@ namespace Microsoft.HybridNetwork;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ConfigurationGroupValuePropertiesFormat
 )
-@includeInapplicableMetadataInPayload(false)
 model ConfigurationGroupValue extends TrackedResourceBase {
   /**
    * The name of the configuration group value.
@@ -29,6 +29,7 @@ model ConfigurationGroupValue extends TrackedResourceBase {
   @path
   @key("configurationGroupValueName")
   @segment("configurationGroupValues")
+  @visibility("read")
   name: string;
 
   /**

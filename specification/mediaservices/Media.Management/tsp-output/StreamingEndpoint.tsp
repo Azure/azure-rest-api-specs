@@ -18,8 +18,8 @@ namespace Microsoft.Media;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MediaService)
-@Azure.ResourceManager.Private.armResourceInternal(StreamingEndpointProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(StreamingEndpointProperties)
 model StreamingEndpoint extends TrackedResourceBase {
   /**
    * The name of the streaming endpoint, maximum length is 24.
@@ -30,6 +30,7 @@ model StreamingEndpoint extends TrackedResourceBase {
   @path
   @key("streamingEndpointName")
   @segment("streamingEndpoints")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,7 +18,6 @@ namespace Microsoft.DataFactory;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-@Azure.ResourceManager.Private.armResourceInternal(LinkedService)
 @includeInapplicableMetadataInPayload(false)
 model LinkedServiceResource extends SubResource {
   /**
@@ -30,6 +29,7 @@ model LinkedServiceResource extends SubResource {
   @path
   @key("linkedServiceName")
   @segment("linkedservices")
+  @visibility("read")
   name: string;
 
   /**

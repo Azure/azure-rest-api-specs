@@ -16,8 +16,8 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(IpPrefixProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(IpPrefixProperties)
 model IpPrefix extends TrackedResourceBase {
   /**
    * Name of the IP Prefix.
@@ -25,6 +25,7 @@ model IpPrefix extends TrackedResourceBase {
   @path
   @key("ipPrefixName")
   @segment("ipPrefixes")
+  @visibility("read")
   name: string;
 
   /**

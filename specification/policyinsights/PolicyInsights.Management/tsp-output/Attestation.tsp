@@ -16,8 +16,8 @@ namespace Microsoft.PolicyInsights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(AttestationProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AttestationProperties)
 model Attestation extends ExtensionResourceBase {
   /**
    * The name of the attestation.
@@ -25,6 +25,7 @@ model Attestation extends ExtensionResourceBase {
   @path
   @key("attestationName")
   @segment("attestations")
+  @visibility("read")
   name: string;
 
   /**

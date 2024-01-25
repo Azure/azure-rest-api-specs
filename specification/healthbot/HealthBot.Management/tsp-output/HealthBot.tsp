@@ -16,7 +16,6 @@ namespace Microsoft.HealthBot;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(HealthBotProperties)
 @includeInapplicableMetadataInPayload(false)
 model HealthBot extends TrackedResource {
   /**
@@ -28,6 +27,7 @@ model HealthBot extends TrackedResource {
   @path
   @key("botName")
   @segment("healthBots")
+  @visibility("read")
   name: string;
 
   /**

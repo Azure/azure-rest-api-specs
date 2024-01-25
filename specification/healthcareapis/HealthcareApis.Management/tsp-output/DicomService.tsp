@@ -18,8 +18,8 @@ namespace Microsoft.HealthcareApis;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(DicomServiceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DicomServiceProperties)
 model DicomService extends TrackedResourceBase {
   /**
    * The name of DICOM Service resource.
@@ -29,6 +29,7 @@ model DicomService extends TrackedResourceBase {
   @path
   @key("dicomServiceName")
   @segment("dicomservices")
+  @visibility("read")
   name: string;
 
   /**

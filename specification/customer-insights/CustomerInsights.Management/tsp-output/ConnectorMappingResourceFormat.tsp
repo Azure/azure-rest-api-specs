@@ -18,7 +18,6 @@ namespace Microsoft.CustomerInsights;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ConnectorResourceFormat)
-@Azure.ResourceManager.Private.armResourceInternal(ConnectorMapping)
 @includeInapplicableMetadataInPayload(false)
 model ConnectorMappingResourceFormat extends ProxyResource {
   /**
@@ -27,6 +26,7 @@ model ConnectorMappingResourceFormat extends ProxyResource {
   @path
   @key("mappingName")
   @segment("mappings")
+  @visibility("read")
   name: string;
 
   /**

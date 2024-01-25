@@ -18,8 +18,8 @@ namespace Microsoft.AVS;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ScriptPackage)
-@Azure.ResourceManager.Private.armResourceInternal(ScriptCmdletProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ScriptCmdletProperties)
 model ScriptCmdlet extends ProxyResourceBase {
   /**
    * Name of the script cmdlet resource in the script package in the private cloud
@@ -28,6 +28,7 @@ model ScriptCmdlet extends ProxyResourceBase {
   @path
   @key("scriptCmdletName")
   @segment("scriptCmdlets")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,8 +16,8 @@ namespace Microsoft.Kubernetes;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ConnectedClusterProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ConnectedClusterProperties)
 model ConnectedCluster extends TrackedResourceBase {
   /**
    * The name of the Kubernetes cluster on which get is called.
@@ -25,6 +25,7 @@ model ConnectedCluster extends TrackedResourceBase {
   @path
   @key("clusterName")
   @segment("connectedClusters")
+  @visibility("read")
   name: string;
 
   /**

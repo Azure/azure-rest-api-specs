@@ -16,8 +16,8 @@ namespace Microsoft.HybridCompute;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(MachineProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(MachineProperties)
 model Machine extends TrackedResourceBase {
   /**
    * The name of the hybrid machine.
@@ -28,6 +28,7 @@ model Machine extends TrackedResourceBase {
   @path
   @key("machineName")
   @segment("machines")
+  @visibility("read")
   name: string;
 
   /**

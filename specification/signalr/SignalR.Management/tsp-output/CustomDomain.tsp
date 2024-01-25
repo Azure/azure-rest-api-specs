@@ -18,8 +18,8 @@ namespace Microsoft.SignalRService;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SignalRResource)
-@Azure.ResourceManager.Private.armResourceInternal(CustomDomainProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CustomDomainProperties)
 model CustomDomain extends ProxyResourceBase {
   /**
    * Custom domain name.
@@ -27,6 +27,7 @@ model CustomDomain extends ProxyResourceBase {
   @path
   @key("name")
   @segment("customDomains")
+  @visibility("read")
   name: string;
 
   /**

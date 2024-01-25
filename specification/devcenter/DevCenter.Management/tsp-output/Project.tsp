@@ -16,8 +16,8 @@ namespace Microsoft.DevCenter;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ProjectProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ProjectProperties)
 model Project extends TrackedResourceBase {
   /**
    * The name of the project.
@@ -25,6 +25,7 @@ model Project extends TrackedResourceBase {
   @path
   @key("projectName")
   @segment("projects")
+  @visibility("read")
   name: string;
 
   /**

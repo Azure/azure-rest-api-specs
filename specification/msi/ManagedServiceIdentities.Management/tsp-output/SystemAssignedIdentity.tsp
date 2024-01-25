@@ -17,13 +17,14 @@ namespace Microsoft.ManagedIdentity;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   SystemAssignedIdentityProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model SystemAssignedIdentity extends ExtensionResourceBase {
   @key("identity")
   @segment("identities")
+  @visibility("read")
   name: string;
 
   /**

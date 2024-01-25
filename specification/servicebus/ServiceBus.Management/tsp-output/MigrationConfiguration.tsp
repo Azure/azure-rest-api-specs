@@ -18,9 +18,6 @@ namespace Microsoft.ServiceBus;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceBusNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(
-  MigrationConfigPropertiesProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model MigrationConfiguration extends ProxyResource {
   /**
@@ -29,7 +26,14 @@ model MigrationConfiguration extends ProxyResource {
   @path
   @key("configName")
   @segment("migrationConfigurations")
+  @visibility("read")
   name: MigrationConfigurationName;
+
+  /**
+   * The system meta data relating to this resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * Properties required to the Create Migration Configuration

@@ -17,8 +17,8 @@ namespace Microsoft.ResourceHealth;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@Azure.ResourceManager.Private.armResourceInternal(EventProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(EventProperties)
 model Event extends ProxyResourceBase {
   /**
    * Event Id which uniquely identifies ServiceHealth event.
@@ -26,6 +26,7 @@ model Event extends ProxyResourceBase {
   @path
   @key("eventTrackingId")
   @segment("events")
+  @visibility("read")
   name: string;
 
   /**

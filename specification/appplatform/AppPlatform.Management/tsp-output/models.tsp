@@ -562,6 +562,21 @@ model Sku {
 }
 
 /**
+ * The resource model definition for a ARM tracked top level resource.
+ */
+model TrackedResource extends Resource {
+  /**
+   * The GEO location of the resource.
+   */
+  location?: string;
+
+  /**
+   * Tags of the service which is a list of key value pairs that describe the resource.
+   */
+  tags?: Record<string>;
+}
+
+/**
  * The core properties of ARM resources.
  */
 model Resource {
@@ -826,6 +841,11 @@ model GitPatternRepository {
    */
   strictHostKeyChecking?: boolean;
 }
+
+/**
+ * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.
+ */
+model ProxyResource extends Resource {}
 
 /**
  * Validation result for config server settings

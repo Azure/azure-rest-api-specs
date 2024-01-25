@@ -19,10 +19,10 @@ namespace Microsoft.NetworkCloud;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   CloudServicesNetworkProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model CloudServicesNetwork extends TrackedResourceBase {
   /**
    * The name of the cloud services network.
@@ -31,6 +31,7 @@ model CloudServicesNetwork extends TrackedResourceBase {
   @path
   @key("cloudServicesNetworkName")
   @segment("cloudServicesNetworks")
+  @visibility("read")
   name: string;
 
   /**

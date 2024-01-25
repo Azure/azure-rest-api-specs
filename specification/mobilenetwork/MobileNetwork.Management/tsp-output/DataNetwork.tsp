@@ -18,8 +18,8 @@ namespace Microsoft.MobileNetwork;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MobileNetwork)
-@Azure.ResourceManager.Private.armResourceInternal(DataNetworkPropertiesFormat)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DataNetworkPropertiesFormat)
 model DataNetwork extends TrackedResourceBase {
   /**
    * The name of the data network.
@@ -29,6 +29,7 @@ model DataNetwork extends TrackedResourceBase {
   @path
   @key("dataNetworkName")
   @segment("dataNetworks")
+  @visibility("read")
   name: string;
 
   /**

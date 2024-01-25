@@ -18,9 +18,6 @@ namespace Microsoft.AppPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BuildService)
-@Azure.ResourceManager.Private.armResourceInternal(
-  BuildServiceAgentPoolProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model BuildServiceAgentPoolResource extends ProxyResource {
   /**
@@ -29,6 +26,7 @@ model BuildServiceAgentPoolResource extends ProxyResource {
   @path
   @key("agentPoolName")
   @segment("agentPools")
+  @visibility("read")
   name: string;
 
   /**

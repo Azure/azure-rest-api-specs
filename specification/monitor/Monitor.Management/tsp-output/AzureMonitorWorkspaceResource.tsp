@@ -16,10 +16,10 @@ namespace Microsoft.Insights;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   AzureMonitorWorkspaceResourceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model AzureMonitorWorkspaceResource extends TrackedResourceBase {
   /**
    * The name of the Azure Monitor workspace.  The name is case insensitive
@@ -28,6 +28,7 @@ model AzureMonitorWorkspaceResource extends TrackedResourceBase {
   @path
   @key("azureMonitorWorkspaceName")
   @segment("accounts")
+  @visibility("read")
   name: string;
 
   /**
