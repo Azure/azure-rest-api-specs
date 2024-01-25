@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.StorageActions;
 @doc("Storage Tasks run report instance")
 @parentResource(StorageTask)
-model StorageTaskReportInstance is TrackedResource<StorageTaskReportProperties> {
+model StorageTaskReportInstance is ProxyResource<StorageTaskReportProperties> {
   @path
   @key("reportName")
   @segment("reports")
