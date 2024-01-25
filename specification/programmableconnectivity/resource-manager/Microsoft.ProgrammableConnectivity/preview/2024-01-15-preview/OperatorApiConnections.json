@@ -505,9 +505,15 @@
           "$ref": "./common.json#/definitions/OperatorApiPlanResourceId",
           "description": "Reference to the Operator API Plan Resource ID."
         },
+        "operatorName": {
+          "type": "string",
+          "description": "Name of the Operator in the linked Operator API Plan belongs to.",
+          "readonly": true
+        },
         "camaraApiName": {
           "type": "string",
-          "description": "Network API user has selected for the current operator in the country/region provided in the linked Operator API Plan."
+          "description": "The Network API for the current operator in the country/region provided in the linked Operator API Plan.",
+          "readonly": true
         },
         "accountType": {
           "$ref": "#/definitions/AccountType",
@@ -530,7 +536,6 @@
       "required": [
         "gatewayId",
         "operatorApiPlanId",
-        "camaraApiName",
         "accountType"
       ]
     },
@@ -558,17 +563,7 @@
         {
           "$ref": "#/definitions/AppCredentials"
         }
-      ],
-      "properties": {
-        "camaraApiName": {
-          "type": "string",
-          "description": "Name of the Network API user has selected for the current operator in the country/region provided in the linked Operator API Plan."
-        },
-        "accountType": {
-          "$ref": "#/definitions/AccountType",
-          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged."
-        }
-      }
+      ]
     }
   },
   "parameters": {
