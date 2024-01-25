@@ -234,7 +234,7 @@ model SolutionTypeProperties {
 model InventoryResource is ProxyResource<InventoryProperties> {
   @doc("Inventory resource")
   @segment("inventory")
-  @key("inventory")
+  @key("inventoryId")
   @visibility("read")
   @path
   name: string;
