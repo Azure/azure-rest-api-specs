@@ -529,6 +529,14 @@
           },
           {
             "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "name": "CancelImportInfo",
+            "in": "body",
+            "description": "Information about the cancel import operation",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemCancelImportInfo"
+            }
           }
         ],
         "responses": {
@@ -831,7 +839,7 @@
                     "$ref": "#/definitions/AmlFilesystemImport"
                   },
                   "x-ms-identifiers": [
-                    "filesystemPath"
+                    "importId"
                   ]
                 }
               }
@@ -991,6 +999,13 @@
           "description": "Only blobs in the non-logging container that start with this path/prefix get imported into the cluster namespace. This is only used during initial creation of the AML file system.",
           "type": "string",
           "default": "/"
+        },
+        "importPrefixesInitial": {
+          "type": "array",
+          "description": "Only blobs in the non-logging container that start with one of the paths/prefixes in this array get imported into the cluster namespace. This is only used during initial creation of the AML file system and has '/' as the default value.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -1165,10 +1180,17 @@
       "type": "object",
       "description": "Information required to execute the import operation",
       "properties": {
-        "filesystemPath": {
+        "importId": {
           "type": "string",
-          "description": "Lustre file system path to import into relative to the file system root. Specify '/' to import all data.",
-          "default": "/"
+          "description": "Universally unique identifier (UUID) of the import job.",
+          "format": "uuid"
+        },
+        "importPrefixes": {
+          "type": "array",
+          "description": "An array of blob paths/prefixes that get imported into the cluster namespace. Specify '/' to import all data.",
+          "items": {
+            "type": "string"
+          }
         },
         "conflictResolutionMode": {
           "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
@@ -1183,6 +1205,21 @@
             "name": "ConflictResolutionMode",
             "modelAsString": true
           }
+        },
+        "maximumErrors": {
+          "description": "Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.",
+          "type": "integer"
+        }
+      }
+    },
+    "AmlFilesystemCancelImportInfo": {
+      "type": "object",
+      "description": "Information required to cancel an import operation",
+      "properties": {
+        "importId": {
+          "type": "string",
+          "description": "Universally unique identifier (UUID) of the import job.",
+          "format": "uuid"
         }
       }
     },
@@ -1191,10 +1228,17 @@
       "type": "object",
       "readOnly": true,
       "properties": {
-        "filesystemPath": {
-          "readOnly": true,
+        "importId": {
           "type": "string",
-          "description": "Lustre file system path to import into relative to the file system root. Specify '/' to import all data."
+          "description": "Universally unique identifier (UUID) of the import operation.",
+          "format": "uuid"
+        },
+        "importPrefixes": {
+          "type": "array",
+          "description": "An array of blob paths/prefixes that get imported into the cluster namespace.",
+          "items": {
+            "type": "string"
+          }
         },
         "conflictResolutionMode": {
           "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
@@ -1209,6 +1253,10 @@
             "name": "ConflictResolutionMode",
             "modelAsString": true
           }
+        },
+        "maximumErrors": {
+          "description": "Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.",
+          "type": "integer"
         },
         "status": {
           "description": "The status of the import",
@@ -1221,6 +1269,7 @@
               "type": "string",
               "enum": [
                 "InProgress",
+                "Cancelling",
                 "Canceled",
                 "Completed",
                 "CompletedPartial",
