@@ -4812,9 +4812,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -4836,7 +4833,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/applyRecoveryPoint": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/applyRecoveryPoint": {
       "post": {
         "tags": [
           "ReplicationProtectionClusters"
@@ -4852,19 +4849,15 @@
         ],
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -4909,7 +4902,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -4926,7 +4930,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/failoverCommit": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/failoverCommit": {
       "post": {
         "tags": [
           "ReplicationProtectionClusters"
@@ -4939,19 +4943,15 @@
         ],
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -4987,7 +4987,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -5082,7 +5093,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/recoveryPoints": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/recoveryPoints": {
       "get": {
         "tags": [
           "ClusterRecoveryPoints"
@@ -5095,19 +5106,15 @@
         ],
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -5152,7 +5159,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Gets the list of cluster recovery points.": {
             "$ref": "./examples/ClusterRecoveryPoints_ListByReplicationProtectionCluster.json"
@@ -5160,7 +5166,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/recoveryPoints/{recoveryPointName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/recoveryPoints/{recoveryPointName}": {
       "get": {
         "tags": [
           "ClusterRecoveryPoint"
@@ -5173,19 +5179,15 @@
         ],
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -5234,7 +5236,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Gets a recovery point.": {
             "$ref": "./examples/ClusterRecoveryPoint_Get.json"
@@ -5292,11 +5293,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -5313,7 +5322,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/testFailover": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/testFailover": {
       "post": {
         "tags": [
           "ReplicationProtectionClusters"
@@ -5329,19 +5338,15 @@
         ],
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -5386,7 +5391,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -5403,7 +5419,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/testFailoverCleanup": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/testFailoverCleanup": {
       "post": {
         "tags": [
           "ReplicationProtectionClusters"
@@ -5419,19 +5435,15 @@
         ],
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -5476,7 +5488,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -5562,7 +5585,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -5975,7 +6009,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/switchclusterprotection": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/switchClusterProtection": {
       "post": {
         "tags": [
           "ReplicationProtectionContainers"
@@ -5991,19 +6025,15 @@
         ],
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -6040,7 +6070,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -6116,7 +6157,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -12233,6 +12285,9 @@
     "ClusterProviderSpecificRecoveryPointDetails": {
       "description": "Replication provider specific cluster recovery point details.",
       "type": "object",
+      "required": [
+        "instanceType"
+      ],
       "properties": {
         "instanceType": {
           "description": "Gets the provider type.",
@@ -12401,6 +12456,9 @@
     "ClusterTestFailoverProviderSpecificInput": {
       "description": "Provider specific test cluster failover input.",
       "type": "object",
+      "required": [
+        "instanceType"
+      ],
       "properties": {
         "instanceType": {
           "description": "The class type.",
@@ -24739,6 +24797,9 @@
     "SwitchClusterProtectionProviderSpecificInput": {
       "description": "Provider specific switch cluster protection input.",
       "type": "object",
+      "required": [
+        "instanceType"
+      ],
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
