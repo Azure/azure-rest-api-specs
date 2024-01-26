@@ -10,21 +10,13 @@
       }
     ]
   },
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "host": "management.azure.com",
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -47,9 +39,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans/{operatorApiPlanName}": {
       "get": {
         "operationId": "OperatorApiPlans_Get",
-        "tags": [
-          "OperatorApiPlans"
-        ],
+        "tags": ["OperatorApiPlans"],
         "description": "Get an OperatorApiPlan resource by name.",
         "parameters": [
           {
@@ -86,9 +76,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans": {
       "get": {
         "operationId": "OperatorApiPlans_ListBySubscription",
-        "tags": [
-          "OperatorApiPlans"
-        ],
+        "tags": ["OperatorApiPlans"],
         "description": "List OperatorApiPlan resources by subscription ID.",
         "parameters": [
           {
@@ -141,9 +129,7 @@
           "$ref": "#/definitions/OperatorApiPlanProperties",
           "description": "Operator API Plan resource properties.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "x-ms-mutability": ["read"]
         }
       },
       "allOf": [
@@ -169,9 +155,7 @@
           "description": "The link to the next page of items."
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "OperatorApiPlanProperties": {
       "type": "object",
@@ -188,9 +172,7 @@
         "supportedLocations": {
           "type": "array",
           "description": "List of Azure regions where this offer is supported.",
-          "x-ms-identifiers": [
-            "supportedLocations"
-          ],
+          "x-ms-identifiers": ["supportedLocations"],
           "items": {
             "type": "string"
           }
@@ -198,9 +180,7 @@
         "operatorRegions": {
           "type": "array",
           "description": "List of country/region names where this plan is being supported by the Operator.",
-          "x-ms-identifiers": [
-            "operatorRegions"
-          ],
+          "x-ms-identifiers": ["operatorRegions"],
           "items": {
             "type": "string"
           }
@@ -208,9 +188,7 @@
         "markets": {
           "type": "array",
           "description": "List of country/region names where this plan is being supported by Azure Marketplace.",
-          "x-ms-identifiers": [
-            "markets"
-          ],
+          "x-ms-identifiers": ["markets"],
           "items": {
             "type": "string"
           }

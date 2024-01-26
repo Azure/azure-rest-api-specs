@@ -10,21 +10,13 @@
       }
     ]
   },
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "host": "management.azure.com",
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -47,9 +39,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/gateways": {
       "get": {
         "operationId": "Gateways_ListBySubscription",
-        "tags": [
-          "Gateways"
-        ],
+        "tags": ["Gateways"],
         "description": "List Gateway resources by subscription ID.",
         "parameters": [
           {
@@ -86,9 +76,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways": {
       "get": {
         "operationId": "Gateways_ListByResourceGroup",
-        "tags": [
-          "Gateways"
-        ],
+        "tags": ["Gateways"],
         "description": "List Gateway resources by resource group.",
         "parameters": [
           {
@@ -128,9 +116,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways/{gatewayName}": {
       "get": {
         "operationId": "Gateways_Get",
-        "tags": [
-          "Gateways"
-        ],
+        "tags": ["Gateways"],
         "description": "Get a Gateway resource by name.",
         "parameters": [
           {
@@ -168,9 +154,7 @@
       },
       "put": {
         "operationId": "Gateways_CreateOrUpdate",
-        "tags": [
-          "Gateways"
-        ],
+        "tags": ["Gateways"],
         "description": "Create or update an APC Gateway.",
         "parameters": [
           {
@@ -234,9 +218,7 @@
       },
       "patch": {
         "operationId": "Gateways_Update",
-        "tags": [
-          "Gateways"
-        ],
+        "tags": ["Gateways"],
         "description": "Update a Gateway.",
         "parameters": [
           {
@@ -301,9 +283,7 @@
       },
       "delete": {
         "operationId": "Gateways_Delete",
-        "tags": [
-          "Gateways"
-        ],
+        "tags": ["Gateways"],
         "description": "Delete a Gateway",
         "parameters": [
           {
@@ -375,10 +355,7 @@
           "$ref": "#/definitions/GatewayProperties",
           "description": "Properties for the Gateway resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         }
       },
       "allOf": [
@@ -404,9 +381,7 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "GatewayProperties": {
       "type": "object",
