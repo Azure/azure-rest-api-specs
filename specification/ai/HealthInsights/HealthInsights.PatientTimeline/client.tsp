@@ -3,12 +3,13 @@ import "./route.patienttimeline.tsp";
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../HealthInsights.OpenAPI/service.tsp";
+import "../service.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_1)
-@TypeSpec.Versioning.useDependency(AzureHealthInsights.ApiVersion.v2023_09_01_Preview)
+@TypeSpec.Versioning.useDependency(
+  AzureHealthInsights.ApiVersion.v2023_09_01_Preview
+)
 namespace ClientForAzureHealthInsights;
 
 @client({
