@@ -25,7 +25,7 @@ using Azure.ClientGenerator.Core;
   "{fullyQualifiedNamespace}",
   "The Schema Registry service endpoint.",
   {
-    @doc("The Schema Registry service endpoint, for example 'my-namespace.servicebus.windows.net'.")
+    @doc("The Schema Registry service endpoint, for example 'https://my-namespace.servicebus.windows.net'.")
     fullyQualifiedNamespace: url,
   }
 )
@@ -84,7 +84,7 @@ interface SchemaOperations {
     OkResponse & SchemaHeaders & SchemaContent & SchemaContentType
   >;
 
-  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/?api-version={apiVersion}
+  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}?api-version={apiVersion}
   @summary("List schema versions.")
   @doc("Gets the list of all versions of one schema.")
   listSchemaVersions is resourceOperations.ResourceList<Version>;
