@@ -3909,7 +3909,7 @@ model InstanceViewStatus {
   message?: string;
 
   @doc("The time of the status.")
-  time?: string;
+  time?: utcDateTime;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
