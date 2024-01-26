@@ -46,6 +46,24 @@ suppressions:
     reason: Keep identical to stable GA version to avoid breaking changes. https://dev.azure.com/msdata/Vienna/_workitems/edit/2803196
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}"].post
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
+  - code: PutResponseCodes
+    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
+  - code: AvoidAdditionalProperties
+    reason: This is an external reference right now, we will have full control on the schema returned in the upcoming version and will avoid this.
+    where:
+      - $.definitions.EndpointModels
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId
 ```
 ### Tag: package-preview-2023-08
 
