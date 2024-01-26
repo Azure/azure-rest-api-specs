@@ -24,9 +24,8 @@ interface IndexVersionsRegistries {
   createOrUpdateIndexVersion is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the registry.")      
-      @Autorest.useRef("registries.json#/parameters/RegistryNameParameter")
       @path
-      registryName: string;
+      registryName: Registry.name;
 
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
@@ -51,9 +50,8 @@ interface IndexVersionsRegistries {
   getIndexVersion is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the registry.")      
-      @Autorest.useRef("registries.json#/parameters/RegistryNameParameter")
       @path
-      registryName: string;
+      registryName: Registry.name;
 
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
@@ -73,9 +71,8 @@ interface IndexVersionsRegistries {
    listIndexVersion is Azure.Core.Foundations.Operation<
      {
        @doc("Name of the registry.")      
-       @Autorest.useRef("registries.json#/parameters/RegistryNameParameter")
        @path
-       registryName: string;
+       registryName: Registry.name;
  
        @doc("Name of the index.")
        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
@@ -103,9 +100,8 @@ interface IndexVersionsWorkspace {
   createOrUpdateIndexVersion is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the workspace.")
-      @Autorest.useRef("machineLearningServices.json#/parameters/WorkspaceNameParameter")
       @path
-      workspaceName: string;
+      workspaceName: Workspace.name;
 
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
@@ -130,9 +126,8 @@ interface IndexVersionsWorkspace {
   getIndexVersion is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the workspace.")
-      @Autorest.useRef("machineLearningServices.json#/parameters/WorkspaceNameParameter")
       @path
-      workspaceName: string;
+      workspaceName: Workspace.name;
 
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
@@ -152,9 +147,8 @@ interface IndexVersionsWorkspace {
    listIndexVersion is Azure.Core.Foundations.Operation<
      {
        @doc("Name of the workspace.")
-       @Autorest.useRef("machineLearningServices.json#/parameters/WorkspaceNameParameter")
        @path
-       workspaceName: string;
+       workspaceName: Workspace.name;
  
        @doc("Name of the index.")
        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
@@ -181,9 +175,8 @@ interface Indexes {
   listIndexRegistry is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the registry.")
-      @Autorest.useRef("registries.json#/parameters/RegistryNameParameter")
       @path
-      registryName: string;
+      registryName: Registry.name;
 
       ...StandardListQueryParameters
     },
@@ -197,9 +190,8 @@ interface Indexes {
    listIndexWorkspace is Azure.Core.Foundations.Operation<
      {
        @doc("Name of the workspace.")
-       @Autorest.useRef("machineLearningServices.json#/parameters/WorkspaceNameParameter")
        @path
-       workspaceName: string;
+       workspaceName: Workspace.name;
  
        ...StandardListQueryParameters
      },
