@@ -21,8 +21,8 @@ using Azure.Core.Traits;
   }
 )
 @doc("// FIXME: (miissing-service-description) Add service description")
-@versioned(DocumentTranslationClient.Versions)
-namespace DocumentTranslationClient;
+@versioned(DocumentTranslationRestClient.Versions)
+namespace DocumentTranslationRestClient;
 
 /** The Azure.AI.DocumentTranslation versions. */
 enum Versions {
