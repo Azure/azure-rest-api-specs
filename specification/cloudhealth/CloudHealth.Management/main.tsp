@@ -621,7 +621,6 @@ enum DiscoveryRuleShowEntityBehavior {
 
 @doc("Discovery rule relationship discovery behavior")
 enum DiscoveryRuleRelationshipDiscoveryBehavior {
-  
   @doc("Automatically attempt to discover relationships")
   Enabled,
 
