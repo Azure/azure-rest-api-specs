@@ -107,7 +107,6 @@ model UpdateAssistantOptions {
   ...OptionalNullableMetadata;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"
 @doc("The status of an assistant deletion operation.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model AssistantDeletionStatus {
