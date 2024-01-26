@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.Batch;
 
@@ -1699,6 +1698,10 @@ Protocol file.
       nodeId: string;
     },
     {
+      @doc("Type of content")
+      @header("content-type")
+      contentType: "application/octet-stream";
+
       @body
       @doc("A response containing the file content.")
       file: bytes;

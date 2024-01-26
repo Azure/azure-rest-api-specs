@@ -6,7 +6,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.Batch;
 
@@ -587,7 +586,6 @@ enum SecurityTypes {
 
 @doc("The result of listing the applications available in an Account.")
 @pagedResult
-@access(Access.public, "java")
 model BatchApplicationListResult {
   @doc("The list of applications available in the Account.")
   @items
@@ -600,7 +598,6 @@ model BatchApplicationListResult {
 }
 
 @doc("Contains information about an application in an Azure Batch Account.")
-@access(Access.public, "java")
 model BatchApplication {
   @doc("A string that uniquely identifies the application within the Account.")
   id: string;
@@ -614,7 +611,6 @@ model BatchApplication {
 
 @doc("An error response received from the Azure Batch service.")
 @error
-@access(Access.public, "java")
 model BatchError {
   @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
   code: string;
@@ -627,7 +623,6 @@ model BatchError {
 }
 
 @doc("An error message received in an Azure Batch error response.")
-@access(Access.public, "java")
 model BatchErrorMessage {
   @doc("The language code of the error message.")
   lang?: string;
@@ -637,7 +632,6 @@ model BatchErrorMessage {
 }
 
 @doc("An item of additional information included in an Azure Batch error response.")
-@access(Access.public, "java")
 model BatchErrorDetail {
   @doc("An identifier specifying the meaning of the Value property.")
   key?: string;
@@ -648,7 +642,6 @@ model BatchErrorDetail {
 
 @doc("The result of a listing the usage metrics for an Account.")
 @pagedResult
-@access(Access.public, "java")
 model BatchPoolListUsageMetricsResult {
   @doc("The Pool usage metrics data.")
   @items
@@ -661,7 +654,6 @@ model BatchPoolListUsageMetricsResult {
 }
 
 @doc("Usage metrics for a Pool across an aggregation interval.")
-@access(Access.public, "java")
 model BatchPoolUsageMetrics {
   @doc("The ID of the Pool whose metrics are aggregated in this entry.")
   poolId: string;
@@ -681,7 +673,6 @@ model BatchPoolUsageMetrics {
 
 @doc("The result of listing the supported Virtual Machine Images.")
 @pagedResult
-@access(Access.public, "java")
 model BatchAccountListSupportedImagesResult {
   @doc("The list of supported Virtual Machine Images.")
   @items
@@ -697,7 +688,6 @@ model BatchAccountListSupportedImagesResult {
 A reference to the Azure Virtual Machines Marketplace Image and additional
 information about the Image.
 """)
-@access(Access.public, "java")
 model ImageInfo {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The ID of the Compute Node agent SKU which the Image supports.")
@@ -725,7 +715,6 @@ A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Ga
 To get the list of all Azure Marketplace Image references verified by Azure Batch, see the
 ' List Supported Images ' operation.
 """)
-@access(Access.public, "java")
 model ImageReference {
   @doc("The publisher of the Azure Virtual Machines Marketplace Image. For example, Canonical or MicrosoftWindowsServer.")
   publisher?: string;
@@ -749,7 +738,6 @@ model ImageReference {
 
 @doc("The result of listing the Compute Node counts in the Account.")
 @pagedResult
-@access(Access.public, "java")
 model BatchPoolNodeCountsListResult {
   @doc("A list of Compute Node counts by Pool.")
   @items
@@ -762,7 +750,6 @@ model BatchPoolNodeCountsListResult {
 }
 
 @doc("The number of Compute Nodes in each state for a Pool.")
-@access(Access.public, "java")
 model BatchPoolNodeCounts {
   @doc("The ID of the Pool.")
   poolId: string;
@@ -775,7 +762,6 @@ model BatchPoolNodeCounts {
 }
 
 @doc("The number of Compute Nodes in each Compute Node state.")
-@access(Access.public, "java")
 model BatchNodeCounts {
   @doc("The number of Compute Nodes in the creating state.")
   creating: int32;
@@ -821,7 +807,6 @@ model BatchNodeCounts {
 }
 
 @doc("Contains utilization and resource usage statistics for the lifetime of a Pool.")
-@access(Access.public, "java")
 model BatchPoolStatistics {
   @doc("The URL for the statistics.")
   url: string;
@@ -840,7 +825,6 @@ model BatchPoolStatistics {
 }
 
 @doc("Statistics related to Pool usage information.")
-@access(Access.public, "java")
 model BatchPoolUsageStatistics {
   @doc("The start time of the time range covered by the statistics.")
   startTime: utcDateTime;
@@ -854,7 +838,6 @@ model BatchPoolUsageStatistics {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Statistics related to resource consumption by Compute Nodes in a Pool.")
-@access(Access.public, "java")
 model BatchPoolResourceStatistics {
   @doc("The start time of the time range covered by the statistics.")
   startTime: utcDateTime;
@@ -899,7 +882,6 @@ model BatchPoolResourceStatistics {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Resource usage statistics for a Job.")
-@access(Access.public, "java")
 model BatchJobStatistics {
   @doc("The URL of the statistics.")
   url: string;
@@ -948,7 +930,6 @@ model BatchJobStatistics {
 A Certificate that can be installed on Compute Nodes and can be used to
 authenticate operations on the machine.
 """)
-@access(Access.public, "java")
 model BatchCertificate {
   @doc("The X.509 thumbprint of the Certificate. This is a sequence of up to 40 hex digits (it may include spaces but these are removed).")
   thumbprint: string;
@@ -998,7 +979,6 @@ model BatchCertificate {
 }
 
 @doc("An error encountered by the Batch service when deleting a Certificate.")
-@access(Access.public, "java")
 model DeleteBatchCertificateError {
   @doc("An identifier for the Certificate deletion error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
@@ -1011,7 +991,6 @@ model DeleteBatchCertificateError {
 }
 
 @doc("Represents a name-value pair.")
-@access(Access.public, "java")
 model NameValuePair {
   @doc("The name in the name-value pair.")
   name?: string;
@@ -1022,7 +1001,6 @@ model NameValuePair {
 
 @doc("The result of listing the Certificates in the Account.")
 @pagedResult
-@access(Access.public, "java")
 model BatchCertificateListResult {
   @doc("The list of Certificates.")
   @items
@@ -1039,7 +1017,6 @@ The result of listing the files on a Compute Node, or the files associated with
 a Task on a Compute Node.
 """)
 @pagedResult
-@access(Access.public, "java")
 model BatchNodeFileListResult {
   @doc("The list of files.")
   @items
@@ -1052,7 +1029,6 @@ model BatchNodeFileListResult {
 }
 
 @doc("Information about a file or directory on a Compute Node.")
-@access(Access.public, "java")
 model BatchNodeFile {
   @doc("The file path.")
   name?: string;
@@ -1068,7 +1044,6 @@ model BatchNodeFile {
 }
 
 @doc("The properties of a file on a Compute Node.")
-@access(Access.public, "java")
 model FileProperties {
   @doc("The file creation time. The creation time is not returned for files on Linux Compute Nodes.")
   creationTime?: utcDateTime;
@@ -1090,7 +1065,6 @@ model FileProperties {
 A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a
 specification used to create each Job.
 """)
-@access(Access.public, "java")
 model BatchJobSchedule {
   @doc("A string that uniquely identifies the schedule within the Account.")
   @visibility("read")
@@ -1153,7 +1127,6 @@ model BatchJobSchedule {
 @doc("""
 Parameters for updating an Azure Batch Job Schedule.
 """)
-@access(Access.public, "java")
 model BatchJobScheduleUpdateParameters {
   @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time. If you do not specify this element, the existing schedule is left unchanged.")
   schedule?: Schedule;
@@ -1168,7 +1141,6 @@ model BatchJobScheduleUpdateParameters {
 @doc("""
 Parameters for creating an Azure Batch Job Schedule
 """)
-@access(Access.public, "java")
 model BatchJobScheduleCreateParameters {
   @doc("A string that uniquely identifies the schedule within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   id: string;
@@ -1190,7 +1162,6 @@ model BatchJobScheduleCreateParameters {
 The schedule according to which Jobs will be created. All times are fixed
 respective to UTC and are not impacted by daylight saving time.
 """)
-@access(Access.public, "java")
 model Schedule {
   @doc("The earliest time at which any Job may be created under this Job Schedule. If you do not specify a doNotRunUntil time, the schedule becomes ready to create Jobs immediately.")
   doNotRunUntil?: utcDateTime;
@@ -1206,7 +1177,6 @@ model Schedule {
 }
 
 @doc("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
-@access(Access.public, "java")
 model SecurityProfile {
   @doc("This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself.")
   encryptionAtHost: boolean;
@@ -1222,14 +1192,12 @@ model SecurityProfile {
 Specifies the service artifact reference id used to set same image version
 for all virtual machines in the scale set when using 'latest' image version.
 """)
-@access(Access.public, "java")
 model ServiceArtifactReference {
   @doc("The service artifact reference id of ServiceArtifactReference. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}")
   id: string;
 }
 
 @doc("Specifies details of the Jobs to be created on a schedule.")
-@access(Access.public, "java")
 model BatchJobSpecification {
   @doc("The priority of Jobs created under this schedule. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0. This priority is used as the default for all Jobs under the Job Schedule. You can update a Job's priority after it has been created using by using the update Job API.")
   priority?: int32;
@@ -1278,14 +1246,12 @@ model BatchJobSpecification {
 }
 
 @doc("The network configuration for the Job.")
-@access(Access.public, "java")
 model BatchJobNetworkConfiguration {
   @doc("The ARM resource identifier of the virtual network subnet which Compute Nodes running Tasks from the Job will join for the duration of the Task. This will only work with a VirtualMachineConfiguration Pool. The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
   subnetId: string;
 }
 
 @doc("The execution constraints for a Job.")
-@access(Access.public, "java")
 model BatchJobConstraints {
   @doc("The maximum elapsed time that the Job may run, measured from the time the Job is created. If the Job does not complete within the time limit, the Batch service terminates it and any Tasks that are still running. In this case, the termination reason will be MaxWallClockTimeExpiry. If this property is not specified, there is no time limit on how long the Job may run.")
   maxWallClockTime?: duration;
@@ -1319,7 +1285,6 @@ to tolerate being interrupted and restarted without causing any corruption or
 duplicate data. The best practice for long running Tasks is to use some form of
 checkpointing.
 """)
-@access(Access.public, "java")
 model BatchJobManagerTask {
   @doc("A string that uniquely identifies the Job Manager Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters.")
   id: string;
@@ -1377,7 +1342,6 @@ or because download failed, the Task fails.
 }
 
 @doc("The container settings for a Task.")
-@access(Access.public, "java")
 model BatchTaskContainerSettings {
   @doc("Additional options to the container create command. These additional options are supplied as arguments to the \"docker create\" command, in addition to those controlled by the Batch Service.")
   containerRunOptions?: string;
@@ -1393,7 +1357,6 @@ model BatchTaskContainerSettings {
 }
 
 @doc("A private container registry.")
-@access(Access.public, "java")
 model ContainerRegistry {
   @doc("The user name to log into the registry server.")
   username?: string;
@@ -1412,14 +1375,12 @@ model ContainerRegistry {
 The reference to a user assigned identity associated with the Batch pool which
 a compute node will use.
 """)
-@access(Access.public, "java")
 model BatchNodeIdentityReference {
   @doc("The ARM resource id of the user assigned identity.")
   resourceId?: string;
 }
 
 @doc("A single file or multiple files to be downloaded to a Compute Node.")
-@access(Access.public, "java")
 model ResourceFile {
   @doc("The storage container name in the auto storage Account. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified.")
   autoStorageContainerName?: string;
@@ -1446,7 +1407,6 @@ model ResourceFile {
 @doc("""
 On every file uploads, Batch service writes two log files to the compute node, 'fileuploadout.txt' and 'fileuploaderr.txt'. These log files are used to learn more about a specific failure.
 """)
-@access(Access.public, "java")
 model OutputFile {
   @doc("A pattern indicating which file(s) to upload. Both relative and absolute paths are supported. Relative paths are relative to the Task working directory. The following wildcards are supported: * matches 0 or more characters (for example pattern abc* would match abc or abcdef), ** matches any directory, ? matches any single character, [abc] matches one character in the brackets, and [a-c] matches one character in the range. Brackets can include a negation to match any character not specified (for example [!abc] matches any character but a, b, or c). If a file name starts with \".\" it is ignored by default but may be matched by specifying it explicitly (for example *.gif will not match .a.gif, but .*.gif will). A simple example: **\\*.txt matches any file that does not start in '.' and ends with .txt in the Task working directory or any subdirectory. If the filename contains a wildcard character it can be escaped using brackets (for example abc[*] would match a file named abc*). Note that both \\ and / are treated as directory separators on Windows, but only / is on Linux. Environment variables (%var% on Windows or $var on Linux) are expanded prior to the pattern being applied.")
   filePattern: string;
@@ -1459,14 +1419,12 @@ model OutputFile {
 }
 
 @doc("The destination to which a file should be uploaded.")
-@access(Access.public, "java")
 model OutputFileDestination {
   @doc("A location in Azure blob storage to which files are uploaded.")
   container?: OutputFileBlobContainerDestination;
 }
 
 @doc("Specifies a file upload destination within an Azure blob storage container.")
-@access(Access.public, "java")
 model OutputFileBlobContainerDestination {
   @doc("The destination blob or virtual directory within the Azure Storage container. If filePattern refers to a specific file (i.e. contains no wildcards), then path is the name of the blob to which to upload that file. If filePattern contains one or more wildcards (and therefore may match multiple files), then path is the name of the blob virtual directory (which is prepended to each blob name) to which to upload the file(s). If omitted, file(s) are uploaded to the root of the container with a blob name matching their file name.")
   path?: string;
@@ -1482,7 +1440,6 @@ model OutputFileBlobContainerDestination {
 }
 
 @doc("An HTTP header name-value pair")
-@access(Access.public, "java")
 model HttpHeader {
   @doc("The case-insensitive name of the header to be used while uploading output files.")
   name: string;
@@ -1495,14 +1452,12 @@ model HttpHeader {
 Options for an output file upload operation, including under what conditions
 to perform the upload.
 """)
-@access(Access.public, "java")
 model OutputFileUploadOptions {
   @doc("The conditions under which the Task output file or set of files should be uploaded. The default is taskcompletion.")
   uploadCondition: OutputFileUploadCondition;
 }
 
 @doc("An environment variable to be set on a Task process.")
-@access(Access.public, "java")
 model EnvironmentSetting {
   @doc("The name of the environment variable.")
   name: string;
@@ -1512,7 +1467,6 @@ model EnvironmentSetting {
 }
 
 @doc("Execution constraints to apply to a Task.")
-@access(Access.public, "java")
 model BatchTaskConstraints {
   @doc("The maximum elapsed time that the Task may run, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. If this is not specified, there is no time limit on how long the Task may run.")
   maxWallClockTime?: duration;
@@ -1525,7 +1479,6 @@ model BatchTaskConstraints {
 }
 
 @doc("The definition of the user identity under which the Task is run. Specify either the userName or autoUser property, but not both.")
-@access(Access.public, "java")
 model UserIdentity {
   @doc("The name of the user identity under which the Task is run. The userName and autoUser properties are mutually exclusive; you must specify one but not both.")
   username?: string;
@@ -1535,7 +1488,6 @@ model UserIdentity {
 }
 
 @doc("Specifies the security settings like secure boot and vTPM used while creating the virtual machine.")
-@access(Access.public, "java")
 model UefiSettings {
   @doc("Specifies whether secure boot should be enabled on the virtual machine.")
   secureBootEnabled?: boolean;
@@ -1547,7 +1499,6 @@ model UefiSettings {
 @doc("""
 Specifies the options for the auto user that runs an Azure Batch Task.
 """)
-@access(Access.public, "java")
 model AutoUserSpecification {
   @doc("The scope for the auto user. The default value is pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by StartTasks.")
   scope?: AutoUserScope;
@@ -1557,7 +1508,6 @@ model AutoUserSpecification {
 }
 
 @doc("A reference to an Package to be deployed to Compute Nodes.")
-@access(Access.public, "java")
 model BatchApplicationPackageReference {
   @doc("The ID of the application to deploy. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}).")
   applicationId: string;
@@ -1570,7 +1520,6 @@ model BatchApplicationPackageReference {
 The settings for an authentication token that the Task can use to perform Batch
 service operations.
 """)
-@access(Access.public, "java")
 model AuthenticationTokenSettings {
   @doc("The Batch resources to which the token grants access. The authentication token grants access to a limited set of Batch service operations. Currently the only supported value for the access property is 'job', which grants access to all operations related to the Job which contains the Task.")
   access?: AccessScope[];
@@ -1604,7 +1553,6 @@ idempotent. This means Tasks need to tolerate being interrupted and restarted
 without causing any corruption or duplicate data. The best practice for long
 running Tasks is to use some form of checkpointing.
 """)
-@access(Access.public, "java")
 model BatchJobPreparationTask {
   @doc("A string that uniquely identifies the Job Preparation Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobpreparation'. No other Task in the Job can have the same ID as the Job Preparation Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobPreparationTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict).")
   id?: string;
@@ -1652,7 +1600,6 @@ completed. The Job Release Task runs in the background. It does not occupy a
 scheduling slot; that is, it does not count towards the taskSlotsPerNode limit
 specified on the Pool.
 """)
-@access(Access.public, "java")
 model BatchJobReleaseTask {
   @doc("A string that uniquely identifies the Job Release Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobrelease'. No other Task in the Job can have the same ID as the Job Release Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobReleaseTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict).")
   id?: string;
@@ -1680,7 +1627,6 @@ model BatchJobReleaseTask {
 }
 
 @doc("Specifies how a Job should be assigned to a Pool.")
-@access(Access.public, "java")
 model BatchPoolInfo {
   @doc("The ID of an existing Pool. All the Tasks of the Job will run on the specified Pool. You must ensure that the Pool referenced by this property exists. If the Pool does not exist at the time the Batch service tries to schedule a Job, no Tasks for the Job will run until you create a Pool with that id. Note that the Batch service will not reject the Job request; it will simply not run Tasks until the Pool exists. You must specify either the Pool ID or the auto Pool specification, but not both.")
   poolId?: string;
@@ -1693,7 +1639,6 @@ model BatchPoolInfo {
 Specifies characteristics for a temporary 'auto pool'. The Batch service will
 create this auto Pool when the Job is submitted.
 """)
-@access(Access.public, "java")
 model BatchAutoPoolSpecification {
   @doc("A prefix to be added to the unique identifier when a Pool is automatically created. The Batch service assigns each auto Pool a unique identifier on creation. To distinguish between Pools created for different purposes, you can specify this element to add a prefix to the ID that is assigned. The prefix can be up to 20 characters long.")
   autoPoolIdPrefix?: string;
@@ -1709,7 +1654,6 @@ model BatchAutoPoolSpecification {
 }
 
 @doc("Specification for creating a new Pool.")
-@access(Access.public, "java")
 model BatchPoolSpecification {
   @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   displayName?: string;
@@ -1789,7 +1733,6 @@ Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batc
 The configuration for Compute Nodes in a Pool based on the Azure Cloud Services
 platform.
 """)
-@access(Access.public, "java")
 model CloudServiceConfiguration {
   @doc("""
 Possible values are:
@@ -1815,7 +1758,6 @@ information, see Azure Guest OS Releases
 The configuration for Compute Nodes in a Pool based on the Azure Virtual
 Machines infrastructure.
 """)
-@access(Access.public, "java")
 model VirtualMachineConfiguration {
   @doc("A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use.")
   imageReference: ImageReference;
@@ -1866,7 +1808,6 @@ Server.
 }
 
 @doc("Windows operating system settings to apply to the virtual machine.")
-@access(Access.public, "java")
 model WindowsConfiguration {
   @doc("Whether automatic updates are enabled on the virtual machine. If omitted, the default value is true.")
   enableAutomaticUpdates?: boolean;
@@ -1878,7 +1819,6 @@ Settings which will be used by the data disks associated to Compute Nodes in
 the Pool. When using attached data disks, you need to mount and format the
 disks from within a VM to use them.
 """)
-@access(Access.public, "java")
 model DataDisk {
   @doc("The logical unit number. The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive.")
   lun: int32;
@@ -1895,7 +1835,6 @@ model DataDisk {
 }
 
 @doc("The configuration for container-enabled Pools.")
-@access(Access.public, "java")
 model ContainerConfiguration {
   @doc("The container technology to be used.")
   type: ContainerType;
@@ -1912,7 +1851,6 @@ The disk encryption configuration applied on compute nodes in the pool.
 Disk encryption configuration is not supported on Linux pool created with
 Azure Compute Gallery Image.
 """)
-@access(Access.public, "java")
 model DiskEncryptionConfiguration {
   @doc("The list of disk targets Batch Service will encrypt on the compute node. If omitted, no disks on the compute nodes in the pool will be encrypted. On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified.")
   targets?: DiskEncryptionTarget[];
@@ -1923,7 +1861,6 @@ For regional placement, nodes in the pool will be allocated in the same region.
 For zonal placement, nodes in the pool will be spread across different zones
 with best effort balancing.
 """)
-@access(Access.public, "java")
 model BatchNodePlacementConfiguration {
   @doc("Node placement Policy type on Batch Pools. Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy.")
   policy?: BatchNodePlacementPolicyType;
@@ -1931,7 +1868,6 @@ model BatchNodePlacementConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The configuration for virtual machine extensions.")
-@access(Access.public, "java")
 model VMExtension {
   @doc("The name of the virtual machine extension.")
   name: string;
@@ -1963,7 +1899,6 @@ model VMExtension {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Settings for the operating system disk of the compute node (VM).")
-@access(Access.public, "java")
 model OSDisk {
   @doc("Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM).")
   ephemeralOSDiskSettings?: DiffDiskSettings;
@@ -1985,14 +1920,12 @@ model OSDisk {
 Specifies the ephemeral Disk Settings for the operating system disk used by the
 compute node (VM).
 """)
-@access(Access.public, "java")
 model DiffDiskSettings {
   @doc("Specifies the ephemeral disk placement for operating system disk for all VMs in the pool. This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.")
   placement?: DiffDiskPlacement;
 }
 
 @doc("Specifies how Tasks should be distributed across Compute Nodes.")
-@access(Access.public, "java")
 model BatchTaskSchedulingPolicy {
   @doc("How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.")
   nodeFillType: BatchNodeFillType;
@@ -2000,7 +1933,6 @@ model BatchTaskSchedulingPolicy {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The network configuration for a Pool.")
-@access(Access.public, "java")
 model NetworkConfiguration {
   @doc("The ARM resource identifier of the virtual network subnet which the Compute Nodes of the Pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported, but for Pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For Pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
   subnetId?: string;
@@ -2021,7 +1953,6 @@ model NetworkConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The endpoint configuration for a Pool.")
-@access(Access.public, "java")
 model BatchPoolEndpointConfiguration {
   @doc("A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.")
   @projectedName("client", "inboundNatPools")
@@ -2033,7 +1964,6 @@ model BatchPoolEndpointConfiguration {
 A inbound NAT Pool that can be used to address specific ports on Compute Nodes
 in a Batch Pool externally.
 """)
-@access(Access.public, "java")
 model InboundNATPool {
   @doc("The name of the endpoint. The name must be unique within a Batch Pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400.")
   name: string;
@@ -2055,7 +1985,6 @@ model InboundNATPool {
 }
 
 @doc("A network security group rule to apply to an inbound endpoint.")
-@access(Access.public, "java")
 model NetworkSecurityGroupRule {
   @doc("The priority for this rule. Priorities within a Pool must be unique and are evaluated in order of priority. The lower the number the higher the priority. For example, rules could be specified with order numbers of 150, 250, and 350. The rule with the order number of 150 takes precedence over the rule that has an order of 250. Allowed priorities are 150 to 4096. If any reserved or duplicate values are provided the request fails with HTTP status code 400.")
   priority: int32;
@@ -2073,7 +2002,6 @@ model NetworkSecurityGroupRule {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The public IP Address configuration of the networking configuration of a Pool.")
 @projectedName("client", "PublicIpAddressConfiguration")
-@access(Access.public, "java")
 model PublicIPAddressConfiguration {
   @doc("The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.")
   @projectedName("client", "IpAddressProvisioningType")
@@ -2098,7 +2026,6 @@ care should be taken to avoid StartTasks which create breakaway process or
 install/launch services from the StartTask working directory, as this will
 block Batch from being able to re-run the StartTask.
 """)
-@access(Access.public, "java")
 model BatchStartTask {
   @doc("The command line of the StartTask. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).")
   commandLine: string;
@@ -2123,7 +2050,6 @@ model BatchStartTask {
 }
 
 @doc("A reference to a Certificate to be installed on Compute Nodes in a Pool. Warning: This object is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.")
-@access(Access.public, "java")
 model BatchCertificateReference {
   @doc("The thumbprint of the Certificate.")
   thumbprint: string;
@@ -2145,7 +2071,6 @@ model BatchCertificateReference {
 Properties used to create a user used to execute Tasks on an Azure Batch
 Compute Node.
 """)
-@access(Access.public, "java")
 model UserAccount {
   @doc("The name of the user Account. Names can contain any Unicode characters up to a maximum length of 20.")
   name: string;
@@ -2164,7 +2089,6 @@ model UserAccount {
 }
 
 @doc("Properties used to create a user Account on a Linux Compute Node.")
-@access(Access.public, "java")
 model LinuxUserConfiguration {
   @doc("The user ID of the user Account. The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the uid.")
   uid?: int32;
@@ -2177,14 +2101,12 @@ model LinuxUserConfiguration {
 }
 
 @doc("Properties used to create a user Account on a Windows Compute Node.")
-@access(Access.public, "java")
 model WindowsUserConfiguration {
   @doc("The login mode for the user. The default value for VirtualMachineConfiguration Pools is 'batch' and for CloudServiceConfiguration Pools is 'interactive'.")
   loginMode?: LoginMode;
 }
 
 @doc("The managed disk parameters.")
-@access(Access.public, "java")
 model ManagedDisk {
   @doc("The storage account type for managed disk.")
   storageAccountType: StorageAccountType;
@@ -2194,7 +2116,6 @@ model ManagedDisk {
 The Batch service does not assign any meaning to this metadata; it is solely
 for the use of user code.
 """)
-@access(Access.public, "java")
 model MetadataItem {
   @doc("The name of the metadata item.")
   name: string;
@@ -2204,7 +2125,6 @@ model MetadataItem {
 }
 
 @doc("The file system to mount on each node.")
-@access(Access.public, "java")
 model MountConfiguration {
   @doc("The Azure Storage Container to mount using blob FUSE on each node. This property is mutually exclusive with all other properties.")
   azureBlobFileSystemConfiguration?: AzureBlobFileSystemConfiguration;
@@ -2220,7 +2140,6 @@ model MountConfiguration {
 }
 
 @doc("Information used to connect to an Azure Storage Container using Blobfuse.")
-@access(Access.public, "java")
 model AzureBlobFileSystemConfiguration {
   @doc("The Azure Storage Account name.")
   accountName: string;
@@ -2247,7 +2166,6 @@ model AzureBlobFileSystemConfiguration {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Information used to connect to an NFS file system.")
 @projectedName("client", "NfsMountConfiguration")
-@access(Access.public, "java")
 model NFSMountConfiguration {
   @doc("The URI of the file system to mount.")
   source: string;
@@ -2260,7 +2178,6 @@ model NFSMountConfiguration {
 }
 
 @doc("Information used to connect to a CIFS file system.")
-@access(Access.public, "java")
 model CifsMountConfiguration {
   @doc("The user to use for authentication against the CIFS file system.")
   username: string;
@@ -2279,7 +2196,6 @@ model CifsMountConfiguration {
 }
 
 @doc("Information used to connect to an Azure Fileshare.")
-@access(Access.public, "java")
 model AzureFileShareConfiguration {
   @doc("The Azure Storage account name.")
   accountName: string;
@@ -2301,7 +2217,6 @@ model AzureFileShareConfiguration {
 Contains information about Jobs that have been and will be run under a Job
 Schedule.
 """)
-@access(Access.public, "java")
 model BatchJobScheduleExecutionInfo {
   @doc("The next time at which a Job will be created under this schedule. This property is meaningful only if the schedule is in the active state when the time comes around. For example, if the schedule is disabled, no Job will be created at nextRunTime unless the Job is enabled before then.")
   nextRunTime?: utcDateTime;
@@ -2314,7 +2229,6 @@ model BatchJobScheduleExecutionInfo {
 }
 
 @doc("Information about the most recent Job to run under the Job Schedule.")
-@access(Access.public, "java")
 model RecentBatchJob {
   @doc("The ID of the Job.")
   id?: string;
@@ -2325,7 +2239,6 @@ model RecentBatchJob {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Resource usage statistics for a Job Schedule.")
-@access(Access.public, "java")
 model BatchJobScheduleStatistics {
   @doc("The URL of the statistics.")
   url: string;
@@ -2372,7 +2285,6 @@ model BatchJobScheduleStatistics {
 
 @doc("The result of listing the Job Schedules in an Account.")
 @pagedResult
-@access(Access.public, "java")
 model BatchJobScheduleListResult {
   @doc("The list of Job Schedules.")
   @items
@@ -2385,7 +2297,6 @@ model BatchJobScheduleListResult {
 }
 
 @doc("An Azure Batch Job.")
-@access(Access.public, "java")
 model BatchJob {
   @doc("A string that uniquely identifies the Job within the Account. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   @visibility("read")
@@ -2486,7 +2397,6 @@ model BatchJob {
 }
 
 @doc("Parameters for creating an Azure Batch Job.")
-@access(Access.public, "java")
 model BatchJobCreateParameters {
   @doc("A string that uniquely identifies the Job within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   id: string;
@@ -2538,7 +2448,6 @@ model BatchJobCreateParameters {
 }
 
 @doc("Parameters for updating an Azure Batch Job.")
-@access(Access.public, "java")
 model BatchJobUpdateParameters {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged.")
   priority?: int32;
@@ -2563,7 +2472,6 @@ model BatchJobUpdateParameters {
 }
 
 @doc("Contains information about the execution of a Job in the Azure Batch service.")
-@access(Access.public, "java")
 model BatchJobExecutionInfo {
   @doc("The start time of the Job. This is the time at which the Job was created.")
   startTime: utcDateTime;
@@ -2582,7 +2490,6 @@ model BatchJobExecutionInfo {
 }
 
 @doc("An error encountered by the Batch service when scheduling a Job.")
-@access(Access.public, "java")
 model BatchJobSchedulingError {
   @doc("The category of the Job scheduling error.")
   category: ErrorCategory;
@@ -2598,14 +2505,12 @@ model BatchJobSchedulingError {
 }
 
 @doc("Parameters for disabling an Azure Batch Job.")
-@access(Access.public, "java")
 model BatchJobDisableParameters {
   @doc("What to do with active Tasks associated with the Job.")
   disableTasks: DisableBatchJobOption;
 }
 
 @doc("Parameters for terminating an Azure Batch Job.")
-@access(Access.public, "java")
 model BatchJobTerminateParameters {
   @doc("The text you want to appear as the Job's TerminateReason. The default is 'UserTerminate'.")
   terminateReason?: string;
@@ -2613,7 +2518,6 @@ model BatchJobTerminateParameters {
 
 @doc("The result of listing the Jobs in an Account.")
 @pagedResult
-@access(Access.public, "java")
 model BatchJobListResult {
   @doc("The list of Jobs.")
   @items
@@ -2630,7 +2534,6 @@ The result of listing the status of the Job Preparation and Job Release Tasks
 for a Job.
 """)
 @pagedResult
-@access(Access.public, "java")
 model BatchJobPreparationAndReleaseTaskStatusListResult {
   @doc("A list of Job Preparation and Job Release Task execution information.")
   @items
@@ -2643,7 +2546,6 @@ model BatchJobPreparationAndReleaseTaskStatusListResult {
 }
 
 @doc("The status of the Job Preparation and Job Release Tasks on a Compute Node.")
-@access(Access.public, "java")
 model BatchJobPreparationAndReleaseTaskStatus {
   @doc("The ID of the Pool containing the Compute Node to which this entry refers.")
   poolId?: string;
@@ -2665,7 +2567,6 @@ model BatchJobPreparationAndReleaseTaskStatus {
 Contains information about the execution of a Job Preparation Task on a Compute
 Node.
 """)
-@access(Access.public, "java")
 model BatchJobPreparationTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -2702,7 +2603,6 @@ model BatchJobPreparationTaskExecutionInfo {
 }
 
 @doc("Contains information about the container which a Task is executing.")
-@access(Access.public, "java")
 model BatchTaskContainerExecutionInfo {
   @doc("The ID of the container.")
   containerId?: string;
@@ -2715,7 +2615,6 @@ model BatchTaskContainerExecutionInfo {
 }
 
 @doc("Information about a Task failure.")
-@access(Access.public, "java")
 model BatchTaskFailureInfo {
   @doc("The category of the Task error.")
   category: ErrorCategory;
@@ -2734,7 +2633,6 @@ model BatchTaskFailureInfo {
 Contains information about the execution of a Job Release Task on a Compute
 Node.
 """)
-@access(Access.public, "java")
 model BatchJobReleaseTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -2765,7 +2663,6 @@ model BatchJobReleaseTaskExecutionInfo {
 }
 
 @doc("The Task and TaskSlot counts for a Job.")
-@access(Access.public, "java")
 model BatchTaskCountsResult {
   @doc("The number of Tasks per state.")
   taskCounts: BatchTaskCounts;
@@ -2775,7 +2672,6 @@ model BatchTaskCountsResult {
 }
 
 @doc("The Task counts for a Job.")
-@access(Access.public, "java")
 model BatchTaskCounts {
   @doc("The number of Tasks in the active state.")
   active: int32;
@@ -2794,7 +2690,6 @@ model BatchTaskCounts {
 }
 
 @doc("The TaskSlot counts for a Job.")
-@access(Access.public, "java")
 model BatchTaskSlotCounts {
   @doc("The number of TaskSlots for active Tasks.")
   active: int32;
@@ -2813,7 +2708,6 @@ model BatchTaskSlotCounts {
 }
 
 @doc("A Pool in the Azure Batch service.")
-@access(Access.public, "java")
 model BatchPool {
   @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   @visibility("read")
@@ -2976,7 +2870,7 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 }
 
 @doc("Parameters for creating an Azure Batch Pool.")
-@access(Access.public, "java")
+
 model BatchPoolCreateParameters {
   @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two Pool IDs within an Account that differ only by case).")
   id: string;
@@ -3057,7 +2951,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 }
 
 @doc("Parameters for replacing properties on an Azure Batch Pool.")
-@access(Access.public, "java")
 model BatchPoolReplaceParameters {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool.")
   startTask?: BatchStartTask;
@@ -3083,7 +2976,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 }
 
 @doc("Parameters for updating an Azure Batch Pool.")
-@access(Access.public, "java")
 model BatchPoolUpdateParameters {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is left unchanged.")
   startTask?: BatchStartTask;
@@ -3109,7 +3001,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 }
 
 @doc("An error that occurred when resizing a Pool.")
-@access(Access.public, "java")
 model ResizeError {
   @doc("An identifier for the Pool resize error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
@@ -3122,7 +3013,6 @@ model ResizeError {
 }
 
 @doc("The results and errors from an execution of a Pool autoscale formula.")
-@access(Access.public, "java")
 model AutoScaleRun {
   @doc("The time at which the autoscale formula was last evaluated.")
   timestamp: utcDateTime;
@@ -3135,7 +3025,6 @@ model AutoScaleRun {
 }
 
 @doc("An error that occurred when executing or evaluating a Pool autoscale formula.")
-@access(Access.public, "java")
 model AutoScaleRunError {
   @doc("An identifier for the autoscale error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
@@ -3148,7 +3037,6 @@ model AutoScaleRunError {
 }
 
 @doc("The identity of the Batch pool, if configured.")
-@access(Access.public, "java")
 model BatchPoolIdentity {
   @doc("The identity of the Batch pool, if configured. The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.")
   type: BatchPoolIdentityType;
@@ -3158,7 +3046,6 @@ model BatchPoolIdentity {
 }
 
 @doc("The user assigned Identity")
-@access(Access.public, "java")
 model UserAssignedIdentity {
   @doc("The ARM resource id of the user assigned identity.")
   resourceId: string;
@@ -3174,7 +3061,6 @@ model UserAssignedIdentity {
 
 @doc("The result of listing the Pools in an Account.")
 @pagedResult
-@access(Access.public, "java")
 model BatchPoolListResult {
   @doc("The list of Pools.")
   @items
@@ -3187,7 +3073,6 @@ model BatchPoolListResult {
 }
 
 @doc("Parameters for enabling automatic scaling on an Azure Batch Pool.")
-@access(Access.public, "java")
 model BatchPoolEnableAutoScaleParameters {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is checked for validity before it is applied to the Pool. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).")
   autoScaleFormula?: string;
@@ -3197,14 +3082,12 @@ model BatchPoolEnableAutoScaleParameters {
 }
 
 @doc("Parameters for evaluating an automatic scaling formula on an Azure Batch Pool.")
-@access(Access.public, "java")
 model BatchPoolEvaluateAutoScaleParameters {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).")
   autoScaleFormula: string;
 }
 
 @doc("Parameters for changing the size of an Azure Batch Pool.")
-@access(Access.public, "java")
 model BatchPoolResizeParameters {
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
   targetDedicatedNodes?: int32;
@@ -3220,7 +3103,6 @@ model BatchPoolResizeParameters {
 }
 
 @doc("Parameters for removing nodes from an Azure Batch Pool.")
-@access(Access.public, "java")
 model BatchNodeRemoveParameters {
   @doc("A list containing the IDs of the Compute Nodes to be removed from the specified Pool. A maximum of 100 nodes may be removed per request.")
   nodeList: string[];
@@ -3243,7 +3125,6 @@ be idempotent. This means Tasks need to tolerate being interrupted and
 restarted without causing any corruption or duplicate data. The best practice
 for long running Tasks is to use some form of checkpointing.
 """)
-@access(Access.public, "java")
 model BatchTask {
   @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.")
   @visibility("read")
@@ -3356,7 +3237,6 @@ model BatchTask {
 @doc("""
 Parameters for creating an Azure Batch Task.
 """)
-@access(Access.public, "java")
 model BatchTaskCreateParameters {
   @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within a Job that differ only by case).")
   id: string;
@@ -3408,7 +3288,6 @@ model BatchTaskCreateParameters {
 }
 
 @doc("Specifies how the Batch service should respond when the Task completes.")
-@access(Access.public, "java")
 model ExitConditions {
   @doc("A list of individual Task exit codes and how the Batch service should respond to them.")
   exitCodes?: ExitCodeMapping[];
@@ -3430,7 +3309,6 @@ model ExitConditions {
 How the Batch service should respond if a Task exits with a particular exit
 code.
 """)
-@access(Access.public, "java")
 model ExitCodeMapping {
   @doc("A process exit code.")
   code: int32;
@@ -3440,7 +3318,6 @@ model ExitCodeMapping {
 }
 
 @doc("Specifies how the Batch service responds to a particular exit condition.")
-@access(Access.public, "java")
 model ExitOptions {
   @doc("An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitOptionsJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   jobAction?: BatchJobAction;
@@ -3453,7 +3330,6 @@ model ExitOptions {
 A range of exit codes and how the Batch service should respond to exit codes
 within that range.
 """)
-@access(Access.public, "java")
 model ExitCodeRangeMapping {
   @doc("The first exit code in the range.")
   start: int32;
@@ -3469,14 +3345,12 @@ model ExitCodeRangeMapping {
 A locality hint that can be used by the Batch service to select a Compute Node
 on which to start a Task.
 """)
-@access(Access.public, "java")
 model AffinityInfo {
   @doc("An opaque string representing the location of a Compute Node or a Task that has run previously. You can pass the affinityId of a Node to indicate that this Task needs to run on that Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId: string;
 }
 
 @doc("Information about the execution of a Task.")
-@access(Access.public, "java")
 model BatchTaskExecutionInfo {
   @doc("The time at which the Task started running. 'Running' corresponds to the running state, so if the Task specifies resource files or Packages, then the start time reflects the time at which the Task started downloading or deploying these. If the Task has been restarted or retried, this is the most recent time at which the Task started running. This property is present only for Tasks that are in the running or completed state.")
   startTime?: utcDateTime;
@@ -3510,7 +3384,6 @@ model BatchTaskExecutionInfo {
 }
 
 @doc("Information about the Compute Node on which a Task ran.")
-@access(Access.public, "java")
 model BatchNodeInfo {
   @doc("An identifier for the Node on which the Task ran, which can be passed when adding a Task to request that the Task be scheduled on this Compute Node.")
   affinityId?: string;
@@ -3537,7 +3410,6 @@ if any of the subtasks fail (for example due to exiting with a non-zero exit
 code) the entire multi-instance Task fails. The multi-instance Task is then
 terminated and retried, up to its retry limit.
 """)
-@access(Access.public, "java")
 model MultiInstanceSettings {
   @doc("The number of Compute Nodes required by the Task. If omitted, the default is 1.")
   numberOfInstances?: int32;
@@ -3551,7 +3423,6 @@ model MultiInstanceSettings {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Resource usage statistics for a Task.")
-@access(Access.public, "java")
 model BatchTaskStatistics {
   @doc("The URL of the statistics.")
   url: string;
@@ -3592,7 +3463,6 @@ Specifies any dependencies of a Task. Any Task that is explicitly specified or
 within a dependency range must complete before the dependant Task will be
 scheduled.
 """)
-@access(Access.public, "java")
 model BatchTaskDependencies {
   @doc("The list of Task IDs that this Task depends on. All Tasks in this list must complete successfully before the dependent Task can be scheduled. The taskIds collection is limited to 64000 characters total (i.e. the combined length of all Task IDs). If the taskIds collection exceeds the maximum length, the Add Task request fails with error code TaskDependencyListTooLong. In this case consider using Task ID ranges instead.")
   taskIds?: string[];
@@ -3605,7 +3475,6 @@ model BatchTaskDependencies {
 The start and end of the range are inclusive. For example, if a range has start
 9 and end 12, then it represents Tasks '9', '10', '11' and '12'.
 """)
-@access(Access.public, "java")
 model BatchTaskIdRange {
   @doc("The first Task ID in the range.")
   start: int32;
@@ -3616,7 +3485,6 @@ model BatchTaskIdRange {
 
 @doc("The result of listing the Tasks in a Job.")
 @pagedResult
-@access(Access.public, "java")
 model BatchTaskListResult {
   @doc("The list of Tasks.")
   @items
@@ -3629,21 +3497,18 @@ model BatchTaskListResult {
 }
 
 @doc("A collection of Azure Batch Tasks to add.")
-@access(Access.public, "java")
 model BatchTaskCollection {
   @doc("The collection of Tasks to add. The maximum count of Tasks is 100. The total serialized size of this collection must be less than 1MB. If it is greater than 1MB (for example if each Task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer Tasks.")
   value: BatchTaskCreateParameters[];
 }
 
 @doc("The result of adding a collection of Tasks to a Job.")
-@access(Access.public, "java")
 model BatchTaskAddCollectionResult {
   @doc("The results of the add Task collection operation.")
   value?: BatchTaskAddResult[];
 }
 
 @doc("Result for a single Task added as part of an add Task collection operation.")
-@access(Access.public, "java")
 model BatchTaskAddResult {
   @doc("The status of the add Task request.")
   status: BatchTaskAddStatus;
@@ -3666,7 +3531,6 @@ model BatchTaskAddResult {
 
 @doc("The result of listing the subtasks of a Task.")
 @pagedResult
-@access(Access.public, "java")
 model BatchTaskListSubtasksResult {
   @doc("The list of subtasks.")
   @items
@@ -3679,7 +3543,6 @@ model BatchTaskListSubtasksResult {
 }
 
 @doc("Information about an Azure Batch subtask.")
-@access(Access.public, "java")
 model BatchSubtask {
   @doc("The ID of the subtask.")
   id?: int32;
@@ -3719,7 +3582,6 @@ model BatchSubtask {
 }
 
 @doc("Parameters for creating a user account for RDP or SSH access on an Azure Batch Compute Node.")
-@access(Access.public, "java")
 model BatchNodeUserCreateParameters {
   @doc("The user name of the Account.")
   name: string;
@@ -3738,7 +3600,6 @@ model BatchNodeUserCreateParameters {
 }
 
 @doc("Parameters for updating a user account for RDP or SSH access on an Azure Batch Compute Node.")
-@access(Access.public, "java")
 model BatchNodeUserUpdateParameters {
   @doc("The password of the Account. The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.")
   password?: string;
@@ -3751,7 +3612,6 @@ model BatchNodeUserUpdateParameters {
 }
 
 @doc("A Compute Node in the Batch service.")
-@access(Access.public, "java")
 model BatchNode {
   @doc("The ID of the Compute Node. Every Compute Node that is added to a Pool is assigned a unique ID. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the ID is reclaimed and could be reused for new Compute Nodes.")
   id?: string;
@@ -3829,7 +3689,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 }
 
 @doc("Information about a Task running on a Compute Node.")
-@access(Access.public, "java")
 model BatchTaskInfo {
   @doc("The URL of the Task.")
   taskUrl?: string;
@@ -3851,7 +3710,6 @@ model BatchTaskInfo {
 }
 
 @doc("Information about a StartTask running on a Compute Node.")
-@access(Access.public, "java")
 model BatchStartTaskInfo {
   @doc("The state of the StartTask on the Compute Node.")
   state: BatchStartTaskState;
@@ -3882,7 +3740,6 @@ model BatchStartTaskInfo {
 }
 
 @doc("An error encountered by a Compute Node.")
-@access(Access.public, "java")
 model BatchNodeError {
   @doc("An identifier for the Compute Node error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
@@ -3895,7 +3752,6 @@ model BatchNodeError {
 }
 
 @doc("The endpoint configuration for the Compute Node.")
-@access(Access.public, "java")
 model BatchNodeEndpointConfiguration {
   @doc("The list of inbound endpoints that are accessible on the Compute Node.")
   inboundEndpoints: InboundEndpoint[];
@@ -3903,7 +3759,6 @@ model BatchNodeEndpointConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("An inbound endpoint on a Compute Node.")
-@access(Access.public, "java")
 model InboundEndpoint {
   @doc("The name of the endpoint.")
   name: string;
@@ -3929,7 +3784,6 @@ model InboundEndpoint {
 The Batch Compute Node agent is a program that runs on each Compute Node in the
 Pool and provides Batch capability on the Compute Node.
 """)
-@access(Access.public, "java")
 model BatchNodeAgentInfo {
   @doc("The version of the Batch Compute Node agent running on the Compute Node. This version number can be checked against the Compute Node agent release notes located at https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md.")
   version: string;
@@ -3939,7 +3793,6 @@ model BatchNodeAgentInfo {
 }
 
 @doc("Info about the current state of the virtual machine.")
-@access(Access.public, "java")
 model VirtualMachineInfo {
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
   imageReference?: ImageReference;
@@ -3949,21 +3802,18 @@ model VirtualMachineInfo {
 }
 
 @doc("Parameters for rebooting an Azure Batch Compute Node.")
-@access(Access.public, "java")
 model BatchNodeRebootParameters {
   @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeRebootOption?: BatchNodeRebootOption;
 }
 
 @doc("Parameters for reimaging an Azure Batch Compute Node.")
-@access(Access.public, "java")
 model BatchNodeReimageParameters {
   @doc("When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeReimageOption?: BatchNodeReimageOption;
 }
 
 @doc("Parameters for disabling scheduling on an Azure Batch Compute Node.")
-@access(Access.public, "java")
 model BatchNodeDisableSchedulingParameters {
   @doc("What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue.")
   nodeDisableSchedulingOption?: BatchNodeDisableSchedulingOption;
@@ -3971,7 +3821,7 @@ model BatchNodeDisableSchedulingParameters {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The remote login settings for a Compute Node.")
-@access(Access.public, "java")
+
 model BatchNodeRemoteLoginSettings {
   @doc("The IP address used for remote login to the Compute Node.")
   @projectedName("client", "remoteLoginIpAddress")
@@ -3982,7 +3832,6 @@ model BatchNodeRemoteLoginSettings {
 }
 
 @doc("The Azure Batch service log files upload parameters for a Compute Node.")
-@access(Access.public, "java")
 model UploadBatchServiceLogsParameters {
   @doc("The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s). If a user assigned managed identity is not being used, the URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified.")
   containerUrl: string;
@@ -3998,7 +3847,6 @@ model UploadBatchServiceLogsParameters {
 }
 
 @doc("The result of uploading Batch service log files from a specific Compute Node.")
-@access(Access.public, "java")
 model UploadBatchServiceLogsResult {
   @doc("The virtual directory within Azure Blob Storage container to which the Batch Service log file(s) will be uploaded. The virtual directory name is part of the blob name for each log file uploaded, and it is built based poolId, nodeId and a unique identifier.")
   virtualDirectoryName: string;
@@ -4009,7 +3857,6 @@ model UploadBatchServiceLogsResult {
 
 @doc("The result of listing the Compute Nodes in a Pool.")
 @pagedResult
-@access(Access.public, "java")
 model BatchNodeListResult {
   @doc("The list of Compute Nodes.")
   @items
@@ -4023,7 +3870,6 @@ model BatchNodeListResult {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("The configuration for virtual machine extension instance view.")
-@access(Access.public, "java")
 model BatchNodeVMExtension {
   @doc("The provisioning state of the virtual machine extension.")
   provisioningState?: string;
@@ -4037,7 +3883,6 @@ model BatchNodeVMExtension {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The vm extension instance view.")
-@access(Access.public, "java")
 model VMExtensionInstanceView {
   @doc("The name of the vm extension instance view.")
   name?: string;
@@ -4050,7 +3895,6 @@ model VMExtensionInstanceView {
 }
 
 @doc("The instance view status.")
-@access(Access.public, "java")
 model InstanceViewStatus {
   @doc("The status code.")
   code?: string;
@@ -4071,7 +3915,6 @@ model InstanceViewStatus {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("The result of listing the Compute Node extensions in a Node.")
 @pagedResult
-@access(Access.public, "java")
 model BatchNodeVMExtensionListResult {
   @doc("The list of Compute Node extensions.")
   @items

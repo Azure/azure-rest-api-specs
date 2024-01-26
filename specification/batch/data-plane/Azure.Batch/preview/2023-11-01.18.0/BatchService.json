@@ -7666,6 +7666,10 @@
         "operationId": "Batch_GetNodeRemoteDesktopFile",
         "summary": "Gets the Remote Desktop Protocol file for the specified Compute Node.",
         "description": "Before you can access a Compute Node by using the RDP file, you must create a\nuser Account on the Compute Node. This API can only be invoked on Pools created\nwith a cloud service configuration. For Pools created with a virtual machine\nconfiguration, see the GetRemoteLoginSettings API.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -7724,8 +7728,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             },
             "headers": {
               "client-request-id": {
