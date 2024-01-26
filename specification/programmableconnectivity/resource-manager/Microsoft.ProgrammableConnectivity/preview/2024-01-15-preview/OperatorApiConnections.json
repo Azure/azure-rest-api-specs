@@ -461,6 +461,11 @@
           ]
         }
       },
+      "required": [
+        "gatewayId",
+        "accountType",
+        "operatorApiPlanId"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -551,11 +556,7 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
-      },
-      "required": [
-        "gatewayId",
-        "accountType"
-      ]
+      }
     },
     "OperatorApiConnectionUpdate": {
       "type": "object",
@@ -569,19 +570,10 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/OperatorApiConnectionUpdateProperties",
+          "$ref": "#/definitions/OperatorApiConnectionUpdateableProperties",
           "x-ms-client-flatten": true
         }
       }
-    },
-    "OperatorApiConnectionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the OperatorApiConnection. These properties can be updated only when the `accountType` is `UserManaged`.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AppCredentials"
-        }
-      ]
     }
   },
   "parameters": {
