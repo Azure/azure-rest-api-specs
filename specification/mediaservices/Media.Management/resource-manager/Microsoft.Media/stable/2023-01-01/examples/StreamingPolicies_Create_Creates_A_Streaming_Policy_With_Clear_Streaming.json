@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "accountName": "contosomedia",
+    "api-version": "2023-01-01",
+    "parameters": {
+      "properties": {
+        "noEncryption": {
+          "enabledProtocols": {
+            "dash": true,
+            "download": true,
+            "hls": true,
+            "smoothStreaming": true
+          }
+        }
+      }
+    },
+    "resourceGroupName": "contosorg",
+    "streamingPolicyName": "clearStreamingPolicy",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "clearStreamingPolicy",
+        "type": "Microsoft.Media/mediaservices/streamingPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/streamingPolicies/clearStreamingPolicy",
+        "properties": {
+          "created": "2018-08-08T18:29:31.1535417Z",
+          "noEncryption": {
+            "enabledProtocols": {
+              "dash": true,
+              "download": true,
+              "hls": true,
+              "smoothStreaming": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "StreamingPolicies_Create",
+  "title": "Creates a Streaming Policy with clear streaming"
+}

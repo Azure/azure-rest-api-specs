@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01",
+    "mobileNetworkName": "testMobileNetwork",
+    "parameters": {
+      "location": "testLocation",
+      "properties": {}
+    },
+    "resourceGroupName": "rg1",
+    "siteName": "testSite",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSite",
+        "type": "Microsoft.MobileNetwork/mobileNetworks/sites",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite",
+        "location": "testLocation",
+        "properties": {
+          "networkFunctions": [],
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testSite",
+        "type": "Microsoft.MobileNetwork/mobileNetworks/sites",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite",
+        "location": "testLocation",
+        "properties": {
+          "networkFunctions": [],
+          "provisioningState": "Created"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2023-09-01"
+      }
+    }
+  },
+  "operationId": "Sites_CreateOrUpdate",
+  "title": "Create mobile network site"
+}

@@ -1,0 +1,2557 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AlertsManagementClient",
+    "version": "2021-08-08",
+    "description": "AlertsManagement Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AlertProcessingRules"
+    },
+    {
+      "name": "Alerts"
+    },
+    {
+      "name": "SmartGroups"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AlertsManagement/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules": {
+      "get": {
+        "operationId": "AlertProcessingRules_ListBySubscription",
+        "tags": [
+          "AlertProcessingRules"
+        ],
+        "description": "List all alert processing rules in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertProcessingRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertProcessingRulesSubscriptionWide": {
+            "$ref": "./examples/AlertProcessingRules_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts": {
+      "get": {
+        "operationId": "Alerts_GetAll",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetResource",
+            "in": "query",
+            "description": "Filter by target resource( which is full ARM ID) Default value is select all.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "targetResourceType",
+            "in": "query",
+            "description": "Filter by target resource type. Default value is select all.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "targetResourceGroup",
+            "in": "query",
+            "description": "Filter by target resource group name. Default value is select all.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "monitorService",
+            "in": "query",
+            "description": "Filter by monitor service which generates the alert instance. Default value is select all.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Application Insights",
+              "ActivityLog Administrative",
+              "ActivityLog Security",
+              "ActivityLog Recommendation",
+              "ActivityLog Policy",
+              "ActivityLog Autoscale",
+              "Log Analytics",
+              "Nagios",
+              "Platform",
+              "SCOM",
+              "ServiceHealth",
+              "SmartDetector",
+              "VM Insights",
+              "Zabbix"
+            ],
+            "x-ms-enum": {
+              "name": "MonitorService",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "monitorCondition",
+            "in": "query",
+            "description": "Filter by monitor condition which is either 'Fired' or 'Resolved'. Default value is to select all.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Fired",
+              "Resolved"
+            ],
+            "x-ms-enum": {
+              "name": "MonitorCondition",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "severity",
+            "in": "query",
+            "description": "Filter by severity.  Default value is select all.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Sev0",
+              "Sev1",
+              "Sev2",
+              "Sev3",
+              "Sev4"
+            ],
+            "x-ms-enum": {
+              "name": "Severity",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "alertState",
+            "in": "query",
+            "description": "Filter by state of the alert instance. Default value is to select all.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "New",
+              "Acknowledged",
+              "Closed"
+            ],
+            "x-ms-enum": {
+              "name": "AlertState",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "alertRule",
+            "in": "query",
+            "description": "Filter by specific alert rule.  Default value is to select all.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "smartGroupId",
+            "in": "query",
+            "description": "Filter the alerts list by the Smart Group Id. Default value is none.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "includeContext",
+            "in": "query",
+            "description": "Include context which has contextual data specific to the monitor service. Default value is false'",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "includeEgressConfig",
+            "in": "query",
+            "description": "Include egress config which would be used for displaying the content in portal.  Default value is 'false'.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "pageCount",
+            "in": "query",
+            "description": "Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \"includeContent\"  filter is selected, maximum value allowed is 25. Default value is 25.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Sort the query results by input field,  Default value is 'lastModifiedDateTime'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "name",
+              "severity",
+              "alertState",
+              "monitorCondition",
+              "targetResource",
+              "targetResourceName",
+              "targetResourceGroup",
+              "targetResourceType",
+              "startDateTime",
+              "lastModifiedDateTime"
+            ],
+            "x-ms-enum": {
+              "name": "AlertsSortByFields",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Sort the query results order in either ascending or descending.  Default value is 'desc' for time fields and 'asc' for others.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "SortOrder",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "This filter allows to selection of the fields(comma separated) which would  be part of the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "timeRange",
+            "in": "query",
+            "description": "Filter by time range by below listed values. Default value is 1 day.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "1h",
+              "1d",
+              "7d",
+              "30d"
+            ],
+            "x-ms-enum": {
+              "name": "TimeRange",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "customTimeRange",
+            "in": "query",
+            "description": "Filter by custom time range in the format <start-time>/<end-time>  where time is in (ISO-8601 format)'. Permissible values is within 30 days from  query time. Either timeRange or customTimeRange could be used but not both. Default is none.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAlerts": {
+            "$ref": "./examples/Alerts_GetAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}": {
+      "get": {
+        "operationId": "Alerts_GetById",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Get information related to a specific alert",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "Unique ID of an alert instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetById": {
+            "$ref": "./examples/Alerts_GetById.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changeState": {
+      "post": {
+        "operationId": "Alerts_ChangeState",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Change the state of an alert.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "Unique ID of an alert instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "comment",
+            "in": "body",
+            "description": "reason of change alert state",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            },
+            "x-ms-client-name": "comment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "apiVersion": {
+                  "type": "string",
+                  "description": "The API version to use for this operation.",
+                  "minLength": 1
+                },
+                "subscriptionId": {
+                  "type": "string",
+                  "description": "The ID of the target subscription.",
+                  "minLength": 1
+                },
+                "newState": {
+                  "$ref": "#/definitions/AlertState",
+                  "description": "New state of the alert."
+                }
+              },
+              "required": [
+                "apiVersion",
+                "subscriptionId",
+                "newState"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resolve": {
+            "$ref": "./examples/Alerts_ChangeState.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history/{subscriptionId}/{alertId}": {
+      "get": {
+        "operationId": "Alerts_GetHistory",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "Unique ID of an alert instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertModification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resolve": {
+            "$ref": "./examples/Alerts_GetHistory.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups": {
+      "get": {
+        "operationId": "SmartGroups_GetAll",
+        "tags": [
+          "SmartGroups"
+        ],
+        "description": "List all the Smart Groups within a specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetResource",
+            "in": "query",
+            "description": "Filter by target resource( which is full ARM ID) Default value is select all.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "targetResourceGroup",
+            "in": "query",
+            "description": "Filter by target resource group name. Default value is select all.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "targetResourceType",
+            "in": "query",
+            "description": "Filter by target resource type. Default value is select all.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "monitorService",
+            "in": "query",
+            "description": "Filter by monitor service which generates the alert instance. Default value is select all.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Application Insights",
+              "ActivityLog Administrative",
+              "ActivityLog Security",
+              "ActivityLog Recommendation",
+              "ActivityLog Policy",
+              "ActivityLog Autoscale",
+              "Log Analytics",
+              "Nagios",
+              "Platform",
+              "SCOM",
+              "ServiceHealth",
+              "SmartDetector",
+              "VM Insights",
+              "Zabbix"
+            ],
+            "x-ms-enum": {
+              "name": "MonitorService",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "monitorCondition",
+            "in": "query",
+            "description": "Filter by monitor condition which is either 'Fired' or 'Resolved'. Default value is to select all.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Fired",
+              "Resolved"
+            ],
+            "x-ms-enum": {
+              "name": "MonitorCondition",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "severity",
+            "in": "query",
+            "description": "Filter by severity.  Default value is select all.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Sev0",
+              "Sev1",
+              "Sev2",
+              "Sev3",
+              "Sev4"
+            ],
+            "x-ms-enum": {
+              "name": "Severity",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "smartGroupState",
+            "in": "query",
+            "description": "Filter by state of the smart group. Default value is to select all.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "New",
+              "Acknowledged",
+              "Closed"
+            ],
+            "x-ms-enum": {
+              "name": "AlertState",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "timeRange",
+            "in": "query",
+            "description": "Filter by time range by below listed values. Default value is 1 day.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "1h",
+              "1d",
+              "7d",
+              "30d"
+            ],
+            "x-ms-enum": {
+              "name": "TimeRange",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "pageCount",
+            "in": "query",
+            "description": "Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \"includeContent\"  filter is selected, maximum value allowed is 25. Default value is 25.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Sort the query results by input field. Default value is sort by 'lastModifiedDateTime'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "alertsCount",
+              "state",
+              "severity",
+              "startDateTime",
+              "lastModifiedDateTime"
+            ],
+            "x-ms-enum": {
+              "name": "SmartGroupsSortByFields",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Sort the query results order in either ascending or descending.  Default value is 'desc' for time fields and 'asc' for others.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "SortOrder",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmartGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List": {
+            "$ref": "./examples/SmartGroups_GetAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}": {
+      "get": {
+        "operationId": "SmartGroups_GetById",
+        "tags": [
+          "SmartGroups"
+        ],
+        "description": "Get information related to a specific Smart Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "smartGroupId",
+            "in": "path",
+            "description": "Smart group unique id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmartGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get": {
+            "$ref": "./examples/SmartGroups_GetById.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/changeState": {
+      "post": {
+        "operationId": "SmartGroups_ChangeState",
+        "tags": [
+          "SmartGroups"
+        ],
+        "description": "Change the state of a Smart Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "newState",
+            "in": "query",
+            "description": "New state of the alert.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "New",
+              "Acknowledged",
+              "Closed"
+            ],
+            "x-ms-enum": {
+              "name": "AlertState",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "smartGroupId",
+            "in": "path",
+            "description": "Smart group unique id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmartGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "changestate": {
+            "$ref": "./examples/SmartGroups_ChangeState.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history/{subscriptionId}/{smartGroupId}": {
+      "get": {
+        "operationId": "SmartGroups_GetHistory",
+        "tags": [
+          "SmartGroups"
+        ],
+        "description": "Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "smartGroupId",
+            "in": "path",
+            "description": "Smart group unique id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SmartGroupModification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resolve": {
+            "$ref": "./examples/SmartGroups_GetHistory.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules": {
+      "get": {
+        "operationId": "AlertProcessingRules_ListByResourceGroup",
+        "tags": [
+          "AlertProcessingRules"
+        ],
+        "description": "List all alert processing rules in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertProcessingRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertProcessingRulesResourceGroupWide": {
+            "$ref": "./examples/AlertProcessingRules_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}": {
+      "get": {
+        "operationId": "AlertProcessingRules_GetByName",
+        "tags": [
+          "AlertProcessingRules"
+        ],
+        "description": "Get an alert processing rule by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "alertProcessingRuleName",
+            "in": "path",
+            "description": "The name of the alert processing rule that needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertProcessingRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertProcessingRuleById": {
+            "$ref": "./examples/AlertProcessingRules_GetByName.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AlertProcessingRules_CreateOrUpdate",
+        "tags": [
+          "AlertProcessingRules"
+        ],
+        "description": "Create or update an alert processing rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "alertProcessingRuleName",
+            "in": "path",
+            "description": "The name of the alert processing rule that needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alertProcessingRule",
+            "in": "body",
+            "description": "Alert processing rule to be created/updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertProcessingRule"
+            },
+            "x-ms-client-name": "alertProcessingRule"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AlertProcessingRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AlertProcessingRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'AlertProcessingRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AlertProcessingRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a rule that adds an action group to all alerts in a subscription": {
+            "$ref": "./examples/AlertProcessingRules_CreateOrUpdate_Create_Or_Update_A_Rule_That_Adds_An_Action_Group_To_All_Alerts_In_A_Subscription.json"
+          },
+          "Create or update a rule that adds two action groups to all Sev0 and Sev1 alerts in two resource groups": {
+            "$ref": "./examples/AlertProcessingRules_CreateOrUpdate_Create_Or_Update_A_Rule_That_Adds_Two_Action_Groups_To_All_Sev0_And_Sev1_Alerts_In_Two_Resource_Groups.json"
+          },
+          "Create or update a rule that removes all action groups from alerts on a specific VM during a one-off maintenance window (1800-2000 at a specific date, Pacific Standard Time)": {
+            "$ref": "./examples/AlertProcessingRules_CreateOrUpdate_Create_Or_Update_A_Rule_That_Removes_All_Action_Groups_From_Alerts_On_A_Specific_Vm_During_A_One_Off_Maintenance_Window_1800_2000_At_A_Specific_Date_Pacific_Standard_Time.json"
+          },
+          "Create or update a rule that removes all action groups from all alerts in a subscription coming from a specific alert rule": {
+            "$ref": "./examples/AlertProcessingRules_CreateOrUpdate_Create_Or_Update_A_Rule_That_Removes_All_Action_Groups_From_All_Alerts_In_A_Subscription_Coming_From_A_Specific_Alert_Rule.json"
+          },
+          "Create or update a rule that removes all action groups from all alerts on any VM in two resource groups during a recurring maintenance window (2200-0400 every Sat and Sun, India Standard Time)": {
+            "$ref": "./examples/AlertProcessingRules_CreateOrUpdate_Create_Or_Update_A_Rule_That_Removes_All_Action_Groups_From_All_Alerts_On_Any_Vm_In_Two_Resource_Groups_During_A_Recurring_Maintenance_Window_2200_0400_Every_Sat_And_Sun_India_Standard_Time.json"
+          },
+          "Create or update a rule that removes all action groups outside business hours (Mon-Fri 09:00-17:00, Eastern Standard Time)": {
+            "$ref": "./examples/AlertProcessingRules_CreateOrUpdate_Create_Or_Update_A_Rule_That_Removes_All_Action_Groups_Outside_Business_Hours_Mon_Fri_09_00_17_00_Eastern_Standard_Time.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "AlertProcessingRules_Update",
+        "tags": [
+          "AlertProcessingRules"
+        ],
+        "description": "Enable, disable, or update tags for an alert processing rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "alertProcessingRuleName",
+            "in": "path",
+            "description": "The name of the alert processing rule that needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alertProcessingRulePatch",
+            "in": "body",
+            "description": "Parameters supplied to the operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchObject"
+            },
+            "x-ms-client-name": "alertProcessingRulePatch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertProcessingRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchAlertProcessingRule": {
+            "$ref": "./examples/AlertProcessingRules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AlertProcessingRules_Delete",
+        "tags": [
+          "AlertProcessingRules"
+        ],
+        "description": "Delete an alert processing rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "alertProcessingRuleName",
+            "in": "path",
+            "description": "The name of the alert processing rule that needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAlertProcessingRule": {
+            "$ref": "./examples/AlertProcessingRules_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Action": {
+      "type": "object",
+      "description": "Action to be applied.",
+      "properties": {
+        "actionType": {
+          "type": "string",
+          "description": "Discriminator property for Action."
+        }
+      },
+      "discriminator": "actionType",
+      "required": [
+        "actionType"
+      ]
+    },
+    "ActionStatus": {
+      "type": "object",
+      "description": "Action status",
+      "properties": {
+        "isSuppressed": {
+          "type": "boolean",
+          "description": "Value indicating whether alert is suppressed."
+        }
+      }
+    },
+    "AddActionGroups": {
+      "type": "object",
+      "description": "Add action groups to alert processing rule.",
+      "properties": {
+        "actionGroupIds": {
+          "type": "array",
+          "description": "List of action group Ids to add to alert processing rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "actionGroupIds"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "AddActionGroups"
+    },
+    "Alert": {
+      "type": "object",
+      "description": "An alert created in alert management service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertProperties",
+          "description": "Alert property bag",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AlertListResult": {
+      "type": "object",
+      "description": "The response of a Alert list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Alert items on this page",
+          "items": {
+            "$ref": "#/definitions/Alert"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertModification": {
+      "type": "object",
+      "description": "Alert Modification details",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertModificationProperties",
+          "description": "Properties of the alert modification item."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "AlertModificationEvent": {
+      "type": "string",
+      "description": "Reason for the modification",
+      "enum": [
+        "AlertCreated",
+        "StateChange",
+        "MonitorConditionChange",
+        "SeverityChange",
+        "ActionRuleTriggered",
+        "ActionRuleSuppressed",
+        "ActionsTriggered",
+        "ActionsSuppressed",
+        "ActionsFailed"
+      ],
+      "x-ms-enum": {
+        "name": "AlertModificationEvent",
+        "modelAsString": false
+      }
+    },
+    "AlertModificationItem": {
+      "type": "object",
+      "description": "Alert modification item.",
+      "properties": {
+        "modificationEvent": {
+          "$ref": "#/definitions/AlertModificationEvent",
+          "description": "Reason for the modification"
+        },
+        "oldValue": {
+          "type": "string",
+          "description": "Old value"
+        },
+        "newValue": {
+          "type": "string",
+          "description": "New value"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "Modified date and time"
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "Modified user details (Principal client name)"
+        },
+        "comments": {
+          "type": "string",
+          "description": "Modification comments"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the modification"
+        }
+      }
+    },
+    "AlertModificationProperties": {
+      "type": "object",
+      "description": "Properties of the alert modification item.",
+      "properties": {
+        "alertId": {
+          "type": "string",
+          "description": "Unique Id of the alert for which the history is being retrieved",
+          "readOnly": true
+        },
+        "modifications": {
+          "type": "array",
+          "description": "Modification details",
+          "items": {
+            "$ref": "#/definitions/AlertModificationItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AlertProcessingRule": {
+      "type": "object",
+      "description": "Alert processing rule object containing target scopes, conditions and scheduling logic.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertProcessingRuleProperties",
+          "description": "Alert processing rule properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AlertProcessingRuleErrorResponse": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/AlertProcessingRuleErrorResponseBody",
+          "description": "Details of error response."
+        }
+      }
+    },
+    "AlertProcessingRuleErrorResponseBody": {
+      "type": "object",
+      "description": "Details of error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code, intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error, intended for display in user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the particular error, for example name of the property."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/AlertProcessingRuleErrorResponseBody"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AlertProcessingRuleListResult": {
+      "type": "object",
+      "description": "The response of a AlertProcessingRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AlertProcessingRule items on this page",
+          "items": {
+            "$ref": "#/definitions/AlertProcessingRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertProcessingRuleProperties": {
+      "type": "object",
+      "description": "Alert processing rule properties defining scopes, conditions and scheduling logic for alert processing rule.",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "description": "Scopes on which alert processing rule will apply.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Conditions on which alerts will be filtered.",
+          "items": {
+            "$ref": "#/definitions/Condition"
+          },
+          "x-ms-identifiers": []
+        },
+        "schedule": {
+          "$ref": "#/definitions/Schedule",
+          "description": "Scheduling for alert processing rule."
+        },
+        "actions": {
+          "type": "array",
+          "description": "Actions to be applied.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          },
+          "x-ms-identifiers": []
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of alert processing rule."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the given alert processing rule is enabled or disabled.",
+          "default": true
+        }
+      },
+      "required": [
+        "scopes",
+        "actions"
+      ]
+    },
+    "AlertProperties": {
+      "type": "object",
+      "description": "Alert property bag",
+      "properties": {
+        "essentials": {
+          "$ref": "#/definitions/Essentials",
+          "description": "This object contains consistent fields across different monitor services."
+        },
+        "context": {
+          "type": "object",
+          "description": "Information specific to the monitor service that gives more contextual details about the alert.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "egressConfig": {
+          "type": "object",
+          "description": "Config which would be used for displaying the data in portal.",
+          "additionalProperties": {},
+          "readOnly": true
+        }
+      }
+    },
+    "AlertState": {
+      "type": "string",
+      "enum": [
+        "New",
+        "Acknowledged",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "AlertState",
+        "modelAsString": true
+      }
+    },
+    "AlertsManagementErrorResponse": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/AlertsManagementErrorResponseBody",
+          "description": "Details of error response."
+        }
+      }
+    },
+    "AlertsManagementErrorResponseBody": {
+      "type": "object",
+      "description": "Details of error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code, intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error, intended for display in user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the particular error, for example name of the property."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/AlertsManagementErrorResponseBody"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AlertsMetaData": {
+      "type": "object",
+      "description": "alert meta data information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertsMetaDataProperties",
+          "description": "alert meta data property bag"
+        }
+      }
+    },
+    "AlertsMetaDataProperties": {
+      "type": "object",
+      "description": "alert meta data property bag",
+      "properties": {
+        "metadataIdentifier": {
+          "type": "string",
+          "description": "Discriminator property for AlertsMetaDataProperties."
+        }
+      },
+      "discriminator": "metadataIdentifier",
+      "required": [
+        "metadataIdentifier"
+      ]
+    },
+    "AlertsSortByFields": {
+      "type": "string",
+      "enum": [
+        "name",
+        "severity",
+        "alertState",
+        "monitorCondition",
+        "targetResource",
+        "targetResourceName",
+        "targetResourceGroup",
+        "targetResourceType",
+        "startDateTime",
+        "lastModifiedDateTime"
+      ],
+      "x-ms-enum": {
+        "name": "AlertsSortByFields",
+        "modelAsString": true
+      }
+    },
+    "AlertsSummary": {
+      "type": "object",
+      "description": "Summary of alerts based on the input filters and 'groupby' parameters.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertsSummaryGroup",
+          "description": "Group the result set."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "AlertsSummaryGroup": {
+      "type": "object",
+      "description": "Group the result set.",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total count of the result set."
+        },
+        "smartGroupsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total count of the smart groups."
+        },
+        "groupedby": {
+          "type": "string",
+          "description": "Name of the field aggregated"
+        },
+        "values": {
+          "type": "array",
+          "description": "List of the items",
+          "items": {
+            "$ref": "#/definitions/AlertsSummaryGroupItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AlertsSummaryGroupByFields": {
+      "type": "string",
+      "enum": [
+        "severity",
+        "alertState",
+        "monitorCondition",
+        "monitorService",
+        "signalType",
+        "alertRule"
+      ],
+      "x-ms-enum": {
+        "name": "AlertsSummaryGroupByFields",
+        "modelAsString": true
+      }
+    },
+    "AlertsSummaryGroupItem": {
+      "type": "object",
+      "description": "Alerts summary group item",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Value of the aggregated field"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of the aggregated field"
+        },
+        "groupedby": {
+          "type": "string",
+          "description": "Name of the field aggregated"
+        },
+        "values": {
+          "type": "array",
+          "description": "List of the items",
+          "items": {
+            "$ref": "#/definitions/AlertsSummaryGroupItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "description": "Condition to trigger an alert processing rule.",
+      "properties": {
+        "field": {
+          "$ref": "#/definitions/Field",
+          "description": "Field for a given condition."
+        },
+        "operator": {
+          "$ref": "#/definitions/Operator",
+          "description": "Operator for a given condition."
+        },
+        "values": {
+          "type": "array",
+          "description": "List of values to match for a given condition.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DailyRecurrence": {
+      "type": "object",
+      "description": "Daily recurrence object.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Recurrence"
+        }
+      ],
+      "x-ms-discriminator-value": "Daily"
+    },
+    "DaysOfWeek": {
+      "type": "string",
+      "description": "Days of week.",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "DaysOfWeek",
+        "modelAsString": true
+      }
+    },
+    "Essentials": {
+      "type": "object",
+      "description": "This object contains consistent fields across different monitor services.",
+      "properties": {
+        "severity": {
+          "$ref": "#/definitions/Severity",
+          "description": "Severity of alert Sev0 being highest and Sev4 being lowest.",
+          "readOnly": true
+        },
+        "signalType": {
+          "$ref": "#/definitions/SignalType",
+          "description": "The type of signal the alert is based on, which could be metrics, logs or activity logs.",
+          "readOnly": true
+        },
+        "alertState": {
+          "$ref": "#/definitions/AlertState",
+          "description": "Alert object state, which can be modified by the user.",
+          "readOnly": true
+        },
+        "monitorCondition": {
+          "$ref": "#/definitions/MonitorCondition",
+          "description": "Condition of the rule at the monitor service. It represents whether the underlying conditions have crossed the defined alert rule thresholds.",
+          "readOnly": true
+        },
+        "targetResource": {
+          "type": "string",
+          "description": "Target ARM resource, on which alert got created."
+        },
+        "targetResourceName": {
+          "type": "string",
+          "description": "Name of the target ARM resource name, on which alert got created."
+        },
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "Resource group of target ARM resource, on which alert got created."
+        },
+        "targetResourceType": {
+          "type": "string",
+          "description": "Resource type of target ARM resource, on which alert got created."
+        },
+        "monitorService": {
+          "$ref": "#/definitions/MonitorService",
+          "description": "Monitor service on which the rule(monitor) is set.",
+          "readOnly": true
+        },
+        "alertRule": {
+          "type": "string",
+          "description": "Rule(monitor) which fired alert instance. Depending on the monitor service,  this would be ARM id or name of the rule.",
+          "readOnly": true
+        },
+        "sourceCreatedId": {
+          "type": "string",
+          "description": "Unique Id created by monitor service for each alert instance. This could be used to track the issue at the monitor service, in case of Nagios, Zabbix, SCOM etc.",
+          "readOnly": true
+        },
+        "smartGroupId": {
+          "type": "string",
+          "description": "Unique Id of the smart group",
+          "readOnly": true
+        },
+        "smartGroupingReason": {
+          "type": "string",
+          "description": "Verbose reason describing the reason why this alert instance is added to a smart group",
+          "readOnly": true
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time(ISO-8601 format) of alert instance.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification time(ISO-8601 format) of alert instance.",
+          "readOnly": true
+        },
+        "monitorConditionResolvedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Resolved time(ISO-8601 format) of alert instance. This will be updated when monitor service resolves the alert instance because the rule condition is no longer met.",
+          "readOnly": true
+        },
+        "lastModifiedUserName": {
+          "type": "string",
+          "description": "User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user.",
+          "readOnly": true
+        },
+        "actionStatus": {
+          "$ref": "#/definitions/ActionStatus",
+          "description": "Action status"
+        },
+        "description": {
+          "type": "string",
+          "description": "Alert description."
+        }
+      }
+    },
+    "Field": {
+      "type": "string",
+      "description": "Field for a given condition.",
+      "enum": [
+        "Severity",
+        "MonitorService",
+        "MonitorCondition",
+        "SignalType",
+        "TargetResourceType",
+        "TargetResource",
+        "TargetResourceGroup",
+        "AlertRuleId",
+        "AlertRuleName",
+        "Description",
+        "AlertContext"
+      ],
+      "x-ms-enum": {
+        "name": "Field",
+        "modelAsString": true
+      }
+    },
+    "Identifier": {
+      "type": "string",
+      "enum": [
+        "MonitorServiceList"
+      ],
+      "x-ms-enum": {
+        "name": "Identifier",
+        "modelAsString": true
+      }
+    },
+    "ManagedResource": {
+      "type": "object",
+      "description": "An azure managed resource object.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "MetadataIdentifier": {
+      "type": "string",
+      "description": "Identification of the information to be retrieved by API call",
+      "enum": [
+        "MonitorServiceList"
+      ],
+      "x-ms-enum": {
+        "name": "MetadataIdentifier",
+        "modelAsString": true
+      }
+    },
+    "MonitorCondition": {
+      "type": "string",
+      "enum": [
+        "Fired",
+        "Resolved"
+      ],
+      "x-ms-enum": {
+        "name": "MonitorCondition",
+        "modelAsString": true
+      }
+    },
+    "MonitorService": {
+      "type": "string",
+      "enum": [
+        "Application Insights",
+        "ActivityLog Administrative",
+        "ActivityLog Security",
+        "ActivityLog Recommendation",
+        "ActivityLog Policy",
+        "ActivityLog Autoscale",
+        "Log Analytics",
+        "Nagios",
+        "Platform",
+        "SCOM",
+        "ServiceHealth",
+        "SmartDetector",
+        "VM Insights",
+        "Zabbix"
+      ],
+      "x-ms-enum": {
+        "name": "MonitorService",
+        "modelAsString": true
+      }
+    },
+    "MonitorServiceDetails": {
+      "type": "object",
+      "description": "Details of a monitor service",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Monitor service name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Monitor service display name"
+        }
+      }
+    },
+    "MonitorServiceList": {
+      "type": "object",
+      "description": "Monitor service details",
+      "properties": {
+        "data": {
+          "type": "array",
+          "description": "Array of operations",
+          "items": {
+            "$ref": "#/definitions/MonitorServiceDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertsMetaDataProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "MonitorServiceList"
+    },
+    "MonthlyRecurrence": {
+      "type": "object",
+      "description": "Monthly recurrence object.",
+      "properties": {
+        "daysOfMonth": {
+          "type": "array",
+          "description": "Specifies the values for monthly recurrence pattern.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "daysOfMonth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Recurrence"
+        }
+      ],
+      "x-ms-discriminator-value": "Monthly"
+    },
+    "Operator": {
+      "type": "string",
+      "description": "Operator for a given condition.",
+      "enum": [
+        "Equals",
+        "NotEquals",
+        "Contains",
+        "DoesNotContain"
+      ],
+      "x-ms-enum": {
+        "name": "Operator",
+        "modelAsString": true
+      }
+    },
+    "PatchObject": {
+      "type": "object",
+      "description": "Data contract for patch.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PatchProperties",
+          "description": "Properties supported by patch operation.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags to be updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchProperties": {
+      "type": "object",
+      "description": "Alert processing rule properties supported by patch.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the given alert processing rule is enabled or disabled."
+        }
+      }
+    },
+    "Recurrence": {
+      "type": "object",
+      "description": "Recurrence object.",
+      "properties": {
+        "recurrenceType": {
+          "type": "string",
+          "description": "Discriminator property for Recurrence."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "time",
+          "description": "Start time for recurrence."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "time",
+          "description": "End time for recurrence."
+        }
+      },
+      "discriminator": "recurrenceType",
+      "required": [
+        "recurrenceType"
+      ]
+    },
+    "RecurrenceType": {
+      "type": "string",
+      "description": "Specifies when the recurrence should be applied.",
+      "enum": [
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "RecurrenceType",
+        "modelAsString": true
+      }
+    },
+    "RemoveAllActionGroups": {
+      "type": "object",
+      "description": "Indicates if all action groups should be removed.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "RemoveAllActionGroups"
+    },
+    "Resource": {
+      "type": "object",
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        }
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "Scheduling configuration for a given alert processing rule.",
+      "properties": {
+        "effectiveFrom": {
+          "type": "string",
+          "description": "Scheduling effective from time. Date-Time in ISO-8601 format without timezone suffix.",
+          "pattern": "^(?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?))$"
+        },
+        "effectiveUntil": {
+          "type": "string",
+          "description": "Scheduling effective until time. Date-Time in ISO-8601 format without timezone suffix.",
+          "pattern": "^(?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?))$"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Scheduling time zone."
+        },
+        "recurrences": {
+          "type": "array",
+          "description": "List of recurrences.",
+          "items": {
+            "$ref": "#/definitions/Recurrence"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Severity": {
+      "type": "string",
+      "enum": [
+        "Sev0",
+        "Sev1",
+        "Sev2",
+        "Sev3",
+        "Sev4"
+      ],
+      "x-ms-enum": {
+        "name": "Severity",
+        "modelAsString": true
+      }
+    },
+    "SignalType": {
+      "type": "string",
+      "description": "The type of signal the alert is based on, which could be metrics, logs or activity logs.",
+      "enum": [
+        "Metric",
+        "Log",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "SignalType",
+        "modelAsString": true
+      }
+    },
+    "SmartGroup": {
+      "type": "object",
+      "description": "Set of related alerts grouped together smartly by AMS.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SmartGroupProperties",
+          "description": "Properties of smart group.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SmartGroupAggregatedProperty": {
+      "type": "object",
+      "description": "Aggregated property of each type",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the type."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of items of type."
+        }
+      }
+    },
+    "SmartGroupErrorResponse": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/SmartGroupErrorResponseBody",
+          "description": "Details of error response."
+        }
+      }
+    },
+    "SmartGroupErrorResponseBody": {
+      "type": "object",
+      "description": "Details of error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code, intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error, intended for display in user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the particular error, for example name of the property."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/SmartGroupErrorResponseBody"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SmartGroupListResult": {
+      "type": "object",
+      "description": "The response of a SmartGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SmartGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/SmartGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SmartGroupModification": {
+      "type": "object",
+      "description": "Alert Modification details",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SmartGroupModificationProperties",
+          "description": "Properties of the smartGroup modification item."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "SmartGroupModificationEvent": {
+      "type": "string",
+      "description": "Reason for the modification",
+      "enum": [
+        "SmartGroupCreated",
+        "StateChange",
+        "AlertAdded",
+        "AlertRemoved"
+      ],
+      "x-ms-enum": {
+        "name": "SmartGroupModificationEvent",
+        "modelAsString": false
+      }
+    },
+    "SmartGroupModificationItem": {
+      "type": "object",
+      "description": "smartGroup modification item.",
+      "properties": {
+        "modificationEvent": {
+          "$ref": "#/definitions/SmartGroupModificationEvent",
+          "description": "Reason for the modification"
+        },
+        "oldValue": {
+          "type": "string",
+          "description": "Old value"
+        },
+        "newValue": {
+          "type": "string",
+          "description": "New value"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "Modified date and time"
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "Modified user details (Principal client name)"
+        },
+        "comments": {
+          "type": "string",
+          "description": "Modification comments"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the modification"
+        }
+      }
+    },
+    "SmartGroupModificationProperties": {
+      "type": "object",
+      "description": "Properties of the smartGroup modification item.",
+      "properties": {
+        "smartGroupId": {
+          "type": "string",
+          "description": "Unique Id of the smartGroup for which the history is being retrieved",
+          "readOnly": true
+        },
+        "modifications": {
+          "type": "array",
+          "description": "Modification details",
+          "items": {
+            "$ref": "#/definitions/SmartGroupModificationItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to fetch the next set of results."
+        }
+      }
+    },
+    "SmartGroupProperties": {
+      "type": "object",
+      "description": "Properties of smart group.",
+      "properties": {
+        "alertsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of alerts in smart group"
+        },
+        "smartGroupState": {
+          "$ref": "#/definitions/SmartGroupState",
+          "description": "Smart group state",
+          "readOnly": true
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity",
+          "description": "Severity of smart group is the highest(Sev0 >... > Sev4) severity of all the alerts in the group.",
+          "readOnly": true
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of smart group. Date-Time in ISO-8601 format.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated time of smart group. Date-Time in ISO-8601 format.",
+          "readOnly": true
+        },
+        "lastModifiedUserName": {
+          "type": "string",
+          "description": "Last modified by user name.",
+          "readOnly": true
+        },
+        "resources": {
+          "type": "array",
+          "description": "Summary of target resources in the smart group",
+          "items": {
+            "$ref": "#/definitions/SmartGroupAggregatedProperty"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "Summary of target resource types in the smart group",
+          "items": {
+            "$ref": "#/definitions/SmartGroupAggregatedProperty"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceGroups": {
+          "type": "array",
+          "description": "Summary of target resource groups in the smart group",
+          "items": {
+            "$ref": "#/definitions/SmartGroupAggregatedProperty"
+          },
+          "x-ms-identifiers": []
+        },
+        "monitorServices": {
+          "type": "array",
+          "description": "Summary of monitorServices in the smart group",
+          "items": {
+            "$ref": "#/definitions/SmartGroupAggregatedProperty"
+          },
+          "x-ms-identifiers": []
+        },
+        "monitorConditions": {
+          "type": "array",
+          "description": "Summary of monitorConditions in the smart group",
+          "items": {
+            "$ref": "#/definitions/SmartGroupAggregatedProperty"
+          },
+          "x-ms-identifiers": []
+        },
+        "alertStates": {
+          "type": "array",
+          "description": "Summary of alertStates in the smart group",
+          "items": {
+            "$ref": "#/definitions/SmartGroupAggregatedProperty"
+          },
+          "x-ms-identifiers": []
+        },
+        "alertSeverities": {
+          "type": "array",
+          "description": "Summary of alertSeverities in the smart group",
+          "items": {
+            "$ref": "#/definitions/SmartGroupAggregatedProperty"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of alerts. Call ListNext() with this URI to fetch the next page alerts."
+        }
+      }
+    },
+    "SmartGroupState": {
+      "type": "string",
+      "description": "Smart group state",
+      "enum": [
+        "New",
+        "Acknowledged",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "SmartGroupState",
+        "modelAsString": true
+      }
+    },
+    "SmartGroupsSortByFields": {
+      "type": "string",
+      "enum": [
+        "alertsCount",
+        "state",
+        "severity",
+        "startDateTime",
+        "lastModifiedDateTime"
+      ],
+      "x-ms-enum": {
+        "name": "SmartGroupsSortByFields",
+        "modelAsString": true
+      }
+    },
+    "SortOrder": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "x-ms-enum": {
+        "name": "SortOrder",
+        "modelAsString": true
+      }
+    },
+    "TimeRange": {
+      "type": "string",
+      "enum": [
+        "1h",
+        "1d",
+        "7d",
+        "30d"
+      ],
+      "x-ms-enum": {
+        "name": "TimeRange",
+        "modelAsString": true
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2021-08-08",
+        "2019-05-05-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2021_08_08",
+            "value": "2021-08-08",
+            "description": "The 2021-08-08 API version."
+          },
+          {
+            "name": "v2019_05_05_preview",
+            "value": "2019-05-05-preview",
+            "description": "The 2019-05-05-preview API version."
+          }
+        ]
+      }
+    },
+    "WeeklyRecurrence": {
+      "type": "object",
+      "description": "Weekly recurrence object.",
+      "properties": {
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Specifies the values for weekly recurrence pattern.",
+          "items": {
+            "$ref": "#/definitions/DaysOfWeek"
+          }
+        }
+      },
+      "required": [
+        "daysOfWeek"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Recurrence"
+        }
+      ],
+      "x-ms-discriminator-value": "Weekly"
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

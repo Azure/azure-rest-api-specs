@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2022-12-01",
+    "registryName": "myRegistry",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "webhookName": "myWebhook"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myWebhook",
+        "type": "Microsoft.ContainerRegistry/registries/webhooks",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/webhooks/myWebhook",
+        "location": "westus",
+        "properties": {
+          "actions": [
+            "push"
+          ],
+          "provisioningState": "Succeeded",
+          "scope": "myRepository",
+          "status": "enabled"
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    }
+  },
+  "operationId": "Webhooks_Get",
+  "title": "WebhookGet"
+}

@@ -1,0 +1,2200 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure AgFoodPlatform RP Service",
+    "version": "2021-09-01-preview",
+    "description": "APIs documentation for Azure AgFoodPlatform Resource Provider Service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Extensions"
+    },
+    {
+      "name": "FarmBeatsOperationGroup"
+    },
+    {
+      "name": "FarmBeatsExtensions"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "PrivateLinkResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions": {
+      "get": {
+        "operationId": "FarmBeatsExtensions_List",
+        "tags": [
+          "FarmBeatsExtensions"
+        ],
+        "description": "Get list of farmBeats extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "farmBeatsExtensionIds",
+            "in": "query",
+            "description": "FarmBeatsExtension ids.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "farmBeatsExtensionNames",
+            "in": "query",
+            "description": "FarmBeats extension names.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extensionCategories",
+            "in": "query",
+            "description": "Extension categories.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "publisherIds",
+            "in": "query",
+            "description": "Publisher ids.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "$maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FarmBeatsExtensionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FarmBeatsExtensions_List": {
+            "$ref": "./examples/FarmBeatsExtensions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/{farmBeatsExtensionId}": {
+      "get": {
+        "operationId": "FarmBeatsExtensions_Get",
+        "tags": [
+          "FarmBeatsExtensions"
+        ],
+        "description": "Get farmBeats extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "farmBeatsExtensionId",
+            "in": "path",
+            "description": "farmBeatsExtensionId to be queried.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FarmBeatsExtension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FarmBeatsExtensions_Get": {
+            "$ref": "./examples/FarmBeatsExtensions_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AgFoodPlatform/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability": {
+      "post": {
+        "operationId": "LocationsOperations_CheckNameAvailability",
+        "description": "Checks the name availability of the resource with requested resource name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "NameAvailabilityRequest object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/farmBeats": {
+      "get": {
+        "operationId": "FarmBeatsModels_ListBySubscription",
+        "tags": [
+          "FarmBeatsOperationGroup"
+        ],
+        "description": "Lists the FarmBeats instances for a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FarmBeatsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FarmBeatsModels_ListBySubscription": {
+            "$ref": "./examples/FarmBeatsModels_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats": {
+      "get": {
+        "operationId": "FarmBeatsModels_ListByResourceGroup",
+        "tags": [
+          "FarmBeatsOperationGroup"
+        ],
+        "description": "Lists the FarmBeats instances for a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token for getting next set of results.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FarmBeatsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FarmBeatsModels_ListByResourceGroup": {
+            "$ref": "./examples/FarmBeatsModels_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}": {
+      "get": {
+        "operationId": "FarmBeatsModels_Get",
+        "tags": [
+          "FarmBeatsOperationGroup"
+        ],
+        "description": "Get FarmBeats resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FarmBeats"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FarmBeatsModels_Get": {
+            "$ref": "./examples/FarmBeatsModels_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FarmBeatsModels_CreateOrUpdate",
+        "tags": [
+          "FarmBeatsOperationGroup"
+        ],
+        "description": "Create or update FarmBeats resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "FarmBeats resource create or update request object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FarmBeats"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FarmBeats' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FarmBeats"
+            }
+          },
+          "201": {
+            "description": "Resource 'FarmBeats' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FarmBeats"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FarmBeatsModels_CreateOrUpdate": {
+            "$ref": "./examples/FarmBeatsModels_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "FarmBeatsModels_Update",
+        "tags": [
+          "FarmBeatsOperationGroup"
+        ],
+        "description": "Update a FarmBeats resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FarmBeatsUpdateRequestModel"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FarmBeats"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FarmBeatsModels_Update": {
+            "$ref": "./examples/FarmBeatsModels_Update.json"
+          },
+          "FarmBeatsModels_UpdateWithSensor": {
+            "$ref": "./examples/FarmBeatsModels_UpdateWithSensor.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FarmBeatsModels_Delete",
+        "tags": [
+          "FarmBeatsOperationGroup"
+        ],
+        "description": "Delete a FarmBeats resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FarmBeatsModels_Delete": {
+            "$ref": "./examples/FarmBeatsModels_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/extensions": {
+      "get": {
+        "operationId": "Extensions_ListByFarmBeats",
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Get installed extensions details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionIds",
+            "in": "query",
+            "description": "Installed extension ids.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extensionCategories",
+            "in": "query",
+            "description": "Installed extension categories.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "$maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skip token for getting next set of results.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_ListByFarmBeats": {
+            "$ref": "./examples/Extensions_ListByFarmBeats.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/extensions/{extensionId}": {
+      "get": {
+        "operationId": "Extensions_Get",
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Get installed extension details by extension id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionId",
+            "in": "path",
+            "description": "Id of extension resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_Get": {
+            "$ref": "./examples/Extensions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Extensions_Create",
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Install extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionId",
+            "in": "path",
+            "description": "Id of extension resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Extension' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "201": {
+            "description": "Resource 'Extension' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_Create": {
+            "$ref": "./examples/Extensions_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Extensions_Update",
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Upgrade to latest extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionId",
+            "in": "path",
+            "description": "Id of extension resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_Update": {
+            "$ref": "./examples/Extensions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Extensions_Delete",
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Uninstall extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionId",
+            "in": "path",
+            "description": "Id of extension resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_Delete": {
+            "$ref": "./examples/Extensions_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/operationResults/{operationResultsId}/{subscriptionId}/{resourceGroupName}/{farmBeatsResourceName}/{operationResultsId}": {
+      "get": {
+        "operationId": "FarmBeatsModels_GetOperationResult",
+        "tags": [
+          "FarmBeatsOperationGroup"
+        ],
+        "description": "Get operationResults for a FarmBeats resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationResultsId",
+            "in": "path",
+            "description": "The operation results id.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ArmAsyncOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FarmBeatsModels_GetOperationResult": {
+            "$ref": "./examples/FarmBeatsModels_GetOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_ListByResource",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get list of Private endpoint connections.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByResource": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get Private endpoint connection object.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private endpoint connection name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approves or Rejects a Private endpoint connection request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private endpoint connection name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_CreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete Private endpoint connection request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private endpoint connection name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListByResource",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get list of Private link resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByResource": {
+            "$ref": "./examples/PrivateLinkResources_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateLinkResources/{subResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get Private link resource object.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "farmBeatsResourceName",
+            "in": "path",
+            "description": "FarmBeats resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subResourceName",
+            "in": "path",
+            "description": "Sub resource name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArmAsyncOperation": {
+      "type": "object",
+      "description": "Arm async operation class.\nRef: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the async operation."
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.CheckNameAvailabilityReason": {
+      "type": "string",
+      "description": "Possible reasons for a name not being available.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "CheckNameAvailabilityReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Name is invalid."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "Name already exists."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.Foundations.ManagedIdentityProperties": {
+      "type": "object",
+      "description": "The properties of the managed service identities assigned to this resource.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The Active Directory tenant id of the principal.",
+          "readOnly": true
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier of this principal.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "System and user assigned managed identity."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
+      "type": "object",
+      "description": "A managed identity assigned by the user.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The active directory client identifier for this principal."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier for this principal."
+        }
+      }
+    },
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "The check availability request body.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource for which availability needs to be checked."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "description": "The check availability result.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates if the resource name is available."
+        },
+        "reason": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.CheckNameAvailabilityReason",
+          "description": "The reason why the given name is not available."
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed reason why the given name is available."
+        }
+      }
+    },
+    "DetailedInformation": {
+      "type": "object",
+      "description": "Model to capture detailed information for farmBeatsExtensions.",
+      "properties": {
+        "apiName": {
+          "type": "string",
+          "description": "ApiName available for the farmBeatsExtension."
+        },
+        "customParameters": {
+          "type": "array",
+          "description": "List of customParameters.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "platformParameters": {
+          "type": "array",
+          "description": "List of platformParameters.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unitsSupported": {
+          "$ref": "#/definitions/UnitSystemsInfo",
+          "description": "Unit systems info for the data provider."
+        },
+        "apiInputParameters": {
+          "type": "array",
+          "description": "List of apiInputParameters.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Extension": {
+      "type": "object",
+      "description": "Extension resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionProperties",
+          "description": "Extension resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExtensionListResult": {
+      "type": "object",
+      "description": "The response of a Extension list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Extension items on this page",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtensionProperties": {
+      "type": "object",
+      "description": "Extension resource properties.",
+      "properties": {
+        "extensionId": {
+          "type": "string",
+          "description": "Extension Id.",
+          "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$",
+          "readOnly": true
+        },
+        "extensionCategory": {
+          "type": "string",
+          "description": "Extension category. e.g. weather/sensor/satellite.",
+          "readOnly": true
+        },
+        "installedExtensionVersion": {
+          "type": "string",
+          "description": "Installed extension version.",
+          "pattern": "^([1-9]|10).\\d$",
+          "readOnly": true
+        },
+        "extensionAuthLink": {
+          "type": "string",
+          "description": "Extension auth link.",
+          "readOnly": true
+        },
+        "extensionApiDocsLink": {
+          "type": "string",
+          "description": "Extension api docs link.",
+          "readOnly": true
+        }
+      }
+    },
+    "FarmBeats": {
+      "type": "object",
+      "description": "FarmBeats ARM Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FarmBeatsProperties",
+          "description": "FarmBeats ARM Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FarmBeatsExtension": {
+      "type": "object",
+      "description": "FarmBeats extension resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FarmBeatsExtensionProperties",
+          "description": "FarmBeatsExtension properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FarmBeatsExtensionListResult": {
+      "type": "object",
+      "description": "The response of a FarmBeatsExtension list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FarmBeatsExtension items on this page",
+          "items": {
+            "$ref": "#/definitions/FarmBeatsExtension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FarmBeatsExtensionProperties": {
+      "type": "object",
+      "description": "FarmBeatsExtension properties.",
+      "properties": {
+        "targetResourceType": {
+          "type": "string",
+          "description": "Target ResourceType of the farmBeatsExtension.",
+          "readOnly": true
+        },
+        "farmBeatsExtensionId": {
+          "type": "string",
+          "description": "FarmBeatsExtension ID.",
+          "minLength": 2,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$",
+          "readOnly": true
+        },
+        "farmBeatsExtensionName": {
+          "type": "string",
+          "description": "FarmBeatsExtension name.",
+          "minLength": 2,
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "farmBeatsExtensionVersion": {
+          "type": "string",
+          "description": "FarmBeatsExtension version.",
+          "minLength": 2,
+          "maxLength": 100,
+          "pattern": "^([1-9]|10).\\d$",
+          "readOnly": true
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher ID.",
+          "minLength": 2,
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Textual description.",
+          "minLength": 2,
+          "maxLength": 500,
+          "readOnly": true
+        },
+        "extensionCategory": {
+          "type": "string",
+          "description": "Category of the extension. e.g. weather/sensor/satellite.",
+          "minLength": 2,
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "extensionAuthLink": {
+          "type": "string",
+          "description": "FarmBeatsExtension auth link.",
+          "readOnly": true
+        },
+        "extensionApiDocsLink": {
+          "type": "string",
+          "description": "FarmBeatsExtension api docs link.",
+          "readOnly": true
+        },
+        "detailedInformation": {
+          "type": "array",
+          "description": "Detailed information which shows summary of requested data.\nUsed in descriptive get extension metadata call.\nInformation for weather category per api included are apisSupported,\ncustomParameters, PlatformParameters and Units supported.",
+          "items": {
+            "$ref": "#/definitions/DetailedInformation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FarmBeatsListResult": {
+      "type": "object",
+      "description": "The response of a FarmBeats list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FarmBeats items on this page",
+          "items": {
+            "$ref": "#/definitions/FarmBeats"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FarmBeatsProperties": {
+      "type": "object",
+      "description": "FarmBeats ARM Resource properties.",
+      "properties": {
+        "instanceUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Uri of the FarmBeats instance.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "FarmBeats instance provisioning state.",
+          "readOnly": true
+        },
+        "sensorIntegration": {
+          "$ref": "#/definitions/SensorIntegration",
+          "description": "Sensor integration request model."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Property to allow or block public traffic for an Azure FarmBeats resource."
+        },
+        "privateEndpointConnections": {
+          "$ref": "#/definitions/PrivateEndpointConnection",
+          "description": "The Private Endpoint Connection resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "FarmBeatsUpdateProperties": {
+      "type": "object",
+      "description": "FarmBeats ARM Resource properties.",
+      "properties": {
+        "sensorIntegration": {
+          "$ref": "#/definitions/SensorIntegration",
+          "description": "Sensor integration request model."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Property to allow or block public traffic for an Azure FarmBeats resource."
+        }
+      }
+    },
+    "FarmBeatsUpdateRequestModel": {
+      "type": "object",
+      "description": "FarmBeats update request.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Geo-location where the resource lives."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/FarmBeatsUpdateProperties",
+          "description": "FarmBeats ARM Resource properties."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "The Private Endpoint resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM identifier for Private Endpoint",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "The Private Endpoint Connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of the PrivateEndpointConnectProperties.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private end point."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "The provisioning state of the private endpoint connection resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The private link resource group id.",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "The private link resource required member names.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The private link resource Private link DNS zone name.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "A collection of information about the state of the connection between service consumer and provider.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Sensor integration instance provisioning state.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Property to allow or block public traffic for an Azure FarmBeats resource.",
+      "enum": [
+        "Enabled",
+        "Hybrid"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      }
+    },
+    "SensorIntegration": {
+      "type": "object",
+      "description": "Sensor integration request model.",
+      "properties": {
+        "enabled": {
+          "type": "string",
+          "description": "Sensor integration enable state. Allowed values are True, None"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Sensor integration instance provisioning state.",
+          "readOnly": true
+        },
+        "provisioningInfo": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)."
+        }
+      }
+    },
+    "UnitSystemsInfo": {
+      "type": "object",
+      "description": "Unit systems info for the data provider.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "UnitSystem key sent as part of ProviderInput.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "values": {
+          "type": "array",
+          "description": "List of unit systems supported by this data provider.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "key",
+        "values"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2021-09-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2021_09_01_preview",
+            "value": "2021-09-01-preview",
+            "description": "The 2021-09-01-preview API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

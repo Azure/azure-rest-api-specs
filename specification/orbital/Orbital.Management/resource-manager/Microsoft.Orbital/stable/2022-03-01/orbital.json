@@ -1,0 +1,2404 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Orbital",
+    "version": "2022-03-01",
+    "description": "Azure Orbital service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Spacecrafts"
+    },
+    {
+      "name": "Contacts"
+    },
+    {
+      "name": "ContactProfiles"
+    },
+    {
+      "name": "AvailableGroundStations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Orbital/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/availableGroundStations": {
+      "get": {
+        "operationId": "AvailableGroundStations_ListByCapability",
+        "tags": [
+          "AvailableGroundStations"
+        ],
+        "description": "Returns list of available ground stations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "capability",
+            "in": "query",
+            "description": "Ground Station Capability.",
+            "required": true,
+            "type": "string",
+            "default": "EarthObservation",
+            "enum": [
+              "EarthObservation",
+              "Communication"
+            ],
+            "x-ms-enum": {
+              "name": "CapabilityParameter",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableGroundStationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Ground Stations by Capability": {
+            "$ref": "./examples/AvailableGroundStations_ListByCapability.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/availableGroundStations/{groundStationName}": {
+      "get": {
+        "operationId": "AvailableGroundStations_Get",
+        "tags": [
+          "AvailableGroundStations"
+        ],
+        "description": "Gets the specified available ground station.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "groundStationName",
+            "in": "path",
+            "description": "Ground Station name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableGroundStation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get GroundStation": {
+            "$ref": "./examples/AvailableGroundStations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/contactProfiles": {
+      "get": {
+        "operationId": "ContactProfiles_ListBySubscription",
+        "tags": [
+          "ContactProfiles"
+        ],
+        "description": "Returns list of contact profiles by Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContactProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Contact Profiles": {
+            "$ref": "./examples/ContactProfiles_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/spacecrafts": {
+      "get": {
+        "operationId": "Spacecrafts_ListBySubscription",
+        "tags": [
+          "Spacecrafts"
+        ],
+        "description": "Returns list of spacecrafts by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpacecraftListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Spacecraft by Subscription": {
+            "$ref": "./examples/Spacecrafts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/contactProfiles": {
+      "get": {
+        "operationId": "ContactProfiles_List",
+        "tags": [
+          "ContactProfiles"
+        ],
+        "description": "Returns list of contact profiles by Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque string that the resource provider uses to skip over previously-returned results. This is used when a previous list operation call returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContactProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Contact Profiles  by Resource Group": {
+            "$ref": "./examples/ContactProfiles_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/contactProfiles/{contactProfileName}": {
+      "get": {
+        "operationId": "ContactProfiles_Get",
+        "tags": [
+          "ContactProfiles"
+        ],
+        "description": "Gets the specified contact Profile in a specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "contactProfileName",
+            "in": "path",
+            "description": "Contact Profile name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContactProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a contact profile": {
+            "$ref": "./examples/ContactProfiles_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ContactProfiles_CreateOrUpdate",
+        "tags": [
+          "ContactProfiles"
+        ],
+        "description": "Creates or updates a contact profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "contactProfileName",
+            "in": "path",
+            "description": "Contact Profile name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to provide for the created Contact Profile.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactProfile"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ContactProfile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ContactProfile"
+            }
+          },
+          "201": {
+            "description": "Resource 'ContactProfile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ContactProfile"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a contact profile": {
+            "$ref": "./examples/ContactProfiles_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ContactProfiles_UpdateTags",
+        "tags": [
+          "ContactProfiles"
+        ],
+        "description": "Updates the specified contact profile tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "contactProfileName",
+            "in": "path",
+            "description": "Contact Profile name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update contact profile tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContactProfile"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Contact Profile tags": {
+            "$ref": "./examples/ContactProfiles_UpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ContactProfiles_Delete",
+        "tags": [
+          "ContactProfiles"
+        ],
+        "description": "Deletes a specified contact profile resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "contactProfileName",
+            "in": "path",
+            "description": "Contact Profile name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Contact Profile": {
+            "$ref": "./examples/ContactProfiles_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/spacecrafts": {
+      "get": {
+        "operationId": "Spacecrafts_List",
+        "tags": [
+          "Spacecrafts"
+        ],
+        "description": "Returns list of spacecrafts by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque string that the resource provider uses to skip over previously-returned results. This is used when a previous list operation call returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpacecraftListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Spacecraft by Resource Group": {
+            "$ref": "./examples/Spacecrafts_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/spacecrafts/{spacecraftName}": {
+      "get": {
+        "operationId": "Spacecrafts_Get",
+        "tags": [
+          "Spacecrafts"
+        ],
+        "description": "Gets the specified spacecraft in a specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spacecraftName",
+            "in": "path",
+            "description": "Spacecraft ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Spacecraft"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Spacecraft": {
+            "$ref": "./examples/Spacecrafts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Spacecrafts_CreateOrUpdate",
+        "tags": [
+          "Spacecrafts"
+        ],
+        "description": "Creates or updates a spacecraft resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spacecraftName",
+            "in": "path",
+            "description": "Spacecraft ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to provide for the created spacecraft.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Spacecraft"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Spacecraft' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Spacecraft"
+            }
+          },
+          "201": {
+            "description": "Resource 'Spacecraft' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Spacecraft"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a spacecraft": {
+            "$ref": "./examples/Spacecrafts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Spacecrafts_UpdateTags",
+        "tags": [
+          "Spacecrafts"
+        ],
+        "description": "Updates the specified spacecraft tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spacecraftName",
+            "in": "path",
+            "description": "Spacecraft ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update spacecraft tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Spacecraft"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Spacecraft tags": {
+            "$ref": "./examples/Spacecrafts_UpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Spacecrafts_Delete",
+        "tags": [
+          "Spacecrafts"
+        ],
+        "description": "Deletes a specified spacecraft resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spacecraftName",
+            "in": "path",
+            "description": "Spacecraft ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Spacecraft": {
+            "$ref": "./examples/Spacecrafts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/spacecrafts/{spacecraftName}/contacts": {
+      "get": {
+        "operationId": "Contacts_List",
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Returns list of contacts by spacecraftName.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque string that the resource provider uses to skip over previously-returned results. This is used when a previous list operation call returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "spacecraftName",
+            "in": "path",
+            "description": "Spacecraft ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContactListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Spacecraft": {
+            "$ref": "./examples/Contacts_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/spacecrafts/{spacecraftName}/contacts/{contactName}": {
+      "get": {
+        "operationId": "Contacts_Get",
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Gets the specified contact in a specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spacecraftName",
+            "in": "path",
+            "description": "Spacecraft ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contactName",
+            "in": "path",
+            "description": "Contact name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Contact": {
+            "$ref": "./examples/Contacts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Contacts_Create",
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Creates a contact.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spacecraftName",
+            "in": "path",
+            "description": "Spacecraft ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contactName",
+            "in": "path",
+            "description": "Contact name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to provide for the created contact.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Contact' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          },
+          "201": {
+            "description": "Resource 'Contact' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a contact": {
+            "$ref": "./examples/Contacts_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Contacts_Delete",
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Deletes a specified contact.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spacecraftName",
+            "in": "path",
+            "description": "Spacecraft ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contactName",
+            "in": "path",
+            "description": "Contact name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Contact": {
+            "$ref": "./examples/Contacts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/spacecrafts/{spacecraftName}/listAvailableContacts": {
+      "post": {
+        "operationId": "Spacecrafts_ListAvailableContacts",
+        "tags": [
+          "Spacecrafts"
+        ],
+        "description": "Returns list of available contacts. A contact is available if the spacecraft is visible from the ground station for more than the minimum viable contact duration provided in the contact profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spacecraftName",
+            "in": "path",
+            "description": "Spacecraft ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to provide for the contacts.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactParameters"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableContactsListResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Contact": {
+            "$ref": "./examples/Spacecrafts_ListAvailableContacts.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ApiVersionParameter": {
+      "type": "string",
+      "enum": [
+        "2020-09-01-preview",
+        "2021-04-04-preview",
+        "2022-03-01"
+      ],
+      "x-ms-enum": {
+        "name": "ApiVersionParameter",
+        "modelAsString": true
+      }
+    },
+    "AuthorizedGroundstation": {
+      "type": "object",
+      "description": "Authorized groundstation.",
+      "properties": {
+        "groundStation": {
+          "type": "string",
+          "description": "Groundstation name."
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of authorization expiration."
+        }
+      }
+    },
+    "AutoTrackingConfiguration": {
+      "type": "string",
+      "description": "Auto-tracking configuration.",
+      "enum": [
+        "disabled",
+        "xBand",
+        "sBand"
+      ],
+      "x-ms-enum": {
+        "name": "AutoTrackingConfiguration",
+        "modelAsString": false
+      }
+    },
+    "AvailableContacts": {
+      "type": "object",
+      "description": "Customer retrieves list of Available Contacts for a spacecraft resource. Later, one of the available contact can be selected to create a contact.",
+      "properties": {
+        "spacecraft": {
+          "$ref": "#/definitions/AvailableContactsSpacecraft",
+          "description": "The reference to the spacecraft resource."
+        },
+        "groundStationName": {
+          "type": "string",
+          "description": "Name of Azure Ground Station.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/AvailableContactsProperties",
+          "description": "Properties of Contact resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AvailableContactsListResult": {
+      "type": "object",
+      "description": "Response for the ListAvailableContacts API service call.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of available contacts.",
+          "items": {
+            "$ref": "#/definitions/AvailableContacts"
+          },
+          "x-ms-client-name": "values",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AvailableContactsProperties": {
+      "type": "object",
+      "description": "Properties of Contact resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContactInstanceProperties"
+        }
+      ]
+    },
+    "AvailableContactsSpacecraft": {
+      "type": "object",
+      "description": "The reference to the spacecraft resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ]
+    },
+    "AvailableGroundStation": {
+      "type": "object",
+      "description": "Ground Stations available to schedule Contacts.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailableGroundStationProperties",
+          "description": "The properties bag for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvailableGroundStationListResult": {
+      "type": "object",
+      "description": "The response of a AvailableGroundStation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AvailableGroundStation items on this page",
+          "items": {
+            "$ref": "#/definitions/AvailableGroundStation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AvailableGroundStationProperties": {
+      "type": "object",
+      "description": "The properties bag for this resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GroundStationProperties"
+        }
+      ]
+    },
+    "Capability": {
+      "type": "string",
+      "description": "Capability of the Ground Station.",
+      "enum": [
+        "EarthObservation",
+        "Communication"
+      ],
+      "x-ms-enum": {
+        "name": "Capability",
+        "modelAsString": true
+      }
+    },
+    "CapabilityParameter": {
+      "type": "string",
+      "enum": [
+        "EarthObservation",
+        "Communication"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityParameter",
+        "modelAsString": true
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from the service."
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Contact": {
+      "type": "object",
+      "description": "Customer creates a contact resource for a spacecraft resource.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ContactsProperties",
+          "description": "Properties of the Contact Resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ContactInstanceProperties": {
+      "type": "object",
+      "description": "Contact Instance Properties.",
+      "properties": {
+        "maximumElevationDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Maximum elevation of the antenna during the contact in decimal degrees.",
+          "readOnly": true
+        },
+        "txStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which antenna transmit will be enabled (ISO 8601 UTC standard).",
+          "readOnly": true
+        },
+        "txEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which antenna transmit will be disabled (ISO 8601 UTC standard).",
+          "readOnly": true
+        },
+        "rxStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Earliest time to receive a signal (ISO 8601 UTC standard).",
+          "readOnly": true
+        },
+        "rxEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time to lost receiving a signal (ISO 8601 UTC standard).",
+          "readOnly": true
+        },
+        "startAzimuthDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Azimuth of the antenna at the start of the contact in decimal degrees.",
+          "readOnly": true
+        },
+        "endAzimuthDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Azimuth of the antenna at the end of the contact in decimal degrees.",
+          "readOnly": true
+        },
+        "startElevationDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Spacecraft elevation above the horizon at contact start.",
+          "readOnly": true
+        },
+        "endElevationDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Spacecraft elevation above the horizon at contact end.",
+          "readOnly": true
+        }
+      }
+    },
+    "ContactListResult": {
+      "type": "object",
+      "description": "The response of a Contact list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Contact items on this page",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ContactParameters": {
+      "type": "object",
+      "description": "Parameters that define the contact resource.",
+      "properties": {
+        "contactProfile": {
+          "$ref": "#/definitions/ContactParametersContactProfile",
+          "description": "The reference to the contact profile resource."
+        },
+        "groundStationName": {
+          "type": "string",
+          "description": "Name of Azure Ground Station."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of a contact (ISO 8601 UTC standard)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of a contact (ISO 8601 UTC standard)."
+        }
+      },
+      "required": [
+        "contactProfile",
+        "groundStationName",
+        "startTime",
+        "endTime"
+      ]
+    },
+    "ContactParametersContactProfile": {
+      "type": "object",
+      "description": "The reference to the contact profile resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ]
+    },
+    "ContactProfile": {
+      "type": "object",
+      "description": "Customer creates a Contact Profile Resource, which will contain all of the configurations required for scheduling a contact.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ContactProfileProperties",
+          "description": "Properties of the contact profile resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ContactProfileLink": {
+      "type": "object",
+      "description": "Contact Profile Link.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Link name."
+        },
+        "polarization": {
+          "$ref": "#/definitions/Polarization",
+          "description": "Polarization. e.g. (RHCP, LHCP)."
+        },
+        "direction": {
+          "$ref": "#/definitions/Direction",
+          "description": "Direction (uplink or downlink)."
+        },
+        "gainOverTemperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Gain To Noise Temperature in db/K. It is the required G/T by the customer. Not used yet."
+        },
+        "eirpdBW": {
+          "type": "number",
+          "format": "float",
+          "description": "Effective Isotropic Radiated Power (EIRP) in dBW. It is the required EIRP by the customer. Not used yet."
+        },
+        "channels": {
+          "type": "array",
+          "description": "Contact Profile Link Channel.",
+          "items": {
+            "$ref": "#/definitions/ContactProfileLinkChannel"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "polarization",
+        "direction",
+        "channels"
+      ]
+    },
+    "ContactProfileLinkChannel": {
+      "type": "object",
+      "description": "Contact Profile Link Channel.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Channel name."
+        },
+        "centerFrequencyMHz": {
+          "type": "number",
+          "format": "float",
+          "description": "Center Frequency in MHz."
+        },
+        "bandwidthMHz": {
+          "type": "number",
+          "format": "float",
+          "description": "Bandwidth in MHz."
+        },
+        "endPoint": {
+          "$ref": "#/definitions/EndPoint",
+          "description": "Customer End point to store/retrieve data during a contact."
+        },
+        "modulationConfiguration": {
+          "type": "string",
+          "description": "Copy of the modem configuration file such as Kratos QRadio. Only valid for uplink directions. If provided, the modem connects to the customer endpoint and accepts commands from the customer instead of a VITA.49 stream."
+        },
+        "demodulationConfiguration": {
+          "type": "string",
+          "description": "Copy of the modem configuration file such as Kratos QRadio or Kratos QuantumRx. Only valid for downlink directions. If provided, the modem connects to the customer endpoint and sends demodulated data instead of a VITA.49 stream."
+        },
+        "encodingConfiguration": {
+          "type": "string",
+          "description": "Currently unused."
+        },
+        "decodingConfiguration": {
+          "type": "string",
+          "description": "Currently unused."
+        }
+      },
+      "required": [
+        "name",
+        "centerFrequencyMHz",
+        "bandwidthMHz",
+        "endPoint"
+      ]
+    },
+    "ContactProfileListResult": {
+      "type": "object",
+      "description": "The response of a ContactProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContactProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/ContactProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ContactProfileProperties": {
+      "type": "object",
+      "description": "Properties of the contact profile resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContactProfilesProperties"
+        }
+      ]
+    },
+    "ContactProfilesProperties": {
+      "type": "object",
+      "description": "List of Contact Profile Resource Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ContactProfilesPropertiesProvisioningState",
+          "description": "The current state of the resource's creation, deletion, or modification."
+        },
+        "minimumViableContactDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Minimum viable contact duration in ISO 8601 format. Used for listing the available contacts with a spacecraft at a given ground station."
+        },
+        "minimumElevationDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Minimum viable elevation for the contact in decimal degrees. Used for listing the available contacts with a spacecraft at a given ground station."
+        },
+        "autoTrackingConfiguration": {
+          "$ref": "#/definitions/AutoTrackingConfiguration",
+          "description": "Auto-tracking configuration."
+        },
+        "eventHubUri": {
+          "type": "string",
+          "description": "ARM resource identifier of the Event Hub used for telemetry. Requires granting Orbital Resource Provider the rights to send telemetry into the hub."
+        },
+        "networkConfiguration": {
+          "$ref": "#/definitions/ContactProfilesPropertiesNetworkConfiguration",
+          "description": "Network configuration of customer virtual network."
+        },
+        "links": {
+          "type": "array",
+          "description": "Links of the Contact Profile. Describes RF links, modem processing, and IP endpoints.",
+          "items": {
+            "$ref": "#/definitions/ContactProfileLink"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "networkConfiguration",
+        "links"
+      ]
+    },
+    "ContactProfilesPropertiesNetworkConfiguration": {
+      "type": "object",
+      "description": "Network configuration of customer virtual network.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "ARM resource identifier of the subnet delegated to the Microsoft.Orbital/orbitalGateways. Needs to be at least a class C subnet, and should not have any IP created in it."
+        }
+      },
+      "required": [
+        "subnetId"
+      ]
+    },
+    "ContactProfilesPropertiesProvisioningState": {
+      "type": "string",
+      "description": "The current state of the resource's creation, deletion, or modification.",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ContactProfilesPropertiesProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "ContactsProperties": {
+      "type": "object",
+      "description": "Properties of the Contact Resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ContactsPropertiesProvisioningState",
+          "description": "The current state of the resource's creation, deletion, or modification."
+        },
+        "status": {
+          "$ref": "#/definitions/ContactsStatus",
+          "description": "Status of a contact.",
+          "readOnly": true
+        },
+        "reservationStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Reservation start time of a contact (ISO 8601 UTC standard).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "reservationEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Reservation end time of a contact (ISO 8601 UTC standard).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "rxStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Receive start time of a contact (ISO 8601 UTC standard).",
+          "readOnly": true
+        },
+        "rxEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Receive end time of a contact (ISO 8601 UTC standard).",
+          "readOnly": true
+        },
+        "txStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Transmit start time of a contact (ISO 8601 UTC standard).",
+          "readOnly": true
+        },
+        "txEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Transmit end time of a contact (ISO 8601 UTC standard).",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Any error message while scheduling a contact.",
+          "readOnly": true
+        },
+        "maximumElevationDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Maximum elevation of the antenna during the contact in decimal degrees.",
+          "readOnly": true
+        },
+        "startAzimuthDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Azimuth of the antenna at the start of the contact in decimal degrees.",
+          "readOnly": true
+        },
+        "endAzimuthDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Azimuth of the antenna at the end of the contact in decimal degrees.",
+          "readOnly": true
+        },
+        "groundStationName": {
+          "type": "string",
+          "description": "Azure Ground Station name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "startElevationDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Spacecraft elevation above the horizon at contact start.",
+          "readOnly": true
+        },
+        "endElevationDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Spacecraft elevation above the horizon at contact end.",
+          "readOnly": true
+        },
+        "antennaConfiguration": {
+          "$ref": "#/definitions/ContactsPropertiesAntennaConfiguration",
+          "description": "The configuration associated with the allocated antenna.",
+          "readOnly": true
+        },
+        "contactProfile": {
+          "$ref": "#/definitions/ContactsPropertiesContactProfile",
+          "description": "The reference to the contact profile resource."
+        }
+      },
+      "required": [
+        "reservationStartTime",
+        "reservationEndTime",
+        "groundStationName",
+        "contactProfile"
+      ]
+    },
+    "ContactsPropertiesAntennaConfiguration": {
+      "type": "object",
+      "description": "The configuration associated with the allocated antenna.",
+      "properties": {
+        "destinationIp": {
+          "type": "string",
+          "description": "The destination IP a packet can be sent to. This would for example be the TCP endpoint you would send data to."
+        },
+        "sourceIps": {
+          "type": "array",
+          "description": "List of Source IP",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ContactsPropertiesContactProfile": {
+      "type": "object",
+      "description": "The reference to the contact profile resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ]
+    },
+    "ContactsPropertiesProvisioningState": {
+      "type": "string",
+      "description": "The current state of the resource's creation, deletion, or modification.",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ContactsPropertiesProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "ContactsStatus": {
+      "type": "string",
+      "description": "Status of a contact.",
+      "enum": [
+        "scheduled",
+        "cancelled",
+        "succeeded",
+        "failed",
+        "providerCancelled"
+      ],
+      "x-ms-enum": {
+        "name": "ContactsStatus",
+        "modelAsString": true
+      }
+    },
+    "Direction": {
+      "type": "string",
+      "description": "Direction (uplink or downlink).",
+      "enum": [
+        "uplink",
+        "downlink"
+      ],
+      "x-ms-enum": {
+        "name": "Direction",
+        "modelAsString": true
+      }
+    },
+    "EndPoint": {
+      "type": "object",
+      "description": "Customer End point to store/retrieve data during a contact.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "IP Address."
+        },
+        "endPointName": {
+          "type": "string",
+          "description": "Name of an end point."
+        },
+        "port": {
+          "type": "string",
+          "description": "TCP port to listen on to receive data."
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocol",
+          "description": "Protocol either UDP or TCP."
+        }
+      },
+      "required": [
+        "ipAddress",
+        "endPointName",
+        "port",
+        "protocol"
+      ]
+    },
+    "GroundStationProperties": {
+      "type": "object",
+      "description": "Properties object for Available groundstation.",
+      "properties": {
+        "city": {
+          "type": "string",
+          "description": "City of ground station."
+        },
+        "providerName": {
+          "type": "string",
+          "description": "Ground station provider name."
+        },
+        "longitudeDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Longitude of the ground station in decimal degrees."
+        },
+        "latitudeDegrees": {
+          "type": "number",
+          "format": "float",
+          "description": "Latitude of the ground station in decimal degrees."
+        },
+        "altitudeMeters": {
+          "type": "number",
+          "format": "float",
+          "description": "Altitude of the ground station."
+        },
+        "releaseMode": {
+          "$ref": "#/definitions/ReleaseMode",
+          "description": "Release Status of a ground station."
+        }
+      }
+    },
+    "OperationResult": {
+      "type": "object",
+      "description": "Operation Result Entity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of operation.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The operation start time (ISO 8601 UTC standard).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The operation end time (ISO 8601 UTC standard).",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "Percentage completed.",
+          "maximum": 100,
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Operation result properties.",
+          "additionalProperties": {},
+          "x-ms-client-flatten": true
+        },
+        "error": {
+          "$ref": "#/definitions/OperationResultErrorProperties",
+          "description": "Operation result error properties."
+        }
+      }
+    },
+    "OperationResultErrorProperties": {
+      "type": "object",
+      "description": "Operation result error properties.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The code of the error.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        }
+      }
+    },
+    "Polarization": {
+      "type": "string",
+      "description": "Polarization. e.g. (RHCP, LHCP).",
+      "enum": [
+        "RHCP",
+        "LHCP",
+        "linearVertical",
+        "linearHorizontal"
+      ],
+      "x-ms-enum": {
+        "name": "Polarization",
+        "modelAsString": true
+      }
+    },
+    "Protocol": {
+      "type": "string",
+      "description": "Protocol either UDP or TCP.",
+      "enum": [
+        "TCP",
+        "UDP"
+      ],
+      "x-ms-enum": {
+        "name": "Protocol",
+        "modelAsString": true
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The current state of the resource's creation, deletion, or modification.",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "ReleaseMode": {
+      "type": "string",
+      "description": "Release Status of a ground station.",
+      "enum": [
+        "Preview",
+        "GA"
+      ],
+      "x-ms-enum": {
+        "name": "ReleaseMode",
+        "modelAsString": true
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceIdListResult": {
+      "type": "object",
+      "description": "Response for an API service call that lists the resource IDs of resources associated with another resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of Azure Resource IDs.",
+          "items": {
+            "$ref": "#/definitions/ResourceIdListResultValueItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceIdListResultValueItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Azure Resource ID."
+        }
+      }
+    },
+    "ResourceReference": {
+      "type": "object",
+      "description": "Resource Reference.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      }
+    },
+    "Spacecraft": {
+      "type": "object",
+      "description": "Customer creates a spacecraft resource to schedule a contact.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SpacecraftsProperties",
+          "description": "Spacecraft Properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SpacecraftLink": {
+      "type": "object",
+      "description": "List of authorized spacecraft links per ground station and the expiration date of the authorization.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Link name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "centerFrequencyMHz": {
+          "type": "number",
+          "format": "float",
+          "description": "Center Frequency in MHz.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "bandwidthMHz": {
+          "type": "number",
+          "format": "float",
+          "description": "Bandwidth in MHz.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "direction": {
+          "$ref": "#/definitions/Direction",
+          "description": "Direction (uplink or downlink).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "polarization": {
+          "$ref": "#/definitions/Polarization",
+          "description": "Polarization. e.g. (RHCP, LHCP).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "authorizations": {
+          "type": "array",
+          "description": "Authorized Ground Stations",
+          "items": {
+            "$ref": "#/definitions/AuthorizedGroundstation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "centerFrequencyMHz",
+        "bandwidthMHz",
+        "direction",
+        "polarization"
+      ]
+    },
+    "SpacecraftListResult": {
+      "type": "object",
+      "description": "The response of a Spacecraft list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Spacecraft items on this page",
+          "items": {
+            "$ref": "#/definitions/Spacecraft"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SpacecraftsProperties": {
+      "type": "object",
+      "description": "List of Spacecraft Resource Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/SpacecraftsPropertiesProvisioningState",
+          "description": "The current state of the resource's creation, deletion, or modification."
+        },
+        "noradId": {
+          "type": "string",
+          "description": "NORAD ID of the spacecraft."
+        },
+        "titleLine": {
+          "type": "string",
+          "description": "Title line of the two-line element set (TLE)."
+        },
+        "tleLine1": {
+          "type": "string",
+          "description": "Line 1 of the two-line element set (TLE)."
+        },
+        "tleLine2": {
+          "type": "string",
+          "description": "Line 2 of the two-line element set (TLE)."
+        },
+        "links": {
+          "type": "array",
+          "description": "Immutable list of Spacecraft links.",
+          "items": {
+            "$ref": "#/definitions/SpacecraftLink"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "noradId"
+      ]
+    },
+    "SpacecraftsPropertiesProvisioningState": {
+      "type": "string",
+      "description": "The current state of the resource's creation, deletion, or modification.",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "SpacecraftsPropertiesProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of operation.",
+      "enum": [
+        "Succeeded",
+        "Canceled",
+        "Failed",
+        "Running"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "TagsObject": {
+      "type": "object",
+      "description": "Tags object for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2022-03-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_03_01",
+            "value": "2022-03-01",
+            "description": "The 2022-03-01 API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,130 @@
+{
+  "parameters": {
+    "api-version": "2022-12-01",
+    "registryName": "myRegistry",
+    "registryUpdateParameters": {
+      "properties": {
+        "adminUserEnabled": true
+      },
+      "sku": {
+        "name": "Standard"
+      },
+      "tags": {
+        "key": "value"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myRegistry",
+        "type": "Microsoft.ContainerRegistry/registries",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry",
+        "location": "westus",
+        "properties": {
+          "adminUserEnabled": true,
+          "creationDate": "2021-06-15T21:38:26.1537861Z",
+          "dataEndpointEnabled": false,
+          "dataEndpointHostNames": [],
+          "encryption": {
+            "status": "disabled"
+          },
+          "loginServer": "myRegistry.azurecr-test.io",
+          "networkRuleBypassOptions": "AzureServices",
+          "networkRuleSet": {
+            "defaultAction": "Allow",
+            "ipRules": []
+          },
+          "policies": {
+            "exportPolicy": {
+              "status": "enabled"
+            },
+            "quarantinePolicy": {
+              "status": "disabled"
+            },
+            "retentionPolicy": {
+              "days": 7,
+              "lastUpdatedTime": "2021-06-15T21:40:12.8506835+00:00",
+              "status": "disabled"
+            },
+            "trustPolicy": {
+              "type": "Notary",
+              "status": "disabled"
+            }
+          },
+          "privateEndpointConnections": [],
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled",
+          "status": null,
+          "zoneRedundancy": "Disabled"
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard"
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myRegistry",
+        "type": "Microsoft.ContainerRegistry/registries",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry",
+        "location": "westus",
+        "properties": {
+          "adminUserEnabled": true,
+          "creationDate": "2021-06-15T21:38:26.1537861Z",
+          "dataEndpointEnabled": false,
+          "dataEndpointHostNames": [],
+          "encryption": {
+            "status": "disabled"
+          },
+          "loginServer": "myRegistry.azurecr-test.io",
+          "networkRuleBypassOptions": "AzureServices",
+          "networkRuleSet": {
+            "defaultAction": "Allow",
+            "ipRules": []
+          },
+          "policies": {
+            "exportPolicy": {
+              "status": "enabled"
+            },
+            "quarantinePolicy": {
+              "status": "disabled"
+            },
+            "retentionPolicy": {
+              "days": 7,
+              "lastUpdatedTime": "2021-06-15T21:40:12.8506835+00:00",
+              "status": "disabled"
+            },
+            "trustPolicy": {
+              "type": "Notary",
+              "status": "disabled"
+            }
+          },
+          "privateEndpointConnections": [],
+          "provisioningState": "Updating",
+          "publicNetworkAccess": "Enabled",
+          "status": null,
+          "zoneRedundancy": "Disabled"
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard"
+        },
+        "tags": {
+          "key": "value"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/operationStatuses/registries-00000000-0000-0000-0000-000000000000?api-version=2022-12-01"
+      }
+    }
+  },
+  "operationId": "Registries_Update",
+  "title": "RegistryUpdate"
+}
