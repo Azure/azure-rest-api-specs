@@ -36,9 +36,6 @@ model IndexSpec {
 
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
   storageUri: string;
-
-  @doc("Placeholder for extras.")
-  indexConfigurations?: Record<string>
 }
 
 @doc("Asset type definition.")
