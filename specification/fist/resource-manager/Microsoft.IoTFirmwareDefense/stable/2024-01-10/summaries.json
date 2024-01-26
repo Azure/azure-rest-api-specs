@@ -34,6 +34,57 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/summaries": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_ListByFirmware",
+        "description": "Lists analysis result summary names of a firmware. To fetch the full summary data, get that summary by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SummaryListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Summaries_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "Summaries_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/summaries/{summaryName}": {
       "get": {
         "tags": [
@@ -100,6 +151,24 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "SummaryType"
+      }
+    },
+    "SummaryListResult": {
+      "type": "object",
+      "description": "List of analysis summaries.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SummaryResource"
+          },
+          "description": "The list of summaries."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
       }
     },
     "SummaryResourceProperties": {
