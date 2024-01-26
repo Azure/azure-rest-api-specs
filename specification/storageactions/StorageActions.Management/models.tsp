@@ -55,6 +55,18 @@ enum ProvisioningState {
   Failed,
 }
 
+@doc("Action to be taken when the operation is successful for a object.")
+@fixed
+enum onSuccess {
+  continue
+}
+
+@doc("Action to be taken when the operation fails for a object.")
+@fixed
+enum onFailure {
+  break
+}
+
 @doc("Properties of the storage task.")
 model StorageTaskProperties {
   @doc("Storage task version.")
@@ -109,10 +121,10 @@ model StorageTaskOperation {
   parameters?: Record<string>;
 
   @doc("Action to be taken when the operation is successful for a object.")
-  onSuccess?: "continue";
+  onSuccess?: onSuccess;
 
   @doc("Action to be taken when the operation fails for a object.")
-  onFailure?: "break";
+  onFailure?: onFailure;
 }
 
 @doc("The else block of storage task operation")

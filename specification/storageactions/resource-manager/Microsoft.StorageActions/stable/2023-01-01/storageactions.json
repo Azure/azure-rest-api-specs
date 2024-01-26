@@ -875,24 +875,12 @@
           }
         },
         "onSuccess": {
-          "type": "string",
-          "description": "Action to be taken when the operation is successful for a object.",
-          "enum": [
-            "continue"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/onSuccess",
+          "description": "Action to be taken when the operation is successful for a object."
         },
         "onFailure": {
-          "type": "string",
-          "description": "Action to be taken when the operation fails for a object.",
-          "enum": [
-            "break"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/onFailure",
+          "description": "Action to be taken when the operation fails for a object."
         }
       },
       "required": [
@@ -1293,6 +1281,28 @@
             "description": "The 2023-01-01 API version."
           }
         ]
+      }
+    },
+    "onFailure": {
+      "type": "string",
+      "description": "Action to be taken when the operation fails for a object.",
+      "enum": [
+        "break"
+      ],
+      "x-ms-enum": {
+        "name": "onFailure",
+        "modelAsString": false
+      }
+    },
+    "onSuccess": {
+      "type": "string",
+      "description": "Action to be taken when the operation is successful for a object.",
+      "enum": [
+        "continue"
+      ],
+      "x-ms-enum": {
+        "name": "onSuccess",
+        "modelAsString": false
       }
     }
   },
