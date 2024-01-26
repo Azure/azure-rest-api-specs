@@ -191,3 +191,18 @@ interface AnalysisServicesServers {
 @@doc(AnalysisServicesServers.update::parameters.properties,
   "Request object that contains the updated information for the server."
 );
+
+
+interface Skus {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "No resource operation"
+  @summary("Lists eligible SKUs for Analysis Services resource provider")
+  @doc("Lists eligible SKUs for Analysis Services resource provider")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus")
+  @operationId("Servers_ListSkusForNew")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+  ): ArmResponse<SkuDetailsForExistingResource> | ErrorResponse;
+}

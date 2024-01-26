@@ -166,6 +166,40 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus": {
+      "get": {
+        "operationId": "Servers_ListSkusForNew",
+        "summary": "Lists eligible SKUs for Analysis Services resource provider",
+        "description": "Lists eligible SKUs for Analysis Services resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuDetailsForExistingResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List eligible SKUs for a new server": {
+            "$ref": "./examples/Servers_ListSkusForNew.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "operationId": "Servers_ListByResourceGroup",
