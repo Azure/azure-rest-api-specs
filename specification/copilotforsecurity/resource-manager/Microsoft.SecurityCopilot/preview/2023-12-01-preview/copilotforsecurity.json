@@ -306,13 +306,6 @@
             "description": "Resource 'Capacity' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Capacity"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -326,11 +319,7 @@
           "Capacities_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Capacities_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "Capacities_Update",
@@ -493,15 +482,10 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
-        },
-        "crossRegionCompute": {
-          "$ref": "#/definitions/IsAllowed",
-          "description": "Is cross region compute allowed"
         }
       },
       "required": [
-        "numberOfUnits",
-        "crossRegionCompute"
+        "numberOfUnits"
       ]
     },
     "CapacityUpdate": {
@@ -531,35 +515,7 @@
           "description": "No of Units",
           "minimum": 1,
           "maximum": 999
-        },
-        "crossRegionCompute": {
-          "$ref": "#/definitions/IsAllowed",
-          "description": "Is cross region compute allowed"
         }
-      }
-    },
-    "IsAllowed": {
-      "type": "string",
-      "description": "Enum to represent Allowed or NotAllowed",
-      "enum": [
-        "Allowed",
-        "NotAllowed"
-      ],
-      "x-ms-enum": {
-        "name": "IsAllowed",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allowed",
-            "value": "Allowed",
-            "description": "Allowed to do"
-          },
-          {
-            "name": "NotAllowed",
-            "value": "NotAllowed",
-            "description": "Not allowed to do"
-          }
-        ]
       }
     },
     "ProvisioningState": {
@@ -569,7 +525,11 @@
         "Succeeded",
         "Failed",
         "Canceled",
-        "Provisioning",
+        "Unknown",
+        "Creating",
+        "Moving",
+        "SoftDeleting",
+        "SoftDeleted",
         "Updating",
         "Deleting",
         "Accepted"
@@ -594,9 +554,29 @@
             "description": "Resource creation was canceled."
           },
           {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The resource is in an unknown state"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is creating"
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "The resource is moving"
+          },
+          {
+            "name": "SoftDeleting",
+            "value": "SoftDeleting",
+            "description": "The resource is soft deleting"
+          },
+          {
+            "name": "SoftDeleted",
+            "value": "SoftDeleted",
+            "description": "The resource is soft deleted"
           },
           {
             "name": "Updating",
