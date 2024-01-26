@@ -15,7 +15,6 @@ namespace Microsoft.MachineLearningServices;
 
 
 @doc("Index asset definition.")
-@parentResource(Workspace)
 // todo modeling for container...
 @resource("indexes")
 model Index {
@@ -94,3 +93,9 @@ model IndexVersion is AssetVersionDto<IndexSpec> {
   @doc("Index asset type.")
   type: AssetType = AssetType.Index;
 }
+
+@doc("Paged collection of IndexVersion items.")
+model IndexVersionList is Azure.Core.Page<IndexVersion>;
+
+@doc("Paged collection of Index items.")
+model IndexList is Azure.Core.Page<Index>;
