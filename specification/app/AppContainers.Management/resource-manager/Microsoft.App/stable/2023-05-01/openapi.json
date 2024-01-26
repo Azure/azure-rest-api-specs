@@ -5853,7 +5853,29 @@
           "$ref": "#/definitions/AvailableWorkloadProfileProperties",
           "description": "Revision resource specific properties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          ]
+        }
+      ]
     },
     "AvailableWorkloadProfileProperties": {
       "type": "object",
@@ -6302,7 +6324,29 @@
           "$ref": "#/definitions/BillingMeterProperties",
           "description": "Revision resource specific properties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          ]
+        }
+      ]
     },
     "BillingMeterCollection": {
       "type": "object",
@@ -6313,8 +6357,7 @@
           "description": "Collection of billing meters.",
           "items": {
             "$ref": "#/definitions/BillingMeter"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -6779,7 +6822,29 @@
           "description": "Container App auth token resource specific properties",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+            }
+          ]
+        }
+      ]
     },
     "ContainerAppAuthTokenProperties": {
       "type": "object",
@@ -7964,7 +8029,29 @@
           "description": "Environment auth token resource specific properties",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+            }
+          ]
+        }
+      ]
     },
     "EnvironmentAuthTokenProperties": {
       "type": "object",
@@ -9537,8 +9624,7 @@
           "description": "The AvailableWorkloadProfile items on this page",
           "items": {
             "$ref": "#/definitions/AvailableWorkloadProfile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -9580,8 +9666,7 @@
           "description": "The WorkloadProfileStates items on this page",
           "items": {
             "$ref": "#/definitions/WorkloadProfileStates"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -10515,7 +10600,29 @@
           "$ref": "#/definitions/WorkloadProfileStatesProperties",
           "description": "Workload Profile resource specific properties."
         }
-      }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          ]
+        }
+      ]
     },
     "WorkloadProfileStatesProperties": {
       "type": "object",

@@ -1160,7 +1160,7 @@ model AvailableWorkloadProfilesCollection
 /**
  * A workload profile with specific hardware configure to run container apps.
  */
-model AvailableWorkloadProfile extends ProxyResource {
+model AvailableWorkloadProfile extends ProxyResource<{}> {
   /**
    * Region of the workload profile.
    */
@@ -1215,7 +1215,7 @@ model BillingMeterCollection {
 /**
  * Billing meter.
  */
-model BillingMeter extends ProxyResource {
+model BillingMeter extends ProxyResource<{}> {
   /**
    * Region for the billing meter.
    */
@@ -2623,7 +2623,7 @@ model ContainerAppSecret {
 /**
  * Container App Auth Token.
  */
-model ContainerAppAuthToken extends TrackedResource {
+model ContainerAppAuthToken extends TrackedResource<{}> {
   /**
    * Container App auth token resource specific properties
    */
@@ -3677,7 +3677,7 @@ model ManagedCertificatePatch {
 /**
  * Environment Auth Token.
  */
-model EnvironmentAuthToken extends TrackedResource {
+model EnvironmentAuthToken extends TrackedResource<{}> {
   /**
    * Environment auth token resource specific properties
    */
@@ -3711,7 +3711,7 @@ model WorkloadProfileStatesCollection is Azure.Core.Page<WorkloadProfileStates>;
 /**
  * Collection of all the workload Profile States for a Managed Environment..
  */
-model WorkloadProfileStates extends ProxyResource {
+model WorkloadProfileStates extends ProxyResource<{}> {
   /**
    * Workload Profile resource specific properties.
    */
