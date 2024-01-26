@@ -115,7 +115,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully set maintenance windows settings."
+            "description": "Successfully updated maintenance windows settings.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindows"
+            }
+          },
+          "201": {
+            "description": "Successfully set maintenance windows settings.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindows"
+            }
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidMaintenanceWindowSelection - Invalid maintenance window selection.",
