@@ -10,13 +10,21 @@
       }
     ]
   },
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "host": "management.azure.com",
-  "produces": ["application/json"],
-  "consumes": ["application/json"],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -39,7 +47,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections": {
       "get": {
         "operationId": "OperatorApiConnections_ListBySubscription",
-        "tags": ["OperatorApiConnections"],
+        "tags": [
+          "OperatorApiConnections"
+        ],
         "description": "List OperatorApiConnection resources by subscription ID.",
         "parameters": [
           {
@@ -76,7 +86,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections": {
       "get": {
         "operationId": "OperatorApiConnections_ListByResourceGroup",
-        "tags": ["OperatorApiConnections"],
+        "tags": [
+          "OperatorApiConnections"
+        ],
         "description": "List OperatorApiConnection resources by resource group.",
         "parameters": [
           {
@@ -116,7 +128,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections/{operatorApiConnectionName}": {
       "get": {
         "operationId": "OperatorApiConnections_Get",
-        "tags": ["OperatorApiConnections"],
+        "tags": [
+          "OperatorApiConnections"
+        ],
         "description": "Get an Operator API Connection.",
         "parameters": [
           {
@@ -154,7 +168,9 @@
       },
       "put": {
         "operationId": "OperatorApiConnections_CreateOrUpdate",
-        "tags": ["OperatorApiConnections"],
+        "tags": [
+          "OperatorApiConnections"
+        ],
         "description": "Create an Operator API Connection.",
         "parameters": [
           {
@@ -218,7 +234,9 @@
       },
       "patch": {
         "operationId": "OperatorApiConnections_Update",
-        "tags": ["OperatorApiConnections"],
+        "tags": [
+          "OperatorApiConnections"
+        ],
         "description": "Update an Operator API Connection.",
         "parameters": [
           {
@@ -283,7 +301,9 @@
       },
       "delete": {
         "operationId": "OperatorApiConnections_Delete",
-        "tags": ["OperatorApiConnections"],
+        "tags": [
+          "OperatorApiConnections"
+        ],
         "description": "Delete an Operator API Connection.",
         "parameters": [
           {
@@ -343,7 +363,10 @@
     "AccountType": {
       "type": "string",
       "description": "The Account Type of the Operator API Connections.",
-      "enum": ["AzureManaged", "UserManaged"],
+      "enum": [
+        "AzureManaged",
+        "UserManaged"
+      ],
       "x-ms-enum": {
         "name": "AccountType",
         "modelAsString": true,
@@ -432,7 +455,10 @@
           "$ref": "#/definitions/OperatorApiConnectionProperties",
           "description": "Operator API Connection resource properties.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -458,7 +484,9 @@
           "description": "The link to the next page of items."
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "OperatorApiConnectionProperties": {
       "type": "object",
@@ -472,7 +500,11 @@
         }
       ],
       "properties": {},
-      "required": ["gatewayId", "operatorApiPlanId", "accountType"]
+      "required": [
+        "gatewayId",
+        "operatorApiPlanId",
+        "accountType"
+      ]
     },
     "OperatorApiConnectionUpdateableProperties": {
       "type": "object",
@@ -525,7 +557,11 @@
           "readOnly": true
         }
       },
-      "required": ["gatewayId", "operatorApiPlanId", "accountType"]
+      "required": [
+        "gatewayId",
+        "operatorApiPlanId",
+        "accountType"
+      ]
     },
     "OperatorApiConnectionUpdate": {
       "type": "object",
