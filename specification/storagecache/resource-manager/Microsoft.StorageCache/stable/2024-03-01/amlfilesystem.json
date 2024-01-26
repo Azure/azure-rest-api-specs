@@ -469,13 +469,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AmlFilesystemNameParameter"
@@ -519,13 +519,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AmlFilesystemNameParameter"
@@ -1182,8 +1182,7 @@
       "properties": {
         "importId": {
           "type": "string",
-          "description": "Universally unique identifier (UUID) of the import job.",
-          "format": "uuid"
+          "description": "Universally unique identifier (UUID) of the import job."
         },
         "importPrefixes": {
           "type": "array",
@@ -1208,7 +1207,8 @@
         },
         "maximumErrors": {
           "description": "Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -1218,8 +1218,7 @@
       "properties": {
         "importId": {
           "type": "string",
-          "description": "Universally unique identifier (UUID) of the import job.",
-          "format": "uuid"
+          "description": "Universally unique identifier (UUID) of the import job."
         }
       }
     },
@@ -1230,8 +1229,7 @@
       "properties": {
         "importId": {
           "type": "string",
-          "description": "Universally unique identifier (UUID) of the import operation.",
-          "format": "uuid"
+          "description": "Universally unique identifier (UUID) of the import operation."
         },
         "importPrefixes": {
           "type": "array",
@@ -1256,9 +1254,11 @@
         },
         "maximumErrors": {
           "description": "Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "status": {
+          "x-ms-client-flatten": true,
           "description": "The status of the import",
           "type": "object",
           "readOnly": true,
