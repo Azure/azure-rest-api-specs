@@ -1837,24 +1837,48 @@
       "type": "string",
       "description": "Discovery rule relationship discovery behavior",
       "enum": [
-        "AutomaticallyDiscoverRelationships",
-        "DoNotDiscoverRelationships"
+        "Enabled",
+        "Disabled"
       ],
       "x-ms-enum": {
         "name": "DiscoveryRuleRelationshipDiscoveryBehavior",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Automatically attempt to discover relationships"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Do not automatically attempt to discover relationships"
+          }
+        ]
       }
     },
     "DiscoveryRuleShowEntityBehavior": {
       "type": "string",
       "description": "Discovery rule show entity behavior",
       "enum": [
-        "CreateEntityForDiscoveryRule",
-        "NoEntityForDiscoveryRule"
+        "Enabled",
+        "Disabled"
       ],
       "x-ms-enum": {
         "name": "DiscoveryRuleShowEntityBehavior",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Create entity for discovery rule"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Do not create entity for discovery rule"
+          }
+        ]
       }
     },
     "DynamicDetectionRule": {

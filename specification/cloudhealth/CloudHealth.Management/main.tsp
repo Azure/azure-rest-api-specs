@@ -610,18 +610,22 @@ model DiscoveryRuleProperties {
   //  addAllSuggestedSignals?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Discovery rule show entity behavior")
 enum DiscoveryRuleShowEntityBehavior {
-  CreateEntityForDiscoveryRule,
-  NoEntityForDiscoveryRule,
+  @doc("Create entity for discovery rule")
+  Enabled,
+
+  @doc("Do not create entity for discovery rule")
+  Disabled,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Discovery rule relationship discovery behavior")
 enum DiscoveryRuleRelationshipDiscoveryBehavior {
-  AutomaticallyDiscoverRelationships,
-  DoNotDiscoverRelationships,
+  @doc("Automatically attempt to discover relationships")
+  Enabled,
+
+  @doc("Do not automatically attempt to discover relationships")
+  Disabled,
 }
 
 alias TimestampQueryParam = {
