@@ -109,6 +109,10 @@ interface StorageTasks {
   ):ArmResponse<StorageTaskPreviewAction> | ErrorResponse;
 }
 
+@@projectedName(StorageTasks.update::parameters.properties,
+  "json",
+  "parameters"
+);
 @@extension(StorageTasks.update::parameters.properties,
   "x-ms-client-name",
   "parameters"
