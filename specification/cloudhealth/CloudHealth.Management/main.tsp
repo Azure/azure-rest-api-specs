@@ -612,7 +612,7 @@ model DiscoveryRuleProperties {
 
 @doc("Discovery rule show entity behavior")
 enum DiscoveryRuleShowEntityBehavior {
-  @doc("Create entity for discovery rule")
+  @doc("Create an entity for the discovery rule itself")
   Enabled,
 
   @doc("Do not create entity for discovery rule")
@@ -621,6 +621,7 @@ enum DiscoveryRuleShowEntityBehavior {
 
 @doc("Discovery rule relationship discovery behavior")
 enum DiscoveryRuleRelationshipDiscoveryBehavior {
+  
   @doc("Automatically attempt to discover relationships")
   Enabled,
 
