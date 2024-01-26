@@ -27,35 +27,40 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The properties of ExperimentationWorkspace")
+@doc("Properties of the experimentation workspace")
 model ExperimentationWorkspaceProperties {
   @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("ExperimentationWorkspace id in partner's system")
-  @visibility("read")
-  experimentationWorkspaceId?: string;
-
-  @doc("Access policy for an experimentation workspace")
+  @doc("Access policy for an experimentation workspace.")
   accessPolicy: AccessPolicy;
 
-  @doc("DataSource for an experimentation workspace")
+  @doc("Data source that telemetry data required for experimentation will be retrieved from.")
   dataSource?: DataSource;
 }
 
-@doc("Access policy for an experimentation workspace")
+@doc("Access policy for an experimentation workspace.")
 model AccessPolicy {
-  @doc("Application id used for access to the experimentation workspace")
-  authApplicationId: string;
+  @doc("Application id used for access to the experimentation workspace.")
+  applicationId: string;
 }
 
-@doc("DataSource for an experimentation workspace")
+@doc("Data source that telemetry data required for experimentation will be retrieved from.")
 model DataSource {
-  @doc("Resource id of the data source")
+  @doc("LogAnalytics data source.")
+  logAnalytics: LogAnalytics;
+}
+
+@doc("LogAnalytics workspace which telemetry data required for experimentation will be retrieved from.")
+model LogAnalytics{
+  @doc("Resource id of the data source.")
   resourceId: string;
 
-  @doc("Whether experimentation is enabled")
+  @doc("Resource id of the storage account associated with LogAnalytics workspace.")
+  storageAccountResourceId: string;
+
+  @doc("Controls whether data flow from the configured data source into the experimentation workspace is enabled.")
   enabled: boolean;
 }
 
@@ -70,6 +75,7 @@ model ExperimentationWorkspace
   @path
   name: string;
 
+  ...ResourceSku;
   ...ManagedServiceIdentity;
 }
 
