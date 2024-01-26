@@ -51,7 +51,7 @@ enum OfferAvailability {
   @doc("The offer availability is public") Public,
 }
 
-@doc("OffereReleaseType Enum")
+@doc("Offer release type Enum")
 enum OfferReleaseType {
   @doc("The offer in preview") Preview,
   @doc("The offer in GA") GA,
