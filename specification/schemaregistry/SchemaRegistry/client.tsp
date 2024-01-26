@@ -2,7 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
  
 using Azure.ClientGenerator.Core;
-using Azure.SchemaRegistry;
+using SchemaRegistry;
 
 @@access(Version, Access.internal);
 @@projectedName(Version, "client", "SchemaVersion");

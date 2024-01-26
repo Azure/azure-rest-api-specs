@@ -31,7 +31,7 @@ using Azure.ClientGenerator.Core;
 )
 @versioned(ServiceApiVersions)
 @doc("SchemaRegistryClient is a client for registering and retrieving schemas from the Azure Schema Registry service.")
-namespace Azure.SchemaRegistry;
+namespace SchemaRegistry;
 
 @doc("Represents the Schema Registry API version to use for requests.")
 enum ServiceApiVersions {
@@ -64,7 +64,7 @@ model AzureAuth
 alias resourceOperations = Azure.Core.StandardResourceOperations;
 @client({
   name: "SchemaRegistryClient",
-  service: Azure.SchemaRegistry,
+  service: SchemaRegistry,
 })
 interface SchemaOperations {
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
