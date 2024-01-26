@@ -15196,17 +15196,20 @@
         "batchSize": {
           "format": "int32",
           "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "learningRateMultiplier": {
           "format": "double",
           "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid over fitting.",
-          "type": "number"
+          "type": "number",
+          "x-nullable": true
         },
         "nEpochs": {
           "format": "int32",
           "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
