@@ -82,5 +82,4 @@ interface Capacities {
   delete is ArmResourceDeleteSync<Capacity>;
   listByResourceGroup is ArmResourceListByParent<Capacity>;
   listBySubscription is ArmListBySubscription<Capacity>;
-  checkGlobalNameAvailability is checkGlobalNameAvailability;
 }

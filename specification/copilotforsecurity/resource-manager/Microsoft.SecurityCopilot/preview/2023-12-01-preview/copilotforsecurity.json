@@ -125,54 +125,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityCopilot/checkNameAvailability": {
-      "post": {
-        "operationId": "Capacities_CheckGlobalNameAvailability",
-        "tags": [
-          "Capacities"
-        ],
-        "description": "Implements global CheckNameAvailability operations",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The CheckAvailability request",
-            "required": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Capacities_CheckGlobalNameAvailability_MaximumSet_Gen": {
-            "$ref": "./examples/Capacities_CheckGlobalNameAvailability_MaximumSet_Gen.json"
-          },
-          "Capacities_CheckGlobalNameAvailability_MinimumSet_Gen": {
-            "$ref": "./examples/Capacities_CheckGlobalNameAvailability_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityCopilot/capacities": {
       "get": {
         "operationId": "Capacities_ListByResourceGroup",
