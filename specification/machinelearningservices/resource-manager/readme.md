@@ -50,6 +50,10 @@ suppressions:
     reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have strictly typed properties.
     where:
       - $.definitions.CustomModelFineTuning.properties.hyperparameters
+  - code: AvoidAdditionalProperties
+    reason: This is coming for wrong reason, just inheriting from JobBase.
+    where:
+      - $.definitions.FineTuningJob
 ```
 ### Tag: package-preview-2023-08
 
