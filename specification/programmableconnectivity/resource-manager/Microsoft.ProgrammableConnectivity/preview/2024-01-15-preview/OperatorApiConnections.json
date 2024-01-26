@@ -390,13 +390,20 @@
       "properties": {
         "appId": {
           "type": "string",
-          "description": "Application ID of the App Developer that is registered with the Operator in a specific country/region."
+          "description": "Application ID of the App Developer that is registered with the Operator in a specific country/region.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "appSecret": {
           "type": "string",
           "format": "password",
           "description": "Application secret linked to the 'appId'. This should be stored securely and is not returned back when the resource information is read.",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       }
     },
@@ -454,11 +461,7 @@
         "properties": {
           "$ref": "#/definitions/OperatorApiConnectionProperties",
           "description": "Operator API Connection resource properties.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -517,21 +520,37 @@
       "properties": {
         "configuredApplication": {
           "description": "Details about the Application that would use the Operator's Network APIs.",
-          "$ref": "#/definitions/ApplicationProperties"
+          "$ref": "#/definitions/ApplicationProperties",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "operatorApiPlanId": {
           "$ref": "./common.json#/definitions/OperatorApiPlanResourceId",
-          "description": "Reference to the Operator API Plan Resource ID."
+          "description": "Reference to the Operator API Plan Resource ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "saasProperties": {
           "description": "Details about the SaaS offer purchased from the marketplace.",
-          "$ref": "#/definitions/SaasProperties"
+          "$ref": "#/definitions/SaasProperties",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
     "OperatorApiConnectionNonUpdateableProperties": {
       "type": "object",
       "description": "Operator API Connection resource properties that cannot be updated once a resource has been created.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
       "properties": {
         "gatewayId": {
           "$ref": "./common.json#/definitions/GatewayResourceId",
