@@ -26,12 +26,18 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.Batch.BatchPool, Access.public, "java");
 @@access(Azure.Batch.BatchPoolUpdateParameters, Access.public, "java");
 @@access(Azure.Batch.BatchPoolEnableAutoScaleParameters, Access.public, "java");
-@@access(Azure.Batch.BatchPoolEvaluateAutoScaleParameters, Access.public, "java");
+@@access(Azure.Batch.BatchPoolEvaluateAutoScaleParameters,
+  Access.public,
+  "java"
+);
 @@access(Azure.Batch.AutoScaleRun, Access.public, "java");
 @@access(Azure.Batch.BatchPoolResizeParameters, Access.public, "java");
 @@access(Azure.Batch.BatchPoolReplaceParameters, Access.public, "java");
 @@access(Azure.Batch.BatchNodeRemoveParameters, Access.public, "java");
-@@access(Azure.Batch.BatchAccountListSupportedImagesResult, Access.public, "java");
+@@access(Azure.Batch.BatchAccountListSupportedImagesResult,
+  Access.public,
+  "java"
+);
 @@access(Azure.Batch.BatchPoolNodeCountsListResult, Access.public, "java");
 @@access(Azure.Batch.BatchJob, Access.public, "java");
 @@access(Azure.Batch.BatchJobUpdateParameters, Access.public, "java");
@@ -39,7 +45,10 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.Batch.BatchJobTerminateParameters, Access.public, "java");
 @@access(Azure.Batch.BatchJobCreateParameters, Access.public, "java");
 @@access(Azure.Batch.BatchJobListResult, Access.public, "java");
-@@access(Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult, Access.public, "java");
+@@access(Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult,
+  Access.public,
+  "java"
+);
 @@access(Azure.Batch.BatchTaskCountsResult, Access.public, "java");
 @@access(Azure.Batch.BatchCertificate, Access.public, "java");
 @@access(Azure.Batch.BatchCertificateListResult, Access.public, "java");
@@ -60,7 +69,10 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.Batch.BatchNode, Access.public, "java");
 @@access(Azure.Batch.BatchNodeRebootParameters, Access.public, "java");
 @@access(Azure.Batch.BatchNodeReimageParameters, Access.public, "java");
-@@access(Azure.Batch.BatchNodeDisableSchedulingParameters, Access.public, "java");
+@@access(Azure.Batch.BatchNodeDisableSchedulingParameters,
+  Access.public,
+  "java"
+);
 @@access(Azure.Batch.BatchNodeRemoteLoginSettings, Access.public, "java");
 @@access(Azure.Batch.UploadBatchServiceLogsParameters, Access.public, "java");
 @@access(Azure.Batch.UploadBatchServiceLogsResult, Access.public, "java");
@@ -70,15 +82,3 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.Batch.BatchNodeFileClientPathParameters, Access.public, "java");
 @@access(Azure.Batch.BatchNodeFileListResult, Access.public, "java");
 @@access(Azure.Batch.BatchError, Access.public, "java");
-
-
-
-
-
-
-
-
-
-
-
-

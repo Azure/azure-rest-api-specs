@@ -2870,7 +2870,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 }
 
 @doc("Parameters for creating an Azure Batch Pool.")
-
 model BatchPoolCreateParameters {
   @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two Pool IDs within an Account that differ only by case).")
   id: string;
@@ -3821,7 +3820,6 @@ model BatchNodeDisableSchedulingParameters {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The remote login settings for a Compute Node.")
-
 model BatchNodeRemoteLoginSettings {
   @doc("The IP address used for remote login to the Compute Node.")
   @projectedName("client", "remoteLoginIpAddress")
