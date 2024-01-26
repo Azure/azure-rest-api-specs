@@ -329,19 +329,33 @@
   "definitions": {
     "DeviceConfiguration": {
       "type": "object",
-      "description": "The device Configuration of a device.",
+      "description": "The device configuration of a device.",
       "properties": {
         "nicDetails": {
           "type": "array",
-          "description": "NIC Details of device",
+          "description": "NIC details of device",
           "items": {
             "$ref": "#/definitions/NicDetail"
           },
           "x-ms-identifiers": []
         },
+        "switchDetails": {
+          "type": "array",
+          "description": "List of switch details for edge device.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SwitchDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "systemInfo": {
+          "$ref": "#/definitions/SystemInfo",
+          "description": "Specifies the system info obtained from the device.",
+          "readOnly": true
+        },
         "sbeDeploymentPackageInfo": {
           "$ref": "#/definitions/SbeDeploymentPackageInfo",
-          "description": "SBE deployment package information.",
+          "description": "Solution builder extension (SBE) deployment package information.",
           "readOnly": true
         },
         "deviceMetadata": {
@@ -418,43 +432,45 @@
       "properties": {
         "adapterName": {
           "type": "string",
-          "description": "Adapter Name of NIC"
+          "description": "Adapter Name of NIC."
         },
         "interfaceDescription": {
           "type": "string",
-          "description": "Interface Description of NIC"
+          "description": "Interface Description of NIC."
         },
         "slot": {
           "type": "string",
-          "description": "Slot of NIC"
+          "readOnly": true,
+          "description": "Slot of NIC."
         },
         "componentId": {
           "type": "string",
-          "description": "Component Id of NIC"
+          "description": "Component ID of NIC."
         },
         "driverVersion": {
           "type": "string",
-          "description": "Driver Version of NIC"
+          "description": "Driver Version of NIC."
         },
         "ip4Address": {
           "type": "string",
-          "description": "Subnet Mask of NIC"
+          "description": "Subnet Mask of NIC."
         },
         "macAddress": {
           "type": "string",
-          "description": "MAC address of NIC"
+          "readOnly": true,
+          "description": "MAC address of NIC."
         },
         "subnetMask": {
           "type": "string",
-          "description": "Subnet Mask of NIC"
+          "description": "Subnet Mask of NIC."
         },
         "defaultGateway": {
           "type": "string",
-          "description": "Default Gateway of NIC"
+          "description": "Default Gateway of NIC."
         },
         "dnsServers": {
           "type": "array",
-          "description": "DNS Servers for NIC",
+          "description": "DNS Servers for NIC.",
           "items": {
             "type": "string"
           },
@@ -462,7 +478,22 @@
         },
         "defaultIsolationId": {
           "type": "string",
-          "description": "Default Isolation of Management NIC"
+          "description": "Default Isolation of Management NIC."
+        },
+        "switchName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The switch attached to the NIC, if any."
+        },
+        "nicType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of NIC, physical, virtual, management."
+        },
+        "vlanId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The VLAN ID of the physical NIC."
         }
       },
       "required": [
@@ -550,6 +581,33 @@
         }
       }
     },
+    "SystemInfo": {
+      "type": "object",
+      "description": "The system info obtained from edge device.",
+      "properties": {
+        "bootType": {
+          "type": "string",
+          "description": "The boot type of the device. e.g. UEFI, Legacy etc",
+          "readOnly": true
+        }
+      }
+    },
+    "SwitchDetail": {
+      "type": "object",
+      "description": "Switch details obtained from the device",
+      "properties": {
+        "switchName": {
+          "type": "string",
+          "description": "The name of the switch.",
+          "readOnly": true
+        },
+        "switchType": {
+          "type": "string",
+          "description": "The type of the switch. e.g. external, internal",
+          "readOnly": true
+        }
+      }
+    },
     "ValidateRequest": {
       "type": "object",
       "description": "The validate request for Edge Device.",
@@ -563,7 +621,7 @@
         },
         "additionalInfo": {
           "type": "string",
-          "description": "additional Info required for validation"
+          "description": "additional info required for validation"
         }
       },
       "required": [

@@ -44,6 +44,9 @@
     },
     {
       "name": "DstsApplications"
+    },
+    {
+      "name": "DsmsAllowlist"
     }
   ],
   "paths": {
@@ -74,8 +77,50 @@
           }
         },
         "x-ms-examples": {
+          "List Operations DsmsAllowlist": {
+            "$ref": "./examples/DsmsAllowlist_Operations.json"
+          },
           "List Operations DstsApplication": {
             "$ref": "./examples/DstsApplications_Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCIS/dsmsAllowlists": {
+      "get": {
+        "operationId": "DsmsAllowlist_ListBySubscription",
+        "tags": [
+          "DsmsAllowlist"
+        ],
+        "description": "List DsmsAllowlistResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription DsmsAllowlist": {
+            "$ref": "./examples/DsmsAllowlist_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -120,6 +165,166 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/dsmsAllowlists": {
+      "get": {
+        "operationId": "DsmsAllowlist_ListByResourceGroup",
+        "tags": [
+          "DsmsAllowlist"
+        ],
+        "description": "List DsmsAllowlistResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup DsmsAllowlist": {
+            "$ref": "./examples/DsmsAllowlist_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/dsmsAllowlists/{resourceName}": {
+      "get": {
+        "operationId": "DsmsAllowlist_Get",
+        "tags": [
+          "DsmsAllowlist"
+        ],
+        "description": "Get a DsmsAllowlistResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DsmsAllowlist": {
+            "$ref": "./examples/DsmsAllowlist_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DsmsAllowlist_CreateOrUpdate",
+        "tags": [
+          "DsmsAllowlist"
+        ],
+        "description": "Create a DsmsAllowlistResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DsmsAllowlistResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'DsmsAllowlistResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create DsmsAllowlist": {
+            "$ref": "./examples/DsmsAllowlist_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/dstsApplications": {
@@ -442,6 +647,129 @@
         "cloudId"
       ]
     },
+    "DscmProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "DscmProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted State"
+          }
+        ]
+      }
+    },
+    "DsmsAllowlistResource": {
+      "type": "object",
+      "description": "dsmsAllowlist Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DsmsAllowlistResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DsmsAllowlistResourceListResult": {
+      "type": "object",
+      "description": "The response of a DsmsAllowlistResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DsmsAllowlistResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DsmsAllowlistResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DsmsAllowlistResourceProperties": {
+      "type": "object",
+      "description": "dsmsAllowlist properties",
+      "properties": {
+        "folderName": {
+          "type": "string",
+          "description": "The name of the folder to apply allowlist changes to. This should be the full folder path starting with a '$', with '$' replacing all '/' characters. Example: '/my-folder/root-folder' should be passed as '$my-folder$root-folder"
+        },
+        "targetDsmsEndpoints": {
+          "type": "array",
+          "description": "The dSMS endpoints to apply allowlist changes to. The folder specified in FolderName will be updated on each of the TargetDsmsEndpoints. If this is left null, this will default to all the dSMS endpoints used for the root folder.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsPatterns": {
+          "type": "array",
+          "description": "Dns domain patterns in the allowlist. Patterns with '*' are accepted values here.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deploymentSubscriptions": {
+          "type": "array",
+          "description": "Guids of Azure deployment subscriptions in allowlist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageSubscriptions": {
+          "type": "array",
+          "description": "Guids of Azure storage subscriptions in allowlist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DscmProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "folderName"
+      ]
+    },
     "DstsApplicationResource": {
       "type": "object",
       "description": "dstsApplication Resource",
@@ -496,7 +824,7 @@
           "description": "The application group. Optional."
         },
         "provisioningState": {
-          "$ref": "#/definitions/dstsApplicationProvisioningState",
+          "$ref": "#/definitions/DscmProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
         }
@@ -517,42 +845,6 @@
       "required": [
         "toIpAddress"
       ]
-    },
-    "dstsApplicationProvisioningState": {
-      "type": "string",
-      "description": "Provisioning status of the resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "dstsApplicationProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Accepted State"
-          }
-        ]
-      }
     }
   },
   "parameters": {}
