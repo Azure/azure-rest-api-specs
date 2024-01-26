@@ -59,11 +59,11 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: This is an external reference right now, we will have full control on the schema returned in the upcoming version and will avoid this.
     where:
-      - $.definitions.EndpointModels
+      - $.definitions.EndpointModels.properties.value
   - code: GuidUsage
     reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
     where:
-      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId
+      - $.definitions.WorkspaceConnectionOAuth2
 ```
 ### Tag: package-preview-2023-08
 
