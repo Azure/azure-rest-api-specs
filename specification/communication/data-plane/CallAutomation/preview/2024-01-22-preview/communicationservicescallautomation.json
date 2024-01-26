@@ -859,109 +859,109 @@
     },
     "/calling/callConnections/{callConnectionId}/dialogs/{dialogId}": {
       "put": {
-          "tags": [
-              "MidConnections"
-          ],
+        "tags": [
+          "MidConnections"
+        ],
         "summary": "Start a dialog.",
-          "description": "Start a dialog.",
-          "operationId": "CallDialog_StartDialog",
-          "parameters": [
-              {
-                  "name": "callConnectionId",
-                  "in": "path",
-                  "description": "The call connection id",
-                  "required": true,
-                  "type": "string"
-              },
-              {
-                  "name": "dialogId",
-                  "in": "path",
-                  "description": "The dialog id",
-                  "required": true,
-                  "type": "string"
-              },
-              {
-                  "name": "startDialogRequest",
-                  "in": "body",
-                  "description": "The start dialog request",
-                  "required": true,
-                  "schema": {
-                      "$ref": "#/definitions/StartDialogRequest"
-                  }
-              },
-              {
-                  "$ref": "#/parameters/ApiVersionParameter"
-              }
-          ],
-          "responses": {
-              "default": {
-                  "description": "Error",
-                  "schema": {
-                      "$ref": "#/definitions/CommunicationErrorResponse"
-                  }
+        "description": "Start a dialog.",
+        "operationId": "CallDialog_StartDialog",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dialogId",
+            "in": "path",
+            "description": "The dialog id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDialogRequest",
+            "in": "body",
+            "description": "The start dialog request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartDialogRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
           },
           "201": {
             "description": "Returns the start dialog response.",
             "schema": {
               "$ref": "#/definitions/DialogStateResponse"
             }
-              }
-          },
-          "x-ms-examples": {
-              "CallDialog_StartDialog": {
-                  "$ref": "./examples/CallDialog_StartDialog.json"
-              }
           }
+        },
+        "x-ms-examples": {
+          "CallDialog_StartDialog": {
+            "$ref": "./examples/CallDialog_StartDialog.json"
+          }
+        }
       },
       "delete": {
-          "tags": [
-              "MidConnections"
-          ],
-          "summary": "Stop a dialog.",
-          "description": "Stop a dialog.",
-          "operationId": "CallDialog_StopDialog",
-          "parameters": [
-              {
-                  "name": "callConnectionId",
-                  "in": "path",
-                  "description": "The call connection id",
-                  "required": true,
-                  "type": "string"
-              },
-              {
-                  "name": "dialogId",
-                  "in": "path",
-                  "description": "The dialog id",
-                  "required": true,
-                  "type": "string"
-              },
-              {
-                  "name": "operationCallbackUri",
-                  "in": "query",
-                  "description": "Opeation callback URI.",
-                  "required": false,
-                  "type": "string"
-              },
-              {
-                  "$ref": "#/parameters/ApiVersionParameter"
-              }
-          ],
-          "responses": {
-              "default": {
-                  "description": "Error",
-                  "schema": {
-                      "$ref": "#/definitions/CommunicationErrorResponse"
-                  }
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Stop a dialog.",
+        "description": "Stop a dialog.",
+        "operationId": "CallDialog_StopDialog",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dialogId",
+            "in": "path",
+            "description": "The dialog id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationCallbackUri",
+            "in": "query",
+            "description": "Opeation callback URI.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
           },
           "204": {
             "description": "Returns no content for stop dialog response."
-              }
-          },
-          "x-ms-examples": {
-              "CallDialog_StopDialog": {
-                  "$ref": "./examples/CallDialog_StopDialog.json"
-              }
           }
+        },
+        "x-ms-examples": {
+          "CallDialog_StopDialog": {
+            "$ref": "./examples/CallDialog_StopDialog.json"
+          }
+        }
       }
     },
     "/calling/callConnections/{callConnectionId}/participants": {
@@ -1564,6 +1564,29 @@
         }
       }
     },
+    "PowerVirtualAgentsDialog": {
+      "description": "Power Virtual Agents Dialog",
+      "required": [
+        "botAppId"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDialog"
+        }
+      ],
+      "properties": {
+        "botAppId": {
+          "description": "Bot identifier.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Language.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "PowerVirtualAgents"
+    },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
     },
@@ -1574,14 +1597,14 @@
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationUserIdentifierModel"
     },
     "CallIntelligenceOptions": {
-        "description": "AI options for the call.",
-        "type": "object",
-        "properties": {
-            "cognitiveServicesEndpoint": {
-                "description": "The identifier of the Cognitive Service resource assigned to this call.",
-                "type": "string"
-            }
+      "description": "AI options for the call.",
+      "type": "object",
+      "properties": {
+        "cognitiveServicesEndpoint": {
+          "description": "The identifier of the Cognitive Service resource assigned to this call.",
+          "type": "string"
         }
+      }
     },
     "TranscriptionTransportType": {
       "description": "The type of transport to be used for live transcription, eg. Websocket",
@@ -1710,8 +1733,8 @@
           "type": "string"
         },
         "callIntelligenceOptions": {
-            "$ref": "#/definitions/CallIntelligenceOptions",
-            "description": "AI options for the call."
+          "$ref": "#/definitions/CallIntelligenceOptions",
+          "description": "AI options for the call."
         },
         "answeredBy": {
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
@@ -2255,72 +2278,72 @@
     },
     "StartDialogRequest": {
       "required": [
-          "dialog"
+        "dialog"
       ],
       "type": "object",
       "properties": {
-          "dialog": {
-              "$ref": "#/definitions/BaseDialog",
-              "description": "Defines the dialog."
-          },
-          "operationCallbackUri": {
-              "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
-              "type": "string"
-          },
-          "operationContext": {
-              "description": "The value to identify context of the operation.",
-              "type": "string"
-          }
+        "dialog": {
+          "$ref": "#/definitions/BaseDialog",
+          "description": "Defines the dialog."
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
       }
     },
     "DialogInputType": {
       "description": "Determines the type of the dialog.",
       "enum": [
-          "powerVirtualAgents"
+        "powerVirtualAgents"
       ],
       "type": "string",
       "x-ms-enum": {
-          "name": "DialogInputType",
-          "modelAsString": true
+        "name": "DialogInputType",
+        "modelAsString": true
       }
     },
     "BaseDialog": {
       "required": [
-          "kind",
-          "context"
+        "kind",
+        "context"
       ],
       "type": "object",
       "properties": {
-          "kind": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "context": {
-              "description": "Dialog context.",
-              "type": "object",
-              "additionalProperties": {
-                  "type": "object"
-              }
+        "kind": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "context": {
+          "description": "Dialog context.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
           }
+        }
       },
       "discriminator": "kind"
     },
     "DialogStateResponse": {
       "type": "object",
       "properties": {
-          "dialogId": {
-              "description": "The dialog ID.",
-              "type": "string"
-          },
-          "dialog": {
-              "$ref": "#/definitions/BaseDialog",
-              "description": "Defines dialog."
-          },
-          "operationContext": {
-              "description": "The value to identify context of the operation.",
-              "type": "string"
-          }
+        "dialogId": {
+          "description": "The dialog ID.",
+          "type": "string"
+        },
+        "dialog": {
+          "$ref": "#/definitions/BaseDialog",
+          "description": "Defines dialog."
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
       }
-    },    
+    },
     "GetParticipantsResponse": {
       "description": "The response payload for getting participants of the call.",
       "required": [
@@ -3226,340 +3249,340 @@
     "DialogCompleted": {
       "type": "object",
       "properties": {
-          "callConnectionId": {
-              "description": "Call connection ID.",
-              "type": "string",
-              "readOnly": true
-          },
-          "serverCallId": {
-              "description": "Server call ID.",
-              "type": "string"
-          },
-          "correlationId": {
-              "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-              "type": "string"
-          },
-          "operationContext": {
-              "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-              "type": "string",
-              "readOnly": true
-          },
-          "resultInformation": {
-              "$ref": "#/definitions/ResultInformation",
-              "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-              "readOnly": true
-          },
-          "dialogInputType": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "dialogId": {
-              "description": "Dialog ID",
-              "type": "string",
-              "readOnly": true
-          }
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "dialogInputType": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "dialogId": {
+          "description": "Dialog ID",
+          "type": "string",
+          "readOnly": true
+        }
       }
     },
     "DialogFailed": {
       "type": "object",
       "properties": {
-          "callConnectionId": {
-              "description": "Call connection ID.",
-              "type": "string",
-              "readOnly": true
-          },
-          "serverCallId": {
-              "description": "Server call ID.",
-              "type": "string"
-          },
-          "correlationId": {
-              "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-              "type": "string"
-          },
-          "operationContext": {
-              "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-              "type": "string",
-              "readOnly": true
-          },
-          "resultInformation": {
-              "$ref": "#/definitions/ResultInformation",
-              "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-              "readOnly": true
-          },
-          "dialogInputType": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "dialogId": {
-              "description": "Dialog ID",
-              "type": "string",
-              "readOnly": true
-          }
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "dialogInputType": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "dialogId": {
+          "description": "Dialog ID",
+          "type": "string",
+          "readOnly": true
+        }
       }
     },
     "DialogConsent": {
       "type": "object",
       "properties": {
-          "callConnectionId": {
-              "description": "Call connection ID.",
-              "type": "string",
-              "readOnly": true
-          },
-          "serverCallId": {
-              "description": "Server call ID.",
-              "type": "string"
-          },
-          "correlationId": {
-              "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-              "type": "string"
-          },
-          "operationContext": {
-              "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-              "type": "string",
-              "readOnly": true
-          },
-          "resultInformation": {
-              "$ref": "#/definitions/ResultInformation",
-              "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-              "readOnly": true
-          },
-          "dialogInputType": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "userConsent": {
-              "$ref": "#/definitions/UserConsent",
-              "description": "UserConsent data from the Conversation Conductor",
-              "readOnly": true
-          },
-          "dialogId": {
-              "description": "Dialog ID",
-              "type": "string",
-              "readOnly": true
-          }
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "dialogInputType": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "userConsent": {
+          "$ref": "#/definitions/UserConsent",
+          "description": "UserConsent data from the Conversation Conductor",
+          "readOnly": true
+        },
+        "dialogId": {
+          "description": "Dialog ID",
+          "type": "string",
+          "readOnly": true
+        }
       }
     },
     "UserConsent": {
       "type": "object",
       "properties": {
-          "recording": {
-              "format": "int32",
-              "type": "integer"
-          }
+        "recording": {
+          "format": "int32",
+          "type": "integer"
+        }
       }
     },
     "DialogStarted": {
       "type": "object",
       "properties": {
-          "callConnectionId": {
-              "description": "Call connection ID.",
-              "type": "string",
-              "readOnly": true
-          },
-          "serverCallId": {
-              "description": "Server call ID.",
-              "type": "string"
-          },
-          "correlationId": {
-              "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-              "type": "string"
-          },
-          "operationContext": {
-              "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-              "type": "string",
-              "readOnly": true
-          },
-          "resultInformation": {
-              "$ref": "#/definitions/ResultInformation",
-              "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-              "readOnly": true
-          },
-          "dialogInputType": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "dialogId": {
-              "description": "Dialog ID",
-              "type": "string",
-              "readOnly": true
-          }
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "dialogInputType": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "dialogId": {
+          "description": "Dialog ID",
+          "type": "string",
+          "readOnly": true
+        }
       }
     },
     "DialogHangup": {
       "type": "object",
       "properties": {
-          "callConnectionId": {
-              "description": "Call connection ID.",
-              "type": "string",
-              "readOnly": true
-          },
-          "serverCallId": {
-              "description": "Server call ID.",
-              "type": "string"
-          },
-          "correlationId": {
-              "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-              "type": "string"
-          },
-          "operationContext": {
-              "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-              "type": "string",
-              "readOnly": true
-          },
-          "resultInformation": {
-              "$ref": "#/definitions/ResultInformation",
-              "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-              "readOnly": true
-          },
-          "dialogInputType": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "dialogId": {
-              "description": "Dialog ID",
-              "type": "string",
-              "readOnly": true
-          },
-          "ivrContext": {
-              "description": "Ivr Context",
-              "type": "object",
-              "readOnly": true
-          }
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "dialogInputType": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "dialogId": {
+          "description": "Dialog ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "ivrContext": {
+          "description": "Ivr Context",
+          "type": "object",
+          "readOnly": true
+        }
       }
     },
     "DialogTransfer": {
       "type": "object",
       "properties": {
-          "callConnectionId": {
-              "description": "Call connection ID.",
-              "type": "string",
-              "readOnly": true
-          },
-          "serverCallId": {
-              "description": "Server call ID.",
-              "type": "string"
-          },
-          "correlationId": {
-              "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-              "type": "string"
-          },
-          "operationContext": {
-              "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-              "type": "string",
-              "readOnly": true
-          },
-          "resultInformation": {
-              "$ref": "#/definitions/ResultInformation",
-              "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-              "readOnly": true
-          },
-          "dialogInputType": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "dialogId": {
-              "description": "Dialog ID",
-              "type": "string",
-              "readOnly": true
-          },
-          "transferType": {
-              "description": "Transfer type",
-              "type": "string",
-              "readOnly": true
-          },
-          "transferDestination": {
-              "description": "Transfer destination",
-              "type": "string",
-              "readOnly": true
-          },
-          "ivrContext": {
-              "description": "IVR context",
-              "type": "object",
-              "readOnly": true
-          }
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "dialogInputType": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "dialogId": {
+          "description": "Dialog ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "transferType": {
+          "description": "Transfer type",
+          "type": "string",
+          "readOnly": true
+        },
+        "transferDestination": {
+          "description": "Transfer destination",
+          "type": "string",
+          "readOnly": true
+        },
+        "ivrContext": {
+          "description": "IVR context",
+          "type": "object",
+          "readOnly": true
+        }
       }
     },
     "DialogLanguageChange": {
       "type": "object",
       "properties": {
-          "callConnectionId": {
-              "description": "Call connection ID.",
-              "type": "string",
-              "readOnly": true
-          },
-          "serverCallId": {
-              "description": "Server call ID.",
-              "type": "string"
-          },
-          "correlationId": {
-              "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-              "type": "string"
-          },
-          "operationContext": {
-              "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-              "type": "string",
-              "readOnly": true
-          },
-          "resultInformation": {
-              "$ref": "#/definitions/ResultInformation",
-              "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-              "readOnly": true
-          },
-          "dialogInputType": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "dialogId": {
-              "description": "Dialog ID",
-              "type": "string",
-              "readOnly": true
-          },
-          "selectedLanguage": {
-              "description": "Selected Language",
-              "type": "string",
-              "readOnly": true
-          },
-          "ivrContext": {
-              "description": "Ivr Context",
-              "type": "object",
-              "readOnly": true
-          }
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "dialogInputType": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "dialogId": {
+          "description": "Dialog ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "selectedLanguage": {
+          "description": "Selected Language",
+          "type": "string",
+          "readOnly": true
+        },
+        "ivrContext": {
+          "description": "Ivr Context",
+          "type": "object",
+          "readOnly": true
+        }
       }
     },
     "DialogSensitivityUpdate": {
       "type": "object",
       "properties": {
-          "callConnectionId": {
-              "description": "Call connection ID.",
-              "type": "string",
-              "readOnly": true
-          },
-          "serverCallId": {
-              "description": "Server call ID.",
-              "type": "string"
-          },
-          "correlationId": {
-              "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-              "type": "string"
-          },
-          "operationContext": {
-              "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-              "type": "string",
-              "readOnly": true
-          },
-          "resultInformation": {
-              "$ref": "#/definitions/ResultInformation",
-              "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
-              "readOnly": true
-          },
-          "dialogInputType": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "dialogId": {
-              "description": "Dialog ID",
-              "type": "string",
-              "readOnly": true
-          },
-          "sensitiveMask": {
-              "description": "SensitiveMask",
-              "type": "boolean",
-              "readOnly": true
-          }
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "dialogInputType": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "dialogId": {
+          "description": "Dialog ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "sensitiveMask": {
+          "description": "SensitiveMask",
+          "type": "boolean",
+          "readOnly": true
+        }
       }
-    },    
+    },
     "ContinuousDtmfRecognitionToneFailed": {
       "type": "object",
       "properties": {
@@ -3589,13 +3612,13 @@
       "type": "object",
       "properties": {
         "sequenceId": {
-            "format": "int32",
-            "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
-            "type": "integer",
-            "readOnly": true
+          "format": "int32",
+          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
+          "type": "integer",
+          "readOnly": true
         },
         "tone": {
-            "$ref": "#/definitions/Tone"
+          "$ref": "#/definitions/Tone"
         },
         "callConnectionId": {
           "description": "Call connection ID.",
