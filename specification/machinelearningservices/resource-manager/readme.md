@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 ```yaml $(tag) == 'package-preview-2024-01'
 input-file:
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/machineLearningServices.json
-  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/mfe.json    
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/registries.json
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceRP.json
@@ -49,11 +49,11 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have strictly typed properties.
     where:
-      - $.definitions.CustomModelFineTuning.properties.hyperparameters.additionalProperties
+      - $.definitions["CustomModelFineTuning.properties"].hyperparameters
   - code: AvoidAdditionalProperties
     reason: This is coming for wrong reason, just inheriting from JobBase.
     where:
-      - $.definitions.FineTuningJob
+      - $.definitions["CustomModelFineTuning"]
 ```
 ### Tag: package-preview-2023-08
 
