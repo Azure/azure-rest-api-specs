@@ -2780,12 +2780,7 @@
       "description": "Representation of a single embeddings relatedness comparison.",
       "properties": {
         "embedding": {
-          "type": "array",
-          "description": "List of embeddings value for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input.",
-          "items": {
-            "type": "number",
-            "format": "float"
-          }
+          "description": "List of embeddings value for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input."
         },
         "index": {
           "type": "integer",
@@ -2820,6 +2815,30 @@
         "usage"
       ]
     },
+    "EmbeddingsEncodingFormat": {
+      "type": "string",
+      "description": "The format used to represent embeddings.",
+      "enum": [
+        "float",
+        "base64"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingsEncodingFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "float",
+            "value": "float",
+            "description": "A vector of floating-point numbers."
+          },
+          {
+            "name": "base64",
+            "value": "base64",
+            "description": "A Base64-encoded string."
+          }
+        ]
+      }
+    },
     "EmbeddingsOptions": {
       "type": "object",
       "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
@@ -2838,6 +2857,12 @@
           "items": {
             "type": "string"
           }
+        },
+        "encoding_format": {
+          "$ref": "#/definitions/EmbeddingsEncodingFormat",
+          "description": "The format in which the embeddings should be returned.",
+          "default": "float",
+          "x-ms-client-name": "encodingFormat"
         }
       },
       "required": [
