@@ -49,4 +49,5 @@ interface Publishers {
       skipToken?: string;
     }
   >;
+  listBySubscription is ArmListBySubscription<Publisher>;
 }

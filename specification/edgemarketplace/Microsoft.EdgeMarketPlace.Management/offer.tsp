@@ -60,4 +60,5 @@ interface Offers {
     AccessTokenReadRequest,
     DiskAccessToken
   >;
+  listBySubscription is ArmListBySubscription<Offer>;
 }
