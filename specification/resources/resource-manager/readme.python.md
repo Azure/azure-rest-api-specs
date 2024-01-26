@@ -733,7 +733,7 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 These settings apply only when `--tag=package-deploymentstacks-2024-03` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-deploymentstacks-2022-08-preview'
+``` yaml $(tag) == 'package-deploymentstacks-2024-03'
 default-api-version: "2024-03-01"
 namespace: azure.mgmt.resource.deploymentstacks.v2024_03_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentstacks/v2024_03_01
