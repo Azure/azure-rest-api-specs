@@ -48,8 +48,17 @@ model AccessPolicy {
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
 model DataSource {
+  @doc("LogAnalytics data source.")
+  logAnalytics: LogAnalytics;
+}
+
+@doc("LogAnalytics workspace which telemetry data required for experimentation will be retrieved from.")
+model LogAnalytics{
   @doc("Resource id of the data source.")
   resourceId: string;
+
+  @doc("Resource id of the storage account associated with LogAnalytics workspace.")
+  storageAccountResourceId: string;
 
   @doc("Controls whether data flow from the configured data source into the experimentation workspace is enabled.")
   enabled: boolean;

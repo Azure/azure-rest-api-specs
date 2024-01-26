@@ -479,31 +479,22 @@
       "type": "object",
       "description": "Data source that telemetry data required for experimentation will be retrieved from.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Resource id of the data source."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Controls whether data flow from the configured data source into the experimentation workspace is enabled."
+        "logAnalytics": {
+          "$ref": "#/definitions/LogAnalytics",
+          "description": "LogAnalytics data source."
         }
       },
       "required": [
-        "resourceId",
-        "enabled"
+        "logAnalytics"
       ]
     },
     "DataSourceUpdate": {
       "type": "object",
       "description": "Data source that telemetry data required for experimentation will be retrieved from.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Resource id of the data source."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Controls whether data flow from the configured data source into the experimentation workspace is enabled."
+        "logAnalytics": {
+          "$ref": "#/definitions/LogAnalyticsUpdate",
+          "description": "LogAnalytics data source."
         }
       }
     },
@@ -614,6 +605,47 @@
         "dataSource": {
           "$ref": "#/definitions/DataSourceUpdate",
           "description": "Data source that telemetry data required for experimentation will be retrieved from."
+        }
+      }
+    },
+    "LogAnalytics": {
+      "type": "object",
+      "description": "LogAnalytics workspace which telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource id of the data source."
+        },
+        "storageAccountResourceId": {
+          "type": "string",
+          "description": "Resource id of the storage account associated with LogAnalytics workspace."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Controls whether data flow from the configured data source into the experimentation workspace is enabled."
+        }
+      },
+      "required": [
+        "resourceId",
+        "storageAccountResourceId",
+        "enabled"
+      ]
+    },
+    "LogAnalyticsUpdate": {
+      "type": "object",
+      "description": "LogAnalytics workspace which telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource id of the data source."
+        },
+        "storageAccountResourceId": {
+          "type": "string",
+          "description": "Resource id of the storage account associated with LogAnalytics workspace."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Controls whether data flow from the configured data source into the experimentation workspace is enabled."
         }
       }
     },
