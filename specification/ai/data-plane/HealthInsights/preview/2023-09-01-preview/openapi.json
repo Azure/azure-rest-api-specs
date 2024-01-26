@@ -2084,7 +2084,23 @@
       "properties": {
         "resourceType": {
           "type": "string",
-          "description": "Discriminator property for DomainResource."
+          "description": "The type of resource"
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "meta": {
+          "$ref": "#/definitions/Fhir.R4.Meta",
+          "description": "Metadata about the resource"
+        },
+        "implicitRules": {
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
+          "description": "A set of rules under which this content was created"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the resource content"
         },
         "text": {
           "$ref": "#/definitions/Fhir.R4.Narrative",
@@ -2116,11 +2132,7 @@
       "required": [
         "resourceType"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Fhir.R4.Resource"
-        }
-      ]
+      "additionalProperties": {}
     },
     "Fhir.R4.Extension": {
       "type": "object",

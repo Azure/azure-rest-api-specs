@@ -3,6 +3,8 @@ import "./model.common.fhir.elements.tsp";
 using TypeSpec.Rest;
 
 namespace Fhir.R4;
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 @doc("""
 Resource is the ancestor of DomainResource from which most resources are derived. Bundle, Parameters, and Binary extend Resource directly.
 Based on [FHIR Resource](https://www.hl7.org/fhir/r4/resource.html
@@ -24,12 +26,13 @@ model Resource is Record<unknown> {
   language?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 @doc("""
 A resource with narrative, extensions, and contained resources
 Based on [FHIR DomainResource](https://www.hl7.org/fhir/domainresource.html)
 """)
 @discriminator("resourceType")
-model DomainResource extends Resource {
+model DomainResource is Resource {
   @doc("Text summary of the resource, for human interpretation")
   text?: Narrative;
 
@@ -43,6 +46,7 @@ model DomainResource extends Resource {
   modifierExtension?: Array<Extension>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 @doc("""
 Detailed information about conditions, problems or diagnoses
 Based on [FHIR Condition](https://www.hl7.org/fhir/R4/condition.html)
@@ -127,6 +131,7 @@ model ConditionStage {
   type?: CodeableConcept;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 @doc("""
 Detailed information about observations
 Based on [FHIR Observation](https://www.hl7.org/fhir/R4/observation.html)
@@ -300,6 +305,7 @@ enum ObservationStatusCodeType {
   Unknown: "unknown",
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 @doc("""
 Detailed information about Research Study 
 Based on [FHIR ResearchStudy](https://www.hl7.org/fhir/R4/researchstudy.html)
