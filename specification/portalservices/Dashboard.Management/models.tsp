@@ -164,15 +164,6 @@ enum AggregationType {
   unique,
 }
 
-@doc("The enum value for InContextPane")
-enum InContextPaneValue {
-  @doc("The in context pane type for true.")
-  `true`,
-
-  @doc("The in context pane type for false.")
-  `false`,
-}
-
 @doc("The shared dashboard properties.")
 model DashboardProperties {
   @doc("The title of dashboard.")
@@ -337,7 +328,7 @@ model BladeReferenceWithContextPane {
   parameters?: {};
 
   @doc("Whether the blade should be opened in the context pane.")
-  inContextPane?: InContextPaneValue;
+  inContextPane?: boolean;
 }
 
 @doc("Model for actions on click update parameters")
