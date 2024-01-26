@@ -763,7 +763,7 @@ default is false.
   importBusinessMetadata is AtlasImportOperation<
     {
       @doc("InputStream of file")
-      uploadedInputStream: bytes;
+      file: bytes;
     },
     BulkImportResult,
     MultipartFormDataRequestHeadersTraits
