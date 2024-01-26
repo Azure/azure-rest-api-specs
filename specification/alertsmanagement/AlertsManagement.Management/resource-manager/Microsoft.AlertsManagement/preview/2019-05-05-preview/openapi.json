@@ -407,49 +407,34 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+            "name": "newState",
+            "in": "query",
+            "description": "New state of the alert.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "New",
+              "Acknowledged",
+              "Closed"
+            ],
+            "x-ms-enum": {
+              "name": "AlertState",
+              "modelAsString": true
+            }
+          },
+          {
             "name": "alertId",
             "in": "path",
             "description": "Unique ID of an alert instance.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "comment",
-            "in": "body",
-            "description": "reason of change alert state",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Alert"
-            },
-            "x-ms-client-name": "comment"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "apiVersion": {
-                  "type": "string",
-                  "description": "The API version to use for this operation.",
-                  "minLength": 1
-                },
-                "subscriptionId": {
-                  "type": "string",
-                  "description": "The ID of the target subscription.",
-                  "minLength": 1
-                },
-                "newState": {
-                  "$ref": "#/definitions/AlertState",
-                  "description": "New state of the alert."
-                }
-              },
-              "required": [
-                "apiVersion",
-                "subscriptionId",
-                "newState"
-              ]
+              "$ref": "#/definitions/Alert"
             }
           },
           "default": {
