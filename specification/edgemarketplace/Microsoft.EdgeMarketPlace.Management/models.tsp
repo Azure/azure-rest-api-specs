@@ -12,13 +12,6 @@ namespace Microsoft.EdgeMarketplace;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("ResourceProvisioningState Enum")
-enum ResourceProvisioningState {
-  @doc("Resource has been created.") Succeeded,
-  @doc("Resource creation failed.") Failed,
-  @doc("Resource creation was canceled.") Canceled,
-}
-
 @doc("Enum for CreatedBy")
 enum CreatedByType {
   @doc("The resource is created by user")
