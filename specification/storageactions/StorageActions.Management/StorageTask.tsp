@@ -45,9 +45,9 @@ interface StorageTasks {
   create(
     ...ResourceInstanceParameters<StorageTask, BaseParameters<StorageTask>>,
 
-    @doc("Resource create parameters.")
+    @doc("The parameters to create a Storage Task.")
     @body
-    resource: StorageTask,
+    parameters: StorageTask,
   ):
     | ArmResourceUpdatedResponse<StorageTask>
     | ArmResourceCreatedResponse<StorageTask, {}>
@@ -109,14 +109,6 @@ interface StorageTasks {
   ):ArmResponse<StorageTaskPreviewAction> | ErrorResponse;
 }
 
-@@projectedName(StorageTasks.create::parameters.resource, "json", "parameters");
-@@extension(StorageTasks.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(StorageTasks.create::parameters.resource,
-  "The parameters to create a Storage Task."
-);
 @@projectedName(StorageTasks.update::parameters.properties,
   "json",
   "parameters"
