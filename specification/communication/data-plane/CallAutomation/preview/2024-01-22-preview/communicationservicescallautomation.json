@@ -1690,6 +1690,10 @@
           "description": "The callback URI.",
           "type": "string"
         },
+        "dataSubscriptionId": {
+          "description": "SubscriptionId for transcription",
+          "type": "string"
+        },
         "sourceCallerIdNumber": {
           "$ref": "#/definitions/PhoneNumberIdentifierModel",
           "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when calling a PSTN callee."
@@ -3829,6 +3833,41 @@
         "transcriptionUpdateResult": {
           "$ref": "#/definitions/TranscriptionUpdate",
           "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        }
+      }
+    },
+    "TranscriptionResumed": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
           "readOnly": true
         }
       }
