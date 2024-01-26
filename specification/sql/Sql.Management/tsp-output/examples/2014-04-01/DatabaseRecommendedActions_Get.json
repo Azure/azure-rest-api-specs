@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "advisorName": "CreateIndex",
+    "api-version": "2020-11-01-preview",
+    "databaseName": "IndexAdvisor_test_3",
+    "recommendedActionName": "IR_[CRM]_[DataPoints]_4821CD2F9510D98184BB",
+    "resourceGroupName": "workloadinsight-demos",
+    "serverName": "misosisvr",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "IR_[CRM]_[DataPoints]_4821CD2F9510D98184BB",
+        "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex/recommendedActions/IR_[CRM]_[DataPoints]_4821CD2F9510D98184BB",
+        "kind": "",
+        "location": "East Asia",
+        "properties": {
+          "errorDetails": {},
+          "estimatedImpact": [
+            {
+              "absoluteValue": 1440,
+              "dimensionName": "ActionDuration",
+              "unit": "Seconds"
+            },
+            {
+              "absoluteValue": 209.3125,
+              "dimensionName": "SpaceChange",
+              "unit": "Megabytes"
+            }
+          ],
+          "implementationDetails": {
+            "method": "TSql",
+            "script": "CREATE NONCLUSTERED INDEX [nci_wi_DataPoints_B892614093BAC56295EF6018BD4CB51B] ON [CRM].[DataPoints] ([Name],[Money],[Power]) INCLUDE ([Hour], [System], [LastChanged]) WITH (ONLINE = ON)"
+          },
+          "isArchivedAction": false,
+          "isExecutableAction": true,
+          "isRevertableAction": true,
+          "lastRefresh": "2017-03-01T14:38:04Z",
+          "observedImpact": [],
+          "recommendationReason": "",
+          "score": 1,
+          "state": {
+            "currentValue": "Active",
+            "lastModified": "2017-03-01T14:38:05Z"
+          },
+          "timeSeries": [],
+          "validSince": "2017-03-01T14:38:04Z",
+          "details": {
+            "schema": "[CRM]",
+            "includedColumns": "[Hour], [System], [LastChanged]",
+            "indexColumns": "[Name],[Money],[Power]",
+            "indexName": "nci_wi_DataPoints_B892614093BAC56295EF6018BD4CB51B",
+            "indexType": "NONCLUSTERED",
+            "table": "[DataPoints]"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "DatabaseRecommendedActions_Get",
+  "title": "Get database recommended action"
+}

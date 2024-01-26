@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2023-06-15",
+    "networkTapName": "example-networkTap",
+    "resourceGroupName": "example-rg",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "example-networkTap",
+        "type": "microsoft.managednetworkfabric/networkTaps",
+        "id": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTaps/example-networkTap",
+        "location": "eastuseuap",
+        "properties": {
+          "administrativeState": "Enabled",
+          "annotation": "annotation",
+          "configurationState": "Succeeded",
+          "destinations": [
+            {
+              "name": "example-destinaionName",
+              "destinationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l3IsloationDomains/example-l3Domain/internalNetworks/example-internalNetwork",
+              "destinationTapRuleId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-destinationTapRule",
+              "destinationType": "IsolationDomain",
+              "isolationDomainProperties": {
+                "encapsulation": "None",
+                "neighborGroupIds": [
+                  "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/neighborGroups/example-neighborGroup"
+                ]
+              }
+            }
+          ],
+          "networkPacketBrokerId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkPacketBrokers/example-networkPacketBroker",
+          "pollingType": "Pull",
+          "provisioningState": "Accepted",
+          "sourceTapRuleId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-sourceTapRule"
+        },
+        "systemData": {
+          "createdAt": "2023-06-08T16:02:57.578Z",
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-06-08T16:02:57.579Z",
+          "lastModifiedBy": "email@address.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key6024": "1234"
+        }
+      }
+    }
+  },
+  "operationId": "NetworkTaps_Get",
+  "title": "NetworkTaps_Get_MaximumSet_Gen"
+}

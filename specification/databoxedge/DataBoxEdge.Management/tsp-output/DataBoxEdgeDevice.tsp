@@ -1,0 +1,417 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DataBoxEdge;
+/**
+ * The Data Box Edge/Gateway device.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DataBoxEdgeDeviceProperties)
+model DataBoxEdgeDevice extends TrackedResourceBase {
+  /**
+   * The device name.
+   */
+  @path
+  @key("deviceName")
+  @segment("dataBoxEdgeDevices")
+  @visibility("read")
+  name: string;
+
+  /**
+   * The etag for the devices.
+   */
+  etag?: string;
+
+  /**
+   * The kind of the device.
+   */
+  @visibility("read")
+  kind?: DataBoxEdgeDeviceKind;
+
+  /**
+   * The properties of the Data Box Edge/Gateway device.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataBoxEdgeDeviceProperties;
+
+  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ResourceSku;
+}
+
+@armResourceOperations
+interface DataBoxEdgeDevices {
+  /**
+   * Gets the properties of the Data Box Edge/Data Box Gateway device.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_Get")
+  get is ArmResourceRead<DataBoxEdgeDevice>;
+
+  /**
+   * Creates or updates a Data Box Edge/Data Box Gateway resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<DataBoxEdgeDevice>;
+
+  /**
+   * Modifies a Data Box Edge/Data Box Gateway resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @parameterVisibility("read")
+  @operationId("Devices_Update")
+  update is ArmCustomPatchSync<DataBoxEdgeDevice, DataBoxEdgeDevicePatch>;
+
+  /**
+   * Deletes the Data Box Edge/Data Box Gateway device.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_Delete")
+  delete is ArmResourceDeleteAsync<DataBoxEdgeDevice>;
+
+  /**
+   * Gets all the Data Box Edge/Data Box Gateway devices in a resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_ListByResourceGroup")
+  listByResourceGroup is ArmResourceListByParent<
+    DataBoxEdgeDevice,
+    {
+      ...BaseParameters<DataBoxEdgeDevice>;
+
+      /**
+       * Specify $expand=details to populate additional fields related to the resource or Specify $skipToken=<token> to populate the next page in the list.
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+
+  /**
+   * Gets all the Data Box Edge/Data Box Gateway devices in a subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_ListBySubscription")
+  listBySubscription is ArmListBySubscription<DataBoxEdgeDevice>;
+
+  /**
+   * Downloads the updates on a Data Box Edge/Data Box Gateway device.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_DownloadUpdates")
+  downloadUpdates is ArmResourceActionAsync<DataBoxEdgeDevice, void, void>;
+
+  /**
+   * Generates certificate for activation key.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_GenerateCertificate")
+  generateCertificate is ArmResourceActionSync<
+    DataBoxEdgeDevice,
+    void,
+    GenerateCertResponse
+  >;
+
+  /**
+   * Gets additional information for the specified Azure Stack Edge/Data Box Gateway device.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_GetExtendedInformation")
+  getExtendedInformation is ArmResourceActionSync<
+    DataBoxEdgeDevice,
+    void,
+    DataBoxEdgeDeviceExtendedInfo
+  >;
+
+  /**
+   * Installs the updates on the Data Box Edge/Data Box Gateway device.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_InstallUpdates")
+  installUpdates is ArmResourceActionAsync<DataBoxEdgeDevice, void, void>;
+
+  /**
+   * Scans for updates on a Data Box Edge/Data Box Gateway device.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_ScanForUpdates")
+  scanForUpdates is ArmResourceActionAsync<DataBoxEdgeDevice, void, void>;
+
+  /**
+   * Updates the security settings on a Data Box Edge/Data Box Gateway device.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_CreateOrUpdateSecuritySettings")
+  createOrUpdateSecuritySettings is ArmResourceActionNoResponseContentAsync<
+    DataBoxEdgeDevice,
+    SecuritySettings
+  >;
+
+  /**
+   * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_UpdateExtendedInformation")
+  updateExtendedInformation is ArmResourceActionSync<
+    DataBoxEdgeDevice,
+    DataBoxEdgeDeviceExtendedInfoPatch,
+    DataBoxEdgeDeviceExtendedInfo
+  >;
+
+  /**
+   * Uploads registration certificate for the device.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_UploadCertificate")
+  uploadCertificate is ArmResourceActionSync<
+    DataBoxEdgeDevice,
+    UploadCertificateRequest,
+    UploadCertificateResponse
+  >;
+
+  /**
+   * Posts the device capacity request info to check feasibility.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("DeviceCapacityCheck_CheckResourceCreationFeasibility")
+  checkResourceCreationFeasibility is ArmResourceActionAsync<
+    DataBoxEdgeDevice,
+    DeviceCapacityRequestInfo,
+    void,
+    {
+      ...BaseParameters<DataBoxEdgeDevice>;
+
+      /**
+       * The capacity name.
+       */
+      @query("capacityName")
+      capacityName?: string;
+    },
+    ArmAsyncOperationHeader
+  >;
+
+  /**
+   * Triggers support package on the device
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("SupportPackages_TriggerSupportPackage")
+  triggerSupportPackage is ArmResourceActionAsync<
+    DataBoxEdgeDevice,
+    TriggerSupportPackageRequest,
+    void
+  >;
+
+  /**
+   * Gets the network settings of the specified Data Box Edge/Data Box Gateway device.
+   */
+  // FIXME: Devices_GetNetworkSettings could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_GetNetworkSettings")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/networkSettings/default")
+  @get
+  getNetworkSettings is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The device name.
+       */
+      @path
+      deviceName: string;
+
+      /**
+       * The subscription ID.
+       */
+      @path
+      subscriptionId: string;
+
+      /**
+       * The resource group name.
+       */
+      @path
+      resourceGroupName: string;
+    },
+    NetworkSettings
+  >;
+
+  /**
+   * Gets information about the availability of updates based on the last scan of the device. It also gets information about any ongoing download or install jobs on the device.
+   */
+  // FIXME: Devices_GetUpdateSummary could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Devices_GetUpdateSummary")
+  @summary("Gets information about the availability of updates based on the last scan of the device. It also gets information about any ongoing download or install jobs on the device.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/updateSummary/default")
+  @get
+  getUpdateSummary is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The device name.
+       */
+      @path
+      deviceName: string;
+
+      /**
+       * The subscription ID.
+       */
+      @path
+      subscriptionId: string;
+
+      /**
+       * The resource group name.
+       */
+      @path
+      resourceGroupName: string;
+    },
+    UpdateSummary
+  >;
+
+  /**
+   * Gets the properties of the specified device capacity info.
+   */
+  // FIXME: DeviceCapacityInfo_GetDeviceCapacityInfo could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("DeviceCapacityInfo_GetDeviceCapacityInfo")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityInfo/default")
+  @get
+  getDeviceCapacityInfo is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The subscription ID.
+       */
+      @path
+      subscriptionId: string;
+
+      /**
+       * The resource group name.
+       */
+      @path
+      resourceGroupName: string;
+
+      /**
+       * The device name.
+       */
+      @path
+      deviceName: string;
+    },
+    DeviceCapacityInfo
+  >;
+
+  /**
+   * Gets all the nodes currently configured under this Data Box Edge device
+   */
+  // FIXME: Nodes_ListByDataBoxEdgeDevice could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Nodes_ListByDataBoxEdgeDevice")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/nodes")
+  @get
+  listByDataBoxEdgeDevice is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The device name.
+       */
+      @path
+      deviceName: string;
+
+      /**
+       * The subscription ID.
+       */
+      @path
+      subscriptionId: string;
+
+      /**
+       * The resource group name.
+       */
+      @path
+      resourceGroupName: string;
+    },
+    NodeList
+  >;
+}
+
+@@projectedName(DataBoxEdgeDevices.createOrUpdate::parameters.resource,
+  "json",
+  "dataBoxEdgeDevice"
+);
+@@extension(DataBoxEdgeDevices.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "dataBoxEdgeDevice"
+);
+@@doc(DataBoxEdgeDevices.createOrUpdate::parameters.resource,
+  "The resource object."
+);
+@@projectedName(DataBoxEdgeDevices.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(DataBoxEdgeDevices.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DataBoxEdgeDevices.update::parameters.properties,
+  "The resource parameters."
+);
+@@projectedName(DataBoxEdgeDevices.createOrUpdateSecuritySettings::parameters.body,
+  "json",
+  "securitySettings"
+);
+@@extension(DataBoxEdgeDevices.createOrUpdateSecuritySettings::parameters.body,
+  "x-ms-client-name",
+  "securitySettings"
+);
+@@doc(DataBoxEdgeDevices.createOrUpdateSecuritySettings::parameters.body,
+  "The security settings."
+);
+@@projectedName(DataBoxEdgeDevices.updateExtendedInformation::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(DataBoxEdgeDevices.updateExtendedInformation::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DataBoxEdgeDevices.updateExtendedInformation::parameters.body,
+  "The patch object."
+);
+@@projectedName(DataBoxEdgeDevices.uploadCertificate::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(DataBoxEdgeDevices.uploadCertificate::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DataBoxEdgeDevices.uploadCertificate::parameters.body,
+  "The upload certificate request."
+);
+@@projectedName(DataBoxEdgeDevices.checkResourceCreationFeasibility::parameters.body,
+  "json",
+  "deviceCapacityRequestInfo"
+);
+@@extension(DataBoxEdgeDevices.checkResourceCreationFeasibility::parameters.body,
+  "x-ms-client-name",
+  "deviceCapacityRequestInfo"
+);
+@@doc(DataBoxEdgeDevices.checkResourceCreationFeasibility::parameters.body,
+  "The device capacity request info."
+);
+@@projectedName(DataBoxEdgeDevices.triggerSupportPackage::parameters.body,
+  "json",
+  "triggerSupportPackageRequest"
+);
+@@extension(DataBoxEdgeDevices.triggerSupportPackage::parameters.body,
+  "x-ms-client-name",
+  "triggerSupportPackageRequest"
+);
+@@doc(DataBoxEdgeDevices.triggerSupportPackage::parameters.body,
+  "The trigger support package request object"
+);

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "mySignalRService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "capacity": {
+              "default": 1,
+              "allowedValues": [
+                0,
+                1
+              ],
+              "maximum": 1,
+              "minimum": 0,
+              "scaleType": "Manual"
+            },
+            "resourceType": "Microsoft.SignalRService/SignalR",
+            "sku": {
+              "name": "Free_F1",
+              "tier": "Free"
+            }
+          },
+          {
+            "capacity": {
+              "default": 1,
+              "allowedValues": [
+                0,
+                1,
+                2,
+                5,
+                10,
+                20,
+                50,
+                100
+              ],
+              "maximum": 100,
+              "minimum": 0,
+              "scaleType": "Automatic"
+            },
+            "resourceType": "Microsoft.SignalRService/SignalR",
+            "sku": {
+              "name": "Standard_S1",
+              "tier": "Standard"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SignalR_ListSkus",
+  "title": "SignalR_ListSkus"
+}

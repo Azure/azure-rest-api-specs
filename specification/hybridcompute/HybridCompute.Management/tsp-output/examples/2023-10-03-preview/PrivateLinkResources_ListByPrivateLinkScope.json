@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2023-10-03-preview",
+    "resourceGroupName": "myResourceGroup",
+    "scopeName": "myPrivateLinkScope",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "hybridcompute",
+            "type": "Microsoft.HybridCompute/privateLinkScopes/privateLinkResources",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/myPrivateLinkScope/privateLinkResources/hybridcompute",
+            "properties": {
+              "groupId": "hybridcompute",
+              "requiredMembers": [
+                "HybridCompute.ServerDP",
+                "HybridCompute.K8sConfigurationDP",
+                "HybridCompute.GuestConfigDP"
+              ],
+              "requiredZoneNames": [
+                "privatelink.his.arc.azure.com",
+                "privatelink.kubernetesconfiguration.azure.com",
+                "privatelink.Guestconfiguration.azure.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_ListByPrivateLinkScope",
+  "title": "Gets private endpoint connection."
+}

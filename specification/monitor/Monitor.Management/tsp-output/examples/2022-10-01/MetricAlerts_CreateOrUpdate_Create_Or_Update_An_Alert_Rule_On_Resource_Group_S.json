@@ -1,0 +1,103 @@
+{
+  "parameters": {
+    "api-version": "2018-03-01",
+    "parameters": {
+      "location": "global",
+      "properties": {
+        "description": "This is the description of the rule1",
+        "actions": [
+          {
+            "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
+            "webHookProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          }
+        ],
+        "autoMitigate": true,
+        "criteria": {
+          "allOf": [
+            {
+              "name": "High_CPU_80",
+              "criterionType": "StaticThresholdCriterion",
+              "dimensions": [],
+              "metricName": "Percentage CPU",
+              "metricNamespace": "microsoft.compute/virtualmachines",
+              "operator": "GreaterThan",
+              "threshold": 80.5,
+              "timeAggregation": "Average"
+            }
+          ],
+          "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+        },
+        "enabled": true,
+        "evaluationFrequency": "PT1M",
+        "scopes": [
+          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest1",
+          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest2"
+        ],
+        "severity": 3,
+        "targetResourceRegion": "southcentralus",
+        "targetResourceType": "Microsoft.Compute/virtualMachines",
+        "windowSize": "PT15M"
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "gigtest1",
+    "ruleName": "MetricAlertAtResourceGroupLevel",
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Insights/metricAlerts",
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest1/providers/providers/microsoft.insights/metricalerts/MetricAlertAtResourceGroupLevel",
+        "location": "global",
+        "properties": {
+          "description": "This is the description of the rule1",
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
+              "webHookProperties": {
+                "key11": "value11",
+                "key12": "value12"
+              }
+            }
+          ],
+          "autoMitigate": true,
+          "criteria": {
+            "allOf": [
+              {
+                "name": "High_CPU_80",
+                "criterionType": "StaticThresholdCriterion",
+                "dimensions": [],
+                "metricName": "Percentage CPU",
+                "metricNamespace": "microsoft.compute/virtualmachines",
+                "operator": "GreaterThan",
+                "threshold": 80.5,
+                "timeAggregation": "Average"
+              }
+            ],
+            "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+          },
+          "enabled": true,
+          "evaluationFrequency": "PT1M",
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest1",
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest2"
+          ],
+          "severity": 3,
+          "targetResourceRegion": "southcentralus",
+          "targetResourceType": "Microsoft.Compute/virtualMachines",
+          "windowSize": "PT15M"
+        },
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "MetricAlerts_CreateOrUpdate",
+  "title": "Create or update an alert rule on Resource group(s)"
+}

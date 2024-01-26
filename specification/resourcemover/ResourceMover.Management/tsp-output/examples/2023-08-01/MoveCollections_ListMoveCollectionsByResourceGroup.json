@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2023-08-01",
+    "moveCollectionName": "movecollection1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "movecollection1",
+            "type": "Microsoft.Migrate/MoveCollections",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "7488fa50-1c8e-42c4-a117-38c8d05d8b72",
+              "tenantId": "cc7e5736-dbba-4059-a621-664eab9c1d80"
+            },
+            "location": "United States",
+            "properties": {
+              "moveType": "RegionToRegion",
+              "provisioningState": "Succeeded",
+              "sourceRegion": "eastus",
+              "targetRegion": "westus",
+              "version": "V1"
+            },
+            "systemData": {
+              "createdAt": "2021-08-29T15:06:54.2757906Z",
+              "createdBy": "user@microsoft.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-29T15:06:54.2757906Z",
+              "lastModifiedBy": "user@microsoft.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "MoveCollections_ListMoveCollectionsByResourceGroup",
+  "title": "MoveCollections_ListMoveCollectionsByResourceGroup"
+}

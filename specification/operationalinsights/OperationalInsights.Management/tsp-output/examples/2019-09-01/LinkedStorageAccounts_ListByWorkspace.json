@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "resourceGroupName": "mms-eus",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "workspaceName": "testLinkStorageAccountsWS"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "CustomLogs",
+            "type": "Microsoft.OperationalInsights/workspaces/linkedStorageAccounts",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000005/resourcegroups/mms-eus/providers/microsoft.operationalinsights/workspaces/testLinkStorageAccountsWS/linkedStorageAccounts/CustomLogs",
+            "properties": {
+              "dataSourceType": "CustomLogs",
+              "storageAccountIds": [
+                "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.Storage/storageAccounts/testStorageA",
+                "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.Storage/storageAccounts/testStorageB"
+              ]
+            }
+          },
+          {
+            "name": "AzureWatson",
+            "type": "Microsoft.OperationalInsights/workspaces/linkedStorageAccounts",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000005/resourcegroups/mms-eus/providers/microsoft.operationalinsights/workspaces/testLinkStorageAccountsWS/linkedStorageAccounts/AzureWatson",
+            "properties": {
+              "dataSourceType": "AzureWatson",
+              "storageAccountIds": [
+                "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.Storage/storageAccounts/testStorageA",
+                "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.Storage/storageAccounts/testStorageC"
+              ]
+            }
+          },
+          {
+            "name": "Query",
+            "type": "Microsoft.OperationalInsights/workspaces/linkedStorageAccounts",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000005/resourcegroups/mms-eus/providers/microsoft.operationalinsights/workspaces/testLinkStorageAccountsWS/linkedStorageAccounts/Query",
+            "properties": {
+              "dataSourceType": "Query",
+              "storageAccountIds": [
+                "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.Storage/storageAccounts/testStorageA",
+                "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.Storage/storageAccounts/testStorageC"
+              ]
+            }
+          },
+          {
+            "name": "Alerts",
+            "type": "Microsoft.OperationalInsights/workspaces/linkedStorageAccounts",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000005/resourcegroups/mms-eus/providers/microsoft.operationalinsights/workspaces/testLinkStorageAccountsWS/linkedStorageAccounts/Alerts",
+            "properties": {
+              "dataSourceType": "Alerts",
+              "storageAccountIds": [
+                "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.Storage/storageAccounts/testStorageA",
+                "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.Storage/storageAccounts/testStorageC"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LinkedStorageAccounts_ListByWorkspace",
+  "title": "Gets list of linked storage accounts on a workspace."
+}

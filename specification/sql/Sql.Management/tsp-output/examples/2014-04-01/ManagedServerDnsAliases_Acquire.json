@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "dnsAliasName": "dns-alias-mi",
+    "managedInstanceName": "new-mi",
+    "parameters": {
+      "oldManagedServerDnsAliasResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/old-mi/dnsAliases/alias1"
+    },
+    "resourceGroupName": "Default",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "alias1",
+        "type": "Microsoft.Sql/managedInstances/dnsAliases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/new-mi/dnsAliases/alias1",
+        "properties": {
+          "azureDnsRecord": "alias1.abcd1234.database.windows.net"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "ManagedServerDnsAliases_Acquire",
+  "title": "Acquire managed server DNS alias."
+}

@@ -1,0 +1,85 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Registry.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ContainerRegistry;
+/**
+ * An object that represents a private endpoint connection for a container registry.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@parentResource(Registry)
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateEndpointConnectionProperties
+)
+model PrivateEndpointConnection extends ProxyResourceBase {
+  /**
+   * The name of the private endpoint connection.
+   */
+  @path
+  @key("privateEndpointConnectionName")
+  @segment("privateEndpointConnections")
+  @visibility("read")
+  name: string;
+
+  /**
+   * The properties of a private endpoint connection.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateEndpointConnectionProperties;
+}
+
+@armResourceOperations
+interface PrivateEndpointConnections {
+  /**
+   * Get the specified private endpoint connection associated with the container registry.
+   */
+  get is ArmResourceRead<PrivateEndpointConnection>;
+
+  /**
+   * Update the state of specified private endpoint connection associated with the container registry.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpointConnection,
+    BaseParameters<PrivateEndpointConnection>,
+    ArmAsyncOperationHeader
+  >;
+
+  /**
+   * Deletes the specified private endpoint connection associated with the container registry.
+   */
+  delete is ArmResourceDeleteAsync<
+    PrivateEndpointConnection,
+    BaseParameters<PrivateEndpointConnection>,
+    ArmLroLocationHeader
+  >;
+
+  /**
+   * List all private endpoint connections in a container registry.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PrivateEndpointConnections_List")
+  list is ArmResourceListByParent<PrivateEndpointConnection>;
+}
+
+@@projectedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "json",
+  "privateEndpointConnection"
+);
+@@extension(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "privateEndpointConnection"
+);
+@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "The parameters for creating a private endpoint connection."
+);

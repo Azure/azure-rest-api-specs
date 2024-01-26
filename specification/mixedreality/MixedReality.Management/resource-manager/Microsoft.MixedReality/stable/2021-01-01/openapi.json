@@ -1,0 +1,1598 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MixedRealityClient",
+    "version": "2021-01-01",
+    "description": "Mixed Reality Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "SpatialAnchorsAccounts"
+    },
+    {
+      "name": "RemoteRenderingAccounts"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.MixedReality/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/locations/{location}/checkNameAvailability": {
+      "post": {
+        "operationId": "CheckNameAvailabilityLocal",
+        "description": "Check Name Availability for local uniqueness",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location in which uniqueness will be verified.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "checkNameAvailability",
+            "in": "body",
+            "description": "Check Name Availability Request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/remoteRenderingAccounts": {
+      "get": {
+        "operationId": "RemoteRenderingAccounts_ListBySubscription",
+        "tags": [
+          "RemoteRenderingAccounts"
+        ],
+        "description": "List Remote Rendering Accounts by Subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List remote rendering accounts by subscription": {
+            "$ref": "./examples/RemoteRenderingAccounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/spatialAnchorsAccounts": {
+      "get": {
+        "operationId": "SpatialAnchorsAccounts_ListBySubscription",
+        "tags": [
+          "SpatialAnchorsAccounts"
+        ],
+        "description": "List Spatial Anchors Accounts by Subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List spatial anchors accounts by subscription": {
+            "$ref": "./examples/SpatialAnchorsAccounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts": {
+      "get": {
+        "operationId": "RemoteRenderingAccounts_ListByResourceGroup",
+        "tags": [
+          "RemoteRenderingAccounts"
+        ],
+        "description": "List Resources by Resource Group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List remote rendering accounts by resource group": {
+            "$ref": "./examples/RemoteRenderingAccounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}": {
+      "get": {
+        "operationId": "RemoteRenderingAccounts_Get",
+        "tags": [
+          "RemoteRenderingAccounts"
+        ],
+        "description": "Retrieve a Remote Rendering Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get remote rendering account": {
+            "$ref": "./examples/RemoteRenderingAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RemoteRenderingAccounts_Create",
+        "tags": [
+          "RemoteRenderingAccounts"
+        ],
+        "description": "Creating or Updating a Remote Rendering Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "remoteRenderingAccount",
+            "in": "body",
+            "description": "Remote Rendering Account parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccount"
+            },
+            "x-ms-client-name": "remoteRenderingAccount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RemoteRenderingAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'RemoteRenderingAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create remote rendering account": {
+            "$ref": "./examples/RemoteRenderingAccounts_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RemoteRenderingAccounts_Delete",
+        "tags": [
+          "RemoteRenderingAccounts"
+        ],
+        "description": "Delete a Remote Rendering Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete remote rendering account": {
+            "$ref": "./examples/RemoteRenderingAccounts_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}/listKeys": {
+      "post": {
+        "operationId": "RemoteRenderingAccounts_ListKeys",
+        "tags": [
+          "RemoteRenderingAccounts"
+        ],
+        "description": "List Both of the 2 Keys of a Remote Rendering Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List remote rendering account key": {
+            "$ref": "./examples/RemoteRenderingAccounts_ListKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}/regenerateKeys": {
+      "post": {
+        "operationId": "RemoteRenderingAccounts_RegenerateKeys",
+        "tags": [
+          "RemoteRenderingAccounts"
+        ],
+        "description": "Regenerate specified Key of a Remote Rendering Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "regenerate",
+            "in": "body",
+            "description": "Required information for key regeneration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountKeyRegenerateRequest"
+            },
+            "x-ms-client-name": "regenerate"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Regenerate remote rendering account keys": {
+            "$ref": "./examples/RemoteRenderingAccounts_RegenerateKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}/remoteRenderingAccounts/{name}": {
+      "patch": {
+        "operationId": "RemoteRenderingAccounts_Update",
+        "tags": [
+          "RemoteRenderingAccounts"
+        ],
+        "description": "Updating a Remote Rendering Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "remoteRenderingAccount",
+            "in": "body",
+            "description": "Remote Rendering Account parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccount"
+            },
+            "x-ms-client-name": "remoteRenderingAccount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update remote rendering account": {
+            "$ref": "./examples/RemoteRenderingAccounts_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts": {
+      "get": {
+        "operationId": "SpatialAnchorsAccounts_ListByResourceGroup",
+        "tags": [
+          "SpatialAnchorsAccounts"
+        ],
+        "description": "List Resources by Resource Group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List spatial anchor accounts by resource group": {
+            "$ref": "./examples/SpatialAnchorsAccounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}": {
+      "get": {
+        "operationId": "SpatialAnchorsAccounts_Get",
+        "tags": [
+          "SpatialAnchorsAccounts"
+        ],
+        "description": "Retrieve a Spatial Anchors Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get spatial anchors account": {
+            "$ref": "./examples/SpatialAnchorsAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SpatialAnchorsAccounts_Create",
+        "tags": [
+          "SpatialAnchorsAccounts"
+        ],
+        "description": "Creating or Updating a Spatial Anchors Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "spatialAnchorsAccount",
+            "in": "body",
+            "description": "Spatial Anchors Account parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccount"
+            },
+            "x-ms-client-name": "spatialAnchorsAccount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SpatialAnchorsAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'SpatialAnchorsAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create spatial anchor account": {
+            "$ref": "./examples/SpatialAnchorsAccounts_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SpatialAnchorsAccounts_Delete",
+        "tags": [
+          "SpatialAnchorsAccounts"
+        ],
+        "description": "Delete a Spatial Anchors Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete spatial anchors account": {
+            "$ref": "./examples/SpatialAnchorsAccounts_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}/listKeys": {
+      "post": {
+        "operationId": "SpatialAnchorsAccounts_ListKeys",
+        "tags": [
+          "SpatialAnchorsAccounts"
+        ],
+        "description": "List Both of the 2 Keys of a Spatial Anchors Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List spatial anchor account key": {
+            "$ref": "./examples/SpatialAnchorsAccounts_ListKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}/regenerateKeys": {
+      "post": {
+        "operationId": "SpatialAnchorsAccounts_RegenerateKeys",
+        "tags": [
+          "SpatialAnchorsAccounts"
+        ],
+        "description": "Regenerate specified Key of a Spatial Anchors Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "regenerate",
+            "in": "body",
+            "description": "Required information for key regeneration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountKeyRegenerateRequest"
+            },
+            "x-ms-client-name": "regenerate"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Regenerate spatial anchors account keys": {
+            "$ref": "./examples/SpatialAnchorsAccounts_RegenerateKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}/spatialAnchorsAccounts/{name}": {
+      "patch": {
+        "operationId": "SpatialAnchorsAccounts_Update",
+        "tags": [
+          "SpatialAnchorsAccounts"
+        ],
+        "description": "Updating a Spatial Anchors Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of an Mixed Reality Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "spatialAnchorsAccount",
+            "in": "body",
+            "description": "Spatial Anchors Account parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccount"
+            },
+            "x-ms-client-name": "spatialAnchorsAccount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update spatial anchors account": {
+            "$ref": "./examples/SpatialAnchorsAccounts_Update.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountKeyRegenerateRequest": {
+      "type": "object",
+      "description": "Request for account key regeneration",
+      "properties": {
+        "serial": {
+          "$ref": "#/definitions/Serial",
+          "description": "serial of key to be regenerated"
+        }
+      }
+    },
+    "AccountKeys": {
+      "type": "object",
+      "description": "Developer Keys of account",
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "description": "value of primary key.",
+          "readOnly": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "value of secondary key.",
+          "readOnly": true
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.SkuTier": {
+      "type": "string",
+      "description": "Available service tiers for the SKU.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "The Free service tier."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "The Basic service tier."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard service tier."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium service tier."
+          }
+        ]
+      }
+    },
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "Check Name Availability Request",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource Name To Verify"
+        },
+        "type": {
+          "type": "string",
+          "description": "Fully qualified resource type which includes provider namespace"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "description": "Check Name Availability Response",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "if name Available"
+        },
+        "reason": {
+          "$ref": "#/definitions/NameUnavailableReason",
+          "description": "Resource Name To Verify"
+        },
+        "message": {
+          "type": "string",
+          "description": "detail message"
+        }
+      },
+      "required": [
+        "nameAvailable"
+      ]
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An Error response."
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from Azure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for displaying in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Specifications of the Log for Azure Monitoring",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the log"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration of the log"
+        }
+      }
+    },
+    "MetricDimension": {
+      "type": "object",
+      "description": "Specifications of the Dimension of metrics",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension"
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Internal name of the dimension."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Whether the dimension should be included for the shoebox export scenario."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Specifications of the Metrics for Azure Monitoring",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the metric"
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Localized friendly description of the metric"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit that makes sense for the metric"
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "Supported aggregation types. Valid values: Average, Minimum, Maximum, Total, Count.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "Supported time grains. Valid values: PT1M, PT5M, PT15M, PT30M, PT1H, PT6H, PT12H, P1D",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Flag to indicate use of regional Mdm accounts"
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "Source mdm account"
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "Source mdm namespace"
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Metric filter regex pattern"
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Flag to determine is Zero is returned for time duration where no metric is emitted"
+        },
+        "category": {
+          "type": "string",
+          "description": "Metric category"
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "Internal metric name."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions of the metric",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "x-ms-identifiers": []
+        },
+        "lockedAggregationType": {
+          "type": "string",
+          "description": "Locked aggregation type of the metric"
+        }
+      }
+    },
+    "MixedRealityAccountProperties": {
+      "type": "object",
+      "description": "Common Properties shared by Mixed Reality Accounts",
+      "properties": {
+        "storageAccountName": {
+          "type": "string",
+          "description": "The name of the storage account associated with this accountId"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "unique id of certain account.",
+          "readOnly": true
+        },
+        "accountDomain": {
+          "type": "string",
+          "description": "Correspond domain name of certain Spatial Anchors Account",
+          "readOnly": true
+        }
+      }
+    },
+    "NameUnavailableReason": {
+      "type": "string",
+      "description": "reason of name unavailable.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "NameUnavailableReason",
+        "modelAsString": true
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Operation properties.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specification."
+        }
+      }
+    },
+    "RemoteRenderingAccount": {
+      "type": "object",
+      "description": "RemoteRenderingAccount Response.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/Sku",
+          "description": "The kind of account, if supported"
+        },
+        "properties": {
+          "$ref": "#/definitions/MixedRealityAccountProperties",
+          "description": "Property bag.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RemoteRenderingAccountListResult": {
+      "type": "object",
+      "description": "The response of a RemoteRenderingAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RemoteRenderingAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/RemoteRenderingAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        }
+      }
+    },
+    "Serial": {
+      "type": "number",
+      "description": "serial of key to be regenerated",
+      "enum": [
+        1,
+        2
+      ],
+      "x-ms-enum": {
+        "name": "Serial",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Primary",
+            "value": 1,
+            "description": "The Primary Key"
+          },
+          {
+            "name": "Secondary",
+            "value": 2,
+            "description": "The Secondary Key"
+          }
+        ]
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Service specification payload",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Log for Azure Monitoring",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Metrics for Azure Monitoring",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SpatialAnchorsAccount": {
+      "type": "object",
+      "description": "SpatialAnchorsAccount Response.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/Sku",
+          "description": "The kind of account, if supported"
+        },
+        "properties": {
+          "$ref": "#/definitions/MixedRealityAccountProperties",
+          "description": "Property bag.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SpatialAnchorsAccountListResult": {
+      "type": "object",
+      "description": "The response of a SpatialAnchorsAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SpatialAnchorsAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/SpatialAnchorsAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2021-01-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2021_01_01",
+            "value": "2021-01-01",
+            "description": "The 2021-01-01 API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

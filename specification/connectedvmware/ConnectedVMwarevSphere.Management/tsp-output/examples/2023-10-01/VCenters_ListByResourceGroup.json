@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ContosoVCenter",
+            "type": "Microsoft.ConnectedVMwarevSphere/VCenters",
+            "extendedLocation": {
+              "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso",
+              "type": "customLocation"
+            },
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter",
+            "location": "East US",
+            "properties": {
+              "credentials": {
+                "username": "tempuser"
+              },
+              "fqdn": "ContosoVMware.contoso.com",
+              "instanceUuid": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+              "port": 1234,
+              "provisioningState": "Succeeded",
+              "version": "1.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VCenters_ListByResourceGroup",
+  "title": "ListVCentersByResourceGroup"
+}

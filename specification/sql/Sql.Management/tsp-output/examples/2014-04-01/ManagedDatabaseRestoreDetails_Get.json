@@ -1,0 +1,155 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01-preview",
+    "databaseName": "testdb",
+    "managedInstanceName": "managedInstance",
+    "parameters": {
+      "tags": {
+        "tagKey1": "TagValue1"
+      }
+    },
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "restoreDetailsName": "Default",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.Sql/managedInstances/databases/restoreDetails",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/databases/testdb/restoreDetails/current",
+        "properties": {
+          "type": "LRSRestore",
+          "currentBackupType": "Log",
+          "currentRestorePlanSizeMB": 47,
+          "currentRestoredSizeMB": 25,
+          "currentRestoringFileName": "RestoreDetailsFullBlownExampleLog10.bak",
+          "diffBackupSets": [
+            {
+              "backupSizeMB": 0,
+              "firstStripeName": "RestoreDetailsFullBlownExampleDiff2.bak",
+              "numberOfStripes": 1,
+              "status": "Skipped"
+            },
+            {
+              "backupSizeMB": 1,
+              "firstStripeName": "RestoreDetailsFullBlownExampleDiff3_1.bak",
+              "numberOfStripes": 3,
+              "restoreFinishedTimestampUtc": "2022-05-09T12:20:21.3667454Z",
+              "restoreStartedTimestampUtc": "2022-05-09T12:19:40.5455092Z",
+              "status": "Restored"
+            }
+          ],
+          "fullBackupSets": [
+            {
+              "backupSizeMB": 2,
+              "firstStripeName": "RestoreDetailsFullBlownExampleFull2.bak",
+              "numberOfStripes": 1,
+              "status": "Skipped"
+            },
+            {
+              "backupSizeMB": 3,
+              "firstStripeName": "RestoreDetailsFullBlownExampleFull3_1.bak",
+              "numberOfStripes": 3,
+              "restoreFinishedTimestampUtc": "2022-05-09T12:18:41.3785089Z",
+              "restoreStartedTimestampUtc": "2022-05-09T12:15:40.3143263Z",
+              "status": "Restored"
+            }
+          ],
+          "lastRestoredFileName": "RestoreDetailsFullBlownExampleLog9_1.bak",
+          "lastRestoredFileTime": "2022-05-09T12:27:20.4936305Z",
+          "lastUploadedFileName": "RestoreDetailsFullBlownExampleLog11.bak",
+          "lastUploadedFileTime": "2022-03-01T07:54:21Z",
+          "logBackupSets": [
+            {
+              "backupSizeMB": 0,
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog2.bak",
+              "numberOfStripes": 1,
+              "status": "Skipped"
+            },
+            {
+              "backupSizeMB": 8,
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog3.bak",
+              "numberOfStripes": 1,
+              "status": "Skipped"
+            },
+            {
+              "backupSizeMB": 11,
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog4.bak",
+              "numberOfStripes": 1,
+              "status": "Skipped"
+            },
+            {
+              "backupSizeMB": 7,
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog5.bak",
+              "numberOfStripes": 1,
+              "restoreFinishedTimestampUtc": "2022-05-09T12:21:54.7557851Z",
+              "restoreStartedTimestampUtc": "2022-05-09T12:21:01.7717453Z",
+              "status": "Restored"
+            },
+            {
+              "backupSizeMB": 3,
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog6.bak",
+              "numberOfStripes": 1,
+              "restoreFinishedTimestampUtc": "2022-05-09T12:23:03.709407Z",
+              "restoreStartedTimestampUtc": "2022-05-09T12:22:41.8784062Z",
+              "status": "Restored"
+            },
+            {
+              "backupSizeMB": 4,
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog7.bak",
+              "numberOfStripes": 1,
+              "restoreFinishedTimestampUtc": "2022-05-09T12:23:52.9274047Z",
+              "restoreStartedTimestampUtc": "2022-05-09T12:23:36.6264066Z",
+              "status": "Restored"
+            },
+            {
+              "backupSizeMB": 3,
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog8.bak",
+              "numberOfStripes": 1,
+              "restoreFinishedTimestampUtc": "2022-05-09T12:24:37.9954063Z",
+              "restoreStartedTimestampUtc": "2022-05-09T12:24:25.899407Z",
+              "status": "Restored"
+            },
+            {
+              "backupSizeMB": 4,
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog9_1.bak",
+              "numberOfStripes": 4,
+              "restoreFinishedTimestampUtc": "2022-05-09T12:25:27.808409Z",
+              "restoreStartedTimestampUtc": "2022-05-09T12:25:10.8804065Z",
+              "status": "Restored"
+            },
+            {
+              "backupSizeMB": 15,
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog10.bak",
+              "numberOfStripes": 1,
+              "restoreStartedTimestampUtc": "2022-05-09T12:26:00.7813103Z",
+              "status": "Restoring"
+            },
+            {
+              "backupSizeMB": 7,
+              "firstStripeName": "RestoreDetailsFullBlownExampleLog11.bak",
+              "numberOfStripes": 1,
+              "status": "Queued"
+            }
+          ],
+          "numberOfFilesDetected": 25,
+          "numberOfFilesQueued": 1,
+          "numberOfFilesRestored": 14,
+          "numberOfFilesRestoring": 1,
+          "numberOfFilesSkipped": 8,
+          "numberOfFilesUnrestorable": 1,
+          "percentCompleted": 53,
+          "status": "Restoring",
+          "unrestorableFiles": [
+            {
+              "name": "ImageFile.JPG"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "ManagedDatabaseRestoreDetails_Get",
+  "title": "Managed database restore details."
+}

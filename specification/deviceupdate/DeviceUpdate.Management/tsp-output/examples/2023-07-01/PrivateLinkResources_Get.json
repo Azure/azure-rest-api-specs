@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "accountName": "contoso",
+    "api-version": "2023-07-01",
+    "groupId": "adu",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "adu",
+        "type": "Microsoft.DeviceUpdate/accounts/privateLinkResources",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/privateLinkResources/adu",
+        "properties": {
+          "groupId": "adu",
+          "requiredMembers": [
+            "adu"
+          ],
+          "requiredZoneNames": [
+            "privatelink.adu.microsoft.com"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_Get",
+  "title": "PrivateLinkResourcesGet"
+}

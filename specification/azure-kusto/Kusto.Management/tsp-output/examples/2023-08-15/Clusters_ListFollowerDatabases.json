@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2023-08-15",
+    "clusterName": "kustoCluster",
+    "resourceGroupName": "kustorptest",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "attachedDatabaseConfigurationName": "attachedDbConfiguration",
+            "clusterResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/follower1",
+            "databaseName": "*",
+            "databaseShareOrigin": "DataShare"
+          },
+          {
+            "attachedDatabaseConfigurationName": "attachedDbConfiguration2",
+            "clusterResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/follower4",
+            "databaseName": "db1",
+            "databaseShareOrigin": "Direct",
+            "tableLevelSharingProperties": {
+              "externalTablesToExclude": [
+                "ExternalTable2"
+              ],
+              "externalTablesToInclude": [
+                "ExternalTable1"
+              ],
+              "materializedViewsToExclude": [
+                "MaterializedViewTable2"
+              ],
+              "materializedViewsToInclude": [
+                "MaterializedViewTable1"
+              ],
+              "tablesToExclude": [
+                "Table2"
+              ],
+              "tablesToInclude": [
+                "Table1"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Clusters_ListFollowerDatabases",
+  "title": "KustoClusterListFollowerDatabases"
+}

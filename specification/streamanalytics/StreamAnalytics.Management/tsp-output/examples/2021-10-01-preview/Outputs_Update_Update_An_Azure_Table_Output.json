@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "jobName": "sj2790",
+    "output": {
+      "properties": {
+        "datasource": {
+          "type": "Microsoft.Storage/Table",
+          "properties": {
+            "partitionKey": "differentPartitionKey"
+          }
+        }
+      }
+    },
+    "outputName": "output958",
+    "resourceGroupName": "sjrg5176",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "output958",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg5176/providers/Microsoft.StreamAnalytics/streamingjobs/sj2790/outputs/output958",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Storage/Table",
+            "properties": {
+              "accountName": "someAccountName",
+              "batchSize": 25,
+              "columnsToRemove": [
+                "column1",
+                "column2"
+              ],
+              "partitionKey": "differentPartitionKey",
+              "rowKey": "rowKey",
+              "table": "samples"
+            }
+          }
+        }
+      },
+      "headers": {
+        "ETag": "ea1d20bf-6cb3-40bc-bc7b-ec3a7fd5977e"
+      }
+    }
+  },
+  "operationId": "Outputs_Update",
+  "title": "Update an Azure Table output"
+}

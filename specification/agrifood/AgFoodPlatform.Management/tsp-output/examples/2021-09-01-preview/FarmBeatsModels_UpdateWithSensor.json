@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "body": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "sensorIntegration": {
+          "enabled": "True"
+        }
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    },
+    "farmBeatsResourceName": "examples-farmBeatsResourceName",
+    "resourceGroupName": "examples-rg",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examples-farmBeatsResourceName",
+        "type": "Microsoft.AgFoodPlatform/farmBeats",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName",
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "abcdefgh-86f1-41af-91ab-2d7cd011db47"
+        },
+        "location": "eastus2",
+        "properties": {
+          "instanceUri": "https://examples-farmbeatsResourceName.eastus2.farmbeats.azure.net",
+          "provisioningState": "Succeeded",
+          "sensorIntegration": {
+            "enabled": "True",
+            "provisioningState": "Creating"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "http://azure.async.operation/status"
+      }
+    }
+  },
+  "operationId": "FarmBeatsModels_Update",
+  "title": "FarmBeatsModels_UpdateWithSensor"
+}

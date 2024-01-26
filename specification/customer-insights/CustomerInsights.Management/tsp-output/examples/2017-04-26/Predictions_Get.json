@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2017-04-26",
+    "hubName": "sdkTestHub",
+    "predictionName": "sdktest",
+    "resourceGroupName": "TestHubRG",
+    "subscriptionId": "c909e979-ef71-4def-a970-bc7c154db8c5"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sdkTestHub/sdktest",
+        "type": "Microsoft.CustomerInsights/hubs/predictions",
+        "id": "/subscriptions/c909e979-ef71-4def-a970-bc7c154db8c5/resourceGroups/TestHubRG/providers/Microsoft.CustomerInsights/hubs/azSdkTestHub/predictions/sdktest",
+        "properties": {
+          "description": {
+            "en-us": "sdktest"
+          },
+          "autoAnalyze": true,
+          "displayName": {
+            "en-us": "sdktest"
+          },
+          "grades": [],
+          "involvedInteractionTypes": [],
+          "involvedKpiTypes": [],
+          "involvedRelationships": [],
+          "mappings": {
+            "grade": "sdktest_Grade",
+            "reason": "sdktest_Reason",
+            "score": "sdktest_Score"
+          },
+          "negativeOutcomeExpression": "Customers.FirstName = 'Mike'",
+          "positiveOutcomeExpression": "Customers.FirstName = 'David'",
+          "predictionName": "sdktest",
+          "primaryProfileType": "Customers",
+          "provisioningState": "Succeeded",
+          "scopeExpression": "*",
+          "scoreLabel": "score label",
+          "systemGeneratedEntities": {
+            "generatedInteractionTypes": [
+              "_predictions_sdktest"
+            ],
+            "generatedKpis": {
+              "leadingProfiles": "_predictions_sdktest_LeadingProfiles",
+              "negativeOutcomeByGrade": "_predictions_sdktest_NegativeOutcomeByGrade",
+              "positiveOutcomeByGrade": "_predictions_sdktest_PositiveOutcomeByGrade",
+              "predictionPerformance": "_predictions_sdktest_PredictionPerformance"
+            },
+            "generatedLinks": [
+              "_predictions_link_sdktest"
+            ]
+          },
+          "tenantId": "predtest620"
+        }
+      }
+    }
+  },
+  "operationId": "Predictions_Get",
+  "title": "Predictions_Get"
+}

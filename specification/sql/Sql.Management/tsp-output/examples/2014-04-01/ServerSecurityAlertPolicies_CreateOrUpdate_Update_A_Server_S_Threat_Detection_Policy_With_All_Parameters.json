@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "parameters": {
+      "properties": {
+        "disabledAlerts": [
+          "Access_Anomaly",
+          "Usage_Anomaly"
+        ],
+        "emailAccountAdmins": true,
+        "emailAddresses": [
+          "testSecurityAlert@microsoft.com"
+        ],
+        "retentionDays": 5,
+        "state": "Enabled",
+        "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
+        "storageEndpoint": "https://mystorage.blob.core.windows.net"
+      }
+    },
+    "resourceGroupName": "securityalert-4799",
+    "securityAlertPolicyName": "Default",
+    "serverName": "securityalert-6440",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Default",
+        "type": "Microsoft.Sql/servers/securityAlertPolicies",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.Sql/servers/securityalert-6440/securityAlertPolicies/default",
+        "properties": {
+          "disabledAlerts": [
+            "Access_Anomaly",
+            "Usage_Anomaly"
+          ],
+          "emailAccountAdmins": true,
+          "emailAddresses": [
+            "testSecurityAlert@microsoft.com"
+          ],
+          "retentionDays": 5,
+          "state": "Enabled",
+          "storageAccountAccessKey": "",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net"
+        },
+        "systemData": {
+          "createdAt": "2020-04-03T04:41:33.937Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-04-03T04:41:33.937Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "ServerSecurityAlertPolicies_CreateOrUpdate",
+  "title": "Update a server's threat detection policy with all parameters"
+}

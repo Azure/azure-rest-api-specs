@@ -1,0 +1,166 @@
+{
+  "parameters": {
+    "accountName": "contosomedia",
+    "api-version": "2023-01-01",
+    "parameters": {
+      "properties": {
+        "commonEncryptionCbcs": {
+          "contentKeys": {
+            "defaultKey": {
+              "label": "cbcsDefaultKey"
+            }
+          },
+          "drm": {
+            "fairPlay": {
+              "allowPersistentLicense": true,
+              "customLicenseAcquisitionUrlTemplate": "https://contoso.com/{AssetAlternativeId}/fairplay/{ContentKeyId}"
+            }
+          },
+          "enabledProtocols": {
+            "dash": false,
+            "download": false,
+            "hls": true,
+            "smoothStreaming": false
+          }
+        },
+        "commonEncryptionCenc": {
+          "clearTracks": [
+            {
+              "trackSelections": [
+                {
+                  "operation": "Equal",
+                  "property": "FourCC",
+                  "value": "hev1"
+                }
+              ]
+            }
+          ],
+          "contentKeys": {
+            "defaultKey": {
+              "label": "cencDefaultKey"
+            }
+          },
+          "drm": {
+            "playReady": {
+              "customLicenseAcquisitionUrlTemplate": "https://contoso.com/{AssetAlternativeId}/playready/{ContentKeyId}",
+              "playReadyCustomAttributes": "PlayReady CustomAttributes"
+            },
+            "widevine": {
+              "customLicenseAcquisitionUrlTemplate": "https://contoso.com/{AssetAlternativeId}/widevine/{ContentKeyId"
+            }
+          },
+          "enabledProtocols": {
+            "dash": true,
+            "download": false,
+            "hls": false,
+            "smoothStreaming": true
+          }
+        },
+        "defaultContentKeyPolicyName": "PolicyWithMultipleOptions",
+        "envelopeEncryption": {
+          "contentKeys": {
+            "defaultKey": {
+              "label": "aesDefaultKey"
+            }
+          },
+          "customKeyAcquisitionUrlTemplate": "https://contoso.com/{AssetAlternativeId}/envelope/{ContentKeyId}",
+          "enabledProtocols": {
+            "dash": true,
+            "download": false,
+            "hls": true,
+            "smoothStreaming": true
+          }
+        }
+      }
+    },
+    "resourceGroupName": "contosorg",
+    "streamingPolicyName": "UserCreatedSecureStreamingPolicy",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "UserCreatedSecureStreamingPolicy",
+        "type": "Microsoft.Media/mediaservices/streamingPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/streamingPolicies/UserCreatedSecureStreamingPolicy",
+        "properties": {
+          "commonEncryptionCbcs": {
+            "clearTracks": [],
+            "contentKeys": {
+              "defaultKey": {
+                "label": "cbcsDefaultKey"
+              },
+              "keyToTrackMappings": []
+            },
+            "drm": {
+              "fairPlay": {
+                "allowPersistentLicense": true,
+                "customLicenseAcquisitionUrlTemplate": "https://contoso.com/{AssetAlternativeId}/fairplay/{ContentKeyId}"
+              }
+            },
+            "enabledProtocols": {
+              "dash": false,
+              "download": false,
+              "hls": true,
+              "smoothStreaming": false
+            }
+          },
+          "commonEncryptionCenc": {
+            "clearTracks": [
+              {
+                "trackSelections": [
+                  {
+                    "operation": "Equal",
+                    "property": "FourCC",
+                    "value": "hev1"
+                  }
+                ]
+              }
+            ],
+            "contentKeys": {
+              "defaultKey": {
+                "label": "cencDefaultKey"
+              },
+              "keyToTrackMappings": []
+            },
+            "drm": {
+              "playReady": {
+                "customLicenseAcquisitionUrlTemplate": "https://contoso.com/{AssetAlternativeId}/playready/{ContentKeyId}",
+                "playReadyCustomAttributes": "PlayReady CustomAttributes"
+              },
+              "widevine": {
+                "customLicenseAcquisitionUrlTemplate": "https://contoso.com/{AssetAlternativeId}/widevine/{ContentKeyId"
+              }
+            },
+            "enabledProtocols": {
+              "dash": true,
+              "download": false,
+              "hls": false,
+              "smoothStreaming": true
+            }
+          },
+          "created": "2018-08-08T18:29:31.7715696Z",
+          "defaultContentKeyPolicyName": "PolicyWithMultipleOptions",
+          "envelopeEncryption": {
+            "clearTracks": [],
+            "contentKeys": {
+              "defaultKey": {
+                "label": "aesDefaultKey"
+              },
+              "keyToTrackMappings": []
+            },
+            "customKeyAcquisitionUrlTemplate": "https://contoso.com/{AssetAlternativeId}/envelope/{ContentKeyId}",
+            "enabledProtocols": {
+              "dash": true,
+              "download": false,
+              "hls": true,
+              "smoothStreaming": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "StreamingPolicies_Create",
+  "title": "Creates a Streaming Policy with secure streaming"
+}

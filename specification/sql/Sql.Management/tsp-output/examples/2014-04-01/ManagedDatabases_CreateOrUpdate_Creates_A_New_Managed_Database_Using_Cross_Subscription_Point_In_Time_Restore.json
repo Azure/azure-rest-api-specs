@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "databaseName": "managedDatabase",
+    "managedInstanceName": "managedInstance",
+    "parameters": {
+      "location": "southeastasia",
+      "properties": {
+        "createMode": "PointInTimeRestore",
+        "crossSubscriptionSourceDatabaseId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/testsvr2/databases/testdb",
+        "crossSubscriptionTargetManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/testsvr",
+        "restorePointInTime": "2017-07-14T05:35:31.503Z"
+      }
+    },
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testdb1",
+        "type": "Microsoft.Sql/managedInstances/databases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/testsvr/databases/testdb1",
+        "location": "southeastasia",
+        "properties": {
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "creationDate": "2017-06-07T04:41:33.937Z",
+          "defaultSecondaryLocation": "North Europe",
+          "isLedgerOn": false,
+          "status": "Online"
+        },
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testdb2",
+        "type": "Microsoft.Sql/managedInstances/databases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/testsvr/databases/testdb2",
+        "location": "southeastasia",
+        "properties": {
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "creationDate": "2017-06-07T04:41:33.937Z",
+          "defaultSecondaryLocation": "North Europe",
+          "isLedgerOn": false,
+          "status": "Online"
+        },
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "ManagedDatabases_CreateOrUpdate",
+  "title": "Creates a new managed database using cross subscription point in time restore"
+}

@@ -1,0 +1,145 @@
+{
+  "parameters": {
+    "Content-Length": [
+      "533"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Referer": [
+      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName01?api-version=2021-12-01"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "api-version": "2021-12-01",
+    "orderItemName": "TestOrderItemName01",
+    "orderItemUpdateParameter": {
+      "properties": {
+        "forwardAddress": {
+          "contactDetails": {
+            "contactName": "Updated contact name",
+            "emailList": [
+              "testemail@microsoft.com"
+            ],
+            "phone": "2222200000"
+          }
+        },
+        "preferences": {
+          "transportPreferences": {
+            "preferredShipmentType": "CustomerManaged"
+          }
+        }
+      },
+      "tags": {
+        "ant": "insect",
+        "pigeon": "bird",
+        "tiger": "animal"
+      }
+    },
+    "resourceGroupName": "TestRG",
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestOrderItemName01",
+        "type": "Microsoft.EdgeOrder/orderItems",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName01",
+        "location": "westus",
+        "properties": {
+          "addressDetails": {
+            "forwardAddress": {
+              "contactDetails": {
+                "contactName": "Updated contact name",
+                "emailList": [
+                  "testemail@microsoft.com"
+                ],
+                "phone": "2222200000"
+              },
+              "shippingAddress": {
+                "addressType": "Residential",
+                "city": "San Francisco",
+                "companyName": "Microsoft",
+                "country": "US",
+                "postalCode": "94107",
+                "stateOrProvince": "CA",
+                "streetAddress1": "16 TOWNSEND ST",
+                "streetAddress2": "UNIT 1",
+                "zipExtendedCode": "1"
+              }
+            }
+          },
+          "orderId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/locations/westus/orders/TestOrderItemName01",
+          "orderItemDetails": {
+            "cancellationStatus": "Cancellable",
+            "currentStage": {
+              "stageName": "Placed",
+              "stageStatus": "Succeeded",
+              "startTime": "2021-06-07T13:14:40.0815406+05:30"
+            },
+            "deletionStatus": "NotAllowed",
+            "notificationEmailList": [],
+            "orderItemStageHistory": [
+              {
+                "stageName": "Placed",
+                "stageStatus": "Succeeded",
+                "startTime": "2021-06-07T13:14:40.0815406+05:30"
+              },
+              {
+                "stageName": "Confirmed",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "ReadyToShip",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "Shipped",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "Delivered",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "InUse",
+                "stageStatus": "None"
+              }
+            ],
+            "orderItemType": "Purchase",
+            "preferences": {
+              "transportPreferences": {
+                "preferredShipmentType": "CustomerManaged"
+              }
+            },
+            "productDetails": {
+              "count": 0,
+              "displayInfo": {
+                "configurationDisplayName": "Azure Stack Edge Pro - 1 GPU",
+                "productFamilyDisplayName": "Azure Stack Edge"
+              },
+              "hierarchyInformation": {
+                "configurationName": "azurestackedgegpu",
+                "productFamilyName": "azurestackedge",
+                "productLineName": "azurestackedge",
+                "productName": "azurestackedgegpu"
+              },
+              "productDoubleEncryptionStatus": "Disabled"
+            },
+            "returnStatus": "NotReturnable"
+          },
+          "startTime": "2021-06-07T13:14:37.4649597+05:30"
+        },
+        "tags": {
+          "ant": "insect",
+          "pigeon": "bird",
+          "tiger": "animal"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "UpdateOrderItem",
+  "title": "UpdateOrderItem"
+}

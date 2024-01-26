@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2022-10-01",
+    "parameters": {
+      "properties": {
+        "retentionInDays": 30,
+        "sku": {
+          "name": "PerGB2018"
+        },
+        "workspaceCapping": {
+          "dailyQuotaGb": -1
+        }
+      }
+    },
+    "resourceGroupName": "oiautorest6685",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "workspaceName": "oiautorest6685"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "australiasoutheast",
+        "properties": {
+          "publicNetworkAccessForIngestion": "Enabled",
+          "publicNetworkAccessForQuery": "Enabled",
+          "retentionInDays": 30,
+          "sku": {
+            "name": "PerGB2018"
+          },
+          "workspaceCapping": {
+            "dailyQuotaGb": -1,
+            "dataIngestionStatus": "RespectQuota",
+            "quotaNextResetTime": "Mon, 16 Nov 2020 15:00:00 GMT"
+          }
+        },
+        "tags": {
+          "tag1": "val1"
+        }
+      }
+    }
+  },
+  "operationId": "Workspaces_Update",
+  "title": "WorkspacesPatch"
+}

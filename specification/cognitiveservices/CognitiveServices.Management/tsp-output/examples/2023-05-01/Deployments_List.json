@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "accountName": "accountName",
+    "api-version": "2023-05-01",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "deploymentName",
+            "type": "Microsoft.CognitiveServices/accounts/deployments",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/deployments/deploymentName",
+            "properties": {
+              "model": {
+                "name": "ada",
+                "format": "OpenAI",
+                "version": "1"
+              },
+              "provisioningState": "Succeeded",
+              "scaleSettings": {
+                "capacity": 1,
+                "scaleType": "Manual"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Deployments_List",
+  "title": "ListDeployments"
+}

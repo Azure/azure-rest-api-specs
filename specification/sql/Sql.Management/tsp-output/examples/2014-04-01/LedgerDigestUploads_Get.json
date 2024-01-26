@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2021-02-01-preview",
+    "databaseName": "testdb",
+    "ledgerDigestUploads": "current",
+    "resourceGroupName": "ledgertestrg",
+    "serverName": "ledgertestserver",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.Sql/servers/databases/ledgerDigestUploads",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/ledgertestrg/providers/Microsoft.Sql/servers/ledgertestserver/databases/testdb/current",
+        "properties": {
+          "digestStorageEndpoint": "https://mystorage.blob.core.windows.net",
+          "state": "Enabled"
+        }
+      }
+    }
+  },
+  "operationId": "LedgerDigestUploads_Get",
+  "title": "Gets the current ledger digest upload configuration for a database."
+}

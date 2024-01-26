@@ -1,0 +1,172 @@
+{
+  "parameters": {
+    "accountName": "slitestmedia10",
+    "api-version": "2022-08-01",
+    "liveEventName": "myLiveEvent1",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "description": "test event updated",
+        "input": {
+          "accessControl": {
+            "ip": {
+              "allow": [
+                {
+                  "name": "AllowOne",
+                  "address": "192.1.1.0"
+                }
+              ]
+            }
+          },
+          "keyFrameIntervalDuration": "PT6S",
+          "streamingProtocol": "FragmentedMP4"
+        },
+        "preview": {
+          "accessControl": {
+            "ip": {
+              "allow": [
+                {
+                  "name": "AllowOne",
+                  "address": "192.1.1.0"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2",
+        "tag3": "value3"
+      }
+    },
+    "resourceGroupName": "mediaresources",
+    "subscriptionId": "0a6ec948-5a62-437d-b9df-934dc7c1b722"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myLiveEvent1",
+        "type": "Microsoft.Media/mediaservices/liveevents",
+        "id": "/subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveevents/myLiveEvent1",
+        "location": "West US",
+        "properties": {
+          "description": "test event updated",
+          "created": "0001-01-01T00:00:00Z",
+          "encoding": {
+            "encodingType": "None",
+            "presetName": null
+          },
+          "input": {
+            "accessControl": {
+              "ip": {
+                "allow": [
+                  {
+                    "name": "AllowOne",
+                    "address": "192.1.1.0",
+                    "subnetPrefixLength": null
+                  }
+                ]
+              }
+            },
+            "accessToken": "<accessToken>",
+            "endpoints": [],
+            "keyFrameIntervalDuration": "PT6S",
+            "streamingProtocol": "FragmentedMP4"
+          },
+          "lastModified": "0001-01-01T00:00:00Z",
+          "preview": {
+            "accessControl": {
+              "ip": {
+                "allow": [
+                  {
+                    "name": "AllowOne",
+                    "address": "192.1.1.0",
+                    "subnetPrefixLength": null
+                  }
+                ]
+              }
+            },
+            "endpoints": [],
+            "previewLocator": "c10ea3fc-587f-4daf-b2b2-fa8f647a9ed2",
+            "streamingPolicyName": null
+          },
+          "provisioningState": "Succeeded",
+          "resourceState": "Running",
+          "streamOptions": [],
+          "useStaticHostname": false
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myLiveEvent1",
+        "type": "Microsoft.Media/mediaservices/liveevents",
+        "id": "/subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveevents/myLiveEvent1",
+        "location": "West US",
+        "properties": {
+          "description": "test event updated",
+          "created": "0001-01-01T00:00:00Z",
+          "encoding": {
+            "encodingType": "None",
+            "presetName": null
+          },
+          "input": {
+            "accessControl": {
+              "ip": {
+                "allow": [
+                  {
+                    "name": "AllowOne",
+                    "address": "192.1.1.0",
+                    "subnetPrefixLength": null
+                  }
+                ]
+              }
+            },
+            "accessToken": "<accessToken>",
+            "endpoints": [],
+            "keyFrameIntervalDuration": "PT6S",
+            "streamingProtocol": "FragmentedMP4"
+          },
+          "lastModified": "0001-01-01T00:00:00Z",
+          "preview": {
+            "accessControl": {
+              "ip": {
+                "allow": [
+                  {
+                    "name": "AllowOne",
+                    "address": "192.1.1.0",
+                    "subnetPrefixLength": null
+                  }
+                ]
+              }
+            },
+            "endpoints": [],
+            "previewLocator": "c10ea3fc-587f-4daf-b2b2-fa8f647a9ed2",
+            "streamingPolicyName": null
+          },
+          "provisioningState": "InProgress",
+          "resourceState": "Running",
+          "streamOptions": [],
+          "useStaticHostname": false
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveeventoperations/62e4d893-d233-4005-988e-a428d9f77076?api-version=2022-08-01",
+        "location": "https://management.azure.com/subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveevents/myLiveEvent1/operationlocations/62e4d893-d233-4005-988e-a428d9f77076?api-version=2022-08-01"
+      }
+    }
+  },
+  "operationId": "LiveEvents_Update",
+  "title": "Update a LiveEvent"
+}

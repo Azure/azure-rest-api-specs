@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2023-05-01",
+    "jobExecutionName": {
+      "value": [
+        {
+          "name": "jobExecution-27944453"
+        },
+        {
+          "name": "jobExecution-27944452"
+        },
+        {
+          "name": "jobExecution-27944451"
+        }
+      ]
+    },
+    "jobName": "testcontainerAppsJob0",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "jobExecution-27944453",
+            "endTime": "2023-02-13T20:47:30+00:00",
+            "startTime": "2023-02-13T20:37:30+00:00",
+            "status": "Stopped"
+          },
+          {
+            "name": "jobExecution-27944452",
+            "endTime": "2023-02-13T20:47:30+00:00",
+            "startTime": "2023-02-13T20:37:30+00:00",
+            "status": "Stopped"
+          },
+          {
+            "name": "jobExecution-27944453",
+            "endTime": "2023-02-13T20:47:30+00:00",
+            "startTime": "2023-02-13T20:37:30+00:00",
+            "status": "Failed"
+          }
+        ]
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "Location": "location"
+      }
+    }
+  },
+  "operationId": "Jobs_StopMultipleExecutions",
+  "title": "Terminate Multiple Container Apps Job"
+}

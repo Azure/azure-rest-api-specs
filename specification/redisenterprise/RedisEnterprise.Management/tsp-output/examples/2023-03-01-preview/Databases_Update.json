@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01-preview",
+    "clusterName": "cache1",
+    "databaseName": "default",
+    "parameters": {
+      "properties": {
+        "clientProtocol": "Encrypted",
+        "evictionPolicy": "AllKeysLRU",
+        "persistence": {
+          "rdbEnabled": true,
+          "rdbFrequency": "12h"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache1/default",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+        "properties": {
+          "clientProtocol": "Encrypted",
+          "clusteringPolicy": "OSSCluster",
+          "evictionPolicy": "AllKeysLRU",
+          "modules": [
+            {
+              "name": "RediSearch",
+              "args": "",
+              "version": "1.0.0"
+            }
+          ],
+          "persistence": {
+            "rdbEnabled": true,
+            "rdbFrequency": "12h"
+          },
+          "port": 10000,
+          "provisioningState": "Updating",
+          "resourceState": "Updating"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    }
+  },
+  "operationId": "Databases_Update",
+  "title": "RedisEnterpriseDatabasesUpdate"
+}

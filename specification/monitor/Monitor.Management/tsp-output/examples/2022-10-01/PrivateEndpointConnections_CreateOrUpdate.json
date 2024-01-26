@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2021-07-01-preview",
+    "parameters": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "Approved by johndoe@contoso.com",
+          "status": "Approved"
+        }
+      }
+    },
+    "privateEndpointConnectionName": "private-endpoint-connection-name",
+    "resourceGroupName": "MyResourceGroup",
+    "scopeName": "MyPrivateLinkScope",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "private-endpoint-connection-name",
+        "type": "Microsoft.Insights/privateLinkScopes/privateEndpointConnections",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/privateEndpointConnections/private-endpoint-connection-name",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by johndoe@contoso.com",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+  "title": "Approve or reject a private endpoint connection with a given name."
+}

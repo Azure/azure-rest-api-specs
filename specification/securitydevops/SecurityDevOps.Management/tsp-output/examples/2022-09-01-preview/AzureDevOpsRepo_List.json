@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "azureDevOpsConnectorName": "testconnector",
+    "azureDevOpsOrgName": "myOrg",
+    "azureDevOpsProjectName": "myProject",
+    "resourceGroupName": "westusrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "microsoft.securitydevops/azureDevOpsConnectors/githubrepo",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/westusrg/providers/Microsoft.SecurityDevOps/azureDevOpsConnectors/testconnector/orgs/myOrg1/projects/myProject/repos/myRepo",
+            "properties": {
+              "repoUrl": "https://dev.azure.com/myOrg/myProject/myRepo"
+            }
+          },
+          {
+            "type": "microsoft.securitydevops/azureDevOpsConnectors/githubrepo",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/westusrg/providers/Microsoft.SecurityDevOps/azureDevOpsConnectors/testconnector/orgs/myOrg2/projects/myProject/repos/myRepo",
+            "properties": {
+              "repoUrl": "https://dev.azure.com/myOrg2/myProject/myRepo"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AzureDevOpsRepo_List",
+  "title": "AzureDevOpsRepo_List"
+}

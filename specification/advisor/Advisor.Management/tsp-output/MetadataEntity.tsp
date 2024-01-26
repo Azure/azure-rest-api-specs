@@ -1,0 +1,63 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Advisor;
+/**
+ * The metadata entity contract.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@tenantResource
+@includeInapplicableMetadataInPayload(false)
+model MetadataEntity {
+  /**
+   * Name of metadata entity.
+   */
+  @path
+  @key("name")
+  @segment("metadata")
+  @visibility("read")
+  name: string;
+
+  /**
+   * The resource Id of the metadata entity.
+   */
+  id?: string;
+
+  /**
+   * The type of the metadata entity.
+   */
+  type?: string;
+
+  /**
+   * The metadata entity properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MetadataEntityProperties;
+}
+
+@armResourceOperations
+interface MetadataEntities {
+  /**
+   * Gets the metadata entity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("RecommendationMetadata_Get")
+  get is ArmResourceRead<MetadataEntity>;
+
+  /**
+   * Gets the list of metadata entities.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("RecommendationMetadata_List")
+  list is ArmResourceListByParent<MetadataEntity>;
+}

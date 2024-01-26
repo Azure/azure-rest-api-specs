@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "api-version": "2023-04-15-preview",
+    "applicationName": "hue",
+    "clusterName": "cluster1",
+    "parameters": {
+      "properties": {
+        "applicationType": "CustomApplication",
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "edgenode",
+              "hardwareProfile": {
+                "vmSize": "Standard_D12_v2"
+              },
+              "targetInstanceCount": 1
+            }
+          ]
+        },
+        "errors": [],
+        "httpsEndpoints": [
+          {
+            "accessModes": [
+              "WebPage"
+            ],
+            "destinationPort": 20000,
+            "subDomainSuffix": "dss"
+          }
+        ],
+        "installScriptActions": [
+          {
+            "name": "app-install-app1",
+            "parameters": "-version latest -port 20000",
+            "roles": [
+              "edgenode"
+            ],
+            "uri": "https://.../install.sh"
+          }
+        ],
+        "uninstallScriptActions": []
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "hue",
+        "type": "Microsoft.HDInsight/clusters/applications",
+        "etag": "etag",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/hue",
+        "properties": {
+          "applicationState": "ApplicationConfiguration",
+          "applicationType": "CustomApplication",
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "edgenode",
+                "hardwareProfile": {
+                  "vmSize": "Standard_D12_v2"
+                },
+                "targetInstanceCount": 1
+              }
+            ]
+          },
+          "createdDate": "2017-02-28",
+          "errors": [],
+          "httpsEndpoints": [
+            {
+              "accessModes": [
+                "WebPage"
+              ],
+              "destinationPort": 20000
+            }
+          ],
+          "installScriptActions": [
+            {
+              "name": "app-install-app1",
+              "roles": [
+                "edgenode"
+              ],
+              "uri": "https://.../install.sh"
+            }
+          ],
+          "provisioningState": "InProgress",
+          "sshEndpoints": [],
+          "uninstallScriptActions": []
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "Applications_Create",
+  "title": "Create Application"
+}

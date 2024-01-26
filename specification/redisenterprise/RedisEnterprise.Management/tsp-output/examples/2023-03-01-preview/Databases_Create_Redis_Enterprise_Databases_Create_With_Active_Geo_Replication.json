@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01-preview",
+    "clusterName": "cache1",
+    "databaseName": "default",
+    "parameters": {
+      "properties": {
+        "clientProtocol": "Encrypted",
+        "clusteringPolicy": "EnterpriseCluster",
+        "evictionPolicy": "NoEviction",
+        "geoReplication": {
+          "groupNickname": "groupName",
+          "linkedDatabases": [
+            {
+              "id": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default"
+            },
+            {
+              "id": "/subscriptions/subid2/resourceGroups/rg2/providers/Microsoft.Cache/redisEnterprise/cache2/databases/default"
+            }
+          ]
+        },
+        "port": 10000
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache1/default",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "id": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+        "properties": {
+          "clientProtocol": "Encrypted",
+          "clusteringPolicy": "EnterpriseCluster",
+          "evictionPolicy": "NoEviction",
+          "geoReplication": {
+            "groupNickname": "groupName",
+            "linkedDatabases": [
+              {
+                "id": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+                "state": "Linking"
+              },
+              {
+                "id": "/subscriptions/subid2/resourceGroups/rg2/providers/Microsoft.Cache/redisEnterprise/cache2/databases/default",
+                "state": "Linking"
+              }
+            ]
+          },
+          "port": 10000,
+          "provisioningState": "Updating",
+          "resourceState": "Updating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "cache1/db1",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "id": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/db1",
+        "properties": {
+          "clientProtocol": "Plaintext",
+          "clusteringPolicy": "EnterpriseCluster",
+          "evictionPolicy": "NoEviction",
+          "geoReplication": {
+            "groupNickname": "groupName",
+            "linkedDatabases": [
+              {
+                "id": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+                "state": "Linking"
+              },
+              {
+                "id": "/subscriptions/subid2/resourceGroups/rg2/providers/Microsoft.Cache/redisEnterprise/cache2/databases/default",
+                "state": "Linking"
+              }
+            ]
+          },
+          "port": 10000,
+          "provisioningState": "Creating",
+          "resourceState": "Creating"
+        }
+      }
+    }
+  },
+  "operationId": "Databases_Create",
+  "title": "RedisEnterpriseDatabasesCreate With Active Geo Replication"
+}

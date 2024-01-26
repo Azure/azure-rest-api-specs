@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "accountName": "contosomedia",
+    "api-version": "2023-01-01",
+    "assetName": "ClimbingMountRainer",
+    "resourceGroupName": "contosorg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "video",
+            "type": "Microsoft.Media/mediaservices/assets/tracks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/assets/ClimbingMountRainer/tracks/video",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "track": {
+                "@odata.type": "#Microsoft.Media.VideoTrack"
+              }
+            }
+          },
+          {
+            "name": "audio",
+            "type": "Microsoft.Media/mediaservices/assets/tracks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/assets/ClimbingMountRainer/tracks/audio",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "track": {
+                "@odata.type": "#Microsoft.Media.AudioTrack"
+              }
+            }
+          },
+          {
+            "name": "text1",
+            "type": "Microsoft.Media/mediaservices/assets/tracks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/assets/ClimbingMountRainer/tracks/text1",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "track": {
+                "@odata.type": "#Microsoft.Media.TextTrack",
+                "displayName": "Auto generated",
+                "fileName": "auto_generated.ttml",
+                "languageCode": "en-us",
+                "playerVisibility": "Visible"
+              }
+            }
+          },
+          {
+            "name": "text2",
+            "type": "Microsoft.Media/mediaservices/assets/tracks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/assets/ClimbingMountRainer/tracks/text2",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "track": {
+                "@odata.type": "#Microsoft.Media.TextTrack",
+                "displayName": "user uploaded text track",
+                "fileName": "text2.vtt",
+                "hlsSettings": {
+                  "default": true,
+                  "characteristics": "public.accessibility.transcribes-spoken-dialog,public.easy-to-read",
+                  "forced": true
+                },
+                "languageCode": "en-us",
+                "playerVisibility": "Hidden"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Tracks_List",
+  "title": "Lists all Tracks"
+}

@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2022-05-04",
+    "configurationProfileAssignmentName": "default",
+    "reportName": "b4e9ee6b-1717-4ff0-a8d2-e6d72c33d5f4",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId",
+    "vmName": "myVMName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "b4e9ee6b-1717-4ff0-a8d2-e6d72c33d5f4",
+        "type": "Microsoft.Automanage/configurationProfileAssignments/reports",
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.Automanage/configurationProfileAssignments/default/reports/b4e9ee6b-1717-4ff0-a8d2-e6d72c33d5f4",
+        "properties": {
+          "type": "Consistency",
+          "configurationProfile": "anyConfigurationProfile",
+          "duration": "PT15M32S",
+          "endTime": "2021-03-31T22:17:42Z",
+          "error": null,
+          "lastModifiedTime": "2021-03-31T22:32:42Z",
+          "reportFormatVersion": "1.0",
+          "resources": [
+            {
+              "name": "myResourceGroupName",
+              "type": "Microsoft.Resources/resourceGroups",
+              "error": null,
+              "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName",
+              "status": "Conformant"
+            }
+          ],
+          "startTime": "2021-03-31T22:13:06Z",
+          "status": "Conformant"
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "reports_Get",
+  "title": "Get a report for a configuration profile assignment"
+}

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2022-05-04",
+    "configurationProfileAssignmentName": "default",
+    "parameters": {
+      "properties": {
+        "configurationProfile": "/providers/Microsoft.Automanage/bestPractices/AzureBestPracticesProduction"
+      }
+    },
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId",
+    "vmName": "myVMName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.Automanage/AutomanageAssignments/default",
+        "properties": {
+          "configurationProfile": "/providers/Microsoft.Automanage/bestPractices/AzureBestPracticesProduction",
+          "status": null,
+          "targetId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName"
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.Automanage/AutomanageAssignments/default",
+        "properties": {
+          "configurationProfile": "/providers/Microsoft.Automanage/bestPractices/AzureBestPracticesProduction",
+          "status": null,
+          "targetId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName"
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ConfigurationProfileAssignments_CreateOrUpdate",
+  "title": "Create or update configuration profile assignment"
+}

@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2023-10-03-preview",
+    "extensionUpgradeParameters": {
+      "extensionTargets": {
+        "Microsoft.Azure.Monitoring": {
+          "targetVersion": "2.0"
+        },
+        "Microsoft.Compute.CustomScriptExtension": {
+          "targetVersion": "1.10"
+        }
+      }
+    },
+    "machineName": "myMachine",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "{callbackUri}",
+        "Location": "{callbackUrl}",
+        "Retry-After": 200
+      }
+    }
+  },
+  "operationId": "UpgradeExtensions",
+  "title": "Upgrade Machine Extensions"
+}

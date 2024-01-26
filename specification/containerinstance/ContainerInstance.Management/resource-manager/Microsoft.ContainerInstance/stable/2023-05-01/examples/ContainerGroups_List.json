@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2023-05-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "demo1",
+            "type": "Microsoft.ContainerInstance/containerGroups",
+            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+            "location": "WestUs",
+            "properties": {
+              "containers": [
+                {
+                  "name": "demo1",
+                  "properties": {
+                    "command": [],
+                    "environmentVariables": [],
+                    "image": "nginx",
+                    "instanceView": {
+                      "currentState": {
+                        "detailStatus": "",
+                        "startTime": "2017-10-17T17:27:21Z",
+                        "state": "Running"
+                      },
+                      "events": [],
+                      "restartCount": 0
+                    },
+                    "ports": [
+                      {
+                        "port": 80
+                      }
+                    ],
+                    "resources": {
+                      "requests": {
+                        "cpu": 1,
+                        "memoryInGB": 1.5
+                      }
+                    },
+                    "volumeMounts": [
+                      {
+                        "name": "volume1",
+                        "mountPath": "/mnt/volume1",
+                        "readOnly": false
+                      }
+                    ]
+                  }
+                }
+              ],
+              "imageRegistryCredentials": [
+                {
+                  "server": "azcloudconsoleregistry.azurecr.io",
+                  "username": "azcloudconsoleregistry"
+                }
+              ],
+              "ipAddress": {
+                "type": "Public",
+                "ip": "10.0.0.1",
+                "ports": [
+                  {
+                    "port": 80,
+                    "protocol": "TCP"
+                  }
+                ]
+              },
+              "osType": "Linux",
+              "provisioningState": "Succeeded",
+              "volumes": [
+                {
+                  "name": "volume1",
+                  "azureFile": {
+                    "readOnly": false,
+                    "shareName": "share1",
+                    "storageAccountName": "storage1"
+                  }
+                }
+              ]
+            },
+            "zones": [
+              "1"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ContainerGroups_List",
+  "title": "ContainerGroupsList"
+}

@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "jobName": "sj3310",
+    "output": {
+      "properties": {
+        "datasource": {
+          "type": "Microsoft.ServiceBus/EventHub",
+          "properties": {
+            "eventHubName": "sdkeventhub",
+            "partitionKey": "partitionKey",
+            "serviceBusNamespace": "sdktest",
+            "sharedAccessPolicyKey": "sharedAccessPolicyKey=",
+            "sharedAccessPolicyName": "RootManageSharedAccessKey"
+          }
+        },
+        "serialization": {
+          "type": "Json",
+          "properties": {
+            "format": "Array",
+            "encoding": "UTF8"
+          }
+        },
+        "watermarkSettings": {
+          "maxWatermarkDifferenceAcrossPartitions": "16:14:30",
+          "watermarkMode": "SendCurrentPartitionWatermark"
+        }
+      }
+    },
+    "outputName": "output5195",
+    "resourceGroupName": "sjrg6912",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "output5195",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg6912/providers/Microsoft.StreamAnalytics/streamingjobs/sj3310/outputs/output5195",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.ServiceBus/EventHub",
+            "properties": {
+              "eventHubName": "sdkeventhub",
+              "partitionKey": "partitionKey",
+              "serviceBusNamespace": "sdktest",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey"
+            }
+          },
+          "serialization": {
+            "type": "Json",
+            "properties": {
+              "format": "Array",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      },
+      "headers": {
+        "ETag": "5472168f-7317-4241-8b75-0c8d9d0ea804"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "output5195",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg6912/providers/Microsoft.StreamAnalytics/streamingjobs/sj3310/outputs/output5195",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.ServiceBus/EventHub",
+            "properties": {
+              "eventHubName": "sdkeventhub",
+              "partitionKey": "partitionKey",
+              "serviceBusNamespace": "sdktest",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey"
+            }
+          },
+          "serialization": {
+            "type": "Json",
+            "properties": {
+              "format": "Array",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      },
+      "headers": {
+        "ETag": "5472168f-7317-4241-8b75-0c8d9d0ea804"
+      }
+    }
+  },
+  "operationId": "Outputs_CreateOrReplace",
+  "title": "Create an Event Hub output with JSON serialization"
+}

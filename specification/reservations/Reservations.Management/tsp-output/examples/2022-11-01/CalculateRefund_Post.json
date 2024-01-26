@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "body": {
+      "id": "/providers/microsoft.capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004",
+      "properties": {
+        "reservationToReturn": {
+          "quantity": 1,
+          "reservationId": "/providers/microsoft.capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004/reservations/40000000-aaaa-bbbb-cccc-100000000000"
+        },
+        "scope": "Reservation"
+      }
+    },
+    "reservationOrderId": "276e7ae4-84d0-4da6-ab4b-d6b94f3557da"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004/reservations/40000000-aaaa-bbbb-cccc-100000000000",
+        "properties": {
+          "billingInformation": {
+            "billingCurrencyProratedAmount": {
+              "amount": 3.28,
+              "currencyCode": "GBP"
+            },
+            "billingCurrencyRemainingCommitmentAmount": {
+              "amount": 0,
+              "currencyCode": "GBP"
+            },
+            "billingCurrencyTotalPaidAmount": {
+              "amount": 24,
+              "currencyCode": "GBP"
+            },
+            "billingPlan": "Upfront",
+            "completedTransactions": 1,
+            "totalTransactions": 1
+          },
+          "billingRefundAmount": {
+            "amount": 20.72,
+            "currencyCode": "GBP"
+          },
+          "policyResult": {
+            "properties": {
+              "consumedRefundsTotal": {
+                "amount": 83.69,
+                "currencyCode": "USD"
+              },
+              "maxRefundLimit": {
+                "amount": 50000,
+                "currencyCode": "USD"
+              },
+              "policyErrors": [
+                {
+                  "code": "SelfServiceRefundNotSupported",
+                  "message": "Self Service refunds are currently not supported for this resource, please contact support."
+                }
+              ]
+            }
+          },
+          "pricingRefundAmount": {
+            "amount": 24.92,
+            "currencyCode": "USD"
+          },
+          "quantity": 1,
+          "sessionId": "10000000-aaaa-bbbb-cccc-200000000000"
+        }
+      }
+    }
+  },
+  "operationId": "CalculateRefund_Post",
+  "title": "CalculateRefund"
+}

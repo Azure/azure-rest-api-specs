@@ -1,0 +1,136 @@
+{
+  "parameters": {
+    "accountName": "contosomedia",
+    "api-version": "2023-01-01",
+    "contentKeyPolicyName": "PolicyWithPlayReadyOptionAndOpenRestriction",
+    "parameters": {
+      "properties": {
+        "description": "ArmPolicyDescription",
+        "options": [
+          {
+            "name": "ArmPolicyOptionName",
+            "configuration": {
+              "@odata.type": "#Microsoft.Media.ContentKeyPolicyPlayReadyConfiguration",
+              "licenses": [
+                {
+                  "allowTestDevices": true,
+                  "beginDate": "2017-10-16T18:22:53.46Z",
+                  "contentKeyLocation": {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicyPlayReadyContentEncryptionKeyFromHeader"
+                  },
+                  "contentType": "UltraVioletDownload",
+                  "licenseType": "Persistent",
+                  "playRight": {
+                    "allowPassingVideoContentToUnknownOutput": "NotAllowed",
+                    "digitalVideoOnlyContentRestriction": false,
+                    "imageConstraintForAnalogComponentVideoRestriction": true,
+                    "imageConstraintForAnalogComputerMonitorRestriction": false,
+                    "scmsRestriction": 2
+                  },
+                  "securityLevel": "SL150"
+                }
+              ]
+            },
+            "restriction": {
+              "@odata.type": "#Microsoft.Media.ContentKeyPolicyOpenRestriction"
+            }
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "contosorg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "PolicyWithPlayReadyOptionAndOpenRestriction",
+        "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithPlayReadyOptionAndOpenRestriction",
+        "properties": {
+          "description": "ArmPolicyDescription",
+          "created": "2012-11-01T00:00:00Z",
+          "lastModified": "2018-08-08T18:29:29.51Z",
+          "options": [
+            {
+              "name": "ArmPolicyOptionName",
+              "configuration": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyPlayReadyConfiguration",
+                "licenses": [
+                  {
+                    "allowTestDevices": true,
+                    "beginDate": "2017-10-16T18:22:53.46Z",
+                    "contentKeyLocation": {
+                      "@odata.type": "#Microsoft.Media.ContentKeyPolicyPlayReadyContentEncryptionKeyFromHeader"
+                    },
+                    "contentType": "UltraVioletDownload",
+                    "licenseType": "Persistent",
+                    "playRight": {
+                      "allowPassingVideoContentToUnknownOutput": "NotAllowed",
+                      "digitalVideoOnlyContentRestriction": false,
+                      "imageConstraintForAnalogComponentVideoRestriction": true,
+                      "imageConstraintForAnalogComputerMonitorRestriction": false,
+                      "scmsRestriction": 2
+                    },
+                    "securityLevel": "SL150"
+                  }
+                ]
+              },
+              "policyOptionId": "c52f9af0-1f53-4775-8edb-af2d9a6e28cd",
+              "restriction": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyOpenRestriction"
+              }
+            }
+          ],
+          "policyId": "a9bacd1d-60f5-4af3-8d2b-cf46ca5c9b04"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "PolicyWithPlayReadyOptionAndOpenRestriction",
+        "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithPlayReadyOptionAndOpenRestriction",
+        "properties": {
+          "description": "ArmPolicyDescription",
+          "created": "2012-11-01T00:00:00Z",
+          "lastModified": "2018-08-08T18:29:29.51Z",
+          "options": [
+            {
+              "name": "ArmPolicyOptionName",
+              "configuration": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyPlayReadyConfiguration",
+                "licenses": [
+                  {
+                    "allowTestDevices": true,
+                    "beginDate": "2017-10-16T18:22:53.46Z",
+                    "contentKeyLocation": {
+                      "@odata.type": "#Microsoft.Media.ContentKeyPolicyPlayReadyContentEncryptionKeyFromHeader"
+                    },
+                    "contentType": "UltraVioletDownload",
+                    "licenseType": "Persistent",
+                    "playRight": {
+                      "allowPassingVideoContentToUnknownOutput": "NotAllowed",
+                      "digitalVideoOnlyContentRestriction": false,
+                      "imageConstraintForAnalogComponentVideoRestriction": true,
+                      "imageConstraintForAnalogComputerMonitorRestriction": false,
+                      "scmsRestriction": 2
+                    },
+                    "securityLevel": "SL150"
+                  }
+                ]
+              },
+              "policyOptionId": "c52f9af0-1f53-4775-8edb-af2d9a6e28cd",
+              "restriction": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyOpenRestriction"
+              }
+            }
+          ],
+          "policyId": "a9bacd1d-60f5-4af3-8d2b-cf46ca5c9b04"
+        }
+      }
+    }
+  },
+  "operationId": "ContentKeyPolicies_CreateOrUpdate",
+  "title": "Creates a Content Key Policy with PlayReady option and Open Restriction"
+}

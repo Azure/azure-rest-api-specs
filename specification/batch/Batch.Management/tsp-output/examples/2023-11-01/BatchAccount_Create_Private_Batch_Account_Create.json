@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2023-11-01",
+    "parameters": {
+      "location": "japaneast",
+      "properties": {
+        "autoStorage": {
+          "storageAccountId": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage"
+        },
+        "keyVaultReference": {
+          "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.KeyVault/vaults/sample",
+          "url": "http://sample.vault.azure.net/"
+        },
+        "publicNetworkAccess": "Disabled"
+      }
+    },
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleacct",
+        "type": "Microsoft.Batch/batchAccounts",
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct",
+        "identity": {
+          "type": "None"
+        },
+        "location": "japaneast",
+        "properties": {
+          "accountEndpoint": "sampleacct.japaneast.batch.azure.com",
+          "activeJobAndJobScheduleQuota": 20,
+          "autoStorage": {
+            "lastKeySync": "2016-03-10T23:48:38.9878479Z",
+            "storageAccountId": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage"
+          },
+          "dedicatedCoreQuota": 20,
+          "keyVaultReference": {
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.KeyVault/vaults/sample",
+            "url": "http://sample.vault.azure.net/"
+          },
+          "lowPriorityCoreQuota": 20,
+          "poolAllocationMode": "UserSubscription",
+          "poolQuota": 20,
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "BatchAccount_Create",
+  "title": "PrivateBatchAccountCreate"
+}

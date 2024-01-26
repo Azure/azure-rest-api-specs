@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "hubName": "exampleHub",
+    "parameters": {
+      "properties": {
+        "eventHandlers": [
+          {
+            "auth": {
+              "type": "ManagedIdentity",
+              "managedIdentity": {
+                "resource": "abc"
+              }
+            },
+            "systemEvents": [
+              "connect",
+              "connected"
+            ],
+            "urlTemplate": "http://host.com",
+            "userEventPattern": "*"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myWebPubSubService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleHub",
+        "type": "Microsoft.SignalRService/WebPubSub/hubs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
+        "properties": {
+          "eventHandlers": [
+            {
+              "auth": {
+                "type": "ManagedIdentity",
+                "managedIdentity": {
+                  "resource": "abc"
+                }
+              },
+              "systemEvents": [
+                "connect",
+                "connected"
+              ],
+              "urlTemplate": "http://host.com",
+              "userEventPattern": "*"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "exampleHub",
+        "type": "Microsoft.SignalRService/WebPubSub/hubs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
+        "properties": {
+          "eventHandlers": [
+            {
+              "auth": {
+                "type": "ManagedIdentity",
+                "managedIdentity": {
+                  "resource": "abc"
+                }
+              },
+              "systemEvents": [
+                "connect",
+                "connected"
+              ],
+              "urlTemplate": "http://host.com",
+              "userEventPattern": "*"
+            }
+          ]
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
+      }
+    }
+  },
+  "operationId": "WebPubSubHubs_CreateOrUpdate",
+  "title": "WebPubSubHubs_CreateOrUpdate"
+}

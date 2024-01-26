@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01-preview",
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "location": "West US",
+        "properties": {
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "userAssignedIdentity",
+                "userAssignedIdentityResourceId": "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity"
+              },
+              "keyEncryptionKeyUrl": "https://your-kv.vault.azure.net/keys/your-key/your-key-version"
+            }
+          },
+          "hostName": "cache1.westus.something.azure.com",
+          "minimumTlsVersion": "1.2",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/privateEndpointConnections/cachePec",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/cachePe"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "Please approve my connection",
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "redisVersion": "6",
+          "resourceState": "Running"
+        },
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 3
+        },
+        "tags": {},
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ]
+      }
+    }
+  },
+  "operationId": "RedisEnterprise_Get",
+  "title": "RedisEnterpriseGet"
+}

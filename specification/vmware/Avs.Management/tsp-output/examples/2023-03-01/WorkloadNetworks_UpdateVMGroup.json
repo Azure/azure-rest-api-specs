@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01",
+    "privateCloudName": "cloud1",
+    "resourceGroupName": "group1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vmGroupId": "vmGroup1",
+    "workloadNetworkVMGroup": {
+      "properties": {
+        "members": [
+          "564d43da-fefc-2a3b-1d92-42855622fa50"
+        ],
+        "revision": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cloud1",
+        "type": "Microsoft.AVS/privateClouds/workloadNetworks/vmGroups",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/workloadNetworks/default/vmGroups/vmGroup1",
+        "properties": {
+          "displayName": "vmGroup1",
+          "members": [
+            "564d43da-fefc-2a3b-1d92-42855622fa50"
+          ],
+          "revision": 2,
+          "status": "SUCCESS"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.AVS/operationstatuses/00000000-0000-0000-0000-000000000000?api-version=2023-03-01"
+      }
+    }
+  },
+  "operationId": "WorkloadNetworks_UpdateVMGroup",
+  "title": "WorkloadNetworks_UpdateVMGroup"
+}

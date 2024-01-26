@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "issueName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "/providers/Microsoft.ResourceHealth/emergingissues",
+        "id": "/providers/Microsoft.ResourceHealth/emergingissues/default",
+        "properties": {
+          "refreshTimestamp": "2019-12-17T09:12:00Z",
+          "statusActiveEvents": [
+            {
+              "description": "Virtual Machines case",
+              "cloud": "Public",
+              "impacts": [
+                {
+                  "name": "Virtual Machines",
+                  "id": "virtual-machines",
+                  "regions": [
+                    {
+                      "name": "Central US",
+                      "id": "us-central"
+                    },
+                    {
+                      "name": "East US",
+                      "id": "us-east"
+                    }
+                  ]
+                }
+              ],
+              "lastModifiedTime": "2019-12-15T08:10:00Z",
+              "published": true,
+              "severity": "Information",
+              "stage": "Active",
+              "startTime": "2019-12-15T08:06:00Z",
+              "title": "Automatic updates to the dial tone page from ACM - SHD event",
+              "trackingId": "KTTK-TZ8"
+            },
+            {
+              "description": "All Azure SQL service management requests (create, update, delete, etc.) are serviced through the SQL Control Plane infrastructure. Engineers determined that during this issue, the control plane service became unhealthy after receiving a significant increase in internally generated operations and reaching an operational threshold. This led to service management requests becoming unable to complete, which in-turn resulted in timeouts and throttling. Subsequent investigation by engineers determined this issue was due service requests from an internal Azure group that triggered a bug which caused an excessive number of internally generated operations.",
+              "cloud": "Public",
+              "impacts": [
+                {
+                  "name": "SQL Database",
+                  "id": "sql-database",
+                  "regions": [
+                    {
+                      "name": "West Europe",
+                      "id": "europe-west"
+                    }
+                  ]
+                }
+              ],
+              "lastModifiedTime": "2019-12-16T05:11:00Z",
+              "published": true,
+              "severity": "Error",
+              "stage": "Active",
+              "startTime": "2019-12-16T05:11:00Z",
+              "title": "Azure SQL Database - West Europe",
+              "trackingId": "4KHK-LS8"
+            }
+          ],
+          "statusBanners": [
+            {
+              "cloud": "Public",
+              "lastModifiedTime": "2019-12-15T08:04:00Z",
+              "message": "Testing backup site",
+              "title": "Automatic updates to the dial tone page from ACM - banner"
+            },
+            {
+              "cloud": "Public",
+              "lastModifiedTime": "2019-12-15T10:15:00Z",
+              "message": "<span style=\"color: #323237; font-family: &quot;Segoe UI&quot;, SegoeUI, &quot;Segoe WP&quot;, Tahoma, Arial, sans-serif; font-size: 16px; background-color: #ffffff\">A subset of customers using Storage in West Europe experienced service availability issues. In addition, resources with dependencies on the impacted storage scale units may have experienced downstream impact in the form of availability issues, connection failures, or high latency. Engineers are investigating the root cause.</span>",
+              "title": "Storage - West Europe"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "EmergingIssues_Get",
+  "title": "GetEmergingIssues"
+}

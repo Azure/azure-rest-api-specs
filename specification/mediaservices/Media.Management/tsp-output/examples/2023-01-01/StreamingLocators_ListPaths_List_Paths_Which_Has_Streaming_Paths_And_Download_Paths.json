@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "accountName": "contosomedia",
+    "api-version": "2023-01-01",
+    "resourceGroupName": "contosorg",
+    "streamingLocatorName": "clearStreamingLocator",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "downloadPaths": [
+          "/262a87b6-b538-4657-bac1-b6897924471d/textTrack.vtt",
+          "/262a87b6-b538-4657-bac1-b6897924471d/video1.mp4",
+          "/262a87b6-b538-4657-bac1-b6897924471d/video2.mp4",
+          "/262a87b6-b538-4657-bac1-b6897924471d/video3.mp4"
+        ],
+        "streamingPaths": [
+          {
+            "encryptionScheme": "NoEncryption",
+            "paths": [
+              "/262a87b6-b538-4657-bac1-b6897924471d/videoManifest1.ism/manifest(format=m3u8-aapl)",
+              "/262a87b6-b538-4657-bac1-b6897924471d/videoManifest2.ism/manifest(format=m3u8-aapl)",
+              "/262a87b6-b538-4657-bac1-b6897924471d/videoManifest3.ism/manifest(format=m3u8-aapl)"
+            ],
+            "streamingProtocol": "Hls"
+          },
+          {
+            "encryptionScheme": "NoEncryption",
+            "paths": [
+              "/262a87b6-b538-4657-bac1-b6897924471d/videoManifest1.ism/manifest(format=mpd-time-csf)",
+              "/262a87b6-b538-4657-bac1-b6897924471d/videoManifest2.ism/manifest(format=mpd-time-csf)",
+              "/262a87b6-b538-4657-bac1-b6897924471d/videoManifest3.ism/manifest(format=mpd-time-csf)"
+            ],
+            "streamingProtocol": "Dash"
+          },
+          {
+            "encryptionScheme": "NoEncryption",
+            "paths": [
+              "/262a87b6-b538-4657-bac1-b6897924471d/videoManifest1.ism/manifest",
+              "/262a87b6-b538-4657-bac1-b6897924471d/videoManifest2.ism/manifest",
+              "/262a87b6-b538-4657-bac1-b6897924471d/videoManifest3.ism/manifest"
+            ],
+            "streamingProtocol": "SmoothStreaming"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "StreamingLocators_ListPaths",
+  "title": "List Paths which has streaming paths and download paths"
+}

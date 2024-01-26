@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "accountName": "myAccount",
+    "api-version": "2023-05-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceType": "Microsoft.CognitiveServices/accounts",
+            "sku": {
+              "name": "F0",
+              "tier": "Free"
+            }
+          },
+          {
+            "resourceType": "Microsoft.CognitiveServices/accounts",
+            "sku": {
+              "name": "S0",
+              "tier": "Standard"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Accounts_ListSkus",
+  "title": "List SKUs"
+}

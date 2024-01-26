@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2023-08-15",
+    "clusterName": "kustoCluster2",
+    "resourceGroupName": "kustorptest",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "kustoCluster2/KustoDatabase8",
+            "type": "Microsoft.Kusto/Clusters/AttachedDatabaseConfigurations",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster2/AttachedDatabaseConfigurations/KustoDatabase8",
+            "location": "westus",
+            "properties": {
+              "clusterResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterLeader",
+              "databaseName": "db1",
+              "defaultPrincipalsModificationKind": "Union",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "kustoCluster2/KustoDatabase9",
+            "type": "Microsoft.Kusto/Clusters/AttachedDatabaseConfigurations",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster2/AttachedDatabaseConfigurations/KustoDatabase9",
+            "location": "westus",
+            "properties": {
+              "clusterResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterLeader",
+              "databaseName": "db1",
+              "defaultPrincipalsModificationKind": "Union",
+              "provisioningState": "Succeeded",
+              "tableLevelSharingProperties": {
+                "externalTablesToExclude": [
+                  "ExternalTable2"
+                ],
+                "externalTablesToInclude": [
+                  "ExternalTable1"
+                ],
+                "functionsToExclude": [
+                  "functionsToExclude2"
+                ],
+                "functionsToInclude": [
+                  "functionsToInclude1"
+                ],
+                "materializedViewsToExclude": [
+                  "MaterializedViewTable2"
+                ],
+                "materializedViewsToInclude": [
+                  "MaterializedViewTable1"
+                ],
+                "tablesToExclude": [
+                  "Table2"
+                ],
+                "tablesToInclude": [
+                  "Table1"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AttachedDatabaseConfigurations_ListByCluster",
+  "title": "KustoAttachedDatabaseConfigurationsListByCluster"
+}

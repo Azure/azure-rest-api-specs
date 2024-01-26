@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2022-12-01",
+    "registryName": "myRegistry",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myReplication",
+            "type": "Microsoft.ContainerRegistry/registries/replications",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/replications/myReplication",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "regionEndpointEnabled": true,
+              "status": {
+                "displayStatus": "Ready",
+                "message": "The replication is ready.",
+                "timestamp": "2017-03-01T23:15:37.0707808Z"
+              },
+              "zoneRedundancy": "Disabled"
+            },
+            "tags": {
+              "key": "value"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Replications_List",
+  "title": "ReplicationList"
+}

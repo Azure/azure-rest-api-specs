@@ -1,0 +1,78 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./BackupVaultResource.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DataProtection;
+/**
+ * BaseBackupPolicy resource
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@parentResource(BackupVaultResource)
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BaseBackupPolicy)
+model BaseBackupPolicyResource extends ProxyResourceBase {
+  @path
+  @key("backupPolicyName")
+  @segment("backupPolicies")
+  @visibility("read")
+  name: string;
+
+  /**
+   * BaseBackupPolicyResource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BaseBackupPolicy;
+}
+
+@armResourceOperations
+interface BaseBackupPolicyResources {
+  /**
+   * Gets a backup policy belonging to a backup vault
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BackupPolicies_Get")
+  get is ArmResourceRead<BaseBackupPolicyResource>;
+
+  /**
+   * Creates or Updates a backup policy belonging to a backup vault
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BackupPolicies_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<BaseBackupPolicyResource>;
+
+  /**
+   * Deletes a backup policy belonging to a backup vault
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BackupPolicies_Delete")
+  delete is ArmResourceDeleteSync<BaseBackupPolicyResource>;
+
+  /**
+   * Returns list of backup policies belonging to a backup vault
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BackupPolicies_List")
+  list is ArmResourceListByParent<BaseBackupPolicyResource>;
+}
+
+@@projectedName(BaseBackupPolicyResources.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(BaseBackupPolicyResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(BaseBackupPolicyResources.createOrUpdate::parameters.resource,
+  "Request body for operation"
+);

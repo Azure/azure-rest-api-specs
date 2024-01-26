@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "accountName": "contoso",
+    "api-version": "2023-07-01",
+    "privateEndpointConnectionProxy": {
+      "remotePrivateEndpoint": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{peName}",
+        "immutableResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{peName}",
+        "immutableSubscriptionId": "00000000-0000-0000-0000-000000000000",
+        "location": "westus2",
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "{privateEndpointConnectionProxyId}",
+            "groupIds": [
+              "DeviceUpdate"
+            ],
+            "requestMessage": "Please approve my connection, thanks."
+          }
+        ],
+        "privateLinkServiceProxies": [
+          {
+            "groupConnectivityInformation": [],
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{privateEndpointConnectionProxyId}/privateLinkServiceProxies/{privateEndpointConnectionProxyId}"
+          }
+        ]
+      }
+    },
+    "privateEndpointConnectionProxyId": "peexample01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "peexample01",
+        "type": "Microsoft.DeviceUpdate/accounts/privateEndpointConnectionProxies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/privateEndpointConnectionProxies/peexample01",
+        "remotePrivateEndpoint": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{peName}",
+          "immutableResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{peName}",
+          "immutableSubscriptionId": "00000000-0000-0000-0000-000000000000",
+          "location": "westus2",
+          "manualPrivateLinkServiceConnections": [
+            {
+              "name": "{plsConnectionName}",
+              "groupIds": [
+                "DeviceUpdate"
+              ],
+              "requestMessage": "Please approve my connection, thanks."
+            }
+          ],
+          "privateLinkServiceProxies": [
+            {
+              "groupConnectivityInformation": [
+                {
+                  "groupId": "DeviceUpdate",
+                  "memberName": "adu"
+                }
+              ],
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{privateEndpointConnectionProxyId}/privateLinkServiceProxies/{privateEndpointConnectionProxyId}"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnectionProxies_CreateOrUpdate",
+  "title": "PrivateEndpointConnectionProxyCreateOrUpdate"
+}

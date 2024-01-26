@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "$filter": "name eq 'job3' and properties/state eq Microsoft.Media.JobState'finished'",
+    "accountName": "contosomedia",
+    "api-version": "2022-07-01",
+    "resourceGroupName": "contosoresources",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "transformName": "exampleTransform"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "job3",
+            "type": "Microsoft.Media/mediaservices/transforms/jobs",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job3",
+            "properties": {
+              "correlationData": {},
+              "created": "2021-06-01T00:00:00Z",
+              "endTime": "2022-10-17T23:14:33.1104174Z",
+              "input": {
+                "@odata.type": "#Microsoft.Media.JobInputs",
+                "inputs": [
+                  {
+                    "@odata.type": "#Microsoft.Media.JobInputAsset",
+                    "assetName": "job3-InputAsset",
+                    "files": [],
+                    "inputDefinitions": []
+                  }
+                ]
+              },
+              "lastModified": "2021-06-01T00:00:00Z",
+              "outputs": [
+                {
+                  "@odata.type": "#Microsoft.Media.JobOutputAsset",
+                  "assetName": "job3-OutputAsset",
+                  "endTime": "2022-10-17T23:14:33.1104174Z",
+                  "label": "example-custom-label",
+                  "progress": 100,
+                  "startTime": "2022-10-17T23:04:33.1104174Z",
+                  "state": "Finished"
+                }
+              ],
+              "priority": "Low",
+              "startTime": "2022-10-17T23:04:33.1104174Z",
+              "state": "Finished"
+            },
+            "systemData": {
+              "createdAt": "2021-06-01T00:00:00Z",
+              "createdBy": "contoso@microsoft.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-06-01T00:00:00Z",
+              "lastModifiedBy": "contoso@microsoft.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Jobs_List",
+  "title": "Lists Jobs for the Transform filter by name and state."
+}

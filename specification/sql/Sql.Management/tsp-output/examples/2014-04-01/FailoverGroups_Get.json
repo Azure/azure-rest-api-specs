@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2023-02-01-preview",
+    "failoverGroupName": "failovergrouptest3",
+    "resourceGroupName": "Default",
+    "serverName": "failovergroupprimaryserver",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "failovergrouptest3",
+        "type": "Microsoft.Sql/servers/failoverGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver/failoverGroups/failovergrouptest3",
+        "location": "Japan West",
+        "properties": {
+          "databases": [
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver/databases/testdb1",
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver/databases/testdb2"
+          ],
+          "partnerServers": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupsecondaryserver",
+              "location": "Japan East",
+              "replicationRole": "Secondary"
+            }
+          ],
+          "readOnlyEndpoint": {
+            "failoverPolicy": "Enabled",
+            "targetServer": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupsecondaryserver"
+          },
+          "readWriteEndpoint": {
+            "failoverPolicy": "Automatic",
+            "failoverWithDataLossGracePeriodMinutes": 120
+          },
+          "replicationRole": "Primary",
+          "replicationState": "CATCH_UP"
+        }
+      }
+    }
+  },
+  "operationId": "FailoverGroups_Get",
+  "title": "Get failover group"
+}

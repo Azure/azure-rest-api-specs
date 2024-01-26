@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2023-08-15",
+    "clusterName": "kustoCluster",
+    "resourceGroupName": "kustorptest",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "kustoCluster",
+        "type": "Microsoft.Kusto/Clusters",
+        "etag": "abcd123",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "faabad1f-4876-463c-af9d-6ba2d2d2394c",
+          "tenantId": "b932977f-6277-4ab7-a2cd-5bd21f07aaf4",
+          "userAssignedIdentities": {}
+        },
+        "location": "westus",
+        "properties": {
+          "allowedFqdnList": [
+            "my-stroage.blob.core.windows.net"
+          ],
+          "allowedIpRangeList": [],
+          "enableAutoStop": true,
+          "enableDiskEncryption": false,
+          "enablePurge": false,
+          "enableStreamingIngest": true,
+          "engineType": "V3",
+          "keyVaultProperties": {
+            "keyName": "keyName",
+            "keyVaultUri": "https://dummy.keyvault.com",
+            "keyVersion": "keyVersion"
+          },
+          "migrationCluster": {
+            "dataIngestionUri": "https://ingest-kustocluster2.westus.kusto.windows.net",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster2",
+            "role": "Destination",
+            "uri": "https://kustocluster2.westus.kusto.windows.net"
+          },
+          "privateEndpointConnections": [
+            {
+              "name": "privateEndpointTest",
+              "type": "Microsoft.Kusto/Clusters/PrivateEndpointConnections",
+              "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/privateEndpointConnections/privateEndpointTest",
+              "properties": {
+                "groupId": "cluster",
+                "privateEndpoint": {
+                  "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "Auto-approved",
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                },
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "publicIPType": "IPv4",
+          "publicNetworkAccess": "Enabled",
+          "restrictOutboundNetworkAccess": "Enabled"
+        },
+        "sku": {
+          "name": "Standard_L16as_v3",
+          "capacity": 2,
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2021-06-29T15:06:54.2757906Z",
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-06-29T15:06:54.2757906Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "Clusters_Get",
+  "title": "KustoClustersGet"
+}

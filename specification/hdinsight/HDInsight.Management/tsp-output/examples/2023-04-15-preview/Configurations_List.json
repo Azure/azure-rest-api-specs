@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2023-04-15-preview",
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "configurations": {
+          "core-site": {
+            "fs.azure.account.key.test.blob.core.windows.net": "accountKey",
+            "fs.defaultFS": "wasb://test.blob.core.windows.net"
+          },
+          "gateway": {
+            "restAuthCredential.isEnabled": "true",
+            "restAuthCredential.password": "**********",
+            "restAuthCredential.username": "admin"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Configurations_List",
+  "title": "Get all configuration information"
+}

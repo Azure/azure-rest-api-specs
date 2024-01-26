@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01",
+    "dhcpId": "dhcp1",
+    "privateCloudName": "cloud1",
+    "resourceGroupName": "group1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workloadNetworkDhcp": {
+      "properties": {
+        "dhcpType": "SERVER",
+        "leaseTime": 86400,
+        "revision": 1,
+        "serverAddress": "40.1.5.1/24"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "dhcp1",
+        "type": "Microsoft.AVS/privateClouds/workloadNetworks/dhcpConfigurations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/workloadNetworks/default/dhcpConfigurations/dhcpConfigurations1",
+        "properties": {
+          "dhcpType": "SERVER",
+          "displayName": "dhcpConfigurations1",
+          "leaseTime": 86400,
+          "revision": 2,
+          "segments": [
+            "segment1",
+            "segment2"
+          ],
+          "serverAddress": "40.1.5.1/24"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.AVS/operationstatuses/00000000-0000-0000-0000-000000000000?api-version=2023-03-01"
+      }
+    }
+  },
+  "operationId": "WorkloadNetworks_UpdateDhcp",
+  "title": "WorkloadNetworks_UpdateDhcp"
+}

@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2022-12-01",
+    "parameters": {
+      "mode": "Force",
+      "source": {
+        "registryUri": "registry.hub.docker.com",
+        "sourceImage": "library/hello-world"
+      },
+      "targetTags": [
+        "targetRepository:targetTag"
+      ],
+      "untaggedTargetRepositories": [
+        "targetRepository1"
+      ]
+    },
+    "registryName": "myRegistry",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/locations/location/operationResults/operationStatuses/registries-00000000-0000-0000-0000-000000000000?api-version=2022-12-01"
+      }
+    }
+  },
+  "operationId": "Registries_ImportImage",
+  "title": "ImportImageFromPublicRegistry"
+}

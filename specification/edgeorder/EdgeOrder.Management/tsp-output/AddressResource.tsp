@@ -1,0 +1,137 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.EdgeOrder;
+/**
+ * Address Resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AddressProperties)
+model AddressResource extends TrackedResourceBase {
+  /**
+   * The name of the address Resource within the specified resource group. address names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
+   */
+  @maxLength(24)
+  @minLength(3)
+  @pattern("^[-\\w\\.]+$")
+  @path
+  @key("addressName")
+  @segment("addresses")
+  @visibility("read")
+  name: string;
+
+  /**
+   * Properties of an address.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: AddressProperties;
+}
+
+@armResourceOperations
+interface AddressResources {
+  /**
+   * Gets information about the specified address.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GetAddressByName")
+  getAddressByName is ArmResourceRead<AddressResource>;
+
+  /**
+   * Creates a new address with the specified parameters. Existing address can be updated with this API
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("CreateAddress")
+  createAddress is ArmResourceCreateOrReplaceAsync<AddressResource>;
+
+  /**
+   * Updates the properties of an existing address.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @parameterVisibility("read")
+  @operationId("UpdateAddress")
+  updateAddress is ArmCustomPatchAsync<
+    AddressResource,
+    AddressUpdateParameter,
+    {
+      ...BaseParameters<AddressResource>;
+
+      /**
+       * Defines the If-Match condition. The patch will be performed only if the ETag of the job on the server matches this value.
+       */
+      @header
+      `If-Match`?: string;
+    }
+  >;
+
+  /**
+   * Deletes an address.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("DeleteAddressByName")
+  deleteAddressByName is ArmResourceDeleteAsync<AddressResource>;
+
+  /**
+   * Lists all the addresses available under the given resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ListAddressesAtResourceGroupLevel")
+  listAddressesAtResourceGroupLevel is ArmResourceListByParent<
+    AddressResource,
+    {
+      ...BaseParameters<AddressResource>;
+
+      /**
+       * $filter is supported to filter based on shipping address properties. Filter supports only equals operation.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * $skipToken is supported on Get list of addresses, which provides the next page in the list of address.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    }
+  >;
+
+  /**
+   * Lists all the addresses available under the subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ListAddressesAtSubscriptionLevel")
+  listAddressesAtSubscriptionLevel is ArmListBySubscription<AddressResource>;
+}
+
+@@projectedName(AddressResources.createAddress::parameters.resource,
+  "json",
+  "addressResource"
+);
+@@extension(AddressResources.createAddress::parameters.resource,
+  "x-ms-client-name",
+  "addressResource"
+);
+@@doc(AddressResources.createAddress::parameters.resource,
+  "Address details from request body."
+);
+@@projectedName(AddressResources.updateAddress::parameters.properties,
+  "json",
+  "addressUpdateParameter"
+);
+@@extension(AddressResources.updateAddress::parameters.properties,
+  "x-ms-client-name",
+  "addressUpdateParameter"
+);
+@@doc(AddressResources.updateAddress::parameters.properties,
+  "Address update parameters from request body."
+);

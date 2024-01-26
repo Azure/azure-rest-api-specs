@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "$count": false,
+    "$filter": "test_filter",
+    "$orderby": "test_orderby",
+    "$select": "test_select",
+    "$skip": 1,
+    "$top": 1,
+    "api-version": "2016-11-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeStore/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>",
+        "value": [
+          {
+            "name": "contosoadla",
+            "type": "test_type",
+            "id": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+            "location": "eastus2",
+            "properties": {
+              "accountId": "94f4bf5d-78a9-4c31-8aa7-b34d07bad898",
+              "creationTime": "2017-04-14T13:21:56.6819037-07:00",
+              "endpoint": "testadlfs17607.azuredatalakestore.net",
+              "lastModifiedTime": "2017-04-14T13:21:56.6819037-07:00",
+              "provisioningState": "Succeeded",
+              "state": "Active"
+            },
+            "tags": {
+              "test_key": "test_value"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Accounts_List",
+  "title": "Lists the Data Lake Store accounts within the subscription"
+}

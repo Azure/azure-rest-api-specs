@@ -1,0 +1,2741 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RecoveryServicesClient",
+    "version": "2023-04-01",
+    "description": "Recovery Services Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PrivateLinkResources"
+    },
+    {
+      "name": "Vaults"
+    },
+    {
+      "name": "RecoveryServicesVaultExtendedInfos"
+    }
+  ],
+  "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/replicationUsages/{subscriptionId}/{resourceGroupName}/{vaultName}": {
+      "get": {
+        "operationId": "ReplicationUsages_List",
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Fetches the replication usages of the vault.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationUsageList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets Replication usages of vault": {
+            "$ref": "./examples/ReplicationUsages_List.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/usages/{subscriptionId}/{resourceGroupName}/{vaultName}": {
+      "get": {
+        "operationId": "Usages_ListByVaults",
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Fetches the usages of the vault.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VaultUsageList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets vault usages": {
+            "$ref": "./examples/Usages_ListByVaults.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.RecoveryServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/capabilities": {
+      "post": {
+        "operationId": "RecoveryServicesOperations_Capabilities",
+        "summary": "API to get details about capabilities provided by Microsoft.RecoveryServices RP",
+        "description": "API to get details about capabilities provided by Microsoft.RecoveryServices RP",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Contains information about Resource type and properties to get capabilities",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceCapabilities"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults": {
+      "get": {
+        "operationId": "Vaults_ListBySubscriptionId",
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Fetches all the resources of the specified type in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VaultListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Recovery Services Resources in SubscriptionId": {
+            "$ref": "./examples/Vaults_ListBySubscriptionId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability": {
+      "post": {
+        "operationId": "RecoveryServicesOperations_CheckNameAvailability",
+        "summary": "API to check for resource name availability.\nA name is available if no other resource exists that has the same SubscriptionId, Resource Name and Type\nor if one or more such resources exist, each of these must be GC'd and their time of deletion be more than 24 Hours Ago",
+        "description": "API to check for resource name availability.\nA name is available if no other resource exists that has the same SubscriptionId, Resource Name and Type\nor if one or more such resources exist, each of these must be GC'd and their time of deletion be more than 24 Hours Ago",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Contains information about Resource type and Resource name",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
+      "get": {
+        "operationId": "Vaults_ListByResourceGroup",
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Retrieve a list of Vaults.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VaultListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Recovery Services Resources in ResourceGroup": {
+            "$ref": "./examples/Vaults_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}": {
+      "get": {
+        "operationId": "Vaults_Get",
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Get the Vault details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Recovery Services Resource": {
+            "$ref": "./examples/Vaults_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Vaults_CreateOrUpdate",
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Creates or updates a Recovery Services vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vault",
+            "in": "body",
+            "description": "Recovery Services Vault to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            },
+            "x-ms-client-name": "vault"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Vault' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "201": {
+            "description": "Resource 'Vault' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Recovery Services vault": {
+            "$ref": "./examples/Vaults_CreateOrUpdate_Create_Or_Update_Recovery_Services_Vault.json"
+          },
+          "Create or Update Vault With Monitoring Setting": {
+            "$ref": "./examples/Vaults_CreateOrUpdate_Create_Or_Update_Vault_With_Monitoring_Setting.json"
+          },
+          "Create or Update Vault with CustomerManagedKeys": {
+            "$ref": "./examples/Vaults_CreateOrUpdate_Create_Or_Update_Vault_With_Customer_Managed_Keys.json"
+          },
+          "Create or Update Vault with User Assigned Identity": {
+            "$ref": "./examples/Vaults_CreateOrUpdate_Create_Or_Update_Vault_With_User_Assigned_Identity.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Vaults_Update",
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Updates the vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vault",
+            "in": "body",
+            "description": "Recovery Services Vault to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchVault"
+            },
+            "x-ms-client-name": "vault"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Resource": {
+            "$ref": "./examples/Vaults_Update_Update_Resource.json"
+          },
+          "Update Resource With CustomerManagedKeys": {
+            "$ref": "./examples/Vaults_Update_Update_Resource_With_Customer_Managed_Keys.json"
+          },
+          "Update Resource With CustomerManagedKeys2": {
+            "$ref": "./examples/Vaults_Update_Update_Resource_With_Customer_Managed_Keys2.json"
+          },
+          "Update Resource With CustomerManagedKeys3": {
+            "$ref": "./examples/Vaults_Update_Update_Resource_With_Customer_Managed_Keys3.json"
+          },
+          "Update Resource With User Assigned Identity": {
+            "$ref": "./examples/Vaults_Update_Update_Resource_With_User_Assigned_Identity.json"
+          },
+          "Update Vault With Monitoring Setting": {
+            "$ref": "./examples/Vaults_Update_Update_Vault_With_Monitoring_Setting.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Vaults_Delete",
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Deletes a vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Recovery Services Vault": {
+            "$ref": "./examples/Vaults_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/extendedInformation/vaultExtendedInfo": {
+      "get": {
+        "operationId": "VaultExtendedInfo_Get",
+        "tags": [
+          "RecoveryServicesVaultExtendedInfos"
+        ],
+        "description": "Get the vault extended info.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RecoveryServicesVaultExtendedInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExtendedInfo of Resource": {
+            "$ref": "./examples/VaultExtendedInfo_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VaultExtendedInfo_CreateOrUpdate",
+        "tags": [
+          "RecoveryServicesVaultExtendedInfos"
+        ],
+        "description": "Create vault extended info.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceResourceExtendedInfoDetails",
+            "in": "body",
+            "description": "Details of ResourceExtendedInfo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecoveryServicesVaultExtendedInfo"
+            },
+            "x-ms-client-name": "resourceResourceExtendedInfoDetails"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RecoveryServicesVaultExtendedInfo' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RecoveryServicesVaultExtendedInfo"
+            }
+          },
+          "201": {
+            "description": "Resource 'RecoveryServicesVaultExtendedInfo' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RecoveryServicesVaultExtendedInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put ExtendedInfo of Resource": {
+            "$ref": "./examples/VaultExtendedInfo_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "VaultExtendedInfo_Update",
+        "tags": [
+          "RecoveryServicesVaultExtendedInfos"
+        ],
+        "description": "Update vault extended info.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceResourceExtendedInfoDetails",
+            "in": "body",
+            "description": "Details of ResourceExtendedInfo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecoveryServicesVaultExtendedInfo"
+            },
+            "x-ms-client-name": "resourceResourceExtendedInfoDetails"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RecoveryServicesVaultExtendedInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PATCH ExtendedInfo of Resource": {
+            "$ref": "./examples/VaultExtendedInfo_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_List",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Returns the list of private link resources that need to be created for Backup and SiteRecovery",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List PrivateLinkResources": {
+            "$ref": "./examples/PrivateLinkResources_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Returns a specified private link resource that need to be created for Backup and SiteRecovery",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get PrivateLinkResource": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlertsState": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AlertsState",
+        "modelAsString": true
+      }
+    },
+    "AuthType": {
+      "type": "string",
+      "description": "Specifies the authentication type.",
+      "enum": [
+        "Invalid",
+        "ACS",
+        "AAD",
+        "AccessControlService",
+        "AzureActiveDirectory"
+      ],
+      "x-ms-enum": {
+        "name": "AuthType",
+        "modelAsString": true
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.ManagedIdentityProperties": {
+      "type": "object",
+      "description": "The properties of the managed service identities assigned to this resource.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The Active Directory tenant id of the principal.",
+          "readOnly": true
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier of this principal.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "System and user assigned managed identity."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
+      "type": "object",
+      "description": "A managed identity assigned by the user.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The active directory client identifier for this principal."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier for this principal."
+        }
+      }
+    },
+    "AzureMonitorAlertSettings": {
+      "type": "object",
+      "description": "Settings for Azure Monitor based alerts",
+      "properties": {
+        "alertsForAllJobFailures": {
+          "$ref": "#/definitions/AlertsState"
+        }
+      }
+    },
+    "BackupStorageVersion": {
+      "type": "string",
+      "description": "Backup storage version",
+      "enum": [
+        "V1",
+        "V2",
+        "Unassigned"
+      ],
+      "x-ms-enum": {
+        "name": "BackupStorageVersion",
+        "modelAsString": true
+      }
+    },
+    "CapabilitiesProperties": {
+      "type": "object",
+      "description": "Capabilities information",
+      "properties": {
+        "dnsZones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DNSZone"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CapabilitiesResponse": {
+      "type": "object",
+      "description": "Capabilities response for Microsoft.RecoveryServices",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilitiesResponseProperties",
+          "description": "Capabilities properties in response"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCapabilitiesBase"
+        }
+      ]
+    },
+    "CapabilitiesResponseProperties": {
+      "type": "object",
+      "description": "Capabilities properties in response",
+      "properties": {
+        "dnsZones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DNSZoneResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CertificateRequest": {
+      "type": "object",
+      "description": "Details of the certificate to be uploaded to the vault.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawCertificateData",
+          "description": "Raw certificate data."
+        }
+      }
+    },
+    "CheckNameAvailabilityParameters": {
+      "type": "object",
+      "description": "Resource Name availability input parameters - Resource type and resource name",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Describes the Resource type: Microsoft.RecoveryServices/Vaults"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name for which availability needs to be checked"
+        }
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "type": "object",
+      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ClassicAlertSettings": {
+      "type": "object",
+      "description": "Settings for classic alerts",
+      "properties": {
+        "alertsForCriticalOperations": {
+          "$ref": "#/definitions/AlertsState"
+        }
+      }
+    },
+    "ClientDiscoveryDisplay": {
+      "type": "object",
+      "description": "Localized display information of an operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Name of the provider for display purposes"
+        },
+        "resource": {
+          "type": "string",
+          "description": "ResourceType for which this Operation can be performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operations Name itself."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation having details of what operation is about."
+        }
+      }
+    },
+    "ClientDiscoveryForLogSpecification": {
+      "type": "object",
+      "description": "Class to represent shoebox log specification in json client discovery.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized display name"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blobs created in customer storage account per hour"
+        }
+      }
+    },
+    "ClientDiscoveryForProperties": {
+      "type": "object",
+      "description": "Class to represent shoebox properties in json client discovery.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification",
+          "description": "Operation properties."
+        }
+      }
+    },
+    "ClientDiscoveryForServiceSpecification": {
+      "type": "object",
+      "description": "Class to represent shoebox service specification in json client discovery.",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "description": "List of log specifications of this operation.",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClientDiscoveryValueForSingleApi": {
+      "type": "object",
+      "description": "Available operation details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Operation."
+        },
+        "display": {
+          "$ref": "#/definitions/ClientDiscoveryDisplay",
+          "description": "Contains the localized display information for this particular operation"
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation;governs the display of the operation in the RBAC UX and the audit logs UX"
+        },
+        "properties": {
+          "$ref": "#/definitions/ClientDiscoveryForProperties",
+          "description": "ShoeBox properties for the given operation."
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from Azure Backup.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The resource management error response."
+        }
+      }
+    },
+    "CmkKekIdentity": {
+      "type": "object",
+      "description": "The details of the identity used for CMK",
+      "properties": {
+        "useSystemAssignedIdentity": {
+          "type": "boolean",
+          "description": "Indicate that system assigned identity should be used. Mutually exclusive with 'userAssignedIdentity' field"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned identity to be used to grant permissions in case the type of identity used is UserAssigned"
+        }
+      }
+    },
+    "CmkKeyVaultProperties": {
+      "type": "object",
+      "description": "The properties of the Key Vault which hosts CMK",
+      "properties": {
+        "keyUri": {
+          "type": "string",
+          "description": "The key uri of the Customer Managed Key"
+        }
+      }
+    },
+    "CrossRegionRestore": {
+      "type": "string",
+      "description": "Flag to show if Cross Region Restore is enabled on the Vault or not",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CrossRegionRestore",
+        "modelAsString": true
+      }
+    },
+    "CrossSubscriptionRestoreSettings": {
+      "type": "object",
+      "description": "Settings for Cross Subscription Restore Settings",
+      "properties": {
+        "crossSubscriptionRestoreState": {
+          "$ref": "#/definitions/CrossSubscriptionRestoreState"
+        }
+      }
+    },
+    "CrossSubscriptionRestoreState": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "PermanentlyDisabled"
+      ],
+      "x-ms-enum": {
+        "name": "CrossSubscriptionRestoreState",
+        "modelAsString": true
+      }
+    },
+    "DNSZone": {
+      "type": "object",
+      "description": "DNSZone information",
+      "properties": {
+        "subResource": {
+          "$ref": "#/definitions/VaultSubResourceType",
+          "description": "Subresource type for vault AzureBackup, AzureBackup_secondary or AzureSiteRecovery"
+        }
+      }
+    },
+    "DNSZoneResponse": {
+      "type": "object",
+      "description": "DNSZone information for Microsoft.RecoveryServices",
+      "properties": {
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The private link resource Private link DNS zone names.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DNSZone"
+        }
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "description": "The resource management error response.",
+      "properties": {
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        }
+      }
+    },
+    "IdentityData": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identities."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ImmutabilitySettings": {
+      "type": "object",
+      "description": "Immutability Settings of vault",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ImmutabilityState"
+        }
+      }
+    },
+    "ImmutabilityState": {
+      "type": "string",
+      "enum": [
+        "Disabled",
+        "Unlocked",
+        "Locked"
+      ],
+      "x-ms-enum": {
+        "name": "ImmutabilityState",
+        "modelAsString": true
+      }
+    },
+    "InfrastructureEncryptionState": {
+      "type": "string",
+      "description": "Enabling/Disabling the Double Encryption state",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "InfrastructureEncryptionState",
+        "modelAsString": true
+      }
+    },
+    "JobsSummary": {
+      "type": "object",
+      "description": "Summary of the replication job data for this vault.",
+      "properties": {
+        "failedJobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of failed jobs."
+        },
+        "suspendedJobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of suspended jobs."
+        },
+        "inProgressJobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of in-progress jobs."
+        }
+      }
+    },
+    "MonitoringSettings": {
+      "type": "object",
+      "description": "Monitoring Settings of the vault",
+      "properties": {
+        "azureMonitorAlertSettings": {
+          "$ref": "#/definitions/AzureMonitorAlertSettings",
+          "description": "Settings for Azure Monitor based alerts"
+        },
+        "classicAlertSettings": {
+          "$ref": "#/definitions/ClassicAlertSettings",
+          "description": "Settings for classic alerts"
+        }
+      }
+    },
+    "MonitoringSummary": {
+      "type": "object",
+      "description": "Summary of the replication monitoring data for this vault.",
+      "properties": {
+        "unHealthyVmCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of unhealthy VMs."
+        },
+        "unHealthyProviderCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of unhealthy replication providers."
+        },
+        "eventsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of all critical warnings."
+        },
+        "deprecatedProviderCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of all deprecated recovery service providers."
+        },
+        "supportedProviderCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of all the supported recovery service providers."
+        },
+        "unsupportedProviderCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of all the unsupported recovery service providers."
+        }
+      }
+    },
+    "MultiUserAuthorization": {
+      "type": "string",
+      "description": "MUA Settings of vault",
+      "enum": [
+        "Invalid",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "MultiUserAuthorization",
+        "modelAsString": true
+      }
+    },
+    "NameInfo": {
+      "type": "object",
+      "description": "The name of usage.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of usage."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Localized value of usage."
+        }
+      }
+    },
+    "OperationResource": {
+      "type": "object",
+      "description": "Operation Resource",
+      "properties": {
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the operation"
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines."
+        },
+        "id": {
+          "type": "string",
+          "description": "It should match what is used to GET the operation result"
+        },
+        "name": {
+          "type": "string",
+          "description": "It must match the last segment of the \"id\" field, and will typically be a GUID / system generated value"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation. (InProgress/Success/Failed/Cancelled)"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the operation"
+        }
+      }
+    },
+    "PatchTrackedResource": {
+      "type": "object",
+      "description": "Tracked resource with location.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "PatchVault": {
+      "type": "object",
+      "description": "Patch Resource information, as returned by the resource provider.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultProperties",
+          "description": "Properties of the vault."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Identifies the unique system identifier for each Azure resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityData",
+          "description": "Identity for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchTrackedResource"
+        }
+      ]
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "The Private Endpoint network resource that is linked to the Private Endpoint connection.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets id.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "Private Endpoint Connection Response Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets or sets provisioning state of the private endpoint connection.",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The Private Endpoint network resource that is linked to the Private Endpoint connection.",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Gets or sets private link service connection state.",
+          "readOnly": true
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "Group Ids for the Private Endpoint",
+          "items": {
+            "$ref": "#/definitions/VaultSubResourceType"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionStatus": {
+      "type": "string",
+      "description": "Gets or sets the status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateEndpointConnectionVaultProperties": {
+      "type": "object",
+      "description": "Information to be stored in Vault properties as an element of privateEndpointConnections List.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Format of id subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.[Service]/{resource}/{resourceName}/privateEndpointConnections/{connectionName}.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnection",
+          "description": "Private Endpoint Connection Response Properties.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the private Endpoint Connection",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type, which will be of the format, Microsoft.RecoveryServices/vaults/privateEndpointConnections",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the private Endpoint connection",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "Information of the private link resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of the private link resource.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "e.g. f9ad6492-33d4-4690-9999-6bfd52a0d081 (Backup) or f9ad6492-33d4-4690-9999-6bfd52a0d082 (SiteRecovery)",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "[backup-ecs1, backup-prot1, backup-prot1b, backup-prot1c, backup-id1]",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The private link resource Private link DNS zone name.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "Gets or sets private link service connection state.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointConnectionStatus",
+          "description": "Gets or sets the status.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets description.",
+          "readOnly": true
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "Gets or sets actions required.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Gets or sets provisioning state of the private endpoint connection.",
+      "enum": [
+        "Succeeded",
+        "Deleting",
+        "Failed",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "property to enable or disable resource provider inbound network traffic from public clients",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
+      }
+    },
+    "RawCertificateData": {
+      "type": "object",
+      "description": "Raw certificate data.",
+      "properties": {
+        "authType": {
+          "$ref": "#/definitions/AuthType",
+          "description": "Specifies the authentication type."
+        },
+        "certificate": {
+          "type": "string",
+          "format": "byte",
+          "description": "The base64 encoded certificate raw data string"
+        }
+      }
+    },
+    "RecoveryServicesVaultExtendedInfo": {
+      "type": "object",
+      "description": "Vault extended information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/VaultExtendedInfoProperties",
+          "description": "Vault extended information.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ReplicationUsage": {
+      "type": "object",
+      "description": "Replication usages of a vault.",
+      "properties": {
+        "monitoringSummary": {
+          "$ref": "#/definitions/MonitoringSummary",
+          "description": "Summary of the replication monitoring data for this vault."
+        },
+        "jobsSummary": {
+          "$ref": "#/definitions/JobsSummary",
+          "description": "Summary of the replication jobs data for this vault."
+        },
+        "protectedItemCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of replication protected items for this vault."
+        },
+        "recoveryPlanCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of replication recovery plans for this vault."
+        },
+        "registeredServersCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of servers registered to this vault."
+        },
+        "recoveryServicesProviderAuthType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The authentication type of recovery service providers in the vault."
+        }
+      }
+    },
+    "ReplicationUsageList": {
+      "type": "object",
+      "description": "Replication usages for vault.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of replication usages for the given vault.",
+          "items": {
+            "$ref": "#/definitions/ReplicationUsage"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "ARM Resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id represents the complete path to the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name associated with the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Optional ETag."
+        }
+      }
+    },
+    "ResourceCapabilities": {
+      "type": "object",
+      "description": "Input to get capabilities information for Microsoft.RecoveryServices",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilitiesProperties",
+          "description": "Capabilities information"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCapabilitiesBase"
+        }
+      ]
+    },
+    "ResourceCapabilitiesBase": {
+      "type": "object",
+      "description": "Base class for request and response capabilities information for Microsoft.RecoveryServices",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Describes the Resource type: Microsoft.RecoveryServices/Vaults"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ResourceCertificateAndAadDetails": {
+      "type": "object",
+      "description": "Certificate details representing the Vault credentials for AAD.",
+      "properties": {
+        "aadAuthority": {
+          "type": "string",
+          "description": "AAD tenant authority."
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "AAD tenant Id."
+        },
+        "servicePrincipalClientId": {
+          "type": "string",
+          "description": "AAD service principal clientId."
+        },
+        "servicePrincipalObjectId": {
+          "type": "string",
+          "description": "AAD service principal ObjectId."
+        },
+        "azureManagementEndpointAudience": {
+          "type": "string",
+          "description": "Azure Management Endpoint Audience."
+        },
+        "serviceResourceId": {
+          "type": "string",
+          "description": "Service Resource Id."
+        },
+        "aadAudience": {
+          "type": "string",
+          "description": "AAD audience for the resource"
+        }
+      },
+      "required": [
+        "aadAuthority",
+        "aadTenantId",
+        "servicePrincipalClientId",
+        "servicePrincipalObjectId",
+        "azureManagementEndpointAudience"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCertificateDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureActiveDirectory"
+    },
+    "ResourceCertificateAndAcsDetails": {
+      "type": "object",
+      "description": "Certificate details representing the Vault credentials for ACS.",
+      "properties": {
+        "globalAcsNamespace": {
+          "type": "string",
+          "description": "ACS namespace name - tenant for our service."
+        },
+        "globalAcsHostName": {
+          "type": "string",
+          "description": "Acs mgmt host name to connect to."
+        },
+        "globalAcsRPRealm": {
+          "type": "string",
+          "description": "Global ACS namespace RP realm."
+        }
+      },
+      "required": [
+        "globalAcsNamespace",
+        "globalAcsHostName",
+        "globalAcsRPRealm"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCertificateDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessControlService"
+    },
+    "ResourceCertificateDetails": {
+      "type": "object",
+      "description": "Certificate details representing the Vault credentials.",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "description": "Discriminator property for ResourceCertificateDetails."
+        },
+        "certificate": {
+          "type": "string",
+          "format": "byte",
+          "description": "The base64 encoded certificate raw data string."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Certificate friendly name."
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Certificate issuer."
+        },
+        "resourceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Resource ID of the vault."
+        },
+        "subject": {
+          "type": "string",
+          "description": "Certificate Subject Name."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Certificate thumbprint."
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Certificate Validity start Date time."
+        },
+        "validTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Certificate Validity End Date time."
+        }
+      },
+      "discriminator": "authType",
+      "required": [
+        "authType"
+      ]
+    },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identities.",
+      "enum": [
+        "SystemAssigned",
+        "None",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": true
+      }
+    },
+    "ResourceMoveState": {
+      "type": "string",
+      "description": "The State of the Resource after the move operation",
+      "enum": [
+        "Unknown",
+        "InProgress",
+        "PrepareFailed",
+        "CommitFailed",
+        "PrepareTimedout",
+        "CommitTimedout",
+        "MoveSucceeded",
+        "Failure",
+        "CriticalFailure",
+        "PartialSuccess"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceMoveState",
+        "modelAsString": true
+      }
+    },
+    "RestoreSettings": {
+      "type": "object",
+      "description": "Restore Settings  of the vault",
+      "properties": {
+        "crossSubscriptionRestoreSettings": {
+          "$ref": "#/definitions/CrossSubscriptionRestoreSettings",
+          "description": "Settings for CrossSubscriptionRestore"
+        }
+      }
+    },
+    "SecureScoreLevel": {
+      "type": "string",
+      "description": "Secure Score of Recovery Services Vault",
+      "enum": [
+        "None",
+        "Minimum",
+        "Adequate",
+        "Maximum"
+      ],
+      "x-ms-enum": {
+        "name": "SecureScoreLevel",
+        "modelAsString": true
+      }
+    },
+    "SecuritySettings": {
+      "type": "object",
+      "description": "Security Settings of the vault",
+      "properties": {
+        "immutabilitySettings": {
+          "$ref": "#/definitions/ImmutabilitySettings",
+          "description": "Immutability Settings of a vault"
+        },
+        "softDeleteSettings": {
+          "$ref": "#/definitions/SoftDeleteSettings",
+          "description": "Soft delete Settings of a vault"
+        },
+        "multiUserAuthorization": {
+          "$ref": "#/definitions/MultiUserAuthorization",
+          "description": "MUA Settings of a vault",
+          "readOnly": true
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "Identifies the unique system identifier for each Azure resource.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName",
+          "description": "Name of SKU is RS0 (Recovery Services 0th version) and the tier is standard tier. They do not have affect on backend storage redundancy or any other vault settings. To manage storage redundancy, use the backupstorageconfig"
+        },
+        "tier": {
+          "type": "string",
+          "description": "The Sku tier."
+        },
+        "family": {
+          "type": "string",
+          "description": "The sku family"
+        },
+        "size": {
+          "type": "string",
+          "description": "The sku size"
+        },
+        "capacity": {
+          "type": "string",
+          "description": "The sku capacity"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "Name of SKU is RS0 (Recovery Services 0th version) and the tier is standard tier. They do not have affect on backend storage redundancy or any other vault settings. To manage storage redundancy, use the backupstorageconfig",
+      "enum": [
+        "Standard",
+        "RS0"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true
+      }
+    },
+    "SoftDeleteSettings": {
+      "type": "object",
+      "description": "Soft delete Settings of vault",
+      "properties": {
+        "softDeleteState": {
+          "$ref": "#/definitions/SoftDeleteState"
+        },
+        "softDeleteRetentionPeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Soft delete retention period in days"
+        }
+      }
+    },
+    "SoftDeleteState": {
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "Enabled",
+        "Disabled",
+        "AlwaysON"
+      ],
+      "x-ms-enum": {
+        "name": "SoftDeleteState",
+        "modelAsString": true
+      }
+    },
+    "StandardTierStorageRedundancy": {
+      "type": "string",
+      "description": "The storage redundancy setting of a vault",
+      "enum": [
+        "LocallyRedundant",
+        "GeoRedundant",
+        "ZoneRedundant"
+      ],
+      "x-ms-enum": {
+        "name": "StandardTierStorageRedundancy",
+        "modelAsString": true
+      }
+    },
+    "TriggerType": {
+      "type": "string",
+      "description": "The way the vault upgrade was triggered.",
+      "enum": [
+        "UserTriggered",
+        "ForcedUpgrade"
+      ],
+      "x-ms-enum": {
+        "name": "TriggerType",
+        "modelAsString": true
+      }
+    },
+    "UpgradeDetails": {
+      "type": "object",
+      "description": "Details for upgrading vault.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "ID of the vault upgrade operation.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC time at which the upgrade operation has started.",
+          "readOnly": true
+        },
+        "lastUpdatedTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC time at which the upgrade operation status was last updated.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC time at which the upgrade operation has ended.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/VaultUpgradeState",
+          "description": "Status of the vault upgrade operation.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Message to the user containing information about the upgrade operation.",
+          "readOnly": true
+        },
+        "triggerType": {
+          "$ref": "#/definitions/TriggerType",
+          "description": "The way the vault upgrade was triggered.",
+          "readOnly": true
+        },
+        "upgradedResourceId": {
+          "type": "string",
+          "description": "Resource ID of the upgraded vault.",
+          "readOnly": true
+        },
+        "previousResourceId": {
+          "type": "string",
+          "description": "Resource ID of the vault before the upgrade.",
+          "readOnly": true
+        }
+      }
+    },
+    "UsagesUnit": {
+      "type": "string",
+      "description": "Unit of the usage.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "Percent",
+        "CountPerSecond",
+        "BytesPerSecond"
+      ],
+      "x-ms-enum": {
+        "name": "UsagesUnit",
+        "modelAsString": true
+      }
+    },
+    "UserIdentity": {
+      "type": "object",
+      "description": "A resource identity that is managed by the user of the service.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of the user-assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the user-assigned identity.",
+          "readOnly": true
+        }
+      }
+    },
+    "Vault": {
+      "type": "object",
+      "description": "Resource information, as returned by the resource provider.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultProperties",
+          "description": "Properties of the vault.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VaultCertificateResponse": {
+      "type": "object",
+      "description": "Certificate corresponding to a vault that can be used by clients to register themselves with the vault.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name associated with the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id represents the complete path to the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ResourceCertificateDetails",
+          "description": "Certificate details representing the Vault credentials."
+        }
+      }
+    },
+    "VaultExtendedInfoProperties": {
+      "type": "object",
+      "description": "Vault extended information.",
+      "properties": {
+        "integrityKey": {
+          "type": "string",
+          "description": "Integrity key."
+        },
+        "encryptionKey": {
+          "type": "string",
+          "description": "Encryption key."
+        },
+        "encryptionKeyThumbprint": {
+          "type": "string",
+          "description": "Encryption key thumbprint."
+        },
+        "algorithm": {
+          "type": "string",
+          "description": "Algorithm for Vault ExtendedInfo"
+        }
+      }
+    },
+    "VaultListResult": {
+      "type": "object",
+      "description": "The response of a Vault list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Vault items on this page",
+          "items": {
+            "$ref": "#/definitions/Vault"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VaultPrivateEndpointState": {
+      "type": "string",
+      "description": "Private endpoint state for backup.",
+      "enum": [
+        "None",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "VaultPrivateEndpointState",
+        "modelAsString": true
+      }
+    },
+    "VaultProperties": {
+      "type": "object",
+      "description": "Properties of the vault.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "upgradeDetails": {
+          "$ref": "#/definitions/UpgradeDetails",
+          "description": "Details for upgrading vault."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connection.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionVaultProperties"
+          },
+          "readOnly": true
+        },
+        "privateEndpointStateForBackup": {
+          "$ref": "#/definitions/VaultPrivateEndpointState",
+          "description": "Private endpoint state for backup.",
+          "readOnly": true
+        },
+        "privateEndpointStateForSiteRecovery": {
+          "$ref": "#/definitions/VaultPrivateEndpointState",
+          "description": "Private endpoint state for site recovery.",
+          "readOnly": true
+        },
+        "encryption": {
+          "$ref": "#/definitions/VaultPropertiesEncryption",
+          "description": "Customer Managed Key details of the resource."
+        },
+        "moveDetails": {
+          "$ref": "#/definitions/VaultPropertiesMoveDetails",
+          "description": "The details of the latest move operation performed on the Azure Resource"
+        },
+        "moveState": {
+          "$ref": "#/definitions/ResourceMoveState",
+          "description": "The State of the Resource after the move operation",
+          "readOnly": true
+        },
+        "backupStorageVersion": {
+          "$ref": "#/definitions/BackupStorageVersion",
+          "description": "Backup storage version",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "property to enable or disable resource provider inbound network traffic from public clients"
+        },
+        "monitoringSettings": {
+          "$ref": "#/definitions/MonitoringSettings",
+          "description": "Monitoring Settings of the vault"
+        },
+        "restoreSettings": {
+          "$ref": "#/definitions/RestoreSettings",
+          "description": "Restore Settings of the vault"
+        },
+        "redundancySettings": {
+          "$ref": "#/definitions/VaultPropertiesRedundancySettings",
+          "description": "The redundancy Settings of a Vault"
+        },
+        "securitySettings": {
+          "$ref": "#/definitions/SecuritySettings",
+          "description": "Security Settings of the vault"
+        },
+        "secureScore": {
+          "$ref": "#/definitions/SecureScoreLevel",
+          "description": "Secure Score of Recovery Services Vault",
+          "readOnly": true
+        }
+      }
+    },
+    "VaultPropertiesEncryption": {
+      "type": "object",
+      "description": "Customer Managed Key details of the resource.",
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/CmkKeyVaultProperties",
+          "description": "The properties of the Key Vault which hosts CMK"
+        },
+        "kekIdentity": {
+          "$ref": "#/definitions/CmkKekIdentity",
+          "description": "The details of the identity used for CMK"
+        },
+        "infrastructureEncryption": {
+          "$ref": "#/definitions/InfrastructureEncryptionState",
+          "description": "Enabling/Disabling the Double Encryption state"
+        }
+      }
+    },
+    "VaultPropertiesMoveDetails": {
+      "type": "object",
+      "description": "The details of the latest move operation performed on the Azure Resource",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "OperationId of the Resource Move Operation",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start Time of the Resource Move Operation",
+          "readOnly": true
+        },
+        "completionTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End Time of the Resource Move Operation",
+          "readOnly": true
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Source Resource of the Resource Move Operation",
+          "readOnly": true
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Target Resource of the Resource Move Operation",
+          "readOnly": true
+        }
+      }
+    },
+    "VaultPropertiesRedundancySettings": {
+      "type": "object",
+      "description": "The redundancy Settings of a Vault",
+      "properties": {
+        "standardTierStorageRedundancy": {
+          "$ref": "#/definitions/StandardTierStorageRedundancy",
+          "description": "The storage redundancy setting of a vault",
+          "readOnly": true
+        },
+        "crossRegionRestore": {
+          "$ref": "#/definitions/CrossRegionRestore",
+          "description": "Flag to show if Cross Region Restore is enabled on the Vault or not",
+          "readOnly": true
+        }
+      }
+    },
+    "VaultSubResourceType": {
+      "type": "string",
+      "description": "Subresource type for vault AzureBackup, AzureBackup_secondary or AzureSiteRecovery",
+      "enum": [
+        "AzureBackup",
+        "AzureBackup_secondary",
+        "AzureSiteRecovery"
+      ],
+      "x-ms-enum": {
+        "name": "VaultSubResourceType",
+        "modelAsString": true
+      }
+    },
+    "VaultUpgradeState": {
+      "type": "string",
+      "description": "Status of the vault upgrade operation.",
+      "enum": [
+        "Unknown",
+        "InProgress",
+        "Upgraded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "VaultUpgradeState",
+        "modelAsString": true
+      }
+    },
+    "VaultUsage": {
+      "type": "object",
+      "description": "Usages of a vault.",
+      "properties": {
+        "unit": {
+          "$ref": "#/definitions/UsagesUnit",
+          "description": "Unit of the usage."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "description": "Quota period of usage."
+        },
+        "nextResetTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Next reset time of usage."
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Current value of usage."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Limit of usage."
+        },
+        "name": {
+          "$ref": "#/definitions/NameInfo",
+          "description": "Name of usage."
+        }
+      }
+    },
+    "VaultUsageList": {
+      "type": "object",
+      "description": "Usage for vault.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of usages for the given vault.",
+          "items": {
+            "$ref": "#/definitions/VaultUsage"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2023-04-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_04_01",
+            "value": "2023-04-01",
+            "description": "The 2023-04-01 API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

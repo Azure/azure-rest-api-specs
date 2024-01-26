@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2023-01-31",
+    "privateEndpointConnection": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "Approved by johndoe@company.com.",
+          "status": "Approved"
+        }
+      }
+    },
+    "privateEndpointConnectionName": "myPrivateConnection",
+    "resourceGroupName": "resRg",
+    "resourceName": "myDigitalTwinsService",
+    "subscriptionId": "50016170-c839-41ba-a724-51e9df440b9e"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myPrivateConnection",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/privateEndpointConnections",
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/privateEndpointConnections/myPrivateConnection",
+        "properties": {
+          "groupIds": [
+            "digitalTwinsInstance"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourceGroups/resRg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by johndoe@company.com.",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myPrivateConnection",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/privateEndpointConnections",
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/privateEndpointConnections/myPrivateConnection",
+        "properties": {
+          "groupIds": [
+            "digitalTwinsInstance"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourceGroups/resRg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Awaiting approval.",
+            "status": "Pending"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/providers/Microsoft.DigitalTwins/locations/westus2/operationStatuses/12345678-1234-1234-123456789012",
+        "location": "https://management.azure.com/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/providers/Microsoft.DigitalTwins/locations/westus2/operationResults/12345678-1234-1234-123456789012",
+        "retry-after": "10"
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+  "title": "Update the status of a private endpoint connection with the given name"
+}

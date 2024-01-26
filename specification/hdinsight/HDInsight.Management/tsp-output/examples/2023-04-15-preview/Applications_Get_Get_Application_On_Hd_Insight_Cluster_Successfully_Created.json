@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2023-04-15-preview",
+    "applicationName": "app",
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "app",
+        "type": "Microsoft.HDInsight/clusters/applications",
+        "etag": "CF938302-6B4D-44A0-A6D2-C0D67E847AEC",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/app",
+        "properties": {
+          "applicationState": "Running",
+          "applicationType": "CustomApplication",
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "edgenode",
+                "hardwareProfile": {
+                  "vmSize": "Standard_D12_v2"
+                },
+                "targetInstanceCount": 1
+              }
+            ]
+          },
+          "createdDate": "2017-03-22T21:34:39.293",
+          "httpsEndpoints": [
+            {
+              "accessModes": [
+                "WebPage"
+              ],
+              "destinationPort": 20000,
+              "location": "https://cluster1.apps.azurehdinsight.net:443",
+              "publicPort": 443
+            }
+          ],
+          "installScriptActions": [
+            {
+              "name": "app-install",
+              "roles": [
+                "edgenode"
+              ],
+              "uri": "http://app.com/public/hdi-app/20170301/app-install.sh"
+            }
+          ],
+          "marketplaceIdentifier": "appMarketId",
+          "provisioningState": "Succeeded",
+          "sshEndpoints": [
+            {
+              "destinationPort": 22,
+              "location": "cluster1-ssh.azurehdinsight.net:22",
+              "publicPort": 22
+            }
+          ],
+          "uninstallScriptActions": []
+        },
+        "tags": {
+          "key1": "val1"
+        }
+      }
+    }
+  },
+  "operationId": "Applications_Get",
+  "title": "Get application on HDInsight cluster successfully created."
+}

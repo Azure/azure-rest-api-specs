@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2016-03-01",
+    "resourceGroupName": "Rac46PostSwapRG",
+    "ruleName": "chiricutin",
+    "subscriptionId": "b67f7fec-69fc-4974-9099-a26bd6ffeda3"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "chiricutin",
+        "type": "Microsoft.Insights/alertRules",
+        "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin",
+        "location": "West US",
+        "properties": {
+          "name": "chiricutin",
+          "description": "Pura Vida",
+          "actions": [],
+          "condition": {
+            "dataSource": {
+              "metricName": "Requests",
+              "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+              "resourceUri": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest"
+            },
+            "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+            "operator": "GreaterThan",
+            "threshold": 3,
+            "timeAggregation": "Total",
+            "windowSize": "PT5M"
+          },
+          "isEnabled": true,
+          "lastUpdatedTime": "2016-11-23T21:23:52.0221265Z"
+        },
+        "tags": {
+          "$type": "Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage",
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AlertRules_Get",
+  "title": "Get an alert rule"
+}
