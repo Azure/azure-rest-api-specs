@@ -443,6 +443,16 @@
             "description": "Unique ID of an alert instance.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "comment",
+            "in": "body",
+            "description": "reason of change alert state",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            },
+            "x-ms-client-name": "comment"
           }
         ],
         "responses": {

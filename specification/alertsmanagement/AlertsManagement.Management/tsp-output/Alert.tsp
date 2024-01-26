@@ -162,7 +162,7 @@ interface Alerts {
    */
   changeState is ArmResourceActionSync<
     Alert,
-    void,
+    Alert,
     Alert,
     {
       ...BaseParameters<Alert>;
