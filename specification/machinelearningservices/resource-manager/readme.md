@@ -53,7 +53,7 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: This is coming for wrong reason, just inheriting from JobBase.
     where:
-      - $.definitions["CustomModelFineTuning"]
+      - $.definitions["FineTuningJob"]
 ```
 ### Tag: package-preview-2023-08
 
