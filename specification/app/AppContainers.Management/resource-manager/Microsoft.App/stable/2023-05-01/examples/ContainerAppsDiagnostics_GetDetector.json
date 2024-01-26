@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2023-05-01",
+    "containerAppName": "mikono-capp-stage1",
+    "detectorName": "cappcontainerappnetworkIO",
+    "resourceGroupName": "mikono-workerapp-test-rg",
+    "subscriptionId": "f07f3711-b45e-40fe-a941-4e6d93f851e6"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cappcontainerappnetworkIO",
+        "type": "Microsoft.App/containerapps/detectors",
+        "id": "/subscriptions/f07f3711-b45e-40fe-a941-4e6d93f851e6/resourceGroups/mikono-workerapp-test-rg/providers/Microsoft.App/containerApps/mikono-capp-stage1/detectors/cappcontainerappnetworkIO",
+        "properties": {
+          "dataset": [
+            {
+              "renderingProperties": {
+                "type": 8,
+                "description": "",
+                "isVisible": true,
+                "title": "Container Apps Network Inbound "
+              },
+              "table": {
+                "columns": [
+                  {
+                    "columnName": "TimeStamp",
+                    "dataType": "DateTime"
+                  },
+                  {
+                    "columnName": "Metric",
+                    "dataType": "String"
+                  },
+                  {
+                    "columnName": "Average",
+                    "dataType": "Double"
+                  }
+                ],
+                "rows": [
+                  [
+                    "2022-03-15T21:35:00",
+                    "RxBytes",
+                    0
+                  ]
+                ],
+                "tableName": ""
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Container App Network Inbound and Outbound",
+            "type": "Detector",
+            "description": "This detector shows the Container App Network Inbound and Outbound.",
+            "author": "",
+            "category": "Availability and Performance",
+            "id": "cappcontainerappnetworkIO",
+            "score": 0,
+            "supportTopicList": []
+          },
+          "status": {
+            "statusId": 3
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerAppsDiagnostics_GetDetector",
+  "title": "Get Container App's diagnostics info"
+}
