@@ -353,7 +353,7 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
-    "CommunicationMessageType": {
+    "CommunicationMessageKind": {
       "type": "string",
       "description": "The type of message. Supports text, image, template.",
       "enum": [
@@ -362,7 +362,7 @@
         "template"
       ],
       "x-ms-enum": {
-        "name": "CommunicationMessageType",
+        "name": "CommunicationMessageKind",
         "modelAsString": true,
         "values": [
           {
@@ -453,7 +453,7 @@
         },
         "language": {
           "type": "string",
-          "description": "The codes for the supported languages for templates."
+          "description": "The template's language, in the ISO 639 format, consist of a two-letter language code followed by an optional two-letter country code, e.g., 'en' or 'en_US'."
         },
         "values": {
           "type": "array",
@@ -478,7 +478,7 @@
       "description": "The binding object to link values to the template specific locations",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/MessageTemplateBindingsType",
+          "$ref": "#/definitions/MessageTemplateBindingsKind",
           "description": "The type discriminator describing a template bindings type."
         }
       },
@@ -487,14 +487,14 @@
         "kind"
       ]
     },
-    "MessageTemplateBindingsType": {
+    "MessageTemplateBindingsKind": {
       "type": "string",
       "description": "The type of the message template.",
       "enum": [
         "whatsApp"
       ],
       "x-ms-enum": {
-        "name": "MessageTemplateBindingsType",
+        "name": "MessageTemplateBindingsKind",
         "modelAsString": true,
         "values": [
           {
@@ -572,7 +572,7 @@
         },
         "language": {
           "type": "string",
-          "description": "The template's language."
+          "description": "The template's language, in the ISO 639 format, consist of a two-letter language code followed by an optional two-letter country code, e.g., 'en' or 'en_US'."
         },
         "status": {
           "$ref": "#/definitions/MessageTemplateStatus",
@@ -709,7 +709,7 @@
           "description": "Name of the Template value"
         },
         "kind": {
-          "$ref": "#/definitions/MessageTemplateValueType",
+          "$ref": "#/definitions/MessageTemplateValueKind",
           "description": "The type discriminator describing a template parameter type."
         }
       },
@@ -719,7 +719,7 @@
         "kind"
       ]
     },
-    "MessageTemplateValueType": {
+    "MessageTemplateValueKind": {
       "type": "string",
       "description": "The type of the template parameter.",
       "enum": [
@@ -731,7 +731,7 @@
         "quickAction"
       ],
       "x-ms-enum": {
-        "name": "MessageTemplateValueType",
+        "name": "MessageTemplateValueKind",
         "modelAsString": true,
         "values": [
           {
@@ -811,7 +811,7 @@
           }
         },
         "kind": {
-          "$ref": "#/definitions/CommunicationMessageType",
+          "$ref": "#/definitions/CommunicationMessageKind",
           "description": "The type discriminator describing a notification type."
         }
       },
