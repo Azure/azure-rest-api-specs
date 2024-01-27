@@ -36,11 +36,7 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-01'
 input-file:
-  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/machineLearningServices.json
-  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/mfe.json    
-  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/registries.json
-  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceFeatures.json
-  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceRP.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/mfe.json
 suppressions:
   - code: PathForResourceAction
     reason: Keep identical to stable GA version to avoid breaking changes. https://dev.azure.com/msdata/Vienna/_workitems/edit/2803196
@@ -53,7 +49,12 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: This is coming for wrong reason, just inheriting from JobBase.
     where:
-      - $.definitions["FineTuningJob"]
+      - $.definitions["FineTuningJob"].allOf
+  - code: AvoidAdditionalProperties
+    reason: This is coming for wrong reason, just type is JobOutput.
+    where:
+      - $.definitions["FineTuningJob"].properties["outputs"]
+
 ```
 ### Tag: package-preview-2023-08
 
