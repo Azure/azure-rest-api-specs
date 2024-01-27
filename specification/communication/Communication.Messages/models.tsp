@@ -11,8 +11,8 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
-@versioned(AzureCommunicationMessagesService.Versions)
-namespace AzureCommunicationMessagesService;
+@versioned(Azure.Communication.MessagesService.Versions)
+namespace Azure.Communication.MessagesService;
 
 @access(Access.public)
 @doc("The type of message. Supports text, image, template.")

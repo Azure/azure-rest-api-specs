@@ -29,4 +29,4 @@ using Azure.Core.Traits;
 )
 @versioned(Versions)
 @doc("Azure Communication Messages Service")
-namespace AzureCommunicationMessagesService;
+namespace Azure.Communication.MessagesService;

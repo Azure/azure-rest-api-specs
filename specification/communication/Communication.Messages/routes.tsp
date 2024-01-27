@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace AzureCommunicationMessagesService;
+namespace Azure.Communication.MessagesService;
 
 alias ServiceTraits = SupportsRepeatableRequests &
   NoConditionalRequests &
