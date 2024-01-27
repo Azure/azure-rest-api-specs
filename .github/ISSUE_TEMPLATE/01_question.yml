@@ -1,0 +1,37 @@
+name: Question/Query
+description: Use this template to file a question/query for the API Spec team that are not bugs or feature requests.
+title: "[Question]"
+
+labels:
+  - question
+
+body:
+  - type: input
+    id: api_spec
+    attributes:
+      label: API Spec and version
+      description: "Path to the API Spec and version"
+      placeholder: "e.g. appconfiguration/data-plane 2023-11-01, or liftrqumulo/Qumulo.Management 1.0.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: background
+    attributes:
+      label: Question/Query
+      description: How can we help?
+      placeholder: Description
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        Please provide more information on your environment:
+          * Hosting platform or OS and .NET runtime version (`dotnet --info` output for .NET Core projects): [e.g. Azure AppService or Windows 10 .NET Framework 4.8]
+          * IDE and version : [e.g. Visual Studio 16.3]
+      placeholder: Environment
+    validations:
+      required: false
