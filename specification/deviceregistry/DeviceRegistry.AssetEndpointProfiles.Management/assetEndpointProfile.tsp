@@ -118,19 +118,19 @@ model OwnCertificate {
 interface AssetEndpointProfiles {
   @Autorest.example(
     "./examples/assetEndpointProfiles/Get_AssetEndpointProfile.json",
-    "Get an Asset Endpoint Profile"
+    "Get an Asset Endpoint Profile."
   )
   get is ArmResourceRead<AssetEndpointProfile>;
 
   @Autorest.example(
     "./examples/assetEndpointProfiles/Create_AssetEndpointProfile.json",
-    "Create an Asset Endpoint Profile"
+    "Create an Asset Endpoint Profile."
   )
   createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
 
   @Autorest.example(
     "./examples/assetEndpointProfiles/Update_AssetEndpointProfile.json",
-    "Patch a Asset Endpoint Profile"
+    "Patch a Asset Endpoint Profile."
   )
   update is ArmResourcePatchAsync<
     AssetEndpointProfile,
@@ -139,19 +139,19 @@ interface AssetEndpointProfiles {
 
   @Autorest.example(
     "./examples/assetEndpointProfiles/Delete_AssetEndpointProfile.json",
-    "Delete an Asset Endpoint Profile"
+    "Delete an Asset Endpoint Profile."
   )
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;
 
   @Autorest.example(
     "./examples/assetEndpointProfiles/List_AssetEndpointProfiles_ResourceGroup.json",
-    "List Asset Endpoint Profiles in a Resource Group"
+    "List Asset Endpoint Profiles in a Resource Group."
   )
   listByResourceGroup is ArmResourceListByParent<AssetEndpointProfile>;
 
   @Autorest.example(
     "./examples/assetEndpointProfiles/List_AssetEndpointProfiles_Subscription.json",
-    "List Asset Endpoint Profiles in a Subscription"
+    "List Asset Endpoint Profiles in a Subscription."
   )
   listBySubscription is ArmListBySubscription<AssetEndpointProfile>;
 }
