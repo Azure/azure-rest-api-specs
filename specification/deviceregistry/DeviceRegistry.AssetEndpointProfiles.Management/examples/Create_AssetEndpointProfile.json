@@ -1,22 +1,33 @@
 {
-  "operationId": "Update_AssetEndpointProfile",
-  "title": "Update_AssetEndpointProfile",
+  "operationId": "Create_AssetEndpointProfile",
+  "title": "Create_AssetEndpointProfile",
   "parameters": {
     "api-version": "2023-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "assetEndpointProfileName": "myAssetEndpointProfile",
+    "assetEndpointProfileName": "my-assetendpointprofile",
     "assetEndpointProfile": {
+      "location": "West Europe",
+      "extendedLocation": {
+        "type": "CustomLocation",
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+      },
+      "tags": {
+        "site": "building-1"
+      },
       "properties": {
-        "targetAddress": "https://www.example.com/myTargetAddress"
+        "targetAddress": "https://www.example.com/myTargetAddress",
+        "userAuthentication": {
+          "mode": "Anonymous"
+        }
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assetEndpointProfiles/myAssetEndpointProfile",
-        "name": "myAssetEndpointProfile",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assetEndpointProfiles/my-assetendpointprofile",
+        "name": "my-assetendpointprofile",
         "type": "Microsoft.DeviceRegistry/assetEndpointProfiles",
         "location": "West Europe",
         "extendedLocation": {
@@ -44,13 +55,10 @@
         }
       }
     },
-    "202": {
-      "headers": {
-        "Location": "https://contoso.com/operationstatus"
-      },
+    "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assetEndpointProfiles/myAssetEndpointProfile1",
-        "name": "myAssetEndpointProfile1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assetEndpointProfiles/my-assetendpointprofile",
+        "name": "my-assetendpointprofile",
         "type": "Microsoft.DeviceRegistry/assetEndpointProfiles",
         "location": "West Europe",
         "extendedLocation": {

@@ -1,0 +1,771 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.DeviceRegistry management service",
+    "version": "2023-10-01-preview",
+    "description": "Microsoft.DeviceRegistry Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "OperationStatus"
+    },
+    {
+      "name": "Devices"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DeviceRegistry/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/devices": {
+      "get": {
+        "operationId": "Devices_ListBySubscription",
+        "tags": [
+          "Devices"
+        ],
+        "description": "List Device resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List devices in a subscription": {
+            "$ref": "./examples/devices/List_Devices_Subscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatus_Get",
+        "tags": [
+          "OperationStatus"
+        ],
+        "description": "Returns the current status of an async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of an async operation": {
+            "$ref": "./examples/Get_OperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/devices": {
+      "get": {
+        "operationId": "Devices_ListByResourceGroup",
+        "tags": [
+          "Devices"
+        ],
+        "description": "List Device resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List devices in a resource group": {
+            "$ref": "./examples/devices/List_Devices_ResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/devices/{deviceName}": {
+      "get": {
+        "operationId": "Devices_Get",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Get a Device",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a device": {
+            "$ref": "./examples/devices/Get_Device.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Devices_CreateOrReplace",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Create a Device",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Device' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "201": {
+            "description": "Resource 'Device' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a device with attributes": {
+            "$ref": "./examples/devices/Create_Device_With_Attributes.json"
+          },
+          "Create a device with endpoints": {
+            "$ref": "./examples/devices/Create_Device_With_Endpoints.json"
+          },
+          "Create a device with external device ID": {
+            "$ref": "./examples/devices/Create_Device_With_ExternalDeviceId.json"
+          },
+          "Create a device without external device ID": {
+            "$ref": "./examples/devices/Create_Device_Without_ExternalDeviceId.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Devices_Update",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Update a Device",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a device": {
+            "$ref": "./examples/devices/Update_Device.json"
+          },
+          "Update a device with new endpoints": {
+            "$ref": "./examples/devices/Update_Device_With_New_Endpoints.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Devices_Delete",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Delete a Device",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a device": {
+            "$ref": "./examples/devices/Delete_Device.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Device": {
+      "type": "object",
+      "description": "Device Model as ARM resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Tag",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DeviceEndpoints": {
+      "type": "object",
+      "description": "Property bag containing the device's unassigned and assigned endpoints",
+      "properties": {
+        "assigned": {
+          "type": "array",
+          "description": "Actively used endpoints a device can use to connect to several services.",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "address"
+          ]
+        },
+        "unassigned": {
+          "type": "array",
+          "description": "List of most recently removed endpoints.",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "address"
+          ]
+        }
+      },
+      "required": [
+        "assigned"
+      ]
+    },
+    "DeviceEndpointsUpdate": {
+      "type": "object",
+      "description": "Property bag containing the device's unassigned and assigned endpoints",
+      "properties": {
+        "assigned": {
+          "type": "array",
+          "description": "Actively used endpoints a device can use to connect to several services.",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "address"
+          ]
+        },
+        "unassigned": {
+          "type": "array",
+          "description": "List of most recently removed endpoints.",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "address"
+          ]
+        }
+      }
+    },
+    "DeviceIdentity": {
+      "type": "object",
+      "description": "The backing AAD identity for the device used for authentication to other services.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal id for the device resource.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant id for the AAD tenant.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceListResult": {
+      "type": "object",
+      "description": "The response of a Device list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Device items on this page",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceProperties": {
+      "type": "object",
+      "description": "Defines the device properties.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Gets a unique identifier for this resource.",
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with AAD.",
+          "default": true
+        },
+        "externalDeviceId": {
+          "type": "string",
+          "description": "Gets the device Id provided by customer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deviceTemplateId": {
+          "type": "string",
+          "description": "Device Template Id used to create a device.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deviceGroupId": {
+          "type": "string",
+          "description": "The AAD group the device is a member of."
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Hardware manufacturer name.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "Hardware model name.",
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "operating system name.",
+          "readOnly": true
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "operating system version."
+        },
+        "identity": {
+          "$ref": "#/definitions/DeviceIdentity",
+          "description": "Identity for the resource"
+        },
+        "endpoints": {
+          "$ref": "#/definitions/DeviceEndpoints",
+          "description": "Property bag containing the device's unassigned and assigned endpoints"
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Device.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeviceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Device.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with AAD.",
+          "default": true
+        },
+        "deviceGroupId": {
+          "type": "string",
+          "description": "The AAD group the device is a member of."
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "operating system version."
+        },
+        "identity": {
+          "$ref": "#/definitions/DeviceIdentity",
+          "description": "Identity for the resource"
+        },
+        "endpoints": {
+          "$ref": "#/definitions/DeviceEndpointsUpdate",
+          "description": "Property bag containing the device's unassigned and assigned endpoints"
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "Endpoint": {
+      "type": "object",
+      "description": "Connection endpoint url a device can use to connect to a service.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of connection endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "Fully qualified domain name."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted by the server."
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

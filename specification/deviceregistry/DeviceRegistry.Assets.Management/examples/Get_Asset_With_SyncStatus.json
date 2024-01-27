@@ -1,17 +1,17 @@
 {
-  "title": "Get_Asset",
-  "operationId": "Get_Asset",
+  "title": "Get_Asset_With_SyncStatus",
+  "operationId": "Get_Asset_With_SyncStatus",
   "parameters": {
     "api-version": "2023-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "assetName": "myAsset"
+    "assetName": "my-asset"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assets/myAsset",
-        "name": "myAsset",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assets/my-asset",
+        "name": "my-asset",
         "type": "Microsoft.DeviceRegistry/assets",
         "location": "West Europe",
         "extendedLocation": {
@@ -36,7 +36,7 @@
           "externalAssetId": "8ZBA6LRHU0A458969",
           "displayName": "AssetDisplayName",
           "description": "This is a sample Asset",
-          "assetEndpointProfileUri": "https://www.example.com/myConnectivityProfile",
+          "assetEndpointProfileUri": "https://www.example.com/myAssetEndpointProfile",
           "version": 73766,
           "manufacturer": "Contoso",
           "manufacturerUri": "https://www.contoso.com/manufacturerUri",
@@ -76,6 +76,15 @@
               "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":8,\"queueSize\":4}"
             }
           ],
+          "status": {
+            "errors": [
+              {
+                "code": 500,
+                "message": "Internal Server Error"
+              }
+            ],
+            "version": 1
+          },
           "provisioningState": "Succeeded"
         }
       }

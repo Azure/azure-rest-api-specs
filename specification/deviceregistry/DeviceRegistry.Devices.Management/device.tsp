@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./common/provisioningState.tsp";
+import "../common/provisioningState.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -18,7 +18,6 @@ model Device is TrackedResource<DeviceProperties> {
   @doc("Name of the device.")
   @key("deviceName")
   @segment("devices")
-  @pattern("^[0-9a-z][a-z0-9-]*$")
   @path
   @minLength(3)
   @maxLength(64)
