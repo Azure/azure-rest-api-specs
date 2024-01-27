@@ -134,7 +134,7 @@ model MessageTemplate {
   @doc("Name of the template.")
   name: string;
 
-  @doc("The codes for the supported languages for templates.")
+  @doc("The template's language, in the ISO 639 format, consist of a two-letter language code followed by an optional two-letter country code, e.g., 'en' or 'en_US'.")
   language: string;
 
   @doc("The template values.")
@@ -349,7 +349,7 @@ model MessageTemplateItem {
   @doc("The template's name.")
   name: string;
 
-  @doc("The template's language.")
+  @doc("The template's language, in the ISO 639 format, consist of a two-letter language code followed by an optional two-letter country code, e.g., 'en' or 'en_US'.")
   language: string;
 
   @doc("The aggregated template status.")
