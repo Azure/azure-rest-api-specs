@@ -2634,6 +2634,225 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKey": {
+      "get": {
+        "operationId": "VpnLinkConnections_SharedKey_Get",
+        "description": "Get the shared key of VpnLink connection specified.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn connection."
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn link connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the shared key of VpnSiteLinkConnection.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteLinkConnectionSharedKeyGet": {
+            "$ref": "./examples/VpnSiteLinkConnectionSharedKeyGet.json"
+          }
+        },
+      },
+      "post": {
+        "tags": [
+          "vpnLinkConnections"
+        ],
+        "operationId": "VpnLinkConnections_Put_SharedKey",
+        "description": "Put the shared key of VpnLink connection specified.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn connection."
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn link connection."
+          },
+          {
+            "name": "sharedKey",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            },
+            "description": "VpnsiteLinkConnection sharedKey to specify for set."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation set the shared key of vpnsitelinkconnection.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation set shared key of vpnsitelinkconnection will complete asynchronously."
+          },
+          "default": {
+            "description": "The operation set shared key of vpnsitelinkconnection could not be completed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResetVpnLinkConnection": {
+            "$ref": "./examples/VpnSiteLinkConnectionSharedKeyPut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetsharedkey": {
+      "post": {
+        "tags": [
+          "vpnLinkConnections"
+        ],
+        "operationId": "VpnLinkConnections_Put_SharedKey",
+        "description": "Put the shared key of VpnLink connection specified.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn connection."
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn link connection."
+          },
+          {
+            "name": "resetSharedKey",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            },
+            "description": "VpnsiteLinkConnection resetSharedKey to specify for reset."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation Reset shared key of vpnsitelinkconnection.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionResetSharedKey"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation ResetConnection will complete asynchronously."
+          },
+          "default": {
+            "description": "The operation ResetConnection could not be completed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResetVpnLinkConnection": {
+            "$ref": "./examples/VpnSiteLinkConnectionSharedKeyReset.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways": {
       "get": {
         "operationId": "VpnGateways_ListByResourceGroup",
@@ -7744,6 +7963,11 @@
             "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "List of egress NatRules."
+        },
+        "dpdTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "DPD timeout in seconds for vpnsite link connection."
         }
       },
       "description": "Parameters for VpnConnection."
@@ -9712,6 +9936,27 @@
       "x-ms-enum": {
         "name": "VnetLocalRouteOverrideCriteria",
         "modelAsString": true
+      }
+    },
+    "ConnectionSharedKey": {
+      "description": "Shared key of VpnSiteLinkConnection.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value of ConnectionSharedKey."
+        }
+      }
+    },
+    "ConnectionResetSharedKey": {
+      "description": "Reset shared key of VpnSiteLinkConnection.",
+      "properties": {
+        "keyLength": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "The value of ConnectionResetSharedKey."
+        }
       }
     }
   }
