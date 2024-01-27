@@ -44,6 +44,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 enum ProvisioningState {
   ...ResourceProvisioningState,
 
-  @doc("Virtual machine is being deleted.")
+  @doc("Resource is being deleted.")
   Deleting,
 }
