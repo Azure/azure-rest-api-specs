@@ -113,10 +113,7 @@ model MediaNotificationContent extends NotificationContent {
   @doc("Optional text content.")
   content?: string;
 
-  @doc("""
-  A media url for the file. Required if the type is one of the supported media
-  types, e.g. image
-  """)
+  @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
 }
 
@@ -163,11 +160,7 @@ model MessageTemplateText extends MessageTemplateValue {
   text: string;
 }
 
-@doc("""
-The message template's media value information.
-Could be an image, document or
-video.
-""")
+@doc("The message template's media value information. Could be an image, document or video.")
 model MessageTemplateMedia {
   @projectedName("csharp", "uri")
   @doc("The (public) URL of the media.")
@@ -292,11 +285,7 @@ model MessageReceipt {
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateItem extends MessageTemplateItem {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Payload being returned from WhatsApp with no guaranteed object type."
-  @doc("""
-WhatsApp platform's template content
-This is the payload returned from WhatsApp
-API.
-""")
+  @doc("WhatsApp platform's template content. This is the payload returned from WhatsApp API.")
   content?: unknown;
 
   @doc("Message template response type is whatsApp.")
