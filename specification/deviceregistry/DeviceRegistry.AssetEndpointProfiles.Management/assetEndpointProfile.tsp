@@ -130,7 +130,7 @@ interface AssetEndpointProfiles {
 
   @Autorest.example(
     "./examples/assetEndpointProfiles/Update_AssetEndpointProfile.json",
-    "Patch a Asset Endpoint Profile."
+    "Patch an Asset Endpoint Profile."
   )
   update is ArmResourcePatchAsync<
     AssetEndpointProfile,
