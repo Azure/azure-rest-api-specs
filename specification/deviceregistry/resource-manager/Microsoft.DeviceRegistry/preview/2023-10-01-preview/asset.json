@@ -750,27 +750,27 @@
           {
             "name": "None",
             "value": "none",
-            "description": "No mapping to OpenTelemetry"
+            "description": "No mapping to OpenTelemetry."
           },
           {
             "name": "Counter",
             "value": "counter",
-            "description": "Map as counter to OpenTelemetry"
+            "description": "Map as counter to OpenTelemetry."
           },
           {
             "name": "Gauge",
             "value": "gauge",
-            "description": "Map as gauge to OpenTelemetry"
+            "description": "Map as gauge to OpenTelemetry."
           },
           {
             "name": "Histogram",
             "value": "histogram",
-            "description": "Map as histogram to OpenTelemetry"
+            "description": "Map as histogram to OpenTelemetry."
           },
           {
             "name": "Log",
             "value": "log",
-            "description": "Map as log to OpenTelemetry"
+            "description": "Map as log to OpenTelemetry."
           }
         ]
       }
@@ -795,6 +795,10 @@
           "$ref": "#/definitions/EventObservabilityMode",
           "description": "An indication of how the event should be mapped to OpenTelemetry.",
           "default": "none"
+        },
+        "eventConfiguration": {
+          "type": "string",
+          "description": "Protocol-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
         }
       },
       "required": [
@@ -803,7 +807,7 @@
     },
     "EventObservabilityMode": {
       "type": "string",
-      "description": "Defines the event observability mode",
+      "description": "Defines the event observability mode.",
       "enum": [
         "none",
         "log"
@@ -815,12 +819,12 @@
           {
             "name": "None",
             "value": "none",
-            "description": "No mapping to OpenTelemetry"
+            "description": "No mapping to OpenTelemetry."
           },
           {
             "name": "Log",
             "value": "log",
-            "description": "Map as log to OpenTelemetry"
+            "description": "Map as log to OpenTelemetry."
           }
         ]
       }

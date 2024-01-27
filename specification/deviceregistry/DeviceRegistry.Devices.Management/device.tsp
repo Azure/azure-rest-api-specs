@@ -66,10 +66,10 @@ model DeviceProperties {
   @doc("operating system version.")
   operatingSystemVersion?: string;
 
-  @doc("Identity for the resource")
+  @doc("Identity for the resource.")
   identity?: DeviceIdentity;
 
-  @doc("Property bag containing the device's unassigned and assigned endpoints")
+  @doc("Property bag containing the device's unassigned and assigned endpoints.")
   endpoints?: DeviceEndpoints;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
@@ -92,7 +92,7 @@ model DeviceIdentity {
   tenantId?: string;
 }
 
-@doc("Property bag containing the device's unassigned and assigned endpoints")
+@doc("Property bag containing the device's unassigned and assigned endpoints.")
 model DeviceEndpoints {
   @doc("Actively used endpoints a device can use to connect to several services.")
   @extension("x-ms-identifiers", ["type", "address"])

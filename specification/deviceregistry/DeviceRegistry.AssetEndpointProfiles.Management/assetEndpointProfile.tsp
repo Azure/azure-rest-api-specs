@@ -55,7 +55,7 @@ model AssetEndpointProfileProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Definition of the client authentication mechanism to the server")
+@doc("Definition of the client authentication mechanism to the server.")
 model UserAuthentication {
   @doc("Defines the mode to authenticate the user of the client at the server.")
   // Default mode is Certificate
@@ -68,19 +68,19 @@ model UserAuthentication {
   x509Credentials?: X509Credentials;
 }
 
-@doc("The mode to authenticate the user of the client at the server")
+@doc("The mode to authenticate the user of the client at the server.")
 enum UserAuthenticationMode {
-  @doc("The user authentication mode is anonymous")
+  @doc("The user authentication mode is anonymous.")
   Anonymous,
 
-  @doc("The user authentication mode is an x509 certificate")
+  @doc("The user authentication mode is an x509 certificate.")
   Certificate,
 
-  @doc("The user authentication mode is a username and password")
+  @doc("The user authentication mode is a username and password.")
   UsernamePassword,
 }
 
-@doc("The credentials for authentication mode UsernamePassword")
+@doc("The credentials for authentication mode UsernamePassword.")
 model UsernamePasswordCredentials {
   @doc("A reference to secret containing the username.")
   usernameReference: string;
@@ -89,13 +89,13 @@ model UsernamePasswordCredentials {
   passwordReference: string;
 }
 
-@doc("The x509 certificate for authentication mode Certificate")
+@doc("The x509 certificate for authentication mode Certificate.")
 model X509Credentials {
   @doc("A reference to secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx).")
   certificateReference: string;
 }
 
-@doc("Definition of the authentication mechanism for the southbound connector")
+@doc("Definition of the authentication mechanism for the southbound connector.")
 model TransportAuthentication {
   @doc("Defines a reference to a secret which contains all certificates and private keys that can be used by the southbound connector connecting to the shop floor/OT device. The accepted extensions are .der for certificates and .pfx/.pem for private keys.")
   @extension("x-ms-identifiers", [])
@@ -110,7 +110,7 @@ model OwnCertificate {
   @doc("Secret Reference name (cert and private key).")
   certSecretReference?: string;
 
-  @doc("Secret Reference Name (Pfx or Pem password)")
+  @doc("Secret Reference Name (Pfx or Pem password).")
   certPasswordReference?: string;
 }
 

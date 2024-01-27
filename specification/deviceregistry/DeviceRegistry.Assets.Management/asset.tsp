@@ -134,19 +134,19 @@ model DataPoint {
 
 @doc("Defines the data point observability mode")
 enum DataPointsObservabilityMode {
-  @doc("No mapping to OpenTelemetry")
+  @doc("No mapping to OpenTelemetry.")
   None: "none",
 
-  @doc("Map as counter to OpenTelemetry")
+  @doc("Map as counter to OpenTelemetry.")
   Counter: "counter",
 
-  @doc("Map as gauge to OpenTelemetry")
+  @doc("Map as gauge to OpenTelemetry.")
   Gauge: "gauge",
 
-  @doc("Map as histogram to OpenTelemetry")
+  @doc("Map as histogram to OpenTelemetry.")
   Histogram: "histogram",
 
-  @doc("Map as log to OpenTelemetry")
+  @doc("Map as log to OpenTelemetry.")
   Log: "log",
 }
 
@@ -163,14 +163,17 @@ model Event {
 
   @doc("An indication of how the event should be mapped to OpenTelemetry.")
   observabilityMode?: EventObservabilityMode = EventObservabilityMode.None;
+
+  @doc("Protocol-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize.")
+  eventConfiguration?: string;
 }
 
-@doc("Defines the event observability mode")
+@doc("Defines the event observability mode.")
 enum EventObservabilityMode {
-  @doc("No mapping to OpenTelemetry")
+  @doc("No mapping to OpenTelemetry.")
   None: "none",
 
-  @doc("Map as log to OpenTelemetry")
+  @doc("Map as log to OpenTelemetry.")
   Log: "log",
 }
 
