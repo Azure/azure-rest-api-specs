@@ -18,7 +18,7 @@ interface NotificationMessagesClient
   extends Azure.Communication.MessagesService.NotificationMessagesOperations {
   @access(Access.internal, "csharp")
   @projectedName("csharp", "downloadMediaInternal")
-  downloadMedia is Azure.Communication.MessagesService.StreamOperations.downloadMedia;
+  downloadMedia is Azure.Communication.MessagesService.StreamOperations.getMedia;
 }
 
 @client({
