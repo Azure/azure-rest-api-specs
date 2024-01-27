@@ -132,7 +132,7 @@ model DataPoint {
   dataPointConfiguration?: string;
 }
 
-@doc("Defines the data point observability mode")
+@doc("Defines the data point observability mode.")
 enum DataPointsObservabilityMode {
   @doc("No mapping to OpenTelemetry.")
   None: "none",
@@ -198,7 +198,7 @@ model AssetStatusError {
 
 @armResourceOperations
 interface Assets {
-  @Autorest.example("./examples/assets/Get_Asset.json", "Get an Asset")
+  @Autorest.example("./examples/assets/Get_Asset.json", "Get an Asset.")
   @Autorest.example(
     "./examples/assets/Get_Asset_With_SyncStatus.json",
     "Get an Asset with Sync Status."

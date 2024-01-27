@@ -13,7 +13,7 @@ using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
-@doc("Device Model as ARM resource")
+@doc("Device Model as ARM resource.")
 model Device is TrackedResource<DeviceProperties> {
   @doc("Name of the device.")
   @key("deviceName")
@@ -25,7 +25,7 @@ model Device is TrackedResource<DeviceProperties> {
 
   // etag not included in TrackedResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @doc("Resource Tag")
+  @doc("Resource Tag.")
   @visibility("read")
   etag?: string;
 }
@@ -136,7 +136,7 @@ interface Devices {
   )
   createOrReplace is ArmResourceCreateOrReplaceAsync<Device>;
 
-  @Autorest.example("./examples/devices/Update_Device.json", "Update a device")
+  @Autorest.example("./examples/devices/Update_Device.json", "Update a device.")
   @Autorest.example(
     "./examples/devices/Update_Device_With_New_Endpoints.json",
     "Update a device with new endpoints."
