@@ -1,4 +1,3 @@
-
 using TypeSpec.Rest;
 
 namespace Fhir.R4;
@@ -106,7 +105,6 @@ Concept - reference to a terminology or just text
 Based on [FHIR CodeableConcept](https://www.hl7.org/fhir/R4/datatypes.html#CodeableConcept)
 """)
 model CodeableConcept is Element {
-
   @doc("Code defined by a terminology system")
   coding?: Array<Coding>;
 
@@ -175,7 +173,7 @@ model Reference is Element {
 An identifier intended for computation
 Based on [FHIR Identifier](https://www.hl7.org/fhir/R4/identifier.html)
 """)
-model Identifier is  Element {
+model Identifier is Element {
   @doc("usual | official | temp | secondary | old (If known)")
   use?: string;
 
