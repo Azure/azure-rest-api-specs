@@ -255,6 +255,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "operationId": "LoadTests_ListOutboundNetworkDependenciesEndpoints",
+        "tags": [
+          "LoadTests"
+        ],
+        "description": "Lists the endpoints that agents may call as part of load testing.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "loadTestName",
+            "in": "path",
+            "description": "Load Test name.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService.Draft/loadTests": {
       "get": {
         "operationId": "LoadTests_ListByResourceGroup",
@@ -523,51 +566,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService.Draft/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints": {
-      "get": {
-        "operationId": "LoadTests_ListOutboundNetworkDependenciesEndpoints",
-        "tags": [
-          "LoadTests"
-        ],
-        "description": "List OutboundEnvironmentEndpoint resources by LoadTestResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "loadTestName",
-            "in": "path",
-            "description": "Load Test name",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OutboundEnvironmentEndpointListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     }
   },
@@ -856,21 +854,6 @@
       "type": "object",
       "description": "A collection of related endpoints from the same service for which the Batch service requires outbound access.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "category": {
           "type": "string",
           "description": "The type of service that Azure Load Testing connects to.",
@@ -881,33 +864,27 @@
           "description": "The endpoints for this service to which the Batch service makes outbound calls.",
           "readOnly": true
         }
-      },
-      "required": [
-        "id",
-        "type",
-        "category"
-      ]
+      }
     },
-    "OutboundEnvironmentEndpointListResult": {
+    "OutboundEnvironmentEndpointCollection": {
       "type": "object",
-      "description": "The response of a OutboundEnvironmentEndpoint list operation.",
+      "description": "Values returned by the List operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The OutboundEnvironmentEndpoint items on this page",
+          "description": "The collection of outbound network dependency endpoints returned by the listing operation.",
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The continuation token."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "QuotaBucketRequest": {
       "type": "object",

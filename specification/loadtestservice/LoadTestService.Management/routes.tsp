@@ -78,9 +78,23 @@ interface LoadTests {
   update is ArmResourcePatchAsync<LoadTestResource, LoadTestProperties>;
   delete is ArmResourceDeleteAsync<LoadTestResource>;
   
+  // #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationId in already published GA spec is different from the auto generated one"
+  // @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
+  // outboundNetworkDependenciesEndpoint is ArmResourceListByParent<OutboundEnvironmentEndpoint>;
+
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationId in already published GA spec is different from the auto generated one"
+  @get
+  @doc("Lists the endpoints that agents may call as part of load testing.")
   @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
-  outboundNetworkDependenciesEndpoint is ArmResourceListByParent<OutboundEnvironmentEndpoint>;
+  @extension("x-ms-pageable", true)
+  @autoRoute
+  @action("outboundNetworkDependenciesEndpoints")
+  op outboundNetworkDependenciesEndpoint(...SubscriptionIdParameter, ...ResourceGroupParameter, ...ApiVersionParameter,
+    @path 
+    @doc("Load Test name.")
+    @segment("providers/Microsoft.LoadTestService/loadTests")
+    @extension("x-ms-parameter-location", "method")
+    loadTestName: string) : OutboundEnvironmentEndpointCollection | ErrorResponse;
 }
 
 @armResourceOperations

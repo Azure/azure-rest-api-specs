@@ -30,7 +30,7 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
 }
 
 @doc("Resources provisioning states.")
-enum ResourceState{
+enum ResourceState {
   @doc("Deleted state.")
   Deleted: "Deleted",
 
@@ -38,7 +38,7 @@ enum ResourceState{
 }
 
 @doc("Managed identity type to use for accessing encryption key Url.")
-enum EncryptionIdentityType{
+enum EncryptionIdentityType {
   @doc("System assigned identity.")
   SystemAssigned: "SystemAssigned",
 
@@ -69,20 +69,30 @@ model EndpointDependency {
 
 }
 
-@parentResource(LoadTestResource)
-@resource("outboundNetworkDependenciesEndpoints")
+// @parentResource(LoadTestResource)
+// @resource("outboundNetworkDependenciesEndpoints")
+// @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
+// model OutboundEnvironmentEndpoint is ArmResource{
+//   @key
+//   @doc("The type of service that Azure Load Testing connects to.")
+//   @visibility("read")
+//   category: string;
+
+//   @doc("The endpoints for this service to which the Batch service makes outbound calls.")
+//   @visibility("read")
+//   endpoints?: EndpointDependency;
+// }
+
 @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
-model OutboundEnvironmentEndpoint is ArmResource{
-  @key
+model OutboundEnvironmentEndpoint {
   @doc("The type of service that Azure Load Testing connects to.")
   @visibility("read")
-  category: string;
+  category?: string;
 
   @doc("The endpoints for this service to which the Batch service makes outbound calls.")
   @visibility("read")
   endpoints?: EndpointDependency;
 }
-
 
 @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
 model EncryptionIdentity{
@@ -213,3 +223,18 @@ model QuotaDimensions {
   @minLength(1)
   location?: string;
 }
+
+@doc("Values returned by the List operation.")
+model OutboundEnvironmentEndpointCollection{
+  @items
+  @visibility("read")
+  @doc("The collection of outbound network dependency endpoints returned by the listing operation.")
+  @extension("x-ms-identifiers", [])
+  value?: OutboundEnvironmentEndpoint[];
+
+  @doc("The continuation token.")
+  @nextLink
+  nextLink?: ResourceLocation<OutboundEnvironmentEndpoint>;
+}
+
+//model OutboundEnvironmentEndpointListResult2 is Azure.Core.Page<OutboundEnvironmentEndpoint2>;
