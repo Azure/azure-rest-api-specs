@@ -19,5 +19,5 @@ namespace ClientForAzureHealthInsights;
 interface PatientTimelineClient {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
-  InferPatientTimeline is AzureHealthInsights.PatientTimeline.createJob;
+  inferPatientTimeline is AzureHealthInsights.PatientTimeline.createJob;
 }
