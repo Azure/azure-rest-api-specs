@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace DocumentTranslationRestClient;
+namespace DocumentTranslationClient;
 
 @doc("Storage Source")
 enum StorageSource {
