@@ -2084,23 +2084,7 @@
       "properties": {
         "resourceType": {
           "type": "string",
-          "description": "The type of resource"
-        },
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "meta": {
-          "$ref": "#/definitions/Fhir.R4.Meta",
-          "description": "Metadata about the resource"
-        },
-        "implicitRules": {
-          "$ref": "#/definitions/Fhir.R4.fhirUri",
-          "description": "A set of rules under which this content was created"
-        },
-        "language": {
-          "type": "string",
-          "description": "Language of the resource content"
+          "description": "Discriminator property for DomainResource."
         },
         "text": {
           "$ref": "#/definitions/Fhir.R4.Narrative",
@@ -2132,7 +2116,11 @@
       "required": [
         "resourceType"
       ],
-      "additionalProperties": {}
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Resource"
+        }
+      ]
     },
     "Fhir.R4.Extension": {
       "type": "object",
@@ -2171,7 +2159,7 @@
         },
         "valueInteger": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Value as integer"
         },
         "valueRange": {
@@ -2385,7 +2373,7 @@
         },
         "valueInteger": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Actual result"
         },
         "valueRange": {
@@ -2517,7 +2505,7 @@
         },
         "valueInteger": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Value as integer"
         },
         "valueRange": {

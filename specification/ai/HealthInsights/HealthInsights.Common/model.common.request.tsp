@@ -1,7 +1,9 @@
+import "@azure-tools/typespec-client-generator-core";
 import "./model.common.shared.tsp";
 import "./model.common.fhir.elements.tsp";
 import "./model.common.fhir.resources.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
@@ -40,6 +42,7 @@ Patient structured information, including demographics and known structured clin
 }
 
 @doc("Patient structured information, including demographics and known structured clinical information.")
+@clientName("PatientDetails")
 model PatientInfo {
   @doc("The patient's sex.")
   sex?: PatientInfoSex;
@@ -53,6 +56,7 @@ model PatientInfo {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The patient's sex.")
+@clientName("PatientSex")
 enum PatientInfoSex {
   Female: "female",
   Male: "male",
