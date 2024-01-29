@@ -12,34 +12,34 @@
           "content": "can you tell me how to care for a parrot?"
         }
       ],
-      "dataSources": [
+      "data_sources": [
         {
-          "type": "AzureCognitiveSearch",
+          "type": "azure_search",
           "parameters": {
             "endpoint": "https://your-search-endpoint.search.windows.net/",
             "authentication": {
-              "type": "UserAssignedManagedIdentity",
-              "managedIdentityResourceId": "/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resource-name}"
+              "type": "user_assigned_managed_identity",
+              "managed_identity_resource_id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resource-name}"
             },
-            "indexName": "{index name}",
-            "queryType": "vector",
-            "embeddingDependency": {
-              "type": "DeploymentName",
+            "index_name": "{index name}",
+            "query_type": "vector",
+            "embedding_dependency": {
+              "type": "deployment_name",
               "deploymentName": "{embedding deployment name}"
             },
-            "inScope": true,
-            "topNDocuments": 5,
+            "in_scope": true,
+            "top_n_documents": 5,
             "strictness": 3,
-            "roleInformation": "You are an AI assistant that helps people find information.",
-            "fieldsMapping": {
-              "contentFieldsSeparator": "\\n",
-              "contentFields": [
+            "role_information": "You are an AI assistant that helps people find information.",
+            "fields_mapping": {
+              "content_fields_separator": "\\n",
+              "content_fields": [
                 "content"
               ],
-              "filepathField": "filepath",
-              "titleField": "title",
-              "urlField": "url",
-              "vectorFields": [
+              "filepath_field": "filepath",
+              "title_field": "title",
+              "url_field": "url",
+              "vector_fields": [
                 "contentvector"
               ]
             }

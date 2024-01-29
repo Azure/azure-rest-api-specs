@@ -12,28 +12,28 @@
           "content": "can you tell me how to care for a parrot?"
         }
       ],
-      "dataSources": [
+      "data_sources": [
         {
-          "type": "Pinecone",
+          "type": "pinecone",
           "parameters": {
             "authentication": {
-              "type": "APIKey",
+              "type": "api_key",
               "key": "{api key}"
             },
             "environment": "{environment name}",
-            "indexName": "{index name}",
-            "embeddingDependency": {
-              "type": "DeploymentName",
-              "deploymentName": "{embedding deployment name}"
+            "index_name": "{index name}",
+            "embedding_dependency": {
+              "type": "deployment_name",
+              "deployment_name": "{embedding deployment name}"
             },
-            "fieldsMapping": {
-              "titleField": "title",
-              "urlField": "url",
-              "filepathField": "filepath",
-              "contentFields": [
+            "fields_mapping": {
+              "title_field": "title",
+              "url_field": "url",
+              "filepath_field": "filepath",
+              "content_fields": [
                 "content"
               ],
-              "contentFieldsSeparator": "\n"
+              "content_fields_separator": "\n"
             }
           }
         }

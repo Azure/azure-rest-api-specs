@@ -12,26 +12,26 @@
           "content": "can you tell me how to care for a parrot?"
         }
       ],
-      "dataSources": [
+      "data_sources": [
         {
-          "type": "AzureCosmosDB",
+          "type": "azure_cosmos_db",
           "parameters": {
             "authentication": {
-              "type": "ConnectionString",
-              "connectionString": "mongodb+srv://rawantest:{password}$@{cluster-name}.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000"
+              "type": "connection_string",
+              "connection_string": "mongodb+srv://rawantest:{password}$@{cluster-name}.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000"
             },
-            "databaseName": "vectordb",
-            "containerName": "azuredocs",
-            "indexName": "azuredocindex",
-            "embeddingDependency": {
-              "type": "DeploymentName",
-              "deploymentName": "{embedding deployment name}"
+            "database_name": "vectordb",
+            "container_name": "azuredocs",
+            "index_name": "azuredocindex",
+            "embedding_dependency": {
+              "type": "deployment_name",
+              "deployment_name": "{embedding deployment name}"
             },
-            "fieldsMapping": {
-              "contentFields": [
+            "field_mapping": {
+              "content_fields": [
                 "content"
               ],
-              "vectorFields": [
+              "vector_fields": [
                 "contentvector"
               ]
             }
