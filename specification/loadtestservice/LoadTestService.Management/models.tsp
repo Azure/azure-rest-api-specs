@@ -14,7 +14,7 @@ using OpenAPI;
 using Autorest;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.LoadTestService.Draft;
+namespace Microsoft.LoadTestService;
 
 @doc("LoadTest details.")
 model LoadTestResource is TrackedResource<LoadTestProperties> {
@@ -117,15 +117,15 @@ model EncryptionProperties{
 model QuotaResourceProperties {
   @minValue(0)
   @doc("Current quota limit of the quota bucket.")
-  limit: int32;
+  limit?: int32;
   
   @doc("Current quota usage of the quota bucket.")
   @minValue(0)
-  usage: int32;
+  usage?: int32;
 
   @doc("Resource provisioning state.")
   @visibility("read")
-  provisioningState: ResourceState;
+  provisioningState?: ResourceState;
 }
 
 @doc("The location of quota resource")

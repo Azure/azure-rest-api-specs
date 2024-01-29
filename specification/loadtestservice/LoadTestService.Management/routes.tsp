@@ -11,11 +11,12 @@ using Azure.ResourceManager;
 using OpenAPI;
 using Autorest;
 using Azure.ResourceManager.Foundations;
-namespace Microsoft.LoadTestService.Draft;
+
+namespace Microsoft.LoadTestService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-// adding a custom operation since we want to override body parameter name to body
+// adding a custom operation since we want to override body parameter name to LoadTestResource
 /**
  * A long-running resource CreateOrUpdate (PUT)
  * @template TResource the resource being patched
@@ -38,9 +39,10 @@ op ArmResourceCreateOrUpdateAsyncCustom<
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "LoadTestResource is already published"
   @doc("Resource create parameters.")
   @body
-  body: TResource,
+  LoadTestResource: TResource,
 ): ArmResourceUpdatedResponse<TResource> | ArmResourceCreatedResponse<TResource> | ErrorResponse;
 
 // adding a custom operation since we want to override body parameter name to QuotaBucketRequest
@@ -86,7 +88,7 @@ interface LoadTests {
   @get
   @doc("Lists the endpoints that agents may call as part of load testing.")
   @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
-  @extension("x-ms-pageable", true)
+  @extension("x-ms-pageable", {"nextLinkName": "nextLink"})
   @autoRoute
   @action("outboundNetworkDependenciesEndpoints")
   op outboundNetworkDependenciesEndpoint(...SubscriptionIdParameter, ...ResourceGroupParameter, ...ApiVersionParameter,

@@ -204,7 +204,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Draft.QuotaResource"
+              "$ref": "#/definitions/QuotaResource"
             }
           },
           "default": {
@@ -255,7 +255,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Draft.QuotaBucketRequest"
+              "$ref": "#/definitions/QuotaBucketRequest"
             }
           }
         ],
@@ -263,7 +263,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Draft.CheckQuotaAvailabilityResponse"
+              "$ref": "#/definitions/CheckQuotaAvailabilityResponse"
             }
           },
           "default": {
@@ -352,7 +352,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Draft.LoadTestResource"
+              "$ref": "#/definitions/LoadTestResource"
             }
           },
           "default": {
@@ -393,12 +393,12 @@
             "x-ms-parameter-location": "method"
           },
           {
-            "name": "body",
+            "name": "LoadTestResource",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Draft.LoadTestResource"
+              "$ref": "#/definitions/LoadTestResource"
             }
           }
         ],
@@ -406,13 +406,13 @@
           "200": {
             "description": "Resource 'LoadTestResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Draft.LoadTestResource"
+              "$ref": "#/definitions/LoadTestResource"
             }
           },
           "201": {
             "description": "Resource 'LoadTestResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Draft.LoadTestResource"
+              "$ref": "#/definitions/LoadTestResource"
             },
             "headers": {
               "Retry-After": {
@@ -477,7 +477,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Draft.LoadTestResource"
+              "$ref": "#/definitions/LoadTestResource"
             }
           },
           "202": {
@@ -605,7 +605,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Draft.OutboundEnvironmentEndpointCollection"
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
             }
           },
           "default": {
@@ -620,7 +620,9 @@
             "$ref": "./examples/LoadTests_ListOutboundNetworkDependenciesEndpoints.json"
           }
         },
-        "x-ms-pageable": true
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     }
   },
@@ -661,7 +663,7 @@
         ]
       }
     },
-    "Draft.CheckQuotaAvailabilityResponse": {
+    "CheckQuotaAvailabilityResponse": {
       "type": "object",
       "description": "Check quota availability response object.",
       "properties": {
@@ -681,7 +683,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/Draft.CheckQuotaAvailabilityResponseProperties",
+          "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
           "description": "Check quota availability response properties.",
           "x-ms-client-flatten": true
         },
@@ -696,7 +698,7 @@
         "type"
       ]
     },
-    "Draft.CheckQuotaAvailabilityResponseProperties": {
+    "CheckQuotaAvailabilityResponseProperties": {
       "type": "object",
       "description": "Check quota availability response properties.",
       "properties": {
@@ -710,12 +712,12 @@
         }
       }
     },
-    "Draft.EncryptionIdentity": {
+    "EncryptionIdentity": {
       "type": "object",
       "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Draft.EncryptionIdentityType",
+          "$ref": "#/definitions/EncryptionIdentityType",
           "description": "Managed identity type to use for accessing encryption key Url."
         },
         "resourceId": {
@@ -725,7 +727,7 @@
         }
       }
     },
-    "Draft.EncryptionIdentityType": {
+    "EncryptionIdentityType": {
       "type": "string",
       "description": "Managed identity type to use for accessing encryption key Url.",
       "enum": [
@@ -749,12 +751,12 @@
         ]
       }
     },
-    "Draft.EncryptionProperties": {
+    "EncryptionProperties": {
       "type": "object",
       "description": "Key and identity details for Customer Managed Key encryption of load test resource.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Draft.EncryptionIdentity",
+          "$ref": "#/definitions/EncryptionIdentity",
           "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
         },
         "keyUrl": {
@@ -763,7 +765,7 @@
         }
       }
     },
-    "Draft.EndpointDependency": {
+    "EndpointDependency": {
       "type": "object",
       "description": "A domain name and connection details used to access a dependency.",
       "properties": {
@@ -778,7 +780,7 @@
           "readOnly": true
         },
         "endpointDetails": {
-          "$ref": "#/definitions/Draft.EndpointDetail",
+          "$ref": "#/definitions/EndpointDetail",
           "description": "The list of connection details for this endpoint.",
           "readOnly": true
         }
@@ -789,7 +791,7 @@
         "endpointDetails"
       ]
     },
-    "Draft.EndpointDetail": {
+    "EndpointDetail": {
       "type": "object",
       "description": "Details about the connection between the Batch service and the endpoint.",
       "properties": {
@@ -804,7 +806,7 @@
         "port"
       ]
     },
-    "Draft.LoadTestProperties": {
+    "LoadTestProperties": {
       "type": "object",
       "description": "LoadTest resource properties.",
       "properties": {
@@ -814,7 +816,7 @@
           "maxLength": 512
         },
         "provisioningState": {
-          "$ref": "#/definitions/Draft.ResourceState",
+          "$ref": "#/definitions/ResourceState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },
@@ -825,17 +827,17 @@
           "readOnly": true
         },
         "encryption": {
-          "$ref": "#/definitions/Draft.EncryptionProperties",
+          "$ref": "#/definitions/EncryptionProperties",
           "description": "CMK Encryption property."
         }
       }
     },
-    "Draft.LoadTestResource": {
+    "LoadTestResource": {
       "type": "object",
       "description": "LoadTest details.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Draft.LoadTestProperties",
+          "$ref": "#/definitions/LoadTestProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -854,205 +856,6 @@
         }
       ]
     },
-    "Draft.OutboundEnvironmentEndpoint": {
-      "type": "object",
-      "description": "A collection of related endpoints from the same service for which the Batch service requires outbound access.",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "The type of service that Azure Load Testing connects to.",
-          "readOnly": true
-        },
-        "endpoints": {
-          "$ref": "#/definitions/Draft.EndpointDependency",
-          "description": "The endpoints for this service to which the Batch service makes outbound calls.",
-          "readOnly": true
-        }
-      }
-    },
-    "Draft.OutboundEnvironmentEndpointCollection": {
-      "type": "object",
-      "description": "Values returned by the List operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The collection of outbound network dependency endpoints returned by the listing operation.",
-          "items": {
-            "$ref": "#/definitions/Draft.OutboundEnvironmentEndpoint"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The continuation token."
-        }
-      }
-    },
-    "Draft.QuotaBucketRequest": {
-      "type": "object",
-      "description": "Request object of new quota for a quota bucket.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/Draft.QuotaBucketRequestProperties",
-          "description": "Request object of new quota for a quota bucket.",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
-    },
-    "Draft.QuotaBucketRequestProperties": {
-      "type": "object",
-      "description": "New quota request request properties.",
-      "properties": {
-        "currentUsage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Current quota usage of the quota bucket.",
-          "minimum": 0
-        },
-        "currentQuota": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Current quota limit of the quota bucket.",
-          "minimum": 0
-        },
-        "newQuota": {
-          "type": "integer",
-          "format": "int32",
-          "description": "New quota limit of the quota bucket.",
-          "minimum": 0
-        },
-        "dimensions": {
-          "$ref": "#/definitions/Draft.QuotaDimensions",
-          "description": "Dimensions for new quota request."
-        }
-      }
-    },
-    "Draft.QuotaDimensions": {
-      "type": "object",
-      "description": "Dimensions for new quota request.",
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription Id dimension for new quota request of the quota bucket.",
-          "minLength": 1
-        },
-        "location": {
-          "type": "string",
-          "description": "Location dimension for new quota request of the quota bucket.",
-          "minLength": 1
-        }
-      }
-    },
-    "Draft.QuotaResource": {
-      "type": "object",
-      "description": "Quota bucket details object.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Draft.QuotaResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "Draft.QuotaResourceProperties": {
-      "type": "object",
-      "description": "Quota bucket resource properties.",
-      "properties": {
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Current quota limit of the quota bucket.",
-          "minimum": 0
-        },
-        "usage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Current quota usage of the quota bucket.",
-          "minimum": 0
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/Draft.ResourceState",
-          "description": "Resource provisioning state.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "limit",
-        "usage",
-        "provisioningState"
-      ]
-    },
-    "Draft.ResourceState": {
-      "type": "string",
-      "description": "Resources provisioning states.",
-      "enum": [
-        "Deleted",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Deleted state."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      }
-    },
     "LoadTestResourceListResult": {
       "type": "object",
       "description": "The response of a LoadTestResource list operation.",
@@ -1061,7 +864,7 @@
           "type": "array",
           "description": "The LoadTestResource items on this page",
           "items": {
-            "$ref": "#/definitions/Draft.LoadTestResource"
+            "$ref": "#/definitions/LoadTestResource"
           }
         },
         "nextLink": {
@@ -1105,10 +908,145 @@
           "maxLength": 512
         },
         "encryption": {
-          "$ref": "#/definitions/Draft.EncryptionProperties",
+          "$ref": "#/definitions/EncryptionProperties",
           "description": "CMK Encryption property."
         }
       }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "type": "object",
+      "description": "A collection of related endpoints from the same service for which the Batch service requires outbound access.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The type of service that Azure Load Testing connects to.",
+          "readOnly": true
+        },
+        "endpoints": {
+          "$ref": "#/definitions/EndpointDependency",
+          "description": "The endpoints for this service to which the Batch service makes outbound calls.",
+          "readOnly": true
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "type": "object",
+      "description": "Values returned by the List operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection of outbound network dependency endpoints returned by the listing operation.",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The continuation token."
+        }
+      }
+    },
+    "QuotaBucketRequest": {
+      "type": "object",
+      "description": "Request object of new quota for a quota bucket.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/QuotaBucketRequestProperties",
+          "description": "Request object of new quota for a quota bucket.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "QuotaBucketRequestProperties": {
+      "type": "object",
+      "description": "New quota request request properties.",
+      "properties": {
+        "currentUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current quota usage of the quota bucket.",
+          "minimum": 0
+        },
+        "currentQuota": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current quota limit of the quota bucket.",
+          "minimum": 0
+        },
+        "newQuota": {
+          "type": "integer",
+          "format": "int32",
+          "description": "New quota limit of the quota bucket.",
+          "minimum": 0
+        },
+        "dimensions": {
+          "$ref": "#/definitions/QuotaDimensions",
+          "description": "Dimensions for new quota request."
+        }
+      }
+    },
+    "QuotaDimensions": {
+      "type": "object",
+      "description": "Dimensions for new quota request.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id dimension for new quota request of the quota bucket.",
+          "minLength": 1
+        },
+        "location": {
+          "type": "string",
+          "description": "Location dimension for new quota request of the quota bucket.",
+          "minLength": 1
+        }
+      }
+    },
+    "QuotaResource": {
+      "type": "object",
+      "description": "Quota bucket details object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "QuotaResourceListResult": {
       "type": "object",
@@ -1118,7 +1056,7 @@
           "type": "array",
           "description": "The QuotaResource items on this page",
           "items": {
-            "$ref": "#/definitions/Draft.QuotaResource"
+            "$ref": "#/definitions/QuotaResource"
           }
         },
         "nextLink": {
@@ -1130,6 +1068,65 @@
       "required": [
         "value"
       ]
+    },
+    "QuotaResourceProperties": {
+      "type": "object",
+      "description": "Quota bucket resource properties.",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current quota limit of the quota bucket.",
+          "minimum": 0
+        },
+        "usage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current quota usage of the quota bucket.",
+          "minimum": 0
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceState": {
+      "type": "string",
+      "description": "Resources provisioning states.",
+      "enum": [
+        "Deleted",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted state."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
     }
   },
   "parameters": {}
