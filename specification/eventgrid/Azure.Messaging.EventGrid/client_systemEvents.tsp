@@ -28,9 +28,6 @@ import "./systemEvents.tsp";
 
 using Azure.ClientGenerator.Core;
 
-// Hide internal dummy operation
-@@access(Microsoft.EventGrid.dummyOperation, Access.internal);
-
 @@usage(Microsoft.EventGrid.ApiManagementUserCreatedEventData,
   Usage.input | Usage.output
 );
