@@ -402,7 +402,17 @@
         },
         "secretsLocation": {
           "type": "string",
-          "description": "The URI to the keyvault / secret store."
+          "description": "Azure keyvault endpoint."
+        },
+        "secrets": {
+          "type": "array",
+          "description": "secrets used for cloud deployment.",
+          "items": {
+            "$ref": "#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
         },
         "optionalServices": {
           "$ref": "#/definitions/OptionalServices",
@@ -532,6 +542,61 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
+      }
+    },
+    "EceDeploymentSecrets": {
+      "type": "object",
+      "description": "secrets used for solution builder extension (SBE) partner extensibility.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "secret name stored in keyvault."
+        },
+        "eceSecretName": {
+          "$ref": "#/definitions/EceSecrets",
+          "description": "secret name expected for Enterprise Cloud Engine (ECE) deployment."
+        },
+        "secretLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "secret URI stored in keyvault."
+        }
+      }
+    },
+    "EceSecrets": {
+      "type": "string",
+      "description": "Secret names allowed for Enterprise Cloud Engine (ECE) deployment.",
+      "enum": [
+        "AzureStackLCMUserCredential",
+        "DefaultARBApplication",
+        "LocalAdminCredential",
+        "WitnessStorageKey"
+      ],
+      "x-ms-enum": {
+        "name": "EceSecrets",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureStackLCMUserCredential",
+            "value": "AzureStackLCMUserCredential",
+            "description": "AzureStackLCMUserCredential used for LCM operations for AzureStackHCI cluster."
+          },
+          {
+            "name": "DefaultARBApplication",
+            "value": "DefaultARBApplication",
+            "description": "DefaultARBApplication used to manage Azure Arc resource bridge (ARB) for AzureStackHCI cluster."
+          },
+          {
+            "name": "LocalAdminCredential",
+            "value": "LocalAdminCredential",
+            "description": "LocalAdminCredential used for admin operations for AzureStackHCI cluster."
+          },
+          {
+            "name": "WitnessStorageKey",
+            "value": "WitnessStorageKey",
+            "description": "WitnessStorageKey used for setting up a cloud witness for AzureStackHCI cluster."
+          }
+        ]
       }
     },
     "HostNetwork": {
@@ -827,11 +892,11 @@
     },
     "SbePartnerInfo": {
       "type": "object",
-      "description": "The SBE partner deployment info for cluster.",
+      "description": "The solution builder extension (SBE) partner deployment info for cluster.",
       "properties": {
         "sbeDeploymentInfo": {
           "$ref": "#/definitions/SbeDeploymentInfo",
-          "description": "SBE package and manifest information for the Solution Builder Extension staged for AzureStackHCI cluster deployment."
+          "description": "SBE package and manifest information for the solution Builder Extension staged for AzureStackHCI cluster deployment."
         },
         "partnerProperties": {
           "type": "array",
@@ -845,17 +910,17 @@
           "type": "array",
           "description": "SBE credentials list for AzureStackHCI cluster deployment.",
           "items": {
-            "$ref": "#/definitions/CredentialList"
+            "$ref": "#/definitions/SbeCredentials"
           },
           "x-ms-identifiers": [
-            "secretsLocation"
+            "secretName"
           ]
         }
       }
     },
     "SbeDeploymentInfo": {
       "type": "object",
-      "description": "SBE package and manifest information for the Solution Builder Extension staged for AzureStackHCI cluster deployment.",
+      "description": "Solution builder extension (SBE) package and manifest information for the solution builder extension staged for AzureStackHCI cluster deployment.",
       "properties": {
         "version": {
           "type": "string",
@@ -882,7 +947,7 @@
     },
     "SbePartnerProperties": {
       "type": "object",
-      "description": "SBE partner properties object.",
+      "description": "Solution builder extension (SBE) partner properties object.",
       "properties": {
         "name": {
           "type": "string",
@@ -894,22 +959,22 @@
         }
       }
     },
-    "CredentialList": {
+    "SbeCredentials": {
       "type": "object",
-      "description": "SBE partner properties object, used to populate SBE $PartnerProperties.",
+      "description": "secrets used for solution builder extension (SBE) partner extensibility.",
       "properties": {
-        "secretsLocation": {
+        "secretName": {
+          "type": "string",
+          "description": "secret name stored in keyvault."
+        },
+        "eceSecretName": {
+          "type": "string",
+          "description": "secret name expected for Enterprise Cloud Engine (ECE)."
+        },
+        "secretLocation": {
           "type": "string",
           "format": "uri",
-          "description": "keyvault URI."
-        },
-        "secretNames": {
-          "type": "array",
-          "description": "SBE partner list of secret names stored in keyvault, used to populate SBE $CredentialList.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
+          "description": "secret URI stored in keyvault."
         }
       }
     },
@@ -923,7 +988,7 @@
         },
         "sbePartnerInfo": {
           "$ref": "#/definitions/SbePartnerInfo",
-          "description": "SBE partner properties"
+          "description": "Solution builder extension (SBE) partner properties"
         }
       },
       "required": [

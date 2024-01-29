@@ -46,6 +46,48 @@ model GenerateAwsTemplateRequest {
   solutionTypes?: Array<SolutionTypeProperties>;
 }
 
+@doc("Public connector permissions.")
+model TestPermissionResponse {
+  @doc("The name of public cloud connector")
+  overallStatus: Status;
+
+  @doc("Solution type permissions.")
+  solutionTypes: Array<SolutionTypePermissions>;
+}
+
+@doc("Solution type permissions.")
+model SolutionTypePermissions {
+  @doc("The name of solution Type")
+  solutionType: SolutionType;
+
+  @doc("The status")
+  status: Status;
+
+  @doc("The details of the status")
+  statusDetails: string;
+}
+
+@doc("Solution types.")
+enum SolutionType {
+  @doc("Asset Management solution type")
+  `Microsoft.AssetManagement`,
+
+  @doc("Hybrid Compute Onboard solution type")
+  `Microsoft.HybridCompute.Onboard`,
+
+  @doc("VWan Provisioning solution type")
+  `Microsoft.HybridNetwork.VWan.Provision`,
+}
+
+@doc("Connection status.")
+enum Status {
+  @doc("Connected status")
+  Connected,
+
+  @doc("Disconnected status")
+  Disconnected,
+}
+
 //---------------------------------------------- Operations ----------------------------------------------
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
@@ -65,4 +107,22 @@ interface GenerateAwsTemplate {
     @body
     generateAwsTemplateRequest: GenerateAwsTemplateRequest,
   ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
+@route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnectorId}")
+interface TestPermissions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
+  @route("testPermissions")
+  @post
+  @action
+  @tag("TestPermissions")
+  @doc("Test permissions of solution configurations of a connector.")
+  post(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    @doc("ConnectorId to check permissions of.")
+    publicCloudConnectorId: string,
+  ): Azure.ResourceManager.ArmAcceptedLroResponse<"Asynchronous operation in progress."> | TestPermissionResponse | Azure.ResourceManager.ErrorResponse;
 }
