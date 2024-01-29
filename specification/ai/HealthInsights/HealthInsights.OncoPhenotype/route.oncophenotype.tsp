@@ -29,6 +29,7 @@ interface OncoPhenotype {
   @route("/onco-phenotype/jobs")
   createJob is HealthInsightsLongRunningRpcOperation<
     OncoPhenotypeData,
-    OncoPhenotypeResult
+    OncoPhenotypeResult,
+    OncoPhenotypeInferenceResult
   >;
 }

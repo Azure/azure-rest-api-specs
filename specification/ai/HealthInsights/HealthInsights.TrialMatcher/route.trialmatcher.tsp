@@ -28,6 +28,7 @@ interface TrialMatcher {
   @route("/trial-matcher/jobs")
   createJob is HealthInsightsLongRunningRpcOperation<
     TrialMatcherData,
-    TrialMatcherResult
+    TrialMatcherResult,
+    TrialMatcherInferenceResult
   >;
 }

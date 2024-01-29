@@ -30,6 +30,7 @@ interface RadiologyInsights {
   @route("/radiology-insights/jobs")
   createJob is HealthInsightsLongRunningRpcOperation<
     RadiologyInsightsData,
-    RadiologyInsightsResult
+    RadiologyInsightsResult,
+    RadiologyInsightsInferenceResult
   >;
 }

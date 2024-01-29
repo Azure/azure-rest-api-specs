@@ -29,6 +29,7 @@ interface PatientTimeline {
   @route("/patient-timeline/jobs")
   createJob is HealthInsightsLongRunningRpcOperation<
     PatientTimelineData,
-    PatientTimelineResult
+    PatientTimelineResult,
+    PatientTimelineInferenceResult
   >;
 }
