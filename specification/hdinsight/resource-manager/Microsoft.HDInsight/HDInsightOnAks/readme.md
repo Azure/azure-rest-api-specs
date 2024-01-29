@@ -45,15 +45,17 @@ input-file:
   - preview/2023-11-01-preview/hdinsight.json
   
 suppressions:
-  - code: ResourceNameRestriction
-    reason: Keep compatibility with old API version.
-  - code: TrackedResourcePatchOperation
-    reason: This is a false positive, the "tags" property is defined in TrackedResource.
-  - code: OperationIdNounVerb
-    reason: The operation id is valid.
   - code: EnumInsteadOfBoolean
-    where: $.definitions["ClusterAccessProfile"]["enableInternalIngress].type
-    reason: The boolean property is expected and more user friendly, and it wil be not extended to other values.
+    where: 
+    - $.definitions.ClusterAccessProfile.enableInternalIngress
+    - $.definitions.ClusterPoolNetworkProfile.enablePrivateApiServer
+    - $.definitions.ClusterRangerPluginProfile.enabled
+    - $.definitions.RangerUsersyncSpec.enabled
+    - $.definitions.KafkaProfile.enableKRaft
+    - $.definitions.KafkaProfile.enablePublicEndpoints
+    - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeClusterPool
+    - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeAllClusterNodes
+    reason: They are used for enabling or disabling a feature. Using a boolean type is more user friendly, and they will be not extended to other values.
 ```
 
 ### Tag: package-2023-06-preview
