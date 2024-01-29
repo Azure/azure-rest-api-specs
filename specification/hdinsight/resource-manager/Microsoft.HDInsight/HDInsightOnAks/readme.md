@@ -46,10 +46,6 @@ input-file:
   
 suppressions:
   - code: ResourceNameRestriction
-    where: 
-    - $.parameters.ClusterPoolNameParameter
-    - $.parameters.ClusterNameParameter
-    - $.parameters.ClusterTypeNameParameter
     reason: Keep compatibility with old API version.
   - code: OperationIdNounVerb
     where: 
