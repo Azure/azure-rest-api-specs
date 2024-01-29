@@ -33,3 +33,9 @@ These settings apply only when `--tag=2023-09-01-preview` is specified on the co
 input-file:
   - preview/2023-09-01-preview/openapi.json
 ```
+
+```yaml
+directive:
+  - suppress: AvoidAnonymousTypes
+    reason: The spec is auto-generated. Tracking issue to fix is https://github.com/Azure/typespec-azure-pr/issues/3349
+```
