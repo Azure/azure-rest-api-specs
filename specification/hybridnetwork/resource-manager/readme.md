@@ -52,6 +52,13 @@ suppressions:
   - code: PatchSkuProperty
     from: siteNetworkService.json
     reason: sku cannot be patched
+  - code: AvoidAdditionalProperties
+    from: serviceManagementContainer.json
+    reason: additional propertie is required by design for dictinary type of object
+  - code:  XmsPageableForListCalls
+    from: serviceManagementContainer.json
+    where: .paths.~1subscriptions~1{subscriptionId}~1resourceGroups~1{resourceGroupName}~1providers~1Microsoft.HybridNetwork~1serviceManagementContainers~1{serviceManagementContainerName}~1updateSpecifications~1{updateSpecificationName}~1rollouts~1{rolloutName}~1statuses~1default
+
 ```
 
 ### Tag: package-2023-09-01
