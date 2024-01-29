@@ -43,7 +43,11 @@
       "get": {
         "operationId": "Jobs_ListByClusters",
         "tags": [
-          "Jobs"
+          "AddServer",
+          "ResumeServer",
+          "PauseServer",
+          "RepairServer",
+          "SetInformation"
         ],
         "description": "List Job resources by Clusters",
         "parameters": [
@@ -131,7 +135,11 @@
       "put": {
         "operationId": "Jobs_CreateOrUpdate",
         "tags": [
-          "Jobs"
+          "AddServer",
+          "ResumeServer",
+          "PauseServer",
+          "RepairServer",
+          "SetInformation"
         ],
         "description": "Create a Job",
         "parameters": [
@@ -188,8 +196,17 @@
           }
         },
         "x-ms-examples": {
-          "Create Jobs": {
-            "$ref": "./examples/PutJobs.json"
+          "CreateAddServerJob": {
+            "$ref": "./examples/CreateAddServerJob.json"
+          },
+          "CreateRepairServerJob": {
+            "$ref": "./examples/CreateRepairServerJob.json"
+          },
+          "CreateResumeServerJob": {
+            "$ref": "./examples/CreateResumeServerJob.json"
+          },
+          "CreatePauseServerJob": {
+            "$ref": "./examples/CreatePauseServerJob.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -200,7 +217,11 @@
       "delete": {
         "operationId": "Jobs_Delete",
         "tags": [
-          "Jobs"
+          "AddServer",
+          "ResumeServer",
+          "PauseServer",
+          "RepairServer",
+          "SetInformation"
         ],
         "description": "Delete a Job",
         "parameters": [
