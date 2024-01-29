@@ -5311,8 +5311,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "ARM operation completed successfully."
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScriptExecution"
+            }
           },
           "default": {
             "description": "An unexpected error response.",

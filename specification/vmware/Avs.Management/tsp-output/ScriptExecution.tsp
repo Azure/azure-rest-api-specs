@@ -69,7 +69,7 @@ list is ArmResourceListByParent<ScriptExecution>;
 * Return the logs for a script execution resource
 */
 // getExecutionLogs is ArmResourceActionSync<ScriptExecution,paths·hl4gv6·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-avs-privateclouds-privatecloudname-scriptexecutions-scriptexecutionname-getexecutionlogs·post·requestbody·content·application-json·schema,ScriptExecution>
-getExecutionLogs is ArmResourceActionSync<ScriptExecution, void, void>
+getExecutionLogs is ArmResourceActionSync<ScriptExecution, void, ScriptExecution>
 }
 
 
