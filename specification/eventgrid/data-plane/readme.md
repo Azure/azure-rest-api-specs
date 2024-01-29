@@ -333,7 +333,7 @@ input-file:
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/common.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
-  - $(this-folder)/Microsoft.AVS/preview/2023-09-01-preview/PrivateCloud.json
+  - $(this-folder)/Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
