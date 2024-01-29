@@ -52,7 +52,7 @@ model DataSource {
   logAnalytics?: LogAnalytics;
 }
 
-@doc("Log Analytics workspace which telemetry data required for experimentation will be retrieved from.")
+@doc("The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.")
 model LogAnalytics {
   @doc("Resource id of the Log Analytics workspace.")
   resourceId: string;
