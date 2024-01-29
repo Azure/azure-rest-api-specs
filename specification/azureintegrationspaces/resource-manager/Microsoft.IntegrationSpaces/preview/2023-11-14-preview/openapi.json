@@ -22,20 +22,21 @@
   ],
   "security": [
     {
-      "azure_auth": [
+      "AadOauth2Auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "azure_auth": {
+    "AadOauth2Auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [
@@ -46,19 +47,16 @@
       "name": "Spaces"
     },
     {
-      "name": "InfrastructureResources"
-    },
-    {
       "name": "Applications"
-    },
-    {
-      "name": "ApplicationResources"
     },
     {
       "name": "BusinessProcesses"
     },
     {
       "name": "BusinessProcessVersions"
+    },
+    {
+      "name": "InfrastructureResources"
     }
   ],
   "paths": {
@@ -86,11 +84,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -155,25 +148,68 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "responses": {
@@ -424,25 +460,68 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "name": "spaceName",
@@ -733,25 +812,68 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "name": "spaceName",
@@ -1082,25 +1204,68 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "name": "spaceName",
@@ -1265,8 +1430,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The business process development artifact success response."
+          "204": {
+            "description": "ARM operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1403,41 +1568,92 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources": {
       "get": {
-        "operationId": "ApplicationResources_ListByApplication",
-        "tags": [
-          "ApplicationResources"
-        ],
+        "operationId": "ApplicationResourcesOperations_ListByApplication",
         "description": "List ApplicationResource resources by Application",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "name": "spaceName",
@@ -1458,21 +1674,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ApplicationResourceListResult"
+              "$ref": "#/definitions/PagedApplicationResource"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListApplicationResourceByApplication": {
-            "$ref": "./examples/ApplicationResources_ListByApplication.json"
           }
         },
         "x-ms-pageable": {
@@ -1482,20 +1699,28 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources/{resourceName}": {
       "get": {
-        "operationId": "ApplicationResources_Get",
-        "tags": [
-          "ApplicationResources"
-        ],
+        "operationId": "ApplicationResourcesOperations_Get",
         "description": "Get a ApplicationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "spaceName",
@@ -1524,7 +1749,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ApplicationResource"
             }
@@ -1532,31 +1757,40 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetApplicationResource": {
-            "$ref": "./examples/ApplicationResources_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "ApplicationResources_CreateOrUpdate",
-        "tags": [
-          "ApplicationResources"
-        ],
+        "operationId": "ApplicationResourcesOperations_CreateOrUpdate",
         "description": "Create a ApplicationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "spaceName",
@@ -1594,13 +1828,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ApplicationResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ApplicationResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'ApplicationResource' create operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ApplicationResource"
             }
@@ -1608,31 +1836,40 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdateApplicationResource": {
-            "$ref": "./examples/ApplicationResources_CreateOrUpdate.json"
           }
         }
       },
       "patch": {
-        "operationId": "ApplicationResources_Patch",
-        "tags": [
-          "ApplicationResources"
-        ],
+        "operationId": "ApplicationResourcesOperations_Patch",
         "description": "Update a ApplicationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "spaceName",
@@ -1670,7 +1907,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ApplicationResource"
             }
@@ -1678,31 +1915,40 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "PatchApplicationResource": {
-            "$ref": "./examples/ApplicationResources_Patch.json"
           }
         }
       },
       "delete": {
-        "operationId": "ApplicationResources_Delete",
-        "tags": [
-          "ApplicationResources"
-        ],
+        "operationId": "ApplicationResourcesOperations_Delete",
         "description": "Delete a ApplicationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "spaceName",
@@ -1730,22 +1976,20 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteApplicationResource": {
-            "$ref": "./examples/ApplicationResources_Delete.json"
           }
         }
       }
@@ -1858,8 +2102,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The business process development artifact success response."
+          "204": {
+            "description": "ARM operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1893,25 +2137,68 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "name": "spaceName",
@@ -2268,29 +2555,25 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/ApplicationResourceProperties",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          ]
         }
-      ]
-    },
-    "ApplicationResourceListResult": {
-      "type": "object",
-      "description": "The response of a ApplicationResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ApplicationResource items on this page",
-          "items": {
-            "$ref": "#/definitions/ApplicationResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ApplicationResourceProperties": {
@@ -2326,6 +2609,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ApplicationResourceUpdateProperties",
+          "description": "The updatable properties of the ApplicationResource.",
           "x-ms-client-flatten": true
         }
       }
@@ -2361,6 +2645,7 @@
         },
         "properties": {
           "$ref": "#/definitions/ApplicationUpdateProperties",
+          "description": "The updatable properties of the Application.",
           "x-ms-client-flatten": true
         }
       }
@@ -2379,6 +2664,67 @@
           "additionalProperties": {
             "$ref": "#/definitions/TrackingDataStore"
           }
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
         }
       }
     },
@@ -2584,6 +2930,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BusinessProcessUpdateProperties",
+          "description": "The updatable properties of the BusinessProcess.",
           "x-ms-client-flatten": true
         }
       }
@@ -2765,6 +3112,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InfrastructureResourceUpdateProperties",
+          "description": "The updatable properties of the InfrastructureResource.",
           "x-ms-client-flatten": true
         }
       }
@@ -2794,6 +3142,27 @@
             "$ref": "#/definitions/SaveOrGetBusinessProcessDevelopmentArtifactResponse"
           },
           "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedApplicationResource": {
+      "type": "object",
+      "description": "The response of a ApplicationResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplicationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ApplicationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2848,6 +3217,33 @@
             "value": "Accepted"
           }
         ]
+      },
+      "readOnly": true
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
       }
     },
     "SaveOrGetBusinessProcessDevelopmentArtifactResponse": {
@@ -2860,7 +3256,8 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system data of the business process development artifact."
+          "description": "The system data of the business process development artifact.",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/BusinessProcessDevelopmentArtifactProperties",
@@ -2957,6 +3354,7 @@
         },
         "properties": {
           "$ref": "#/definitions/SpaceUpdateProperties",
+          "description": "The updatable properties of the Space.",
           "x-ms-client-flatten": true
         }
       }
@@ -2970,11 +3368,6 @@
           "description": "The description of the resource."
         }
       }
-    },
-    "SuccessfulBusinessProcessDevelopmentArtifactResponse": {
-      "type": "object",
-      "description": "The business process development artifact success response.",
-      "properties": {}
     },
     "TrackingCorrelationContext": {
       "type": "object",
@@ -3042,7 +3435,8 @@
           "type": "object",
           "description": "The properties to be collected for event.",
           "additionalProperties": {
-            "$ref": "#/definitions/object"
+            "additionalProperties": {},
+            "type": "object"
           }
         }
       }
@@ -3053,7 +3447,8 @@
       "properties": {
         "$schema": {
           "type": "string",
-          "description": "The tracking definition schema uri."
+          "description": "The tracking definition schema uri.",
+          "x-ms-client-name": "schema"
         },
         "businessProcess": {
           "$ref": "#/definitions/BusinessProcessReference",
@@ -3068,84 +3463,35 @@
         }
       }
     },
-    "object": {
-      "type": "object",
-      "description": "Represent a model",
-      "properties": {}
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2023-11-14-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_11_14_preview",
+            "value": "2023-11-14-preview",
+            "description": "The 2023-11-14-preview API version."
+          }
+        ]
+      }
     }
   },
   "parameters": {
-    "Azure.Core.ExpandQueryParameter": {
-      "name": "expand",
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
       "in": "query",
-      "description": "Expand the indicated resources into the response.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.FilterQueryParameter": {
-      "name": "filter",
-      "in": "query",
-      "description": "Filter the result list using the given expression.",
-      "required": false,
+      "description": "The API version to use for this operation.",
+      "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.MaxPageSizeQueryParameter": {
-      "name": "maxpagesize",
-      "in": "query",
-      "description": "The maximum number of result items per page.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.OrderByQueryParameter": {
-      "name": "orderby",
-      "in": "query",
-      "description": "Expressions that specify the order of returned results.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.SelectQueryParameter": {
-      "name": "select",
-      "in": "query",
-      "description": "Select the specified fields to be included in the response.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.SkipQueryParameter": {
-      "name": "skip",
-      "in": "query",
-      "description": "The number of result items to skip.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 0,
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.TopQueryParameter": {
-      "name": "top",
-      "in": "query",
-      "description": "The number of result items to return.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
