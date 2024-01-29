@@ -162,28 +162,28 @@ namespace Microsoft.EventGrid {
   @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskCompleted event.")
   model StorageTaskCompletedEventData {
     @doc("The time at which a storage task was completed.")
-    completedDateTime: utcDateTime;
+    completedDateTime?: utcDateTime;
 
     @doc("The status for a storage task.")
-    status: StorageTaskCompletedStatus;
+    status?: StorageTaskCompletedStatus;
 
     @doc("The summary report blob url for a storage task")
-    summaryReportBlobUrl: url;
+    summaryReportBlobUrl?: url;
 
     @doc("The execution id for a storage task.")
-    taskExecutionId: string;
+    taskExecutionId?: string;
 
     @doc("The task name for a storage task.")
-    taskName: string;
+    taskName?: string;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskQueued event.")
   model StorageTaskQueuedEventData {
     @doc("The time at which a storage task was queued.")
-    queuedDateTime: utcDateTime;
+    queuedDateTime?: utcDateTime;
 
     @doc("The execution id for a storage task.")
-    taskExecutionId: string;
+    taskExecutionId?: string;
   }
 
   @doc("The status for a storage task.")
@@ -208,8 +208,9 @@ namespace Microsoft.EventGrid {
     @doc("The identity of the requester that triggered this event.")
     identity?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is Any"
     @doc("For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.")
-    storageDiagnostics?: Record<string>;
+    storageDiagnostics?: unknown;
   };
 
   alias StorageBaseTypeData = {

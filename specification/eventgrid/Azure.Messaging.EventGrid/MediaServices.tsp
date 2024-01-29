@@ -169,7 +169,7 @@ namespace Microsoft.EventGrid {
   @doc("Gets the Job output label.")
   "label"?: string;
   @doc("Gets the Job output progress.")
-  "progress"?: int32;
+  "progress"?: int64;
   @doc("Gets the Job correlation data.")
   "jobCorrelationData"?: Record<string>;
   }

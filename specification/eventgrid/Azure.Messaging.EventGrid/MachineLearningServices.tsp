@@ -27,11 +27,13 @@ model MachineLearningServicesModelDeployedEventData {
   @doc("A common separated list of model IDs. The IDs of the models deployed in the service.")
   modelIds?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Service tags is type any"
   @doc("The tags of the deployed service.")
-  serviceTags?: Record<string>;
+  serviceTags?: unknown;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Service properties is type any"
   @doc("The properties of the deployed service.")
-  serviceProperties?: Record<string>;
+  serviceProperties?: unknown;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event.")
@@ -48,11 +50,13 @@ model MachineLearningServicesRunCompletedEventData {
   @doc("The Run Type of the completed Run.")
   runType?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Run tags is type any"
   @doc("The tags of the completed Run.")
-  runTags?: Record<string>;
+  runTags?: unknown;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Run properties is type any"
   @doc("The properties of the completed Run.")
-  runProperties?: Record<string>;
+  runProperties?: unknown;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event.")
