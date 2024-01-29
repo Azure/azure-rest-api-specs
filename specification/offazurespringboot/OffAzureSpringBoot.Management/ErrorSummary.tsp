@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./SpringbootsitesModel.tsp";
@@ -8,12 +9,17 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.OffAzureSpringBoot;
-@doc("The error summary resource definition.")
+/**
+ * The error summary resource definition.
+ */
 @parentResource(SpringbootsitesModel)
 model ErrorSummary is ProxyResource<ErrorSummariesProperties> {
-  @doc("The name of error summary")
+  /**
+   * The name of error summary
+   */
   @maxLength(63)
   @minLength(3)
   @pattern("^[A-Za-z][A-Za-z0-9]*$")
@@ -25,8 +31,15 @@ model ErrorSummary is ProxyResource<ErrorSummariesProperties> {
 
 @armResourceOperations
 interface ErrorSummaries {
-  @doc("Gets the ErrorSummaries resource.")
+  /**
+   * Gets the ErrorSummaries resource.
+   */
   get is ArmResourceRead<ErrorSummary>;
-  @doc("Lists the ErrorSummaries resource in springbootsites.")
+
+  /**
+   * Lists the ErrorSummaries resource in springbootsites.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ErrorSummaries_ListBySite")
   listBySite is ArmResourceListByParent<ErrorSummary>;
 }

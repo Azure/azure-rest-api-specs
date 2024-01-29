@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./SpringbootsitesModel.tsp";
@@ -8,12 +9,17 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.OffAzureSpringBoot;
-@doc("The summary resource definition.")
+/**
+ * The summary resource definition.
+ */
 @parentResource(SpringbootsitesModel)
 model Summary is ProxyResource<SummariesProperties> {
-  @doc("The name of summary")
+  /**
+   * The name of summary
+   */
   @maxLength(63)
   @minLength(3)
   @pattern("^[A-Za-z][A-Za-z0-9]*$")
@@ -25,8 +31,15 @@ model Summary is ProxyResource<SummariesProperties> {
 
 @armResourceOperations
 interface Summaries {
-  @doc("Gets the Summaries resource.")
+  /**
+   * Gets the Summaries resource.
+   */
   get is ArmResourceRead<Summary>;
-  @doc("Lists the Summaries resource in springbootsites.")
+
+  /**
+   * Lists the Summaries resource in springbootsites.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Summaries_ListBySite")
   listBySite is ArmResourceListByParent<Summary>;
 }

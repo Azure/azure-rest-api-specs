@@ -15,17 +15,24 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * The Microsoft.OffAzureSpringBoot Rest API spec.
+ */
 @armProviderNamespace
 @service({
   title: "OffAzureSpringBoot",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-@doc("The Microsoft.OffAzureSpringBoot Rest API spec.")
 namespace Microsoft.OffAzureSpringBoot;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2023-01-01-preview API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_01_01_preview: "2023-01-01-preview",

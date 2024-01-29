@@ -43,13 +43,13 @@
       "name": "Operations"
     },
     {
-      "name": "springbootsites"
+      "name": "SpringbootsitesModels"
     },
     {
-      "name": "springbootservers"
+      "name": "SpringbootserversModels"
     },
     {
-      "name": "springbootapps"
+      "name": "SpringbootappsModels"
     },
     {
       "name": "Summaries"
@@ -92,9 +92,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureSpringBoot/springbootsites": {
       "get": {
-        "operationId": "Springbootsites_ListBySubscription",
+        "operationId": "springbootsites_ListBySubscription",
         "tags": [
-          "springbootsites"
+          "SpringbootsitesModels"
         ],
         "description": "List springbootsites resource by subscription",
         "parameters": [
@@ -119,6 +119,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootsites_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "springbootsites_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -126,9 +134,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootapps": {
       "get": {
-        "operationId": "Springbootapps_ListBySubscription",
+        "operationId": "springbootapps_ListBySubscription",
         "tags": [
-          "springbootapps"
+          "SpringbootappsModels"
         ],
         "description": "List springbootapps resource by subscription",
         "parameters": [
@@ -163,6 +171,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootapps_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/springbootapps_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "springbootapps_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/springbootapps_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -170,9 +186,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootservers": {
       "get": {
-        "operationId": "Springbootservers_ListBySubscription",
+        "operationId": "springbootservers_ListBySubscription",
         "tags": [
-          "springbootservers"
+          "SpringbootserversModels"
         ],
         "description": "List springbootservers resource by subscription",
         "parameters": [
@@ -207,6 +223,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootservers_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "springbootservers_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -214,9 +238,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites": {
       "get": {
-        "operationId": "Springbootsites_ListByResourceGroup",
+        "operationId": "springbootsites_ListByResourceGroup",
         "tags": [
-          "springbootsites"
+          "SpringbootsitesModels"
         ],
         "description": "List springbootsites resource by resourceGroup.",
         "parameters": [
@@ -244,6 +268,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootsites_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "springbootsites_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -251,9 +283,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}": {
       "get": {
-        "operationId": "Springbootsites_Get",
+        "operationId": "springbootsites_Get",
         "tags": [
-          "springbootsites"
+          "SpringbootsitesModels"
         ],
         "description": "Get a springbootsites resource.",
         "parameters": [
@@ -290,12 +322,20 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "springbootsites_Get_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_Get_MaximumSet_Gen.json"
+          },
+          "springbootsites_Get_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_Get_MinimumSet_Gen.json"
+          }
         }
       },
       "put": {
-        "operationId": "Springbootsites_CreateOrUpdate",
+        "operationId": "springbootsites_CreateOrUpdate",
         "tags": [
-          "springbootsites"
+          "SpringbootsitesModels"
         ],
         "description": "Create a springbootsites resource.",
         "parameters": [
@@ -319,13 +359,14 @@
             "pattern": "^[a-z][a-z0-9-]*$"
           },
           {
-            "name": "resource",
+            "name": "springbootsites",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "Create a springbootsites payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SpringbootsitesModel"
-            }
+            },
+            "x-ms-client-name": "springbootsites"
           }
         ],
         "responses": {
@@ -347,12 +388,20 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "springbootsites_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "springbootsites_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_CreateOrUpdate_MinimumSet_Gen.json"
+          }
         }
       },
       "patch": {
-        "operationId": "Springbootsites_Update",
+        "operationId": "springbootsites_Update",
         "tags": [
-          "springbootsites"
+          "SpringbootsitesModels"
         ],
         "description": "Update a springbootsites resource.",
         "parameters": [
@@ -376,13 +425,14 @@
             "pattern": "^[a-z][a-z0-9-]*$"
           },
           {
-            "name": "properties",
+            "name": "springbootsites",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Update a springbootsites payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SpringbootsitesModelUpdate"
-            }
+              "$ref": "#/definitions/SpringbootsitesPatch"
+            },
+            "x-ms-client-name": "springbootsites"
           }
         ],
         "responses": {
@@ -413,15 +463,23 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootsites_Update_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_Update_MaximumSet_Gen.json"
+          },
+          "springbootsites_Update_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_Update_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Springbootsites_Delete",
+        "operationId": "springbootsites_Delete",
         "tags": [
-          "springbootsites"
+          "SpringbootsitesModels"
         ],
         "description": "Delete a springbootsites resource.",
         "parameters": [
@@ -470,6 +528,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootsites_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_Delete_MaximumSet_Gen.json"
+          },
+          "springbootsites_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_Delete_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -478,7 +544,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/errorSummaries": {
       "get": {
-        "operationId": "ErrorSummaries_ListBySpringbootsitesModel",
+        "operationId": "ErrorSummaries_ListBySite",
         "tags": [
           "ErrorSummaries"
         ],
@@ -516,6 +582,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ErrorSummaries_ListBySite_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_ListBySite_MaximumSet_Gen.json"
+          },
+          "ErrorSummaries_ListBySite_MinimumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_ListBySite_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -574,14 +648,22 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "ErrorSummaries_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Get_MaximumSet_Gen.json"
+          },
+          "ErrorSummaries_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Get_MinimumSet_Gen.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootapps": {
       "get": {
-        "operationId": "Springbootapps_ListBySpringbootsitesModel",
+        "operationId": "springbootapps_ListByResourceGroup",
         "tags": [
-          "springbootapps"
+          "SpringbootappsModels"
         ],
         "description": "List springbootapps resource by resourceGroup",
         "parameters": [
@@ -619,6 +701,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootapps_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/springbootapps_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "springbootapps_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/springbootapps_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -626,9 +716,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootapps/{springbootappsName}": {
       "get": {
-        "operationId": "Springbootapps_Get",
+        "operationId": "springbootapps_Get",
         "tags": [
-          "springbootapps"
+          "SpringbootappsModels"
         ],
         "description": "Get a springbootapps resource.",
         "parameters": [
@@ -675,12 +765,20 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "springbootapps_Get_MaximumSet_Gen": {
+            "$ref": "./examples/springbootapps_Get_MaximumSet_Gen.json"
+          },
+          "springbootapps_Get_MinimumSet_Gen": {
+            "$ref": "./examples/springbootapps_Get_MinimumSet_Gen.json"
+          }
         }
       },
       "patch": {
-        "operationId": "Springbootapps_Update",
+        "operationId": "springbootapps_Update",
         "tags": [
-          "springbootapps"
+          "SpringbootappsModels"
         ],
         "description": "Update a springbootapps resource.",
         "parameters": [
@@ -714,13 +812,14 @@
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$"
           },
           {
-            "name": "properties",
+            "name": "springbootapps",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Update a springbootapps payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SpringbootappsModelUpdate"
-            }
+              "$ref": "#/definitions/SpringbootappsPatch"
+            },
+            "x-ms-client-name": "springbootapps"
           }
         ],
         "responses": {
@@ -751,6 +850,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootapps_Update_MaximumSet_Gen": {
+            "$ref": "./examples/springbootapps_Update_MaximumSet_Gen.json"
+          },
+          "springbootapps_Update_MinimumSet_Gen": {
+            "$ref": "./examples/springbootapps_Update_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -759,9 +866,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootservers": {
       "get": {
-        "operationId": "Springbootservers_ListBySpringbootsitesModel",
+        "operationId": "springbootservers_ListByResourceGroup",
         "tags": [
-          "springbootservers"
+          "SpringbootserversModels"
         ],
         "description": "List springbootservers resource by resourceGroup",
         "parameters": [
@@ -799,6 +906,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootservers_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "springbootservers_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -806,9 +921,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootservers/{springbootserversName}": {
       "get": {
-        "operationId": "Springbootservers_Get",
+        "operationId": "springbootservers_Get",
         "tags": [
-          "springbootservers"
+          "SpringbootserversModels"
         ],
         "description": "List springbootservers resource.",
         "parameters": [
@@ -855,12 +970,20 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "springbootservers_Get_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_Get_MaximumSet_Gen.json"
+          },
+          "springbootservers_Get_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_Get_MinimumSet_Gen.json"
+          }
         }
       },
       "put": {
-        "operationId": "Springbootservers_CreateOrUpdate",
+        "operationId": "springbootservers_CreateOrUpdate",
         "tags": [
-          "springbootservers"
+          "SpringbootserversModels"
         ],
         "description": "Create springbootservers resource.",
         "parameters": [
@@ -894,13 +1017,14 @@
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$"
           },
           {
-            "name": "resource",
+            "name": "springbootservers",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "Create a springbootservers payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SpringbootserversModel"
-            }
+            },
+            "x-ms-client-name": "springbootservers"
           }
         ],
         "responses": {
@@ -922,12 +1046,20 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "springbootservers_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "springbootservers_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_CreateOrUpdate_MinimumSet_Gen.json"
+          }
         }
       },
       "patch": {
-        "operationId": "Springbootservers_Update",
+        "operationId": "springbootservers_Update",
         "tags": [
-          "springbootservers"
+          "SpringbootserversModels"
         ],
         "description": "Update springbootservers resource.",
         "parameters": [
@@ -961,13 +1093,14 @@
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$"
           },
           {
-            "name": "properties",
+            "name": "springbootservers",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Update a springbootservers payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SpringbootserversModelUpdate"
-            }
+              "$ref": "#/definitions/SpringbootserversPatch"
+            },
+            "x-ms-client-name": "springbootservers"
           }
         ],
         "responses": {
@@ -998,15 +1131,23 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootservers_Update_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_Update_MaximumSet_Gen.json"
+          },
+          "springbootservers_Update_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_Update_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Springbootservers_Delete",
+        "operationId": "springbootservers_Delete",
         "tags": [
-          "springbootservers"
+          "SpringbootserversModels"
         ],
         "description": "Delete springbootservers resource.",
         "parameters": [
@@ -1065,6 +1206,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootservers_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_Delete_MaximumSet_Gen.json"
+          },
+          "springbootservers_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_Delete_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1073,7 +1222,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/summaries": {
       "get": {
-        "operationId": "Summaries_ListBySpringbootsitesModel",
+        "operationId": "Summaries_ListBySite",
         "tags": [
           "Summaries"
         ],
@@ -1111,6 +1260,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Summaries_ListBySite_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_ListBySite_MaximumSet_Gen.json"
+          },
+          "Summaries_ListBySite_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_ListBySite_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1169,14 +1326,22 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Summaries_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MaximumSet_Gen.json"
+          },
+          "Summaries_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MinimumSet_Gen.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/triggerRefreshSite": {
       "post": {
-        "operationId": "Springbootsites_TriggerRefreshSite",
+        "operationId": "springbootsites_TriggerRefreshSite",
         "tags": [
-          "springbootsites"
+          "SpringbootsitesModels"
         ],
         "description": "Trigger refresh springbootsites action",
         "parameters": [
@@ -1222,6 +1387,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "springbootsites_TriggerRefreshSite_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_TriggerRefreshSite_MaximumSet_Gen.json"
+          },
+          "springbootsites_TriggerRefreshSite_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_TriggerRefreshSite_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1230,36 +1403,13 @@
     }
   },
   "definitions": {
-    "ActionType": {
-      "type": "string",
-      "enum": [
-        "Internal"
-      ],
-      "x-ms-enum": {
-        "name": "ActionType",
-        "modelAsString": true
-      }
-    },
-    "CreatedByType": {
-      "type": "string",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "CreatedByType",
-        "modelAsString": true
-      }
-    },
     "Error": {
       "type": "object",
       "description": "Defines the error.",
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The error ID."
         },
         "code": {
@@ -1390,25 +1540,14 @@
         },
         "affectedObjectsCount": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The count."
         }
       }
     },
-    "Origin": {
-      "type": "string",
-      "enum": [
-        "user",
-        "system",
-        "user,system"
-      ],
-      "x-ms-enum": {
-        "name": "Origin",
-        "modelAsString": true
-      }
-    },
     "ProvisioningState": {
       "type": "string",
+      "description": "The resource provisioning state.",
       "enum": [
         "Unknown",
         "Succeeded",
@@ -1421,6 +1560,33 @@
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
       }
     },
     "SpringbootappsModel": {
@@ -1464,181 +1630,40 @@
         "value"
       ]
     },
-    "SpringbootappsModelUpdate": {
+    "SpringbootappsPatch": {
       "type": "object",
-      "description": "The type used for update operations of the SpringbootappsModel.",
+      "description": "The springbootapps resource patch definition.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SpringbootappsModelUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SpringbootappsModelUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the SpringbootappsModel.",
-      "properties": {
-        "appName": {
-          "type": "string",
-          "description": "The name of SpringBootApp."
-        },
-        "artifactName": {
-          "type": "string",
-          "description": "The artifact name of SpringBootApp."
-        },
-        "appPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The application port."
-        },
-        "appType": {
-          "type": "string",
-          "description": "The application type, whether it is a SpringBoot app."
-        },
-        "applicationConfigurations": {
-          "type": "array",
-          "description": "The application configuration file list.",
-          "items": {
-            "$ref": "#/definitions/SpringbootappsPropertiesApplicationConfigurationsItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "bindingPorts": {
-          "type": "array",
-          "description": "The application binding port list.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "buildJdkVersion": {
-          "type": "string",
-          "description": "The jdk version in build."
-        },
-        "certificates": {
-          "type": "array",
-          "description": "The certificate file list.",
-          "items": {
+        "tags": {
+          "type": "object",
+          "description": "The springbootapps resource definition.Resource tags",
+          "additionalProperties": {
             "type": "string"
-          }
-        },
-        "checksum": {
-          "type": "string",
-          "description": "The checksum of jar file."
-        },
-        "dependencies": {
-          "type": "array",
-          "description": "The dependency list.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "environments": {
-          "type": "array",
-          "description": "The environment variable list.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "instanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total instance count the app deployed."
-        },
-        "jarFileLocation": {
-          "type": "string",
-          "description": "The jar file location on the server."
-        },
-        "jvmMemoryInMB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The jvm heap memory allocated."
-        },
-        "jvmOptions": {
-          "type": "array",
-          "description": "The jvm options.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "miscs": {
-          "type": "array",
-          "description": "The other types of date collected.",
-          "items": {
-            "$ref": "#/definitions/SpringbootappsPropertiesMiscsItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "instances": {
-          "type": "array",
-          "description": "The breakdown info for app instances on all the servers",
-          "items": {
-            "$ref": "#/definitions/SpringbootappsPropertiesInstancesItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "runtimeJdkVersion": {
-          "type": "string",
-          "description": "The jdk version installed on server"
-        },
-        "servers": {
-          "type": "array",
-          "description": "The server list the app installed",
-          "items": {
-            "type": "string"
-          }
-        },
-        "machineArmIds": {
-          "type": "array",
-          "description": "The machine ARM id list the app belongs to.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "siteName": {
-          "type": "string",
-          "description": "The site name."
-        },
-        "springBootVersion": {
-          "type": "string",
-          "description": "The spring boot version."
-        },
-        "staticContentLocations": {
-          "type": "array",
-          "description": "The static content location list.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "connectionStrings": {
-          "type": "array",
-          "description": "The connection string list.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time when this springbootapps jar file was last modified."
-        },
-        "lastUpdatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time when this springbootapps instance was last refreshed."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The resource provisioning state."
-        },
-        "errors": {
-          "type": "array",
-          "description": "The list of errors.",
-          "items": {
-            "$ref": "#/definitions/Error"
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/SpringbootappsProperties",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          ]
+        }
+      ]
     },
     "SpringbootappsProperties": {
       "type": "object",
@@ -1901,62 +1926,40 @@
         "value"
       ]
     },
-    "SpringbootserversModelUpdate": {
+    "SpringbootserversPatch": {
       "type": "object",
-      "description": "The type used for update operations of the SpringbootserversModel.",
+      "description": "The springbootservers resource patch definition.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SpringbootserversModelUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SpringbootserversModelUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the SpringbootserversModel.",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Target server port for remote login"
-        },
-        "server": {
-          "type": "string",
-          "description": "Server is the target server name or ip address to discover of SpringBootServer."
-        },
-        "fqdnAndIpAddressList": {
-          "type": "array",
-          "description": "The alternative FQDN or IP addresses to discover for this server",
-          "items": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
             "type": "string"
           }
-        },
-        "machineArmId": {
-          "type": "string",
-          "description": "The machine Id from ARM"
-        },
-        "totalApps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of apps been discovered"
-        },
-        "springBootApps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of spring boot apps been discovered"
-        },
-        "errors": {
-          "type": "array",
-          "description": "The list of errors.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The resource provisioning state."
         }
-      }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/SpringbootserversProperties",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          ]
+        }
+      ]
     },
     "SpringbootserversProperties": {
       "type": "object",
@@ -2067,44 +2070,25 @@
         "value"
       ]
     },
-    "SpringbootsitesModelUpdate": {
+    "SpringbootsitesPatch": {
       "type": "object",
-      "description": "The type used for update operations of the SpringbootsitesModel.",
+      "description": "The springbootsites resource patch definition.",
       "properties": {
-        "extendedLocation": {
-          "$ref": "#/definitions/SpringbootsitesModelExtendedLocation",
-          "description": "The extended location definition."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/SpringbootsitesModelUpdateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/SpringbootsitesProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
-      }
-    },
-    "SpringbootsitesModelUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the SpringbootsitesModel.",
-      "properties": {
-        "masterSiteId": {
-          "type": "string",
-          "description": "The master site ID from Azure Migrate."
-        },
-        "migrateProjectId": {
-          "type": "string",
-          "description": "The migrate project ID from Azure Migrate."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The resource provisioning state."
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
-      }
+      ]
     },
     "SpringbootsitesProperties": {
       "type": "object",
@@ -2130,12 +2114,12 @@
       "properties": {
         "discoveredServers": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The of number discovered spring boot servers."
         },
         "discoveredApps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The of number discovered spring boot apps."
         },
         "errors": {
@@ -2221,7 +2205,8 @@
         "values": [
           {
             "name": "v2023_01_01_preview",
-            "value": "2023-01-01-preview"
+            "value": "2023-01-01-preview",
+            "description": "The 2023-01-01-preview API version."
           }
         ]
       }

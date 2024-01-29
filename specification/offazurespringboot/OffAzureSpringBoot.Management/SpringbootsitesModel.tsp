@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,11 +8,16 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.OffAzureSpringBoot;
-@doc("The springbootsites envelope resource definition.")
+/**
+ * The springbootsites envelope resource definition.
+ */
 model SpringbootsitesModel is TrackedResource<SpringbootsitesProperties> {
-  @doc("The springbootsites name.")
+  /**
+   * The springbootsites name.
+   */
   @maxLength(64)
   @minLength(3)
   @pattern("^[a-z][a-z0-9-]*$")
@@ -20,30 +26,98 @@ model SpringbootsitesModel is TrackedResource<SpringbootsitesProperties> {
   @segment("springbootsites")
   name: string;
 
-  @doc("The extended location definition.")
+  /**
+   * The extended location definition.
+   */
   extendedLocation?: SpringbootsitesModelExtendedLocation;
 }
 
 @armResourceOperations
-interface springbootsites {
-  @doc("Get a springbootsites resource.")
+interface SpringbootsitesModels {
+  /**
+   * Get a springbootsites resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("springbootsites_Get")
   get is ArmResourceRead<SpringbootsitesModel>;
-  @doc("Create a springbootsites resource.")
+
+  /**
+   * Create a springbootsites resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("springbootsites_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<SpringbootsitesModel>;
-  @doc("Update a springbootsites resource.")
-  update is ArmResourcePatchAsync<
+
+  /**
+   * Update a springbootsites resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @parameterVisibility("read")
+  @operationId("springbootsites_Update")
+  update is ArmCustomPatchAsync<
     SpringbootsitesModel,
-    SpringbootsitesProperties
+    SpringbootsitesPatch,
+    BaseParameters<SpringbootsitesModel>,
+    ArmLroLocationHeader
   >;
-  @doc("Delete a springbootsites resource.")
-  delete is ArmResourceDeleteWithoutOkAsync<SpringbootsitesModel>;
-  @doc("List springbootsites resource by resourceGroup.")
+
+  /**
+   * Delete a springbootsites resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("springbootsites_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    SpringbootsitesModel,
+    BaseParameters<SpringbootsitesModel>,
+    ArmLroLocationHeader
+  >;
+
+  /**
+   * List springbootsites resource by resourceGroup.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("springbootsites_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<SpringbootsitesModel>;
-  @doc("List springbootsites resource by subscription")
+
+  /**
+   * List springbootsites resource by subscription
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("springbootsites_ListBySubscription")
   listBySubscription is ArmListBySubscription<SpringbootsitesModel>;
-  @doc("Trigger refresh springbootsites action")
+
+  /**
+   * Trigger refresh springbootsites action
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("springbootsites_TriggerRefreshSite")
   triggerRefreshSite is ArmResourceActionNoResponseContentAsync<
     SpringbootsitesModel,
-    void
+    void,
+    BaseParameters<SpringbootsitesModel>,
+    ArmLroLocationHeader
   >;
 }
+
+@@projectedName(SpringbootsitesModels.createOrUpdate::parameters.resource,
+  "json",
+  "springbootsites"
+);
+@@extension(SpringbootsitesModels.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "springbootsites"
+);
+@@doc(SpringbootsitesModels.createOrUpdate::parameters.resource,
+  "Create a springbootsites payload."
+);
+@@projectedName(SpringbootsitesModels.update::parameters.properties,
+  "json",
+  "springbootsites"
+);
+@@extension(SpringbootsitesModels.update::parameters.properties,
+  "x-ms-client-name",
+  "springbootsites"
+);
+@@doc(SpringbootsitesModels.update::parameters.properties,
+  "Update a springbootsites payload."
+);
