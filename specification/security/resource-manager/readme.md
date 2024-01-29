@@ -12,7 +12,7 @@ To build the SDK for Security, simply [Install AutoRest](https://aka.ms/autorest
 
 > `autorest`
 
-To see additional help and options, run: 
+To see additional help and options, run:
 
 > `autorest --help`
 
@@ -65,6 +65,7 @@ directive:
     from: pricings.json
     reason: It does have a LIST API, but it is wrapped with PricingList object.
 ```
+
 ``` yaml
 suppressions:
   - code: ResourceNameRestriction
@@ -77,6 +78,7 @@ suppressions:
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
 ```
+
 ### Basic Information
 
 These are the global settings for the Security API.
@@ -93,6 +95,15 @@ tag: package-composite-v3
 The following packages may be composed from multiple api-versions.
 
 
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - Microsoft.Security/preview/2024-02-01-preview/assessmentMetadata.json
+  - Microsoft.Security/preview/2024-02-01-preview/assessments.json
+```
 ### Tag: package-2023-11-15
 
 These settings apply only when `--tag=package-2023-11-15` is specified on the command line.
@@ -101,19 +112,21 @@ These settings apply only when `--tag=package-2023-11-15` is specified on the co
 input-file:
   - Microsoft.Security/stable/2023-11-15/apiCollections.json
 ```
+
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
 ```
+
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-09'
+``` yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
 suppressions:
@@ -134,7 +147,7 @@ suppressions:
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01'
+``` yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.Security/stable/2024-01-01/pricings.json
 ```
@@ -414,15 +427,6 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
-- Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
-- Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
-- Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
-- Microsoft.Security/stable/2017-08-01/complianceResults.json
-- Microsoft.Security/stable/2024-01-01/pricings.json
-- Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
-- Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
-- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
-- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -452,6 +456,8 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
 - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2024-02-01-preview/assessmentMetadata.json
+- Microsoft.Security/preview/2024-02-01-preview/assessments.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
@@ -468,13 +474,12 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
-- Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
-- Microsoft.Security/stable/2021-06-01/assessments.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/stable/2023-01-01/pricings.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
+- Microsoft.Security/stable/2024-01-01/pricings.json
 
 # Autorest suppressions
 suppressions:
@@ -553,6 +558,8 @@ input-file:
 - Microsoft.Security/stable/2023-01-01/pricings.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
+- Microsoft.Security/preview/2024-02-01-preview/assessmentMetadata.json
+- Microsoft.Security/preview/2024-02-01-preview/assessments.json
 
 # Needed when there is more than one input file
 override-info:
