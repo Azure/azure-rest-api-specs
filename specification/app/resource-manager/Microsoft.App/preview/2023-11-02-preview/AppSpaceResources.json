@@ -330,10 +330,6 @@
         }
       }
     },
-    "Object": {
-      "type": "object",
-      "properties": {}
-    },
     "AppSpaceResource": {
       "description": "App Space Resource.",
       "type": "object",
@@ -371,12 +367,12 @@
               "description": "Optional App Space Resource Deployment Information"
             },
             "isFavorite": {
-              "description": "Boolean marking this App Space Resource as a favorite",
+              "description": "Boolean marking whether or not this App Space Resource is a favorite (true or false, default is false)",
               "type": "boolean"
             },
             "metadata": {
-              "$ref": "#/definitions/Object",
-              "description": "Property bag to add properties used by Portal."
+              "description": "Property bag to add properties used by Portal UX.",
+              "type": "object"
             },
             "dependencies": {
               "type": "array",
