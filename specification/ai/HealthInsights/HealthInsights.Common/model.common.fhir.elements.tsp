@@ -220,7 +220,7 @@ Based on [FHIR Quantity](https://www.hl7.org/fhir/R4/datatypes.html#Quantity)
 """)
 model Quantity extends Element {
   @doc("Numerical value (with implicit precision)")
-  value?: decimal;
+  value?: decimal128;
 
   @doc("< | <= | >= | > - how to understand the value")
   comparator?: string;
@@ -287,16 +287,16 @@ model SampledData extends Element {
   origin: Quantity;
 
   @doc("Number of milliseconds between samples")
-  period: decimal;
+  period: decimal128;
 
   @doc("Multiply data by this before adding to origin")
-  factor?: decimal;
+  factor?: decimal128;
 
   @doc("Lower limit of detection")
-  lowerLimit?: decimal;
+  lowerLimit?: decimal128;
 
   @doc("Upper limit of detection")
-  upperLimit?: decimal;
+  upperLimit?: decimal128;
 
   @doc("Number of sample points at each time point")
   @minValue(1)

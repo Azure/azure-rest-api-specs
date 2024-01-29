@@ -33,10 +33,10 @@ model RadiologyInsightsModelConfiguration {
 @doc("Options regarding follow up recommendation inferences and finding inferences.")
 model RadiologyInsightsInferenceOptions {
   @doc("Follow-up recommendation options.")
-  followupRecommendation?: FollowupRecommendationOptions;
+  followupRecommendationOptions?: FollowupRecommendationOptions;
 
   @doc("Finding options.")
-  finding?: FindingOptions;
+  findingOptions?: FindingOptions;
 }
 
 @doc("Follow-up recommendation options.")
