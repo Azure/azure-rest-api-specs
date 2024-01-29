@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "scope": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss1/providers/Microsoft.Security/assessments/21300918-b2e3-0346-785f-c77ff57d243b",
+            "name": "21300918-b2e3-0346-785f-c77ff57d243b",
+            "type": "Microsoft.Security/assessments",
+            "properties": {
+              "resourceDetails": {
+                "source": "Azure",
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss1"
+              },
+              "displayName": "Install endpoint protection solution on virtual machine scale sets",
+              "status": {
+                "code": "Unhealthy",
+                "statusChangeDate": "2023-01-12T09:07:18.6759138Z",
+                "firstEvaluationDate": "2023-01-12T09:07:18.6759138Z"
+              },
+              "risk": {
+                "attackPathsReferences": [
+                  "5F0F0A65186ECF4BA52DA673037E61C6C9315439EBF3B081C1484761EF96ECCC"
+                ],
+                "riskFactors": [
+                  "Exposure to the Internet",
+                  "Anonymous Access"
+                ],
+                "paths": [
+                  {
+                    "id": "97cf86c2-190f-e241-c926-88e8f331ac8a",
+                    "insights": [
+                      {
+                        "id": "97cf86c2-190f-e241-c926-88e8f331ac8a",
+                        "type": "24053cf1-37a3-4d29-b070-3d223bee8e29",
+                        "subjectId": "5704e833-566f-c8ce-d6b3-4b9a2813cfd7"
+                      }
+                    ],
+                    "nodes": [],
+                    "edges": []
+                  }
+                ],
+                "level": "High"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2/providers/Microsoft.Security/assessments/21300918-b2e3-0346-785f-c77ff57d243b",
+            "name": "21300918-b2e3-0346-785f-c77ff57d243b",
+            "type": "Microsoft.Security/assessments",
+            "properties": {
+              "resourceDetails": {
+                "source": "Azure",
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2"
+              },
+              "displayName": "Install endpoint protection solution on virtual machine scale sets",
+              "status": {
+                "code": "NotApplicable",
+                "cause": "OffByPolicy",
+                "description": "The effective policy for the assessment was evaluated to off - use Microsoft.Authorization/policyAssignments to turn this assessment on",
+                "statusChangeDate": "2021-04-12T09:07:18.6759138Z",
+                "firstEvaluationDate": "2021-04-12T09:07:18.6759138Z"
+              },
+              "additionalData": {
+                "linkedWorkspaceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myLaWorkspace"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

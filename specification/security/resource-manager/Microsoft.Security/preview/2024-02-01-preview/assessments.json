@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Defender for Cloud",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2021-06-01"
+    "version": "2024-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -313,6 +313,9 @@
         },
         "partnersData": {
           "$ref": "#/definitions/SecurityAssessmentPartnerData"
+        },
+        "risk": {
+          "$ref": "#/definitions/AssessmentRisk"
         }
       },
       "required": [
@@ -416,6 +419,114 @@
       "required": [
         "code"
       ]
+    },
+    "AssessmentRisk": {
+      "type": "object",
+      "description": "The risk properties of the assessment",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "The level of the risk",
+          "enum": [
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ],
+          "x-ms-enum": {
+            "name": "AssessmentRiskLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Low",
+                "description": "Low risk"
+              },
+              {
+                "value": "Medium",
+                "description": "Medium risk"
+              },
+              {
+                "value": "High",
+                "description": "High risk"
+              },
+              {
+                "value": "Critical",
+                "description": "Critical risk"
+              }
+            ]
+          }
+        },
+        "attackPathsReferences": {
+          "type": "array",
+          "description": "List of Attack Path IDs that effect the risk for this assessment",
+          "items": {
+            "type": "string"
+          }
+        },
+        "riskFactors": {
+          "type": "array",
+          "description": "List of risk factors that were considered for calculating the risk",
+          "items": {
+            "type": "string"
+          }
+        },
+        "paths": {
+          "type": "array",
+          "description": "List of paths that were considered for calculating the risk",
+          "items": {
+            "$ref": "#/definitions/AssessmentRiskPath"
+          }
+        }
+      }
+    },
+    "AssessmentRiskPath": {
+      "type": "object",
+      "description": "A contextual path that was considered for calculating an assessment risk",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the path"
+        },
+        "nodes": {
+          "type": "array",
+          "description": "List of node IDs in the path",
+          "items": {
+            "$ref": "#/definitions/AssessmentRiskPathReferenceItem"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "description": "List of edge IDs in the path",
+          "items": {
+            "$ref": "#/definitions/AssessmentRiskPathReferenceItem"
+          }
+        },
+        "insights": {
+          "type": "array",
+          "description": "List of insight IDs in the path",
+          "items": {
+            "$ref": "#/definitions/AssessmentRiskPathReferenceItem"
+          }
+        }
+      }
+    },
+    "AssessmentRiskPathReferenceItem": {
+      "type": "object",
+      "description": "A single item from a contextual path that was considered for calculating an assessment risk",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the referenced item"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the referenced item"
+        },
+        "subjectId": {
+          "type": "string",
+          "description": "The ID of the subject of the referenced item"
+        }
+      }
     }
   },
   "parameters": {

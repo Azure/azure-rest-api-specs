@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2",
+    "assessmentName": "21300918-b2e3-0346-785f-c77ff57d243b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2/providers/Microsoft.Security/assessments/21300918-b2e3-0346-785f-c77ff57d243b",
+        "name": "21300918-b2e3-0346-785f-c77ff57d243b",
+        "type": "Microsoft.Security/assessments",
+        "properties": {
+          "resourceDetails": {
+            "source": "Azure",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2"
+          },
+          "displayName": "Install endpoint protection solution on virtual machine scale sets",
+          "status": {
+            "firstEvaluationDate": "2023-01-30T17:40:45.3184593Z",
+            "statusChangeDate": "2023-01-30T17:40:45.3184593Z",
+            "code": "Unhealthy"
+          },
+          "risk": {
+            "attackPathsReferences": [
+              "5F0F0A65186ECF4BA52DA673037E61C6C9315439EBF3B081C1484761EF96ECCC"
+            ],
+            "riskFactors": [
+              "Exposure to the Internet",
+              "Anonymous Access"
+            ],
+            "paths": [
+              {
+                "id": "97cf86c2-190f-e241-c926-88e8f331ac8a",
+                "insights": [
+                  {
+                    "id": "97cf86c2-190f-e241-c926-88e8f331ac8a",
+                    "type": "24053cf1-37a3-4d29-b070-3d223bee8e29",
+                    "subjectId": "5704e833-566f-c8ce-d6b3-4b9a2813cfd7"
+                  }
+                ],
+                "nodes": [],
+                "edges": []
+              }
+            ],
+            "level": "High"
+          },
+          "additionalData": {
+            "linkedWorkspaceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myLaWorkspace"
+          }
+        }
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Defender for Cloud",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2021-06-01"
+    "version": "2024-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -339,7 +339,9 @@
               "Networking",
               "Data",
               "IdentityAndAccess",
-              "IoT"
+              "IoT",
+              "Container",
+              "AppServices"
             ],
             "x-ms-enum": {
               "name": "categories",
@@ -359,6 +361,12 @@
                 },
                 {
                   "value": "IoT"
+                },
+                {
+                  "value": "Container"
+                },
+                {
+                  "value": "AppServices"
                 }
               ]
             }
@@ -494,7 +502,11 @@
             "BuiltIn",
             "CustomPolicy",
             "CustomerManaged",
-            "VerifiedPartner"
+            "BuiltInPolicy",
+            "VerifiedPartner",
+            "ManualBuiltInPolicy",
+            "ManualBuiltIn",
+            "ManualCustomPolicy"
           ],
           "x-ms-enum": {
             "name": "assessmentType",
@@ -513,8 +525,24 @@
                 "description": "User assessments pushed directly by the user or other third party to Microsoft Defender for Cloud"
               },
               {
+                "value": "BuiltInPolicy",
+                "description": "The assessment is calculated from a built in Azure Policy definition that is ingested to Microsoft Defender for Cloud"
+              },
+              {
                 "value": "VerifiedPartner",
                 "description": "An assessment that was created by a verified 3rd party if the user connected it to ASC"
+              },
+              {
+                "value": "ManualBuiltInPolicy",
+                "description": "The assessment is manual and calculated from a built in Azure Policy definition that is ingested to Microsoft Defender for Cloud"
+              },
+              {
+                "value": "ManualBuiltIn",
+                "description": "Microsoft Defender for Cloud manual managed assessments"
+              },
+              {
+                "value": "ManualCustomPolicy",
+                "description": "User defined policies that are manually ingested from Azure Policy to Microsoft Defender for Cloud"
               }
             ]
           }
@@ -756,7 +784,13 @@
               "User Execution",
               "Valid Accounts",
               "Windows Management Instrumentation",
-              "File and Directory Permissions Modification"
+              "File and Directory Permissions Modification",
+              "Cloud Storage Object Discovery",
+              "Weaken Encryption",
+              "Network Service Discovery",
+              "Exfiltration over C2 Channel",
+              "Steal Application Access Token",
+              "Gather Victim Host Information"
             ],
             "x-ms-enum": {
               "name": "techniques",
@@ -1073,9 +1107,90 @@
                 },
                 {
                   "value": "File and Directory Permissions Modification"
+                },
+                {
+                  "value": "Cloud Storage Object Discovery"
+                },
+                {
+                  "value": "Weaken Encryption"
+                },
+                {
+                  "value": "Network Service Discovery"
+                },
+                {
+                  "value": "Exfiltration over C2 Channel"
+                },
+                {
+                  "value": "Steal Application Access Token"
+                },
+                {
+                  "value": "Gather Victim Host Information"
                 }
               ]
             }
+          }
+        },
+        "cloudProviders": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Cloud providers of the assessment",
+            "enum": [
+              "Azure",
+              "AWS",
+              "GCP",
+              "GitHub",
+              "GitLab",
+              "AzureDevOps"
+            ],
+            "x-ms-enum": {
+              "name": "cloudProviders",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Azure"
+                },
+                {
+                  "value": "AWS"
+                },
+                {
+                  "value": "GCP"
+                },
+                {
+                  "value": "GitHub"
+                },
+                {
+                  "value": "GitLab"
+                },
+                {
+                  "value": "AzureDevOps"
+                }
+              ]
+            }
+          }
+        },
+        "remediationPolicy": {
+          "type": "string",
+          "description": "The Azure Policy definition ID that is used for remediating the assessment"
+        },
+        "managementProvider": {
+          "type": "string",
+          "description": "The management provider of the assessment",
+          "enum": [
+            "MDC",
+            "AzurePolicy"
+          ],
+          "x-ms-enum": {
+            "name": "managementProvider",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "MDC"
+              },
+              {
+                "value": "AzurePolicy"
+              }
+            ]
           }
         }
       },
