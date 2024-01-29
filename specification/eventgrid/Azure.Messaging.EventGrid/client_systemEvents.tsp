@@ -741,6 +741,8 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.DeviceTwinProperties, Access.public);
 @@usage(Microsoft.EventGrid.DeviceTwinInfo, Usage.input | Usage.output);
 @@access(Microsoft.EventGrid.DeviceTwinInfo, Access.public);
+@@usage(Microsoft.EventGrid.DeviceTwinInfoProperties, Usage.input | Usage.output);
+@@access(Microsoft.EventGrid.DeviceTwinInfoProperties, Access.public);
 @@usage(Microsoft.EventGrid.DeviceConnectionStateEventProperties,
   Usage.input | Usage.output
 );

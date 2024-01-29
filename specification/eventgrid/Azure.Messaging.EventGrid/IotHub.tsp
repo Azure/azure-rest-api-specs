@@ -53,13 +53,7 @@ model DeviceTwinInfo {
   //TODO: something here needs to change
 
   @doc("Properties JSON element.")
-  properties?: {
-    @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
-    desired?: DeviceTwinProperties;
-  
-    @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
-    reported?: DeviceTwinProperties;
-  };
+  properties?: DeviceTwinInfoProperties;
 
   @doc("Whether the device twin is enabled or disabled.")
   status?: string;
@@ -140,3 +134,13 @@ model DeviceTwinInfoX509Thumbprint {
   @doc("Secondary thumbprint for the x509 certificate.")
   secondaryThumbprint?: string;
 }
+
+@doc("Properties JSON element.")
+model DeviceTwinInfoProperties
+{
+  @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
+  desired?: DeviceTwinProperties;
+
+  @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
+  reported?: DeviceTwinProperties;
+};
