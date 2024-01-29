@@ -70,7 +70,6 @@ interface SchemaOperations {
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
   @summary("Get list of schema groups.")
   @doc("Gets the list of schema groups user is authorized to access.")
-  @sharedRoute
   listSchemaGroups is resourceOperations.ResourceList<SchemaGroup>;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
@@ -146,6 +145,7 @@ union SchemaContentTypeValues {
   protobuf: "text/vnd.ms.protobuf",
 }
 
+// Used by the C# client.
 @doc("The content type for the schema.")
 enum ContentTypeEnum {
   @doc("The Avro schema content type.")
