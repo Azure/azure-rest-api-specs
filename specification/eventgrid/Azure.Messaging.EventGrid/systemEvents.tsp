@@ -29,9 +29,4 @@ namespace Microsoft.EventGrid {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2018_01_01: "2018-01-01",
   }
-
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"  "dummy operation"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"  "dummy operation"
-  @doc("void")
-  op dummyOperation(): void;
 }
