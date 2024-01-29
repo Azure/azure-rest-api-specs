@@ -102,6 +102,11 @@ directive:
   - suppress: AvoidAdditionalProperties
     reason: Property solutionSettings for Solution Configurations settings
     from: publicCloud.json
+    where:
+      - $.paths["/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}"].patch
+      - $.paths["/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}"].put
+      - $.paths["/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}"].delete
+      - $.paths["/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}"].get
 ```
 
 ---
