@@ -79,13 +79,57 @@ enum IdentityType {
   SystemAssigned,
 }
 
-// TODO, needed?
-/** A string representation of a boolean */
-enum StringBoolean {
-  /** "true" */
+/** Limit CPU for migration. */
+enum LimitCpuForMigration {
+  /** Enable limit CPU for migration. */
   `true`,
 
-  /** "false" */
+  /** Disable limit CPU for migration. */
+  `false`,
+}
+
+/** Dynamic memory enabled. */
+enum DynamicMemoryEnabled {
+  /** Enable dynamic memory. */
+  `true`,
+
+  /** Disable dynamic memory. */
+  `false`,
+}
+
+/** Highly available. */
+enum IsHighlyAvailable {
+  /** Enable highly available. */
+  `true`,
+
+  /** Disable highly available. */
+  `false`,
+}
+
+/** Create diff disk. */
+enum CreateDiffDisk {
+  /** Enable create diff disk. */
+  `true`,
+
+  /** Disable create diff disk. */
+  `false`,
+}
+
+/** Customizable. */
+enum IsCustomizable {
+  /** Enable customizable. */
+  `true`,
+
+  /** Disable customizable. */
+  `false`,
+}
+
+/** Skip shutdown. */
+enum SkipShutdown {
+  /** Enable skip shutdown. */
+  `true`,
+
+  /** Disable skip shutdown. */
   `false`,
 }
 
@@ -261,15 +305,15 @@ model VirtualMachineTemplateProperties {
 
   /** Gets a value indicating whether to enable processor compatibility mode for live migration of VMs. */
   @visibility("read")
-  limitCpuForMigration?: StringBoolean;
+  limitCpuForMigration?: LimitCpuForMigration;
 
   /** Gets a value indicating whether to enable dynamic memory or not. */
   @visibility("read")
-  dynamicMemoryEnabled?: StringBoolean;
+  dynamicMemoryEnabled?: DynamicMemoryEnabled;
 
   /** Gets a value indicating whether the vm template is customizable or not. */
   @visibility("read")
-  isCustomizable?: StringBoolean;
+  isCustomizable?: IsCustomizable;
 
   /** Gets the max dynamic memory for the vm. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
@@ -283,7 +327,7 @@ model VirtualMachineTemplateProperties {
 
   /** Gets highly available property. */
   @visibility("read")
-  isHighlyAvailable?: StringBoolean;
+  isHighlyAvailable?: IsHighlyAvailable;
 
   /** Gets the generation for the vm. */
   @visibility("read")
@@ -391,7 +435,7 @@ model VirtualDisk {
   storageQosPolicy?: StorageQosPolicyDetails;
 
   /** Gets or sets a value indicating diff disk. */
-  createDiffDisk?: StringBoolean;
+  createDiffDisk?: CreateDiffDisk;
 }
 
 /** The StorageQoSPolicyDetails definition. */
@@ -507,10 +551,10 @@ model HardwareProfile {
   cpuCount?: int32;
 
   /** Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs. */
-  limitCpuForMigration?: StringBoolean;
+  limitCpuForMigration?: LimitCpuForMigration;
 
   /** Gets or sets a value indicating whether to enable dynamic memory or not. */
-  dynamicMemoryEnabled?: StringBoolean;
+  dynamicMemoryEnabled?: DynamicMemoryEnabled;
 
   /** Gets or sets the max dynamic memory for the vm. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
@@ -522,7 +566,7 @@ model HardwareProfile {
 
   /** Gets highly available property. */
   @visibility("read")
-  isHighlyAvailable?: StringBoolean;
+  isHighlyAvailable?: IsHighlyAvailable;
 }
 
 /** Defines the resource properties. */
@@ -603,10 +647,10 @@ model HardwareProfileUpdate {
   cpuCount?: int32;
 
   /** Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs. */
-  limitCpuForMigration?: StringBoolean;
+  limitCpuForMigration?: LimitCpuForMigration;
 
   /** Gets or sets a value indicating whether to enable dynamic memory or not. */
-  dynamicMemoryEnabled?: StringBoolean;
+  dynamicMemoryEnabled?: DynamicMemoryEnabled;
 
   /** Gets or sets the max dynamic memory for the vm. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
@@ -691,7 +735,7 @@ model InfrastructureProfileUpdate {
 /** Defines the stop action properties. */
 model StopVirtualMachineOptions {
   /** Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false. */
-  skipShutdown?: StringBoolean;
+  skipShutdown?: SkipShutdown;
 }
 
 /** Describes the properties of Hybrid Identity Metadata for a Virtual Machine. */

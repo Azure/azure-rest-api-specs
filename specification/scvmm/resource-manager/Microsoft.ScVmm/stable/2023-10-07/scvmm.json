@@ -3029,6 +3029,54 @@
         }
       }
     },
+    "CreateDiffDisk": {
+      "type": "string",
+      "description": "Create diff disk.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "CreateDiffDisk",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable create diff disk."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable create diff disk."
+          }
+        ]
+      }
+    },
+    "DynamicMemoryEnabled": {
+      "type": "string",
+      "description": "Dynamic memory enabled.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicMemoryEnabled",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable dynamic memory."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable dynamic memory."
+          }
+        ]
+      }
+    },
     "ExtendedLocation": {
       "type": "object",
       "description": "The extended location.",
@@ -3159,11 +3207,11 @@
           "description": "Gets or sets the number of vCPUs for the vm."
         },
         "limitCpuForMigration": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/LimitCpuForMigration",
           "description": "Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs."
         },
         "dynamicMemoryEnabled": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/DynamicMemoryEnabled",
           "description": "Gets or sets a value indicating whether to enable dynamic memory or not."
         },
         "dynamicMemoryMaxMB": {
@@ -3177,7 +3225,7 @@
           "description": "Gets or sets the min dynamic memory for the vm."
         },
         "isHighlyAvailable": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/IsHighlyAvailable",
           "description": "Gets highly available property.",
           "readOnly": true
         }
@@ -3198,11 +3246,11 @@
           "description": "Gets or sets the number of vCPUs for the vm."
         },
         "limitCpuForMigration": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/LimitCpuForMigration",
           "description": "Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs."
         },
         "dynamicMemoryEnabled": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/DynamicMemoryEnabled",
           "description": "Gets or sets a value indicating whether to enable dynamic memory or not."
         },
         "dynamicMemoryMaxMB": {
@@ -3439,6 +3487,78 @@
       "required": [
         "inventoryType"
       ]
+    },
+    "IsCustomizable": {
+      "type": "string",
+      "description": "Customizable.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "IsCustomizable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable customizable."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable customizable."
+          }
+        ]
+      }
+    },
+    "IsHighlyAvailable": {
+      "type": "string",
+      "description": "Highly available.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "IsHighlyAvailable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable highly available."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable highly available."
+          }
+        ]
+      }
+    },
+    "LimitCpuForMigration": {
+      "type": "string",
+      "description": "Limit CPU for migration.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "LimitCpuForMigration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable limit CPU for migration."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable limit CPU for migration."
+          }
+        ]
+      }
     },
     "NetworkInterface": {
       "type": "object",
@@ -3715,12 +3835,36 @@
         ]
       }
     },
+    "SkipShutdown": {
+      "type": "string",
+      "description": "Skip shutdown.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "SkipShutdown",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable skip shutdown."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable skip shutdown."
+          }
+        ]
+      }
+    },
     "StopVirtualMachineOptions": {
       "type": "object",
       "description": "Defines the stop action properties.",
       "properties": {
         "skipShutdown": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/SkipShutdown",
           "description": "Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false."
         }
       }
@@ -3798,30 +3942,6 @@
           "type": "string",
           "description": "The ID of the QoS policy."
         }
-      }
-    },
-    "StringBoolean": {
-      "type": "string",
-      "description": "A string representation of a boolean",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "x-ms-enum": {
-        "name": "StringBoolean",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "true",
-            "value": "true",
-            "description": "\"true\""
-          },
-          {
-            "name": "false",
-            "value": "false",
-            "description": "\"false\""
-          }
-        ]
       }
     },
     "Versions": {
@@ -3908,7 +4028,7 @@
           "x-ms-client-name": "storageQosPolicy"
         },
         "createDiffDisk": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/CreateDiffDisk",
           "description": "Gets or sets a value indicating diff disk."
         }
       }
@@ -4307,17 +4427,17 @@
           "readOnly": true
         },
         "limitCpuForMigration": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/LimitCpuForMigration",
           "description": "Gets a value indicating whether to enable processor compatibility mode for live migration of VMs.",
           "readOnly": true
         },
         "dynamicMemoryEnabled": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/DynamicMemoryEnabled",
           "description": "Gets a value indicating whether to enable dynamic memory or not.",
           "readOnly": true
         },
         "isCustomizable": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/IsCustomizable",
           "description": "Gets a value indicating whether the vm template is customizable or not.",
           "readOnly": true
         },
@@ -4334,7 +4454,7 @@
           "readOnly": true
         },
         "isHighlyAvailable": {
-          "$ref": "#/definitions/StringBoolean",
+          "$ref": "#/definitions/IsHighlyAvailable",
           "description": "Gets highly available property.",
           "readOnly": true
         },
