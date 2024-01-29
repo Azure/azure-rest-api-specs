@@ -15,7 +15,7 @@ using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
 An abstract representation of a response format configuration usable by Chat Completions. Can be used to enable JSON
 mode.
@@ -30,7 +30,7 @@ model ChatCompletionsResponseFormat {
 The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response
 content that adheres to a specific schema.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatCompletionsTextResponseFormat extends ChatCompletionsResponseFormat {
   @doc("The discriminated object type, which is always 'text' for this format.")
   type: "text";
@@ -39,7 +39,7 @@ model ChatCompletionsTextResponseFormat extends ChatCompletionsResponseFormat {
 @doc("""
 A response format for Chat Completions that restricts responses to emitting valid JSON objects.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatCompletionsJsonResponseFormat extends ChatCompletionsResponseFormat {
   @doc("The discriminated object type, which is always 'json_object' for this format.")
   type: "json_object";
@@ -63,7 +63,7 @@ model ChatCompletionsOptions {
 
   @doc("A list of functions the model may generate JSON inputs for.")
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @removed(ServiceApiVersions.v2023_12_01_Preview)
+  @removed(ServiceApiVersions.v2024_02_15_Preview)
   functions?: FunctionDefinition[];
 
   @doc("""
@@ -74,7 +74,7 @@ model ChatCompletionsOptions {
     """)
   @projectedName("json", "function_call")
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @removed(ServiceApiVersions.v2023_12_01_Preview)
+  @removed(ServiceApiVersions.v2024_02_15_Preview)
   functionCall?: FunctionCallConfig;
 
   @doc("The maximum number of tokens to generate.")
@@ -181,16 +181,16 @@ model ChatCompletionsOptions {
   //        the array were in an appropriate parent JSON object on the wire) and type/field names should converge on
   //        "extensions" instead of "data sources" for representing the additional configuration information. A future
   //        service API version will absorb these proposed changes and allow us to retire the extra complexity.
-  @added(ServiceApiVersions.v2023_08_01_Preview)
-  @projectedName("json", "dataSources")
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @projectedName("json", "data_sources")
   @projectedName("csharp", "InternalAzureExtensionsDataSources")
   dataSources?: AzureChatExtensionConfiguration[];
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("If provided, the configuration options for available Azure OpenAI chat enhancements.")
   enhancements?: AzureChatEnhancementConfiguration;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
   If specified, the system will make a best effort to sample deterministically such that repeated requests with the
   same seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the
@@ -199,16 +199,16 @@ model ChatCompletionsOptions {
   seed?: int64;
 
   @projectedName("json", "response_format")
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
   responseFormat?: ChatCompletionsResponseFormat;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
   tools?: ChatCompletionsToolDefinition[];
 
   @projectedName("json", "tool_choice")
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
   If specified, the model will configure which of the provided tools it can use for the chat completions response.
   """)
@@ -241,7 +241,7 @@ model ChatChoice {
   The reason the model stopped generating tokens, together with any applicable details.
   This structured representation replaces 'finish_reason' for some models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @projectedName("json", "finish_details")
   finishDetails?: ChatFinishDetails;
 
@@ -259,7 +259,7 @@ model ChatChoice {
   @projectedName("json", "content_filter_results")
   contentFilterResults?: ContentFilterResultsForChoice;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
   Represents the output results of Azure OpenAI enhancements to chat completions, as configured via the matching input
   provided in the request. This supplementary information is only available when using Azure OpenAI and only when the
@@ -304,7 +304,7 @@ model ChatCompletions {
   @projectedName("json", "prompt_filter_results")
   promptFilterResults?: ContentFilterResultsForPrompt[];
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @projectedName("json", "system_fingerprint")
   @doc("""
   Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that
@@ -319,7 +319,7 @@ model ChatCompletions {
   usage: CompletionsUsage;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @discriminator("type")
 @doc("An abstract representation of structured information about why a chat completions response terminated.")
 model ChatFinishDetails {
@@ -328,7 +328,7 @@ model ChatFinishDetails {
 }
 
 @doc("A structured representation of a stop reason that signifies natural termination by the model.")
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model StopFinishDetails extends ChatFinishDetails {
   @doc("The object type, which is always 'stop' for this object.")
   type: "stop";
@@ -341,7 +341,7 @@ model StopFinishDetails extends ChatFinishDetails {
 A structured representation of a stop reason that signifies a token limit was reached before the model could naturally
 complete.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model MaxTokensFinishDetails extends ChatFinishDetails {
   @doc("The object type, which is always 'max_tokens' for this object.")
   type: "max_tokens";

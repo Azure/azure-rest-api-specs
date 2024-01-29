@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
@@ -36,6 +38,11 @@ model EmbeddingsOptions {
     as we have observed inferior results when newlines are present.
     """)
   input: string[];
+
+  @doc("type of embedding search to use")
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @projectedName("json", "input_type")
+  inputType: string;
 }
 
 @doc("""

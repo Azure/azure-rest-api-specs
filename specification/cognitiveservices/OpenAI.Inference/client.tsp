@@ -7,7 +7,7 @@ using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @TypeSpec.Versioning.useDependency(
-  Azure.OpenAI.ServiceApiVersions.v2023_12_01_Preview
+  Azure.OpenAI.ServiceApiVersions.v2024_02_15_Preview
 )
 namespace Client;
 
@@ -35,6 +35,7 @@ interface OpenAIClient {
 
   getCompletions is Azure.OpenAI.getCompletions;
   getChatCompletions is Azure.OpenAI.getChatCompletions;
+
   getChatCompletionsWithAzureExtensions is Azure.OpenAI.getChatCompletionsWithAzureExtensions;
 
   getImageGenerations is Azure.OpenAI.getImageGenerations;

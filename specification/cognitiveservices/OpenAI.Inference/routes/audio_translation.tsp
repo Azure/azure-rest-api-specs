@@ -21,7 +21,7 @@ namespace Azure.OpenAI;
 @doc("""
 Gets English language transcribed text and associated metadata from provided spoken audio data.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @actionSeparator("/")
 @action("audio/translations")
 @sharedRoute
@@ -36,7 +36,7 @@ op getAudioTranslationAsPlainText is Azure.Core.Foundations.ResourceOperation<
 @doc("""
 Gets English language transcribed text and associated metadata from provided spoken audio data.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @actionSeparator("/")
 @action("audio/translations")
 @sharedRoute

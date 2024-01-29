@@ -29,21 +29,21 @@ enum ImageSize {
   A standard, square image size of 1024x1024 pixels.
   Supported by both dall-e-2 and dall-e-3 models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   size1024x1024: "1024x1024",
 
   @doc("""
   A wider image size of 1024x1792 pixels.
   Only supported with dall-e-3 models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   size1792x1024: "1792x1024",
 
   @doc("""
   A taller image size of 1792x1024 pixels.
   Only supported with dall-e-3 models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   size1024x1792: "1024x1792",
 }
 
@@ -51,7 +51,7 @@ enum ImageSize {
 An image generation configuration that specifies how the model should prioritize quality, cost, and speed.
 Only configurable with dall-e-3 models.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 enum ImageGenerationQuality {
   @doc("""
   Requests image generation with standard, balanced characteristics of quality, cost, and speed.
@@ -68,7 +68,7 @@ enum ImageGenerationQuality {
 An image generation configuration that specifies how the model should incorporate realism and other visual characteristics.
 Only configurable with dall-e-3 models.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 enum ImageGenerationStyle {
   @doc("""
   Requests image generation in a natural style with less preference for dramatic and hyper-realistic characteristics.
@@ -127,14 +127,14 @@ model ImageGenerationOptions {
   The desired image generation quality level to use.
   Only configurable with dall-e-3 models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   quality?: ImageGenerationQuality = ImageGenerationQuality.standard;
 
   @doc("""
   The desired image generation style to use.
   Only configurable with dall-e-3 models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   style?: ImageGenerationStyle = ImageGenerationStyle.vivid;
 
   @doc("A unique identifier representing your end-user, which can help to monitor and detect abuse.")
@@ -158,7 +158,7 @@ model ImageGenerationData {
   The final prompt used by the model to generate the image.
   Only provided with dall-3-models and only when revisions were made to the prompt.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @projectedName("json", "revised_prompt")
   revisedPrompt?: string;
 }
@@ -191,7 +191,7 @@ model ImageGenerations {
 //@lroStatus
 @doc("A polling status update or final response payload for an image operation.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
-@removed(ServiceApiVersions.v2023_12_01_Preview)
+@removed(ServiceApiVersions.v2024_02_15_Preview)
 model BatchImageGenerationOperationResponse {
   @doc("The ID of the operation.")
   id: string;

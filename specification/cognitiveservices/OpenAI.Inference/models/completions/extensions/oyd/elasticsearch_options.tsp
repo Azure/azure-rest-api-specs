@@ -6,7 +6,7 @@ namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
 A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
 extension.
@@ -23,7 +23,7 @@ model ElasticsearchChatExtensionConfiguration
   parameters: ElasticsearchChatExtensionParameters;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are KeyAndKeyId and EncodedAPIKey.")
 model ElasticsearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
@@ -32,51 +32,61 @@ model ElasticsearchChatExtensionParameters {
   endpoint: url;
 
   @doc("The index name of Elasticsearch®.")
+  @projectedName("json", "index_name")
   indexName: string;
 
   @doc("The index field mapping options of Elasticsearch®.")
   @projectedName("csharp", "FieldMappingOptions")
+  @projectedName("json", "field_mapping")
   fieldsMapping?: ElasticsearchIndexFieldMappingOptions;
 
   @doc("The query type of Elasticsearch®.")
+  @projectedName("json", "query_type")
   queryType?: ElasticsearchQueryType;
 
   @doc("The embedding dependency for vector search.")
+  @projectedName("json", "embedding_dependency")
   embeddingDependency?: OnYourDataVectorizationSource;
 }
 
 @doc("Optional settings to control how fields are processed when using a configured Elasticsearch® resource.")
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model ElasticsearchIndexFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
   @projectedName("csharp", "TitleFieldName")
+  @projectedName("json", "title_field")
   titleField?: string;
 
   @doc("The name of the index field to use as a URL.")
   @projectedName("csharp", "UrlFieldName")
+  @projectedName("json", "url_field")
   urlField?: string;
 
   @doc("The name of the index field to use as a filepath.")
   @projectedName("csharp", "FilepathFieldName")
+  @projectedName("json", "filepath_field")
   filepathField?: string;
 
   @doc("The names of index fields that should be treated as content.")
   @projectedName("csharp", "ContentFieldNames")
+  @projectedName("json", "content_fields")
   contentFields?: string[];
 
   @doc("The separator pattern that content fields should use.")
   @projectedName("csharp", "ContentFieldSeparator")
+  @projectedName("json", "content_fields_separator")
   contentFieldsSeparator?: string;
 
   @doc("The names of fields that represent vector data.")
   @projectedName("csharp", "VectorFieldNames")
+  @projectedName("json", "vector_fields")
   vectorFields?: string[];
 }
 
 @doc("""
 The type of Elasticsearch® retrieval query that should be executed when using it as an Azure OpenAI chat extension.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 enum ElasticsearchQueryType {
   @doc("Represents the default, simple query parser.")
   simple: "simple",
