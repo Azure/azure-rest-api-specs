@@ -102,8 +102,10 @@ interface Quotas {
   @doc("Get the available quota for a quota bucket per region per subscription.")
   get is ArmResourceRead<QuotaResource>;
 
+  //#suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationId in already published GA spec is different from the auto generated one"
   @doc("List quotas for a given subscription Id.")
-  listBySubscription is ArmListBySubscription<QuotaResource>;
+  //@operationId("Quotas_List")
+  list is ArmListBySubscription<QuotaResource>;
 
   @doc("Check Quota Availability on quota bucket per region per subscription.")
   checkAvailability is ArmResourceActionSyncCustom<QuotaResource, QuotaBucketRequest, CheckQuotaAvailabilityResponse>;

@@ -172,7 +172,12 @@ model LoadTestProperties{
 @doc("Check quota availability response object.")
 model CheckQuotaAvailabilityResponse is ArmResource {
   @doc("Check quota availability response properties.")
+  @extension("x-ms-client-flatten", true)
   properties?: CheckQuotaAvailabilityResponseProperties;
+
+  @doc("The name of the resource.")
+  @visibility("read")
+  name?: string;
 }
 
 @doc("Check quota availability response properties.")
@@ -185,7 +190,7 @@ model CheckQuotaAvailabilityResponseProperties {
 }
 
 @doc("Request object of new quota for a quota bucket.")
-model QuotaBucketRequest{
+model QuotaBucketRequest is ArmResource{
   @extension("x-ms-client-flatten", true)
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
