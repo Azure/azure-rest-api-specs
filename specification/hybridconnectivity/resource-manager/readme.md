@@ -104,8 +104,8 @@ directive:
     from: publicCloud.json
     where:
       - $.definitions.SolutionConfigurationUpdateProperties.properties.solutionSettings
-      - $.definitions.SolutionConfigurationUpdate.properties
-      - $.definitions.SolutionConfiguration.properties
+      - $.definitions.SolutionConfigurationUpdate.properties.properties
+      - $.definitions.SolutionConfiguration.properties.properties
       - $.definitions.SolutionConfigurationProperties.properties.solutionSettings
       - $.definitions.SolutionTypeSettings.properties.solutionSettings
 ```
