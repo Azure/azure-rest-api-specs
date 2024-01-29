@@ -1711,17 +1711,6 @@
       "type": "object",
       "description": "A text note which also  contains information about who made the statement and when\nBased on [FHIR Annotation](https://www.hl7.org/fhir/R4/datatypes.html#Annotation)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "authorString": {
           "type": "string",
           "description": "Individual responsible for the annotation"
@@ -1737,23 +1726,17 @@
       },
       "required": [
         "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
       ]
     },
     "Fhir.R4.CodeableConcept": {
       "type": "object",
       "description": "Concept - reference to a terminology or just text\nBased on [FHIR CodeableConcept](https://www.hl7.org/fhir/R4/datatypes.html#CodeableConcept)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "coding": {
           "type": "array",
           "description": "Code defined by a terminology system",
@@ -1765,23 +1748,17 @@
           "type": "string",
           "description": "Plain text representation of the concept"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
     },
     "Fhir.R4.Coding": {
       "type": "object",
       "description": "A Coding is a representation of a defined concept using a symbol from a defined \"code system\".\nBased on [FHIR Coding](https://www.hl7.org/fhir/R4/datatypes.html#Coding)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "system": {
           "$ref": "#/definitions/Fhir.R4.fhirUri",
           "description": "Identity of the terminology system"
@@ -1798,7 +1775,12 @@
           "type": "string",
           "description": "Representation defined by the system"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
     },
     "Fhir.R4.Condition": {
       "type": "object",
@@ -1930,17 +1912,6 @@
       "type": "object",
       "description": "Contact details (See: https://www.hl7.org/fhir/R4/metadatatypes.html#ContactDetail)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "name": {
           "type": "string",
           "description": "Name of an individual to contact"
@@ -1953,7 +1924,12 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
     },
     "Fhir.R4.ContactPoint": {
       "type": "object",
@@ -2122,9 +2098,9 @@
         }
       ]
     },
-    "Fhir.R4.Extension": {
+    "Fhir.R4.Element": {
       "type": "object",
-      "description": "Base for all elements\nBased on [FHIR Element](https://www.hl7.org/fhir/datatypes.html#Element)",
+      "description": "The base definition for all elements contained inside a resource.\nBased on [FHIR Element](https://www.hl7.org/fhir/R4/element.html)",
       "properties": {
         "id": {
           "type": "string",
@@ -2136,7 +2112,13 @@
           "items": {
             "$ref": "#/definitions/Fhir.R4.Extension"
           }
-        },
+        }
+      }
+    },
+    "Fhir.R4.Extension": {
+      "type": "object",
+      "description": "Base for all elements\nBased on [FHIR Element](https://www.hl7.org/fhir/datatypes.html#Element)",
+      "properties": {
         "url": {
           "$ref": "#/definitions/Fhir.R4.fhirUri",
           "description": "Source of the definition for the extension code - a logical name or a URL."
@@ -2194,23 +2176,17 @@
       },
       "required": [
         "url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
       ]
     },
     "Fhir.R4.Identifier": {
       "type": "object",
       "description": "An identifier intended for computation\nBased on [FHIR Identifier](https://www.hl7.org/fhir/R4/identifier.html)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "use": {
           "type": "string",
           "description": "usual | official | temp | secondary | old (If known)"
@@ -2235,7 +2211,12 @@
           "$ref": "#/definitions/Fhir.R4.Reference",
           "description": "Organization that issued id (may be just text)"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
     },
     "Fhir.R4.Meta": {
       "type": "object",
@@ -2280,17 +2261,6 @@
       "type": "object",
       "description": "Any resource that is a [DomainResource](https://www.hl7.org/fhir/domainresource.html) may include a human-readable narrative that contains a summary of the resource and may be used to represent the content of the resource to a human.\nBased on [FHIR Narrative](https://www.hl7.org/fhir/R4/narrative.html#Narrative)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "status": {
           "type": "string",
           "description": "generated, extensions, additional, empty"
@@ -2303,6 +2273,11 @@
       "required": [
         "status",
         "div"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
       ]
     },
     "Fhir.R4.Observation": {
@@ -2472,17 +2447,6 @@
       "type": "object",
       "description": "Component results\nBased on [FHIR Observation.component](https://www.hl7.org/fhir/R4/observation.html)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "code": {
           "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Type of component observation (code / type)"
@@ -2559,6 +2523,11 @@
       },
       "required": [
         "code"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
       ]
     },
     "Fhir.R4.ObservationReferenceRange": {
@@ -2658,17 +2627,6 @@
       "type": "object",
       "description": "A time period defined by a start and end date and optionally time\nBased on [FHIR Period](https://www.hl7.org/fhir/R4/datatypes.html#Period)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "start": {
           "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "Starting time with inclusive boundary"
@@ -2677,23 +2635,17 @@
           "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "End time with inclusive boundary, if not ongoing"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
     },
     "Fhir.R4.Quantity": {
       "type": "object",
       "description": "A measured or measurable amount\nBased on [FHIR Quantity](https://www.hl7.org/fhir/R4/datatypes.html#Quantity)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "value": {
           "type": "number",
           "format": "decimal",
@@ -2715,23 +2667,17 @@
           "type": "string",
           "description": "Coded form of the unit"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
     },
     "Fhir.R4.Range": {
       "type": "object",
       "description": "A set of ordered Quantities defined by a low and high limit\nBased on [FHIR Range](https://www.hl7.org/fhir/R4/datatypes.html#Range)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "low": {
           "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Low limit"
@@ -2740,23 +2686,17 @@
           "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "High limit"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
     },
     "Fhir.R4.Ratio": {
       "type": "object",
       "description": "A ratio of two Quantity values - a numerator and a denominator\nBased on [FHIR Ratio](https://www.hl7.org/fhir/R4/datatypes.html#Ratio)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "numerator": {
           "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Numerator value"
@@ -2765,23 +2705,17 @@
           "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Denominator value"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
     },
     "Fhir.R4.Reference": {
       "type": "object",
       "description": "A reference from one resource to another\nBased on [FHIR Reference](https://www.hl7.org/fhir/R4/references.html)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "reference": {
           "type": "string",
           "description": "Literal reference, Relative, internal or absolute URL"
@@ -2798,7 +2732,12 @@
           "type": "string",
           "description": "Text alternative for the resource"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
+      ]
     },
     "Fhir.R4.ResearchStudy": {
       "type": "object",
@@ -3093,17 +3032,6 @@
       "type": "object",
       "description": "A series of measurements taken by a device\nBased on [FHIR SampledData](https://www.hl7.org/fhir/R4/datatypes.html#SampledData)",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique id for inter-element referencing"
-        },
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "origin": {
           "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Zero value and units"
@@ -3143,6 +3071,11 @@
         "origin",
         "period",
         "dimensions"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Fhir.R4.Element"
+        }
       ]
     },
     "Fhir.R4.fhirDateTime": {

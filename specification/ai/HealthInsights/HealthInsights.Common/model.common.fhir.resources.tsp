@@ -270,13 +270,14 @@ model ObservationReferenceRange {
   text?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 Component results
 Based on [FHIR Observation.component](https://www.hl7.org/fhir/R4/observation.html)
 """)
 @clientName("Fhir_R4_ObservationComponent", "java")
 @clientName("Fhir_R4_ObservationComponent", "csharp")
-model ObservationComponent is Element {
+model ObservationComponent extends Element {
   @doc("Type of component observation (code / type)")
   code: CodeableConcept;
 

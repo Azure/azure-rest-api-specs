@@ -55,13 +55,14 @@ alias value_x = {
   valueReference?: Reference;
 };
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 Base for all elements
 Based on [FHIR Element](https://www.hl7.org/fhir/datatypes.html#Element)
 """)
 @clientName("FHIR_R4_Extension", "java")
 @clientName("FHIR_R4_Extension", "csharp")
-model Extension is Element {
+model Extension extends Element {
   @doc("Source of the definition for the extension code - a logical name or a URL.")
   url: fhirUri;
 
@@ -91,13 +92,14 @@ model Element {
   extension?: Extension[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 A Coding is a representation of a defined concept using a symbol from a defined "code system".
 Based on [FHIR Coding](https://www.hl7.org/fhir/R4/datatypes.html#Coding)
 """)
 @clientName("FHIR_R4_Coding", "java")
 @clientName("FHIR_R4_Coding", "csharp")
-model Coding is Element {
+model Coding extends Element {
   @doc("Identity of the terminology system")
   system?: fhirUri;
 
@@ -111,13 +113,14 @@ model Coding is Element {
   display?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 Concept - reference to a terminology or just text
 Based on [FHIR CodeableConcept](https://www.hl7.org/fhir/R4/datatypes.html#CodeableConcept)
 """)
 @clientName("FHIR_R4_CodeableConcept", "java")
 @clientName("FHIR_R4_CodeableConcept", "csharp")
-model CodeableConcept is Element {
+model CodeableConcept extends Element {
   @doc("Code defined by a terminology system")
   coding?: Array<Coding>;
 
@@ -154,13 +157,14 @@ model Meta {
 }
 
 alias xhtml = string;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 Any resource that is a [DomainResource](https://www.hl7.org/fhir/domainresource.html) may include a human-readable narrative that contains a summary of the resource and may be used to represent the content of the resource to a human.
 Based on [FHIR Narrative](https://www.hl7.org/fhir/R4/narrative.html#Narrative)
 """)
 @clientName("FHIR_R4_Narrative", "java")
 @clientName("FHIR_R4_Narrative", "csharp")
-model Narrative is Element {
+model Narrative extends Element {
   @doc("generated, extensions, additional, empty")
   status: string;
 
@@ -168,13 +172,14 @@ model Narrative is Element {
   div: xhtml;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 A reference from one resource to another
 Based on [FHIR Reference](https://www.hl7.org/fhir/R4/references.html)
 """)
 @clientName("FHIR_R4_Reference", "java")
 @clientName("FHIR_R4_Reference", "csharp")
-model Reference is Element {
+model Reference extends Element {
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "must keep the name 'reference' for compatibility with FHIR"
   @doc("Literal reference, Relative, internal or absolute URL")
   reference?: string;
@@ -189,13 +194,14 @@ model Reference is Element {
   display?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 An identifier intended for computation
 Based on [FHIR Identifier](https://www.hl7.org/fhir/R4/identifier.html)
 """)
 @clientName("FHIR_R4_Identifier", "java")
 @clientName("FHIR_R4_Identifier", "csharp")
-model Identifier is Element {
+model Identifier extends Element {
   @doc("usual | official | temp | secondary | old (If known)")
   use?: string;
 
@@ -215,13 +221,14 @@ model Identifier is Element {
   assigner?: Reference;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 A time period defined by a start and end date and optionally time
 Based on [FHIR Period](https://www.hl7.org/fhir/R4/datatypes.html#Period)
 """)
 @clientName("FHIR_R4_Period", "java")
 @clientName("FHIR_R4_Period", "csharp")
-model Period is Element {
+model Period extends Element {
   @doc("Starting time with inclusive boundary")
   start?: fhirDateTime;
 
@@ -229,13 +236,14 @@ model Period is Element {
   end?: fhirDateTime;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 A measured or measurable amount
 Based on [FHIR Quantity](https://www.hl7.org/fhir/R4/datatypes.html#Quantity)
 """)
 @clientName("FHIR_R4_Quantity", "java")
 @clientName("FHIR_R4_Quantity", "csharp")
-model Quantity is Element {
+model Quantity extends Element {
   @doc("Numerical value (with implicit precision)")
   value?: decimal;
 
@@ -252,13 +260,14 @@ model Quantity is Element {
   code?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 A set of ordered Quantities defined by a low and high limit
 Based on [FHIR Range](https://www.hl7.org/fhir/R4/datatypes.html#Range)
 """)
 @clientName("FHIR_R4_Range", "java")
 @clientName("FHIR_R4_Range", "csharp")
-model Range is Element {
+model Range extends Element {
   @doc("Low limit")
   low?: Quantity;
 
@@ -266,13 +275,14 @@ model Range is Element {
   high?: Quantity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 A ratio of two Quantity values - a numerator and a denominator
 Based on [FHIR Ratio](https://www.hl7.org/fhir/R4/datatypes.html#Ratio)
 """)
 @clientName("FHIR_R4_Ratio", "java")
 @clientName("FHIR_R4_Ratio", "csharp")
-model Ratio is Element {
+model Ratio extends Element {
   @doc("Numerator value")
   numerator?: Quantity;
 
@@ -280,13 +290,14 @@ model Ratio is Element {
   denominator?: Quantity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 A text note which also  contains information about who made the statement and when
 Based on [FHIR Annotation](https://www.hl7.org/fhir/R4/datatypes.html#Annotation)
 """)
 @clientName("FHIR_R4_Annotation", "java")
 @clientName("FHIR_R4_Annotation", "csharp")
-model Annotation is Element {
+model Annotation extends Element {
   @doc("Individual responsible for the annotation")
   authorString?: string;
 
@@ -297,13 +308,14 @@ model Annotation is Element {
   text: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 A series of measurements taken by a device
 Based on [FHIR SampledData](https://www.hl7.org/fhir/R4/datatypes.html#SampledData)
 """)
 @clientName("FHIR_R4_SampledData", "java")
 @clientName("FHIR_R4_SampledData", "csharp")
-model SampledData is Element {
+model SampledData extends Element {
   @doc("Zero value and units")
   origin: Quantity;
 
@@ -327,18 +339,20 @@ model SampledData is Element {
   data?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
 Contact details (See: https://www.hl7.org/fhir/R4/metadatatypes.html#ContactDetail)
 """)
 @clientName("FHIR_R4_ContactDetail", "java")
 @clientName("FHIR_R4_ContactDetail", "csharp")
-model ContactDetail is Element {
+model ContactDetail extends Element {
   @doc("Name of an individual to contact")
   name?: string;
 
   @doc("Contact details for individual or organization")
   telecom?: Array<ContactPoint>;
 }
+
 
 @doc("""
 Details for all kinds of technology mediated contact points for a person or organization, including telephone, email, etc.
