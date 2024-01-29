@@ -103,7 +103,11 @@ directive:
     reason: Property solutionSettings for Solution Configurations settings previously defined like this
     from: publicCloud.json
     where:
-      - $.definitions.SolutionSettings
+      - $.definitions.SolutionConfigurationUpdateProperties.properties.solutionSettings
+      - $.definitions.SolutionConfigurationUpdate.properties
+      - $.definitions.SolutionConfiguration.properties
+      - $.definitions.SolutionConfigurationProperties.properties.solutionSettings
+      - $.definitions.SolutionTypeSettings.properties.solutionSettings
 ```
 
 ---
