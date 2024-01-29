@@ -46,30 +46,28 @@ interface ScriptExecutions {
 /**
 * Get an script execution by name in a private cloud
 */
-get is ArmResourceRead<ScriptExecution>
+get is ArmResourceRead<ScriptExecution>;
 
 /**
 * Create or update a script execution in a private cloud
 */
-createOrUpdate is ArmResourceCreateOrReplaceAsync<ScriptExecution>
+createOrUpdate is ArmResourceCreateOrReplaceAsync<ScriptExecution>;
 
 /**
 * Cancel a ScriptExecution in a private cloud
 */
-delete is ArmResourceDeleteAsync<ScriptExecution>
+delete is ArmResourceDeleteAsync<ScriptExecution>;
 
 /**
 * List script executions in a private cloud
 */
 @operationId("ScriptExecutions_List")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-list is ArmResourceListByParent<ScriptExecution>
+list is ArmResourceListByParent<ScriptExecution>;
 
 /**
 * Return the logs for a script execution resource
 */
-getExecutionLogs is ArmResourceActionSync<ScriptExecution,paths·hl4gv6·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-avs-privateclouds-privatecloudname-scriptexecutions-scriptexecutionname-getexecutionlogs·post·requestbody·content·application-json·schema,ScriptExecution>
-
 }
 
 
@@ -77,6 +75,3 @@ getExecutionLogs is ArmResourceActionSync<ScriptExecution,paths·hl4gv6·subscri
 @@projectedName(ScriptExecutions.`createOrUpdate`::parameters.resource, "json", "scriptExecution");
 @@extension(ScriptExecutions.`createOrUpdate`::parameters.resource, "x-ms-client-name", "scriptExecution");
 @@doc(ScriptExecutions.`createOrUpdate`::parameters.resource, "A script running in the private cloud");
-@@projectedName(ScriptExecutions.`getExecutionLogs`::parameters.body, "json", "scriptOutputStreamType");
-@@extension(ScriptExecutions.`getExecutionLogs`::parameters.body, "x-ms-client-name", "scriptOutputStreamType");
-@@doc(ScriptExecutions.`getExecutionLogs`::parameters.body, "Name of the desired output stream to return. If not provided, will return all. An empty array will return nothing");

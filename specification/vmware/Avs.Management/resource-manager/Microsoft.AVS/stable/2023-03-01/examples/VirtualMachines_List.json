@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01",
+    "clusterName": "cluster1",
+    "privateCloudName": "cloud1",
+    "resourceGroupName": "group1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "vm-209",
+            "type": "Microsoft.AVS/privateClouds/clusters/virtualMachines",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/virtualMachines/vm-209",
+            "properties": {
+              "displayName": "contoso-vm1",
+              "folderPath": "vm/folder-1",
+              "moRefId": "vm-209",
+              "restrictMovement": "Disabled"
+            }
+          },
+          {
+            "name": "vm-128",
+            "type": "Microsoft.AVS/privateClouds/clusters/virtualMachines",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/virtualMachines/vm-128",
+            "properties": {
+              "displayName": "contoso-vm2",
+              "folderPath": "vm",
+              "moRefId": "vm-128",
+              "restrictMovement": "Enabled"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachines_List",
+  "title": "ListClusterVirtualMachines"
+}
