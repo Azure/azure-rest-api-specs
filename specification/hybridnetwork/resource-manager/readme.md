@@ -57,7 +57,8 @@ suppressions:
     reason: additional propertie is required by design for dictinary type of object
   - code:  XmsPageableForListCalls
     from: serviceManagementContainer.json
-    where: .paths.~1subscriptions~1{subscriptionId}~1resourceGroups~1{resourceGroupName}~1providers~1Microsoft.HybridNetwork~1serviceManagementContainers~1{serviceManagementContainerName}~1updateSpecifications~1{updateSpecificationName}~1rollouts~1{rolloutName}~1statuses~1default
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/statuses/default"].get
+    reason: This is not a LIST call
 
 ```
 
