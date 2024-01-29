@@ -1,9 +1,7 @@
-import "@azure-tools/typespec-client-generator-core";
 import "./model.common.shared.tsp";
 import "./model.common.fhir.elements.tsp";
 import "./model.common.fhir.resources.tsp";
 
-using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
