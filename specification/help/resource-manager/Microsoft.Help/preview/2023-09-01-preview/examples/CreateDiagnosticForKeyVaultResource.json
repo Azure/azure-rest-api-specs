@@ -3,19 +3,16 @@
     "api-version": "2023-09-01-preview",
     "scope": "subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read",
     "diagnosticsResourceName": "VMNotWorkingInsight",
-    "diagnosticItemRequest": {
+    "diagnosticResourceRequest": {
       "properties": {
         "insights": [
           {
-            "solutionId": "SampleSolutionId",
-            "additionalParameters": {
-              "serverName": "testServer"
-            }
+            "solutionId": "SampleSolutionId1"
+          },
+          {
+            "solutionId": "SampleSolutionId2"
           }
-        ],
-        "globalParameters": {
-          "startTime": "2020-07-01"
-        }
+        ]
       }
     }
   },
@@ -26,8 +23,8 @@
         "name": "VMNotWorkingInsight",
         "type": "Microsoft.Help/diagnostics",
         "properties": {
-          "provisioningState": "Succeeded",
-          "acceptedAt": "2023-03-10T03:04:40Z"
+          "provisioningState": "Running",
+          "acceptedAt": "2023-11-05T18:13:15.8708055+00:00"
         }
       }
     },
@@ -37,26 +34,8 @@
         "type": "VMNotWorkingInsight",
         "name": "Microsoft.Help/diagnostics",
         "properties": {
-          "acceptedAt": "2023-03-10T03:04:40Z",
-          "provisioningState": "Succeeded",
-          "diagnostics": [
-            {
-              "solutionId": "sampleSolutionId",
-              "status": "Succeeded",
-              "insights": [
-                {
-                  "id": "InsightArticleId",
-                  "title": "An example title for an Insight",
-                  "results": "Article Content",
-                  "importanceLevel": "Critical"
-                }
-              ],
-              "error": {
-                "code": "errorCode",
-                "message": "errorMessage"
-              }
-            }
-          ]
+          "provisioningState": "Running",
+          "acceptedAt": "2023-11-05T18:13:15.8708055+00:00"
         }
       }
     }

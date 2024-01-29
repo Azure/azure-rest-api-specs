@@ -280,7 +280,7 @@
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
         "message": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The chat message for a given chat completions prompt."
         },
         "index": {
@@ -295,7 +295,7 @@
           "x-ms-client-name": "finishReason"
         },
         "delta": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The delta message content for a streaming response."
         }
       },
@@ -345,7 +345,7 @@
           "type": "array",
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
           "items": {
-            "$ref": "#/definitions/ChatMessage"
+            "$ref": "#/definitions/ChatRequestMessage"
           },
           "x-ms-identifiers": []
         },
@@ -416,17 +416,100 @@
         "messages"
       ]
     },
-    "ChatMessage": {
+    "ChatRequestAssistantMessage": {
       "type": "object",
-      "description": "A single, role-attributed message within a chat completion interaction.",
+      "description": "A request chat message representing response or action from the assistant.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
+    "ChatRequestMessage": {
+      "type": "object",
+      "description": "An abstract representation of a chat message as provided in a request.",
       "properties": {
         "role": {
           "$ref": "#/definitions/ChatRole",
-          "description": "The role associated with this message payload."
+          "description": "The chat role associated with this message."
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role"
+      ]
+    },
+    "ChatRequestSystemMessage": {
+      "type": "object",
+      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the system message."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ChatRequestUserMessage": {
+      "type": "object",
+      "description": "A request chat message representing user input to the assistant.",
+      "properties": {
+        "content": {
+          "description": "The contents of the user message, with available input types varying by selected model."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "description": "A representation of a chat message as received in a response.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message."
         },
         "content": {
           "type": "string",
-          "description": "The text associated with this message payload.",
+          "description": "The content of the message.",
           "x-nullable": true
         }
       },

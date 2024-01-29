@@ -1,21 +1,43 @@
 import "@azure-tools/typespec-client-generator-core";
+
+import "./client/custom_visibility.tsp";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-// Azure-specific long-running operations should be treated as implementation details that are wrapped into
-// appropriately merged public surface.
-@@access(Azure.OpenAI.beginAzureBatchImageGeneration, Access.internal);
-@@access(Azure.OpenAI.getAzureBatchImageGenerationOperationStatus,
-  Access.internal
-);
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
+@TypeSpec.Versioning.useDependency(
+  Azure.OpenAI.ServiceApiVersions.v2023_12_01_Preview
+)
+namespace Client;
 
-// Azure-specific Chat Completions with extensions should be handled by clients as a conditional selection within the
-// shared Chat Completions route, with the selection gated by the presence or non-presence of additional child
-// configuration options on the request payload options model.
-@@access(Azure.OpenAI.getChatCompletionsWithAzureExtensions, Access.internal);
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
+@client({
+  name: "OpenAIClient",
+  service: Azure.OpenAI,
+})
+interface OpenAIClient {
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+  getAudioTranscriptionAsPlainText is Azure.OpenAI.getAudioTranscriptionAsPlainText;
 
-// Some models from routes with suppressed visibility are still desired for custom public surface.
-@@usage(Azure.OpenAI.ImageGenerationOptions, Usage.input | Usage.output);
-@@usage(Azure.OpenAI.ImageLocation, Usage.input | Usage.output);
-@@usage(Azure.OpenAI.ImageGenerations, Usage.input | Usage.output);
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+  getAudioTranscriptionAsResponseObject is Azure.OpenAI.getAudioTranscriptionAsResponseObject;
+
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+  getAudioTranslationAsPlainText is Azure.OpenAI.getAudioTranslationAsPlainText;
+
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+  getAudioTranslationAsResponseObject is Azure.OpenAI.getAudioTranslationAsResponseObject;
+
+  getCompletions is Azure.OpenAI.getCompletions;
+  getChatCompletions is Azure.OpenAI.getChatCompletions;
+  getChatCompletionsWithAzureExtensions is Azure.OpenAI.getChatCompletionsWithAzureExtensions;
+
+  getImageGenerations is Azure.OpenAI.getImageGenerations;
+
+  getEmbeddings is Azure.OpenAI.getEmbeddings;
+}
