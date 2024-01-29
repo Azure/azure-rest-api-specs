@@ -331,46 +331,48 @@
       }
     },
     "AppSpaceResourceProperties":{
-      "description": "AppSpaceResource resource-specific properties.",
-      "type": "object",
       "properties": {
-        "resourceId": {
-          "description": "ARM resource Id of the tracked resource.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Friendly name of the App Space Resource.",
-          "type": "string"
-        },
-        "resourceLocation": {
-          "description": "Location of the tracked ARM resource. Can be different from the location of the app space resource.",
-          "type": "string"
-        },
-        "repo": {
-          "$ref": "#/definitions/RepositoryInformation",
-          "description": "Optional App Space Resource Repository Information"
-        },
-        "deployment": {
-          "$ref": "#/definitions/DeploymentInformation",
-          "description": "Optional App Space Resource Deployment Information"
-        },
-        "isFavorite": {
-          "description": "Boolean marking whether or not this App Space Resource is a favorite (true or false, default is false)",
-          "type": "boolean"
-        },
-        "metadata": {
-          "description": "Property bag to add properties used by Portal UX.",
-          "type": "object"
-        },
-        "dependencies": {
-          "type": "array",
-          "items": {
+        "description": "AppSpaceResource resource-specific properties",
+        "type": "object",
+        "properties":{
+          "resourceId": {
+            "description": "ARM resource Id of the tracked resource.",
             "type": "string"
           },
-          "description": "List of ARM App Space Resource Ids on which this App Space Resource is dependent."
-        }
-      },
-      "x-ms-client-flatten": true
+          "friendlyName": {
+            "description": "Friendly name of the App Space Resource.",
+            "type": "string"
+          },
+          "resourceLocation": {
+            "description": "Location of the tracked ARM resource. Can be different from the location of the app space resource.",
+            "type": "string"
+          },
+          "repo": {
+            "$ref": "#/definitions/RepositoryInformation",
+            "description": "Optional App Space Resource Repository Information"
+          },
+          "deployment": {
+            "$ref": "#/definitions/DeploymentInformation",
+            "description": "Optional App Space Resource Deployment Information"
+          },
+          "isFavorite": {
+            "description": "Boolean marking whether or not this App Space Resource is a favorite (true or false, default is false)",
+            "type": "boolean"
+          },
+          "metadata": {
+            "description": "Property bag to add properties used by Portal UX.",
+            "type": "object"
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of ARM App Space Resource Ids on which this App Space Resource is dependent."
+          }
+        },
+        "x-ms-client-flatten": true
+      }
     },
     "AppSpaceResource": {
       "description": "App Space Resource.",
@@ -385,8 +387,7 @@
           "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
         },
         "properties": {
-          "description": "AppSpaceResource resource specific properties",
-          "type": "#/definitions/AppSpaceResourceProperties"
+          "$ref": "#/definitions/AppSpaceResourceProperties"
         }
       }
     },
@@ -423,8 +424,7 @@
           "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
         },
         "properties": {
-          "description": "AppSpaceResource resource specific properties",
-          "type": "#/definitions/AppSpaceResourceProperties"
+          "$ref": "#/definitions/AppSpaceResourceProperties"
         }
       }
     },
