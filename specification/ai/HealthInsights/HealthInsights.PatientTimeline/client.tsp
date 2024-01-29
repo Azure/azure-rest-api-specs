@@ -22,7 +22,6 @@ interface PatientTimelineClient {
   inferPatientTimeline is AzureHealthInsights.PatientTimeline.createJob;
 }
 
-
 @@clientName(Fhir.R4.Extension, "Fhir_R4_Extension", "java");
 @@clientName(Fhir.R4.Extension, "Fhir_R4_Extension", "csharp");
 @@clientName(Fhir.R4.Extendible, "Fhir_R4_Extendible", "java");
