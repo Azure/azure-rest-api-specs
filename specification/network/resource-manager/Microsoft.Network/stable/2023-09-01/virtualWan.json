@@ -2726,11 +2726,13 @@
             "description": "The name of the vpn connection."
           },
           {
-            "name": "linkConnectionName",
-            "in": "path",
+            "name": "parameters",
+            "in": "body",
             "required": true,
-            "type": "string",
-            "description": "The name of the vpn link connection."
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            },
+            "description": "Parameters supplied to the Begin Set vpn site link connection Shared key operation throughNetwork resource provider."
           },
           {
             "name": "sharedKey",
@@ -2754,6 +2756,9 @@
           },
           "202": {
             "description": "Accepted and the operation set shared key of vpnsitelinkconnection will complete asynchronously."
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
           },
           "default": {
             "description": "The operation set shared key of vpnsitelinkconnection could not be completed.",
@@ -2764,7 +2769,7 @@
         },
         "x-ms-examples": {
           "ResetVpnLinkConnection": {
-            "$ref": "./examples/VpnSiteLinkConnectionSharedKeyPut.json"
+            "$ref": "./examples/VpnSiteLinkConnectionSharedKeySet.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -2778,7 +2783,7 @@
         "tags": [
           "vpnLinkConnections"
         ],
-        "operationId": "VpnLinkConnections_Put_SharedKey",
+        "operationId": "VpnLinkConnections_Reset_SharedKey",
         "description": "Put the shared key of VpnLink connection specified.",
         "parameters": [
           {
@@ -2813,13 +2818,13 @@
             "description": "The name of the vpn link connection."
           },
           {
-            "name": "resetSharedKey",
-            "in": "query",
+            "name": "parameters",
+            "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
+              "$ref": "#/definitions/ConnectionResetSharedKey"
             },
-            "description": "VpnsiteLinkConnection resetSharedKey to specify for reset."
+            "description": "Parameters supplied to the begin reset vpnsitelink connection shared key operation through network resource provider."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -2834,6 +2839,9 @@
           },
           "202": {
             "description": "Accepted and the operation ResetConnection will complete asynchronously."
+            "schema": {
+              "$ref": "#/definitions/ConnectionResetSharedKey"
+            }
           },
           "default": {
             "description": "The operation ResetConnection could not be completed.",
@@ -9939,25 +9947,36 @@
       }
     },
     "ConnectionSharedKey": {
-      "description": "Shared key of VpnSiteLinkConnection.",
       "properties": {
         "value": {
           "type": "string",
-          "description": "The value of ConnectionSharedKey."
+          "description": "The vpnsite link connection shared key value."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "required": [
+        "value"
+      ],
+      "description": "Response for GetvpnsitelinkConnectionSharedKey API service call."
     },
     "ConnectionResetSharedKey": {
-      "description": "Reset shared key of VpnSiteLinkConnection.",
       "properties": {
         "keyLength": {
           "type": "integer",
-          "format": "int64",
-          "minimum": 0,
-          "maximum": 4294967295,
-          "description": "The value of ConnectionResetSharedKey."
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 128,
+          "description": "The vpnsite link connection reset shared key length, should between 1 and 128."
         }
-      }
-    }
+      },
+      "required": [
+        "keyLength"
+      ],
+      "description": "The vpnsite link connection reset shared key."
+    },
   }
 }
