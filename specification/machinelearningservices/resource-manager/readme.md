@@ -58,10 +58,12 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
   - code: AvoidAdditionalProperties
     reason: This is an external reference right now, we will have full control on the schema returned in the upcoming version and will avoid this.
+    from: workspaceRP.json
     where:
-      - $.definitions.EndpointModels.properties.value.items
+      - $.definitions.EndpointModels.properties.value.items.$ref
   - code: GuidUsage
     reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
+    from: workspaceRP.json    
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
 ```
