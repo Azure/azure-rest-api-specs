@@ -5276,6 +5276,58 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/scriptExecutions/{scriptExecutionName}/getExecutionLogs": {
+      "post": {
+        "operationId": "ScriptExecutions_GetExecutionLogs",
+        "tags": [
+          "ScriptExecutions"
+        ],
+        "description": "Return the logs for a script execution resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "description": "Name of the private cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "scriptExecutionName",
+            "in": "path",
+            "description": "Name of the user-invoked script execution resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScriptExecutions_GetExecutionLogs": {
+            "$ref": "./examples/ScriptExecutions_GetExecutionLogs.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/scriptPackages": {
       "get": {
         "operationId": "ScriptPackages_List",
