@@ -43,11 +43,7 @@
       "get": {
         "operationId": "Jobs_ListByClusters",
         "tags": [
-          "AddServer",
-          "ResumeServer",
-          "PauseServer",
-          "RepairServer",
-          "SetInformation"
+          "Jobs"
         ],
         "description": "List Job resources by Clusters",
         "parameters": [
@@ -135,11 +131,7 @@
       "put": {
         "operationId": "Jobs_CreateOrUpdate",
         "tags": [
-          "AddServer",
-          "ResumeServer",
-          "PauseServer",
-          "RepairServer",
-          "SetInformation"
+          "Jobs"
         ],
         "description": "Create a Job",
         "parameters": [
@@ -217,11 +209,7 @@
       "delete": {
         "operationId": "Jobs_Delete",
         "tags": [
-          "AddServer",
-          "ResumeServer",
-          "PauseServer",
-          "RepairServer",
-          "SetInformation"
+          "Jobs"
         ],
         "description": "Delete a Job",
         "parameters": [
@@ -280,6 +268,7 @@
   },
   "definitions": {
     "AddServerJob": {
+      "description": "AddServer job to add node to AzureStackHCI cluster.",
       "type": "object",
       "properties": {
         "properties": {
@@ -672,6 +661,7 @@
       "x-ms-discriminator-value": "RepairServer"
     },
     "ResumeServerJob": {
+      "description": "ResumeServer job to resume given node in AzureStackHCI cluster.",
       "type": "object",
       "properties": {
         "properties": {
