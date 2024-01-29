@@ -317,6 +317,7 @@ model MessageDataStream {
   @key
   @visibility("read")
   @doc("The stream ID.")
+  @projectedName("java", "mediaId")
   id: string;
 
   @body
