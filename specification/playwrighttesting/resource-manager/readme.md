@@ -18,22 +18,6 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ---
 
-## Suppression
-
-```yaml $(suppression)
-directive:
-  - suppress: ResourceNameRestriction
-    from: playwrighttesting.json
-    reason: We have enums defined for quota resource names which doesn't support string pattern validation.
-  - suppress: ProvisioningStateMustBeReadOnly
-    from: playwrighttesting.json
-    reason: Seems like a tool bug, as the visibility is set to read in the TypeSpec already.
-  - suppress: DeleteResponseCode
-    from: playwrighttesting.json
-    reason: Seems like a tool bug, as default operations are generated from the TrackedResourceOperations in the TypeSpec.
-```
----
-
 ## Configuration
 
 ### Basic Information
@@ -55,6 +39,16 @@ These settings apply only when `--tag=package-2024-02-01` is specified on the co
 ```yaml $(tag) == 'package-2024-02-01'
 input-file:
   - Microsoft.AzurePlaywrightService/stable/2024-02-01/playwrighttesting.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: playwrighttesting.json
+    reason: We have enums defined for quota resource names which doesn't support string pattern validation.
+  - code: ProvisioningStateMustBeReadOnly
+    from: playwrighttesting.json
+    reason: Seems like a tool bug, as the visibility is set to read only in the TypeSpec already.
+  - code: DeleteResponseCodes
+    from: playwrighttesting.json
+    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
 ```
 
 ### Tag: package-2023-10-01-preview
