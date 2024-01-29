@@ -45,13 +45,28 @@ input-file:
   - preview/2023-11-01-preview/hdinsight.json
   
 suppressions:
+  - code: ResourceNameRestriction
+    where: 
+    - $.parameters.ClusterPoolNameParameter
+    - $.parameters.ClusterNameParameter
+    - $.parameters.ClusterTypeNameParameter
+    reason: Keep compatibility with old API version.
+  - code: OperationIdNounVerb
+    where: 
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters"].get.operationId
+    reason: The operation id is valid.
+  - code: EnumInsteadOfBoolean
+  - code: TrackedResourcePatchOperation
+    where: 
+    - $.definitions.Cluster
+    reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
   - code: EnumInsteadOfBoolean
     where: 
-    - $.definitions.ClusterAccessProfile.enableInternalIngress
-    - $.definitions.ClusterPoolNetworkProfile.enablePrivateApiServer
-    - $.definitions.ClusterRangerPluginProfile.enabled
-    - $.definitions.RangerUsersyncSpec.enabled
-    - $.definitions.KafkaProfile.enableKRaft
+    - $.definitions.ClusterAccessProfile.properties.enableInternalIngress
+    - $.definitions.ClusterPoolNetworkProfile.properties.enablePrivateApiServer
+    - $.definitions.ClusterRangerPluginProfile.properties.enabled
+    - $.definitions.RangerUsersyncSpec.properties.enabled
+    - $.definitions.KafkaProfile.properties.enableKRaft
     - $.definitions.KafkaProfile.enablePublicEndpoints
     - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeClusterPool
     - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeAllClusterNodes
