@@ -100,13 +100,10 @@ input-file:
 ``` yaml
 directive:
   - suppress: AvoidAdditionalProperties
-    reason: Property solutionSettings for Solution Configurations settings
+    reason: Property solutionSettings for Solution Configurations settings previously defined like this
     from: publicCloud.json
     where:
-      - $.paths["/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}"].patch
-      - $.paths["/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}"].put
-      - $.paths["/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}"].delete
-      - $.paths["/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}"].get
+      - $.definitions.SolutionSettings
 ```
 
 ---
