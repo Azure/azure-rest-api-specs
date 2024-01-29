@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
@@ -59,56 +60,19 @@ interface Spaces {
     {
       ...BaseParameters<Space>;
 
-      /**
-       * The number of result items to return.
-       */
-      @query("top")
-      top?: int32;
+      ...TopQueryParameter;
 
-      /**
-       * The number of result items to skip.
-       */
-      @query("skip")
-      skip?: int32;
+      ...SkipQueryParameter;
 
-      /**
-       * The maximum number of result items per page.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
+      ...MaxPageSizeQueryParameter;
 
-      /**
-       * Filter the result list using the given expression.
-       */
-      @query("filter")
-      filter?: string;
+      ...FilterQueryParameter;
 
-      /**
-       * Select the specified fields to be included in the response.
-       */
-      @query({
-        name: "select",
-        format: "multi",
-      })
-      select?: string[];
+      ...SelectQueryParameter;
 
-      /**
-       * Expand the indicated resources into the response.
-       */
-      @query({
-        name: "expand",
-        format: "multi",
-      })
-      expand?: string[];
+      ...ExpandQueryParameter;
 
-      /**
-       * Expressions that specify the order of returned results.
-       */
-      @query({
-        name: "orderby",
-        format: "multi",
-      })
-      orderby?: string[];
+      ...OrderByQueryParameter;
     }
   >;
 
