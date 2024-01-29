@@ -2462,6 +2462,74 @@
       },
       "x-ms-discriminator-value": "AccountKey"
     },
+    "AccountModel": {
+      "description": "Cognitive Services account Model.",
+      "type": "object",
+      "properties": {
+        "baseModel": {
+          "type": "object",
+          "description": "Base Model Identifier.",
+          "$ref": "#/definitions/DeploymentModel"
+        },
+        "isDefaultVersion": {
+          "type": "boolean",
+          "description": "If the model is default version."
+        },
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelSku"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of Model Sku."
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max capacity."
+        },
+        "capabilities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The capabilities."
+        },
+        "finetuneCapabilities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The capabilities for finetune models."
+        },
+        "deprecation": {
+          "type": "object",
+          "$ref": "#/definitions/ModelDeprecationInfo"
+        },
+        "lifecycleStatus": {
+          "type": "string",
+          "enum": [
+            "GenerallyAvailable",
+            "Preview"
+          ],
+          "x-ms-enum": {
+            "name": "ModelLifecycleStatus",
+            "modelAsString": true
+          },
+          "description": "Model lifecycle status."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentModel"
+        }
+      ]
+    },
     "ApiKeyAuthWorkspaceConnectionProperties": {
       "description": "This connection type covers the generic ApiKey auth connection categories, for examples:\r\nAzureOpenAI:\r\n    Category:= AzureOpenAI\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {ApiKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\r\n    Target:= {ApiBase}\r\n            \r\nCognitiveService:\r\n    Category:= CognitiveService\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {SubscriptionKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\r\n    Target:= ServiceRegion={serviceRegion}\r\n            \r\nCognitiveSearch:\r\n    Category:= CognitiveSearch\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {Key} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\r\n    Target:= {Endpoint}\r\n            \r\nUse Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields",
       "type": "object",
@@ -2476,6 +2544,63 @@
         }
       },
       "x-ms-discriminator-value": "ApiKey"
+    },
+    "CallRateLimit": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number",
+          "description": "The count value of Call Rate Limit."
+        },
+        "renewalPeriod": {
+          "type": "number",
+          "description": "The renewal period in seconds of Call Rate Limit."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThrottlingRule"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        }
+      },
+      "description": "The call rate limit Cognitive Services account."
+    },
+    "CapacityConfig": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum capacity."
+        },
+        "step": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimal incremental between allowed values for capacity."
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default capacity."
+        },
+        "allowedValues": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The array of allowed values for capacity."
+        }
+      },
+      "description": "The capacity configuration."
     },
     "CognitiveServiceEndpointDeploymentResourceProperties": {
       "required": [
@@ -2761,6 +2886,32 @@
         "name": "DefaultResourceProvisioningState",
         "modelAsString": true
       }
+    },
+    "DeploymentModel": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Deployment model format."
+        },
+        "name": {
+          "type": "string",
+          "description": "Deployment model name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Optional. Deployment model version. If version is not specified, a default version will be assigned. The default version is different for different models and might change when there is new version available for a model. Default version for a model could be found from list models API."
+        },
+        "source": {
+          "type": "string",
+          "description": "Optional. Deployment model source ARM resource ID."
+        },
+        "callRateLimit": {
+          "readOnly": true,
+          "$ref": "#/definitions/CallRateLimit"
+        }
+      },
+      "description": "Properties of Cognitive Services account deployment model."
     },
     "DiagnoseRequestProperties": {
       "type": "object",
@@ -3521,6 +3672,52 @@
       ],
       "x-ms-discriminator-value": "managedOnlineEndpoint"
     },
+    "ModelDeprecationInfo": {
+      "description": "Cognitive Services account ModelDeprecationInfo.",
+      "type": "object",
+      "properties": {
+        "fineTune": {
+          "type": "string",
+          "description": "The datetime of deprecation of the fineTune Model."
+        },
+        "inference": {
+          "type": "string",
+          "description": "The datetime of deprecation of the inference Model."
+        }
+      }
+    },
+    "ModelSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the model SKU."
+        },
+        "usageName": {
+          "type": "string",
+          "description": "The usage name of the model SKU."
+        },
+        "deprecationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of deprecation of the model SKU."
+        },
+        "capacity": {
+          "type": "object",
+          "description": "The capacity configuration.",
+          "$ref": "#/definitions/CapacityConfig"
+        },
+        "rateLimits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CallRateLimit"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of rateLimit."
+        }
+      },
+      "description": "Describes an available Cognitive Services Model SKU."
+    },
     "NoneAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
       "allOf": [
@@ -4031,6 +4228,17 @@
         }
       }
     },
+    "RequestMatchPattern": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
+      }
+    },
     "RuleAction": {
       "description": "The action enum for networking rule.",
       "enum": [
@@ -4240,6 +4448,36 @@
         }
       ],
       "x-ms-discriminator-value": "Azure.Speech"
+    },
+    "ThrottlingRule": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "renewalPeriod": {
+          "type": "number"
+        },
+        "count": {
+          "type": "number"
+        },
+        "minCount": {
+          "type": "number"
+        },
+        "dynamicThrottlingEnabled": {
+          "type": "boolean"
+        },
+        "matchPatterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestMatchPattern"
+          },
+          "x-ms-identifiers": [
+            "path",
+            "method"
+          ]
+        }
+      }
     },
     "UsernamePasswordAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
