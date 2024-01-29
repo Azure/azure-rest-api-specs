@@ -93,3 +93,12 @@ These settings apply only when `--tag=package-2023-06-01-preview-mccf` is specif
 input-file:
   - Microsoft.ManagedCcf/preview/2023-06-01-preview/mccfgov.json
 ```
+
+### Tag: package-2024-01-26-preview-ledger
+
+These settings apply only when `--tag=package-2024-01-26-preview-ledger` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-26-preview-ledger'
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2024-01-26-preview/confidentialledger.json
+```
