@@ -275,7 +275,7 @@
             "required": true,
             "description": "Properties of an App Space that need to be updated",
             "schema": {
-              "$ref": "#/definitions/AppSpace"
+              "$ref": "#/definitions/AppSpacePatch"
             }
           },
           {
@@ -305,6 +305,21 @@
     }
   },
   "definitions": {
+    "AppSpaceProperties": {
+      "description": "AppSpace resource specific properties",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of the App Space.",
+          "type": "string"
+        },
+        "primaryResourceId": {
+          "description": "Optional - ARM resource Id of the primary App Space Resource in the App Space. Used by Portal UX if present.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-flatten": true
+    },
     "AppSpace": {
       "description": "App Space.",
       "type": "object",
@@ -318,19 +333,44 @@
           "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
         },
         "properties": {
-          "description": "AppSpace resource specific properties",
+          "$ref": "#/definitions/AppSpaceProperties"
+        }
+      }
+    },
+    "AppSpacePatch": {
+      "description": "AppSpace patch object - Patch is done via a json merge and does not require all parameters for TrackedResource (i.e. location) to be present.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "tags": {
           "type": "object",
-          "properties": {
-            "friendlyName": {
-              "description": "Friendly name of the App Space.",
-              "type": "string"
-            },
-            "primaryResourceId": {
-              "description": "Optional - ARM resource Id of the primary App Space Resource in the App Space. Used by Portal UX if present.",
-              "type": "string"
-            }
+          "additionalProperties": {
+            "type": "string"
           },
-          "x-ms-client-flatten": true
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "extendedLocation": {
+          "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
+        },
+        "properties": {
+          "$ref": "#/definitions/AppSpaceProperties"
         }
       }
     },
