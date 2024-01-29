@@ -2,7 +2,8 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
+import "./policy.tsp";
+import "./backcompat.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -15,7 +16,6 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
   title: "PurviewPolicyClient",
-  versions: Versions,
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)

@@ -50,7 +50,7 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Purview/policies": {
+    "/{scope}/providers/Microsoft.Purview/policies": {
       "get": {
         "operationId": "PurviewPolicies_List",
         "tags": [
@@ -64,7 +64,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/SkipTokenParameter"
@@ -374,15 +374,6 @@
     }
   },
   "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "description": "The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
     "SkipTokenParameter": {
       "name": "skipToken",
       "in": "query",

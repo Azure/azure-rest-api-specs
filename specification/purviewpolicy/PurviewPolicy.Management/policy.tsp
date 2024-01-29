@@ -11,10 +11,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Purview;
 
-@@doc(Azure.ResourceManager.ResourceUriParameter.resourceUri,
-  "The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'"
-);
-
 @armResourceOperations
 interface PurviewPolicies {
   /** The API lists the Azure purview RBAC policies affecting the scope. The scope can be any valid ARM resource id */
