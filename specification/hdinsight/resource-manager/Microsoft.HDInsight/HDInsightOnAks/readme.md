@@ -52,7 +52,8 @@ suppressions:
   - code: OperationIdNounVerb
     reason: The operation id is valid.
   - code: EnumInsteadOfBoolean
-    reason: The boolean property is expected.
+    where: $.definitions["ClusterAccessProfile"]["enableInternalIngress].type
+    reason: The boolean property is expected and more user friendly, and it wil be not extended to other values.
 ```
 
 ### Tag: package-2023-06-preview
