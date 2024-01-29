@@ -1,0 +1,214 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KeyVaultClient",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
+    "version": "7.5"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{vaultBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "vaultBaseUrl",
+        "description": "The vault name, for example https://myvault.vault.azure.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/settings/{setting-name}": {
+      "patch": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "UpdateSetting",
+        "summary": "Updates key vault account setting, stores it, then returns the setting name and value to the client.",
+        "description": "Description of the pool setting to be updated",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SettingNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSettingRequest"
+            },
+            "description": "The parameters to update an account setting."
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An account setting containing the name of the setting and the value it is set to. ",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Setting": {
+            "$ref": "./examples/UpdateSetting-example.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "GetSetting",
+        "summary": "Get specified account setting object.",
+        "description": "Retrieves the setting object of a specified setting name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SettingNameParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An account setting containing the name of the setting and the value it is set to.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetSetting": {
+            "$ref": "./examples/UpdateSetting-example.json"
+          }
+        }
+      }
+    },
+    "/settings": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "GetSettings",
+        "summary": "List account settings.",
+        "description": "Retrieves a list of all the available account settings that can be configured.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of account settings with their associated value.",
+            "schema": {
+              "$ref": "#/definitions/SettingsListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetSettings": {
+            "$ref": "./examples/ListSettings-example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UpdateSettingRequest": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value of the pool setting."
+        }
+      },
+      "description": "The update settings request object.",
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "Setting": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The account setting to be updated"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the pool setting."
+        },
+        "type": {
+          "enum": [
+            "boolean"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SettingTypeEnum",
+            "modelAsString": true
+          },
+          "description": "The type specifier of the value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "type": "object"
+    },
+    "SettingsListResult": {
+      "properties": {
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Setting"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of account settings with their associated value."
+        }
+      },
+      "description": "The settings list result.",
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "SettingNameParameter": {
+      "name": "setting-name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the account setting. Must be a valid settings option.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
