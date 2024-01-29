@@ -24,7 +24,7 @@ using Azure.Core.Traits;
   title: "Batch Document Translation Client",
 })
 @server(
-  "{endpoint}/translator/text/batch/v1.1",
+  "{endpoint}/translator/text/batch/v1.0",
   "// FIXME: (miissing-service-description) Add service description",
   {
     endpoint: string,
