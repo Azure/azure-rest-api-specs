@@ -171,7 +171,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-migrate-2023-03
 ```
 
 ### Tag: package-migrate-2023-03
