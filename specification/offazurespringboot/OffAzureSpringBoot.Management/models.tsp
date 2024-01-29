@@ -91,12 +91,7 @@ model Resource {
 /**
  * The springbootsites resource patch definition.
  */
-model SpringbootsitesPatch extends TrackedResource<SpringbootsitesProperties> {
-  /**
-   * The springbootsites resource definition.
-   */
-  // properties?: SpringbootsitesProperties;
-}
+model SpringbootsitesPatch extends TrackedResource<SpringbootsitesProperties> {}
 
 /**
  * The springbootservers resource definition.
@@ -202,11 +197,6 @@ model SpringbootserversPatch extends ProxyResource<SpringbootserversProperties> 
    * Resource tags
    */
   tags?: Record<string>;
-
-  /**
-   * The springbootsites resource definition.
-   */
-  // properties?: SpringbootserversProperties;
 }
 
 /**
@@ -401,11 +391,6 @@ model SpringbootappsPropertiesInstancesItem {
  * The springbootapps resource patch definition.
  */
 model SpringbootappsPatch extends ProxyResource<SpringbootappsProperties> {
-  /**
-   * The springbootapps resource definition.
-   */
-  // properties?: SpringbootappsProperties;
-
   /**
    * Resource tags
    */

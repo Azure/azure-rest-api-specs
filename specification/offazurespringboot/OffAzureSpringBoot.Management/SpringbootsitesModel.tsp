@@ -22,7 +22,7 @@ model SpringbootsitesModel is TrackedResource<SpringbootsitesProperties> {
   @minLength(3)
   @pattern("^[a-z][a-z0-9-]*$")
   @path
-  @key("springbootsitesName")
+  @key("siteName")
   @segment("springbootsites")
   name: string;
 
@@ -89,14 +89,30 @@ interface SpringbootsitesModels {
   /**
    * Trigger refresh springbootsites action
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("springbootsites_TriggerRefreshSite")
-  triggerRefreshSite is ArmResourceActionNoResponseContentAsync<
-    SpringbootsitesModel,
-    void,
-    BaseParameters<SpringbootsitesModel>,
-    ArmLroLocationHeader
-  >;
+  @segment("refreshSite")
+  @post
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  triggerRefreshSite(
+    ...ResourceGroupBaseParameters,
+    ...DefaultProviderNamespace,
+
+    /**
+     * The springbootsites name.
+     */
+    @maxLength(64)
+    @minLength(3)
+    @pattern("^[a-z][a-z0-9-]*$")
+    @path
+    @key("springbootsitesName")
+    @segment("springbootsites")
+    springbootsitesName: string;
+  ): ArmAcceptedLroResponse | ErrorResponse;
 }
 
 @@projectedName(SpringbootsitesModels.createOrUpdate::parameters.resource,

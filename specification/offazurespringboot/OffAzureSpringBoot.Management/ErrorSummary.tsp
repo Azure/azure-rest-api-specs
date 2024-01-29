@@ -34,6 +34,8 @@ interface ErrorSummaries {
   /**
    * Gets the ErrorSummaries resource.
    */
+  @operationId("ErrorSummaries_Get")
+  @summary("Implements ErrorSummaries GET method.")
   get is ArmResourceRead<ErrorSummary>;
 
   /**
@@ -41,5 +43,6 @@ interface ErrorSummaries {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("ErrorSummaries_ListBySite")
+  @summary("Implements ErrorSummaries GET method.")
   listBySite is ArmResourceListByParent<ErrorSummary>;
 }

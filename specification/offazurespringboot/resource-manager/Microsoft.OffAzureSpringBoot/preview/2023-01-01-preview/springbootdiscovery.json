@@ -85,6 +85,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -132,7 +140,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootapps": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/springbootapps": {
       "get": {
         "operationId": "springbootapps_ListBySubscription",
         "tags": [
@@ -147,7 +155,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -184,7 +192,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootservers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/springbootservers": {
       "get": {
         "operationId": "springbootservers_ListBySubscription",
         "tags": [
@@ -199,7 +207,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -281,7 +289,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}": {
       "get": {
         "operationId": "springbootsites_Get",
         "tags": [
@@ -299,7 +307,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -349,7 +357,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -415,7 +423,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -493,7 +501,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -542,12 +550,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/errorSummaries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/errorSummaries": {
       "get": {
         "operationId": "ErrorSummaries_ListBySite",
         "tags": [
           "ErrorSummaries"
         ],
+        "summary": "Implements ErrorSummaries GET method.",
         "description": "Lists the ErrorSummaries resource in springbootsites.",
         "parameters": [
           {
@@ -560,7 +569,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -597,12 +606,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/errorSummaries/{errorSummaryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/errorSummaries/{errorSummaryName}": {
       "get": {
         "operationId": "ErrorSummaries_Get",
         "tags": [
           "ErrorSummaries"
         ],
+        "summary": "Implements ErrorSummaries GET method.",
         "description": "Gets the ErrorSummaries resource.",
         "parameters": [
           {
@@ -615,7 +625,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -659,7 +669,71 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootapps": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/refreshSite": {
+      "post": {
+        "operationId": "springbootsites_TriggerRefreshSite",
+        "tags": [
+          "SpringbootsitesModels"
+        ],
+        "description": "Trigger refresh springbootsites action",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootsites_TriggerRefreshSite_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_TriggerRefreshSite_MaximumSet_Gen.json"
+          },
+          "springbootsites_TriggerRefreshSite_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_TriggerRefreshSite_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/springbootapps": {
       "get": {
         "operationId": "springbootapps_ListByResourceGroup",
         "tags": [
@@ -677,7 +751,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -714,7 +788,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootapps/{springbootappsName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/springbootapps/{springbootappsName}": {
       "get": {
         "operationId": "springbootapps_Get",
         "tags": [
@@ -732,7 +806,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -792,7 +866,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -864,7 +938,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootservers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/springbootservers": {
       "get": {
         "operationId": "springbootservers_ListByResourceGroup",
         "tags": [
@@ -882,7 +956,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -919,7 +993,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootservers/{springbootserversName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/springbootservers/{springbootserversName}": {
       "get": {
         "operationId": "springbootservers_Get",
         "tags": [
@@ -937,7 +1011,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -997,7 +1071,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -1073,7 +1147,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -1161,7 +1235,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -1220,12 +1294,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/summaries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/summaries": {
       "get": {
         "operationId": "Summaries_ListBySite",
         "tags": [
           "Summaries"
         ],
+        "summary": "Implements Summaries GET method.",
         "description": "Lists the Summaries resource in springbootsites.",
         "parameters": [
           {
@@ -1238,7 +1313,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -1275,12 +1350,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/summaries/{summaryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/summaries/{summaryName}": {
       "get": {
         "operationId": "Summaries_Get",
         "tags": [
           "Summaries"
         ],
+        "summary": "Implements Summaries GET method.",
         "description": "Gets the Summaries resource.",
         "parameters": [
           {
@@ -1293,7 +1369,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "springbootsitesName",
+            "name": "siteName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -1335,70 +1411,6 @@
             "$ref": "./examples/Summaries_Get_MinimumSet_Gen.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/triggerRefreshSite": {
-      "post": {
-        "operationId": "springbootsites_TriggerRefreshSite",
-        "tags": [
-          "SpringbootsitesModels"
-        ],
-        "description": "Trigger refresh springbootsites action",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "springbootsitesName",
-            "in": "path",
-            "description": "The springbootsites name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9-]*$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "springbootsites_TriggerRefreshSite_MaximumSet_Gen": {
-            "$ref": "./examples/springbootsites_TriggerRefreshSite_MaximumSet_Gen.json"
-          },
-          "springbootsites_TriggerRefreshSite_MinimumSet_Gen": {
-            "$ref": "./examples/springbootsites_TriggerRefreshSite_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1636,7 +1648,7 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "The springbootapps resource definition.Resource tags",
+          "description": "Resource tags",
           "additionalProperties": {
             "type": "string"
           }

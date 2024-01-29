@@ -34,6 +34,8 @@ interface Summaries {
   /**
    * Gets the Summaries resource.
    */
+  @operationId("Summaries_Get")
+  @summary("Implements Summaries GET method.")
   get is ArmResourceRead<Summary>;
 
   /**
@@ -41,5 +43,6 @@ interface Summaries {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Summaries_ListBySite")
+  @summary("Implements Summaries GET method.")
   listBySite is ArmResourceListByParent<Summary>;
 }
