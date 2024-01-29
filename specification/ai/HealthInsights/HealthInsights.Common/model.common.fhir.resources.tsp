@@ -1,8 +1,6 @@
-import "@azure-tools/typespec-client-generator-core";
 import "./model.common.fhir.elements.tsp";
 
 using TypeSpec.Rest;
-using Azure.ClientGenerator.Core;
 
 namespace Fhir.R4;
 
@@ -11,8 +9,8 @@ namespace Fhir.R4;
 Resource is the ancestor of DomainResource from which most resources are derived. Bundle, Parameters, and Binary extend Resource directly.
 Based on [FHIR Resource](https://www.hl7.org/fhir/r4/resource.html
 """)
-@clientName("Fhir_R4_Resource", "java")
-@clientName("Fhir_R4_Resource", "csharp")
+//@clientName("Fhir_R4_Resource", "java")
+//@clientName("Fhir_R4_Resource", "csharp")
 model Resource is Record<unknown> {
   @doc("The type of resource")
   resourceType: string;
@@ -36,8 +34,8 @@ model Resource is Record<unknown> {
 A resource with narrative, extensions, and contained resources
 Based on [FHIR DomainResource](https://www.hl7.org/fhir/domainresource.html)
 """)
-@clientName("Fhir_R4_DomainResource", "java")
-@clientName("Fhir_R4_DomainResource", "csharp")
+//@clientName("Fhir_R4_DomainResource", "java")
+//@clientName("Fhir_R4_DomainResource", "csharp")
 @discriminator("resourceType")
 model DomainResource extends Resource {
   @doc("Text summary of the resource, for human interpretation")
@@ -58,8 +56,8 @@ model DomainResource extends Resource {
 Detailed information about conditions, problems or diagnoses
 Based on [FHIR Condition](https://www.hl7.org/fhir/R4/condition.html)
 """)
-@clientName("Fhir_R4_Condition", "java")
-@clientName("Fhir_R4_Condition", "csharp")
+//@clientName("Fhir_R4_Condition", "java")
+//@clientName("Fhir_R4_Condition", "csharp")
 model Condition extends DomainResource {
   @doc("resourceType")
   resourceType: "Condition";
@@ -132,8 +130,8 @@ model Condition extends DomainResource {
 Stage/grade, usually assessed formally
 Based on [FHIR Condition.Stage](https://www.hl7.org/fhir/R4/condition.html)
 """)
-@clientName("Fhir_R4_ConditionStage", "java")
-@clientName("Fhir_R4_ConditionStage", "csharp")
+//@clientName("Fhir_R4_ConditionStage", "java")
+//@clientName("Fhir_R4_ConditionStage", "csharp")
 model ConditionStage {
   @doc("Simple summary (disease specific)")
   summary?: CodeableConcept;
@@ -147,8 +145,8 @@ model ConditionStage {
 Detailed information about observations
 Based on [FHIR Observation](https://www.hl7.org/fhir/R4/observation.html)
 """)
-@clientName("Fhir_R4_Observation", "java")
-@clientName("Fhir_R4_Observation", "csharp")
+//@clientName("Fhir_R4_Observation", "java")
+//@clientName("Fhir_R4_Observation", "csharp")
 model Observation extends DomainResource {
   @doc("resourceType")
   resourceType: "Observation";
@@ -248,8 +246,8 @@ model Observation extends DomainResource {
 Provides guide for interpretation of component result
 Based on [FHIR Observation.referenceRange](https://www.hl7.org/fhir/R4/observation.html)
 """)
-@clientName("Fhir_R4_ObservationReferenceRange", "java")
-@clientName("Fhir_R4_ObservationReferenceRange", "csharp")
+//@clientName("Fhir_R4_ObservationReferenceRange", "java")
+//@clientName("Fhir_R4_ObservationReferenceRange", "csharp")
 model ObservationReferenceRange {
   @doc("Low Range, if relevant")
   low?: Quantity;
@@ -275,8 +273,8 @@ model ObservationReferenceRange {
 Component results
 Based on [FHIR Observation.component](https://www.hl7.org/fhir/R4/observation.html)
 """)
-@clientName("Fhir_R4_ObservationComponent", "java")
-@clientName("Fhir_R4_ObservationComponent", "csharp")
+//@clientName("Fhir_R4_ObservationComponent", "java")
+//@clientName("Fhir_R4_ObservationComponent", "csharp")
 model ObservationComponent extends Element {
   @doc("Type of component observation (code / type)")
   code: CodeableConcept;
@@ -328,8 +326,8 @@ enum ObservationStatusCodeType {
 Detailed information about Research Study 
 Based on [FHIR ResearchStudy](https://www.hl7.org/fhir/R4/researchstudy.html)
 """)
-@clientName("Fhir_R4_ResearchStudy", "java")
-@clientName("Fhir_R4_ResearchStudy", "csharp")
+//@clientName("Fhir_R4_ResearchStudy", "java")
+//@clientName("Fhir_R4_ResearchStudy", "csharp")
 model ResearchStudy extends DomainResource {
   @doc("resourceType")
   resourceType: "ResearchStudy";
