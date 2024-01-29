@@ -27,6 +27,40 @@ interface TextOperations {
     },
     AnalyzeTextResult
   >;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Text Jailbreak")
+  @doc("A synchronous API for the analysis of text jailbreak.")
+  @route("/text:detectJailbreak")
+  @post
+  detectTextJailbreak is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text jailbreak analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: AnalyzeTextJailbreakOptions;
+    },
+    AnalyzeTextJailbreakResult
+  >;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Protected Material")
+  @doc("A synchronous API for the analysis of protected material.")
+  @route("/text:detectProtectedMaterial")
+  @post
+  detectTextProtectedMaterial is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text protected material analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: AnalyzeTextProtectedMaterialOptions;
+    },
+    AnalyzeTextProtectedMaterialResult
+  >;
 }
 
 interface ImageOperations {

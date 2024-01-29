@@ -1607,6 +1607,30 @@
         }
       }
     },
+    "KeyObjectValue": {
+      "description": "Key Values of custom properties",
+      "type": "object",
+      "xml": {
+        "name": "KeyValueOfObjectType",
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      },
+      "properties": {
+        "key": {
+          "type": "string",
+          "xml": {
+            "name": "Key",
+            "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+          }
+        },
+        "value": {
+          "type": "object",
+          "xml": {
+            "name": "Value",
+            "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+          }
+        }
+      }
+    },
     "RuleFilter": {
       "type": "object",
       "discriminator": "type",
@@ -1700,7 +1724,7 @@
                 "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
               },
               "items": {
-                "$ref": "#/definitions/KeyValue"
+                "$ref": "#/definitions/KeyObjectValue"
               }
             }
           }

@@ -9663,17 +9663,34 @@
         }
       }
     },
+    "UserAssignedIdentityProperties": {
+      "type": "object",
+      "description": "User assigned managed identity properties",
+      "properties": {
+        "clientId": {
+          "description": "The client ID of the assigned identity.",
+          "type": "string"
+        },
+        "principalId": {
+          "description": "The principal ID of the assigned identity.",
+          "type": "string"
+        }
+      }
+    },
     "UserAssignedManagedIdentityDetails": {
       "type": "object",
+      "description": "User assigned managed identity details",
       "properties": {
         "identityArmId": {
-          "type": "string"
+          "type": "string",
+          "description": "The ARM id of the assigned identity."
         },
         "identityName": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the assigned identity."
         },
         "userAssignedIdentityProperties": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/UserAssignedIdentity"
+          "$ref": "#/definitions/UserAssignedIdentityProperties"
         }
       }
     },
