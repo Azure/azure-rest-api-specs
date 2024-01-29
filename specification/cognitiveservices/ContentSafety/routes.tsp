@@ -85,9 +85,14 @@ interface ImageBatchOperations {
   @added(ContentSafety.Versions.v2023_10_30_Preview)
   @summary("Start Batch Analyze Images")
   @doc("An asynchronous API for the batch analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.")
-  @route("/image:batchAnalyze")
+  @route("/image/batchAnalyses")
+  @put
   batchAnalyzeImage is ContentSafetyLongRunningRpcOperation<
     {
+      @path
+      @doc("The unique operation id.")
+      operationId: string;
+
       @body
       @doc("The image batch analysis request.")
       body: BatchAnalyzeImagesOptions;
@@ -96,9 +101,17 @@ interface ImageBatchOperations {
   >;
 
   @added(ContentSafety.Versions.v2023_10_30_Preview)
-  @summary("Get Batch Analyze Status")
+  @summary("Get Image Batch Analysis task Status")
   @doc("Check the status of a batch image analysis task.")
   getBatchTaskStatus is Azure.Core.ResourceRead<ImageBatchTaskDetail>;
+
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @summary("List All Image Batch Analysis Tasks")
+  @doc("List all batch image analysis tasks.")
+  listBatchTasks is Azure.Core.ResourceList<
+    ImageBatchTaskDetail,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 }
 
 @doc("Long running RPC operation template")

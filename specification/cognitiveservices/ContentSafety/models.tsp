@@ -250,11 +250,11 @@ model ImageCategoriesAnalysis {
 @added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("The image batch analysis request.")
 model BatchAnalyzeImagesOptions {
-  @doc("The URL of the Azure Storage Blob containing all the images to be analyzed in the batch task.")
-  imagesBlobFolderUrl: url;
+  @doc("The blob parameters of images to be analyzed.")
+  images: BatchAnalyzeImages;
 
-  @doc("The URL of the Azure Storage Blob where the batch task results will be written.")
-  analysisResultsBlobFolderUrl: url;
+  @doc("The blob parameters of result files.")
+  analysisResults: BatchAnalyzeImagesResults;
 
   @doc("The storage mode for the batch task results, either 'CollectiveResultFile' or 'IndividualResultFiles'.")
   resultsStorageMode?: BatchResultsStorageMode = BatchResultsStorageMode.CollectiveResultFile;
@@ -262,7 +262,7 @@ model BatchAnalyzeImagesOptions {
   @doc("The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
   categories?: ImageCategory[];
 
-  @doc("This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
+  @doc("This refers to the type of image analysis output. If no value is assigned, the default value will be 'FourSeverityLevels'.")
   outputType?: AnalyzeImageOutputType = AnalyzeImageOutputType.FourSeverityLevels;
 
   @doc("The incidents to detect.")
@@ -270,23 +270,55 @@ model BatchAnalyzeImagesOptions {
 }
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The image batch analysis input.")
+model BatchAnalyzeImages {
+  @doc("The URL to a blob prefix which represents a directory containing all the images to be analyzed in this batch task.")
+  blobPrefixLocation: url;
+
+  @doc("The delimiter character you desire to use in the location URL, typically '/'.")
+  delimiter: string;
+
+  @doc("An array of strings indicating file extensions of desired images within the logical folder.")
+  extensions: string[];
+
+  @doc("The last modified time (in RFC1123 format) of blobs. Only images that were modified before this time will be analyzed.")
+  lastModified?: utcDateTime;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The image batch analysis output.")
+model BatchAnalyzeImagesResults {
+  @doc("The URL to a blob prefix which represents a directory. The analysis result file(s) will be written to this directory.")
+  blobPrefixLocation: url;
+
+  @doc("The delimiter character you desire to use in the location URL, typically '/'.")
+  delimiter: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("Image batch analyze task.")
-@resource("image/batchAnalyzeTasks")
+@resource("image/batchAnalyses")
 model ImageBatchTaskDetail {
   @doc("The id of image batch analysis task.")
-  @key("taskId")
-  @visibility("read")
+  @key("operationId")
+  @visibility("read", "create", "query")
   @maxLength(64)
-  taskId: string;
+  id: string;
+
+  @doc("The kind of operation.")
+  kind: string;
 
   @doc("The status of the batch image analysis task.")
   status: BatchTaskStatus;
 
-  @doc("The progress of the batch image analysis task, represented as a percentage (0-100).")
-  progressPercentage: float64;
-
   @doc("The timestamp of when batch image analysis task was created.")
-  taskCreatedTime: utcDateTime;
+  createdTime: utcDateTime;
+
+  @doc("The blob parameters of result files.")
+  analysisResults: BatchAnalyzeImagesResults;
+
+  @doc("The progress of the batch image analysis task, represented as a percentage (0-100).")
+  progressPercentage: float32;
 
   @doc("Return error detail when the task failed.")
   error?: Azure.Core.Foundations.Error;

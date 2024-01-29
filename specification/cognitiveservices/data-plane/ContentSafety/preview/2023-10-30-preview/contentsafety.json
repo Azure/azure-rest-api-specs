@@ -59,17 +59,61 @@
   },
   "tags": [],
   "paths": {
-    "/image/batchAnalyzeTasks/{taskId}": {
+    "/image/batchAnalyses": {
+      "get": {
+        "operationId": "ImageBatchOperations_ListBatchTasks",
+        "summary": "List All Image Batch Analysis Tasks",
+        "description": "List all batch image analysis tasks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedImageBatchTaskDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/image/batchAnalyses/{operationId}": {
       "get": {
         "operationId": "ImageBatchOperations_GetBatchTaskStatus",
-        "summary": "Get Batch Analyze Status",
+        "summary": "Get Image Batch Analysis task Status",
         "description": "Check the status of a batch image analysis task.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "taskId",
+            "name": "operationId",
             "in": "path",
             "description": "The id of image batch analysis task.",
             "required": true,
@@ -80,6 +124,52 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageBatchTaskDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ImageBatchOperations_BatchAnalyzeImage",
+        "summary": "Start Batch Analyze Images",
+        "description": "An asynchronous API for the batch analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique operation id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The image batch analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchAnalyzeImagesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/ImageBatchTaskDetail"
             }
@@ -516,47 +606,6 @@
         "x-ms-examples": {
           "Analyze Image": {
             "$ref": "./examples/AnalyzeImage.json"
-          }
-        }
-      }
-    },
-    "/image:batchAnalyze": {
-      "post": {
-        "operationId": "ImageBatchOperations_BatchAnalyzeImage",
-        "summary": "Start Batch Analyze Images",
-        "description": "An asynchronous API for the batch analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The image batch analysis request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BatchAnalyzeImagesOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/ImageBatchTaskDetail"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
           }
         }
       }
@@ -2545,19 +2594,49 @@
         }
       }
     },
+    "BatchAnalyzeImages": {
+      "type": "object",
+      "description": "The image batch analysis input.",
+      "properties": {
+        "blobPrefixLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to a blob prefix which represents a directory containing all the images to be analyzed in this batch task."
+        },
+        "delimiter": {
+          "type": "string",
+          "description": "The delimiter character you desire to use in the location URL, typically '/'."
+        },
+        "extensions": {
+          "type": "array",
+          "description": "An array of strings indicating file extensions of desired images within the logical folder.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modified time (in RFC1123 format) of blobs. Only images that were modified before this time will be analyzed."
+        }
+      },
+      "required": [
+        "blobPrefixLocation",
+        "delimiter",
+        "extensions"
+      ]
+    },
     "BatchAnalyzeImagesOptions": {
       "type": "object",
       "description": "The image batch analysis request.",
       "properties": {
-        "imagesBlobFolderUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL of the Azure Storage Blob containing all the images to be analyzed in the batch task."
+        "images": {
+          "$ref": "#/definitions/BatchAnalyzeImages",
+          "description": "The blob parameters of images to be analyzed."
         },
-        "analysisResultsBlobFolderUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL of the Azure Storage Blob where the batch task results will be written."
+        "analysisResults": {
+          "$ref": "#/definitions/BatchAnalyzeImagesResults",
+          "description": "The blob parameters of result files."
         },
         "resultsStorageMode": {
           "$ref": "#/definitions/BatchResultsStorageMode",
@@ -2573,7 +2652,7 @@
         },
         "outputType": {
           "$ref": "#/definitions/AnalyzeImageOutputType",
-          "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
+          "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be 'FourSeverityLevels'.",
           "default": "FourSeverityLevels"
         },
         "incidents": {
@@ -2582,8 +2661,27 @@
         }
       },
       "required": [
-        "imagesBlobFolderUrl",
-        "analysisResultsBlobFolderUrl"
+        "images",
+        "analysisResults"
+      ]
+    },
+    "BatchAnalyzeImagesResults": {
+      "type": "object",
+      "description": "The image batch analysis output.",
+      "properties": {
+        "blobPrefixLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to a blob prefix which represents a directory. The analysis result file(s) will be written to this directory."
+        },
+        "delimiter": {
+          "type": "string",
+          "description": "The delimiter character you desire to use in the location URL, typically '/'."
+        }
+      },
+      "required": [
+        "blobPrefixLocation",
+        "delimiter"
       ]
     },
     "BatchResultsStorageMode": {
@@ -2832,25 +2930,36 @@
       "type": "object",
       "description": "Image batch analyze task.",
       "properties": {
-        "taskId": {
+        "id": {
           "type": "string",
           "description": "The id of image batch analysis task.",
           "maxLength": 64,
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of operation."
         },
         "status": {
           "$ref": "#/definitions/BatchTaskStatus",
           "description": "The status of the batch image analysis task."
         },
-        "progressPercentage": {
-          "type": "number",
-          "format": "double",
-          "description": "The progress of the batch image analysis task, represented as a percentage (0-100)."
-        },
-        "taskCreatedTime": {
+        "createdTime": {
           "type": "string",
           "format": "date-time",
           "description": "The timestamp of when batch image analysis task was created."
+        },
+        "analysisResults": {
+          "$ref": "#/definitions/BatchAnalyzeImagesResults",
+          "description": "The blob parameters of result files."
+        },
+        "progressPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "The progress of the batch image analysis task, represented as a percentage (0-100)."
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -2858,10 +2967,12 @@
         }
       },
       "required": [
-        "taskId",
+        "id",
+        "kind",
         "status",
-        "progressPercentage",
-        "taskCreatedTime"
+        "createdTime",
+        "analysisResults",
+        "progressPercentage"
       ]
     },
     "ImageCategoriesAnalysis": {
@@ -3127,6 +3238,27 @@
         "name": "ModelStatus",
         "modelAsString": true
       }
+    },
+    "PagedImageBatchTaskDetail": {
+      "type": "object",
+      "description": "Paged collection of ImageBatchTaskDetail items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ImageBatchTaskDetail items on this page",
+          "items": {
+            "$ref": "#/definitions/ImageBatchTaskDetail"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PagedImageIncident": {
       "type": "object",
