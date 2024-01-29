@@ -10,6 +10,16 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.authorizationCode,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
+)
 @service({
   title: "Batch Document Translation Client",
 })
@@ -21,8 +31,8 @@ using Azure.Core.Traits;
   }
 )
 @doc("// FIXME: (miissing-service-description) Add service description")
-@versioned(DocumentTranslationClient.Versions)
-namespace DocumentTranslationClient;
+@versioned(DocumentTranslationRestClient.Versions)
+namespace DocumentTranslationRestClient;
 
 /** The Azure.AI.DocumentTranslation versions. */
 enum Versions {

@@ -31,6 +31,32 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
   "tags": [],
   "paths": {
     "/batches": {
@@ -81,7 +107,8 @@
             "required": false,
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             },
             "collectionFormat": "csv"
           },
@@ -199,7 +226,8 @@
             "in": "path",
             "description": "Format - uuid.  The operation id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -236,7 +264,8 @@
             "in": "path",
             "description": "Format - uuid.  The operation-id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -275,7 +304,8 @@
             "in": "path",
             "description": "Format - uuid.  The operation id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "$top",
@@ -316,7 +346,8 @@
             "required": false,
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             },
             "collectionFormat": "csv"
           },
@@ -399,14 +430,16 @@
             "in": "path",
             "description": "Format - uuid.  The batch id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "documentId",
             "in": "path",
             "description": "Format - uuid.  The document id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -614,6 +647,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "BatchRequest": {
       "type": "object",
       "description": "Definition for the input batch translation request",
@@ -705,7 +743,7 @@
           "maximum": 1
         },
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Document Id"
         },
         "characterCharged": {
@@ -970,7 +1008,7 @@
         },
         "totalCharacterCharged": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Total characters charged by the API"
         }
       },

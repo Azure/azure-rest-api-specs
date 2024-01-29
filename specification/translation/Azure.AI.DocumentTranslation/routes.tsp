@@ -4,8 +4,9 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 
-namespace DocumentTranslationClient;
+namespace DocumentTranslationRestClient;
 
 interface DocumentTranslationOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -155,7 +156,7 @@ if the specified page size is smaller than the server's default page size.
         name: "ids",
         format: "csv",
       })
-      ids?: string[];
+      ids?: uuid[];
 
       @doc("Statuses to use in filtering")
       @query({
@@ -197,11 +198,11 @@ and document Id.
     {
       @doc("Format - uuid.  The batch id")
       @path
-      id: string;
+      id: uuid;
 
       @doc("Format - uuid.  The document id")
       @path
-      documentId: string;
+      documentId: uuid;
     },
     DocumentStatus
   >;
@@ -220,7 +221,7 @@ translated as part of that request.
     {
       @doc("Format - uuid.  The operation id")
       @path
-      id: string;
+      id: uuid;
     },
     TranslationStatus
   >;
@@ -243,7 +244,7 @@ possible.
     {
       @doc("Format - uuid.  The operation-id")
       @path
-      id: string;
+      id: uuid;
     },
     TranslationStatus
   >;
@@ -304,7 +305,7 @@ the data returned.
     {
       @doc("Format - uuid.  The operation id")
       @path
-      id: string;
+      id: uuid;
 
       @doc("""
 $top indicates the total number of records the user wants to be returned across
@@ -363,7 +364,7 @@ if the specified page size is smaller than the server's default page size.
         name: "ids",
         format: "csv",
       })
-      ids?: string[];
+      ids?: uuid[];
 
       @doc("Statuses to use in filtering")
       @query({

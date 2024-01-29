@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace DocumentTranslationClient;
+namespace DocumentTranslationRestClient;
 
 @doc("Storage Source")
 enum StorageSource {
@@ -324,7 +324,7 @@ model StatusSummary {
   cancelled: int32;
 
   @doc("Total characters charged by the API")
-  totalCharacterCharged: int32;
+  totalCharacterCharged: int64;
 }
 
 @doc("Document Status Response")
@@ -360,7 +360,7 @@ inner error with more descriptive details.
   progress: float32;
 
   @doc("Document Id")
-  id: string;
+  id: uuid;
 
   @doc("Character charged by the API")
   characterCharged?: int32;
