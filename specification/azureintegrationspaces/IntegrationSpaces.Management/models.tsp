@@ -56,35 +56,6 @@ model SpaceResourceProperties {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility("read")
-  systemData?: SystemData;
-}
-
-/**
  * The type used for update operations of the Space.
  */
 model SpaceUpdate {
@@ -511,18 +482,6 @@ model ListBusinessProcessDevelopmentArtifactsResponse {
  * The response of a ApplicationResource list operation.
  */
 model ApplicationResourceListResult is Azure.Core.Page<ApplicationResource>;
-
-/**
- * A resource under application.
- */
-model ApplicationResource extends ProxyResource<ApplicationResourceProperties> {
-  /**
-   * The resource-specific properties for this resource.
-   */
-  @visibility("read", "create")
-  @extension("x-ms-client-flatten", true)
-  properties?: ApplicationResourceProperties;
-}
 
 /**
  * The properties of application resource.

@@ -5,10 +5,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Space.tsp";
 import "./Application.tsp";
+import "./ApplicationResource.tsp";
 import "./BusinessProcess.tsp";
 import "./BusinessProcessVersion.tsp";
 import "./InfrastructureResource.tsp";
-import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
