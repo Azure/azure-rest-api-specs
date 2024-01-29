@@ -59,6 +59,9 @@ suppressions:
     from: serviceManagementContainer.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/statuses/default"].get
     reason: This is not a LIST call
+  - code: PatchPropertiesCorrespondToPutProperties
+    from: serviceManagementContainer.json
+    reason: The tag is not part of PUT request parameters but in PATCH.
 
 ```
 
