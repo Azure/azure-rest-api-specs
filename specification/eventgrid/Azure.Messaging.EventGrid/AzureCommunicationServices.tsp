@@ -4,10 +4,10 @@ namespace Microsoft.EventGrid;
 @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event")
 model AcsIncomingCallEventData {
   @doc("The communication identifier of the target user.")
-  to?: CommunicationIdentifierModel;
+  toCommunicationIdentifierModel?: CommunicationIdentifierModel;
 
   @doc("The communication identifier of the user who initiated the call.")
-  from?: CommunicationIdentifierModel;
+  fromCommunicationIdentifierModel?: CommunicationIdentifierModel;
 
   @doc("The Id of the server call")
   serverCallId?: string;
@@ -753,7 +753,7 @@ model AcsRouterWorkerSelector {
 
   @doc("Router Job Worker Selector Time to Live in Seconds")
   @encode("ISO8601") // TODO verify this is timespan in C#
-  ttlSeconds?: duration;
+  timeToLive?: duration;
 
   @doc("Router Job Worker Selector State")
   state?: AcsRouterWorkerSelectorState;

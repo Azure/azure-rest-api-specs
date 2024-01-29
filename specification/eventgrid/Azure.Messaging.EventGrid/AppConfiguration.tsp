@@ -34,13 +34,13 @@ model AppConfigurationKeyValueDeletedEventData {
 @doc("Schema of common properties of snapshot events")
 model AppConfigurationSnapshotEventData {
   @doc("The name of the snapshot.")
-  name: string;
+  name?: string;
 
   @doc("The etag representing the new state of the snapshot.")
-  etag: string;
+  etag?: string;
 
   @doc("The sync token representing the server state after the event.")
-  syncToken: string;
+  syncToken?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."

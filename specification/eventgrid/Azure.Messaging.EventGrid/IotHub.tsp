@@ -53,7 +53,13 @@ model DeviceTwinInfo {
   //TODO: something here needs to change
 
   @doc("Properties JSON element.")
-  properties?: JsonProperties;
+  properties?: {
+    @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
+    desired?: DeviceTwinProperties;
+  
+    @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
+    reported?: DeviceTwinProperties;
+  };
 
   @doc("Whether the device twin is enabled or disabled.")
   status?: string;
@@ -67,7 +73,7 @@ model DeviceTwinInfo {
   //TODO: also here
 
   @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
-  x509Thumbprint?: ThumbPrintValue;
+  x509Thumbprint?: DeviceTwinInfoX509Thumbprint;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).")
@@ -127,19 +133,10 @@ model IotHubDeviceDisconnectedEventData
 model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
 
 @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
-model ThumbPrintValue {
+model DeviceTwinInfoX509Thumbprint {
   @doc("Primary thumbprint for the x509 certificate.")
   primaryThumbprint?: string;
 
   @doc("Secondary thumbprint for the x509 certificate.")
   secondaryThumbprint?: string;
-}
-
-@doc("Properties JSON element.")
-model JsonProperties {
-  @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
-  desired?: DeviceTwinProperties;
-
-  @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
-  reported?: DeviceTwinProperties;
 }

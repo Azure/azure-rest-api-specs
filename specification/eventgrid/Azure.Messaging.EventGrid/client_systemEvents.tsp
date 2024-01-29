@@ -778,10 +778,8 @@ using Azure.ClientGenerator.Core;
   Usage.input | Usage.output
 );
 @@access(Microsoft.EventGrid.IotHubDeviceTelemetryEventData, Access.public);
-@@usage(Microsoft.EventGrid.ThumbPrintValue, Usage.input | Usage.output);
-@@access(Microsoft.EventGrid.ThumbPrintValue, Access.public);
-@@usage(Microsoft.EventGrid.JsonProperties, Usage.input | Usage.output);
-@@access(Microsoft.EventGrid.JsonProperties, Access.public);
+@@usage(Microsoft.EventGrid.DeviceTwinInfoX509Thumbprint , Usage.input | Usage.output);
+@@access(Microsoft.EventGrid.DeviceTwinInfoX509Thumbprint , Access.public);
 @@usage(Microsoft.EventGrid.KeyVaultCertificateNewVersionCreatedEventData,
   Usage.input | Usage.output
 );

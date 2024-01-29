@@ -3,6 +3,7 @@ namespace Microsoft.EventGrid;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.EventHub.CaptureFileCreated event.")
 model EventHubCaptureFileCreatedEventData {
+  @friendlyName("fileurl")
   @doc("The path to the capture file.")
   fileUrl?: string;
 

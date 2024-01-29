@@ -61,7 +61,7 @@ namespace Microsoft.EventGrid {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageUpdated event.")
   model HealthcareDicomImageUpdatedEventData {
     @doc("Data partition name")
-    partitionName: string;
+    partitionName?: string;
 
     @doc("Unique identifier for the Study")
     imageStudyInstanceUid?: string;
@@ -566,15 +566,19 @@ namespace Microsoft.EventGrid {
   }
 
   alias HealthcareFhirResourceBaseEventData = {
+    @friendlyName("FhirServiceHostName")
     @doc("Domain name of FHIR account for this resource.")
     resourceFhirAccount?: string;
 
+    @friendlyName("FhirResourceId")
     @doc("Id of HL7 FHIR resource.")
     resourceFhirId?: string;
 
+    @friendlyName("FhirResourceVersionId")
     @doc("VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).")
     resourceVersionId?: int64;
 
+    @friendlyName("FhirResourceType")
     @doc("Type of HL7 FHIR resource.")
     resourceType?: HealthcareFhirResourceType;
   };
