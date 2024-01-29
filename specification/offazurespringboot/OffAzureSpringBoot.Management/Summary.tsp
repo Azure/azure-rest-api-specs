@@ -16,6 +16,7 @@ namespace Microsoft.OffAzureSpringBoot;
  * The summary resource definition.
  */
 @parentResource(SpringbootsitesModel)
+@extension("x-ms-azure-resource", true)
 model Summary is ProxyResource<SummariesProperties> {
   /**
    * The name of summary
@@ -27,6 +28,11 @@ model Summary is ProxyResource<SummariesProperties> {
   @key("summaryName")
   @segment("summaries")
   name: string;
+
+  /**
+   * Resource tags
+   */
+  tags?: Record<string>;
 }
 
 @armResourceOperations

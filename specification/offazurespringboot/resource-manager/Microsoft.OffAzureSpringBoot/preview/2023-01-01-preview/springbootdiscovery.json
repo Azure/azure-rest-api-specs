@@ -289,7 +289,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}": {
       "get": {
         "operationId": "springbootsites_Get",
         "tags": [
@@ -307,7 +307,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "siteName",
+            "name": "springbootsitesName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -357,7 +357,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "siteName",
+            "name": "springbootsitesName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -373,8 +373,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/SpringbootsitesModel"
-            },
-            "x-ms-client-name": "springbootsites"
+            }
           }
         ],
         "responses": {
@@ -423,7 +422,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "siteName",
+            "name": "springbootsitesName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -439,19 +438,18 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/SpringbootsitesPatch"
-            },
-            "x-ms-client-name": "springbootsites"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'SpringbootsitesModel' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/SpringbootsitesModel"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "Updates the springbootsites resource.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -501,7 +499,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "siteName",
+            "name": "springbootsitesName",
             "in": "path",
             "description": "The springbootsites name.",
             "required": true,
@@ -513,7 +511,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Deletes the springbootsites resource.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -527,7 +525,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Deletes the springbootsites resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1513,13 +1511,21 @@
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "ErrorSummaryListResult": {
       "type": "object",
@@ -1613,13 +1619,21 @@
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "SpringbootappsModelListResult": {
       "type": "object",
@@ -1909,13 +1923,21 @@
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "SpringbootserversModelListResult": {
       "type": "object",
@@ -2176,13 +2198,21 @@
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "SummaryListResult": {
       "type": "object",

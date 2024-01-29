@@ -16,6 +16,7 @@ namespace Microsoft.OffAzureSpringBoot;
  * The springbootapps envelope resource definition.
  */
 @parentResource(SpringbootsitesModel)
+@extension("x-ms-azure-resource", true)
 model SpringbootappsModel is ProxyResource<SpringbootappsProperties> {
   /**
    * The springbootapps name.
@@ -27,6 +28,11 @@ model SpringbootappsModel is ProxyResource<SpringbootappsProperties> {
   @key("springbootappsName")
   @segment("springbootapps")
   name: string;
+
+  /**
+   * Resource tags
+   */
+  tags?: Record<string>;
 }
 
 @armResourceOperations

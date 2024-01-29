@@ -37,40 +37,123 @@ interface SpringbootsitesModels {
   /**
    * Get a springbootsites resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("springbootsites_Get")
-  get is ArmResourceRead<SpringbootsitesModel>;
+  @get
+  get(
+    ...ResourceGroupBaseParameters,
+    ...DefaultProviderNamespace,
+    
+    /**
+     * The springbootsites name.
+     */
+    @maxLength(64)
+    @minLength(3)
+    @pattern("^[a-z][a-z0-9-]*$")
+    @path
+    @key("springbootsitesName")
+    @segment("springbootsites")
+    springbootsitesName: string;
+  ): ArmResponse<SpringbootsitesModel> | ErrorResponse;
 
   /**
    * Create a springbootsites resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("springbootsites_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SpringbootsitesModel>;
+  @put
+  createOrUpdate(
+    ...ResourceGroupBaseParameters,
+    ...DefaultProviderNamespace,
+
+    /**
+     * The springbootsites name.
+     */
+    @maxLength(64)
+    @minLength(3)
+    @pattern("^[a-z][a-z0-9-]*$")
+    @path
+    @key("springbootsitesName")
+    @segment("springbootsites")
+    springbootsitesName: string;
+
+    /**
+     * Create a springbootsites payload.
+     */
+    @body
+    springbootsites: SpringbootsitesModel;
+  ): 
+    | ArmResourceUpdatedResponse<SpringbootsitesModel> 
+    | ArmResourceCreatedSyncResponse<SpringbootsitesModel> 
+    | ErrorResponse;
 
   /**
    * Update a springbootsites resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
   @parameterVisibility("read")
   @operationId("springbootsites_Update")
-  update is ArmCustomPatchAsync<
-    SpringbootsitesModel,
-    SpringbootsitesPatch,
-    BaseParameters<SpringbootsitesModel>,
-    ArmLroLocationHeader
-  >;
+  @patch
+  update(
+    ...ResourceGroupBaseParameters,
+    ...DefaultProviderNamespace,
 
-  /**
+    /**
+     * The springbootsites name.
+     */
+    @maxLength(64)
+    @minLength(3)
+    @pattern("^[a-z][a-z0-9-]*$")
+    @path
+    @key("springbootsitesName")
+    @segment("springbootsites")
+    springbootsitesName: string;
+
+    /**
+     * Update a springbootsites payload.
+     */
+    @body
+    springbootsites: SpringbootsitesPatch;
+  ): 
+    | ArmResourceUpdatedResponse<SpringbootsitesModel>
+    | ArmAcceptedLroResponse<"Updates the springbootsites resource.">
+    | ErrorResponse;
+
+    /**
    * Delete a springbootsites resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("springbootsites_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    SpringbootsitesModel,
-    BaseParameters<SpringbootsitesModel>,
-    ArmLroLocationHeader
-  >;
+    @extension("x-ms-long-running-operation", true)
+    @extension(
+      "x-ms-long-running-operation-options",
+      {
+        `final-state-via`: "location",
+      }
+    )
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+    @operationId("springbootsites_Delete")
+    @delete
+    delete(
+      ...ResourceGroupBaseParameters,
+      ...DefaultProviderNamespace,
+  
+      /**
+       * The springbootsites name.
+       */
+      @maxLength(64)
+      @minLength(3)
+      @pattern("^[a-z][a-z0-9-]*$")
+      @path
+      @key("springbootsitesName")
+      @segment("springbootsites")
+      springbootsitesName: string;
+    ): 
+      | ArmAcceptedLroResponse<"Deletes the springbootsites resource.">
+      | ArmNoContentResponse<"Deletes the springbootsites resource.">
+      | ErrorResponse;
 
   /**
    * List springbootsites resource by resourceGroup.
@@ -114,26 +197,3 @@ interface SpringbootsitesModels {
     springbootsitesName: string;
   ): ArmAcceptedLroResponse | ErrorResponse;
 }
-
-@@projectedName(SpringbootsitesModels.createOrUpdate::parameters.resource,
-  "json",
-  "springbootsites"
-);
-@@extension(SpringbootsitesModels.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "springbootsites"
-);
-@@doc(SpringbootsitesModels.createOrUpdate::parameters.resource,
-  "Create a springbootsites payload."
-);
-@@projectedName(SpringbootsitesModels.update::parameters.properties,
-  "json",
-  "springbootsites"
-);
-@@extension(SpringbootsitesModels.update::parameters.properties,
-  "x-ms-client-name",
-  "springbootsites"
-);
-@@doc(SpringbootsitesModels.update::parameters.properties,
-  "Update a springbootsites payload."
-);
