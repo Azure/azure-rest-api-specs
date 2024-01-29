@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-01-18-preview",
+    "version": "2024-01-26-preview",
     "title": "ConfidentialLedgerClient",
     "description": "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service."
   },
@@ -378,6 +378,41 @@
             "description": "The current ledger entry available on the receiving node. Non-primary nodes may return older values.",
             "schema": {
               "$ref": "#/definitions/LedgerEntry"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/users/": {
+      "get": {
+        "operationId": "ListUsers",
+        "x-ms-examples": {
+          "ListUserEntries": {
+            "$ref": "./examples/ledger/ListUsers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "users",
+          "nextLinkName": "nextLink"
+        },
+        "summary": "Gets details on a list of users.",
+        "description": "All users' object IDs and roles will be returned.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users in the paged specified range.",
+            "schema": {
+              "$ref": "#/definitions/PagedUsers"
             }
           },
           "default": {
@@ -936,6 +971,22 @@
         "collections": {
           "items": {
             "$ref": "#/definitions/Collection"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
+    "PagedUsers": {
+      "description": "Paginated users returned in response to a query.",
+      "type": "object",
+      "properties": {
+        "users": {
+          "items": {
+            "$ref": "#/definitions/LedgerUser"
           },
           "type": "array"
         },
