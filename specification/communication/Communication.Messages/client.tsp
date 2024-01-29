@@ -7,23 +7,23 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@useDependency(AzureCommunicationMessagesService.Versions.c2024_02_01)
+@useDependency(Azure.Communication.MessagesService.Versions.c2024_02_01)
 namespace ClientForAcsMessages;
 
 @client({
   name: "NotificationMessagesClient",
-  service: AzureCommunicationMessagesService,
+  service: Azure.Communication.MessagesService,
 })
 interface NotificationMessagesClient
-  extends AzureCommunicationMessagesService.NotificationMessagesOperations {
+  extends Azure.Communication.MessagesService.NotificationMessagesOperations {
   @access(Access.internal, "csharp")
   @projectedName("csharp", "downloadMediaInternal")
-  downloadMedia is AzureCommunicationMessagesService.StreamOperations.downloadMedia;
+  downloadMedia is Azure.Communication.MessagesService.StreamOperations.getMedia;
 }
 
 @client({
   name: "MessageTemplateClient",
-  service: AzureCommunicationMessagesService,
+  service: Azure.Communication.MessagesService,
 })
 interface MessageTemplateClient
-  extends AzureCommunicationMessagesService.TemplateOperations {}
+  extends Azure.Communication.MessagesService.TemplateOperations {}

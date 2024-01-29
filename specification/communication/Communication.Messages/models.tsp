@@ -11,12 +11,11 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
-@versioned(AzureCommunicationMessagesService.Versions)
-namespace AzureCommunicationMessagesService;
+@versioned(Azure.Communication.MessagesService.Versions)
+namespace Azure.Communication.MessagesService;
 
-@access(Access.public)
 @doc("The type of message. Supports text, image, template.")
-enum CommunicationMessageType {
+enum CommunicationMessageKind {
   @doc("Text message type.")
   text,
 
@@ -27,7 +26,6 @@ enum CommunicationMessageType {
   template,
 }
 
-@access(Access.public)
 @doc("The WhatsApp button sub type.")
 enum WhatsAppMessageButtonSubType {
   @doc("The WhatsApp button sub type is quick reply.")
@@ -37,7 +35,6 @@ enum WhatsAppMessageButtonSubType {
   url,
 }
 
-@access(Access.public)
 @doc("The aggregated template status.")
 enum MessageTemplateStatus {
   @doc("Message template is approved.")
@@ -54,7 +51,7 @@ enum MessageTemplateStatus {
 }
 
 @doc("The type of the template parameter.")
-enum MessageTemplateValueType {
+enum MessageTemplateValueKind {
   @doc("The text template parameter type.")
   text,
 
@@ -81,7 +78,7 @@ enum CommunicationMessagesChannel {
 }
 
 @doc("The type of the message template.")
-enum MessageTemplateBindingsType {
+enum MessageTemplateBindingsKind {
   @doc("The WhatsApp template type.")
   whatsApp,
 }
@@ -96,13 +93,13 @@ model NotificationContent {
   to: string[];
 
   @doc("The type discriminator describing a notification type.")
-  kind: CommunicationMessageType;
+  kind: CommunicationMessageKind;
 }
 
 @doc("A request to send a text notification.")
 model TextNotificationContent extends NotificationContent {
   @doc("Message notification type is text.")
-  kind: CommunicationMessageType.text;
+  kind: CommunicationMessageKind.text;
 
   @doc("Message content.")
   content: string;
@@ -111,22 +108,19 @@ model TextNotificationContent extends NotificationContent {
 @doc("A request to send a media notification.")
 model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
-  kind: CommunicationMessageType.image;
+  kind: CommunicationMessageKind.image;
 
   @doc("Optional text content.")
   content?: string;
 
-  @doc("""
-  A media url for the file. Required if the type is one of the supported media
-  types, e.g. image
-  """)
+  @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
 }
 
 @doc("A request to send a template notification.")
 model TemplateNotificationContent extends NotificationContent {
   @doc("Message notification type is template.")
-  kind: CommunicationMessageType.template;
+  kind: CommunicationMessageKind.template;
 
   @doc("The template object used to create templates.")
   template: MessageTemplate;
@@ -137,7 +131,7 @@ model MessageTemplate {
   @doc("Name of the template.")
   name: string;
 
-  @doc("The codes for the supported languages for templates.")
+  @doc("The template's language, in the ISO 639 format, consist of a two-letter language code followed by an optional two-letter country code, e.g., 'en' or 'en_US'.")
   language: string;
 
   @doc("The template values.")
@@ -154,23 +148,19 @@ model MessageTemplateValue {
   name: string;
 
   @doc("The type discriminator describing a template parameter type.")
-  kind: MessageTemplateValueType;
+  kind: MessageTemplateValueKind;
 }
 
 @doc("The message template's text value information.")
 model MessageTemplateText extends MessageTemplateValue {
   @doc("Message parameter type is text.")
-  kind: MessageTemplateValueType.text;
+  kind: MessageTemplateValueKind.text;
 
   @doc("The text value.")
   text: string;
 }
 
-@doc("""
-The message template's media value information.
-Could be an image, document or
-video.
-""")
+@doc("The message template's media value information. Could be an image, document or video.")
 model MessageTemplateMedia {
   @projectedName("csharp", "uri")
   @doc("The (public) URL of the media.")
@@ -186,7 +176,7 @@ model MessageTemplateMedia {
 @doc("The message template's image value information.")
 model MessageTemplateImage extends MessageTemplateValue {
   @doc("Message parameter type is image.")
-  kind: MessageTemplateValueType.image;
+  kind: MessageTemplateValueKind.image;
 
   ...MessageTemplateMedia;
 }
@@ -194,7 +184,7 @@ model MessageTemplateImage extends MessageTemplateValue {
 @doc("The message template's document value information.")
 model MessageTemplateDocument extends MessageTemplateValue {
   @doc("Message parameter type is document.")
-  kind: MessageTemplateValueType.document;
+  kind: MessageTemplateValueKind.document;
 
   ...MessageTemplateMedia;
 }
@@ -202,7 +192,7 @@ model MessageTemplateDocument extends MessageTemplateValue {
 @doc("The message template's video value information.")
 model MessageTemplateVideo extends MessageTemplateValue {
   @doc("Message parameter type is video.")
-  kind: MessageTemplateValueType.video;
+  kind: MessageTemplateValueKind.video;
 
   ...MessageTemplateMedia;
 }
@@ -210,7 +200,7 @@ model MessageTemplateVideo extends MessageTemplateValue {
 @doc("The message template's location value information.")
 model MessageTemplateLocation extends MessageTemplateValue {
   @doc("Message parameter type is location.")
-  kind: MessageTemplateValueType.location;
+  kind: MessageTemplateValueKind.location;
 
   @doc("The [Optional] name of the location.")
   locationName?: string;
@@ -228,7 +218,7 @@ model MessageTemplateLocation extends MessageTemplateValue {
 @doc("The message template's quick action value information.")
 model MessageTemplateQuickAction extends MessageTemplateValue {
   @doc("Message parameter type is quick action.")
-  kind: MessageTemplateValueType.quickAction;
+  kind: MessageTemplateValueKind.quickAction;
 
   @doc("The [Optional] quick action text")
   text?: string;
@@ -241,13 +231,13 @@ model MessageTemplateQuickAction extends MessageTemplateValue {
 @doc("The binding object to link values to the template specific locations")
 model MessageTemplateBindings {
   @doc("The type discriminator describing a template bindings type.")
-  kind: MessageTemplateBindingsType;
+  kind: MessageTemplateBindingsKind;
 }
 
 @doc("The template bindings for WhatsApp")
 model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   @doc("MessageTemplateBindings is whatsApp")
-  kind: MessageTemplateBindingsType.whatsApp;
+  kind: MessageTemplateBindingsKind.whatsApp;
 
   @doc("The header template bindings")
   header?: WhatsAppMessageTemplateBindingsComponent[];
@@ -271,7 +261,7 @@ model WhatsAppMessageTemplateBindingsComponent {
 @doc("The template bindings component button for WhatsApp")
 model WhatsAppMessageTemplateBindingsButton {
   @doc("The WhatsApp button sub type")
-  subType?: WhatsAppMessageButtonSubType;
+  subType: WhatsAppMessageButtonSubType;
 
   @doc("The name of the referenced item in the template values.")
   refValue: string;
@@ -295,11 +285,7 @@ model MessageReceipt {
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateItem extends MessageTemplateItem {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Payload being returned from WhatsApp with no guaranteed object type."
-  @doc("""
-WhatsApp platform's template content
-This is the payload returned from WhatsApp
-API.
-""")
+  @doc("WhatsApp platform's template content. This is the payload returned from WhatsApp API.")
   content?: unknown;
 
   @doc("Message template response type is whatsApp.")
@@ -352,7 +338,7 @@ model MessageTemplateItem {
   @doc("The template's name.")
   name: string;
 
-  @doc("The template's language.")
+  @doc("The template's language, in the ISO 639 format, consist of a two-letter language code followed by an optional two-letter country code, e.g., 'en' or 'en_US'.")
   language: string;
 
   @doc("The aggregated template status.")
