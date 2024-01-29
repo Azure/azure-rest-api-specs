@@ -12303,9 +12303,7 @@
             "UltraSSD_LRS",
             "Standard_ZRS",
             "StandardSSD_ZRS",
-            "Premium_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS"
+            "Premium_ZRS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -12457,9 +12455,7 @@
             "UltraSSD_LRS",
             "Standard_ZRS",
             "StandardSSD_ZRS",
-            "Premium_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS"
+            "Premium_ZRS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -13749,9 +13745,7 @@
             "UltraSSD_LRS",
             "Standard_ZRS",
             "StandardSSD_ZRS",
-            "Premium_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS"
+            "Premium_ZRS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -13843,9 +13837,7 @@
             "UltraSSD_LRS",
             "Standard_ZRS",
             "StandardSSD_ZRS",
-            "Premium_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS"
+            "Premium_ZRS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -15484,9 +15476,7 @@
             "UltraSSD_LRS",
             "Standard_ZRS",
             "StandardSSD_ZRS",
-            "Premium_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS"
+            "Premium_ZRS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -15527,9 +15517,7 @@
             "UltraSSD_LRS",
             "Standard_ZRS",
             "StandardSSD_ZRS",
-            "Premium_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS"
+            "Premium_ZRS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -16971,9 +16959,7 @@
             "UltraSSD_LRS",
             "Standard_ZRS",
             "StandardSSD_ZRS",
-            "Premium_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS"
+            "Premium_ZRS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -17014,6 +17000,28 @@
           "format": "int32",
           "description": "The logical sector size (in bytes), 512 by default.",
           "type": "integer"
+        }
+      }
+    },
+    "InMageRcmUnProtectedDiskDetails": {
+      "description": "InMageRcm un-protected disk details.",
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskName": {
+          "description": "The disk name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capacityInBytes": {
+          "format": "int64",
+          "description": "The disk capacity in bytes.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -17324,6 +17332,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageRcmProtectedDiskDetails"
+          }
+        },
+        "unprotectedDisks": {
+          "description": "The list of unprotected disks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageRcmUnProtectedDiskDetails"
           }
         },
         "isLastUpgradeSuccessful": {
@@ -24220,9 +24235,7 @@
             "UltraSSD_LRS",
             "Standard_ZRS",
             "StandardSSD_ZRS",
-            "Premium_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS"
+            "Premium_ZRS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -24964,9 +24977,7 @@
             "UltraSSD_LRS",
             "Standard_ZRS",
             "StandardSSD_ZRS",
-            "Premium_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS"
+            "Premium_ZRS"
           ],
           "type": "string",
           "x-ms-enum": {
