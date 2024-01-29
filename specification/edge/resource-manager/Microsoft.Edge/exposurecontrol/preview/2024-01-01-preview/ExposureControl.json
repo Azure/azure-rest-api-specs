@@ -56,43 +56,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.Edge/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List the operations for the provider",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureWorkflowManifests": {
+    "/providers/Microsoft.Edge/exposureWorkflowManifests": {
       "get": {
         "operationId": "ExposureWorkflowManifests_ListByResourceGroup",
         "tags": [
@@ -101,13 +65,40 @@
         "description": "List ExposureWorkflowManifest resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "The dynamic parameters of a list call for a resource instance - pass in the proper base type to indicate\nwhere the list should take place.  The default is in a resource group",
+              "properties": {
+                "exposureFeatureId": {
+                  "type": "string",
+                  "description": "Feature Name."
+                },
+                "discriminator": {
+                  "type": "string",
+                  "description": "Ring description."
+                },
+                "overrideDefaultStartRing": {
+                  "type": "string",
+                  "description": "default ring."
+                },
+                "ringConfigurations": {
+                  "type": "array",
+                  "description": "ring configuration properties.",
+                  "items": {
+                    "$ref": "#/definitions/RingConfigurationProperties"
+                  },
+                  "x-ms-identifiers": []
+                }
+              },
+              "required": [
+                "exposureFeatureId",
+                "discriminator",
+                "ringConfigurations"
+              ]
+            }
           }
         ],
         "responses": {
@@ -120,17 +111,207 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflowManifests_ListByResourceGroup": {
+            "$ref": "./examples/ExposureWorkflowManifests_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Edge/exposureWorkflows": {
+      "get": {
+        "operationId": "ExposureWorkflows_ListByResourceGroup",
+        "tags": [
+          "ExposureWorkflows"
+        ],
+        "description": "List ExposureWorkflow resources by resource group",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "The dynamic parameters of a list call for a resource instance - pass in the proper base type to indicate\nwhere the list should take place.  The default is in a resource group",
+              "properties": {
+                "discriminator": {
+                  "type": "string",
+                  "description": "Workflow descriminator."
+                }
+              },
+              "required": [
+                "discriminator"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         },
         "x-ms-examples": {
-          "ExposureWorkflowManifests_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureWorkflowManifests_ListByResourceGroup.json"
+          "ExposureWorkflows_ListByResourceGroup": {
+            "$ref": "./examples/ExposureWorkflows_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Edge/features": {
+      "get": {
+        "operationId": "ExposureFeatures_ListByResourceGroup",
+        "tags": [
+          "ExposureFeatures"
+        ],
+        "description": "List ExposureFeature resources by resource group",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "The dynamic parameters of a list call for a resource instance - pass in the proper base type to indicate\nwhere the list should take place.  The default is in a resource group",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Feature description."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureFeatureListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureFeatures_ListByResourceGroup": {
+            "$ref": "./examples/ExposureFeatures_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Edge/groups": {
+      "get": {
+        "operationId": "ExposureGroups_ListByResourceGroup",
+        "tags": [
+          "ExposureGroups"
+        ],
+        "description": "List ExposureGroup resources by resource group",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "The dynamic parameters of a list call for a resource instance - pass in the proper base type to indicate\nwhere the list should take place.  The default is in a resource group",
+              "properties": {
+                "filterConditions": {
+                  "type": "array",
+                  "description": "filter conditions.",
+                  "items": {
+                    "$ref": "#/definitions/FilterCondition"
+                  },
+                  "x-ms-identifiers": []
+                }
+              },
+              "required": [
+                "filterConditions"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureGroups_ListByResourceGroup": {
+            "$ref": "./examples/ExposureGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Edge/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -143,18 +324,18 @@
         "description": "Get a ExposureWorkflowManifest",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "exposureWorkflowManifestName",
             "in": "path",
-            "description": "Name of Exposure workflow manifest",
+            "description": "Name of exposure control manifest",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$"
@@ -170,12 +351,12 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "ExposureWorkflowManifests_Get_MaximumSet_Gen": {
+          "ExposureWorkflowManifests_Get": {
             "$ref": "./examples/ExposureWorkflowManifests_Get.json"
           }
         }
@@ -188,18 +369,18 @@
         "description": "Create a ExposureWorkflowManifest",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "exposureWorkflowManifestName",
             "in": "path",
-            "description": "Name of Exposure workflow manifest",
+            "description": "Name of exposure control manifest",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$"
@@ -237,19 +418,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflowManifests_CreateOrUpdate": {
+            "$ref": "./examples/ExposureWorkflowManifests_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ExposureWorkflowManifests_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureWorkflowManifests_CreateOrUpdate.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ExposureWorkflowManifests_Delete",
@@ -259,18 +440,18 @@
         "description": "Delete a ExposureWorkflowManifest",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "exposureWorkflowManifestName",
             "in": "path",
-            "description": "Name of Exposure workflow manifest",
+            "description": "Name of exposure control manifest",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$"
@@ -300,61 +481,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflowManifests_Delete": {
+            "$ref": "./examples/ExposureWorkflowManifests_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ExposureWorkflowManifests_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureWorkflowManifests_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureWorkflows": {
-      "get": {
-        "operationId": "ExposureWorkflows_ListByResourceGroup",
-        "tags": [
-          "ExposureWorkflows"
-        ],
-        "description": "List ExposureWorkflow resources by resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ExposureWorkflowListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ExposureWorkflows_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureWorkflows_ListByResourceGroup.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureWorkflows/{exposureWorkflowName}": {
@@ -366,13 +505,13 @@
         "description": "Get a ExposureWorkflow",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "exposureWorkflowName",
@@ -393,12 +532,12 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "ExposureWorkflows_Get_MaximumSet_Gen": {
+          "ExposureWorkflows_Get": {
             "$ref": "./examples/ExposureWorkflows_Get.json"
           }
         }
@@ -411,13 +550,13 @@
         "description": "Create a ExposureWorkflow",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "exposureWorkflowName",
@@ -460,19 +599,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflows_CreateOrUpdate": {
+            "$ref": "./examples/ExposureWorkflows_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ExposureWorkflows_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureWorkflows_CreateOrUpdate.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ExposureWorkflows_Delete",
@@ -482,13 +621,13 @@
         "description": "Delete a ExposureWorkflow",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "exposureWorkflowName",
@@ -523,25 +662,25 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflows_Delete": {
+            "$ref": "./examples/ExposureWorkflows_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ExposureWorkflows_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureWorkflows_Delete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureWorkflows/{exposureWorkflowName}/updateStatus": {
       "patch": {
         "operationId": "UpdateWorkflowCurrentRingStatusAsync",
-        "description": "update ring status in Exposure Workflow",
+        "description": "update ring status in Exposure workflow",
         "parameters": [
           {
             "name": "subscriptionId",
@@ -579,50 +718,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateWorkflowCurrentRingStatusAsync_MaximumSet_Gen": {
+          "UpdateWorkflowCurrentRingStatusAsync": {
             "$ref": "./examples/UpdateWorkflowCurrentRingStatusAsync.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/features": {
-      "get": {
-        "operationId": "ExposureFeatures_ListByResourceGroup",
-        "tags": [
-          "ExposureFeatures"
-        ],
-        "description": "List ExposureFeature resources by resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ExposureFeatureListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ExposureFeatures_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureFeatures_ListByResourceGroup.json"
           }
         }
       }
@@ -636,13 +733,13 @@
         "description": "Get a ExposureFeature",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "featureName",
@@ -663,12 +760,12 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "ExposureFeatures_Get_MaximumSet_Gen": {
+          "ExposureFeatures_Get": {
             "$ref": "./examples/ExposureFeatures_Get.json"
           }
         }
@@ -681,13 +778,13 @@
         "description": "Create a ExposureFeature",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "featureName",
@@ -730,19 +827,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureFeatures_CreateOrUpdate": {
+            "$ref": "./examples/ExposureFeatures_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ExposureFeatures_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureFeatures_CreateOrUpdate.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ExposureFeatures_Delete",
@@ -752,13 +849,13 @@
         "description": "Delete a ExposureFeature",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "featureName",
@@ -793,61 +890,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureFeatures_Delete": {
+            "$ref": "./examples/ExposureFeatures_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ExposureFeatures_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureFeatures_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/groups": {
-      "get": {
-        "operationId": "ExposureGroups_ListByResourceGroup",
-        "tags": [
-          "ExposureGroups"
-        ],
-        "description": "List ExposureGroup resources by resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ExposureGroupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ExposureGroups_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureGroups_ListByResourceGroup.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/groups/{groupName}": {
@@ -891,7 +946,7 @@
           }
         },
         "x-ms-examples": {
-          "ExposureGroups_Get_MaximumSet_Gen": {
+          "ExposureGroups_Get": {
             "$ref": "./examples/ExposureGroups_Get.json"
           }
         }
@@ -957,15 +1012,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ExposureGroups_CreateOrUpdate": {
+            "$ref": "./examples/ExposureGroups_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ExposureGroups_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureGroups_CreateOrUpdate.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ExposureGroups_Delete",
@@ -1020,15 +1075,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ExposureGroups_Delete": {
+            "$ref": "./examples/ExposureGroups_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ExposureGroups_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ExposureGroups_Delete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1236,7 +1291,7 @@
     },
     "ExposureWorkflowManifestProperties": {
       "type": "object",
-      "description": "Exposure manifest Properties",
+      "description": "Exposure workflow manifest definition Properties",
       "properties": {
         "exposureFeatureId": {
           "type": "string",
@@ -1248,11 +1303,11 @@
         },
         "overrideDefaultStartRing": {
           "type": "string",
-          "description": "default start ring."
+          "description": "default ring."
         },
         "ringConfigurations": {
           "type": "array",
-          "description": "ring configuration details.",
+          "description": "ring configuration properties.",
           "items": {
             "$ref": "#/definitions/RingConfigurationProperties"
           },
@@ -1290,7 +1345,7 @@
         },
         "rings": {
           "type": "array",
-          "description": "Ring configuration names.",
+          "description": "Ring configuration details.",
           "items": {
             "$ref": "#/definitions/ExposureWorkflowRingConfigurationProperties"
           },
@@ -1404,7 +1459,8 @@
             "description": "workflow Failed."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "FilterCondition": {
       "type": "object",
@@ -1580,11 +1636,12 @@
             "description": "The resource create request has been accepted"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "RingConfigurationProperties": {
       "type": "object",
-      "description": "Ring configuration Details",
+      "description": "Ring configuration Properties",
       "properties": {
         "name": {
           "type": "string",
@@ -1604,11 +1661,6 @@
         "progressionSetting": {
           "$ref": "#/definitions/ProgressionSetting",
           "description": "Progression settings."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
         }
       },
       "required": [
@@ -1685,7 +1737,7 @@
           {
             "name": "v2024_00_01",
             "value": "2024-01-01-preview",
-            "description": "Version 2024-01-01"
+            "description": "Version 2024-01-01-preview"
           }
         ]
       }

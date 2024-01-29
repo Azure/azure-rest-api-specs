@@ -2,18 +2,10 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-```
-
-### Tag: package-2024-01-01-preview and go
-
-These settings apply only when `--tag=package-2024-01-01-privatepreview --go` is specified on the command line.
-Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-2024-01-01-preview' && $(go)
-namespace: Private.EdgeInternal
-output-folder: $(go-sdk-folder)/Private.EdgeInternal/preview/2024-01-01-privatepreview/$(namespace)
+```yaml $(go) && $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/exposurecontrol/armedgeexposurecontrol
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
 ```
