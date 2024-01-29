@@ -49,11 +49,11 @@ model AccessPolicy {
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
 model DataSource {
   @doc("LogAnalytics data source.")
-  logAnalytics: LogAnalytics;
+  logAnalytics?: LogAnalytics;
 }
 
 @doc("LogAnalytics workspace which telemetry data required for experimentation will be retrieved from.")
-model LogAnalytics{
+model LogAnalytics {
   @doc("Resource id of the data source.")
   resourceId: string;
 
