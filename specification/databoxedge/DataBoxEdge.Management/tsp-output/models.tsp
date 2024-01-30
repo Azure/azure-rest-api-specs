@@ -3273,7 +3273,7 @@ model ArcAddon extends Addon {
   /**
    * Addon type.
    */
-  kind: "ArcForKubernetes";
+  kind1: "ArcForKubernetes";
 }
 
 /**
@@ -3360,7 +3360,7 @@ model CloudEdgeManagementRole extends Role {
   /**
    * Role type.
    */
-  kind: "CloudEdgeManagement";
+  kind1: "CloudEdgeManagement";
 }
 
 /**
@@ -3474,7 +3474,7 @@ model FileEventTrigger extends Trigger {
   /**
    * Trigger Kind.
    */
-  kind: "FileEvent";
+  kind1: "FileEvent";
 }
 
 /**
@@ -3551,7 +3551,7 @@ model IoTAddon extends Addon {
   /**
    * Addon type.
    */
-  kind: "IotEdge";
+  kind1: "IotEdge";
 }
 
 /**
@@ -3990,7 +3990,7 @@ model PeriodicTimerEventTrigger extends Trigger {
   /**
    * Trigger Kind.
    */
-  kind: "PeriodicTimerEvent";
+  kind1: "PeriodicTimerEvent";
 }
 
 /**

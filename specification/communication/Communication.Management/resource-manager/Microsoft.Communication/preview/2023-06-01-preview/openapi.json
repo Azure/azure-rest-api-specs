@@ -182,11 +182,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Communication/emailServices": {
       "get": {
-        "operationId": "EmailServices_ListBySubscription",
+        "operationId": "EmailServices_ListVerifiedExchangeOnlineDomains",
         "tags": [
           "EmailServiceResources"
         ],
-        "description": "Handles requests to list all resources in a subscription.",
+        "description": "Handles requests to list all resources in a subscription.Get a list of domains that are fully verified in Exchange Online.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -210,8 +210,8 @@
           }
         },
         "x-ms-examples": {
-          "List EmailService resources by subscription": {
-            "$ref": "./examples/EmailServices_ListBySubscription.json"
+          "Get verified Exchange Online domains": {
+            "$ref": "./examples/EmailServices_ListVerifiedExchangeOnlineDomains.json"
           }
         },
         "x-ms-pageable": {
