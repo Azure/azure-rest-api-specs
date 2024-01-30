@@ -637,8 +637,7 @@ model Resource {
 /**
  * The api properties for special APIs.
  */
-// model ApiProperties extends Record<Record<unknown>> {
-  model ApiProperties {
+model ApiProperties {
   /**
    * (QnAMaker Only) The runtime endpoint of QnAMaker.
    */
