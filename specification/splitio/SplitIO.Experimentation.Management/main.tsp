@@ -69,7 +69,7 @@ scalar StorageAccountResourceId
 @doc("The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.")
 model LogAnalytics {
   @doc("Resource id of the Log Analytics workspace.")
-  resourceId: LogAnalyticsWorkspaceResourceId;
+  logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
 
   @doc("Resource id of the storage account associated with the Log Analytics workspace.")
   storageAccountResourceId: StorageAccountResourceId;
