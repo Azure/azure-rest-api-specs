@@ -43,7 +43,13 @@
       "name": "Operations"
     },
     {
+      "name": "Gateways"
+    },
+    {
       "name": "OperatorApiConnections"
+    },
+    {
+      "name": "OperatorApiPlans"
     }
   ],
   "paths": {
@@ -76,6 +82,45 @@
         "x-ms-examples": {
           "Operations_List": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/gateways": {
+      "get": {
+        "operationId": "Gateways_ListBySubscription",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "List Gateway resources by subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_ListBySubscription": {
+            "$ref": "./examples/Gateways_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -120,6 +165,226 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways": {
+      "get": {
+        "operationId": "Gateways_ListByResourceGroup",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "List Gateway resources by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_ListByResourceGroup": {
+            "$ref": "./examples/Gateways_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways/{gatewayName}": {
+      "get": {
+        "operationId": "Gateways_Get",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Get a Gateway resource by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_Get": {
+            "$ref": "./examples/Gateways_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Gateways_CreateOrUpdate",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Create or update an APC Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Gateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'Gateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_CreateOrUpdate": {
+            "$ref": "./examples/Gateways_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Gateways_Delete",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Delete a Gateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_Delete": {
+            "$ref": "./examples/Gateways_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections": {
@@ -413,6 +678,115 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans": {
+      "get": {
+        "operationId": "OperatorApiPlans_ListByResourceGroup",
+        "tags": [
+          "OperatorApiPlans"
+        ],
+        "description": "List OperatorApiPlan resources by subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An optional OData based filter expression to apply on the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "An optional query parameter which specifies the number of records to be skipped.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans/{operatorApiPlanName}": {
+      "get": {
+        "operationId": "OperatorApiPlans_Get",
+        "tags": [
+          "OperatorApiPlans"
+        ],
+        "description": "Get an OperatorApiPlan resource by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "operatorApiPlanName",
+            "in": "path",
+            "description": "APC Gateway Plan Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorApiPlans_Get": {
+            "$ref": "./examples/OperatorApiPlans_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -471,6 +845,124 @@
         "privacyContactEmailAddress": {
           "type": "string",
           "description": "Email address of the Privacy contact or Data Protection officer of the organization."
+        }
+      }
+    },
+    "Gateway": {
+      "type": "object",
+      "description": "A Programmable Connectivity Gateway resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GatewayListResult": {
+      "type": "object",
+      "description": "The response of a Gateway list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Gateway items on this page",
+          "items": {
+            "$ref": "#/definitions/Gateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GatewayProperties": {
+      "type": "object",
+      "description": "Gateway resource properties",
+      "properties": {
+        "operatorApiConnections": {
+          "type": "array",
+          "description": "List of Operator API Connections selected by the user",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an ARM resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ProgrammableConnectivity/operatorApiConnections"
+                }
+              ]
+            }
+          },
+          "readOnly": true
+        },
+        "gatewayBaseUrl": {
+          "type": "string",
+          "description": "Base URL of the Gateway resource. This is the URL that the users would use to make Open API Gateway requests to the Operators via Azure.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation on the Gateway resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayUpdate": {
+      "type": "object",
+      "description": "Properties for update operations of the Gateway.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/GatewayProperties",
+          "description": "Gateway resource properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MarketplaceProperties": {
+      "type": "object",
+      "description": "Azure marketplace properties for a plan.",
+      "properties": {
+        "offerId": {
+          "type": "string",
+          "description": "Azure marketplace Offer ID for this plan."
+        },
+        "legacyOfferId": {
+          "type": "string",
+          "description": "Azure marketplace Legacy Offer ID for this plan. This is used to fetch the details of the plan from the Azure marketplace."
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Azure marketplace Publisher ID for this plan."
+        },
+        "planId": {
+          "type": "string",
+          "description": "Azure marketplace Plan ID for this plan."
+        },
+        "termId": {
+          "type": "string",
+          "description": "Azure marketplace Term ID for this plan."
         }
       }
     },
@@ -687,6 +1179,95 @@
             "update",
             "create"
           ]
+        }
+      }
+    },
+    "OperatorApiPlan": {
+      "type": "object",
+      "description": "A Programmable Connectivity Operator API Plans resource. This is a readonly resource that indicates which Operator Network APIs are available in the user's subscription.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OperatorApiPlanProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OperatorApiPlanListResult": {
+      "type": "object",
+      "description": "The response of a OperatorApiPlan list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OperatorApiPlan items on this page",
+          "items": {
+            "$ref": "#/definitions/OperatorApiPlan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperatorApiPlanProperties": {
+      "type": "object",
+      "description": "Operator API Plan properties.",
+      "properties": {
+        "operatorName": {
+          "type": "string",
+          "description": "Name of the Operator this plan belongs to."
+        },
+        "camaraApiName": {
+          "type": "string",
+          "description": "Standardized Network API name defined by CAMARA specifications."
+        },
+        "supportedLocations": {
+          "type": "array",
+          "description": "List of Azure regions where this offer is supported.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operatorRegions": {
+          "type": "array",
+          "description": "List of country/region names where this plan is being supported by the Operator.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "markets": {
+          "type": "array",
+          "description": "List of country/region names where this plan is being supported by Azure Marketplace.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limits": {
+          "type": "string",
+          "description": "The limits, if any, will be imposed by the operator."
+        },
+        "marketplaceProperties": {
+          "$ref": "#/definitions/MarketplaceProperties",
+          "description": "Azure marketplace properties for this plan."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation on the Gateway resource.",
+          "readOnly": true
         }
       }
     },

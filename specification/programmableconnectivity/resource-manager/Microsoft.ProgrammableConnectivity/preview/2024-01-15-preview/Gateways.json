@@ -3,7 +3,12 @@
   "info": {
     "title": "ProgrammableConnectivity",
     "version": "2024-01-15-preview",
-    "description": "Azure Programmable Connectivity Provider management API."
+    "description": "Azure Programmable Connectivity Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
   "schemes": [
     "https"
@@ -35,10 +40,49 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "Gateways"
     }
   ],
   "paths": {
+    "/providers/Microsoft.ProgrammableConnectivity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/gateways": {
       "get": {
         "operationId": "Gateways_ListBySubscription",
@@ -56,25 +100,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Gateway' list operation on subscription ID succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GatewayListResult"
             }
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Gateways_ListBySubscription_MaximumSet_Gen": {
+          "Gateways_ListBySubscription": {
             "$ref": "./examples/Gateways_ListBySubscription_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -98,25 +142,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Gateway' list operation on resource group succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GatewayListResult"
             }
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Gateways_ListByResourceGroup_MaximumSet_Gen": {
+          "Gateways_ListByResourceGroup": {
             "$ref": "./examples/Gateways_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -138,25 +182,30 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/GatewayName"
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Gateway' get by name operation succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Gateway"
             }
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Gateways_Get_MaximumSet_Gen": {
+          "Gateways_Get": {
             "$ref": "./examples/Gateways_Get_MaximumSet_Gen.json"
           }
         }
@@ -178,12 +227,17 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/GatewayName"
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
-            "description": "Gateway resource create parameters.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Gateway"
@@ -192,13 +246,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Gateway' update operation succeeded.",
+            "description": "Resource 'Gateway' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Gateway"
             }
           },
           "201": {
-            "description": "Resource 'Gateway' create operation succeeded.",
+            "description": "Resource 'Gateway' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Gateway"
             },
@@ -211,88 +265,21 @@
             }
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_CreateOrUpdate": {
+            "$ref": "./examples/Gateways_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Gateways_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Gateways_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Gateways_Update",
-        "tags": [
-          "Gateways"
-        ],
-        "description": "Update a Gateway.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/GatewayName"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Updatable properties for a Gateway resource.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GatewayUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'Gateway' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Gateway"
-            }
-          },
-          "202": {
-            "description": "Resource 'Gateway' update operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "Gateway error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Gateways_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Gateways_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Gateways_Delete",
@@ -311,12 +298,17 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/GatewayName"
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
           "202": {
-            "description": "Resource 'Gateway' delete operation succeeded.",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -330,27 +322,24 @@
             }
           },
           "204": {
-            "description": "Resource 'Gateway' delete operation succeeded."
+            "description": "Resource deleted successfully."
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
+        "x-ms-examples": {
+          "Gateways_Delete": {
+            "$ref": "./examples/Gateways_Delete_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Gateways_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Gateways_Delete_MaximumSet_Gen.json"
-          },
-          "Gateways_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Gateways_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -359,16 +348,9 @@
       "type": "object",
       "description": "A Programmable Connectivity Gateway resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/GatewayProperties",
-          "description": "Properties for the Gateway resource.",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read",
@@ -411,7 +393,16 @@
           "type": "array",
           "description": "List of Operator API Connections selected by the user",
           "items": {
-            "$ref": "./common.json#/definitions/OperatorApiConnectionResourceId"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an ARM resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ProgrammableConnectivity/operatorApiConnections"
+                }
+              ]
+            }
           },
           "readOnly": true
         },
@@ -421,7 +412,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation on the Gateway resource.",
           "readOnly": true
         }
@@ -440,19 +431,84 @@
         },
         "properties": {
           "$ref": "#/definitions/GatewayProperties",
+          "description": "Gateway resource properties",
           "x-ms-client-flatten": true
         }
       }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create or update request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-01-15-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_01_15_preview",
+            "value": "2024-01-15-preview",
+            "description": "The 2024-01-15-preview API version."
+          }
+        ]
+      }
     }
   },
-  "parameters": {
-    "GatewayName": {
-      "name": "gatewayName",
-      "in": "path",
-      "description": "Azure Programmable Connectivity Gateway Name",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
-    }
-  }
+  "parameters": {}
 }
