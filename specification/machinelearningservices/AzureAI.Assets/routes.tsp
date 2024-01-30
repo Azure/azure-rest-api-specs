@@ -82,8 +82,8 @@ interface IndexVersionsRegistries {
        @doc("View type for including/excluding (for example) archived entities.")
        @query listViewType: string = "ActiveOnly";
        
-       @doc("Label query parameter, for example, latest.")
-       @query label: string;
+       @doc("Ordering of list.")
+       @query orderBy: string;
 
        ...StandardListQueryParameters
      },
@@ -158,8 +158,8 @@ interface IndexVersionsWorkspace {
        @doc("View type for including/excluding (for example) archived entities.")
        @query listViewType: string = "ActiveOnly";
        
-       @doc("Label query parameter, for example, latest.")
-       @query label: string;
+       @doc("Ordering of list.")
+       @query orderBy: string;
 
        ...StandardListQueryParameters
      },
