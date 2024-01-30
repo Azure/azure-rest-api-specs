@@ -53,7 +53,7 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: This is coming for wrong reason, just inheriting from JobBase.
     where:
-      - $.definitions["FineTuningJob"].allOf[0]["allOf"][0].properties["services"]
+      - $.definitions["FineTuningJob"].allOf[0]["allOf"][0].properties["properties"]
       - $.definitions["FineTuningJob"].allOf[0].properties["notificationSetting"].properties["webhooks"]
       - $.definitions["FineTuningJob"].allOf[0].properties["secretsConfiguration"]
       - $.definitions["FineTuningJob"].allOf[0].properties["services"]
