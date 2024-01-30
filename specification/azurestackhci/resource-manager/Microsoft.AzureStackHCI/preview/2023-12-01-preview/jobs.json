@@ -331,38 +331,6 @@
       ],
       "x-ms-discriminator-value": "AddServer"
     },
-    "ClusterProperties": {
-      "type": "object",
-      "description": "A ClusterProperties"
-    },
-    "Clusters": {
-      "type": "object",
-      "description": "A Cluster",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ClusterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of Cluster",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
     "EceActionStatus": {
       "type": "object",
       "description": "The ECE action plan deployment status for AzureStackHCI Cluster.",
