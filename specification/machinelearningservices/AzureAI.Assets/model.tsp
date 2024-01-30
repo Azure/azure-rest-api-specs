@@ -15,19 +15,12 @@ namespace Microsoft.MachineLearningServices;
 
 
 @doc("Index asset definition.")
-// todo modeling for container...
 @resource("indexes")
-model Index {
+model Index is Container {
   @key("name")
   @doc("Name of the index.")
   @visibility("external")
   name: string;
-
-  @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
-  indexVersion: string;
-
-  @doc("Index version definition.")
-  indexVersionDefinition: IndexVersion
 }
 
 

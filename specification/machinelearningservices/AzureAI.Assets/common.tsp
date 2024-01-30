@@ -76,3 +76,25 @@ enum AssetCapabilityType {
   @doc("Uri denotes a file.")
   UriFile
 }
+
+@doc("Asset container common definition.")
+model Container {
+
+  @doc("The asset description text.")
+  description?: string;
+
+  @doc("Is the asset archived?")
+  isArchived: boolean;
+
+  @doc("Latest version inside the container.")
+  latestVersion: string;
+
+  @doc("The next auto incremental version.")
+  nextVersion: string;
+
+  @doc("Asset's properties.")
+  properties?: Record<string>;
+
+  @doc("Asset's tags.")
+  tags?: Record<string>;
+}
