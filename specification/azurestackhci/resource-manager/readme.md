@@ -24,6 +24,9 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the azurestackhci.
 
+Please specify both the latest Cluster and ArcVM files under the package-preview tag that is listed below (even if they are not a part of the same preview api-version). Not including both will result in docs missing from learn.
+
+
 ``` yaml
 title: AzureStackHCIClient
 description: Azure Stack HCI management service
@@ -98,6 +101,14 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateRuns.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/logicalNetworks.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualMachineInstances.json
 ```
 ### Tag: package-preview-2023-09
 
