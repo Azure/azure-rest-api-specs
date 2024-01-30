@@ -1858,6 +1858,10 @@ format is bytes=startRange-endRange.
         `ocp-range`?: string;
       },
     FileResponseHeders & {
+      @doc("Type of content")
+      @header("content-type")
+      contentType: "application/octet-stream";
+
       @body
       @doc("A response containing the file content.")
       file: bytes;
