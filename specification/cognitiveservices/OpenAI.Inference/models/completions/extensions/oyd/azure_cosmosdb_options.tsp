@@ -51,7 +51,7 @@ model AzureCosmosDBChatExtensionParameters {
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
   @projectedName("csharp", "FieldMappingOptions")
-  @projectedName("json", "field_mapping")
+  @projectedName("json", "fields_mapping")
   fieldsMapping: AzureCosmosDBFieldMappingOptions;
 
   @doc("The embedding dependency for vector search.")

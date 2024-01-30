@@ -37,7 +37,7 @@ model ElasticsearchChatExtensionParameters {
 
   @doc("The index field mapping options of Elasticsearch®.")
   @projectedName("csharp", "FieldMappingOptions")
-  @projectedName("json", "field_mapping")
+  @projectedName("json", "fields_mapping")
   fieldsMapping?: ElasticsearchIndexFieldMappingOptions;
 
   @doc("The query type of Elasticsearch®.")

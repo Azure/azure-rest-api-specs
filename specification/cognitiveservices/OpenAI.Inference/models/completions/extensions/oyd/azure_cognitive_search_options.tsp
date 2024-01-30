@@ -39,7 +39,7 @@ model AzureSearchChatExtensionParameters {
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
   @projectedName("csharp", "FieldMappingOptions")
-  @projectedName("json", "field_mapping")
+  @projectedName("json", "fields_mapping")
   fieldsMapping?: AzureSearchIndexFieldMappingOptions;
 
   @doc("The query type to use with Azure Cognitive Search.")
