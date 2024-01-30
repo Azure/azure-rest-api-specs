@@ -1416,7 +1416,7 @@
           "Get an NSP config by name": {
             "$ref": "./examples/NetworkSecurityPerimeterConfigurationsGet.json"
           }
-        }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1428,7 +1428,11 @@
             "name": "nspConfigName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$",
+            "minLength": 38,
+            "maxLength": 100,
+            "description": "The network security configuration name."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1471,7 +1475,11 @@
             "name": "nspConfigName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$",
+            "minLength": 38,
+            "maxLength": 100,
+            "description": "The network security configuration name."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1482,7 +1490,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Reconcile NSP Configuration operation accepted"
+            "description": "Reconcile NSP Configuration operation accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error occurred during the operation.",
@@ -2985,7 +2998,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -3020,7 +3033,8 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "networkSecurityPerimeter": {
           "$ref": "#/definitions/NSPConfigPerimeter"
@@ -3049,7 +3063,8 @@
         "properties": {
           "$ref": "#/definitions/NSPConfigAccessRuleProperties"
         }
-      }
+      },
+      "description": "An access rule for a network security perimeter configuration."
     },
     "NSPConfigAccessRuleProperties": {
       "type": "object",
@@ -3081,7 +3096,8 @@
             "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
           }
         }
-      }
+      },
+      "description": "The properties for the access rules in a network security perimeter configuration."
     },
     "NSPConfigAssociation": {
       "type": "object",
@@ -3092,7 +3108,8 @@
         "accessMode": {
           "type": "string"
         }
-      }
+      },
+      "description": "The resource association for the network security perimeter."
     },
     "NSPConfigNetworkSecurityPerimeterRule": {
       "type": "object",
@@ -3104,9 +3121,11 @@
           "type": "string"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [ "create", "read" ]
         }
-      }
+      },
+      "description": "The network security perimeter properties present in a configuration rule."
     },
     "NSPConfigPerimeter": {
       "type": "object",
@@ -3118,9 +3137,11 @@
           "type": "string"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [ "create", "read" ]
         }
-      }
+      },
+      "description": "The perimeter for a network security perimeter configuration."
     },
     "NSPConfigProfile": {
       "type": "object",
@@ -3138,7 +3159,8 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "description": "The profile for a network security perimeter configuration."
     },
     "NSPProvisioningIssue": {
       "type": "object",
@@ -3148,7 +3170,8 @@
         },
         "properties": {
           "$ref": "#/definitions/NSPProvisioningIssueProperties"
-        }
+        },
+        "description": "An object to describe any issues with provisioning network security perimeters to a search service."
       }
     },
     "NSPProvisioningIssueProperties": {
@@ -3175,7 +3198,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
     }
   },
   "parameters": {
