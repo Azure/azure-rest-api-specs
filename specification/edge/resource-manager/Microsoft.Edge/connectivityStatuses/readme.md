@@ -27,8 +27,18 @@ These are the global settings for the edge.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: connectivityStatuses-package-2023-07-01-preview
+tag: connectivityStatuses-package-2024-02-01-preview
 ```
+
+### Tag: connectivityStatuses-package-2024-02-01-preview
+
+These settings apply only when `--tag=connectivityStatuses-package-2024-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'connectivityStatuses-package-2024-02-01-preview'
+input-file:
+  - preview/2024-02-01-preview/connectivityStatuses.json
+```
+---
 
 ### Tag: connectivityStatuses-package-2023-07-01-preview
 
