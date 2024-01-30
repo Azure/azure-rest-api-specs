@@ -14,7 +14,6 @@ namespace Microsoft.ProgrammableConnectivity;
 /**
  * A Programmable Connectivity Operator API Plans resource. This is a readonly resource that indicates which Operator Network APIs are available in the user's subscription.
  */
-@includeInapplicableMetadataInPayload(false)
 @subscriptionResource
 model OperatorApiPlan is ProxyResource<OperatorApiPlanProperties> {
   /**
