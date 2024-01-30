@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @added(ServiceApiVersions.v2023_12_01_Preview)
 @doc("""
-A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
+A specific representation of configurable options for Pinecone when using it as an Azure OpenAI chat
 extension.
 """)
 model PineconeChatExtensionConfiguration
@@ -26,7 +26,7 @@ model PineconeChatExtensionConfiguration
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("Parameters for configuring Azure OpenAI Pinecone chat extensions.")
+@doc("Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is APIKey.")
 model PineconeChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
@@ -42,7 +42,7 @@ model PineconeChatExtensionParameters {
   fieldsMapping: PineconeFieldMappingOptions;
 
   @doc("The embedding dependency for vector search.")
-  embeddingDependency?: OnYourDataVectorizationSource;
+  embeddingDependency: OnYourDataVectorizationSource;
 }
 
 @doc("Optional settings to control how fields are processed when using a configured Pinecone resource.")
@@ -62,18 +62,9 @@ model PineconeFieldMappingOptions {
 
   @doc("The names of index fields that should be treated as content.")
   @projectedName("csharp", "ContentFieldNames")
-  contentFields?: string[];
+  contentFields: string[];
 
   @doc("The separator pattern that content fields should use.")
   @projectedName("csharp", "ContentFieldSeparator")
   contentFieldsSeparator?: string;
-
-  @doc("The names of fields that represent vector data.")
-  @projectedName("csharp", "VectorFieldNames")
-  vectorFields?: string[];
-
-  @added(ServiceApiVersions.v2023_12_01_Preview)
-  @doc("The names of fields that represent image vector data.")
-  @projectedName("csharp", "ImageVectorFieldNames")
-  imageVectorFields?: string[];
 }
