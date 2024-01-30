@@ -82,7 +82,7 @@ model OperatorApiConnectionProperties {
   /**
    * Application secret linked to the 'appId'. This should be stored securely and is not returned back when the resource information is read.
    */
-  @visibility("create")
+  @visibility("create", "update")
   @secret
   appSecret?: string;
 
