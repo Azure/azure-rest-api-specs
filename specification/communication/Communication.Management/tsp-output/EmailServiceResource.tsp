@@ -99,9 +99,9 @@ interface EmailServiceResources {
   /**
    * Get a list of domains that are fully verified in Exchange Online.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("EmailServices_ListVerifiedExchangeOnlineDomains")
-  listVerifiedExchangeOnlineDomains is ArmListBySubscription<EmailServiceResource>;
+  // #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  // @operationId("EmailServices_ListVerifiedExchangeOnlineDomains")
+  // listVerifiedExchangeOnlineDomains is ArmListBySubscription<EmailServiceResource>;
 }
 
 @@projectedName(EmailServiceResources.createOrUpdate::parameters.resource,
