@@ -2344,10 +2344,18 @@
       ],
       "properties": {
         "name": {
-          "type": "string"
+          "$ref": "#/definitions/PrebuildIndexFieldName"
         }
       },
       "x-ms-discriminator-value": "prebuild"
+    },
+    "PrebuildIndexFieldName":{
+      "type": "string",
+      "enum": [
+        "url",
+        "title",
+        "permitted_ids"
+      ]
     },
     "IngestionJobCompletionAction": {
       "title": "IngestionJobCompletionAction",
