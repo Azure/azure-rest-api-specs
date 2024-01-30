@@ -42,7 +42,7 @@ perform-load: false
 These settings apply only when `--tag=package-2024-02-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2023-08-preview' && $(python)
+``` yaml $(tag) == 'package-2024-02-preview' && $(python)
 namespace: azure.mgmt.containerservicefleet.v2024_02_02_preview
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservicefleet/azure/mgmt/containerservicefleet/v2024_02_02_preview
 ```
