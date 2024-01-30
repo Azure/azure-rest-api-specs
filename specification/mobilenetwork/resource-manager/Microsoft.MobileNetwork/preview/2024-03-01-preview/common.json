@@ -214,6 +214,21 @@
       "description": "Reference to an Azure Stack HCI cluster resource.",
       "x-ms-azure-resource": true
     },
+    "NexusEdgeClusterResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[nN][eE][tT][wW][oO][rR][kK][cC][lL][oO][uU][dD]/[eE][dD][gG][eE][cC][lL][uU][sS][tT][eE][rR][sS]/[^/?#]+$",
+          "description": "Nexus edge cluster resource Id."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a Nexus edge cluster resource.",
+      "x-ms-azure-resource": true
+    },
     "ConnectedClusterResourceId": {
       "type": "object",
       "properties": {
@@ -242,6 +257,51 @@
         "id"
       ],
       "description": "Reference to an Azure Arc custom location resource.",
+      "x-ms-azure-resource": true
+    },
+    "NexusCloudServicesNetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[nN][eE][tT][wW][oO][rR][kK][cC][lL][oO][uU][dD]/[cC][lL][oO][uU][dD][sS][eE][rR][vV][iI][cC][eE][sS][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+          "description": "Nexus cloud services network resource Id."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a Nexus cloud services network resource.",
+      "x-ms-azure-resource": true
+    },
+    "NexusL3NetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[nN][eE][tT][wW][oO][rR][kK][cC][lL][oO][uU][dD]/[lL][3][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+          "description": "Nexus L3 network resource Id."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a Nexus L3 network resource.",
+      "x-ms-azure-resource": true
+    },
+    "NexusTrunkedNetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[nN][eE][tT][wW][oO][rR][kK][cC][lL][oO][uU][dD]/[tT][rR][uU][nN][kK][eE][dD][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+          "description": "Nexus trunked network resource Id."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a Nexus trunked network resource.",
       "x-ms-azure-resource": true
     },
     "AsyncOperationId": {
@@ -476,6 +536,13 @@
         "ipv4Gateway": {
           "$ref": "./ts29571.json#/definitions/Ipv4Addr",
           "description": "The default IPv4 gateway (router)."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 4094,
+          "description": "VLAN identifier of the network interface. Example: 501."
         }
       },
       "description": "Interface properties"
