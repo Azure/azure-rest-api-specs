@@ -52,8 +52,3 @@ enum ProvisioningState {
    */
   Accepted,
 }
-
-
-
-
-

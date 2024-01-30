@@ -18,8 +18,8 @@ namespace Microsoft.ProgrammableConnectivity;
 //#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 //#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 //@includeInapplicableMetadataInPayload(false)
-
-model OperatorApiConnection is TrackedResource<OperatorApiConnectionProperties> {
+model OperatorApiConnection
+  is TrackedResource<OperatorApiConnectionProperties> {
   /**
    * Azure Programmable Connectivity (APC) Operator API Connection Name.
    */
@@ -110,7 +110,6 @@ model OperatorApiConnectionProperties {
   @visibility("read")
   status?: Status;
 }
-
 
 /**
  * The Account Type of the Operator API Connections.
@@ -245,7 +244,6 @@ model Status {
 //   ]>;
 //   }
 // }
-
 @armResourceOperations
 interface OperatorApiConnections {
   /**
@@ -261,7 +259,10 @@ interface OperatorApiConnections {
   /**
    * Update an Operator API Connection.
    */
-  update is ArmResourcePatchAsync<OperatorApiConnection, OperatorApiConnectionProperties>;
+  update is ArmResourcePatchAsync<
+    OperatorApiConnection,
+    OperatorApiConnectionProperties
+  >;
 
   /**
    * Delete an Operator API Connection.
