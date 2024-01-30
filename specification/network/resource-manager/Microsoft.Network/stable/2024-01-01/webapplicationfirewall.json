@@ -899,8 +899,20 @@
         "selectorMatchOperator",
         "selector"
       ],
-      "description": "Allow to exclude some variable satisfy the condition for the WAF check.",
+      "description": "Allows exclusion of a variable or the whole request from WAF check when the exclusion condition is satisfied.",
       "properties": {
+        "exclude": {
+          "type": "string",
+          "enum": [
+            "MatchVariable",
+            "Request"
+          ],
+          "description": "Exclusion type that determines if only a variable is to be excluded or the whole request",
+          "x-ms-enum": {
+            "name": "OwaspCrsExclusionEntryExclude",
+            "modelAsString": true
+          }
+        },
         "matchVariable": {
           "type": "string",
           "enum": [
@@ -912,9 +924,12 @@
             "RequestCookieKeys",
             "RequestCookieValues",
             "RequestArgKeys",
-            "RequestArgValues"
+            "RequestArgValues",
+            "RequestURI",
+            "RemoteAddr",
+            "RequestHeader"
           ],
-          "description": "The variable to be excluded.",
+          "description": "The variable on which we evaluate the exclusion condition",
           "x-ms-enum": {
             "name": "OwaspCrsExclusionEntryMatchVariable",
             "modelAsString": true
@@ -938,6 +953,27 @@
         "selector": {
           "type": "string",
           "description": "When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed values for request exclusion"
+        },
+        "valueMatchOperator ": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith"
+          ],
+          "x-ms-enum": {
+            "name": "OwaspCrsExclusionEntryValueMatchOperator",
+            "modelAsString": true
+          },
+          "description": "Operates on the allowed values for request exclusion"
         },
         "exclusionManagedRuleSets": {
           "type": "array",

@@ -111,6 +111,59 @@
               "matchVariable": "RequestArgValues",
               "selectorMatchOperator": "StartsWith",
               "selector": "test"
+            },
+            {
+              "exclude": "Request",
+              "matchVariable": "RequestURI",
+              "valueMatchOperator": "Contains",
+              "values": ["path1", "path2", "path3"],
+              "exclusionManagedRuleSets": [
+                {
+                  "ruleSetType": "OWASP",
+                  "ruleSetVersion": "3.2"
+                }
+              ]
+            },
+            {
+              "exclude": "Request",
+              "matchVariable": "RequestHeader",
+              "selectorMatchOperator": "StartsWith",
+              "selector": "test",
+              "valueMatchOperator": "Contains",
+              "values": ["val1", "val2", "val3"],
+              "exclusionManagedRuleSets": [
+                {
+                  "ruleSetType": "OWASP",
+                  "ruleSetVersion": "3.2",
+                  "ruleGroups": [
+                    {
+                      "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "exclude": "Request",
+              "matchVariable": "RemoteAddr",
+              "values": ["1.2.3.4", "10.0.0.1/6"],
+              "exclusionManagedRuleSets": [
+                {
+                  "ruleSetType": "Microsoft_BotManagerRuleSet",
+                  "ruleSetVersion": "1.0",
+                  "ruleGroups": [
+                    {
+                      "ruleGroupName": "BadBots",
+                      "rules": [
+                        {
+                          "ruleId": "100100"
+                        }
+                      ]
+                    }
+                  ]
+
+                }
+              ]
             }
           ]
         },
@@ -365,6 +418,59 @@
                 "matchVariable": "RequestArgValues",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
+              },
+              {
+                "exclude": "Request",
+                "matchVariable": "RequestURI",
+                "valueMatchOperator": "Contains",
+                "values": ["path1", "path2", "path3"],
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2"
+                  }
+                ]
+              },
+              {
+                "exclude": "Request",
+                "matchVariable": "RequestHeader",
+                "selectorMatchOperator": "StartsWith",
+                "selector": "test",
+                "valueMatchOperator": "Contains",
+                "values": ["val1", "val2", "val3"],
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "exclude": "Request",
+                "matchVariable": "RemoteAddr",
+                "values": ["1.2.3.4", "10.0.0.1/6"],
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "Microsoft_BotManagerRuleSet",
+                    "ruleSetVersion": "1.0",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "BadBots",
+                        "rules": [
+                          {
+                            "ruleId": "100100"
+                          }
+                        ]
+                      }
+                    ]
+
+                  }
+                ]
               }
             ]
           },
@@ -611,6 +717,59 @@
                 "matchVariable": "RequestArgValues",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
+              },
+              {
+                "exclude": "Request",
+                "matchVariable": "RequestURI",
+                "valueMatchOperator": "Contains",
+                "values": ["path1", "path2", "path3"],
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2"
+                  }
+                ]
+              },
+              {
+                "exclude": "Request",
+                "matchVariable": "RequestHeader",
+                "selectorMatchOperator": "StartsWith",
+                "selector": "test",
+                "valueMatchOperator": "Contains",
+                "values": ["val1", "val2", "val3"],
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "exclude": "Request",
+                "matchVariable": "RemoteAddr",
+                "values": ["1.2.3.4", "10.0.0.1/6"],
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "Microsoft_BotManagerRuleSet",
+                    "ruleSetVersion": "1.0",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "BadBots",
+                        "rules": [
+                          {
+                            "ruleId": "100100"
+                          }
+                        ]
+                      }
+                    ]
+
+                  }
+                ]
               }
             ]
           },
