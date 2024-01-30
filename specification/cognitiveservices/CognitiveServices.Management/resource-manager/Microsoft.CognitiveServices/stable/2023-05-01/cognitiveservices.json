@@ -1,0 +1,4721 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CognitiveServicesManagementClient",
+    "version": "2023-05-01",
+    "description": "Cognitive Services Management Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Accounts"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "Deployments"
+    },
+    {
+      "name": "CommitmentPlans"
+    },
+    {
+      "name": "CommitmentPlanAccountAssociations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.CognitiveServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/accounts": {
+      "get": {
+        "operationId": "Accounts_List",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Accounts by Subscription": {
+            "$ref": "./examples/Accounts_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/checkDomainAvailability": {
+      "post": {
+        "operationId": "CheckDomainAvailability",
+        "description": "Check whether a domain is available.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Check Domain Availability parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckDomainAvailabilityParameter"
+            },
+            "x-ms-client-flatten": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DomainAvailability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/commitmentPlans": {
+      "get": {
+        "operationId": "CommitmentPlansOperations_ListPlansBySubscription",
+        "description": "Returns all the resources of a particular type belonging to a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/deletedAccounts": {
+      "get": {
+        "operationId": "DeletedAccountsOperations_List",
+        "description": "Returns all the resources of a particular type belonging to a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/checkSkuAvailability": {
+      "post": {
+        "operationId": "CheckSkuAvailability",
+        "description": "Check available SKUs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Resource location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Check SKU Availability POST body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckSkuAvailabilityParameter"
+            },
+            "x-ms-client-flatten": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SkuAvailabilityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/commitmentTiers": {
+      "get": {
+        "operationId": "CommitmentTiersOperations_List",
+        "description": "List Commitment Tiers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Resource location.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedCommitmentTier"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/models": {
+      "get": {
+        "operationId": "ModelsOperations_List",
+        "description": "List Models.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Resource location.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/resourceGroups/{resourceGroupName}/deletedAccounts/{accountName}": {
+      "get": {
+        "operationId": "DeletedAccountsOperations_Get",
+        "description": "Returns a Cognitive Services account specified by the parameters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Resource location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeletedAccountsOperations_Purge",
+        "description": "Deletes a Cognitive Services account from the resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Resource location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/usages": {
+      "get": {
+        "operationId": "UsagesOperations_List",
+        "description": "Get usages for the requested subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Resource location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/skus": {
+      "get": {
+        "operationId": "ResourceSkusOperations_List",
+        "description": "Gets the list of Microsoft.CognitiveServices SKUs available for your Subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedResourceSku"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accountAssociations": {
+      "get": {
+        "operationId": "CommitmentPlans_ListAssociations",
+        "tags": [
+          "CommitmentPlanAccountAssociations"
+        ],
+        "description": "Gets the associations of the Cognitive Services commitment plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanAccountAssociationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListCommitmentPlans": {
+            "$ref": "./examples/CommitmentPlans_ListAssociations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accountAssociations/{commitmentPlanAssociationName}": {
+      "get": {
+        "operationId": "CommitmentPlans_GetAssociation",
+        "tags": [
+          "CommitmentPlanAccountAssociations"
+        ],
+        "description": "Gets the association of the Cognitive Services commitment plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "commitmentPlanAssociationName",
+            "in": "path",
+            "description": "The name of the commitment plan association with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanAccountAssociation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCommitmentPlan": {
+            "$ref": "./examples/CommitmentPlans_GetAssociation.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CommitmentPlans_CreateOrUpdateAssociation",
+        "tags": [
+          "CommitmentPlanAccountAssociations"
+        ],
+        "description": "Create or update the association of the Cognitive Services commitment plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "commitmentPlanAssociationName",
+            "in": "path",
+            "description": "The name of the commitment plan association with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "association",
+            "in": "body",
+            "description": "The commitmentPlan properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanAccountAssociation"
+            },
+            "x-ms-client-name": "association"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CommitmentPlanAccountAssociation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanAccountAssociation"
+            }
+          },
+          "201": {
+            "description": "Resource 'CommitmentPlanAccountAssociation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanAccountAssociation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutCommitmentPlan": {
+            "$ref": "./examples/CommitmentPlans_CreateOrUpdateAssociation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CommitmentPlans_DeleteAssociation",
+        "tags": [
+          "CommitmentPlanAccountAssociations"
+        ],
+        "description": "Deletes the association of the Cognitive Services commitment plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "commitmentPlanAssociationName",
+            "in": "path",
+            "description": "The name of the commitment plan association with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCommitmentPlan": {
+            "$ref": "./examples/CommitmentPlans_DeleteAssociation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts": {
+      "get": {
+        "operationId": "Accounts_ListByResourceGroup",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Accounts by Resource Group": {
+            "$ref": "./examples/Accounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}": {
+      "get": {
+        "operationId": "Accounts_Get",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Returns a Cognitive Services account specified by the parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Account": {
+            "$ref": "./examples/Accounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Accounts_Create",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Create Cognitive Services Account. Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "description": "The parameters to provide for the created account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            },
+            "x-ms-client-name": "account"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Account' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "201": {
+            "description": "Resource 'Account' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Account": {
+            "$ref": "./examples/Accounts_Create_Create_Account.json"
+          },
+          "Create Account Min": {
+            "$ref": "./examples/Accounts_Create_Create_Account_Min.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Accounts_Delete",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Deletes a Cognitive Services account from the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Account": {
+            "$ref": "./examples/Accounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/accounts/{name}": {
+      "patch": {
+        "operationId": "Accounts_Update",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Updates a Cognitive Services account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "description": "The parameters to provide for the created account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            },
+            "x-ms-client-name": "account"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Account": {
+            "$ref": "./examples/Accounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans": {
+      "get": {
+        "operationId": "CommitmentPlans_List",
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "description": "Gets the commitmentPlans associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListCommitmentPlans": {
+            "$ref": "./examples/CommitmentPlans_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans/{commitmentPlanName}": {
+      "get": {
+        "operationId": "CommitmentPlans_Get",
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "description": "Gets the specified commitmentPlans associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "commitmentPlanName",
+            "in": "path",
+            "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCommitmentPlan": {
+            "$ref": "./examples/CommitmentPlans_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CommitmentPlans_CreateOrUpdate",
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "description": "Update the state of specified commitmentPlans associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "commitmentPlanName",
+            "in": "path",
+            "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "commitmentPlan",
+            "in": "body",
+            "description": "The commitmentPlan properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            },
+            "x-ms-client-name": "commitmentPlan"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CommitmentPlan' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "201": {
+            "description": "Resource 'CommitmentPlan' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutCommitmentPlan": {
+            "$ref": "./examples/CommitmentPlans_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CommitmentPlans_Delete",
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "description": "Deletes the specified commitmentPlan associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "commitmentPlanName",
+            "in": "path",
+            "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCommitmentPlan": {
+            "$ref": "./examples/CommitmentPlans_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/deployments": {
+      "get": {
+        "operationId": "Deployments_List",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Gets the deployments associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListDeployments": {
+            "$ref": "./examples/Deployments_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/deployments/{deploymentName}": {
+      "get": {
+        "operationId": "Deployments_Get",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Gets the specified deployments associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDeployment": {
+            "$ref": "./examples/Deployments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Deployments_CreateOrUpdate",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Update the state of specified deployments associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deployment",
+            "in": "body",
+            "description": "The deployment properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "x-ms-client-name": "deployment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Deployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "201": {
+            "description": "Resource 'Deployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutDeployment": {
+            "$ref": "./examples/Deployments_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Deployments_Delete",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Deletes the specified deployment associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteDeployment": {
+            "$ref": "./examples/Deployments_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/listKeys": {
+      "post": {
+        "operationId": "Accounts_ListKeys",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Lists the account keys for the specified Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApiKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Keys": {
+            "$ref": "./examples/Accounts_ListKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/models/{resourceGroupName}/{accountName}/{subscriptionId}": {
+      "get": {
+        "operationId": "Accounts_ListModels",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "List available Models for the requested Cognitive Services account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAccountModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AccountModels": {
+            "$ref": "./examples/Accounts_ListModels.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_List",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets the private endpoint connections associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnections_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets the specified private endpoint connection associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes the specified private endpoint connection associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletePrivateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/regenerateKey": {
+      "post": {
+        "operationId": "Accounts_RegenerateKey",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Regenerates the specified account key for the specified Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "regenerate key parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyParameters"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApiKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Regenerate Keys": {
+            "$ref": "./examples/Accounts_RegenerateKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus/{resourceGroupName}/{accountName}/{subscriptionId}": {
+      "get": {
+        "operationId": "Accounts_ListSkus",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "List available SKUs for the requested Cognitive Services account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccountSkuListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SKUs": {
+            "$ref": "./examples/Accounts_ListSkus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/usages/{resourceGroupName}/{accountName}/{subscriptionId}": {
+      "get": {
+        "operationId": "Accounts_ListUsages",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get usages for the requested Cognitive Services account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Usages": {
+            "$ref": "./examples/Accounts_ListUsages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/commitmentPlans": {
+      "get": {
+        "operationId": "CommitmentPlansOperations_ListPlansByResourceGroup",
+        "description": "Returns all the resources of a particular type belonging to a resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/commitmentPlans/{commitmentPlanName}": {
+      "get": {
+        "operationId": "CommitmentPlansOperations_GetPlan",
+        "description": "Returns a Cognitive Services commitment plan specified by the parameters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "commitmentPlanName",
+            "in": "path",
+            "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "CommitmentPlansOperations_CreateOrUpdatePlan",
+        "description": "Create Cognitive Services commitment plan.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "commitmentPlanName",
+            "in": "path",
+            "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "commitmentPlan",
+            "in": "body",
+            "description": "The parameters to provide for the created commitment plan.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CommitmentPlansOperations_UpdatePlan",
+        "description": "Create Cognitive Services commitment plan.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "commitmentPlanName",
+            "in": "path",
+            "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "commitmentPlan",
+            "in": "body",
+            "description": "The parameters to provide for the created commitment plan.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchResourceTagsAndSkuUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CommitmentPlansOperations_DeletePlan",
+        "description": "Deletes a Cognitive Services commitment plan from the resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "commitmentPlanName",
+            "in": "path",
+            "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AbusePenalty": {
+      "type": "object",
+      "description": "The abuse penalty.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/AbusePenaltyAction",
+          "description": "The action of AbusePenalty."
+        },
+        "rateLimitPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "The percentage of rate limit."
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of expiration of the AbusePenalty."
+        }
+      }
+    },
+    "AbusePenaltyAction": {
+      "type": "string",
+      "description": "The action of AbusePenalty.",
+      "enum": [
+        "Throttle",
+        "Block"
+      ],
+      "x-ms-enum": {
+        "name": "AbusePenaltyAction",
+        "modelAsString": true
+      }
+    },
+    "Account": {
+      "type": "object",
+      "description": "Cognitive Services account is an Azure resource representing the provisioned account, it's type, location and SKU.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "Properties of Cognitive Services account.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AccountListResult": {
+      "type": "object",
+      "description": "The response of a Account list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Account items on this page",
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AccountModel": {
+      "type": "object",
+      "description": "Cognitive Services account Model.",
+      "properties": {
+        "baseModel": {
+          "$ref": "#/definitions/DeploymentModel",
+          "description": "Base Model Identifier."
+        },
+        "isDefaultVersion": {
+          "type": "boolean",
+          "description": "If the model is default version."
+        },
+        "skus": {
+          "type": "array",
+          "description": "The list of Model Sku.",
+          "items": {
+            "$ref": "#/definitions/ModelSku"
+          },
+          "x-ms-identifiers": []
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max capacity."
+        },
+        "capabilities": {
+          "type": "object",
+          "description": "The capabilities.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "finetuneCapabilities": {
+          "type": "object",
+          "description": "The capabilities for finetune models.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "deprecation": {
+          "$ref": "#/definitions/ModelDeprecationInfo",
+          "description": "Cognitive Services account ModelDeprecationInfo."
+        },
+        "lifecycleStatus": {
+          "$ref": "#/definitions/ModelLifecycleStatus",
+          "description": "Model lifecycle status."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentModel"
+        }
+      ]
+    },
+    "AccountProperties": {
+      "type": "object",
+      "description": "Properties of Cognitive Services account.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets the status of the cognitive services account at the time the operation was called.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint of the created account.",
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only.",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "isMigrated": {
+          "type": "boolean",
+          "description": "If the resource is migrated from an existing key.",
+          "readOnly": true
+        },
+        "migrationToken": {
+          "type": "string",
+          "description": "Resource migration token."
+        },
+        "skuChangeInfo": {
+          "$ref": "#/definitions/SkuChangeInfo",
+          "description": "Sku change info of account.",
+          "readOnly": true
+        },
+        "customSubDomainName": {
+          "type": "string",
+          "description": "Optional subdomain name used for token-based authentication."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "The encryption properties for this resource."
+        },
+        "userOwnedStorage": {
+          "type": "array",
+          "description": "The storage accounts for this resource.",
+          "items": {
+            "$ref": "#/definitions/UserOwnedStorage"
+          },
+          "x-ms-identifiers": []
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "The private endpoint connection associated with the Cognitive Services account.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public endpoint access is allowed for this account."
+        },
+        "apiProperties": {
+          "$ref": "#/definitions/ApiProperties",
+          "description": "The api properties for special APIs."
+        },
+        "dateCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the date of cognitive services account creation.",
+          "readOnly": true,
+          "x-ms-client-name": "createdOn"
+        },
+        "callRateLimit": {
+          "$ref": "#/definitions/CallRateLimit",
+          "description": "The call rate limit Cognitive Services account.",
+          "readOnly": true
+        },
+        "dynamicThrottlingEnabled": {
+          "type": "boolean",
+          "description": "The flag to enable dynamic throttling."
+        },
+        "quotaLimit": {
+          "$ref": "#/definitions/QuotaLimit",
+          "readOnly": true
+        },
+        "restrictOutboundNetworkAccess": {
+          "type": "boolean"
+        },
+        "allowedFqdnList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disableLocalAuth": {
+          "type": "boolean"
+        },
+        "endpoints": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "restore": {
+          "type": "boolean",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "deletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deletion date, only available for deleted account.",
+          "readOnly": true,
+          "x-ms-client-name": "deletedOn"
+        },
+        "scheduledPurgeDate": {
+          "type": "string",
+          "description": "The scheduled purge date, only available for deleted account.",
+          "readOnly": true
+        },
+        "locations": {
+          "$ref": "#/definitions/MultiRegionSettings",
+          "description": "The multiregion settings of Cognitive Services account."
+        },
+        "commitmentPlanAssociations": {
+          "type": "array",
+          "description": "The commitment plan associations of Cognitive Services account.",
+          "items": {
+            "$ref": "#/definitions/CommitmentPlanAssociation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "abusePenalty": {
+          "$ref": "#/definitions/AbusePenalty",
+          "description": "The abuse penalty.",
+          "readOnly": true
+        }
+      }
+    },
+    "AccountSku": {
+      "type": "object",
+      "description": "Cognitive Services resource type and SKU.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Namespace and Type"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of Cognitive Services account."
+        }
+      }
+    },
+    "AccountSkuListResult": {
+      "type": "object",
+      "description": "The list of cognitive services accounts operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets the list of Cognitive Services accounts and their properties.",
+          "items": {
+            "$ref": "#/definitions/AccountSku"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ApiKeys": {
+      "type": "object",
+      "description": "The access keys for the cognitive services account.",
+      "properties": {
+        "key1": {
+          "type": "string",
+          "description": "Gets the value of key 1."
+        },
+        "key2": {
+          "type": "string",
+          "description": "Gets the value of key 2."
+        }
+      }
+    },
+    "ApiProperties": {
+      "type": "object",
+      "description": "The api properties for special APIs.",
+      "properties": {
+        "qnaRuntimeEndpoint": {
+          "type": "string",
+          "description": "(QnAMaker Only) The runtime endpoint of QnAMaker."
+        },
+        "qnaAzureSearchEndpointKey": {
+          "type": "string",
+          "description": "(QnAMaker Only) The Azure Search endpoint key of QnAMaker."
+        },
+        "qnaAzureSearchEndpointId": {
+          "type": "string",
+          "description": "(QnAMaker Only) The Azure Search endpoint id of QnAMaker."
+        },
+        "statisticsEnabled": {
+          "type": "boolean",
+          "description": "(Bing Search Only) The flag to enable statistics of Bing Search."
+        },
+        "eventHubConnectionString": {
+          "type": "string",
+          "description": "(Personalization Only) The flag to enable statistics of Bing Search.",
+          "maxLength": 1000,
+          "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$"
+        },
+        "storageAccountConnectionString": {
+          "type": "string",
+          "description": "(Personalization Only) The storage account connection string.",
+          "maxLength": 1000,
+          "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$"
+        },
+        "aadClientId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Client Id (Application Id).",
+          "maxLength": 500
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Tenant Id.",
+          "maxLength": 500
+        },
+        "superUser": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The super user of Metrics Advisor.",
+          "maxLength": 500
+        },
+        "websiteName": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The website name of Metrics Advisor.",
+          "maxLength": 500
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.SkuTier": {
+      "type": "string",
+      "description": "Available service tiers for the SKU.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "The Free service tier."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "The Basic service tier."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard service tier."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium service tier."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
+      "type": "object",
+      "description": "A managed identity assigned by the user.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The active directory client identifier for this principal."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier for this principal."
+        }
+      }
+    },
+    "Azure.ResourceManager.ResourceSku": {
+      "type": "object",
+      "description": "The SKU (Stock Keeping Unit) assigned to this resource.",
+      "properties": {
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      }
+    },
+    "AzureEntityResource": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "CallRateLimit": {
+      "type": "object",
+      "description": "The call rate limit Cognitive Services account.",
+      "properties": {
+        "count": {
+          "type": "number",
+          "format": "float",
+          "description": "The count value of Call Rate Limit."
+        },
+        "renewalPeriod": {
+          "type": "number",
+          "format": "float",
+          "description": "The renewal period in seconds of Call Rate Limit."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThrottlingRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CapacityConfig": {
+      "type": "object",
+      "description": "The capacity configuration.",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum capacity."
+        },
+        "step": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimal incremental between allowed values for capacity."
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default capacity."
+        }
+      }
+    },
+    "CheckDomainAvailabilityParameter": {
+      "type": "object",
+      "description": "Check Domain availability parameter.",
+      "properties": {
+        "subdomainName": {
+          "type": "string",
+          "description": "The subdomain name to use."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the resource."
+        }
+      },
+      "required": [
+        "subdomainName",
+        "type"
+      ]
+    },
+    "CheckSkuAvailabilityParameter": {
+      "type": "object",
+      "description": "Check SKU availability parameter.",
+      "properties": {
+        "skus": {
+          "type": "array",
+          "description": "The SKU of the resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        }
+      },
+      "required": [
+        "skus",
+        "kind",
+        "type"
+      ]
+    },
+    "CommitmentCost": {
+      "type": "object",
+      "description": "Cognitive Services account commitment cost.",
+      "properties": {
+        "commitmentMeterId": {
+          "type": "string",
+          "description": "Commitment meter Id."
+        },
+        "overageMeterId": {
+          "type": "string",
+          "description": "Overage meter Id."
+        }
+      }
+    },
+    "CommitmentPeriod": {
+      "type": "object",
+      "description": "Cognitive Services account commitment period.",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "description": "Commitment period commitment tier."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Commitment period commitment count."
+        },
+        "quota": {
+          "$ref": "#/definitions/CommitmentQuota",
+          "description": "Cognitive Services account commitment quota.",
+          "readOnly": true
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Commitment period start date.",
+          "readOnly": true,
+          "x-ms-client-name": "startOn"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Commitment period end date.",
+          "readOnly": true,
+          "x-ms-client-name": "endOn"
+        }
+      }
+    },
+    "CommitmentPlan": {
+      "type": "object",
+      "description": "Cognitive Services account commitment plan.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/CommitmentPlanProperties",
+          "description": "Properties of Cognitive Services account commitment plan.",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CommitmentPlanAccountAssociation": {
+      "type": "object",
+      "description": "The commitment plan association.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/CommitmentPlanAccountAssociationProperties",
+          "description": "Properties of Cognitive Services account commitment plan association.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CommitmentPlanAccountAssociationListResult": {
+      "type": "object",
+      "description": "The response of a CommitmentPlanAccountAssociation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CommitmentPlanAccountAssociation items on this page",
+          "items": {
+            "$ref": "#/definitions/CommitmentPlanAccountAssociation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CommitmentPlanAccountAssociationProperties": {
+      "type": "object",
+      "description": "The commitment plan account association properties.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "The Azure resource id of the account."
+        }
+      }
+    },
+    "CommitmentPlanAssociation": {
+      "type": "object",
+      "description": "The commitment plan association.",
+      "properties": {
+        "commitmentPlanId": {
+          "type": "string",
+          "description": "The Azure resource id of the commitment plan."
+        },
+        "commitmentPlanLocation": {
+          "type": "string",
+          "description": "The location of of the commitment plan."
+        }
+      }
+    },
+    "CommitmentPlanListResult": {
+      "type": "object",
+      "description": "The response of a CommitmentPlan list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CommitmentPlan items on this page",
+          "items": {
+            "$ref": "#/definitions/CommitmentPlan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CommitmentPlanProperties": {
+      "type": "object",
+      "description": "Properties of Cognitive Services account commitment plan.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/CommitmentPlanProvisioningState",
+          "description": "Gets the status of the resource at the time the operation was called.",
+          "readOnly": true
+        },
+        "commitmentPlanGuid": {
+          "type": "string",
+          "description": "Commitment plan guid."
+        },
+        "hostingModel": {
+          "$ref": "#/definitions/HostingModel",
+          "description": "Account hosting model."
+        },
+        "planType": {
+          "type": "string",
+          "description": "Commitment plan type."
+        },
+        "current": {
+          "$ref": "#/definitions/CommitmentPeriod",
+          "description": "Cognitive Services account commitment period."
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "AutoRenew commitment plan."
+        },
+        "next": {
+          "$ref": "#/definitions/CommitmentPeriod",
+          "description": "Cognitive Services account commitment period."
+        },
+        "last": {
+          "$ref": "#/definitions/CommitmentPeriod",
+          "description": "Cognitive Services account commitment period.",
+          "readOnly": true
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "description": "The list of ProvisioningIssue.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CommitmentPlanProvisioningState": {
+      "type": "string",
+      "description": "Gets the status of the resource at the time the operation was called.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Deleting",
+        "Moving",
+        "Failed",
+        "Succeeded",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "CommitmentPlanProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "CommitmentQuota": {
+      "type": "object",
+      "description": "Cognitive Services account commitment quota.",
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Commitment quota quantity."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Commitment quota unit."
+        }
+      }
+    },
+    "CommitmentTier": {
+      "type": "object",
+      "description": "Cognitive Services account commitment tier.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the resource."
+        },
+        "skuName": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "hostingModel": {
+          "$ref": "#/definitions/HostingModel",
+          "description": "Account hosting model."
+        },
+        "planType": {
+          "type": "string",
+          "description": "Commitment plan type."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Commitment period commitment tier."
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Commitment period commitment max count."
+        },
+        "quota": {
+          "$ref": "#/definitions/CommitmentQuota",
+          "description": "Cognitive Services account commitment quota."
+        },
+        "cost": {
+          "$ref": "#/definitions/CommitmentCost",
+          "description": "Cognitive Services account commitment cost."
+        }
+      }
+    },
+    "Deployment": {
+      "type": "object",
+      "description": "Cognitive Services account deployment.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentProperties",
+          "description": "Properties of Cognitive Services account deployment.",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeploymentListResult": {
+      "type": "object",
+      "description": "The response of a Deployment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Deployment items on this page",
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentModel": {
+      "type": "object",
+      "description": "Properties of Cognitive Services account deployment model.",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Deployment model format."
+        },
+        "name": {
+          "type": "string",
+          "description": "Deployment model name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Optional. Deployment model version. If version is not specified, a default version will be assigned. The default version is different for different models and might change when there is new version available for a model. Default version for a model could be found from list models API."
+        },
+        "source": {
+          "type": "string",
+          "description": "Optional. Deployment model source ARM resource ID."
+        },
+        "callRateLimit": {
+          "$ref": "#/definitions/CallRateLimit",
+          "description": "The call rate limit Cognitive Services account.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeploymentModelVersionUpgradeOption": {
+      "type": "string",
+      "description": "Deployment model version upgrade option.",
+      "enum": [
+        "OnceNewDefaultVersionAvailable",
+        "OnceCurrentVersionExpired",
+        "NoAutoUpgrade"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentModelVersionUpgradeOption",
+        "modelAsString": true
+      }
+    },
+    "DeploymentProperties": {
+      "type": "object",
+      "description": "Properties of Cognitive Services account deployment.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/DeploymentProvisioningState",
+          "description": "Gets the status of the resource at the time the operation was called.",
+          "readOnly": true
+        },
+        "model": {
+          "$ref": "#/definitions/DeploymentModel",
+          "description": "Properties of Cognitive Services account deployment model."
+        },
+        "scaleSettings": {
+          "$ref": "#/definitions/DeploymentScaleSettings",
+          "description": "Properties of Cognitive Services account deployment model."
+        },
+        "capabilities": {
+          "type": "object",
+          "description": "The capabilities.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "raiPolicyName": {
+          "type": "string",
+          "description": "The name of RAI policy."
+        },
+        "callRateLimit": {
+          "$ref": "#/definitions/CallRateLimit",
+          "description": "The call rate limit Cognitive Services account.",
+          "readOnly": true
+        },
+        "rateLimits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThrottlingRule"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "versionUpgradeOption": {
+          "$ref": "#/definitions/DeploymentModelVersionUpgradeOption",
+          "description": "Deployment model version upgrade option."
+        }
+      }
+    },
+    "DeploymentProvisioningState": {
+      "type": "string",
+      "description": "Gets the status of the resource at the time the operation was called.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Deleting",
+        "Moving",
+        "Failed",
+        "Succeeded",
+        "Disabled",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "DeploymentScaleSettings": {
+      "type": "object",
+      "description": "Properties of Cognitive Services account deployment model.",
+      "properties": {
+        "scaleType": {
+          "$ref": "#/definitions/DeploymentScaleType",
+          "description": "Deployment scale type."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Deployment capacity."
+        },
+        "activeCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Deployment active capacity. This value might be different from `capacity` if customer recently updated `capacity`.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeploymentScaleType": {
+      "type": "string",
+      "description": "Deployment scale type.",
+      "enum": [
+        "Standard",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentScaleType",
+        "modelAsString": true
+      }
+    },
+    "DomainAvailability": {
+      "type": "object",
+      "description": "Domain availability.",
+      "properties": {
+        "isSubdomainAvailable": {
+          "type": "boolean",
+          "description": "Indicates the given SKU is available or not."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason why the SKU is not available."
+        },
+        "subdomainName": {
+          "type": "string",
+          "description": "The subdomain name to use."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the resource."
+        }
+      }
+    },
+    "Encryption": {
+      "type": "object",
+      "description": "Properties to configure Encryption",
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of KeyVault"
+        },
+        "keySource": {
+          "$ref": "#/definitions/KeySource",
+          "description": "Enumerates the possible value of keySource for Encryption",
+          "default": "Microsoft.KeyVault"
+        }
+      }
+    },
+    "HostingModel": {
+      "type": "string",
+      "description": "Account hosting model.",
+      "enum": [
+        "Web",
+        "ConnectedContainer",
+        "DisconnectedContainer",
+        "ProvisionedWeb"
+      ],
+      "x-ms-enum": {
+        "name": "HostingModel",
+        "modelAsString": true
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The identity type."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
+          "additionalProperties": {
+            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "IpRule": {
+      "type": "object",
+      "description": "A rule governing the accessibility from a specific ip address or ip range.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KeyName": {
+      "type": "string",
+      "description": "key name to generate (Key1|Key2)",
+      "enum": [
+        "Key1",
+        "Key2"
+      ],
+      "x-ms-enum": {
+        "name": "KeyName",
+        "modelAsString": false
+      }
+    },
+    "KeySource": {
+      "type": "string",
+      "description": "Enumerates the possible value of keySource for Encryption",
+      "enum": [
+        "Microsoft.CognitiveServices",
+        "Microsoft.KeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "KeySource",
+        "modelAsString": true
+      }
+    },
+    "KeyVaultProperties": {
+      "type": "object",
+      "description": "Properties to configure keyVault Properties",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Name of the Key from KeyVault"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Version of the Key from KeyVault"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        },
+        "identityClientId": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricName": {
+      "type": "object",
+      "description": "A metric name.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The friendly name of the metric."
+        }
+      }
+    },
+    "Model": {
+      "type": "object",
+      "description": "Cognitive Services Model.",
+      "properties": {
+        "model": {
+          "$ref": "#/definitions/AccountModel",
+          "description": "Model Metadata."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the Model."
+        },
+        "skuName": {
+          "type": "string",
+          "description": "The SKU of the Model."
+        }
+      }
+    },
+    "ModelDeprecationInfo": {
+      "type": "object",
+      "description": "Cognitive Services account ModelDeprecationInfo.",
+      "properties": {
+        "fineTune": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of deprecation of the fineTune Model.",
+          "x-ms-client-name": "fineTuneOn"
+        },
+        "inference": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of deprecation of the inference Model.",
+          "x-ms-client-name": "inferenceOn"
+        }
+      }
+    },
+    "ModelLifecycleStatus": {
+      "type": "string",
+      "description": "Model lifecycle status.",
+      "enum": [
+        "GenerallyAvailable",
+        "Preview"
+      ],
+      "x-ms-enum": {
+        "name": "ModelLifecycleStatus",
+        "modelAsString": true
+      }
+    },
+    "ModelSku": {
+      "type": "object",
+      "description": "Describes an available Cognitive Services Model SKU.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the model SKU."
+        },
+        "usageName": {
+          "type": "string",
+          "description": "The usage name of the model SKU."
+        },
+        "deprecationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of deprecation of the model SKU."
+        },
+        "capacity": {
+          "$ref": "#/definitions/CapacityConfig",
+          "description": "The capacity configuration."
+        },
+        "rateLimits": {
+          "type": "array",
+          "description": "The list of rateLimit.",
+          "items": {
+            "$ref": "#/definitions/CallRateLimit"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MultiRegionSettings": {
+      "type": "object",
+      "description": "The multiregion settings Cognitive Services account.",
+      "properties": {
+        "routingMethod": {
+          "$ref": "#/definitions/RoutingMethods",
+          "description": "Multiregion routing methods."
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionSetting"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NetworkRuleAction": {
+      "type": "string",
+      "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkRuleAction",
+        "modelAsString": true
+      }
+    },
+    "NetworkRuleSet": {
+      "type": "object",
+      "description": "A set of rules governing the network accessibility.",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/NetworkRuleAction",
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated."
+        },
+        "ipRules": {
+          "type": "array",
+          "description": "The list of IP address rules.",
+          "items": {
+            "$ref": "#/definitions/IpRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "description": "The list of virtual network rules.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        }
+      }
+    },
+    "PagedAccountModel": {
+      "type": "object",
+      "description": "The list of cognitive services accounts operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AccountModel items on this page",
+          "items": {
+            "$ref": "#/definitions/AccountModel"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedCommitmentTier": {
+      "type": "object",
+      "description": "The list of cognitive services accounts operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CommitmentTier items on this page",
+          "items": {
+            "$ref": "#/definitions/CommitmentTier"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedModel": {
+      "type": "object",
+      "description": "The list of cognitive services models.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Model items on this page",
+          "items": {
+            "$ref": "#/definitions/Model"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedResourceSku": {
+      "type": "object",
+      "description": "The Get Skus operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResourceSku items on this page",
+          "items": {
+            "$ref": "#/definitions/Azure.ResourceManager.ResourceSku"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedUsage": {
+      "type": "object",
+      "description": "The response to a list usage request.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Usage items on this page",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PatchResourceTags": {
+      "type": "object",
+      "description": "The object being used to update tags of a resource, in general used for PATCH operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "PatchResourceTagsAndSku": {
+      "type": "object",
+      "description": "The object being used to update tags and sku of a resource, in general used for PATCH operations.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The resource model definition representing SKU"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchResourceTags"
+        }
+      ]
+    },
+    "PatchResourceTagsAndSkuUpdate": {
+      "type": "object",
+      "description": "The object being used to update tags and sku of a resource, in general used for PATCH operations.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/SkuUpdate",
+          "description": "The resource model definition representing SKU"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchResourceTags"
+        }
+      ]
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "The Private Endpoint resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM identifier for Private Endpoint",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "The Private Endpoint Connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of the PrivateEndpointConnectProperties.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private end point."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "The provisioning state of the private endpoint connection resource.",
+          "readOnly": true
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "The private link resource group ids.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "A list of private link resources",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The private link resource group id.",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "The private link resource required member names.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The private link resource Private link DNS zone name.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The private link resource display name.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "A collection of information about the state of the connection between service consumer and provider.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Gets the status of the cognitive services account at the time the operation was called.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Deleting",
+        "Moving",
+        "Failed",
+        "Succeeded",
+        "ResolvingDNS"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Whether or not public endpoint access is allowed for this account.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
+      }
+    },
+    "QuotaLimit": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number",
+          "format": "float"
+        },
+        "renewalPeriod": {
+          "type": "number",
+          "format": "float"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThrottlingRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "QuotaUsageStatus": {
+      "type": "string",
+      "description": "Cognitive Services account quota usage status.",
+      "enum": [
+        "Included",
+        "Blocked",
+        "InOverage",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaUsageStatus",
+        "modelAsString": true
+      }
+    },
+    "RegenerateKeyParameters": {
+      "type": "object",
+      "description": "Regenerate key parameters.",
+      "properties": {
+        "keyName": {
+          "$ref": "#/definitions/KeyName",
+          "description": "key name to generate (Key1|Key2)"
+        }
+      },
+      "required": [
+        "keyName"
+      ]
+    },
+    "RegionSetting": {
+      "type": "object",
+      "description": "The call rate limit Cognitive Services account.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the region."
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "A value for priority or weighted routing methods."
+        },
+        "customsubdomain": {
+          "type": "string",
+          "description": "Maps the region to the regional custom subdomain."
+        }
+      }
+    },
+    "RequestMatchPattern": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The identity type.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": false
+      }
+    },
+    "ResourceSkuRestrictionInfo": {
+      "type": "object",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "Locations where the SKU is restricted",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zones": {
+          "type": "array",
+          "description": "List of availability zones where the SKU is restricted.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceSkuRestrictions": {
+      "type": "object",
+      "description": "Describes restrictions of a SKU.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceSkuRestrictionsType",
+          "description": "The type of restrictions."
+        },
+        "values": {
+          "type": "array",
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "description": "The information about the restriction where the SKU cannot be used."
+        },
+        "reasonCode": {
+          "$ref": "#/definitions/ResourceSkuRestrictionsReasonCode",
+          "description": "The reason for restriction."
+        }
+      }
+    },
+    "ResourceSkuRestrictionsReasonCode": {
+      "type": "string",
+      "description": "The reason for restriction.",
+      "enum": [
+        "QuotaId",
+        "NotAvailableForSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSkuRestrictionsReasonCode",
+        "modelAsString": true
+      }
+    },
+    "ResourceSkuRestrictionsType": {
+      "type": "string",
+      "description": "The type of restrictions.",
+      "enum": [
+        "Location",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSkuRestrictionsType",
+        "modelAsString": false
+      }
+    },
+    "RoutingMethods": {
+      "type": "string",
+      "description": "Multiregion routing methods.",
+      "enum": [
+        "Priority",
+        "Weighted",
+        "Performance"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingMethods",
+        "modelAsString": true
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SkuAvailability": {
+      "type": "object",
+      "description": "SKU availability.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        },
+        "skuName": {
+          "type": "string",
+          "description": "The SKU of Cognitive Services account."
+        },
+        "skuAvailable": {
+          "type": "boolean",
+          "description": "Indicates the given SKU is available or not."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason why the SKU is not available."
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional error message."
+        }
+      }
+    },
+    "SkuAvailabilityListResult": {
+      "type": "object",
+      "description": "Check SKU availability result list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Check SKU availability result list.",
+          "items": {
+            "$ref": "#/definitions/SkuAvailability"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SkuCapability": {
+      "type": "object",
+      "description": "SkuCapability indicates the capability of a certain feature.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SkuCapability."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the SkuCapability."
+        }
+      }
+    },
+    "SkuChangeInfo": {
+      "type": "object",
+      "description": "Sku change info of account.",
+      "properties": {
+        "countOfDowngrades": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the count of downgrades."
+        },
+        "countOfUpgradesAfterDowngrades": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the count of upgrades after downgrades."
+        },
+        "lastChangeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the last change date.",
+          "x-ms-client-name": "lastChangedOn"
+        }
+      }
+    },
+    "SkuUpdate": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      }
+    },
+    "ThrottlingRule": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "renewalPeriod": {
+          "type": "number",
+          "format": "float"
+        },
+        "count": {
+          "type": "number",
+          "format": "float"
+        },
+        "minCount": {
+          "type": "number",
+          "format": "float"
+        },
+        "dynamicThrottlingEnabled": {
+          "type": "boolean"
+        },
+        "matchPatterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestMatchPattern"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "UnitType": {
+      "type": "string",
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "Percent",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Milliseconds"
+      ],
+      "x-ms-enum": {
+        "name": "UnitType",
+        "modelAsString": true
+      }
+    },
+    "Usage": {
+      "type": "object",
+      "description": "The usage data for a usage request.",
+      "properties": {
+        "unit": {
+          "$ref": "#/definitions/UnitType",
+          "description": "The unit of the metric."
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "description": "The quota period used to summarize the usage values."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum value for this metric."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Current value for this metric."
+        },
+        "nextResetTime": {
+          "type": "string",
+          "description": "Next reset time for current quota."
+        },
+        "status": {
+          "$ref": "#/definitions/QuotaUsageStatus",
+          "description": "Cognitive Services account quota usage status."
+        }
+      }
+    },
+    "UserOwnedStorage": {
+      "type": "object",
+      "description": "The user owned storage for Cognitive Services account.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Full resource id of a Microsoft.Storage resource."
+        },
+        "identityClientId": {
+          "type": "string"
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2023-05-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_05_01",
+            "value": "2023-05-01",
+            "description": "The 2023-05-01 API version."
+          }
+        ]
+      }
+    },
+    "VirtualNetworkRule": {
+      "type": "object",
+      "description": "A rule governing the accessibility from a specific virtual network.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets the state of virtual network rule."
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Ignore missing vnet service endpoint or not."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
