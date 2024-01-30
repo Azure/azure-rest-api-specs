@@ -12,13 +12,13 @@ using Azure.ClientGenerator.Core;
 @useAuth(
   OAuth2Auth<[
     {
-      type: OAuth2FlowType.implicit;
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
 
       // add description to below: "impersonate your user account"
-      scopes: ["https://eventhubs.azure.net/.default"];
+      scopes: ["https://eventhubs.azure.net/.default"],
     }
-  ]>;
+  ]>
 )
 @service({
   title: "Azure Schema Registry",
@@ -70,11 +70,7 @@ interface SchemaOperations {
   @summary("Get list of schema groups.")
   @doc("Gets the list of schema groups user is authorized to access.")
   @route("/$schemaGroups")
-  listSchemaGroups is Azure.Core.Foundations.Operation<
-    {},
-    StringsList,
-    {}
-  >;
+  listSchemaGroups is Azure.Core.Foundations.Operation<{}, StringsList, {}>;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ SchemaId resource doesn't allow returning binary schema and headers."
@@ -92,7 +88,7 @@ interface SchemaOperations {
   @summary("List schema versions.")
   @doc("Gets the list of all versions of one schema.")
   @route("/$schemaGroups/{groupName}/schemas/{name}/versions")
-  listSchemaVersions  is Azure.Core.Foundations.Operation<
+  listSchemaVersions is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<SchemaName>,
     Int32sList,
     {}
@@ -110,6 +106,7 @@ interface SchemaOperations {
   >;
 
   //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}:get-id?api-version={apiVersion}
+  #suppress "@azure-tools/typespec-azure-core/byos" "storage service is not used"
   @summary("Get ID for existing schema.")
   @doc("Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.")
   @action("get-id")
@@ -127,6 +124,7 @@ interface SchemaOperations {
 
   //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}?api-version={apiVersion}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard createOrReplace operation does not allow passing in binary body to request."
+  #suppress "@azure-tools/typespec-azure-core/byos" "storage service is not used"
   @summary("Register new schema")
   @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.")
   @route("/$schemaGroups/{groupName}/schemas/{name}")
@@ -146,11 +144,15 @@ alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 union SchemaContentTypeValues {
   @added(ServiceApiVersions.V2022_10)
   customBinary: "application/octet-stream",
+
   @added(ServiceApiVersions.V2022_10)
   custom: "text/plain; charset=utf-8",
+
   avro: "application/json; serialization=Avro",
+
   @added(ServiceApiVersions.V2022_10)
   json: "application/json; serialization=Json",
+
   @added(ServiceApiVersions.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
 }
