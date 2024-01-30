@@ -71,7 +71,7 @@ enum OnAllBatchTasksComplete {
   @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
   NoAction: "noaction",
 
-  @doc("Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'.")
+  @doc("Terminate the Job. The Job's terminationReason is set to 'AllTasksComplete'.")
   TerminateJob: "terminatejob",
 }
 
@@ -80,7 +80,7 @@ enum OnBatchTaskFailure {
   @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
   NoAction: "noaction",
 
-  @doc("Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'.")
+  @doc("Terminate the Job. The Job's terminationReason is set to 'AllTasksComplete'.")
   PerformExitOptionsJobAction: "performexitoptionsjobaction",
 }
 
@@ -412,7 +412,7 @@ enum BatchJobAction {
   @doc("Disable the Job. This is equivalent to calling the disable Job API, with a disableTasks value of requeue.")
   Disable: "disable",
 
-  @doc("Terminate the Job. The terminateReason in the Job's executionInfo is set to \"TaskFailed\".")
+  @doc("Terminate the Job. The terminationReason in the Job's executionInfo is set to \"TaskFailed\".")
   Terminate: "terminate",
 }
 
@@ -2491,6 +2491,7 @@ model BatchJobExecutionInfo {
   schedulingError?: BatchJobSchedulingError;
 
   @doc("A string describing the reason the Job ended. This property is set only if the Job is in the completed state. If the Batch service terminates the Job, it sets the reason as follows: JMComplete - the Job Manager Task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry - the Job reached its maxWallClockTime constraint. TerminateJobSchedule - the Job ran as part of a schedule, and the schedule terminated. AllTasksComplete - the Job's onAllTasksComplete attribute is set to terminatejob, and all Tasks in the Job are complete. TaskFailed - the Job's onTaskFailure attribute is set to performExitOptionsJobAction, and a Task in the Job failed with an exit condition that specified a jobAction of terminatejob. Any other string is a user-defined reason specified in a call to the 'Terminate a Job' operation.")
+  @projectedName("client", "terminationReason")
   terminateReason?: string;
 }
 
@@ -2517,7 +2518,8 @@ model BatchJobDisableParameters {
 
 @doc("Parameters for terminating an Azure Batch Job.")
 model BatchJobTerminateParameters {
-  @doc("The text you want to appear as the Job's TerminateReason. The default is 'UserTerminate'.")
+  @doc("The text you want to appear as the Job's TerminationReason. The default is 'UserTerminate'.")
+  @projectedName("client", "terminationReason")
   terminateReason?: string;
 }
 
