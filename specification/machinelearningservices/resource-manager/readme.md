@@ -46,6 +46,22 @@ suppressions:
     reason: Keep identical to stable GA version to avoid breaking changes. https://dev.azure.com/msdata/Vienna/_workitems/edit/2803196
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}"].post
+  - code: AvoidAdditionalProperties
+    reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have strictly typed properties.
+    where:
+      - $.definitions["CustomModelFineTuning"].properties["hyperParameters"]
+  - code: AvoidAdditionalProperties
+    reason: This is coming for wrong reason, just inheriting from JobBase.
+    where:
+      - $.definitions["FineTuningJob"].allOf[0]["allOf"][0].properties["properties"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["notificationSetting"].properties["webhooks"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["secretsConfiguration"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["services"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["services"].additionalProperties["properties"].properties
+  - code: AvoidAdditionalProperties
+    reason: There is a similar usage in existing jobs.
+    where:
+      - $.definitions["FineTuningJob"].properties["outputs"]
 ```
 ### Tag: package-preview-2023-08
 
