@@ -388,7 +388,7 @@ model AssignmentLockSettings {
 */
 "excludedPrincipals"?: string[];
 /**
-* List of management operations that are excluded from blueprint locks. Up to 200 actions are permitted. If the lock mode is set to 'AllResourcesReadOnly', then the following actions are automatically appended to 'excludedActions': '*/read', 'Microsoft.Network/virtualNetworks/subnets/join/action' and 'Microsoft.Authorization/locks/delete'. If the lock mode is set to 'AllResourcesDoNotDelete', then the following actions are automatically appended to 'excludedActions': 'Microsoft.Authorization/locks/delete'. Duplicate actions will get removed.
+* List of management operations that are excluded from blueprint locks. Up to 200 actions are permitted. If the lock mode is set to 'AllResourcesReadOnly', then the following actions are automatically appended to 'excludedActions': '/read', 'Microsoft.Network/virtualNetworks/subnets/join/action' and 'Microsoft.Authorization/locks/delete'. If the lock mode is set to 'AllResourcesDoNotDelete', then the following actions are automatically appended to 'excludedActions': 'Microsoft.Authorization/locks/delete'. Duplicate actions will get removed.
 */
 "excludedActions"?: string[];
 }
@@ -593,7 +593,7 @@ model TemplateArtifact extends Artifact {
 /**
 * Specifies the kind of blueprint artifact.
 */
-"kind": "template";
+"Fookind": "template";
 }
 
 /**
@@ -628,7 +628,7 @@ model RoleAssignmentArtifact extends Artifact {
 /**
 * Specifies the kind of blueprint artifact.
 */
-"kind": "roleAssignment";
+"Fookind": "roleAssignment";
 }
 
 /**
@@ -663,5 +663,5 @@ model PolicyAssignmentArtifact extends Artifact {
 /**
 * Specifies the kind of blueprint artifact.
 */
-"kind": "policyAssignment";
+"Fookind": "policyAssignment";
 }

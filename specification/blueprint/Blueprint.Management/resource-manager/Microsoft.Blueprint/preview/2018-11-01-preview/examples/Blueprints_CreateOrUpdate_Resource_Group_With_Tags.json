@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "blueprint": {
+      "properties": {
+        "description": "An example blueprint containing an RG with two tags.",
+        "resourceGroups": {
+          "myRGName": {
+            "name": "myRGName",
+            "location": "westus",
+            "metadata": {
+              "displayName": "My Resource Group"
+            },
+            "tags": {
+              "costcenter": "123456",
+              "nameOnlyTag": ""
+            }
+          }
+        },
+        "targetScope": "subscription"
+      }
+    },
+    "blueprintName": "simpleBlueprint",
+    "resourceScope": "providers/Microsoft.Management/managementGroups/{ManagementGroupId}"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "RGTaggingExample",
+        "type": "Microsoft.Blueprint/blueprints",
+        "id": "/providers/Microsoft.Management/managementGroups/{ManagementGroupId}/providers/Microsoft.Blueprint/blueprints/RGTaggingExample",
+        "properties": {
+          "description": "An example blueprint containing an RG with two tags.",
+          "parameters": {},
+          "resourceGroups": {
+            "myRGName": {
+              "name": "myRGName",
+              "dependsOn": [],
+              "location": "westus",
+              "metadata": {
+                "displayName": "My Resource Group"
+              },
+              "tags": {
+                "costcenter": "123456",
+                "tagWithNoValue": ""
+              }
+            }
+          },
+          "status": {
+            "lastModified": "2019-04-29T20:52:56+00:00",
+            "timeCreated": "2019-04-29T20:52:56+00:00"
+          },
+          "targetScope": "subscription"
+        }
+      }
+    }
+  },
+  "operationId": "Blueprints_CreateOrUpdate",
+  "title": "ResourceGroupWithTags"
+}

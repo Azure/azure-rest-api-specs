@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "assignmentName": "assignSimpleBlueprint",
+    "deleteBehavior": "all",
+    "resourceScope": "managementGroups/ContosoOnlineGroup"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "assignSimpleBlueprint",
+        "type": "Microsoft.Blueprint/Assignment",
+        "id": "/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "location": "eastus",
+        "properties": {
+          "description": "enforce pre-defined simpleBlueprint to this XXXXXXXX subscription.",
+          "blueprintId": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint",
+          "parameters": {
+            "costCenter": {
+              "value": "Contoso/Online/Shopping/Production"
+            },
+            "owners": {
+              "value": [
+                "johnDoe@contoso.com",
+                "johnsteam@contoso.com"
+              ]
+            },
+            "storageAccountType": {
+              "value": "Standard_LRS"
+            }
+          },
+          "provisioningState": "deleting",
+          "resourceGroups": {
+            "storageRG": {
+              "name": "defaultRG",
+              "location": "eastus"
+            }
+          },
+          "scope": "subscriptions/00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Assignments_Delete",
+  "title": "Assignment_Delete at management group scope, and delete the resources created by the assignment"
+}
