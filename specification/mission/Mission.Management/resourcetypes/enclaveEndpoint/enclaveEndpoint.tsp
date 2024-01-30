@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 import "../shared/provisioningstate.tsp";
 import "../shared/resourceid.tsp";
+import "../shared/endpointrulebase.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -35,6 +36,8 @@ enum EnclaveEndpointProtocol {
   AH,
 }
 
+#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+@removed(Microsoft.Mission.Versions.v2023_11_01_preview)
 @doc("Enclave Endpoint Rule Properties")
 model EnclaveEndpointRule {
   @doc("Endpoint Rule Name.")
@@ -50,8 +53,22 @@ model EnclaveEndpointRule {
   protocol?: EnclaveEndpointProtocol;
 }
 
+@doc("Enclave Endpoint Rule Properties")
+model EnclaveEndpointDestinationRule is EndpointRuleBase {
+  @doc("Protocols. Options specified by Endpoint Protocol Enum.")
+  protocols?: EnclaveEndpointProtocol[];
+}
+
 @doc("Enclave Endpoint Resource properties")
 model EnclaveEndpointProperties {
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
+  @added(Microsoft.Mission.Versions.v2023_11_01_preview)
+  @extension("x-ms-identifiers", [])
+  @doc("Enclave Endpoint Rule Collection.")
+  ruleCollection: EnclaveEndpointDestinationRule[];
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @removed(Microsoft.Mission.Versions.v2023_11_01_preview)
   @extension("x-ms-identifiers", ["name"])
   @doc("Endpoint Rule Collection.")
   endpointRuleCollection?: EnclaveEndpointRule[];

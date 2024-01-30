@@ -664,6 +664,11 @@
     "WorkloadPropertiesFormat": {
       "description": "Workload properties.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common-types.json#/definitions/PowerStateProperty"
+        }
+      ],
       "properties": {
         "provisioningState": {
           "$ref": "./modsimworkbenches.json#/definitions/ProvisioningState",
@@ -681,6 +686,10 @@
           "description": "Gets or sets the status.",
           "type": "string",
           "readOnly": true
+        },
+        "restartAt": {
+          "$ref": "./modsimworkbenches.json#/definitions/RestartAt",
+          "description": "Workload Restart date by which Workload needs to be restarted."
         },
         "privateIP": {
           "description": "Gets or sets the private IpAddress of workload.",

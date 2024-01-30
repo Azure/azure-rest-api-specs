@@ -59,7 +59,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/OpenApiGatewayOfferingName"
+            "$ref": "#/parameters/OpenApiGatewayOfferingNameParamter"
           }
         ],
         "responses": {
@@ -96,6 +96,15 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipParameter"
           }
         ],
         "responses": {
@@ -178,20 +187,6 @@
         }
       }
     },
-    "OpenApiGatewayOfferingAuth": {
-      "type": "object",
-      "description": "OpenAPI Gateway Offering API Auth properties",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "description": "Open Gateway Offering API Auth mode."
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "Open Gateway Offering API Auth endpoint."
-        }
-      }
-    },
     "OpenApiGatewayOfferingProperties": {
       "type": "object",
       "description": "OpenAPI Gateway Offering properties",
@@ -204,13 +199,13 @@
           "type": "string",
           "description": "Name of the Operator this offering belongs to."
         },
-        "endpoint": {
+        "region": {
           "type": "string",
-          "description": "Endpoint (Base URL) for the Operator's Network API in current region/country."
+          "description": "Name of the country/region where this offering is being supported on Azure."
         },
-        "country": {
+        "operatorRegion": {
           "type": "string",
-          "description": "Name of the country where this offering is being supported."
+          "description": "Name of the country/region where this offering is being supported by the Operator."
         },
         "supportedApis": {
           "type": "array",
@@ -221,11 +216,6 @@
           "items": {
             "$ref": "#/definitions/OpenApiGatewayOfferingApi"
           }
-        },
-        "authentication": {
-          "type": "object",
-          "description": "Authentication details for the Operator's Network API.",
-          "$ref": "#/definitions/OpenApiGatewayOfferingAuth"
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",
@@ -271,13 +261,39 @@
     }
   },
   "parameters": {
-    "OpenApiGatewayOfferingName": {
+    "OpenApiGatewayOfferingNameParamter": {
       "name": "openApiGatewayOfferingName",
       "in": "path",
       "description": "APC Gateway Offering Name",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9-]{3,24}$"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "An optional OData based filter expression to apply on the operation. Valid properties for filtering are `name, properties/provisioningState, properties/operatorName, properties/offerName, properties/region, properties/operatorRegion`."
+    },
+    "ListTopParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 20,
+      "description": "An optional query parameter which specifies the maximum number of records to be returned."
+    },
+    "ListSkipParameter": {
+      "name": "$skip",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "An optional query parameter which specifies the number of records to be skipped."
     }
   }
 }

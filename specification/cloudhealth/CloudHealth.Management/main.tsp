@@ -11,23 +11,29 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
-@armProviderNamespace("Microsoft.CloudHealth")
+@armProviderNamespace(ProviderName)
 @service({
-  title: "Microsoft.CloudHealth",
+  title: ProviderName,
   version: "2023-10-01-preview",
 })
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.CloudHealth;
+
+alias ProviderName = "Microsoft.CloudHealth";
 
 // Regex for all our resource name validations
 alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,58}[a-zA-Z0-9]$";
 
 @pattern(resourceNameRegex)
+@doc("String with regex validation to match the resource name requirements")
 scalar stringResourceName extends string;
 
 @maxLength(4096)
+@doc("String with max length validation of 4096 characters")
 scalar string4096 extends string;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -46,9 +52,6 @@ model HealthModel is TrackedResource<HealthModelProperties> {
 
 @doc("HealthModel properties")
 model HealthModelProperties {
-  @doc("Enabled state of the health model. When disabled, no health data is collected and no health state is propagated.")
-  enabledState: EnabledState;
-
   @visibility("read")
   @doc("The data plane endpoint for interacting with health data")
   dataplaneEndpoint?: string;
@@ -56,13 +59,6 @@ model HealthModelProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
-@doc("Enabled state of the health model")
-enum EnabledState {
-  Enabled,
-  Disabled,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
@@ -104,26 +100,13 @@ model SignalDefinitionProperties {
   displayName?: string;
 
   @doc("Kind of the signal definition")
-  @knownValues(SignalKind)
-  @extension(
-    "x-ms-enum",
-    {
-      name: "SignalKindEnum", // Adding this manually to fix linter issue when using @knownValues
-      modelAsString: true,
-    }
-  )
-  signalKind: string; // Cannot use enum directly due to bug https://github.com/Azure/typespec-azure/issues/3574
+  signalKind: SignalKind;
 
-  @doc("Interval in which the signal is being evaluated.")
-  refreshInterval?: RefreshInterval;
+  @doc("Interval in which the signal is being evaluated. Defaults to PT1M.")
+  refreshInterval?: RefreshInterval = RefreshInterval.PT1M;
 
   @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
-
-  @doc("Time range of signal. ISO duration format like PT10M.")
-  @minLength(1)
-  @maxLength(100)
-  timeGrain?: string;
 
   @doc("Unit of the signal result (e.g. Bytes, MilliSeconds, Percent, Count))")
   @minLength(1)
@@ -166,17 +149,37 @@ model ThresholdRule {
 
 @doc("ML-based evaluation rule for a signal definition")
 model DynamicDetectionRule {
-  @doc("Operator")
+  @doc("ML model to use for dynamic thresholds")
   dynamicThresholdModel: DynamicThresholdModel;
 
-  @doc("ML model sensitivity")
-  modelSensitivity?: int32;
+  @doc("ML model sensitivity. Lowest value = high sensitivity. Supported step size = 0.5")
+  @minValue(0.0)
+  @maxValue(5.0)
+  modelSensitivity: float32;
+
+  @doc("Threshold direction")
+  dynamicThresholdDirection: DynamicThresholdDirection;
+
+  @doc("Start time of the training in UTC.")
+  trainingStartTime?: utcDateTime;
 }
 
 @doc("ML-based model variants")
 enum DynamicThresholdModel {
   @doc("Anomaly detection model")
   AnomalyDetection,
+}
+
+@doc("Threshold direction for dynamic thresholds")
+enum DynamicThresholdDirection {
+  @doc("Lower than")
+  LowerThan,
+
+  @doc("Greater than")
+  GreaterThan,
+
+  @doc("Greater or Lower Than")
+  GreaterOrLowerThan,
 }
 
 @doc("Refresh interval in ISO duration format")
@@ -204,7 +207,7 @@ enum RefreshInterval {
 model ResourceMetricSignalDefinitionProperties
   extends SignalDefinitionProperties {
   @doc("Kind of the signal definition")
-  signalKind: "AzureResourceMetric";
+  signalKind: SignalKind.AzureResourceMetric;
 
   @doc("Metric namespace")
   @minLength(1)
@@ -215,6 +218,11 @@ model ResourceMetricSignalDefinitionProperties
   @minLength(1)
   @maxLength(256)
   metricName: string;
+
+  @doc("Time range of signal. ISO duration format like PT10M.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain: string;
 
   @doc("Type of aggregation to apply to the metric")
   aggregationType: MetricAggregationType;
@@ -234,12 +242,17 @@ model ResourceMetricSignalDefinitionProperties
 model LogAnalyticsQuerySignalDefinitionProperties
   extends SignalDefinitionProperties {
   @doc("Kind of the signal definition")
-  signalKind: "LogAnalyticsQuery";
+  signalKind: SignalKind.LogAnalyticsQuery;
 
   @doc("Query text in KQL syntax")
   @minLength(1)
   @maxLength(5000)
   queryText: string;
+
+  @doc("Time range of signal. ISO duration format like PT10M. If not specified, the KQL query must define a time range.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain?: string;
 
   @doc("Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified.")
   @minLength(1)
@@ -254,12 +267,17 @@ model LogAnalyticsQuerySignalDefinitionProperties
 model PrometheusMetricsSignalDefinitionProperties
   extends SignalDefinitionProperties {
   @doc("Kind of the signal definition")
-  signalKind: "PrometheusMetricsQuery";
+  signalKind: SignalKind.PrometheusMetricsQuery;
 
   @doc("Query text in PromQL syntax")
   @minLength(1)
   @maxLength(5000)
   queryText: string;
+
+  @doc("Time range of signal. ISO duration format like PT10M.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain?: string;
 }
 
 @doc("Signal operator")
@@ -338,22 +356,14 @@ model AuthenticationSettingProperties {
   displayName?: string;
 
   @doc("Kind of the authentication setting")
-  @knownValues(AuthenticationKind)
-  @extension(
-    "x-ms-enum",
-    {
-      name: "AuthenticationKindEnum", // Adding this manually to fix linter issue when using @knownValues
-      modelAsString: true,
-    }
-  )
-  authenticationKind: string; // Cannot use enum directly due to bug https://github.com/Azure/typespec-azure/issues/3574
+  authenticationKind: AuthenticationKind;
 }
 
 @doc("Authentication setting properties for Azure Managed Identity")
 model ManagedIdentityAuthenticationSettingProperties
   extends AuthenticationSettingProperties {
   @doc("Kind of the authentication setting")
-  authenticationKind: "ManagedIdentity";
+  authenticationKind: AuthenticationKind.ManagedIdentity;
 
   @doc("Name of the managed identity to use. Either 'SystemAssigned' or the resourceId of a user-assigned identity.")
   @minLength(1)
@@ -361,7 +371,7 @@ model ManagedIdentityAuthenticationSettingProperties
   managedIdentityName: string;
 }
 
-@doc("An entity (aka node) a health model")
+@doc("An entity (aka node) of a health model")
 @parentResource(HealthModel)
 model Entity is ProxyResource<EntityProperties> {
   @doc("Name of the entity. Must be unique within a health model.")
@@ -403,8 +413,8 @@ model EntityProperties {
   signals?: SignalGroup;
 
   @visibility("read")
-  @doc("Indicates whether this entity was dynamically discovered. If true, the entity cannot be deleted manually.")
-  isDynamicallyDiscovered?: boolean;
+  @doc("Discovered by which discovery rule. If set, the entity cannot be deleted manually.")
+  discoveredBy?: stringResourceName;
 
   @visibility("read")
   @doc("Date when the entity was (soft-)deleted")
@@ -426,11 +436,8 @@ model IconDefinition {
 
 @doc("Contains various signal groups that can be assigned to an entity")
 model SignalGroup {
-  @doc("Azure Resource Signal Group. Can only be defined if dynamicAzureResourceDefinition is not defined.")
+  @doc("Azure Resource Signal Group")
   azureResource?: AzureResourceSignalGroup;
-
-  @doc("Dynamic Azure Resource Signal Group. Can only be defined if azureResource is not defined.")
-  dynamicAzureResources?: DynamicAzureResourcesSignalGroup;
 
   @doc("Log Analytics Signal Group")
   azureLogAnalytics?: LogAnalyticsSignalGroup;
@@ -463,7 +470,9 @@ model SignalAssignmentGroup {
 @doc("Group of signal definition assignments")
 model SignalAssignment {
   @doc("Signal definitions referenced by their names. All definitions are combined with an AND operator.")
-  @maxItems(50)
+  // @maxItems(50) - until the backend supports correlation, we need to limit this to 1
+  @maxItems(1)
+  @minItems(1)
   signalDefinitions: stringResourceName[];
 }
 
@@ -479,21 +488,15 @@ model LogAnalyticsSignalGroup is SignalAssignmentGroup {
   logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
 
   @doc("Log Analytics workspace ID") // Ideally, we dont need this since we also have the Resource Id. But at the moment we need this ID for querying
-  logAnalyticsWorkspaceId: uuid;
+  @minLength(36)
+  @maxLength(36)
+  logAnalyticsWorkspaceId: string;
 }
 
 @doc("A grouping of signal assignments for a Azure Monitor Workspace")
 model AzureMonitorWorkspaceSignalGroup is SignalAssignmentGroup {
   @doc("Azure Monitor workspace resource ID")
   azureMonitorWorkspaceResourceId: AzureMonitorWorkspaceResourceId;
-}
-
-@doc("A grouping of signal assignments for dynamic Azure Resources")
-model DynamicAzureResourcesSignalGroup is SignalAssignmentGroup {
-  @doc("Azure Resource Graph query in KQL syntax to select a dynamic set of Azure resources")
-  @minLength(1)
-  @maxLength(5000)
-  azureResourceGraphQuery: string;
 }
 
 @doc("Type of impact an entity has on health state propagation")
@@ -559,13 +562,77 @@ model RelationshipProperties {
   labels?: Record<string4096>;
 
   @visibility("read")
-  @doc("Indicates whether this relationship was dynamically discovered. If true, the relationship cannot be deleted manually.")
-  isDynamicallyDiscovered?: boolean;
+  @doc("Discovered by which discovery rule. If set, the relationship cannot be deleted manually.")
+  discoveredBy?: stringResourceName;
 
   @visibility("read")
   @doc("Date when the relationship was (soft-)deleted")
   deletionDate?: utcDateTime;
 }
+
+@doc("A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query")
+@parentResource(HealthModel)
+model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
+  @doc("Name of the discovery rule. Must be unique within a health model.")
+  @key("discoveryRuleName")
+  @segment("discoveryrules")
+  @path
+  name: stringResourceName;
+}
+
+@doc("Discovery rule properties")
+model DiscoveryRuleProperties {
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: HealthModelProvisioningState;
+
+  @doc("Display name")
+  @minLength(1)
+  @maxLength(100)
+  displayName?: string;
+
+  @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
+  @minLength(1)
+  @maxLength(5000)
+  resourceGraphQuery: string;
+
+  @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
+  authenticationSetting: stringResourceName;
+
+  @doc("Whether to create an entity for the discovery rule itself. If set, all discovered entities will be children of this entity.")
+  showEntity: DiscoveryRuleShowEntityBehavior;
+
+  @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
+  discoverRelationships: DiscoveryRuleRelationshipDiscoveryBehavior;
+
+  // Will be added later
+  //  @doc("Whether to add all suggested signals to the discovered entities.")
+  //  addAllSuggestedSignals?: boolean;
+}
+
+@doc("Discovery rule show entity behavior")
+enum DiscoveryRuleShowEntityBehavior {
+  @doc("Create an entity for the discovery rule itself")
+  Enabled,
+
+  @doc("Do not create entity for discovery rule")
+  Disabled,
+}
+
+@doc("Discovery rule relationship discovery behavior")
+enum DiscoveryRuleRelationshipDiscoveryBehavior {
+  @doc("Automatically attempt to discover relationships")
+  Enabled,
+
+  @doc("Do not automatically attempt to discover relationships")
+  Disabled,
+}
+
+alias TimestampQueryParam = {
+  @doc("Timestamp to use for the operation. When specified, the version of the resource at this point in time is retrieved. If not specified, the latest version is used.")
+  @query
+  timestamp?: utcDateTime;
+};
 
 @armResourceOperations
 interface HealthModels {
@@ -580,16 +647,19 @@ interface HealthModels {
 @armResourceOperations
 interface SignalDefinitions {
   get is ArmResourceRead<SignalDefinition>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<SignalDefinition>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
   delete is ArmResourceDeleteSync<SignalDefinition>;
 
-  listByParent is ArmResourceListByParent<SignalDefinition>;
+  listByParent is ArmResourceListByParent<
+    SignalDefinition,
+    BaseParameters<SignalDefinition> & TimestampQueryParam
+  >;
 }
 
 @armResourceOperations
 interface AuthenticationSettings {
   get is ArmResourceRead<AuthenticationSetting>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<AuthenticationSetting>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<AuthenticationSetting>;
   delete is ArmResourceDeleteSync<AuthenticationSetting>;
 
   listByParent is ArmResourceListByParent<AuthenticationSetting>;
@@ -598,17 +668,35 @@ interface AuthenticationSettings {
 @armResourceOperations
 interface Entities {
   get is ArmResourceRead<Entity>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<Entity>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Entity>;
   delete is ArmResourceDeleteSync<Entity>;
 
-  listByParent is ArmResourceListByParent<Entity>;
+  listByParent is ArmResourceListByParent<
+    Entity,
+    BaseParameters<Entity> & TimestampQueryParam
+  >;
 }
 
 @armResourceOperations
 interface Relationships {
   get is ArmResourceRead<Relationship>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<Relationship>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Relationship>;
   delete is ArmResourceDeleteSync<Relationship>;
 
-  listByParent is ArmResourceListByParent<Relationship>;
+  listByParent is ArmResourceListByParent<
+    Relationship,
+    BaseParameters<Relationship> & TimestampQueryParam
+  >;
+}
+
+@armResourceOperations
+interface DiscoveryRules {
+  get is ArmResourceRead<DiscoveryRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<DiscoveryRule>;
+  delete is ArmResourceDeleteSync<DiscoveryRule>;
+
+  listByParent is ArmResourceListByParent<
+    DiscoveryRule,
+    BaseParameters<DiscoveryRule> & TimestampQueryParam
+  >;
 }

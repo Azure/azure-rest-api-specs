@@ -49,7 +49,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           }
         ],
         "responses": {
@@ -81,7 +81,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/suppressionLists/{suppressionListName}": {
       "get": {
-        "description": "Get all SuppressionList for a domains resource.",
+        "description": "Get a SuppressionList resource.",
         "operationId": "SuppressionLists_Get",
         "summary": "Get",
         "tags": [
@@ -101,7 +101,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -151,7 +151,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -171,7 +171,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The create or update request was completed successfully",
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListResource"
+            }
+          },
+          "201": {
+            "description": "The resource was created successfully.",
             "schema": {
               "$ref": "#/definitions/SuppressionListResource"
             }
@@ -213,7 +219,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -268,7 +274,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -323,7 +329,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -337,13 +343,6 @@
             "description": "Success. The suppression list address object.",
             "schema": {
               "$ref": "#/definitions/SuppressionListAddressResource"
-            }
-          },
-          "404": {
-            "description": "The address was not found in the suppression list.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -383,7 +382,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -403,7 +402,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The suppression list address object that was updated.",
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListAddressResource"
+            }
+          },
+          "201": {
+            "description": "The resource was created successfully.",
             "schema": {
               "$ref": "#/definitions/SuppressionListAddressResource"
             }
@@ -445,7 +450,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -515,24 +520,22 @@
       "type": "object",
       "properties": {
         "listName": {
-          "description": "The the name of the suppression list. This value must match one of the valid sender usernames of the sending domain. This value can be null; a null listName will apply suppress the address from all emails sent by the parent domainsResource.",
+          "description": "The the name of the suppression list. This value must match one of the valid sender usernames of the sending domain.",
           "type": "string"
-        },
-        "dataLocation": {
-          "description": "The location where the SuppressionList resource data is stored at rest. This property does not need to be set, the dataLocation of the parent domainsResource is used for storing suppressionList data.",
-          "type": "string",
-          "readOnly": true
         },
         "lastUpdatedTimeStamp": {
           "description": "The date the resource was last updated.",
           "type": "string",
-          "format": "date-time",
           "readOnly": true
         },
         "createdTimeStamp": {
           "description": "The date the resource was created.",
           "type": "string",
-          "format": "date-time",
+          "readOnly": true
+        },
+        "dataLocation": {
+          "description": "The location where the SuppressionListAddress data is stored at rest. This value is inherited from the parent Domains resource.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -579,7 +582,13 @@
         "lastModified": {
           "description": "The date the address was last updated in a suppression list.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
+        },
+        "dataLocation": {
+          "description": "The location where the SuppressionListAddress data is stored at rest. This value is inherited from the parent Domains resource.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -610,7 +619,8 @@
       "maxLength": 253,
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9-]+$"
     },
     "SuppressionListName": {
       "name": "suppressionListName",
@@ -620,7 +630,19 @@
       "maxLength": 253,
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9-]+$"
+    },
+    "DomainName": {
+      "name": "domainName",
+      "in": "path",
+      "description": "The name of the Domains resource.",
+      "minLength": 1,
+      "maxLength": 253,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": ".*"
     }
   }
 }

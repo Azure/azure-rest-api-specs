@@ -2541,16 +2541,15 @@
       "type": "object",
       "description": "Blob Catalog type.",
       "properties": {
+        "catalogStorageType": {
+          "$ref": "#/definitions/CatalogStorageType",
+          "description": "Catalog's storage type."
+        },
         "uri": {
           "type": "string",
           "description": "Catalog Storage's URI."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/CatalogBase"
-        }
-      ]
+      }
     },
     "Catalog": {
       "type": "object",
@@ -2560,16 +2559,6 @@
           "$ref": "#/definitions/BlobCatalog"
         }
       ]
-    },
-    "CatalogBase": {
-      "type": "object",
-      "description": "Base type for catalog.",
-      "properties": {
-        "catalogStorageType": {
-          "$ref": "#/definitions/CatalogStorageType",
-          "description": "Catalog's storage type."
-        }
-      }
     },
     "CatalogProperties": {
       "type": "object",

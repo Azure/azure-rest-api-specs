@@ -6,10 +6,10 @@ import { FormatRule } from "./rules/format.js";
 import { GitDiffRule } from "./rules/git-diff.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
-import path from "path";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
 
 export async function main() {
+  const host = new TsvRunnerHost();
   const args = process.argv.slice(2);
   const options = {
     folder: {
@@ -18,10 +18,18 @@ export async function main() {
     },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
-  const folder = parsedArgs.positionals[0].split(path.sep).join("/");
-  console.log("Running TypeSpecValidation on folder:", folder);
+  const folder = parsedArgs.positionals[0];
+  const absolutePath = host.normalizePath(folder);
 
-  const host = new TsvRunnerHost();
+  if (!(await host.checkFileExists(absolutePath))) {
+    console.log(`Folder ${absolutePath} does not exist`);
+    process.exit(1);
+  }
+  if (!(await host.isDirectory(absolutePath))) {
+    console.log(`Please run TypeSpec Validation on a directory path`);
+    process.exit(1);
+  }
+  console.log("Running TypeSpecValidation on folder: ", absolutePath);
 
   const rules = [
     new FolderStructureRule(),
@@ -36,7 +44,7 @@ export async function main() {
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
-    const result = await rule.execute(host, folder);
+    const result = await rule.execute(host, absolutePath);
     if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
       success = false;

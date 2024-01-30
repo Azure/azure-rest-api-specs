@@ -74,10 +74,6 @@ model IngestionSettings {
   dataCollectionEndpointResourceId?: string;
 }
 
-@armCommonDefinition("PrivateEndpointConnection", "v4", "privatelinks.json")
-@doc("PrivateEndpointConnection from the common objects")
-model PrivateEndpointConnection {}
-
 @doc("State of the public network access.")
 enum PublicNetworkAccess {
   @doc("The public network access is enabled")
