@@ -23,6 +23,7 @@ model ApplicationResource is ProxyResource<ApplicationResourceProperties> {
   @doc("The name of the resource")
   @visibility("read")
   @segment("resources")
+  @path
   @key("resourceName")
   name: string;
 }
