@@ -1257,7 +1257,7 @@
         }
       }
     },
-    "/chat/threads/{chatThreadId}/images/{imageId}/view/{viewType}": {
+    "/chat/threads/{chatThreadId}/images/{imageId}/view/{imageViewType}": {
       "get": {
         "tags": [
           "Images"
@@ -2096,7 +2096,7 @@
   "parameters": {
     "ImageViewTypeParameter": {
       "in": "path",
-      "name": "viewType",
+      "name": "imageViewType",
       "description": "The view type of image.",
       "required": true,
       "enum": [
@@ -2105,10 +2105,9 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ImaveViewType",
+        "name": "ImageViewType",
         "modelAsString": true
-      },
-      "x-ms-parameter-location": "path"
+      }
     },
     "ApiVersionParameter": {
       "in": "query",
