@@ -2778,7 +2778,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetsharedkey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKey/reset": {
       "post": {
         "tags": [
           "vpnLinkConnections"
@@ -2824,7 +2824,7 @@
             "schema": {
               "$ref": "#/definitions/ConnectionResetSharedKey"
             },
-            "description": "Parameters supplied to the begin reset vpnsitelink connection shared key operation through network resource provider."
+            "description": "Parameters supplied to the begin reset VpnLink connection shared key operation through network resource provider."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -9961,7 +9961,7 @@
       "required": [
         "value"
       ],
-      "description": "Response for GetvpnsitelinkConnectionSharedKey API service call."
+      "description": "Response for get VpnLink connection shared key value service call."
     },
     "ConnectionResetSharedKey": {
       "properties": {
