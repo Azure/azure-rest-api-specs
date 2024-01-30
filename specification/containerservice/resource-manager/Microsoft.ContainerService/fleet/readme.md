@@ -31,7 +31,7 @@ tag: package-2024-02-preview
 ```
 
 
-### Tag: ackage-2024-02-preview
+### Tag: package-2024-02-preview
 
 These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
 
