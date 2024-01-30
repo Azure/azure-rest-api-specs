@@ -43,12 +43,17 @@ suppressions:
   - code: ResourceNameRestriction
     from: playwrighttesting.json
     reason: We have enums defined for quota resource names which doesn't support string pattern validation.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas/{quotaName}"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}/quotas/{quotaName}"].get
   - code: ProvisioningStateMustBeReadOnly
     from: playwrighttesting.json
     reason: Seems like a tool bug, as the visibility is set to read only in the TypeSpec already.
   - code: DeleteResponseCodes
     from: playwrighttesting.json
     reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}"].delete
 ```
 
 ### Tag: package-2023-10-01-preview
