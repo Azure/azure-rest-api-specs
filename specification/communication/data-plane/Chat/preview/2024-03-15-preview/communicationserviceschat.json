@@ -1793,7 +1793,7 @@
           }
         },
         "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy"
+          "$ref": "#/definitions/ChatRetentionPolicy"
         }
       }
     },
@@ -1840,7 +1840,7 @@
           }
         },
         "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy"
+          "$ref": "#/definitions/ChatRetentionPolicy"
         }
       }
     },
@@ -1932,7 +1932,7 @@
           }
         },
         "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy"
+          "$ref": "#/definitions/ChatRetentionPolicy"
         }
       }
     },
@@ -1947,19 +1947,19 @@
         }
       }
     },
-    "RetentionPolicy": {
+    "ChatRetentionPolicy": {
       "description": "Data retention policy for auto deletion.",
       "type": "object",
-      "discriminator": "policyType",
+      "discriminator": "kind",
       "properties": {
-        "policyType": {
+        "kind": {
           "description": "Retention Policy Type",
           "enum": [
             "threadCreationDate"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "policyType",
+            "name": "RetentionPolicyKind",
             "modelAsString": true,
             "values": [
               {
@@ -1971,7 +1971,7 @@
         }
       },
       "required": [
-        "policyType"
+        "kind"
       ]
     },
     "ThreadCreationDateRetentionPolicy": {
@@ -1980,18 +1980,18 @@
       "x-ms-discriminator-value": "threadCreationDate",
       "allOf": [
         {
-          "$ref": "#/definitions/RetentionPolicy"
+          "$ref": "#/definitions/ChatRetentionPolicy"
         }
       ],
       "properties": {
-        "daysAfterCreation": {
+        "deleteThreadAfterDays": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates how many days after the thread creation the thread will be deleted."
         }
       },
       "required": [
-        "daysAfterCreation"
+        "deleteThreadAfterDays"
       ]
     },
     "ChatImageFile": {
