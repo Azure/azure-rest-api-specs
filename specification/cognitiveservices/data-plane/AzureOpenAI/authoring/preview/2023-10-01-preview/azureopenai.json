@@ -2309,6 +2309,46 @@
         }
       }
     },
+    "BlobMetadataToIndexFieldMapping": {
+      "title": "BlobMetadataToIndexFieldMapping",
+      "description": "A mapping of blob metadata to index fields. The key is the blob metadata name.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/IndexField"
+      }
+    },
+    "IndexField": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/IndexFieldKind"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "IndexFieldKind":{
+      "type": "string",
+      "enum": [
+        "prebuild"
+      ]
+    },
+    "PrebuildIndexField": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IndexField"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "prebuild"
+    },
     "IngestionJobCompletionAction": {
       "title": "IngestionJobCompletionAction",
       "description": "The action to take on ingestion job completion.",
@@ -2378,6 +2418,9 @@
         },
         "progress": {
           "$ref": "#/definitions/IngestionJobProgress"
+        },
+        "blobMetadataToIndexFieldMapping": {
+          "$ref": "#/definitions/BlobMetadataToIndexFieldMapping"
         }
       }
     },
