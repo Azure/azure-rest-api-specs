@@ -3,11 +3,6 @@ import "../main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-// Azure-specific Chat Completions with extensions should be handled by clients as a conditional selection within the
-// shared Chat Completions route, with the selection gated by the presence or non-presence of additional child
-// configuration options on the request payload options model.
-@@access(Azure.OpenAI.getChatCompletionsWithAzureExtensions, Access.internal);
-
 // In C#, the functionality provided by the `response_format` property used in image generations is handled by unique
 // method signatures for the different response types (i.e. blob URL versus base64 methods).
 @@access(Azure.OpenAI.ImageGenerationResponseFormat, Access.internal, "csharp");
@@ -28,18 +23,18 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.AudioTranslation, Access.public, "java");
 @@access(Azure.OpenAI.AudioTranslationOptions, Access.public, "java");
 
-@@access(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions,
+@@access(Azure.OpenAI.AzureSearchIndexFieldMappingOptions,
   Access.public
 );
-@@usage(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions, Usage.input);
+@@usage(Azure.OpenAI.AzureSearchIndexFieldMappingOptions, Usage.input);
 
-@@access(Azure.OpenAI.AzureCognitiveSearchQueryType, Access.public);
-@@usage(Azure.OpenAI.AzureCognitiveSearchQueryType, Usage.input);
+@@access(Azure.OpenAI.AzureSearchQueryType, Access.public);
+@@usage(Azure.OpenAI.AzureSearchQueryType, Usage.input);
 
-@@access(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
+@@access(Azure.OpenAI.AzureSearchChatExtensionConfiguration,
   Access.public
 );
-@@usage(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
+@@usage(Azure.OpenAI.AzureSearchChatExtensionConfiguration,
   Usage.input
 );
 

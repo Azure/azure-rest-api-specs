@@ -44,7 +44,7 @@ model ChatCompletionsNamedFunctionToolSelection
   function: ChatCompletionsFunctionToolSelection;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
 model ChatCompletionsFunctionToolSelection {
   @doc("The name of the function that should be called.")
