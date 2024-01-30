@@ -163,12 +163,7 @@ model Error {
 /**
  * The springbootservers resource patch definition.
  */
-model SpringbootserversPatch extends ProxyResource<SpringbootserversProperties> {
-  /**
-   * Resource tags
-   */
-  tags?: Record<string>;
-}
+model SpringbootserversPatch extends ProxyResource<SpringbootserversProperties> {}
 
 /**
  * The springbootapps resource definition.
@@ -361,12 +356,7 @@ model SpringbootappsPropertiesInstancesItem {
 /**
  * The springbootapps resource patch definition.
  */
-model SpringbootappsPatch extends ProxyResource<SpringbootappsProperties> {
-  /**
-   * Resource tags
-   */
-  tags?: Record<string>;
-}
+model SpringbootappsPatch extends ProxyResource<SpringbootappsProperties> {}
 
 /**
  * Summaries properties

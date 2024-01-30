@@ -1634,34 +1634,19 @@
       "type": "object",
       "description": "The springbootapps resource patch definition.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "properties": {
+          "$ref": "#/definitions/SpringbootappsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
         {
-          "type": "object",
-          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/SpringbootappsProperties",
-              "description": "The resource-specific properties for this resource.",
-              "x-ms-client-flatten": true,
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
-            }
-          },
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-            }
-          ]
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1938,34 +1923,19 @@
       "type": "object",
       "description": "The springbootservers resource patch definition.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "properties": {
+          "$ref": "#/definitions/SpringbootserversProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
         {
-          "type": "object",
-          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/SpringbootserversProperties",
-              "description": "The resource-specific properties for this resource.",
-              "x-ms-client-flatten": true,
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
-            }
-          },
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-            }
-          ]
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
