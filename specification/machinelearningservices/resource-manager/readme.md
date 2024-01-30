@@ -57,7 +57,7 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: There is a similar usage in existing jobs.
     where:
-      - $.definitions["FineTuningJob"].properties.outputs
+      - $.definitions["FineTuningJob"].properties["outputs"]
 ```
 ### Tag: package-preview-2023-08
 
