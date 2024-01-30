@@ -938,17 +938,25 @@
       "properties": {
         "tenantId": {
           "type": "string",
-          "description": "The identity tenantId",
+          "description": "The tenantId of the identity.",
           "readOnly": true
         },
         "principalId": {
           "type": "string",
-          "description": "The identity principal ID",
+          "description": "The principalId of the identity.",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "The identity type"
+          "description": "The type of identity used for the Streaming Job.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
         }
       }
     }
