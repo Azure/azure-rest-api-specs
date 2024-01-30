@@ -30,7 +30,8 @@ interface IspCustomers {
   @doc("This api updates an existing ispCustomer resource")
   update is ArmCustomPatchSync<
     IspCustomerResource,
-    ConnectedCachePatchResource>;
+    ConnectedCachePatchResource
+  >;
   @doc("This api deletes an existing ispCustomer resource")
   delete is ArmResourceDeleteWithoutOkAsync<IspCustomerResource>;
   @doc("This api gets the information about all ispCustomer resources under the given subscription and resource group")

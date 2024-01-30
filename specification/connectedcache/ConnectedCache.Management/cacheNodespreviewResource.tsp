@@ -23,14 +23,17 @@ model CacheNodePreviewResource is TrackedResource<CacheNodeOldResponse> {
 
 @armResourceOperations
 interface CacheNodesOperations {
-  @doc("Retrieves the properties of a cacheNodes")  
+  @doc("Retrieves the properties of a cacheNodes")
   get is ArmResourceRead<CacheNodePreviewResource>;
   @doc("Creates a cacheNodes with the specified create parameters")
   createorUpdate is ArmResourceCreateOrReplaceAsync<CacheNodePreviewResource>;
   @doc("Deletes an existing cache Node")
   delete is ArmResourceDeleteSync<CacheNodePreviewResource>;
   @doc("updates an existing Cache Node")
-  update is ArmCustomPatchSync<CacheNodePreviewResource,ConnectedCachePatchResource>;
+  update is ArmCustomPatchSync<
+    CacheNodePreviewResource,
+    ConnectedCachePatchResource
+  >;
   @doc("Retrieves the properties of all ConnectedCache")
   listByResourceGroup is ArmResourceListByParent<CacheNodePreviewResource>;
   @doc("Retrieves the properties of all ConnectedCaches")

@@ -29,7 +29,10 @@ interface EnterpriseCustomerOperations {
   @doc("Creates a cacheNodes with the specified create parameters")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EnterprisePreviewResource>;
   @doc("updates an existing enterpriseCustomers")
-  update is ArmCustomPatchSync<EnterprisePreviewResource, ConnectedCachePatchResource>;
+  update is ArmCustomPatchSync<
+    EnterprisePreviewResource,
+    ConnectedCachePatchResource
+  >;
   @doc("Deletes an existing customer Enterprise resource")
   delete is ArmResourceDeleteSync<EnterprisePreviewResource>;
   @doc("Retrieves the properties of all ConnectedCache enterpriseCustomers")

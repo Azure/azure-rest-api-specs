@@ -13,13 +13,17 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("provisioning state of the resource")
 enum ProvisioningState {
-  ...ResourceProvisioningState,  
+  ...ResourceProvisioningState,
+
   /** unknown  state of the provisioning state */
   Unknown,
+
   /** Accepted state of the provisioning state during the Async Operations */
   Accepted,
+
   /** Upgrading state of the provisioning state */
   Upgrading,
+
   /** Deleting state of the provisioning state */
   Deleting,
 }
@@ -183,7 +187,7 @@ model CustomerEntity {
   @doc("Customer resource contact full name.")
   contactName?: string;
 
-  @doc("Customer resource entitilment flag as boolean.")
+  @doc("Customer resource entitlement flag as boolean.")
   isEntitled?: boolean;
 
   @doc("Customer resource Mcc release version.")
@@ -688,7 +692,8 @@ model ProxyUrlConfiguration {
 
 @doc("Represents all Cidr details of the Bgp request for a specific cache node resource")
 model MccCacheNodeBgpCidrDetails {
-  ...Azure.ResourceManager.Foundations.TrackedResourceBase,
+  ...Azure.ResourceManager.Foundations.TrackedResourceBase;
+
   @doc("Mcc cache node resource Bgp Cidr properties.")
   properties?: BgpCidrsConfiguration;
 }
@@ -701,7 +706,8 @@ model BgpCidrsConfiguration {
 
 @doc("Mcc cache node resource all install details.")
 model MccCacheNodeInstallDetails {
-  ...Azure.ResourceManager.Foundations.TrackedResourceBase,
+  ...Azure.ResourceManager.Foundations.TrackedResourceBase;
+
   @doc("Mcc cache node resource install script details.")
   properties?: CacheNodeInstallProperties;
 }

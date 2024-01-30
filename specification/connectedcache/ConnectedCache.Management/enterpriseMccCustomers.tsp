@@ -11,7 +11,7 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.ConnectedCache;
 
 @doc("Represents the high level Nodes needed to provision customer resources")
-model EnterpriseMccCustomerResource is TrackedResource<CustomerProperty>{
+model EnterpriseMccCustomerResource is TrackedResource<CustomerProperty> {
   @doc("Name of the Customer resource")
   @maxLength(90)
   @minLength(1)
@@ -23,7 +23,7 @@ model EnterpriseMccCustomerResource is TrackedResource<CustomerProperty>{
 }
 
 @armResourceOperations
-interface EnterpriseMccCustomers { 
+interface EnterpriseMccCustomers {
   @doc("Gets the enterprise mcc customer resource information using this get call")
   get is ArmResourceRead<EnterpriseMccCustomerResource>;
   @doc("This api creates an enterprise mcc customer with the specified create parameters")
@@ -31,7 +31,8 @@ interface EnterpriseMccCustomers {
   @doc("This api updates an existing enterprise mcc customer resource")
   update is ArmCustomPatchSync<
     EnterpriseMccCustomerResource,
-    ConnectedCachePatchResource>;
+    ConnectedCachePatchResource
+  >;
   @doc("This api deletes an existing enterprise mcc customer resource")
   delete is ArmResourceDeleteWithoutOkAsync<EnterpriseMccCustomerResource>;
   @doc("This api gets the information about all enterprise mcc customer resources under the given subscription and resource group")
