@@ -893,6 +893,7 @@ model BatchJobStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
+  @projectedName("client", "userCpuTime")
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
@@ -2251,6 +2252,7 @@ model BatchJobScheduleStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
+  @projectedName("client", "userCpuTime")
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
@@ -3435,6 +3437,7 @@ model BatchTaskStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
+  @projectedName("client", "userCpuTime")
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
