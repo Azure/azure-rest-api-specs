@@ -1,0 +1,206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Edge Sites",
+    "version": "2023-08-01-preview",
+    "description": "Azure Edge Sites Resource Provider management API."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Edge/siteAwareResourceTypes": {
+      "get": {
+        "tags": [
+          "SiteAwareResourceTypes"
+        ],
+        "operationId": "SiteAwareResourceTypes_List",
+        "description": "List Singleton SiteAwareResourceTypes Object.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteAwareResourceTypesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List by Subscription": {
+            "$ref": "./examples/ListSiteAwareResourceTypes.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Edge/siteAwareResourceTypes/default": {
+      "get": {
+        "tags": [
+          "SiteAwareResourceTypes"
+        ],
+        "operationId": "SiteAwareResourceTypes_Get",
+        "description": "Get Site Aware Resource Types",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteAwareResourceTypes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Show All Site Aware Resource Types": {
+            "$ref": "./examples/GetSiteAwareResourceTypes.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SiteAwareResourceTypesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteAwareResourceTypes"
+          },
+          "description": "The list returning singleton instance of siteAwareResourceTypes object."
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response returning singleton instance of siteAwareResourceTypes object.",
+      "required": [
+        "value"
+      ]
+    },
+    "SiteAwareResourceTypes": {
+      "description": "Displays all the resource types which support Sites.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SiteAwareResourceTypesProperties",
+          "description": "The properties for this resource type.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SiteAwareResourceTypesProperties": {
+      "description": "Properties of the SiteAwareResourceTypes resource type.",
+      "type": "object",
+      "properties": {
+        "supportedResourceTypes": {
+          "description": "Details for each SiteAwareResourceType",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteAwareResourceTypesDetails"
+          },
+          "x-ms-identifiers": [
+            "resourceType"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "./edgesites.json#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "SiteAwareResourceTypesDetails": {
+      "description": "The properties and availability status of each resource type which recognizes Sites as an aggregation concept.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Name to be displayed on portal.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceType": {
+          "description": "Fully qualified name of the resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "availabilityStatus": {
+          "description": "Distinguishes whether RP is already supported or coming soon.",
+          "type": "string",
+          "enum": [
+            "ComingSoon",
+            "Supported"
+          ],
+          "x-ms-enum": {
+            "name": "availabilityStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "supportedCapabilities": {
+          "description": "Aggregation properties which are currently supported.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          },
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
