@@ -62,6 +62,29 @@ suppressions:
     reason: There is a similar usage in existing jobs.
     where:
       - $.definitions["FineTuningJob"].properties["outputs"]
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
+  - code: PutResponseCodes
+    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
+  - code: AvoidAdditionalProperties
+    reason: This is an external reference right now, we will have full control on the schema returned in the upcoming version and will avoid this.
+    from: workspaceRP.json
+    where:
+      - $.definitions.AccountModel.properties.finetuneCapabilities
+      - $.definitions.AccountModel.properties.capabilities
+      - $.definitions.EndpointModels.properties.value.items.properties.capabilities
+      - $.definitions.EndpointModels.properties.value.items.properties.finetuneCapabilities
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
+    from: workspaceRP.json    
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
 ```
 ### Tag: package-preview-2023-08
 
