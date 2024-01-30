@@ -36,15 +36,14 @@
   ],
   "security": [
     {
-      "AzureAuth": [
+      "OAuth2Auth": [
         "https://eventhubs.azure.net/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "AzureAuth": {
+    "OAuth2Auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
@@ -642,28 +641,6 @@
           "description": "Inner error."
         }
       }
-    },
-    "AzureAuth": {
-      "type": "object",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows"
-      ]
     },
     "PagedSchemaGroup": {
       "type": "object",

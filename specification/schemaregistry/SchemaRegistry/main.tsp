@@ -9,7 +9,17 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
-@useAuth(AzureAuth)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+
+      // add description to below: "impersonate your user account"
+      scopes: ["https://eventhubs.azure.net/.default"];
+    }
+  ]>;
+)
 @service({
   title: "Azure Schema Registry",
 })
@@ -47,18 +57,6 @@ enum ServiceApiVersions {
   @doc("Azure Schema Registry 2023-07-01 Version. This is the default version.")
   V2023_07_01: "2023-07-01",
 }
-
-@doc("Azure Active Directory OAuth2 Flow")
-model AzureAuth
-  is OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit;
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
-
-      // add description to below: "impersonate your user account"
-      scopes: ["https://eventhubs.azure.net/.default"];
-    }
-  ]>;
 
 // ROUTES
 alias resourceOperations = Azure.Core.StandardResourceOperations;
