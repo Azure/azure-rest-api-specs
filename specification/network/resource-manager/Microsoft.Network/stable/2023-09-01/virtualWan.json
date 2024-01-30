@@ -2676,7 +2676,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns the shared key of VpnSiteLinkConnection.",
+            "description": "Request successful. Returns the shared key of VpnLink connection.",
             "schema": {
               "$ref": "#/definitions/ConnectionSharedKey"
             }
@@ -2741,7 +2741,7 @@
             "schema": {
               "$ref": "#/definitions/ConnectionSharedKey"
             },
-            "description": "VpnsiteLinkConnection sharedKey to specify for set."
+            "description": "VpnLink connection sharedKey to specify for set."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -2749,19 +2749,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation set the shared key of vpnsitelinkconnection.",
+            "description": "Request successful. The operation set the shared key of VpnLink connection.",
             "schema": {
               "$ref": "#/definitions/ConnectionSharedKey"
             }
           },
           "202": {
-            "description": "Accepted and the operation set shared key of vpnsitelinkconnection will complete asynchronously.",
+            "description": "Accepted and the operation set shared key of VpnLink connection will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ConnectionSharedKey"
             }
           },
           "default": {
-            "description": "The operation set shared key of vpnsitelinkconnection could not be completed.",
+            "description": "The operation set shared key of VpnLink connection could not be completed.",
             "schema": {
               "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
             }
@@ -2832,7 +2832,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation Reset shared key of vpnsitelinkconnection.",
+            "description": "Request successful. The operation Reset shared key of VpnLink connection.",
             "schema": {
               "$ref": "#/definitions/ConnectionResetSharedKey"
             }
@@ -7975,7 +7975,7 @@
         "dpdTimeoutSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "DPD timeout in seconds for vpnsite link connection."
+          "description": "DPD timeout in seconds for VpnLink connection."
         }
       },
       "description": "Parameters for VpnConnection."
@@ -9950,7 +9950,7 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "The vpnsite link connection shared key value."
+          "description": "The VpnLink connection shared key value."
         }
       },
       "allOf": [
@@ -9970,13 +9970,13 @@
           "format": "int32",
           "minimum": 1,
           "maximum": 128,
-          "description": "The vpnsite link connection reset shared key length, should between 1 and 128."
+          "description": "The VpnLink connection reset shared key length, should between 1 and 128."
         }
       },
       "required": [
         "keyLength"
       ],
-      "description": "The vpnsite link connection reset shared key."
+      "description": "The VpnLink connection reset shared key."
     }
   }
 }
