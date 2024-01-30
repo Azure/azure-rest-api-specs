@@ -27,9 +27,23 @@ These are the global settings for the devcenter.
 ``` yaml
 openapi-type: data-plane
 azure-arm: false
-tag: package-2023-10-01-preview
+tag: package-2024-02-01
 ```
 
+### Tag: 2024-02-01
+
+These settings apply only when `--tag=package-2024-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02-01'
+input-file:
+  - Microsoft.DevCenter/stable/2024-02-01/devbox.json
+  - Microsoft.DevCenter/stable/2024-02-01/devcenter.json
+  - Microsoft.DevCenter/stable/2024-02-01/environments.json
+
+directive:
+  - suppress: HostParametersValidation
+    reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
+```
 
 ### Tag: package-2023-10-01-preview
 
