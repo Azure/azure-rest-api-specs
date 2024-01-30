@@ -23,7 +23,7 @@ model ExposureFeature is ProxyResource<ExposureFeatureProperties> {
   @pattern("^[-\\w\\._]+$")
   @key("featureName")
   @path
-  @segment("features")
+  @segment("exposureFeatures")
   name: string;
 }
 
@@ -36,4 +36,3 @@ model ExposureFeatureProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
-

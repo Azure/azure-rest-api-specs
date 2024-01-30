@@ -5,6 +5,7 @@ import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
+import "@typespec/openapi";
 
 import "./CommonResources.tsp";
 
@@ -13,23 +14,23 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 @doc("Exposure Control Resource Provider Service API.")
 namespace Microsoft.Edge;
 
-
 @doc("Exposure workflow manifest definition Properties")
 model ExposureWorkflowManifestProperties {
-
   @doc("Feature Name.")
   exposureFeatureId: string;
-  
+
   @doc("Ring description.")
   discriminator: string;
 
-  @doc("default ring.")
+  @doc("default override start ring.")
   overrideDefaultStartRing?: string;
 
+  #suppress "@azure-tools/typespec-providerhub/no-identifier-property-in-array-item" "Error items have no unique identifier."
   @doc("ring configuration properties.")
   ringConfigurations: Array<RingConfigurationProperties>;
 
@@ -39,7 +40,8 @@ model ExposureWorkflowManifestProperties {
 }
 
 @doc("A exposure control manifest resource")
-model ExposureWorkflowManifest is ProxyResource<ExposureWorkflowManifestProperties> {
+model ExposureWorkflowManifest
+  is ProxyResource<ExposureWorkflowManifestProperties> {
   @doc("Name of exposure control manifest")
   @pattern("^[-\\w\\._]+$")
   @key("exposureWorkflowManifestName")
@@ -79,6 +81,7 @@ model ProgressionMethod {
 enum ProgressionType {
   @doc("Fixed time based progression.")
   TimeBased,
+
   @doc("Custom defined progression.")
   Custom,
 }
@@ -87,17 +90,17 @@ enum ProgressionType {
 enum GateStatus {
   @doc("Open.")
   Open,
+
   @doc("Closed.")
   Closed,
 }
 
 @doc("Ring configuration Properties")
 model RingConfigurationProperties {
-
   @doc("Ring name.")
   name: string;
 
-  @doc("Group names.")
+  @doc("Exposure Group Id's.")
   exposureGroupIds: Array<string>;
 
   @doc("Ring status.")
@@ -106,12 +109,3 @@ model RingConfigurationProperties {
   @doc("Progression settings.")
   progressionSetting: ProgressionSetting;
 }
-
-
-
-
-
-
-
-
-

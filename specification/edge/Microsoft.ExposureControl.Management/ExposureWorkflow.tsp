@@ -30,8 +30,7 @@ model ExposureWorkflow is ProxyResource<ExposureWorkflowProperties> {
 
 @doc("Exposure workflow Properties")
 model ExposureWorkflowProperties {
-
-  @doc("Feature Name.")
+  @doc("Feature unique Id.")
   @visibility("read")
   exposureFeatureId: string;
 
@@ -42,6 +41,7 @@ model ExposureWorkflowProperties {
   @visibility("read")
   exposureWorkflowManifestId: string;
 
+  #suppress "@azure-tools/typespec-providerhub/no-identifier-property-in-array-item" "Error items have no unique identifier."
   @doc("Ring configuration details.")
   @visibility("read")
   rings: Array<ExposureWorkflowRingConfigurationProperties>;
@@ -83,6 +83,7 @@ model ExposureWorkflowRingConfigurationProperties {
   @visibility("read")
   name: string;
 
+  #suppress "@azure-tools/typespec-providerhub/no-identifier-property-in-array-item" "Error items have no unique identifier."
   @doc("Group Properties.")
   @visibility("read")
   exposureGroupProperties: Array<ExposureGroupProperties>;
@@ -97,4 +98,16 @@ model ExposureWorkflowRingConfigurationProperties {
   @doc("Progression settings.")
   @visibility("read")
   progressionSetting: ProgressionSetting;
+}
+
+@doc("Exposure workflow update object.")
+model ExposureWorkflowUpdate {
+  @doc("Exposure workflow update properties")
+  properties: ExposureWorkflowUpdateProperties;
+}
+
+@doc("Exposure workflow update properties")
+model ExposureWorkflowUpdateProperties {
+  @doc("Ring status")
+  status: RingStatus;
 }

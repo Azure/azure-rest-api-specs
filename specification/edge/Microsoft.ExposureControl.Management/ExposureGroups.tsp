@@ -19,17 +19,17 @@ namespace Microsoft.Edge;
 
 @doc("A exposure control group resource")
 model ExposureGroup is ProxyResource<ExposureGroupProperties> {
-  @doc("Name of Group")
+  @doc("Name of Exposure Group")
   @pattern("^[-\\w\\._]+$")
   @key("groupName")
   @path
-  @segment("groups")
+  @segment("exposureGroups")
   name: string;
 }
 
 @doc("Group Properties")
 model ExposureGroupProperties {
-  
+  #suppress "@azure-tools/typespec-providerhub/no-identifier-property-in-array-item" "Error items have no unique identifier."
   @doc("filter conditions.")
   filterConditions: Array<FilterCondition>;
 
@@ -46,4 +46,3 @@ model FilterCondition {
   @doc("values.")
   values: Array<string>;
 }
-

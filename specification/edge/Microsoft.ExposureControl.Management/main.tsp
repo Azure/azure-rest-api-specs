@@ -19,7 +19,7 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service({
-  title: "ExposureControlService"
+  title: "ExposureControlService",
 })
 @versioned(Versions)
 @doc("Exposure Control Resource Provider Service API.")
@@ -37,42 +37,70 @@ enum Versions {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface ExposureGroups extends Azure.ResourceManager.ProxyResourceOperations<ExposureGroup, ExposureGroupProperties> {
+interface ExposureGroups
+  extends Azure.ResourceManager.ProxyResourceOperations<
+      ExposureGroup,
+      ExposureGroupProperties
+    > {
   get is ArmResourceRead<ExposureGroup>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ExposureGroup>;
   delete is ArmResourceDeleteWithoutOkAsync<ExposureGroup>;
-  list is ArmResourceListByParent<ExposureGroup, Azure.ResourceManager.Foundations.BaseParameters<ExposureGroup>
-   & Azure.Core.StandardListQueryParameters & Azure.Core.FilterQueryParameter>;
+  list is ArmResourceListByParent<
+    ExposureGroup,
+    Azure.ResourceManager.Foundations.BaseParameters<ExposureGroup> &
+      Azure.Core.StandardListQueryParameters &
+      Azure.Core.FilterQueryParameter
+  >;
 }
 
 @armResourceOperations
-interface ExposureFeatures extends Azure.ResourceManager.ProxyResourceOperations<ExposureFeature, ExposureFeatureProperties> {
+interface ExposureFeatures
+  extends Azure.ResourceManager.ProxyResourceOperations<
+      ExposureFeature,
+      ExposureFeatureProperties
+    > {
   get is ArmResourceRead<ExposureFeature>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ExposureFeature>;
   delete is ArmResourceDeleteWithoutOkAsync<ExposureFeature>;
-  list is ArmResourceListByParent<ExposureFeature, Azure.ResourceManager.Foundations.BaseParameters<ExposureFeature>
-  & Azure.Core.StandardListQueryParameters & Azure.Core.FilterQueryParameter>;
+  list is ArmResourceListByParent<
+    ExposureFeature,
+    Azure.ResourceManager.Foundations.BaseParameters<ExposureFeature> &
+      Azure.Core.StandardListQueryParameters &
+      Azure.Core.FilterQueryParameter
+  >;
 }
 
 @armResourceOperations
-interface ExposureWorkflowManifests extends Azure.ResourceManager.ProxyResourceOperations<ExposureWorkflowManifest, ExposureWorkflowManifestProperties> {
+interface ExposureWorkflowManifests
+  extends Azure.ResourceManager.ProxyResourceOperations<
+      ExposureWorkflowManifest,
+      ExposureWorkflowManifestProperties
+    > {
   get is ArmResourceRead<ExposureWorkflowManifest>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ExposureWorkflowManifest>;
   delete is ArmResourceDeleteWithoutOkAsync<ExposureWorkflowManifest>;
-  list is ArmResourceListByParent<ExposureWorkflowManifest, Azure.ResourceManager.Foundations.BaseParameters<ExposureWorkflowManifest>
-  & Azure.Core.StandardListQueryParameters & Azure.Core.FilterQueryParameter>;
+  list is ArmResourceListByParent<
+    ExposureWorkflowManifest,
+    Azure.ResourceManager.Foundations.BaseParameters<ExposureWorkflowManifest> &
+      Azure.Core.StandardListQueryParameters &
+      Azure.Core.FilterQueryParameter
+  >;
 }
 
 @armResourceOperations
-interface ExposureWorkflows  extends Azure.ResourceManager.ProxyResourceOperations<ExposureWorkflow, ExposureWorkflowProperties>{
+interface ExposureWorkflows
+  extends Azure.ResourceManager.ProxyResourceOperations<
+      ExposureWorkflow,
+      ExposureWorkflowProperties
+    > {
   get is ArmResourceRead<ExposureWorkflow>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ExposureWorkflow>;
   delete is ArmResourceDeleteWithoutOkAsync<ExposureWorkflow>;
-  list is ArmResourceListByParent<ExposureWorkflow, Azure.ResourceManager.Foundations.BaseParameters<ExposureWorkflow>
-  & Azure.Core.StandardListQueryParameters & Azure.Core.FilterQueryParameter>;
+  list is ArmResourceListByParent<
+    ExposureWorkflow,
+    Azure.ResourceManager.Foundations.BaseParameters<ExposureWorkflow> &
+      Azure.Core.StandardListQueryParameters &
+      Azure.Core.FilterQueryParameter
+  >;
+  update is ArmCustomPatchSync<ExposureWorkflow, ExposureWorkflowUpdate>;
 }
-
-  @patch
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureWorkflows/{exposureWorkflowName}/updateStatus")
-  @doc("update ring status in Exposure workflow")
-  op updateWorkflowCurrentRingStatusAsync(subscriptionId : string, resourceGroupName: string, exposureWorkflowName: string, @body status: RingStatus):ExposureWorkflow;

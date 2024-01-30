@@ -53,5 +53,5 @@ enum RingStatus {
   AutoPassed,
 
   @doc("Omitted.")
-  Omitted
+  Omitted,
 }
