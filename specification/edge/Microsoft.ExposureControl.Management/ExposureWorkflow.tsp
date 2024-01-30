@@ -35,7 +35,7 @@ model ExposureWorkflowProperties {
   @visibility("read")
   exposureFeatureId: string;
 
-  @doc("Workflow descriminator.")
+  @doc("Workflow discriminator.")
   discriminator: string;
 
   @doc("Workflow manifest Id.")
