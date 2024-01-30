@@ -227,7 +227,7 @@ npx tsv specification/contosowidgetmanager/Contoso.WidgetManager
 Then check any errors that might be outputted and address any issues as needed. If there are changed files after the runit generally means
 that the generated OpenAPI spec files were not in-sync with the TypeSpec project and you should include those changes in your pull request as well. 
 
-If none of the above helped, please reach out on [TypeSpec Discussions Teams channel]. 
+If none of the above helped, please reach out on [TypeSpec Discussions Teams channel].
 
 ## Suppression Process
 
