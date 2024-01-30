@@ -44,8 +44,8 @@ suppressions:
     from: playwrighttesting.json
     reason: We have enums defined for quota resource names which doesn't support string pattern validation.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas/{quotaName}"].get
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}/quotas/{quotaName}"].get
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas/{quotaName}"].get.parameters.3
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}/quotas/{quotaName}"].get.parameters.4
   - code: ProvisioningStateMustBeReadOnly
     from: playwrighttesting.json
     reason: Seems like a tool bug, as the visibility is set to read only in the TypeSpec already.
