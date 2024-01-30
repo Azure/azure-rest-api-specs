@@ -27,7 +27,7 @@ These are the global settings for the hybridconnectivity.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-03-15
+tag: package-2024-08-01-preview
 ```
 
 ### Tag: package-2023-03
@@ -104,8 +104,8 @@ directive:
     from: publicCloud.json
     where:
       - $.definitions.SolutionConfigurationUpdateProperties.properties.solutionSettings
-      - $.definitions.SolutionConfigurationUpdate.properties.SolutionConfigurationUpdateProperties.properties.solutionSettings
-      - $.definitions.SolutionConfiguration.properties.SolutionConfigurationProperties.properties.solutionSettings
+      - $.definitions.SolutionConfigurationUpdate.properties.properties.SolutionConfigurationUpdateProperties.properties.solutionSettings
+      - $.definitions.SolutionConfiguration.properties.properties.SolutionConfigurationProperties.properties.solutionSettings
       - $.definitions.SolutionConfigurationProperties.properties.solutionSettings
       - $.definitions.SolutionTypeSettings.properties.solutionSettings
 ```
