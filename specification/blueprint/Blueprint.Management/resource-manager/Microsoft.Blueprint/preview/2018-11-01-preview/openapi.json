@@ -60,6 +60,65 @@
     }
   ],
   "paths": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{resourceScope}/{blueprintName}": {
+      "get": {
+        "operationId": "PublishedBlueprints_List",
+        "tags": [
+          "Blueprints"
+        ],
+        "description": "List published versions of given blueprint definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceScope",
+            "in": "path",
+            "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blueprintName",
+            "in": "path",
+            "description": "Name of the blueprint definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedPublishedBlueprint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublishedManagementGroupBlueprint": {
+            "$ref": "./examples/PublishedBlueprints_List_Published_Management_Group_Blueprint.json"
+          },
+          "PublishedSubscriptionBlueprint": {
+            "$ref": "./examples/PublishedBlueprints_List_Published_Subscription_Blueprint.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts": {
       "get": {
         "operationId": "PublishedArtifactsOperations_List",

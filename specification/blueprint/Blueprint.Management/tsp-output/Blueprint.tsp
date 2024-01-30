@@ -63,26 +63,26 @@ interface Blueprints {
    * List published versions of given blueprint definition.
    */
   // FIXME: PublishedBlueprints_List could not be converted to a resource operation
-  // #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  // @operationId("PublishedBlueprints_List")
-  // @route("/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions")
-  // @get
-  // list is Azure.Core.Foundations.Operation<
-  //   {
-  //     /**
-  //      * The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').
-  //      */
-  //     @path
-  //     resourceScope: string;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PublishedBlueprints_List")
+  @route("/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions")
+  @get
+  listPub is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').
+       */
+      @path
+      resourceScope: string;
 
-  //     /**
-  //      * Name of the blueprint definition.
-  //      */
-  //     @path
-  //     blueprintName: string;
-  //   },
-  //   PublishedBlueprintList
-  // >;
+      /**
+       * Name of the blueprint definition.
+       */
+      @path
+      blueprintName: string;
+    },
+    PublishedBlueprintList
+  >;
 }
 
 @@projectedName(Blueprints.createOrUpdate::parameters.resource,
