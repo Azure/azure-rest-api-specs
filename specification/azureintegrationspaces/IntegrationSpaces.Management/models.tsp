@@ -479,11 +479,6 @@ model ListBusinessProcessDevelopmentArtifactsResponse {
 }
 
 /**
- * The response of a ApplicationResource list operation.
- */
-model ApplicationResourceListResult is Azure.Core.Page<ApplicationResource>;
-
-/**
  * The properties of application resource.
  */
 model ApplicationResourceProperties {

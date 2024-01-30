@@ -5,7 +5,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.IntegrationSpaces;
 
@@ -51,88 +53,23 @@ interface ApplicationResources {
    * List ApplicationResource resources by Application
    */
   listByApplication is ArmResourceListByParent<
-    ApplicationResource>;
-  //   {
-  //     /**
-  //      * The ID of the target subscription.
-  //      */
-  //     @minLength(1)
-  //     @path
-  //     subscriptionId: string;
+    ApplicationResource,
+    {
+      ...BaseParameters<ApplicationResource>;
 
-  //     /**
-  //      * The name of the resource group. The name is case insensitive.
-  //      */
-  //     @maxLength(90)
-  //     @minLength(1)
-  //     @path
-  //     resourceGroupName: string;
+      ...TopQueryParameter;
 
-  //     /**
-  //      * The number of result items to return.
-  //      */
-  //     @query("top")
-  //     top?: int32;
+      ...SkipQueryParameter;
 
-  //     /**
-  //      * The number of result items to skip.
-  //      */
-  //     @query("skip")
-  //     skip?: int32;
+      ...MaxPageSizeQueryParameter;
 
-  //     /**
-  //      * The maximum number of result items per page.
-  //      */
-  //     @query("maxpagesize")
-  //     maxpagesize?: int32;
+      ...FilterQueryParameter;
 
-  //     /**
-  //      * Filter the result list using the given expression.
-  //      */
-  //     @query("filter")
-  //     filter?: string;
+      ...SelectQueryParameter;
 
-  //     /**
-  //      * Select the specified fields to be included in the response.
-  //      */
-  //     @query({
-  //       name: "select",
-  //       format: "multi",
-  //     })
-  //     select?: string[];
+      ...ExpandQueryParameter;
 
-  //     /**
-  //      * Expand the indicated resources into the response.
-  //      */
-  //     @query({
-  //       name: "expand",
-  //       format: "multi",
-  //     })
-  //     expand?: string[];
-
-  //     /**
-  //      * Expressions that specify the order of returned results.
-  //      */
-  //     @query({
-  //       name: "orderby",
-  //       format: "multi",
-  //     })
-  //     orderby?: string[];
-
-  //     /**
-  //      * The name of the space
-  //      */
-  //     @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  //     @path
-  //     spaceName: string;
-
-  //     /**
-  //      * The name of the Application
-  //      */
-  //     @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  //     @path
-  //     applicationName: string;
-  //   },
-  //   ApplicationResourceListResult
-  // >;
+      ...OrderByQueryParameter;
+    }
+  >;
 }
