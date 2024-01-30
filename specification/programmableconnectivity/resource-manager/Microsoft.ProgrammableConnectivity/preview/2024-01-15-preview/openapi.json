@@ -167,6 +167,109 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans": {
+      "get": {
+        "operationId": "OperatorApiPlans_ListBySubscription",
+        "tags": [
+          "OperatorApiPlans"
+        ],
+        "description": "List OperatorApiPlan resources by subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An optional OData based filter expression to apply on the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "An optional query parameter which specifies the number of records to be skipped.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans/{operatorApiPlanName}": {
+      "get": {
+        "operationId": "OperatorApiPlans_Get",
+        "tags": [
+          "OperatorApiPlans"
+        ],
+        "description": "Get an OperatorApiPlan resource by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "operatorApiPlanName",
+            "in": "path",
+            "description": "APC Gateway Plan Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorApiPlans_Get": {
+            "$ref": "./examples/OperatorApiPlans_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways": {
       "get": {
         "operationId": "Gateways_ListByResourceGroup",
@@ -677,115 +780,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans": {
-      "get": {
-        "operationId": "OperatorApiPlans_ListByResourceGroup",
-        "tags": [
-          "OperatorApiPlans"
-        ],
-        "description": "List OperatorApiPlan resources by subscription ID.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An optional OData based filter expression to apply on the operation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "An optional query parameter which specifies the maximum number of records to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 20
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "An optional query parameter which specifies the number of records to be skipped.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OperatorApiPlanListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans/{operatorApiPlanName}": {
-      "get": {
-        "operationId": "OperatorApiPlans_Get",
-        "tags": [
-          "OperatorApiPlans"
-        ],
-        "description": "Get an OperatorApiPlan resource by name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "operatorApiPlanName",
-            "in": "path",
-            "description": "APC Gateway Plan Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OperatorApiPlan"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "OperatorApiPlans_Get": {
-            "$ref": "./examples/OperatorApiPlans_Get_MaximumSet_Gen.json"
-          }
-        }
       }
     }
   },
