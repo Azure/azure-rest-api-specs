@@ -29,13 +29,22 @@ openapi-type: arm
 tag: package-2022-11-01
 ```
 
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11-01'
+input-file:
+  - Microsoft.Orbital/aodg/preview/2024-03-01-preview/aodg.json
+```
+
 ### Tag: package-2022-11-01
 
 These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-11-01'
 input-file:
-  - Microsoft.Orbital/stable/2022-11-01/orbital.json
+  - Microsoft.Orbital/aogs/stable/2022-11-01/orbital.json
 ```
 
 ### Tag: package-2022-03-01
@@ -44,7 +53,7 @@ These settings apply only when `--tag=package-2022-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-03-01'
 input-file:
-  - Microsoft.Orbital/stable/2022-03-01/orbital.json
+  - Microsoft.Orbital/aogs/stable/2022-03-01/orbital.json
 ```
 
 ---
