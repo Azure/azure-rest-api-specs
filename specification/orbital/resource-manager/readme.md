@@ -33,7 +33,7 @@ tag: package-2022-11-01
 
 These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11-01'
+```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
   - Microsoft.Orbital/aodg/preview/2024-03-01-preview/aodg.json
 ```
