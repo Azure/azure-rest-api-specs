@@ -186,7 +186,8 @@
             "in": "query",
             "description": "An optional OData based filter expression to apply on the operation.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "filter"
           },
           {
             "name": "$top",
@@ -196,7 +197,8 @@
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "maximum": 20
+            "maximum": 20,
+            "x-ms-client-name": "top"
           },
           {
             "name": "$skip",
@@ -204,7 +206,8 @@
             "description": "An optional query parameter which specifies the number of records to be skipped.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "x-ms-client-name": "skip"
           }
         ],
         "responses": {

@@ -122,7 +122,7 @@ interface OperatorApiPlans {
        * An optional OData based filter expression to apply on the operation.
        */
       @query("$filter")
-      $filter?: string;
+      filter?: string;
 
       /**
        * An optional query parameter which specifies the maximum number of records to be returned.
@@ -130,13 +130,13 @@ interface OperatorApiPlans {
       @maxValue(20)
       @minValue(1)
       @query("$top")
-      $top?: int32;
+      top?: int32;
 
       /**
        * An optional query parameter which specifies the number of records to be skipped.
        */
       @query("$skip")
-      $skip?: int32;
+      skip?: int32;
     }
   >;
 }
