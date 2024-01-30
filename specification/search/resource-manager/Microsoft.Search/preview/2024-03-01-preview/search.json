@@ -1365,8 +1365,16 @@
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "description": "Gets a list of NSP configurations for a search service.",
         "operationId": "NetworkSecurityPerimeterConfigurations_ListByService",
+        "x-ms-examples": {
+          "List NSP configs by search service": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationsListByService.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1393,14 +1401,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          },
-          "x-ms-examples": {
-            "List NSP configs by server": {
-              "$ref": "./examples/NetworkSecurityPerimeterConfigurationsListByService.json"
-            }
           }
         }
       }
@@ -1412,6 +1412,11 @@
         ],
         "description": "Gets a network security perimeter configuration.",
         "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "x-ms-examples": {
+          "Get an NSP config by name": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationsGet.json"
+          }
+        }
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1444,11 +1449,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-        }
-      },
-      "x-ms-examples": {
-        "Get an NSP config by name": {
-          "$ref": "./examples/NetworkSecurityPerimeterConfigurationsGet.json"
         }
       }
     }
