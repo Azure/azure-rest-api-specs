@@ -28,7 +28,7 @@ using Azure.ClientGenerator.Core;
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/?api-version={apiVersion}
-//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}?api-version={apiVersion}
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{version}?api-version={apiVersion}
 //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/:get-id?api-version={apiVersion}
 //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}?api-version={apiVersion}
 @server(
@@ -66,9 +66,15 @@ alias resourceOperations = Azure.Core.StandardResourceOperations;
 })
 interface SchemaOperations {
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ SchemaId resource doesn't allow returning binary schema and headers."
   @summary("Get list of schema groups.")
   @doc("Gets the list of schema groups user is authorized to access.")
-  listSchemaGroups is resourceOperations.ResourceList<SchemaGroup>;
+  @route("/$schemaGroups")
+  listSchemaGroups is Azure.Core.Foundations.Operation<
+    {},
+    StringsList,
+    {}
+  >;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ SchemaId resource doesn't allow returning binary schema and headers."
@@ -81,19 +87,25 @@ interface SchemaOperations {
     OkResponse & SchemaHeaders & SchemaContent & SchemaContentType
   >;
 
-  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}?api-version={apiVersion}
+  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions?api-version={apiVersion}
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ Version resource doesn't allow returning non-version response."
   @summary("List schema versions.")
   @doc("Gets the list of all versions of one schema.")
-  listSchemaVersions is resourceOperations.ResourceList<Version>;
+  @route("/$schemaGroups/{groupName}/schemas/{name}/versions")
+  listSchemaVersions  is Azure.Core.Foundations.Operation<
+    Azure.Core.Foundations.ItemKeysOf<SchemaName>,
+    Int32sList,
+    {}
+  >;
 
-  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}?api-version={apiVersion}
+  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{version}?api-version={apiVersion}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ Version resource doesn't allow returning non-version response."
   @summary("Get specific schema versions.")
   @doc("Gets one specific version of one schema.")
-  @route("/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}")
+  @route("/$schemaGroups/{groupName}/schemas/{name}/versions/{version}")
   @get
   getSchemaByVersion is Azure.Core.Foundations.Operation<
-    Azure.Core.Foundations.ItemKeysOf<Version>,
+    Azure.Core.Foundations.ItemKeysOf<SchemaVersion>,
     OkResponse & SchemaHeaders & SchemaContent & SchemaContentType
   >;
 
@@ -102,7 +114,7 @@ interface SchemaOperations {
   @doc("Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.")
   @action("get-id")
   getSchemaIdByContent is resourceOperations.ResourceAction<
-    SchemaNameContent,
+    SchemaName,
     {
       ...SchemaContentType;
 
@@ -120,7 +132,7 @@ interface SchemaOperations {
   @route("/$schemaGroups/{groupName}/schemas/{name}")
   @put
   registerSchema is Azure.Core.Foundations.Operation<
-    Azure.Core.Foundations.ItemKeysOf<SchemaNameContent> &
+    Azure.Core.Foundations.ItemKeysOf<SchemaName> &
       SchemaContent &
       SchemaContentType,
     NoContentResponse<SchemaHeaders>
@@ -193,6 +205,34 @@ model SchemaId {
   id: string;
 }
 
+/**
+ * The list of strings with server paging support.
+ */
+@Azure.Core.pagedResult
+model StringsList {
+  /** The collection of pageable items. */
+  @Azure.Core.items
+  value: string[];
+
+  /** The link to the next page of items */
+  @Azure.Core.nextLink
+  nextLink?: string;
+}
+
+/**
+ * The list of int32s with server paging support.
+ */
+@Azure.Core.pagedResult
+model Int32sList {
+  /** The collection of pageable items. */
+  @Azure.Core.items
+  value: int32[];
+
+  /** The link to the next page of items */
+  @Azure.Core.nextLink
+  nextLink?: string;
+}
+
 @doc("Schema Group resource.")
 @resource("$schemaGroups")
 model SchemaGroup {
@@ -203,9 +243,9 @@ model SchemaGroup {
 }
 
 @doc("Schemas resource.")
-@resource("schemas")
 @parentResource(SchemaGroup)
-model SchemaNameContent {
+@resource("schemas")
+model SchemaName {
   @key("name")
   @doc("Name of schema.")
   @visibility("read")
@@ -216,10 +256,10 @@ model SchemaNameContent {
 
 @doc("Schema versions resource.")
 @resource("versions")
-@parentResource(SchemaNameContent)
-model Version {
-  @key("schemaVersion")
+@parentResource(SchemaName)
+model SchemaVersion {
+  @key("version")
   @doc("Version number of specific schema.")
   @visibility("read")
-  schemaVersion: int32;
+  version: int32;
 }

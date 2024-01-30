@@ -67,7 +67,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedSchemaGroup"
+              "$ref": "#/definitions/StringsList"
             }
           },
           "default": {
@@ -304,7 +304,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedVersion"
+              "$ref": "#/definitions/Int32sList"
             }
           },
           "default": {
@@ -330,7 +330,7 @@
         }
       }
     },
-    "/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}": {
+    "/$schemaGroups/{groupName}/schemas/{name}/versions/{version}": {
       "get": {
         "operationId": "SchemaOperations_GetSchemaByVersion",
         "summary": "Get specific schema versions.",
@@ -364,7 +364,7 @@
             "pattern": "^[A-Za-z0-9][^\\\\/$:]*$"
           },
           {
-            "name": "schemaVersion",
+            "name": "version",
             "in": "path",
             "description": "Version number of specific schema.",
             "required": true,
@@ -642,43 +642,20 @@
         }
       }
     },
-    "PagedSchemaGroup": {
+    "Int32sList": {
       "type": "object",
-      "description": "Paged collection of SchemaGroup items",
+      "description": "The list of int32s with server paging support.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SchemaGroup items on this page",
+          "description": "The collection of pageable items.",
           "items": {
-            "$ref": "#/definitions/SchemaGroup"
-          },
-          "x-ms-identifiers": []
+            "type": "integer",
+            "format": "int32"
+          }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedVersion": {
-      "type": "object",
-      "description": "Paged collection of Version items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Version items on this page",
-          "items": {
-            "$ref": "#/definitions/Version"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
@@ -758,7 +735,7 @@
         "id"
       ]
     },
-    "SchemaNameContent": {
+    "SchemaName": {
       "type": "object",
       "description": "Schemas resource.",
       "properties": {
@@ -772,6 +749,21 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "SchemaVersion": {
+      "type": "object",
+      "description": "Schema versions resource.",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Version number of specific schema.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "version"
       ]
     },
     "ServiceApiVersions": {
@@ -804,19 +796,24 @@
         ]
       }
     },
-    "Version": {
+    "StringsList": {
       "type": "object",
-      "description": "Schema versions resource.",
+      "description": "The list of strings with server paging support.",
       "properties": {
-        "schemaVersion": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Version number of specific schema.",
-          "readOnly": true
+        "value": {
+          "type": "array",
+          "description": "The collection of pageable items.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "schemaVersion"
+        "value"
       ]
     }
   },

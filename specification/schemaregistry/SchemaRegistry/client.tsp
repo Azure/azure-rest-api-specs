@@ -6,8 +6,7 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using SchemaRegistry;
 
-@@access(Version, Access.internal);
-@@projectedName(Version, "client", "SchemaVersion");
+@@access(SchemaVersion, Access.internal);
 @@access(SchemaGroup, Access.internal);
 
 @doc("Represents the format of the schema to be stored by the Schema Registry service.")
