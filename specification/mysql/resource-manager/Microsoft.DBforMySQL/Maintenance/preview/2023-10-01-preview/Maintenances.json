@@ -231,6 +231,10 @@
           "type": "string",
           "description": "A string defines maintenance type."
         },
+        "maintenanceState": {
+          "$ref": "#/definitions/MaintenanceState",
+          "description": "A string describes the maintenance status"
+        },
         "maintenanceStartTime": {
           "type": "string",
           "format": "date-time",
@@ -291,6 +295,23 @@
         "modelAsString": true
       }
     },
+    "MaintenanceState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current status of this maintenance.",
+      "enum": [
+        "Scheduled",
+        "ReScheduled",
+        "InPreparation",
+        "Processing",
+        "Completed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceState",
+        "modelAsString": true
+      }
+    },
     "MaintenanceUpdate": {
       "type": "object",
       "properties": {
@@ -320,7 +341,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z-0-9]*$",
+      "pattern": "^[a-zA-Z0-9-_]*$",
       "description": "The name of the maintenance.",
       "x-ms-parameter-location": "method"
     }
