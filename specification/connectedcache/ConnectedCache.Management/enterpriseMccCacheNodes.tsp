@@ -13,7 +13,7 @@ namespace Microsoft.ConnectedCache;
 
 @doc("Represents the high level Nodes needed to provision cache node resources")
 @parentResource(EnterpriseMccCustomerResource)
-model EnterpriseMccCacheNodeResource is TrackedResource<CacheNodePrperty> {
+model EnterpriseMccCacheNodeResource is TrackedResource<CacheNodeProperty> {
   @doc("Name of the ConnectedCache resource")
   @maxLength(90)
   @minLength(1)

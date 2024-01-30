@@ -14,23 +14,15 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("provisioning state of the resource")
 enum ProvisioningState {
   ...ResourceProvisioningState,  
-  /** unknown  state of the provisioing state */
+  /** unknown  state of the provisioning state */
   Unknown,
-  /** Accepted state of the provisioing state during the Async Operations */
+  /** Accepted state of the provisioning state during the Async Operations */
   Accepted,
-  /** Upgrading state of the provisioing state */
+  /** Upgrading state of the provisioning state */
   Upgrading,
-  /** Deleting state of the provisioing state */
+  /** Deleting state of the provisioning state */
   Deleting,
 }
-
-
-// enum CreatedByType {
-//   User,
-//   Application,
-//   ManagedIdentity,
-//   Key,
-// }
 
 @doc("Describes the Resource Provider Operation")
 model ResourceProviderOperationDefinition {
@@ -130,7 +122,7 @@ model Resource {
   systemData?: SystemData;
 }
 
-@doc("Mcc PATCH opertaion properties.")
+@doc("Mcc PATCH operation properties.")
 model ConnectedCachePatchResource {
   @doc("Resource tags.")
   @visibility("read", "update")
@@ -157,7 +149,7 @@ model CustomerProperty {
   @visibility("read")
   statusText?: string;
 
-  @doc("Mcc response stastus details for retieving response inner details.")
+  @doc("Mcc response status details for retrieving response inner details.")
   @visibility("read")
   statusDetails?: string;
 
@@ -191,7 +183,7 @@ model CustomerEntity {
   @doc("Customer resource contact full name.")
   contactName?: string;
 
-  @doc("Customer resource entitilement flag as boolean.")
+  @doc("Customer resource entitilment flag as boolean.")
   isEntitled?: boolean;
 
   @doc("Customer resource Mcc release version.")
@@ -219,7 +211,7 @@ model CustomerEntity {
   @doc("Customer resource client tenant Id of subscription.")
   clientTenantId?: string;
 
-  @doc("Customer resource attemped deletions.")
+  @doc("Customer resource attempted deletions.")
   attemptedDeletes?: int32;
 
   @doc("Customer resource deletion flag set timestamp.")
@@ -379,7 +371,7 @@ model AdditionalCustomerProperties {
 }
 
 @doc("Model representing an Mcc cache node connectedCache resource")
-model CacheNodePrperty {
+model CacheNodeProperty {
   @doc("The provisioned state of the resource")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -387,7 +379,7 @@ model CacheNodePrperty {
   @doc("Mcc cache node resource (cache node entity).")
   cacheNode?: CacheNodeEntity;
 
-  @doc("Mcc cache node resouce additional properties.")
+  @doc("Mcc cache node resource additional properties.")
   additionalCacheNodeProperties?: AdditionalCacheNodeProperties;
 
   @doc("Mcc response status code.")
@@ -403,7 +395,7 @@ model CacheNodePrperty {
   @visibility("read")
   status?: string;
 
-  @doc("Mcc respone error details.")
+  @doc("Mcc response error details.")
   error?: ErrorDefinition;
 }
 
@@ -446,7 +438,7 @@ model CacheNodeEntity {
   @doc("Cache node resource maximum allowed probability of egress.")
   maxAllowableProbability?: float32;
 
-  @doc("Cache node resource Arm Xcid.")
+  @doc("Cache node resource Arm XCid.")
   xCid?: string;
 
   @doc("Cache node resource flag for determining if managed by enterprise as boolean.")
@@ -576,7 +568,7 @@ model CacheNodeEntity {
   @doc("Cache node resource update Arm Correlation Id.")
   updateCorrelationId?: string;
 
-  @doc("Cache node resouce deletion Arm Correlation Id for rectifier.")
+  @doc("Cache node resource deletion Arm Correlation Id for rectifier.")
   deleteRectifierCorrelationId?: string;
 
   @doc("Cache node resource Arm Correlation Id for Iot Central rectification.")
@@ -587,12 +579,12 @@ model CacheNodeEntity {
   @visibility("read")
   workerConnections?: int32;
 
-  @doc("Cache node resource last updated Mcc contatiner deployement worker connection count timestamp.")
+  @doc("Cache node resource last updated Mcc container deployment worker connection count timestamp.")
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   workerConnectionsLastUpdatedDateTime?: utcDateTime;
 
-  @doc("Cache node resource Mcc contatiner configuration details re-sync trigger.")
+  @doc("Cache node resource Mcc container configuration details re-sync trigger.")
   @visibility("read")
   containerResyncTrigger?: int32;
 
@@ -690,7 +682,7 @@ model BgpConfiguration {
 
 @doc("ProxyUrl configuration of cache node")
 model ProxyUrlConfiguration {
-  @doc("Host Proxy Address configuation along with port number. This can be a proxy or ip address. ex: xx.xx.xx.xxxx:80 or host name http://exampleproxy.com:80")
+  @doc("Host Proxy Address configuration along with port number. This can be a proxy or ip address. ex: xx.xx.xx.xxxx:80 or host name http://exampleproxy.com:80")
   proxyUrl?: string;
 }
 
