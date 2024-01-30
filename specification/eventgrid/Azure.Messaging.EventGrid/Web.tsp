@@ -91,7 +91,7 @@ namespace Microsoft.EventGrid {
     verb?: string;
 
     @doc("sku of app service plan.")
-    sku?: sku;
+    sku?: WebAppServicePlanUpdatedEventDataSku;
   }
 
   @doc("App Action Type")
@@ -180,7 +180,8 @@ namespace Microsoft.EventGrid {
     verb?: string;
   };
 
-  alias sku = {
+  @doc("sku of app service plan.")
+  model WebAppServicePlanUpdatedEventDataSku {
     @doc("name of app service plan sku.")
     name?: string;
 
