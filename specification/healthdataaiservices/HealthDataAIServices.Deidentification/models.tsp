@@ -16,35 +16,9 @@ model Job {
   @maxLength(36)
   @minLength(1)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
+  @path
   name: string;
 
-  @doc("Current status of a job.")
-  @visibility("read")
-  status?: JobStatus;
-
-  @doc("Summary of a job. Exists only when the job is completed.")
-  @visibility("read")
-  summary?: JobSummary;
-
-  @doc("Date and time when the job was created.")
-  @visibility("read")
-  createdAt?: utcDateTime;
-
-  @doc("Date and time when the job was started.")
-  @visibility("read")
-  startedAt?: utcDateTime;
-
-  @doc("""
-  Date and time when the job was completed.
-  
-  If the job is canceled, this is the time when the job was canceled.
-  
-  If the job failed, this is the time when the job failed.
-  """)
-  @visibility("read")
-  completedAt?: utcDateTime;
-
-  // Create Properties
   @doc("Storage location to perform the operation on.")
   sourceLocation: SourceStorageLocation;
 
@@ -61,6 +35,34 @@ model Job {
   @minLength(1)
   @doc("Format of the redacted output. Only valid when Operation is Redact.")
   redactionFormat?: string;
+
+  // Readonly Properties
+
+  @doc("Current status of a job.")
+  @visibility("read")
+  status: JobStatus;
+
+  @doc("Date and time when the job was created.")
+  @visibility("read")
+  createdAt: utcDateTime;
+
+  @doc("Date and time when the job was started.")
+  @visibility("read")
+  startedAt?: utcDateTime;
+
+  @doc("""
+  Date and time when the job was completed.
+  
+  If the job is canceled, this is the time when the job was canceled.
+  
+  If the job failed, this is the time when the job failed.
+  """)
+  @visibility("read")
+  completedAt?: utcDateTime;
+
+  @doc("Summary of a job. Exists only when the job is completed.")
+  @visibility("read")
+  summary?: JobSummary;
 }
 
 @doc("File report once job has completed.")
@@ -174,6 +176,8 @@ enum StringIndexType {
 @doc("Request for synchronous DeID operation.")
 model DeidRequest {
   @doc("Input text to deidentify.")
+  @maxLength(100000) // 100KB
+  @minLength(1)
   inputText: string;
 
   @doc("Data type of the input.")
@@ -192,10 +196,10 @@ model DeidRequest {
 
 @doc("Response for synchronous DeID operation.")
 model DeidResponse {
-  @doc("Output text after deidentification.")
-  outputText: string;
+  @doc("Output text after deidentification. Not Availalbe for Tag Operation.")
+  outputText?: string;
 
-  @doc("Result of the tag operation.")
+  @doc("Result of the tag operation. Only Available for Tag Operation.")
   taggerResult?: PhiTaggerResult;
 }
 
@@ -208,7 +212,7 @@ model PhiTaggerResult {
   stringIndexType: StringIndexType = StringIndexType.TextElement_v8;
 
   @doc("Path to the file in the storage container.")
-  @maxLength(1024)
+  @maxLength(1024) // Max length for Blob Name
   path?: string;
 
   @doc("Checksum of the file.")
@@ -216,7 +220,7 @@ model PhiTaggerResult {
 }
 
 @doc("List of PHI Entities.")
-enum PhiCategories {
+enum PhiCategory {
   @doc("Unknown PHI Type.")
   Unknown,
 
@@ -308,7 +312,7 @@ enum PhiCategories {
 @doc("Phi Entity tag in the input.")
 model PhiEntity {
   @doc("Phi Category of the entity.")
-  category: PhiCategories;
+  category: PhiCategory;
 
   @doc("Starting index of the location from within the input text.")
   offset: int32;

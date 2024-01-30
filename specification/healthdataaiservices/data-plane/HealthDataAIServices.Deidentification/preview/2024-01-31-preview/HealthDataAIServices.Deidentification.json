@@ -240,7 +240,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Job"
+              "$ref": "#/definitions/JobCreateOrUpdate"
             }
           }
         ],
@@ -595,7 +595,9 @@
       "properties": {
         "inputText": {
           "type": "string",
-          "description": "Input text to deidentify."
+          "description": "Input text to deidentify.",
+          "minLength": 1,
+          "maxLength": 100000
         },
         "dataType": {
           "$ref": "#/definitions/DocumentDataType",
@@ -628,16 +630,13 @@
       "properties": {
         "outputText": {
           "type": "string",
-          "description": "Output text after deidentification."
+          "description": "Output text after deidentification. Not Availalbe for Tag Operation."
         },
         "taggerResult": {
           "$ref": "#/definitions/PhiTaggerResult",
-          "description": "Result of the tag operation."
+          "description": "Result of the tag operation. Only Available for Tag Operation."
         }
-      },
-      "required": [
-        "outputText"
-      ]
+      }
     },
     "DocumentDataType": {
       "type": "string",
@@ -705,14 +704,33 @@
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$",
           "readOnly": true
         },
+        "sourceLocation": {
+          "$ref": "#/definitions/SourceStorageLocation",
+          "description": "Storage location to perform the operation on."
+        },
+        "targetLocation": {
+          "$ref": "#/definitions/TargetStorageLocation",
+          "description": "Target location to store output of operation."
+        },
+        "dataType": {
+          "$ref": "#/definitions/DocumentDataType",
+          "description": "Data type of the input documents.",
+          "default": "PlainText"
+        },
+        "operation": {
+          "$ref": "#/definitions/OperationType",
+          "description": "Operation to perform on the input documents.",
+          "default": "Redact"
+        },
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when Operation is Redact.",
+          "minLength": 1,
+          "maxLength": 16
+        },
         "status": {
           "$ref": "#/definitions/JobStatus",
           "description": "Current status of a job.",
-          "readOnly": true
-        },
-        "summary": {
-          "$ref": "#/definitions/JobSummary",
-          "description": "Summary of a job. Exists only when the job is completed.",
           "readOnly": true
         },
         "createdAt": {
@@ -733,6 +751,26 @@
           "description": "Date and time when the job was completed.\n\nIf the job is canceled, this is the time when the job was canceled.\n\nIf the job failed, this is the time when the job failed.",
           "readOnly": true
         },
+        "summary": {
+          "$ref": "#/definitions/JobSummary",
+          "description": "Summary of a job. Exists only when the job is completed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "sourceLocation",
+        "targetLocation",
+        "dataType",
+        "operation",
+        "status",
+        "createdAt"
+      ]
+    },
+    "JobCreateOrUpdate": {
+      "type": "object",
+      "description": "A job containing a batch of documents to deidentify.",
+      "properties": {
         "sourceLocation": {
           "$ref": "#/definitions/SourceStorageLocation",
           "description": "Storage location to perform the operation on."
@@ -759,7 +797,6 @@
         }
       },
       "required": [
-        "name",
         "sourceLocation",
         "targetLocation",
         "dataType",
@@ -926,7 +963,7 @@
         "value"
       ]
     },
-    "PhiCategories": {
+    "PhiCategory": {
       "type": "string",
       "description": "List of PHI Entities.",
       "enum": [
@@ -961,7 +998,7 @@
         "Zip"
       ],
       "x-ms-enum": {
-        "name": "PhiCategories",
+        "name": "PhiCategory",
         "modelAsString": true,
         "values": [
           {
@@ -1117,7 +1154,7 @@
       "description": "Phi Entity tag in the input.",
       "properties": {
         "category": {
-          "$ref": "#/definitions/PhiCategories",
+          "$ref": "#/definitions/PhiCategory",
           "description": "Phi Category of the entity."
         },
         "offset": {
