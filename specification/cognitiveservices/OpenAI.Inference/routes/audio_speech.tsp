@@ -18,4 +18,8 @@ namespace Azure.OpenAI;
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @actionSeparator("/")
 @action("audio/transcriptions")
-op getAudioSpeech is ResourceAction<Deployment, AudioSpeechOptions, AudioSpeechResponse>;
+op getAudioSpeech is ResourceAction<
+  Deployment,
+  AudioSpeechOptions,
+  AudioSpeechResponse
+>;

@@ -23,20 +23,14 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.AudioTranslation, Access.public, "java");
 @@access(Azure.OpenAI.AudioTranslationOptions, Access.public, "java");
 
-@@access(Azure.OpenAI.AzureSearchIndexFieldMappingOptions,
-  Access.public
-);
+@@access(Azure.OpenAI.AzureSearchIndexFieldMappingOptions, Access.public);
 @@usage(Azure.OpenAI.AzureSearchIndexFieldMappingOptions, Usage.input);
 
 @@access(Azure.OpenAI.AzureSearchQueryType, Access.public);
 @@usage(Azure.OpenAI.AzureSearchQueryType, Usage.input);
 
-@@access(Azure.OpenAI.AzureSearchChatExtensionConfiguration,
-  Access.public
-);
-@@usage(Azure.OpenAI.AzureSearchChatExtensionConfiguration,
-  Usage.input
-);
+@@access(Azure.OpenAI.AzureSearchChatExtensionConfiguration, Access.public);
+@@usage(Azure.OpenAI.AzureSearchChatExtensionConfiguration, Usage.input);
 
 // Remap "model" nomenclature to "DeploymentName" in appropriate containers; comments should clarify the dual use
 @@projectedName(Azure.OpenAI.ImageGenerationOptions.`model`,

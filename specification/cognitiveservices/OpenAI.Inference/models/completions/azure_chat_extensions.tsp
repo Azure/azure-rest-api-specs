@@ -21,7 +21,6 @@ enum AzureChatExtensionType {
   @doc("Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension.")
   azureSearch: "azure_search",
 
-
   @doc("Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension.")
   azureMachineLearningIndex: "azure_ml_index",
 
