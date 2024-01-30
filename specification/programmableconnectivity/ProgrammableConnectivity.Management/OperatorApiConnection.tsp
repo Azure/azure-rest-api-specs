@@ -10,14 +10,10 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-@armProviderNamespace("Microsoft.ProgrammableConnectivity")
 namespace Microsoft.ProgrammableConnectivity;
 /**
  * A Programmable Connectivity Operator API Connection resource
  */
-//#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-//#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-//@includeInapplicableMetadataInPayload(false)
 model OperatorApiConnection
   is TrackedResource<OperatorApiConnectionProperties> {
   /**
@@ -196,54 +192,6 @@ model Status {
   reason?: string;
 }
 
-/**
- * The type used for update operations of the OperatorApiConnection.
- */
-// model OperatorApiConnectionUpdate {
-//   ...ArmTagsProperty;
-//   /**
-//    * Azure Programmable Connectivity (APC) Operator API Connection Name.
-//    */
-//   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
-//   @path
-//   @key("operatorApiConnectionName")
-//   @segment("operatorApiConnections")
-//   @visibility("read")
-//   name: string;
-
-//   /**
-//    * "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-//    */
-//   @visibility("read")
-//   id: ResourceIdentifier<[
-//     {
-//       type: "Microsoft.ProgrammableConnectivity/operatorApiConnections";
-//     }
-//   ]>;
-
-//   /**
-//    * The type of the resource.
-//    */
-//   @visibility("read")
-//   type: string;
-
-//   /**
-//    * The OperatorApiConnection resource properties.
-//    */
-//   properties?: {
-//     ...OperatorApiConnectionUpdateableProperties;
-
-//   /**
-//    * Reference to the Operator API Plan Resource ID.
-//    */
-//   @visibility("read", "create")
-//   operatorApiPlanId?: ResourceIdentifier<[
-//     {
-//       type: "Microsoft.ProgrammableConnectivity/operatorApiPlans";
-//     }
-//   ]>;
-//   }
-// }
 @armResourceOperations
 interface OperatorApiConnections {
   /**
