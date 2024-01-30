@@ -896,6 +896,7 @@ model BatchJobStatistics {
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
+  @projectedName("client", "kernelCpuTime")
   kernelCPUTime: duration;
 
   @doc("The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
@@ -2253,6 +2254,7 @@ model BatchJobScheduleStatistics {
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
+  @projectedName("client", "kernelCpuTime")
   kernelCPUTime: duration;
 
   @doc("The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
@@ -3436,6 +3438,7 @@ model BatchTaskStatistics {
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
+  @projectedName("client", "kernelCpuTime")
   kernelCPUTime: duration;
 
   @doc("The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries.")
