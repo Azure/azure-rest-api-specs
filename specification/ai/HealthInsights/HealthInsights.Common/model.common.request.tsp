@@ -40,7 +40,6 @@ Patient structured information, including demographics and known structured clin
 }
 
 @doc("Patient structured information, including demographics and known structured clinical information.")
-@projectedName("client", "PatientDetails")
 model PatientInfo {
   @doc("The patient's sex.")
   sex?: PatientInfoSex;
@@ -54,7 +53,6 @@ model PatientInfo {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The patient's sex.")
-@projectedName("client", "PatientSex")
 enum PatientInfoSex {
   Female: "female",
   Male: "male",
