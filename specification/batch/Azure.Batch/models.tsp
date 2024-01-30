@@ -1823,6 +1823,7 @@ disks from within a VM to use them.
 """)
 model DataDisk {
   @doc("The logical unit number. The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive.")
+  @projectedName("client", "logicalUnitNumber")
   lun: int32;
 
   @doc("The type of caching to be enabled for the data disks. The default value for caching is readwrite. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.")
