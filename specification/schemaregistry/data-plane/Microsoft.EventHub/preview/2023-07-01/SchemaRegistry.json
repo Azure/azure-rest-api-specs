@@ -414,7 +414,33 @@
                   "application/json; serialization=Avro",
                   "application/json; serialization=Json",
                   "text/vnd.ms.protobuf"
-                ]
+                ],
+                "x-ms-enum": {
+                  "name": "SchemaContentTypeValues",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "customBinary",
+                      "value": "application/octet-stream"
+                    },
+                    {
+                      "name": "custom",
+                      "value": "text/plain; charset=utf-8"
+                    },
+                    {
+                      "name": "avro",
+                      "value": "application/json; serialization=Avro"
+                    },
+                    {
+                      "name": "json",
+                      "value": "application/json; serialization=Json"
+                    },
+                    {
+                      "name": "protobuf",
+                      "value": "text/vnd.ms.protobuf"
+                    }
+                  ]
+                }
               }
             }
           },
@@ -504,7 +530,33 @@
                   "application/json; serialization=Avro",
                   "application/json; serialization=Json",
                   "text/vnd.ms.protobuf"
-                ]
+                ],
+                "x-ms-enum": {
+                  "name": "SchemaContentTypeValues",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "customBinary",
+                      "value": "application/octet-stream"
+                    },
+                    {
+                      "name": "custom",
+                      "value": "text/plain; charset=utf-8"
+                    },
+                    {
+                      "name": "avro",
+                      "value": "application/json; serialization=Avro"
+                    },
+                    {
+                      "name": "json",
+                      "value": "application/json; serialization=Json"
+                    },
+                    {
+                      "name": "protobuf",
+                      "value": "text/vnd.ms.protobuf"
+                    }
+                  ]
+                }
               }
             }
           },
@@ -613,42 +665,6 @@
         "flows"
       ]
     },
-    "ContentTypeEnum": {
-      "type": "string",
-      "description": "The content type for the schema.",
-      "enum": [
-        "application/json; serialization=Avro",
-        "application/json; serialization=Json",
-        "text/plain; charset=utf-8",
-        "text/vnd.ms.protobuf"
-      ],
-      "x-ms-enum": {
-        "name": "ContentTypeEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "avro",
-            "value": "application/json; serialization=Avro",
-            "description": "The Avro schema content type."
-          },
-          {
-            "name": "json",
-            "value": "application/json; serialization=Json",
-            "description": "The JSON schema content type."
-          },
-          {
-            "name": "custom",
-            "value": "text/plain; charset=utf-8",
-            "description": "The custom schema content type."
-          },
-          {
-            "name": "protobuf",
-            "value": "text/vnd.ms.protobuf",
-            "description": "The protobuf schema content type."
-          }
-        ]
-      }
-    },
     "PagedSchemaGroup": {
       "type": "object",
       "description": "Paged collection of SchemaGroup items",
@@ -693,24 +709,6 @@
         "value"
       ]
     },
-    "Schema": {
-      "type": "object",
-      "description": "The schema content of a schema, along with id and meta properties.",
-      "properties": {
-        "definition": {
-          "type": "string",
-          "description": "The content of the schema."
-        },
-        "properties": {
-          "$ref": "#/definitions/SchemaProperties",
-          "description": "The properties of the schema."
-        }
-      },
-      "required": [
-        "definition",
-        "properties"
-      ]
-    },
     "SchemaContentType": {
       "type": "object",
       "description": "The content type for given schema. Each schema type has an associated content-type."
@@ -723,40 +721,30 @@
         "application/json; serialization=Avro",
         "application/json; serialization=Json",
         "text/vnd.ms.protobuf"
-      ]
-    },
-    "SchemaFormat": {
-      "type": "string",
-      "description": "Represents the format of the schema to be stored by the Schema Registry service.",
-      "enum": [
-        "Avro",
-        "Json",
-        "Custom",
-        "Protobuf"
       ],
       "x-ms-enum": {
-        "name": "SchemaFormat",
-        "modelAsString": true,
+        "name": "SchemaContentTypeValues",
+        "modelAsString": false,
         "values": [
           {
-            "name": "avro",
-            "value": "Avro",
-            "description": "Represents the Apache Avro schema format."
-          },
-          {
-            "name": "json",
-            "value": "Json",
-            "description": "Represents the JSON schema format."
+            "name": "customBinary",
+            "value": "application/octet-stream"
           },
           {
             "name": "custom",
-            "value": "Custom",
-            "description": "Represents a custom schema format."
+            "value": "text/plain; charset=utf-8"
+          },
+          {
+            "name": "avro",
+            "value": "application/json; serialization=Avro"
+          },
+          {
+            "name": "json",
+            "value": "application/json; serialization=Json"
           },
           {
             "name": "protobuf",
-            "value": "Protobuf",
-            "description": "Represents a protobuf schema format."
+            "value": "text/vnd.ms.protobuf"
           }
         ]
       }
@@ -807,40 +795,6 @@
       },
       "required": [
         "name"
-      ]
-    },
-    "SchemaProperties": {
-      "type": "object",
-      "description": "Meta properties of a schema.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "References a specific schema in the registry namespace."
-        },
-        "format": {
-          "$ref": "#/definitions/SchemaFormat",
-          "description": "Format for the schema being stored."
-        },
-        "groupName": {
-          "type": "string",
-          "description": "Schema group under which schema is stored."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of schema."
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Version of schema."
-        }
-      },
-      "required": [
-        "id",
-        "format",
-        "groupName",
-        "name",
-        "version"
       ]
     },
     "ServiceApiVersions": {
