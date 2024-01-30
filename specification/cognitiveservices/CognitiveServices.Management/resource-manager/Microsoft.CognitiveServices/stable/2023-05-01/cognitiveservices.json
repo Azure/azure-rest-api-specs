@@ -2000,7 +2000,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateLinkResources/{resourceGroupName}/{accountName}/{subscriptionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateLinkResources": {
       "get": {
         "operationId": "PrivateLinkResources_List",
         "tags": [
@@ -2009,16 +2009,13 @@
         "description": "Gets the private link resources that need to be created for a Cognitive Services account.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "accountName",
@@ -2029,19 +2026,11 @@
             "minLength": 2,
             "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
@@ -2049,13 +2038,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },

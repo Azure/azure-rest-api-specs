@@ -212,36 +212,41 @@ interface Accounts {
   // FIXME: PrivateLinkResources_List could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("PrivateLinkResources_List")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateLinkResources")
   @get
-  listFoo is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+  @segment("privateLinkResources")
+  listPrivateLinkResources (
+    ...ResourceInstanceParameters<Account, BaseParameters<Account>>,
 
-      /**
-       * The name of Cognitive Services account.
-       */
-      @maxLength(64)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-      @path
-      accountName: string;
+  ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse
 
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
-    },
-    PrivateLinkResourceListResult
-  >;
+  
+  //   {
+  //     /**
+  //      * The name of the resource group. The name is case insensitive.
+  //      */
+  //     @maxLength(90)
+  //     @minLength(1)
+  //     @path
+  //     resourceGroupName: string;
+
+  //     /**
+  //      * The name of Cognitive Services account.
+  //      */
+  //     @maxLength(64)
+  //     @minLength(2)
+  //     @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  //     @path
+  //     accountName: string;
+
+  //     /**
+  //      * The ID of the target subscription.
+  //      */
+  //     @minLength(1)
+  //     @path
+  //     subscriptionId: string;
+  //   },
+  //   PrivateLinkResourceListResult
+  // >;
 }
 
 @@projectedName(Accounts.create::parameters.resource, "json", "account");
