@@ -196,10 +196,10 @@ model DeidRequest {
 
 @doc("Response for synchronous DeID operation.")
 model DeidResponse {
-  @doc("Output text after deidentification. Not Availalbe for Tag Operation.")
+  @doc("Output text after deidentification. Not available for Tag Operation.")
   outputText?: string;
 
-  @doc("Result of the tag operation. Only Available for Tag Operation.")
+  @doc("Result of the tag operation. Only available for Tag Operation.")
   taggerResult?: PhiTaggerResult;
 }
 
