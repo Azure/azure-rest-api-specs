@@ -55,6 +55,7 @@ interface StorageTasks {
     | ErrorResponse;
 
   @doc("Update storage task properties")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     StorageTask,
     StorageTaskUpdateParameters,
