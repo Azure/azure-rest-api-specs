@@ -1229,7 +1229,7 @@
           {
             "in": "body",
             "name": "chatImageFile",
-            "description": "Read receipt details.",
+            "description": "Image binary data, allowed image formate: jpg/jpeg, png, gif, heic, webp",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ChatImageFile"
@@ -1243,38 +1243,74 @@
               "$ref": "#/definitions/UploadChatImageResult"
             }
           },
-          "401": {
-            "description": "Unauthorized.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/ErrorResponseWrapper"
+            }
           }
         },
         "x-ms-examples": {
           "Upload Image": {
             "$ref": "./examples/Images_UploadChatImage.json"
+          }
+        }
+      }
+    },
+    "/chat/threads/{chatThreadId}/images/{imageId}/view/{viewType}": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "summary": "Get an image by view type.",
+        "operationId": "ChatThread_GetChatImage",
+        "produces": [
+          "application/json",
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/bmp",
+          "image/tiff"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chatThreadId",
+            "description": "The thread id to which the message was sent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "imageId",
+            "description": "The image id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ImageViewTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Image binary data",
+            "schema": {
+              "$ref": "#/definitions/ChatImageFile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseWrapper"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete message": {
+            "$ref": "./examples/Images_GetChatImage.json"
           }
         }
       }
@@ -1312,33 +1348,11 @@
           "204": {
             "description": "Request successful."
           },
-          "401": {
-            "description": "Unauthorized.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/ErrorResponseWrapper"
+            }
           }
         },
         "x-ms-examples": {
@@ -1413,6 +1427,62 @@
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+    },
+    "ErrorResponseWrapper": {
+      "type": "object",
+      "description": "Wrapper for error response to follow ARM guidelines.",
+      "properties": {
+        "error": {
+          "description": "The error response.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of error detail objects.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "Error detail information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "SendReadReceiptRequest": {
       "description": "Request payload for sending a read receipt.",
@@ -1570,6 +1640,9 @@
           "example": "https://{geoChatGW}/threads/{chatThreadId}/images/{imageId}/views/small"
         }
       }
+    },
+    "ChatImageViewType": {
+      
     },
     "ChatMessageContent": {
       "description": "Content of a chat message.",
@@ -2024,6 +2097,22 @@
     }
   },
   "parameters": {
+    "ImageViewTypeParameter": {
+      "in": "path",
+      "name": "viewType",
+      "description": "The view type of image.",
+      "required": true,
+      "enum": [
+        "original",
+        "small"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ImaveViewType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "path"
+    },
     "ApiVersionParameter": {
       "in": "query",
       "name": "api-version",
