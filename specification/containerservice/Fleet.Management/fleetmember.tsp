@@ -98,6 +98,12 @@ interface FleetMembers {
   @sharedRoute
   @added(Versions.v2023_06_15_preview)
   @operationId("FleetMembers_Update")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "original-uri",
+    }
+  )
   updateAsync is ArmResourcePatchAsync<
     FleetMember,
     FleetMemberProperties,
