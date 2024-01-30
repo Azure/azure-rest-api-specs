@@ -53,22 +53,6 @@ model GatewayProperties {
   provisioningState?: ProvisioningState;
 }
 
-/**
- * Properties for update operations of the Gateway.
- */
-model GatewayUpdate {
-  /**
-   * Resource tags.
-   */
-  tags?: Record<string>;
-
-  /**
-   * Gateway resource properties
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GatewayProperties;
-}
-
 @armResourceOperations
 interface Gateways {
   /**
@@ -82,7 +66,12 @@ interface Gateways {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Gateway>;
 
   /**
-   * Delete a Gateway
+   * Update Gateway tags.
+   */
+  update is ArmTagsPatchSync<Gateway>;
+
+  /**
+   * Delete a Gateway.
    */
   delete is ArmResourceDeleteWithoutOkAsync<Gateway>;
 
@@ -98,17 +87,3 @@ interface Gateways {
    */
   listBySubscription is ArmListBySubscription<Gateway>;
 }
-/*
-@@projectedName(Gateways.createOrUpdate::parameters.resource, "json", "body");
-@@extension(Gateways.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
-@@doc(Gateways.createOrUpdate::parameters.resource,
-  "Gateway resource create parameters."
-);
-@@projectedName(Gateways.update::parameters.properties, "json", "body");
-@@extension(Gateways.update::parameters.properties, "x-ms-client-name", "body");
-@@doc(Gateways.update::parameters.properties,
-  "Updatable properties for a Gateway resource."
-);*/

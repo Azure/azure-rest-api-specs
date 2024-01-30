@@ -434,12 +434,61 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "Gateways_Update",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Update Gateway tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "operationId": "Gateways_Delete",
         "tags": [
           "Gateways"
         ],
-        "description": "Delete a Gateway",
+        "description": "Delete a Gateway.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -921,9 +970,9 @@
         }
       }
     },
-    "GatewayUpdate": {
+    "GatewayTagsUpdate": {
       "type": "object",
-      "description": "Properties for update operations of the Gateway.",
+      "description": "The type used for updating tags in Gateway resources.",
       "properties": {
         "tags": {
           "type": "object",
@@ -931,11 +980,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/GatewayProperties",
-          "description": "Gateway resource properties",
-          "x-ms-client-flatten": true
         }
       }
     },
