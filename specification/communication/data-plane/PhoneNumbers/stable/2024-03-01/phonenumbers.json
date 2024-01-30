@@ -865,8 +865,8 @@
           {
             "in": "body",
             "name": "body",
-            "required": true,
             "description": "The phone number(s) whose number format and operator information should be searched",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/OperatorInformationRequest"
             }
@@ -887,7 +887,7 @@
           }
         },
         "x-ms-examples": {
-          "Search for operator information on phone numbers": {
+          "Search for number format and operator information on phone numbers": {
             "$ref": "./examples/SearchOperatorInformation.json"
           }
         }
@@ -909,6 +909,111 @@
         "nextLink": {
           "description": "Represents the URL link to the next page.",
           "type": "string"
+        }
+      }
+    },
+    "OperatorDetails": {
+      "description": "Represents metadata describing the operator of a phone number",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the phone operator",
+          "type": "string"
+        },
+        "mobileNetworkCode": {
+          "description": "Mobile Network Code",
+          "type": "string"
+        },
+        "mobileCountryCode": {
+          "description": "Mobile Country Code",
+          "type": "string"
+        }
+      }
+    },
+    "OperatorInformation": {
+      "description": "Represents metadata about a phone number that is controlled/provided by that phone number's operator.",
+      "required": [
+        "phoneNumber"
+      ],
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "description": "E.164 formatted string representation of the phone number",
+          "type": "string"
+        },
+        "nationalFormat": {
+          "description": "National format of the phone number",
+          "type": "string"
+        },
+        "internationalFormat": {
+          "description": "International format of the phone number",
+          "type": "string"
+        },
+        "isoCountryCode": {
+          "description": "ISO 3166-1 two character ('alpha-2') code associated with the phone number.",
+          "type": "string"
+        },
+        "numberType": {
+          "description": "Type of service associated with the phone number",
+          "enum": [
+            "unknown",
+            "other",
+            "geographic",
+            "mobile"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperatorNumberType",
+            "modelAsString": true
+          }
+        },
+        "operatorDetails": {
+          "$ref": "#/definitions/OperatorDetails"
+        }
+      }
+    },
+    "OperatorInformationOptions": {
+      "description": "Represents options to modify a search request for operator information",
+      "type": "object",
+      "properties": {
+        "includeAdditionalOperatorDetails": {
+          "description": "Includes the fields operatorDetails, numberType, and isoCountryCode in the response.  Please note: use of this option will result in additional costs",
+          "type": "boolean"
+        }
+      }
+    },
+    "OperatorInformationRequest": {
+      "description": "Represents a search request for operator information for the given phone numbers.",
+      "required": [
+        "phoneNumbers"
+      ],
+      "type": "object",
+      "properties": {
+        "phoneNumbers": {
+          "description": "Phone number(s) whose operator information is being requested",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "options": {
+          "$ref": "#/definitions/OperatorInformationOptions"
+        }
+      }
+    },
+    "OperatorInformationResult": {
+      "description": "Represents a search result containing format and operator information associated with the requested phone numbers",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "Results of a search.\r\nThis array will have one entry per requested phone number which will contain the relevant operator information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperatorInformation"
+          }
         }
       }
     },
@@ -1466,105 +1571,6 @@
           "type": "string"
         }
       }
-    },
-    "OperatorInformationRequest": {
-      "description": "Represents a search request for operator information for the given phone numbers",
-      "type": "object",
-      "properties": {
-        "phoneNumbers": {
-          "description": "Phone number(s) whose operator information is being requested",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "options": {
-          "$ref": "#/definitions/OperatorInformationOptions"
-        }
-      }
-    },
-    "OperatorInformationOptions": {
-      "description": "Represents options to modify a search request for operator information",
-      "type": "object",
-      "properties": {
-        "includeAdditionalOperatorDetails": {
-          "description": "Includes the fields operatorDetails, numberType, and isoCountryCode in the response.  Please note: use of this option will result in additional costs",
-          "type": "boolean"
-        }
-      }
-    },
-    "OperatorInformationResult": {
-      "description": "Represents a search result containing format and operator information associated with the requested phone numbers",
-      "type": "object",
-      "properties": {
-        "values": {
-          "description": "Results of a search.\r\nThis array will have one entry per requested phone number which will contain the relevant operator information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperatorInformation"
-          }
-        }
-      }
-    },
-    "OperatorInformation": {
-      "description": "Represents metadata about a phone number that is controlled/provided by that phone number's operator.",
-      "type": "object",
-      "required": [
-        "phoneNumber"
-      ],
-      "properties": {
-        "phoneNumber": {
-          "description": "E.164 formatted string representation of the phone number",
-          "type": "string"
-        },
-        "nationalFormat": {
-          "description": "National format of the phone number",
-          "type": "string"
-        },
-        "internationalFormat": {
-          "description": "International format of the phone number",
-          "type": "string"
-        },
-        "numberType": {
-          "description": "Type of service associated with the phone number",
-          "enum": [
-            "unavailable",
-            "other",
-            "geographic",
-            "mobile"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OperatorNumberType",
-            "modelAsString": true
-          }
-        },
-        "isoCountryCode": {
-          "description": "ISO 3166-1 two character ('alpha-2') code associated with the phone number.",
-          "type": "string"
-        },
-        "operatorDetails": {
-          "$ref": "#/definitions/OperatorDetails"
-        }
-      }
-    },
-    "OperatorDetails": {
-      "description": "Represents metadata describing the operator of a phone number",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the phone operator",
-          "type": "string"
-        },
-        "mobileNetworkCode": {
-          "description": "Mobile Network Code",
-          "type": "string"
-        },
-        "mobileCountryCode": {
-          "description": "Mobile Country Code",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
@@ -1582,9 +1588,9 @@
       "description": "The communication resource, for example https://resourcename.communication.azure.com",
       "required": true,
       "type": "string",
-      "format": "url",
       "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "format": "url"
     }
   },
   "securityDefinitions": {
