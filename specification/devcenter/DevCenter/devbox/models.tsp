@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "../shared/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 namespace DevCenterService;
 
@@ -351,6 +353,8 @@ model DevBoxListResult is Azure.Core.Page<DevBox>;
 @doc("A Dev Box")
 @resource("devboxes")
 @parentResource(User)
+@access(Access.public)
+@usage(Usage.input | Usage.output)
 model DevBox {
   @key("devBoxName")
   @doc("Display name for the Dev Box")
