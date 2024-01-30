@@ -1822,7 +1822,7 @@ the Pool. When using attached data disks, you need to mount and format the
 disks from within a VM to use them.
 """)
 model DataDisk {
-  @doc("The logical unit number. The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive.")
+  @doc("The logical unit number. The logicalUnitNumber is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct logicalUnitNumber. The value must be between 0 and 63, inclusive.")
   @projectedName("client", "logicalUnitNumber")
   lun: int32;
 
