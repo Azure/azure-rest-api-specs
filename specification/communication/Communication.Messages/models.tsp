@@ -2,14 +2,12 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Azure.ClientGenerator.Core;
 
 @versioned(Azure.Communication.MessagesService.Versions)
 namespace Azure.Communication.MessagesService;
@@ -317,7 +315,6 @@ model CommunicationChannel {
 
 @resource("messages/streams")
 @doc("A data stream.")
-@access(Access.internal)
 model MessageDataStream {
   @key
   @visibility("read")

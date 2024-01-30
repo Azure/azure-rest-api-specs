@@ -27,3 +27,7 @@ interface NotificationMessagesClient
 })
 interface MessageTemplateClient
   extends Azure.Communication.MessagesService.TemplateOperations {}
+
+@@access(Azure.Communication.MessagesService.MessageDataStream,
+  Access.internal
+);
