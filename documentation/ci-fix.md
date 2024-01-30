@@ -16,6 +16,8 @@
     - [`Record<unkown>` causes `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`](#recordunkown-causes-avoidadditionalproperties-and-propertiestypeobjectnodefinition)
     - [`RequestBodyMustExistForPutPatch`](#requestbodymustexistforputpatch)
     - [`PatchPropertiesCorrespondToPutProperties`](#patchpropertiescorrespondtoputproperties)
+    - [`@singleton` causes `EvenSegmentedPathForPutOperation` and `XmsPageableForListCalls`](#singleton-causes-evensegmentedpathforputoperation-and-xmspageableforlistcalls)
+    - [Intersecting models causes `AvoidAnonymousTypes`](#intersecting-models-causes-avoidanonymoustypes)
   - [`Swagger Avocado`](#swagger-avocado)
     - [Get help fixing Avocado validation failures](#get-help-fixing-avocado-validation-failures)
     - [Run avocado locally](#run-avocado-locally)
@@ -155,21 +157,28 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
+Check `Swagger LintDiff` may fail for the OpenAPI generated from TypeSpec, even if there are no warnings or errors reported from the TypeSpec compiler.  Causes include bugs in the TypeSpec OpenAPI emitter, bugs in LintDiff rules, incompatibilities between TypeSpec and LintDiff, or checks duplicated in TypeSpec and LintDiff.
+
+We are working to address the root causes (where possible).  Until then, we recommend you [suppress](#suppression-process) these LintDiff errors, using a "permanent suppression" with a descriptive "reason", so we can revert your suppression when the root cause is fixed.
+
 ### `Record<unkown>` causes `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`
 
-The use of `Record<unkown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the OpenAPI spec generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations (in `readme.md`).
+The use of `Record<unkown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the OpenAPI spec generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations.
 
 ### `RequestBodyMustExistForPutPatch`
 
-We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/641.  Until fixed, spec authors should **not** suppress the violations in `readme.md`, but rather have label `Approved-LintDiff` applied to their PR to ignore the errors.
+We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/641
 
 ### `PatchPropertiesCorrespondToPutProperties`
 
-We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/642.  Until fixed, spec authors should **not** suppress the violations in `readme.md`, but rather have label `Approved-LintDiff` applied to their PR to ignore the errors.
+We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/642
 
 ### `@singleton` causes `EvenSegmentedPathForPutOperation` and `XmsPageableForListCalls`
 
-If `EvenSegmentedPathForPutOperation` and/or `XmsPageableForListCalls` are failing for OpenAPI generated from TypeSpec using `@singleton` (OpenAPI path ends with `/default`), we believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/646.  Until fixed, spec authors should **not** suppress the violations in `readme.md`, but rather have label `Approved-LintDiff` applied to their PR to ignore the errors.
+If `EvenSegmentedPathForPutOperation` and/or `XmsPageableForListCalls` are failing for OpenAPI generated from TypeSpec using `@singleton` (OpenAPI path ends with `/default`), we believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/646
+
+### Intersecting models causes `AvoidAnonymousTypes`
+If you do **TBD** in TypeSpec, it may cause LintDiff errors of type `AvoidAnonymoustypes`.  We believe this is an issue in TypeSpec that can be fixed (https://github.com/Azure/typespec-azure-pr/issues/3349).
 
 ## `Swagger Avocado`
 
