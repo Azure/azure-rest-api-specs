@@ -62,8 +62,8 @@ suppressions:
     where:
       - $.definitions.AccountModel.properties.finetuneCapabilities
       - $.definitions.AccountModel.properties.capabilities
-      - $.definitions.EndpointModels.properties.value.items
-      - $.definitions.EndpointModels.properties.value.items.$ref
+      - $.definitions.EndpointModels.properties.value.items.properties.capabilities
+      - $.definitions.EndpointModels.properties.value.items.properties.finetuneCapabilities
   - code: GuidUsage
     reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
     from: workspaceRP.json    
