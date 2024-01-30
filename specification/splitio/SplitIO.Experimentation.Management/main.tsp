@@ -52,13 +52,27 @@ model DataSource {
   logAnalytics?: LogAnalytics;
 }
 
+scalar LogAnalyticsWorkspaceResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.OperationalInsights/workspaces",
+    }
+  ]>;
+
+scalar StorageAccountResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts",
+    }
+  ]>;
+
 @doc("The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.")
 model LogAnalytics {
   @doc("Resource id of the Log Analytics workspace.")
-  resourceId: string;
+  resourceId: LogAnalyticsWorkspaceResourceId;
 
   @doc("Resource id of the storage account associated with the Log Analytics workspace.")
-  storageAccountResourceId: string;
+  storageAccountResourceId: StorageAccountResourceId;
 
   @doc("Controls whether data flow from the configured Log Analytics workspace into the experimentation workspace is enabled.")
   enabled: boolean;
