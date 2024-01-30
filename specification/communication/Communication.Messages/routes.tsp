@@ -22,7 +22,10 @@ interface TemplateOperations {
   @tag("Template")
   @doc("List all templates for given ACS channel")
   @projectedName("csharp", "getTemplates")
-  listTemplates is Operations.ResourceList<MessageTemplateItem>;
+  listTemplates is Operations.ResourceList<
+    MessageTemplateItem,
+    ListTemplatesQueryParams
+  >;
 }
 
 interface NotificationMessagesOperations {

@@ -308,6 +308,11 @@ model CommunicationChannel {
   @visibility("read")
   @doc("The registration ID of the channel.")
   channelId: string;
+
+  @doc("Number of objects to return per page.")
+  @query
+  @visibility("create")
+  maxpagesize?: int32;
 }
 
 @resource("messages/streams")
@@ -347,6 +352,12 @@ model MessageTemplateItem {
   @doc("The type discriminator describing a template type.")
   kind: CommunicationMessagesChannel;
 }
+
+alias ListTemplatesQueryParams = ListQueryParametersTrait<{
+  @doc("Number of objects to return per page.")
+  @query
+  maxpagesize?: int32;
+}>;
 
 @doc("Azure Communication Messages Versions")
 enum Versions {
