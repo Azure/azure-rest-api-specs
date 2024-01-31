@@ -227,6 +227,8 @@ npx tsv specification/contosowidgetmanager/Contoso.WidgetManager
 Then check any errors that might be outputted and address any issues as needed. If there are changed files after the runit generally means
 that the generated OpenAPI spec files were not in-sync with the TypeSpec project and you should include those changes in your pull request as well. 
 
+If none of the above helped, please reach out on [TypeSpec Discussions Teams channel].
+
 ## Suppression Process
 
 In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs. Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
@@ -249,3 +251,4 @@ Following checks have been removed from the validation toolchain as of August 20
 [aka.ms/azsdk/pr-getting-help]: https://aka.ms/azsdk/pr-getting-help
 [aka.ms/azsdk/support/specreview-channel]: https://aka.ms/azsdk/support/specreview-channel
 [aka.ms/azsdk/support]: https://aka.ms/azsdk/support
+[TypeSpec Discussions Teams channel]: https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion%20%F0%9F%90%AE?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47
