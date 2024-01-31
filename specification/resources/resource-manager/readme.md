@@ -1342,6 +1342,15 @@ directive:
   - suppress: XmsParameterLocation
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForTrackedResourceType
+    from: deploymentStacks.json
+    reason: A deployment stack resource is a proxy location-mapped resource type.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: deploymentStacks.json
+    reason: Working with deployment stacks at the management group scope is supported.
+  - suppress: TrackedResourcePatchOperation
+    from: deploymentStacks.json
+    reason: A deployment stack resource is a proxy location-mapped resource type.
 ```
 
 ---
