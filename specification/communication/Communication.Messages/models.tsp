@@ -306,11 +306,6 @@ model CommunicationChannel {
   @visibility("read")
   @doc("The registration ID of the channel.")
   channelId: string;
-
-  @doc("Number of objects to return per page.")
-  @query
-  @visibility("create")
-  maxpagesize?: int32;
 }
 
 @resource("messages/streams")
