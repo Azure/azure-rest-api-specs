@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @added(ServiceApiVersions.v2023_12_01_Preview)
 @doc("""
-A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
+A specific representation of configurable options for Azure Cosmos DB when using it as an Azure OpenAI chat
 extension.
 """)
 model AzureCosmosDBChatExtensionConfiguration
@@ -29,7 +29,7 @@ model AzureCosmosDBChatExtensionConfiguration
 @added(ServiceApiVersions.v2023_12_01_Preview)
 @doc("""
 Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for
-MongoDB vCore.
+MongoDB vCore. The supported authentication type is ConnectionString.
 """)
 model AzureCosmosDBChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
@@ -51,13 +51,33 @@ model AzureCosmosDBChatExtensionParameters {
   fieldsMapping: AzureCosmosDBFieldMappingOptions;
 
   @doc("The embedding dependency for vector search.")
-  embeddingDependency?: OnYourDataVectorizationSource;
+  embeddingDependency: OnYourDataVectorizationSource;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @doc("Optional settings to control how fields are processed when using a configured Azure Cosmos DB resource.")
 @added(ServiceApiVersions.v2023_12_01_Preview)
 model AzureCosmosDBFieldMappingOptions {
+  @doc("The name of the index field to use as a title.")
+  @projectedName("csharp", "TitleFieldName")
+  titleField?: string;
+
+  @doc("The name of the index field to use as a URL.")
+  @projectedName("csharp", "UrlFieldName")
+  urlField?: string;
+
+  @doc("The name of the index field to use as a filepath.")
+  @projectedName("csharp", "FilepathFieldName")
+  filepathField?: string;
+
+  @doc("The names of index fields that should be treated as content.")
+  @projectedName("csharp", "ContentFieldNames")
+  contentFields: string[];
+
+  @doc("The separator pattern that content fields should use.")
+  @projectedName("csharp", "ContentFieldSeparator")
+  contentFieldsSeparator?: string;
+
   @doc("The names of fields that represent vector data.")
   @projectedName("csharp", "VectorFieldNames")
   vectorFields: string[];
