@@ -26,10 +26,17 @@ model WorkloadProperties {
   @doc("Virtual Enclave Resource Id.")
   enclaveResourceId?: VirtualEnclaveResourceId;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @removed(Microsoft.Mission.Versions.v2023_11_01_preview)
   @doc("Managed Resource Groups.")
   managedResourceGroups?: string[];
 
   @doc("Provisioning State.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @added(Microsoft.Mission.Versions.v2023_11_01_preview)
+  @doc("Managed resource group configuration.")
+  managedResourceGroupConfiguration: ManagedResourceGroupConfiguration;
 }

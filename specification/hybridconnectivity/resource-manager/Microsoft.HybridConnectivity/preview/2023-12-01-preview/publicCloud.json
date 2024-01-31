@@ -1,0 +1,141 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hybrid Connectivity Management API",
+    "version": "2023-12-01-preview",
+    "description": "REST API for public clouds.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "GenerateAwsTemplate"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/generateAwsTemplate": {
+      "post": {
+        "operationId": "GenerateAwsTemplate_Post",
+        "tags": [
+          "GenerateAwsTemplate"
+        ],
+        "description": "Retrieve AWS Cloud Formation template",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "generateAwsTemplateRequest",
+            "in": "body",
+            "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateAwsTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateAwsTemplate_Post": {
+            "$ref": "./examples/GenerateAwsTemplate_Post.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GenerateAwsTemplateRequest": {
+      "type": "object",
+      "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.",
+      "properties": {
+        "connectorId": {
+          "type": "string",
+          "description": "The name of public cloud connector"
+        },
+        "solutionTypes": {
+          "type": "array",
+          "description": "The list of solution types and their settings",
+          "items": {
+            "$ref": "#/definitions/SolutionTypeProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "connectorId"
+      ]
+    },
+    "SolutionSettings": {
+      "type": "object",
+      "description": "Solution settings",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "SolutionTypeProperties": {
+      "type": "object",
+      "description": "The properties of Solution Type",
+      "properties": {
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution"
+        },
+        "solutionSettings": {
+          "$ref": "#/definitions/SolutionSettings",
+          "description": "Solution settings"
+        }
+      },
+      "required": [
+        "solutionType"
+      ]
+    }
+  },
+  "parameters": {}
+}

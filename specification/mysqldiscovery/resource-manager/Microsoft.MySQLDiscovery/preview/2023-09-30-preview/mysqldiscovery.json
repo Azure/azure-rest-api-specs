@@ -1215,6 +1215,28 @@
           "type": "string",
           "description": "MySQL Server port number"
         },
+        "mysqlVersion": {
+          "type": "string",
+          "description": "The mysql server version."
+        },
+        "numberOfDatabase": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of database."
+        },
+        "supportStatus": {
+          "type": "string",
+          "description": "mysql version support status.",
+          "enum": [
+            "NotSupported",
+            "ExtendedSupport",
+            "MainstreamSupport"
+          ],
+          "x-ms-enum": {
+            "name": "supportStatus",
+            "modelAsString": true
+          }
+        },
         "errors": {
           "description": "The list of errors.",
           "type": "array",

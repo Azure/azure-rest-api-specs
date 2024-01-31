@@ -13,7 +13,7 @@ go:
 
 ### Go multi-api
 
-``` yaml $(go) && $(multiapi)
+```yaml $(go) && $(multiapi)
 batch:
   - tag: package-2020-11-01-preview
   - tag: package-preview-2021-01
@@ -38,5 +38,3 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 namespace: azurestackhci
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-11-01-preview/$(namespace)
 ```
-
-

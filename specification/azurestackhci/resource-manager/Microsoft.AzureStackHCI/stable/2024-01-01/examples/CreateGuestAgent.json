@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM",
+    "body": {
+      "properties": {
+        "provisioningAction": "install",
+        "credentials": {
+          "username": "tempuser",
+          "password": "<password>"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/guestAgents/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/virtualMachineInstances/guestAgents",
+        "properties": {
+          "provisioningAction": "install",
+          "status": "connected",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/guestAgents/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/virtualMachineInstances/guestAgents",
+        "properties": {
+          "provisioningAction": "install",
+          "status": "connected",
+          "provisioningState": "Created"
+        }
+      }
+    }
+  }
+}

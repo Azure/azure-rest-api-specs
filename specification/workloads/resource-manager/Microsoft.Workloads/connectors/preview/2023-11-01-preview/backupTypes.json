@@ -251,6 +251,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/TieringPolicy"
           }
+        },
+        "snapshotBackupAdditionalDetails": {
+          "$ref": "#/definitions/SnapshotBackupAdditionalDetails",
+          "description": "Hana DB instance snapshot backup additional details."
         }
       }
     },
@@ -291,6 +295,33 @@
             "name": "RetentionDurationType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "UserAssignedIdentityProperties": {
+      "description": "User assigned managed identity properties.",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        }
+      }
+    },
+    "UserAssignedManagedIdentityDetails": {
+      "description": "User assigned managed identity details.",
+      "type": "object",
+      "properties": {
+        "identityArmId": {
+          "type": "string"
+        },
+        "identityName": {
+          "type": "string"
+        },
+        "userAssignedIdentityProperties": {
+          "$ref": "#/definitions/UserAssignedIdentityProperties"
         }
       }
     },
@@ -394,6 +425,25 @@
         }
       },
       "x-ms-discriminator-value": "SimpleSchedulePolicyV2"
+    },
+    "SnapshotBackupAdditionalDetails": {
+      "description": "Snapshot Backup related fields for WorkloadType SAP Hana system",
+      "type": "object",
+      "properties": {
+        "instantRpRetentionRangeInDays": {
+          "format": "int32",
+          "description": "Retention range for instant Rp in days.",
+          "type": "integer"
+        },
+        "instantRPDetails": {
+          "description": "Instant RP details for the snapshot.",
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
+          "description": "User Assigned managed identity details used for snapshot policy."
+        }
+      }
     },
     "HourlySchedule": {
       "type": "object",

@@ -11,23 +11,29 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
-@armProviderNamespace("Microsoft.CloudHealth")
+@armProviderNamespace(ProviderName)
 @service({
-  title: "Microsoft.CloudHealth",
+  title: ProviderName,
   version: "2023-10-01-preview",
 })
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.CloudHealth;
+
+alias ProviderName = "Microsoft.CloudHealth";
 
 // Regex for all our resource name validations
 alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,58}[a-zA-Z0-9]$";
 
 @pattern(resourceNameRegex)
+@doc("String with regex validation to match the resource name requirements")
 scalar stringResourceName extends string;
 
 @maxLength(4096)
+@doc("String with max length validation of 4096 characters")
 scalar string4096 extends string;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -114,16 +120,11 @@ model SignalDefinitionProperties {
   )
   signalKind: string; // Cannot use enum directly due to bug https://github.com/Azure/typespec-azure/issues/3574
 
-  @doc("Interval in which the signal is being evaluated.")
-  refreshInterval?: RefreshInterval;
+  @doc("Interval in which the signal is being evaluated. Defaults to PT1M.")
+  refreshInterval: RefreshInterval = RefreshInterval.PT1M;
 
   @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
-
-  @doc("Time range of signal. ISO duration format like PT10M.")
-  @minLength(1)
-  @maxLength(100)
-  timeGrain?: string;
 
   @doc("Unit of the signal result (e.g. Bytes, MilliSeconds, Percent, Count))")
   @minLength(1)
@@ -166,17 +167,37 @@ model ThresholdRule {
 
 @doc("ML-based evaluation rule for a signal definition")
 model DynamicDetectionRule {
-  @doc("Operator")
+  @doc("ML model to use for dynamic thresholds")
   dynamicThresholdModel: DynamicThresholdModel;
 
-  @doc("ML model sensitivity")
-  modelSensitivity?: int32;
+  @doc("ML model sensitivity. Lowest value = high sensitivity. Supported step size = 0.5")
+  @minValue(0.0)
+  @maxValue(5.0)
+  modelSensitivity: float32;
+
+  @doc("Threshold direction")
+  dynamicThresholdDirection: DynamicThresholdDirection;
+
+  @doc("Start time of the training in UTC.")
+  trainingStartTime?: utcDateTime;
 }
 
 @doc("ML-based model variants")
 enum DynamicThresholdModel {
   @doc("Anomaly detection model")
   AnomalyDetection,
+}
+
+@doc("Threshold direction for dynamic thresholds")
+enum DynamicThresholdDirection {
+  @doc("Lower than")
+  LowerThan,
+
+  @doc("Greater than")
+  GreaterThan,
+
+  @doc("Greater or Lower Than")
+  GreaterOrLowerThan,
 }
 
 @doc("Refresh interval in ISO duration format")
@@ -216,6 +237,11 @@ model ResourceMetricSignalDefinitionProperties
   @maxLength(256)
   metricName: string;
 
+  @doc("Time range of signal. ISO duration format like PT10M.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain: string;
+
   @doc("Type of aggregation to apply to the metric")
   aggregationType: MetricAggregationType;
 
@@ -241,6 +267,11 @@ model LogAnalyticsQuerySignalDefinitionProperties
   @maxLength(5000)
   queryText: string;
 
+  @doc("Time range of signal. ISO duration format like PT10M. If not specified, the KQL query must define a time range.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain?: string;
+
   @doc("Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified.")
   @minLength(1)
   @maxLength(100)
@@ -260,6 +291,11 @@ model PrometheusMetricsSignalDefinitionProperties
   @minLength(1)
   @maxLength(5000)
   queryText: string;
+
+  @doc("Time range of signal. ISO duration format like PT10M.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain?: string;
 }
 
 @doc("Signal operator")
@@ -426,11 +462,8 @@ model IconDefinition {
 
 @doc("Contains various signal groups that can be assigned to an entity")
 model SignalGroup {
-  @doc("Azure Resource Signal Group. Can only be defined if dynamicAzureResourceDefinition is not defined.")
+  @doc("Azure Resource Signal Group")
   azureResource?: AzureResourceSignalGroup;
-
-  @doc("Dynamic Azure Resource Signal Group. Can only be defined if azureResource is not defined.")
-  dynamicAzureResources?: DynamicAzureResourcesSignalGroup;
 
   @doc("Log Analytics Signal Group")
   azureLogAnalytics?: LogAnalyticsSignalGroup;
@@ -463,7 +496,9 @@ model SignalAssignmentGroup {
 @doc("Group of signal definition assignments")
 model SignalAssignment {
   @doc("Signal definitions referenced by their names. All definitions are combined with an AND operator.")
-  @maxItems(50)
+  // @maxItems(50) - until the backend supports correlation, we need to limit this to 1
+  @maxItems(1)
+  @minItems(1)
   signalDefinitions: stringResourceName[];
 }
 
@@ -479,21 +514,15 @@ model LogAnalyticsSignalGroup is SignalAssignmentGroup {
   logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
 
   @doc("Log Analytics workspace ID") // Ideally, we dont need this since we also have the Resource Id. But at the moment we need this ID for querying
-  logAnalyticsWorkspaceId: uuid;
+  @minLength(36)
+  @maxLength(36)
+  logAnalyticsWorkspaceId: string;
 }
 
 @doc("A grouping of signal assignments for a Azure Monitor Workspace")
 model AzureMonitorWorkspaceSignalGroup is SignalAssignmentGroup {
   @doc("Azure Monitor workspace resource ID")
   azureMonitorWorkspaceResourceId: AzureMonitorWorkspaceResourceId;
-}
-
-@doc("A grouping of signal assignments for dynamic Azure Resources")
-model DynamicAzureResourcesSignalGroup is SignalAssignmentGroup {
-  @doc("Azure Resource Graph query in KQL syntax to select a dynamic set of Azure resources")
-  @minLength(1)
-  @maxLength(5000)
-  azureResourceGraphQuery: string;
 }
 
 @doc("Type of impact an entity has on health state propagation")
@@ -567,6 +596,12 @@ model RelationshipProperties {
   deletionDate?: utcDateTime;
 }
 
+alias TimestampQueryParam = {
+  @doc("Timestamp to use for the operation. When specified, the version of the resource at this point in time is retrieved. If not specified, the latest version is used.")
+  @query
+  timestamp?: utcDateTime;
+};
+
 @armResourceOperations
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
@@ -580,16 +615,19 @@ interface HealthModels {
 @armResourceOperations
 interface SignalDefinitions {
   get is ArmResourceRead<SignalDefinition>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<SignalDefinition>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
   delete is ArmResourceDeleteSync<SignalDefinition>;
 
-  listByParent is ArmResourceListByParent<SignalDefinition>;
+  listByParent is ArmResourceListByParent<
+    SignalDefinition,
+    BaseParameters<SignalDefinition> & TimestampQueryParam
+  >;
 }
 
 @armResourceOperations
 interface AuthenticationSettings {
   get is ArmResourceRead<AuthenticationSetting>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<AuthenticationSetting>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<AuthenticationSetting>;
   delete is ArmResourceDeleteSync<AuthenticationSetting>;
 
   listByParent is ArmResourceListByParent<AuthenticationSetting>;
@@ -598,17 +636,23 @@ interface AuthenticationSettings {
 @armResourceOperations
 interface Entities {
   get is ArmResourceRead<Entity>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<Entity>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Entity>;
   delete is ArmResourceDeleteSync<Entity>;
 
-  listByParent is ArmResourceListByParent<Entity>;
+  listByParent is ArmResourceListByParent<
+    Entity,
+    BaseParameters<Entity> & TimestampQueryParam
+  >;
 }
 
 @armResourceOperations
 interface Relationships {
   get is ArmResourceRead<Relationship>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<Relationship>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Relationship>;
   delete is ArmResourceDeleteSync<Relationship>;
 
-  listByParent is ArmResourceListByParent<Relationship>;
+  listByParent is ArmResourceListByParent<
+    Relationship,
+    BaseParameters<Relationship> & TimestampQueryParam
+  >;
 }

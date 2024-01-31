@@ -46,9 +46,8 @@
           "scanListenerPortTcp": 1050,
           "scanListenerPortTcpSsl": 1025,
           "vnetId": "/subscriptions/0000000-0000-0000-00000-00000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1",
-          "giVersion": "/subscriptions/0000000-0000-0000-00000-00000000/providers/Oracle.Database/giVersions/19.0.0.0",
+          "giVersion": "19.0.0.0",
           "subnetId": "/subscriptions/0000000-0000-0000-00000-00000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-          "backupSubnetId": "/subscriptions/0000000-0000-0000-00000-00000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
           "systemVersion": "v1",
           "diskRedundancy": "High",
           "scanIpIds": [
@@ -69,11 +68,13 @@
           },
           "displayName": "cluster 1",
           "iormConfigCache": {
-            "dbPlans": {
-              "dbName": "db1",
-              "flashCacheLimit": "none",
-              "share": 32
-            },
+            "dbPlans": [
+              {
+                "dbName": "db1",
+                "flashCacheLimit": "none",
+                "share": 32
+              }
+            ],
             "lifecycleDetails": "success",
             "provisioningState": "Succeeded",
             "objective": "LowLatency"
