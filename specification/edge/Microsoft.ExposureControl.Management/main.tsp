@@ -45,6 +45,7 @@ interface ExposureGroups
   get is ArmResourceRead<ExposureGroup>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ExposureGroup>;
   delete is ArmResourceDeleteWithoutOkAsync<ExposureGroup>;
+  listBySubscription is ArmListBySubscription<ExposureGroup>;
   list is ArmResourceListByParent<
     ExposureGroup,
     Azure.ResourceManager.Foundations.BaseParameters<ExposureGroup> &
@@ -62,6 +63,7 @@ interface ExposureFeatures
   get is ArmResourceRead<ExposureFeature>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ExposureFeature>;
   delete is ArmResourceDeleteWithoutOkAsync<ExposureFeature>;
+  listBySubscription is ArmListBySubscription<ExposureFeature>;
   list is ArmResourceListByParent<
     ExposureFeature,
     Azure.ResourceManager.Foundations.BaseParameters<ExposureFeature> &
@@ -79,6 +81,7 @@ interface ExposureWorkflowManifests
   get is ArmResourceRead<ExposureWorkflowManifest>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ExposureWorkflowManifest>;
   delete is ArmResourceDeleteWithoutOkAsync<ExposureWorkflowManifest>;
+  listBySubscription is ArmListBySubscription<ExposureWorkflowManifest>;
   list is ArmResourceListByParent<
     ExposureWorkflowManifest,
     Azure.ResourceManager.Foundations.BaseParameters<ExposureWorkflowManifest> &
@@ -96,6 +99,7 @@ interface ExposureWorkflows
   get is ArmResourceRead<ExposureWorkflow>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ExposureWorkflow>;
   delete is ArmResourceDeleteWithoutOkAsync<ExposureWorkflow>;
+  listBySubscription is ArmListBySubscription<ExposureWorkflow>;
   list is ArmResourceListByParent<
     ExposureWorkflow,
     Azure.ResourceManager.Foundations.BaseParameters<ExposureWorkflow> &

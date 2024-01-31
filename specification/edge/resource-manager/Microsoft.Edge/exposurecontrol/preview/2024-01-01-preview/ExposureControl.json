@@ -92,6 +92,162 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/exposureFeatures": {
+      "get": {
+        "operationId": "ExposureFeatures_ListBySubscription",
+        "tags": [
+          "ExposureFeatures"
+        ],
+        "description": "List ExposureFeature resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureFeatureListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureFeatures_ListBySubscription": {
+            "$ref": "./examples/ExposureFeatures_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/exposureGroups": {
+      "get": {
+        "operationId": "ExposureGroups_ListBySubscription",
+        "tags": [
+          "ExposureGroups"
+        ],
+        "description": "List ExposureGroup resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureGroups_ListBySubscription": {
+            "$ref": "./examples/ExposureGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/exposureWorkflowManifests": {
+      "get": {
+        "operationId": "ExposureWorkflowManifests_ListBySubscription",
+        "tags": [
+          "ExposureWorkflowManifests"
+        ],
+        "description": "List ExposureWorkflowManifest resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowManifestListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflowManifests_ListBySubscription": {
+            "$ref": "./examples/ExposureWorkflowManifests_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/exposureWorkflows": {
+      "get": {
+        "operationId": "ExposureWorkflows_ListBySubscription",
+        "tags": [
+          "ExposureWorkflows"
+        ],
+        "description": "List ExposureWorkflow resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflows_ListBySubscription": {
+            "$ref": "./examples/ExposureWorkflows_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureFeatures": {
       "get": {
         "operationId": "ExposureFeatures_ListByResourceGroup",
@@ -1319,8 +1475,7 @@
       "properties": {
         "exposureFeatureId": {
           "type": "string",
-          "description": "Feature unique Id.",
-          "readOnly": true
+          "description": "Feature unique Id."
         },
         "discriminator": {
           "type": "string",
@@ -1328,8 +1483,7 @@
         },
         "exposureWorkflowManifestId": {
           "type": "string",
-          "description": "Workflow manifest Id.",
-          "readOnly": true
+          "description": "Workflow manifest Id."
         },
         "rings": {
           "type": "array",
@@ -1342,8 +1496,11 @@
         },
         "overrideDefaultStartRing": {
           "type": "string",
-          "description": "Default start Ring.",
-          "readOnly": true
+          "description": "Default start Ring."
+        },
+        "currentRingStatus": {
+          "$ref": "#/definitions/RingStatus",
+          "description": "Exposure workflow current ring status."
         },
         "workflowStatus": {
           "$ref": "#/definitions/ExposureWorkflowStatus",
@@ -1357,11 +1514,8 @@
         }
       },
       "required": [
-        "exposureFeatureId",
         "discriminator",
-        "exposureWorkflowManifestId",
         "rings",
-        "overrideDefaultStartRing",
         "workflowStatus"
       ]
     },
@@ -1464,9 +1618,9 @@
       "type": "object",
       "description": "Exposure workflow update properties",
       "properties": {
-        "status": {
+        "currentRingStatus": {
           "$ref": "#/definitions/RingStatus",
-          "description": "Ring status"
+          "description": "Current Ring status"
         }
       }
     },
@@ -1476,11 +1630,11 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "type."
+          "description": "filter condition type."
         },
         "values": {
           "type": "array",
-          "description": "values.",
+          "description": "filter condition values.",
           "items": {
             "type": "string"
           }
@@ -1505,12 +1659,12 @@
           {
             "name": "Open",
             "value": "Open",
-            "description": "Open."
+            "description": "Gate status Open."
           },
           {
             "name": "Closed",
             "value": "Closed",
-            "description": "Closed."
+            "description": "Gate status Closed."
           }
         ]
       }
@@ -1668,7 +1822,7 @@
         },
         "progressionSetting": {
           "$ref": "#/definitions/ProgressionSetting",
-          "description": "Progression settings."
+          "description": "Ring Progression settings."
         }
       },
       "required": [
@@ -1727,7 +1881,7 @@
           {
             "name": "Omitted",
             "value": "Omitted",
-            "description": "Omitted."
+            "description": "Ring Omitted."
           }
         ]
       }

@@ -88,10 +88,10 @@ enum ProgressionType {
 
 @doc("GateStatus enum.")
 enum GateStatus {
-  @doc("Open.")
+  @doc("Gate status Open.")
   Open,
 
-  @doc("Closed.")
+  @doc("Gate status Closed.")
   Closed,
 }
 
@@ -106,6 +106,6 @@ model RingConfigurationProperties {
   @doc("Ring status.")
   status: RingStatus;
 
-  @doc("Progression settings.")
+  @doc("Ring Progression settings.")
   progressionSetting: ProgressionSetting;
 }

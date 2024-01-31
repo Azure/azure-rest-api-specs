@@ -40,9 +40,9 @@ model ExposureGroupProperties {
 
 @doc("Filter Conditions")
 model FilterCondition {
-  @doc("type.")
+  @doc("filter condition type.")
   type: string;
 
-  @doc("values.")
+  @doc("filter condition values.")
   values: Array<string>;
 }

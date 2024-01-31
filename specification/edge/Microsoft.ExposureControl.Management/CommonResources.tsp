@@ -52,6 +52,6 @@ enum RingStatus {
   @doc("Ring bypassed.")
   AutoPassed,
 
-  @doc("Omitted.")
+  @doc("Ring Omitted.")
   Omitted,
 }
