@@ -148,9 +148,6 @@ model TargetInput {
   @doc("List of Glossary")
   glossaries?: Glossary[];
 
-  @doc("Batch Request Options")
-  options?: BatchRequestOptions;
-
   @doc("Storage Source")
   storageSource?: StorageSource;
 }
@@ -175,12 +172,6 @@ language pair is not present in the glossary, it will not be applied
 
   @doc("Storage Source")
   storageSource?: StorageSource;
-}
-
-@doc("Batch Request Options")
-model BatchRequestOptions {
-  @doc("List of possible additional output formats")
-  pdfOutputAdditionalFormat?: AdditionalOutputFileFormat;
 }
 
 @doc("""
