@@ -37,6 +37,8 @@ interface SpringbootsitesModels {
   /**
    * Get a springbootsites resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @armResourceRead(SpringbootsitesModel)
   @operationId("springbootsites_Get")
   @get
   get(
@@ -58,6 +60,8 @@ interface SpringbootsitesModels {
   /**
    * Create a springbootsites resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @armResourceCreateOrUpdate(SpringbootsitesModel)
   @operationId("springbootsites_CreateOrUpdate")
   @put
   createOrUpdate(
@@ -88,6 +92,8 @@ interface SpringbootsitesModels {
   /**
    * Update a springbootsites resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @armResourceUpdate(SpringbootsitesPatch)
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -126,6 +132,8 @@ interface SpringbootsitesModels {
     /**
    * Delete a springbootsites resource.
    */
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+    @armResourceDelete(SpringbootsitesModel)
     @extension("x-ms-long-running-operation", true)
     @extension(
       "x-ms-long-running-operation-options",
@@ -172,8 +180,10 @@ interface SpringbootsitesModels {
   /**
    * Trigger refresh springbootsites action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @armResourceAction(SpringbootsitesModel)
   @operationId("springbootsites_TriggerRefreshSite")
-  @segment("refreshSite")
+  @action("refreshSite")
   @post
   @extension(
     "x-ms-long-running-operation-options",
