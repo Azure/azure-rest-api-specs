@@ -26,18 +26,10 @@ These are the global settings for the communicationservices.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-2023-10
+tag: package-phonenumber-2023-10-01-preview
 ```
 
 
-### Tag: package-preview-2023-10
-
-These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-10'
-input-file:
-  - preview/2023-10-01-preview/phonenumbers.json
-```
 ### Tag: package-phonenumber-2022-12-01
 
 These settings apply only when `--tag=package-phonenumber-2022-12-01` is specified on the command line.
@@ -89,6 +81,17 @@ These settings apply only when `--tag=package-phonenumber-2023-05-01-preview` is
 ``` yaml $(tag) == 'package-phonenumber-2023-05-01-preview'
 input-file:
   - preview/2023-05-01-preview/phonenumbers.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-phonenumber-2023-10-01-preview
+
+These settings apply only when `--tag=package-phonenumber-2023-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-phonenumber-2023-10-01-preview'
+input-file:
+  - preview/2023-10-01-preview/phonenumbers.json
 title:
   Azure Communication Services
 ```
