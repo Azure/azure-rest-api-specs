@@ -10,7 +10,7 @@ using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Azure.ResourceManager.Sphere;
+namespace Microsoft.AzureSphere;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 

@@ -11,7 +11,7 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.Sphere;
+namespace Microsoft.AzureSphere;
 /**
  * An product resource belonging to a catalog resource.
  */

@@ -2,7 +2,7 @@
 
 ``` yaml
 library-name: Sphere
-namespace: Azure.ResourceManager.Sphere
+namespace: Microsoft.AzureSphere
 isAzureSpec: true
 isArm: true
 require: https://github.com/Azure/azure-rest-api-specs/blob/a89f3906ba60257ae28a2eed756a1ee4ca72ed51/specification/sphere/resource-manager/readme.md
