@@ -4596,7 +4596,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4669,7 +4669,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4755,7 +4755,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4813,7 +4813,18 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -4821,7 +4832,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4918,7 +4929,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5003,7 +5014,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5082,7 +5093,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5152,7 +5163,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5219,7 +5230,8 @@
             "in": "path",
             "description": "The recovery point name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           }
         ],
         "responses": {
@@ -5232,7 +5244,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5310,7 +5322,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5407,7 +5419,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5504,7 +5516,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5601,7 +5613,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -6086,7 +6098,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ServiceDefaultError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -23733,11 +23745,11 @@
           "description": "The Agent cluster Id.",
           "type": "string"
         },
-        "clusterFQDN": {
+        "clusterFqdn": {
           "description": "The cluster FQDN.",
           "type": "string"
         },
-        "clusterNodeFQDNs": {
+        "clusterNodeFqdns": {
           "description": "The List of cluster Node FQDNs.",
           "type": "array",
           "items": {
@@ -23751,8 +23763,8 @@
             "type": "string"
           }
         },
-        "protectionClusterStatus": {
-          "description": "The status.",
+        "provisioningState": {
+          "description": "The provisioning state of the cluster.",
           "type": "string"
         },
         "areAllClusterNodesRegistered": {
