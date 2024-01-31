@@ -228,7 +228,7 @@
       "type": "object",
       "properties": {
         "maintenanceType": {
-          "type": "string",
+          "$ref": "#/definitions/MaintenanceType",
           "description": "A string defines maintenance type."
         },
         "maintenanceState": {
@@ -243,34 +243,41 @@
         "maintenanceEndTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The end time for a maintenance."
         },
         "maintenanceExecutionStartTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The start time for a maintenance execution."
         },
         "maintenanceExecutionEndTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The end time for a maintenance execution."
         },
         "maintenanceAvailableScheduleMinTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The min time the maintenance can be rescheduled."
         },
         "maintenanceAvailableScheduleMaxTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The max time the maintenance can be rescheduled."
         },
         "maintenanceTitle": {
           "type": "string",
+          "readOnly": true,
           "description": "The maintenance title."
         },
         "maintenanceDescription": {
           "type": "string",
+          "readOnly": true,
           "description": "The maintenance description."
         },
         "provisioningState": {
@@ -309,6 +316,21 @@
       ],
       "x-ms-enum": {
         "name": "MaintenanceState",
+        "modelAsString": true
+      }
+    },
+    "MaintenanceType": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The type of this maintenance.",
+      "enum": [
+        "RoutineMaintenance",
+        "MinorVersionUpgrade",
+        "SecurityPatches",
+        "HotFixes"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceType",
         "modelAsString": true
       }
     },
