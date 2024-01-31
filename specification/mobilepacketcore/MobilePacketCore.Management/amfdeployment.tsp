@@ -62,6 +62,8 @@ interface AmfDeployments {
   createOrUpdate is ArmResourceCreateOrUpdate2Async<AmfDeploymentResource>;
   updateTags is ArmTagsPatchSync<AmfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AmfDeploymentResource>;
+  @doc("List all Access and Mobility Function Deployments by Resource Group.")
   listByResourceGroup is ArmResourceListByParent<AmfDeploymentResource>;
+  @doc("List all Access and Mobility Function Deployments by Subscription ID.")
   listBySubscription is ArmListBySubscription<AmfDeploymentResource>;
 }

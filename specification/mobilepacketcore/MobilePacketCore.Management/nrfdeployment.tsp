@@ -62,6 +62,8 @@ interface NrfDeployments {
   createOrUpdate is ArmResourceCreateOrUpdate2Async<NrfDeploymentResource>;
   updateTags is ArmTagsPatchSync<NrfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<NrfDeploymentResource>;
+  @doc("List all Network Repository Function Deployments by Resource Group.")
   listByResourceGroup is ArmResourceListByParent<NrfDeploymentResource>;
+  @doc("List all Network Repository Function Deployments by Subscription ID.")
   listBySubscription is ArmListBySubscription<NrfDeploymentResource>;
 }

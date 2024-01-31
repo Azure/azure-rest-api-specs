@@ -62,6 +62,8 @@ interface UpfDeployments {
   createOrUpdate is ArmResourceCreateOrUpdate2Async<UpfDeploymentResource>;
   updateTags is ArmTagsPatchSync<UpfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<UpfDeploymentResource>;
+  @doc("List all User Plane Function Deployments by Resource ID.")
   listByResourceGroup is ArmResourceListByParent<UpfDeploymentResource>;
+  @doc("List all User Plane Function Deployments by Subscription ID.")
   listBySubscription is ArmListBySubscription<UpfDeploymentResource>;
 }

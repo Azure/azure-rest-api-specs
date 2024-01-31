@@ -59,6 +59,8 @@ interface ObservabilityServices {
   createOrUpdate is ArmResourceCreateOrUpdate2Async<ObservabilityServiceResource>;
   updateTags is ArmTagsPatchSync<ObservabilityServiceResource>;
   delete is ArmResourceDeleteWithoutOkAsync<ObservabilityServiceResource>;
+  @doc("List all Observability Services by Resource Group.")
   listByResourceGroup is ArmResourceListByParent<ObservabilityServiceResource>;
+  @doc("List all Observability Services by Subscription ID.")
   listBySubscription is ArmListBySubscription<ObservabilityServiceResource>;
 }

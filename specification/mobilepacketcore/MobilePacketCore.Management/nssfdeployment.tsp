@@ -62,6 +62,8 @@ interface NssfDeployments {
   createOrUpdate is ArmResourceCreateOrUpdate2Async<NssfDeploymentResource>;
   updateTags is ArmTagsPatchSync<NssfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<NssfDeploymentResource>;
+  @doc("List all Network Slice Selection Function Deployments by Resource Group.")
   listByResourceGroup is ArmResourceListByParent<NssfDeploymentResource>;
+  @doc("List all Network Slice Selection Function Deployments by Subscription ID.")
   listBySubscription is ArmListBySubscription<NssfDeploymentResource>;
 }

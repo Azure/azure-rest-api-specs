@@ -29,6 +29,7 @@ model ClusterServiceResource
   @visibility("create", "read")
   name: string;
 }
+@@doc(ClusterServiceResource.properties, "FOOBAR");
 
 @doc("Cluster Service Properties.")
 model ClusterServiceResourceProperties {
@@ -61,7 +62,9 @@ interface ClusterServices {
   createOrUpdate is ArmResourceCreateOrUpdate2Async<ClusterServiceResource>;
   updateTags is ArmTagsPatchSync<ClusterServiceResource>;
   delete is ArmResourceDeleteWithoutOkAsync<ClusterServiceResource>;
+  @doc("List all Cluster Services by Resource Group.")
   listByResourceGroup is ArmResourceListByParent<ClusterServiceResource>;
+  @doc("List all Cluster Services by Subscription ID.")
   listBySubscription is ArmListBySubscription<ClusterServiceResource>;
 }
 
