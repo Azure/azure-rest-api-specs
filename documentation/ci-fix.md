@@ -17,7 +17,9 @@
     - [`RequestBodyMustExistForPutPatch`](#requestbodymustexistforputpatch)
     - [`PatchPropertiesCorrespondToPutProperties`](#patchpropertiescorrespondtoputproperties)
     - [`@singleton` causes `EvenSegmentedPathForPutOperation` and `XmsPageableForListCalls`](#singleton-causes-evensegmentedpathforputoperation-and-xmspageableforlistcalls)
-    - [Intersecting models causes `AvoidAnonymousTypes`](#intersecting-models-causes-avoidanonymoustypes)
+    - [`AvoidAnonymousParameter`, `AvoidAnonymousTypes`, `IntegerTypeMustHaveFormat`](#avoidanonymousparameter-avoidanonymoustypes-integertypemusthaveformat)
+    - [`AvoidAnonymousTypes` inside a 202 response](#avoidanonymoustypes-inside-a-202-response)
+    - [`OAuth2Auth` causes `XmsEnumValidation`](#oauth2auth-causes-xmsenumvalidation)
   - [`Swagger Avocado`](#swagger-avocado)
     - [Get help fixing Avocado validation failures](#get-help-fixing-avocado-validation-failures)
     - [Run avocado locally](#run-avocado-locally)
@@ -177,8 +179,33 @@ We believe this is a false positive: https://github.com/Azure/azure-openapi-vali
 
 If `EvenSegmentedPathForPutOperation` and/or `XmsPageableForListCalls` are failing for OpenAPI generated from TypeSpec using `@singleton` (OpenAPI path ends with `/default`), we believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/646
 
-### Intersecting models causes `AvoidAnonymousTypes`
-If you do **TBD** in TypeSpec, it may cause LintDiff errors of type `AvoidAnonymoustypes`.  We believe this is an issue in TypeSpec that can be fixed (https://github.com/Azure/typespec-azure-pr/issues/3349).
+### `AvoidAnonymousParameter`, `AvoidAnonymousTypes`, `IntegerTypeMustHaveFormat`
+
+Data-plane specs can suppress violations of the following rules, since they only exist for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec.  Resource-manager specs should **not** suppress violations of these rules, since resource-manager SDKs are generated from OpenAPI, and rely on these errors being fixed.
+
+* `AvoidAnonymousParameter`
+* `AvoidAnonymousTypes`
+* `IntegerTypeMustHaveFormat`
+
+### `AvoidAnonymousTypes` inside a 202 response
+
+As an exception to the previous note, resource-manager specs **may** be able to suppress `AvoidAnonymousTypes`, but only if the error is inside a 202 response from a long-running operation (LRO).  It is known that SDKs do not need to generate type names for such responses.
+
+### `OAuth2Auth` causes `XmsEnumValidation`
+
+TypeSpec using `OAuth2Auth` may generate the following OpenAPI:
+
+```
+"type": {
+  "type": "string",
+  "description": "OAuth2 authentication",
+  "enum": [
+    "oauth2"
+  ]
+},
+```
+
+Which causes error `XmsEnumValidation`.  The recommended workaround is to add `omit-unreachable-types: true` to your `tspconfig.yaml`.
 
 ## `Swagger Avocado`
 
