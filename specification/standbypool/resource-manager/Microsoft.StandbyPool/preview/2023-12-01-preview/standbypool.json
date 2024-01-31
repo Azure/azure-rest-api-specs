@@ -872,7 +872,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Specifies container group profile id of standby container groups."
+          "format": "arm-id",
+          "description": "Specifies container group profile id of standby container groups.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerInstance/containerGroupProfiles"
+              }
+            ]
+          }
         },
         "revision": {
           "type": "integer",
@@ -890,7 +898,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Specifies container group profile id of standby container groups."
+          "format": "arm-id",
+          "description": "Specifies container group profile id of standby container groups.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerInstance/containerGroupProfiles"
+              }
+            ]
+          }
         },
         "revision": {
           "type": "integer",
@@ -936,43 +952,6 @@
         }
       }
     },
-    "ElasticityProfile": {
-      "type": "object",
-      "description": "Details of the ElasticityProfile.",
-      "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of standby container groups.",
-          "minimum": 0,
-          "maximum": 2000
-        },
-        "refillPolicy": {
-          "$ref": "#/definitions/RefillPolicy",
-          "description": "Specifies refill policy of the pool."
-        }
-      },
-      "required": [
-        "maxReadyCapacity"
-      ]
-    },
-    "ElasticityProfileUpdate": {
-      "type": "object",
-      "description": "Details of the ElasticityProfile.",
-      "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of standby container groups.",
-          "minimum": 0,
-          "maximum": 2000
-        },
-        "refillPolicy": {
-          "$ref": "#/definitions/RefillPolicy",
-          "description": "Specifies refill policy of the pool."
-        }
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning state",
@@ -1004,7 +983,7 @@
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Virtual machine is being deleted."
+            "description": "Resource is being deleted."
           }
         ]
       }
@@ -1025,6 +1004,43 @@
             "description": "A refill policy that standby pool is automatically refilled to maintain maxReadyCapacity."
           }
         ]
+      }
+    },
+    "StandbyContainerGroupPoolElasticityProfile": {
+      "type": "object",
+      "description": "Specifies the elasticity profile of the standby container group pools.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of standby container groups in the standby pool.",
+          "minimum": 0,
+          "maximum": 2000
+        },
+        "refillPolicy": {
+          "$ref": "#/definitions/RefillPolicy",
+          "description": "Specifies refill policy of the pool."
+        }
+      },
+      "required": [
+        "maxReadyCapacity"
+      ]
+    },
+    "StandbyContainerGroupPoolElasticityProfileUpdate": {
+      "type": "object",
+      "description": "Specifies the elasticity profile of the standby container group pools.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of standby container groups in the standby pool.",
+          "minimum": 0,
+          "maximum": 2000
+        },
+        "refillPolicy": {
+          "$ref": "#/definitions/RefillPolicy",
+          "description": "Specifies refill policy of the pool."
+        }
       }
     },
     "StandbyContainerGroupPoolResource": {
@@ -1073,7 +1089,7 @@
       "description": "Details of the StandbyContainerGroupPool.",
       "properties": {
         "elasticityProfile": {
-          "$ref": "#/definitions/ElasticityProfile",
+          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfile",
           "description": "Specifies elasticity profile of standby container group pools."
         },
         "containerGroupProperties": {
@@ -1113,7 +1129,7 @@
       "description": "The updatable properties of the StandbyContainerGroupPoolResource.",
       "properties": {
         "elasticityProfile": {
-          "$ref": "#/definitions/ElasticityProfileUpdate",
+          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfileUpdate",
           "description": "Specifies elasticity profile of standby container group pools."
         },
         "containerGroupProperties": {
@@ -1340,7 +1356,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Specifies ARM resource id of the subnet."
+          "format": "arm-id",
+          "description": "Specifies ARM resource id of the subnet.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         }
       },
       "required": [
