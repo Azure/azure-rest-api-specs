@@ -83,8 +83,8 @@ batch:
   - tag: package-templatespecs-2021-03-preview
   - tag: package-templatespecs-2019-06-preview
   - multiapiscript-templatespecs: true
-  - tag: package-deploymentstacks-2022-08-preview
   - tag: package-deploymentstacks-2024-03
+  - tag: package-deploymentstacks-2022-08-preview
   - multiapiscript-deploymentstacks: true
   - tag: package-changes-2022-05
   - multiapiscript-changes: true
