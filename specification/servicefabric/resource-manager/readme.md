@@ -59,7 +59,7 @@ directive:
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
 ```
 
-### Tag: package-2023-11
+### Tag: package-2023-11-preview
 
 These settings apply only when `--tag=package-2023-11-preview` is specified on the command line.
 
