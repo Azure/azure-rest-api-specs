@@ -3802,6 +3802,28 @@
         "exportSettings"
       ]
     },
+    "SnowflakeV2Source": {
+      "description": "A copy activity snowflake source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Snowflake Sql query. Type: string (or Expression with resultType string)."
+        },
+        "exportSettings": {
+          "$ref": "#/definitions/SnowflakeExportCopyCommand",
+          "description": "Snowflake export settings."
+        }
+      },
+      "required": [
+        "exportSettings"
+      ]
+    },
     "ExportSettings": {
       "description": "Export command settings.",
       "discriminator": "type",
@@ -4547,6 +4569,26 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "importSettings": {
+          "$ref": "#/definitions/SnowflakeImportCopyCommand",
+          "description": "Snowflake import settings."
+        }
+      }
+    },
+    "SnowflakeV2Sink": {
+      "description": "A copy activity snowflake sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         },
         "importSettings": {
@@ -7942,8 +7984,8 @@
           "type": "object",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
-        "readBehavior": {
-          "description": "The read behavior for the operation. Default is query. Allowed values: query/queryAll. Type: string (or Expression with resultType string).",
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
       }
@@ -7961,26 +8003,14 @@
           "type": "object",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
-        "readBehavior": {
-          "description": "The read behavior for the operation. Default is query. Allowed values: query/queryAll. Type: string (or Expression with resultType string).",
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         },
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
-      }
-    },
-    "SalesforceV2SourceReadBehavior": {
-      "description": "The Salesforce read behavior for the operation",
-      "type": "string",
-      "enum": [
-        "query",
-        "queryAll"
-      ],
-      "x-ms-enum": {
-        "name": "SalesforceV2SourceReadBehavior",
-        "modelAsString": true
       }
     },
     "SalesforceV2Sink": {

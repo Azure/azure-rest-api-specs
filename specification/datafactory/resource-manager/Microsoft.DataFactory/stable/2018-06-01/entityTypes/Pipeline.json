@@ -4293,6 +4293,29 @@
         "exportSettings"
       ]
     },
+    "SnowflakeV2Source": {
+      "description": "A copy activity snowflake source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Snowflake Sql query. Type: string (or Expression with resultType string)."
+        },
+        "exportSettings": {
+          "$ref": "#/definitions/SnowflakeExportCopyCommand",
+          "description": "Snowflake export settings."
+        }
+      },
+      "required": [
+        "exportSettings"
+      ]
+    },
     "ExportSettings": {
       "description": "Export command settings.",
       "discriminator": "type",
@@ -5214,6 +5237,26 @@
       }
     },
     "SnowflakeSink": {
+      "description": "A copy activity snowflake sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "importSettings": {
+          "$ref": "#/definitions/SnowflakeImportCopyCommand",
+          "description": "Snowflake import settings."
+        }
+      }
+    },
+    "SnowflakeV2Sink": {
       "description": "A copy activity snowflake sink.",
       "type": "object",
       "allOf": [
@@ -7090,8 +7133,11 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-key-value-pairs",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
+          "additionalProperties": {
+            "type": "string",
+            "x-ms-format": "dfe-string"
+          }
         },
         "body": {
           "type": "object",
@@ -8128,8 +8174,11 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-key-value-pairs",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
+          "additionalProperties": {
+            "type": "string",
+            "x-ms-format": "dfe-string"
+          }
         },
         "body": {
           "type": "object",
@@ -8194,8 +8243,11 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-key-value-pairs",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
+          "additionalProperties": {
+            "type": "string",
+            "x-ms-format": "dfe-string"
+          }
         },
         "body": {
           "type": "object",
@@ -9013,10 +9065,10 @@
           "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
-        "readBehavior": {
-          "description": "The read behavior for the operation. Default is query. Allowed values: query/queryAll. Type: string (or Expression with resultType string).",
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object",
-          "x-ms-format": "dfe-string"
+          "x-ms-format": "dfe-bool"
         }
       }
     },
@@ -9034,27 +9086,15 @@
           "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
-        "readBehavior": {
-          "description": "The read behavior for the operation. Default is query. Allowed values: query/queryAll. Type: string (or Expression with resultType string).",
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object",
-          "x-ms-format": "dfe-string"
+          "x-ms-format": "dfe-bool"
         },
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
-      }
-    },
-    "SalesforceV2SourceReadBehavior": {
-      "description": "The Salesforce read behavior for the operation",
-      "type": "string",
-      "enum": [
-        "query",
-        "queryAll"
-      ],
-      "x-ms-enum": {
-        "name": "SalesforceV2SourceReadBehavior",
-        "modelAsString": true
       }
     },
     "SalesforceV2Sink": {

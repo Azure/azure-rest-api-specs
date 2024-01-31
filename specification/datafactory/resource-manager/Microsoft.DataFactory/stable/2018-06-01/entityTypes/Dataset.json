@@ -38,7 +38,7 @@
         },
         "schema": {
           "type": "object",
-          "x-ms-format": "dfe-object",
+          "x-ms-format": "dfe-list-generic",
           "x-ms-format-element-type": "DatasetSchemaDataElement",
           "description": "Columns that define the physical type schema of the dataset. Type: array (or Expression with resultType array), itemType: DatasetSchemaDataElement."
         },
@@ -3505,6 +3505,26 @@
     },
     "SnowflakeDataset": {
       "x-ms-discriminator-value": "SnowflakeTable",
+      "description": "The snowflake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SnowflakeV2Dataset": {
+      "x-ms-discriminator-value": "SnowflakeV2Table",
       "description": "The snowflake dataset.",
       "type": "object",
       "allOf": [
