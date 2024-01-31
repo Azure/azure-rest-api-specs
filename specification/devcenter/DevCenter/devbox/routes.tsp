@@ -34,20 +34,7 @@ interface DevBoxesOperations {
 
   @summary("Gets a pool")
   @doc("Gets a pool")
-  @route("/projects/{projectName}/pools/{poolName}")
-  @get
-  getPool is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The name of a pool of Dev Boxes.")
-      @path
-      poolName: string;
-    },
-    Pool
-  >;
+  getPool is Azure.Core.ResourceRead<Pool>;
 
   @summary("Lists available schedules for a pool.")
   @doc("Lists available schedules for a pool.")
@@ -122,24 +109,7 @@ interface DevBoxesOperations {
 
   @summary("Gets a Dev Box")
   @doc("Gets a Dev Box")
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
-  @get
-  getDevBox is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-    },
-    DevBox
-  >;
+  getDevBox is Azure.Core.ResourceRead<DevBox>;
 
   @summary("Creates or replaces a Dev Box.")
   @doc("Creates or replaces a Dev Box.")

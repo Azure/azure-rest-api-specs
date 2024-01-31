@@ -718,14 +718,14 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
           },
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of a pool of Dev Boxes.",
+            "description": "Pool name",
             "required": true,
             "type": "string"
           }
@@ -965,21 +965,21 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
           },
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "description": "The AAD object id of the user",
             "required": true,
             "type": "string"
           },
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "The name of a Dev Box.",
+            "description": "Display name for the Dev Box",
             "required": true,
             "type": "string"
           }
@@ -2183,7 +2183,10 @@
         "name": {
           "type": "string",
           "description": "Display name for the Dev Box",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "projectName": {
           "type": "string",
