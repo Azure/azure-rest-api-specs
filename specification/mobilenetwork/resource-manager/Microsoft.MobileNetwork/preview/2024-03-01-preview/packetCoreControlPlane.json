@@ -1016,7 +1016,7 @@
         },
         "nexusEdgeCluster": {
           "$ref": "./common.json#/definitions/NexusEdgeClusterResourceId",
-          "description": "The Nexus edge cluster where the packet core is deployed."
+          "description": "The Nexus Edge Cluster where the packet core is deployed."
         },
         "connectedCluster": {
           "$ref": "./common.json#/definitions/ConnectedClusterResourceId",
@@ -1066,28 +1066,37 @@
       "description": "The Nexus network configuration to deploy the Nexus Azure Kubernetes Service and the packet core.",
       "type": "object",
       "properties": {
+        "loadBalancerIpAddresses": {
+          "description": "The list of IP address ranges. Each range can be a either a subnet in CIDR format or an explicit start-end range of IP addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
         "cloudServicesNetwork": {
           "$ref": "./common.json#/definitions/NexusCloudServicesNetworkResourceId",
-          "description": "The cloud services network that provides VMs/Kubernetes clusters access to cloud services such as DNS, NTP, and user-specified Azure PaaS services"
+          "description": "The Cloud Services Network that provides VMs/Kubernetes clusters access to cloud services such as DNS, NTP, and user-specified Azure PaaS services"
         },
         "containerNetworkInterface": {
           "$ref": "./common.json#/definitions/NexusL3NetworkResourceId",
-          "description": "The layer 3 network that is used for creation of the container networking interface network."
+          "description": "The Layer 3 Network that is used for creation of the container networking interface network."
         },
         "controlPlaneAccessInterface": {
           "$ref": "./common.json#/definitions/NexusTrunkedNetworkResourceId",
-          "description": "The trunked network that is used for creation of the packet core control plane interface on the access network."
+          "description": "The Trunked Network that is used for creation of the packet core control plane interface on the access network."
         },
         "userPlaneAccessInterface": {
           "$ref": "./common.json#/definitions/NexusTrunkedNetworkResourceId",
-          "description": "The trunked network that is used for creation of the packet core user plane interface on the access network."
+          "description": "The Trunked Network that is used for creation of the packet core user plane interface on the access network."
         },
         "userPlaneDataInterface": {
           "$ref": "./common.json#/definitions/NexusTrunkedNetworkResourceId",
-          "description": "The trunked network that is used for creation of the packet core user plane interface on the data network."
+          "description": "The Trunked Network that is used for creation of the packet core user plane interface on the data network."
         }
       },
       "required": [
+        "loadBalancerIpAddresses",
         "cloudServicesNetwork",
         "containerNetworkInterface",
         "controlPlaneAccessInterface",
