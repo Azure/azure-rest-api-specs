@@ -20,7 +20,6 @@ batch:
   - tag: package-migrateengine-2022-05
 ```
 
-
 ### Tag: package-migrate-2023-04
 
 These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
@@ -31,6 +30,15 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
+```
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.OffAzure/preview/2023-10-01-preview/migrate.json
 ```
 ### Tag: package-2023-06
 
@@ -183,7 +191,16 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-migrate-2023-04
+tag: package-preview-2023-10
+```
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.OffAzure/preview/2023-10-01-preview/migrate.json
 ```
 
 ### Tag: package-migrate-2023-03
