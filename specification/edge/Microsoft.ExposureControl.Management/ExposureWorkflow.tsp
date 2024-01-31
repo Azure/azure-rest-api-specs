@@ -31,13 +31,13 @@ model ExposureWorkflow is ProxyResource<ExposureWorkflowProperties> {
 @doc("Exposure workflow Properties")
 model ExposureWorkflowProperties {
   @doc("Feature unique Id.")
-  exposureFeatureId? : string;
+  exposureFeatureId?: string;
 
   @doc("Workflow discriminator.")
   discriminator: string;
 
   @doc("Workflow manifest Id.")
-  exposureWorkflowManifestId? : string;
+  exposureWorkflowManifestId?: string;
 
   #suppress "@azure-tools/typespec-providerhub/no-identifier-property-in-array-item" "Error items have no unique identifier."
   @doc("Ring configuration details.")
@@ -45,10 +45,10 @@ model ExposureWorkflowProperties {
   rings: Array<ExposureWorkflowRingConfigurationProperties>;
 
   @doc("Default start Ring.")
-  overrideDefaultStartRing? : string;
+  overrideDefaultStartRing?: string;
 
   @doc("Exposure workflow current ring status.")
-  currentRingStatus? : RingStatus;
+  currentRingStatus?: RingStatus;
 
   @doc("Exposure workflow status.")
   @visibility("read")
