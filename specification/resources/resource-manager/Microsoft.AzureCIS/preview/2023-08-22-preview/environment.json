@@ -211,7 +211,7 @@
         }
       },
       "put": {
-        "operationId": "Environment_CreateOrUpdate",
+        "operationId": "Environment_CreateOrReplace",
         "tags": [
           "Environment"
         ],
@@ -273,7 +273,7 @@
         },
         "x-ms-examples": {
           "Create Environment": {
-            "$ref": "./examples/Environment_CreateOrUpdate.json"
+            "$ref": "./examples/Environment_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -412,6 +412,24 @@
           "description": "Provisioning state",
           "readOnly": true
         }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Supported API versions for the Autopilot Environment resource provider.",
+      "enum": [
+        "2023-08-22-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_08_22_preview",
+            "value": "2023-08-22-preview",
+            "description": "Version 2023-08-22-preview"
+          }
+        ]
       }
     }
   },
