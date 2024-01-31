@@ -16,7 +16,6 @@ namespace Microsoft.OffAzureSpringBoot;
  * The springbootservers envelope resource definition.
  */
 @parentResource(SpringbootsitesModel)
-@extension("x-ms-azure-resource", true)
 model SpringbootserversModel is ProxyResource<SpringbootserversProperties> {
   /**
    * The springbootservers name.
@@ -28,11 +27,6 @@ model SpringbootserversModel is ProxyResource<SpringbootserversProperties> {
   @key("springbootserversName")
   @segment("springbootservers")
   name: string;
-
-  /**
-   * Resource tags
-   */
-  tags?: Record<string>;
 }
 
 @armResourceOperations

@@ -16,7 +16,6 @@ namespace Microsoft.OffAzureSpringBoot;
  * The error summary resource definition.
  */
 @parentResource(SpringbootsitesModel)
-@extension("x-ms-azure-resource", true)
 model ErrorSummary is ProxyResource<ErrorSummariesProperties> {
   /**
    * The name of error summary
@@ -28,11 +27,6 @@ model ErrorSummary is ProxyResource<ErrorSummariesProperties> {
   @key("errorSummaryName")
   @segment("errorSummaries")
   name: string;
-
-  /**
-   * Resource tags
-   */
-  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -40,7 +34,6 @@ interface ErrorSummaries {
   /**
    * Gets the ErrorSummaries resource.
    */
-  @operationId("ErrorSummaries_Get")
   @summary("Implements ErrorSummaries GET method.")
   get is ArmResourceRead<ErrorSummary>;
 
