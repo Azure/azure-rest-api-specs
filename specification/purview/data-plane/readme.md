@@ -305,6 +305,19 @@ See configuration in [readme.python.md](./readme.python.md)
 
 ``` yaml
 directive:
+  - suppress: AvoidAnonymousParameter
+    from: openapi.json
+    reason: This rule is irrelevant for data-plane TypeSpec specs.
+  - suppress: AvoidAnonymousTypes
+    from: openapi.json
+    reason: This rule is irrelevant for data-plane TypeSpec specs.
+  - suppress: IntegerTypeMustHaveFormat
+    from: openapi.json
+    reason: This rule is irrelevant for SDKs generated directly by TypeSpec.
+```
+
+``` yaml
+directive:
   - suppress: R3013
 where:
   - $.paths[\"/atlas/v2/glossary/terms/{termGuid}/assignedEntities\"].delete.parameters[1]
