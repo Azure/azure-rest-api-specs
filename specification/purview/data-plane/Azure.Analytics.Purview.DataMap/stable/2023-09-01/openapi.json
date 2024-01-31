@@ -4750,24 +4750,6 @@
     }
   },
   "definitions": {
-    "ApiVersions": {
-      "type": "string",
-      "description": "Service API versions",
-      "enum": [
-        "2023-09-01"
-      ],
-      "x-ms-enum": {
-        "name": "ApiVersions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_09_01",
-            "value": "2023-09-01",
-            "description": "2023-09-01 service API version"
-          }
-        ]
-      }
-    },
     "AtlasAttributeDef": {
       "type": "object",
       "description": "class that captures details of a struct-attribute.",
@@ -4832,84 +4814,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The minimum count of the values."
-        }
-      }
-    },
-    "AtlasBaseModelObject": {
-      "type": "object",
-      "description": "The base model object.",
-      "properties": {
-        "guid": {
-          "type": "string",
-          "description": "The GUID of the object."
-        }
-      }
-    },
-    "AtlasBaseTypeDef": {
-      "type": "object",
-      "description": "Base class that captures common-attributes for all types.",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/TypeCategory",
-          "description": "The enum of type category."
-        },
-        "createTime": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The created time of the record."
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "The user who created the record."
-        },
-        "dateFormatter": {
-          "$ref": "#/definitions/DateFormat",
-          "description": "The date format."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the type definition."
-        },
-        "guid": {
-          "type": "string",
-          "description": "The GUID of the type definition."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the type definition."
-        },
-        "options": {
-          "type": "object",
-          "description": "The options for the type definition.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "serviceType": {
-          "type": "string",
-          "description": "The service type."
-        },
-        "typeVersion": {
-          "type": "string",
-          "description": "The version of the type."
-        },
-        "updateTime": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The update time of the record."
-        },
-        "updatedBy": {
-          "type": "string",
-          "description": "The user who updated the record."
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The version of the record."
-        },
-        "lastModifiedTS": {
-          "type": "string",
-          "description": "ETag for concurrency control."
         }
       }
     },
@@ -5415,19 +5319,6 @@
         }
       }
     },
-    "AtlasEntityExtInfo": {
-      "type": "object",
-      "description": "An instance of an entity along with extended info - like hive_table,\nhive_database.",
-      "properties": {
-        "referredEntities": {
-          "type": "object",
-          "description": "The referred entities.",
-          "additionalProperties": {
-            "$ref": "#/definitions/AtlasEntity"
-          }
-        }
-      }
-    },
     "AtlasEntityHeader": {
       "type": "object",
       "description": "An instance of an entity - like hive_table, hive_database.",
@@ -5647,77 +5538,6 @@
         }
       }
     },
-    "AtlasExtraTypeDef": {
-      "type": "object",
-      "description": "Extra properties for a type.",
-      "properties": {
-        "entityTypes": {
-          "type": "array",
-          "description": "Specifying a list of entityType names in the classificationDef, ensures that\nclassifications can\nonly be applied to those entityTypes.\n\nAny subtypes of the entity types inherit the restriction.\n\nAny classificationDef subtypes inherit the parents entityTypes restrictions.\n\nAny classificationDef subtypes can further restrict the parents entityTypes\nrestrictions by specifying a subset of the entityTypes.\n\nAn empty entityTypes list when there are no parent restrictions means there are no\nrestrictions.\n\nAn empty entityTypes list when there are parent\nrestrictions means that the subtype picks up the parents\nrestrictions.\n\nIf a list of entityTypes are supplied, where one inherits\nfrom another, this will be rejected. This should encourage cleaner\nclassificationsDefs.\n",
-          "items": {
-            "type": "string"
-          }
-        },
-        "subTypes": {
-          "type": "array",
-          "description": "An array of sub types.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "superTypes": {
-          "type": "array",
-          "description": "An array of super types.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "relationshipAttributeDefs": {
-          "type": "array",
-          "description": "An array of relationship attributes.",
-          "items": {
-            "$ref": "#/definitions/AtlasRelationshipAttributeDef"
-          },
-          "x-ms-identifiers": []
-        },
-        "defaultValue": {
-          "type": "string",
-          "description": "The default value."
-        },
-        "elementDefs": {
-          "type": "array",
-          "description": "An array of enum element definitions.",
-          "items": {
-            "$ref": "#/definitions/AtlasEnumElementDef"
-          },
-          "x-ms-identifiers": []
-        },
-        "endDef1": {
-          "$ref": "#/definitions/AtlasRelationshipEndDef",
-          "description": "The relationshipEndDef represents an end of the relationship. The end of the\nrelationship is defined by a type, an\nattribute name, cardinality and whether\nit  is the container end of the relationship."
-        },
-        "endDef2": {
-          "$ref": "#/definitions/AtlasRelationshipEndDef",
-          "description": "The relationshipEndDef represents an end of the relationship. The end of the\nrelationship is defined by a type, an\nattribute name, cardinality and whether\nit  is the container end of the relationship."
-        },
-        "relationshipCategory": {
-          "$ref": "#/definitions/RelationshipCategory",
-          "description": "The Relationship category determines the style of relationship around\ncontainment and lifecycle.\nUML terminology is used for the values.\n\nASSOCIATION is a relationship with no containment. \nCOMPOSITION and AGGREGATION are containment relationships.\n\nThe difference being in the lifecycles of the container and its children. \nIn the COMPOSITION case, the children cannot exist without the container. \nFor AGGREGATION, the life cycles of the container and children are totally independent."
-        },
-        "relationshipLabel": {
-          "type": "string",
-          "description": "The label of the relationship."
-        },
-        "attributeDefs": {
-          "type": "array",
-          "description": "An array of attribute definitions.",
-          "items": {
-            "$ref": "#/definitions/AtlasAttributeDef"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "AtlasGlossary": {
       "type": "object",
       "description": "The glossary object.",
@@ -5795,62 +5615,6 @@
         "usage": {
           "type": "string",
           "description": "The usage of the glossary."
-        }
-      }
-    },
-    "AtlasGlossaryBaseObject": {
-      "type": "object",
-      "description": "The glossary base object.",
-      "properties": {
-        "guid": {
-          "type": "string",
-          "description": "The GUID of the object."
-        },
-        "classifications": {
-          "type": "array",
-          "description": "An array of classifications.",
-          "items": {
-            "$ref": "#/definitions/AtlasClassification"
-          },
-          "x-ms-identifiers": []
-        },
-        "longDescription": {
-          "type": "string",
-          "description": "The long version description."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the glossary object."
-        },
-        "qualifiedName": {
-          "type": "string",
-          "description": "The qualified name of the glossary object."
-        },
-        "shortDescription": {
-          "type": "string",
-          "description": "The short version of description."
-        },
-        "lastModifiedTS": {
-          "type": "string",
-          "description": "ETag for concurrency control."
-        },
-        "createTime": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The created time of the record."
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "The user who created the record."
-        },
-        "updateTime": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The update time of the record."
-        },
-        "updatedBy": {
-          "type": "string",
-          "description": "The user who updated the record."
         }
       }
     },
@@ -7228,28 +6992,6 @@
         }
       }
     },
-    "AuthToken": {
-      "type": "object",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows"
-      ]
-    },
     "AutoCompleteOptions": {
       "type": "object",
       "description": "The query of autocomplete request.",
@@ -7321,36 +7063,6 @@
           },
           "x-ms-identifiers": []
         }
-      }
-    },
-    "BusinessAttributeUpdateBehavior": {
-      "type": "string",
-      "description": "Enum for business attribute update behavior",
-      "enum": [
-        "ignore",
-        "replace",
-        "merge"
-      ],
-      "x-ms-enum": {
-        "name": "BusinessAttributeUpdateBehavior",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Ignore",
-            "value": "ignore",
-            "description": "Ignore the business attribute payload for update."
-          },
-          {
-            "name": "Replace",
-            "value": "replace",
-            "description": "Replace all the business attributes using the payload."
-          },
-          {
-            "name": "Merge",
-            "value": "merge",
-            "description": "Merge the business attributes. Business attributes will not be updated if not provided."
-          }
-        ]
       }
     },
     "CardinalityValue": {
@@ -7534,84 +7246,6 @@
         ]
       }
     },
-    "FilterOperator": {
-      "type": "string",
-      "description": "Search Filter Operator",
-      "enum": [
-        "eq",
-        "ne",
-        "gt",
-        "lt",
-        "ge",
-        "le",
-        "contains",
-        "startswith",
-        "prefix",
-        "timerange",
-        "exists"
-      ],
-      "x-ms-enum": {
-        "name": "FilterOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "eq",
-            "value": "eq",
-            "description": "equal"
-          },
-          {
-            "name": "ne",
-            "value": "ne",
-            "description": "not equal"
-          },
-          {
-            "name": "gt",
-            "value": "gt",
-            "description": "greater than"
-          },
-          {
-            "name": "lt",
-            "value": "lt",
-            "description": "less than"
-          },
-          {
-            "name": "ge",
-            "value": "ge",
-            "description": "greater than or equal to"
-          },
-          {
-            "name": "le",
-            "value": "le",
-            "description": "less than or equal to"
-          },
-          {
-            "name": "contains",
-            "value": "contains",
-            "description": "contains"
-          },
-          {
-            "name": "startswith",
-            "value": "startswith",
-            "description": "start with"
-          },
-          {
-            "name": "prefix",
-            "value": "prefix",
-            "description": "prefix"
-          },
-          {
-            "name": "timerange",
-            "value": "timerange",
-            "description": "time range"
-          },
-          {
-            "name": "exists",
-            "value": "exists",
-            "description": "exists"
-          }
-        ]
-      }
-    },
     "ImportInfo": {
       "type": "object",
       "description": "ImportInfo",
@@ -7785,40 +7419,6 @@
         "roundingMode": {
           "$ref": "#/definitions/RoundingMode",
           "description": "The enum of rounding mode."
-        }
-      }
-    },
-    "PList": {
-      "type": "object",
-      "description": "Paginated-list, for returning search results.",
-      "properties": {
-        "list": {
-          "type": "array",
-          "description": "An array of objects.",
-          "items": {}
-        },
-        "pageSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The size of the page."
-        },
-        "sortBy": {
-          "type": "string",
-          "description": "The sorted by field."
-        },
-        "sortType": {
-          "$ref": "#/definitions/SortType",
-          "description": "to specify whether the result should be sorted? If yes, whether asc or desc."
-        },
-        "startIndex": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The start index of the page."
-        },
-        "totalCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total count of items."
         }
       }
     },
