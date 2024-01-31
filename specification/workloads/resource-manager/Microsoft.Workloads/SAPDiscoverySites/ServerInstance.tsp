@@ -1,0 +1,100 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./SAPInstance.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Workloads;
+/**
+ * Define the Server Instance resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@parentResource(SAPInstance)
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ServerInstanceProperties)
+model ServerInstance extends ProxyResourceBase {
+  /**
+   * The name of the Server instance resource for SAP Migration.
+   */
+  @pattern("^[A-Za-z][\\w-]*[A-Za-z0-9]$")
+  @path
+  @key("serverInstanceName")
+  @segment("serverInstances")
+  @visibility("read")
+  name: string;
+
+  /**
+   * Defines the SAP Instance properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerInstanceProperties;
+}
+
+@armResourceOperations
+interface ServerInstances {
+  /**
+   * Gets the Server Instance resource.
+   */
+  get is ArmResourceRead<ServerInstance>;
+
+  /**
+   * Creates the Server Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
+   */
+  create is ArmResourceCreateOrReplaceAsync<
+    ServerInstance,
+    BaseParameters<ServerInstance>,
+    ArmLroLocationHeader
+  >;
+
+  /**
+   * Updates the Server Instance resource. This operation on a resource by end user will return a Bad Request error.
+   */
+  @parameterVisibility("read")
+  update is ArmCustomPatchAsync<
+    ServerInstance,
+    ServerInstance,
+    BaseParameters<ServerInstance>,
+    ArmLroLocationHeader
+  >;
+
+  /**
+   * Deletes the Server Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
+   */
+  delete is ArmResourceDeleteAsync<
+    ServerInstance,
+    BaseParameters<ServerInstance>,
+    ArmLroLocationHeader
+  >;
+
+  /**
+   * Lists the Server Instance resources for the given SAP Instance resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ServerInstances_List")
+  list is ArmResourceListByParent<ServerInstance>;
+}
+
+@@projectedName(ServerInstances.create::parameters.resource, "json", "body");
+@@extension(ServerInstances.create::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(ServerInstances.create::parameters.resource,
+  "The Server Instance request body."
+);
+@@projectedName(ServerInstances.update::parameters.properties, "json", "body");
+@@extension(ServerInstances.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(ServerInstances.update::parameters.properties,
+  "The Server Instance resource request body."
+);
