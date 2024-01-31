@@ -327,6 +327,15 @@
     }
   },
   "definitions": {
+    "DesiredDeviceConfiguration": {
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "hostName"
+        }
+      }
+    },
     "DeviceConfiguration": {
       "type": "object",
       "description": "The device Configuration of a device.",
@@ -338,6 +347,18 @@
             "$ref": "#/definitions/NicDetail"
           },
           "x-ms-identifiers": []
+        },
+        "DeviceType": {
+          "type": "string",
+          "enum": [
+            "Linux",
+            "WinServer",
+            "HCI"
+          ],
+          "x-ms-enum": {
+            "name": "DeviceType",
+            "modelAsString": true
+          }
         },
         "deviceMetadata": {
           "type": "string",
@@ -401,11 +422,77 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of edgeDevice resource",
           "readOnly": true
+        },
+        "deviceType": {
+          "$ref": "#/definitions/DeviceType",
+          "default": "HCI"
         }
       },
+      "discriminator": "deviceType",
       "required": [
-        "deviceConfiguration"
+        "deviceConfiguration",
+        "deviceType"
       ]
+    },
+    "HciDesiredDeviceConfiguration": {
+      "type": "object",
+      "properties": {
+        "hyperV": {
+          "$ref": "#/definitions/HyperVConfiguration"
+        },
+        "winRM": {
+          "$ref": "#/definitions/WinRMConfiguration"
+        },
+        "rdp": {
+          "$ref": "#/definitions/RDPConfiguration"
+        }
+      }
+    },
+    "HciEdgeDeviceProperties": {
+      "type": "object",
+      "properties": {
+        "desiredDeviceConfiguration": {
+          "$ref": "#/definitions/HciDesiredDeviceConfiguration"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDeviceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "HCI"
+    },
+    "HyperVConfiguration": {
+      "type": "object",
+      "description": "hyper-v properties",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "desiredConfiguration"
+        }
+      }
+    },
+    "LinuxDesiredDeviceConfiguration": {
+      "type": "object",
+      "properties": {
+        "ssh": {
+          "$ref": "#/definitions/SshConfiguration"
+        }
+      }
+    },
+    "LinuxEdgeDeviceProperties": {
+      "type": "object",
+      "properties": {
+        "desiredDeviceConfiguration": {
+          "$ref": "#/definitions/LinuxDesiredDeviceConfiguration"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDeviceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Linux"
     },
     "NicDetail": {
       "type": "object",
@@ -516,6 +603,37 @@
         ]
       }
     },
+    "RDPConfiguration": {
+      "type": "object",
+      "description": "RDP properties",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "RDP Configuration"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "enabled",
+        "port"
+      ]
+    },
+    "SshConfiguration": {
+      "type": "object",
+      "description": "hyper-v properties",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "desiredConfiguration"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
     "ValidateRequest": {
       "type": "object",
       "description": "The validate request for Edge Device.",
@@ -546,6 +664,44 @@
           "readOnly": true
         }
       }
+    },
+    "WinRMConfiguration": {
+      "type": "object",
+      "description": "win-rm properties",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "desiredConfiguration"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "WinServerDesiredDeviceConfiguration": {
+      "type": "object",
+      "properties": {
+        "winRM": {
+          "$ref": "#/definitions/WinRMConfiguration"
+        },
+        "rdp": {
+          "$ref": "#/definitions/RDPConfiguration"
+        }
+      }
+    },
+    "WinServerEdgeDeviceProperties": {
+      "type": "object",
+      "properties": {
+        "desiredDeviceConfiguration": {
+          "$ref": "#/definitions/WinServerDesiredDeviceConfiguration"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDeviceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "WinServer"
     }
   },
   "parameters": {
