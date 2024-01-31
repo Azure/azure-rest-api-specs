@@ -3,7 +3,7 @@ import "./route.oncophenotype.tsp";
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../HealthInsights.Common/service.tsp";
+import "../HealthInsights.OpenAPI/service.tsp";
 
 using Azure.ClientGenerator.Core;
 
