@@ -31,6 +31,11 @@ input-file:
   - stable/2021-02-01/environment.json
   - stable/2021-02-01/dstsServiceAccount.json
 ```
+```yaml $(tag) == '2023-08-22-preview'
+input-file: 
+  - preview/2023-08-22-preview/genevaActions.json
+  - preview/2023-08-22-preview/dscm.json
+```
 
 ``` yaml
 suppressions:
