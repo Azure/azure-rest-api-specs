@@ -2144,6 +2144,49 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Support/lookUpResourceId": {
+      "post": {
+        "tags": [
+          "SupportTickets"
+        ],
+        "summary": "This operation fetches ARM resource id of support resource type.",
+        "operationId": "LookUpResourceId_Post",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "lookUpResourceIdRequest",
+            "in": "body",
+            "description": "Look up resource id request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LookUpResourceIdRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully obtained resource id of support resource type.",
+            "schema": {
+              "$ref": "#/definitions/LookUpResourceIdResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Look up resource id of support resource type": {
+            "$ref": "./examples/LookUpResourceId.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2720,8 +2763,7 @@
         },
         "enrollmentId": {
           "description": "Enrollment Id associated with the support ticket.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "require24X7Response": {
           "description": "Indicates if this requires a 24x7 response from Azure.",
@@ -3305,6 +3347,37 @@
         "chunkIndex": {
           "description": "Index of the uploaded chunk (Index starts at 0)",
           "type": "number"
+        }
+      }
+    },
+    "LookUpResourceIdRequest": {
+      "description": "The look up resource Id request body",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "description": "The System generated Id that is unique. Use supportTicketId property for Microsoft.Support/supportTickets resource type.",
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Support/supportTickets"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of resource."
+        }
+      }
+    },
+    "LookUpResourceIdResponse": {
+      "description": "The look up resource id response",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource Id of support resource type.",
+          "type": "string"
         }
       }
     }
