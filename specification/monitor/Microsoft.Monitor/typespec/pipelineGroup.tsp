@@ -153,7 +153,7 @@ model Service {
   @extension("x-ms-identifiers", [])
   pipelines: Pipeline[];
 
-  @doc("Persistence options to a all pipeline groups in the instance.")
+  @doc("Persistence options to all pipelines in the instance.")
   @extension("x-ms-identifiers", [])
   persistence?: PersistenceConfigurations;
 }
@@ -208,7 +208,7 @@ model NetworkingRoute {
   subdomain?: string;
 }
 
-@doc("Persistence options to a all pipeline groups in the instance.")
+@doc("Persistence options to all pipelines in the instance.")
 model PersistenceConfigurations {
   @doc("The name of the mounted persistent volume.")
   persistentVolumeName: string;
