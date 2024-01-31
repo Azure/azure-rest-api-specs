@@ -78,6 +78,40 @@ describe("folder-structure", function () {
     assert(result.errorOutput.includes("must be capitalized"));
   });
 
+  it("should fail if second level folder is data-plane", async function () {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/bar/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/data-plane",
+    );
+    assert(result.errorOutput);
+    assert(result.errorOutput.includes("must be capitalized"));
+  });
+
+  it("should fail if second level folder is resource-manager", async function () {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/bar/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/resource-manager",
+    );
+    assert(result.errorOutput);
+    assert(result.errorOutput.includes("must be capitalized"));
+  });
+
   it("should fail if Shared does not follow Management ", async function () {
     let host = new TsvTestHost();
     host.globby = async () => {

@@ -16,3 +16,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/[[ServiceName]]/azure-mgmt-[[ServiceName]]/azure/mgmt/[[ServiceName]]
 ```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```

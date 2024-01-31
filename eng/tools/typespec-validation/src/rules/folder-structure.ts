@@ -47,10 +47,7 @@ export class FolderStructureRule implements Rule {
     }
 
     // Verify second level folder is capitalized after each '.'
-    if (
-      /(^|\. *)([a-z])/g.test(packageFolder) &&
-      !["data-plane", "resource-manager"].includes(packageFolder)
-    ) {
+    if (/(^|\. *)([a-z])/g.test(packageFolder)) {
       success = false;
       errorOutput += `Invalid folder name. Folders under specification/${folderStruct[1]} must be capitalized after each '.'\n`;
     }
