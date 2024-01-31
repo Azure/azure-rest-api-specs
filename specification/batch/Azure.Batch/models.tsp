@@ -211,8 +211,7 @@ enum NetworkSecurityGroupRuleAccess {
 }
 
 @doc("IPAddressProvisioningType enums")
-@projectedName("client", "IpAddressProvisioningType")
-enum IPAddressProvisioningType {
+enum IpAddressProvisioningType {
   @doc("A public IP will be created and managed by Batch. There may be multiple public IPs depending on the size of the Pool.")
   BatchManaged: "batchmanaged",
 
@@ -220,8 +219,7 @@ enum IPAddressProvisioningType {
   UserManaged: "usermanaged",
 
   @doc("No public IP Address will be created.")
-  @projectedName("client", "NoPublicIpAddresses")
-  NoPublicIPAddresses: "nopublicipaddresses",
+  NoPublicIpAddresses: "nopublicipaddresses",
 }
 
 @doc("AccessDiffDiskPlacementScope enums")
@@ -1948,7 +1946,7 @@ model NetworkConfiguration {
 
   @doc("The Public IPAddress configuration for Compute Nodes in the Batch Pool. Public IP configuration property is only supported on Pools with the virtualMachineConfiguration property.")
   @projectedName("client", "publicIpAddressConfiguration")
-  publicIPAddressConfiguration?: PublicIPAddressConfiguration;
+  publicIPAddressConfiguration?: PublicIpAddressConfiguration;
 
   @doc("Whether this pool should enable accelerated networking. Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.")
   enableAcceleratedNetworking?: boolean;
@@ -2004,11 +2002,10 @@ model NetworkSecurityGroupRule {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The public IP Address configuration of the networking configuration of a Pool.")
-@projectedName("client", "PublicIpAddressConfiguration")
-model PublicIPAddressConfiguration {
+model PublicIpAddressConfiguration {
   @doc("The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.")
   @projectedName("client", "IpAddressProvisioningType")
-  provision?: IPAddressProvisioningType;
+  provision?: IpAddressProvisioningType;
 
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
   ipAddressIds?: string[];
@@ -2133,7 +2130,7 @@ model MountConfiguration {
   azureBlobFileSystemConfiguration?: AzureBlobFileSystemConfiguration;
 
   @doc("The NFS file system to mount on each node. This property is mutually exclusive with all other properties.")
-  nfsMountConfiguration?: NFSMountConfiguration;
+  nfsMountConfiguration?: NfsMountConfiguration;
 
   @doc("The CIFS/SMB file system to mount on each node. This property is mutually exclusive with all other properties.")
   cifsMountConfiguration?: CifsMountConfiguration;
@@ -2168,8 +2165,7 @@ model AzureBlobFileSystemConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Information used to connect to an NFS file system.")
-@projectedName("client", "NfsMountConfiguration")
-model NFSMountConfiguration {
+model NfsMountConfiguration {
   @doc("The URI of the file system to mount.")
   source: string;
 
