@@ -7,8 +7,8 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
     extensions: informatica
-    namespace: azure.mgmt.informatica
-    package-name: azure-mgmt-informatica
+    namespace: azure.mgmt.informaticadatamanagement
+    package-name: azure-mgmt-informaticadatamanagement
 az-output-folder: $(azure-cli-extension-folder)/src/informatica
 python-sdk-output-folder: "$(az-output-folder)/azext_informatica/vendored_sdks/informatica"
 # add additional configuration here specific for Azure CLI
@@ -21,8 +21,8 @@ This is for command modules that already in azure cli main repo.
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
   extensions: informatica
-  namespace: azure.mgmt.informatica
-  package-name: azure-mgmt-informatica
+  namespace: azure.mgmt.informaticadatamanagement
+  package-name: azure-mgmt-informaticadatamanagement
 az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/informatica
 python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/informatica"
 ``` 

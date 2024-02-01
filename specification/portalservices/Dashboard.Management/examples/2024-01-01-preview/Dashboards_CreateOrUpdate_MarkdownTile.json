@@ -1,0 +1,151 @@
+{
+  "operationId": "Dashboards_CreateOrUpdate",
+  "title": "Create a dashboard with Markdown tiles",
+  "parameters": {
+    "dashboardName": "testdashboard",
+    "resourceGroupName": "testRG",
+    "api-version": "2024-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "properties": {
+        "title": "testdashboard",
+        "pages": [
+          {
+            "title": "New 1",
+            "tiles": [
+              {
+                "title": "My title",
+                "subtitle": "My subtitle",
+                "type": "MarkdownTile",
+                "layout": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 4,
+                  "height": 4
+                },
+                "data": {
+                  "source": "inline",
+                  "content": "__My data__\n\nThis tile lets you put custom content on your dashboard. It supports plain text, and __Markdown__."
+                }
+              },
+              {
+                "title": "My title",
+                "subtitle": "My subtitle",
+                "type": "MarkdownTile",
+                "layout": {
+                  "x": 4,
+                  "y": 0,
+                  "width": 4,
+                  "height": 4
+                },
+                "data": {
+                  "source": "uri",
+                  "uri": "https://raw.githubusercontent.com/Azure/portaldocs/main/LICENSE.md"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "title": "testdashboard",
+          "pages": [
+            {
+              "title": "New 1",
+              "tiles": [
+                {
+                  "title": "My title",
+                  "subtitle": "My subtitle",
+                  "type": "MarkdownTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "data": {
+                    "source": "inline",
+                    "content": "__My data__\n\nThis tile lets you put custom content on your dashboard. It supports plain text, and __Markdown__."
+                  }
+                },
+                {
+                  "title": "My title",
+                  "subtitle": "My subtitle",
+                  "type": "MarkdownTile",
+                  "layout": {
+                    "x": 4,
+                    "y": 0,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "data": {
+                    "source": "uri",
+                    "uri": "https://raw.githubusercontent.com/Azure/portaldocs/main/LICENSE.md"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testdashboard",
+        "name": "testdashboard",
+        "type": "Microsoft.PortalServices/dashboards"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "title": "testdashboard",
+          "pages": [
+            {
+              "title": "New 1",
+              "tiles": [
+                {
+                  "title": "My title",
+                  "subtitle": "My subtitle",
+                  "type": "MarkdownTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "data": {
+                    "source": "inline",
+                    "content": "__My data__\n\nThis tile lets you put custom content on your dashboard. It supports plain text, and __Markdown__."
+                  }
+                },
+                {
+                  "title": "My title",
+                  "subtitle": "My subtitle",
+                  "type": "MarkdownTile",
+                  "layout": {
+                    "x": 4,
+                    "y": 0,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "data": {
+                    "source": "uri",
+                    "uri": "https://raw.githubusercontent.com/Azure/portaldocs/main/LICENSE.md"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testdashboard",
+        "name": "testdashboard",
+        "type": "Microsoft.PortalServices/dashboards"
+      }
+    }
+  }
+}

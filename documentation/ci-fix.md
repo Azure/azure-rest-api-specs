@@ -167,6 +167,10 @@ We believe this is a false positive: https://github.com/Azure/azure-openapi-vali
 
 We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/642.  Until fixed, spec authors should **not** suppress the violations in `readme.md`, but rather have label `Approved-LintDiff` applied to their PR to ignore the errors.
 
+### `@singleton` causes `EvenSegmentedPathForPutOperation` and `XmsPageableForListCalls`
+
+If `EvenSegmentedPathForPutOperation` and/or `XmsPageableForListCalls` are failing for OpenAPI generated from TypeSpec using `@singleton` (OpenAPI path ends with `/default`), we believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/646.  Until fixed, spec authors should **not** suppress the violations in `readme.md`, but rather have label `Approved-LintDiff` applied to their PR to ignore the errors.
+
 ## `Swagger Avocado`
 
 >[!IMPORTANT]
