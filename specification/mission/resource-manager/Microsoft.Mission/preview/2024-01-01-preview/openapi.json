@@ -4647,6 +4647,36 @@
         ]
       }
     },
+    "DiagnosticDestination": {
+      "type": "string",
+      "description": "Specifies the destination of where to store diagnostic logs.",
+      "enum": [
+        "CommunityOnly",
+        "EnclaveOnly",
+        "Both"
+      ],
+      "x-ms-enum": {
+        "name": "DiagnosticDestination",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CommunityOnly",
+            "value": "CommunityOnly",
+            "description": "DiagnosticDestination Type CommunityOnly"
+          },
+          {
+            "name": "EnclaveOnly",
+            "value": "EnclaveOnly",
+            "description": "DiagnosticDestination Type EnclaveOnly"
+          },
+          {
+            "name": "Both",
+            "value": "Both",
+            "description": "DiagnosticDestination Type Both"
+          }
+        ]
+      }
+    },
     "EnclaveAddressSpaces": {
       "type": "object",
       "description": "Enclave Address Spaces",
@@ -4884,13 +4914,20 @@
           "$ref": "#/definitions/KeyVaultResourceId",
           "description": "Key Vault Resource Id."
         },
-        "logAnalyticsResourceId": {
-          "$ref": "#/definitions/LogAnalyticsResourceId",
-          "description": "Log Analytics Resource Id."
-        },
         "storageAccountResourceId": {
           "$ref": "#/definitions/StorageAccountResourceId",
           "description": "Storage Account Resource Id."
+        },
+        "logAnalyticsResourceIdCollection": {
+          "type": "array",
+          "description": "Log Analytics Resource Ids.",
+          "items": {
+            "$ref": "#/definitions/LogAnalyticsResourceId"
+          }
+        },
+        "diagnosticDestination": {
+          "$ref": "#/definitions/DiagnosticDestination",
+          "description": "Diagnostic Destination."
         }
       }
     },
