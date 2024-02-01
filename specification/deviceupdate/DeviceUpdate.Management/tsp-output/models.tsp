@@ -420,13 +420,13 @@ model PrivateLinkResourceProperties {
 /**
  * Private endpoint connection proxy object property bag.
  */
-// model PrivateEndpointConnectionProxyProperties {
-//   /**
-//    * The provisioning state of the private endpoint connection proxy resource.
-//    */
-//   @visibility("read")
-//   provisioningState?: PrivateEndpointConnectionProxyProvisioningState;
-// }
+model PrivateEndpointConnectionProxyProperties {
+  /**
+   * The provisioning state of the private endpoint connection proxy resource.
+   */
+  @visibility("read")
+  provisioningState?: PrivateEndpointConnectionProxyProvisioningState;
+}
 
 /**
  * Private endpoint connection proxy object properties.
