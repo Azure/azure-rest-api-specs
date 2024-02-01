@@ -12,7 +12,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys/create": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys/{apiKeyAlias}/create": {
       "post": {
         "tags": [
           "CreateApiKey"
@@ -24,6 +24,13 @@
           }
         },
         "parameters": [
+          {
+            "type": "string",
+            "name": "apiKeyAlias",
+            "in": "path",
+            "required": true,
+            "description": "Alias for new API Key. This alias must be unique and contain only alphanumeric characters seperated by dashes"
+          },
           {
             "type": "string",
             "name": "x-ms-client-tenant-id",
@@ -57,7 +64,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys/{key}/revoke": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys/{apiKeyAlias}/revoke": {
       "post": {
         "tags": [
           "RevokeApiKey"
@@ -71,10 +78,9 @@
         "parameters": [
           {
             "type": "string",
-            "name": "key",
+            "name": "apiKeyAlias",
             "in": "path",
-            "required": true,
-            "x-nullable": true
+            "required": true
           },
           {
             "type": "string",
@@ -189,10 +195,10 @@
     }
   },
   "definitions": {
-    "key": {
+    "apiKeys": {
       "type": "object",
       "properties": {
-        "key": {
+        "aliasKeyPair": {
           "description": "The API key",
           "type": "string"
         }
