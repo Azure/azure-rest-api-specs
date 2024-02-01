@@ -299,13 +299,13 @@ See configuration in [readme.python.md](./readme.python.md)
 ``` yaml
 directive:
   - suppress: AvoidAnonymousParameter
-    from: openapi.json
+    from: purviewdatamap.json
     reason: This rule is irrelevant for data-plane TypeSpec specs.
   - suppress: AvoidAnonymousTypes
-    from: openapi.json
+    from: purviewdatamap.json
     reason: This rule is irrelevant for data-plane TypeSpec specs.
   - suppress: IntegerTypeMustHaveFormat
-    from: openapi.json
+    from: purviewdatamap.json
     reason: This rule is irrelevant for SDKs generated directly by TypeSpec.
 ```
 
