@@ -18,6 +18,7 @@ model Publisher is ExtensionResource<PublisherProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "backcompat, ARM reviewed"
 @armResourceOperations
 interface Publishers {
   @doc("Get a Publisher")

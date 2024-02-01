@@ -17,6 +17,7 @@ model Offer is ExtensionResource<OfferProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "backcompat, ARM reviewed"
 @armResourceOperations
 interface Offers {
   @doc("Get a Offer")
