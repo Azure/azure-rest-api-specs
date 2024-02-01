@@ -37,18 +37,33 @@ model Registry {
   name: string;
 }
 
+@doc("The identity information associated with creation of the resource.")
+model CreatedBy {
+  @visibility("read")
+  @doc("The user identity object Id that created the resource.")
+  userObjectId: string;
+
+  @visibility("read")
+  @doc("The tenantId that created the resource.")
+  userTenantId: string;
+
+  @visibility("read")
+  @doc("The user name that created the resource.")
+  userName: string;
+}
+
 @doc("Metadata pertaining to creation and last modification of the resource.")
 model SystemData {
   @visibility("read")
   @doc("The identity that created the resource.")
-  createdBy: string;
+  createdBy: CreatedBy;
 
   @visibility("read")
   @doc("The type of identity that created the resource.")
-  createTime?: plainDate;
+  createTime?: utcDateTime;
 
   @visibility("read")
   @doc("The timestamp of resource last modification (UTC)")
-  modifiedTime?: plainDate;
+  modifiedTime?: utcDateTime;
 }
 

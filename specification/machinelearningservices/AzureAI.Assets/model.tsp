@@ -41,11 +41,8 @@ model AssetVersionDto {
   @visibility("read")
   version: string;
 
-  @doc("Display name.")
-  displayName?: string;
-
-  @doc("Lifecycle stage of the asset. Update stage to 'Archived' for soft delete.")
-  stage?: string;
+  @doc("Update stage to 'Archived' for soft delete.")
+  isArchived: boolean = false;
 
   @doc("Description information of the asset.")
   description?: string;
