@@ -49,3 +49,9 @@ These settings apply only when `--tag=2024-04-01` is specified on the command li
 input-file:
   - stable/2024-04-01/openapi.json
 ```
+
+```yaml
+directive:
+  - suppress: AvoidAnonymousTypes
+    reason: The spec is auto-generated. Tracking issue to fix is https://github.com/Azure/typespec-azure-pr/issues/3349
+```
