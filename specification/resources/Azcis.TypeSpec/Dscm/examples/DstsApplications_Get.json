@@ -16,8 +16,7 @@
         "properties": {
           "applicationAccount": {
             "dstsInstance": "Instance 1",
-            "name": "Application 1",
-            "serviceTreeId": "ba1016c1-938a-4ca0-91c4-7d4e9a371f89",
+            "applicationAccountName": "Application 1",
             "realms": [
               "realm1",
               "realm2"
@@ -35,12 +34,41 @@
             "isMfaEnabled": true,
             "sawDeviceEnforcement": "full SAW enforcement will apply to the application",
             "isElevatedAccess": true,
-            "isProduction": true
+            "isProduction": true,
+            "claimRules": [
+              {
+                "clientIdentifier": {
+                  "type": "http://sts.msft.net/user/Group",
+                  "value": "GroupName"
+                },
+                "claim": {
+                  "type": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                  "value": "PlatformServiceViewer"
+                },
+                "clientIdentityOrigin": "MSIT-ADFS-Federation",
+                "isRegionalEnforced": true
+              }
+            ],
+            "applicationClientIdentity": {
+              "dmsiInfo": {
+                "path": "/path/to/dmsi",
+                "region": "asiaeast-dsms.dsms.core.windows.net",
+                "subscriptions": [
+                  "ef06429b-d53b-4362-92b9-b5fff2d27320"
+                ]
+              },
+              "type": "Dsmi",
+              "clientTokenIpRangeRestrictions": [
+                {
+                  "fromIpAddress": "10.10.10.0",
+                  "toIpAddress": "10.10.10.10"
+                }
+              ]
+            }
           },
           "applicationGroup": {
             "id": "4e33702f-ec54-49b8-b360-4c0f68b34bb7",
-            "serviceTreeId": "ba1016c1-938a-4ca0-91c4-7d4e9a371f89",
-            "name": "Group 1",
+            "applicationGroupName": "Group 1",
             "applicationName": "Application 1",
             "servicePrincipalNames": [
               "service principal name 1",
@@ -59,10 +87,12 @@
             "sawDeviceEnforcement": "full SAW enforcement will apply to the application",
             "clientTokenIpRangeRestrictions": [
               {
-                "toIpAddress": "IP Address1"
+                "fromIpAddress": "10.10.10.0",
+                "toIpAddress": "10.10.10.10"
               },
               {
-                "toIpAddress": "IP Address2"
+                "fromIpAddress": "172.16.0.0",
+                "toIpAddress": "172.16.0.10"
               }
             ],
             "cloudId": "PROD",
@@ -73,7 +103,37 @@
             "regions": [
               "region 1",
               "region 2"
-            ]
+            ],
+            "claimRules": [
+              {
+                "clientIdentifier": {
+                  "type": "http://sts.msft.net/user/Group",
+                  "value": "GroupName"
+                },
+                "claim": {
+                  "type": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                  "value": "PlatformServiceViewer"
+                },
+                "clientIdentityOrigin": "MSIT-ADFS-Federation",
+                "isRegionalEnforced": true
+              }
+            ],
+            "applicationClientIdentity": {
+              "dmsiInfo": {
+                "path": "/path/to/dmsi",
+                "region": "asiaeast-dsms.dsms.core.windows.net",
+                "subscriptions": [
+                  "ef06429b-d53b-4362-92b9-b5fff2d27320"
+                ]
+              },
+              "type": "Dsmi",
+              "clientTokenIpRangeRestrictions": [
+                {
+                  "fromIpAddress": "10.10.10.0",
+                  "toIpAddress": "10.10.10.10"
+                }
+              ]
+            }
           }
         }
       }

@@ -27,10 +27,33 @@ These are the global settings for the mobilenetwork.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-10
+tag: package-2024-02
 ```
 
+### Tag: package-2024-02
 
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.MobileNetwork/stable/2024-02-01/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/common.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/dataNetwork.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/mobileNetwork.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/operation.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/packetCapture.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/service.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/sim.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/simGroup.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/simPolicy.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/site.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/slice.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/ts29571.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/ueInfo.json
+```
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
