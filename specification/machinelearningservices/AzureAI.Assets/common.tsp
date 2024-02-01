@@ -52,10 +52,3 @@ model SystemData {
   modifiedTime?: plainDate;
 }
 
-@doc("Asset capability type definition.")
-enum AssetCapabilityType {
-  @doc("Uri denotes a folder.")
-  UriFolder,
-  @doc("Uri denotes a file.")
-  UriFile
-}

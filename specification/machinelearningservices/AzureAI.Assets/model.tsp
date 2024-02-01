@@ -34,23 +34,21 @@ model AssetVersionDto {
   indexVersionNum: string;
 
   @doc("Name of the index.")
+  @visibility("read")
   name: string;
 
   @doc("Version of the index.")
+  @visibility("read")
   version: string;
 
   @doc("Display name.")
   displayName?: string;
 
-  @doc("Lifecycle stage of the asset. Stage populates IsArchived.")
+  @doc("Lifecycle stage of the asset. Update stage to 'Archived' for soft delete.")
   stage?: string;
 
   @doc("Description information of the asset.")
   description?: string;
-
-  @doc("Capability type of the asset.")
-  @visibility("read")
-  capabilities?: Record<AssetCapabilityType>;
 
   @doc("Metadata containing createdBy and modifiedBy information.")
   @visibility("read")
