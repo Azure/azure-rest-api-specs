@@ -36,14 +36,11 @@ enum Versions {
   v2024_03_01: "2024-03-01",
 }
 
-@@TypeSpec.OpenAPI.extension(Apis.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "payload"
-);
+@@projectedName(Apis.createOrUpdate::parameters.resource, "json", "payload");
 @@projectedName(Apis.createOrUpdate::parameters.resource, "client", "payload");
 
-@@TypeSpec.OpenAPI.extension(ApiDefinitions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
+@@projectedName(ApiDefinitions.createOrUpdate::parameters.resource,
+  "json",
   "payload"
 );
 @@projectedName(ApiDefinitions.createOrUpdate::parameters.resource,
@@ -51,8 +48,8 @@ enum Versions {
   "payload"
 );
 
-@@TypeSpec.OpenAPI.extension(ApiVersions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
+@@projectedName(ApiVersions.createOrUpdate::parameters.resource,
+  "json",
   "payload"
 );
 @@projectedName(ApiVersions.createOrUpdate::parameters.resource,
@@ -60,8 +57,8 @@ enum Versions {
   "payload"
 );
 
-@@TypeSpec.OpenAPI.extension(Deployments.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
+@@projectedName(Deployments.createOrUpdate::parameters.resource,
+  "json",
   "payload"
 );
 @@projectedName(Deployments.createOrUpdate::parameters.resource,
@@ -69,8 +66,8 @@ enum Versions {
   "payload"
 );
 
-@@TypeSpec.OpenAPI.extension(Environments.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
+@@projectedName(Environments.createOrUpdate::parameters.resource,
+  "json",
   "payload"
 );
 @@projectedName(Environments.createOrUpdate::parameters.resource,
@@ -78,8 +75,8 @@ enum Versions {
   "payload"
 );
 
-@@TypeSpec.OpenAPI.extension(MetadataSchemas.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
+@@projectedName(MetadataSchemas.createOrUpdate::parameters.resource,
+  "json",
   "payload"
 );
 @@projectedName(MetadataSchemas.createOrUpdate::parameters.resource,
@@ -87,8 +84,8 @@ enum Versions {
   "payload"
 );
 
-@@TypeSpec.OpenAPI.extension(Services.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
+@@projectedName(Services.createOrUpdate::parameters.resource,
+  "json",
   "payload"
 );
 @@projectedName(Services.createOrUpdate::parameters.resource,
@@ -96,14 +93,11 @@ enum Versions {
   "payload"
 );
 
-@@TypeSpec.OpenAPI.extension(Services.update::parameters.properties,
-  "x-ms-client-name",
-  "payload"
-);
+@@projectedName(Services.update::parameters.properties, "json", "payload");
 @@projectedName(Services.update::parameters.properties, "client", "payload");
 
-@@TypeSpec.OpenAPI.extension(Workspaces.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
+@@projectedName(Workspaces.createOrUpdate::parameters.resource,
+  "json",
   "payload"
 );
 @@projectedName(Workspaces.createOrUpdate::parameters.resource,
@@ -111,8 +105,8 @@ enum Versions {
   "payload"
 );
 
-@@TypeSpec.OpenAPI.extension(ApiDefinitions.importSpecification::parameters.body,
-  "x-ms-client-name",
+@@projectedName(ApiDefinitions.importSpecification::parameters.body,
+  "json",
   "payload"
 );
 
@@ -121,8 +115,8 @@ enum Versions {
   "payload"
 );
 
-@@TypeSpec.OpenAPI.extension(ApiDefinitions.exportSpecification::parameters.body,
-  "x-ms-client-name",
+@@projectedName(ApiDefinitions.exportSpecification::parameters.body,
+  "json",
   "payload"
 );
 
@@ -131,8 +125,8 @@ enum Versions {
   "payload"
 );
 
-@@TypeSpec.OpenAPI.extension(Services.exportMetadataSchema::parameters.body,
-  "x-ms-client-name",
+@@projectedName(Services.exportMetadataSchema::parameters.body,
+  "json",
   "payload"
 );
 
