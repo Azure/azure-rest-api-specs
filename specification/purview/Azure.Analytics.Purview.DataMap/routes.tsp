@@ -58,6 +58,7 @@ alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTr
   contentType: "multipart/form-data";
 }>;
 
+@projectedName("csharp", "EntityOperations")
 interface Entity {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
