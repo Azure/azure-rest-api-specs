@@ -2955,6 +2955,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The API specification was successfully imported."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2968,9 +2971,6 @@
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
-          },
-          "204": {
-            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3476,6 +3476,10 @@
           "description": "Specification version."
         }
       }
+    },
+    "ApiImportSuccess": {
+      "type": "object",
+      "description": "The API specification was successfully imported."
     },
     "ApiKind": {
       "type": "string",
