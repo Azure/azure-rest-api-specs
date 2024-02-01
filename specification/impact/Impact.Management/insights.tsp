@@ -59,7 +59,7 @@ model InsightProperties is ResourceProperties {
   insightUniqueId: string;
 
   @doc("details of of the impact for which insight has been generated.")
-  impacts: ImpactDetails;
+  impact: ImpactDetails;
 
   @doc("additional details of the insight.")
   additionalDetails?: {};
