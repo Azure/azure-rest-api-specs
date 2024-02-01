@@ -10,7 +10,12 @@
         "defaultCatalog": {
           "initialType": "UnityCatalog",
           "initialName": ""
-        }
+        },
+        "accessConnector": {
+          "id": "/subscriptions/subid/resourceGroups/rg/providers/accessConnectors/myAccessConnector",
+          "identityType": "SystemAssigned"
+        },
+        "privateDbfsAccess": "Enabled"
       },
       "location": "westus"
     }
@@ -27,6 +32,11 @@
         },
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "accessConnector": {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/accessConnectors/myAccessConnector",
+            "identityType": "SystemAssigned"
+          },
+          "privateDbfsAccess": "Enabled",
           "parameters": null,
           "provisioningState": "Accepted",
           "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json",
@@ -72,6 +82,11 @@
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
           "parameters": null,
+          "accessConnector": {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/accessConnectors/myAccessConnector",
+            "identityType": "SystemAssigned"
+          },
+          "privateDbfsAccess": "Enabled",
           "provisioningState": "Accepted",
           "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json",
           "authorizations": [

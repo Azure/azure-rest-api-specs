@@ -873,6 +873,48 @@
           "readOnly": true,
           "description": "Indicates whether unity catalog enabled for the workspace or not.",
           "type": "boolean"
+        },
+        "accessConnector": {
+          "description": "Access Connector Resource that is going to be associated with Databricks Workspace",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The resource ID of Azure Databricks Access Connector Resource."
+            },
+            "identityType": {
+              "type": "string",
+              "description": "The identity type of the Access Connector Resource.",
+              "enum": [
+                "SystemAssigned",
+                "UserAssigned"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "IdentityType"
+              }
+            },
+            "userAssignedIdentityId": {
+              "type": "string",
+              "description": "The resource ID of the User Assigned Identity associated with the Access Connector Resource. This is required for type 'UserAssigned' and not valid for type 'SystemAssigned'."
+            }
+          },
+          "required": [
+            "id",
+            "identityType"
+          ]
+        },
+        "privateDbfsAccess": {
+          "description": "Gets or Sets Private DBFS Access configuration information",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PrivateDbfsAccess"
+          }
         }
       },
       "required": [
