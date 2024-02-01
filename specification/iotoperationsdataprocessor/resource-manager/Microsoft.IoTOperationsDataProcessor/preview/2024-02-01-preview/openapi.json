@@ -783,7 +783,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExecuteTestRunRequest"
+              "$ref": "#/definitions/TestRunRequest"
             }
           }
         ],
@@ -791,7 +791,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ExecuteTestRunResponse"
+              "$ref": "#/definitions/TestRunResponse"
             }
           },
           "202": {
@@ -1370,50 +1370,6 @@
         }
       }
     },
-    "ExecuteTestRunRequest": {
-      "type": "object",
-      "description": "The request properties to execute a test run.",
-      "properties": {
-        "dataSource": {
-          "$ref": "#/definitions/DataSourceBase",
-          "description": "Configure where test run messages are sourced from."
-        },
-        "stages": {
-          "type": "object",
-          "description": "Map of stage IDs to stage configurations for all pipeline processing and output stages.",
-          "additionalProperties": {
-            "$ref": "#/definitions/PipelineStage"
-          }
-        }
-      },
-      "required": [
-        "dataSource"
-      ]
-    },
-    "ExecuteTestRunResponse": {
-      "type": "object",
-      "description": "The response properties from a test run.",
-      "properties": {
-        "messages": {
-          "type": "array",
-          "description": "Unordered list of every message state seen at a stages input and output.",
-          "items": {
-            "$ref": "#/definitions/Message"
-          },
-          "x-ms-identifiers": []
-        },
-        "executions": {
-          "type": "array",
-          "description": "Unordered list of the results from an individual stage processing a message.",
-          "items": {
-            "$ref": "#/definitions/ExecutionResult"
-          },
-          "x-ms-identifiers": [
-            "stage"
-          ]
-        }
-      }
-    },
     "ExecutionResult": {
       "type": "object",
       "description": "The properties for a ExecutionResult.",
@@ -1771,6 +1727,50 @@
             "description": "The resource was accepted by the server."
           }
         ]
+      }
+    },
+    "TestRunRequest": {
+      "type": "object",
+      "description": "The request properties to execute a test run.",
+      "properties": {
+        "dataSource": {
+          "$ref": "#/definitions/DataSourceBase",
+          "description": "Configure where test run messages are sourced from."
+        },
+        "stages": {
+          "type": "object",
+          "description": "Map of stage IDs to stage configurations for all pipeline processing and output stages.",
+          "additionalProperties": {
+            "$ref": "#/definitions/PipelineStage"
+          }
+        }
+      },
+      "required": [
+        "dataSource"
+      ]
+    },
+    "TestRunResponse": {
+      "type": "object",
+      "description": "The response properties from a test run.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "Unordered list of every message state seen at a stages input and output.",
+          "items": {
+            "$ref": "#/definitions/Message"
+          },
+          "x-ms-identifiers": []
+        },
+        "executions": {
+          "type": "array",
+          "description": "Unordered list of the results from an individual stage processing a message.",
+          "items": {
+            "$ref": "#/definitions/ExecutionResult"
+          },
+          "x-ms-identifiers": [
+            "stage"
+          ]
+        }
       }
     },
     "Versions": {

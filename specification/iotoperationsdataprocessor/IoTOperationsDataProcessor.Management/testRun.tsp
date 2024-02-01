@@ -19,7 +19,7 @@ namespace Microsoft.IoTOperationsDataProcessor;
 
 @doc("The request properties to execute a test run.")
 @added(Versions.Preview20240201)
-model ExecuteTestRunRequest {
+model TestRunRequest {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Configure where test run messages are sourced from.")
   dataSource: DataSourceBase;
@@ -31,7 +31,7 @@ model ExecuteTestRunRequest {
 
 @doc("The response properties from a test run.")
 @added(Versions.Preview20240201)
-model ExecuteTestRunResponse {
+model TestRunResponse {
   @doc("Unordered list of every message state seen at a stages input and output.")
   @extension("x-ms-identifiers", [])
   messages?: Message[];
