@@ -9,8 +9,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Workloads;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 @doc("Defines the environment type - Production/Non Production.")
 enum SAPEnvironmentType {
   NonProd,

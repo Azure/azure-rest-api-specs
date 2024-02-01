@@ -64,6 +64,7 @@ interface SAPDatabaseInstances {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Starts the database instance of the SAP system.")
   @operationId("SAPDatabaseInstances_StartInstance")
+  @action("start")
   startInstance is ArmResourceActionAsync<
     SAPDatabaseInstance,
     StartRequest,
@@ -75,6 +76,7 @@ interface SAPDatabaseInstances {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Stops the database instance of the SAP system.")
   @operationId("SAPDatabaseInstances_StopInstance")
+  @action("stop")
   stopInstance is ArmResourceActionAsync<
     SAPDatabaseInstance,
     StopRequest,

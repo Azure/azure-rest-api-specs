@@ -65,6 +65,7 @@ interface SAPApplicationServerInstances {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Starts the SAP Application Server Instance.")
   @operationId("SAPApplicationServerInstances_StartInstance")
+  @action("start")
   startInstance is ArmResourceActionAsync<
     SAPApplicationServerInstance,
     StartRequest,
@@ -76,6 +77,7 @@ interface SAPApplicationServerInstances {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Stops the SAP Application Server Instance.")
   @operationId("SAPApplicationServerInstances_StopInstance")
+  @action("stop")
   stopInstance is ArmResourceActionAsync<
     SAPApplicationServerInstance,
     StopRequest,
