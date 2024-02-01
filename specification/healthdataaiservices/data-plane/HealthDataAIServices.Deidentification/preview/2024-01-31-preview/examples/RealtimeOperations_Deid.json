@@ -1,0 +1,33 @@
+{
+  "title": "Realtime Synchronous Deidentification.",
+  "operationId": "RealtimeOperations_Deid",
+  "parameters": {
+    "api-version": "2024-01-31-preview",
+    "body": {
+      "inputText": "Hello my name is John Smith.",
+      "dataType": "PlainText",
+      "operation": "Redact",
+      "stringIndexType": "TextElement_v8",
+      "redactionFormat": "[{type}]"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outputText": "Hello my name is [name].",
+        "taggerResult": {
+          "entities": [
+            {
+              "category": "Patient",
+              "offset": 17,
+              "length": 10,
+              "text": "John Smith",
+              "confidenceScore": 0.83
+            }
+          ],
+          "stringIndexType": "TextElement_v8"
+        }
+      }
+    }
+  }
+}

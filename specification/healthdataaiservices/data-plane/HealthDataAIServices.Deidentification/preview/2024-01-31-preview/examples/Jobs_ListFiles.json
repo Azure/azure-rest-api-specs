@@ -1,0 +1,27 @@
+{
+  "title": "List processed files within a Job",
+  "operationId": "Jobs_ListFiles",
+  "parameters": {
+    "api-version": "2024-01-31-preview",
+    "name": "documents_smith_1",
+    "top": 10,
+    "skip": 10,
+    "maxpagesize": 10,
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "path": "/documents/patient_doc_1",
+            "status": "Failed",
+            "explanation": "File was moved after job started.",
+            "etag": "0x8DB638EEA0CC717"
+          }
+        ],
+        "nextLink": "https://deidtest.api.deid.azure.com/jobs/00000000-0000-0000-0000-000000000000/files?top=10&skip=10&maxpagesize=10"
+      }
+    }
+  }
+}

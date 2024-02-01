@@ -1,0 +1,1348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HealthDataAIServices.Deidentification Service",
+    "version": "2024-01-31-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{deid-service-uri}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "deid-service-uri",
+        "in": "path",
+        "description": "Uri of your Deid Service.",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadToken": [
+        "https://deid.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadToken": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://deid.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/deid": {
+      "post": {
+        "operationId": "RealtimeOperations_Deid",
+        "summary": "Realtime Synchronous Deidentification.",
+        "description": "A remote procedure call (RPC) operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body for realtime deidentification.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeidRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeidResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Realtime Synchronous Deidentification.": {
+            "$ref": "./examples/RealtimeOperations_Deid.json"
+          }
+        }
+      }
+    },
+    "/jobs": {
+      "get": {
+        "operationId": "Jobs_List",
+        "summary": "List DeID Jobs",
+        "description": "Resource list operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedJob"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List DeID Jobs": {
+            "$ref": "./examples/Jobs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/jobs/{name}": {
+      "get": {
+        "operationId": "Jobs_Get",
+        "summary": "Get a DeID Job",
+        "description": "Resource read operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of a job.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a DeID Job": {
+            "$ref": "./examples/Jobs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Jobs_Create",
+        "summary": "Create a DeID Job",
+        "description": "Long-running resource create or replace operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of a job.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a DeID Job": {
+            "$ref": "./examples/Jobs_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Jobs_Delete",
+        "summary": "Delete a DeID Job",
+        "description": "Removes the record of the job from the service. Does not delete any files.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of a job.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a DeID Job": {
+            "$ref": "./examples/Jobs_Delete.json"
+          }
+        }
+      }
+    },
+    "/jobs/{name}:cancel": {
+      "post": {
+        "operationId": "Jobs_Cancel",
+        "summary": "Cancel a DeID Job",
+        "description": "Cancels a job that is in progress. \n\nThe job will be marked as canceled and the service will stop processing the job. The service will not delete any files that have already been processed.\n\nIf the job is already complete, this will have no effect. ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of a job.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a DeID Job": {
+            "$ref": "./examples/Jobs_Cancel.json"
+          }
+        }
+      }
+    },
+    "/jobs/{name}/files": {
+      "get": {
+        "operationId": "Jobs_ListFiles",
+        "summary": "List processed files within a Job",
+        "description": "Resource list operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of a job.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedFile"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List processed files within a Job": {
+            "$ref": "./examples/Jobs_ListFiles.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
+    "DeidRequest": {
+      "type": "object",
+      "description": "Request for synchronous DeID operation.",
+      "properties": {
+        "inputText": {
+          "type": "string",
+          "description": "Input text to deidentify.",
+          "minLength": 1,
+          "maxLength": 100000
+        },
+        "dataType": {
+          "$ref": "#/definitions/DocumentDataType",
+          "description": "Data type of the input."
+        },
+        "operation": {
+          "$ref": "#/definitions/OperationType",
+          "description": "Operation to perform on the input."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "Requested Encoding of the tag response indices.",
+          "default": "TextElement_v8"
+        },
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when OperationType is Redact.",
+          "maxLength": 16
+        }
+      },
+      "required": [
+        "inputText",
+        "dataType",
+        "operation"
+      ]
+    },
+    "DeidResponse": {
+      "type": "object",
+      "description": "Response for synchronous DeID operation.",
+      "properties": {
+        "outputText": {
+          "type": "string",
+          "description": "Output text after deidentification. Not available for Tag Operation."
+        },
+        "taggerResult": {
+          "$ref": "#/definitions/PhiTaggerResult",
+          "description": "Result of the tag operation. Only available for Tag Operation."
+        }
+      }
+    },
+    "DocumentDataType": {
+      "type": "string",
+      "description": "Enum of supported Data Types.",
+      "enum": [
+        "Unknown",
+        "PlainText"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown data type."
+          },
+          {
+            "name": "PlainText",
+            "value": "PlainText",
+            "description": "Plain text data type."
+          }
+        ]
+      }
+    },
+    "File": {
+      "type": "object",
+      "description": "File report once job has completed.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Relative path to file from location prefix.",
+          "maxLength": 1024,
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Status of the file."
+        },
+        "explanation": {
+          "type": "string",
+          "description": "Explanation of current status. If needed."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "path",
+        "status",
+        "etag"
+      ]
+    },
+    "Job": {
+      "type": "object",
+      "description": "A job containing a batch of documents to deidentify.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of a job.",
+          "minLength": 1,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$",
+          "readOnly": true
+        },
+        "sourceLocation": {
+          "$ref": "#/definitions/SourceStorageLocation",
+          "description": "Storage location to perform the operation on."
+        },
+        "targetLocation": {
+          "$ref": "#/definitions/TargetStorageLocation",
+          "description": "Target location to store output of operation."
+        },
+        "dataType": {
+          "$ref": "#/definitions/DocumentDataType",
+          "description": "Data type of the input documents.",
+          "default": "PlainText"
+        },
+        "operation": {
+          "$ref": "#/definitions/OperationType",
+          "description": "Operation to perform on the input documents.",
+          "default": "Redact"
+        },
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when Operation is Redact.",
+          "minLength": 1,
+          "maxLength": 16
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Current status of a job.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the job was created.",
+          "readOnly": true
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the job was started.",
+          "readOnly": true
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the job was completed.\n\nIf the job is canceled, this is the time when the job was canceled.\n\nIf the job failed, this is the time when the job failed.",
+          "readOnly": true
+        },
+        "summary": {
+          "$ref": "#/definitions/JobSummary",
+          "description": "Summary of a job. Exists only when the job is completed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "sourceLocation",
+        "targetLocation",
+        "dataType",
+        "operation",
+        "status",
+        "createdAt"
+      ]
+    },
+    "JobCreateOrUpdate": {
+      "type": "object",
+      "description": "A job containing a batch of documents to deidentify.",
+      "properties": {
+        "sourceLocation": {
+          "$ref": "#/definitions/SourceStorageLocation",
+          "description": "Storage location to perform the operation on."
+        },
+        "targetLocation": {
+          "$ref": "#/definitions/TargetStorageLocation",
+          "description": "Target location to store output of operation."
+        },
+        "dataType": {
+          "$ref": "#/definitions/DocumentDataType",
+          "description": "Data type of the input documents.",
+          "default": "PlainText"
+        },
+        "operation": {
+          "$ref": "#/definitions/OperationType",
+          "description": "Operation to perform on the input documents.",
+          "default": "Redact"
+        },
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when Operation is Redact.",
+          "minLength": 1,
+          "maxLength": 16
+        }
+      },
+      "required": [
+        "sourceLocation",
+        "targetLocation",
+        "dataType",
+        "operation"
+      ]
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "List of statuses a job can have.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "PartialFailed"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          },
+          {
+            "name": "PartialFailed",
+            "value": "PartialFailed",
+            "description": "Job has completed with at least 1 file failing."
+          }
+        ]
+      }
+    },
+    "JobSummary": {
+      "type": "object",
+      "description": "Summary metrics the documents pertaining to a job.",
+      "properties": {
+        "successful": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of blobs that have completed."
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of blobs that have failed."
+        },
+        "canceled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of blobs that have been canceled."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of blobs total."
+        },
+        "bytesProcessed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of bytes processed."
+        }
+      },
+      "required": [
+        "successful",
+        "failed",
+        "canceled",
+        "total",
+        "bytesProcessed"
+      ]
+    },
+    "OperationType": {
+      "type": "string",
+      "description": "Enum of supported Operation Types.",
+      "enum": [
+        "Redact",
+        "Surrogate",
+        "Tag"
+      ],
+      "x-ms-enum": {
+        "name": "OperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Redact",
+            "value": "Redact",
+            "description": "Redact Operation will remove all entities of PHI and replace them with a placeholder value."
+          },
+          {
+            "name": "Surrogate",
+            "value": "Surrogate",
+            "description": "Surrogation Operation will replace all entities of PHI with a surrogate value."
+          },
+          {
+            "name": "Tag",
+            "value": "Tag",
+            "description": "Tag Operation will detect all entities of PHI, their type, and return their locations in the document."
+          }
+        ]
+      }
+    },
+    "PagedFile": {
+      "type": "object",
+      "description": "Paged collection of File items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The File items on this page",
+          "items": {
+            "$ref": "#/definitions/File"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedJob": {
+      "type": "object",
+      "description": "Paged collection of Job items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Job items on this page",
+          "items": {
+            "$ref": "#/definitions/Job"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PhiCategory": {
+      "type": "string",
+      "description": "List of PHI Entities.",
+      "enum": [
+        "Unknown",
+        "Account",
+        "Age",
+        "BioID",
+        "City",
+        "CountryOrRegion",
+        "Date",
+        "Device",
+        "Doctor",
+        "Email",
+        "Fax",
+        "HealthPlan",
+        "Hospital",
+        "IDNum",
+        "IPAddress",
+        "License",
+        "LocationOther",
+        "MedicalRecord",
+        "Organization",
+        "Patient",
+        "Phone",
+        "Profession",
+        "SocialSecurity",
+        "State",
+        "Street",
+        "Url",
+        "Username",
+        "Vehicle",
+        "Zip"
+      ],
+      "x-ms-enum": {
+        "name": "PhiCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown PHI Type."
+          },
+          {
+            "name": "Account",
+            "value": "Account",
+            "description": "Account Number."
+          },
+          {
+            "name": "Age",
+            "value": "Age",
+            "description": "Age."
+          },
+          {
+            "name": "BioID",
+            "value": "BioID",
+            "description": "Biological Identifier, such as a fingerprint or retinal scan"
+          },
+          {
+            "name": "City",
+            "value": "City",
+            "description": "City."
+          },
+          {
+            "name": "CountryOrRegion",
+            "value": "CountryOrRegion",
+            "description": "Country or Region."
+          },
+          {
+            "name": "Date",
+            "value": "Date",
+            "description": "Date."
+          },
+          {
+            "name": "Device",
+            "value": "Device",
+            "description": "Device ID or serial numbers."
+          },
+          {
+            "name": "Doctor",
+            "value": "Doctor",
+            "description": "Doctor's Name."
+          },
+          {
+            "name": "Email",
+            "value": "Email",
+            "description": "Email Addresses."
+          },
+          {
+            "name": "Fax",
+            "value": "Fax",
+            "description": "Fax Number."
+          },
+          {
+            "name": "HealthPlan",
+            "value": "HealthPlan",
+            "description": "Health Plan ID Numbers."
+          },
+          {
+            "name": "Hospital",
+            "value": "Hospital",
+            "description": "Hospital Name."
+          },
+          {
+            "name": "IDNum",
+            "value": "IDNum",
+            "description": "Id Numbers. Such as a passport number."
+          },
+          {
+            "name": "IPAddress",
+            "value": "IPAddress",
+            "description": "IP Address."
+          },
+          {
+            "name": "License",
+            "value": "License",
+            "description": "License. Such as a driver's license or medical license"
+          },
+          {
+            "name": "LocationOther",
+            "value": "LocationOther",
+            "description": "Location Other. Such as Golden Gate Park."
+          },
+          {
+            "name": "MedicalRecord",
+            "value": "MedicalRecord",
+            "description": "Medical Record Number."
+          },
+          {
+            "name": "Organization",
+            "value": "Organization",
+            "description": "Organization. Such as a company name"
+          },
+          {
+            "name": "Patient",
+            "value": "Patient",
+            "description": "Patient Name."
+          },
+          {
+            "name": "Phone",
+            "value": "Phone",
+            "description": "Phone Number."
+          },
+          {
+            "name": "Profession",
+            "value": "Profession",
+            "description": "Profession."
+          },
+          {
+            "name": "SocialSecurity",
+            "value": "SocialSecurity",
+            "description": "Social Security Numbers in the US."
+          },
+          {
+            "name": "State",
+            "value": "State",
+            "description": "State"
+          },
+          {
+            "name": "Street",
+            "value": "Street",
+            "description": "Street."
+          },
+          {
+            "name": "Url",
+            "value": "Url",
+            "description": "Web URL."
+          },
+          {
+            "name": "Username",
+            "value": "Username",
+            "description": "Usernames, such as a social media handle"
+          },
+          {
+            "name": "Vehicle",
+            "value": "Vehicle",
+            "description": "Vehicle IDs, such as license plates or VIN numbers"
+          },
+          {
+            "name": "Zip",
+            "value": "Zip",
+            "description": "Zip Code."
+          }
+        ]
+      }
+    },
+    "PhiEntity": {
+      "type": "object",
+      "description": "Phi Entity tag in the input.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/PhiCategory",
+          "description": "Phi Category of the entity."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Starting index of the location from within the input text."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length of the input text."
+        },
+        "text": {
+          "type": "string",
+          "description": "Text of the entity."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score of the text/type pairing."
+        }
+      },
+      "required": [
+        "category",
+        "offset",
+        "length"
+      ]
+    },
+    "PhiTaggerResult": {
+      "type": "object",
+      "description": "Result of the tag operation.",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "description": "List of entities detected in the input.",
+          "items": {
+            "$ref": "#/definitions/PhiEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "Requested Encoding of the tag response indices.",
+          "default": "TextElement_v8"
+        },
+        "path": {
+          "type": "string",
+          "description": "Path to the file in the storage container.",
+          "maxLength": 1024
+        },
+        "checksum": {
+          "type": "string",
+          "description": "Checksum of the file."
+        }
+      },
+      "required": [
+        "entities",
+        "stringIndexType"
+      ]
+    },
+    "SourceStorageLocation": {
+      "type": "object",
+      "description": "Storage location.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to storage location. Must be a valid Azure Storage SAS URI."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix to filter blobs by."
+        },
+        "extensions": {
+          "type": "array",
+          "description": "List of extensions to filter blobs by.",
+          "default": [
+            "*"
+          ],
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location",
+        "prefix"
+      ]
+    },
+    "StringIndexType": {
+      "type": "string",
+      "description": "List of supported index encodings.",
+      "enum": [
+        "TextElement_v8",
+        "UnicodeCodePoint",
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TextElement_v8",
+            "value": "TextElement_v8",
+            "description": "Iterates over graphemes as defined by the Unicode 8.0.0 standard."
+          },
+          {
+            "name": "UnicodeCodePoint",
+            "value": "UnicodeCodePoint",
+            "description": "Iterates over Unicode Code Points, the default scheme for Python 3."
+          },
+          {
+            "name": "Utf16CodeUnit",
+            "value": "Utf16CodeUnit",
+            "description": "Iterates over UTF-16 Code Units, the default scheme for JavaScript, Java, and .NET."
+          }
+        ]
+      }
+    },
+    "TargetStorageLocation": {
+      "type": "object",
+      "description": "Storage location.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to storage location. Must be a valid Azure Storage SAS URI."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix to filter blobs by."
+        }
+      },
+      "required": [
+        "location",
+        "prefix"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
