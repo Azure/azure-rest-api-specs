@@ -84,15 +84,6 @@ enum Versions {
   "payload"
 );
 
-@@projectedName(Services.createOrUpdate::parameters.resource,
-  "json",
-  "payload"
-);
-@@projectedName(Services.createOrUpdate::parameters.resource,
-  "client",
-  "payload"
-);
-
 @@projectedName(Services.update::parameters.properties, "json", "payload");
 @@projectedName(Services.update::parameters.properties, "client", "payload");
 
