@@ -20,7 +20,7 @@ model SAPVirtualInstance is TrackedResource<SAPVirtualInstanceProperties> {
   @segment("sapVirtualInstances")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  identity?: UserAssignedServiceIdentity;
 }
 
 @armResourceOperations
@@ -33,6 +33,12 @@ interface SAPVirtualInstances {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a Virtual Instance for SAP solutions (VIS) resource")
   @operationId("SAPVirtualInstances_Create")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
   create is ArmResourceCreateOrUpdateAsync<
     SAPVirtualInstance,
     BaseParameters<SAPVirtualInstance>,

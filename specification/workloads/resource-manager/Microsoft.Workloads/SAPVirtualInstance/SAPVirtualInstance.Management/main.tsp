@@ -20,7 +20,7 @@ using TypeSpec.Versioning;
   title: "Workloads Client",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 @doc("Workloads client provides access to various workload operations.")
 namespace Microsoft.Workloads;
 

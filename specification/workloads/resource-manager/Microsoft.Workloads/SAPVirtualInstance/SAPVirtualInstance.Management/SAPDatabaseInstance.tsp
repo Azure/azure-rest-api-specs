@@ -33,6 +33,12 @@ interface SAPDatabaseInstances {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates the Database resource corresponding to the Virtual Instance for SAP solutions resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT by end user will return a Bad Request error.")
   @operationId("SAPDatabaseInstances_Create")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
   create is ArmResourceCreateOrUpdateAsync<
     SAPDatabaseInstance,
     BaseParameters<SAPDatabaseInstance>,

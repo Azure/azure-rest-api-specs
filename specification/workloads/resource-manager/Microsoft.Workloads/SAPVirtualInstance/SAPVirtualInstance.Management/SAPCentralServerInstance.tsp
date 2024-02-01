@@ -33,6 +33,12 @@ interface SAPCentralServerInstances {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates the SAP Central Services Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.")
   @operationId("SAPCentralInstances_Create")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
   create is ArmResourceCreateOrUpdateAsync<
     SAPCentralServerInstance,
     BaseParameters<SAPCentralServerInstance>,

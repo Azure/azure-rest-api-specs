@@ -185,10 +185,10 @@ model SAPSizingRecommendationRequest {
   deploymentType: SAPDeploymentType;
 
   @doc("The SAP Application Performance Standard measurement.")
-  saps: int32;
+  saps: int64;
 
   @doc("The database memory configuration.")
-  dbMemory: int32;
+  dbMemory: int64;
 
   @doc("The database type.")
   databaseType: SAPDatabaseType;
@@ -282,10 +282,10 @@ model SAPDiskConfiguration {
 @doc("The disk configuration required for the selected volume.")
 model DiskVolumeConfiguration {
   @doc("The total number of disks required for the concerned volume.")
-  count?: int32;
+  count?: int64;
 
   @doc("The disk size in GB.")
-  sizeGB?: int32;
+  sizeGB?: int64;
 
   @doc("The disk SKU details.")
   sku?: DiskSku;
@@ -303,19 +303,19 @@ model DiskDetails {
   sku?: DiskSku;
 
   @doc("The disk size in GB.")
-  sizeGB?: int32;
+  sizeGB?: int64;
 
   @doc("The minimum supported disk count.")
-  minimumSupportedDiskCount?: int32;
+  minimumSupportedDiskCount?: int64;
 
   @doc("The maximum supported disk count.")
-  maximumSupportedDiskCount?: int32;
+  maximumSupportedDiskCount?: int64;
 
   @doc("The disk Iops.")
-  iopsReadWrite?: int32;
+  iopsReadWrite?: int64;
 
   @doc("The disk provisioned throughput in MBps.")
-  mbpsReadWrite?: int32;
+  mbpsReadWrite?: int64;
 
   @doc("The disk tier, e.g. P10, E10.")
   diskTier?: string;
@@ -342,10 +342,10 @@ model SAPAvailabilityZoneDetailsResult {
 @doc("The SAP Availability Zone Pair.")
 model SAPAvailabilityZonePair {
   @doc("The zone A.")
-  zoneA?: int32;
+  zoneA?: int64;
 
   @doc("The zone B.")
-  zoneB?: int32;
+  zoneB?: int64;
 }
 
 @doc("Managed service identity (user assigned identities)")
@@ -428,25 +428,6 @@ model ErrorDefinition {
   details?: ErrorDefinition[];
 }
 
-@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
-model Resource {
-  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
-  @visibility("read")
-  id?: string;
-
-  @doc("The name of the resource")
-  @visibility("read")
-  name?: string;
-
-  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
-  @visibility("read")
-  type?: string;
-
-  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
-}
-
 @doc("Defines the request body for updating Virtual Instance for SAP.")
 model UpdateSAPVirtualInstanceRequest {
   @doc("Gets or sets the Resource tags.")
@@ -524,19 +505,19 @@ model SAPCentralServerProperties {
 model MessageServerProperties {
   @doc("message server port.")
   @visibility("read")
-  msPort?: int32;
+  msPort?: int64;
 
   @doc("message server internal MS port.")
   @visibility("read")
-  internalMsPort?: int32;
+  internalMsPort?: int64;
 
   @doc("message server HTTP Port.")
   @visibility("read")
-  httpPort?: int32;
+  httpPort?: int64;
 
   @doc("message server HTTPS Port.")
   @visibility("read")
-  httpsPort?: int32;
+  httpsPort?: int64;
 
   @doc("message server SAP Hostname.")
   @visibility("read")
@@ -563,7 +544,7 @@ model EnqueueServerProperties {
 
   @doc("Enqueue Server Port.")
   @visibility("read")
-  port?: int32;
+  port?: int64;
 
   @doc("Defines the health of SAP Instances.")
   @visibility("read")
@@ -574,7 +555,7 @@ model EnqueueServerProperties {
 model GatewayServerProperties {
   @doc("Gateway Port.")
   @visibility("read")
-  port?: int32;
+  port?: int64;
 
   @doc("Defines the health of SAP Instances.")
   @visibility("read")
@@ -731,15 +712,15 @@ model SAPApplicationServerProperties {
 
   @doc("Application server instance gateway Port.")
   @visibility("read")
-  gatewayPort?: int32;
+  gatewayPort?: int64;
 
   @doc("Application server instance ICM HTTP Port.")
   @visibility("read")
-  icmHttpPort?: int32;
+  icmHttpPort?: int64;
 
   @doc("Application server instance ICM HTTPS Port.")
   @visibility("read")
-  icmHttpsPort?: int32;
+  icmHttpsPort?: int64;
 
   @doc("Application server instance dispatcher status.")
   @visibility("read")
@@ -799,7 +780,7 @@ model StartRequest {
 @doc("Stop SAP instance(s) request body.")
 model StopRequest {
   @doc("This parameter defines how long (in seconds) the soft shutdown waits until the RFC/HTTP clients no longer consider the server for calls with load balancing. Value 0 means that the kernel does not wait, but goes directly into the next shutdown state, i.e. hard stop.")
-  softStopTimeoutSeconds?: int32;
+  softStopTimeoutSeconds?: int64;
 
   @doc("The boolean value indicates whether to Stop and deallocate the virtual machines along with the SAP instances.")
   deallocateVm?: boolean;
@@ -866,12 +847,14 @@ model SshKeyPair {
   publicKey?: string;
 
   @doc("SSH private key.")
+  @secret
   privateKey?: string;
 }
 
 @doc("Specifies the operating system settings for the virtual machine. Some of the settings cannot be changed once VM is provisioned.")
 model OSProfile {
   @doc("Specifies the name of the administrator account. <br><br> This property cannot be updated after the VM is created. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters.")
+  @secret
   adminUsername?: string;
 
   @doc("Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)")
@@ -896,19 +879,19 @@ model ThreeTierRecommendationResult extends SAPSizingRecommendationResult {
   dbVmSku?: string;
 
   @doc("The database server instance count.")
-  databaseInstanceCount?: int32;
+  databaseInstanceCount?: int64;
 
   @doc("The central server VM SKU.")
   centralServerVmSku?: string;
 
   @doc("The central server instance count.")
-  centralServerInstanceCount?: int32;
+  centralServerInstanceCount?: int64;
 
   @doc("The application server VM SKU.")
   applicationServerVmSku?: string;
 
   @doc("The application server instance count.")
-  applicationServerInstanceCount?: int32;
+  applicationServerInstanceCount?: int64;
 
   @doc("The type of SAP deployment, single server or Three tier.")
   deploymentType: "ThreeTier";
@@ -982,7 +965,7 @@ model CentralServerConfiguration {
   virtualMachineConfiguration: VirtualMachineConfiguration;
 
   @doc("The number of central server VMs.")
-  instanceCount: int32;
+  instanceCount: int64;
 }
 
 @doc("Gets or sets the database configuration.")
@@ -997,7 +980,7 @@ model DatabaseConfiguration {
   virtualMachineConfiguration: VirtualMachineConfiguration;
 
   @doc("The number of database VMs.")
-  instanceCount: int32;
+  instanceCount: int64;
 
   @doc("Gets or sets the disk configuration.")
   diskConfiguration?: DiskConfiguration;
@@ -1012,7 +995,7 @@ model ApplicationServerConfiguration {
   virtualMachineConfiguration: VirtualMachineConfiguration;
 
   @doc("The number of app server instances.")
-  instanceCount: int32;
+  instanceCount: int64;
 }
 
 @doc("Gets or sets the high availability configuration.")
@@ -1110,6 +1093,7 @@ model VirtualMachineResourceNames {
   hostName?: string;
 
   @doc("The list of network interface name objects for the selected virtual machine. Currently, only one network interface is supported per virtual machine.")
+  @maxItems(1)
   networkInterfaces?: NetworkInterfaceResourceNames[];
 
   @doc("The full name for OS disk attached to the VM. If this value is not provided, it will be named by ARM as per its default naming standards (prefixed with vm name). There is only one OS disk attached per Virtual Machine.")
@@ -1146,6 +1130,7 @@ model ThreeTierFullResourceNames extends ThreeTierCustomResourceNames {
 @doc("The full resource names object for central server layer resources.")
 model CentralServerFullResourceNames {
   @doc("The list of names for all ASCS virtual machines to be deployed. The number of entries in this list should be equal to the number VMs to be created for ASCS layer. At maximum, there can be two virtual machines at this layer: ASCS and ERS.")
+  @maxItems(2)
   virtualMachines?: VirtualMachineResourceNames[];
 
   @doc("The full name for availability set. In case name is not provided, it will be defaulted to {SID}-ASCS-AvSet.")
@@ -1161,12 +1146,15 @@ model LoadBalancerResourceNames {
   loadBalancerName?: string;
 
   @doc("The list of frontend IP configuration names. If provided as input, size of this list should be 2 for cs layer and should be 1 for database layer.")
+  @maxItems(2)
   frontendIpConfigurationNames?: string[];
 
   @doc("The list of backend pool names. Currently, ACSS deploys only one backend pool and hence, size of this list should be 1")
+  @maxItems(1)
   backendPoolNames?: string[];
 
   @doc("The list of health probe names. If provided as input, size of this list should be 2 for cs layer and should be 1 for database layer.")
+  @maxItems(2)
   healthProbeNames?: string[];
 }
 
@@ -1182,6 +1170,7 @@ model ApplicationServerFullResourceNames {
 @doc("The full resource names object for database layer resources. The number of entries in this list should be equal to the number VMs to be created for database layer.")
 model DatabaseServerFullResourceNames {
   @doc("The list of virtual machine naming details.")
+  @maxItems(2)
   virtualMachines?: VirtualMachineResourceNames[];
 
   @doc("The full name for availability set. In case name is not provided, it will be defaulted to {SID}-DB-AvSet.")
@@ -1219,6 +1208,7 @@ model ServiceInitiatedSoftwareConfiguration extends SoftwareConfiguration {
   sapFqdn: string;
 
   @doc("The SSH private key.")
+  @secret
   sshPrivateKey: string;
 
   @doc("Gets or sets the HA software configuration.")
@@ -1234,6 +1224,7 @@ model HighAvailabilitySoftwareConfiguration {
   fencingClientId: string;
 
   @doc("The fencing client id secret/password. The secret should never expire. This will be used pacemaker to start/stop the cluster VMs.")
+  @secret
   fencingClientPassword: string;
 }
 
