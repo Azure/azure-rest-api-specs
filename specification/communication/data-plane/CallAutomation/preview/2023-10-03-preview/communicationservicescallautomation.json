@@ -1056,6 +1056,58 @@
             "$ref": "./examples/CallDialog_StopDialog.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Update an ongoing dialog in a call.",
+        "description": "Update a dialog.",
+        "operationId": "CallDialog_UpdateDialog",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dialogId",
+            "in": "path",
+            "description": "The dialog id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateDialogRequest",
+            "in": "body",
+            "description": "The update dialog request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateDialogRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the update dialog response."
+          }
+        },
+        "x-ms-examples": {
+          "CallDialog_UpdateDialog": {
+            "$ref": "./examples/CallDialog_UpdateDialog.json"
+          }
+        }
       }
     },
     "/calling/callConnections/{callConnectionId}/participants": {
@@ -1875,6 +1927,18 @@
         }
       }
     },
+    "AzureOpenAIDialogUpdate": {
+      "description": "Azure Open AI Dialog for UpdateDialog API Call",
+      "required": [],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DialogUpdateBase"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "AzureOpenAI"
+    },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
     },
@@ -2009,6 +2073,10 @@
         "answeredBy": {
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the call automation entity which answers the call"
+        },
+        "sourceCallerIdNumber": {
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The source caller Id, a phone number, that's will be used when inviting a pstn target.\r\nRequired only when transferring call to PSTN, if this is an incoming voip call."
         }
       }
     },
@@ -2184,6 +2252,10 @@
       "properties": {
         "loop": {
           "description": "The option to play the provided audio source in loop when set to true",
+          "type": "boolean"
+        },
+        "interruptCallMediaOperation": {
+          "description": "If set play can barge into other existing queued-up/currently-processing requests.",
           "type": "boolean"
         }
       }
@@ -2633,6 +2705,45 @@
           "type": "string"
         }
       }
+    },
+    "UpdateDialogRequest": {
+      "required": [
+        "dialog"
+      ],
+      "type": "object",
+      "properties": {
+        "dialog": {
+          "$ref": "#/definitions/DialogUpdateBase",
+          "description": "Dialog context."
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "DialogUpdateBase": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "context": {
+          "description": "Dialog context.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "discriminator": "kind"
     },
     "GetParticipantsResponse": {
       "description": "The response payload for getting participants of the call.",
@@ -4079,6 +4190,49 @@
         "dialogId": {
           "description": "Dialog ID",
           "type": "string",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DialogUpdated": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "dialogInputType": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "dialogId": {
+          "description": "Dialog ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "ivrContext": {
+          "description": "Ivr Context",
+          "type": "object",
           "readOnly": true
         },
         "callConnectionId": {
