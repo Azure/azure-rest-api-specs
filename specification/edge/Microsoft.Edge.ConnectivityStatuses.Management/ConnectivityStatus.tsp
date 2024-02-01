@@ -10,6 +10,7 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
 namespace Microsoft.Edge;
 /**
  * A Microsoft.Edge connectivity status resource
