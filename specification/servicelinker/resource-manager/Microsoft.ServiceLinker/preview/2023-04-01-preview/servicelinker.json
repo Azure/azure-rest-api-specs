@@ -1694,9 +1694,9 @@
           "description": "The authentication type.",
           "$ref": "#/definitions/AuthType"
         },
-        "optChoice": {
-          "description": "Optional. Indicates whether to configure authentication. If optIn, service linker configures authentication such as enabling identity on source resource and granting RBAC roles. If optOut, opt out authentication setup. Default is optIn.",
-          "$ref": "#/definitions/AuthInfoOptChoice"
+        "authMode": {
+          "description": "Optional. Indicates how to configure authentication. If optIn, service linker configures authentication such as enabling identity on source resource and granting RBAC roles. If optOutAllAuth, opt out authentication setup. Default is optIn.",
+          "$ref": "#/definitions/AuthMode"
         }
       },
       "required": [
@@ -2757,16 +2757,26 @@
         "modelAsString": true
       }
     },
-    "AuthInfoOptChoice": {
+    "AuthMode": {
       "description": "Indicates how to apply the authentication configuration operations.",
       "type": "string",
       "enum": [
-        "optIn",
-        "optOut"
+        "optInAllAuth",
+        "optOutAllAuth"
       ],
       "x-ms-enum": {
-        "name": "authInfoOptChoice",
-        "modelAsString": true
+        "name": "authMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "optInAllAuth",
+            "description": "Default authentication configuration according to the authentication type."
+          },
+          {
+            "value": "optOutAllAuth",
+            "description": "Skip all authentication configuration such as enabling mangaged identity and granting RBAC roles"
+          }
+        ]
       }
     },
     "AllowType": {
