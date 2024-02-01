@@ -32,6 +32,21 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   identity?: ManagedServiceIdentity;
 }
 
+@doc("LoadTest resource patch request body.")
+model LoadTestResourcePatchRequestBody{
+  @doc("Resource tags.")
+  @extension("x-ms-nullable", true)
+  tags?: Record<string>;
+
+  @doc("The type of identity used for the resource.")
+  identity?: ManagedServiceIdentity;
+
+  @doc("LoadTest resource properties.")
+  @extension("x-ms-client-flatten", true)
+  properties?: LoadTestProperties;
+}
+
+
 @doc("Resources provisioning states.")
 enum ResourceState {
   @doc("Deleted state.")

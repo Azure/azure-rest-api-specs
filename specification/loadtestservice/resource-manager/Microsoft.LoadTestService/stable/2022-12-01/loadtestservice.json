@@ -469,7 +469,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LoadTestProperties"
+              "$ref": "#/definitions/LoadTestResourcePatchRequestBody"
             }
           }
         ],
@@ -662,6 +662,16 @@
       "description": "Base class used for type definitions"
     },
     "Azure.ResourceManager.ManagedServiceIdentity": {
+      "type": "object",
+      "description": "The managed service identities envelope.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
+    "Azure.ResourceManager.ManagedServiceIdentityUpdate": {
       "type": "object",
       "description": "The managed service identities envelope.",
       "properties": {
@@ -895,6 +905,29 @@
       "required": [
         "value"
       ]
+    },
+    "LoadTestResourcePatchRequestBody": {
+      "type": "object",
+      "description": "LoadTest resource patch request body.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-nullable": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityUpdate",
+          "description": "The type of identity used for the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/LoadTestProperties",
+          "description": "LoadTest resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "OutboundEnvironmentEndpoint": {
       "type": "object",
