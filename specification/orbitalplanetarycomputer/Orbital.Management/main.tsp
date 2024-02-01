@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "partial service -- no operations needed"
 @armProviderNamespace("Microsoft.Orbital")
 @service({
   title: "Microsoft.Orbital.AOPC",
@@ -19,7 +20,10 @@ using Azure.ResourceManager;
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.Spatio;
 
-interface Operations extends Azure.ResourceManager.Operations {}
+// Operations API is explicitly excluded since this specification
+// represents a partial service that will be deployed under an ARM
+// partial manifest.
+// interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A AOPC catalog resource")
 model GeoCatalog is TrackedResource<GeoCatalogProperties> {

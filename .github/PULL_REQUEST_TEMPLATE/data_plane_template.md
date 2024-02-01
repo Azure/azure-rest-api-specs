@@ -47,17 +47,23 @@ The [Azure API Review Board](https://aka.ms/azsdk/onboarding/restapischedule) is
 ### Tooling
 
  * [Open API validation tools](https://aka.ms/swaggertools) were run on this PR. Go here to see [how to fix errors](https://aka.ms/ci-fix)
- * [Spectral Linting](https://aka.ms/style)
+ * [Spectral Linting](https://github.com/Azure/azure-api-style-guide/blob/main/README.md)
  * [Open API Hub](https://aka.ms/openapiportal)
 
 ### Guidelines & Specifications
 
- * [Azure REST API Guidelines](https://aka.ms/guidelines)
- * [OpenAPI Style Guidelines](https://aka.ms/style)
+ * [Azure REST API Guidelines](https://aka.ms/azapi/guidelines)
+ * [OpenAPI Style Guidelines](https://aka.ms/azapi/style)
  * [Azure Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy)
 
 ### Helpful Links
 
  * [Azure DevTools Wiki](https://aka.ms/azapi)
 
+</details>
+
+<details>
+  <summary>Checks stuck in `queued` state?</summary>
+If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
+This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.  
 </details>

@@ -591,8 +591,14 @@
           }
         },
         "x-ms-examples": {
-          "Create a PipelineGroup instance": {
-            "$ref": "./examples/PipelineGroupCreate.json"
+          "Create a PipelineGroup instance using UDP receiver": {
+            "$ref": "./examples/PipelineGroupCreateUdp.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver": {
+            "$ref": "./examples/PipelineGroupCreateSyslogs.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver and networking configurations.": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithNetworking.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -738,6 +744,21 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.PrivateEndpointConnection": {
+      "type": "object",
+      "description": "The private endpoint connection resource",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The private endpoint connection properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "AzureMonitorWorkspace": {
       "type": "object",
       "description": "An Azure Monitor Workspace definition.",
@@ -810,7 +831,7 @@
         "schema"
       ]
     },
-    "AzureMonitorWorkspaceLogsConfig": {
+    "AzureMonitorWorkspaceLogsExporter": {
       "type": "object",
       "description": "Azure Monitor Workspace Logs specific configurations.",
       "properties": {
@@ -849,10 +870,9 @@
           "type": "array",
           "description": "List of private endpoint connections.",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
@@ -890,6 +910,28 @@
         "metrics": {
           "$ref": "#/definitions/Metrics",
           "description": "Information about metrics for the Azure Monitor workspace"
+        }
+      }
+    },
+    "BatchProcessor": {
+      "type": "object",
+      "description": "Batch processor.",
+      "properties": {
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the batch.",
+          "default": 8192,
+          "minimum": 10,
+          "maximum": 100000
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout in milliseconds.",
+          "default": 200,
+          "minimum": 10,
+          "maximum": 60000
         }
       }
     },
@@ -935,11 +977,11 @@
           "description": "The name of exporter.",
           "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
         },
-        "azureMonitorWorkspaceLogsConfig": {
-          "$ref": "#/definitions/AzureMonitorWorkspaceLogsConfig",
+        "azureMonitorWorkspaceLogs": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceLogsExporter",
           "description": "Azure Monitor Workspace Logs specific configurations."
         },
-        "tcpExporter": {
+        "tcp": {
           "$ref": "#/definitions/TcpExporter",
           "description": "TCP based exporter. Used for pipelineGroup exporter."
         }
@@ -1041,13 +1083,68 @@
         }
       }
     },
+    "NetworkingConfiguration": {
+      "type": "object",
+      "description": "Networking configuration for the pipeline group instance.",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.",
+          "pattern": "^[a-zA-Z0-9-\\.]+$"
+        },
+        "routes": {
+          "type": "array",
+          "description": "Networking routes configuration.",
+          "items": {
+            "$ref": "#/definitions/NetworkingRoute"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "host",
+        "routes"
+      ]
+    },
+    "NetworkingRoute": {
+      "type": "object",
+      "description": "Networking route configuration.",
+      "properties": {
+        "receiver": {
+          "type": "string",
+          "description": "The name of the previously defined receiver.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port that will be configured externally. If not specified, it will use the port from the receiver definition.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "path": {
+          "type": "string",
+          "description": "Route path.",
+          "pattern": "^[a-zA-Z0-9-/\\.]+$"
+        },
+        "subdomain": {
+          "type": "string",
+          "description": "Route subdomain.",
+          "pattern": "^[a-zA-Z0-9-\\.]+$"
+        }
+      },
+      "required": [
+        "receiver"
+      ]
+    },
     "OtlpReceiver": {
       "type": "object",
       "description": "OTLP Receiver.",
       "properties": {
         "endpoint": {
           "type": "string",
-          "description": "OTLP GRPC endpoint definition. Example: 0.0.0.0:<port>"
+          "description": "OTLP GRPC endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         }
       },
       "required": [
@@ -1181,6 +1278,14 @@
           "$ref": "#/definitions/Service",
           "description": "The service section for a given pipeline group instance."
         },
+        "networkingConfigurations": {
+          "type": "array",
+          "description": "Networking configurations for the pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/NetworkingConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.",
@@ -1248,6 +1353,14 @@
         "service": {
           "$ref": "#/definitions/ServiceUpdate",
           "description": "The service section for a given pipeline group instance."
+        },
+        "networkingConfigurations": {
+          "type": "array",
+          "description": "Networking configurations for the pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/NetworkingConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1263,6 +1376,10 @@
           "type": "string",
           "description": "The name of processor.",
           "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "batch": {
+          "$ref": "#/definitions/BatchProcessor",
+          "description": "Batch processor configurations."
         }
       },
       "required": [
@@ -1274,16 +1391,16 @@
       "type": "string",
       "description": "The processor type.",
       "enum": [
-        "Filter"
+        "Batch"
       ],
       "x-ms-enum": {
         "name": "ProcessorType",
         "modelAsString": true,
         "values": [
           {
-            "name": "Filter",
-            "value": "Filter",
-            "description": "filter"
+            "name": "Batch",
+            "value": "Batch",
+            "description": "Batch processor."
           }
         ]
       }
@@ -1367,13 +1484,17 @@
           "description": "The name of receiver.",
           "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
         },
-        "tcpReceiver": {
-          "$ref": "#/definitions/TcpReceiver",
-          "description": "TCP service configurations. This field is mandatory for syslog type receivers."
+        "syslog": {
+          "$ref": "#/definitions/SyslogReceiver",
+          "description": "Syslog configurations. This field is mandatory for syslog type receivers."
         },
-        "otlpReceiver": {
+        "otlp": {
           "$ref": "#/definitions/OtlpReceiver",
           "description": "OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers."
+        },
+        "udp": {
+          "$ref": "#/definitions/UdpReceiver",
+          "description": "UDP receiver configurations. This field is mandatory for UDP receivers."
         }
       },
       "required": [
@@ -1388,7 +1509,8 @@
         "Syslog",
         "Ama",
         "PipelineGroup",
-        "OTLP"
+        "OTLP",
+        "UDP"
       ],
       "x-ms-enum": {
         "name": "ReceiverType",
@@ -1413,6 +1535,11 @@
             "name": "OTLP",
             "value": "OTLP",
             "description": "Receives data from a OTLP collector."
+          },
+          {
+            "name": "UDP",
+            "value": "UDP",
+            "description": "Receives data from an UDP collector."
           }
         ]
       }
@@ -1535,6 +1662,97 @@
         }
       }
     },
+    "StreamEncodingType": {
+      "type": "string",
+      "description": "Encoding types for streams.",
+      "enum": [
+        "nop",
+        "utf-8",
+        "utf-16le",
+        "utf-16be",
+        "ascii",
+        "big5"
+      ],
+      "x-ms-enum": {
+        "name": "StreamEncodingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "nop",
+            "value": "nop",
+            "description": "No encoding validation. Treats the file as a stream of raw bytes."
+          },
+          {
+            "name": "utf_8",
+            "value": "utf-8",
+            "description": "UTF-8 encoding."
+          },
+          {
+            "name": "utf_16le",
+            "value": "utf-16le",
+            "description": "UTF-16 encoding with little-endian byte order."
+          },
+          {
+            "name": "utf_16be",
+            "value": "utf-16be",
+            "description": "UTF-16 encoding with little-endian byte order."
+          },
+          {
+            "name": "ascii",
+            "value": "ascii",
+            "description": "ASCII encoding."
+          },
+          {
+            "name": "big5",
+            "value": "big5",
+            "description": "The Big5 Chinese character encoding."
+          }
+        ]
+      }
+    },
+    "SyslogProtocol": {
+      "type": "string",
+      "description": "The syslog protocol to parse messages.",
+      "enum": [
+        "rfc3164",
+        "rfc5424"
+      ],
+      "x-ms-enum": {
+        "name": "SyslogProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "rfc3164",
+            "value": "rfc3164",
+            "description": "rfc3164."
+          },
+          {
+            "name": "rfc5424",
+            "value": "rfc5424",
+            "description": "rfc5424."
+          }
+        ]
+      }
+    },
+    "SyslogReceiver": {
+      "type": "object",
+      "description": "Base receiver using TCP as transport protocol.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Syslog receiver endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
+        },
+        "protocol": {
+          "$ref": "#/definitions/SyslogProtocol",
+          "description": "Protocol to parse syslog messages. Default rfc3164",
+          "default": "rfc3164"
+        }
+      },
+      "required": [
+        "endpoint"
+      ]
+    },
     "TcpExporter": {
       "type": "object",
       "description": "Base exporter using TCP as transport protocol.",
@@ -1553,14 +1771,41 @@
       "type": "object",
       "description": "Base receiver using TCP as transport protocol.",
       "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "TCP port to listen for packages."
+        "endpoint": {
+          "type": "string",
+          "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         }
       },
       "required": [
-        "port"
+        "endpoint"
+      ]
+    },
+    "UdpReceiver": {
+      "type": "object",
+      "description": "Receiver using UDP as transport protocol.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
+        },
+        "encoding": {
+          "$ref": "#/definitions/StreamEncodingType",
+          "description": "The encoding of the stream being received.",
+          "default": "nop"
+        },
+        "readQueueLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max read queue length.",
+          "default": 1000,
+          "minimum": 100,
+          "maximum": 100000
+        }
+      },
+      "required": [
+        "endpoint"
       ]
     }
   },
