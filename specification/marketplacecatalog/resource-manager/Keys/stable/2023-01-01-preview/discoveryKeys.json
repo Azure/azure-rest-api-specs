@@ -52,7 +52,7 @@
             "x-nullable": false,
             "description": "Returns the newly created API key",
             "schema": {
-              "$ref": "#/definitions/ApiKeys"
+              "$ref": "#/definitions/apiKeys"
             }
           },
           "default": {
@@ -142,7 +142,7 @@
             "x-nullable": false,
             "description": "List of active keys that belong to the subscription",
             "schema": {
-              "$ref": "#/definitions/ApiKeys"
+              "$ref": "#/definitions/apiKeys"
             }
           },
           "default": {
@@ -192,11 +192,12 @@
     }
   },
   "definitions": {
-    "ApiKeys": {
+    "apiKeys": {
       "type": "object",
       "description": "Dictionary of API keys and their aliases",
-      "apiKeys": {
-        "type": "string"
+      "additionalProperties": {
+        "type"  : "string"
+      }
       }
     },
     "ErrorResponse": {
