@@ -44,7 +44,7 @@ model InsightProperties is ResourceProperties {
   status?: string;
 
   @doc("Contains title & content for the insight")
-  article: Article; 
+  article: Article;
 
   @doc("level of the insight. Informational, Warning, Error, Critical.")
   level: InsightLevel;
@@ -83,10 +83,10 @@ model ImpactDetails {
   impactUniqueId: string;
 }
 
-@doc("Article details of the isight like title, content etc")
+@doc("Article details of the insight like title, content etc")
 model Article {
   @doc("Title of the insight article")
-  title : string;
+  title: string;
 
   @doc("Content of the insight article")
   content: string;
