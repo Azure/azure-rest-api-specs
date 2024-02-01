@@ -1,7 +1,5 @@
 # Readme
-
 > see https://aka.ms/autorest
-
 ```yaml
 title: RPaaSClient
 openapi-type: arm
@@ -26,7 +24,6 @@ input-file:
   - preview/2021-08-10-privatepreview/dsmsAllowlist.json
   - preview/2021-08-10-privatepreview/dstsApplication.json
 ```
-
 ```yaml $(tag) == '2021-02-01'
 input-file:
   - stable/2021-02-01/environment.json
