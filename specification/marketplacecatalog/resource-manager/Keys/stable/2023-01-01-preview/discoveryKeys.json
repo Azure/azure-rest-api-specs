@@ -142,14 +142,7 @@
             "x-nullable": false,
             "description": "List of active keys that belong to the subscription",
             "schema": {
-              "value": {
-                "$ref": "#/definitions/ApiKeys"
-              },
-              "nextLink": {
-                "type": "string",
-                "description": "Link to the next page where request returns more than a single page of results",
-                "format": "uri"
-              }
+              "$ref": "#/definitions/ApiKeys"
             }
           },
           "default": {
@@ -208,7 +201,8 @@
       "properties": {
         "apiKeys": {
           "type": "string"
-        }
+        },
+        "nextLink": null
       }
     },
     "ErrorResponse": {
