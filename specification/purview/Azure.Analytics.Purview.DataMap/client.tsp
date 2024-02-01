@@ -13,6 +13,7 @@ namespace Customizations;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
+@projectedName("csharp", "EntityOperations")
 interface Entity {
   createOrUpdate is PurviewDataMap.Entity.createOrUpdate;
   getByIds is PurviewDataMap.Entity.listByGuids;
@@ -54,6 +55,7 @@ interface Entity {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
+@projectedName("csharp", "GlossaryOperations")
 interface Glossary {
   batchGet is PurviewDataMap.Glossary.list;
   create is PurviewDataMap.Glossary.create;
@@ -88,6 +90,7 @@ interface Glossary {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
+@projectedName("csharp", "DiscoveryOperations")
 interface Discovery {
   query is PurviewDataMap.Discovery.query;
   suggest is PurviewDataMap.Discovery.suggest;
@@ -96,6 +99,7 @@ interface Discovery {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
+@projectedName("csharp", "LineageOperations")
 interface Lineage {
   get is PurviewDataMap.Lineage.get;
   getNextPage is PurviewDataMap.Lineage.getNextPage;
@@ -104,6 +108,7 @@ interface Lineage {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
+@projectedName("csharp", "RelationshipOperations")
 interface Relationship {
   create is PurviewDataMap.Relationship.create;
   update is PurviewDataMap.Relationship.update;
@@ -113,6 +118,7 @@ interface Relationship {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
+@projectedName("csharp", "TypeOperations")
 interface TypeDefinition {
   getBusinessMetadataById is PurviewDataMap.Type.getBusinessMetadataDefByGuid;
   getBusinessMetadataByName is PurviewDataMap.Type.getBusinessMetadataDefByName;

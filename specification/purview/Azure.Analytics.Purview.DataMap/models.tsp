@@ -499,7 +499,8 @@ model AtlasEntitiesWithExtInfo {
   entities?: AtlasEntity[];
 }
 
-@doc("The request content for classification association.")
+@doc("The request payload for classification association.")
+@projectedName("csharp", "ClassificationAssociateConfig")
 model ClassificationAssociateOptions {
   @doc("""
 An instance of a classification; it doesn't have an identity, this object
@@ -570,7 +571,8 @@ model ImportInfo {
   remarks?: string;
 }
 
-@doc("MoveEntitiesContent")
+@doc("MoveEntitiesOptions")
+@projectedName("csharp", "MoveEntitiesConfig")
 model MoveEntitiesOptions {
   @doc("An array of entity guids to be moved to target collection.")
   entityGuids?: string[];
@@ -902,6 +904,7 @@ model AtlasGlossaryExtInfo {
 }
 
 @doc("The search query of advanced search request.")
+@projectedName("csharp", "QueryConfig")
 model QueryOptions {
   @doc("The keywords applied to all searchable fields.")
   keywords?: string;
@@ -1183,7 +1186,8 @@ Expert or Steward for a glossary term.
   contactType?: string;
 }
 
-@doc("The query of suggest request.")
+@doc("The payload of suggest request.")
+@projectedName("csharp", "SuggestConfig")
 model SuggestOptions {
   @doc("""
 The keywords applied to all fields that support suggest operation. It must be
@@ -1295,7 +1299,8 @@ AtlasGlossaryCategory.
   longDescription?: string;
 }
 
-@doc("The query of autocomplete request.")
+@doc("The payload of autocomplete request.")
+@projectedName("csharp", "AutoCompleteConfig")
 model AutoCompleteOptions {
   @doc("""
 The keywords applied to all fields that support autocomplete operation. It must
