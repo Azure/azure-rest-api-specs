@@ -1,8 +1,8 @@
-# deidentification
+# HealthDataAIServices.Deidentification
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for deidentification.
+This is the AutoRest configuration file for HealthDataAIServices.Deidentification.
 
 ## Getting Started
 
@@ -22,14 +22,15 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the deidentification.
+These are the global settings for the HealthDataAIServices.Deidentification.
 
 ```yaml
 openapi-type: data-plane
 tag: package-2024-01-31-preview
-title: [[Title]]
+title: Health Deidentifcation Service
 security: AADToken
-security-scopes: [[SecurityScopes]]
+security-scopes:
+  - "https://deid.azure.com/.default"
 ```
 
 ### Tag: package-2024-01-31-preview
@@ -38,8 +39,10 @@ These settings apply only when `--tag=package-2024-01-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-01-31-preview'
 input-file:
-  - Microsoft.HealthDataAIServices/preview/2024-01-31-preview/deidentification.json
+  - preview/2024-01-31-preview/HealthDataAIServices.Deidentification.json
 ```
+
+---
 
 # Code Generation
 
@@ -50,8 +53,26 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-js
+  - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
+
+## Az
+
+See configuration in [readme.az.md](./readme.az.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)

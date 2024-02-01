@@ -1,0 +1,72 @@
+{
+  "title": "Create a DeID Job",
+  "operationId": "Jobs_Create",
+  "parameters": {
+    "api-version": "2024-01-31-preview",
+    "name": "documents_smith_1",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "sourceLocation": {
+        "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
+        "prefix": "/documents",
+        "extensions": [
+          "*"
+        ]
+      },
+      "targetLocation": {
+        "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
+        "prefix": "/documents"
+      },
+      "dataType": "PlainText",
+      "operation": "Redact",
+      "redactionFormat": "[{type}]"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "documents_smith_1",
+        "sourceLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
+          "prefix": "/documents",
+          "extensions": [
+            "*"
+          ]
+        },
+        "targetLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
+          "prefix": "/documents"
+        },
+        "dataType": "PlainText",
+        "operation": "Redact",
+        "redactionFormat": "[{type}]",
+        "status": "NotStarted",
+        "createdAt": "2024-01-25T23:27:43.009Z"
+      }
+    },
+    "201": {
+      "headers": {
+        "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D"
+      },
+      "body": {
+        "name": "documents_smith_1",
+        "sourceLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
+          "prefix": "/documents",
+          "extensions": [
+            "*"
+          ]
+        },
+        "targetLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
+          "prefix": "/documents"
+        },
+        "dataType": "PlainText",
+        "operation": "Redact",
+        "redactionFormat": "[{type}]",
+        "status": "NotStarted",
+        "createdAt": "2024-01-25T23:27:43.009Z"
+      }
+    }
+  }
+}
