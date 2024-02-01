@@ -55,5 +55,9 @@ interface Instances {
   @doc("Execute a pipeline test run.")
   @added(Versions.Preview20240201)
   @armResourceAction(Instance)
-  executeTestRun is ArmResourceActionAsync<Instance, ExecuteTestRunRequest, ExecuteTestRunResponse>;
+  executeTestRun is ArmResourceActionAsync<
+    Instance,
+    ExecuteTestRunRequest,
+    ExecuteTestRunResponse
+  >;
 }
