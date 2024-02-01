@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Qumulo.Storage",
-    "version": "2024-01-30-preview"
+    "version": "2024-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -472,10 +472,10 @@
           "x-ms-secret": true,
           "description": "Initial administrator password of the resource"
         },
-        "initialCapacity": {
+        "usedStorage": {
           "type": "integer",
           "format": "int32",
-          "description": "Storage capacity in TB"
+          "description": "Storage capacity used in TB"
         },
         "fsGBpsProvisioned": {
           "type": "integer",
@@ -497,8 +497,7 @@
         "userDetails",
         "delegatedSubnetId",
         "adminPassword",
-        "storageSku",
-        "initialCapacity"
+        "storageSku"
       ]
     },
     "FileSystemResourceUpdate": {
@@ -540,14 +539,6 @@
           "type": "string",
           "description": "File system Id of the resource"
         },
-        "privateIPs": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "Private IPs of the resource"
-        },
         "fsGBpsProvisioned": {
           "type": "integer",
           "format": "int32",
@@ -588,8 +579,7 @@
       "description": "MarketplaceDetails of Qumulo FileSystem resource",
       "required": [
         "planId",
-        "offerId",
-        "publisherId"
+        "offerId"
       ]
     },
     "MarketplaceSubscriptionStatus": {
@@ -720,7 +710,7 @@
       ],
       "x-ms-enum": {
         "name": "StorageSku",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Standard",
