@@ -74,7 +74,7 @@ interface GuestConfigurationAssignments {
   @operationId("GuestConfigurationAssignmentReports_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports")
   @get
-  list is Azure.Core.Foundations.Operation<
+  listfoo is Azure.Core.Foundations.Operation<
     {
       /**
        * The resource group name.
@@ -112,7 +112,7 @@ interface GuestConfigurationAssignments {
   @operationId("GuestConfigurationAssignmentReports_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}")
   @get
-  get is Azure.Core.Foundations.Operation<
+  getfoo is Azure.Core.Foundations.Operation<
     {
       /**
        * The resource group name.

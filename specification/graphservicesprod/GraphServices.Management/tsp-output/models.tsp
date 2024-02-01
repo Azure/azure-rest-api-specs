@@ -20,6 +20,13 @@ enum ProvisioningState {
   Canceled,
 }
 
+enum CreatedByType {
+  User,
+  Application,
+  ManagedIdentity,
+  Key,
+}
+
 /**
  * Metadata pertaining to creation and last modification of the resource.
  */
