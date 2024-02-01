@@ -17,10 +17,10 @@ namespace Microsoft.Workloads;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 @parentResource(SAPDiscoverySite)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(SAPInstanceProperties)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 model SAPInstance extends TrackedResourceBase {
   /**
    * The name of SAP Instance resource for SAP Migration.

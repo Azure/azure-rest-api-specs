@@ -48,7 +48,7 @@ enum ProvisioningState {
 enum SapInstanceEnvironment {
   @doc("The type of Sap Instance Environment- Production.")
   Production,
-  
+
   @doc("The type of Sap Instance Environment- PreProduction.")
   PreProduction,
 
@@ -123,7 +123,7 @@ enum DatabaseType {
 
   @doc("The type of Database- Oracle.")
   Oracle,
-  
+
   @doc("The type of Database- SAPMaxDB.")
   SAPMaxDB,
 
@@ -470,8 +470,8 @@ model ConfigurationData {
   /**
    * Provide the total disk volume capacity in GB. Add the disk volume for each individual disks and provide the total sum in this field.
    */
-  @visibility("read")
   #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @visibility("read")
   totalDiskSizeGB?: int32;
 
   /**
@@ -489,8 +489,8 @@ model ConfigurationData {
   /**
    *  Provide the target HANA database size you need. Applicable only if SAP instance type for this server instance is 'DB' and you are migrating an AnyDb database to SAP S/4HANA.
    */
-  @visibility("read")
   #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @visibility("read")
   targetHanaRamSizeGB?: int32;
 }
 
@@ -500,7 +500,7 @@ model ConfigurationData {
 @discriminator("dataSource")
 model PerformanceData {
   @doc("The data source of the performance data.")
-  dataSource: DataSource
+  dataSource: DataSource;
 }
 
 /**
@@ -516,8 +516,8 @@ model ExcelPerformanceData extends PerformanceData {
   /**
    * Provide the source Database size in GB. Applicable only if SAP instance type for this server instance is 'DB'.
    */
-  @visibility("read")
   #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @visibility("read")
   totalSourceDbSizeGB?: int32;
 
   /**

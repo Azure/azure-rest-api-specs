@@ -16,9 +16,9 @@ namespace Microsoft.Workloads;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(SAPDiscoverySiteProperties)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 model SAPDiscoverySite extends TrackedResourceBase {
   /**
    * The name of the discovery site resource for SAP Migration.
@@ -42,8 +42,8 @@ model SAPDiscoverySite extends TrackedResourceBase {
   properties?: SAPDiscoverySiteProperties;
 }
 
-@armResourceOperations
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
+@armResourceOperations
 interface SAPDiscoverySites {
   /**
    * Gets a SAP Migration discovery site resource.
