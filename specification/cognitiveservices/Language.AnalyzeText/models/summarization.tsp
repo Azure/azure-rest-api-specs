@@ -98,7 +98,7 @@ model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROTaskKind.AbstractiveSummarization;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  parameters: AbstractiveSummarizationTaskParameters;
+  parameters?: AbstractiveSummarizationTaskParameters;
 }
 
 @added(Versions.v2023_04_01)

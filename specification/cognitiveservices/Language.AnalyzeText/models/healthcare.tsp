@@ -320,7 +320,7 @@ enum HealthRelationType {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @added(Versions.v2023_04_01)
-  VariantOfGene, //14
+  VariantOfGene,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -336,7 +336,7 @@ model HealthcareAssertion {
 
   @added(Versions.v2023_04_15_preview)
   @doc("Describes temporal information regarding the entity.")
-  temporality: Temporality;
+  temporality?: Temporality;
 }
 
 @added(Versions.v2023_04_15_preview)
