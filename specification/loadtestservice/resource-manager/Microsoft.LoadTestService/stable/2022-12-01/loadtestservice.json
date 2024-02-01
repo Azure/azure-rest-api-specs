@@ -622,40 +622,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Foundations.ArmResource": {
-      "type": "object",
-      "description": "Common properties for all ARM resources.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResourceBase"
-        }
-      ]
-    },
-    "Azure.ResourceManager.Foundations.ArmResourceBase": {
-      "type": "object",
-      "description": "Base class used for type definitions"
-    },
     "Azure.ResourceManager.ManagedServiceIdentity": {
       "type": "object",
       "description": "The managed service identities envelope.",
@@ -685,6 +651,11 @@
           "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
           "readOnly": true
         },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
         "type": {
           "type": "string",
           "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
@@ -699,21 +670,11 @@
           "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
           "description": "Check quota availability response properties.",
           "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource.",
-          "readOnly": true
         }
       },
       "required": [
         "id",
         "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResourceBase"
-        }
       ]
     },
     "CheckQuotaAvailabilityResponseProperties": {
@@ -808,12 +769,7 @@
             "port"
           ]
         }
-      },
-      "required": [
-        "domainName",
-        "description",
-        "endpointDetails"
-      ]
+      }
     },
     "EndpointDetail": {
       "type": "object",
@@ -975,6 +931,11 @@
           "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
           "readOnly": true
         },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
         "type": {
           "type": "string",
           "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
@@ -989,21 +950,11 @@
           "$ref": "#/definitions/QuotaBucketRequestProperties",
           "description": "Request object of new quota for a quota bucket.",
           "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource.",
-          "readOnly": true
         }
       },
       "required": [
         "id",
         "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResourceBase"
-        }
       ]
     },
     "QuotaBucketRequestProperties": {

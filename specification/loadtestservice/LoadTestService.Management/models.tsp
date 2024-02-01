@@ -75,16 +75,16 @@ model EndpointDetail {
 model EndpointDependency {
   @doc("The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard.")
   @visibility("read")
-  domainName: string;
+  domainName?: string;
 
   @doc("Human-readable supplemental information about the dependency and when it is applicable.")
   @visibility("read")
-  description: string;
+  description?: string;
 
   @doc("The list of connection details for this endpoint.")
   @visibility("read")
   @extension("x-ms-identifiers", ["port"])
-  endpointDetails: EndpointDetail[];
+  endpointDetails?: EndpointDetail[];
 }
 
 @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
@@ -175,14 +175,10 @@ model LoadTestProperties {
 }
 
 @doc("Check quota availability response object.")
-model CheckQuotaAvailabilityResponse is ArmResource {
+model CheckQuotaAvailabilityResponse is Resource {
   @doc("Check quota availability response properties.")
   @extension("x-ms-client-flatten", true)
   properties?: CheckQuotaAvailabilityResponseProperties;
-
-  @doc("The name of the resource.")
-  @visibility("read")
-  name?: string;
 }
 
 @doc("Check quota availability response properties.")
@@ -194,15 +190,31 @@ model CheckQuotaAvailabilityResponseProperties {
   availabilityStatus?: string;
 }
 
-@doc("Request object of new quota for a quota bucket.")
-model QuotaBucketRequest is ArmResource {
-  @extension("x-ms-client-flatten", true)
-  @doc("Request object of new quota for a quota bucket.")
-  properties?: QuotaBucketRequestProperties;
+@doc("Common properties for resources.")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  @visibility("read")
+  id: string;
 
   @doc("The name of the resource.")
   @visibility("read")
   name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type: string;
+
+  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
+} 
+
+@doc("Request object of new quota for a quota bucket.")
+model QuotaBucketRequest is Resource {
+  @extension("x-ms-client-flatten", true)
+  @doc("Request object of new quota for a quota bucket.")
+  properties?: QuotaBucketRequestProperties;
+
 }
 
 @doc("New quota request request properties.")
