@@ -36,9 +36,6 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.AppConfiguration/preview/2023-10-01-preview/appconfiguration.json
-suppressions:
-- code: LroLocationHeader
-  reason: Service returns Azure-AsyncOperation header for long running operations.
 ```
 
 ### Tag: package-preview-2023-08
