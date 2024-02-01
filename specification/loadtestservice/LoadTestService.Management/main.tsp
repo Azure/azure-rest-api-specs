@@ -18,14 +18,13 @@ using Azure.ResourceManager;
 })
 @doc("LoadTest client provides access to LoadTest Resource and it's status operations.")
 @versioned(APIVersions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.LoadTestService;
 
 @doc("The Loadtest service resource manager version.")
 enum APIVersions {
-    @doc("The 2022-12-01 version of the Azure Load Testing Resource manager API.")
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2022_12_01: "2022-12-01",
-  
+  @doc("The 2022-12-01 version of the Azure Load Testing Resource manager API.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2022_12_01: "2022-12-01",
 }

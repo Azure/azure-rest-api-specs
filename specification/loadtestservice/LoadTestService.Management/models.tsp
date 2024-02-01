@@ -25,8 +25,11 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   @segment("loadTests")
   name: string;
 
+  // @doc("The type of identity used for the resource.")
+  // identity?: ManagedIdentityType;
+  
   @doc("The type of identity used for the resource.")
-  identity?: ManagedIdentityType;
+  identity?: ManagedServiceIdentity;
 }
 
 @doc("Resources provisioning states.")
@@ -34,7 +37,7 @@ enum ResourceState {
   @doc("Deleted state.")
   Deleted: "Deleted",
 
-  ...ResourceProvisioningState
+  ...ResourceProvisioningState,
 }
 
 @doc("Managed identity type to use for accessing encryption key Url.")
@@ -43,7 +46,7 @@ enum EncryptionIdentityType {
   SystemAssigned: "SystemAssigned",
 
   @doc("User assigned identity.")
-  UserAssigned: "UserAssigned"
+  UserAssigned: "UserAssigned",
 }
 
 @doc("Details about the connection between the Batch service and the endpoint.")
@@ -65,23 +68,9 @@ model EndpointDependency {
 
   @doc("The list of connection details for this endpoint.")
   @visibility("read")
-  endpointDetails: EndpointDetail;
-
+  @extension("x-ms-identifiers", ["port"])
+  endpointDetails: EndpointDetail[];
 }
-
-// @parentResource(LoadTestResource)
-// @resource("outboundNetworkDependenciesEndpoints")
-// @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
-// model OutboundEnvironmentEndpoint is ArmResource{
-//   @key
-//   @doc("The type of service that Azure Load Testing connects to.")
-//   @visibility("read")
-//   category: string;
-
-//   @doc("The endpoints for this service to which the Batch service makes outbound calls.")
-//   @visibility("read")
-//   endpoints?: EndpointDependency;
-// }
 
 @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
 model OutboundEnvironmentEndpoint {
@@ -91,11 +80,12 @@ model OutboundEnvironmentEndpoint {
 
   @doc("The endpoints for this service to which the Batch service makes outbound calls.")
   @visibility("read")
-  endpoints?: EndpointDependency;
+  @extension("x-ms-identifiers", ["domainName"])
+  endpoints?: EndpointDependency[];
 }
 
 @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
-model EncryptionIdentity{
+model EncryptionIdentity {
   @doc("Managed identity type to use for accessing encryption key Url.")
   type?: EncryptionIdentityType;
 
@@ -105,7 +95,7 @@ model EncryptionIdentity{
 }
 
 @doc("Key and identity details for Customer Managed Key encryption of load test resource.")
-model EncryptionProperties{
+model EncryptionProperties {
   @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
   identity?: EncryptionIdentity;
 
@@ -118,7 +108,7 @@ model QuotaResourceProperties {
   @minValue(0)
   @doc("Current quota limit of the quota bucket.")
   limit?: int32;
-  
+
   @doc("Current quota usage of the quota bucket.")
   @minValue(0)
   usage?: int32;
@@ -150,7 +140,7 @@ model QuotaResource is ProxyResource<QuotaResourceProperties> {
 }
 
 @doc("LoadTest resource properties.")
-model LoadTestProperties{
+model LoadTestProperties {
   @maxLength(512)
   @doc("Description of the resource.")
   description?: string;
@@ -190,7 +180,7 @@ model CheckQuotaAvailabilityResponseProperties {
 }
 
 @doc("Request object of new quota for a quota bucket.")
-model QuotaBucketRequest is ArmResource{
+model QuotaBucketRequest is ArmResource {
   @extension("x-ms-client-flatten", true)
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
@@ -230,7 +220,7 @@ model QuotaDimensions {
 }
 
 @doc("Values returned by the List operation.")
-model OutboundEnvironmentEndpointCollection{
+model OutboundEnvironmentEndpointCollection {
   @items
   @visibility("read")
   @doc("The collection of outbound network dependency endpoints returned by the listing operation.")
