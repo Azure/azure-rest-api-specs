@@ -12,6 +12,7 @@ Work item to track the move outside the folder: [Product Backlog Item 25525935: 
 input-file:
   - preview/2023-08-22-preview/aad.json
   - preview/2023-08-22-preview/dscm.json
+  - preview/2023-08-22-preview/genevaActions.json
   - preview/2023-08-22-preview/environment.json
 ```
 
