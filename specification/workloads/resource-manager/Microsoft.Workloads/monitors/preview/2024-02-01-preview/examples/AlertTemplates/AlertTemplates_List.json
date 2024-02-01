@@ -34,21 +34,30 @@
                   "frequencyInMinutes": 10,
                   "timeWindowInMinutes": 45
                 },
-                "queryInputParameters": {
-                  "providerInstances": [
-                    "provider1"
-                  ],
-                  "alertThreshold": 1,
-                  "haClusters": [
-                    "cluster1"
-                  ]
-                },
-                "laParameters": [
+                "queryInputParameters": [
                   {
-                    "queryParameterName": "aggregate",
-                    "laQuery": "SapHana_LoadHistory_CL | distinct HOST_s",
-                    "parameterName": "Host",
-                    "selectionMode": "Multiple"
+                    "parameterName": "providerInstance",
+                    "parameterDefaultValue": "",
+                    "parameterDescription": "The provider instance names."
+                  },
+                  {
+                    "parameterName": "haCluster",
+                    "parameterDefaultValue": "",
+                    "parameterDescription": "The ha cluster instance names."
+                  },
+                  {
+                    "parameterName": "alertThreshold",
+                    "parameterDefaultValue": "1",
+                    "parameterDescription": "The alert threshold value."
+                  },
+                  {
+                    "parameterName": "laQuery",
+                    "parameterType": "LogAnalyticsQuery",
+                    "parameterDefaultValue": "host1",
+                    "parameterDescription": "The LA query value.",
+                    "query": "SapHana_LoadHistory_CL | distinct HOST_s | where name in ({providerInstance})",
+                    "selectionMode": "Single",
+                    "parameterDisplayName": ""
                   }
                 ]
               }
@@ -78,22 +87,30 @@
                   "frequencyInMinutes": 10,
                   "timeWindowInMinutes": 45
                 },
-                "queryInputParameters": {
-                  "providerInstances": [
-                    "provider1"
-                  ],
-                  "alertThreshold": 1,
-                  "haClusters": [
-                    "cluster1"
-                  ]
-                },
-                "laParameters": [
+                "queryInputParameters": [
                   {
-                    "queryParameterName": "aggregate",
-                    "laQuery": "SapHana_LoadHistory_CL | distinct HOST_s",
-                    "parameterName": "Host",
+                    "parameterName": "providerInstance",
+                    "parameterDefaultValue": "",
+                    "parameterDescription": "The provider instance names."
+                  },
+                  {
+                    "parameterName": "haCluster",
+                    "parameterDefaultValue": "",
+                    "parameterDescription": "The ha cluster instance names."
+                  },
+                  {
+                    "parameterName": "alertThreshold",
+                    "parameterDefaultValue": "1",
+                    "parameterDescription": "The alert threshold value."
+                  },
+                  {
+                    "parameterName": "laQuery",
+                    "parameterType": "LogAnalyticsQuery",
+                    "parameterDefaultValue": "host1",
+                    "parameterDescription": "The LA query value.",
+                    "query": "SapHana_LoadHistory_CL | distinct HOST_s | where name in ({providerInstance})",
                     "selectionMode": "Single",
-                    "dependency": "ProviderInstance"
+                    "parameterDisplayName": ""
                   }
                 ]
               }

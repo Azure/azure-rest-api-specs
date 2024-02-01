@@ -1671,11 +1671,6 @@
             "type": "string"
           }
         },
-        "createdWithApiVersion": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The API version with which the alert was created."
-        },
         "alertProperties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AlertProperties",
@@ -1780,9 +1775,12 @@
           "type": "string",
           "description": "The dimension for the alert"
         },
-        "alertQueryParameter": {
-          "description": "Defines the alert query properties.",
-          "$ref": "#/definitions/AlertQueryParameter"
+        "alertQueryParameters": {
+          "description": "Defines the alert query parameters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertQueryParameter"
+          }
         }
       },
       "description": "Describes the properties of a alert."
@@ -1790,18 +1788,16 @@
     "AlertQueryParameter": {
       "type": "object",
       "properties": {
-        "providerInstances": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Provider Instances used in alert query parameters"
+        "parameterName": {
+          "type": "string",
+          "description": "The name of the alert query param."
+        },
+        "parameterValue": {
+          "type": "string",
+          "description": "The value of the alert query param."
         }
       },
-      "additionalProperties": {
-        "type": "string"
-      },
-      "description": "Describes the Query Parameter properties in alert."
+      "description": "Describes the Alert Query Parameter properties in alert."
     },
     "AlertTemplatesListResult": {
       "type": "object",
@@ -1927,13 +1923,9 @@
         },
         "queryInputParameters": {
           "description": "Defines the query input properties.",
-          "$ref": "#/definitions/AlertTemplateQueryInputParameters"
-        },
-        "laParameters": {
-          "description": "List of the LA parameter properties.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AlertTemplateLAParameter"
+            "$ref": "#/definitions/AlertTemplateQueryInputParameter"
           }
         }
       },
@@ -1993,59 +1985,54 @@
       },
       "description": "Describes the properties for metric measurement in alerts template."
     },
-    "AlertTemplateQueryInputParameters": {
+    "AlertTemplateQueryInputParameter": {
       "type": "object",
       "properties": {
-        "providerInstances": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Provider Instances we need to query in the Alert Template"
-        },
-        "alertThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The Alert Threshold Value Associated with the Alert Template for Query Input Parameters"
-        },
-        "haClusters": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "HA Cluster Instances we need to query in the Alert Template"
-        }
-      },
-      "additionalProperties": {
-        "type": "string"
-      },
-      "description": "Describes the LA Parameter properties in alerts template."
-    },
-    "AlertTemplateLAParameter": {
-      "type": "object",
-      "properties": {
-        "queryParameterName": {
+        "parameterType": {
           "type": "string",
-          "description": "Query Parameter Name for LA queries in alerts template"
-        },
-        "laQuery": {
-          "type": "string",
-          "description": "Actual LA query for alerts template"
+          "description": "Type of the Query Input Parameter",
+          "enum": [
+            "LogAnalyticsQuery"
+          ],
+          "x-ms-enum": {
+            "name": "alertTemplateParameterType",
+            "modelAsString": true
+          }
         },
         "parameterName": {
           "type": "string",
-          "description": "LA parameter name that we need to query"
+          "description": "Name of the Query Input Parameter"
+        },
+        "parameterDescription": {
+          "type": "string",
+          "description": "Description of the Query Input Parameter"
+        },
+        "parameterDefaultValue": {
+          "type": "string",
+          "description": "Default Value of the Query Input Parameter"
+        },
+        "query": {
+          "type": "string",
+          "description": "Query of the Query Input Parameter"
         },
         "selectionMode": {
           "type": "string",
-          "description": "It specifies the selection mode whether it would be single or multiple"
+          "description": "Selection Mode of the Query Input Parameter",
+          "enum": [
+            "Single",
+            "Multiple"
+          ],
+          "x-ms-enum": {
+            "name": "alertTemplateSelectionMode",
+            "modelAsString": true
+          }
         },
-        "dependency": {
+        "parameterDisplayName": {
           "type": "string",
-          "description": "It specifies if there are any dependencies for the LA query"
+          "description": "Display Name of the Query Input Parameter"
         }
       },
-      "description": "Describes the LA Parameter properties in alerts template."
+      "description": "Describes the Query Input Parameter properties in alerts template."
     },
     "db2JobConfigurationsListResult": {
       "type": "object",

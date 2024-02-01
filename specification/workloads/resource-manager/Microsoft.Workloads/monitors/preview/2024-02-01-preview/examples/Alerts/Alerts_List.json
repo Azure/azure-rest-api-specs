@@ -22,7 +22,6 @@
               "lastModifiedAt": "2021-08-19T15:10:46.196Z"
             },
             "properties": {
-              "createdWithApiVersion": "2024-02-01-preview",
               "provisioningState": "Succeeded",
               "templateId": "saphana-cpu-memory-health",
               "alertRuleResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/scheduledqueryrules/myAlert",
@@ -46,12 +45,16 @@
                 "muteActionsDuration": 0,
                 "autoMitigate": false,
                 "dimension": "CPU",
-                "alertQueryParameter": {
-                  "providerInstances": [
-                    "hana-provider"
-                  ],
-                  "aggregate": ""
-                }
+                "alertQueryParameters": [
+                  {
+                    "parameterName": "providerInstance",
+                    "parameterValue": ""
+                  },
+                  {
+                    "parameterName": "workType",
+                    "parameterValue": ""
+                  }
+                ]
               }
             }
           },
@@ -68,7 +71,6 @@
               "lastModifiedAt": "2021-08-19T15:10:46.196Z"
             },
             "properties": {
-              "createdWithApiVersion": "2024-02-01-preview",
               "provisioningState": "Succeeded",
               "templateId": "saphana-cpu-memory-health",
               "alertRuleResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/scheduledqueryrules/myAlert2",
@@ -92,12 +94,16 @@
                 "muteActionsDuration": 0,
                 "autoMitigate": false,
                 "dimension": "Memory",
-                "alertQueryParameter": {
-                  "providerInstances": [
-                    "hana-provider"
-                  ],
-                  "aggregate": ""
-                }
+                "alertQueryParameters": [
+                  {
+                    "parameterName": "providerInstance",
+                    "parameterValue": ""
+                  },
+                  {
+                    "parameterName": "workType",
+                    "parameterValue": ""
+                  }
+                ]
               }
             }
           },
@@ -114,7 +120,6 @@
               "lastModifiedAt": "2021-08-19T15:10:46.196Z"
             },
             "properties": {
-              "createdWithApiVersion": "2024-02-01-preview",
               "provisioningState": "Succeeded",
               "templateId": "saphana-cpu-memory-health",
               "alertRuleResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/scheduledqueryrules/myAlert3",
@@ -138,12 +143,16 @@
                 "muteActionsDuration": 0,
                 "autoMitigate": false,
                 "dimension": "CPU",
-                "alertQueryParameter": {
-                  "providerInstances": [
-                    "hana-provider"
-                  ],
-                  "aggregate": ""
-                }
+                "alertQueryParameters": [
+                  {
+                    "parameterName": "providerInstance",
+                    "parameterValue": ""
+                  },
+                  {
+                    "parameterName": "workType",
+                    "parameterValue": ""
+                  }
+                ]
               }
             }
           }
