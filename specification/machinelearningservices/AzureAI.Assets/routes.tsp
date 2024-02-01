@@ -18,7 +18,7 @@ namespace Microsoft.MachineLearningServices;
 interface IndexVersionsRegistries {
   
   @doc("Creates or updates a IndexVersion.")
-  @route("/registries/{registryName}/indexes/{name}/versions/{version}")
+  @route("/registries/{registryName}/indexes/{indexName}/versions/{indexVersion}")
   @put
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   createOrUpdateIndexVersion is Azure.Core.Foundations.Operation<
@@ -30,13 +30,13 @@ interface IndexVersionsRegistries {
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
       @path
-      name: string;
+      indexName: string;
 
       @doc("Version of the index.")
       @path
-      version: string;
+      indexVersion: string;
 
-      /** The deployment properties. */
+      @doc("Properties of an Index Version.")
       @body
       index: IndexVersion;
 
@@ -44,7 +44,7 @@ interface IndexVersionsRegistries {
     ResourceCreatedOrOkResponse<IndexVersion>
   >;
 
-  @route("/registries/{registryName}/indexes/{name}/versions/{version}")
+  @route("/registries/{registryName}/indexes/{indexName}/versions/{indexVersion}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   getIndexVersion is Azure.Core.Foundations.Operation<
@@ -56,16 +56,16 @@ interface IndexVersionsRegistries {
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
       @path
-      name: string;
+      indexName: string;
 
       @doc("Version of the index.")
       @path
-      version: string;
+      indexVersion: string;
     },
     IndexVersion
    >;
 
-   @route("/registries/{registryName}/indexes/{name}/versions")
+   @route("/registries/{registryName}/indexes/{indexName}/versions")
    @get
    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
    listIndexVersion is Azure.Core.Foundations.Operation<
@@ -77,7 +77,7 @@ interface IndexVersionsRegistries {
        @doc("Name of the index.")
        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
        @path
-       name: string;
+       indexName: string;
  
        @doc("View type for including/excluding (for example) archived entities.")
        @query listViewType: string = "ActiveOnly";
@@ -94,7 +94,7 @@ interface IndexVersionsRegistries {
 interface IndexVersionsWorkspace {
   
   @doc("Creates or updates a IndexVersion.")
-  @route("/workspaces/{workspaceName}/indexes/{name}/versions/{version}")
+  @route("/workspaces/{workspaceName}/indexes/{indexName}/versions/{indexVersion}")
   @put
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   createOrUpdateIndexVersion is Azure.Core.Foundations.Operation<
@@ -106,13 +106,13 @@ interface IndexVersionsWorkspace {
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
       @path
-      name: string;
+      indexName: string;
 
       @doc("Version of the index.")
       @path
-      version: string;
+      indexVersion: string;
 
-      /** The deployment properties. */
+      @doc("Properties of an Index Version.")
       @body
       index: IndexVersion;
 
@@ -120,7 +120,7 @@ interface IndexVersionsWorkspace {
     ResourceCreatedOrOkResponse<IndexVersion>
   >;
 
-  @route("/workspaces/{workspaceName}/indexes/{name}/versions/{version}")
+  @route("/workspaces/{workspaceName}/indexes/{indexName}/versions/{indexVersion}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   getIndexVersion is Azure.Core.Foundations.Operation<
@@ -132,16 +132,16 @@ interface IndexVersionsWorkspace {
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
       @path
-      name: string;
+      indexName: string;
 
       @doc("Version of the index.")
       @path
-      version: string;
+      indexVersion: string;
     },
     IndexVersion
    >;
 
-   @route("/workspaces/{workspaceName}/indexes/{name}/versions")
+   @route("/workspaces/{workspaceName}/indexes/{indexName}/versions")
    @get
    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
    listIndexVersion is Azure.Core.Foundations.Operation<
@@ -153,7 +153,7 @@ interface IndexVersionsWorkspace {
        @doc("Name of the index.")
        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
        @path
-       name: string;
+       indexName: string;
  
        @doc("View type for including/excluding (for example) archived entities.")
        @query listViewType: string = "ActiveOnly";
@@ -168,6 +168,25 @@ interface IndexVersionsWorkspace {
 }
 
 interface Indexes {
+
+  @doc("Get latest Index.")
+  @route("/registries/{registryName}/indexes/{indexName}")
+  @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  getIndexRegistry is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the registry.")
+      @path
+      registryName: Registry.name;
+
+      @doc("Name of the index.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      @path
+      indexName: string;
+    },
+    IndexVersion
+   >;
+
   @doc("List the latest version of each index.")
   @route("/registries/{registryName}/indexes/")
   @get
@@ -180,8 +199,26 @@ interface Indexes {
 
       ...StandardListQueryParameters
     },
-    IndexList
+    IndexVersionList
    >;
+
+   @doc("Get latest Index.")
+   @route("/workspaces/{workspaceName}/indexes/{indexName}")
+   @get
+   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+   getIndexWorkspace is Azure.Core.Foundations.Operation<
+     {
+       @doc("Name of the workspace.")
+       @path
+       workspaceName: Workspace.name;
+ 
+       @doc("Name of the index.")
+       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+       @path
+       indexName: string;
+     },
+     IndexVersion
+    >;
 
    @doc("List the latest version of each index.")
    @route("/workspaces/{workspaceName}/indexes/")
@@ -195,7 +232,7 @@ interface Indexes {
  
        ...StandardListQueryParameters
      },
-     IndexList
+     IndexVersionList
     >;
 }
 

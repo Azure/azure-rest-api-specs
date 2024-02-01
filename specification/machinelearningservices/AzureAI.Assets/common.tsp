@@ -52,49 +52,10 @@ model SystemData {
   modifiedTime?: plainDate;
 }
 
-@doc("Lineage with other assets.")
-model Relationship {
-
-  @doc("AssetId of the other asset.")
-  assetId: string;
-
-  @doc("AssetType of the other asset.")
-  assetType: string;
-
-  @doc("State of relationship.")
-  state: string;
-
-  @doc("Type of relationship.")
-  type: string;
-}
-
-// Todo get review from Micky
 @doc("Asset capability type definition.")
 enum AssetCapabilityType {
   @doc("Uri denotes a folder.")
   UriFolder,
   @doc("Uri denotes a file.")
   UriFile
-}
-
-@doc("Asset container common definition.")
-model Container {
-
-  @doc("The asset description text.")
-  description?: string;
-
-  @doc("Is the asset archived?")
-  isArchived: boolean;
-
-  @doc("Latest version inside the container.")
-  latestVersion: string;
-
-  @doc("The next auto incremental version.")
-  nextVersion: string;
-
-  @doc("Asset's properties.")
-  properties?: Record<string>;
-
-  @doc("Asset's tags.")
-  tags?: Record<string>;
 }

@@ -16,35 +16,27 @@ namespace Microsoft.MachineLearningServices;
 
 @doc("Index asset definition.")
 @resource("indexes")
-model Index is Container {
-  @key("name")
+model Index {
+  @key("indexName")
   @doc("Name of the index.")
   @visibility("external")
-  name: string;
+  indexName: string;
 }
 
-
-@doc("IndexSpec Definition")
-model IndexSpec {
-
-  @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
-  storageUri: string;
-}
-
-@doc("Asset type definition.")
-enum AssetType {
-  @doc("AssetVersion Definition")
-  Index: "Index"
-}
-
-// finish definition
 @doc("AssetVersion Definition")
 @parentResource(Index)
 @resource("versions")
-model AssetVersionDto<T> {
-  @key("version")
+model AssetVersionDto {
+  
+  @key("indexVersion")
   @doc("Version of the index.")
   @visibility("external")
+  indexVersionNum: string;
+
+  @doc("Name of the index.")
+  name: string;
+
+  @doc("Version of the index.")
   version: string;
 
   @doc("Display name.")
@@ -69,23 +61,15 @@ model AssetVersionDto<T> {
 
   @doc("Asset's properties.")
   properties?: Record<string>;
-
-  @doc("Asset's relationship.")
-  relationships?: Record<Relationship>;
-
-  @doc("AssetSpec definition.")
-  assetSpec: T;
 }
 
 @doc("Index resource Definition")
-model IndexVersion is AssetVersionDto<IndexSpec> {
+model IndexVersion is AssetVersionDto {
 
-  @doc("Index asset type.")
-  type: AssetType = AssetType.Index;
+  @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
+  storageUri: string;
 }
 
 @doc("Paged collection of IndexVersion items.")
 model IndexVersionList is Azure.Core.Page<IndexVersion>;
 
-@doc("Paged collection of Index items.")
-model IndexList is Azure.Core.Page<Index>;
