@@ -2271,6 +2271,14 @@
           "type": "string",
           "description": "Cache node resource Mcc proxy Url"
         },
+        "isProxyUsed": {
+          "type": "boolean",
+          "description": "Check Cache node resource need proxy"
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "Operating system of the cache node"
+        },
         "optionalProperty1": {
           "type": "string",
           "description": "Optional property #1 of Mcc response object"
@@ -2764,7 +2772,8 @@
         },
         "imageUri": {
           "type": "string",
-          "description": "Cache node resource Mcc Container Id Uri."
+          "description": "Cache node resource Mcc Container Id Uri.",
+          "readOnly": true
         }
       }
     },
@@ -3416,6 +3425,30 @@
         "type"
       ]
     },
+    "OsType": {
+      "type": "string",
+      "description": "Operating System of the cache node",
+      "enum": [
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "OsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "cache node installs on windows operating system"
+          },
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "cache node installs on Linux Operating system"
+          }
+        ]
+      }
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "provisioning state of the resource",
@@ -3477,36 +3510,6 @@
         "proxyUrl": {
           "type": "string",
           "description": "Host Proxy Address configuration along with port number. This can be a proxy or ip address. ex: xx.xx.xx.xxxx:80 or host name http://exampleproxy.com:80"
-        }
-      }
-    },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
         }
       }
     },

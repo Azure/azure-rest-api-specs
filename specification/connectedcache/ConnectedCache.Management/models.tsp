@@ -28,6 +28,14 @@ enum ProvisioningState {
   Deleting,
 }
 
+@doc("Operating System of the cache node")
+enum OsType {
+  /** cache node installs on windows operating system */
+  Windows,
+
+  /** cache node installs on Linux Operating system */
+  Linux,
+}
 @doc("Describes the Resource Provider Operation")
 model ResourceProviderOperationDefinition {
   @doc("Resource provider operation name")
@@ -105,25 +113,6 @@ model CacheNodeOldResponse {
 
   @doc("The error details")
   error?: ErrorDefinition;
-}
-
-@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
-model Resource {
-  @doc("Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"")
-  @visibility("read")
-  id?: ResourceIdentifier;
-
-  @doc("The name of the resource")
-  @visibility("read")
-  name?: string;
-
-  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
-  @visibility("read")
-  type?: string;
-
-  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
 }
 
 @doc("Mcc PATCH operation properties.")
@@ -593,6 +582,7 @@ model CacheNodeEntity {
   containerResyncTrigger?: int32;
 
   @doc("Cache node resource Mcc Container Id Uri.")
+  @visibility("read")
   imageUri?: string;
 }
 
@@ -646,6 +636,12 @@ model AdditionalCacheNodeProperties {
 
   @doc("Cache node resource Mcc proxy Url")
   proxyUrl?: string;
+
+  @doc("Check Cache node resource need proxy")
+  isProxyUsed?: boolean;
+
+  @doc("Operating system of the cache node")
+  osType?: OsType;
 
   @doc("Optional property #1 of Mcc response object")
   optionalProperty1?: string;
