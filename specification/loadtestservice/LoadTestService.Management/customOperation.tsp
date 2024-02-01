@@ -128,7 +128,11 @@ op ArmCustomPatchAsyncCustom<
   @doc("The resource properties to be updated.")
   @body
   LoadTestResourcePatchRequestBody: PatchModel,
-): ArmResponse<Resource> | ArmAcceptedLroResponse<
-  "Resource update request accepted.",
-  LroHeaders
-> | ErrorResponse;
+): ArmResponse<Resource> | ArmAcceptedResponseCustom | ErrorResponse;
+
+@doc("Accepted -- LoadTest resource patch request accepted")
+model ArmAcceptedResponseCustom{
+  ...AcceptedResponse,
+  ...ArmAsyncOperationHeader
+}
+
