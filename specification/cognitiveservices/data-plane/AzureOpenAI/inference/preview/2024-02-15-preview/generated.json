@@ -1737,6 +1737,16 @@
           "$ref": "#/definitions/ChatResponseMessage",
           "description": "The chat message for a given chat completions prompt."
         },
+        "logprobs": {
+          "type": "object",
+          "description": "The log probability information for this choice, as enabled via the 'logprobs' request option.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ChatChoiceLogProbabilityInfo"
+            }
+          ]
+        },
         "index": {
           "type": "integer",
           "format": "int32",
@@ -1768,8 +1778,27 @@
         }
       },
       "required": [
+        "logprobs",
         "index",
         "finish_reason"
+      ]
+    },
+    "ChatChoiceLogProbabilityInfo": {
+      "type": "object",
+      "description": "Log probability information for a choice, as requested via 'logprobs' and 'top_logprobs'.",
+      "properties": {
+        "content": {
+          "type": "array",
+          "description": "The list of log probability information entries for the choice's message content tokens, as requested via the 'logprobs' option.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ChatTokenLogProbabilityResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "content"
       ]
     },
     "ChatCompletions": {
@@ -1958,6 +1987,18 @@
           "type": "integer",
           "format": "int64",
           "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the\nsystem_fingerprint response parameter to monitor changes in the backend.\""
+        },
+        "logprobs": {
+          "type": "boolean",
+          "description": "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`. This option is currently not available on the `gpt-4-vision-preview` model.",
+          "default": false,
+          "x-nullable": true
+        },
+        "top_logprobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An integer between 0 and 5 specifying the number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to `true` if this parameter is used.",
+          "x-nullable": true
         },
         "response_format": {
           "$ref": "#/definitions/ChatCompletionsResponseFormat",
@@ -2241,6 +2282,74 @@
           }
         ]
       }
+    },
+    "ChatTokenLogProbabilityInfo": {
+      "type": "object",
+      "description": "A representation of the log probability information for a single message content token.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The message content token."
+        },
+        "logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "The log probability of the message content token."
+        },
+        "bytes": {
+          "type": "array",
+          "description": "A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be null if there is no bytes representation for the token.",
+          "x-nullable": true,
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "token",
+        "logprob",
+        "bytes"
+      ]
+    },
+    "ChatTokenLogProbabilityResult": {
+      "type": "object",
+      "description": "A representation of the log probability information for a single content token, including a list of most likely tokens if 'top_logprobs' were requested.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The message content token."
+        },
+        "logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "The log probability of the message content token."
+        },
+        "bytes": {
+          "type": "array",
+          "description": "A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be null if there is no bytes representation for the token.",
+          "x-nullable": true,
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "top_logprobs": {
+          "type": "array",
+          "description": "The list of most likely tokens and their log probability information, as requested via 'top_logprobs'.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ChatTokenLogProbabilityInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "token",
+        "logprob",
+        "bytes",
+        "top_logprobs"
+      ]
     },
     "CompletionsFinishReason": {
       "type": "string",

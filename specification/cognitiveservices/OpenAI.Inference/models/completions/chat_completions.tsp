@@ -198,6 +198,21 @@ model ChatCompletionsOptions {
   """)
   seed?: int64;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly nullable types"
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @doc("""
+  Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`. This option is currently not available on the `gpt-4-vision-preview` model.
+  """)
+  logprobs?: boolean | null = false;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @doc("""
+  An integer between 0 and 5 specifying the number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to `true` if this parameter is used.
+  """)
+  top_logprobs?: int32 | null;
+
   @projectedName("json", "response_format")
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
@@ -226,11 +241,16 @@ model ChatChoice {
   @projectedName("json", "message")
   message?: ChatResponseMessage;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @doc("The log probability information for this choice, as enabled via the 'logprobs' request option.")
+  logprobs: ChatChoiceLogProbabilityInfo | null;
+
   @doc("The ordered index associated with this chat completions choice.")
   @projectedName("json", "index")
   index: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The reason that this chat completions choice completed its generated.")
   @projectedName("json", "finish_reason")
@@ -345,4 +365,47 @@ complete.
 model MaxTokensFinishDetails extends ChatFinishDetails {
   @doc("The object type, which is always 'max_tokens' for this object.")
   type: "max_tokens";
+}
+
+@added(ServiceApiVersions.v2024_02_15_Preview)
+@doc("""
+Log probability information for a choice, as requested via 'logprobs' and 'top_logprobs'.
+""")
+model ChatChoiceLogProbabilityInfo {
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @doc("""
+  The list of log probability information entries for the choice's message content tokens, as requested via the 'logprobs' option.
+  """)
+  content: ChatTokenLogProbabilityResult[] | null;
+}
+
+@added(ServiceApiVersions.v2024_02_15_Preview)
+@doc("""
+A representation of the log probability information for a single content token, including a list of most likely tokens if 'top_logprobs' were requested.
+""")
+model ChatTokenLogProbabilityResult {
+  ...ChatTokenLogProbabilityInfo;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
+  @doc("The list of most likely tokens and their log probability information, as requested via 'top_logprobs'.")
+  top_logprobs: ChatTokenLogProbabilityInfo[] | null;
+}
+
+@added(ServiceApiVersions.v2024_02_15_Preview)
+@doc("""
+A representation of the log probability information for a single message content token.
+""")
+model ChatTokenLogProbabilityInfo {
+  @doc("The message content token.")
+  token: string;
+
+  @doc("The log probability of the message content token.")
+  logprob: float32;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @doc("""
+  A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be null if there is no bytes representation for the token.
+  """)
+  bytes: int32[] | null;
 }

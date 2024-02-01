@@ -66,3 +66,33 @@ using Azure.ClientGenerator.Core;
   "csharp",
   "InternalPlainText"
 );
+
+@@projectedName(Azure.OpenAI.ChatCompletionsOptions.logprobs,
+  "csharp",
+  "EnableLogProbabilities"
+);
+@@projectedName(Azure.OpenAI.ChatCompletionsOptions.top_logprobs,
+  "csharp",
+  "LogProbabilitiesPerToken"
+);
+
+@@projectedName(Azure.OpenAI.ChatChoice.logprobs,
+  "csharp",
+  "LogProbabilityInfo"
+);
+@@projectedName(Azure.OpenAI.ChatChoiceLogProbabilityInfo.content,
+  "csharp",
+  "TokenLogProbabilityResults"
+);
+@@projectedName(Azure.OpenAI.ChatTokenLogProbabilityResult.top_logprobs,
+  "csharp",
+  "TopLogProbabilityEntries"
+);
+@@projectedName(Azure.OpenAI.ChatTokenLogProbabilityInfo.logprob,
+  "csharp",
+  "LogProbability"
+);
+@@projectedName(Azure.OpenAI.ChatTokenLogProbabilityInfo.bytes,
+  "csharp",
+  "Utf8ByteValues"
+);
