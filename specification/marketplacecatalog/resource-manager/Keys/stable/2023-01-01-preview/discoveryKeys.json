@@ -115,10 +115,10 @@
         "tags": [
           "GetApiKeys"
         ],
-        "operationId": "GetApiKeys_Get",
+        "operationId": "GetApiKeys_List",
         "x-ms-examples": {
           "Get_Key": {
-            "$ref": "./examples/GetKey.json"
+            "$ref": "./examples/GetKeys.json"
           }
         },
         "parameters": [
@@ -151,6 +151,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -192,11 +195,13 @@
     }
   },
   "definitions": {
-    "apiKeys": {
+    "ApiKeys": {
       "type": "object",
       "description": "Dictionary of API keys and their aliases",
-      "additionalProperties": {
-        "type": "string"
+      "properties": {
+        "apiKeys": {
+          "type": "string"
+        }
       }
     },
     "ErrorResponse": {
