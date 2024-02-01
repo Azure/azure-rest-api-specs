@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "accountName": "contoso",
+    "api-version": "2023-07-01",
+    "instanceName": "blue",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "tagUpdatePayload": {
+      "tags": {
+        "tagKey": "tagValue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "blue",
+        "type": "Microsoft.DeviceUpdate/accounts/instances",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/instances/blue",
+        "location": "westus2",
+        "properties": {
+          "accountName": "contoso",
+          "diagnosticStorageProperties": {
+            "authenticationType": "KeyBased",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/adu-resource-group/providers/Microsoft.Storage/storageAccounts/testAccount"
+          },
+          "enableDiagnostics": false,
+          "iotHubs": [
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Devices/IotHubs/blue-contoso-hub"
+            }
+          ]
+        },
+        "tags": {
+          "tagKey": "tagValue"
+        }
+      }
+    }
+  },
+  "operationId": "Instances_Update",
+  "title": "Updates Instance"
+}

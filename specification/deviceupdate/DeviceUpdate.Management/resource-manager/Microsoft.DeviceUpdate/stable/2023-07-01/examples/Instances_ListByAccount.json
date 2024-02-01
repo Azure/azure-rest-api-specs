@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "accountName": "contoso",
+    "api-version": "2023-07-01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "blue",
+            "type": "Microsoft.DeviceUpdate/accounts/instances",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/instances/blue",
+            "location": "westus2",
+            "properties": {
+              "accountName": "contoso",
+              "diagnosticStorageProperties": {
+                "authenticationType": "KeyBased",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/adu-resource-group/providers/Microsoft.Storage/storageAccounts/testAccount"
+              },
+              "enableDiagnostics": false,
+              "iotHubs": [
+                {
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Devices/IotHubs/blue-contoso-hub"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "red",
+            "type": "Microsoft.DeviceUpdate/accounts/instances",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/instances/red",
+            "location": "westus2",
+            "properties": {
+              "accountName": "contoso",
+              "diagnosticStorageProperties": {
+                "authenticationType": "KeyBased",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/adu-resource-group/providers/Microsoft.Storage/storageAccounts/testAccount"
+              },
+              "enableDiagnostics": false,
+              "iotHubs": [
+                {
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Devices/IotHubs/red-contoso-hub"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Instances_ListByAccount",
+  "title": "Gets list of Instances by Account"
+}
