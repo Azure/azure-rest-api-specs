@@ -200,18 +200,25 @@
       "description": "Dictionary of API keys and their aliases",
       "properties": {
         "value": {
-          "apiKeys": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "type": "string"
-              }
-            }
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiKey"
           }
         },
         "nextLink": {
           "description": "Next page of results",
+          "type": "string"
+        }
+      }
+    },
+    "apiKey": {
+      "type": "object",
+      "description": "Something",
+      "properties": {
+        "keyAlias": {
+          "type": "string"
+        },
+        "key": {
           "type": "string"
         }
       }
