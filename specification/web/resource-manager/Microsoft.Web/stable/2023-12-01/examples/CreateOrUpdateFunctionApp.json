@@ -8,22 +8,6 @@
       "location": "East US",
       "kind": "functionapp,linux",
       "properties": {
-        "enabled": true,
-        "reserved": true,
-        "isXenon": false,
-        "hyperV": false,
-        "vnetRouteAllEnabled": false,
-        "vnetImagePullEnabled": false,
-        "vnetContentShareEnabled": false,
-        "scmSiteAlsoStopped": false,
-        "clientAffinityEnabled": false,
-        "clientCertEnabled": false,
-        "containerSize": 2048,
-        "httpsOnly": true,
-        "redundancyMode": "None",
-        "publicNetworkAccess": "Enabled",
-        "storageAccountRequired": false,
-        "keyVaultReferenceIdentity": "SystemAssigned",
         "siteConfig": {
           "appSettings": [
             {
@@ -35,35 +19,10 @@
               "value": "~4"
             },
             {
-              "name": "FUNCTIONS_WORKER_RUNTIME",
-              "value": "python"
-            },
-            {
-              "name": "SCALE_UP_THROTTLING_ENABLED",
-              "value": "0"
-            },
-            {
-              "name": "WEBSITE_RUN_FROM_PACKAGE",
-              "value": "https://StrogeAccountName.blob.core.windows.net/pathToFunctionApp.zip"
-            },
-            {
-              "name": "WEBSITE_CONTENTSHARE",
-              "value": "StorageAccountNamele9e14"
-            },
-            {
-              "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-              "value": "DefaultEndpointsProtocol=https;AccountName=StorageAccountName;AccountKey=Sanitized;EndpointSuffix=core.windows.net"
+              "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+              "value": "InstrumentationKey=Sanitized;IngestionEndpoint=Sanitized;LiveEndpoint=Sanitized"
             }
-          ],
-          "netFrameworkVersion": "v6.0",
-          "linuxFxVersion": "python|3.10",
-          "numberOfWorkers": 1,
-          "preWarmedInstanceCount": 0,
-          "acrUseManagedIdentityCreds": false,
-          "alwaysOn": false,
-          "http20Enabled": false,
-          "functionAppScaleLimit": 200,
-          "minimumElasticInstanceCount": 0
+          ]
         },
         "functionAppConfig": {
           "deployment": {
@@ -72,16 +31,28 @@
               "value": "https://storageAccountName.blob.core.windows.net/containername",
               "authentication": {
                 "type": "StorageAccountConnectionString",
-                "storageAccountConnectionStringName": "SomeAppSettingName"
+                "storageAccountConnectionStringName": "TheAppSettingName"
               }
             }
           },
           "runtime": {
             "name": "python",
-            "version": "3.10"
+            "version": "3.11"
           },
           "scaleAndConcurrency": {
-            "instanceMemoryMB": 2048
+            "alwaysReady": [
+              {
+                "name": "http",
+                "instanceCount": 2
+              }
+            ],
+            "maximumInstanceCount": 50,
+            "instanceMemoryMB": 2048,
+            "triggers": {
+              "http": {
+                "perInstanceConcurrency": 16
+              }
+            }
           }
         }
       }
@@ -121,7 +92,7 @@
             }
           ],
           "serverFarmId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/DefaultAsp",
-          "reserved": true,
+          "reserved": null,
           "isXenon": false,
           "hyperV": false,
           "lastModifiedTimeUtc": "2024-01-09T00:24:54.8",
@@ -135,7 +106,7 @@
             "pythonVersion": "",
             "nodeVersion": "",
             "powerShellVersion": "",
-            "linuxFxVersion": "python|3.10",
+            "linuxFxVersion": "",
             "requestTracingEnabled": false,
             "remoteDebuggingEnabled": false,
             "httpLoggingEnabled": false,
@@ -159,7 +130,7 @@
             "vnetName": "",
             "vnetRouteAllEnabled": false,
             "vnetPrivatePortsCount": 0,
-            "keyVaultReferenceIdentity": "SystemAssigned",
+            "keyVaultReferenceIdentity": "",
             "ipSecurityRestrictions": [
               {
                 "ipAddress": "Any",
@@ -194,19 +165,28 @@
                 "value": "https://storageAccountName.blob.core.windows.net/containername",
                 "authentication": {
                   "type": "StorageAccountConnectionString",
-                  "storageAccountConnectionStringName": "SomeAppSettingName"
+                  "storageAccountConnectionStringName": "TheAppSettingName"
                 }
               }
             },
             "runtime": {
               "name": "python",
-              "version": "3.10"
+              "version": "3.11"
             },
             "scaleAndConcurrency": {
-              "alwaysReady": null,
-              "maximumInstanceCount": null,
+              "alwaysReady": [
+                {
+                  "name": "http",
+                  "instanceCount": 2
+                }
+              ],
+              "maximumInstanceCount": 50,
               "instanceMemoryMB": 2048,
-              "triggers": null
+              "triggers": {
+                "http": {
+                  "perInstanceConcurrency": 16
+                }
+              }
             }
           },
           "scmSiteAlsoStopped": false,
@@ -265,7 +245,7 @@
             }
           ],
           "serverFarmId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/DefaultAsp",
-          "reserved": true,
+          "reserved": null,
           "isXenon": false,
           "hyperV": false,
           "lastModifiedTimeUtc": "2024-01-09T00:24:54.8",
@@ -279,7 +259,7 @@
             "pythonVersion": "",
             "nodeVersion": "",
             "powerShellVersion": "",
-            "linuxFxVersion": "python|3.10",
+            "linuxFxVersion": "",
             "requestTracingEnabled": false,
             "remoteDebuggingEnabled": false,
             "httpLoggingEnabled": false,
@@ -303,7 +283,7 @@
             "vnetName": "",
             "vnetRouteAllEnabled": false,
             "vnetPrivatePortsCount": 0,
-            "keyVaultReferenceIdentity": "SystemAssigned",
+            "keyVaultReferenceIdentity": "",
             "ipSecurityRestrictions": [
               {
                 "ipAddress": "Any",
@@ -338,19 +318,28 @@
                 "value": "https://storageAccountName.blob.core.windows.net/containername",
                 "authentication": {
                   "type": "StorageAccountConnectionString",
-                  "storageAccountConnectionStringName": "SomeAppSettingName"
+                  "storageAccountConnectionStringName": "TheAppSettingName"
                 }
               }
             },
             "runtime": {
               "name": "python",
-              "version": "3.10"
+              "version": "3.11"
             },
             "scaleAndConcurrency": {
-              "alwaysReady": null,
-              "maximumInstanceCount": null,
+              "alwaysReady": [
+                {
+                  "name": "http",
+                  "instanceCount": 2
+                }
+              ],
+              "maximumInstanceCount": 50,
               "instanceMemoryMB": 2048,
-              "triggers": null
+              "triggers": {
+                "http": {
+                  "perInstanceConcurrency": 16
+                }
+              }
             }
           },
           "scmSiteAlsoStopped": false,
