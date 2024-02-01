@@ -350,8 +350,11 @@
           "Register with trusted access enabled": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Discover_TrustedAccessEnable.json"
           },
-          "Installation with SAP CAL API": {
+          "Installation with SAP CAL API for Distributed System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_SAPInstallThroughCAL_Distributed.json"
+          },
+          "Installation with SAP CAL API for HA System": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_SAPInstallThroughCAL_HA.json"
           }
         },
         "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
@@ -3539,33 +3542,29 @@
         }
       ],
       "properties": {
-        "calAccountId": {
-          "type": "string",
-          "description": "The CAL account ID. Refer the CAL portal for this."
-        },
         "calProductId": {
           "type": "string",
           "description": "The CAL product ID. Refer the CAL portal for this."
+        },
+        "deploymentServerResourceGroup": {
+          "type": "string",
+          "description": "The deployment server resource group."
         },
         "privateDnsZoneId": {
           "type": "string",
           "description": "The private DNS zone."
         },
-        "transitNetworkId": {
+        "deploymentServerSubnetId": {
           "type": "string",
-          "description": "The transit network."
+          "description": "The deployment server subnet."
         },
-        "sharedServicesSubnetId": {
+        "executionEngineSubnetId": {
           "type": "string",
-          "description": "The shared services subnet."
+          "description": "The execution engine subnet."
         },
         "keyVaultId": {
           "type": "string",
-          "description": "The keyvault ID."
-        },
-        "deploymentServerResourceGroup": {
-          "type": "string",
-          "description": "The deployment server resource group."
+          "description": "The keyvault ID that contains the technical communication user password."
         },
         "technicalCommunicationUser": {
           "type": "string",
@@ -3574,23 +3573,13 @@
         "technicalCommunicationUserPasswordSecretName": {
           "type": "string",
           "description": "The technical communication user password secret name. The password should be stored in the keyvault ID against this secret name."
-        },
-        "frontendHostname": {
-          "type": "string",
-          "description": "The frontend hostname."
         }
       },
       "required": [
-        "calAccountId",
         "calProductId",
-        "privateDnsZoneId",
-        "transitNetworkId",
-        "sharedServicesSubnetId",
         "keyVaultId",
-        "deploymentServerResourceGroup",
         "technicalCommunicationUser",
-        "technicalCommunicationUserPasswordSecretName",
-        "frontendHostname"
+        "technicalCommunicationUserPasswordSecretName"
       ]
     },
     "ExternalInstallationSoftwareConfiguration": {
