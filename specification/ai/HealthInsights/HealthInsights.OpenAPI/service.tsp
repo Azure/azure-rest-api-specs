@@ -23,4 +23,7 @@ namespace AzureHealthInsights;
 enum ApiVersion {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_09_01_Preview: "2023-09-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_04_01: "2024-04-01",
 }
