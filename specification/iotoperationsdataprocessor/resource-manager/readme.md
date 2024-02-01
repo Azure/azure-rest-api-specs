@@ -34,13 +34,13 @@ directive:
     where: $.definitions.DataSourceMessages.properties.messages.items.properties.data
     reason: We're unable to map data coming from IoT devices to a fixed schema.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.TestRunRequest.properties.stages
+    where: $.definitions.ExecuteTestRunRequest.properties.stages
     reason: Reusing $definitions.PipelineStage modal that was approved during the review for 2023-10-04-preview API version.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.TestRunRequest.properties.stages.additionalProperties
+    where: $.definitions.ExecuteTestRunRequest.properties.stages.additionalProperties
     reason: Reusing $definitions.PipelineStage modal that was approved during the review for 2023-10-04-preview API version.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.TestRunResponse.properties.messages.items.properties.data
+    where: $.definitions.ExecuteTestRunResponse.properties.messages.items.properties.data
     reason: We're unable to map data coming from IoT devices to a fixed schema.
 ```
 

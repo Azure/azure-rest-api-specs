@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
 import "./pipeline.tsp";
-import "./testruns.tsp";
+import "./executeTestRun.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -55,5 +55,5 @@ interface Instances {
   @doc("Execute a pipeline test run.")
   @added(Versions.Preview20240201)
   @armResourceAction(Instance)
-  testRuns is ArmResourceActionAsync<Instance, TestRunRequest, TestRunResponse>;
+  executeTestRun is ArmResourceActionAsync<Instance, ExecuteTestRunRequest, ExecuteTestRunResponse>;
 }
