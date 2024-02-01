@@ -57,6 +57,20 @@ model AnalyzeTextOptions {
 
   @doc("This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
+  
+  @doc("Customized categories will be analyzed if they are assigned. If no customized categories are assigned, no analysis on them will be returned.")
+  @added(ContentSafety.Versions.v2024_03_30_Preview)
+  customizedCategories?: CustomizedCategoryOption[];
+}
+
+@added(ContentSafety.Versions.v2024_03_30_Preview)
+@doc("The customized category option for text.")
+model CustomizedCategoryOption {
+  @doc("Name")
+  categoryName: string;
+
+  @doc("Customized category version for inference")
+  version: int32;
 }
 
 @doc("The text analysis response.")
@@ -66,6 +80,20 @@ model AnalyzeTextResult {
 
   @doc("Analysis result for categories.")
   categoriesAnalysis: TextCategoriesAnalysis[];
+
+  @added(ContentSafety.Versions.v2024_03_30_Preview)
+  @doc("Analysis result for text customized categories")
+  textCustomizedCategoriesAnalysis?: TextCustomizedCategoriesAnalysis[];
+}
+
+@added(ContentSafety.Versions.v2024_03_30_Preview)
+@doc("Analysis result for text customized categories.")
+model TextCustomizedCategoriesAnalysis {
+  @doc("Name of the custom category.")
+  categoryName: string;
+
+  @doc("Whether the customized category is detected.")
+  detected: boolean;
 }
 
 @doc("The result of blocklist match.")
@@ -227,4 +255,69 @@ model AnalyzeTextJailbreakResult {
 model JailbreakAnalysisResult {
   @doc("Analysis result for jailbreak.")
   detected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_03_30_Preview)
+@resource("text/categories")
+@doc("Text customized category")
+model TextCustomizedCategory {
+  @key
+  @visibility("read", "create", "update")
+  @doc("Name of the customized category")
+  categoryName: string;
+
+  @doc("Definition or description of the customized category.")
+  @visibility("read", "create", "update")
+  definition: string;
+
+  @doc("URL of sample jsonl blob.")
+  @visibility("create")
+  sampleBlobUrl: string;
+
+  @doc("URL of copied sample jsonl blob.")
+  @visibility("read")
+  sampleCopyBlobUrl: string;
+
+  @doc("Version number of the customized category.")
+  @visibility("read")
+  version: int32;
+
+  @doc("Creation time of the customized category.")
+  @visibility("read")
+  createdTime: utcDateTime;
+
+  @doc("Build status of the customized category")
+  @visibility("read")
+  buildStatus: CategoryBuildStatus;
+
+  @doc("Build information for the customized category.")
+  @visibility("read")
+  buildInfo: TextCustomizedCategoryBuildInfo;
+}
+
+@doc("Detailed information of the customized category build.")
+model TextCustomizedCategoryBuildInfo {
+
+  @doc("Last build trigger time.")
+  lastBuildTriggeringTime: utcDateTime;
+
+  @doc("Last build update time.")
+  lastBuildUpdatedTime: utcDateTime;
+
+  @doc("Errors when building the category.")
+  buildErrors?: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@doc("Status of the customized category build.")
+enum CategoryBuildStatus {
+  BuildNotStarted,
+  Building,
+  BuildSucceeded,
+  BuildFailed,
+}
+
+@doc("Alias of TextCustomizedCategory")
+model TextCustomizedCategoryVersion {
+  ...TextCustomizedCategory
 }
