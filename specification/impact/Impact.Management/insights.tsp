@@ -37,14 +37,14 @@ model InsightUnderSubscription is ProxyResource<InsightProperties> {
 
 @doc("Impact category properties.")
 model InsightProperties is ResourceProperties {
-  @doc("summary of the insight.")
-  summary: string;
-
   @doc("category of the insight.")
   category: string;
 
   @doc("status of the insight. example resolved, repaired, other.")
-  status: string;
+  status?: string;
+
+  @doc("Contains title & content for the insight")
+  article: Article; 
 
   @doc("level of the insight. Informational, Warning, Error, Critical.")
   level: InsightLevel;
@@ -55,25 +55,14 @@ model InsightProperties is ResourceProperties {
   @doc("attribution time of the insight.")
   attributionTime: utcDateTime;
 
-  @doc("failure signature level 1.")
-  failureSignatureLevel1?: string;
-
-  @doc("failure signature level 2.")
-  failureSignatureLevel2?: string;
-
-  @doc("failure signature level 3.")
-  failureSignatureLevel3?: string;
-
   @doc("unique id of the insight.")
   insightUniqueId: string;
 
   @doc("details of of the impact for which insight has been generated.")
-  @extension("x-ms-identifiers", ["impactId"])
-  impacts: ImpactDetails[];
+  impacts: ImpactDetails;
 
-  @extension("x-ms-identifiers", ["name"])
   @doc("additional details of the insight.")
-  additionalDetails?: AdditionalField[];
+  additionalDetails?: {};
 }
 
 @doc("details of of the impact for which insight has been generated.")
@@ -92,6 +81,15 @@ model ImpactDetails {
 
   @doc("unique (guid) id of the impact generated during impact creation.")
   impactUniqueId: string;
+}
+
+@doc("Article details of the isight like title, content etc")
+model Article {
+  @doc("Title of the insight article")
+  title : string;
+
+  @doc("Content of the insight article")
+  content: string;
 }
 
 @doc("impacted azure resource id.")

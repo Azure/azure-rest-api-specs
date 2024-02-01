@@ -851,6 +851,24 @@
         "value"
       ]
     },
+    "Article": {
+      "type": "object",
+      "description": "Article details of the isight like title, content etc",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the insight article"
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the insight article"
+        }
+      },
+      "required": [
+        "title",
+        "content"
+      ]
+    },
     "ClientIncidentDetails": {
       "type": "object",
       "description": "Client incident details ex: incidentId , incident source",
@@ -1257,10 +1275,6 @@
           "description": "Resource provisioning state.",
           "readOnly": true
         },
-        "summary": {
-          "type": "string",
-          "description": "summary of the insight."
-        },
         "category": {
           "type": "string",
           "description": "category of the insight."
@@ -1268,6 +1282,10 @@
         "status": {
           "type": "string",
           "description": "status of the insight. example resolved, repaired, other."
+        },
+        "article": {
+          "$ref": "#/definitions/Article",
+          "description": "Contains title & content for the insight"
         },
         "level": {
           "$ref": "#/definitions/InsightLevel",
@@ -1283,47 +1301,22 @@
           "format": "date-time",
           "description": "attribution time of the insight."
         },
-        "failureSignatureLevel1": {
-          "type": "string",
-          "description": "failure signature level 1."
-        },
-        "failureSignatureLevel2": {
-          "type": "string",
-          "description": "failure signature level 2."
-        },
-        "failureSignatureLevel3": {
-          "type": "string",
-          "description": "failure signature level 3."
-        },
         "insightUniqueId": {
           "type": "string",
           "description": "unique id of the insight."
         },
         "impacts": {
-          "type": "array",
-          "description": "details of of the impact for which insight has been generated.",
-          "items": {
-            "$ref": "#/definitions/ImpactDetails"
-          },
-          "x-ms-identifiers": [
-            "impactId"
-          ]
+          "$ref": "#/definitions/ImpactDetails",
+          "description": "details of of the impact for which insight has been generated."
         },
         "additionalDetails": {
-          "type": "array",
-          "description": "additional details of the insight.",
-          "items": {
-            "$ref": "#/definitions/AdditionalField"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "type": "object",
+          "description": "additional details of the insight."
         }
       },
       "required": [
-        "summary",
         "category",
-        "status",
+        "article",
         "level",
         "priority",
         "attributionTime",
