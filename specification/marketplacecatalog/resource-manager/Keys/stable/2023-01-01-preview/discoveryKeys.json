@@ -29,7 +29,7 @@
             "name": "apiKeyAlias",
             "in": "path",
             "required": true,
-            "description": "Alias for new API Key. This alias must be unique and contain only alphanumeric characters seperated by dashes"
+            "description": "Alias for new API Key. This alias must be unique and contain only alphanumeric characters separated by dashes"
           },
           {
             "type": "string",
@@ -52,7 +52,7 @@
             "x-nullable": false,
             "description": "Returns the newly created API key",
             "schema": {
-              "$ref": "#/definitions/apiKeys"
+              "$ref": "#/definitions/ApiKeys"
             }
           },
           "default": {
@@ -115,7 +115,7 @@
         "tags": [
           "GetApiKeys"
         ],
-        "operationId": "GetApiKeys_Get",
+        "operationId": "GetApiKeys_List",
         "x-ms-examples": {
           "Get_Key": {
             "$ref": "./examples/GetKey.json"
@@ -142,7 +142,12 @@
             "x-nullable": false,
             "description": "List of active keys that belong to the subscription",
             "schema": {
-              "$ref": "#/definitions/apiKeys"
+              "$ref": "#/definitions/ApiKeys",
+              "nextLink": {
+                "description": "URL to get the next page if any",
+                "type": "string",
+                "readOnly": true
+              }
             }
           },
           "default": {
@@ -195,13 +200,11 @@
     }
   },
   "definitions": {
-    "apiKeys": {
+    "ApiKeys": {
       "type": "object",
+      "description": "Dictionary of API keys and their aliases",
       "apiKeys": {
-        "description": "Dictionary of API keys and their aliases",
-        "apiKeys": {
-          "key": "alias"
-        }
+        "key": "alias"
       }
     },
     "ErrorResponse": {
