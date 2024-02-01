@@ -4248,19 +4248,19 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "Resource ID of the connection monitor endpoint are supported for AzureVM,AzureVMSS,AzureVNet,AzureSubnet,MMAWorkspaceMachine,MMAWorkspaceNetwork,AzureArcVM,AzureArcNetwork endpoint type."
+          "description": "Resource ID of the connection monitor endpoint are supported for AzureVM, AzureVMSS, AzureVNet, AzureSubnet, MMAWorkspaceMachine, MMAWorkspaceNetwork, AzureArcVM endpoint type."
         },
         "address": {
           "type": "string",
-          "description": "Address of the connection monitor endpoint are supported for AzureVM,ExternalAddress,ArcMachine,MMAWorkspaceMachine endpoint type."
+          "description": "Address of the connection monitor endpoint. Supported for AzureVM, ExternalAddress, ArcMachine, MMAWorkspaceMachine endpoint type."
         },
         "filter": {
           "$ref": "#/definitions/ConnectionMonitorEndpointFilter",
-          "description": "Filter for sub-items within the endpoint."
+          "description": "Filter field is getting deprecated and should not be used. Instead use Include/Exclude scope fields for it."
         },
         "scope": {
           "$ref": "#/definitions/ConnectionMonitorEndpointScope",
-          "description": "Endpoint scope are supported for AzureVNet,MMAWorkspaceNetwork,AzureArcNetwork,AzureSubnet,VMSS endpoint type."
+          "description": "Endpoint scope defines which target resource to monitor in case of compound resource endpoints like VMSS, AzureSubnet, AzureVNet, MMAWorkspaceNetwork, AzureArcNetwork."
         },
         "coverageLevel": {
           "type": "string",
