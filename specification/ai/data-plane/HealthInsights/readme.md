@@ -4,10 +4,10 @@
 
 Configuration for generating Health Insights SDK.
 
-The current release is `2023-09-01-preview`.
+The current release is `2024-04-01`.
 
 ```yaml
-tag: 2023-09-01-preview
+tag: 2024-04-01
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -38,4 +38,14 @@ input-file:
 directive:
   - suppress: AvoidAnonymousTypes
     reason: The spec is auto-generated. Tracking issue to fix is https://github.com/Azure/typespec-azure-pr/issues/3349
+```
+
+### Release 2024-04-01
+
+
+These settings apply only when `--tag=2024-04-01` is specified on the command line.
+
+```yaml $(tag) == '2024-04-01'
+input-file:
+  - stable/2024-04-01/openapi.json
 ```
