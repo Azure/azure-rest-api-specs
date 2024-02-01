@@ -13,8 +13,7 @@ namespace Customizations;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-@projectedName("csharp", "EntityOperations")
-interface Entity {
+interface EntityOperations {
   createOrUpdate is PurviewDataMap.Entity.createOrUpdate;
   getByIds is PurviewDataMap.Entity.listByGuids;
   batchCreateOrUpdate is PurviewDataMap.Entity.bulkCreateOrUpdate;
@@ -55,8 +54,7 @@ interface Entity {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-@projectedName("csharp", "GlossaryOperations")
-interface Glossary {
+interface GlossaryOperations {
   batchGet is PurviewDataMap.Glossary.list;
   create is PurviewDataMap.Glossary.create;
   createCategories is PurviewDataMap.Glossary.createCategories;
@@ -90,8 +88,7 @@ interface Glossary {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-@projectedName("csharp", "DiscoveryOperations")
-interface Discovery {
+interface DiscoveryOperations {
   query is PurviewDataMap.Discovery.query;
   suggest is PurviewDataMap.Discovery.suggest;
   autoComplete is PurviewDataMap.Discovery.autoComplete;
@@ -99,8 +96,7 @@ interface Discovery {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-@projectedName("csharp", "LineageOperations")
-interface Lineage {
+interface LineageOperations {
   get is PurviewDataMap.Lineage.get;
   getNextPage is PurviewDataMap.Lineage.getNextPage;
   getByUniqueAttribute is PurviewDataMap.Lineage.getByUniqueAttribute;
@@ -108,8 +104,7 @@ interface Lineage {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-@projectedName("csharp", "RelationshipOperations")
-interface Relationship {
+interface RelationshipOperations {
   create is PurviewDataMap.Relationship.create;
   update is PurviewDataMap.Relationship.update;
   get is PurviewDataMap.Relationship.get;
@@ -118,8 +113,7 @@ interface Relationship {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-@projectedName("csharp", "TypeOperations")
-interface TypeDefinition {
+interface TypeDefinitionOperations {
   getBusinessMetadataById is PurviewDataMap.Type.getBusinessMetadataDefByGuid;
   getBusinessMetadataByName is PurviewDataMap.Type.getBusinessMetadataDefByName;
   getClassificationById is PurviewDataMap.Type.getClassificationDefByGuid;
