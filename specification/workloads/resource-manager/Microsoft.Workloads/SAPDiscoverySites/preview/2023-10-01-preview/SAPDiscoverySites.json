@@ -497,7 +497,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances": {
       "get": {
-        "operationId": "SAPInstances_List",
+        "operationId": "SapInstances_List",
         "tags": [
           "SAPInstances"
         ],
@@ -533,6 +533,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the SAP Instance resources for the given SAP Migration discovery site resource.": {
+            "$ref": "./examples/SAPInstances_List.json"
           }
         },
         "x-ms-pageable": {

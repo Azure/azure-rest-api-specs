@@ -81,7 +81,7 @@ interface SAPInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @operationId("SAPInstances_List")
+  @operationId("SapInstances_List")
   list is ArmResourceListByParent<SAPInstance>;
 }
 
