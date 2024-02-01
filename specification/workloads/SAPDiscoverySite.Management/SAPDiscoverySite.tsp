@@ -18,6 +18,7 @@ namespace Microsoft.Workloads;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(SAPDiscoverySiteProperties)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 model SAPDiscoverySite extends TrackedResourceBase {
   /**
    * The name of the discovery site resource for SAP Migration.
@@ -42,19 +43,18 @@ model SAPDiscoverySite extends TrackedResourceBase {
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 interface SAPDiscoverySites {
   /**
    * Gets a SAP Migration discovery site resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SAPDiscoverySites_Get")
   get is ArmResourceRead<SAPDiscoverySite>;
 
   /**
    * Creates a discovery site for SAP Migration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SAPDiscoverySites_Create")
   create is ArmResourceCreateOrReplaceAsync<
     SAPDiscoverySite,
     BaseParameters<SAPDiscoverySite>,
@@ -66,7 +66,6 @@ interface SAPDiscoverySites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("SAPDiscoverySites_Update")
   update is ArmCustomPatchAsync<
     SAPDiscoverySite,
     UpdateSAPDiscoverySiteRequest,
@@ -78,7 +77,6 @@ interface SAPDiscoverySites {
    * Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances and Server Instances.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SAPDiscoverySites_Delete")
   delete is ArmResourceDeleteAsync<
     SAPDiscoverySite,
     BaseParameters<SAPDiscoverySite>,
@@ -89,21 +87,18 @@ interface SAPDiscoverySites {
    * Gets all SAP Migration discovery site resources in a Resource Group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SAPDiscoverySites_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<SAPDiscoverySite>;
 
   /**
    * Gets all SAP Migration discovery site resources in a Subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SAPDiscoverySites_ListBySubscription")
   listBySubscription is ArmListBySubscription<SAPDiscoverySite>;
 
   /**
    * Import a SAP Migration discovery site resource and it's child resources, that is the SAP instances and Server instances.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SAPDiscoverySites_ImportEntities")
   importEntities is ArmResourceActionAsync<
     SAPDiscoverySite,
     void,

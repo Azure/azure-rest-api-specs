@@ -20,6 +20,7 @@ namespace Microsoft.Workloads;
 @parentResource(SAPDiscoverySite)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(SAPInstanceProperties)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 model SAPInstance extends TrackedResourceBase {
   /**
    * The name of SAP Instance resource for SAP Migration.
@@ -38,20 +39,17 @@ model SAPInstance extends TrackedResourceBase {
   properties: SAPInstanceProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 @armResourceOperations
 interface SAPInstances {
   /**
    * Gets the SAP Instance resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SAPInstances_Get")
   get is ArmResourceRead<SAPInstance>;
 
   /**
-   * Creates the SAP Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
+   * Creates the SAP Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SAPInstances_Create")
   create is ArmResourceCreateOrReplaceAsync<
     SAPInstance,
     BaseParameters<SAPInstance>,
@@ -61,9 +59,7 @@ interface SAPInstances {
   /**
    * Updates the SAP Instance resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("SAPInstances_Update")
   update is ArmCustomPatchAsync<
     SAPInstance,
     UpdateSAPInstanceRequest,
@@ -72,10 +68,8 @@ interface SAPInstances {
   >;
 
   /**
-   * Deletes the SAP Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
+   * Deletes the SAP Instance resource. <br><br>This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SAPInstances_Delete")
   delete is ArmResourceDeleteAsync<
     SAPInstance,
     BaseParameters<SAPInstance>,
@@ -86,6 +80,7 @@ interface SAPInstances {
    * Lists the SAP Instance resources for the given SAP Migration discovery site resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
   @operationId("SAPInstances_List")
   list is ArmResourceListByParent<SAPInstance>;
 }
