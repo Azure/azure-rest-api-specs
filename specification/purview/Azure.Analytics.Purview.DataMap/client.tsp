@@ -13,7 +13,7 @@ namespace Customizations;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-interface EntityOperations {
+interface Entity {
   createOrUpdate is PurviewDataMap.Entity.createOrUpdate;
   getByIds is PurviewDataMap.Entity.listByGuids;
   batchCreateOrUpdate is PurviewDataMap.Entity.bulkCreateOrUpdate;
@@ -54,7 +54,7 @@ interface EntityOperations {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-interface GlossaryOperations {
+interface Glossary {
   batchGet is PurviewDataMap.Glossary.list;
   create is PurviewDataMap.Glossary.create;
   createCategories is PurviewDataMap.Glossary.createCategories;
@@ -88,7 +88,7 @@ interface GlossaryOperations {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-interface DiscoveryOperations {
+interface Discovery {
   query is PurviewDataMap.Discovery.query;
   suggest is PurviewDataMap.Discovery.suggest;
   autoComplete is PurviewDataMap.Discovery.autoComplete;
@@ -96,7 +96,7 @@ interface DiscoveryOperations {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-interface LineageOperations {
+interface Lineage {
   get is PurviewDataMap.Lineage.get;
   getNextPage is PurviewDataMap.Lineage.getNextPage;
   getByUniqueAttribute is PurviewDataMap.Lineage.getByUniqueAttribute;
@@ -104,7 +104,7 @@ interface LineageOperations {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-interface RelationshipOperations {
+interface Relationship {
   create is PurviewDataMap.Relationship.create;
   update is PurviewDataMap.Relationship.update;
   get is PurviewDataMap.Relationship.get;
@@ -113,7 +113,7 @@ interface RelationshipOperations {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
-interface TypeDefinitionOperations {
+interface TypeDefinition {
   getBusinessMetadataById is PurviewDataMap.Type.getBusinessMetadataDefByGuid;
   getBusinessMetadataByName is PurviewDataMap.Type.getBusinessMetadataDefByName;
   getClassificationById is PurviewDataMap.Type.getClassificationDefByGuid;
