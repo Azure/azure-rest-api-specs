@@ -57,12 +57,39 @@ model AzureChatExtensionConfiguration {
 """)
 model AzureChatExtensionsMessageContext {
   @doc("""
-    The contextual message payload associated with the Azure chat extensions used for a chat completions request.
+    The contextual information associated with the Azure chat extensions used for a chat completions request.
     These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the
     course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat
     extensions.
   """)
-  messages?: ChatResponseMessage[];
+  citations?: AzureChatExtensionDataSourceResponseCitation[];
+
+  @doc("The detected intent from the chat history, used to pass to the next turn to carry over the context.")
+  intent?: string;
+}
+
+@added(ServiceApiVersions.v2024_02_15_Preview)
+@doc("""
+A single instance of additional context information available when Azure OpenAI chat extensions are involved
+in the generation of a corresponding chat completions response. This context information is only populated when
+using an Azure OpenAI request configured to use a matching extension.
+""")
+model AzureChatExtensionDataSourceResponseCitation {
+  @doc("The content of the citation.")
+  content: string;
+
+  @doc("The title of the citation.")
+  title?: string;
+
+  @doc("The URL of the citation.")
+  url?: string;
+
+  @doc("The file path of the citation.")
+  filepath?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
+  @doc("The chunk ID of the citation.")
+  chunk_id?: string;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
