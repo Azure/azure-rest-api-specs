@@ -5,7 +5,19 @@
     "resourceGroupName": "contoso-resources",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "serviceName": "contoso",
-    "api-version": "2024-03-01"
+    "api-version": "2024-03-01",
+    "payload": {
+      "tags": {},
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {
+            "principalId": "00000000-0000-0000-0000-000000000000",
+            "clientId": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
