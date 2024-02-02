@@ -2824,29 +2824,33 @@
         },
         "logScrubbing": {
           "description": "Defines rules to scrub sensitive fields in logs",
-          "type": "object",
-          "properties": {
-            "state": {
-              "type": "string",
-              "description": "State of the log scrub config. Default value is Enabled.",
-              "enum": [
-                "Enabled",
-                "Disabled"
-              ],
-              "x-ms-enum": {
-                "name": "ProfileScrubbingState",
-                "modelAsString": true
-              }
-            },
-            "scrubbingRules": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ProfileScrubbingRules"
-              },
-              "x-ms-identifiers": [],
-              "description": "List of log scrub rules applied to logs."
-            }
+          "$ref": "#/definitions/ProfileLogScrubbing"
+        }
+      }
+    },
+    "ProfileLogScrubbing": {
+      "description": "Defines rules to scrub sensitive fields in logs",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State of the log scrub config. Default value is Enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ProfileScrubbingState",
+            "modelAsString": true
           }
+        },
+        "scrubbingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProfileScrubbingRules"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of log scrub rules applied to logs."
         }
       }
     },
@@ -2903,29 +2907,7 @@
         },
         "logScrubbing": {
           "description": "Defines rules to scrub sensitive fields in logs",
-          "type": "object",
-          "properties": {
-            "state": {
-              "type": "string",
-              "description": "State of the log scrub config. Default value is Enabled.",
-              "enum": [
-                "Enabled",
-                "Disabled"
-              ],
-              "x-ms-enum": {
-                "name": "ProfileScrubbingState",
-                "modelAsString": true
-              }
-            },
-            "scrubbingRules": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ProfileScrubbingRules"
-              },
-              "x-ms-identifiers": [],
-              "description": "List of log scrub rules applied to logs."
-            }
-          }
+          "$ref": "#/definitions/ProfileLogScrubbing"
         }
       }
     },
