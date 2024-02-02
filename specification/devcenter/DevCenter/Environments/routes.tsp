@@ -120,7 +120,6 @@ interface EnvironmentsOperations {
   @doc("Gets the specified catalog within the project")
   getCatalog is StandardResourceOperations.ResourceRead<Catalog>;
 
-
   @doc("Lists all environment definitions available for a project.")
   @route("/projects/{projectName}/environmentDefinitions")
   @get
