@@ -12,128 +12,22 @@ namespace DevCenterService;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface DevBoxesOperations {
   @doc("Lists available pools")
-  @route("/projects/{projectName}/pools")
-  @get
-  listPools is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("An OData filter clause to apply to the operation.")
-      @query
-      filter?: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
-    },
-    PoolListResult
-  >;
+  listPools is StandardResourceOperations.ResourceList<Pool>;
 
   @doc("Gets a pool")
-  @route("/projects/{projectName}/pools/{poolName}")
-  @get
-  getPool is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The name of a pool of Dev Boxes.")
-      @path
-      poolName: string;
-    },
-    Pool
-  >;
+  getPool is StandardResourceOperations.ResourceRead<Pool>;
 
   @doc("Lists available schedules for a pool.")
-  @route("/projects/{projectName}/pools/{poolName}/schedules")
-  @get
-  listSchedules is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The name of a pool of Dev Boxes.")
-      @path
-      poolName: string;
-
-      @doc("An OData filter clause to apply to the operation.")
-      @query
-      filter?: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
-    },
-    ScheduleListResult
-  >;
+  listSchedules is StandardResourceOperations.ResourceList<Schedule>;
 
   @doc("Gets a schedule.")
-  @route("/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}")
-  @get
-  getSchedule is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The name of a pool of Dev Boxes.")
-      @path
-      poolName: string;
-
-      @doc("The name of a schedule.")
-      @path
-      scheduleName: string;
-    },
-    Schedule
-  >;
+  getSchedule is StandardResourceOperations.ResourceRead<Schedule>;
 
   @doc("Lists Dev Boxes in the project for a particular user.")
-  @route("/projects/{projectName}/users/{userId}/devboxes")
-  @get
-  listDevBoxes is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("An OData filter clause to apply to the operation.")
-      @query
-      filter?: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
-    },
-    DevBoxListResult
-  >;
+  listDevBoxes is StandardResourceOperations.ResourceList<DevBox>;
 
   @doc("Gets a Dev Box")
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
-  @get
-  getDevBox is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-    },
-    DevBox
-  >;
+  getDevBox is StandardResourceOperations.ResourceRead<DevBox>;
 
   @doc("Creates or replaces a Dev Box.")
   @finalOperation(DevBoxesOperations.getDevBox)
@@ -312,48 +206,10 @@ interface DevBoxesOperations {
   >;
 
   @doc("Lists actions on a Dev Box.")
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions")
-  @get
-  listDevBoxActions is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-    },
-    DevBoxActionsListResult
-  >;
+  listDevBoxActions is StandardResourceOperations.ResourceList<DevBoxAction>;
 
   @doc("Gets an action.")
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}")
-  @get
-  getDevBoxAction is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-
-      @doc("The name of an action that will take place on a Dev Box.")
-      @path
-      actionName: string;
-    },
-    DevBoxAction
-  >;
+  getDevBoxAction is StandardResourceOperations.ResourceRead<DevBoxAction>;
 
   @doc("Skips an occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip")
