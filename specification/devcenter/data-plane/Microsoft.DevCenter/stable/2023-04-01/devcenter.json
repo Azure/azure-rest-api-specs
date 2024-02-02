@@ -58,21 +58,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "An OData filter clause to apply to the operation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
@@ -116,7 +101,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
           }
@@ -318,7 +303,7 @@
     },
     "PagedProject": {
       "type": "object",
-      "description": "Results of the project list operation.",
+      "description": "Paged collection of Project items",
       "properties": {
         "value": {
           "type": "array",
