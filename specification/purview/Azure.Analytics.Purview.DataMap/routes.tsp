@@ -37,6 +37,20 @@ op AtlasOperation<
   ...TParams,
 ): TResponse | TErrorResponse;
 
+op AtlasRpcOperation<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model,
+  Traits extends TypeSpec.Reflection.Model = {},
+  TErrorResponse = Azure.Core.Foundations.ErrorResponse,
+  TraitContexts extends TraitContext = TraitContext.Undefined
+> is AtlasOperation<
+  TParams & TraitProperties<Traits, TraitLocation.Parameters>,
+  TResponse & TraitProperties<Traits, TraitLocation.Response, TraitContexts>,
+  Traits,
+  TErrorResponse
+>;
+
+
 model OkResponse<T> {
   @statusCode
   status: 200;
@@ -762,10 +776,11 @@ default is false.
     AtlasErrorResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the sample Template for uploading/creating bulk BusinessMetaData")
   @route("/atlas/v2/entity/businessmetadata/import/template")
   @get
-  getSampleBusinessMetadataTemplate is Azure.Core.RpcOperation<
+  getSampleBusinessMetadataTemplate is AtlasRpcOperation<
     {},
     {
       @header contentType: "application/octet-stream";
