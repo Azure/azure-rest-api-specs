@@ -47,7 +47,7 @@ op AtlasImportOperation<
       TraitLocation.Response,
       TraitContext.Action
     >,
-  Traits & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId,
+  Traits,
   AtlasErrorResponse
 >;
 
