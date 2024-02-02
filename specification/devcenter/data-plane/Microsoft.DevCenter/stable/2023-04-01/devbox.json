@@ -161,24 +161,9 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "An OData filter clause to apply to the operation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
@@ -222,14 +207,14 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
           },
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of a pool of Dev Boxes.",
+            "description": "Pool name",
             "required": true,
             "type": "string"
           }
@@ -272,31 +257,16 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
           },
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of a pool of Dev Boxes.",
+            "description": "Pool name",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "An OData filter clause to apply to the operation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
@@ -340,21 +310,21 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
           },
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of a pool of Dev Boxes.",
+            "description": "Pool name",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleName",
             "in": "path",
-            "description": "The name of a schedule.",
+            "description": "Display name for the Schedule",
             "required": true,
             "type": "string"
           }
@@ -465,21 +435,21 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
           },
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "description": "The AAD object id of the user",
             "required": true,
             "type": "string"
           },
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "The name of a Dev Box.",
+            "description": "Display name for the Dev Box",
             "required": true,
             "type": "string"
           }
@@ -872,21 +842,21 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
           },
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "description": "The AAD object id of the user",
             "required": true,
             "type": "string"
           },
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "The name of a Dev Box.",
+            "description": "Display name for the Dev Box",
             "required": true,
             "type": "string"
           }
@@ -932,28 +902,28 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
           },
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "description": "The AAD object id of the user",
             "required": true,
             "type": "string"
           },
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "The name of a Dev Box.",
+            "description": "Display name for the Dev Box",
             "required": true,
             "type": "string"
           },
           {
             "name": "actionName",
             "in": "path",
-            "description": "The name of an action that will take place on a Dev Box.",
+            "description": "The name of the action.",
             "required": true,
             "type": "string"
           }
@@ -1948,7 +1918,7 @@
     },
     "PagedDevBoxAction": {
       "type": "object",
-      "description": "The actions list result",
+      "description": "Paged collection of DevBoxAction items",
       "properties": {
         "value": {
           "type": "array",
@@ -1992,7 +1962,7 @@
     },
     "PagedPool": {
       "type": "object",
-      "description": "The Pool list result",
+      "description": "Paged collection of Pool items",
       "properties": {
         "value": {
           "type": "array",
@@ -2014,7 +1984,7 @@
     },
     "PagedSchedule": {
       "type": "object",
-      "description": "The Schedule list result",
+      "description": "Paged collection of Schedule items",
       "properties": {
         "value": {
           "type": "array",
