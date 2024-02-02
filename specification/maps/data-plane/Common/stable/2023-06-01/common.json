@@ -547,9 +547,7 @@
           "description": "A more specific error code than was provided by the containing error."
         },
         "innererror": {
-          "readOnly": true,
-          "type": "object",
-          "description": "An object containing more specific information than the current object about the error."
+          "$ref": "#/definitions/InnerError"
         }
       },
       "description": "An object containing more specific information than the current object about the error."
@@ -592,7 +590,6 @@
     },
     "ErrorResponse": {
       "type": "object",
-      "title": "Error response",
       "description": "Common error response for all Azure APIs to return error details for failed operations.",
       "properties": {
         "error": {
