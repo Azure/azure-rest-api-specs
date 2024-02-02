@@ -373,7 +373,7 @@ action performed by user.
 
   @doc("The current power state of the Dev Box.")
   @visibility("read")
-  powerState: PowerState = PowerState.Unknown;
+  powerState?: PowerState = PowerState.Unknown;
 
   @doc("""
 A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
