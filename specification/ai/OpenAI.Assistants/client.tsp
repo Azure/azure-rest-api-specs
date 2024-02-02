@@ -69,27 +69,29 @@ namespace Azure.AI.OpenAI.Assistants;
   "InternalDetails"
 );
 
-// RequiredFunctionToolCall, FunctionToolCall: include name/arguments directly
+// RequiredFunctionToolCall, RunStepFunctionToolCall: include name/arguments/output directly
 
-@@access(FunctionToolCallDetails, Access.internal);
-@@projectedName(FunctionToolCallDetails,
+@@access(RunStepFunctionToolCallDetails, Access.internal);
+@@projectedName(RunStepFunctionToolCallDetails,
   "csharp",
-  "InternalFunctionToolCallDetails"
+  "InternalRunStepFunctionToolCallDetails"
 );
-@@projectedName(RequiredFunctionToolCall.function,
+@@projectedName(RequiredFunctionToolCall.function, "csharp", "InternalDetails");
+@@access(RequiredFunctionToolCallDetails, Access.internal);
+@@projectedName(RequiredFunctionToolCallDetails,
   "csharp",
-  "InternalFunctionDefinition"
+  "InternalRequiredFunctionToolCallDetails"
 );
-@@projectedName(FunctionToolCall.function, "csharp", "InternalDetails");
+@@projectedName(RunStepFunctionToolCall.function, "csharp", "InternalDetails");
 
-// CodeInterpreterToolCall: include input/outputs directly
+// RunStepCodeInterpreterToolCall: include input/outputs directly
 
-@@access(CodeInterpreterToolCallDetails, Access.internal);
-@@projectedName(CodeInterpreterToolCallDetails,
+@@access(RunStepCodeInterpreterToolCallDetails, Access.internal);
+@@projectedName(RunStepCodeInterpreterToolCallDetails,
   "csharp",
   "InternalCodeInterpreterToolCallDetails"
 );
-@@projectedName(CodeInterpreterToolCall.codeInterpreter,
+@@projectedName(RunStepCodeInterpreterToolCall.codeInterpreter,
   "csharp",
   "InternalDetails"
 );
