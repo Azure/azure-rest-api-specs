@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "test-rg",
+    "name": "test-serverfarm",
+    "api-version": "2023-12-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "subnetResourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/vnet-rg/providers/Microsoft.Network/virtualNetworks/client-vnet/subnets/client-subnet",
+            "subnetIpAllocation": {
+              "subnetIpAddressesAvailable": 7,
+              "subnetIpAddressesUsed": 4
+            },
+            "resourceAllocation": {
+              "connectedServerFarmsId": [
+                "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/serverFarms/test-serverfarm"
+              ],
+              "connectedSitesId": [
+                "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-site1",
+                "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-site2"
+              ]
+            }
+          },
+          {
+            "subnetResourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/vnet-rg2/providers/Microsoft.Network/virtualNetworks/client-vnet2/subnets/client-subnet2",
+            "subnetIpAllocation": {
+              "subnetIpAddressesAvailable": 2,
+              "subnetIpAddressesUsed": 0
+            },
+            "resourceAllocation": {
+              "connectedServerFarmsId": [
+                "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/serverFarms/test-serverfarm"
+              ],
+              "connectedSitesId": [
+                "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-site3"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
