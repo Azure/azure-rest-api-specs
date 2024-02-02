@@ -19,23 +19,23 @@ namespace Microsoft.LoadTestService;
 @doc("Lists the endpoints that agents may call as part of load testing.")
 @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
 @extension(
-"x-ms-pageable",
-{
+  "x-ms-pageable",
+  {
     nextLinkName: "nextLink",
-}
+  }
 )
 @autoRoute
 @action("outboundNetworkDependenciesEndpoints")
 op OutboundNetworkDependenciesEndpoint<TResource>(
-...SubscriptionIdParameter,
-...ResourceGroupParameter,
-...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...ApiVersionParameter,
 
-@path
-@doc("Load Test name.")
-@segment("providers/Microsoft.LoadTestService/loadTests")
-@extension("x-ms-parameter-location", "method")
-loadTestName: string,
+  @path
+  @doc("Load Test name.")
+  @segment("providers/Microsoft.LoadTestService/loadTests")
+  @extension("x-ms-parameter-location", "method")
+  loadTestName: string,
 ): TResource | ErrorResponse;
 
 // adding a custom operation since we want to override body parameter name to LoadTestResource
@@ -130,17 +130,49 @@ op ArmCustomPatchAsyncCustom<
   LoadTestResourcePatchRequestBody: PatchModel,
 ): ArmResponse<Resource> | ArmAcceptedResponseCustom | ErrorResponse;
 
-// Removed header retry-after from the response 
+/**
+ * @dev Delete a resource asynchronously
+ * @template Resource The resource being deleted
+ * @template Response The response type for the operation
+ * @template BaseParameters Optional. Allows overriding the parameters for the operation
+ */
+@autoRoute
+@doc("Delete a {name}", Resource)
+@extension("x-ms-long-running-operation", true)
+@extension(
+  "x-ms-long-running-operation-options",
+  {
+    `final-state-via`: "location",
+  }
+)
+@armResourceDelete(Resource)
+@delete
+op ArmResourceDeleteAsyncCustom<
+  Resource extends ArmResource,
+  Response = ArmDeletedResponse | ArmAcceptedLroDeleteResponse | ArmDeletedNoContentResponse,
+  BaseParameters = DefaultBaseParameters<Resource>
+>(...ResourceInstanceParameters<Resource, BaseParameters>): Response | ErrorResponse;
+
+// Removed header retry-after from the response
 @doc("Accepted -- LoadTest resource patch request accepted.")
-model ArmAcceptedResponseCustom{
-  ...AcceptedResponse,
-  ...ArmAsyncOperationHeader
+model ArmAcceptedResponseCustom {
+  ...AcceptedResponse;
+  ...ArmAsyncOperationHeader;
 }
 
 // Removed header retry-after from the response
 @doc("Created -- LoadTest resource created.")
-model ArmResourceCreatedResponseCustom{
-  ...CreatedResponse,
+model ArmResourceCreatedResponseCustom {
+  ...CreatedResponse;
   ...Body<LoadTestResource>;
-  ...ArmAsyncOperationHeader
+  ...ArmAsyncOperationHeader;
+}
+
+@doc(Description)
+model ArmAcceptedLroDeleteResponse<
+  Description extends valueof string = "Resource deletion accepted.",
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader
+> {
+  ...AcceptedResponse;
+  ...LroHeaders;
 }

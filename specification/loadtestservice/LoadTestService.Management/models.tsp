@@ -24,12 +24,12 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   @path
   @segment("loadTests")
   name: string;
-  
+
   ...ManagedServiceIdentity;
 }
 
 @doc("LoadTest resource patch request body.")
-model LoadTestResourcePatchRequestBody{
+model LoadTestResourcePatchRequestBody {
   @doc("Resource tags.")
   @extension("x-ms-nullable", true)
   tags?: Record<string>;
@@ -40,7 +40,6 @@ model LoadTestResourcePatchRequestBody{
   @extension("x-ms-client-flatten", true)
   properties?: LoadTestProperties;
 }
-
 
 @doc("Resources provisioning states.")
 enum ResourceState {
@@ -202,14 +201,13 @@ model Resource {
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
   @visibility("read")
   systemData?: SystemData;
-} 
+}
 
 @doc("Request object of new quota for a quota bucket.")
 model QuotaBucketRequest is Resource {
   @extension("x-ms-client-flatten", true)
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
-
 }
 
 @doc("New quota request request properties.")

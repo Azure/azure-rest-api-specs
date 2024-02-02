@@ -23,8 +23,11 @@ interface LoadTests {
   listByResourceGroup is ArmResourceListByParent<LoadTestResource>;
   get is ArmResourceRead<LoadTestResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsyncCustom<LoadTestResource>;
-  update is ArmCustomPatchAsyncCustom<LoadTestResource, LoadTestResourcePatchRequestBody>;
-  delete is ArmResourceDeleteAsync<LoadTestResource>;
+  update is ArmCustomPatchAsyncCustom<
+    LoadTestResource,
+    LoadTestResourcePatchRequestBody
+  >;
+  delete is ArmResourceDeleteAsyncCustom<LoadTestResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationId in already published GA spec is different from the auto generated one"
   outboundNetworkDependenciesEndpoint is OutboundNetworkDependenciesEndpoint<OutboundEnvironmentEndpointCollection>;
