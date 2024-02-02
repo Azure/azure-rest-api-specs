@@ -20,6 +20,7 @@
       {
         "name": "endpoint",
         "in": "path",
+        "description": "The DevCenter-specific URI to operate on.",
         "required": true,
         "type": "string"
       }
@@ -34,7 +35,7 @@
   "security": [
     {
       "OAuth2Auth": [
-        "user_impersonation"
+        "https://devcenter.azure.com/.default"
       ]
     }
   ],
@@ -44,7 +45,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
+        "https://devcenter.azure.com/.default": ""
       }
     }
   },
@@ -52,7 +53,7 @@
   "paths": {
     "/projects/{projectName}/catalogs": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListCatalogsByProject",
+        "operationId": "EnvironmentsOperations_ListCatalogs",
         "description": "Lists all of the catalogs available for a project.",
         "parameters": [
           {
@@ -69,7 +70,7 @@
             "name": "top",
             "in": "query",
             "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32"
           }
@@ -92,6 +93,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all of the catalogs available for a project.": {
+            "$ref": "./examples/EnvironmentsOperations_ListCatalogs.json"
           }
         },
         "x-ms-pageable": {
@@ -141,6 +147,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the specified catalog within the project": {
+            "$ref": "./examples/EnvironmentsOperations_GetCatalog.json"
+          }
         }
       }
     },
@@ -160,19 +171,19 @@
             "type": "string"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "catalogName",
             "in": "path",
             "description": "The name of the catalog",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -193,6 +204,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all environment definitions available within a catalog.": {
+            "$ref": "./examples/EnvironmentsOperations_ListEnvironmentDefinitionsByCatalog.json"
           }
         },
         "x-ms-pageable": {
@@ -249,12 +265,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get an environment definition from a catalog.": {
+            "$ref": "./examples/EnvironmentsOperations_GetEnvironmentDefinition.json"
+          }
         }
       }
     },
     "/projects/{projectName}/environmentDefinitions": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListEnvironmentDefinitionsByProject",
+        "operationId": "EnvironmentsOperations_ListEnvironmentDefinitions",
         "description": "Lists all environment definitions available for a project.",
         "parameters": [
           {
@@ -271,7 +292,7 @@
             "name": "top",
             "in": "query",
             "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32"
           }
@@ -294,6 +315,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all environment definitions available for a project.": {
+            "$ref": "./examples/EnvironmentsOperations_ListEnvironmentDefinitions.json"
           }
         },
         "x-ms-pageable": {
@@ -320,7 +346,7 @@
             "name": "top",
             "in": "query",
             "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32"
           }
@@ -345,6 +371,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Lists all environment types configured for a project.": {
+            "$ref": "./examples/EnvironmentsOperations_ListEnvironmentTypes.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -352,19 +383,11 @@
     },
     "/projects/{projectName}/environments": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListEnvironments",
+        "operationId": "EnvironmentsOperations_ListAllEnvironments",
         "description": "Lists the environments for a project.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
           },
           {
             "name": "projectName",
@@ -372,6 +395,14 @@
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -394,26 +425,68 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Lists the environments for a project.": {
+            "$ref": "./examples/EnvironmentsOperations_ListAllEnvironments.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/environments": {
+    "/projects/{projectName}/operationstatuses/{operationId}": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListEnvironmentsByUser",
-        "description": "Lists the environments for a project and user.",
+        "operationId": "SharedOperations_GetProjectOperationStatus",
+        "description": "Get the status of an operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments": {
+      "get": {
+        "operationId": "EnvironmentsOperations_ListEnvironments",
+        "description": "Lists the environments for a project and user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "projectName",
@@ -425,9 +498,17 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -450,6 +531,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Lists the environments for a project and user.": {
+            "$ref": "./examples/EnvironmentsOperations_ListEnvironments.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -457,7 +543,7 @@
     },
     "/projects/{projectName}/users/{userId}/environments/{environmentName}": {
       "get": {
-        "operationId": "EnvironmentsOperations_GetEnvironmentByUser",
+        "operationId": "EnvironmentsOperations_GetEnvironment",
         "description": "Gets an environment",
         "parameters": [
           {
@@ -473,7 +559,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string"
           },
@@ -504,10 +590,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets an environment": {
+            "$ref": "./examples/EnvironmentsOperations_GetEnvironment.json"
+          }
         }
       },
       "put": {
-        "operationId": "EnvironmentsOperations_CreateOrReplaceEnvironment",
+        "operationId": "EnvironmentsOperations_CreateOrUpdateEnvironment",
         "description": "Creates or updates an environment.",
         "parameters": [
           {
@@ -523,7 +614,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string"
           },
@@ -545,10 +636,15 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -563,7 +659,13 @@
               }
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Creates or updates an environment.": {
+            "$ref": "./examples/EnvironmentsOperations_CreateOrUpdateEnvironment.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "EnvironmentsOperations_DeleteEnvironment",
@@ -582,7 +684,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string"
           },
@@ -595,10 +697,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Operation-Location": {
+                "type": "string"
+              }
             }
           },
           "204": {
@@ -616,7 +726,13 @@
               }
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Deletes an environment and all its associated resources": {
+            "$ref": "./examples/EnvironmentsOperations_DeleteEnvironment.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -625,8 +741,7 @@
       "type": "string",
       "description": "DevCenter API versions",
       "enum": [
-        "2023-04-01",
-        "2023-09-01-preview"
+        "2023-04-01"
       ],
       "x-ms-enum": {
         "name": "APIVersions",
@@ -636,11 +751,6 @@
             "name": "v2023_04_01",
             "value": "2023-04-01",
             "description": "The 2023-04-01 service API version"
-          },
-          {
-            "name": "v2023_09_01_preview",
-            "value": "2023-09-01-preview",
-            "description": "The 2023-09-01-preview service API version"
           }
         ]
       }
@@ -706,6 +816,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Catalog": {
       "type": "object",
       "description": "A catalog.",
@@ -719,54 +834,13 @@
         "name"
       ]
     },
-    "CloudError": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Error body"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be\nconsumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user\ninterface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in\nerror."
-        },
-        "details": {
-          "type": "array",
-          "description": "A list of additional details about the error.",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
     "Environment": {
       "type": "object",
       "description": "Properties of an environment.",
       "properties": {
         "parameters": {
+          "type": "string",
+          "format": "byte",
           "description": "Parameters object for the environment."
         },
         "name": {
@@ -776,15 +850,19 @@
         },
         "environmentType": {
           "type": "string",
-          "description": "Environment type."
+          "description": "Environment type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "user": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The AAD object id of the owner of this Environment.",
           "readOnly": true
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/EnvironmentProvisioningState",
           "description": "The provisioning state of the environment.",
           "readOnly": true
         },
@@ -795,14 +873,22 @@
         },
         "catalogName": {
           "type": "string",
-          "description": "Name of the catalog."
+          "description": "Name of the catalog.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "environmentDefinitionName": {
           "type": "string",
-          "description": "Name of the environment definition."
+          "description": "Name of the environment definition.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Provisioning error details. Populated only for error states.",
           "readOnly": true
         }
@@ -842,6 +928,7 @@
         },
         "parametersSchema": {
           "type": "string",
+          "format": "byte",
           "description": "JSON schema defining the parameters object passed to an environment."
         },
         "templatePath": {
@@ -873,6 +960,7 @@
         },
         "default": {
           "type": "string",
+          "format": "byte",
           "description": "Default value of the parameter"
         },
         "type": {
@@ -890,6 +978,7 @@
         "allowed": {
           "type": "array",
           "description": "An array of allowed values",
+          "minItems": 1,
           "items": {
             "type": "string"
           }
@@ -900,6 +989,96 @@
         "type",
         "required"
       ]
+    },
+    "EnvironmentProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the environment.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Accepted",
+        "Deleting",
+        "Updating",
+        "Preparing",
+        "Running",
+        "Syncing",
+        "MovingResources",
+        "TransientFailure",
+        "StorageProvisioningFailed"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The environment was successfully provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The environment failed to provision."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The environment provisioning was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The environment is creating."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The environment was accepted."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The environment is deleting."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The environment is updating."
+          },
+          {
+            "name": "Preparing",
+            "value": "Preparing",
+            "description": "The environment is preparing."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The environment is running."
+          },
+          {
+            "name": "Syncing",
+            "value": "Syncing",
+            "description": "The environment is Syncing."
+          },
+          {
+            "name": "MovingResources",
+            "value": "MovingResources",
+            "description": "The environment is moving resources."
+          },
+          {
+            "name": "TransientFailure",
+            "value": "TransientFailure",
+            "description": "The environment has a transient failure."
+          },
+          {
+            "name": "StorageProvisioningFailed",
+            "value": "StorageProvisioningFailed",
+            "description": "The environment storage provisioning failed."
+          }
+        ]
+      }
     },
     "EnvironmentType": {
       "type": "object",
@@ -926,6 +1105,7 @@
     },
     "EnvironmentTypeEnableStatus": {
       "type": "string",
+      "description": "Indicates whether an environment type is enabled for use in a project.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -952,6 +1132,8 @@
       "description": "Properties of an environment. These properties can be updated after the\nresource has been created.",
       "properties": {
         "parameters": {
+          "type": "string",
+          "format": "byte",
           "description": "Parameters object for the environment."
         }
       }
@@ -969,7 +1151,7 @@
           "description": "The operation id name"
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/OperationStatusValue",
           "description": "Provisioning state of the resource."
         },
         "resourceId": {
@@ -989,13 +1171,17 @@
         "percentComplete": {
           "type": "number",
           "format": "float",
-          "description": "Percent of the operation that is complete"
+          "description": "Percent of the operation that is complete",
+          "minimum": 0,
+          "maximum": 100
         },
         "properties": {
+          "type": "string",
+          "format": "byte",
           "description": "Custom operation properties, populated only for a successful operation."
         },
         "error": {
-          "$ref": "#/definitions/OperationStatusError",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Operation Error message"
         }
       },
@@ -1003,18 +1189,40 @@
         "status"
       ]
     },
-    "OperationStatusError": {
-      "type": "object",
-      "description": "Operation Error message",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
+    "OperationStatusValue": {
+      "type": "string",
+      "description": "Indicates whether operation status is running, completed, canceled or failed.",
+      "enum": [
+        "Running",
+        "Completed",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatusValue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Operation is in progress"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Operation is completed with success"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Operation was canceled"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Operation failed"
+          }
+        ]
       }
     },
     "PagedCatalog": {
@@ -1106,6 +1314,7 @@
     },
     "ParameterType": {
       "type": "string",
+      "description": "The type of data a parameter accepts.",
       "enum": [
         "array",
         "boolean",
@@ -1150,6 +1359,30 @@
           }
         ]
       }
+    },
+    "Project": {
+      "type": "object",
+      "description": "Project details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the project",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the project."
+        },
+        "maxDevBoxesPerUser": {
+          "type": "integer",
+          "format": "int32",
+          "description": "When specified, indicates the maximum number of Dev Boxes a single user can\ncreate across all pools in the project.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "name"
+      ]
     }
   },
   "parameters": {
