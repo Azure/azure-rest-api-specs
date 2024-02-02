@@ -186,8 +186,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create Edge Device": {
-            "$ref": "./examples/PutEdgeDevices.json"
+          "Create HCI Edge Device": {
+            "$ref": "./examples/CreateHciEdgeDevice.json"
           }
         }
       },
@@ -339,25 +339,6 @@
           },
           "x-ms-identifiers": []
         },
-        "switchDetails": {
-          "type": "array",
-          "description": "List of switch details for edge device.",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SwitchDetail"
-          },
-          "x-ms-identifiers": []
-        },
-        "systemInfo": {
-          "$ref": "#/definitions/SystemInfo",
-          "description": "Specifies the system info obtained from the device.",
-          "readOnly": true
-        },
-        "sbeDeploymentPackageInfo": {
-          "$ref": "#/definitions/SbeDeploymentPackageInfo",
-          "description": "Solution builder extension (SBE) deployment package information.",
-          "readOnly": true
-        },
         "deviceMetadata": {
           "type": "string",
           "description": "device metadata details."
@@ -412,18 +393,18 @@
       "type": "object",
       "description": "Edge Device properties",
       "properties": {
-        "deviceConfiguration": {
-          "$ref": "#/definitions/DeviceConfiguration",
-          "description": "Device Configuration"
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of edgeDevice resource",
           "readOnly": true
+        },
+        "deviceType": {
+          "$ref": "#/definitions/DeviceType"
         }
       },
+      "discriminator": "deviceType",
       "required": [
-        "deviceConfiguration"
+        "deviceType"
       ]
     },
     "NicDetail": {
@@ -498,6 +479,99 @@
       },
       "required": [
         "adapterName"
+      ]
+    },
+    "DeviceType": {
+      "type": "string",
+      "description": "Edge device type based on host OS installed.",
+      "enum": [
+        "HCI",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "Arc-enabled edge device with HCI OS."
+          },
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "Arc-enabled edge device with Linux OS."
+          }
+        ]
+      }
+    },
+    "HciEdgeDevice": {
+      "type": "object",
+      "description": "Arc-enabled edge device with HCI OS.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HciEdgeDeviceProperties",
+          "description": "properties for Arc-enabled edge device with HCI OS."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDevice"
+        }
+      ]
+    },
+    "HciEdgeDeviceProperties": {
+      "type": "object",
+      "description": "properties for Arc-enabled edge device with HCI OS.",
+      "properties": {
+        "deviceConfiguration": {
+          "$ref": "#/definitions/HciDeviceConfiguration",
+          "description": "The device Configuration for HCI device."
+        }
+      },
+      "required": [
+        "deviceConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDeviceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "HCI"
+    },
+    "HciDeviceConfiguration": {
+      "type": "object",
+      "description": "The device Configuration for HCI device.",
+      "properties": {
+        "switchDetails": {
+          "type": "array",
+          "description": "List of switch details for edge device.",
+          "items": {
+            "$ref": "#/definitions/SwitchDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "switchName"
+          ]
+        },
+        "systemInfo": {
+          "$ref": "#/definitions/SystemInfo",
+          "description": "Specifies the system info obtained from the device.",
+          "readOnly": true
+        },
+        "sbeDeploymentPackageInfo": {
+          "$ref": "#/definitions/SbeDeploymentPackageInfo",
+          "description": "Solution builder extension (SBE) deployment package information.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceConfiguration"
+        }
       ]
     },
     "ProvisioningState": {
