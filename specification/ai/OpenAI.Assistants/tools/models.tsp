@@ -82,7 +82,7 @@ model RequiredFunctionToolCall extends RequiredToolCall {
   type: "function";
 
   @doc("Detailed information about the function to be executed by the tool that includes name and arguments.")
-  function: FunctionToolCall;
+  function: FunctionToolCallDetails;
 }
 
 //

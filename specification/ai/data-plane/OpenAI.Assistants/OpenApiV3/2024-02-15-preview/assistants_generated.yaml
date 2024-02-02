@@ -1858,7 +1858,7 @@ components:
           description: The object type of the required tool call. Always 'function' for function tools.
         function:
           allOf:
-            - $ref: '#/components/schemas/FunctionToolCall'
+            - $ref: '#/components/schemas/FunctionToolCallDetails'
           description: Detailed information about the function to be executed by the tool that includes name and arguments.
       allOf:
         - $ref: '#/components/schemas/RequiredToolCall'
@@ -2379,6 +2379,7 @@ components:
         mapping:
           code_interpreter: '#/components/schemas/CodeInterpreterToolCall'
           retrieval: '#/components/schemas/RetrievalToolCall'
+          function: '#/components/schemas/FunctionToolCall'
       description: An abstract representation of a detailed tool call as recorded within a run step for an existing run.
     ToolDefinition:
       type: object
