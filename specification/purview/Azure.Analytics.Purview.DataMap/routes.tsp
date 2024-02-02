@@ -740,7 +740,6 @@ default is false.
     AtlasErrorResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the sample Template for uploading/creating bulk BusinessMetaData")
   @route("/atlas/v2/entity/businessmetadata/import/template")
   @get
