@@ -9571,7 +9571,15 @@
           "description": "The list of nodes representing the cluster.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems"
+                }
+              ]
+            }
           }
         }
       },
@@ -9602,13 +9610,28 @@
       "properties": {
         "clusterRecoveryPointId": {
           "description": "The cluster recovery point id to be passed to failover to a particular recovery point.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionClusters/recoveryPoints"
+              }
+            ]
+          }
         },
         "individualNodeRecoveryPoints": {
           "description": "The list of individual node recovery points.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/recoveryPoints"
+                }
+              ]
+            }
           }
         }
       },
@@ -12506,8 +12529,17 @@
           "type": "string"
         },
         "recoveryPointType": {
-          "description": "The recovery point type: ApplicationConsistent, CrashConsistent.",
-          "type": "string"
+          "description": "The recovery point type.",
+          "enum": [
+            "NotSpecified",
+            "ApplicationConsistent",
+            "CrashConsistent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPoint",
+            "modelAsString": true
+          }
         },
         "providerSpecificDetails": {
           "$ref": "#/definitions/ClusterProviderSpecificRecoveryPointDetails",
