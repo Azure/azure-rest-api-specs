@@ -26,7 +26,7 @@ model Index {
 @doc("AssetVersion Definition")
 @parentResource(Index)
 @resource("versions")
-model AssetVersionDto {
+model AssetVersion {
   
   @key("indexVersion")
   @doc("Version of the index.")
@@ -59,7 +59,7 @@ model AssetVersionDto {
 }
 
 @doc("Index resource Definition")
-model IndexVersion is AssetVersionDto {
+model IndexVersion is AssetVersion {
 
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
   storageUri: string;

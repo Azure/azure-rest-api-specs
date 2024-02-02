@@ -17,7 +17,6 @@ namespace Microsoft.MachineLearningServices;
 
 interface IndexVersionsRegistries {
   
-  @doc("Creates or updates a IndexVersion.")
   @route("/registries/{registryName}/indexes/{indexName}/versions/{indexVersion}")
   @put
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
@@ -38,7 +37,7 @@ interface IndexVersionsRegistries {
 
       @doc("Properties of an Index Version.")
       @body
-      index: IndexVersion;
+      indexDefinition: IndexVersion;
 
     },
     ResourceCreatedOrOkResponse<IndexVersion>
@@ -93,7 +92,6 @@ interface IndexVersionsRegistries {
 
 interface IndexVersionsWorkspace {
   
-  @doc("Creates or updates a IndexVersion.")
   @route("/workspaces/{workspaceName}/indexes/{indexName}/versions/{indexVersion}")
   @put
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
@@ -114,7 +112,7 @@ interface IndexVersionsWorkspace {
 
       @doc("Properties of an Index Version.")
       @body
-      index: IndexVersion;
+      indexDefinition: IndexVersion;
 
     },
     ResourceCreatedOrOkResponse<IndexVersion>
