@@ -11,15 +11,25 @@ using PurviewDataMap;
 })
 namespace Customizations;
 
+@@access(MoveEntitiesOptions, Access.internal);
 @@projectedName(MoveEntitiesOptions, "csharp", "MoveEntitiesConfig");
+@@access(DateFormat, Access.internal);
 @@projectedName(DateFormat,"csharp", "AtlasDateFormat");
+@@access(NumberFormat, Access.internal);
 @@projectedName(NumberFormat, "csharp", "AtlasNumberFormat");
+@@access(TimeZone, Access.internal);
 @@projectedName(TimeZone, "csharp", "AtlasTimeZone");
+@@access(SortType, Access.internal);
 @@projectedName(SortType,"csharp", "AtlasSortType");
+@@access(ClassificationAssociateOptions, Access.internal);
 @@projectedName(ClassificationAssociateOptions, "csharp", "ClassificationAssociateConfig");
+@@access(QueryOptions, Access.internal);
 @@projectedName(QueryOptions, "csharp", "QueryConfig");
-@@projectedName(SuggestOptions"csharp", "SuggestConfig");
+@@access(SuggestOptions, Access.internal);
+@@projectedName(SuggestOptions, "csharp", "SuggestConfig");
+@@access(AutoCompleteOptions, Access.internal);
 @@projectedName(AutoCompleteOptions, "csharp", "AutoCompleteConfig");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
 interface Entity {
