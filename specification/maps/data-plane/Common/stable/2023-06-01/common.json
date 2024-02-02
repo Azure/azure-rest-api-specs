@@ -538,21 +538,21 @@
       "description": "The ontology version of this dataset.",
       "readOnly": true
     },
-    "ErrorAdditionalInfo": {
+    "InnerError": {
       "type": "object",
       "properties": {
-        "type": {
+        "code": {
           "readOnly": true,
           "type": "string",
-          "description": "The additional info type."
+          "description": "A more specific error code than was provided by the containing error."
         },
-        "info": {
+        "innererror": {
           "readOnly": true,
           "type": "object",
-          "description": "The additional info."
+          "description": "An object containing more specific information than the current object about the error."
         }
       },
-      "description": "The resource management error additional info."
+      "description": "An object containing more specific information than the current object about the error."
     },
     "ErrorDetail": {
       "type": "object",
@@ -561,17 +561,17 @@
         "code": {
           "readOnly": true,
           "type": "string",
-          "description": "The error code."
+          "description": "One of a server-defined set of error codes."
         },
         "message": {
           "readOnly": true,
           "type": "string",
-          "description": "The error message."
+          "description": "A human-readable representation of the error."
         },
         "target": {
           "readOnly": true,
           "type": "string",
-          "description": "The error target."
+          "description": "The target of the error."
         },
         "details": {
           "readOnly": true,
@@ -579,17 +579,10 @@
           "items": {
             "$ref": "#/definitions/ErrorDetail"
           },
-          "x-ms-identifiers": [],
-          "description": "The error details."
+          "description": "An array of details about specific errors that led to this reported error."
         },
-        "additionalInfo": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "x-ms-identifiers": [],
-          "description": "The error additional info."
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
         }
       },
       "required": [
@@ -600,10 +593,10 @@
     "ErrorResponse": {
       "type": "object",
       "title": "Error response",
-      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "description": "Common error response for all Azure APIs to return error details for failed operations.",
       "properties": {
         "error": {
-          "description": "The error object.",
+          "description": "The top-level error object whose code matches the `x-ms-error-code` response header",
           "$ref": "#/definitions/ErrorDetail"
         }
       },
