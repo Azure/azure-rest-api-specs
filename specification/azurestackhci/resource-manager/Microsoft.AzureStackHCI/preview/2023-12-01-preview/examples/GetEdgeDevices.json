@@ -19,39 +19,44 @@
           "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
         },
         "properties": {
+          "deviceType": "HCI",
           "deviceConfiguration": {
             "nicDetails": [
               {
-                "adapterName": "ethernet",
-                "interfaceDescription": "NDIS 6.70 ",
-                "componentId": "VMBUS{f8615163-df3e-46c5-913f-f2d2f965ed0g} ",
-                "driverVersion": "10.0.20348.1547 ",
-                "ip4Address": "10.10.10.10",
+                "adapterName": "vmanagement",
+                "interfaceDescription": "Hyper-V Virtual Ethernet Adapter",
+                "componentId": "vms_mp",
+                "driverVersion": "10.0.25398.1",
+                "ip4Address": "192.168.200.92",
                 "subnetMask": "255.255.255.0",
-                "defaultGateway": "10.10.10.1",
+                "defaultGateway": "192.168.200.1",
                 "dnsServers": [
-                  "100.10.10.1"
+                  "192.168.200.222"
                 ],
                 "defaultIsolationId": "0",
                 "slot": "0",
-                "macAddress": "10.10.10.10",
-                "switchName": "vmanagement",
-                "nicType": "physical",
+                "macAddress": "000000000041",
+                "switchName": null,
+                "nicType": "Virtual",
                 "vlanId": "0"
               }
             ],
-            "deviceMetadata": "",
+            "deviceMetadata": null,
             "systemInfo": {
               "bootType": "UEFI"
+            },
+            "sbeDeploymentPackageInfo": {
+              "code": "NewerThanLatestPublished",
+              "message": "The SBE package at path 'C:\\SBE' with version 4.1.2312.10 is published later than the latest SBE manifest published for online discovery. ",
+              "sbeManifest": "PEFwcGxpY2Fi"
             },
             "switchDetails": [
               {
                 "switchName": "vmanagement",
-                "switchType": "external"
+                "switchType": "External"
               }
             ]
-          },
-          "provisioningState": "Succeeded"
+          }
         }
       }
     }
