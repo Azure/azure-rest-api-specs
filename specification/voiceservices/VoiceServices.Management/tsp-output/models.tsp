@@ -150,7 +150,7 @@ model CommunicationsGatewayProperties {
 * A list of dial strings used for emergency calling.
 */
 @visibility("read", "create", "update")
-"emergencyDialStrings"?: string[] = 911,933;
+"emergencyDialStrings"?: string[];
 }
 
 /**
@@ -187,12 +187,12 @@ model PrimaryRegionProperties {
 * The allowed source IP address or CIDR ranges for signaling
 */
 @visibility("read", "create", "update")
-"allowedSignalingSourceAddressPrefixes"?: string[] = ;
+"allowedSignalingSourceAddressPrefixes"?: string[];
 /**
 * The allowed source IP address or CIDR ranges for media
 */
 @visibility("read", "create", "update")
-"allowedMediaSourceAddressPrefixes"?: string[] = ;
+"allowedMediaSourceAddressPrefixes"?: string[];
 }
 
 /**
