@@ -141,5 +141,6 @@ model ArmAcceptedResponseCustom{
 @doc("Created -- LoadTest resource created.")
 model ArmResourceCreatedResponseCustom{
   ...CreatedResponse,
+  ...Body<LoadTestResource>;
   ...ArmAsyncOperationHeader
 }
