@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Edge Devices",
-    "version": "2023-11-15-preview",
+    "version": "2023-12-01-preview",
     "description": "Azure Arc-enabled Edge Device."
   },
   "schemes": [
@@ -327,38 +327,17 @@
     }
   },
   "definitions": {
-    "DesiredDeviceConfiguration": {
-      "type": "object",
-      "properties": {
-        "hostName": {
-          "type": "string",
-          "description": "hostName"
-        }
-      }
-    },
     "DeviceConfiguration": {
       "type": "object",
-      "description": "The device Configuration of a device.",
+      "description": "The device configuration of a device.",
       "properties": {
         "nicDetails": {
           "type": "array",
-          "description": "NIC Details of device",
+          "description": "NIC details of device",
           "items": {
             "$ref": "#/definitions/NicDetail"
           },
           "x-ms-identifiers": []
-        },
-        "DeviceType": {
-          "type": "string",
-          "enum": [
-            "Linux",
-            "WinServer",
-            "HCI"
-          ],
-          "x-ms-enum": {
-            "name": "DeviceType",
-            "modelAsString": true
-          }
         },
         "deviceMetadata": {
           "type": "string",
@@ -424,8 +403,7 @@
           "readOnly": true
         },
         "deviceType": {
-          "$ref": "#/definitions/DeviceType",
-          "default": "HCI"
+          "$ref": "#/definitions/DeviceType"
         }
       },
       "discriminator": "deviceType",
@@ -434,101 +412,51 @@
         "deviceType"
       ]
     },
-    "HciDesiredDeviceConfiguration": {
-      "type": "object",
-      "properties": {
-        "hyperV": {
-          "$ref": "#/definitions/HyperVConfiguration"
-        },
-        "winRM": {
-          "$ref": "#/definitions/WinRMConfiguration"
-        },
-        "rdp": {
-          "$ref": "#/definitions/RDPConfiguration"
-        }
-      }
-    },
-    "HciEdgeDeviceProperties": {
-      "type": "object",
-      "properties": {
-        "desiredDeviceConfiguration": {
-          "$ref": "#/definitions/HciDesiredDeviceConfiguration"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeDeviceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "HCI"
-    },
-    "HyperVConfiguration": {
-      "type": "object",
-      "description": "hyper-v properties",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "desiredConfiguration"
-        }
-      }
-    },
-    "LinuxDesiredDeviceConfiguration": {
-      "type": "object",
-      "properties": {
-        "ssh": {
-          "$ref": "#/definitions/SshConfiguration"
-        }
-      }
-    },
-    "LinuxEdgeDeviceProperties": {
-      "type": "object",
-      "properties": {
-        "desiredDeviceConfiguration": {
-          "$ref": "#/definitions/LinuxDesiredDeviceConfiguration"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeDeviceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Linux"
-    },
     "NicDetail": {
       "type": "object",
       "description": "The NIC Detail of a device.",
       "properties": {
         "adapterName": {
           "type": "string",
-          "description": "Adapter Name of NIC"
+          "description": "Adapter Name of NIC."
         },
         "interfaceDescription": {
           "type": "string",
-          "description": "Interface Description of NIC"
+          "description": "Interface Description of NIC."
+        },
+        "slot": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Slot of NIC."
         },
         "componentId": {
           "type": "string",
-          "description": "Component Id of NIC"
+          "description": "Component ID of NIC."
         },
         "driverVersion": {
           "type": "string",
-          "description": "Driver Version of NIC"
+          "description": "Driver Version of NIC."
         },
         "ip4Address": {
           "type": "string",
-          "description": "Subnet Mask of NIC"
+          "description": "Subnet Mask of NIC."
+        },
+        "macAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "MAC address of NIC."
         },
         "subnetMask": {
           "type": "string",
-          "description": "Subnet Mask of NIC"
+          "description": "Subnet Mask of NIC."
         },
         "defaultGateway": {
           "type": "string",
-          "description": "Default Gateway of NIC"
+          "description": "Default Gateway of NIC."
         },
         "dnsServers": {
           "type": "array",
-          "description": "DNS Servers for NIC",
+          "description": "DNS Servers for NIC.",
           "items": {
             "type": "string"
           },
@@ -536,11 +464,119 @@
         },
         "defaultIsolationId": {
           "type": "string",
-          "description": "Default Isolation of Management NIC"
+          "description": "Default Isolation of Management NIC."
+        },
+        "switchName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The switch attached to the NIC, if any."
+        },
+        "nicType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of NIC, physical, virtual, management."
+        },
+        "vlanId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The VLAN ID of the physical NIC."
         }
       },
       "required": [
         "adapterName"
+      ]
+    },
+    "DeviceType": {
+      "type": "string",
+      "description": "Edge device type based on host OS installed.",
+      "enum": [
+        "HCI",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "Arc-enabled edge device with HCI OS."
+          },
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "Arc-enabled edge device with Linux OS."
+          }
+        ]
+      }
+    },
+    "HciEdgeDevice": {
+      "type": "object",
+      "description": "Arc-enabled edge device with HCI OS.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HciEdgeDeviceProperties",
+          "description": "properties for Arc-enabled edge device with HCI OS."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDevice"
+        }
+      ]
+    },
+    "HciEdgeDeviceProperties": {
+      "type": "object",
+      "description": "properties for Arc-enabled edge device with HCI OS.",
+      "properties": {
+        "deviceConfiguration": {
+          "$ref": "#/definitions/HciDeviceConfiguration",
+          "description": "The device Configuration for HCI device."
+        }
+      },
+      "required": [
+        "deviceConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDeviceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "HCI"
+    },
+    "HciDeviceConfiguration": {
+      "type": "object",
+      "description": "The device Configuration for HCI device.",
+      "properties": {
+        "switchDetails": {
+          "type": "array",
+          "description": "List of switch details for edge device.",
+          "items": {
+            "$ref": "#/definitions/SwitchDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "switchName"
+          ]
+        },
+        "systemInfo": {
+          "$ref": "#/definitions/SystemInfo",
+          "description": "Specifies the system info obtained from the device.",
+          "readOnly": true
+        },
+        "sbeDeploymentPackageInfo": {
+          "$ref": "#/definitions/SbeDeploymentPackageInfo",
+          "description": "Solution builder extension (SBE) deployment package information.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceConfiguration"
+        }
       ]
     },
     "ProvisioningState": {
@@ -603,36 +639,53 @@
         ]
       }
     },
-    "RDPConfiguration": {
+    "SbeDeploymentPackageInfo": {
       "type": "object",
-      "description": "RDP properties",
+      "description": "SBE deployment package information.",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "RDP Configuration"
+        "code": {
+          "type": "string",
+          "description": "SBE deployment validation code.",
+          "readOnly": true
         },
-        "port": {
-          "type": "integer",
-          "format": "int64"
+        "message": {
+          "type": "string",
+          "description": "A detailed message that explains the SBE package validation result.",
+          "readOnly": true
+        },
+        "sbeManifest": {
+          "type": "string",
+          "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "enabled",
-        "port"
-      ]
+      }
     },
-    "SshConfiguration": {
+    "SystemInfo": {
       "type": "object",
-      "description": "hyper-v properties",
+      "description": "The system info obtained from edge device.",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "desiredConfiguration"
+        "bootType": {
+          "type": "string",
+          "description": "The boot type of the device. e.g. UEFI, Legacy etc",
+          "readOnly": true
         }
-      },
-      "required": [
-        "enabled"
-      ]
+      }
+    },
+    "SwitchDetail": {
+      "type": "object",
+      "description": "Switch details obtained from the device",
+      "properties": {
+        "switchName": {
+          "type": "string",
+          "description": "The name of the switch.",
+          "readOnly": true
+        },
+        "switchType": {
+          "type": "string",
+          "description": "The type of the switch. e.g. external, internal",
+          "readOnly": true
+        }
+      }
     },
     "ValidateRequest": {
       "type": "object",
@@ -647,7 +700,7 @@
         },
         "additionalInfo": {
           "type": "string",
-          "description": "additional Info required for validation"
+          "description": "additional info required for validation"
         }
       },
       "required": [
@@ -664,44 +717,6 @@
           "readOnly": true
         }
       }
-    },
-    "WinRMConfiguration": {
-      "type": "object",
-      "description": "win-rm properties",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "desiredConfiguration"
-        }
-      },
-      "required": [
-        "enabled"
-      ]
-    },
-    "WinServerDesiredDeviceConfiguration": {
-      "type": "object",
-      "properties": {
-        "winRM": {
-          "$ref": "#/definitions/WinRMConfiguration"
-        },
-        "rdp": {
-          "$ref": "#/definitions/RDPConfiguration"
-        }
-      }
-    },
-    "WinServerEdgeDeviceProperties": {
-      "type": "object",
-      "properties": {
-        "desiredDeviceConfiguration": {
-          "$ref": "#/definitions/WinServerDesiredDeviceConfiguration"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeDeviceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "WinServer"
     }
   },
   "parameters": {
