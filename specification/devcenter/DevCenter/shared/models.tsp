@@ -83,3 +83,13 @@ create across all pools in the project.
   @minValue(0)
   maxDevBoxesPerUser?: int32;
 }
+
+@doc("Project user")
+@resource("users")
+@parentResource(Project)
+model User {
+  @key("userId")
+  @visibility("read")
+  @doc("The AAD object id of the user")
+  userId: string;
+}

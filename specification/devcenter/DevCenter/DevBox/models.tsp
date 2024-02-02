@@ -174,16 +174,6 @@ enum DevBoxActionDelayResultStatus {
   @doc("The delay operation failed.") Failed,
 }
 
-@doc("Project user")
-@resource("users")
-@parentResource(Project)
-model User {
-  @key("userId")
-  @visibility("read")
-  @doc("The AAD object id of the user")
-  userId: string;
-}
-
 @doc("A pool of Dev Boxes.")
 @resource("pools")
 @parentResource(Project)

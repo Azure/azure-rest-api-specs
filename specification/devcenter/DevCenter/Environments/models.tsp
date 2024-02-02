@@ -76,6 +76,8 @@ enum EnvironmentProvisioningState {
 model EnvironmentListResult is Azure.Core.Page<Environment>;
 
 @doc("Properties of an environment.")
+@resource("environments")
+@parentResource(User)
 @projectedName("csharp", "DevCenterEnvironment")
 @projectedName("java", "DevCenterEnvironment")
 model Environment {
@@ -83,7 +85,8 @@ model Environment {
 
   @doc("Environment name.")
   @visibility("read")
-  name?: string;
+  @key("environmentName")
+  name: string;
 
   @doc("Environment type.")
   @visibility("read", "create")
@@ -127,13 +130,14 @@ model EnvironmentUpdateProperties {
   parameters?: bytes;
 }
 
-@doc("Results of the catalog list operation.")
-model CatalogListResult is Azure.Core.Page<Catalog>;
-
 @doc("A catalog.")
+@resource("catalogs")
+@parentResource(Project)
 @projectedName("csharp", "DevCenterCatalog")
 model Catalog {
   @doc("Name of the catalog.")
+  @key("catalogName")
+  @visibility("read")
   name: string;
 }
 
@@ -141,11 +145,15 @@ model Catalog {
 model EnvironmentDefinitionListResult is Azure.Core.Page<EnvironmentDefinition>;
 
 @doc("An environment definition.")
+@resource("environmentDefinitions")
+@parentResource(Catalog)
 model EnvironmentDefinition {
   @doc("The ID of the environment definition.")
   id: string;
 
   @doc("Name of the environment definition.")
+  @key("definitionName")
+  @visibility("read")
   name: string;
 
   @doc("Name of the catalog.")

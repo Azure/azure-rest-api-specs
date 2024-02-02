@@ -49,24 +49,7 @@ interface EnvironmentsOperations {
   >;
 
   @doc("Gets an environment")
-  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
-  @get
-  getEnvironment is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @path
-      environmentName: string;
-    },
-    Environment
-  >;
+  getEnvironment is StandardResourceOperations.ResourceRead<Environment>;
 
   @doc("Creates or updates an environment.")
   @finalOperation(EnvironmentsOperations.getEnvironment)
@@ -140,36 +123,11 @@ interface EnvironmentsOperations {
   } | Azure.Core.Foundations.ErrorResponse;
 
   @doc("Lists all of the catalogs available for a project.")
-  @route("/projects/{projectName}/catalogs")
-  @get
-  listCatalogs is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
-    },
-    CatalogListResult
-  >;
+  listCatalogs is StandardResourceOperations.ResourceList<Catalog>;
 
   @doc("Gets the specified catalog within the project")
-  @route("/projects/{projectName}/catalogs/{catalogName}")
-  @get
-  getCatalog is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
+  getCatalog is StandardResourceOperations.ResourceRead<Catalog>;
 
-      @doc("The name of the catalog")
-      @path
-      catalogName: string;
-    },
-    Catalog
-  >;
 
   @doc("Lists all environment definitions available for a project.")
   @route("/projects/{projectName}/environmentDefinitions")
@@ -208,24 +166,7 @@ interface EnvironmentsOperations {
   >;
 
   @doc("Get an environment definition from a catalog.")
-  @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{definitionName}")
-  @get
-  getEnvironmentDefinition is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The name of the catalog")
-      @path
-      catalogName: string;
-
-      @doc("The name of the environment definition")
-      @path
-      definitionName: string;
-    },
-    EnvironmentDefinition
-  >;
+  getEnvironmentDefinition is StandardResourceOperations.ResourceRead<EnvironmentDefinition>;
 
   @doc("Lists all environment types configured for a project.")
   @route("/projects/{projectName}/environmentTypes")
