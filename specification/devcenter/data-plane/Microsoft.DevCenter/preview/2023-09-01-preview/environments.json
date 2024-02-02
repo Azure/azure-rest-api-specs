@@ -1,397 +1,88 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DevCenter",
     "version": "2023-09-01-preview",
-    "description": "DevCenter service",
-    "x-typespec-generated": [
+    "title": "DevCenter",
+    "description": "Deployment Environments API."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
       {
-        "emitter": "@azure-tools/typespec-autorest"
+        "$ref": "devcenter.json#/parameters/EndpointParameter"
       }
     ]
   },
   "schemes": [
     "https"
   ],
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "name": "endpoint",
-        "in": "path",
-        "required": true,
-        "type": "string"
-      }
-    ]
-  },
-  "produces": [
+  "consumes": [
     "application/json"
   ],
-  "consumes": [
+  "produces": [
     "application/json"
   ],
   "security": [
     {
-      "OAuth2Auth": [
+      "AADToken": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "OAuth2Auth": {
+    "AADToken": {
       "type": "oauth2",
-      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-        "user_impersonation": ""
+        "user_impersonation": "impersonate your user account"
       }
     }
   },
-  "tags": [],
   "paths": {
-    "/projects/{projectName}/catalogs": {
-      "get": {
-        "operationId": "EnvironmentsOperations_ListCatalogsByProject",
-        "description": "Lists all of the catalogs available for a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedCatalog"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/projects/{projectName}/catalogs/{catalogName}": {
-      "get": {
-        "operationId": "EnvironmentsOperations_GetCatalog",
-        "description": "Gets the specified catalog within the project",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "The name of the catalog",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Catalog"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions": {
-      "get": {
-        "operationId": "EnvironmentsOperations_ListEnvironmentDefinitionsByCatalog",
-        "description": "Lists all environment definitions available within a catalog.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "The name of the catalog",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedEnvironmentDefinition"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{definitionName}": {
-      "get": {
-        "operationId": "EnvironmentsOperations_GetEnvironmentDefinition",
-        "description": "Get an environment definition from a catalog.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "The name of the catalog",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "definitionName",
-            "in": "path",
-            "description": "The name of the environment definition",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EnvironmentDefinition"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/environmentDefinitions": {
-      "get": {
-        "operationId": "EnvironmentsOperations_ListEnvironmentDefinitionsByProject",
-        "description": "Lists all environment definitions available for a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedEnvironmentDefinition"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/projects/{projectName}/environmentTypes": {
-      "get": {
-        "operationId": "EnvironmentsOperations_ListEnvironmentTypes",
-        "description": "Lists all environment types configured for a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedEnvironmentType"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/projects/{projectName}/environments": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListEnvironments",
+        "tags": [
+          "Environments"
+        ],
         "description": "Lists the environments for a project.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "devcenter.json#/parameters/TopParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           }
         ],
+        "operationId": "Environments_ListEnvironments",
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedEnvironment"
+              "$ref": "#/definitions/EnvironmentListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "devcenter.json#/definitions/CloudError"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListEnvironments": {
+            "$ref": "./examples/Environments_ListByProject.json"
           }
         },
         "x-ms-pageable": {
@@ -401,53 +92,48 @@
     },
     "/projects/{projectName}/users/{userId}/environments": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListEnvironmentsByUser",
+        "tags": [
+          "Environments"
+        ],
         "description": "Lists the environments for a project and user.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "devcenter.json#/parameters/TopParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           }
         ],
+        "operationId": "Environments_ListEnvironmentsByUser",
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedEnvironment"
+              "$ref": "#/definitions/EnvironmentListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "devcenter.json#/definitions/CloudError"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListEnvironmentsByUser": {
+            "$ref": "./examples/Environments_ListByProjectByUser.json"
           }
         },
         "x-ms-pageable": {
@@ -457,82 +143,68 @@
     },
     "/projects/{projectName}/users/{userId}/environments/{environmentName}": {
       "get": {
-        "operationId": "EnvironmentsOperations_GetEnvironmentByUser",
+        "tags": [
+          "Environments"
+        ],
         "description": "Gets an environment",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "The name of the environment.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/EnvironmentNameParameter"
           }
         ],
+        "operationId": "Environments_GetEnvironmentByUser",
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Environment"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "devcenter.json#/definitions/CloudError"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_GetEnvironmentByUser": {
+            "$ref": "./examples/Environments_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "EnvironmentsOperations_CreateOrReplaceEnvironment",
+        "tags": [
+          "Environments"
+        ],
         "description": "Creates or updates an environment.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "The name of the environment.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
             "name": "body",
@@ -544,144 +216,151 @@
             }
           }
         ],
+        "operationId": "Environments_CreateOrReplaceEnvironment",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "Created. Operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "devcenter.json#/definitions/CloudError"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_CreateByEnvironmentDefinition": {
+            "$ref": "./examples/Environments_CreateByEnvironmentDefinition.json"
           }
         }
       },
       "delete": {
-        "operationId": "EnvironmentsOperations_DeleteEnvironment",
+        "tags": [
+          "Environments"
+        ],
         "description": "Deletes an environment and all its associated resources",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "The name of the environment.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/EnvironmentNameParameter"
           }
         ],
+        "operationId": "Environments_DeleteEnvironment",
+        "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "$ref": "devcenter.json#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
             }
           },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "Deletion was successful or resource does not exist."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "devcenter.json#/definitions/CloudError"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_DeleteEnvironment": {
+            "$ref": "./examples/Environments_Delete.json"
           }
         }
       }
     },
     "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListOperations",
+        "tags": [
+          "EnvironmentOperations",
+          "Environments"
+        ],
         "description": "Lists operations on the environment which have occurred within the past 90 days",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "devcenter.json#/parameters/TopParameter"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "An OData filter clause to apply to the operation.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/FilterParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "The name of the environment.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/EnvironmentNameParameter"
           }
         ],
+        "operationId": "Environments_ListOperations",
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedEnvironmentOperation"
+              "$ref": "#/definitions/EnvironmentOperationListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "devcenter.json#/definitions/CloudError"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentOperations_ListByEnvironment": {
+            "$ref": "./examples/EnvironmentOperations_ListByEnvironment.json"
           }
         },
         "x-ms-pageable": {
@@ -691,282 +370,424 @@
     },
     "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}": {
       "get": {
-        "operationId": "EnvironmentsOperations_GetOperation",
+        "tags": [
+          "EnvironmentOperations",
+          "Environments"
+        ],
         "description": "Gets an environment action result.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "The name of the environment.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "description": "The id of the operation on an environment.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/EnvironmentOperationIdParameter"
           }
         ],
+        "operationId": "Environments_GetOperation",
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/EnvironmentOperation"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "devcenter.json#/definitions/CloudError"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentOperations_GetByEnvironment": {
+            "$ref": "./examples/EnvironmentOperations_GetByEnvironment.json"
           }
         }
       }
     },
     "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}/logs": {
       "get": {
-        "operationId": "EnvironmentsOperations_GetLogsByOperation",
+        "tags": [
+          "EnvironmentOperations",
+          "Environments"
+        ],
         "description": "Gets the logs for an operation on an environment.",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the\nauthentication context.",
-            "required": true,
-            "type": "string"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "The name of the environment.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "description": "The id of the operation on an environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "text/plain"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "Accept"
+            "$ref": "#/parameters/EnvironmentOperationIdParameter"
           }
         ],
+        "operationId": "Environments_GetLogsByOperation",
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "type": "file"
+            }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "devcenter.json#/definitions/CloudError"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "EnvironmentOperations_GetLogs": {
+            "$ref": "./examples/EnvironmentOperations_GetLogs.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/catalogs": {
+      "get": {
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Lists all of the catalogs available for a project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Environments_ListCatalogsByProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListCatalogsByProject": {
+            "$ref": "./examples/Catalogs_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/catalogs/{catalogName}": {
+      "get": {
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Gets the specified catalog within the project",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "Environments_GetCatalog",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_GetCatalog": {
+            "$ref": "./examples/Catalogs_Get.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/environmentDefinitions": {
+      "get": {
+        "tags": [
+          "Environment Definitions"
+        ],
+        "description": "Lists all environment definitions available for a project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Environments_ListEnvironmentDefinitionsByProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListEnvironmentDefinitions": {
+            "$ref": "./examples/EnvironmentDefinitions_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions": {
+      "get": {
+        "tags": [
+          "Environment Definitions"
+        ],
+        "description": "Lists all environment definitions available within a catalog.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "Environments_ListEnvironmentDefinitionsByCatalog",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListEnvironmentDefinitionsByCatalog": {
+            "$ref": "./examples/EnvironmentDefinitions_ListByCatalog.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{definitionName}": {
+      "get": {
+        "tags": [
+          "Environment Definitions"
+        ],
+        "description": "Get an environment definition from a catalog.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
+          }
+        ],
+        "operationId": "Environments_GetEnvironmentDefinition",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_GetEnvironmentDefinition": {
+            "$ref": "./examples/EnvironmentDefinitions_Get.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/environmentTypes": {
+      "get": {
+        "tags": [
+          "Environment Types"
+        ],
+        "description": "Lists all environment types configured for a project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Environments_ListEnvironmentTypes",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentTypeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListEnvironmentTypes": {
+            "$ref": "./examples/EnvironmentTypes_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
-    "APIVersions": {
-      "type": "string",
-      "description": "DevCenter API versions",
-      "enum": [
-        "2023-04-01",
-        "2023-09-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "APIVersions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_04_01",
-            "value": "2023-04-01",
-            "description": "The 2023-04-01 service API version"
-          },
-          {
-            "name": "v2023_09_01_preview",
-            "value": "2023-09-01-preview",
-            "description": "The 2023-09-01-preview service API version"
-          }
-        ]
-      }
-    },
-    "Azure.Core.Foundations.Error": {
+    "EnvironmentUpdateProperties": {
+      "description": "Properties of an environment. These properties can be updated after the resource has been created.",
       "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "description": "A response containing error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Azure.Core.Foundations.InnerError": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
-        }
-      }
-    },
-    "Catalog": {
-      "type": "object",
-      "description": "A catalog.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the catalog."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "CloudError": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Error body"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be\nconsumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user\ninterface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in\nerror."
-        },
-        "details": {
-          "type": "array",
-          "description": "A list of additional details about the error.",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Environment": {
-      "type": "object",
-      "description": "Properties of an environment.",
       "properties": {
         "parameters": {
+          "type": "object",
           "description": "Parameters object for the environment."
+        }
+      }
+    },
+    "Environment": {
+      "description": "Properties of an environment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentUpdateProperties"
+        }
+      ],
+      "properties": {
+        "uri": {
+          "description": "The unique URI of the environment",
+          "type": "string",
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -975,7 +796,11 @@
         },
         "environmentType": {
           "type": "string",
-          "description": "Environment type."
+          "description": "Environment type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "user": {
           "type": "string",
@@ -983,27 +808,35 @@
           "readOnly": true
         },
         "provisioningState": {
-          "type": "string",
           "description": "The provisioning state of the environment.",
+          "type": "string",
           "readOnly": true
         },
         "resourceGroupId": {
-          "type": "string",
           "description": "The identifier of the resource group containing the environment's resources.",
+          "type": "string",
           "readOnly": true
         },
         "catalogName": {
           "type": "string",
-          "description": "Name of the catalog."
+          "description": "Name of the catalog.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "environmentDefinitionName": {
           "type": "string",
-          "description": "Name of the environment definition."
+          "description": "Name of the environment definition.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
           "description": "Provisioning error details. Populated only for error states.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "devcenter.json#/definitions/CloudErrorBody"
         }
       },
       "required": [
@@ -1012,46 +845,129 @@
         "environmentDefinitionName"
       ]
     },
-    "EnvironmentDefinition": {
+    "EnvironmentListResult": {
+      "description": "Results of the environment list operation.",
       "type": "object",
-      "description": "An environment definition.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the environment definition."
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Environment"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CatalogListResult": {
+      "description": "Results of the catalog list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Catalog"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Catalog": {
+      "description": "A catalog.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "The unique URI of the catalog",
+          "type": "string"
         },
         "name": {
-          "type": "string",
-          "description": "Name of the environment definition."
+          "description": "Name of the catalog.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uri",
+        "name"
+      ]
+    },
+    "EnvironmentDefinitionListResult": {
+      "description": "Results of the environment definition list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EnvironmentDefinition": {
+      "description": "An environment definition.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "The unique URI of the environment definition",
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the environment definition.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the environment definition.",
+          "type": "string"
         },
         "catalogName": {
-          "type": "string",
-          "description": "Name of the catalog."
+          "description": "Name of the catalog.",
+          "type": "string"
         },
         "description": {
-          "type": "string",
-          "description": "A short description of the environment definition."
+          "description": "A short description of the environment definition.",
+          "type": "string"
         },
         "parameters": {
           "type": "array",
-          "description": "Input parameters passed to an environment.",
           "items": {
             "$ref": "#/definitions/EnvironmentDefinitionParameter"
-          }
+          },
+          "description": "Input parameters passed to an environment."
         },
         "parametersSchema": {
           "type": "string",
           "description": "JSON schema defining the parameters object passed to an environment."
         },
         "templatePath": {
-          "type": "string",
-          "description": "Path to the Environment Definition entrypoint file."
+          "description": "Path to the Environment Definition entrypoint file.",
+          "type": "string"
         }
       },
       "required": [
-        "id",
         "name",
-        "catalogName"
+        "uri",
+        "catalogName",
+        "id"
       ]
     },
     "EnvironmentDefinitionParameter": {
@@ -1075,12 +991,12 @@
           "description": "Default value of the parameter"
         },
         "type": {
-          "$ref": "#/definitions/ParameterType",
-          "description": "A string of one of the basic JSON types (number, integer, array, object,\nboolean, string)"
+          "description": "A string of one of the basic JSON types (number, integer, array, object, boolean, string)",
+          "$ref": "#/definitions/ParameterType"
         },
         "readOnly": {
           "type": "boolean",
-          "description": "Whether or not this parameter is read-only.  If true, default should have a\nvalue."
+          "description": "Whether or not this parameter is read-only.  If true, default should have a value."
         },
         "required": {
           "type": "boolean",
@@ -1088,10 +1004,12 @@
         },
         "allowed": {
           "type": "array",
-          "description": "An array of allowed values",
           "items": {
             "type": "string"
-          }
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "An array of allowed values"
         }
       },
       "required": [
@@ -1100,321 +1018,79 @@
         "required"
       ]
     },
-    "EnvironmentOperation": {
+    "EnvironmentTypeListResult": {
+      "description": "Result of the environment type list operation.",
       "type": "object",
-      "description": "Information about an operation on an environment.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for EnvironmentOperation."
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentType"
+          }
         },
-        "uri": {
-          "type": "string",
-          "description": "The unique URI for the environment operation."
-        },
-        "operationId": {
-          "type": "string",
-          "description": "Unique identifier for the environment operation."
-        },
-        "status": {
-          "$ref": "#/definitions/EnvironmentOperationStatus",
-          "description": "The operation status."
-        },
-        "createdByObjectId": {
-          "type": "string",
-          "description": "The object ID of the actor which initiated the operation."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the operation started."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the operation finished."
-        },
-        "environmentParameters": {
-          "description": "Parameters object for the environment at the time of the operation."
-        },
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Provisioning or operation error details. Populated only for error states."
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string"
         }
       },
-      "discriminator": "kind",
       "required": [
-        "kind",
-        "uri",
-        "operationId",
-        "status"
+        "value"
       ]
     },
-    "EnvironmentOperationStatus": {
-      "type": "string",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Canceled",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "EnvironmentOperationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "The operation has not started."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The operation is running."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation succeeded."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation was canceled."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation failed."
-          }
-        ]
-      }
-    },
     "EnvironmentType": {
-      "type": "object",
       "description": "Properties of an environment type.",
+      "type": "object",
       "properties": {
+        "uri": {
+          "description": "The unique URI of the environment type",
+          "type": "string"
+        },
         "name": {
-          "type": "string",
-          "description": "Name of the environment type"
+          "description": "Name of the environment type",
+          "type": "string"
         },
         "deploymentTargetId": {
-          "type": "string",
-          "description": "Id of a subscription or management group that the environment type will be\nmapped to. The environment's resources will be deployed into this subscription\nor management group."
+          "description": "The ID of a subscription or management group that the environment type will be mapped to. The environment's resources will be deployed into this subscription or management group.",
+          "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/EnvironmentTypeEnableStatus",
-          "description": "Indicates whether this environment type is enabled for use in this project."
+          "description": "Indicates whether this environment type is enabled for use in this project.",
+          "$ref": "#/definitions/EnvironmentTypeEnableStatus"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the environment type."
         }
       },
       "required": [
+        "uri",
         "name",
         "deploymentTargetId",
         "status"
       ]
     },
     "EnvironmentTypeEnableStatus": {
-      "type": "string",
+      "description": "Indicates whether an environment type is enabled for use in a project.",
       "enum": [
         "Enabled",
         "Disabled"
       ],
+      "type": "string",
       "x-ms-enum": {
         "name": "EnvironmentTypeEnableStatus",
         "modelAsString": true,
         "values": [
           {
-            "name": "Enabled",
             "value": "Enabled",
             "description": "The environment type is enabled for use in the project."
           },
           {
-            "name": "Disabled",
             "value": "Disabled",
             "description": "The environment type is not enabled for use in the project."
           }
         ]
       }
-    },
-    "EnvironmentUpdateProperties": {
-      "type": "object",
-      "description": "Properties of an environment. These properties can be updated after the\nresource has been created.",
-      "properties": {
-        "parameters": {
-          "description": "Parameters object for the environment."
-        }
-      }
-    },
-    "OperationStatus": {
-      "type": "object",
-      "description": "The current status of an async operation",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified ID for the operation status."
-        },
-        "name": {
-          "type": "string",
-          "description": "The operation id name"
-        },
-        "status": {
-          "type": "string",
-          "description": "Provisioning state of the resource."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "The id of the resource."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the operation"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the operation"
-        },
-        "percentComplete": {
-          "type": "number",
-          "format": "float",
-          "description": "Percent of the operation that is complete"
-        },
-        "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
-        },
-        "error": {
-          "$ref": "#/definitions/OperationStatusError",
-          "description": "Operation Error message"
-        }
-      },
-      "required": [
-        "status"
-      ]
-    },
-    "OperationStatusError": {
-      "type": "object",
-      "description": "Operation Error message",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      }
-    },
-    "PagedCatalog": {
-      "type": "object",
-      "description": "Results of the catalog list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Catalog items on this page",
-          "items": {
-            "$ref": "#/definitions/Catalog"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedEnvironment": {
-      "type": "object",
-      "description": "Results of the environment list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Environment items on this page",
-          "items": {
-            "$ref": "#/definitions/Environment"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedEnvironmentDefinition": {
-      "type": "object",
-      "description": "Results of the environment definition list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The EnvironmentDefinition items on this page",
-          "items": {
-            "$ref": "#/definitions/EnvironmentDefinition"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedEnvironmentOperation": {
-      "type": "object",
-      "description": "The action results list result.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The EnvironmentOperation items on this page",
-          "items": {
-            "$ref": "#/definitions/EnvironmentOperation"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedEnvironmentType": {
-      "type": "object",
-      "description": "Result of the environment type list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The EnvironmentType items on this page",
-          "items": {
-            "$ref": "#/definitions/EnvironmentType"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "ParameterType": {
       "type": "string",
@@ -1426,54 +1102,233 @@
         "object",
         "string"
       ],
+      "description": "The type of data a parameter accepts.",
       "x-ms-enum": {
         "name": "ParameterType",
         "modelAsString": true,
         "values": [
           {
-            "name": "array",
             "value": "array",
             "description": "The parameter accepts an array of values."
           },
           {
-            "name": "boolean",
             "value": "boolean",
             "description": "The parameter accepts a boolean value."
           },
           {
-            "name": "integer",
             "value": "integer",
             "description": "The parameter accepts an integer value."
           },
           {
-            "name": "number",
             "value": "number",
             "description": "The parameter accepts a number value."
           },
           {
-            "name": "object",
             "value": "object",
             "description": "The parameter accepts an object value."
           },
           {
-            "name": "string",
             "value": "string",
             "description": "The parameter accepts a string value."
           }
         ]
       }
+    },
+    "EnvironmentOperationListResult": {
+      "type": "object",
+      "description": "The action results list result.",
+      "properties": {
+        "value": {
+          "description": "The current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EnvironmentOperation": {
+      "type": "object",
+      "description": "Information about an operation on an environment.",
+      "discriminator": "kind",
+      "properties": {
+        "uri": {
+          "description": "The unique URI for the environment operation.",
+          "type": "string"
+        },
+        "operationId": {
+          "description": "Unique identifier for the environment operation.",
+          "type": "string"
+        },
+        "kind": {
+          "description": "The kind of operation that occurred.",
+          "$ref": "#/definitions/EnvironmentOperationKind"
+        },
+        "status": {
+          "description": "The operation status.",
+          "$ref": "#/definitions/EnvironmentOperationStatus"
+        },
+        "createdByObjectId": {
+          "description": "The object ID of the actor which initiated the operation.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The time the operation started.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The time the operation finished.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "environmentParameters": {
+          "type": "object",
+          "description": "Parameters object for the environment at the time of the operation."
+        },
+        "error": {
+          "description": "Provisioning or operation error details. Populated only for error states.",
+          "$ref": "devcenter.json#/definitions/CloudErrorBody"
+        }
+      },
+      "required": [
+        "uri",
+        "operationId",
+        "kind",
+        "status"
+      ]
+    },
+    "EnvironmentOperationKind": {
+      "type": "string",
+      "enum": [
+        "Deploy",
+        "Delete"
+      ],
+      "description": "The type of environment operation.",
+      "x-ms-enum": {
+        "name": "EnvironmentOperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Deploy",
+            "description": "The operation represents a deployment."
+          },
+          {
+            "value": "Delete",
+            "description": "The operation represents a delete."
+          }
+        ]
+      }
+    },
+    "EnvironmentOperationStatus": {
+      "type": "string",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Canceled",
+        "Failed"
+      ],
+      "description": "The status of an environment operation.",
+      "x-ms-enum": {
+        "name": "EnvironmentOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "value": "Running",
+            "description": "The operation is running."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "value": "Failed",
+            "description": "The operation failed."
+          }
+        ]
+      }
+    },
+    "EnvironmentDeployOperation": {
+      "type": "object",
+      "description": "Information about a deploy operation on an environment.",
+      "x-ms-discriminator-value": "Deploy",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentOperation"
+        }
+      ]
+    },
+    "EnvironmentDeleteOperation": {
+      "type": "object",
+      "description": "Information about a delete operation on an environment.",
+      "x-ms-discriminator-value": "Delete",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentOperation"
+        }
+      ]
     }
   },
   "parameters": {
-    "Azure.Core.Foundations.ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The API version to use for this operation.",
+    "EnvironmentNameParameter": {
+      "name": "environmentName",
+      "in": "path",
       "required": true,
       "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "apiVersion"
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of the environment.",
+      "x-ms-parameter-location": "method"
+    },
+    "CatalogNameParameter": {
+      "name": "catalogName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of the catalog",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentDefinitionNameParameter": {
+      "name": "definitionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of the environment definition",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentOperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The id of the operation on an environment.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
