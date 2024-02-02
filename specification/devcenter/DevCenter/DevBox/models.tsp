@@ -174,9 +174,6 @@ enum DevBoxActionDelayResultStatus {
   @doc("The delay operation failed.") Failed,
 }
 
-@doc("The Pool list result")
-model PoolListResult is Azure.Core.Page<Pool>;
-
 @doc("Project user")
 @resource("users")
 @parentResource(Project)
@@ -318,9 +315,6 @@ is detected.
   gracePeriodMinutes?: int32;
 }
 
-@doc("The Schedule list result")
-model ScheduleListResult is Azure.Core.Page<Schedule>;
-
 @doc("A Schedule to execute action.")
 @resource("schedules")
 @parentResource(Pool)
@@ -453,9 +447,6 @@ model RemoteConnection {
   @projectedName("csharp", "rdpConnectionUri")
   rdpConnectionUrl?: url;
 }
-
-@doc("The actions list result")
-model DevBoxActionsListResult is Azure.Core.Page<DevBoxAction>;
 
 @doc("An action which will take place on a Dev Box.")
 @resource("actions")

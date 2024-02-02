@@ -24,7 +24,28 @@ interface DevBoxesOperations {
   getSchedule is StandardResourceOperations.ResourceRead<Schedule>;
 
   @doc("Lists Dev Boxes in the project for a particular user.")
-  listDevBoxes is StandardResourceOperations.ResourceList<DevBox>;
+  @route("/projects/{projectName}/users/{userId}/devboxes")
+  @get
+  listDevBoxes is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @path
+      userId: string;
+
+      @doc("An OData filter clause to apply to the operation.")
+      @query
+      filter?: string;
+
+      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
+      @query
+      top?: int32;
+    },
+    DevBoxListResult
+  >;
 
   @doc("Gets a Dev Box")
   getDevBox is StandardResourceOperations.ResourceRead<DevBox>;
