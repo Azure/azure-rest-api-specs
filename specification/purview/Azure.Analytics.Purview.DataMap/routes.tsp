@@ -15,6 +15,28 @@ using Azure.ClientGenerator.Core;
 
 namespace PurviewDataMap;
 
+@doc("The ApiVersion query parameter for Atlas API.")
+model AtlasApiVersionParameter {
+  @query("api-version")
+  @minLength(1)
+  @doc("The API version to use for this operation.")
+  apiVersion?: string;
+}
+
+@doc("The operation defined for Atlas APIs")
+op AtlasOperation<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse,
+  Traits extends TypeSpec.Reflection.Model = {},
+  TErrorResponse = Azure.Core.Foundations.ErrorResponse
+>(
+  ...TraitProperties<
+    Traits & VersionParameterTrait<AtlasApiVersionParameter>,
+    TraitLocation.ApiVersionParameter
+  >,
+  ...TParams,
+): TResponse | TErrorResponse;
+
 model OkResponse<T> {
   @statusCode
   status: 200;
@@ -28,7 +50,7 @@ op AtlasImportOperation<
   TResponse extends TypeSpec.Reflection.Model,
   Traits extends TypeSpec.Reflection.Model = {},
   TraitContexts extends TraitContext = TraitContext.Undefined
-> is Azure.Core.Foundations.Operation<
+> is AtlasOperation<
   TParams &
     TraitProperties<
       Traits &
@@ -70,7 +92,7 @@ For each contact type, the maximum number of contacts is 20.
 """)
   @route("/atlas/v2/entity")
   @post
-  createOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is AtlasOperation<
     {
       @doc("""
 Used to define the update behavior for business attributes when updating
@@ -100,7 +122,7 @@ need to move an entity to another collection.
   @doc("List entities in bulk identified by its GUIDs.")
   @route("/atlas/v2/entity/bulk")
   @get
-  listByGuids is Azure.Core.Foundations.Operation<
+  listByGuids is AtlasOperation<
     {
       @doc("An array of GUIDs of entities to list.")
       @query({
@@ -134,7 +156,7 @@ is 20.
 """)
   @route("/atlas/v2/entity/bulk")
   @post
-  bulkCreateOrUpdate is Azure.Core.Foundations.Operation<
+  bulkCreateOrUpdate is AtlasOperation<
     {
       @doc("""
 The collection where entities will be moved to. Only specify a value if you
@@ -167,7 +189,7 @@ attributes.
 """)
   @route("/atlas/v2/entity/bulk")
   @delete
-  bulkDelete is Azure.Core.Foundations.Operation<
+  bulkDelete is AtlasOperation<
     {
       @doc("An array of GUIDs of entities to delete.")
       @query({
@@ -184,7 +206,7 @@ attributes.
   @doc("Associate a classification to multiple entities in bulk.")
   @route("/atlas/v2/entity/bulk/classification")
   @post
-  addClassification is Azure.Core.Foundations.Operation<
+  addClassification is AtlasOperation<
     {
       @doc("The request to associate a classification to multiple entities.")
       @body
@@ -199,7 +221,7 @@ attributes.
   @doc("Get complete definition of an entity given its GUID.")
   @route("/atlas/v2/entity/guid/{guid}")
   @get
-  get is Azure.Core.Foundations.Operation<
+  get is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -228,7 +250,7 @@ Null updates are not possible.
 """)
   @route("/atlas/v2/entity/guid/{guid}")
   @put
-  partialUpdateAttributeByGuid is Azure.Core.Foundations.Operation<
+  partialUpdateAttributeByGuid is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -252,7 +274,7 @@ Null updates are not possible.
   @doc("Delete an entity identified by its GUID.")
   @route("/atlas/v2/entity/guid/{guid}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
+  delete is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -267,7 +289,7 @@ Null updates are not possible.
   @doc("Get classification for a given entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classification/{classificationName}")
   @get
-  getClassification is Azure.Core.Foundations.Operation<
+  getClassification is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -286,7 +308,7 @@ Null updates are not possible.
   @doc("Delete a given classification from an existing entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classification/{classificationName}")
   @delete
-  removeClassification is Azure.Core.Foundations.Operation<
+  removeClassification is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -305,7 +327,7 @@ Null updates are not possible.
   @doc("List classifications for a given entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @get
-  getClassifications is Azure.Core.Foundations.Operation<
+  getClassifications is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -321,7 +343,7 @@ Null updates are not possible.
   @doc("Add classifications to an existing entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @post
-  addClassifications is Azure.Core.Foundations.Operation<
+  addClassifications is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -341,7 +363,7 @@ Null updates are not possible.
   @doc("Update classifications to an existing entity represented by a guid.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @put
-  updateClassifications is Azure.Core.Foundations.Operation<
+  updateClassifications is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -375,7 +397,7 @@ GET
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @get
-  getByUniqueAttributes is Azure.Core.Foundations.Operation<
+  getByUniqueAttributes is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -422,7 +444,7 @@ PUT
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @put
-  partialUpdateByUniqueAttributes is Azure.Core.Foundations.Operation<
+  partialUpdateByUniqueAttributes is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -461,7 +483,7 @@ DELETE
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @delete
-  deleteByUniqueAttribute is Azure.Core.Foundations.Operation<
+  deleteByUniqueAttribute is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -486,7 +508,7 @@ attributes.
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classification/{classificationName}")
   @delete
-  removeClassificationByUniqueAttribute is Azure.Core.Foundations.Operation<
+  removeClassificationByUniqueAttribute is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -513,7 +535,7 @@ be changed to other unique attributes)
   @doc("Add classification to the entity identified by its type and unique attributes.")
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classifications")
   @post
-  addClassificationsByUniqueAttribute is Azure.Core.Foundations.Operation<
+  addClassificationsByUniqueAttribute is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -540,7 +562,7 @@ be changed to other unique attributes)
   @doc("Update classification on an entity identified by its type and unique attributes.")
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classifications")
   @put
-  updateClassificationsByUniqueAttribute is Azure.Core.Foundations.Operation<
+  updateClassificationsByUniqueAttribute is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -566,7 +588,7 @@ be changed to other unique attributes)
   @doc("Set classifications on entities in bulk.")
   @route("/atlas/v2/entity/bulk/setClassifications")
   @post
-  bulkSetClassifications is Azure.Core.Foundations.Operation<
+  bulkSetClassifications is AtlasOperation<
     {
       @doc("Atlas entity headers.")
       @body
@@ -601,7 +623,7 @@ at least one unique attribute must be provided.
 """)
   @route("/atlas/v2/entity/bulk/uniqueAttribute/type/{typeName}")
   @get
-  listByUniqueAttributes is Azure.Core.Foundations.Operation<
+  listByUniqueAttributes is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -632,7 +654,7 @@ example. qualifiedName can be changed to other unique attributes)
   @doc("Get entity header given its GUID.")
   @route("/atlas/v2/entity/guid/{guid}/header")
   @get
-  getHeader is Azure.Core.Foundations.Operation<
+  getHeader is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -647,7 +669,7 @@ example. qualifiedName can be changed to other unique attributes)
   @doc("Remove business metadata from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata")
   @delete
-  removeBusinessMetadata is Azure.Core.Foundations.Operation<
+  removeBusinessMetadata is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -667,7 +689,7 @@ example. qualifiedName can be changed to other unique attributes)
   @doc("Add business metadata to an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata")
   @post
-  addOrUpdateBusinessMetadata is Azure.Core.Foundations.Operation<
+  addOrUpdateBusinessMetadata is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -695,7 +717,7 @@ default is false.
   @doc("Delete business metadata attributes from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{businessMetadataName}")
   @delete
-  removeBusinessMetadataAttributes is Azure.Core.Foundations.Operation<
+  removeBusinessMetadataAttributes is AtlasOperation<
     {
       @doc("BusinessMetadata name")
       @path
@@ -720,7 +742,7 @@ default is false.
   @doc("Add or update business metadata attributes.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{businessMetadataName}")
   @post
-  addOrUpdateBusinessMetadataAttributes is Azure.Core.Foundations.Operation<
+  addOrUpdateBusinessMetadataAttributes is AtlasOperation<
     {
       @doc("BusinessMetadata name")
       @path
@@ -772,7 +794,7 @@ default is false.
   @doc("Delete given labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @delete
-  removeLabels is Azure.Core.Foundations.Operation<
+  removeLabels is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -792,7 +814,7 @@ default is false.
   @doc("Set labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @post
-  setLabels is Azure.Core.Foundations.Operation<
+  setLabels is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -812,7 +834,7 @@ default is false.
   @doc("Add given labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @put
-  addLabel is Azure.Core.Foundations.Operation<
+  addLabel is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -846,7 +868,7 @@ this: DELETE
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @delete
-  removeLabelsByUniqueAttribute is Azure.Core.Foundations.Operation<
+  removeLabelsByUniqueAttribute is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -889,7 +911,7 @@ request would look something like this: POST
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @post
-  setLabelsByUniqueAttribute is Azure.Core.Foundations.Operation<
+  setLabelsByUniqueAttribute is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -932,7 +954,7 @@ request would look something like this: PUT
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @put
-  addLabelsByUniqueAttribute is Azure.Core.Foundations.Operation<
+  addLabelsByUniqueAttribute is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -988,7 +1010,7 @@ and
 """)
   @route("/atlas/v2/glossary")
   @get
-  list is Azure.Core.Foundations.Operation<
+  list is AtlasOperation<
     {
       @doc("The page size - by default there is no paging.")
       @query
@@ -1016,7 +1038,7 @@ and
   @doc("Create a glossary.")
   @route("/atlas/v2/glossary")
   @post
-  create is Azure.Core.Foundations.Operation<
+  create is AtlasOperation<
     {
       @doc("""
 Glossary definition, terms & categories can be anchored to a glossary.
@@ -1036,7 +1058,7 @@ the anchor attribute when creating the Term/Category.
   @doc("Create glossary category in bulk.")
   @route("/atlas/v2/glossary/categories")
   @post
-  createCategories is Azure.Core.Foundations.Operation<
+  createCategories is AtlasOperation<
     {
       @doc("An array of glossary category definitions to be created.")
       @body
@@ -1051,7 +1073,7 @@ the anchor attribute when creating the Term/Category.
   @doc("Create a glossary category.")
   @route("/atlas/v2/glossary/category")
   @post
-  createCategory is Azure.Core.Foundations.Operation<
+  createCategory is AtlasOperation<
     {
       @doc("""
 The glossary category definition. A category must be anchored to a Glossary
@@ -1071,7 +1093,7 @@ can also be defined during creation.
   @doc("Get specific glossary category by its GUID.")
   @route("/atlas/v2/glossary/category/{categoryId}")
   @get
-  getCategory is Azure.Core.Foundations.Operation<
+  getCategory is AtlasOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1086,7 +1108,7 @@ can also be defined during creation.
   @doc("Update the given glossary category by its GUID.")
   @route("/atlas/v2/glossary/category/{categoryId}")
   @put
-  updateCategory is Azure.Core.Foundations.Operation<
+  updateCategory is AtlasOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1105,7 +1127,7 @@ can also be defined during creation.
   @doc("Delete a glossary category.")
   @route("/atlas/v2/glossary/category/{categoryId}")
   @delete
-  deleteCategory is Azure.Core.Foundations.Operation<
+  deleteCategory is AtlasOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1124,7 +1146,7 @@ updating shortDescription and longDescription for category.
 """)
   @route("/atlas/v2/glossary/category/{categoryId}/partial")
   @put
-  partialUpdateCategory is Azure.Core.Foundations.Operation<
+  partialUpdateCategory is AtlasOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1149,7 +1171,7 @@ parameters are currently not being enabled and won't work even they are passed.
 """)
   @route("/atlas/v2/glossary/category/{categoryId}/related")
   @get
-  listRelatedCategories is Azure.Core.Foundations.Operation<
+  listRelatedCategories is AtlasOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1176,7 +1198,7 @@ parameters are currently not being enabled and won't work even they are passed.
   @doc("Get all terms associated with the specific category.")
   @route("/atlas/v2/glossary/category/{categoryId}/terms")
   @get
-  listCategoryTerms is Azure.Core.Foundations.Operation<
+  listCategoryTerms is AtlasOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1203,7 +1225,7 @@ parameters are currently not being enabled and won't work even they are passed.
   @doc("Create a glossary term.")
   @route("/atlas/v2/glossary/term")
   @post
-  createTerm is Azure.Core.Foundations.Operation<
+  createTerm is AtlasOperation<
     {
       @doc("Whether include term hierarchy")
       @query
@@ -1226,7 +1248,7 @@ Optionally it can be categorized as well.
   @doc("Get a specific glossary term by its GUID. ")
   @route("/atlas/v2/glossary/term/{termId}")
   @get
-  getTerm is Azure.Core.Foundations.Operation<
+  getTerm is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1241,7 +1263,7 @@ Optionally it can be categorized as well.
   @doc("Update the given glossary term by its GUID.")
   @route("/atlas/v2/glossary/term/{termId}")
   @put
-  updateTerm is Azure.Core.Foundations.Operation<
+  updateTerm is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1264,7 +1286,7 @@ Optionally it can be categorized as well.
   @doc("Delete a glossary term.")
   @route("/atlas/v2/glossary/term/{termId}")
   @delete
-  deleteTerm is Azure.Core.Foundations.Operation<
+  deleteTerm is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1283,7 +1305,7 @@ shortDescription, longDescription, abbreviation, usage and status for term.
 """)
   @route("/atlas/v2/glossary/term/{termId}/partial")
   @put
-  partialUpdateTerm is Azure.Core.Foundations.Operation<
+  partialUpdateTerm is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1310,7 +1332,7 @@ values to be updated.
   @doc("Create glossary terms in bulk.")
   @route("/atlas/v2/glossary/terms")
   @post
-  createTerms is Azure.Core.Foundations.Operation<
+  createTerms is AtlasOperation<
     {
       @doc("Whether include term hierarchy")
       @query
@@ -1332,7 +1354,7 @@ limit/offset to get pagination result.
 """)
   @route("/atlas/v2/glossary/terms/{termId}/assignedEntities")
   @get
-  listEntitiesAssignedWithTerm is Azure.Core.Foundations.Operation<
+  listEntitiesAssignedWithTerm is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1367,7 +1389,7 @@ is an alternative to assign a term to multiple entities.
 """)
   @route("/atlas/v2/glossary/terms/{termId}/assignedEntities")
   @post
-  assignTermToEntities is Azure.Core.Foundations.Operation<
+  assignTermToEntities is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1387,7 +1409,7 @@ is an alternative to assign a term to multiple entities.
   @doc("Delete the term assignment for the given list of related objects.")
   @route("/atlas/v2/glossary/terms/{termId}/assignedEntities")
   @delete
-  deleteTermAssignmentFromEntities is Azure.Core.Foundations.Operation<
+  deleteTermAssignmentFromEntities is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1409,7 +1431,7 @@ parameters are currently not being enabled and won't work even they are passed.
 """)
   @route("/atlas/v2/glossary/terms/{termId}/related")
   @get
-  listRelatedTerms is Azure.Core.Foundations.Operation<
+  listRelatedTerms is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1436,7 +1458,7 @@ parameters are currently not being enabled and won't work even they are passed.
   @doc("Get a specific Glossary by its GUID.")
   @route("/atlas/v2/glossary/{glossaryId}")
   @get
-  get is Azure.Core.Foundations.Operation<
+  get is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1451,7 +1473,7 @@ parameters are currently not being enabled and won't work even they are passed.
   @doc("Update the given glossary.")
   @route("/atlas/v2/glossary/{glossaryId}")
   @put
-  update is Azure.Core.Foundations.Operation<
+  update is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1477,7 +1499,7 @@ separate delete terms and categories.
 """)
   @route("/atlas/v2/glossary/{glossaryId}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
+  delete is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1495,7 +1517,7 @@ limit/offset to get pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryId}/categories")
   @get
-  listCategories is Azure.Core.Foundations.Operation<
+  listCategories is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1525,7 +1547,7 @@ limit/offset to get pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryId}/categories/headers")
   @get
-  listCategoriesHeaders is Azure.Core.Foundations.Operation<
+  listCategoriesHeaders is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1561,7 +1583,7 @@ GET /datamap/api/atlas/v2/glossary/{glossaryId}/categories.
 """)
   @route("/atlas/v2/glossary/{glossaryId}/detailed")
   @get
-  getDetailed is Azure.Core.Foundations.Operation<
+  getDetailed is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1586,7 +1608,7 @@ using 'ignoreTermsAndCategories=true' to reduce response body size.
 """)
   @route("/atlas/v2/glossary/{glossaryId}/partial")
   @put
-  partialUpdate is Azure.Core.Foundations.Operation<
+  partialUpdate is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1615,7 +1637,7 @@ pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryId}/terms")
   @get
-  listTerms is Azure.Core.Foundations.Operation<
+  listTerms is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1645,7 +1667,7 @@ to get pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryId}/terms/headers")
   @get
-  listTermHeaders is Azure.Core.Foundations.Operation<
+  listTermHeaders is AtlasOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1721,7 +1743,7 @@ interface Lineage {
   @doc("Get lineage info of the entity specified by GUID.")
   @route("/atlas/v2/lineage/{guid}")
   @get
-  get is Azure.Core.Foundations.Operation<
+  get is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -1788,7 +1810,7 @@ GET
 """)
   @route("/atlas/v2/lineage/uniqueAttribute/type/{typeName}")
   @get
-  getByUniqueAttribute is Azure.Core.Foundations.Operation<
+  getByUniqueAttribute is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -1820,7 +1842,7 @@ interface Relationship {
   @doc("Create a new relationship between entities.")
   @route("/atlas/v2/relationship")
   @post
-  create is Azure.Core.Foundations.Operation<
+  create is AtlasOperation<
     {
       @doc("""
 The AtlasRelationship object containing the information for the relationship to
@@ -1838,7 +1860,7 @@ be created.
   @doc("Update an existing relationship between entities.")
   @route("/atlas/v2/relationship")
   @put
-  update is Azure.Core.Foundations.Operation<
+  update is AtlasOperation<
     {
       @doc("""
 The AtlasRelationship object containing the information for the relationship to
@@ -1856,7 +1878,7 @@ be created.
   @doc("Get relationship information between entities by its GUID.")
   @route("/atlas/v2/relationship/guid/{guid}")
   @get
-  get is Azure.Core.Foundations.Operation<
+  get is AtlasOperation<
     {
       @doc("The globally unique identifier of the relationship.")
       @path
@@ -1875,7 +1897,7 @@ be created.
   @doc("Delete a relationship between entities by its GUID.")
   @route("/atlas/v2/relationship/guid/{guid}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
+  delete is AtlasOperation<
     {
       @doc("The globally unique identifier of the relationship.")
       @path
@@ -1892,7 +1914,7 @@ interface Type {
   @doc("Get the businessMetadata definition for the given guid.")
   @route("/atlas/v2/types/businessmetadatadef/guid/{guid}")
   @get
-  getBusinessMetadataDefByGuid is Azure.Core.Foundations.Operation<
+  getBusinessMetadataDefByGuid is AtlasOperation<
     {
       @doc("businessMetadata guid")
       @path
@@ -1907,7 +1929,7 @@ interface Type {
   @doc("Get the businessMetadata definition by it's name (unique).")
   @route("/atlas/v2/types/businessmetadatadef/name/{name}")
   @get
-  getBusinessMetadataDefByName is Azure.Core.Foundations.Operation<
+  getBusinessMetadataDefByName is AtlasOperation<
     {
       @doc("businessMetadata name")
       @path
@@ -1922,7 +1944,7 @@ interface Type {
   @doc("Get the classification definition for the given GUID.")
   @route("/atlas/v2/types/classificationdef/guid/{guid}")
   @get
-  getClassificationDefByGuid is Azure.Core.Foundations.Operation<
+  getClassificationDefByGuid is AtlasOperation<
     {
       @doc("The globally unique identifier of the classification.")
       @path
@@ -1937,7 +1959,7 @@ interface Type {
   @doc("Get the classification definition by its name (unique).")
   @route("/atlas/v2/types/classificationdef/name/{name}")
   @get
-  getClassificationDefByName is Azure.Core.Foundations.Operation<
+  getClassificationDefByName is AtlasOperation<
     {
       @doc("The name of the classification.")
       @path
@@ -1952,7 +1974,7 @@ interface Type {
   @doc("Get the Entity definition for the given GUID.")
   @route("/atlas/v2/types/entitydef/guid/{guid}")
   @get
-  getEntityDefByGuid is Azure.Core.Foundations.Operation<
+  getEntityDefByGuid is AtlasOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -1967,7 +1989,7 @@ interface Type {
   @doc("Get the entity definition by its name (unique).")
   @route("/atlas/v2/types/entitydef/name/{name}")
   @get
-  getEntityDefByName is Azure.Core.Foundations.Operation<
+  getEntityDefByName is AtlasOperation<
     {
       @doc("The name of the entity.")
       @path
@@ -1982,7 +2004,7 @@ interface Type {
   @doc("Get the enum definition for the given GUID.")
   @route("/atlas/v2/types/enumdef/guid/{guid}")
   @get
-  getEnumDefByGuid is Azure.Core.Foundations.Operation<
+  getEnumDefByGuid is AtlasOperation<
     {
       @doc("The globally unique identifier of the enum.")
       @path
@@ -1997,7 +2019,7 @@ interface Type {
   @doc("Get the enum definition by its name (unique).")
   @route("/atlas/v2/types/enumdef/name/{name}")
   @get
-  getEnumDefByName is Azure.Core.Foundations.Operation<
+  getEnumDefByName is AtlasOperation<
     {
       @doc("The name of the enum.")
       @path
@@ -2012,7 +2034,7 @@ interface Type {
   @doc("Get the relationship definition for the given GUID.")
   @route("/atlas/v2/types/relationshipdef/guid/{guid}")
   @get
-  getRelationshipDefByGuid is Azure.Core.Foundations.Operation<
+  getRelationshipDefByGuid is AtlasOperation<
     {
       @doc("The globally unique identifier of the relationship.")
       @path
@@ -2027,7 +2049,7 @@ interface Type {
   @doc("Get the relationship definition by its name (unique).")
   @route("/atlas/v2/types/relationshipdef/name/{name}")
   @get
-  getRelationshipDefByName is Azure.Core.Foundations.Operation<
+  getRelationshipDefByName is AtlasOperation<
     {
       @doc("The name of the relationship.")
       @path
@@ -2042,7 +2064,7 @@ interface Type {
   @doc("Get the struct definition for the given GUID.")
   @route("/atlas/v2/types/structdef/guid/{guid}")
   @get
-  getStructDefByGuid is Azure.Core.Foundations.Operation<
+  getStructDefByGuid is AtlasOperation<
     {
       @doc("The globally unique identifier of the struct.")
       @path
@@ -2057,7 +2079,7 @@ interface Type {
   @doc("Get the struct definition by its name (unique).")
   @route("/atlas/v2/types/structdef/name/{name}")
   @get
-  getStructDefByName is Azure.Core.Foundations.Operation<
+  getStructDefByName is AtlasOperation<
     {
       @doc("The name of the struct.")
       @path
@@ -2072,7 +2094,7 @@ interface Type {
   @doc("Get the type definition for the given GUID.")
   @route("/atlas/v2/types/typedef/guid/{guid}")
   @get
-  getByGuid is Azure.Core.Foundations.Operation<
+  getByGuid is AtlasOperation<
     {
       @doc("The globally unique identifier of the type.")
       @path
@@ -2087,7 +2109,7 @@ interface Type {
   @doc("Get the type definition by its name (unique).")
   @route("/atlas/v2/types/typedef/name/{name}")
   @get
-  getByName is Azure.Core.Foundations.Operation<
+  getByName is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -2102,7 +2124,7 @@ interface Type {
   @doc("Delete API for type identified by its name.")
   @route("/atlas/v2/types/typedef/name/{name}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
+  delete is AtlasOperation<
     {
       @doc("The name of the type.")
       @path
@@ -2144,7 +2166,7 @@ Any changes to the existing definitions will be discarded.
 """)
   @route("/atlas/v2/types/typedefs")
   @post
-  bulkCreate is Azure.Core.Foundations.Operation<
+  bulkCreate is AtlasOperation<
     {
       @doc("A composite wrapper object with corresponding lists of the type definition.")
       @body
@@ -2162,7 +2184,7 @@ persisted.
 """)
   @route("/atlas/v2/types/typedefs")
   @put
-  bulkUpdate is Azure.Core.Foundations.Operation<
+  bulkUpdate is AtlasOperation<
     {
       @doc("A composite object that captures all type definition changes.")
       @body
@@ -2177,7 +2199,7 @@ persisted.
   @doc("Delete API for all types in bulk.")
   @route("/atlas/v2/types/typedefs")
   @delete
-  bulkDelete is Azure.Core.Foundations.Operation<
+  bulkDelete is AtlasOperation<
     {
       @doc("A composite object that captures all types to be deleted")
       @body

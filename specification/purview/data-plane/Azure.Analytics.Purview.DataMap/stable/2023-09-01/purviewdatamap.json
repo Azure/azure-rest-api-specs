@@ -57,7 +57,7 @@
         "description": "Create or update an entity.\nExisting entity is matched using its unique guid if\nsupplied or by its unique attributes eg: qualifiedName.\nMap and array of\ncollections are not well supported. E.g., array<array<int>>, array<map<string,\nint>>.\nFor each contact type, the maximum number of contacts is 20.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "businessAttributeUpdateBehavior",
@@ -142,7 +142,7 @@
         "description": "List entities in bulk identified by its GUIDs.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -195,7 +195,7 @@
         "description": "Create or update entities in bulk.\nExisting entity is matched using its unique\nguid if supplied or by its unique attributes eg: qualifiedName.\nMap and array\nof collections are not well supported. E.g., array<array<int>>,\narray<map<string, int>>.\nFor each contact type, the maximum number of contacts\nis 20.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "collectionId",
@@ -272,7 +272,7 @@
         "description": "Delete a list of entities in bulk identified by their GUIDs or unique\nattributes.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -313,7 +313,7 @@
         "description": "Associate a classification to multiple entities in bulk.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "body",
@@ -349,7 +349,7 @@
         "description": "Set classifications on entities in bulk.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "body",
@@ -391,7 +391,7 @@
         "description": "Bulk API to retrieve list of entities identified by its unique attributes.\nIn\naddition to the typeName path parameter, attribute key-value pair(s) can be\nprovided in the following\nformat\n\ntypeName=\\<typeName>&attr_1:\\<attrName>=\\<attrValue>&attr_2:\\<attrName>=\\<attrValue>&attr_3:\\<attrName>=\\<attrValue>\n\nNOTE:\nThe attrName should be an unique attribute for the given entity-type.\nThe REST\nrequest would look something like this\n\nGET\n/v2/entity/bulk/uniqueAttribute/type/hive_db?attr_1:qualifiedName=db1@cl1&attr_2:qualifiedName=db2@cl1\n\nNote:\nat least one unique attribute must be provided.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -452,7 +452,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "file",
@@ -523,7 +523,7 @@
         "description": "Get complete definition of an entity given its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -572,7 +572,7 @@
         "description": "Update entity partially - create or update entity attribute identified by its\nGUID.\nSupports only primitive attribute type and entity references.\nIt does not support updating complex types like arrays, and maps.\nNull updates are not possible.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -621,7 +621,7 @@
         "description": "Delete an entity identified by its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -658,7 +658,7 @@
         "description": "Add business metadata to an entity.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -711,7 +711,7 @@
         "description": "Remove business metadata from an entity.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -758,7 +758,7 @@
         "description": "Add or update business metadata attributes.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "businessMetadataName",
@@ -807,7 +807,7 @@
         "description": "Delete business metadata attributes from an entity.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "businessMetadataName",
@@ -858,7 +858,7 @@
         "description": "Get classification for a given entity represented by a GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -900,7 +900,7 @@
         "description": "Delete a given classification from an existing entity represented by a GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -941,7 +941,7 @@
         "description": "List classifications for a given entity represented by a GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -976,7 +976,7 @@
         "description": "Update classifications to an existing entity represented by a guid.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -1021,7 +1021,7 @@
         "description": "Add classifications to an existing entity represented by a GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -1068,7 +1068,7 @@
         "description": "Get entity header given its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -1105,7 +1105,7 @@
         "description": "Add given labels to a given entity.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -1149,7 +1149,7 @@
         "description": "Set labels to a given entity.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -1193,7 +1193,7 @@
         "description": "Delete given labels to a given entity.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -1239,7 +1239,7 @@
         "description": "Get complete definition of an entity given its type and unique attribute.\n\nIn\naddition to the typeName path parameter, attribute key-value pair(s) can be\nprovided in the following format:\nattr:\\<attrName>=<attrValue>.\n\nNOTE: The\nattrName and attrValue should be unique across entities, eg.\nqualifiedName.\n\nThe REST request would look something like this:\nGET\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -1296,7 +1296,7 @@
         "description": "Update entity partially - Allow a subset of attributes to be updated on an\nentity which is identified by its type and unique attribute eg:\nReferenceable.qualifiedName. Null updates are not possible.\n\nIn addition to the\ntypeName path parameter, attribute key-value pair(s) can be provided in the\nfollowing format:\n\nattr:<attrName>=<attrValue>.\nNOTE: The attrName and\nattrValue should be unique across entities, eg. qualifiedName.\n\nThe REST\nrequest would look something like this:\nPUT\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -1348,7 +1348,7 @@
         "description": "Delete an entity identified by its type and unique attributes.\nIn addition to\nthe typeName path parameter, attribute key-value pair(s) can be provided in the\nfollowing format:\nattr:\\<attrName>=\\<attrValue>.\nNOTE: The attrName and\nattrValue should be unique across entities, eg. qualifiedName.\n\nThe REST\nrequest would look something like this:\nDELETE\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -1393,7 +1393,7 @@
         "description": "Delete a given classification from an entity identified by its type and unique\nattributes.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -1442,7 +1442,7 @@
         "description": "Update classification on an entity identified by its type and unique attributes.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -1495,7 +1495,7 @@
         "description": "Add classification to the entity identified by its type and unique attributes.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -1550,7 +1550,7 @@
         "description": "Add given labels to a given entity identified by its type and unique\nattributes.\n\nIf labels is null/empty, no labels will be added.\n\nIn addition to\nthe typeName path parameter, attribute key-value pair(s) can be provided in the\nfollowing format: attr:<attrName>=<attrValue>.\n\nNOTE: The attrName and\nattrValue should be unique across entities, eg. qualifiedName.\n\nThe REST\nrequest would look something like this: PUT\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -1602,7 +1602,7 @@
         "description": "Set labels to a given entity identified by its type and unique attributes.\n\nIf\nlabels is null/empty, existing labels will all be removed.\n\nIn addition to the\ntypeName path parameter, attribute key-value pair(s) can be provided in the\nfollowing format: attr:<attrName>=<attrValue>.\n\nNOTE: The attrName and\nattrValue should be unique across entities, eg. qualifiedName.\n\nThe REST\nrequest would look something like this: POST\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -1654,7 +1654,7 @@
         "description": "Delete given labels to a given entity identified by its type and unique\nattribute.\n\nIf labels is null/empty, no labels will be removed.\n\nIf any labels\nin labels set are non-existing labels, they will be ignored, only existing\nlabels will be removed. In addition to the typeName path parameter, attribute\nkey-value pair(s) can be provided in the following format:\nattr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique\nacross entities, eg. qualifiedName. The REST request would look something like\nthis: DELETE\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -1708,7 +1708,7 @@
         "description": "Get all glossaries. Recommend using limit/offset to get pagination result.\nRecommend using 'ignoreTermsAndCategories=true' and fetch terms/categories\nseparately using \n\n 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'\nand \n\n 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "limit",
@@ -1770,7 +1770,7 @@
         "description": "Create a glossary.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "body",
@@ -1809,7 +1809,7 @@
         "description": "Get a specific Glossary by its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "glossaryId",
@@ -1844,7 +1844,7 @@
         "description": "Update the given glossary.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "glossaryId",
@@ -1895,7 +1895,7 @@
         "description": "Delete a glossary. Will delete underlying terms/categories together. Recommend\nseparate delete terms and categories.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "glossaryId",
@@ -1929,7 +1929,7 @@
         "description": "Get the categories belonging to a specific glossary. Recommend using\nlimit/offset to get pagination result.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "glossaryId",
@@ -1993,7 +1993,7 @@
         "description": "Get the category headers belonging to a specific glossary. Recommend using\nlimit/offset to get pagination result.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "glossaryId",
@@ -2057,7 +2057,7 @@
         "description": "Get a specific glossary with detailed information. This API is not\nrecommend.\n\nRecommend to fetch terms/categories details separately using \n\nGET /datamap/api/atlas/v2/glossary/{glossaryId}/terms and \n\nGET /datamap/api/atlas/v2/glossary/{glossaryId}/categories.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "glossaryId",
@@ -2094,7 +2094,7 @@
         "description": "Update the glossary partially. Some properties such as qualifiedName are not\nallowed to be updated.\n\nSo far we only supports partial updating\nshortDescription, longDescription, language and usage for glossary. \n\nRecommend\nusing 'ignoreTermsAndCategories=true' to reduce response body size.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "glossaryId",
@@ -2150,7 +2150,7 @@
         "description": "Get terms belonging to a specific glossary. Recommend using limit/offset to get\npagination result.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "glossaryId",
@@ -2214,7 +2214,7 @@
         "description": "Get term headers belonging to a specific glossary. Recommend using limit/offset\nto get pagination result.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "glossaryId",
@@ -2278,7 +2278,7 @@
         "description": "Create glossary category in bulk.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "body",
@@ -2325,7 +2325,7 @@
         "description": "Create a glossary category.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "body",
@@ -2364,7 +2364,7 @@
         "description": "Get specific glossary category by its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "categoryId",
@@ -2399,7 +2399,7 @@
         "description": "Update the given glossary category by its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "categoryId",
@@ -2443,7 +2443,7 @@
         "description": "Delete a glossary category.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "categoryId",
@@ -2477,7 +2477,7 @@
         "description": "Update the glossary category partially. So far we only supports partial\nupdating shortDescription and longDescription for category.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "categoryId",
@@ -2526,7 +2526,7 @@
         "description": "Get all related categories (parent and children). Limit, offset, and sort\nparameters are currently not being enabled and won't work even they are passed.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "categoryId",
@@ -2593,7 +2593,7 @@
         "description": "Get all terms associated with the specific category.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "categoryId",
@@ -2657,7 +2657,7 @@
         "description": "Create a glossary term.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "includeTermHierarchy",
@@ -2706,7 +2706,7 @@
         "description": "Get a specific glossary term by its GUID. ",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "termId",
@@ -2744,7 +2744,7 @@
         "description": "Update the given glossary term by its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "termId",
@@ -2795,7 +2795,7 @@
         "description": "Delete a glossary term.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "termId",
@@ -2829,7 +2829,7 @@
         "description": "Update the glossary term partially. So far we only supports partial updating\nshortDescription, longDescription, abbreviation, usage and status for term.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "termId",
@@ -2885,7 +2885,7 @@
         "description": "Create glossary terms in bulk.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "includeTermHierarchy",
@@ -2939,7 +2939,7 @@
         "description": "List all related objects assigned with the specified term. Recommend using\nlimit/offset to get pagination result.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "termId",
@@ -3001,7 +3001,7 @@
         "description": "Assign the given term to the provided list of related objects. Recommend using\nsmall batches with multiple API calls.\n\n[Entities Create Or Update\noperation](https://learn.microsoft.com/en-us/rest/api/purview/datamapdataplane/entity/bulk-create-or-update?tabs=HTTP)\nis an alternative to assign a term to multiple entities.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "termId",
@@ -3046,7 +3046,7 @@
         "description": "Delete the term assignment for the given list of related objects.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "termId",
@@ -3093,7 +3093,7 @@
         "description": "Get all related terms for a specific term by its GUID. Limit, offset, and sort\nparameters are currently not being enabled and won't work even they are passed.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "termId",
@@ -3160,7 +3160,7 @@
         "description": "Get lineage info of the entity specified by GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -3238,7 +3238,7 @@
         "description": "Return lineage info about entity.\n\nIn addition to the typeName path parameter,\nattribute key-value pair(s) can be provided in the following\nformat\n\nattr:[attrName]=[attrValue]\n\nNOTE: The attrName and attrValue should be\nunique across entities, eg. qualifiedName.\n\nThe REST request would look\nsomething like this:\n\nGET\n/v2/lineage/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "typeName",
@@ -3324,7 +3324,7 @@
         "description": "Update an existing relationship between entities.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "body",
@@ -3361,7 +3361,7 @@
         "description": "Create a new relationship between entities.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "body",
@@ -3400,7 +3400,7 @@
         "description": "Get relationship information between entities by its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -3442,7 +3442,7 @@
         "description": "Delete a relationship between entities by its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -3476,7 +3476,7 @@
         "description": "Get the businessMetadata definition for the given guid.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -3513,7 +3513,7 @@
         "description": "Get the businessMetadata definition by it's name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "name",
@@ -3550,7 +3550,7 @@
         "description": "Get the classification definition for the given GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -3587,7 +3587,7 @@
         "description": "Get the classification definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "name",
@@ -3624,7 +3624,7 @@
         "description": "Get the Entity definition for the given GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -3661,7 +3661,7 @@
         "description": "Get the entity definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "name",
@@ -3698,7 +3698,7 @@
         "description": "Get the enum definition for the given GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -3735,7 +3735,7 @@
         "description": "Get the enum definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "name",
@@ -3772,7 +3772,7 @@
         "description": "Get the relationship definition for the given GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -3809,7 +3809,7 @@
         "description": "Get the relationship definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "name",
@@ -3846,7 +3846,7 @@
         "description": "Get the struct definition for the given GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -3883,7 +3883,7 @@
         "description": "Get the struct definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "name",
@@ -3920,7 +3920,7 @@
         "description": "Get the type definition for the given GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "guid",
@@ -3957,7 +3957,7 @@
         "description": "Get the type definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "name",
@@ -3992,7 +3992,7 @@
         "description": "Delete API for type identified by its name.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "name",
@@ -4142,7 +4142,7 @@
         "description": "Update all types in bulk, changes detected in the type definitions would be\npersisted.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "body",
@@ -4179,7 +4179,7 @@
         "description": "Create all atlas type definitions in bulk, only new definitions will be\ncreated.\nAny changes to the existing definitions will be discarded.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "body",
@@ -4219,7 +4219,7 @@
         "description": "Delete API for all types in bulk.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "body",
@@ -8450,6 +8450,16 @@
     }
   },
   "parameters": {
+    "AtlasApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
