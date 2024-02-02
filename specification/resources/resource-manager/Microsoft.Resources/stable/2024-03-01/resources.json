@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2023-07-01",
+    "version": "2024-03-01",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -2756,6 +2756,9 @@
           },
           "Export a resource group with filtering": {
             "$ref": "./examples/ExportResourceGroupWithFiltering.json"
+          },
+          "Export a resource group as Bicep": {
+            "$ref": "./examples/ExportResourceGroupAsBicep.json"
           }
         },
         "responses": {
@@ -5868,6 +5871,18 @@
         "options": {
           "type": "string",
           "description": "The export template options. A CSV-formatted list containing zero or more of the following: 'IncludeParameterDefaultValue', 'IncludeComments', 'SkipResourceNameParameterization', 'SkipAllParameterization'"
+        },
+        "outputFormat": {
+          "type": "string",
+          "description": "The output format for the exported resources.",
+          "enum": [
+            "Json",
+            "Bicep"
+          ],
+          "x-ms-enum": {
+            "name": "ExportTemplateOutputFormat",
+            "modelAsString": true
+          }
         }
       },
       "description": "Export resource group template request parameters."
@@ -6202,7 +6217,11 @@
       "properties": {
         "template": {
           "type": "object",
-          "description": "The template content."
+          "description": "The template content. Used if outputFormat is empty or set to 'Json'."
+        },
+        "output": {
+          "type": "string",
+          "description": "The formatted export content. Used if outputFormat is set to 'Bicep'."
         },
         "error": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
