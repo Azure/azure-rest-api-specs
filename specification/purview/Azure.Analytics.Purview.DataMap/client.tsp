@@ -11,6 +11,15 @@ using PurviewDataMap;
 })
 namespace Customizations;
 
+@@projectedName(MoveEntitiesOptions, "csharp", "MoveEntitiesConfig");
+@@projectedName(DateFormat,"csharp", "AtlasDateFormat");
+@@projectedName(NumberFormat, "csharp", "AtlasNumberFormat");
+@@projectedName(TimeZone, "csharp", "AtlasTimeZone");
+@@projectedName(SortType,"csharp", "AtlasSortType");
+@@projectedName(ClassificationAssociateOptions, "csharp", "ClassificationAssociateConfig");
+@@projectedName(QueryOptions, "csharp", "QueryConfig");
+@@projectedName(SuggestOptions"csharp", "SuggestConfig");
+@@projectedName(AutoCompleteOptions, "csharp", "AutoCompleteConfig");
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
 interface Entity {

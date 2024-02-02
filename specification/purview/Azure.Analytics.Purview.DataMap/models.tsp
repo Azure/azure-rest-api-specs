@@ -52,7 +52,6 @@ enum AtlasTermAssignmentStatus {
 }
 
 @doc("Type for sorting")
-@projectedName("csharp", "AtlasSortType")
 enum SortType {
   @doc("No sorting order")
   None: "NONE",
@@ -500,7 +499,6 @@ model AtlasEntitiesWithExtInfo {
 }
 
 @doc("The request payload for classification association.")
-@projectedName("csharp", "ClassificationAssociateConfig")
 model ClassificationAssociateOptions {
   @doc("""
 An instance of a classification; it doesn't have an identity, this object
@@ -572,7 +570,6 @@ model ImportInfo {
 }
 
 @doc("MoveEntitiesOptions")
-@projectedName("csharp", "MoveEntitiesConfig")
 model MoveEntitiesOptions {
   @doc("An array of entity guids to be moved to target collection.")
   entityGuids?: string[];
@@ -904,7 +901,6 @@ model AtlasGlossaryExtInfo {
 }
 
 @doc("The search query of advanced search request.")
-@projectedName("csharp", "QueryConfig")
 model QueryOptions {
   @doc("The keywords applied to all searchable fields.")
   keywords?: string;
@@ -1187,7 +1183,6 @@ Expert or Steward for a glossary term.
 }
 
 @doc("The payload of suggest request.")
-@projectedName("csharp", "SuggestConfig")
 model SuggestOptions {
   @doc("""
 The keywords applied to all fields that support suggest operation. It must be
@@ -1300,7 +1295,6 @@ AtlasGlossaryCategory.
 }
 
 @doc("The payload of autocomplete request.")
-@projectedName("csharp", "AutoCompleteConfig")
 model AutoCompleteOptions {
   @doc("""
 The keywords applied to all fields that support autocomplete operation. It must
@@ -1555,7 +1549,6 @@ model AtlasBaseTypeDef {
 }
 
 @doc("The date format.")
-@projectedName("csharp", "AtlasDateFormat")
 model DateFormat {
   @doc("An array of available locales.")
   availableLocales?: string[];
@@ -1586,7 +1579,6 @@ model DateFormat {
 }
 
 @doc("The number format.")
-@projectedName("csharp", "AtlasNumberFormat")
 model NumberFormat {
   @doc("The number format.")
   availableLocales?: string[];
@@ -1632,7 +1624,6 @@ model NumberFormat {
 }
 
 @doc("The timezone information.")
-@projectedName("csharp", "AtlasTimeZone")
 model TimeZone {
   @doc("The value of the daylight saving time.")
   dstSavings?: int32;
