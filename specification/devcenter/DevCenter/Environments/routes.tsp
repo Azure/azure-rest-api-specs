@@ -20,10 +20,6 @@ interface EnvironmentsOperations {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
       projectName: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
     },
     EnvironmentListResult
   >;
@@ -40,10 +36,6 @@ interface EnvironmentsOperations {
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
     },
     EnvironmentListResult
   >;
@@ -137,10 +129,6 @@ interface EnvironmentsOperations {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
       projectName: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
     },
     EnvironmentDefinitionListResult
   >;
@@ -176,10 +164,6 @@ interface EnvironmentsOperations {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
       projectName: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
     },
     EnvironmentTypeListResult
   >;
