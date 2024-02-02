@@ -6,10 +6,10 @@ using Azure.ResourceManager;
 
 @@path(ResourceUriParameter.resourceUri, "scope");
 @@Azure.ResourceManager.Private.armCommonParameter(ResourceUriParameter.resourceUri,
-    "ScopeParameter",
-    Azure.ResourceManager.CommonTypes.Versions.v5
+  "ScopeParameter",
+  Azure.ResourceManager.CommonTypes.Versions.v5
 );
 
 @@doc(Azure.ResourceManager.ResourceUriParameter.resourceUri,
-    "The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'"
+  "The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'"
 );
