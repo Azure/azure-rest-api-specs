@@ -64,6 +64,7 @@ interface TextOperations {
     AnalyzeTextProtectedMaterialResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Operation types must use camelCase"
   @added(ContentSafety.Versions.v2024_02_15_Preview)
   @summary("Analyze text cross-prompt injection attacks")
   @doc("A synchronous API for the analysis of text cross-prompt injection attacks.")
@@ -163,5 +164,21 @@ interface TextBlocklists {
   listTextBlocklistItems is BlockOps.ResourceList<
     TextBlocklistItem,
     ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+}
+
+@added(Versions.v2024_02_15_Preview)
+interface TextUngroundednessDetectionOperations {
+  @summary("Detect Ungrounded Information")
+  @doc("A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.")
+  @route("/text:detectUngroundedness")
+  @post
+  detectUngroundedness is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The ungroundedness detection request.")
+      body: DetectUngroundednessOptions;
+    },
+    DetectUngroundednessResult
   >;
 }

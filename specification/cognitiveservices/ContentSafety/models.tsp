@@ -237,6 +237,104 @@ model JailbreakAnalysisResult {
   detected: boolean;
 }
 
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@added(ContentSafety.Versions.v2024_02_15_Preview)
+@doc("Domain.")
+enum Domain {
+  Generic,
+  Medical,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@added(ContentSafety.Versions.v2024_02_15_Preview)
+@doc("Task type.")
+enum Task {
+  Summarization,
+  QnA,
+}
+
+@added(Versions.v2024_02_15_Preview)
+@doc("Connection details for the GPT resource.")
+model GptResource {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  @doc("Endpoint for Azure OpenAI resource.")
+  azureOpenAIEndpoint: string;
+
+  @doc("Deployment model name.")
+  deploymentName: string;
+}
+
+@added(Versions.v2024_02_15_Preview)
+@doc("The request of ungroundedness detection.")
+model DetectUngroundednessOptions {
+  @doc("""
+  The domain of the text for analysis.
+  This field is optional, with a default value of Generic.
+  """)
+  domain?: Domain;
+
+  @doc("""
+  The task type for the text analysis.
+  This field is optional, with a default value of Summarization.
+  """)
+  task?: Task;
+
+  @doc("""
+  The user's question input in a QnA scenario.
+  This field is optional, but if the task type is set to QnA, it becomes required.
+  """)
+  query?: string;
+
+  @doc("The text requiring analysis.")
+  text: string;
+
+  @doc("The source information used as a grounding reference.")
+  groundingSources: string[];
+
+  @doc("""
+  A value indicating if the output includes an explanation for the identified ungroundedness.
+  This field is optional, with a default value of false.
+  """)
+  reasoning?: boolean;
+
+  @doc("""
+  Connection details for the GPT resource. 
+  This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
+  """)
+  gptResource?: GptResource;
+}
+
+@added(Versions.v2024_02_15_Preview)
+@doc("The detailed information about a text identified as ungrounded.")
+model UngroundedDetails {
+  @doc("The ungrounded text.")
+  text: string;
+
+  @doc("""
+  The explanation for identifying the text as ungrounded. 
+  Only when the 'reasoning' field in the input is set to true 'reason' field will be returned.
+  """)
+  reason?: string;
+}
+
+@added(Versions.v2024_02_15_Preview)
+@doc("The response of ungroundedness detection.")
+model DetectUngroundednessResult {
+  @doc("Detection result for ungrounded text.")
+  ungrounded: boolean;
+
+  @doc("Confidence score of the model in the analysis results.")
+  confidenceScore: float32;
+
+  @doc("Percentage of ungrounded Text.")
+  ungroundedPercentage: float32;
+
+  @doc("The detailed information about a text identified as ungrounded.")
+  ungroundedDetails: UngroundedDetails[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("The text cross-prompt injection attacks analysis request.")
 model AnalyzeTextXPIAOptions {
@@ -244,6 +342,7 @@ model AnalyzeTextXPIAOptions {
   text: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("The text cross-prompt injection attacks analysis response.")
 model AnalyzeTextXPIAResult {
@@ -251,6 +350,7 @@ model AnalyzeTextXPIAResult {
   xpiaAnalysisResult: XPIAAnalysisResult;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("The text cross-prompt injection attacks analysis response.")
 model XPIAAnalysisResult {
