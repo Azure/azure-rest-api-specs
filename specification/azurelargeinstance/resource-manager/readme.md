@@ -77,6 +77,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
 ### Suppress linting rules
 
 These set of linting rules aren't applicable to the AzureLargeInstance RP so suppressing them here.
