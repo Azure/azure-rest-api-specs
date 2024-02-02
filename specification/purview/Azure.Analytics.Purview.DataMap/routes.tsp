@@ -816,7 +816,7 @@ default is false.
 
       @doc("set of labels to be deleted")
       @body
-      body: string[];
+      body?: string[];
     },
     void,
     {},
@@ -836,7 +836,7 @@ default is false.
 
       @doc("set of labels to be set to the entity")
       @body
-      body: string[];
+      body?: string[];
     },
     void,
     {},
@@ -856,7 +856,7 @@ default is false.
 
       @doc("set of labels to be added")
       @body
-      body: string[];
+      body?: string[];
     },
     void,
     {},
@@ -897,7 +897,7 @@ be changed to other unique attributes)
 
       @doc("set of labels to be deleted")
       @body
-      body: string[];
+      body?: string[];
     },
     void,
     {},
@@ -940,7 +940,7 @@ be changed to other unique attributes)
 
       @doc("set of labels to be set")
       @body
-      body: string[];
+      body?: string[];
     },
     void,
     {},
@@ -983,7 +983,7 @@ be changed to other unique attributes)
 
       @doc("set of labels to be added")
       @body
-      body: string[];
+      body?: string[];
     },
     void,
     {},
