@@ -215,13 +215,14 @@
         },
         "inputBlobUrl": {
           "type": "string",
+          "format": "uri",
           "description": "URL to the input blob containing the batch data."
         },
         "linkedResource": {
           "type": "string",
           "description": "The destination where the batch results will be stored. This should be a preconfigured resource in the control plane designated to receive and store the output of the batch processing."
         },
-        "msiClientId": {
+        "userManagedIdentityId": {
           "type": "string",
           "description": "Client ID of a user-assigned managed identity. This is used for authentication and authorization purposes. If the managed identity is system-assigned, this field can be null."
         },
@@ -282,10 +283,19 @@
             ]
           }
         },
-        "outputBlobUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "URL to the output blob containing the batch results."
+        "result": {
+          "type": "object",
+          "description": "The result of the asynchronous batch operation.",
+          "properties": {
+            "outputBlobUrl": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL to the output blob containing the batch results."
+            }
+          },
+          "required": [
+            "outputBlobUrl"
+          ]
         },
         "error": {
           "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
