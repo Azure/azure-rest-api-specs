@@ -1,0 +1,2165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "OffAzureSpringBoot",
+    "version": "2023-01-01-preview",
+    "description": "The Microsoft.OffAzureSpringBoot Rest API spec.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "SpringbootsitesModels"
+    },
+    {
+      "name": "SpringbootserversModels"
+    },
+    {
+      "name": "SpringbootappsModels"
+    },
+    {
+      "name": "Summaries"
+    },
+    {
+      "name": "ErrorSummaries"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.OffAzureSpringBoot/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureSpringBoot/springbootsites": {
+      "get": {
+        "operationId": "springbootsites_ListBySubscription",
+        "tags": [
+          "SpringbootsitesModels"
+        ],
+        "description": "List springbootsites resource by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootsitesModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootsites_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "springbootsites_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootapps": {
+      "get": {
+        "operationId": "springbootapps_ListBySubscription",
+        "tags": [
+          "SpringbootappsModels"
+        ],
+        "description": "List springbootapps resource by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootappsModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootapps_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/springbootapps_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "springbootapps_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/springbootapps_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootservers": {
+      "get": {
+        "operationId": "springbootservers_ListBySubscription",
+        "tags": [
+          "SpringbootserversModels"
+        ],
+        "description": "List springbootservers resource by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootserversModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootservers_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "springbootservers_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites": {
+      "get": {
+        "operationId": "springbootsites_ListByResourceGroup",
+        "tags": [
+          "SpringbootsitesModels"
+        ],
+        "description": "List springbootsites resource by resourceGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootsitesModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootsites_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "springbootsites_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}": {
+      "get": {
+        "operationId": "springbootsites_Get",
+        "tags": [
+          "SpringbootsitesModels"
+        ],
+        "description": "Get a springbootsites resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootsitesModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootsites_Get_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_Get_MaximumSet_Gen.json"
+          },
+          "springbootsites_Get_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "springbootsites_CreateOrUpdate",
+        "tags": [
+          "SpringbootsitesModels"
+        ],
+        "description": "Create a springbootsites resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          {
+            "name": "springbootsites",
+            "in": "body",
+            "description": "Create a springbootsites payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpringbootsitesModel"
+            },
+            "x-ms-client-name": "springbootsites"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SpringbootsitesModel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SpringbootsitesModel"
+            }
+          },
+          "201": {
+            "description": "Resource 'SpringbootsitesModel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SpringbootsitesModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootsites_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "springbootsites_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "springbootsites_Update",
+        "tags": [
+          "SpringbootsitesModels"
+        ],
+        "description": "Update a springbootsites resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          {
+            "name": "springbootsites",
+            "in": "body",
+            "description": "Update a springbootsites payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpringbootsitesPatch"
+            },
+            "x-ms-client-name": "springbootsites"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootsitesModel"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootsites_Update_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_Update_MaximumSet_Gen.json"
+          },
+          "springbootsites_Update_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "springbootsites_Delete",
+        "tags": [
+          "SpringbootsitesModels"
+        ],
+        "description": "Delete a springbootsites resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootsites_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_Delete_MaximumSet_Gen.json"
+          },
+          "springbootsites_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/errorSummaries": {
+      "get": {
+        "operationId": "ErrorSummaries_ListBySite",
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "description": "Lists the ErrorSummaries resource in springbootsites.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ErrorSummaries_ListBySite_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_ListBySite_MaximumSet_Gen.json"
+          },
+          "ErrorSummaries_ListBySite_MinimumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_ListBySite_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/errorSummaries/{errorSummaryName}": {
+      "get": {
+        "operationId": "ErrorSummaries_Get",
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "description": "Gets the ErrorSummaries resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          {
+            "name": "errorSummaryName",
+            "in": "path",
+            "description": "The name of error summary",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ErrorSummaries_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Get_MaximumSet_Gen.json"
+          },
+          "ErrorSummaries_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootapps": {
+      "get": {
+        "operationId": "springbootapps_ListByResourceGroup",
+        "tags": [
+          "SpringbootappsModels"
+        ],
+        "description": "List springbootapps resource by resourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootappsModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootapps_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/springbootapps_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "springbootapps_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/springbootapps_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootapps/{springbootappsName}": {
+      "get": {
+        "operationId": "springbootapps_Get",
+        "tags": [
+          "SpringbootappsModels"
+        ],
+        "description": "Get a springbootapps resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          {
+            "name": "springbootappsName",
+            "in": "path",
+            "description": "The springbootapps name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootappsModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootapps_Get_MaximumSet_Gen": {
+            "$ref": "./examples/springbootapps_Get_MaximumSet_Gen.json"
+          },
+          "springbootapps_Get_MinimumSet_Gen": {
+            "$ref": "./examples/springbootapps_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "springbootapps_Update",
+        "tags": [
+          "SpringbootappsModels"
+        ],
+        "description": "Update a springbootapps resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          {
+            "name": "springbootappsName",
+            "in": "path",
+            "description": "The springbootapps name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$"
+          },
+          {
+            "name": "springbootapps",
+            "in": "body",
+            "description": "Update a springbootapps payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpringbootappsPatch"
+            },
+            "x-ms-client-name": "springbootapps"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootappsModel"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootapps_Update_MaximumSet_Gen": {
+            "$ref": "./examples/springbootapps_Update_MaximumSet_Gen.json"
+          },
+          "springbootapps_Update_MinimumSet_Gen": {
+            "$ref": "./examples/springbootapps_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootservers": {
+      "get": {
+        "operationId": "springbootservers_ListByResourceGroup",
+        "tags": [
+          "SpringbootserversModels"
+        ],
+        "description": "List springbootservers resource by resourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootserversModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootservers_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "springbootservers_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/springbootservers/{springbootserversName}": {
+      "get": {
+        "operationId": "springbootservers_Get",
+        "tags": [
+          "SpringbootserversModels"
+        ],
+        "description": "List springbootservers resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          {
+            "name": "springbootserversName",
+            "in": "path",
+            "description": "The springbootservers name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootserversModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootservers_Get_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_Get_MaximumSet_Gen.json"
+          },
+          "springbootservers_Get_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "springbootservers_CreateOrUpdate",
+        "tags": [
+          "SpringbootserversModels"
+        ],
+        "description": "Create springbootservers resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          {
+            "name": "springbootserversName",
+            "in": "path",
+            "description": "The springbootservers name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$"
+          },
+          {
+            "name": "springbootservers",
+            "in": "body",
+            "description": "Create a springbootservers payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpringbootserversModel"
+            },
+            "x-ms-client-name": "springbootservers"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SpringbootserversModel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SpringbootserversModel"
+            }
+          },
+          "201": {
+            "description": "Resource 'SpringbootserversModel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SpringbootserversModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootservers_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "springbootservers_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "springbootservers_Update",
+        "tags": [
+          "SpringbootserversModels"
+        ],
+        "description": "Update springbootservers resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          {
+            "name": "springbootserversName",
+            "in": "path",
+            "description": "The springbootservers name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$"
+          },
+          {
+            "name": "springbootservers",
+            "in": "body",
+            "description": "Update a springbootservers payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpringbootserversPatch"
+            },
+            "x-ms-client-name": "springbootservers"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpringbootserversModel"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootservers_Update_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_Update_MaximumSet_Gen.json"
+          },
+          "springbootservers_Update_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "springbootservers_Delete",
+        "tags": [
+          "SpringbootserversModels"
+        ],
+        "description": "Delete springbootservers resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          {
+            "name": "springbootserversName",
+            "in": "path",
+            "description": "The springbootservers name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootservers_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/springbootservers_Delete_MaximumSet_Gen.json"
+          },
+          "springbootservers_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/springbootservers_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/summaries": {
+      "get": {
+        "operationId": "Summaries_ListBySite",
+        "tags": [
+          "Summaries"
+        ],
+        "description": "Lists the Summaries resource in springbootsites.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Summaries_ListBySite_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_ListBySite_MaximumSet_Gen.json"
+          },
+          "Summaries_ListBySite_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_ListBySite_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/summaries/{summaryName}": {
+      "get": {
+        "operationId": "Summaries_Get",
+        "tags": [
+          "Summaries"
+        ],
+        "description": "Gets the Summaries resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          {
+            "name": "summaryName",
+            "in": "path",
+            "description": "The name of summary",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Summaries_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MaximumSet_Gen.json"
+          },
+          "Summaries_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/triggerRefreshSite": {
+      "post": {
+        "operationId": "springbootsites_TriggerRefreshSite",
+        "tags": [
+          "SpringbootsitesModels"
+        ],
+        "description": "Trigger refresh springbootsites action",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "springbootsitesName",
+            "in": "path",
+            "description": "The springbootsites name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootsites_TriggerRefreshSite_MaximumSet_Gen": {
+            "$ref": "./examples/springbootsites_TriggerRefreshSite_MaximumSet_Gen.json"
+          },
+          "springbootsites_TriggerRefreshSite_MinimumSet_Gen": {
+            "$ref": "./examples/springbootsites_TriggerRefreshSite_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "description": "Defines the error.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The error ID."
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "summaryMessage": {
+          "type": "string",
+          "description": "The summarized error message."
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "The account ID used to login."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed error message."
+        },
+        "possibleCauses": {
+          "type": "string",
+          "description": "The error possible causes."
+        },
+        "recommendedAction": {
+          "type": "string",
+          "description": "The error recommended action"
+        },
+        "severity": {
+          "type": "string",
+          "description": "The error severity"
+        },
+        "updatedTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this error was last updated."
+        }
+      }
+    },
+    "ErrorSummariesProperties": {
+      "type": "object",
+      "description": "Error summary properties",
+      "properties": {
+        "discoveryScopeErrorSummaries": {
+          "type": "array",
+          "description": "The list of ErrorSummary.",
+          "items": {
+            "$ref": "#/definitions/ErrorSummaryModel"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The resource provisioning state."
+        }
+      }
+    },
+    "ErrorSummariesResourcePatch": {
+      "type": "object",
+      "description": "Object containing tags updates for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ErrorSummariesProperties",
+          "description": "The ErrorSummaries resource definition."
+        }
+      }
+    },
+    "ErrorSummary": {
+      "type": "object",
+      "description": "The error summary resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ErrorSummariesProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ErrorSummaryListResult": {
+      "type": "object",
+      "description": "The response of a ErrorSummary list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ErrorSummary items on this page",
+          "items": {
+            "$ref": "#/definitions/ErrorSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ErrorSummaryModel": {
+      "type": "object",
+      "description": "ErrorSummary model.",
+      "properties": {
+        "affectedResourceType": {
+          "type": "string",
+          "description": "The type of Object."
+        },
+        "affectedObjectsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The resource provisioning state.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Provisioning",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      }
+    },
+    "SpringbootappsModel": {
+      "type": "object",
+      "description": "The springbootapps envelope resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpringbootappsProperties",
+          "description": "The springbootapps resource definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SpringbootappsModelListResult": {
+      "type": "object",
+      "description": "The response of a SpringbootappsModel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SpringbootappsModel items on this page",
+          "items": {
+            "$ref": "#/definitions/SpringbootappsModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SpringbootappsPatch": {
+      "type": "object",
+      "description": "The springbootapps resource patch definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpringbootappsProperties",
+          "description": "The springbootapps resource definition."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SpringbootappsProperties": {
+      "type": "object",
+      "description": "The springbootapps resource definition.",
+      "properties": {
+        "appName": {
+          "type": "string",
+          "description": "The name of SpringBootApp."
+        },
+        "artifactName": {
+          "type": "string",
+          "description": "The artifact name of SpringBootApp."
+        },
+        "appPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The application port."
+        },
+        "appType": {
+          "type": "string",
+          "description": "The application type, whether it is a SpringBoot app."
+        },
+        "applicationConfigurations": {
+          "type": "array",
+          "description": "The application configuration file list.",
+          "items": {
+            "$ref": "#/definitions/SpringbootappsPropertiesApplicationConfigurationsItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "bindingPorts": {
+          "type": "array",
+          "description": "The application binding port list.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "buildJdkVersion": {
+          "type": "string",
+          "description": "The jdk version in build."
+        },
+        "certificates": {
+          "type": "array",
+          "description": "The certificate file list.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "checksum": {
+          "type": "string",
+          "description": "The checksum of jar file."
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "The dependency list.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "environments": {
+          "type": "array",
+          "description": "The environment variable list.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total instance count the app deployed."
+        },
+        "jarFileLocation": {
+          "type": "string",
+          "description": "The jar file location on the server."
+        },
+        "jvmMemoryInMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The jvm heap memory allocated."
+        },
+        "jvmOptions": {
+          "type": "array",
+          "description": "The jvm options.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "miscs": {
+          "type": "array",
+          "description": "The other types of date collected.",
+          "items": {
+            "$ref": "#/definitions/SpringbootappsPropertiesMiscsItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "instances": {
+          "type": "array",
+          "description": "The breakdown info for app instances on all the servers",
+          "items": {
+            "$ref": "#/definitions/SpringbootappsPropertiesInstancesItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "runtimeJdkVersion": {
+          "type": "string",
+          "description": "The jdk version installed on server"
+        },
+        "servers": {
+          "type": "array",
+          "description": "The server list the app installed",
+          "items": {
+            "type": "string"
+          }
+        },
+        "machineArmIds": {
+          "type": "array",
+          "description": "The machine ARM id list the app belongs to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "siteName": {
+          "type": "string",
+          "description": "The site name."
+        },
+        "springBootVersion": {
+          "type": "string",
+          "description": "The spring boot version."
+        },
+        "staticContentLocations": {
+          "type": "array",
+          "description": "The static content location list.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "connectionStrings": {
+          "type": "array",
+          "description": "The connection string list.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this springbootapps jar file was last modified."
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this springbootapps instance was last refreshed."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The resource provisioning state."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "SpringbootappsPropertiesApplicationConfigurationsItem": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The application config file name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The application config file content, only contains config keys."
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "SpringbootappsPropertiesInstancesItem": {
+      "type": "object",
+      "properties": {
+        "machineArmId": {
+          "type": "string",
+          "description": "The machine ARM resource Id of this app instance"
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The instance count of this app instance"
+        },
+        "jvmMemoryInMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The jvm heap memory allocated of this app instance"
+        }
+      },
+      "required": [
+        "machineArmId"
+      ]
+    },
+    "SpringbootappsPropertiesMiscsItem": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The miscs. key."
+        },
+        "value": {
+          "type": "string",
+          "description": "The miscs. value."
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "SpringbootserversModel": {
+      "type": "object",
+      "description": "The springbootservers envelope resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpringbootserversProperties",
+          "description": "The springbootservers resource definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SpringbootserversModelListResult": {
+      "type": "object",
+      "description": "The response of a SpringbootserversModel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SpringbootserversModel items on this page",
+          "items": {
+            "$ref": "#/definitions/SpringbootserversModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SpringbootserversPatch": {
+      "type": "object",
+      "description": "The springbootservers resource patch definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SpringbootserversProperties",
+          "description": "The springbootsites resource definition."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SpringbootserversProperties": {
+      "type": "object",
+      "description": "The springbootservers resource definition.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Target server port for remote login"
+        },
+        "server": {
+          "type": "string",
+          "description": "Server is the target server name or ip address to discover of SpringBootServer."
+        },
+        "fqdnAndIpAddressList": {
+          "type": "array",
+          "description": "The alternative FQDN or IP addresses to discover for this server",
+          "items": {
+            "type": "string"
+          }
+        },
+        "machineArmId": {
+          "type": "string",
+          "description": "The machine Id from ARM"
+        },
+        "totalApps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of apps been discovered"
+        },
+        "springBootApps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of spring boot apps been discovered"
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The resource provisioning state."
+        }
+      },
+      "required": [
+        "server"
+      ]
+    },
+    "SpringbootsitesModel": {
+      "type": "object",
+      "description": "The springbootsites envelope resource definition.",
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/SpringbootsitesModelExtendedLocation",
+          "description": "The extended location definition."
+        },
+        "properties": {
+          "$ref": "#/definitions/SpringbootsitesProperties",
+          "description": "The springbootsites resource definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SpringbootsitesModelExtendedLocation": {
+      "type": "object",
+      "description": "The extended location definition.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
+    "SpringbootsitesModelListResult": {
+      "type": "object",
+      "description": "The response of a SpringbootsitesModel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SpringbootsitesModel items on this page",
+          "items": {
+            "$ref": "#/definitions/SpringbootsitesModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SpringbootsitesPatch": {
+      "type": "object",
+      "description": "The springbootsites resource patch definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpringbootsitesProperties",
+          "description": "The springbootsites resource definition."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SpringbootsitesProperties": {
+      "type": "object",
+      "description": "The springbootsites resource definition.",
+      "properties": {
+        "masterSiteId": {
+          "type": "string",
+          "description": "The master site ID from Azure Migrate."
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "description": "The migrate project ID from Azure Migrate."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The resource provisioning state."
+        }
+      }
+    },
+    "SummariesProperties": {
+      "type": "object",
+      "description": "Summaries properties",
+      "properties": {
+        "discoveredServers": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The of number discovered spring boot servers."
+        },
+        "discoveredApps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The of number discovered spring boot apps."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The resource provisioning state."
+        }
+      }
+    },
+    "SummariesResourcePatch": {
+      "type": "object",
+      "description": "Object containing tags updates for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SummariesProperties",
+          "description": "The Summaries resource definition."
+        }
+      }
+    },
+    "Summary": {
+      "type": "object",
+      "description": "The summary resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SummariesProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SummaryListResult": {
+      "type": "object",
+      "description": "The response of a Summary list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Summary items on this page",
+          "items": {
+            "$ref": "#/definitions/Summary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2023-01-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_01_01_preview",
+            "value": "2023-01-01-preview",
+            "description": "The 2023-01-01-preview API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

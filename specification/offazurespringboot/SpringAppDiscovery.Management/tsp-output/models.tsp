@@ -91,7 +91,7 @@ model Resource {
 /**
  * The springbootsites resource patch definition.
  */
-model SpringbootsitesPatch extends TrackedResource {
+model SpringbootsitesPatch extends TrackedResourceBase {
   /**
    * The springbootsites resource definition.
    */
@@ -197,7 +197,7 @@ model Error {
 /**
  * The springbootservers resource patch definition.
  */
-model SpringbootserversPatch extends ProxyResource {
+model SpringbootserversPatch extends ProxyResourceBase {
   /**
    * Resource tags
    */
@@ -400,7 +400,7 @@ model SpringbootappsPropertiesInstancesItem {
 /**
  * The springbootapps resource patch definition.
  */
-model SpringbootappsPatch extends ProxyResource {
+model SpringbootappsPatch extends ProxyResourceBase {
   /**
    * The springbootapps resource definition.
    */
