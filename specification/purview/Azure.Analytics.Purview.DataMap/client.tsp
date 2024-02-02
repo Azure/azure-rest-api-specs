@@ -14,15 +14,18 @@ namespace Customizations;
 @@access(MoveEntitiesOptions, Access.public);
 @@projectedName(MoveEntitiesOptions, "csharp", "MoveEntitiesConfig");
 @@access(DateFormat, Access.public);
-@@projectedName(DateFormat,"csharp", "AtlasDateFormat");
+@@projectedName(DateFormat, "csharp", "AtlasDateFormat");
 @@access(NumberFormat, Access.public);
 @@projectedName(NumberFormat, "csharp", "AtlasNumberFormat");
 @@access(TimeZone, Access.public);
 @@projectedName(TimeZone, "csharp", "AtlasTimeZone");
 @@access(SortType, Access.public);
-@@projectedName(SortType,"csharp", "AtlasSortType");
+@@projectedName(SortType, "csharp", "AtlasSortType");
 @@access(ClassificationAssociateOptions, Access.public);
-@@projectedName(ClassificationAssociateOptions, "csharp", "ClassificationAssociateConfig");
+@@projectedName(ClassificationAssociateOptions,
+  "csharp",
+  "ClassificationAssociateConfig"
+);
 @@access(QueryOptions, Access.public);
 @@projectedName(QueryOptions, "csharp", "QueryConfig");
 @@access(SuggestOptions, Access.public);
