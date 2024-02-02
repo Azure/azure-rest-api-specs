@@ -410,15 +410,11 @@
             }
           },
           "201": {
-            "description": "Resource 'LoadTestResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LoadTestResource"
-            },
+            "description": "Created -- LoadTest resource created.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -481,7 +477,7 @@
             }
           },
           "202": {
-            "description": "Accepted -- LoadTest resource patch request accepted",
+            "description": "Accepted -- LoadTest resource patch request accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -622,26 +618,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.ManagedServiceIdentity": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
-    "Azure.ResourceManager.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
     "CheckQuotaAvailabilityResponse": {
       "type": "object",
       "description": "Check quota availability response object.",
@@ -671,11 +647,7 @@
           "description": "Check quota availability response properties.",
           "x-ms-client-flatten": true
         }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
+      }
     },
     "CheckQuotaAvailabilityResponseProperties": {
       "type": "object",
@@ -781,10 +753,7 @@
           "description": "The port an endpoint is connected to.",
           "readOnly": true
         }
-      },
-      "required": [
-        "port"
-      ]
+      }
     },
     "LoadTestProperties": {
       "type": "object",
@@ -826,8 +795,8 @@
           ]
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentity",
-          "description": "The type of identity used for the resource."
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -870,8 +839,8 @@
           "x-ms-nullable": true
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityUpdate",
-          "description": "The type of identity used for the resource."
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         },
         "properties": {
           "$ref": "#/definitions/LoadTestProperties",
@@ -951,11 +920,7 @@
           "description": "Request object of new quota for a quota bucket.",
           "x-ms-client-flatten": true
         }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
+      }
     },
     "QuotaBucketRequestProperties": {
       "type": "object",

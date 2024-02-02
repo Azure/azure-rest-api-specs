@@ -24,12 +24,8 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   @path
   @segment("loadTests")
   name: string;
-
-  // @doc("The type of identity used for the resource.")
-  // identity?: ManagedIdentityType;
   
-  @doc("The type of identity used for the resource.")
-  identity?: ManagedServiceIdentity;
+  ...ManagedServiceIdentity;
 }
 
 @doc("LoadTest resource patch request body.")
@@ -38,8 +34,7 @@ model LoadTestResourcePatchRequestBody{
   @extension("x-ms-nullable", true)
   tags?: Record<string>;
 
-  @doc("The type of identity used for the resource.")
-  identity?: ManagedServiceIdentity;
+  ...ManagedServiceIdentity;
 
   @doc("LoadTest resource properties.")
   @extension("x-ms-client-flatten", true)
@@ -68,7 +63,7 @@ enum EncryptionIdentityType {
 model EndpointDetail {
   @visibility("read")
   @doc("The port an endpoint is connected to.")
-  port: int32;
+  port?: int32;
 }
 
 @doc("A domain name and connection details used to access a dependency.")
@@ -194,7 +189,7 @@ model CheckQuotaAvailabilityResponseProperties {
 model Resource {
   @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
   @visibility("read")
-  id: string;
+  id?: string;
 
   @doc("The name of the resource.")
   @visibility("read")
@@ -202,7 +197,7 @@ model Resource {
 
   @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
   @visibility("read")
-  type: string;
+  type?: string;
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
   @visibility("read")

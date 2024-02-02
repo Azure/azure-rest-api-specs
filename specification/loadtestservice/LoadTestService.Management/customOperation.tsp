@@ -65,7 +65,7 @@ op ArmResourceCreateOrUpdateAsyncCustom<
   @doc("Resource create parameters.")
   @body
   LoadTestResource: TResource,
-): ArmResourceUpdatedResponse<TResource> | ArmResourceCreatedResponse<TResource> | ErrorResponse;
+): ArmResourceUpdatedResponse<TResource> | ArmResourceCreatedResponseCustom | ErrorResponse;
 
 // adding a custom operation since we want to override body parameter name to QuotaBucketRequest
 /**
@@ -93,7 +93,7 @@ op ArmResourceActionSyncCustom<
   QuotaBucketRequest: TRequest,
 ): TResponse | ErrorResponse;
 
-
+// adding a custom operation since we want to override body parameter name to LoadTestResourcePatchRequestBody
 /**
  * A long-running resource update using a custom PATCH payload (Asynchronous)
  * @template Resource the resource being patched
@@ -130,9 +130,16 @@ op ArmCustomPatchAsyncCustom<
   LoadTestResourcePatchRequestBody: PatchModel,
 ): ArmResponse<Resource> | ArmAcceptedResponseCustom | ErrorResponse;
 
-@doc("Accepted -- LoadTest resource patch request accepted")
+// Removed header retry-after from the response 
+@doc("Accepted -- LoadTest resource patch request accepted.")
 model ArmAcceptedResponseCustom{
   ...AcceptedResponse,
   ...ArmAsyncOperationHeader
 }
 
+// Removed header retry-after from the response
+@doc("Created -- LoadTest resource created.")
+model ArmResourceCreatedResponseCustom{
+  ...CreatedResponse,
+  ...ArmAsyncOperationHeader
+}
