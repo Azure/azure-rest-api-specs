@@ -35,14 +35,6 @@ interface DevBoxesOperations {
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
-
-      @doc("An OData filter clause to apply to the operation.")
-      @query
-      filter?: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
     },
     DevBoxListResult
   >;

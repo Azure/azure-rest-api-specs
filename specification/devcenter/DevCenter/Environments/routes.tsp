@@ -144,10 +144,6 @@ interface EnvironmentsOperations {
       @doc("The name of the catalog")
       @path
       catalogName: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
     },
     EnvironmentDefinitionListResult
   >;
