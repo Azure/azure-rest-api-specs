@@ -4,7 +4,6 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@typespec/rest";
 import "./models.tsp";
-import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
