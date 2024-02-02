@@ -190,6 +190,9 @@
             },
             "x-ms-error-response": true
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -841,11 +844,13 @@
             },
             "departureTime": {
               "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+              "type":"string",
               "format": "date-time",
               "readOnly": true
             },
             "arrivalTime": {
               "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+              "type": "string",
               "format": "date-time",
               "readOnly": true
             },
@@ -989,11 +994,13 @@
         },
         "departureTime": {
           "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+          "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "arrivalTime": {
           "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+          "type": "string",
           "format": "date-time",
           "readOnly": true
         },
@@ -2027,25 +2034,28 @@
         }
       ]
     },
+    "DirectionsBatchResponseSummary": {
+      "description": "Summary for the batch request",
+      "type": "object",
+      "properties": {
+        "successfulRequests": {
+          "description": "Number of successful requests in the batch",
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalRequests": {
+          "description": "Total number of requests in the batch",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "DirectionsBatchResponse": {
       "description": "This object is returned from a successful Directions Batch service call.",
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary for the batch request",
-          "type": "object",
-          "properties": {
-            "successfulRequests": {
-              "description": "Number of successful requests in the batch",
-              "type": "integer",
-              "format": "int32"
-            },
-            "totalRequests": {
-              "description": "Total number of requests in the batch",
-              "type": "integer",
-              "format": "int32"
-            }
-          }
+          "$ref": "#/definitions/DirectionsBatchResponseSummary"
         },
         "batchItems": {
           "description": "Array containing the batch results.",

@@ -176,6 +176,20 @@
     }
   },
   "definitions": {
+    "AsyncBatchOperationResult": {
+      "type": "object",
+      "description": "The result of the asynchronous batch operation.",
+      "properties": {
+        "outputBlobUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the output blob containing the batch results."
+        }
+      },
+      "required": [
+        "outputBlobUrl"
+      ]
+    },
     "AsyncBatchOperation": {
       "type": "object",
       "description": "This object is returned from a successful Get Operation request.",
@@ -282,21 +296,10 @@
           }
         },
         "result": {
-          "type": "object",
-          "description": "The result of the asynchronous batch operation.",
-          "properties": {
-            "outputBlobUrl": {
-              "type": "string",
-              "format": "uri",
-              "description": "URL to the output blob containing the batch results."
-            }
-          },
-          "required": [
-            "outputBlobUrl"
-          ]
+          "$ref": "#/definitions/AsyncBatchOperationResult"
         },
         "error": {
-          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/ErrorDetail"
         }
       },
       "required": [
