@@ -895,14 +895,13 @@
     },
     "OwaspCrsExclusionEntry": {
       "required": [
-        "matchVariable",
-        "selectorMatchOperator",
-        "selector"
+        "matchVariable"
       ],
       "description": "Allows exclusion of a variable or the whole request from WAF check when the exclusion condition is satisfied.",
       "properties": {
         "exclude": {
           "type": "string",
+          "default": "MatchVariable",
           "enum": [
             "MatchVariable",
             "Request"
