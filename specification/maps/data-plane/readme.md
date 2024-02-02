@@ -93,7 +93,9 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
+  - Common/stable/2023-06-01/common.json
   - Search/preview/2024-04-01-preview/search.json
+  - Route/preview/2024-04-01-preview/route.json
   - AsyncBatchManagement/preview/2024-04-01-preview/asyncBatchManagement.json
 ```
 
