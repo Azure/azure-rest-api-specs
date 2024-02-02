@@ -17,7 +17,8 @@ namespace Microsoft.StoragePool;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
-model DiskPool extends TrackedResource {
+@Azure.ResourceManager.Private.armResourceInternal(DiskPoolProperties)
+model DiskPool extends TrackedResourceBase {
   /**
    * The name of the Disk Pool.
    */
@@ -47,8 +48,8 @@ model DiskPool extends TrackedResource {
   /**
    * Resource metadata required by ARM RPC
    */
-  @visibility("read")
-  systemData?: SystemMetadata;
+  // @visibility("read")
+  // systemData?: SystemMetadata;
 
   /**
    * Properties of Disk Pool.

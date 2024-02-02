@@ -19,7 +19,8 @@ namespace Microsoft.StoragePool;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DiskPool)
 @includeInapplicableMetadataInPayload(false)
-model IscsiTarget extends ProxyResource {
+@Azure.ResourceManager.Private.armResourceInternal(IscsiTargetProperties)
+model IscsiTarget extends ProxyResourceBase {
   /**
    * The name of the iSCSI Target.
    */
@@ -32,8 +33,8 @@ model IscsiTarget extends ProxyResource {
   /**
    * Resource metadata required by ARM RPC
    */
-  @visibility("read")
-  systemData?: SystemMetadata;
+  // @visibility("read")
+  // systemData?: SystemMetadata;
 
   /**
    * Azure resource id. Indicates if this resource is managed by another Azure resource.

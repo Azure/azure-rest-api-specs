@@ -218,7 +218,7 @@ model SystemMetadata {
   /**
    * The type of identity that created the resource.
    */
-  createdByType?: CreatedByType;
+  createdByType?: string;
 
   /**
    * The timestamp of resource creation (UTC).
@@ -234,7 +234,7 @@ model SystemMetadata {
   /**
    * The type of identity that last modified the resource.
    */
-  lastModifiedByType?: CreatedByType;
+  lastModifiedByType?: string;
 
   /**
    * The type of identity that last modified the resource.
