@@ -50,7 +50,6 @@ op AtlasRpcOperation<
   TErrorResponse
 >;
 
-
 model OkResponse<T> {
   @statusCode
   status: 200;
