@@ -30,6 +30,7 @@ using Azure.Core;
   }
 )
 @versioned(APCVersions)
+@doc("Azure Programmable Connectivity (APC) provides a unified interface to the Network APIs of multiple Telecom Operators. Note that Operators may deprecate a Network API with less advance notice than the Azure standard, in which case APC will also deprecate that Network API.")
 namespace Azure.ProgrammableConnectivity;
 
 @doc("APC Versions")
