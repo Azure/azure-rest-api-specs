@@ -91,7 +91,7 @@ model RequiredFunctionToolCallDetails {
   @doc("The name of the function.")
   name: string;
 
-  @doc("The arguments to use when invoking the named function, as provided by the model.")
+  @doc("The arguments to use when invoking the named function, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation.")
   arguments: string;
 }
 
