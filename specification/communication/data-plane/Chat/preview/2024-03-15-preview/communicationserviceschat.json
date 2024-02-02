@@ -1246,7 +1246,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1304,7 +1304,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1351,7 +1351,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1428,17 +1428,17 @@
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
     },
-    "ErrorResponseWrapper": {
+    "ErrorResponse": {
       "type": "object",
       "description": "Wrapper for error response to follow ARM guidelines.",
       "properties": {
         "error": {
           "description": "The error response.",
-          "$ref": "#/definitions/ErrorResponse"
+          "$ref": "#/definitions/Error"
         }
       }
     },
-    "ErrorResponse": {
+    "Error": {
       "type": "object",
       "description": "Error response information.",
       "properties": {
