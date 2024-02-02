@@ -17,12 +17,15 @@ namespace PurviewDataMap;
 
 @doc("The ApiVersion query parameter for Atlas API.")
 model AtlasApiVersionParameter {
+  @doc("The API version to use for this operation.")
   @query("api-version")
   @minLength(1)
-  @doc("The API version to use for this operation.")
   apiVersion?: string;
 }
 
+alias AtlasApiVersionParameterTraits = Azure.Core.Traits.VersionParameterTrait<AtlasApiVersionParameter>;
+
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
 @doc("The operation defined for Atlas APIs")
 op AtlasOperation<
   TParams extends TypeSpec.Reflection.Model,
@@ -30,13 +33,11 @@ op AtlasOperation<
   Traits extends TypeSpec.Reflection.Model = {},
   TErrorResponse = Azure.Core.Foundations.ErrorResponse
 >(
-  ...TraitProperties<
-    Traits & VersionParameterTrait<AtlasApiVersionParameter>,
-    TraitLocation.ApiVersionParameter
-  >,
+  ...TraitProperties<Traits, TraitLocation.ApiVersionParameter>,
   ...TParams,
 ): TResponse | TErrorResponse;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
 op AtlasRpcOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model,
@@ -58,6 +59,7 @@ model OkResponse<T> {
   data: T;
 }
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
 op AtlasImportOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model,
@@ -126,7 +128,7 @@ need to move an entity to another collection.
       body: AtlasEntityWithExtInfo;
     },
     EntityMutationResult,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
@@ -152,7 +154,7 @@ need to move an entity to another collection.
       ignoreRelationships?: boolean;
     },
     AtlasEntitiesWithExtInfo,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
@@ -190,12 +192,13 @@ entities.
       body: AtlasEntitiesWithExtInfo;
     },
     EntityMutationResult,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "This is an existing Atlas API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Delete a list of entities in bulk identified by their GUIDs or unique
 attributes.
@@ -216,6 +219,7 @@ attributes.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Associate a classification to multiple entities in bulk.")
   @route("/atlas/v2/entity/bulk/classification")
   @post
@@ -231,6 +235,7 @@ attributes.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get complete definition of an entity given its GUID.")
   @route("/atlas/v2/entity/guid/{guid}")
   @get
@@ -254,6 +259,7 @@ attributes.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Update entity partially - create or update entity attribute identified by its
 GUID.
@@ -284,6 +290,7 @@ Null updates are not possible.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete an entity identified by its GUID.")
   @route("/atlas/v2/entity/guid/{guid}")
   @delete
@@ -299,6 +306,7 @@ Null updates are not possible.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get classification for a given entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classification/{classificationName}")
   @get
@@ -318,6 +326,7 @@ Null updates are not possible.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete a given classification from an existing entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classification/{classificationName}")
   @delete
@@ -337,6 +346,7 @@ Null updates are not possible.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("List classifications for a given entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @get
@@ -353,6 +363,7 @@ Null updates are not possible.
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Add classifications to an existing entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @post
@@ -373,6 +384,7 @@ Null updates are not possible.
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Update classifications to an existing entity represented by a guid.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @put
@@ -392,6 +404,7 @@ Null updates are not possible.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Get complete definition of an entity given its type and unique attribute.
 
@@ -437,6 +450,7 @@ be changed to other unique attributes)
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Update entity partially - Allow a subset of attributes to be updated on an
 entity which is identified by its type and unique attribute eg:
@@ -480,6 +494,7 @@ be changed to other unique attributes)
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Delete an entity identified by its type and unique attributes.
 In addition to
@@ -515,6 +530,7 @@ be changed to other unique attributes)
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Delete a given classification from an entity identified by its type and unique
 attributes.
@@ -545,6 +561,7 @@ be changed to other unique attributes)
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Add classification to the entity identified by its type and unique attributes.")
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classifications")
   @post
@@ -572,6 +589,7 @@ be changed to other unique attributes)
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Update classification on an entity identified by its type and unique attributes.")
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classifications")
   @put
@@ -598,6 +616,7 @@ be changed to other unique attributes)
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Set classifications on entities in bulk.")
   @route("/atlas/v2/entity/bulk/setClassifications")
   @post
@@ -614,6 +633,7 @@ be changed to other unique attributes)
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is Atlas API behavior"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Bulk API to retrieve list of entities identified by its unique attributes.
 In
@@ -664,6 +684,7 @@ example. qualifiedName can be changed to other unique attributes)
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get entity header given its GUID.")
   @route("/atlas/v2/entity/guid/{guid}/header")
   @get
@@ -679,6 +700,7 @@ example. qualifiedName can be changed to other unique attributes)
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Remove business metadata from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata")
   @delete
@@ -699,6 +721,7 @@ example. qualifiedName can be changed to other unique attributes)
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Add business metadata to an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata")
   @post
@@ -727,6 +750,7 @@ default is false.
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an Atlas existing api"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete business metadata attributes from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{businessMetadataName}")
   @delete
@@ -752,6 +776,7 @@ default is false.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an Atlas existing api"
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Add or update business metadata attributes.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{businessMetadataName}")
   @post
@@ -776,6 +801,7 @@ default is false.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the sample Template for uploading/creating bulk BusinessMetaData")
   @route("/atlas/v2/entity/businessmetadata/import/template")
   @get
@@ -790,6 +816,7 @@ default is false.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Upload the file for creating Business Metadata in BULK")
   @route("/atlas/v2/entity/businessmetadata/import")
@@ -804,6 +831,7 @@ default is false.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete given labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
@@ -825,6 +853,7 @@ default is false.
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Set labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @post
@@ -845,6 +874,7 @@ default is false.
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Add given labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @put
@@ -865,6 +895,7 @@ default is false.
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Delete given labels to a given entity identified by its type and unique
 attribute.
@@ -906,6 +937,7 @@ be changed to other unique attributes)
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Set labels to a given entity identified by its type and unique attributes.
 
@@ -949,6 +981,7 @@ be changed to other unique attributes)
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Add given labels to a given entity identified by its type and unique
 attributes.
@@ -1043,12 +1076,13 @@ and
       ignoreTermsAndCategories?: boolean;
     },
     OkResponse<AtlasGlossary[]>,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Create a glossary.")
   @route("/atlas/v2/glossary")
   @post
@@ -1069,6 +1103,7 @@ the anchor attribute when creating the Term/Category.
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Create glossary category in bulk.")
   @route("/atlas/v2/glossary/categories")
   @post
@@ -1084,6 +1119,7 @@ the anchor attribute when creating the Term/Category.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Create a glossary category.")
   @route("/atlas/v2/glossary/category")
   @post
@@ -1104,6 +1140,7 @@ can also be defined during creation.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get specific glossary category by its GUID.")
   @route("/atlas/v2/glossary/category/{categoryId}")
   @get
@@ -1119,6 +1156,7 @@ can also be defined during creation.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Update the given glossary category by its GUID.")
   @route("/atlas/v2/glossary/category/{categoryId}")
   @put
@@ -1138,6 +1176,7 @@ can also be defined during creation.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete a glossary category.")
   @route("/atlas/v2/glossary/category/{categoryId}")
   @delete
@@ -1153,6 +1192,7 @@ can also be defined during creation.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("""
 Update the glossary category partially. So far we only supports partial
@@ -1179,6 +1219,7 @@ values for partial update.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Get all related categories (parent and children). Limit, offset, and sort
 parameters are currently not being enabled and won't work even they are passed.
@@ -1209,6 +1250,7 @@ parameters are currently not being enabled and won't work even they are passed.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get all terms associated with the specific category.")
   @route("/atlas/v2/glossary/category/{categoryId}/terms")
   @get
@@ -1236,6 +1278,7 @@ parameters are currently not being enabled and won't work even they are passed.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Create a glossary term.")
   @route("/atlas/v2/glossary/term")
   @post
@@ -1269,7 +1312,7 @@ Optionally it can be categorized as well.
       termId: string;
     },
     AtlasGlossaryTerm,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
@@ -1292,11 +1335,12 @@ Optionally it can be categorized as well.
       body: AtlasGlossaryTerm;
     },
     AtlasGlossaryTerm,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete a glossary term.")
   @route("/atlas/v2/glossary/term/{termId}")
   @delete
@@ -1337,7 +1381,7 @@ values to be updated.
       body: Record<string>;
     },
     AtlasGlossaryTerm,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
@@ -1357,11 +1401,12 @@ values to be updated.
       body: AtlasGlossaryTerm[];
     },
     OkResponse<AtlasGlossaryTerm[]>,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 List all related objects assigned with the specified term. Recommend using
 limit/offset to get pagination result.
@@ -1393,6 +1438,7 @@ limit/offset to get pagination result.
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Assign the given term to the provided list of related objects. Recommend using
 small batches with multiple API calls.
@@ -1420,6 +1466,7 @@ is an alternative to assign a term to multiple entities.
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete the term assignment for the given list of related objects.")
   @route("/atlas/v2/glossary/terms/{termId}/assignedEntities")
   @delete
@@ -1464,11 +1511,12 @@ parameters are currently not being enabled and won't work even they are passed.
       sort?: string;
     },
     OkResponse<Record<AtlasRelatedTermHeader[]>>,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get a specific Glossary by its GUID.")
   @route("/atlas/v2/glossary/{glossaryId}")
   @get
@@ -1502,11 +1550,12 @@ parameters are currently not being enabled and won't work even they are passed.
       body: AtlasGlossary;
     },
     AtlasGlossary,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Delete a glossary. Will delete underlying terms/categories together. Recommend
 separate delete terms and categories.
@@ -1525,6 +1574,7 @@ separate delete terms and categories.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Get the categories belonging to a specific glossary. Recommend using
 limit/offset to get pagination result.
@@ -1555,6 +1605,7 @@ limit/offset to get pagination result.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Get the category headers belonging to a specific glossary. Recommend using
 limit/offset to get pagination result.
@@ -1604,7 +1655,7 @@ GET /datamap/api/atlas/v2/glossary/{glossaryId}/categories.
       glossaryId: string;
     },
     AtlasGlossaryExtInfo,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
@@ -1640,7 +1691,7 @@ values.
       body: Record<string>;
     },
     AtlasGlossary,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
@@ -1670,11 +1721,12 @@ pagination result.
       sort?: string;
     },
     OkResponse<AtlasGlossaryTerm[]>,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Get term headers belonging to a specific glossary. Recommend using limit/offset
 to get pagination result.
@@ -1754,6 +1806,7 @@ interface Discovery {
 
 interface Lineage {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get lineage info of the entity specified by GUID.")
   @route("/atlas/v2/lineage/{guid}")
   @get
@@ -1804,6 +1857,7 @@ interface Lineage {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Return lineage info about entity.
 
@@ -1853,6 +1907,7 @@ be changed to other unique attributes)
 
 interface Relationship {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Create a new relationship between entities.")
   @route("/atlas/v2/relationship")
   @post
@@ -1871,6 +1926,7 @@ be created.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Update an existing relationship between entities.")
   @route("/atlas/v2/relationship")
   @put
@@ -1889,6 +1945,7 @@ be created.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get relationship information between entities by its GUID.")
   @route("/atlas/v2/relationship/guid/{guid}")
   @get
@@ -1908,6 +1965,7 @@ be created.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete a relationship between entities by its GUID.")
   @route("/atlas/v2/relationship/guid/{guid}")
   @delete
@@ -1925,6 +1983,7 @@ be created.
 
 interface Type {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the businessMetadata definition for the given guid.")
   @route("/atlas/v2/types/businessmetadatadef/guid/{guid}")
   @get
@@ -1940,6 +1999,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the businessMetadata definition by it's name (unique).")
   @route("/atlas/v2/types/businessmetadatadef/name/{name}")
   @get
@@ -1955,6 +2015,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the classification definition for the given GUID.")
   @route("/atlas/v2/types/classificationdef/guid/{guid}")
   @get
@@ -1970,6 +2031,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the classification definition by its name (unique).")
   @route("/atlas/v2/types/classificationdef/name/{name}")
   @get
@@ -1985,6 +2047,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the Entity definition for the given GUID.")
   @route("/atlas/v2/types/entitydef/guid/{guid}")
   @get
@@ -2000,6 +2063,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the entity definition by its name (unique).")
   @route("/atlas/v2/types/entitydef/name/{name}")
   @get
@@ -2015,6 +2079,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the enum definition for the given GUID.")
   @route("/atlas/v2/types/enumdef/guid/{guid}")
   @get
@@ -2030,6 +2095,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the enum definition by its name (unique).")
   @route("/atlas/v2/types/enumdef/name/{name}")
   @get
@@ -2045,6 +2111,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the relationship definition for the given GUID.")
   @route("/atlas/v2/types/relationshipdef/guid/{guid}")
   @get
@@ -2060,6 +2127,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the relationship definition by its name (unique).")
   @route("/atlas/v2/types/relationshipdef/name/{name}")
   @get
@@ -2075,6 +2143,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the struct definition for the given GUID.")
   @route("/atlas/v2/types/structdef/guid/{guid}")
   @get
@@ -2090,6 +2159,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the struct definition by its name (unique).")
   @route("/atlas/v2/types/structdef/name/{name}")
   @get
@@ -2105,6 +2175,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the type definition for the given GUID.")
   @route("/atlas/v2/types/typedef/guid/{guid}")
   @get
@@ -2120,6 +2191,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Get the type definition by its name (unique).")
   @route("/atlas/v2/types/typedef/name/{name}")
   @get
@@ -2135,6 +2207,7 @@ interface Type {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete API for type identified by its name.")
   @route("/atlas/v2/types/typedef/name/{name}")
   @delete
@@ -2153,7 +2226,7 @@ interface Type {
   @doc("List all type definitions in bulk.")
   @route("/atlas/v2/types/typedefs")
   @get
-  list is Azure.Core.Foundations.Operation<
+  list is AtlasOperation<
     {
       @doc("""
 Whether include termtemplatedef when return all typedefs.
@@ -2168,11 +2241,12 @@ when search filter type=term_template
       type?: TypeCategory;
     },
     AtlasTypesDef,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Create all atlas type definitions in bulk, only new definitions will be
 created.
@@ -2192,6 +2266,7 @@ Any changes to the existing definitions will be discarded.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
 Update all types in bulk, changes detected in the type definitions would be
 persisted.
@@ -2210,6 +2285,7 @@ persisted.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete API for all types in bulk.")
   @route("/atlas/v2/types/typedefs")
   @delete
@@ -2228,7 +2304,7 @@ persisted.
   @doc("List all type definitions returned as a list of minimal information header.")
   @route("/atlas/v2/types/typedefs/headers")
   @get
-  listHeaders is Azure.Core.Foundations.Operation<
+  listHeaders is AtlasOperation<
     {
       @doc("""
 Whether include termtemplatedef when return all typedefs.
@@ -2243,7 +2319,7 @@ when search filter type=term_template
       type?: TypeCategory;
     },
     OkResponse<AtlasTypeDefHeader[]>,
-    {},
+    AtlasApiVersionParameterTraits,
     AtlasErrorResponse
   >;
 

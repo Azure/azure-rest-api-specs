@@ -272,9 +272,6 @@
         "description": "Delete a list of entities in bulk identified by their GUIDs or unique\nattributes.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "query",
             "description": "An array of GUIDs of entities to delete.",
@@ -313,9 +310,6 @@
         "description": "Associate a classification to multiple entities in bulk.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The request to associate a classification to multiple entities.",
@@ -348,9 +342,6 @@
         "operationId": "Entity_BulkSetClassifications",
         "description": "Set classifications on entities in bulk.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -390,9 +381,6 @@
         "operationId": "Entity_ListByUniqueAttributes",
         "description": "Bulk API to retrieve list of entities identified by its unique attributes.\nIn\naddition to the typeName path parameter, attribute key-value pair(s) can be\nprovided in the following\nformat\n\ntypeName=\\<typeName>&attr_1:\\<attrName>=\\<attrValue>&attr_2:\\<attrName>=\\<attrValue>&attr_3:\\<attrName>=\\<attrValue>\n\nNOTE:\nThe attrName should be an unique attribute for the given entity-type.\nThe REST\nrequest would look something like this\n\nGET\n/v2/entity/bulk/uniqueAttribute/type/hive_db?attr_1:qualifiedName=db1@cl1&attr_2:qualifiedName=db2@cl1\n\nNote:\nat least one unique attribute must be provided.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "typeName",
             "in": "path",
@@ -452,9 +440,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "file",
             "in": "formData",
             "description": "InputStream of file",
@@ -491,11 +476,7 @@
           "application/octet-stream",
           "application/json"
         ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -522,9 +503,6 @@
         "operationId": "Entity_Get",
         "description": "Get complete definition of an entity given its GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -572,9 +550,6 @@
         "description": "Update entity partially - create or update entity attribute identified by its\nGUID.\nSupports only primitive attribute type and entity references.\nIt does not support updating complex types like arrays, and maps.\nNull updates are not possible.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "path",
             "description": "The globally unique identifier of the entity.",
@@ -621,9 +596,6 @@
         "description": "Delete an entity identified by its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "path",
             "description": "The globally unique identifier of the entity.",
@@ -657,9 +629,6 @@
         "operationId": "Entity_AddOrUpdateBusinessMetadata",
         "description": "Add business metadata to an entity.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -711,9 +680,6 @@
         "description": "Remove business metadata from an entity.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "path",
             "description": "The globally unique identifier of the entity.",
@@ -757,9 +723,6 @@
         "operationId": "Entity_AddOrUpdateBusinessMetadataAttributes",
         "description": "Add or update business metadata attributes.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "businessMetadataName",
             "in": "path",
@@ -806,9 +769,6 @@
         "operationId": "Entity_RemoveBusinessMetadataAttributes",
         "description": "Delete business metadata attributes from an entity.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "businessMetadataName",
             "in": "path",
@@ -858,9 +818,6 @@
         "description": "Get classification for a given entity represented by a GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "path",
             "description": "The globally unique identifier of the entity.",
@@ -900,9 +857,6 @@
         "description": "Delete a given classification from an existing entity represented by a GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "path",
             "description": "The globally unique identifier of the entity.",
@@ -941,9 +895,6 @@
         "description": "List classifications for a given entity represented by a GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "path",
             "description": "The globally unique identifier of the entity.",
@@ -975,9 +926,6 @@
         "operationId": "Entity_UpdateClassifications",
         "description": "Update classifications to an existing entity represented by a guid.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -1020,9 +968,6 @@
         "operationId": "Entity_AddClassifications",
         "description": "Add classifications to an existing entity represented by a GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -1068,9 +1013,6 @@
         "description": "Get entity header given its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "path",
             "description": "The globally unique identifier of the entity.",
@@ -1104,9 +1046,6 @@
         "operationId": "Entity_AddLabel",
         "description": "Add given labels to a given entity.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -1149,9 +1088,6 @@
         "description": "Set labels to a given entity.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "path",
             "description": "The globally unique identifier of the entity.",
@@ -1192,9 +1128,6 @@
         "operationId": "Entity_RemoveLabels",
         "description": "Delete given labels to a given entity.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -1238,9 +1171,6 @@
         "operationId": "Entity_GetByUniqueAttributes",
         "description": "Get complete definition of an entity given its type and unique attribute.\n\nIn\naddition to the typeName path parameter, attribute key-value pair(s) can be\nprovided in the following format:\nattr:\\<attrName>=<attrValue>.\n\nNOTE: The\nattrName and attrValue should be unique across entities, eg.\nqualifiedName.\n\nThe REST request would look something like this:\nGET\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "typeName",
             "in": "path",
@@ -1296,9 +1226,6 @@
         "description": "Update entity partially - Allow a subset of attributes to be updated on an\nentity which is identified by its type and unique attribute eg:\nReferenceable.qualifiedName. Null updates are not possible.\n\nIn addition to the\ntypeName path parameter, attribute key-value pair(s) can be provided in the\nfollowing format:\n\nattr:<attrName>=<attrValue>.\nNOTE: The attrName and\nattrValue should be unique across entities, eg. qualifiedName.\n\nThe REST\nrequest would look something like this:\nPUT\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "typeName",
             "in": "path",
             "description": "The name of the type.",
@@ -1348,9 +1275,6 @@
         "description": "Delete an entity identified by its type and unique attributes.\nIn addition to\nthe typeName path parameter, attribute key-value pair(s) can be provided in the\nfollowing format:\nattr:\\<attrName>=\\<attrValue>.\nNOTE: The attrName and\nattrValue should be unique across entities, eg. qualifiedName.\n\nThe REST\nrequest would look something like this:\nDELETE\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "typeName",
             "in": "path",
             "description": "The name of the type.",
@@ -1392,9 +1316,6 @@
         "operationId": "Entity_RemoveClassificationByUniqueAttribute",
         "description": "Delete a given classification from an entity identified by its type and unique\nattributes.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "typeName",
             "in": "path",
@@ -1441,9 +1362,6 @@
         "operationId": "Entity_UpdateClassificationsByUniqueAttribute",
         "description": "Update classification on an entity identified by its type and unique attributes.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "typeName",
             "in": "path",
@@ -1494,9 +1412,6 @@
         "operationId": "Entity_AddClassificationsByUniqueAttribute",
         "description": "Add classification to the entity identified by its type and unique attributes.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "typeName",
             "in": "path",
@@ -1550,9 +1465,6 @@
         "description": "Add given labels to a given entity identified by its type and unique\nattributes.\n\nIf labels is null/empty, no labels will be added.\n\nIn addition to\nthe typeName path parameter, attribute key-value pair(s) can be provided in the\nfollowing format: attr:<attrName>=<attrValue>.\n\nNOTE: The attrName and\nattrValue should be unique across entities, eg. qualifiedName.\n\nThe REST\nrequest would look something like this: PUT\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "typeName",
             "in": "path",
             "description": "The name of the type.",
@@ -1602,9 +1514,6 @@
         "description": "Set labels to a given entity identified by its type and unique attributes.\n\nIf\nlabels is null/empty, existing labels will all be removed.\n\nIn addition to the\ntypeName path parameter, attribute key-value pair(s) can be provided in the\nfollowing format: attr:<attrName>=<attrValue>.\n\nNOTE: The attrName and\nattrValue should be unique across entities, eg. qualifiedName.\n\nThe REST\nrequest would look something like this: POST\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "typeName",
             "in": "path",
             "description": "The name of the type.",
@@ -1653,9 +1562,6 @@
         "operationId": "Entity_RemoveLabelsByUniqueAttribute",
         "description": "Delete given labels to a given entity identified by its type and unique\nattribute.\n\nIf labels is null/empty, no labels will be removed.\n\nIf any labels\nin labels set are non-existing labels, they will be ignored, only existing\nlabels will be removed. In addition to the typeName path parameter, attribute\nkey-value pair(s) can be provided in the following format:\nattr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique\nacross entities, eg. qualifiedName. The REST request would look something like\nthis: DELETE\n/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "typeName",
             "in": "path",
@@ -1770,9 +1676,6 @@
         "description": "Create a glossary.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "Glossary definition, terms & categories can be anchored to a glossary.\nUsing\nthe anchor attribute when creating the Term/Category.",
@@ -1808,9 +1711,6 @@
         "operationId": "Glossary_Get",
         "description": "Get a specific Glossary by its GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "glossaryId",
             "in": "path",
@@ -1895,9 +1795,6 @@
         "description": "Delete a glossary. Will delete underlying terms/categories together. Recommend\nseparate delete terms and categories.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
@@ -1928,9 +1825,6 @@
         "operationId": "Glossary_ListCategories",
         "description": "Get the categories belonging to a specific glossary. Recommend using\nlimit/offset to get pagination result.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "glossaryId",
             "in": "path",
@@ -1992,9 +1886,6 @@
         "operationId": "Glossary_ListCategoriesHeaders",
         "description": "Get the category headers belonging to a specific glossary. Recommend using\nlimit/offset to get pagination result.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "glossaryId",
             "in": "path",
@@ -2214,9 +2105,6 @@
         "description": "Get term headers belonging to a specific glossary. Recommend using limit/offset\nto get pagination result.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
@@ -2278,9 +2166,6 @@
         "description": "Create glossary category in bulk.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "An array of glossary category definitions to be created.",
@@ -2325,9 +2210,6 @@
         "description": "Create a glossary category.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The glossary category definition. A category must be anchored to a Glossary\nwhen creating.\nOptionally, terms belonging to the category and the hierarchy\ncan also be defined during creation.",
@@ -2364,9 +2246,6 @@
         "description": "Get specific glossary category by its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "categoryId",
             "in": "path",
             "description": "The globally unique identifier of the category.",
@@ -2398,9 +2277,6 @@
         "operationId": "Glossary_UpdateCategory",
         "description": "Update the given glossary category by its GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "categoryId",
             "in": "path",
@@ -2443,9 +2319,6 @@
         "description": "Delete a glossary category.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "categoryId",
             "in": "path",
             "description": "The globally unique identifier of the category.",
@@ -2476,9 +2349,6 @@
         "operationId": "Glossary_PartialUpdateCategory",
         "description": "Update the glossary category partially. So far we only supports partial\nupdating shortDescription and longDescription for category.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "categoryId",
             "in": "path",
@@ -2525,9 +2395,6 @@
         "operationId": "Glossary_ListRelatedCategories",
         "description": "Get all related categories (parent and children). Limit, offset, and sort\nparameters are currently not being enabled and won't work even they are passed.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "categoryId",
             "in": "path",
@@ -2593,9 +2460,6 @@
         "description": "Get all terms associated with the specific category.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "categoryId",
             "in": "path",
             "description": "The globally unique identifier of the category.",
@@ -2656,9 +2520,6 @@
         "operationId": "Glossary_CreateTerm",
         "description": "Create a glossary term.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "includeTermHierarchy",
             "in": "query",
@@ -2794,9 +2655,6 @@
         "operationId": "Glossary_DeleteTerm",
         "description": "Delete a glossary term.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "termId",
             "in": "path",
@@ -2939,9 +2797,6 @@
         "description": "List all related objects assigned with the specified term. Recommend using\nlimit/offset to get pagination result.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "termId",
             "in": "path",
             "description": "The globally unique identifier for glossary term.",
@@ -3001,9 +2856,6 @@
         "description": "Assign the given term to the provided list of related objects. Recommend using\nsmall batches with multiple API calls.\n\n[Entities Create Or Update\noperation](https://learn.microsoft.com/en-us/rest/api/purview/datamapdataplane/entity/bulk-create-or-update?tabs=HTTP)\nis an alternative to assign a term to multiple entities.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "termId",
             "in": "path",
             "description": "The globally unique identifier for glossary term.",
@@ -3045,9 +2897,6 @@
         "operationId": "Glossary_DeleteTermAssignmentFromEntities",
         "description": "Delete the term assignment for the given list of related objects.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "termId",
             "in": "path",
@@ -3160,9 +3009,6 @@
         "description": "Get lineage info of the entity specified by GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "path",
             "description": "The globally unique identifier of the entity.",
@@ -3237,9 +3083,6 @@
         "operationId": "Lineage_GetByUniqueAttribute",
         "description": "Return lineage info about entity.\n\nIn addition to the typeName path parameter,\nattribute key-value pair(s) can be provided in the following\nformat\n\nattr:[attrName]=[attrValue]\n\nNOTE: The attrName and attrValue should be\nunique across entities, eg. qualifiedName.\n\nThe REST request would look\nsomething like this:\n\nGET\n/v2/lineage/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "typeName",
             "in": "path",
@@ -3324,9 +3167,6 @@
         "description": "Update an existing relationship between entities.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The AtlasRelationship object containing the information for the relationship to\nbe created.",
@@ -3360,9 +3200,6 @@
         "operationId": "Relationship_Create",
         "description": "Create a new relationship between entities.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -3399,9 +3236,6 @@
         "operationId": "Relationship_Get",
         "description": "Get relationship information between entities by its GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -3442,9 +3276,6 @@
         "description": "Delete a relationship between entities by its GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "guid",
             "in": "path",
             "description": "The globally unique identifier of the relationship.",
@@ -3475,9 +3306,6 @@
         "operationId": "Type_GetBusinessMetadataDefByGuid",
         "description": "Get the businessMetadata definition for the given guid.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -3513,9 +3341,6 @@
         "description": "Get the businessMetadata definition by it's name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "name",
             "in": "path",
             "description": "businessMetadata name",
@@ -3549,9 +3374,6 @@
         "operationId": "Type_GetClassificationDefByGuid",
         "description": "Get the classification definition for the given GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -3587,9 +3409,6 @@
         "description": "Get the classification definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "name",
             "in": "path",
             "description": "The name of the classification.",
@@ -3623,9 +3442,6 @@
         "operationId": "Type_GetEntityDefByGuid",
         "description": "Get the Entity definition for the given GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -3661,9 +3477,6 @@
         "description": "Get the entity definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "name",
             "in": "path",
             "description": "The name of the entity.",
@@ -3697,9 +3510,6 @@
         "operationId": "Type_GetEnumDefByGuid",
         "description": "Get the enum definition for the given GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -3735,9 +3545,6 @@
         "description": "Get the enum definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "name",
             "in": "path",
             "description": "The name of the enum.",
@@ -3771,9 +3578,6 @@
         "operationId": "Type_GetRelationshipDefByGuid",
         "description": "Get the relationship definition for the given GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -3809,9 +3613,6 @@
         "description": "Get the relationship definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "name",
             "in": "path",
             "description": "The name of the relationship.",
@@ -3845,9 +3646,6 @@
         "operationId": "Type_GetStructDefByGuid",
         "description": "Get the struct definition for the given GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -3883,9 +3681,6 @@
         "description": "Get the struct definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "name",
             "in": "path",
             "description": "The name of the struct.",
@@ -3919,9 +3714,6 @@
         "operationId": "Type_GetByGuid",
         "description": "Get the type definition for the given GUID.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "guid",
             "in": "path",
@@ -3957,9 +3749,6 @@
         "description": "Get the type definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "name",
             "in": "path",
             "description": "The name of the type.",
@@ -3992,9 +3781,6 @@
         "description": "Delete API for type identified by its name.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "name",
             "in": "path",
             "description": "The name of the type.",
@@ -4026,7 +3812,7 @@
         "description": "List all type definitions in bulk.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "includeTermTemplate",
@@ -4142,9 +3928,6 @@
         "description": "Update all types in bulk, changes detected in the type definitions would be\npersisted.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "A composite object that captures all type definition changes.",
@@ -4178,9 +3961,6 @@
         "operationId": "Type_BulkCreate",
         "description": "Create all atlas type definitions in bulk, only new definitions will be\ncreated.\nAny changes to the existing definitions will be discarded.",
         "parameters": [
-          {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -4219,9 +3999,6 @@
         "description": "Delete API for all types in bulk.",
         "parameters": [
           {
-            "$ref": "#/parameters/AtlasApiVersionParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "A composite object that captures all types to be deleted",
@@ -4255,7 +4032,7 @@
         "description": "List all type definitions returned as a list of minimal information header.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/AtlasApiVersionParameter"
           },
           {
             "name": "includeTermTemplate",
