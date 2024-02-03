@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-04-01",
+    "version": "2024-02-01-preview",
     "title": "AuthorizationManagementClient"
   },
   "securityDefinitions": {
@@ -386,6 +386,53 @@
         }
       }
     },
+    "RoleManagementPolicyPimOnlyModeRule": {
+      "description": "The role management policy PIM only mode rule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "pimOnlyModeSettings": {
+          "$ref": "#/definitions/PIMOnlyModeSettings",
+          "description": "The PIM Only Mode settings"
+        }
+      }
+    },
+    "PIMOnlyModeSettings": {
+      "description": "The PIM Only Mode settings.",
+      "type": "object",
+      "properties": {
+        "mode" : {
+          "type": "string",
+          "description": "Determines whether the setting is enabled, disabled or report only.",
+          "enum": [
+            "Disabled",
+            "Enabled",
+            "ReportOnly"
+          ],
+          "x-ms-enum": {
+            "name": "PIMOnlyMode",
+            "modelAsString": true
+          }
+        },
+        "excludes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of object IDs that the rule does not apply to."
+        },
+        "excludeAllServicePrincipals": {
+          "type": "boolean",
+          "description": "Exclude all service principals from this rule."
+        }
+      }
+    },
+
     "RoleManagementPolicyRuleType": {
       "type": "string",
       "description": "The type of rule",
@@ -394,7 +441,8 @@
         "RoleManagementPolicyAuthenticationContextRule",
         "RoleManagementPolicyEnablementRule",
         "RoleManagementPolicyExpirationRule",
-        "RoleManagementPolicyNotificationRule"
+        "RoleManagementPolicyNotificationRule",
+        "RoleManagementPolicyPimOnlyModeRule"
       ],
       "x-ms-enum": {
         "name": "RoleManagementPolicyRuleType",
