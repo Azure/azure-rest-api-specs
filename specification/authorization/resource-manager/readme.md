@@ -102,8 +102,6 @@ input-file:
   - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicy.json
   - Microsoft.Authorization/preview/2024-02-01-preview/common-types.json
 ```
-
-
 ### Tag: package-2022-05-01-preview-only
 
 These settings apply only when `--package-2022-05-01-preview-only` is specified on the command line.
