@@ -132,6 +132,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get the status of an operation.": {
+            "$ref": "./examples/SharedOperations_GetProjectOperationStatus.json"
+          }
         }
       }
     },
@@ -479,7 +484,7 @@
             "type": "string"
           },
           {
-            "name": "devBox",
+            "name": "body",
             "in": "body",
             "description": "Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator",
             "required": true,
@@ -1420,8 +1425,7 @@
       },
       "required": [
         "name",
-        "poolName",
-        "powerState"
+        "poolName"
       ]
     },
     "DevBoxAction": {
@@ -2154,7 +2158,6 @@
         },
         "time": {
           "type": "string",
-          "format": "time",
           "description": "The target time to trigger the action. The format is HH:MM."
         },
         "timeZone": {

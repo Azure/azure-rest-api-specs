@@ -186,7 +186,7 @@ model EnvironmentDefinitionParameter {
   @doc("Default value of the parameter")
   @projectedName("csharp", "defaultValue")
   @projectedName("java", "defaultValue")
-  default?: bytes;
+  default?: string;
 
   @doc("""
 A string of one of the basic JSON types (number, integer, array, object,
@@ -207,7 +207,6 @@ value.
 
   @doc("An array of allowed values")
   @minItems(1)
-  // @uniqueItems // TODO import TypeSpec.JsonSchema
   allowed?: string[];
 }
 

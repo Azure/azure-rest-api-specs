@@ -63,7 +63,7 @@ interface DevBoxesOperations {
 
       @doc("Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator")
       @body
-      devBox: DevBox;
+      body: DevBox;
     },
     DevBox | {
       @statusCode statusCode: 201;

@@ -325,7 +325,8 @@ model Schedule {
   frequency: ScheduledFrequency;
 
   @doc("The target time to trigger the action. The format is HH:MM.")
-  time: plainTime;
+  //no build in time type matches HH:MM time format
+  time: string;
 
   @doc("The IANA timezone id at which the schedule should execute.")
   timeZone: string;
