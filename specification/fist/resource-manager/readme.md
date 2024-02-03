@@ -62,28 +62,6 @@ input-file:
   - Microsoft.IoTFirmwareDefense/preview/2023-02-08-preview/operations.json
 ```
 
-### Tag: package-2022-09-15-privatepreview
-
-These settings apply only when `--tag=package-2022-09-15-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-09-15-privatepreview'
-input-file:
-  - Microsoft.IoTFirmwareDefense/preview/2022-09-15-privatepreview/firmwareGroups.json
-  - Microsoft.IoTFirmwareDefense/preview/2022-09-15-privatepreview/firmwares.json
-  - Microsoft.IoTFirmwareDefense/preview/2022-09-15-privatepreview/operations.json
-```
-
-### Tag: package-2021-11-10-privatepreview
-
-These settings apply only when `--tag=package-2021-11-10-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-11-10-privatepreview'
-input-file:
-  - Microsoft.IoTFirmwareDefense/preview/2021-11-10-privatepreview/firmwareGroups.json
-  - Microsoft.IoTFirmwareDefense/preview/2021-11-10-privatepreview/firmwares.json
-  - Microsoft.IoTFirmwareDefense/preview/2021-11-10-privatepreview/operations.json
-```
-
 ---
 
 # Code Generation
