@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2024-01-10",
-    "title": "fist",
+    "title": "IoT Firmware Defense",
     "description": "The definitions and parameters in this swagger specification will be used to manage the IoT Firmware Defense resources."
   },
   "host": "management.azure.com",
@@ -43,119 +43,23 @@
           "type": "string",
           "format": "uri",
           "readOnly": true
-        },
-        "uploadUrl": {
-          "description": "SAS URL for file uploading. Kept for backwards compatibility",
-          "type": "string",
-          "format": "uri",
-          "readOnly": true
         }
       },
       "description": "Url data for creating or accessing a blob file."
     },
-    "Firmware": {
+    "PairedKey": {
       "type": "object",
-      "description": "Firmware definition",
+      "description": "Details of a matching paired key or certificate.",
       "properties": {
-        "properties": {
-          "title": "Firmware properties",
-          "description": "The properties of a firmware",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FirmwareProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "FirmwareUpdateDefinition": {
-      "type": "object",
-      "description": "Firmware definition",
-      "properties": {
-        "properties": {
-          "title": "Firmware properties",
-          "description": "The editable properties of a firmware",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FirmwareProperties"
+        "id": {
+          "type": "string",
+          "description": "ID of the paired key or certificate."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type indicating whether the paired object is a key or certificate."
         }
       }
-    },
-    "FirmwareProperties": {
-      "type": "object",
-      "properties": {
-        "fileName": {
-          "type": "string",
-          "description": "File name for a firmware that user uploaded."
-        },
-        "vendor": {
-          "type": "string",
-          "description": "Firmware vendor."
-        },
-        "model": {
-          "type": "string",
-          "description": "Firmware model."
-        },
-        "version": {
-          "type": "string",
-          "description": "Firmware version."
-        },
-        "description": {
-          "type": "string",
-          "description": "User-specified description of the firmware."
-        },
-        "fileSize": {
-          "description": "File size of the uploaded firmware image.",
-          "type": "integer",
-          "format": "int64",
-          "x-nullable": true
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of firmware scan.",
-          "enum": [
-            "Pending",
-            "Extracting",
-            "Analyzing",
-            "Ready",
-            "Error"
-          ],
-          "default": "Pending",
-          "x-ms-enum": {
-            "name": "status",
-            "modelAsString": true
-          }
-        },
-        "statusMessages": {
-          "type": "array",
-          "description": "A list of errors or other messages generated during firmware analysis",
-          "items": {
-            "$ref": "#/definitions/StatusMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the resource.",
-          "type": "string",
-          "enum": [
-            "Accepted",
-            "Succeeded",
-            "Canceled",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        }
-      },
-      "description": "Firmware properties."
-    },
-    "StatusMessage": {
-      "type": "object",
-      "description": "Error and status message"
     }
   },
   "parameters": {

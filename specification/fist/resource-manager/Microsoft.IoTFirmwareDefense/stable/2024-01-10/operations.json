@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2024-01-10",
-    "title": "fist",
-    "description": "Firmware & IoT Security"
+    "title": "IoT Firmware Defense",
+    "description": "Firmware & IoT Security REST API"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -43,20 +43,20 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
