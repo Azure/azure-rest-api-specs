@@ -237,7 +237,7 @@ model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   @doc("MessageTemplateBindings is whatsApp")
   kind: MessageTemplateBindingsKind.whatsApp;
 
-  @visibility("create")
+  @visibility("create","update")
   @doc("The header template bindings")
   header?: WhatsAppMessageTemplateBindingsComponent[];
 
