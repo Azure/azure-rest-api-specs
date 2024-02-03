@@ -1,5 +1,5 @@
 {
-  "title": "Create a PipelineGroup instance using a syslog receiver and networking configurations.",
+  "title": "Create a PipelineGroup instance using a syslog receiver and cache.",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -26,7 +26,12 @@
             }
           }
         ],
-        "processors": [],
+        "processors": [
+          {
+            "type": "Batch",
+            "name": "batch-processor1"
+          }
+        ],
         "exporters": [
           {
             "type": "AzureMonitorWorkspaceLogs",
@@ -34,7 +39,7 @@
             "azureMonitorWorkspaceLogs": {
               "api": {
                 "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                "stream": "Custom-MyTableRawData",
+                "stream": "Custom-MyTableRawData_CL",
                 "dataCollectionRule": "dcr-00000000000000000000000000000000",
                 "schema": {
                   "recordMap": [
@@ -54,9 +59,12 @@
                 }
               },
               "concurrency": {
-                "fixedCount": 10,
-                "payloadQueueSize": 100,
-                "logQueueSize": 100
+                "workerCount": 4,
+                "batchQueueSize": 100
+              },
+              "cache": {
+                "maxStorageUsage": 100,
+                "retentionPeriod": 10
               }
             }
           }
@@ -68,23 +76,15 @@
               "receivers": [
                 "syslog-receiver1"
               ],
-              "processors": [],
+              "processors": [
+                "batch-processor1"
+              ],
               "exporters": [
                 "my-workspace-logs-exporter1"
               ]
             }
           ]
-        },
-        "networkingConfigurations": [
-          {
-            "host": "azuremonitorpipeline.contoso.com",
-            "routes": [
-              {
-                "receiver": "syslog-receiver1"
-              }
-            ]
-          }
-        ]
+        }
       }
     }
   },
@@ -114,7 +114,12 @@
               }
             }
           ],
-          "processors": [],
+          "processors": [
+            {
+              "type": "Batch",
+              "name": "batch-processor1"
+            }
+          ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
@@ -122,7 +127,7 @@
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-MyTableRawData",
+                  "stream": "Custom-MyTableRawData_CL",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
@@ -142,9 +147,8 @@
                   }
                 },
                 "concurrency": {
-                  "fixedCount": 10,
-                  "payloadQueueSize": 100,
-                  "logQueueSize": 100
+                  "workerCount": 4,
+                  "batchQueueSize": 100
                 }
               }
             }
@@ -156,23 +160,15 @@
                 "receivers": [
                   "syslog-receiver1"
                 ],
-                "processors": [],
+                "processors": [
+                  "batch-processor1"
+                ],
                 "exporters": [
                   "my-workspace-logs-exporter1"
                 ]
               }
             ]
-          },
-          "networkingConfigurations": [
-            {
-              "host": "azuremonitorpipeline.contoso.com",
-              "routes": [
-                {
-                  "receiver": "syslog-receiver1"
-                }
-              ]
-            }
-          ]
+          }
         },
         "systemData": {
           "createdBy": "myuser@myorg.com",
@@ -209,7 +205,12 @@
               }
             }
           ],
-          "processors": [],
+          "processors": [
+            {
+              "type": "Batch",
+              "name": "batch-processor1"
+            }
+          ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
@@ -217,7 +218,7 @@
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-MyTableRawData",
+                  "stream": "Custom-MyTableRawData_CL",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
@@ -237,9 +238,8 @@
                   }
                 },
                 "concurrency": {
-                  "fixedCount": 10,
-                  "payloadQueueSize": 100,
-                  "logQueueSize": 100
+                  "workerCount": 4,
+                  "batchQueueSize": 100
                 }
               }
             }
@@ -251,23 +251,15 @@
                 "receivers": [
                   "syslog-receiver1"
                 ],
-                "processors": [],
+                "processors": [
+                  "batch-processor1"
+                ],
                 "exporters": [
                   "my-workspace-logs-exporter1"
                 ]
               }
             ]
-          },
-          "networkingConfigurations": [
-            {
-              "host": "azuremonitorpipeline.contoso.com",
-              "routes": [
-                {
-                  "receiver": "syslog-receiver1"
-                }
-              ]
-            }
-          ]
+          }
         },
         "systemData": {
           "createdBy": "myuser@myorg.com",

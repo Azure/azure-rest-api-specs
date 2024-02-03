@@ -34,7 +34,7 @@
             "azureMonitorWorkspaceLogs": {
               "api": {
                 "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                "stream": "Custom-MyTableRawData",
+                "stream": "Custom-MyTableRawData_CL",
                 "dataCollectionRule": "dcr-00000000000000000000000000000000",
                 "schema": {
                   "recordMap": [
@@ -54,9 +54,8 @@
                 }
               },
               "concurrency": {
-                "fixedCount": 10,
-                "payloadQueueSize": 100,
-                "logQueueSize": 100
+                "workerCount": 4,
+                "batchQueueSize": 100
               }
             }
           }
@@ -122,7 +121,7 @@
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-MyTableRawData",
+                  "stream": "Custom-MyTableRawData_CL",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
@@ -142,9 +141,8 @@
                   }
                 },
                 "concurrency": {
-                  "fixedCount": 10,
-                  "payloadQueueSize": 100,
-                  "logQueueSize": 100
+                  "workerCount": 4,
+                  "batchQueueSize": 100
                 }
               }
             }
@@ -217,7 +215,7 @@
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-MyTableRawData",
+                  "stream": "Custom-MyTableRawData_CL",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
@@ -237,9 +235,8 @@
                   }
                 },
                 "concurrency": {
-                  "fixedCount": 10,
-                  "payloadQueueSize": 100,
-                  "logQueueSize": 100
+                  "workerCount": 4,
+                  "batchQueueSize": 100
                 }
               }
             }
