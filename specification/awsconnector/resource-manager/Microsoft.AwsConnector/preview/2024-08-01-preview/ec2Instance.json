@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AwsConnector",
-    "version": "2023-12-01-preview",
+    "version": "2024-08-01-preview",
     "description": "Microsoft.AwsConnector Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -53,7 +53,7 @@
         "description": "List Ec2Instance resources by parent",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -69,7 +69,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -92,7 +92,7 @@
         "description": "Get a Ec2Instance",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -108,7 +108,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -126,7 +126,7 @@
         "description": "Create a Ec2Instance. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -164,7 +164,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -186,16 +186,13 @@
         "description": "Delete a Ec2Instance",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -216,7 +213,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -263,7 +260,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/AmdSevSnpSpecification",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -315,7 +312,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/ArchitectureValues",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -361,45 +358,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/AttachmentStatus",
-          "description": "Gets and sets the property value. "
-        }
-      }
-    },
-    "AwsCommonProperties": {
-      "type": "object",
-      "description": "Definition of AwsCommon",
-      "properties": {
-        "publicCloudConnectorsResourceId": {
-          "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId. "
-        },
-        "awsAccountId": {
-          "type": "string",
-          "description": "Gets and sets the property awsAccountId. "
-        },
-        "awsResourceName": {
-          "type": "string",
-          "description": "Gets and sets the property awsResourceName. "
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion. "
-        },
-        "awsRegion": {
-          "type": "string",
-          "description": "Gets and sets the property awsRegion. "
-        },
-        "awsTags": {
-          "type": "object",
-          "description": "Gets and sets the property awsTags. ",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState. The status of the last operation.",
-          "readOnly": true
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -410,15 +369,15 @@
         "amiLaunchIndex": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property amiLaunchIndex. <p>The AMI launch index, which can be used to find this instance in the launch group.</p>"
+          "description": "Gets and sets the property amiLaunchIndex.<p>The AMI launch index, which can be used to find this instance in the launch group.</p>"
         },
         "architecture": {
           "$ref": "#/definitions/ArchitectureValuesEnumValue",
-          "description": "Gets and sets the property architecture. <p>The architecture of the image.</p>"
+          "description": "Gets and sets the property architecture.<p>The architecture of the image.</p>"
         },
         "blockDeviceMappings": {
           "type": "array",
-          "description": "Gets and sets the property blockDeviceMappings. <p>Any block device mapping entries for the instance.</p>",
+          "description": "Gets and sets the property blockDeviceMappings.<p>Any block device mapping entries for the instance.</p>",
           "items": {
             "$ref": "#/definitions/InstanceBlockDeviceMapping"
           },
@@ -426,35 +385,35 @@
         },
         "bootMode": {
           "$ref": "#/definitions/BootModeValuesEnumValue",
-          "description": "Gets and sets the property bootMode. <p>The boot mode that was specified by the AMI. If the value is <code>uefi-preferred</code>, the AMI supports both UEFI and Legacy BIOS. The <code>currentInstanceBootMode</code> parameter is the boot mode that is used to boot the instance at launch or start.</p> <note> <p>The operating system contained in the AMI must be configured to support the specified boot mode.</p> </note> <p>For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+          "description": "Gets and sets the property bootMode.<p>The boot mode that was specified by the AMI. If the value is <code>uefi-preferred</code>, the AMI supports both UEFI and Legacy BIOS. The <code>currentInstanceBootMode</code> parameter is the boot mode that is used to boot the instance at launch or start.</p> <note> <p>The operating system contained in the AMI must be configured to support the specified boot mode.</p> </note> <p>For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>"
         },
         "capacityReservationId": {
           "type": "string",
-          "description": "Gets and sets the property capacityReservationId. <p>The ID of the Capacity Reservation.</p>"
+          "description": "Gets and sets the property capacityReservationId.<p>The ID of the Capacity Reservation.</p>"
         },
         "capacityReservationSpecification": {
           "$ref": "#/definitions/CapacityReservationSpecificationResponse",
-          "description": "Gets and sets the property capacityReservationSpecification. <p>Information about the Capacity Reservation targeting option.</p>"
+          "description": "Gets and sets the property capacityReservationSpecification.<p>Information about the Capacity Reservation targeting option.</p>"
         },
         "clientToken": {
           "type": "string",
-          "description": "Gets and sets the property clientToken. <p>The idempotency token you provided when you launched the instance, if applicable.</p>"
+          "description": "Gets and sets the property clientToken.<p>The idempotency token you provided when you launched the instance, if applicable.</p>"
         },
         "cpuOptions": {
           "$ref": "#/definitions/CpuOptions",
-          "description": "Gets and sets the property cpuOptions. <p>The CPU options for the instance.</p>"
+          "description": "Gets and sets the property cpuOptions.<p>The CPU options for the instance.</p>"
         },
         "currentInstanceBootMode": {
           "$ref": "#/definitions/InstanceBootModeValuesEnumValue",
-          "description": "Gets and sets the property currentInstanceBootMode. <p>The boot mode that is used to boot the instance at launch or start. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+          "description": "Gets and sets the property currentInstanceBootMode.<p>The boot mode that is used to boot the instance at launch or start. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>"
         },
         "ebsOptimized": {
           "type": "boolean",
-          "description": "Gets and sets the property ebsOptimized. <p>Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.</p>"
+          "description": "Gets and sets the property ebsOptimized.<p>Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.</p>"
         },
         "elasticGpuAssociations": {
           "type": "array",
-          "description": "Gets and sets the property elasticGpuAssociations. <p>The Elastic GPU associated with the instance.</p>",
+          "description": "Gets and sets the property elasticGpuAssociations.<p>The Elastic GPU associated with the instance.</p>",
           "items": {
             "$ref": "#/definitions/ElasticGpuAssociation"
           },
@@ -462,7 +421,7 @@
         },
         "elasticInferenceAcceleratorAssociations": {
           "type": "array",
-          "description": "Gets and sets the property elasticInferenceAcceleratorAssociations. <p>The elastic inference accelerator associated with the instance.</p>",
+          "description": "Gets and sets the property elasticInferenceAcceleratorAssociations.<p>The elastic inference accelerator associated with the instance.</p>",
           "items": {
             "$ref": "#/definitions/ElasticInferenceAcceleratorAssociation"
           },
@@ -470,60 +429,60 @@
         },
         "enaSupport": {
           "type": "boolean",
-          "description": "Gets and sets the property enaSupport. <p>Specifies whether enhanced networking with ENA is enabled.</p>"
+          "description": "Gets and sets the property enaSupport.<p>Specifies whether enhanced networking with ENA is enabled.</p>"
         },
         "enclaveOptions": {
           "$ref": "#/definitions/EnclaveOptions",
-          "description": "Gets and sets the property enclaveOptions. <p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves.</p>"
+          "description": "Gets and sets the property enclaveOptions.<p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves.</p>"
         },
         "hibernationOptions": {
           "$ref": "#/definitions/HibernationOptions",
-          "description": "Gets and sets the property hibernationOptions. <p>Indicates whether the instance is enabled for hibernation.</p>"
+          "description": "Gets and sets the property hibernationOptions.<p>Indicates whether the instance is enabled for hibernation.</p>"
         },
         "hypervisor": {
           "$ref": "#/definitions/HypervisorTypeEnumValue",
-          "description": "Gets and sets the property hypervisor. <p>The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.</p>"
+          "description": "Gets and sets the property hypervisor.<p>The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.</p>"
         },
         "iamInstanceProfile": {
           "$ref": "#/definitions/IamInstanceProfile",
-          "description": "Gets and sets the property iamInstanceProfile. <p>The IAM instance profile associated with the instance, if applicable.</p>"
+          "description": "Gets and sets the property iamInstanceProfile.<p>The IAM instance profile associated with the instance, if applicable.</p>"
         },
         "imageId": {
           "type": "string",
-          "description": "Gets and sets the property imageId. <p>The ID of the AMI used to launch the instance.</p>"
+          "description": "Gets and sets the property imageId.<p>The ID of the AMI used to launch the instance.</p>"
         },
         "instanceId": {
           "type": "string",
-          "description": "Gets and sets the property instanceId. <p>The ID of the instance.</p>"
+          "description": "Gets and sets the property instanceId.<p>The ID of the instance.</p>"
         },
         "instanceLifecycle": {
           "$ref": "#/definitions/InstanceLifecycleTypeEnumValue",
-          "description": "Gets and sets the property instanceLifecycle. <p>Indicates whether this is a Spot Instance or a Scheduled Instance.</p>"
+          "description": "Gets and sets the property instanceLifecycle.<p>Indicates whether this is a Spot Instance or a Scheduled Instance.</p>"
         },
         "instanceType": {
           "$ref": "#/definitions/InstanceTypeEnumValue",
-          "description": "Gets and sets the property instanceType. <p>The instance type.</p>"
+          "description": "Gets and sets the property instanceType.<p>The instance type.</p>"
         },
         "ipv6Address": {
           "type": "string",
-          "description": "Gets and sets the property ipv6Address. <p>The IPv6 address assigned to the instance.</p>"
+          "description": "Gets and sets the property ipv6Address.<p>The IPv6 address assigned to the instance.</p>"
         },
         "kernelId": {
           "type": "string",
-          "description": "Gets and sets the property kernelId. <p>The kernel associated with this instance, if applicable.</p>"
+          "description": "Gets and sets the property kernelId.<p>The kernel associated with this instance, if applicable.</p>"
         },
         "keyName": {
           "type": "string",
-          "description": "Gets and sets the property keyName. <p>The name of the key pair, if this instance was launched with an associated key pair.</p>"
+          "description": "Gets and sets the property keyName.<p>The name of the key pair, if this instance was launched with an associated key pair.</p>"
         },
         "launchTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets and sets the property launchTime. <p>The time the instance was launched.</p>"
+          "description": "Gets and sets the property launchTime.<p>The time the instance was launched.</p>"
         },
         "licenses": {
           "type": "array",
-          "description": "Gets and sets the property licenses. <p>The license configurations for the instance.</p>",
+          "description": "Gets and sets the property licenses.<p>The license configurations for the instance.</p>",
           "items": {
             "$ref": "#/definitions/LicenseConfiguration"
           },
@@ -531,19 +490,19 @@
         },
         "maintenanceOptions": {
           "$ref": "#/definitions/InstanceMaintenanceOptions",
-          "description": "Gets and sets the property maintenanceOptions. <p>Provides information on the recovery and maintenance options of your instance.</p>"
+          "description": "Gets and sets the property maintenanceOptions.<p>Provides information on the recovery and maintenance options of your instance.</p>"
         },
         "metadataOptions": {
           "$ref": "#/definitions/InstanceMetadataOptionsResponse",
-          "description": "Gets and sets the property metadataOptions. <p>The metadata options for the instance.</p>"
+          "description": "Gets and sets the property metadataOptions.<p>The metadata options for the instance.</p>"
         },
         "monitoring": {
           "$ref": "#/definitions/Monitoring",
-          "description": "Gets and sets the property monitoring. <p>The monitoring for the instance.</p>"
+          "description": "Gets and sets the property monitoring.<p>The monitoring for the instance.</p>"
         },
         "networkInterfaces": {
           "type": "array",
-          "description": "Gets and sets the property networkInterfaces. <p>The network interfaces for the instance.</p>",
+          "description": "Gets and sets the property networkInterfaces.<p>The network interfaces for the instance.</p>",
           "items": {
             "$ref": "#/definitions/InstanceNetworkInterface"
           },
@@ -551,35 +510,35 @@
         },
         "outpostArn": {
           "type": "string",
-          "description": "Gets and sets the property outpostArn. <p>The Amazon Resource Name (ARN) of the Outpost.</p>"
+          "description": "Gets and sets the property outpostArn.<p>The Amazon Resource Name (ARN) of the Outpost.</p>"
         },
         "placement": {
           "$ref": "#/definitions/Placement",
-          "description": "Gets and sets the property placement. <p>The location where the instance launched, if applicable.</p>"
+          "description": "Gets and sets the property placement.<p>The location where the instance launched, if applicable.</p>"
         },
         "platform": {
           "$ref": "#/definitions/PlatformValuesEnumValue",
-          "description": "Gets and sets the property platform. <p>The value is <code>Windows</code> for Windows instances; otherwise blank.</p>"
+          "description": "Gets and sets the property platform.<p>The value is <code>Windows</code> for Windows instances; otherwise blank.</p>"
         },
         "platformDetails": {
           "type": "string",
-          "description": "Gets and sets the property platformDetails. <p>The platform details value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+          "description": "Gets and sets the property platformDetails.<p>The platform details value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>"
         },
         "privateDnsName": {
           "type": "string",
-          "description": "Gets and sets the property privateDnsName. <p>[IPv4 only] The private DNS hostname name assigned to the instance. This DNS hostname can only be used inside the Amazon EC2 network. This name is not available until the instance enters the <code>running</code> state. </p> <p>The Amazon-provided DNS server resolves Amazon-provided private DNS hostnames if you've enabled DNS resolution and DNS hostnames in your VPC. If you are not using the Amazon-provided DNS server in your VPC, your custom domain name servers must resolve the hostname as appropriate.</p>"
+          "description": "Gets and sets the property privateDnsName.<p>[IPv4 only] The private DNS hostname name assigned to the instance. This DNS hostname can only be used inside the Amazon EC2 network. This name is not available until the instance enters the <code>running</code> state. </p> <p>The Amazon-provided DNS server resolves Amazon-provided private DNS hostnames if you've enabled DNS resolution and DNS hostnames in your VPC. If you are not using the Amazon-provided DNS server in your VPC, your custom domain name servers must resolve the hostname as appropriate.</p>"
         },
         "privateDnsNameOptions": {
           "$ref": "#/definitions/PrivateDnsNameOptionsResponse",
-          "description": "Gets and sets the property privateDnsNameOptions. <p>The options for the instance hostname.</p>"
+          "description": "Gets and sets the property privateDnsNameOptions.<p>The options for the instance hostname.</p>"
         },
         "privateIpAddress": {
           "type": "string",
-          "description": "Gets and sets the property privateIpAddress. <p>The private IPv4 address assigned to the instance.</p>"
+          "description": "Gets and sets the property privateIpAddress.<p>The private IPv4 address assigned to the instance.</p>"
         },
         "productCodes": {
           "type": "array",
-          "description": "Gets and sets the property productCodes. <p>The product codes attached to this instance, if applicable.</p>",
+          "description": "Gets and sets the property productCodes.<p>The product codes attached to this instance, if applicable.</p>",
           "items": {
             "$ref": "#/definitions/ProductCode"
           },
@@ -587,27 +546,27 @@
         },
         "publicDnsName": {
           "type": "string",
-          "description": "Gets and sets the property publicDnsName. <p>[IPv4 only] The public DNS name assigned to the instance. This name is not available until the instance enters the <code>running</code> state. This name is only available if you've enabled DNS hostnames for your VPC.</p>"
+          "description": "Gets and sets the property publicDnsName.<p>[IPv4 only] The public DNS name assigned to the instance. This name is not available until the instance enters the <code>running</code> state. This name is only available if you've enabled DNS hostnames for your VPC.</p>"
         },
         "publicIpAddress": {
           "type": "string",
-          "description": "Gets and sets the property publicIpAddress. <p>The public IPv4 address, or the Carrier IP address assigned to the instance, if applicable.</p> <p>A Carrier IP address only applies to an instance launched in a subnet associated with a Wavelength Zone.</p>"
+          "description": "Gets and sets the property publicIpAddress.<p>The public IPv4 address, or the Carrier IP address assigned to the instance, if applicable.</p> <p>A Carrier IP address only applies to an instance launched in a subnet associated with a Wavelength Zone.</p>"
         },
         "ramdiskId": {
           "type": "string",
-          "description": "Gets and sets the property ramdiskId. <p>The RAM disk associated with this instance, if applicable.</p>"
+          "description": "Gets and sets the property ramdiskId.<p>The RAM disk associated with this instance, if applicable.</p>"
         },
         "rootDeviceName": {
           "type": "string",
-          "description": "Gets and sets the property rootDeviceName. <p>The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>"
+          "description": "Gets and sets the property rootDeviceName.<p>The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>"
         },
         "rootDeviceType": {
           "$ref": "#/definitions/DeviceTypeEnumValue",
-          "description": "Gets and sets the property rootDeviceType. <p>The root device type used by the AMI. The AMI can use an EBS volume or an instance store volume.</p>"
+          "description": "Gets and sets the property rootDeviceType.<p>The root device type used by the AMI. The AMI can use an EBS volume or an instance store volume.</p>"
         },
         "securityGroups": {
           "type": "array",
-          "description": "Gets and sets the property securityGroups. <p>The security groups for the instance.</p>",
+          "description": "Gets and sets the property securityGroups.<p>The security groups for the instance.</p>",
           "items": {
             "$ref": "#/definitions/GroupIdentifier"
           },
@@ -615,35 +574,35 @@
         },
         "sourceDestCheck": {
           "type": "boolean",
-          "description": "Gets and sets the property sourceDestCheck. <p>Indicates whether source/destination checking is enabled.</p>"
+          "description": "Gets and sets the property sourceDestCheck.<p>Indicates whether source/destination checking is enabled.</p>"
         },
         "spotInstanceRequestId": {
           "type": "string",
-          "description": "Gets and sets the property spotInstanceRequestId. <p>If the request is a Spot Instance request, the ID of the request.</p>"
+          "description": "Gets and sets the property spotInstanceRequestId.<p>If the request is a Spot Instance request, the ID of the request.</p>"
         },
         "sriovNetSupport": {
           "type": "string",
-          "description": "Gets and sets the property sriovNetSupport. <p>Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>"
+          "description": "Gets and sets the property sriovNetSupport.<p>Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>"
         },
         "state": {
           "$ref": "#/definitions/InstanceState",
-          "description": "Gets and sets the property state. <p>The current state of the instance.</p>"
+          "description": "Gets and sets the property state.<p>The current state of the instance.</p>"
         },
         "stateReason": {
           "$ref": "#/definitions/StateReason",
-          "description": "Gets and sets the property stateReason. <p>The reason for the most recent state transition.</p>"
+          "description": "Gets and sets the property stateReason.<p>The reason for the most recent state transition.</p>"
         },
         "stateTransitionReason": {
           "type": "string",
-          "description": "Gets and sets the property stateTransitionReason. <p>The reason for the most recent state transition. This might be an empty string.</p>"
+          "description": "Gets and sets the property stateTransitionReason.<p>The reason for the most recent state transition. This might be an empty string.</p>"
         },
         "subnetId": {
           "type": "string",
-          "description": "Gets and sets the property subnetId. <p>The ID of the subnet in which the instance is running.</p>"
+          "description": "Gets and sets the property subnetId.<p>The ID of the subnet in which the instance is running.</p>"
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags. <p>Any tags assigned to the instance.</p>",
+          "description": "Gets and sets the property tags.<p>Any tags assigned to the instance.</p>",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -651,24 +610,24 @@
         },
         "tpmSupport": {
           "type": "string",
-          "description": "Gets and sets the property tpmSupport. <p>If the instance is configured for NitroTPM support, the value is <code>v2.0</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html'>NitroTPM</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+          "description": "Gets and sets the property tpmSupport.<p>If the instance is configured for NitroTPM support, the value is <code>v2.0</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html'>NitroTPM</a> in the <i>Amazon EC2 User Guide</i>.</p>"
         },
         "usageOperation": {
           "type": "string",
-          "description": "Gets and sets the property usageOperation. <p>The usage operation value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+          "description": "Gets and sets the property usageOperation.<p>The usage operation value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>"
         },
         "usageOperationUpdateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets and sets the property usageOperationUpdateTime. <p>The time that the usage operation was last updated.</p>"
+          "description": "Gets and sets the property usageOperationUpdateTime.<p>The time that the usage operation was last updated.</p>"
         },
         "virtualizationType": {
           "$ref": "#/definitions/VirtualizationTypeEnumValue",
-          "description": "Gets and sets the property virtualizationType. <p>The virtualization type of the instance.</p>"
+          "description": "Gets and sets the property virtualizationType.<p>The virtualization type of the instance.</p>"
         },
         "vpcId": {
           "type": "string",
-          "description": "Gets and sets the property vpcId. <p>The ID of the VPC in which the instance is running.</p>"
+          "description": "Gets and sets the property vpcId.<p>The ID of the VPC in which the instance is running.</p>"
         }
       }
     },
@@ -685,7 +644,7 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Legacybios",
+            "name": "LegacyBios",
             "value": "legacy-bios",
             "description": "BootModeValues enum legacy-bios"
           },
@@ -695,7 +654,7 @@
             "description": "BootModeValues enum uefi"
           },
           {
-            "name": "Uefipreferred",
+            "name": "UefiPreferred",
             "value": "uefi-preferred",
             "description": "BootModeValues enum uefi-preferred"
           }
@@ -708,7 +667,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/BootModeValues",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -742,7 +701,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/CapacityReservationPreference",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -752,11 +711,11 @@
       "properties": {
         "capacityReservationPreference": {
           "$ref": "#/definitions/CapacityReservationPreferenceEnumValue",
-          "description": "Gets and sets the property capacityReservationPreference. <p>Describes the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>"
+          "description": "Gets and sets the property capacityReservationPreference.<p>Describes the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>"
         },
         "capacityReservationTarget": {
           "$ref": "#/definitions/CapacityReservationTargetResponse",
-          "description": "Gets and sets the property capacityReservationTarget. <p>Information about the targeted Capacity Reservation or Capacity Reservation group.</p>"
+          "description": "Gets and sets the property capacityReservationTarget.<p>Information about the targeted Capacity Reservation or Capacity Reservation group.</p>"
         }
       }
     },
@@ -766,11 +725,11 @@
       "properties": {
         "capacityReservationId": {
           "type": "string",
-          "description": "Gets and sets the property capacityReservationId. <p>The ID of the targeted Capacity Reservation.</p>"
+          "description": "Gets and sets the property capacityReservationId.<p>The ID of the targeted Capacity Reservation.</p>"
         },
         "capacityReservationResourceGroupArn": {
           "type": "string",
-          "description": "Gets and sets the property capacityReservationResourceGroupArn. <p>The ARN of the targeted Capacity Reservation group.</p>"
+          "description": "Gets and sets the property capacityReservationResourceGroupArn.<p>The ARN of the targeted Capacity Reservation group.</p>"
         }
       }
     },
@@ -780,17 +739,17 @@
       "properties": {
         "amdSevSnp": {
           "$ref": "#/definitions/AmdSevSnpSpecificationEnumValue",
-          "description": "Gets and sets the property amdSevSnp. <p>Indicates whether the instance is enabled for AMD SEV-SNP. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html'>AMD SEV-SNP</a>.</p>"
+          "description": "Gets and sets the property amdSevSnp.<p>Indicates whether the instance is enabled for AMD SEV-SNP. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html'>AMD SEV-SNP</a>.</p>"
         },
         "coreCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property coreCount. <p>The number of CPU cores for the instance.</p>"
+          "description": "Gets and sets the property coreCount.<p>The number of CPU cores for the instance.</p>"
         },
         "threadsPerCore": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property threadsPerCore. <p>The number of threads per CPU core.</p>"
+          "description": "Gets and sets the property threadsPerCore.<p>The number of threads per CPU core.</p>"
         }
       }
     },
@@ -811,7 +770,7 @@
             "description": "DeviceType enum ebs"
           },
           {
-            "name": "Instancestore",
+            "name": "InstanceStore",
             "value": "instance-store",
             "description": "DeviceType enum instance-store"
           }
@@ -824,7 +783,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/DeviceType",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -835,19 +794,19 @@
         "attachTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets and sets the property attachTime. <p>The time stamp when the attachment initiated.</p>"
+          "description": "Gets and sets the property attachTime.<p>The time stamp when the attachment initiated.</p>"
         },
         "deleteOnTermination": {
           "type": "boolean",
-          "description": "Gets and sets the property deleteOnTermination. <p>Indicates whether the volume is deleted on instance termination.</p>"
+          "description": "Gets and sets the property deleteOnTermination.<p>Indicates whether the volume is deleted on instance termination.</p>"
         },
         "status": {
           "$ref": "#/definitions/AttachmentStatusEnumValue",
-          "description": "Gets and sets the property status. <p>The attachment state.</p>"
+          "description": "Gets and sets the property status.<p>The attachment state.</p>"
         },
         "volumeId": {
           "type": "string",
-          "description": "Gets and sets the property volumeId. <p>The ID of the EBS volume.</p>"
+          "description": "Gets and sets the property volumeId.<p>The ID of the EBS volume.</p>"
         }
       }
     },
@@ -867,7 +826,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -898,14 +857,45 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsEc2InstanceProperties",
-          "description": "Gets and sets the property awsProperties. "
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AwsCommonProperties"
-        }
-      ]
+      }
     },
     "ElasticGpuAssociation": {
       "type": "object",
@@ -913,19 +903,19 @@
       "properties": {
         "elasticGpuAssociationId": {
           "type": "string",
-          "description": "Gets and sets the property elasticGpuAssociationId. <p>The ID of the association.</p>"
+          "description": "Gets and sets the property elasticGpuAssociationId.<p>The ID of the association.</p>"
         },
         "elasticGpuAssociationState": {
           "type": "string",
-          "description": "Gets and sets the property elasticGpuAssociationState. <p>The state of the association between the instance and the Elastic Graphics accelerator.</p>"
+          "description": "Gets and sets the property elasticGpuAssociationState.<p>The state of the association between the instance and the Elastic Graphics accelerator.</p>"
         },
         "elasticGpuAssociationTime": {
           "type": "string",
-          "description": "Gets and sets the property elasticGpuAssociationTime. <p>The time the Elastic Graphics accelerator was associated with the instance.</p>"
+          "description": "Gets and sets the property elasticGpuAssociationTime.<p>The time the Elastic Graphics accelerator was associated with the instance.</p>"
         },
         "elasticGpuId": {
           "type": "string",
-          "description": "Gets and sets the property elasticGpuId. <p>The ID of the Elastic Graphics accelerator.</p>"
+          "description": "Gets and sets the property elasticGpuId.<p>The ID of the Elastic Graphics accelerator.</p>"
         }
       }
     },
@@ -935,20 +925,20 @@
       "properties": {
         "elasticInferenceAcceleratorArn": {
           "type": "string",
-          "description": "Gets and sets the property elasticInferenceAcceleratorArn. <p> The Amazon Resource Name (ARN) of the elastic inference accelerator. </p>"
+          "description": "Gets and sets the property elasticInferenceAcceleratorArn.<p> The Amazon Resource Name (ARN) of the elastic inference accelerator. </p>"
         },
         "elasticInferenceAcceleratorAssociationId": {
           "type": "string",
-          "description": "Gets and sets the property elasticInferenceAcceleratorAssociationId. <p> The ID of the association. </p>"
+          "description": "Gets and sets the property elasticInferenceAcceleratorAssociationId.<p> The ID of the association. </p>"
         },
         "elasticInferenceAcceleratorAssociationState": {
           "type": "string",
-          "description": "Gets and sets the property elasticInferenceAcceleratorAssociationState. <p> The state of the elastic inference accelerator. </p>"
+          "description": "Gets and sets the property elasticInferenceAcceleratorAssociationState.<p> The state of the elastic inference accelerator. </p>"
         },
         "elasticInferenceAcceleratorAssociationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets and sets the property elasticInferenceAcceleratorAssociationTime. <p> The time at which the elastic inference accelerator is associated with an instance. </p>"
+          "description": "Gets and sets the property elasticInferenceAcceleratorAssociationTime.<p> The time at which the elastic inference accelerator is associated with an instance. </p>"
         }
       }
     },
@@ -958,7 +948,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Gets and sets the property enabled. <p>If this parameter is set to <code>true</code>, the instance is enabled for Amazon Web Services Nitro Enclaves; otherwise, it is not enabled for Amazon Web Services Nitro Enclaves.</p>"
+          "description": "Gets and sets the property enabled.<p>If this parameter is set to <code>true</code>, the instance is enabled for Amazon Web Services Nitro Enclaves; otherwise, it is not enabled for Amazon Web Services Nitro Enclaves.</p>"
         }
       }
     },
@@ -968,11 +958,11 @@
       "properties": {
         "groupId": {
           "type": "string",
-          "description": "Gets and sets the property groupId. <p>The ID of the security group.</p>"
+          "description": "Gets and sets the property groupId.<p>The ID of the security group.</p>"
         },
         "groupName": {
           "type": "string",
-          "description": "Gets and sets the property groupName. <p>The name of the security group.</p>"
+          "description": "Gets and sets the property groupName.<p>The name of the security group.</p>"
         }
       }
     },
@@ -982,7 +972,7 @@
       "properties": {
         "configured": {
           "type": "boolean",
-          "description": "Gets and sets the property configured. <p>If <code>true</code>, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.</p>"
+          "description": "Gets and sets the property configured.<p>If <code>true</code>, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.</p>"
         }
       }
     },
@@ -998,12 +988,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Ipname",
+            "name": "IpName",
             "value": "ip-name",
             "description": "HostnameType enum ip-name"
           },
           {
-            "name": "Resourcename",
+            "name": "ResourceName",
             "value": "resource-name",
             "description": "HostnameType enum resource-name"
           }
@@ -1016,7 +1006,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/HostnameType",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1050,7 +1040,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/HttpTokensState",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1084,7 +1074,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/HypervisorType",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1094,11 +1084,11 @@
       "properties": {
         "arn": {
           "type": "string",
-          "description": "Gets and sets the property arn. <p>The Amazon Resource Name (ARN) of the instance profile.</p>"
+          "description": "Gets and sets the property arn.<p>The Amazon Resource Name (ARN) of the instance profile.</p>"
         },
         "id": {
           "type": "string",
-          "description": "Gets and sets the property id. <p>The ID of the instance profile.</p>"
+          "description": "Gets and sets the property id.<p>The ID of the instance profile.</p>"
         }
       }
     },
@@ -1132,7 +1122,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/InstanceAutoRecoveryState",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1142,11 +1132,11 @@
       "properties": {
         "deviceName": {
           "type": "string",
-          "description": "Gets and sets the property deviceName. <p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>"
+          "description": "Gets and sets the property deviceName.<p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>"
         },
         "ebs": {
           "$ref": "#/definitions/EbsInstanceBlockDevice",
-          "description": "Gets and sets the property ebs. <p>Parameters used to automatically set up EBS volumes when the instance is launched.</p>"
+          "description": "Gets and sets the property ebs.<p>Parameters used to automatically set up EBS volumes when the instance is launched.</p>"
         }
       }
     },
@@ -1162,7 +1152,7 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Legacybios",
+            "name": "LegacyBios",
             "value": "legacy-bios",
             "description": "InstanceBootModeValues enum legacy-bios"
           },
@@ -1180,7 +1170,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/InstanceBootModeValues",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1190,7 +1180,7 @@
       "properties": {
         "ipv4Prefix": {
           "type": "string",
-          "description": "Gets and sets the property ipv4Prefix. <p>One or more IPv4 prefixes assigned to the network interface.</p>"
+          "description": "Gets and sets the property ipv4Prefix.<p>One or more IPv4 prefixes assigned to the network interface.</p>"
         }
       }
     },
@@ -1200,7 +1190,11 @@
       "properties": {
         "ipv6Address": {
           "type": "string",
-          "description": "Gets and sets the property ipv6Address. <p>The IPv6 address.</p>"
+          "description": "Gets and sets the property ipv6Address.<p>The IPv6 address.</p>"
+        },
+        "isPrimaryIpv6": {
+          "type": "boolean",
+          "description": "Gets and sets the property isPrimaryIpv6.<p>Determines if an IPv6 address associated with a network interface is the primary IPv6 address. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html'>RunInstances</a>.</p>"
         }
       }
     },
@@ -1210,7 +1204,7 @@
       "properties": {
         "ipv6Prefix": {
           "type": "string",
-          "description": "Gets and sets the property ipv6Prefix. <p>One or more IPv6 prefixes assigned to the network interface.</p>"
+          "description": "Gets and sets the property ipv6Prefix.<p>One or more IPv6 prefixes assigned to the network interface.</p>"
         }
       }
     },
@@ -1244,7 +1238,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/InstanceLifecycleType",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1254,7 +1248,7 @@
       "properties": {
         "autoRecovery": {
           "$ref": "#/definitions/InstanceAutoRecoveryStateEnumValue",
-          "description": "Gets and sets the property autoRecovery. <p>Provides information on the current automatic recovery behavior of your instance.</p>"
+          "description": "Gets and sets the property autoRecovery.<p>Provides information on the current automatic recovery behavior of your instance.</p>"
         }
       }
     },
@@ -1288,7 +1282,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/InstanceMetadataEndpointState",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1298,28 +1292,28 @@
       "properties": {
         "httpEndpoint": {
           "$ref": "#/definitions/InstanceMetadataEndpointStateEnumValue",
-          "description": "Gets and sets the property httpEndpoint. <p>Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.</p> <p>If the value is <code>disabled</code>, you cannot access your instance metadata.</p>"
+          "description": "Gets and sets the property httpEndpoint.<p>Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.</p> <p>If the value is <code>disabled</code>, you cannot access your instance metadata.</p>"
         },
         "httpProtocolIpv6": {
           "$ref": "#/definitions/InstanceMetadataProtocolStateEnumValue",
-          "description": "Gets and sets the property httpProtocolIpv6. <p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>"
+          "description": "Gets and sets the property httpProtocolIpv6.<p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>"
         },
         "httpPutResponseHopLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property httpPutResponseHopLimit. <p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p> <p>Default: 1</p> <p>Possible values: Integers from 1 to 64</p>"
+          "description": "Gets and sets the property httpPutResponseHopLimit.<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p> <p>Default: 1</p> <p>Possible values: Integers from 1 to 64</p>"
         },
         "httpTokens": {
           "$ref": "#/definitions/HttpTokensStateEnumValue",
-          "description": "Gets and sets the property httpTokens. <p>IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP tokens is <code>optional</code> (in other words, indicates whether the use of IMDSv2 is <code>optional</code>) or <code>required</code> (in other words, indicates whether the use of IMDSv2 is <code>required</code>).</p> <ul> <li> <p> <code>optional</code> - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.</p> </li> <li> <p> <code>required</code> - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.</p> </li> </ul> <p>Default: <code>optional</code> </p>"
+          "description": "Gets and sets the property httpTokens.<p>IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP tokens is <code>optional</code> (in other words, indicates whether the use of IMDSv2 is <code>optional</code>) or <code>required</code> (in other words, indicates whether the use of IMDSv2 is <code>required</code>).</p> <ul> <li> <p> <code>optional</code> - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.</p> </li> <li> <p> <code>required</code> - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.</p> </li> </ul> <p>Default: <code>optional</code> </p>"
         },
         "instanceMetadataTags": {
           "$ref": "#/definitions/InstanceMetadataTagsStateEnumValue",
-          "description": "Gets and sets the property instanceMetadataTags. <p>Indicates whether access to instance tags from the instance metadata is enabled or disabled. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS'>Work with instance tags using the instance metadata</a>.</p>"
+          "description": "Gets and sets the property instanceMetadataTags.<p>Indicates whether access to instance tags from the instance metadata is enabled or disabled. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS'>Work with instance tags using the instance metadata</a>.</p>"
         },
         "state": {
           "$ref": "#/definitions/InstanceMetadataOptionsStateEnumValue",
-          "description": "Gets and sets the property state. <p>The state of the metadata option changes.</p> <p> <code>pending</code> - The metadata options are being updated and the instance is not ready to process metadata traffic with the new selection.</p> <p> <code>applied</code> - The metadata options have been successfully applied on the instance.</p>"
+          "description": "Gets and sets the property state.<p>The state of the metadata option changes.</p> <p> <code>pending</code> - The metadata options are being updated and the instance is not ready to process metadata traffic with the new selection.</p> <p> <code>applied</code> - The metadata options have been successfully applied on the instance.</p>"
         }
       }
     },
@@ -1353,7 +1347,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/InstanceMetadataOptionsState",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1387,7 +1381,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/InstanceMetadataProtocolState",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1421,7 +1415,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/InstanceMetadataTagsState",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1431,19 +1425,19 @@
       "properties": {
         "association": {
           "$ref": "#/definitions/InstanceNetworkInterfaceAssociation",
-          "description": "Gets and sets the property association. <p>The association information for an Elastic IPv4 associated with the network interface.</p>"
+          "description": "Gets and sets the property association.<p>The association information for an Elastic IPv4 associated with the network interface.</p>"
         },
         "attachment": {
           "$ref": "#/definitions/InstanceNetworkInterfaceAttachment",
-          "description": "Gets and sets the property attachment. <p>The network interface attachment.</p>"
+          "description": "Gets and sets the property attachment.<p>The network interface attachment.</p>"
         },
         "description": {
           "type": "string",
-          "description": "Gets and sets the property description. <p>The description.</p>"
+          "description": "Gets and sets the property description.<p>The description.</p>"
         },
         "groups": {
           "type": "array",
-          "description": "Gets and sets the property groups. <p>The security groups.</p>",
+          "description": "Gets and sets the property groups.<p>The security groups.</p>",
           "items": {
             "$ref": "#/definitions/GroupIdentifier"
           },
@@ -1451,11 +1445,11 @@
         },
         "interfaceType": {
           "type": "string",
-          "description": "Gets and sets the property interfaceType. <p>The type of network interface.</p> <p>Valid values: <code>interface</code> | <code>efa</code> | <code>trunk</code> </p>"
+          "description": "Gets and sets the property interfaceType.<p>The type of network interface.</p> <p>Valid values: <code>interface</code> | <code>efa</code> | <code>trunk</code> </p>"
         },
         "ipv4Prefixes": {
           "type": "array",
-          "description": "Gets and sets the property ipv4Prefixes. <p>The IPv4 delegated prefixes that are assigned to the network interface.</p>",
+          "description": "Gets and sets the property ipv4Prefixes.<p>The IPv4 delegated prefixes that are assigned to the network interface.</p>",
           "items": {
             "$ref": "#/definitions/InstanceIpv4Prefix"
           },
@@ -1463,7 +1457,7 @@
         },
         "ipv6Addresses": {
           "type": "array",
-          "description": "Gets and sets the property ipv6Addresses. <p>The IPv6 addresses associated with the network interface.</p>",
+          "description": "Gets and sets the property ipv6Addresses.<p>The IPv6 addresses associated with the network interface.</p>",
           "items": {
             "$ref": "#/definitions/InstanceIpv6Address"
           },
@@ -1471,7 +1465,7 @@
         },
         "ipv6Prefixes": {
           "type": "array",
-          "description": "Gets and sets the property ipv6Prefixes. <p>The IPv6 delegated prefixes that are assigned to the network interface.</p>",
+          "description": "Gets and sets the property ipv6Prefixes.<p>The IPv6 delegated prefixes that are assigned to the network interface.</p>",
           "items": {
             "$ref": "#/definitions/InstanceIpv6Prefix"
           },
@@ -1479,27 +1473,27 @@
         },
         "macAddress": {
           "type": "string",
-          "description": "Gets and sets the property macAddress. <p>The MAC address.</p>"
+          "description": "Gets and sets the property macAddress.<p>The MAC address.</p>"
         },
         "networkInterfaceId": {
           "type": "string",
-          "description": "Gets and sets the property networkInterfaceId. <p>The ID of the network interface.</p>"
+          "description": "Gets and sets the property networkInterfaceId.<p>The ID of the network interface.</p>"
         },
         "ownerId": {
           "type": "string",
-          "description": "Gets and sets the property ownerId. <p>The ID of the Amazon Web Services account that created the network interface.</p>"
+          "description": "Gets and sets the property ownerId.<p>The ID of the Amazon Web Services account that created the network interface.</p>"
         },
         "privateDnsName": {
           "type": "string",
-          "description": "Gets and sets the property privateDnsName. <p>The private DNS name.</p>"
+          "description": "Gets and sets the property privateDnsName.<p>The private DNS name.</p>"
         },
         "privateIpAddress": {
           "type": "string",
-          "description": "Gets and sets the property privateIpAddress. <p>The IPv4 address of the network interface within the subnet.</p>"
+          "description": "Gets and sets the property privateIpAddress.<p>The IPv4 address of the network interface within the subnet.</p>"
         },
         "privateIpAddresses": {
           "type": "array",
-          "description": "Gets and sets the property privateIpAddresses. <p>The private IPv4 addresses associated with the network interface.</p>",
+          "description": "Gets and sets the property privateIpAddresses.<p>The private IPv4 addresses associated with the network interface.</p>",
           "items": {
             "$ref": "#/definitions/InstancePrivateIpAddress"
           },
@@ -1507,19 +1501,19 @@
         },
         "sourceDestCheck": {
           "type": "boolean",
-          "description": "Gets and sets the property sourceDestCheck. <p>Indicates whether source/destination checking is enabled.</p>"
+          "description": "Gets and sets the property sourceDestCheck.<p>Indicates whether source/destination checking is enabled.</p>"
         },
         "status": {
           "$ref": "#/definitions/NetworkInterfaceStatusEnumValue",
-          "description": "Gets and sets the property status. <p>The status of the network interface.</p>"
+          "description": "Gets and sets the property status.<p>The status of the network interface.</p>"
         },
         "subnetId": {
           "type": "string",
-          "description": "Gets and sets the property subnetId. <p>The ID of the subnet.</p>"
+          "description": "Gets and sets the property subnetId.<p>The ID of the subnet.</p>"
         },
         "vpcId": {
           "type": "string",
-          "description": "Gets and sets the property vpcId. <p>The ID of the VPC.</p>"
+          "description": "Gets and sets the property vpcId.<p>The ID of the VPC.</p>"
         }
       }
     },
@@ -1529,23 +1523,23 @@
       "properties": {
         "carrierIp": {
           "type": "string",
-          "description": "Gets and sets the property carrierIp. <p>The carrier IP address associated with the network interface.</p>"
+          "description": "Gets and sets the property carrierIp.<p>The carrier IP address associated with the network interface.</p>"
         },
         "customerOwnedIp": {
           "type": "string",
-          "description": "Gets and sets the property customerOwnedIp. <p>The customer-owned IP address associated with the network interface.</p>"
+          "description": "Gets and sets the property customerOwnedIp.<p>The customer-owned IP address associated with the network interface.</p>"
         },
         "ipOwnerId": {
           "type": "string",
-          "description": "Gets and sets the property ipOwnerId. <p>The ID of the owner of the Elastic IP address.</p>"
+          "description": "Gets and sets the property ipOwnerId.<p>The ID of the owner of the Elastic IP address.</p>"
         },
         "publicDnsName": {
           "type": "string",
-          "description": "Gets and sets the property publicDnsName. <p>The public DNS name.</p>"
+          "description": "Gets and sets the property publicDnsName.<p>The public DNS name.</p>"
         },
         "publicIp": {
           "type": "string",
-          "description": "Gets and sets the property publicIp. <p>The public IP address or Elastic IP address bound to the network interface.</p>"
+          "description": "Gets and sets the property publicIp.<p>The public IP address or Elastic IP address bound to the network interface.</p>"
         }
       }
     },
@@ -1556,29 +1550,29 @@
         "attachTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets and sets the property attachTime. <p>The time stamp when the attachment initiated.</p>"
+          "description": "Gets and sets the property attachTime.<p>The time stamp when the attachment initiated.</p>"
         },
         "attachmentId": {
           "type": "string",
-          "description": "Gets and sets the property attachmentId. <p>The ID of the network interface attachment.</p>"
+          "description": "Gets and sets the property attachmentId.<p>The ID of the network interface attachment.</p>"
         },
         "deleteOnTermination": {
           "type": "boolean",
-          "description": "Gets and sets the property deleteOnTermination. <p>Indicates whether the network interface is deleted when the instance is terminated.</p>"
+          "description": "Gets and sets the property deleteOnTermination.<p>Indicates whether the network interface is deleted when the instance is terminated.</p>"
         },
         "deviceIndex": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property deviceIndex. <p>The index of the device on the instance for the network interface attachment.</p>"
+          "description": "Gets and sets the property deviceIndex.<p>The index of the device on the instance for the network interface attachment.</p>"
         },
         "networkCardIndex": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property networkCardIndex. <p>The index of the network card.</p>"
+          "description": "Gets and sets the property networkCardIndex.<p>The index of the network card.</p>"
         },
         "status": {
           "$ref": "#/definitions/AttachmentStatusEnumValue",
-          "description": "Gets and sets the property status. <p>The attachment state.</p>"
+          "description": "Gets and sets the property status.<p>The attachment state.</p>"
         }
       }
     },
@@ -1588,19 +1582,19 @@
       "properties": {
         "association": {
           "$ref": "#/definitions/InstanceNetworkInterfaceAssociation",
-          "description": "Gets and sets the property association. <p>The association information for an Elastic IP address for the network interface.</p>"
+          "description": "Gets and sets the property association.<p>The association information for an Elastic IP address for the network interface.</p>"
         },
         "primary": {
           "type": "boolean",
-          "description": "Gets and sets the property primary. <p>Indicates whether this IPv4 address is the primary private IP address of the network interface.</p>"
+          "description": "Gets and sets the property primary.<p>Indicates whether this IPv4 address is the primary private IP address of the network interface.</p>"
         },
         "privateDnsName": {
           "type": "string",
-          "description": "Gets and sets the property privateDnsName. <p>The private IPv4 DNS name.</p>"
+          "description": "Gets and sets the property privateDnsName.<p>The private IPv4 DNS name.</p>"
         },
         "privateIpAddress": {
           "type": "string",
-          "description": "Gets and sets the property privateIpAddress. <p>The private IPv4 address of the network interface.</p>"
+          "description": "Gets and sets the property privateIpAddress.<p>The private IPv4 address of the network interface.</p>"
         }
       }
     },
@@ -1611,11 +1605,11 @@
         "code": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property code. <p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>"
+          "description": "Gets and sets the property code.<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>"
         },
         "name": {
           "$ref": "#/definitions/InstanceStateNameEnumValue",
-          "description": "Gets and sets the property name. <p>The current state of the instance.</p>"
+          "description": "Gets and sets the property name.<p>The current state of the instance.</p>"
         }
       }
     },
@@ -1645,7 +1639,7 @@
             "description": "InstanceStateName enum running"
           },
           {
-            "name": "Shuttingdown",
+            "name": "ShuttingDown",
             "value": "shutting-down",
             "description": "InstanceStateName enum shutting-down"
           },
@@ -1673,7 +1667,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/InstanceStateName",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -1816,6 +1810,14 @@
         "c7g.medium",
         "c7g.metal",
         "c7g.xlarge",
+        "c7gd.12xlarge",
+        "c7gd.16xlarge",
+        "c7gd.2xlarge",
+        "c7gd.4xlarge",
+        "c7gd.8xlarge",
+        "c7gd.large",
+        "c7gd.medium",
+        "c7gd.xlarge",
         "c7gn.12xlarge",
         "c7gn.16xlarge",
         "c7gn.2xlarge",
@@ -1824,6 +1826,15 @@
         "c7gn.large",
         "c7gn.medium",
         "c7gn.xlarge",
+        "c7i.12xlarge",
+        "c7i.16xlarge",
+        "c7i.24xlarge",
+        "c7i.2xlarge",
+        "c7i.48xlarge",
+        "c7i.4xlarge",
+        "c7i.8xlarge",
+        "c7i.large",
+        "c7i.xlarge",
         "cc1.4xlarge",
         "cc2.8xlarge",
         "cg1.4xlarge",
@@ -1885,6 +1896,10 @@
         "hi1.4xlarge",
         "hpc6a.48xlarge",
         "hpc6id.32xlarge",
+        "hpc7a.12xlarge",
+        "hpc7a.24xlarge",
+        "hpc7a.48xlarge",
+        "hpc7a.96xlarge",
         "hpc7g.16xlarge",
         "hpc7g.4xlarge",
         "hpc7g.8xlarge",
@@ -2087,6 +2102,18 @@
         "m6in.large",
         "m6in.metal",
         "m6in.xlarge",
+        "m7a.12xlarge",
+        "m7a.16xlarge",
+        "m7a.24xlarge",
+        "m7a.2xlarge",
+        "m7a.32xlarge",
+        "m7a.48xlarge",
+        "m7a.4xlarge",
+        "m7a.8xlarge",
+        "m7a.large",
+        "m7a.medium",
+        "m7a.metal-48xl",
+        "m7a.xlarge",
         "m7g.12xlarge",
         "m7g.16xlarge",
         "m7g.2xlarge",
@@ -2096,7 +2123,30 @@
         "m7g.medium",
         "m7g.metal",
         "m7g.xlarge",
+        "m7gd.12xlarge",
+        "m7gd.16xlarge",
+        "m7gd.2xlarge",
+        "m7gd.4xlarge",
+        "m7gd.8xlarge",
+        "m7gd.large",
+        "m7gd.medium",
+        "m7gd.xlarge",
+        "m7i-flex.2xlarge",
+        "m7i-flex.4xlarge",
+        "m7i-flex.8xlarge",
+        "m7i-flex.large",
+        "m7i-flex.xlarge",
+        "m7i.12xlarge",
+        "m7i.16xlarge",
+        "m7i.24xlarge",
+        "m7i.2xlarge",
+        "m7i.48xlarge",
+        "m7i.4xlarge",
+        "m7i.8xlarge",
+        "m7i.large",
+        "m7i.xlarge",
         "mac1.metal",
+        "mac2-m2pro.metal",
         "mac2.metal",
         "p2.16xlarge",
         "p2.8xlarge",
@@ -2107,6 +2157,7 @@
         "p3dn.24xlarge",
         "p4d.24xlarge",
         "p4de.24xlarge",
+        "p5.48xlarge",
         "r3.2xlarge",
         "r3.4xlarge",
         "r3.8xlarge",
@@ -2248,6 +2299,17 @@
         "r6in.large",
         "r6in.metal",
         "r6in.xlarge",
+        "r7a.12xlarge",
+        "r7a.16xlarge",
+        "r7a.24xlarge",
+        "r7a.2xlarge",
+        "r7a.32xlarge",
+        "r7a.48xlarge",
+        "r7a.4xlarge",
+        "r7a.8xlarge",
+        "r7a.large",
+        "r7a.medium",
+        "r7a.xlarge",
         "r7g.12xlarge",
         "r7g.16xlarge",
         "r7g.2xlarge",
@@ -2257,6 +2319,22 @@
         "r7g.medium",
         "r7g.metal",
         "r7g.xlarge",
+        "r7gd.12xlarge",
+        "r7gd.16xlarge",
+        "r7gd.2xlarge",
+        "r7gd.4xlarge",
+        "r7gd.8xlarge",
+        "r7gd.large",
+        "r7gd.medium",
+        "r7gd.xlarge",
+        "r7iz.12xlarge",
+        "r7iz.16xlarge",
+        "r7iz.2xlarge",
+        "r7iz.32xlarge",
+        "r7iz.4xlarge",
+        "r7iz.8xlarge",
+        "r7iz.large",
+        "r7iz.xlarge",
         "t1.micro",
         "t2.2xlarge",
         "t2.large",
@@ -2362,32 +2440,32 @@
             "description": "InstanceType enum a1.4xlarge"
           },
           {
-            "name": "A1large",
+            "name": "A1Large",
             "value": "a1.large",
             "description": "InstanceType enum a1.large"
           },
           {
-            "name": "A1medium",
+            "name": "A1Medium",
             "value": "a1.medium",
             "description": "InstanceType enum a1.medium"
           },
           {
-            "name": "A1metal",
+            "name": "A1Metal",
             "value": "a1.metal",
             "description": "InstanceType enum a1.metal"
           },
           {
-            "name": "A1xlarge",
+            "name": "A1Xlarge",
             "value": "a1.xlarge",
             "description": "InstanceType enum a1.xlarge"
           },
           {
-            "name": "C1medium",
+            "name": "C1Medium",
             "value": "c1.medium",
             "description": "InstanceType enum c1.medium"
           },
           {
-            "name": "C1xlarge",
+            "name": "C1Xlarge",
             "value": "c1.xlarge",
             "description": "InstanceType enum c1.xlarge"
           },
@@ -2407,12 +2485,12 @@
             "description": "InstanceType enum c3.8xlarge"
           },
           {
-            "name": "C3large",
+            "name": "C3Large",
             "value": "c3.large",
             "description": "InstanceType enum c3.large"
           },
           {
-            "name": "C3xlarge",
+            "name": "C3Xlarge",
             "value": "c3.xlarge",
             "description": "InstanceType enum c3.xlarge"
           },
@@ -2432,12 +2510,12 @@
             "description": "InstanceType enum c4.8xlarge"
           },
           {
-            "name": "C4large",
+            "name": "C4Large",
             "value": "c4.large",
             "description": "InstanceType enum c4.large"
           },
           {
-            "name": "C4xlarge",
+            "name": "C4Xlarge",
             "value": "c4.xlarge",
             "description": "InstanceType enum c4.xlarge"
           },
@@ -2472,17 +2550,17 @@
             "description": "InstanceType enum c5.9xlarge"
           },
           {
-            "name": "C5large",
+            "name": "C5Large",
             "value": "c5.large",
             "description": "InstanceType enum c5.large"
           },
           {
-            "name": "C5metal",
+            "name": "C5Metal",
             "value": "c5.metal",
             "description": "InstanceType enum c5.metal"
           },
           {
-            "name": "C5xlarge",
+            "name": "C5Xlarge",
             "value": "c5.xlarge",
             "description": "InstanceType enum c5.xlarge"
           },
@@ -2517,12 +2595,12 @@
             "description": "InstanceType enum c5a.8xlarge"
           },
           {
-            "name": "C5alarge",
+            "name": "C5aLarge",
             "value": "c5a.large",
             "description": "InstanceType enum c5a.large"
           },
           {
-            "name": "C5axlarge",
+            "name": "C5aXlarge",
             "value": "c5a.xlarge",
             "description": "InstanceType enum c5a.xlarge"
           },
@@ -2557,12 +2635,12 @@
             "description": "InstanceType enum c5ad.8xlarge"
           },
           {
-            "name": "C5adlarge",
+            "name": "C5adLarge",
             "value": "c5ad.large",
             "description": "InstanceType enum c5ad.large"
           },
           {
-            "name": "C5adxlarge",
+            "name": "C5adXlarge",
             "value": "c5ad.xlarge",
             "description": "InstanceType enum c5ad.xlarge"
           },
@@ -2597,17 +2675,17 @@
             "description": "InstanceType enum c5d.9xlarge"
           },
           {
-            "name": "C5dlarge",
+            "name": "C5dLarge",
             "value": "c5d.large",
             "description": "InstanceType enum c5d.large"
           },
           {
-            "name": "C5dmetal",
+            "name": "C5dMetal",
             "value": "c5d.metal",
             "description": "InstanceType enum c5d.metal"
           },
           {
-            "name": "C5dxlarge",
+            "name": "C5dXlarge",
             "value": "c5d.xlarge",
             "description": "InstanceType enum c5d.xlarge"
           },
@@ -2632,17 +2710,17 @@
             "description": "InstanceType enum c5n.9xlarge"
           },
           {
-            "name": "C5nlarge",
+            "name": "C5nLarge",
             "value": "c5n.large",
             "description": "InstanceType enum c5n.large"
           },
           {
-            "name": "C5nmetal",
+            "name": "C5nMetal",
             "value": "c5n.metal",
             "description": "InstanceType enum c5n.metal"
           },
           {
-            "name": "C5nxlarge",
+            "name": "C5nXlarge",
             "value": "c5n.xlarge",
             "description": "InstanceType enum c5n.xlarge"
           },
@@ -2687,17 +2765,17 @@
             "description": "InstanceType enum c6a.8xlarge"
           },
           {
-            "name": "C6alarge",
+            "name": "C6aLarge",
             "value": "c6a.large",
             "description": "InstanceType enum c6a.large"
           },
           {
-            "name": "C6ametal",
+            "name": "C6aMetal",
             "value": "c6a.metal",
             "description": "InstanceType enum c6a.metal"
           },
           {
-            "name": "C6axlarge",
+            "name": "C6aXlarge",
             "value": "c6a.xlarge",
             "description": "InstanceType enum c6a.xlarge"
           },
@@ -2727,22 +2805,22 @@
             "description": "InstanceType enum c6g.8xlarge"
           },
           {
-            "name": "C6glarge",
+            "name": "C6gLarge",
             "value": "c6g.large",
             "description": "InstanceType enum c6g.large"
           },
           {
-            "name": "C6gmedium",
+            "name": "C6gMedium",
             "value": "c6g.medium",
             "description": "InstanceType enum c6g.medium"
           },
           {
-            "name": "C6gmetal",
+            "name": "C6gMetal",
             "value": "c6g.metal",
             "description": "InstanceType enum c6g.metal"
           },
           {
-            "name": "C6gxlarge",
+            "name": "C6gXlarge",
             "value": "c6g.xlarge",
             "description": "InstanceType enum c6g.xlarge"
           },
@@ -2772,22 +2850,22 @@
             "description": "InstanceType enum c6gd.8xlarge"
           },
           {
-            "name": "C6gdlarge",
+            "name": "C6gdLarge",
             "value": "c6gd.large",
             "description": "InstanceType enum c6gd.large"
           },
           {
-            "name": "C6gdmedium",
+            "name": "C6gdMedium",
             "value": "c6gd.medium",
             "description": "InstanceType enum c6gd.medium"
           },
           {
-            "name": "C6gdmetal",
+            "name": "C6gdMetal",
             "value": "c6gd.metal",
             "description": "InstanceType enum c6gd.metal"
           },
           {
-            "name": "C6gdxlarge",
+            "name": "C6gdXlarge",
             "value": "c6gd.xlarge",
             "description": "InstanceType enum c6gd.xlarge"
           },
@@ -2817,17 +2895,17 @@
             "description": "InstanceType enum c6gn.8xlarge"
           },
           {
-            "name": "C6gnlarge",
+            "name": "C6gnLarge",
             "value": "c6gn.large",
             "description": "InstanceType enum c6gn.large"
           },
           {
-            "name": "C6gnmedium",
+            "name": "C6gnMedium",
             "value": "c6gn.medium",
             "description": "InstanceType enum c6gn.medium"
           },
           {
-            "name": "C6gnxlarge",
+            "name": "C6gnXlarge",
             "value": "c6gn.xlarge",
             "description": "InstanceType enum c6gn.xlarge"
           },
@@ -2867,17 +2945,17 @@
             "description": "InstanceType enum c6i.8xlarge"
           },
           {
-            "name": "C6ilarge",
+            "name": "C6iLarge",
             "value": "c6i.large",
             "description": "InstanceType enum c6i.large"
           },
           {
-            "name": "C6imetal",
+            "name": "C6iMetal",
             "value": "c6i.metal",
             "description": "InstanceType enum c6i.metal"
           },
           {
-            "name": "C6ixlarge",
+            "name": "C6iXlarge",
             "value": "c6i.xlarge",
             "description": "InstanceType enum c6i.xlarge"
           },
@@ -2917,17 +2995,17 @@
             "description": "InstanceType enum c6id.8xlarge"
           },
           {
-            "name": "C6idlarge",
+            "name": "C6idLarge",
             "value": "c6id.large",
             "description": "InstanceType enum c6id.large"
           },
           {
-            "name": "C6idmetal",
+            "name": "C6idMetal",
             "value": "c6id.metal",
             "description": "InstanceType enum c6id.metal"
           },
           {
-            "name": "C6idxlarge",
+            "name": "C6idXlarge",
             "value": "c6id.xlarge",
             "description": "InstanceType enum c6id.xlarge"
           },
@@ -2967,17 +3045,17 @@
             "description": "InstanceType enum c6in.8xlarge"
           },
           {
-            "name": "C6inlarge",
+            "name": "C6inLarge",
             "value": "c6in.large",
             "description": "InstanceType enum c6in.large"
           },
           {
-            "name": "C6inmetal",
+            "name": "C6inMetal",
             "value": "c6in.metal",
             "description": "InstanceType enum c6in.metal"
           },
           {
-            "name": "C6inxlarge",
+            "name": "C6inXlarge",
             "value": "c6in.xlarge",
             "description": "InstanceType enum c6in.xlarge"
           },
@@ -3007,24 +3085,64 @@
             "description": "InstanceType enum c7g.8xlarge"
           },
           {
-            "name": "C7glarge",
+            "name": "C7gLarge",
             "value": "c7g.large",
             "description": "InstanceType enum c7g.large"
           },
           {
-            "name": "C7gmedium",
+            "name": "C7gMedium",
             "value": "c7g.medium",
             "description": "InstanceType enum c7g.medium"
           },
           {
-            "name": "C7gmetal",
+            "name": "C7gMetal",
             "value": "c7g.metal",
             "description": "InstanceType enum c7g.metal"
           },
           {
-            "name": "C7gxlarge",
+            "name": "C7gXlarge",
             "value": "c7g.xlarge",
             "description": "InstanceType enum c7g.xlarge"
+          },
+          {
+            "name": "C7gd12xlarge",
+            "value": "c7gd.12xlarge",
+            "description": "InstanceType enum c7gd.12xlarge"
+          },
+          {
+            "name": "C7gd16xlarge",
+            "value": "c7gd.16xlarge",
+            "description": "InstanceType enum c7gd.16xlarge"
+          },
+          {
+            "name": "C7gd2xlarge",
+            "value": "c7gd.2xlarge",
+            "description": "InstanceType enum c7gd.2xlarge"
+          },
+          {
+            "name": "C7gd4xlarge",
+            "value": "c7gd.4xlarge",
+            "description": "InstanceType enum c7gd.4xlarge"
+          },
+          {
+            "name": "C7gd8xlarge",
+            "value": "c7gd.8xlarge",
+            "description": "InstanceType enum c7gd.8xlarge"
+          },
+          {
+            "name": "C7gdLarge",
+            "value": "c7gd.large",
+            "description": "InstanceType enum c7gd.large"
+          },
+          {
+            "name": "C7gdMedium",
+            "value": "c7gd.medium",
+            "description": "InstanceType enum c7gd.medium"
+          },
+          {
+            "name": "C7gdXlarge",
+            "value": "c7gd.xlarge",
+            "description": "InstanceType enum c7gd.xlarge"
           },
           {
             "name": "C7gn12xlarge",
@@ -3052,19 +3170,64 @@
             "description": "InstanceType enum c7gn.8xlarge"
           },
           {
-            "name": "C7gnlarge",
+            "name": "C7gnLarge",
             "value": "c7gn.large",
             "description": "InstanceType enum c7gn.large"
           },
           {
-            "name": "C7gnmedium",
+            "name": "C7gnMedium",
             "value": "c7gn.medium",
             "description": "InstanceType enum c7gn.medium"
           },
           {
-            "name": "C7gnxlarge",
+            "name": "C7gnXlarge",
             "value": "c7gn.xlarge",
             "description": "InstanceType enum c7gn.xlarge"
+          },
+          {
+            "name": "C7i12xlarge",
+            "value": "c7i.12xlarge",
+            "description": "InstanceType enum c7i.12xlarge"
+          },
+          {
+            "name": "C7i16xlarge",
+            "value": "c7i.16xlarge",
+            "description": "InstanceType enum c7i.16xlarge"
+          },
+          {
+            "name": "C7i24xlarge",
+            "value": "c7i.24xlarge",
+            "description": "InstanceType enum c7i.24xlarge"
+          },
+          {
+            "name": "C7i2xlarge",
+            "value": "c7i.2xlarge",
+            "description": "InstanceType enum c7i.2xlarge"
+          },
+          {
+            "name": "C7i48xlarge",
+            "value": "c7i.48xlarge",
+            "description": "InstanceType enum c7i.48xlarge"
+          },
+          {
+            "name": "C7i4xlarge",
+            "value": "c7i.4xlarge",
+            "description": "InstanceType enum c7i.4xlarge"
+          },
+          {
+            "name": "C7i8xlarge",
+            "value": "c7i.8xlarge",
+            "description": "InstanceType enum c7i.8xlarge"
+          },
+          {
+            "name": "C7iLarge",
+            "value": "c7i.large",
+            "description": "InstanceType enum c7i.large"
+          },
+          {
+            "name": "C7iXlarge",
+            "value": "c7i.xlarge",
+            "description": "InstanceType enum c7i.xlarge"
           },
           {
             "name": "Cc14xlarge",
@@ -3102,7 +3265,7 @@
             "description": "InstanceType enum d2.8xlarge"
           },
           {
-            "name": "D2xlarge",
+            "name": "D2Xlarge",
             "value": "d2.xlarge",
             "description": "InstanceType enum d2.xlarge"
           },
@@ -3122,7 +3285,7 @@
             "description": "InstanceType enum d3.8xlarge"
           },
           {
-            "name": "D3xlarge",
+            "name": "D3Xlarge",
             "value": "d3.xlarge",
             "description": "InstanceType enum d3.xlarge"
           },
@@ -3152,7 +3315,7 @@
             "description": "InstanceType enum d3en.8xlarge"
           },
           {
-            "name": "D3enxlarge",
+            "name": "D3enXlarge",
             "value": "d3en.xlarge",
             "description": "InstanceType enum d3en.xlarge"
           },
@@ -3202,7 +3365,7 @@
             "description": "InstanceType enum g3.8xlarge"
           },
           {
-            "name": "G3sxlarge",
+            "name": "G3sXlarge",
             "value": "g3s.xlarge",
             "description": "InstanceType enum g3s.xlarge"
           },
@@ -3227,7 +3390,7 @@
             "description": "InstanceType enum g4ad.8xlarge"
           },
           {
-            "name": "G4adxlarge",
+            "name": "G4adXlarge",
             "value": "g4ad.xlarge",
             "description": "InstanceType enum g4ad.xlarge"
           },
@@ -3257,12 +3420,12 @@
             "description": "InstanceType enum g4dn.8xlarge"
           },
           {
-            "name": "G4dnmetal",
+            "name": "G4dnMetal",
             "value": "g4dn.metal",
             "description": "InstanceType enum g4dn.metal"
           },
           {
-            "name": "G4dnxlarge",
+            "name": "G4dnXlarge",
             "value": "g4dn.xlarge",
             "description": "InstanceType enum g4dn.xlarge"
           },
@@ -3302,7 +3465,7 @@
             "description": "InstanceType enum g5.8xlarge"
           },
           {
-            "name": "G5xlarge",
+            "name": "G5Xlarge",
             "value": "g5.xlarge",
             "description": "InstanceType enum g5.xlarge"
           },
@@ -3327,12 +3490,12 @@
             "description": "InstanceType enum g5g.8xlarge"
           },
           {
-            "name": "G5gmetal",
+            "name": "G5gMetal",
             "value": "g5g.metal",
             "description": "InstanceType enum g5g.metal"
           },
           {
-            "name": "G5gxlarge",
+            "name": "G5gXlarge",
             "value": "g5g.xlarge",
             "description": "InstanceType enum g5g.xlarge"
           },
@@ -3372,6 +3535,26 @@
             "description": "InstanceType enum hpc6id.32xlarge"
           },
           {
+            "name": "Hpc7a12xlarge",
+            "value": "hpc7a.12xlarge",
+            "description": "InstanceType enum hpc7a.12xlarge"
+          },
+          {
+            "name": "Hpc7a24xlarge",
+            "value": "hpc7a.24xlarge",
+            "description": "InstanceType enum hpc7a.24xlarge"
+          },
+          {
+            "name": "Hpc7a48xlarge",
+            "value": "hpc7a.48xlarge",
+            "description": "InstanceType enum hpc7a.48xlarge"
+          },
+          {
+            "name": "Hpc7a96xlarge",
+            "value": "hpc7a.96xlarge",
+            "description": "InstanceType enum hpc7a.96xlarge"
+          },
+          {
             "name": "Hpc7g16xlarge",
             "value": "hpc7g.16xlarge",
             "description": "InstanceType enum hpc7g.16xlarge"
@@ -3407,7 +3590,7 @@
             "description": "InstanceType enum i2.8xlarge"
           },
           {
-            "name": "I2xlarge",
+            "name": "I2Xlarge",
             "value": "i2.xlarge",
             "description": "InstanceType enum i2.xlarge"
           },
@@ -3432,17 +3615,17 @@
             "description": "InstanceType enum i3.8xlarge"
           },
           {
-            "name": "I3large",
+            "name": "I3Large",
             "value": "i3.large",
             "description": "InstanceType enum i3.large"
           },
           {
-            "name": "I3metal",
+            "name": "I3Metal",
             "value": "i3.metal",
             "description": "InstanceType enum i3.metal"
           },
           {
-            "name": "I3xlarge",
+            "name": "I3Xlarge",
             "value": "i3.xlarge",
             "description": "InstanceType enum i3.xlarge"
           },
@@ -3472,17 +3655,17 @@
             "description": "InstanceType enum i3en.6xlarge"
           },
           {
-            "name": "I3enlarge",
+            "name": "I3enLarge",
             "value": "i3en.large",
             "description": "InstanceType enum i3en.large"
           },
           {
-            "name": "I3enmetal",
+            "name": "I3enMetal",
             "value": "i3en.metal",
             "description": "InstanceType enum i3en.metal"
           },
           {
-            "name": "I3enxlarge",
+            "name": "I3enXlarge",
             "value": "i3en.xlarge",
             "description": "InstanceType enum i3en.xlarge"
           },
@@ -3507,12 +3690,12 @@
             "description": "InstanceType enum i4g.8xlarge"
           },
           {
-            "name": "I4glarge",
+            "name": "I4gLarge",
             "value": "i4g.large",
             "description": "InstanceType enum i4g.large"
           },
           {
-            "name": "I4gxlarge",
+            "name": "I4gXlarge",
             "value": "i4g.xlarge",
             "description": "InstanceType enum i4g.xlarge"
           },
@@ -3542,17 +3725,17 @@
             "description": "InstanceType enum i4i.8xlarge"
           },
           {
-            "name": "I4ilarge",
+            "name": "I4iLarge",
             "value": "i4i.large",
             "description": "InstanceType enum i4i.large"
           },
           {
-            "name": "I4imetal",
+            "name": "I4iMetal",
             "value": "i4i.metal",
             "description": "InstanceType enum i4i.metal"
           },
           {
-            "name": "I4ixlarge",
+            "name": "I4iXlarge",
             "value": "i4i.xlarge",
             "description": "InstanceType enum i4i.xlarge"
           },
@@ -3577,12 +3760,12 @@
             "description": "InstanceType enum im4gn.8xlarge"
           },
           {
-            "name": "Im4gnlarge",
+            "name": "Im4gnLarge",
             "value": "im4gn.large",
             "description": "InstanceType enum im4gn.large"
           },
           {
-            "name": "Im4gnxlarge",
+            "name": "Im4gnXlarge",
             "value": "im4gn.xlarge",
             "description": "InstanceType enum im4gn.xlarge"
           },
@@ -3602,7 +3785,7 @@
             "description": "InstanceType enum inf1.6xlarge"
           },
           {
-            "name": "Inf1xlarge",
+            "name": "Inf1Xlarge",
             "value": "inf1.xlarge",
             "description": "InstanceType enum inf1.xlarge"
           },
@@ -3622,7 +3805,7 @@
             "description": "InstanceType enum inf2.8xlarge"
           },
           {
-            "name": "Inf2xlarge",
+            "name": "Inf2Xlarge",
             "value": "inf2.xlarge",
             "description": "InstanceType enum inf2.xlarge"
           },
@@ -3642,37 +3825,37 @@
             "description": "InstanceType enum is4gen.8xlarge"
           },
           {
-            "name": "Is4genlarge",
+            "name": "Is4genLarge",
             "value": "is4gen.large",
             "description": "InstanceType enum is4gen.large"
           },
           {
-            "name": "Is4genmedium",
+            "name": "Is4genMedium",
             "value": "is4gen.medium",
             "description": "InstanceType enum is4gen.medium"
           },
           {
-            "name": "Is4genxlarge",
+            "name": "Is4genXlarge",
             "value": "is4gen.xlarge",
             "description": "InstanceType enum is4gen.xlarge"
           },
           {
-            "name": "M1large",
+            "name": "M1Large",
             "value": "m1.large",
             "description": "InstanceType enum m1.large"
           },
           {
-            "name": "M1medium",
+            "name": "M1Medium",
             "value": "m1.medium",
             "description": "InstanceType enum m1.medium"
           },
           {
-            "name": "M1small",
+            "name": "M1Small",
             "value": "m1.small",
             "description": "InstanceType enum m1.small"
           },
           {
-            "name": "M1xlarge",
+            "name": "M1Xlarge",
             "value": "m1.xlarge",
             "description": "InstanceType enum m1.xlarge"
           },
@@ -3687,7 +3870,7 @@
             "description": "InstanceType enum m2.4xlarge"
           },
           {
-            "name": "M2xlarge",
+            "name": "M2Xlarge",
             "value": "m2.xlarge",
             "description": "InstanceType enum m2.xlarge"
           },
@@ -3697,17 +3880,17 @@
             "description": "InstanceType enum m3.2xlarge"
           },
           {
-            "name": "M3large",
+            "name": "M3Large",
             "value": "m3.large",
             "description": "InstanceType enum m3.large"
           },
           {
-            "name": "M3medium",
+            "name": "M3Medium",
             "value": "m3.medium",
             "description": "InstanceType enum m3.medium"
           },
           {
-            "name": "M3xlarge",
+            "name": "M3Xlarge",
             "value": "m3.xlarge",
             "description": "InstanceType enum m3.xlarge"
           },
@@ -3732,12 +3915,12 @@
             "description": "InstanceType enum m4.4xlarge"
           },
           {
-            "name": "M4large",
+            "name": "M4Large",
             "value": "m4.large",
             "description": "InstanceType enum m4.large"
           },
           {
-            "name": "M4xlarge",
+            "name": "M4Xlarge",
             "value": "m4.xlarge",
             "description": "InstanceType enum m4.xlarge"
           },
@@ -3772,17 +3955,17 @@
             "description": "InstanceType enum m5.8xlarge"
           },
           {
-            "name": "M5large",
+            "name": "M5Large",
             "value": "m5.large",
             "description": "InstanceType enum m5.large"
           },
           {
-            "name": "M5metal",
+            "name": "M5Metal",
             "value": "m5.metal",
             "description": "InstanceType enum m5.metal"
           },
           {
-            "name": "M5xlarge",
+            "name": "M5Xlarge",
             "value": "m5.xlarge",
             "description": "InstanceType enum m5.xlarge"
           },
@@ -3817,12 +4000,12 @@
             "description": "InstanceType enum m5a.8xlarge"
           },
           {
-            "name": "M5alarge",
+            "name": "M5aLarge",
             "value": "m5a.large",
             "description": "InstanceType enum m5a.large"
           },
           {
-            "name": "M5axlarge",
+            "name": "M5aXlarge",
             "value": "m5a.xlarge",
             "description": "InstanceType enum m5a.xlarge"
           },
@@ -3857,12 +4040,12 @@
             "description": "InstanceType enum m5ad.8xlarge"
           },
           {
-            "name": "M5adlarge",
+            "name": "M5adLarge",
             "value": "m5ad.large",
             "description": "InstanceType enum m5ad.large"
           },
           {
-            "name": "M5adxlarge",
+            "name": "M5adXlarge",
             "value": "m5ad.xlarge",
             "description": "InstanceType enum m5ad.xlarge"
           },
@@ -3897,17 +4080,17 @@
             "description": "InstanceType enum m5d.8xlarge"
           },
           {
-            "name": "M5dlarge",
+            "name": "M5dLarge",
             "value": "m5d.large",
             "description": "InstanceType enum m5d.large"
           },
           {
-            "name": "M5dmetal",
+            "name": "M5dMetal",
             "value": "m5d.metal",
             "description": "InstanceType enum m5d.metal"
           },
           {
-            "name": "M5dxlarge",
+            "name": "M5dXlarge",
             "value": "m5d.xlarge",
             "description": "InstanceType enum m5d.xlarge"
           },
@@ -3942,17 +4125,17 @@
             "description": "InstanceType enum m5dn.8xlarge"
           },
           {
-            "name": "M5dnlarge",
+            "name": "M5dnLarge",
             "value": "m5dn.large",
             "description": "InstanceType enum m5dn.large"
           },
           {
-            "name": "M5dnmetal",
+            "name": "M5dnMetal",
             "value": "m5dn.metal",
             "description": "InstanceType enum m5dn.metal"
           },
           {
-            "name": "M5dnxlarge",
+            "name": "M5dnXlarge",
             "value": "m5dn.xlarge",
             "description": "InstanceType enum m5dn.xlarge"
           },
@@ -3987,17 +4170,17 @@
             "description": "InstanceType enum m5n.8xlarge"
           },
           {
-            "name": "M5nlarge",
+            "name": "M5nLarge",
             "value": "m5n.large",
             "description": "InstanceType enum m5n.large"
           },
           {
-            "name": "M5nmetal",
+            "name": "M5nMetal",
             "value": "m5n.metal",
             "description": "InstanceType enum m5n.metal"
           },
           {
-            "name": "M5nxlarge",
+            "name": "M5nXlarge",
             "value": "m5n.xlarge",
             "description": "InstanceType enum m5n.xlarge"
           },
@@ -4022,17 +4205,17 @@
             "description": "InstanceType enum m5zn.6xlarge"
           },
           {
-            "name": "M5znlarge",
+            "name": "M5znLarge",
             "value": "m5zn.large",
             "description": "InstanceType enum m5zn.large"
           },
           {
-            "name": "M5znmetal",
+            "name": "M5znMetal",
             "value": "m5zn.metal",
             "description": "InstanceType enum m5zn.metal"
           },
           {
-            "name": "M5znxlarge",
+            "name": "M5znXlarge",
             "value": "m5zn.xlarge",
             "description": "InstanceType enum m5zn.xlarge"
           },
@@ -4077,17 +4260,17 @@
             "description": "InstanceType enum m6a.8xlarge"
           },
           {
-            "name": "M6alarge",
+            "name": "M6aLarge",
             "value": "m6a.large",
             "description": "InstanceType enum m6a.large"
           },
           {
-            "name": "M6ametal",
+            "name": "M6aMetal",
             "value": "m6a.metal",
             "description": "InstanceType enum m6a.metal"
           },
           {
-            "name": "M6axlarge",
+            "name": "M6aXlarge",
             "value": "m6a.xlarge",
             "description": "InstanceType enum m6a.xlarge"
           },
@@ -4117,22 +4300,22 @@
             "description": "InstanceType enum m6g.8xlarge"
           },
           {
-            "name": "M6glarge",
+            "name": "M6gLarge",
             "value": "m6g.large",
             "description": "InstanceType enum m6g.large"
           },
           {
-            "name": "M6gmedium",
+            "name": "M6gMedium",
             "value": "m6g.medium",
             "description": "InstanceType enum m6g.medium"
           },
           {
-            "name": "M6gmetal",
+            "name": "M6gMetal",
             "value": "m6g.metal",
             "description": "InstanceType enum m6g.metal"
           },
           {
-            "name": "M6gxlarge",
+            "name": "M6gXlarge",
             "value": "m6g.xlarge",
             "description": "InstanceType enum m6g.xlarge"
           },
@@ -4162,22 +4345,22 @@
             "description": "InstanceType enum m6gd.8xlarge"
           },
           {
-            "name": "M6gdlarge",
+            "name": "M6gdLarge",
             "value": "m6gd.large",
             "description": "InstanceType enum m6gd.large"
           },
           {
-            "name": "M6gdmedium",
+            "name": "M6gdMedium",
             "value": "m6gd.medium",
             "description": "InstanceType enum m6gd.medium"
           },
           {
-            "name": "M6gdmetal",
+            "name": "M6gdMetal",
             "value": "m6gd.metal",
             "description": "InstanceType enum m6gd.metal"
           },
           {
-            "name": "M6gdxlarge",
+            "name": "M6gdXlarge",
             "value": "m6gd.xlarge",
             "description": "InstanceType enum m6gd.xlarge"
           },
@@ -4217,17 +4400,17 @@
             "description": "InstanceType enum m6i.8xlarge"
           },
           {
-            "name": "M6ilarge",
+            "name": "M6iLarge",
             "value": "m6i.large",
             "description": "InstanceType enum m6i.large"
           },
           {
-            "name": "M6imetal",
+            "name": "M6iMetal",
             "value": "m6i.metal",
             "description": "InstanceType enum m6i.metal"
           },
           {
-            "name": "M6ixlarge",
+            "name": "M6iXlarge",
             "value": "m6i.xlarge",
             "description": "InstanceType enum m6i.xlarge"
           },
@@ -4267,17 +4450,17 @@
             "description": "InstanceType enum m6id.8xlarge"
           },
           {
-            "name": "M6idlarge",
+            "name": "M6idLarge",
             "value": "m6id.large",
             "description": "InstanceType enum m6id.large"
           },
           {
-            "name": "M6idmetal",
+            "name": "M6idMetal",
             "value": "m6id.metal",
             "description": "InstanceType enum m6id.metal"
           },
           {
-            "name": "M6idxlarge",
+            "name": "M6idXlarge",
             "value": "m6id.xlarge",
             "description": "InstanceType enum m6id.xlarge"
           },
@@ -4317,17 +4500,17 @@
             "description": "InstanceType enum m6idn.8xlarge"
           },
           {
-            "name": "M6idnlarge",
+            "name": "M6idnLarge",
             "value": "m6idn.large",
             "description": "InstanceType enum m6idn.large"
           },
           {
-            "name": "M6idnmetal",
+            "name": "M6idnMetal",
             "value": "m6idn.metal",
             "description": "InstanceType enum m6idn.metal"
           },
           {
-            "name": "M6idnxlarge",
+            "name": "M6idnXlarge",
             "value": "m6idn.xlarge",
             "description": "InstanceType enum m6idn.xlarge"
           },
@@ -4367,19 +4550,79 @@
             "description": "InstanceType enum m6in.8xlarge"
           },
           {
-            "name": "M6inlarge",
+            "name": "M6inLarge",
             "value": "m6in.large",
             "description": "InstanceType enum m6in.large"
           },
           {
-            "name": "M6inmetal",
+            "name": "M6inMetal",
             "value": "m6in.metal",
             "description": "InstanceType enum m6in.metal"
           },
           {
-            "name": "M6inxlarge",
+            "name": "M6inXlarge",
             "value": "m6in.xlarge",
             "description": "InstanceType enum m6in.xlarge"
+          },
+          {
+            "name": "M7a12xlarge",
+            "value": "m7a.12xlarge",
+            "description": "InstanceType enum m7a.12xlarge"
+          },
+          {
+            "name": "M7a16xlarge",
+            "value": "m7a.16xlarge",
+            "description": "InstanceType enum m7a.16xlarge"
+          },
+          {
+            "name": "M7a24xlarge",
+            "value": "m7a.24xlarge",
+            "description": "InstanceType enum m7a.24xlarge"
+          },
+          {
+            "name": "M7a2xlarge",
+            "value": "m7a.2xlarge",
+            "description": "InstanceType enum m7a.2xlarge"
+          },
+          {
+            "name": "M7a32xlarge",
+            "value": "m7a.32xlarge",
+            "description": "InstanceType enum m7a.32xlarge"
+          },
+          {
+            "name": "M7a48xlarge",
+            "value": "m7a.48xlarge",
+            "description": "InstanceType enum m7a.48xlarge"
+          },
+          {
+            "name": "M7a4xlarge",
+            "value": "m7a.4xlarge",
+            "description": "InstanceType enum m7a.4xlarge"
+          },
+          {
+            "name": "M7a8xlarge",
+            "value": "m7a.8xlarge",
+            "description": "InstanceType enum m7a.8xlarge"
+          },
+          {
+            "name": "M7aLarge",
+            "value": "m7a.large",
+            "description": "InstanceType enum m7a.large"
+          },
+          {
+            "name": "M7aMedium",
+            "value": "m7a.medium",
+            "description": "InstanceType enum m7a.medium"
+          },
+          {
+            "name": "M7aMetal48xl",
+            "value": "m7a.metal-48xl",
+            "description": "InstanceType enum m7a.metal-48xl"
+          },
+          {
+            "name": "M7aXlarge",
+            "value": "m7a.xlarge",
+            "description": "InstanceType enum m7a.xlarge"
           },
           {
             "name": "M7g12xlarge",
@@ -4407,32 +4650,147 @@
             "description": "InstanceType enum m7g.8xlarge"
           },
           {
-            "name": "M7glarge",
+            "name": "M7gLarge",
             "value": "m7g.large",
             "description": "InstanceType enum m7g.large"
           },
           {
-            "name": "M7gmedium",
+            "name": "M7gMedium",
             "value": "m7g.medium",
             "description": "InstanceType enum m7g.medium"
           },
           {
-            "name": "M7gmetal",
+            "name": "M7gMetal",
             "value": "m7g.metal",
             "description": "InstanceType enum m7g.metal"
           },
           {
-            "name": "M7gxlarge",
+            "name": "M7gXlarge",
             "value": "m7g.xlarge",
             "description": "InstanceType enum m7g.xlarge"
           },
           {
-            "name": "Mac1metal",
+            "name": "M7gd12xlarge",
+            "value": "m7gd.12xlarge",
+            "description": "InstanceType enum m7gd.12xlarge"
+          },
+          {
+            "name": "M7gd16xlarge",
+            "value": "m7gd.16xlarge",
+            "description": "InstanceType enum m7gd.16xlarge"
+          },
+          {
+            "name": "M7gd2xlarge",
+            "value": "m7gd.2xlarge",
+            "description": "InstanceType enum m7gd.2xlarge"
+          },
+          {
+            "name": "M7gd4xlarge",
+            "value": "m7gd.4xlarge",
+            "description": "InstanceType enum m7gd.4xlarge"
+          },
+          {
+            "name": "M7gd8xlarge",
+            "value": "m7gd.8xlarge",
+            "description": "InstanceType enum m7gd.8xlarge"
+          },
+          {
+            "name": "M7gdLarge",
+            "value": "m7gd.large",
+            "description": "InstanceType enum m7gd.large"
+          },
+          {
+            "name": "M7gdMedium",
+            "value": "m7gd.medium",
+            "description": "InstanceType enum m7gd.medium"
+          },
+          {
+            "name": "M7gdXlarge",
+            "value": "m7gd.xlarge",
+            "description": "InstanceType enum m7gd.xlarge"
+          },
+          {
+            "name": "M7iFlex2xlarge",
+            "value": "m7i-flex.2xlarge",
+            "description": "InstanceType enum m7i-flex.2xlarge"
+          },
+          {
+            "name": "M7iFlex4xlarge",
+            "value": "m7i-flex.4xlarge",
+            "description": "InstanceType enum m7i-flex.4xlarge"
+          },
+          {
+            "name": "M7iFlex8xlarge",
+            "value": "m7i-flex.8xlarge",
+            "description": "InstanceType enum m7i-flex.8xlarge"
+          },
+          {
+            "name": "M7iFlexLarge",
+            "value": "m7i-flex.large",
+            "description": "InstanceType enum m7i-flex.large"
+          },
+          {
+            "name": "M7iFlexXlarge",
+            "value": "m7i-flex.xlarge",
+            "description": "InstanceType enum m7i-flex.xlarge"
+          },
+          {
+            "name": "M7i12xlarge",
+            "value": "m7i.12xlarge",
+            "description": "InstanceType enum m7i.12xlarge"
+          },
+          {
+            "name": "M7i16xlarge",
+            "value": "m7i.16xlarge",
+            "description": "InstanceType enum m7i.16xlarge"
+          },
+          {
+            "name": "M7i24xlarge",
+            "value": "m7i.24xlarge",
+            "description": "InstanceType enum m7i.24xlarge"
+          },
+          {
+            "name": "M7i2xlarge",
+            "value": "m7i.2xlarge",
+            "description": "InstanceType enum m7i.2xlarge"
+          },
+          {
+            "name": "M7i48xlarge",
+            "value": "m7i.48xlarge",
+            "description": "InstanceType enum m7i.48xlarge"
+          },
+          {
+            "name": "M7i4xlarge",
+            "value": "m7i.4xlarge",
+            "description": "InstanceType enum m7i.4xlarge"
+          },
+          {
+            "name": "M7i8xlarge",
+            "value": "m7i.8xlarge",
+            "description": "InstanceType enum m7i.8xlarge"
+          },
+          {
+            "name": "M7iLarge",
+            "value": "m7i.large",
+            "description": "InstanceType enum m7i.large"
+          },
+          {
+            "name": "M7iXlarge",
+            "value": "m7i.xlarge",
+            "description": "InstanceType enum m7i.xlarge"
+          },
+          {
+            "name": "Mac1Metal",
             "value": "mac1.metal",
             "description": "InstanceType enum mac1.metal"
           },
           {
-            "name": "Mac2metal",
+            "name": "Mac2M2proMetal",
+            "value": "mac2-m2pro.metal",
+            "description": "InstanceType enum mac2-m2pro.metal"
+          },
+          {
+            "name": "Mac2Metal",
             "value": "mac2.metal",
             "description": "InstanceType enum mac2.metal"
           },
@@ -4447,7 +4805,7 @@
             "description": "InstanceType enum p2.8xlarge"
           },
           {
-            "name": "P2xlarge",
+            "name": "P2Xlarge",
             "value": "p2.xlarge",
             "description": "InstanceType enum p2.xlarge"
           },
@@ -4482,6 +4840,11 @@
             "description": "InstanceType enum p4de.24xlarge"
           },
           {
+            "name": "P548xlarge",
+            "value": "p5.48xlarge",
+            "description": "InstanceType enum p5.48xlarge"
+          },
+          {
             "name": "R32xlarge",
             "value": "r3.2xlarge",
             "description": "InstanceType enum r3.2xlarge"
@@ -4497,12 +4860,12 @@
             "description": "InstanceType enum r3.8xlarge"
           },
           {
-            "name": "R3large",
+            "name": "R3Large",
             "value": "r3.large",
             "description": "InstanceType enum r3.large"
           },
           {
-            "name": "R3xlarge",
+            "name": "R3Xlarge",
             "value": "r3.xlarge",
             "description": "InstanceType enum r3.xlarge"
           },
@@ -4527,12 +4890,12 @@
             "description": "InstanceType enum r4.8xlarge"
           },
           {
-            "name": "R4large",
+            "name": "R4Large",
             "value": "r4.large",
             "description": "InstanceType enum r4.large"
           },
           {
-            "name": "R4xlarge",
+            "name": "R4Xlarge",
             "value": "r4.xlarge",
             "description": "InstanceType enum r4.xlarge"
           },
@@ -4567,17 +4930,17 @@
             "description": "InstanceType enum r5.8xlarge"
           },
           {
-            "name": "R5large",
+            "name": "R5Large",
             "value": "r5.large",
             "description": "InstanceType enum r5.large"
           },
           {
-            "name": "R5metal",
+            "name": "R5Metal",
             "value": "r5.metal",
             "description": "InstanceType enum r5.metal"
           },
           {
-            "name": "R5xlarge",
+            "name": "R5Xlarge",
             "value": "r5.xlarge",
             "description": "InstanceType enum r5.xlarge"
           },
@@ -4612,12 +4975,12 @@
             "description": "InstanceType enum r5a.8xlarge"
           },
           {
-            "name": "R5alarge",
+            "name": "R5aLarge",
             "value": "r5a.large",
             "description": "InstanceType enum r5a.large"
           },
           {
-            "name": "R5axlarge",
+            "name": "R5aXlarge",
             "value": "r5a.xlarge",
             "description": "InstanceType enum r5a.xlarge"
           },
@@ -4652,12 +5015,12 @@
             "description": "InstanceType enum r5ad.8xlarge"
           },
           {
-            "name": "R5adlarge",
+            "name": "R5adLarge",
             "value": "r5ad.large",
             "description": "InstanceType enum r5ad.large"
           },
           {
-            "name": "R5adxlarge",
+            "name": "R5adXlarge",
             "value": "r5ad.xlarge",
             "description": "InstanceType enum r5ad.xlarge"
           },
@@ -4692,17 +5055,17 @@
             "description": "InstanceType enum r5b.8xlarge"
           },
           {
-            "name": "R5blarge",
+            "name": "R5bLarge",
             "value": "r5b.large",
             "description": "InstanceType enum r5b.large"
           },
           {
-            "name": "R5bmetal",
+            "name": "R5bMetal",
             "value": "r5b.metal",
             "description": "InstanceType enum r5b.metal"
           },
           {
-            "name": "R5bxlarge",
+            "name": "R5bXlarge",
             "value": "r5b.xlarge",
             "description": "InstanceType enum r5b.xlarge"
           },
@@ -4737,17 +5100,17 @@
             "description": "InstanceType enum r5d.8xlarge"
           },
           {
-            "name": "R5dlarge",
+            "name": "R5dLarge",
             "value": "r5d.large",
             "description": "InstanceType enum r5d.large"
           },
           {
-            "name": "R5dmetal",
+            "name": "R5dMetal",
             "value": "r5d.metal",
             "description": "InstanceType enum r5d.metal"
           },
           {
-            "name": "R5dxlarge",
+            "name": "R5dXlarge",
             "value": "r5d.xlarge",
             "description": "InstanceType enum r5d.xlarge"
           },
@@ -4782,17 +5145,17 @@
             "description": "InstanceType enum r5dn.8xlarge"
           },
           {
-            "name": "R5dnlarge",
+            "name": "R5dnLarge",
             "value": "r5dn.large",
             "description": "InstanceType enum r5dn.large"
           },
           {
-            "name": "R5dnmetal",
+            "name": "R5dnMetal",
             "value": "r5dn.metal",
             "description": "InstanceType enum r5dn.metal"
           },
           {
-            "name": "R5dnxlarge",
+            "name": "R5dnXlarge",
             "value": "r5dn.xlarge",
             "description": "InstanceType enum r5dn.xlarge"
           },
@@ -4827,17 +5190,17 @@
             "description": "InstanceType enum r5n.8xlarge"
           },
           {
-            "name": "R5nlarge",
+            "name": "R5nLarge",
             "value": "r5n.large",
             "description": "InstanceType enum r5n.large"
           },
           {
-            "name": "R5nmetal",
+            "name": "R5nMetal",
             "value": "r5n.metal",
             "description": "InstanceType enum r5n.metal"
           },
           {
-            "name": "R5nxlarge",
+            "name": "R5nXlarge",
             "value": "r5n.xlarge",
             "description": "InstanceType enum r5n.xlarge"
           },
@@ -4882,17 +5245,17 @@
             "description": "InstanceType enum r6a.8xlarge"
           },
           {
-            "name": "R6alarge",
+            "name": "R6aLarge",
             "value": "r6a.large",
             "description": "InstanceType enum r6a.large"
           },
           {
-            "name": "R6ametal",
+            "name": "R6aMetal",
             "value": "r6a.metal",
             "description": "InstanceType enum r6a.metal"
           },
           {
-            "name": "R6axlarge",
+            "name": "R6aXlarge",
             "value": "r6a.xlarge",
             "description": "InstanceType enum r6a.xlarge"
           },
@@ -4922,22 +5285,22 @@
             "description": "InstanceType enum r6g.8xlarge"
           },
           {
-            "name": "R6glarge",
+            "name": "R6gLarge",
             "value": "r6g.large",
             "description": "InstanceType enum r6g.large"
           },
           {
-            "name": "R6gmedium",
+            "name": "R6gMedium",
             "value": "r6g.medium",
             "description": "InstanceType enum r6g.medium"
           },
           {
-            "name": "R6gmetal",
+            "name": "R6gMetal",
             "value": "r6g.metal",
             "description": "InstanceType enum r6g.metal"
           },
           {
-            "name": "R6gxlarge",
+            "name": "R6gXlarge",
             "value": "r6g.xlarge",
             "description": "InstanceType enum r6g.xlarge"
           },
@@ -4967,22 +5330,22 @@
             "description": "InstanceType enum r6gd.8xlarge"
           },
           {
-            "name": "R6gdlarge",
+            "name": "R6gdLarge",
             "value": "r6gd.large",
             "description": "InstanceType enum r6gd.large"
           },
           {
-            "name": "R6gdmedium",
+            "name": "R6gdMedium",
             "value": "r6gd.medium",
             "description": "InstanceType enum r6gd.medium"
           },
           {
-            "name": "R6gdmetal",
+            "name": "R6gdMetal",
             "value": "r6gd.metal",
             "description": "InstanceType enum r6gd.metal"
           },
           {
-            "name": "R6gdxlarge",
+            "name": "R6gdXlarge",
             "value": "r6gd.xlarge",
             "description": "InstanceType enum r6gd.xlarge"
           },
@@ -5022,17 +5385,17 @@
             "description": "InstanceType enum r6i.8xlarge"
           },
           {
-            "name": "R6ilarge",
+            "name": "R6iLarge",
             "value": "r6i.large",
             "description": "InstanceType enum r6i.large"
           },
           {
-            "name": "R6imetal",
+            "name": "R6iMetal",
             "value": "r6i.metal",
             "description": "InstanceType enum r6i.metal"
           },
           {
-            "name": "R6ixlarge",
+            "name": "R6iXlarge",
             "value": "r6i.xlarge",
             "description": "InstanceType enum r6i.xlarge"
           },
@@ -5072,17 +5435,17 @@
             "description": "InstanceType enum r6id.8xlarge"
           },
           {
-            "name": "R6idlarge",
+            "name": "R6idLarge",
             "value": "r6id.large",
             "description": "InstanceType enum r6id.large"
           },
           {
-            "name": "R6idmetal",
+            "name": "R6idMetal",
             "value": "r6id.metal",
             "description": "InstanceType enum r6id.metal"
           },
           {
-            "name": "R6idxlarge",
+            "name": "R6idXlarge",
             "value": "r6id.xlarge",
             "description": "InstanceType enum r6id.xlarge"
           },
@@ -5122,17 +5485,17 @@
             "description": "InstanceType enum r6idn.8xlarge"
           },
           {
-            "name": "R6idnlarge",
+            "name": "R6idnLarge",
             "value": "r6idn.large",
             "description": "InstanceType enum r6idn.large"
           },
           {
-            "name": "R6idnmetal",
+            "name": "R6idnMetal",
             "value": "r6idn.metal",
             "description": "InstanceType enum r6idn.metal"
           },
           {
-            "name": "R6idnxlarge",
+            "name": "R6idnXlarge",
             "value": "r6idn.xlarge",
             "description": "InstanceType enum r6idn.xlarge"
           },
@@ -5172,19 +5535,74 @@
             "description": "InstanceType enum r6in.8xlarge"
           },
           {
-            "name": "R6inlarge",
+            "name": "R6inLarge",
             "value": "r6in.large",
             "description": "InstanceType enum r6in.large"
           },
           {
-            "name": "R6inmetal",
+            "name": "R6inMetal",
             "value": "r6in.metal",
             "description": "InstanceType enum r6in.metal"
           },
           {
-            "name": "R6inxlarge",
+            "name": "R6inXlarge",
             "value": "r6in.xlarge",
             "description": "InstanceType enum r6in.xlarge"
+          },
+          {
+            "name": "R7a12xlarge",
+            "value": "r7a.12xlarge",
+            "description": "InstanceType enum r7a.12xlarge"
+          },
+          {
+            "name": "R7a16xlarge",
+            "value": "r7a.16xlarge",
+            "description": "InstanceType enum r7a.16xlarge"
+          },
+          {
+            "name": "R7a24xlarge",
+            "value": "r7a.24xlarge",
+            "description": "InstanceType enum r7a.24xlarge"
+          },
+          {
+            "name": "R7a2xlarge",
+            "value": "r7a.2xlarge",
+            "description": "InstanceType enum r7a.2xlarge"
+          },
+          {
+            "name": "R7a32xlarge",
+            "value": "r7a.32xlarge",
+            "description": "InstanceType enum r7a.32xlarge"
+          },
+          {
+            "name": "R7a48xlarge",
+            "value": "r7a.48xlarge",
+            "description": "InstanceType enum r7a.48xlarge"
+          },
+          {
+            "name": "R7a4xlarge",
+            "value": "r7a.4xlarge",
+            "description": "InstanceType enum r7a.4xlarge"
+          },
+          {
+            "name": "R7a8xlarge",
+            "value": "r7a.8xlarge",
+            "description": "InstanceType enum r7a.8xlarge"
+          },
+          {
+            "name": "R7aLarge",
+            "value": "r7a.large",
+            "description": "InstanceType enum r7a.large"
+          },
+          {
+            "name": "R7aMedium",
+            "value": "r7a.medium",
+            "description": "InstanceType enum r7a.medium"
+          },
+          {
+            "name": "R7aXlarge",
+            "value": "r7a.xlarge",
+            "description": "InstanceType enum r7a.xlarge"
           },
           {
             "name": "R7g12xlarge",
@@ -5212,27 +5630,107 @@
             "description": "InstanceType enum r7g.8xlarge"
           },
           {
-            "name": "R7glarge",
+            "name": "R7gLarge",
             "value": "r7g.large",
             "description": "InstanceType enum r7g.large"
           },
           {
-            "name": "R7gmedium",
+            "name": "R7gMedium",
             "value": "r7g.medium",
             "description": "InstanceType enum r7g.medium"
           },
           {
-            "name": "R7gmetal",
+            "name": "R7gMetal",
             "value": "r7g.metal",
             "description": "InstanceType enum r7g.metal"
           },
           {
-            "name": "R7gxlarge",
+            "name": "R7gXlarge",
             "value": "r7g.xlarge",
             "description": "InstanceType enum r7g.xlarge"
           },
           {
-            "name": "T1micro",
+            "name": "R7gd12xlarge",
+            "value": "r7gd.12xlarge",
+            "description": "InstanceType enum r7gd.12xlarge"
+          },
+          {
+            "name": "R7gd16xlarge",
+            "value": "r7gd.16xlarge",
+            "description": "InstanceType enum r7gd.16xlarge"
+          },
+          {
+            "name": "R7gd2xlarge",
+            "value": "r7gd.2xlarge",
+            "description": "InstanceType enum r7gd.2xlarge"
+          },
+          {
+            "name": "R7gd4xlarge",
+            "value": "r7gd.4xlarge",
+            "description": "InstanceType enum r7gd.4xlarge"
+          },
+          {
+            "name": "R7gd8xlarge",
+            "value": "r7gd.8xlarge",
+            "description": "InstanceType enum r7gd.8xlarge"
+          },
+          {
+            "name": "R7gdLarge",
+            "value": "r7gd.large",
+            "description": "InstanceType enum r7gd.large"
+          },
+          {
+            "name": "R7gdMedium",
+            "value": "r7gd.medium",
+            "description": "InstanceType enum r7gd.medium"
+          },
+          {
+            "name": "R7gdXlarge",
+            "value": "r7gd.xlarge",
+            "description": "InstanceType enum r7gd.xlarge"
+          },
+          {
+            "name": "R7iz12xlarge",
+            "value": "r7iz.12xlarge",
+            "description": "InstanceType enum r7iz.12xlarge"
+          },
+          {
+            "name": "R7iz16xlarge",
+            "value": "r7iz.16xlarge",
+            "description": "InstanceType enum r7iz.16xlarge"
+          },
+          {
+            "name": "R7iz2xlarge",
+            "value": "r7iz.2xlarge",
+            "description": "InstanceType enum r7iz.2xlarge"
+          },
+          {
+            "name": "R7iz32xlarge",
+            "value": "r7iz.32xlarge",
+            "description": "InstanceType enum r7iz.32xlarge"
+          },
+          {
+            "name": "R7iz4xlarge",
+            "value": "r7iz.4xlarge",
+            "description": "InstanceType enum r7iz.4xlarge"
+          },
+          {
+            "name": "R7iz8xlarge",
+            "value": "r7iz.8xlarge",
+            "description": "InstanceType enum r7iz.8xlarge"
+          },
+          {
+            "name": "R7izLarge",
+            "value": "r7iz.large",
+            "description": "InstanceType enum r7iz.large"
+          },
+          {
+            "name": "R7izXlarge",
+            "value": "r7iz.xlarge",
+            "description": "InstanceType enum r7iz.xlarge"
+          },
+          {
+            "name": "T1Micro",
             "value": "t1.micro",
             "description": "InstanceType enum t1.micro"
           },
@@ -5242,32 +5740,32 @@
             "description": "InstanceType enum t2.2xlarge"
           },
           {
-            "name": "T2large",
+            "name": "T2Large",
             "value": "t2.large",
             "description": "InstanceType enum t2.large"
           },
           {
-            "name": "T2medium",
+            "name": "T2Medium",
             "value": "t2.medium",
             "description": "InstanceType enum t2.medium"
           },
           {
-            "name": "T2micro",
+            "name": "T2Micro",
             "value": "t2.micro",
             "description": "InstanceType enum t2.micro"
           },
           {
-            "name": "T2nano",
+            "name": "T2Nano",
             "value": "t2.nano",
             "description": "InstanceType enum t2.nano"
           },
           {
-            "name": "T2small",
+            "name": "T2Small",
             "value": "t2.small",
             "description": "InstanceType enum t2.small"
           },
           {
-            "name": "T2xlarge",
+            "name": "T2Xlarge",
             "value": "t2.xlarge",
             "description": "InstanceType enum t2.xlarge"
           },
@@ -5277,32 +5775,32 @@
             "description": "InstanceType enum t3.2xlarge"
           },
           {
-            "name": "T3large",
+            "name": "T3Large",
             "value": "t3.large",
             "description": "InstanceType enum t3.large"
           },
           {
-            "name": "T3medium",
+            "name": "T3Medium",
             "value": "t3.medium",
             "description": "InstanceType enum t3.medium"
           },
           {
-            "name": "T3micro",
+            "name": "T3Micro",
             "value": "t3.micro",
             "description": "InstanceType enum t3.micro"
           },
           {
-            "name": "T3nano",
+            "name": "T3Nano",
             "value": "t3.nano",
             "description": "InstanceType enum t3.nano"
           },
           {
-            "name": "T3small",
+            "name": "T3Small",
             "value": "t3.small",
             "description": "InstanceType enum t3.small"
           },
           {
-            "name": "T3xlarge",
+            "name": "T3Xlarge",
             "value": "t3.xlarge",
             "description": "InstanceType enum t3.xlarge"
           },
@@ -5312,32 +5810,32 @@
             "description": "InstanceType enum t3a.2xlarge"
           },
           {
-            "name": "T3alarge",
+            "name": "T3aLarge",
             "value": "t3a.large",
             "description": "InstanceType enum t3a.large"
           },
           {
-            "name": "T3amedium",
+            "name": "T3aMedium",
             "value": "t3a.medium",
             "description": "InstanceType enum t3a.medium"
           },
           {
-            "name": "T3amicro",
+            "name": "T3aMicro",
             "value": "t3a.micro",
             "description": "InstanceType enum t3a.micro"
           },
           {
-            "name": "T3anano",
+            "name": "T3aNano",
             "value": "t3a.nano",
             "description": "InstanceType enum t3a.nano"
           },
           {
-            "name": "T3asmall",
+            "name": "T3aSmall",
             "value": "t3a.small",
             "description": "InstanceType enum t3a.small"
           },
           {
-            "name": "T3axlarge",
+            "name": "T3aXlarge",
             "value": "t3a.xlarge",
             "description": "InstanceType enum t3a.xlarge"
           },
@@ -5347,32 +5845,32 @@
             "description": "InstanceType enum t4g.2xlarge"
           },
           {
-            "name": "T4glarge",
+            "name": "T4gLarge",
             "value": "t4g.large",
             "description": "InstanceType enum t4g.large"
           },
           {
-            "name": "T4gmedium",
+            "name": "T4gMedium",
             "value": "t4g.medium",
             "description": "InstanceType enum t4g.medium"
           },
           {
-            "name": "T4gmicro",
+            "name": "T4gMicro",
             "value": "t4g.micro",
             "description": "InstanceType enum t4g.micro"
           },
           {
-            "name": "T4gnano",
+            "name": "T4gNano",
             "value": "t4g.nano",
             "description": "InstanceType enum t4g.nano"
           },
           {
-            "name": "T4gsmall",
+            "name": "T4gSmall",
             "value": "t4g.small",
             "description": "InstanceType enum t4g.small"
           },
           {
-            "name": "T4gxlarge",
+            "name": "T4gXlarge",
             "value": "t4g.xlarge",
             "description": "InstanceType enum t4g.xlarge"
           },
@@ -5397,7 +5895,7 @@
             "description": "InstanceType enum u-12tb1.112xlarge"
           },
           {
-            "name": "U12tb1metal",
+            "name": "U12tb1Metal",
             "value": "u-12tb1.metal",
             "description": "InstanceType enum u-12tb1.metal"
           },
@@ -5407,7 +5905,7 @@
             "description": "InstanceType enum u-18tb1.112xlarge"
           },
           {
-            "name": "U18tb1metal",
+            "name": "U18tb1Metal",
             "value": "u-18tb1.metal",
             "description": "InstanceType enum u-18tb1.metal"
           },
@@ -5417,7 +5915,7 @@
             "description": "InstanceType enum u-24tb1.112xlarge"
           },
           {
-            "name": "U24tb1metal",
+            "name": "U24tb1Metal",
             "value": "u-24tb1.metal",
             "description": "InstanceType enum u-24tb1.metal"
           },
@@ -5437,7 +5935,7 @@
             "description": "InstanceType enum u-6tb1.56xlarge"
           },
           {
-            "name": "U6tb1metal",
+            "name": "U6tb1Metal",
             "value": "u-6tb1.metal",
             "description": "InstanceType enum u-6tb1.metal"
           },
@@ -5447,7 +5945,7 @@
             "description": "InstanceType enum u-9tb1.112xlarge"
           },
           {
-            "name": "U9tb1metal",
+            "name": "U9tb1Metal",
             "value": "u-9tb1.metal",
             "description": "InstanceType enum u-9tb1.metal"
           },
@@ -5502,7 +6000,7 @@
             "description": "InstanceType enum x1e.8xlarge"
           },
           {
-            "name": "X1exlarge",
+            "name": "X1eXlarge",
             "value": "x1e.xlarge",
             "description": "InstanceType enum x1e.xlarge"
           },
@@ -5532,22 +6030,22 @@
             "description": "InstanceType enum x2gd.8xlarge"
           },
           {
-            "name": "X2gdlarge",
+            "name": "X2gdLarge",
             "value": "x2gd.large",
             "description": "InstanceType enum x2gd.large"
           },
           {
-            "name": "X2gdmedium",
+            "name": "X2gdMedium",
             "value": "x2gd.medium",
             "description": "InstanceType enum x2gd.medium"
           },
           {
-            "name": "X2gdmetal",
+            "name": "X2gdMetal",
             "value": "x2gd.metal",
             "description": "InstanceType enum x2gd.metal"
           },
           {
-            "name": "X2gdxlarge",
+            "name": "X2gdXlarge",
             "value": "x2gd.xlarge",
             "description": "InstanceType enum x2gd.xlarge"
           },
@@ -5567,7 +6065,7 @@
             "description": "InstanceType enum x2idn.32xlarge"
           },
           {
-            "name": "X2idnmetal",
+            "name": "X2idnMetal",
             "value": "x2idn.metal",
             "description": "InstanceType enum x2idn.metal"
           },
@@ -5602,12 +6100,12 @@
             "description": "InstanceType enum x2iedn.8xlarge"
           },
           {
-            "name": "X2iednmetal",
+            "name": "X2iednMetal",
             "value": "x2iedn.metal",
             "description": "InstanceType enum x2iedn.metal"
           },
           {
-            "name": "X2iednxlarge",
+            "name": "X2iednXlarge",
             "value": "x2iedn.xlarge",
             "description": "InstanceType enum x2iedn.xlarge"
           },
@@ -5637,7 +6135,7 @@
             "description": "InstanceType enum x2iezn.8xlarge"
           },
           {
-            "name": "X2ieznmetal",
+            "name": "X2ieznMetal",
             "value": "x2iezn.metal",
             "description": "InstanceType enum x2iezn.metal"
           },
@@ -5662,17 +6160,17 @@
             "description": "InstanceType enum z1d.6xlarge"
           },
           {
-            "name": "Z1dlarge",
+            "name": "Z1dLarge",
             "value": "z1d.large",
             "description": "InstanceType enum z1d.large"
           },
           {
-            "name": "Z1dmetal",
+            "name": "Z1dMetal",
             "value": "z1d.metal",
             "description": "InstanceType enum z1d.metal"
           },
           {
-            "name": "Z1dxlarge",
+            "name": "Z1dXlarge",
             "value": "z1d.xlarge",
             "description": "InstanceType enum z1d.xlarge"
           }
@@ -5685,7 +6183,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/InstanceType",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -5695,7 +6193,7 @@
       "properties": {
         "licenseConfigurationArn": {
           "type": "string",
-          "description": "Gets and sets the property licenseConfigurationArn. <p>The Amazon Resource Name (ARN) of the license configuration.</p>"
+          "description": "Gets and sets the property licenseConfigurationArn.<p>The Amazon Resource Name (ARN) of the license configuration.</p>"
         }
       }
     },
@@ -5705,7 +6203,7 @@
       "properties": {
         "state": {
           "$ref": "#/definitions/MonitoringStateEnumValue",
-          "description": "Gets and sets the property state. <p>Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.</p>"
+          "description": "Gets and sets the property state.<p>Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.</p>"
         }
       }
     },
@@ -5751,7 +6249,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/MonitoringState",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -5790,7 +6288,7 @@
             "description": "NetworkInterfaceStatus enum detaching"
           },
           {
-            "name": "Inuse",
+            "name": "InUse",
             "value": "in-use",
             "description": "NetworkInterfaceStatus enum in-use"
           }
@@ -5803,7 +6301,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/NetworkInterfaceStatus",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -5813,40 +6311,40 @@
       "properties": {
         "affinity": {
           "type": "string",
-          "description": "Gets and sets the property affinity. <p>The affinity setting for the instance on the Dedicated Host.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>"
+          "description": "Gets and sets the property affinity.<p>The affinity setting for the instance on the Dedicated Host.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>"
         },
         "availabilityZone": {
           "type": "string",
-          "description": "Gets and sets the property availabilityZone. <p>The Availability Zone of the instance.</p> <p>If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>"
+          "description": "Gets and sets the property availabilityZone.<p>The Availability Zone of the instance.</p> <p>If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>"
         },
         "groupId": {
           "type": "string",
-          "description": "Gets and sets the property groupId. <p>The ID of the placement group that the instance is in. If you specify <code>GroupId</code>, you can't specify <code>GroupName</code>.</p>"
+          "description": "Gets and sets the property groupId.<p>The ID of the placement group that the instance is in. If you specify <code>GroupId</code>, you can't specify <code>GroupName</code>.</p>"
         },
         "groupName": {
           "type": "string",
-          "description": "Gets and sets the property groupName. <p>The name of the placement group that the instance is in. If you specify <code>GroupName</code>, you can't specify <code>GroupId</code>.</p>"
+          "description": "Gets and sets the property groupName.<p>The name of the placement group that the instance is in. If you specify <code>GroupName</code>, you can't specify <code>GroupId</code>.</p>"
         },
         "hostId": {
           "type": "string",
-          "description": "Gets and sets the property hostId. <p>The ID of the Dedicated Host on which the instance resides.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>"
+          "description": "Gets and sets the property hostId.<p>The ID of the Dedicated Host on which the instance resides.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>"
         },
         "hostResourceGroupArn": {
           "type": "string",
-          "description": "Gets and sets the property hostResourceGroupArn. <p>The ARN of the host resource group in which to launch the instances.</p> <p>If you specify this parameter, either omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>"
+          "description": "Gets and sets the property hostResourceGroupArn.<p>The ARN of the host resource group in which to launch the instances.</p> <p>If you specify this parameter, either omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>"
         },
         "partitionNumber": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property partitionNumber. <p>The number of the partition that the instance is in. Valid only if the placement group strategy is set to <code>partition</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>"
+          "description": "Gets and sets the property partitionNumber.<p>The number of the partition that the instance is in. Valid only if the placement group strategy is set to <code>partition</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>"
         },
         "spreadDomain": {
           "type": "string",
-          "description": "Gets and sets the property spreadDomain. <p>Reserved for future use.</p>"
+          "description": "Gets and sets the property spreadDomain.<p>Reserved for future use.</p>"
         },
         "tenancy": {
           "$ref": "#/definitions/TenancyEnumValue",
-          "description": "Gets and sets the property tenancy. <p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>. The <code>host</code> tenancy is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a> or for T3 instances that are configured for the <code>unlimited</code> CPU credit option.</p>"
+          "description": "Gets and sets the property tenancy.<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>. The <code>host</code> tenancy is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a> or for T3 instances that are configured for the <code>unlimited</code> CPU credit option.</p>"
         }
       }
     },
@@ -5874,7 +6372,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/PlatformValues",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -5884,15 +6382,15 @@
       "properties": {
         "enableResourceNameDnsAAAARecord": {
           "type": "boolean",
-          "description": "Gets and sets the property enableResourceNameDnsAAAARecord. <p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>"
+          "description": "Gets and sets the property enableResourceNameDnsAAAARecord.<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>"
         },
         "enableResourceNameDnsARecord": {
           "type": "boolean",
-          "description": "Gets and sets the property enableResourceNameDnsARecord. <p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>"
+          "description": "Gets and sets the property enableResourceNameDnsARecord.<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>"
         },
         "hostnameType": {
           "$ref": "#/definitions/HostnameTypeEnumValue",
-          "description": "Gets and sets the property hostnameType. <p>The type of hostname to assign to an instance.</p>"
+          "description": "Gets and sets the property hostnameType.<p>The type of hostname to assign to an instance.</p>"
         }
       }
     },
@@ -5902,11 +6400,11 @@
       "properties": {
         "productCodeId": {
           "type": "string",
-          "description": "Gets and sets the property productCodeId. <p>The product code.</p>"
+          "description": "Gets and sets the property productCodeId.<p>The product code.</p>"
         },
         "productCodeType": {
           "$ref": "#/definitions/ProductCodeValuesEnumValue",
-          "description": "Gets and sets the property productCodeType. <p>The type of product code.</p>"
+          "description": "Gets and sets the property productCodeType.<p>The type of product code.</p>"
         }
       }
     },
@@ -5940,7 +6438,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/ProductCodeValues",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -5996,7 +6494,8 @@
             "description": "The resource create request has been accepted"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "StateReason": {
       "type": "object",
@@ -6004,11 +6503,11 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets and sets the property code. <p>The reason code for the state change.</p>"
+          "description": "Gets and sets the property code.<p>The reason code for the state change.</p>"
         },
         "message": {
           "type": "string",
-          "description": "Gets and sets the property message. <p>The message for the state change.</p> <ul> <li> <p> <code>Server.InsufficientInstanceCapacity</code>: There was insufficient capacity available to satisfy the launch request.</p> </li> <li> <p> <code>Server.InternalError</code>: An internal error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Server.ScheduledStop</code>: The instance was stopped due to a scheduled retirement.</p> </li> <li> <p> <code>Server.SpotInstanceShutdown</code>: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Server.SpotInstanceTermination</code>: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Client.InstanceInitiatedShutdown</code>: The instance was shut down using the <code>shutdown -h</code> command from the instance.</p> </li> <li> <p> <code>Client.InstanceTerminated</code>: The instance was terminated or rebooted during AMI creation.</p> </li> <li> <p> <code>Client.InternalError</code>: A client error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Client.InvalidSnapshot.NotFound</code>: The specified snapshot was not found.</p> </li> <li> <p> <code>Client.UserInitiatedHibernate</code>: Hibernation was initiated on the instance.</p> </li> <li> <p> <code>Client.UserInitiatedShutdown</code>: The instance was shut down using the Amazon EC2 API.</p> </li> <li> <p> <code>Client.VolumeLimitExceeded</code>: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.</p> </li> </ul>"
+          "description": "Gets and sets the property message.<p>The message for the state change.</p> <ul> <li> <p> <code>Server.InsufficientInstanceCapacity</code>: There was insufficient capacity available to satisfy the launch request.</p> </li> <li> <p> <code>Server.InternalError</code>: An internal error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Server.ScheduledStop</code>: The instance was stopped due to a scheduled retirement.</p> </li> <li> <p> <code>Server.SpotInstanceShutdown</code>: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Server.SpotInstanceTermination</code>: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Client.InstanceInitiatedShutdown</code>: The instance was shut down using the <code>shutdown -h</code> command from the instance.</p> </li> <li> <p> <code>Client.InstanceTerminated</code>: The instance was terminated or rebooted during AMI creation.</p> </li> <li> <p> <code>Client.InternalError</code>: A client error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Client.InvalidSnapshot.NotFound</code>: The specified snapshot was not found.</p> </li> <li> <p> <code>Client.UserInitiatedHibernate</code>: Hibernation was initiated on the instance.</p> </li> <li> <p> <code>Client.UserInitiatedShutdown</code>: The instance was shut down using the Amazon EC2 API.</p> </li> <li> <p> <code>Client.VolumeLimitExceeded</code>: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.</p> </li> </ul>"
         }
       }
     },
@@ -6018,11 +6517,11 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key. <p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>"
+          "description": "Gets and sets the property key.<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>"
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value. <p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>"
+          "description": "Gets and sets the property value.<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>"
         }
       }
     },
@@ -6062,7 +6561,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/Tenancy",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     },
@@ -6096,7 +6595,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/VirtualizationType",
-          "description": "Gets and sets the property value. "
+          "description": "Gets and sets the property value."
         }
       }
     }

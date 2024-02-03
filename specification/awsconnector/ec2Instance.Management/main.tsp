@@ -18,13 +18,15 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft.AwsConnector",
-  version: "2023-12-01-preview",
+  version: "2024-08-01-preview",
 })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AwsConnector;
 
 //---------------------------------------------- Ec2Instances ----------------------------------------------
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
 @doc("A Microsoft.AwsConnector resource")
 @singleton
 model Ec2Instance is ExtensionResource<Ec2InstanceProperties> {
@@ -36,192 +38,195 @@ model Ec2Instance is ExtensionResource<Ec2InstanceProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of Ec2Instance")
-model Ec2InstanceProperties extends AwsCommonProperties {
-  @doc("Gets and sets the property awsProperties. ")
+model Ec2InstanceProperties {
+  @doc("Gets and sets the property awsProperties.")
   awsProperties?: AwsEc2InstanceProperties;
+
+  ...AwsCommonProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of awsEc2Instance")
 model AwsEc2InstanceProperties {
-  @doc("Gets and sets the property amiLaunchIndex. <p>The AMI launch index, which can be used to find this instance in the launch group.</p>")
+  @doc("Gets and sets the property amiLaunchIndex.<p>The AMI launch index, which can be used to find this instance in the launch group.</p>")
   amiLaunchIndex?: int32;
 
-  @doc("Gets and sets the property architecture. <p>The architecture of the image.</p>")
+  @doc("Gets and sets the property architecture.<p>The architecture of the image.</p>")
   architecture?: ArchitectureValuesEnumValue;
 
-  @doc("Gets and sets the property blockDeviceMappings. <p>Any block device mapping entries for the instance.</p>")
+  @doc("Gets and sets the property blockDeviceMappings.<p>Any block device mapping entries for the instance.</p>")
   @extension("x-ms-identifiers", [])
   blockDeviceMappings?: InstanceBlockDeviceMapping[];
 
-  @doc("Gets and sets the property bootMode. <p>The boot mode that was specified by the AMI. If the value is <code>uefi-preferred</code>, the AMI supports both UEFI and Legacy BIOS. The <code>currentInstanceBootMode</code> parameter is the boot mode that is used to boot the instance at launch or start.</p> <note> <p>The operating system contained in the AMI must be configured to support the specified boot mode.</p> </note> <p>For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
+  @doc("Gets and sets the property bootMode.<p>The boot mode that was specified by the AMI. If the value is <code>uefi-preferred</code>, the AMI supports both UEFI and Legacy BIOS. The <code>currentInstanceBootMode</code> parameter is the boot mode that is used to boot the instance at launch or start.</p> <note> <p>The operating system contained in the AMI must be configured to support the specified boot mode.</p> </note> <p>For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   bootMode?: BootModeValuesEnumValue;
 
-  @doc("Gets and sets the property capacityReservationId. <p>The ID of the Capacity Reservation.</p>")
+  @doc("Gets and sets the property capacityReservationId.<p>The ID of the Capacity Reservation.</p>")
   capacityReservationId?: string;
 
-  @doc("Gets and sets the property capacityReservationSpecification. <p>Information about the Capacity Reservation targeting option.</p>")
+  @doc("Gets and sets the property capacityReservationSpecification.<p>Information about the Capacity Reservation targeting option.</p>")
   capacityReservationSpecification?: CapacityReservationSpecificationResponse;
 
-  @doc("Gets and sets the property clientToken. <p>The idempotency token you provided when you launched the instance, if applicable.</p>")
+  @doc("Gets and sets the property clientToken.<p>The idempotency token you provided when you launched the instance, if applicable.</p>")
   clientToken?: string;
 
-  @doc("Gets and sets the property cpuOptions. <p>The CPU options for the instance.</p>")
+  @doc("Gets and sets the property cpuOptions.<p>The CPU options for the instance.</p>")
   cpuOptions?: CpuOptions;
 
-  @doc("Gets and sets the property currentInstanceBootMode. <p>The boot mode that is used to boot the instance at launch or start. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
+  @doc("Gets and sets the property currentInstanceBootMode.<p>The boot mode that is used to boot the instance at launch or start. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   currentInstanceBootMode?: InstanceBootModeValuesEnumValue;
 
-  @doc("Gets and sets the property ebsOptimized. <p>Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.</p>")
+  @doc("Gets and sets the property ebsOptimized.<p>Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.</p>")
   ebsOptimized?: boolean;
 
-  @doc("Gets and sets the property elasticGpuAssociations. <p>The Elastic GPU associated with the instance.</p>")
+  @doc("Gets and sets the property elasticGpuAssociations.<p>The Elastic GPU associated with the instance.</p>")
   @extension("x-ms-identifiers", [])
   elasticGpuAssociations?: ElasticGpuAssociation[];
 
-  @doc("Gets and sets the property elasticInferenceAcceleratorAssociations. <p>The elastic inference accelerator associated with the instance.</p>")
+  @doc("Gets and sets the property elasticInferenceAcceleratorAssociations.<p>The elastic inference accelerator associated with the instance.</p>")
   @extension("x-ms-identifiers", [])
   elasticInferenceAcceleratorAssociations?: ElasticInferenceAcceleratorAssociation[];
 
-  @doc("Gets and sets the property enaSupport. <p>Specifies whether enhanced networking with ENA is enabled.</p>")
+  @doc("Gets and sets the property enaSupport.<p>Specifies whether enhanced networking with ENA is enabled.</p>")
   enaSupport?: boolean;
 
-  @doc("Gets and sets the property enclaveOptions. <p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves.</p>")
+  @doc("Gets and sets the property enclaveOptions.<p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves.</p>")
   enclaveOptions?: EnclaveOptions;
 
-  @doc("Gets and sets the property hibernationOptions. <p>Indicates whether the instance is enabled for hibernation.</p>")
+  @doc("Gets and sets the property hibernationOptions.<p>Indicates whether the instance is enabled for hibernation.</p>")
   hibernationOptions?: HibernationOptions;
 
-  @doc("Gets and sets the property hypervisor. <p>The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.</p>")
+  @doc("Gets and sets the property hypervisor.<p>The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.</p>")
   hypervisor?: HypervisorTypeEnumValue;
 
-  @doc("Gets and sets the property iamInstanceProfile. <p>The IAM instance profile associated with the instance, if applicable.</p>")
+  @doc("Gets and sets the property iamInstanceProfile.<p>The IAM instance profile associated with the instance, if applicable.</p>")
   iamInstanceProfile?: IamInstanceProfile;
 
-  @doc("Gets and sets the property imageId. <p>The ID of the AMI used to launch the instance.</p>")
+  @doc("Gets and sets the property imageId.<p>The ID of the AMI used to launch the instance.</p>")
   imageId?: string;
 
-  @doc("Gets and sets the property instanceId. <p>The ID of the instance.</p>")
+  @doc("Gets and sets the property instanceId.<p>The ID of the instance.</p>")
   instanceId?: string;
 
-  @doc("Gets and sets the property instanceLifecycle. <p>Indicates whether this is a Spot Instance or a Scheduled Instance.</p>")
+  @doc("Gets and sets the property instanceLifecycle.<p>Indicates whether this is a Spot Instance or a Scheduled Instance.</p>")
   instanceLifecycle?: InstanceLifecycleTypeEnumValue;
 
-  @doc("Gets and sets the property instanceType. <p>The instance type.</p>")
+  @doc("Gets and sets the property instanceType.<p>The instance type.</p>")
   instanceType?: InstanceTypeEnumValue;
 
-  @doc("Gets and sets the property ipv6Address. <p>The IPv6 address assigned to the instance.</p>")
+  @doc("Gets and sets the property ipv6Address.<p>The IPv6 address assigned to the instance.</p>")
   ipv6Address?: string;
 
-  @doc("Gets and sets the property kernelId. <p>The kernel associated with this instance, if applicable.</p>")
+  @doc("Gets and sets the property kernelId.<p>The kernel associated with this instance, if applicable.</p>")
   kernelId?: string;
 
-  @doc("Gets and sets the property keyName. <p>The name of the key pair, if this instance was launched with an associated key pair.</p>")
+  @doc("Gets and sets the property keyName.<p>The name of the key pair, if this instance was launched with an associated key pair.</p>")
   keyName?: string;
 
-  @doc("Gets and sets the property launchTime. <p>The time the instance was launched.</p>")
+  @doc("Gets and sets the property launchTime.<p>The time the instance was launched.</p>")
   launchTime?: utcDateTime;
 
-  @doc("Gets and sets the property licenses. <p>The license configurations for the instance.</p>")
+  @doc("Gets and sets the property licenses.<p>The license configurations for the instance.</p>")
   @extension("x-ms-identifiers", [])
   licenses?: LicenseConfiguration[];
 
-  @doc("Gets and sets the property maintenanceOptions. <p>Provides information on the recovery and maintenance options of your instance.</p>")
+  @doc("Gets and sets the property maintenanceOptions.<p>Provides information on the recovery and maintenance options of your instance.</p>")
   maintenanceOptions?: InstanceMaintenanceOptions;
 
-  @doc("Gets and sets the property metadataOptions. <p>The metadata options for the instance.</p>")
+  @doc("Gets and sets the property metadataOptions.<p>The metadata options for the instance.</p>")
   metadataOptions?: InstanceMetadataOptionsResponse;
 
-  @doc("Gets and sets the property monitoring. <p>The monitoring for the instance.</p>")
+  @doc("Gets and sets the property monitoring.<p>The monitoring for the instance.</p>")
   monitoring?: Monitoring;
 
-  @doc("Gets and sets the property networkInterfaces. <p>The network interfaces for the instance.</p>")
+  @doc("Gets and sets the property networkInterfaces.<p>The network interfaces for the instance.</p>")
   @extension("x-ms-identifiers", [])
   networkInterfaces?: InstanceNetworkInterface[];
 
-  @doc("Gets and sets the property outpostArn. <p>The Amazon Resource Name (ARN) of the Outpost.</p>")
+  @doc("Gets and sets the property outpostArn.<p>The Amazon Resource Name (ARN) of the Outpost.</p>")
   outpostArn?: string;
 
-  @doc("Gets and sets the property placement. <p>The location where the instance launched, if applicable.</p>")
+  @doc("Gets and sets the property placement.<p>The location where the instance launched, if applicable.</p>")
   placement?: Placement;
 
-  @doc("Gets and sets the property platform. <p>The value is <code>Windows</code> for Windows instances; otherwise blank.</p>")
+  @doc("Gets and sets the property platform.<p>The value is <code>Windows</code> for Windows instances; otherwise blank.</p>")
   platform?: PlatformValuesEnumValue;
 
-  @doc("Gets and sets the property platformDetails. <p>The platform details value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>")
+  @doc("Gets and sets the property platformDetails.<p>The platform details value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   platformDetails?: string;
 
-  @doc("Gets and sets the property privateDnsName. <p>[IPv4 only] The private DNS hostname name assigned to the instance. This DNS hostname can only be used inside the Amazon EC2 network. This name is not available until the instance enters the <code>running</code> state. </p> <p>The Amazon-provided DNS server resolves Amazon-provided private DNS hostnames if you've enabled DNS resolution and DNS hostnames in your VPC. If you are not using the Amazon-provided DNS server in your VPC, your custom domain name servers must resolve the hostname as appropriate.</p>")
+  @doc("Gets and sets the property privateDnsName.<p>[IPv4 only] The private DNS hostname name assigned to the instance. This DNS hostname can only be used inside the Amazon EC2 network. This name is not available until the instance enters the <code>running</code> state. </p> <p>The Amazon-provided DNS server resolves Amazon-provided private DNS hostnames if you've enabled DNS resolution and DNS hostnames in your VPC. If you are not using the Amazon-provided DNS server in your VPC, your custom domain name servers must resolve the hostname as appropriate.</p>")
   privateDnsName?: string;
 
-  @doc("Gets and sets the property privateDnsNameOptions. <p>The options for the instance hostname.</p>")
+  @doc("Gets and sets the property privateDnsNameOptions.<p>The options for the instance hostname.</p>")
   privateDnsNameOptions?: PrivateDnsNameOptionsResponse;
 
-  @doc("Gets and sets the property privateIpAddress. <p>The private IPv4 address assigned to the instance.</p>")
+  @doc("Gets and sets the property privateIpAddress.<p>The private IPv4 address assigned to the instance.</p>")
   privateIpAddress?: string;
 
-  @doc("Gets and sets the property productCodes. <p>The product codes attached to this instance, if applicable.</p>")
+  @doc("Gets and sets the property productCodes.<p>The product codes attached to this instance, if applicable.</p>")
   @extension("x-ms-identifiers", [])
   productCodes?: ProductCode[];
 
-  @doc("Gets and sets the property publicDnsName. <p>[IPv4 only] The public DNS name assigned to the instance. This name is not available until the instance enters the <code>running</code> state. This name is only available if you've enabled DNS hostnames for your VPC.</p>")
+  @doc("Gets and sets the property publicDnsName.<p>[IPv4 only] The public DNS name assigned to the instance. This name is not available until the instance enters the <code>running</code> state. This name is only available if you've enabled DNS hostnames for your VPC.</p>")
   publicDnsName?: string;
 
-  @doc("Gets and sets the property publicIpAddress. <p>The public IPv4 address, or the Carrier IP address assigned to the instance, if applicable.</p> <p>A Carrier IP address only applies to an instance launched in a subnet associated with a Wavelength Zone.</p>")
+  @doc("Gets and sets the property publicIpAddress.<p>The public IPv4 address, or the Carrier IP address assigned to the instance, if applicable.</p> <p>A Carrier IP address only applies to an instance launched in a subnet associated with a Wavelength Zone.</p>")
   publicIpAddress?: string;
 
-  @doc("Gets and sets the property ramdiskId. <p>The RAM disk associated with this instance, if applicable.</p>")
+  @doc("Gets and sets the property ramdiskId.<p>The RAM disk associated with this instance, if applicable.</p>")
   ramdiskId?: string;
 
-  @doc("Gets and sets the property rootDeviceName. <p>The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>")
+  @doc("Gets and sets the property rootDeviceName.<p>The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>")
   rootDeviceName?: string;
 
-  @doc("Gets and sets the property rootDeviceType. <p>The root device type used by the AMI. The AMI can use an EBS volume or an instance store volume.</p>")
+  @doc("Gets and sets the property rootDeviceType.<p>The root device type used by the AMI. The AMI can use an EBS volume or an instance store volume.</p>")
   rootDeviceType?: DeviceTypeEnumValue;
 
-  @doc("Gets and sets the property securityGroups. <p>The security groups for the instance.</p>")
+  @doc("Gets and sets the property securityGroups.<p>The security groups for the instance.</p>")
   @extension("x-ms-identifiers", [])
   securityGroups?: GroupIdentifier[];
 
-  @doc("Gets and sets the property sourceDestCheck. <p>Indicates whether source/destination checking is enabled.</p>")
+  @doc("Gets and sets the property sourceDestCheck.<p>Indicates whether source/destination checking is enabled.</p>")
   sourceDestCheck?: boolean;
 
-  @doc("Gets and sets the property spotInstanceRequestId. <p>If the request is a Spot Instance request, the ID of the request.</p>")
+  @doc("Gets and sets the property spotInstanceRequestId.<p>If the request is a Spot Instance request, the ID of the request.</p>")
   spotInstanceRequestId?: string;
 
-  @doc("Gets and sets the property sriovNetSupport. <p>Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>")
+  @doc("Gets and sets the property sriovNetSupport.<p>Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>")
   sriovNetSupport?: string;
 
-  @doc("Gets and sets the property state. <p>The current state of the instance.</p>")
+  @doc("Gets and sets the property state.<p>The current state of the instance.</p>")
   state?: InstanceState;
 
-  @doc("Gets and sets the property stateReason. <p>The reason for the most recent state transition.</p>")
+  @doc("Gets and sets the property stateReason.<p>The reason for the most recent state transition.</p>")
   stateReason?: StateReason;
 
-  @doc("Gets and sets the property stateTransitionReason. <p>The reason for the most recent state transition. This might be an empty string.</p>")
+  @doc("Gets and sets the property stateTransitionReason.<p>The reason for the most recent state transition. This might be an empty string.</p>")
   stateTransitionReason?: string;
 
-  @doc("Gets and sets the property subnetId. <p>The ID of the subnet in which the instance is running.</p>")
+  @doc("Gets and sets the property subnetId.<p>The ID of the subnet in which the instance is running.</p>")
   subnetId?: string;
 
-  @doc("Gets and sets the property tags. <p>Any tags assigned to the instance.</p>")
+  @doc("Gets and sets the property tags.<p>Any tags assigned to the instance.</p>")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property tpmSupport. <p>If the instance is configured for NitroTPM support, the value is <code>v2.0</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html'>NitroTPM</a> in the <i>Amazon EC2 User Guide</i>.</p>")
+  @doc("Gets and sets the property tpmSupport.<p>If the instance is configured for NitroTPM support, the value is <code>v2.0</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html'>NitroTPM</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   tpmSupport?: string;
 
-  @doc("Gets and sets the property usageOperation. <p>The usage operation value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>")
+  @doc("Gets and sets the property usageOperation.<p>The usage operation value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   usageOperation?: string;
 
-  @doc("Gets and sets the property usageOperationUpdateTime. <p>The time that the usage operation was last updated.</p>")
+  @doc("Gets and sets the property usageOperationUpdateTime.<p>The time that the usage operation was last updated.</p>")
   usageOperationUpdateTime?: utcDateTime;
 
-  @doc("Gets and sets the property virtualizationType. <p>The virtualization type of the instance.</p>")
+  @doc("Gets and sets the property virtualizationType.<p>The virtualization type of the instance.</p>")
   virtualizationType?: VirtualizationTypeEnumValue;
 
-  @doc("Gets and sets the property vpcId. <p>The ID of the VPC in which the instance is running.</p>")
+  @doc("Gets and sets the property vpcId.<p>The ID of the VPC in which the instance is running.</p>")
   vpcId?: string;
 }
 
@@ -246,14 +251,14 @@ enum ArchitectureValues {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of ArchitectureValuesEnumValue")
 model ArchitectureValuesEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: ArchitectureValues;
 }
 
 @doc("InstanceBootModeValues enum")
 enum InstanceBootModeValues {
   @doc("InstanceBootModeValues enum legacy-bios")
-  Legacybios: "legacy-bios",
+  LegacyBios: "legacy-bios",
 
   @doc("InstanceBootModeValues enum uefi")
   Uefi: "uefi",
@@ -262,7 +267,7 @@ enum InstanceBootModeValues {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceBootModeValuesEnumValue")
 model InstanceBootModeValuesEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: InstanceBootModeValues;
 }
 
@@ -278,7 +283,7 @@ enum InstanceLifecycleType {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceLifecycleTypeEnumValue")
 model InstanceLifecycleTypeEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: InstanceLifecycleType;
 }
 
@@ -291,7 +296,7 @@ enum PlatformValues {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of PlatformValuesEnumValue")
 model PlatformValuesEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: PlatformValues;
 }
 
@@ -307,36 +312,36 @@ enum VirtualizationType {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of VirtualizationTypeEnumValue")
 model VirtualizationTypeEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: VirtualizationType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceBlockDeviceMapping")
 model InstanceBlockDeviceMapping {
-  @doc("Gets and sets the property deviceName. <p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>")
+  @doc("Gets and sets the property deviceName.<p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>")
   deviceName?: string;
 
-  @doc("Gets and sets the property ebs. <p>Parameters used to automatically set up EBS volumes when the instance is launched.</p>")
+  @doc("Gets and sets the property ebs.<p>Parameters used to automatically set up EBS volumes when the instance is launched.</p>")
   ebs?: EbsInstanceBlockDevice;
 }
 
 @doc("BootModeValues enum")
 enum BootModeValues {
   @doc("BootModeValues enum legacy-bios")
-  Legacybios: "legacy-bios",
+  LegacyBios: "legacy-bios",
 
   @doc("BootModeValues enum uefi")
   Uefi: "uefi",
 
   @doc("BootModeValues enum uefi-preferred")
-  Uefipreferred: "uefi-preferred",
+  UefiPreferred: "uefi-preferred",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of BootModeValuesEnumValue")
 model BootModeValuesEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: BootModeValues;
 }
 
@@ -349,22 +354,22 @@ enum InstanceType {
   A14xlarge: "a1.4xlarge",
 
   @doc("InstanceType enum a1.large")
-  A1large: "a1.large",
+  A1Large: "a1.large",
 
   @doc("InstanceType enum a1.medium")
-  A1medium: "a1.medium",
+  A1Medium: "a1.medium",
 
   @doc("InstanceType enum a1.metal")
-  A1metal: "a1.metal",
+  A1Metal: "a1.metal",
 
   @doc("InstanceType enum a1.xlarge")
-  A1xlarge: "a1.xlarge",
+  A1Xlarge: "a1.xlarge",
 
   @doc("InstanceType enum c1.medium")
-  C1medium: "c1.medium",
+  C1Medium: "c1.medium",
 
   @doc("InstanceType enum c1.xlarge")
-  C1xlarge: "c1.xlarge",
+  C1Xlarge: "c1.xlarge",
 
   @doc("InstanceType enum c3.2xlarge")
   C32xlarge: "c3.2xlarge",
@@ -376,10 +381,10 @@ enum InstanceType {
   C38xlarge: "c3.8xlarge",
 
   @doc("InstanceType enum c3.large")
-  C3large: "c3.large",
+  C3Large: "c3.large",
 
   @doc("InstanceType enum c3.xlarge")
-  C3xlarge: "c3.xlarge",
+  C3Xlarge: "c3.xlarge",
 
   @doc("InstanceType enum c4.2xlarge")
   C42xlarge: "c4.2xlarge",
@@ -391,10 +396,10 @@ enum InstanceType {
   C48xlarge: "c4.8xlarge",
 
   @doc("InstanceType enum c4.large")
-  C4large: "c4.large",
+  C4Large: "c4.large",
 
   @doc("InstanceType enum c4.xlarge")
-  C4xlarge: "c4.xlarge",
+  C4Xlarge: "c4.xlarge",
 
   @doc("InstanceType enum c5.12xlarge")
   C512xlarge: "c5.12xlarge",
@@ -415,13 +420,13 @@ enum InstanceType {
   C59xlarge: "c5.9xlarge",
 
   @doc("InstanceType enum c5.large")
-  C5large: "c5.large",
+  C5Large: "c5.large",
 
   @doc("InstanceType enum c5.metal")
-  C5metal: "c5.metal",
+  C5Metal: "c5.metal",
 
   @doc("InstanceType enum c5.xlarge")
-  C5xlarge: "c5.xlarge",
+  C5Xlarge: "c5.xlarge",
 
   @doc("InstanceType enum c5a.12xlarge")
   C5a12xlarge: "c5a.12xlarge",
@@ -442,10 +447,10 @@ enum InstanceType {
   C5a8xlarge: "c5a.8xlarge",
 
   @doc("InstanceType enum c5a.large")
-  C5alarge: "c5a.large",
+  C5aLarge: "c5a.large",
 
   @doc("InstanceType enum c5a.xlarge")
-  C5axlarge: "c5a.xlarge",
+  C5aXlarge: "c5a.xlarge",
 
   @doc("InstanceType enum c5ad.12xlarge")
   C5ad12xlarge: "c5ad.12xlarge",
@@ -466,10 +471,10 @@ enum InstanceType {
   C5ad8xlarge: "c5ad.8xlarge",
 
   @doc("InstanceType enum c5ad.large")
-  C5adlarge: "c5ad.large",
+  C5adLarge: "c5ad.large",
 
   @doc("InstanceType enum c5ad.xlarge")
-  C5adxlarge: "c5ad.xlarge",
+  C5adXlarge: "c5ad.xlarge",
 
   @doc("InstanceType enum c5d.12xlarge")
   C5d12xlarge: "c5d.12xlarge",
@@ -490,13 +495,13 @@ enum InstanceType {
   C5d9xlarge: "c5d.9xlarge",
 
   @doc("InstanceType enum c5d.large")
-  C5dlarge: "c5d.large",
+  C5dLarge: "c5d.large",
 
   @doc("InstanceType enum c5d.metal")
-  C5dmetal: "c5d.metal",
+  C5dMetal: "c5d.metal",
 
   @doc("InstanceType enum c5d.xlarge")
-  C5dxlarge: "c5d.xlarge",
+  C5dXlarge: "c5d.xlarge",
 
   @doc("InstanceType enum c5n.18xlarge")
   C5n18xlarge: "c5n.18xlarge",
@@ -511,13 +516,13 @@ enum InstanceType {
   C5n9xlarge: "c5n.9xlarge",
 
   @doc("InstanceType enum c5n.large")
-  C5nlarge: "c5n.large",
+  C5nLarge: "c5n.large",
 
   @doc("InstanceType enum c5n.metal")
-  C5nmetal: "c5n.metal",
+  C5nMetal: "c5n.metal",
 
   @doc("InstanceType enum c5n.xlarge")
-  C5nxlarge: "c5n.xlarge",
+  C5nXlarge: "c5n.xlarge",
 
   @doc("InstanceType enum c6a.12xlarge")
   C6a12xlarge: "c6a.12xlarge",
@@ -544,13 +549,13 @@ enum InstanceType {
   C6a8xlarge: "c6a.8xlarge",
 
   @doc("InstanceType enum c6a.large")
-  C6alarge: "c6a.large",
+  C6aLarge: "c6a.large",
 
   @doc("InstanceType enum c6a.metal")
-  C6ametal: "c6a.metal",
+  C6aMetal: "c6a.metal",
 
   @doc("InstanceType enum c6a.xlarge")
-  C6axlarge: "c6a.xlarge",
+  C6aXlarge: "c6a.xlarge",
 
   @doc("InstanceType enum c6g.12xlarge")
   C6g12xlarge: "c6g.12xlarge",
@@ -568,16 +573,16 @@ enum InstanceType {
   C6g8xlarge: "c6g.8xlarge",
 
   @doc("InstanceType enum c6g.large")
-  C6glarge: "c6g.large",
+  C6gLarge: "c6g.large",
 
   @doc("InstanceType enum c6g.medium")
-  C6gmedium: "c6g.medium",
+  C6gMedium: "c6g.medium",
 
   @doc("InstanceType enum c6g.metal")
-  C6gmetal: "c6g.metal",
+  C6gMetal: "c6g.metal",
 
   @doc("InstanceType enum c6g.xlarge")
-  C6gxlarge: "c6g.xlarge",
+  C6gXlarge: "c6g.xlarge",
 
   @doc("InstanceType enum c6gd.12xlarge")
   C6gd12xlarge: "c6gd.12xlarge",
@@ -595,16 +600,16 @@ enum InstanceType {
   C6gd8xlarge: "c6gd.8xlarge",
 
   @doc("InstanceType enum c6gd.large")
-  C6gdlarge: "c6gd.large",
+  C6gdLarge: "c6gd.large",
 
   @doc("InstanceType enum c6gd.medium")
-  C6gdmedium: "c6gd.medium",
+  C6gdMedium: "c6gd.medium",
 
   @doc("InstanceType enum c6gd.metal")
-  C6gdmetal: "c6gd.metal",
+  C6gdMetal: "c6gd.metal",
 
   @doc("InstanceType enum c6gd.xlarge")
-  C6gdxlarge: "c6gd.xlarge",
+  C6gdXlarge: "c6gd.xlarge",
 
   @doc("InstanceType enum c6gn.12xlarge")
   C6gn12xlarge: "c6gn.12xlarge",
@@ -622,13 +627,13 @@ enum InstanceType {
   C6gn8xlarge: "c6gn.8xlarge",
 
   @doc("InstanceType enum c6gn.large")
-  C6gnlarge: "c6gn.large",
+  C6gnLarge: "c6gn.large",
 
   @doc("InstanceType enum c6gn.medium")
-  C6gnmedium: "c6gn.medium",
+  C6gnMedium: "c6gn.medium",
 
   @doc("InstanceType enum c6gn.xlarge")
-  C6gnxlarge: "c6gn.xlarge",
+  C6gnXlarge: "c6gn.xlarge",
 
   @doc("InstanceType enum c6i.12xlarge")
   C6i12xlarge: "c6i.12xlarge",
@@ -652,13 +657,13 @@ enum InstanceType {
   C6i8xlarge: "c6i.8xlarge",
 
   @doc("InstanceType enum c6i.large")
-  C6ilarge: "c6i.large",
+  C6iLarge: "c6i.large",
 
   @doc("InstanceType enum c6i.metal")
-  C6imetal: "c6i.metal",
+  C6iMetal: "c6i.metal",
 
   @doc("InstanceType enum c6i.xlarge")
-  C6ixlarge: "c6i.xlarge",
+  C6iXlarge: "c6i.xlarge",
 
   @doc("InstanceType enum c6id.12xlarge")
   C6id12xlarge: "c6id.12xlarge",
@@ -682,13 +687,13 @@ enum InstanceType {
   C6id8xlarge: "c6id.8xlarge",
 
   @doc("InstanceType enum c6id.large")
-  C6idlarge: "c6id.large",
+  C6idLarge: "c6id.large",
 
   @doc("InstanceType enum c6id.metal")
-  C6idmetal: "c6id.metal",
+  C6idMetal: "c6id.metal",
 
   @doc("InstanceType enum c6id.xlarge")
-  C6idxlarge: "c6id.xlarge",
+  C6idXlarge: "c6id.xlarge",
 
   @doc("InstanceType enum c6in.12xlarge")
   C6in12xlarge: "c6in.12xlarge",
@@ -712,13 +717,13 @@ enum InstanceType {
   C6in8xlarge: "c6in.8xlarge",
 
   @doc("InstanceType enum c6in.large")
-  C6inlarge: "c6in.large",
+  C6inLarge: "c6in.large",
 
   @doc("InstanceType enum c6in.metal")
-  C6inmetal: "c6in.metal",
+  C6inMetal: "c6in.metal",
 
   @doc("InstanceType enum c6in.xlarge")
-  C6inxlarge: "c6in.xlarge",
+  C6inXlarge: "c6in.xlarge",
 
   @doc("InstanceType enum c7g.12xlarge")
   C7g12xlarge: "c7g.12xlarge",
@@ -736,16 +741,40 @@ enum InstanceType {
   C7g8xlarge: "c7g.8xlarge",
 
   @doc("InstanceType enum c7g.large")
-  C7glarge: "c7g.large",
+  C7gLarge: "c7g.large",
 
   @doc("InstanceType enum c7g.medium")
-  C7gmedium: "c7g.medium",
+  C7gMedium: "c7g.medium",
 
   @doc("InstanceType enum c7g.metal")
-  C7gmetal: "c7g.metal",
+  C7gMetal: "c7g.metal",
 
   @doc("InstanceType enum c7g.xlarge")
-  C7gxlarge: "c7g.xlarge",
+  C7gXlarge: "c7g.xlarge",
+
+  @doc("InstanceType enum c7gd.12xlarge")
+  C7gd12xlarge: "c7gd.12xlarge",
+
+  @doc("InstanceType enum c7gd.16xlarge")
+  C7gd16xlarge: "c7gd.16xlarge",
+
+  @doc("InstanceType enum c7gd.2xlarge")
+  C7gd2xlarge: "c7gd.2xlarge",
+
+  @doc("InstanceType enum c7gd.4xlarge")
+  C7gd4xlarge: "c7gd.4xlarge",
+
+  @doc("InstanceType enum c7gd.8xlarge")
+  C7gd8xlarge: "c7gd.8xlarge",
+
+  @doc("InstanceType enum c7gd.large")
+  C7gdLarge: "c7gd.large",
+
+  @doc("InstanceType enum c7gd.medium")
+  C7gdMedium: "c7gd.medium",
+
+  @doc("InstanceType enum c7gd.xlarge")
+  C7gdXlarge: "c7gd.xlarge",
 
   @doc("InstanceType enum c7gn.12xlarge")
   C7gn12xlarge: "c7gn.12xlarge",
@@ -763,13 +792,40 @@ enum InstanceType {
   C7gn8xlarge: "c7gn.8xlarge",
 
   @doc("InstanceType enum c7gn.large")
-  C7gnlarge: "c7gn.large",
+  C7gnLarge: "c7gn.large",
 
   @doc("InstanceType enum c7gn.medium")
-  C7gnmedium: "c7gn.medium",
+  C7gnMedium: "c7gn.medium",
 
   @doc("InstanceType enum c7gn.xlarge")
-  C7gnxlarge: "c7gn.xlarge",
+  C7gnXlarge: "c7gn.xlarge",
+
+  @doc("InstanceType enum c7i.12xlarge")
+  C7i12xlarge: "c7i.12xlarge",
+
+  @doc("InstanceType enum c7i.16xlarge")
+  C7i16xlarge: "c7i.16xlarge",
+
+  @doc("InstanceType enum c7i.24xlarge")
+  C7i24xlarge: "c7i.24xlarge",
+
+  @doc("InstanceType enum c7i.2xlarge")
+  C7i2xlarge: "c7i.2xlarge",
+
+  @doc("InstanceType enum c7i.48xlarge")
+  C7i48xlarge: "c7i.48xlarge",
+
+  @doc("InstanceType enum c7i.4xlarge")
+  C7i4xlarge: "c7i.4xlarge",
+
+  @doc("InstanceType enum c7i.8xlarge")
+  C7i8xlarge: "c7i.8xlarge",
+
+  @doc("InstanceType enum c7i.large")
+  C7iLarge: "c7i.large",
+
+  @doc("InstanceType enum c7i.xlarge")
+  C7iXlarge: "c7i.xlarge",
 
   @doc("InstanceType enum cc1.4xlarge")
   Cc14xlarge: "cc1.4xlarge",
@@ -793,7 +849,7 @@ enum InstanceType {
   D28xlarge: "d2.8xlarge",
 
   @doc("InstanceType enum d2.xlarge")
-  D2xlarge: "d2.xlarge",
+  D2Xlarge: "d2.xlarge",
 
   @doc("InstanceType enum d3.2xlarge")
   D32xlarge: "d3.2xlarge",
@@ -805,7 +861,7 @@ enum InstanceType {
   D38xlarge: "d3.8xlarge",
 
   @doc("InstanceType enum d3.xlarge")
-  D3xlarge: "d3.xlarge",
+  D3Xlarge: "d3.xlarge",
 
   @doc("InstanceType enum d3en.12xlarge")
   D3en12xlarge: "d3en.12xlarge",
@@ -823,7 +879,7 @@ enum InstanceType {
   D3en8xlarge: "d3en.8xlarge",
 
   @doc("InstanceType enum d3en.xlarge")
-  D3enxlarge: "d3en.xlarge",
+  D3enXlarge: "d3en.xlarge",
 
   @doc("InstanceType enum dl1.24xlarge")
   Dl124xlarge: "dl1.24xlarge",
@@ -853,7 +909,7 @@ enum InstanceType {
   G38xlarge: "g3.8xlarge",
 
   @doc("InstanceType enum g3s.xlarge")
-  G3sxlarge: "g3s.xlarge",
+  G3sXlarge: "g3s.xlarge",
 
   @doc("InstanceType enum g4ad.16xlarge")
   G4ad16xlarge: "g4ad.16xlarge",
@@ -868,7 +924,7 @@ enum InstanceType {
   G4ad8xlarge: "g4ad.8xlarge",
 
   @doc("InstanceType enum g4ad.xlarge")
-  G4adxlarge: "g4ad.xlarge",
+  G4adXlarge: "g4ad.xlarge",
 
   @doc("InstanceType enum g4dn.12xlarge")
   G4dn12xlarge: "g4dn.12xlarge",
@@ -886,10 +942,10 @@ enum InstanceType {
   G4dn8xlarge: "g4dn.8xlarge",
 
   @doc("InstanceType enum g4dn.metal")
-  G4dnmetal: "g4dn.metal",
+  G4dnMetal: "g4dn.metal",
 
   @doc("InstanceType enum g4dn.xlarge")
-  G4dnxlarge: "g4dn.xlarge",
+  G4dnXlarge: "g4dn.xlarge",
 
   @doc("InstanceType enum g5.12xlarge")
   G512xlarge: "g5.12xlarge",
@@ -913,7 +969,7 @@ enum InstanceType {
   G58xlarge: "g5.8xlarge",
 
   @doc("InstanceType enum g5.xlarge")
-  G5xlarge: "g5.xlarge",
+  G5Xlarge: "g5.xlarge",
 
   @doc("InstanceType enum g5g.16xlarge")
   G5g16xlarge: "g5g.16xlarge",
@@ -928,10 +984,10 @@ enum InstanceType {
   G5g8xlarge: "g5g.8xlarge",
 
   @doc("InstanceType enum g5g.metal")
-  G5gmetal: "g5g.metal",
+  G5gMetal: "g5g.metal",
 
   @doc("InstanceType enum g5g.xlarge")
-  G5gxlarge: "g5g.xlarge",
+  G5gXlarge: "g5g.xlarge",
 
   @doc("InstanceType enum h1.16xlarge")
   H116xlarge: "h1.16xlarge",
@@ -953,6 +1009,18 @@ enum InstanceType {
 
   @doc("InstanceType enum hpc6id.32xlarge")
   Hpc6id32xlarge: "hpc6id.32xlarge",
+
+  @doc("InstanceType enum hpc7a.12xlarge")
+  Hpc7a12xlarge: "hpc7a.12xlarge",
+
+  @doc("InstanceType enum hpc7a.24xlarge")
+  Hpc7a24xlarge: "hpc7a.24xlarge",
+
+  @doc("InstanceType enum hpc7a.48xlarge")
+  Hpc7a48xlarge: "hpc7a.48xlarge",
+
+  @doc("InstanceType enum hpc7a.96xlarge")
+  Hpc7a96xlarge: "hpc7a.96xlarge",
 
   @doc("InstanceType enum hpc7g.16xlarge")
   Hpc7g16xlarge: "hpc7g.16xlarge",
@@ -976,7 +1044,7 @@ enum InstanceType {
   I28xlarge: "i2.8xlarge",
 
   @doc("InstanceType enum i2.xlarge")
-  I2xlarge: "i2.xlarge",
+  I2Xlarge: "i2.xlarge",
 
   @doc("InstanceType enum i3.16xlarge")
   I316xlarge: "i3.16xlarge",
@@ -991,13 +1059,13 @@ enum InstanceType {
   I38xlarge: "i3.8xlarge",
 
   @doc("InstanceType enum i3.large")
-  I3large: "i3.large",
+  I3Large: "i3.large",
 
   @doc("InstanceType enum i3.metal")
-  I3metal: "i3.metal",
+  I3Metal: "i3.metal",
 
   @doc("InstanceType enum i3.xlarge")
-  I3xlarge: "i3.xlarge",
+  I3Xlarge: "i3.xlarge",
 
   @doc("InstanceType enum i3en.12xlarge")
   I3en12xlarge: "i3en.12xlarge",
@@ -1015,13 +1083,13 @@ enum InstanceType {
   I3en6xlarge: "i3en.6xlarge",
 
   @doc("InstanceType enum i3en.large")
-  I3enlarge: "i3en.large",
+  I3enLarge: "i3en.large",
 
   @doc("InstanceType enum i3en.metal")
-  I3enmetal: "i3en.metal",
+  I3enMetal: "i3en.metal",
 
   @doc("InstanceType enum i3en.xlarge")
-  I3enxlarge: "i3en.xlarge",
+  I3enXlarge: "i3en.xlarge",
 
   @doc("InstanceType enum i4g.16xlarge")
   I4g16xlarge: "i4g.16xlarge",
@@ -1036,10 +1104,10 @@ enum InstanceType {
   I4g8xlarge: "i4g.8xlarge",
 
   @doc("InstanceType enum i4g.large")
-  I4glarge: "i4g.large",
+  I4gLarge: "i4g.large",
 
   @doc("InstanceType enum i4g.xlarge")
-  I4gxlarge: "i4g.xlarge",
+  I4gXlarge: "i4g.xlarge",
 
   @doc("InstanceType enum i4i.16xlarge")
   I4i16xlarge: "i4i.16xlarge",
@@ -1057,13 +1125,13 @@ enum InstanceType {
   I4i8xlarge: "i4i.8xlarge",
 
   @doc("InstanceType enum i4i.large")
-  I4ilarge: "i4i.large",
+  I4iLarge: "i4i.large",
 
   @doc("InstanceType enum i4i.metal")
-  I4imetal: "i4i.metal",
+  I4iMetal: "i4i.metal",
 
   @doc("InstanceType enum i4i.xlarge")
-  I4ixlarge: "i4i.xlarge",
+  I4iXlarge: "i4i.xlarge",
 
   @doc("InstanceType enum im4gn.16xlarge")
   Im4gn16xlarge: "im4gn.16xlarge",
@@ -1078,10 +1146,10 @@ enum InstanceType {
   Im4gn8xlarge: "im4gn.8xlarge",
 
   @doc("InstanceType enum im4gn.large")
-  Im4gnlarge: "im4gn.large",
+  Im4gnLarge: "im4gn.large",
 
   @doc("InstanceType enum im4gn.xlarge")
-  Im4gnxlarge: "im4gn.xlarge",
+  Im4gnXlarge: "im4gn.xlarge",
 
   @doc("InstanceType enum inf1.24xlarge")
   Inf124xlarge: "inf1.24xlarge",
@@ -1093,7 +1161,7 @@ enum InstanceType {
   Inf16xlarge: "inf1.6xlarge",
 
   @doc("InstanceType enum inf1.xlarge")
-  Inf1xlarge: "inf1.xlarge",
+  Inf1Xlarge: "inf1.xlarge",
 
   @doc("InstanceType enum inf2.24xlarge")
   Inf224xlarge: "inf2.24xlarge",
@@ -1105,7 +1173,7 @@ enum InstanceType {
   Inf28xlarge: "inf2.8xlarge",
 
   @doc("InstanceType enum inf2.xlarge")
-  Inf2xlarge: "inf2.xlarge",
+  Inf2Xlarge: "inf2.xlarge",
 
   @doc("InstanceType enum is4gen.2xlarge")
   Is4gen2xlarge: "is4gen.2xlarge",
@@ -1117,25 +1185,25 @@ enum InstanceType {
   Is4gen8xlarge: "is4gen.8xlarge",
 
   @doc("InstanceType enum is4gen.large")
-  Is4genlarge: "is4gen.large",
+  Is4genLarge: "is4gen.large",
 
   @doc("InstanceType enum is4gen.medium")
-  Is4genmedium: "is4gen.medium",
+  Is4genMedium: "is4gen.medium",
 
   @doc("InstanceType enum is4gen.xlarge")
-  Is4genxlarge: "is4gen.xlarge",
+  Is4genXlarge: "is4gen.xlarge",
 
   @doc("InstanceType enum m1.large")
-  M1large: "m1.large",
+  M1Large: "m1.large",
 
   @doc("InstanceType enum m1.medium")
-  M1medium: "m1.medium",
+  M1Medium: "m1.medium",
 
   @doc("InstanceType enum m1.small")
-  M1small: "m1.small",
+  M1Small: "m1.small",
 
   @doc("InstanceType enum m1.xlarge")
-  M1xlarge: "m1.xlarge",
+  M1Xlarge: "m1.xlarge",
 
   @doc("InstanceType enum m2.2xlarge")
   M22xlarge: "m2.2xlarge",
@@ -1144,19 +1212,19 @@ enum InstanceType {
   M24xlarge: "m2.4xlarge",
 
   @doc("InstanceType enum m2.xlarge")
-  M2xlarge: "m2.xlarge",
+  M2Xlarge: "m2.xlarge",
 
   @doc("InstanceType enum m3.2xlarge")
   M32xlarge: "m3.2xlarge",
 
   @doc("InstanceType enum m3.large")
-  M3large: "m3.large",
+  M3Large: "m3.large",
 
   @doc("InstanceType enum m3.medium")
-  M3medium: "m3.medium",
+  M3Medium: "m3.medium",
 
   @doc("InstanceType enum m3.xlarge")
-  M3xlarge: "m3.xlarge",
+  M3Xlarge: "m3.xlarge",
 
   @doc("InstanceType enum m4.10xlarge")
   M410xlarge: "m4.10xlarge",
@@ -1171,10 +1239,10 @@ enum InstanceType {
   M44xlarge: "m4.4xlarge",
 
   @doc("InstanceType enum m4.large")
-  M4large: "m4.large",
+  M4Large: "m4.large",
 
   @doc("InstanceType enum m4.xlarge")
-  M4xlarge: "m4.xlarge",
+  M4Xlarge: "m4.xlarge",
 
   @doc("InstanceType enum m5.12xlarge")
   M512xlarge: "m5.12xlarge",
@@ -1195,13 +1263,13 @@ enum InstanceType {
   M58xlarge: "m5.8xlarge",
 
   @doc("InstanceType enum m5.large")
-  M5large: "m5.large",
+  M5Large: "m5.large",
 
   @doc("InstanceType enum m5.metal")
-  M5metal: "m5.metal",
+  M5Metal: "m5.metal",
 
   @doc("InstanceType enum m5.xlarge")
-  M5xlarge: "m5.xlarge",
+  M5Xlarge: "m5.xlarge",
 
   @doc("InstanceType enum m5a.12xlarge")
   M5a12xlarge: "m5a.12xlarge",
@@ -1222,10 +1290,10 @@ enum InstanceType {
   M5a8xlarge: "m5a.8xlarge",
 
   @doc("InstanceType enum m5a.large")
-  M5alarge: "m5a.large",
+  M5aLarge: "m5a.large",
 
   @doc("InstanceType enum m5a.xlarge")
-  M5axlarge: "m5a.xlarge",
+  M5aXlarge: "m5a.xlarge",
 
   @doc("InstanceType enum m5ad.12xlarge")
   M5ad12xlarge: "m5ad.12xlarge",
@@ -1246,10 +1314,10 @@ enum InstanceType {
   M5ad8xlarge: "m5ad.8xlarge",
 
   @doc("InstanceType enum m5ad.large")
-  M5adlarge: "m5ad.large",
+  M5adLarge: "m5ad.large",
 
   @doc("InstanceType enum m5ad.xlarge")
-  M5adxlarge: "m5ad.xlarge",
+  M5adXlarge: "m5ad.xlarge",
 
   @doc("InstanceType enum m5d.12xlarge")
   M5d12xlarge: "m5d.12xlarge",
@@ -1270,13 +1338,13 @@ enum InstanceType {
   M5d8xlarge: "m5d.8xlarge",
 
   @doc("InstanceType enum m5d.large")
-  M5dlarge: "m5d.large",
+  M5dLarge: "m5d.large",
 
   @doc("InstanceType enum m5d.metal")
-  M5dmetal: "m5d.metal",
+  M5dMetal: "m5d.metal",
 
   @doc("InstanceType enum m5d.xlarge")
-  M5dxlarge: "m5d.xlarge",
+  M5dXlarge: "m5d.xlarge",
 
   @doc("InstanceType enum m5dn.12xlarge")
   M5dn12xlarge: "m5dn.12xlarge",
@@ -1297,13 +1365,13 @@ enum InstanceType {
   M5dn8xlarge: "m5dn.8xlarge",
 
   @doc("InstanceType enum m5dn.large")
-  M5dnlarge: "m5dn.large",
+  M5dnLarge: "m5dn.large",
 
   @doc("InstanceType enum m5dn.metal")
-  M5dnmetal: "m5dn.metal",
+  M5dnMetal: "m5dn.metal",
 
   @doc("InstanceType enum m5dn.xlarge")
-  M5dnxlarge: "m5dn.xlarge",
+  M5dnXlarge: "m5dn.xlarge",
 
   @doc("InstanceType enum m5n.12xlarge")
   M5n12xlarge: "m5n.12xlarge",
@@ -1324,13 +1392,13 @@ enum InstanceType {
   M5n8xlarge: "m5n.8xlarge",
 
   @doc("InstanceType enum m5n.large")
-  M5nlarge: "m5n.large",
+  M5nLarge: "m5n.large",
 
   @doc("InstanceType enum m5n.metal")
-  M5nmetal: "m5n.metal",
+  M5nMetal: "m5n.metal",
 
   @doc("InstanceType enum m5n.xlarge")
-  M5nxlarge: "m5n.xlarge",
+  M5nXlarge: "m5n.xlarge",
 
   @doc("InstanceType enum m5zn.12xlarge")
   M5zn12xlarge: "m5zn.12xlarge",
@@ -1345,13 +1413,13 @@ enum InstanceType {
   M5zn6xlarge: "m5zn.6xlarge",
 
   @doc("InstanceType enum m5zn.large")
-  M5znlarge: "m5zn.large",
+  M5znLarge: "m5zn.large",
 
   @doc("InstanceType enum m5zn.metal")
-  M5znmetal: "m5zn.metal",
+  M5znMetal: "m5zn.metal",
 
   @doc("InstanceType enum m5zn.xlarge")
-  M5znxlarge: "m5zn.xlarge",
+  M5znXlarge: "m5zn.xlarge",
 
   @doc("InstanceType enum m6a.12xlarge")
   M6a12xlarge: "m6a.12xlarge",
@@ -1378,13 +1446,13 @@ enum InstanceType {
   M6a8xlarge: "m6a.8xlarge",
 
   @doc("InstanceType enum m6a.large")
-  M6alarge: "m6a.large",
+  M6aLarge: "m6a.large",
 
   @doc("InstanceType enum m6a.metal")
-  M6ametal: "m6a.metal",
+  M6aMetal: "m6a.metal",
 
   @doc("InstanceType enum m6a.xlarge")
-  M6axlarge: "m6a.xlarge",
+  M6aXlarge: "m6a.xlarge",
 
   @doc("InstanceType enum m6g.12xlarge")
   M6g12xlarge: "m6g.12xlarge",
@@ -1402,16 +1470,16 @@ enum InstanceType {
   M6g8xlarge: "m6g.8xlarge",
 
   @doc("InstanceType enum m6g.large")
-  M6glarge: "m6g.large",
+  M6gLarge: "m6g.large",
 
   @doc("InstanceType enum m6g.medium")
-  M6gmedium: "m6g.medium",
+  M6gMedium: "m6g.medium",
 
   @doc("InstanceType enum m6g.metal")
-  M6gmetal: "m6g.metal",
+  M6gMetal: "m6g.metal",
 
   @doc("InstanceType enum m6g.xlarge")
-  M6gxlarge: "m6g.xlarge",
+  M6gXlarge: "m6g.xlarge",
 
   @doc("InstanceType enum m6gd.12xlarge")
   M6gd12xlarge: "m6gd.12xlarge",
@@ -1429,16 +1497,16 @@ enum InstanceType {
   M6gd8xlarge: "m6gd.8xlarge",
 
   @doc("InstanceType enum m6gd.large")
-  M6gdlarge: "m6gd.large",
+  M6gdLarge: "m6gd.large",
 
   @doc("InstanceType enum m6gd.medium")
-  M6gdmedium: "m6gd.medium",
+  M6gdMedium: "m6gd.medium",
 
   @doc("InstanceType enum m6gd.metal")
-  M6gdmetal: "m6gd.metal",
+  M6gdMetal: "m6gd.metal",
 
   @doc("InstanceType enum m6gd.xlarge")
-  M6gdxlarge: "m6gd.xlarge",
+  M6gdXlarge: "m6gd.xlarge",
 
   @doc("InstanceType enum m6i.12xlarge")
   M6i12xlarge: "m6i.12xlarge",
@@ -1462,13 +1530,13 @@ enum InstanceType {
   M6i8xlarge: "m6i.8xlarge",
 
   @doc("InstanceType enum m6i.large")
-  M6ilarge: "m6i.large",
+  M6iLarge: "m6i.large",
 
   @doc("InstanceType enum m6i.metal")
-  M6imetal: "m6i.metal",
+  M6iMetal: "m6i.metal",
 
   @doc("InstanceType enum m6i.xlarge")
-  M6ixlarge: "m6i.xlarge",
+  M6iXlarge: "m6i.xlarge",
 
   @doc("InstanceType enum m6id.12xlarge")
   M6id12xlarge: "m6id.12xlarge",
@@ -1492,13 +1560,13 @@ enum InstanceType {
   M6id8xlarge: "m6id.8xlarge",
 
   @doc("InstanceType enum m6id.large")
-  M6idlarge: "m6id.large",
+  M6idLarge: "m6id.large",
 
   @doc("InstanceType enum m6id.metal")
-  M6idmetal: "m6id.metal",
+  M6idMetal: "m6id.metal",
 
   @doc("InstanceType enum m6id.xlarge")
-  M6idxlarge: "m6id.xlarge",
+  M6idXlarge: "m6id.xlarge",
 
   @doc("InstanceType enum m6idn.12xlarge")
   M6idn12xlarge: "m6idn.12xlarge",
@@ -1522,13 +1590,13 @@ enum InstanceType {
   M6idn8xlarge: "m6idn.8xlarge",
 
   @doc("InstanceType enum m6idn.large")
-  M6idnlarge: "m6idn.large",
+  M6idnLarge: "m6idn.large",
 
   @doc("InstanceType enum m6idn.metal")
-  M6idnmetal: "m6idn.metal",
+  M6idnMetal: "m6idn.metal",
 
   @doc("InstanceType enum m6idn.xlarge")
-  M6idnxlarge: "m6idn.xlarge",
+  M6idnXlarge: "m6idn.xlarge",
 
   @doc("InstanceType enum m6in.12xlarge")
   M6in12xlarge: "m6in.12xlarge",
@@ -1552,13 +1620,49 @@ enum InstanceType {
   M6in8xlarge: "m6in.8xlarge",
 
   @doc("InstanceType enum m6in.large")
-  M6inlarge: "m6in.large",
+  M6inLarge: "m6in.large",
 
   @doc("InstanceType enum m6in.metal")
-  M6inmetal: "m6in.metal",
+  M6inMetal: "m6in.metal",
 
   @doc("InstanceType enum m6in.xlarge")
-  M6inxlarge: "m6in.xlarge",
+  M6inXlarge: "m6in.xlarge",
+
+  @doc("InstanceType enum m7a.12xlarge")
+  M7a12xlarge: "m7a.12xlarge",
+
+  @doc("InstanceType enum m7a.16xlarge")
+  M7a16xlarge: "m7a.16xlarge",
+
+  @doc("InstanceType enum m7a.24xlarge")
+  M7a24xlarge: "m7a.24xlarge",
+
+  @doc("InstanceType enum m7a.2xlarge")
+  M7a2xlarge: "m7a.2xlarge",
+
+  @doc("InstanceType enum m7a.32xlarge")
+  M7a32xlarge: "m7a.32xlarge",
+
+  @doc("InstanceType enum m7a.48xlarge")
+  M7a48xlarge: "m7a.48xlarge",
+
+  @doc("InstanceType enum m7a.4xlarge")
+  M7a4xlarge: "m7a.4xlarge",
+
+  @doc("InstanceType enum m7a.8xlarge")
+  M7a8xlarge: "m7a.8xlarge",
+
+  @doc("InstanceType enum m7a.large")
+  M7aLarge: "m7a.large",
+
+  @doc("InstanceType enum m7a.medium")
+  M7aMedium: "m7a.medium",
+
+  @doc("InstanceType enum m7a.metal-48xl")
+  M7aMetal48xl: "m7a.metal-48xl",
+
+  @doc("InstanceType enum m7a.xlarge")
+  M7aXlarge: "m7a.xlarge",
 
   @doc("InstanceType enum m7g.12xlarge")
   M7g12xlarge: "m7g.12xlarge",
@@ -1576,22 +1680,91 @@ enum InstanceType {
   M7g8xlarge: "m7g.8xlarge",
 
   @doc("InstanceType enum m7g.large")
-  M7glarge: "m7g.large",
+  M7gLarge: "m7g.large",
 
   @doc("InstanceType enum m7g.medium")
-  M7gmedium: "m7g.medium",
+  M7gMedium: "m7g.medium",
 
   @doc("InstanceType enum m7g.metal")
-  M7gmetal: "m7g.metal",
+  M7gMetal: "m7g.metal",
 
   @doc("InstanceType enum m7g.xlarge")
-  M7gxlarge: "m7g.xlarge",
+  M7gXlarge: "m7g.xlarge",
+
+  @doc("InstanceType enum m7gd.12xlarge")
+  M7gd12xlarge: "m7gd.12xlarge",
+
+  @doc("InstanceType enum m7gd.16xlarge")
+  M7gd16xlarge: "m7gd.16xlarge",
+
+  @doc("InstanceType enum m7gd.2xlarge")
+  M7gd2xlarge: "m7gd.2xlarge",
+
+  @doc("InstanceType enum m7gd.4xlarge")
+  M7gd4xlarge: "m7gd.4xlarge",
+
+  @doc("InstanceType enum m7gd.8xlarge")
+  M7gd8xlarge: "m7gd.8xlarge",
+
+  @doc("InstanceType enum m7gd.large")
+  M7gdLarge: "m7gd.large",
+
+  @doc("InstanceType enum m7gd.medium")
+  M7gdMedium: "m7gd.medium",
+
+  @doc("InstanceType enum m7gd.xlarge")
+  M7gdXlarge: "m7gd.xlarge",
+
+  @doc("InstanceType enum m7i-flex.2xlarge")
+  M7iFlex2xlarge: "m7i-flex.2xlarge",
+
+  @doc("InstanceType enum m7i-flex.4xlarge")
+  M7iFlex4xlarge: "m7i-flex.4xlarge",
+
+  @doc("InstanceType enum m7i-flex.8xlarge")
+  M7iFlex8xlarge: "m7i-flex.8xlarge",
+
+  @doc("InstanceType enum m7i-flex.large")
+  M7iFlexLarge: "m7i-flex.large",
+
+  @doc("InstanceType enum m7i-flex.xlarge")
+  M7iFlexXlarge: "m7i-flex.xlarge",
+
+  @doc("InstanceType enum m7i.12xlarge")
+  M7i12xlarge: "m7i.12xlarge",
+
+  @doc("InstanceType enum m7i.16xlarge")
+  M7i16xlarge: "m7i.16xlarge",
+
+  @doc("InstanceType enum m7i.24xlarge")
+  M7i24xlarge: "m7i.24xlarge",
+
+  @doc("InstanceType enum m7i.2xlarge")
+  M7i2xlarge: "m7i.2xlarge",
+
+  @doc("InstanceType enum m7i.48xlarge")
+  M7i48xlarge: "m7i.48xlarge",
+
+  @doc("InstanceType enum m7i.4xlarge")
+  M7i4xlarge: "m7i.4xlarge",
+
+  @doc("InstanceType enum m7i.8xlarge")
+  M7i8xlarge: "m7i.8xlarge",
+
+  @doc("InstanceType enum m7i.large")
+  M7iLarge: "m7i.large",
+
+  @doc("InstanceType enum m7i.xlarge")
+  M7iXlarge: "m7i.xlarge",
 
   @doc("InstanceType enum mac1.metal")
-  Mac1metal: "mac1.metal",
+  Mac1Metal: "mac1.metal",
+
+  @doc("InstanceType enum mac2-m2pro.metal")
+  Mac2M2proMetal: "mac2-m2pro.metal",
 
   @doc("InstanceType enum mac2.metal")
-  Mac2metal: "mac2.metal",
+  Mac2Metal: "mac2.metal",
 
   @doc("InstanceType enum p2.16xlarge")
   P216xlarge: "p2.16xlarge",
@@ -1600,7 +1773,7 @@ enum InstanceType {
   P28xlarge: "p2.8xlarge",
 
   @doc("InstanceType enum p2.xlarge")
-  P2xlarge: "p2.xlarge",
+  P2Xlarge: "p2.xlarge",
 
   @doc("InstanceType enum p3.16xlarge")
   P316xlarge: "p3.16xlarge",
@@ -1620,6 +1793,9 @@ enum InstanceType {
   @doc("InstanceType enum p4de.24xlarge")
   P4de24xlarge: "p4de.24xlarge",
 
+  @doc("InstanceType enum p5.48xlarge")
+  P548xlarge: "p5.48xlarge",
+
   @doc("InstanceType enum r3.2xlarge")
   R32xlarge: "r3.2xlarge",
 
@@ -1630,10 +1806,10 @@ enum InstanceType {
   R38xlarge: "r3.8xlarge",
 
   @doc("InstanceType enum r3.large")
-  R3large: "r3.large",
+  R3Large: "r3.large",
 
   @doc("InstanceType enum r3.xlarge")
-  R3xlarge: "r3.xlarge",
+  R3Xlarge: "r3.xlarge",
 
   @doc("InstanceType enum r4.16xlarge")
   R416xlarge: "r4.16xlarge",
@@ -1648,10 +1824,10 @@ enum InstanceType {
   R48xlarge: "r4.8xlarge",
 
   @doc("InstanceType enum r4.large")
-  R4large: "r4.large",
+  R4Large: "r4.large",
 
   @doc("InstanceType enum r4.xlarge")
-  R4xlarge: "r4.xlarge",
+  R4Xlarge: "r4.xlarge",
 
   @doc("InstanceType enum r5.12xlarge")
   R512xlarge: "r5.12xlarge",
@@ -1672,13 +1848,13 @@ enum InstanceType {
   R58xlarge: "r5.8xlarge",
 
   @doc("InstanceType enum r5.large")
-  R5large: "r5.large",
+  R5Large: "r5.large",
 
   @doc("InstanceType enum r5.metal")
-  R5metal: "r5.metal",
+  R5Metal: "r5.metal",
 
   @doc("InstanceType enum r5.xlarge")
-  R5xlarge: "r5.xlarge",
+  R5Xlarge: "r5.xlarge",
 
   @doc("InstanceType enum r5a.12xlarge")
   R5a12xlarge: "r5a.12xlarge",
@@ -1699,10 +1875,10 @@ enum InstanceType {
   R5a8xlarge: "r5a.8xlarge",
 
   @doc("InstanceType enum r5a.large")
-  R5alarge: "r5a.large",
+  R5aLarge: "r5a.large",
 
   @doc("InstanceType enum r5a.xlarge")
-  R5axlarge: "r5a.xlarge",
+  R5aXlarge: "r5a.xlarge",
 
   @doc("InstanceType enum r5ad.12xlarge")
   R5ad12xlarge: "r5ad.12xlarge",
@@ -1723,10 +1899,10 @@ enum InstanceType {
   R5ad8xlarge: "r5ad.8xlarge",
 
   @doc("InstanceType enum r5ad.large")
-  R5adlarge: "r5ad.large",
+  R5adLarge: "r5ad.large",
 
   @doc("InstanceType enum r5ad.xlarge")
-  R5adxlarge: "r5ad.xlarge",
+  R5adXlarge: "r5ad.xlarge",
 
   @doc("InstanceType enum r5b.12xlarge")
   R5b12xlarge: "r5b.12xlarge",
@@ -1747,13 +1923,13 @@ enum InstanceType {
   R5b8xlarge: "r5b.8xlarge",
 
   @doc("InstanceType enum r5b.large")
-  R5blarge: "r5b.large",
+  R5bLarge: "r5b.large",
 
   @doc("InstanceType enum r5b.metal")
-  R5bmetal: "r5b.metal",
+  R5bMetal: "r5b.metal",
 
   @doc("InstanceType enum r5b.xlarge")
-  R5bxlarge: "r5b.xlarge",
+  R5bXlarge: "r5b.xlarge",
 
   @doc("InstanceType enum r5d.12xlarge")
   R5d12xlarge: "r5d.12xlarge",
@@ -1774,13 +1950,13 @@ enum InstanceType {
   R5d8xlarge: "r5d.8xlarge",
 
   @doc("InstanceType enum r5d.large")
-  R5dlarge: "r5d.large",
+  R5dLarge: "r5d.large",
 
   @doc("InstanceType enum r5d.metal")
-  R5dmetal: "r5d.metal",
+  R5dMetal: "r5d.metal",
 
   @doc("InstanceType enum r5d.xlarge")
-  R5dxlarge: "r5d.xlarge",
+  R5dXlarge: "r5d.xlarge",
 
   @doc("InstanceType enum r5dn.12xlarge")
   R5dn12xlarge: "r5dn.12xlarge",
@@ -1801,13 +1977,13 @@ enum InstanceType {
   R5dn8xlarge: "r5dn.8xlarge",
 
   @doc("InstanceType enum r5dn.large")
-  R5dnlarge: "r5dn.large",
+  R5dnLarge: "r5dn.large",
 
   @doc("InstanceType enum r5dn.metal")
-  R5dnmetal: "r5dn.metal",
+  R5dnMetal: "r5dn.metal",
 
   @doc("InstanceType enum r5dn.xlarge")
-  R5dnxlarge: "r5dn.xlarge",
+  R5dnXlarge: "r5dn.xlarge",
 
   @doc("InstanceType enum r5n.12xlarge")
   R5n12xlarge: "r5n.12xlarge",
@@ -1828,13 +2004,13 @@ enum InstanceType {
   R5n8xlarge: "r5n.8xlarge",
 
   @doc("InstanceType enum r5n.large")
-  R5nlarge: "r5n.large",
+  R5nLarge: "r5n.large",
 
   @doc("InstanceType enum r5n.metal")
-  R5nmetal: "r5n.metal",
+  R5nMetal: "r5n.metal",
 
   @doc("InstanceType enum r5n.xlarge")
-  R5nxlarge: "r5n.xlarge",
+  R5nXlarge: "r5n.xlarge",
 
   @doc("InstanceType enum r6a.12xlarge")
   R6a12xlarge: "r6a.12xlarge",
@@ -1861,13 +2037,13 @@ enum InstanceType {
   R6a8xlarge: "r6a.8xlarge",
 
   @doc("InstanceType enum r6a.large")
-  R6alarge: "r6a.large",
+  R6aLarge: "r6a.large",
 
   @doc("InstanceType enum r6a.metal")
-  R6ametal: "r6a.metal",
+  R6aMetal: "r6a.metal",
 
   @doc("InstanceType enum r6a.xlarge")
-  R6axlarge: "r6a.xlarge",
+  R6aXlarge: "r6a.xlarge",
 
   @doc("InstanceType enum r6g.12xlarge")
   R6g12xlarge: "r6g.12xlarge",
@@ -1885,16 +2061,16 @@ enum InstanceType {
   R6g8xlarge: "r6g.8xlarge",
 
   @doc("InstanceType enum r6g.large")
-  R6glarge: "r6g.large",
+  R6gLarge: "r6g.large",
 
   @doc("InstanceType enum r6g.medium")
-  R6gmedium: "r6g.medium",
+  R6gMedium: "r6g.medium",
 
   @doc("InstanceType enum r6g.metal")
-  R6gmetal: "r6g.metal",
+  R6gMetal: "r6g.metal",
 
   @doc("InstanceType enum r6g.xlarge")
-  R6gxlarge: "r6g.xlarge",
+  R6gXlarge: "r6g.xlarge",
 
   @doc("InstanceType enum r6gd.12xlarge")
   R6gd12xlarge: "r6gd.12xlarge",
@@ -1912,16 +2088,16 @@ enum InstanceType {
   R6gd8xlarge: "r6gd.8xlarge",
 
   @doc("InstanceType enum r6gd.large")
-  R6gdlarge: "r6gd.large",
+  R6gdLarge: "r6gd.large",
 
   @doc("InstanceType enum r6gd.medium")
-  R6gdmedium: "r6gd.medium",
+  R6gdMedium: "r6gd.medium",
 
   @doc("InstanceType enum r6gd.metal")
-  R6gdmetal: "r6gd.metal",
+  R6gdMetal: "r6gd.metal",
 
   @doc("InstanceType enum r6gd.xlarge")
-  R6gdxlarge: "r6gd.xlarge",
+  R6gdXlarge: "r6gd.xlarge",
 
   @doc("InstanceType enum r6i.12xlarge")
   R6i12xlarge: "r6i.12xlarge",
@@ -1945,13 +2121,13 @@ enum InstanceType {
   R6i8xlarge: "r6i.8xlarge",
 
   @doc("InstanceType enum r6i.large")
-  R6ilarge: "r6i.large",
+  R6iLarge: "r6i.large",
 
   @doc("InstanceType enum r6i.metal")
-  R6imetal: "r6i.metal",
+  R6iMetal: "r6i.metal",
 
   @doc("InstanceType enum r6i.xlarge")
-  R6ixlarge: "r6i.xlarge",
+  R6iXlarge: "r6i.xlarge",
 
   @doc("InstanceType enum r6id.12xlarge")
   R6id12xlarge: "r6id.12xlarge",
@@ -1975,13 +2151,13 @@ enum InstanceType {
   R6id8xlarge: "r6id.8xlarge",
 
   @doc("InstanceType enum r6id.large")
-  R6idlarge: "r6id.large",
+  R6idLarge: "r6id.large",
 
   @doc("InstanceType enum r6id.metal")
-  R6idmetal: "r6id.metal",
+  R6idMetal: "r6id.metal",
 
   @doc("InstanceType enum r6id.xlarge")
-  R6idxlarge: "r6id.xlarge",
+  R6idXlarge: "r6id.xlarge",
 
   @doc("InstanceType enum r6idn.12xlarge")
   R6idn12xlarge: "r6idn.12xlarge",
@@ -2005,13 +2181,13 @@ enum InstanceType {
   R6idn8xlarge: "r6idn.8xlarge",
 
   @doc("InstanceType enum r6idn.large")
-  R6idnlarge: "r6idn.large",
+  R6idnLarge: "r6idn.large",
 
   @doc("InstanceType enum r6idn.metal")
-  R6idnmetal: "r6idn.metal",
+  R6idnMetal: "r6idn.metal",
 
   @doc("InstanceType enum r6idn.xlarge")
-  R6idnxlarge: "r6idn.xlarge",
+  R6idnXlarge: "r6idn.xlarge",
 
   @doc("InstanceType enum r6in.12xlarge")
   R6in12xlarge: "r6in.12xlarge",
@@ -2035,13 +2211,46 @@ enum InstanceType {
   R6in8xlarge: "r6in.8xlarge",
 
   @doc("InstanceType enum r6in.large")
-  R6inlarge: "r6in.large",
+  R6inLarge: "r6in.large",
 
   @doc("InstanceType enum r6in.metal")
-  R6inmetal: "r6in.metal",
+  R6inMetal: "r6in.metal",
 
   @doc("InstanceType enum r6in.xlarge")
-  R6inxlarge: "r6in.xlarge",
+  R6inXlarge: "r6in.xlarge",
+
+  @doc("InstanceType enum r7a.12xlarge")
+  R7a12xlarge: "r7a.12xlarge",
+
+  @doc("InstanceType enum r7a.16xlarge")
+  R7a16xlarge: "r7a.16xlarge",
+
+  @doc("InstanceType enum r7a.24xlarge")
+  R7a24xlarge: "r7a.24xlarge",
+
+  @doc("InstanceType enum r7a.2xlarge")
+  R7a2xlarge: "r7a.2xlarge",
+
+  @doc("InstanceType enum r7a.32xlarge")
+  R7a32xlarge: "r7a.32xlarge",
+
+  @doc("InstanceType enum r7a.48xlarge")
+  R7a48xlarge: "r7a.48xlarge",
+
+  @doc("InstanceType enum r7a.4xlarge")
+  R7a4xlarge: "r7a.4xlarge",
+
+  @doc("InstanceType enum r7a.8xlarge")
+  R7a8xlarge: "r7a.8xlarge",
+
+  @doc("InstanceType enum r7a.large")
+  R7aLarge: "r7a.large",
+
+  @doc("InstanceType enum r7a.medium")
+  R7aMedium: "r7a.medium",
+
+  @doc("InstanceType enum r7a.xlarge")
+  R7aXlarge: "r7a.xlarge",
 
   @doc("InstanceType enum r7g.12xlarge")
   R7g12xlarge: "r7g.12xlarge",
@@ -2059,103 +2268,151 @@ enum InstanceType {
   R7g8xlarge: "r7g.8xlarge",
 
   @doc("InstanceType enum r7g.large")
-  R7glarge: "r7g.large",
+  R7gLarge: "r7g.large",
 
   @doc("InstanceType enum r7g.medium")
-  R7gmedium: "r7g.medium",
+  R7gMedium: "r7g.medium",
 
   @doc("InstanceType enum r7g.metal")
-  R7gmetal: "r7g.metal",
+  R7gMetal: "r7g.metal",
 
   @doc("InstanceType enum r7g.xlarge")
-  R7gxlarge: "r7g.xlarge",
+  R7gXlarge: "r7g.xlarge",
+
+  @doc("InstanceType enum r7gd.12xlarge")
+  R7gd12xlarge: "r7gd.12xlarge",
+
+  @doc("InstanceType enum r7gd.16xlarge")
+  R7gd16xlarge: "r7gd.16xlarge",
+
+  @doc("InstanceType enum r7gd.2xlarge")
+  R7gd2xlarge: "r7gd.2xlarge",
+
+  @doc("InstanceType enum r7gd.4xlarge")
+  R7gd4xlarge: "r7gd.4xlarge",
+
+  @doc("InstanceType enum r7gd.8xlarge")
+  R7gd8xlarge: "r7gd.8xlarge",
+
+  @doc("InstanceType enum r7gd.large")
+  R7gdLarge: "r7gd.large",
+
+  @doc("InstanceType enum r7gd.medium")
+  R7gdMedium: "r7gd.medium",
+
+  @doc("InstanceType enum r7gd.xlarge")
+  R7gdXlarge: "r7gd.xlarge",
+
+  @doc("InstanceType enum r7iz.12xlarge")
+  R7iz12xlarge: "r7iz.12xlarge",
+
+  @doc("InstanceType enum r7iz.16xlarge")
+  R7iz16xlarge: "r7iz.16xlarge",
+
+  @doc("InstanceType enum r7iz.2xlarge")
+  R7iz2xlarge: "r7iz.2xlarge",
+
+  @doc("InstanceType enum r7iz.32xlarge")
+  R7iz32xlarge: "r7iz.32xlarge",
+
+  @doc("InstanceType enum r7iz.4xlarge")
+  R7iz4xlarge: "r7iz.4xlarge",
+
+  @doc("InstanceType enum r7iz.8xlarge")
+  R7iz8xlarge: "r7iz.8xlarge",
+
+  @doc("InstanceType enum r7iz.large")
+  R7izLarge: "r7iz.large",
+
+  @doc("InstanceType enum r7iz.xlarge")
+  R7izXlarge: "r7iz.xlarge",
 
   @doc("InstanceType enum t1.micro")
-  T1micro: "t1.micro",
+  T1Micro: "t1.micro",
 
   @doc("InstanceType enum t2.2xlarge")
   T22xlarge: "t2.2xlarge",
 
   @doc("InstanceType enum t2.large")
-  T2large: "t2.large",
+  T2Large: "t2.large",
 
   @doc("InstanceType enum t2.medium")
-  T2medium: "t2.medium",
+  T2Medium: "t2.medium",
 
   @doc("InstanceType enum t2.micro")
-  T2micro: "t2.micro",
+  T2Micro: "t2.micro",
 
   @doc("InstanceType enum t2.nano")
-  T2nano: "t2.nano",
+  T2Nano: "t2.nano",
 
   @doc("InstanceType enum t2.small")
-  T2small: "t2.small",
+  T2Small: "t2.small",
 
   @doc("InstanceType enum t2.xlarge")
-  T2xlarge: "t2.xlarge",
+  T2Xlarge: "t2.xlarge",
 
   @doc("InstanceType enum t3.2xlarge")
   T32xlarge: "t3.2xlarge",
 
   @doc("InstanceType enum t3.large")
-  T3large: "t3.large",
+  T3Large: "t3.large",
 
   @doc("InstanceType enum t3.medium")
-  T3medium: "t3.medium",
+  T3Medium: "t3.medium",
 
   @doc("InstanceType enum t3.micro")
-  T3micro: "t3.micro",
+  T3Micro: "t3.micro",
 
   @doc("InstanceType enum t3.nano")
-  T3nano: "t3.nano",
+  T3Nano: "t3.nano",
 
   @doc("InstanceType enum t3.small")
-  T3small: "t3.small",
+  T3Small: "t3.small",
 
   @doc("InstanceType enum t3.xlarge")
-  T3xlarge: "t3.xlarge",
+  T3Xlarge: "t3.xlarge",
 
   @doc("InstanceType enum t3a.2xlarge")
   T3a2xlarge: "t3a.2xlarge",
 
   @doc("InstanceType enum t3a.large")
-  T3alarge: "t3a.large",
+  T3aLarge: "t3a.large",
 
   @doc("InstanceType enum t3a.medium")
-  T3amedium: "t3a.medium",
+  T3aMedium: "t3a.medium",
 
   @doc("InstanceType enum t3a.micro")
-  T3amicro: "t3a.micro",
+  T3aMicro: "t3a.micro",
 
   @doc("InstanceType enum t3a.nano")
-  T3anano: "t3a.nano",
+  T3aNano: "t3a.nano",
 
   @doc("InstanceType enum t3a.small")
-  T3asmall: "t3a.small",
+  T3aSmall: "t3a.small",
 
   @doc("InstanceType enum t3a.xlarge")
-  T3axlarge: "t3a.xlarge",
+  T3aXlarge: "t3a.xlarge",
 
   @doc("InstanceType enum t4g.2xlarge")
   T4g2xlarge: "t4g.2xlarge",
 
   @doc("InstanceType enum t4g.large")
-  T4glarge: "t4g.large",
+  T4gLarge: "t4g.large",
 
   @doc("InstanceType enum t4g.medium")
-  T4gmedium: "t4g.medium",
+  T4gMedium: "t4g.medium",
 
   @doc("InstanceType enum t4g.micro")
-  T4gmicro: "t4g.micro",
+  T4gMicro: "t4g.micro",
 
   @doc("InstanceType enum t4g.nano")
-  T4gnano: "t4g.nano",
+  T4gNano: "t4g.nano",
 
   @doc("InstanceType enum t4g.small")
-  T4gsmall: "t4g.small",
+  T4gSmall: "t4g.small",
 
   @doc("InstanceType enum t4g.xlarge")
-  T4gxlarge: "t4g.xlarge",
+  T4gXlarge: "t4g.xlarge",
 
   @doc("InstanceType enum trn1.2xlarge")
   Trn12xlarge: "trn1.2xlarge",
@@ -2170,19 +2427,19 @@ enum InstanceType {
   U12tb1112xlarge: "u-12tb1.112xlarge",
 
   @doc("InstanceType enum u-12tb1.metal")
-  U12tb1metal: "u-12tb1.metal",
+  U12tb1Metal: "u-12tb1.metal",
 
   @doc("InstanceType enum u-18tb1.112xlarge")
   U18tb1112xlarge: "u-18tb1.112xlarge",
 
   @doc("InstanceType enum u-18tb1.metal")
-  U18tb1metal: "u-18tb1.metal",
+  U18tb1Metal: "u-18tb1.metal",
 
   @doc("InstanceType enum u-24tb1.112xlarge")
   U24tb1112xlarge: "u-24tb1.112xlarge",
 
   @doc("InstanceType enum u-24tb1.metal")
-  U24tb1metal: "u-24tb1.metal",
+  U24tb1Metal: "u-24tb1.metal",
 
   @doc("InstanceType enum u-3tb1.56xlarge")
   U3tb156xlarge: "u-3tb1.56xlarge",
@@ -2194,13 +2451,13 @@ enum InstanceType {
   U6tb156xlarge: "u-6tb1.56xlarge",
 
   @doc("InstanceType enum u-6tb1.metal")
-  U6tb1metal: "u-6tb1.metal",
+  U6tb1Metal: "u-6tb1.metal",
 
   @doc("InstanceType enum u-9tb1.112xlarge")
   U9tb1112xlarge: "u-9tb1.112xlarge",
 
   @doc("InstanceType enum u-9tb1.metal")
-  U9tb1metal: "u-9tb1.metal",
+  U9tb1Metal: "u-9tb1.metal",
 
   @doc("InstanceType enum vt1.24xlarge")
   Vt124xlarge: "vt1.24xlarge",
@@ -2233,7 +2490,7 @@ enum InstanceType {
   X1e8xlarge: "x1e.8xlarge",
 
   @doc("InstanceType enum x1e.xlarge")
-  X1exlarge: "x1e.xlarge",
+  X1eXlarge: "x1e.xlarge",
 
   @doc("InstanceType enum x2gd.12xlarge")
   X2gd12xlarge: "x2gd.12xlarge",
@@ -2251,16 +2508,16 @@ enum InstanceType {
   X2gd8xlarge: "x2gd.8xlarge",
 
   @doc("InstanceType enum x2gd.large")
-  X2gdlarge: "x2gd.large",
+  X2gdLarge: "x2gd.large",
 
   @doc("InstanceType enum x2gd.medium")
-  X2gdmedium: "x2gd.medium",
+  X2gdMedium: "x2gd.medium",
 
   @doc("InstanceType enum x2gd.metal")
-  X2gdmetal: "x2gd.metal",
+  X2gdMetal: "x2gd.metal",
 
   @doc("InstanceType enum x2gd.xlarge")
-  X2gdxlarge: "x2gd.xlarge",
+  X2gdXlarge: "x2gd.xlarge",
 
   @doc("InstanceType enum x2idn.16xlarge")
   X2idn16xlarge: "x2idn.16xlarge",
@@ -2272,7 +2529,7 @@ enum InstanceType {
   X2idn32xlarge: "x2idn.32xlarge",
 
   @doc("InstanceType enum x2idn.metal")
-  X2idnmetal: "x2idn.metal",
+  X2idnMetal: "x2idn.metal",
 
   @doc("InstanceType enum x2iedn.16xlarge")
   X2iedn16xlarge: "x2iedn.16xlarge",
@@ -2293,10 +2550,10 @@ enum InstanceType {
   X2iedn8xlarge: "x2iedn.8xlarge",
 
   @doc("InstanceType enum x2iedn.metal")
-  X2iednmetal: "x2iedn.metal",
+  X2iednMetal: "x2iedn.metal",
 
   @doc("InstanceType enum x2iedn.xlarge")
-  X2iednxlarge: "x2iedn.xlarge",
+  X2iednXlarge: "x2iedn.xlarge",
 
   @doc("InstanceType enum x2iezn.12xlarge")
   X2iezn12xlarge: "x2iezn.12xlarge",
@@ -2314,7 +2571,7 @@ enum InstanceType {
   X2iezn8xlarge: "x2iezn.8xlarge",
 
   @doc("InstanceType enum x2iezn.metal")
-  X2ieznmetal: "x2iezn.metal",
+  X2ieznMetal: "x2iezn.metal",
 
   @doc("InstanceType enum z1d.12xlarge")
   Z1d12xlarge: "z1d.12xlarge",
@@ -2329,29 +2586,29 @@ enum InstanceType {
   Z1d6xlarge: "z1d.6xlarge",
 
   @doc("InstanceType enum z1d.large")
-  Z1dlarge: "z1d.large",
+  Z1dLarge: "z1d.large",
 
   @doc("InstanceType enum z1d.metal")
-  Z1dmetal: "z1d.metal",
+  Z1dMetal: "z1d.metal",
 
   @doc("InstanceType enum z1d.xlarge")
-  Z1dxlarge: "z1d.xlarge",
+  Z1dXlarge: "z1d.xlarge",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceTypeEnumValue")
 model InstanceTypeEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: InstanceType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of CapacityReservationSpecificationResponse")
 model CapacityReservationSpecificationResponse {
-  @doc("Gets and sets the property capacityReservationPreference. <p>Describes the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>")
+  @doc("Gets and sets the property capacityReservationPreference.<p>Describes the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>")
   capacityReservationPreference?: CapacityReservationPreferenceEnumValue;
 
-  @doc("Gets and sets the property capacityReservationTarget. <p>Information about the targeted Capacity Reservation or Capacity Reservation group.</p>")
+  @doc("Gets and sets the property capacityReservationTarget.<p>Information about the targeted Capacity Reservation or Capacity Reservation group.</p>")
   capacityReservationTarget?: CapacityReservationTargetResponse;
 }
 
@@ -2367,7 +2624,7 @@ enum HypervisorType {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of HypervisorTypeEnumValue")
 model HypervisorTypeEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: HypervisorType;
 }
 
@@ -2383,20 +2640,20 @@ enum CapacityReservationPreference {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of CapacityReservationPreferenceEnumValue")
 model CapacityReservationPreferenceEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: CapacityReservationPreference;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of CpuOptions")
 model CpuOptions {
-  @doc("Gets and sets the property amdSevSnp. <p>Indicates whether the instance is enabled for AMD SEV-SNP. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html'>AMD SEV-SNP</a>.</p>")
+  @doc("Gets and sets the property amdSevSnp.<p>Indicates whether the instance is enabled for AMD SEV-SNP. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html'>AMD SEV-SNP</a>.</p>")
   amdSevSnp?: AmdSevSnpSpecificationEnumValue;
 
-  @doc("Gets and sets the property coreCount. <p>The number of CPU cores for the instance.</p>")
+  @doc("Gets and sets the property coreCount.<p>The number of CPU cores for the instance.</p>")
   coreCount?: int32;
 
-  @doc("Gets and sets the property threadsPerCore. <p>The number of threads per CPU core.</p>")
+  @doc("Gets and sets the property threadsPerCore.<p>The number of threads per CPU core.</p>")
   threadsPerCore?: int32;
 }
 
@@ -2406,29 +2663,29 @@ enum DeviceType {
   Ebs: "ebs",
 
   @doc("DeviceType enum instance-store")
-  Instancestore: "instance-store",
+  InstanceStore: "instance-store",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of DeviceTypeEnumValue")
 model DeviceTypeEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: DeviceType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of ElasticGpuAssociation")
 model ElasticGpuAssociation {
-  @doc("Gets and sets the property elasticGpuAssociationId. <p>The ID of the association.</p>")
+  @doc("Gets and sets the property elasticGpuAssociationId.<p>The ID of the association.</p>")
   elasticGpuAssociationId?: string;
 
-  @doc("Gets and sets the property elasticGpuAssociationState. <p>The state of the association between the instance and the Elastic Graphics accelerator.</p>")
+  @doc("Gets and sets the property elasticGpuAssociationState.<p>The state of the association between the instance and the Elastic Graphics accelerator.</p>")
   elasticGpuAssociationState?: string;
 
-  @doc("Gets and sets the property elasticGpuAssociationTime. <p>The time the Elastic Graphics accelerator was associated with the instance.</p>")
+  @doc("Gets and sets the property elasticGpuAssociationTime.<p>The time the Elastic Graphics accelerator was associated with the instance.</p>")
   elasticGpuAssociationTime?: string;
 
-  @doc("Gets and sets the property elasticGpuId. <p>The ID of the Elastic Graphics accelerator.</p>")
+  @doc("Gets and sets the property elasticGpuId.<p>The ID of the Elastic Graphics accelerator.</p>")
   elasticGpuId?: string;
 }
 
@@ -2444,61 +2701,61 @@ enum AmdSevSnpSpecification {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of AmdSevSnpSpecificationEnumValue")
 model AmdSevSnpSpecificationEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: AmdSevSnpSpecification;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of ElasticInferenceAcceleratorAssociation")
 model ElasticInferenceAcceleratorAssociation {
-  @doc("Gets and sets the property elasticInferenceAcceleratorArn. <p> The Amazon Resource Name (ARN) of the elastic inference accelerator. </p>")
+  @doc("Gets and sets the property elasticInferenceAcceleratorArn.<p> The Amazon Resource Name (ARN) of the elastic inference accelerator. </p>")
   elasticInferenceAcceleratorArn?: string;
 
-  @doc("Gets and sets the property elasticInferenceAcceleratorAssociationId. <p> The ID of the association. </p>")
+  @doc("Gets and sets the property elasticInferenceAcceleratorAssociationId.<p> The ID of the association. </p>")
   elasticInferenceAcceleratorAssociationId?: string;
 
-  @doc("Gets and sets the property elasticInferenceAcceleratorAssociationState. <p> The state of the elastic inference accelerator. </p>")
+  @doc("Gets and sets the property elasticInferenceAcceleratorAssociationState.<p> The state of the elastic inference accelerator. </p>")
   elasticInferenceAcceleratorAssociationState?: string;
 
-  @doc("Gets and sets the property elasticInferenceAcceleratorAssociationTime. <p> The time at which the elastic inference accelerator is associated with an instance. </p>")
+  @doc("Gets and sets the property elasticInferenceAcceleratorAssociationTime.<p> The time at which the elastic inference accelerator is associated with an instance. </p>")
   elasticInferenceAcceleratorAssociationTime?: utcDateTime;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of EnclaveOptions")
 model EnclaveOptions {
-  @doc("Gets and sets the property enabled. <p>If this parameter is set to <code>true</code>, the instance is enabled for Amazon Web Services Nitro Enclaves; otherwise, it is not enabled for Amazon Web Services Nitro Enclaves.</p>")
+  @doc("Gets and sets the property enabled.<p>If this parameter is set to <code>true</code>, the instance is enabled for Amazon Web Services Nitro Enclaves; otherwise, it is not enabled for Amazon Web Services Nitro Enclaves.</p>")
   enabled?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of HibernationOptions")
 model HibernationOptions {
-  @doc("Gets and sets the property configured. <p>If <code>true</code>, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.</p>")
+  @doc("Gets and sets the property configured.<p>If <code>true</code>, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.</p>")
   configured?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of IamInstanceProfile")
 model IamInstanceProfile {
-  @doc("Gets and sets the property arn. <p>The Amazon Resource Name (ARN) of the instance profile.</p>")
+  @doc("Gets and sets the property arn.<p>The Amazon Resource Name (ARN) of the instance profile.</p>")
   arn?: string;
 
-  @doc("Gets and sets the property id. <p>The ID of the instance profile.</p>")
+  @doc("Gets and sets the property id.<p>The ID of the instance profile.</p>")
   id?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of LicenseConfiguration")
 model LicenseConfiguration {
-  @doc("Gets and sets the property licenseConfigurationArn. <p>The Amazon Resource Name (ARN) of the license configuration.</p>")
+  @doc("Gets and sets the property licenseConfigurationArn.<p>The Amazon Resource Name (ARN) of the license configuration.</p>")
   licenseConfigurationArn?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceMaintenanceOptions")
 model InstanceMaintenanceOptions {
-  @doc("Gets and sets the property autoRecovery. <p>Provides information on the current automatic recovery behavior of your instance.</p>")
+  @doc("Gets and sets the property autoRecovery.<p>Provides information on the current automatic recovery behavior of your instance.</p>")
   autoRecovery?: InstanceAutoRecoveryStateEnumValue;
 }
 
@@ -2514,29 +2771,29 @@ enum InstanceAutoRecoveryState {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceAutoRecoveryStateEnumValue")
 model InstanceAutoRecoveryStateEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: InstanceAutoRecoveryState;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceMetadataOptionsResponse")
 model InstanceMetadataOptionsResponse {
-  @doc("Gets and sets the property httpEndpoint. <p>Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.</p> <p>If the value is <code>disabled</code>, you cannot access your instance metadata.</p>")
+  @doc("Gets and sets the property httpEndpoint.<p>Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.</p> <p>If the value is <code>disabled</code>, you cannot access your instance metadata.</p>")
   httpEndpoint?: InstanceMetadataEndpointStateEnumValue;
 
-  @doc("Gets and sets the property httpProtocolIpv6. <p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>")
+  @doc("Gets and sets the property httpProtocolIpv6.<p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>")
   httpProtocolIpv6?: InstanceMetadataProtocolStateEnumValue;
 
-  @doc("Gets and sets the property httpPutResponseHopLimit. <p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p> <p>Default: 1</p> <p>Possible values: Integers from 1 to 64</p>")
+  @doc("Gets and sets the property httpPutResponseHopLimit.<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p> <p>Default: 1</p> <p>Possible values: Integers from 1 to 64</p>")
   httpPutResponseHopLimit?: int32;
 
-  @doc("Gets and sets the property httpTokens. <p>IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP tokens is <code>optional</code> (in other words, indicates whether the use of IMDSv2 is <code>optional</code>) or <code>required</code> (in other words, indicates whether the use of IMDSv2 is <code>required</code>).</p> <ul> <li> <p> <code>optional</code> - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.</p> </li> <li> <p> <code>required</code> - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.</p> </li> </ul> <p>Default: <code>optional</code> </p>")
+  @doc("Gets and sets the property httpTokens.<p>IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP tokens is <code>optional</code> (in other words, indicates whether the use of IMDSv2 is <code>optional</code>) or <code>required</code> (in other words, indicates whether the use of IMDSv2 is <code>required</code>).</p> <ul> <li> <p> <code>optional</code> - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.</p> </li> <li> <p> <code>required</code> - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.</p> </li> </ul> <p>Default: <code>optional</code> </p>")
   httpTokens?: HttpTokensStateEnumValue;
 
-  @doc("Gets and sets the property instanceMetadataTags. <p>Indicates whether access to instance tags from the instance metadata is enabled or disabled. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS'>Work with instance tags using the instance metadata</a>.</p>")
+  @doc("Gets and sets the property instanceMetadataTags.<p>Indicates whether access to instance tags from the instance metadata is enabled or disabled. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS'>Work with instance tags using the instance metadata</a>.</p>")
   instanceMetadataTags?: InstanceMetadataTagsStateEnumValue;
 
-  @doc("Gets and sets the property state. <p>The state of the metadata option changes.</p> <p> <code>pending</code> - The metadata options are being updated and the instance is not ready to process metadata traffic with the new selection.</p> <p> <code>applied</code> - The metadata options have been successfully applied on the instance.</p>")
+  @doc("Gets and sets the property state.<p>The state of the metadata option changes.</p> <p> <code>pending</code> - The metadata options are being updated and the instance is not ready to process metadata traffic with the new selection.</p> <p> <code>applied</code> - The metadata options have been successfully applied on the instance.</p>")
   state?: InstanceMetadataOptionsStateEnumValue;
 }
 
@@ -2552,7 +2809,7 @@ enum InstanceMetadataEndpointState {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceMetadataEndpointStateEnumValue")
 model InstanceMetadataEndpointStateEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: InstanceMetadataEndpointState;
 }
 
@@ -2568,7 +2825,7 @@ enum HttpTokensState {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of HttpTokensStateEnumValue")
 model HttpTokensStateEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: HttpTokensState;
 }
 
@@ -2584,14 +2841,14 @@ enum InstanceMetadataOptionsState {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceMetadataOptionsStateEnumValue")
 model InstanceMetadataOptionsStateEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: InstanceMetadataOptionsState;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of Monitoring")
 model Monitoring {
-  @doc("Gets and sets the property state. <p>Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.</p>")
+  @doc("Gets and sets the property state.<p>Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.</p>")
   state?: MonitoringStateEnumValue;
 }
 
@@ -2607,7 +2864,7 @@ enum InstanceMetadataProtocolState {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceMetadataProtocolStateEnumValue")
 model InstanceMetadataProtocolStateEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: InstanceMetadataProtocolState;
 }
 
@@ -2629,70 +2886,70 @@ enum MonitoringState {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of MonitoringStateEnumValue")
 model MonitoringStateEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: MonitoringState;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceNetworkInterface")
 model InstanceNetworkInterface {
-  @doc("Gets and sets the property association. <p>The association information for an Elastic IPv4 associated with the network interface.</p>")
+  @doc("Gets and sets the property association.<p>The association information for an Elastic IPv4 associated with the network interface.</p>")
   association?: InstanceNetworkInterfaceAssociation;
 
-  @doc("Gets and sets the property attachment. <p>The network interface attachment.</p>")
+  @doc("Gets and sets the property attachment.<p>The network interface attachment.</p>")
   attachment?: InstanceNetworkInterfaceAttachment;
 
-  @doc("Gets and sets the property description. <p>The description.</p>")
+  @doc("Gets and sets the property description.<p>The description.</p>")
   description?: string;
 
-  @doc("Gets and sets the property groups. <p>The security groups.</p>")
+  @doc("Gets and sets the property groups.<p>The security groups.</p>")
   @extension("x-ms-identifiers", [])
   groups?: GroupIdentifier[];
 
-  @doc("Gets and sets the property interfaceType. <p>The type of network interface.</p> <p>Valid values: <code>interface</code> | <code>efa</code> | <code>trunk</code> </p>")
+  @doc("Gets and sets the property interfaceType.<p>The type of network interface.</p> <p>Valid values: <code>interface</code> | <code>efa</code> | <code>trunk</code> </p>")
   interfaceType?: string;
 
-  @doc("Gets and sets the property ipv4Prefixes. <p>The IPv4 delegated prefixes that are assigned to the network interface.</p>")
+  @doc("Gets and sets the property ipv4Prefixes.<p>The IPv4 delegated prefixes that are assigned to the network interface.</p>")
   @extension("x-ms-identifiers", [])
   ipv4Prefixes?: InstanceIpv4Prefix[];
 
-  @doc("Gets and sets the property ipv6Addresses. <p>The IPv6 addresses associated with the network interface.</p>")
+  @doc("Gets and sets the property ipv6Addresses.<p>The IPv6 addresses associated with the network interface.</p>")
   @extension("x-ms-identifiers", [])
   ipv6Addresses?: InstanceIpv6Address[];
 
-  @doc("Gets and sets the property ipv6Prefixes. <p>The IPv6 delegated prefixes that are assigned to the network interface.</p>")
+  @doc("Gets and sets the property ipv6Prefixes.<p>The IPv6 delegated prefixes that are assigned to the network interface.</p>")
   @extension("x-ms-identifiers", [])
   ipv6Prefixes?: InstanceIpv6Prefix[];
 
-  @doc("Gets and sets the property macAddress. <p>The MAC address.</p>")
+  @doc("Gets and sets the property macAddress.<p>The MAC address.</p>")
   macAddress?: string;
 
-  @doc("Gets and sets the property networkInterfaceId. <p>The ID of the network interface.</p>")
+  @doc("Gets and sets the property networkInterfaceId.<p>The ID of the network interface.</p>")
   networkInterfaceId?: string;
 
-  @doc("Gets and sets the property ownerId. <p>The ID of the Amazon Web Services account that created the network interface.</p>")
+  @doc("Gets and sets the property ownerId.<p>The ID of the Amazon Web Services account that created the network interface.</p>")
   ownerId?: string;
 
-  @doc("Gets and sets the property privateDnsName. <p>The private DNS name.</p>")
+  @doc("Gets and sets the property privateDnsName.<p>The private DNS name.</p>")
   privateDnsName?: string;
 
-  @doc("Gets and sets the property privateIpAddress. <p>The IPv4 address of the network interface within the subnet.</p>")
+  @doc("Gets and sets the property privateIpAddress.<p>The IPv4 address of the network interface within the subnet.</p>")
   privateIpAddress?: string;
 
-  @doc("Gets and sets the property privateIpAddresses. <p>The private IPv4 addresses associated with the network interface.</p>")
+  @doc("Gets and sets the property privateIpAddresses.<p>The private IPv4 addresses associated with the network interface.</p>")
   @extension("x-ms-identifiers", [])
   privateIpAddresses?: InstancePrivateIpAddress[];
 
-  @doc("Gets and sets the property sourceDestCheck. <p>Indicates whether source/destination checking is enabled.</p>")
+  @doc("Gets and sets the property sourceDestCheck.<p>Indicates whether source/destination checking is enabled.</p>")
   sourceDestCheck?: boolean;
 
-  @doc("Gets and sets the property status. <p>The status of the network interface.</p>")
+  @doc("Gets and sets the property status.<p>The status of the network interface.</p>")
   status?: NetworkInterfaceStatusEnumValue;
 
-  @doc("Gets and sets the property subnetId. <p>The ID of the subnet.</p>")
+  @doc("Gets and sets the property subnetId.<p>The ID of the subnet.</p>")
   subnetId?: string;
 
-  @doc("Gets and sets the property vpcId. <p>The ID of the VPC.</p>")
+  @doc("Gets and sets the property vpcId.<p>The ID of the VPC.</p>")
   vpcId?: string;
 }
 
@@ -2708,38 +2965,38 @@ enum InstanceMetadataTagsState {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceMetadataTagsStateEnumValue")
 model InstanceMetadataTagsStateEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: InstanceMetadataTagsState;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of Placement")
 model Placement {
-  @doc("Gets and sets the property affinity. <p>The affinity setting for the instance on the Dedicated Host.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>")
+  @doc("Gets and sets the property affinity.<p>The affinity setting for the instance on the Dedicated Host.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>")
   affinity?: string;
 
-  @doc("Gets and sets the property availabilityZone. <p>The Availability Zone of the instance.</p> <p>If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
+  @doc("Gets and sets the property availabilityZone.<p>The Availability Zone of the instance.</p> <p>If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
   availabilityZone?: string;
 
-  @doc("Gets and sets the property groupId. <p>The ID of the placement group that the instance is in. If you specify <code>GroupId</code>, you can't specify <code>GroupName</code>.</p>")
+  @doc("Gets and sets the property groupId.<p>The ID of the placement group that the instance is in. If you specify <code>GroupId</code>, you can't specify <code>GroupName</code>.</p>")
   groupId?: string;
 
-  @doc("Gets and sets the property groupName. <p>The name of the placement group that the instance is in. If you specify <code>GroupName</code>, you can't specify <code>GroupId</code>.</p>")
+  @doc("Gets and sets the property groupName.<p>The name of the placement group that the instance is in. If you specify <code>GroupName</code>, you can't specify <code>GroupId</code>.</p>")
   groupName?: string;
 
-  @doc("Gets and sets the property hostId. <p>The ID of the Dedicated Host on which the instance resides.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>")
+  @doc("Gets and sets the property hostId.<p>The ID of the Dedicated Host on which the instance resides.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>")
   hostId?: string;
 
-  @doc("Gets and sets the property hostResourceGroupArn. <p>The ARN of the host resource group in which to launch the instances.</p> <p>If you specify this parameter, either omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
+  @doc("Gets and sets the property hostResourceGroupArn.<p>The ARN of the host resource group in which to launch the instances.</p> <p>If you specify this parameter, either omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
   hostResourceGroupArn?: string;
 
-  @doc("Gets and sets the property partitionNumber. <p>The number of the partition that the instance is in. Valid only if the placement group strategy is set to <code>partition</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
+  @doc("Gets and sets the property partitionNumber.<p>The number of the partition that the instance is in. Valid only if the placement group strategy is set to <code>partition</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
   partitionNumber?: int32;
 
-  @doc("Gets and sets the property spreadDomain. <p>Reserved for future use.</p>")
+  @doc("Gets and sets the property spreadDomain.<p>Reserved for future use.</p>")
   spreadDomain?: string;
 
-  @doc("Gets and sets the property tenancy. <p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>. The <code>host</code> tenancy is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a> or for T3 instances that are configured for the <code>unlimited</code> CPU credit option.</p>")
+  @doc("Gets and sets the property tenancy.<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>. The <code>host</code> tenancy is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a> or for T3 instances that are configured for the <code>unlimited</code> CPU credit option.</p>")
   tenancy?: TenancyEnumValue;
 }
 
@@ -2758,26 +3015,26 @@ enum NetworkInterfaceStatus {
   Detaching: "detaching",
 
   @doc("NetworkInterfaceStatus enum in-use")
-  Inuse: "in-use",
+  InUse: "in-use",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of NetworkInterfaceStatusEnumValue")
 model NetworkInterfaceStatusEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: NetworkInterfaceStatus;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of PrivateDnsNameOptionsResponse")
 model PrivateDnsNameOptionsResponse {
-  @doc("Gets and sets the property enableResourceNameDnsAAAARecord. <p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>")
+  @doc("Gets and sets the property enableResourceNameDnsAAAARecord.<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>")
   enableResourceNameDnsAAAARecord?: boolean;
 
-  @doc("Gets and sets the property enableResourceNameDnsARecord. <p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>")
+  @doc("Gets and sets the property enableResourceNameDnsARecord.<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>")
   enableResourceNameDnsARecord?: boolean;
 
-  @doc("Gets and sets the property hostnameType. <p>The type of hostname to assign to an instance.</p>")
+  @doc("Gets and sets the property hostnameType.<p>The type of hostname to assign to an instance.</p>")
   hostnameType?: HostnameTypeEnumValue;
 }
 
@@ -2796,43 +3053,43 @@ enum Tenancy {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of TenancyEnumValue")
 model TenancyEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: Tenancy;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of ProductCode")
 model ProductCode {
-  @doc("Gets and sets the property productCodeId. <p>The product code.</p>")
+  @doc("Gets and sets the property productCodeId.<p>The product code.</p>")
   productCodeId?: string;
 
-  @doc("Gets and sets the property productCodeType. <p>The type of product code.</p>")
+  @doc("Gets and sets the property productCodeType.<p>The type of product code.</p>")
   productCodeType?: ProductCodeValuesEnumValue;
 }
 
 @doc("HostnameType enum")
 enum HostnameType {
   @doc("HostnameType enum ip-name")
-  Ipname: "ip-name",
+  IpName: "ip-name",
 
   @doc("HostnameType enum resource-name")
-  Resourcename: "resource-name",
+  ResourceName: "resource-name",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of HostnameTypeEnumValue")
 model HostnameTypeEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: HostnameType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of GroupIdentifier")
 model GroupIdentifier {
-  @doc("Gets and sets the property groupId. <p>The ID of the security group.</p>")
+  @doc("Gets and sets the property groupId.<p>The ID of the security group.</p>")
   groupId?: string;
 
-  @doc("Gets and sets the property groupName. <p>The name of the security group.</p>")
+  @doc("Gets and sets the property groupName.<p>The name of the security group.</p>")
   groupName?: string;
 }
 
@@ -2848,17 +3105,17 @@ enum ProductCodeValues {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of ProductCodeValuesEnumValue")
 model ProductCodeValuesEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: ProductCodeValues;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceState")
 model InstanceState {
-  @doc("Gets and sets the property code. <p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>")
+  @doc("Gets and sets the property code.<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>")
   code?: int32;
 
-  @doc("Gets and sets the property name. <p>The current state of the instance.</p>")
+  @doc("Gets and sets the property name.<p>The current state of the instance.</p>")
   name?: InstanceStateNameEnumValue;
 }
 
@@ -2871,7 +3128,7 @@ enum InstanceStateName {
   Running: "running",
 
   @doc("InstanceStateName enum shutting-down")
-  Shuttingdown: "shutting-down",
+  ShuttingDown: "shutting-down",
 
   @doc("InstanceStateName enum stopped")
   Stopped: "stopped",
@@ -2886,43 +3143,43 @@ enum InstanceStateName {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceStateNameEnumValue")
 model InstanceStateNameEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: InstanceStateName;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of StateReason")
 model StateReason {
-  @doc("Gets and sets the property code. <p>The reason code for the state change.</p>")
+  @doc("Gets and sets the property code.<p>The reason code for the state change.</p>")
   code?: string;
 
-  @doc("Gets and sets the property message. <p>The message for the state change.</p> <ul> <li> <p> <code>Server.InsufficientInstanceCapacity</code>: There was insufficient capacity available to satisfy the launch request.</p> </li> <li> <p> <code>Server.InternalError</code>: An internal error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Server.ScheduledStop</code>: The instance was stopped due to a scheduled retirement.</p> </li> <li> <p> <code>Server.SpotInstanceShutdown</code>: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Server.SpotInstanceTermination</code>: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Client.InstanceInitiatedShutdown</code>: The instance was shut down using the <code>shutdown -h</code> command from the instance.</p> </li> <li> <p> <code>Client.InstanceTerminated</code>: The instance was terminated or rebooted during AMI creation.</p> </li> <li> <p> <code>Client.InternalError</code>: A client error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Client.InvalidSnapshot.NotFound</code>: The specified snapshot was not found.</p> </li> <li> <p> <code>Client.UserInitiatedHibernate</code>: Hibernation was initiated on the instance.</p> </li> <li> <p> <code>Client.UserInitiatedShutdown</code>: The instance was shut down using the Amazon EC2 API.</p> </li> <li> <p> <code>Client.VolumeLimitExceeded</code>: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.</p> </li> </ul>")
+  @doc("Gets and sets the property message.<p>The message for the state change.</p> <ul> <li> <p> <code>Server.InsufficientInstanceCapacity</code>: There was insufficient capacity available to satisfy the launch request.</p> </li> <li> <p> <code>Server.InternalError</code>: An internal error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Server.ScheduledStop</code>: The instance was stopped due to a scheduled retirement.</p> </li> <li> <p> <code>Server.SpotInstanceShutdown</code>: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Server.SpotInstanceTermination</code>: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Client.InstanceInitiatedShutdown</code>: The instance was shut down using the <code>shutdown -h</code> command from the instance.</p> </li> <li> <p> <code>Client.InstanceTerminated</code>: The instance was terminated or rebooted during AMI creation.</p> </li> <li> <p> <code>Client.InternalError</code>: A client error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Client.InvalidSnapshot.NotFound</code>: The specified snapshot was not found.</p> </li> <li> <p> <code>Client.UserInitiatedHibernate</code>: Hibernation was initiated on the instance.</p> </li> <li> <p> <code>Client.UserInitiatedShutdown</code>: The instance was shut down using the Amazon EC2 API.</p> </li> <li> <p> <code>Client.VolumeLimitExceeded</code>: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.</p> </li> </ul>")
   message?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. <p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>")
+  @doc("Gets and sets the property key.<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>")
   key?: string;
 
-  @doc("Gets and sets the property value. <p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>")
+  @doc("Gets and sets the property value.<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>")
   value?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of EbsInstanceBlockDevice")
 model EbsInstanceBlockDevice {
-  @doc("Gets and sets the property attachTime. <p>The time stamp when the attachment initiated.</p>")
+  @doc("Gets and sets the property attachTime.<p>The time stamp when the attachment initiated.</p>")
   attachTime?: utcDateTime;
 
-  @doc("Gets and sets the property deleteOnTermination. <p>Indicates whether the volume is deleted on instance termination.</p>")
+  @doc("Gets and sets the property deleteOnTermination.<p>Indicates whether the volume is deleted on instance termination.</p>")
   deleteOnTermination?: boolean;
 
-  @doc("Gets and sets the property status. <p>The attachment state.</p>")
+  @doc("Gets and sets the property status.<p>The attachment state.</p>")
   status?: AttachmentStatusEnumValue;
 
-  @doc("Gets and sets the property volumeId. <p>The ID of the EBS volume.</p>")
+  @doc("Gets and sets the property volumeId.<p>The ID of the EBS volume.</p>")
   volumeId?: string;
 }
 
@@ -2944,109 +3201,113 @@ enum AttachmentStatus {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of AttachmentStatusEnumValue")
 model AttachmentStatusEnumValue {
-  @doc("Gets and sets the property value. ")
+  @doc("Gets and sets the property value.")
   value?: AttachmentStatus;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of CapacityReservationTargetResponse")
 model CapacityReservationTargetResponse {
-  @doc("Gets and sets the property capacityReservationId. <p>The ID of the targeted Capacity Reservation.</p>")
+  @doc("Gets and sets the property capacityReservationId.<p>The ID of the targeted Capacity Reservation.</p>")
   capacityReservationId?: string;
 
-  @doc("Gets and sets the property capacityReservationResourceGroupArn. <p>The ARN of the targeted Capacity Reservation group.</p>")
+  @doc("Gets and sets the property capacityReservationResourceGroupArn.<p>The ARN of the targeted Capacity Reservation group.</p>")
   capacityReservationResourceGroupArn?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceNetworkInterfaceAssociation")
 model InstanceNetworkInterfaceAssociation {
-  @doc("Gets and sets the property carrierIp. <p>The carrier IP address associated with the network interface.</p>")
+  @doc("Gets and sets the property carrierIp.<p>The carrier IP address associated with the network interface.</p>")
   carrierIp?: string;
 
-  @doc("Gets and sets the property customerOwnedIp. <p>The customer-owned IP address associated with the network interface.</p>")
+  @doc("Gets and sets the property customerOwnedIp.<p>The customer-owned IP address associated with the network interface.</p>")
   customerOwnedIp?: string;
 
-  @doc("Gets and sets the property ipOwnerId. <p>The ID of the owner of the Elastic IP address.</p>")
+  @doc("Gets and sets the property ipOwnerId.<p>The ID of the owner of the Elastic IP address.</p>")
   ipOwnerId?: string;
 
-  @doc("Gets and sets the property publicDnsName. <p>The public DNS name.</p>")
+  @doc("Gets and sets the property publicDnsName.<p>The public DNS name.</p>")
   publicDnsName?: string;
 
-  @doc("Gets and sets the property publicIp. <p>The public IP address or Elastic IP address bound to the network interface.</p>")
+  @doc("Gets and sets the property publicIp.<p>The public IP address or Elastic IP address bound to the network interface.</p>")
   publicIp?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceNetworkInterfaceAttachment")
 model InstanceNetworkInterfaceAttachment {
-  @doc("Gets and sets the property attachTime. <p>The time stamp when the attachment initiated.</p>")
+  @doc("Gets and sets the property attachTime.<p>The time stamp when the attachment initiated.</p>")
   attachTime?: utcDateTime;
 
-  @doc("Gets and sets the property attachmentId. <p>The ID of the network interface attachment.</p>")
+  @doc("Gets and sets the property attachmentId.<p>The ID of the network interface attachment.</p>")
   attachmentId?: string;
 
-  @doc("Gets and sets the property deleteOnTermination. <p>Indicates whether the network interface is deleted when the instance is terminated.</p>")
+  @doc("Gets and sets the property deleteOnTermination.<p>Indicates whether the network interface is deleted when the instance is terminated.</p>")
   deleteOnTermination?: boolean;
 
-  @doc("Gets and sets the property deviceIndex. <p>The index of the device on the instance for the network interface attachment.</p>")
+  @doc("Gets and sets the property deviceIndex.<p>The index of the device on the instance for the network interface attachment.</p>")
   deviceIndex?: int32;
 
-  @doc("Gets and sets the property networkCardIndex. <p>The index of the network card.</p>")
+  @doc("Gets and sets the property networkCardIndex.<p>The index of the network card.</p>")
   networkCardIndex?: int32;
 
-  @doc("Gets and sets the property status. <p>The attachment state.</p>")
+  @doc("Gets and sets the property status.<p>The attachment state.</p>")
   status?: AttachmentStatusEnumValue;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceIpv4Prefix")
 model InstanceIpv4Prefix {
-  @doc("Gets and sets the property ipv4Prefix. <p>One or more IPv4 prefixes assigned to the network interface.</p>")
+  @doc("Gets and sets the property ipv4Prefix.<p>One or more IPv4 prefixes assigned to the network interface.</p>")
   ipv4Prefix?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceIpv6Address")
 model InstanceIpv6Address {
-  @doc("Gets and sets the property ipv6Address. <p>The IPv6 address.</p>")
+  @doc("Gets and sets the property ipv6Address.<p>The IPv6 address.</p>")
   ipv6Address?: string;
+
+  @doc("Gets and sets the property isPrimaryIpv6.<p>Determines if an IPv6 address associated with a network interface is the primary IPv6 address. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html'>RunInstances</a>.</p>")
+  isPrimaryIpv6?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstanceIpv6Prefix")
 model InstanceIpv6Prefix {
-  @doc("Gets and sets the property ipv6Prefix. <p>One or more IPv6 prefixes assigned to the network interface.</p>")
+  @doc("Gets and sets the property ipv6Prefix.<p>One or more IPv6 prefixes assigned to the network interface.</p>")
   ipv6Prefix?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 @doc("Definition of InstancePrivateIpAddress")
 model InstancePrivateIpAddress {
-  @doc("Gets and sets the property association. <p>The association information for an Elastic IP address for the network interface.</p>")
+  @doc("Gets and sets the property association.<p>The association information for an Elastic IP address for the network interface.</p>")
   association?: InstanceNetworkInterfaceAssociation;
 
-  @doc("Gets and sets the property primary. <p>Indicates whether this IPv4 address is the primary private IP address of the network interface.</p>")
+  @doc("Gets and sets the property primary.<p>Indicates whether this IPv4 address is the primary private IP address of the network interface.</p>")
   primary?: boolean;
 
-  @doc("Gets and sets the property privateDnsName. <p>The private IPv4 DNS name.</p>")
+  @doc("Gets and sets the property privateDnsName.<p>The private IPv4 DNS name.</p>")
   privateDnsName?: string;
 
-  @doc("Gets and sets the property privateIpAddress. <p>The private IPv4 address of the network interface.</p>")
+  @doc("Gets and sets the property privateIpAddress.<p>The private IPv4 address of the network interface.</p>")
   privateIpAddress?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
 @armResourceOperations
 interface Ec2Instances {
   get is ArmResourceRead<Ec2Instance>;
   @doc("Create a Ec2Instance. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Ec2Instance>;
-  delete is ArmResourceDeleteAsync<Ec2Instance>;
+  delete is ArmResourceDeleteWithoutOkAsync<Ec2Instance>;
   list is ArmResourceListByParent<Ec2Instance>;
 }
 
 //--------------------------------------------------------------------------------------------
-// This TypeSpec was auto genrated by aws2TypeSpec.js tool
+// This TypeSpec was auto genrated by aws2SwaggerMain.js tool
 //
 // Input used to generate TypeSpec:
 // AWS Service Model: generator\ServiceModels\ec2\ec2-2016-11-15.normal.json
@@ -3054,6 +3315,6 @@ interface Ec2Instances {
 //
 // Related information for backend service:
 // AWS Servcie : EC2
-// Product Version : 3.7.601.0
-// SDK Version : 3.7.200.1
+// Product Version : 3.7.660.0
+// SDK Version : 3.7.219.0
 //--------------------------------------------------------------------------------------------

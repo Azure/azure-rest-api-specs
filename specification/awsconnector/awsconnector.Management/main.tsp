@@ -16,10 +16,11 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft.AwsConnector",
-  version: "2023-12-01-preview",
+  version: "2024-08-01-preview",
 })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AwsConnector;
 
 interface Operations extends Azure.ResourceManager.Operations {}
