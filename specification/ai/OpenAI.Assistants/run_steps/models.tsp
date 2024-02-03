@@ -110,7 +110,7 @@ model RunStepToolCallDetails extends RunStepDetails {
 
   @projectedName("json", "tool_calls")
   @doc("A list of tool call details for this run step.")
-  toolCalls: ToolCall[];
+  toolCalls: RunStepToolCall[];
 }
 
 @doc("The details of a message created as a part of a run step.")
