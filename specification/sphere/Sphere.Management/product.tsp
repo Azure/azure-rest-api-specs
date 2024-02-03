@@ -77,8 +77,9 @@ interface Products extends ProxyResourceOperationsProducts<Product> {
 
 @doc("The properties of product")
 model ProductProperties {
+  @madeOptional(Versions.v2024_04_01)
   @doc("Description of the product")
-  description: string;
+  description?: string;
 
   @visibility("read")
   @doc("The status of the last operation.")

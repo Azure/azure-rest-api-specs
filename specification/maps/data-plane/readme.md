@@ -43,9 +43,6 @@ directive:
     where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get
     reason: The reason for this suppression is the API is already released and introducing new LRO properties will not function and are not supported today and will only be developed for the next version of this API.
 
-  - suppress: INVALID_TYPE
-    reason: false positive from oav is breaking our example validation. See azure/oav#1020.
-
   - suppress: RESPONSE_SCHEMA_NOT_IN_SPEC
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
 
