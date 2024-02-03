@@ -100,6 +100,7 @@ These settings apply only when `--package-2024-02-01-preview` is specified on th
 ```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
   - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicyAssignment.json
   - Microsoft.Authorization/preview/2024-02-01-preview/common-types.json
 ```
 ### Tag: package-2022-05-01-preview-only
