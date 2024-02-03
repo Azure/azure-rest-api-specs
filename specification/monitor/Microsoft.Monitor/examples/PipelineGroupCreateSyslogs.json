@@ -1,5 +1,5 @@
 {
-  "title": "Create a PipelineGroup instance using UDP receiver",
+  "title": "Create a PipelineGroup instance using a syslog receiver",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -19,15 +19,19 @@
       "properties": {
         "receivers": [
           {
-            "type": "UDP",
-            "name": "udp-receiver1",
-            "udp": {
-              "endpoint": "0.0.0.0:518",
-              "encoding": "utf-8"
+            "type": "Syslog",
+            "name": "syslog-receiver1",
+            "syslog": {
+              "endpoint": "0.0.0.0:514"
             }
           }
         ],
-        "processors": [],
+        "processors": [
+          {
+            "type": "Batch",
+            "name": "batch-processor1"
+          }
+        ],
         "exporters": [
           {
             "type": "AzureMonitorWorkspaceLogs",
@@ -35,7 +39,7 @@
             "azureMonitorWorkspaceLogs": {
               "api": {
                 "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                "stream": "Custom-MyTableRawData",
+                "stream": "Custom-MyTableRawData_CL",
                 "dataCollectionRule": "dcr-00000000000000000000000000000000",
                 "schema": {
                   "recordMap": [
@@ -55,9 +59,8 @@
                 }
               },
               "concurrency": {
-                "fixedCount": 10,
-                "payloadQueueSize": 100,
-                "logQueueSize": 100
+                "workerCount": 4,
+                "batchQueueSize": 100
               }
             }
           }
@@ -67,9 +70,11 @@
             {
               "name": "MyPipelineForLogs1",
               "receivers": [
-                "udp-receiver1"
+                "syslog-receiver1"
               ],
-              "processors": [],
+              "processors": [
+                "batch-processor1"
+              ],
               "exporters": [
                 "my-workspace-logs-exporter1"
               ]
@@ -98,15 +103,19 @@
           "provisioningState": "Accepted",
           "receivers": [
             {
-              "type": "UDP",
-              "name": "udp-receiver1",
-              "udp": {
-                "endpoint": "0.0.0.0:518",
-                "encoding": "utf-8"
+              "type": "Syslog",
+              "name": "syslog-receiver1",
+              "syslog": {
+                "endpoint": "0.0.0.0:514"
               }
             }
           ],
-          "processors": [],
+          "processors": [
+            {
+              "type": "Batch",
+              "name": "batch-processor1"
+            }
+          ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
@@ -114,7 +123,7 @@
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-MyTableRawData",
+                  "stream": "Custom-MyTableRawData_CL",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
@@ -134,9 +143,8 @@
                   }
                 },
                 "concurrency": {
-                  "fixedCount": 10,
-                  "payloadQueueSize": 100,
-                  "logQueueSize": 100
+                  "workerCount": 4,
+                  "batchQueueSize": 100
                 }
               }
             }
@@ -146,9 +154,11 @@
               {
                 "name": "MyPipelineForLogs1",
                 "receivers": [
-                  "udp-receiver1"
+                  "syslog-receiver1"
                 ],
-                "processors": [],
+                "processors": [
+                  "batch-processor1"
+                ],
                 "exporters": [
                   "my-workspace-logs-exporter1"
                 ]
@@ -159,10 +169,10 @@
         "systemData": {
           "createdBy": "myuser@myorg.com",
           "createdByType": "User",
-          "createdAt": "2023-11-17T18:48:39.6050449Z",
+          "createdAt": "2023-10-02T18:48:39.6050449Z",
           "lastModifiedBy": "myuser@myorg.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-11-17T18:48:39.6050449Z"
+          "lastModifiedAt": "2023-10-02T18:48:39.6050449Z"
         }
       }
     },
@@ -184,15 +194,19 @@
           "provisioningState": "Succeeded",
           "receivers": [
             {
-              "type": "UDP",
-              "name": "udp-receiver1",
-              "udp": {
-                "endpoint": "0.0.0.0:518",
-                "encoding": "utf-8"
+              "type": "Syslog",
+              "name": "syslog-receiver1",
+              "syslog": {
+                "endpoint": "0.0.0.0:514"
               }
             }
           ],
-          "processors": [],
+          "processors": [
+            {
+              "type": "Batch",
+              "name": "batch-processor1"
+            }
+          ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
@@ -200,7 +214,7 @@
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-MyTableRawData",
+                  "stream": "Custom-MyTableRawData_CL",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
@@ -220,9 +234,8 @@
                   }
                 },
                 "concurrency": {
-                  "fixedCount": 10,
-                  "payloadQueueSize": 100,
-                  "logQueueSize": 100
+                  "workerCount": 4,
+                  "batchQueueSize": 100
                 }
               }
             }
@@ -232,9 +245,11 @@
               {
                 "name": "MyPipelineForLogs1",
                 "receivers": [
-                  "udp-receiver1"
+                  "syslog-receiver1"
                 ],
-                "processors": [],
+                "processors": [
+                  "batch-processor1"
+                ],
                 "exporters": [
                   "my-workspace-logs-exporter1"
                 ]
@@ -245,10 +260,10 @@
         "systemData": {
           "createdBy": "myuser@myorg.com",
           "createdByType": "User",
-          "createdAt": "2023-11-17T18:48:39.6050449Z",
+          "createdAt": "2023-10-02T18:48:39.6050449Z",
           "lastModifiedBy": "myuser@myorg.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-11-17T18:48:39.6050449Z"
+          "lastModifiedAt": "2023-10-02T18:48:39.6050449Z"
         }
       }
     }

@@ -13,6 +13,9 @@ model AzureMonitorWorkspaceLogsExporter {
 
   @doc("Concurrency configuration for the exporter.")
   concurrency?: ConcurrencyConfiguration;
+
+  @doc("Cache configurations.")
+  cache?: CacheConfiguration;
 }
 
 @doc("Azure Monitor Workspace Logs Api configurations.")
@@ -22,7 +25,7 @@ model AzureMonitorWorkspaceLogsApiConfig {
   dataCollectionEndpointUrl: string;
 
   @doc("Stream name in destination. Azure Monitor stream is related to the destination table.")
-  @pattern("^(?!-)[a-zA-Z0-9.-]{1,1000}[^-]$")
+  @pattern("^(?!-)[a-zA-Z0-9._-]{1,1000}[^-]$")
   stream: string;
 
   @doc("Data Collection Rule (DCR) immutable id.")
@@ -77,12 +80,18 @@ model ScopeMap {
 
 @doc("Concurrent publishing configuration.")
 model ConcurrencyConfiguration {
-  @doc("Fixed count of messages.")
-  fixedCount: int32 = 10;
+  @doc("Number of parallel workers processing the log queues.")
+  workerCount?: int32 = 4;
 
-  @doc("Payload queue size.")
-  payloadQueueSize: int32 = 100;
+  @doc("Size of the queue for log batches.")
+  batchQueueSize?: int32 = 100;
+}
 
-  @doc("Log queue size.")
-  logQueueSize: int32 = 100;
+@doc("Cache configurations.")
+model CacheConfiguration {
+  @doc("Max storage usage in megabytes.")
+  maxStorageUsage?: int32;
+
+  @doc("Retention period in minutes.")
+  retentionPeriod?: int32;
 }
