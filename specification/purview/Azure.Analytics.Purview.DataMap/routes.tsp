@@ -969,7 +969,6 @@ be changed to other unique attributes)
       @doc("The collection where entities will be moved to.")
       @query
       collectionId: string;
-
     } & MoveEntitiesOptions,
     EntityMutationResult,
     {},
@@ -1019,11 +1018,7 @@ and
   @doc("Create a glossary.")
   @route("/atlas/v2/glossary")
   @post
-  create is AtlasOperation<
-    AtlasGlossary,
-    AtlasGlossary,
-    {}
-  >;
+  create is AtlasOperation<AtlasGlossary, AtlasGlossary, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1077,7 +1072,6 @@ and
       @doc("The globally unique identifier of the category.")
       @path
       categoryId: string;
-
     } & AtlasGlossaryCategory,
     AtlasGlossaryCategory,
     {}
@@ -1765,22 +1759,14 @@ interface Relationship {
   @doc("Create a new relationship between entities.")
   @route("/atlas/v2/relationship")
   @post
-  create is AtlasOperation<
-    AtlasRelationship,
-    AtlasRelationship,
-    {}
-  >;
+  create is AtlasOperation<AtlasRelationship, AtlasRelationship, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Update an existing relationship between entities.")
   @route("/atlas/v2/relationship")
   @put
-  update is AtlasOperation<
-    AtlasRelationship,
-    AtlasRelationship,
-    {}
-  >;
+  update is AtlasOperation<AtlasRelationship, AtlasRelationship, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
@@ -2074,11 +2060,7 @@ Any changes to the existing definitions will be discarded.
 """)
   @route("/atlas/v2/types/typedefs")
   @post
-  bulkCreate is AtlasOperation<
-    AtlasTypesDef,
-    AtlasTypesDef,
-    {}
-  >;
+  bulkCreate is AtlasOperation<AtlasTypesDef, AtlasTypesDef, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
@@ -2088,22 +2070,14 @@ persisted.
 """)
   @route("/atlas/v2/types/typedefs")
   @put
-  bulkUpdate is AtlasOperation<
-    AtlasTypesDef,
-    AtlasTypesDef,
-    {}
-  >;
+  bulkUpdate is AtlasOperation<AtlasTypesDef, AtlasTypesDef, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete API for all types in bulk.")
   @route("/atlas/v2/types/typedefs")
   @delete
-  bulkDelete is AtlasOperation<
-    AtlasTypesDef,
-    void,
-    {}
-  >;
+  bulkDelete is AtlasOperation<AtlasTypesDef, void, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("List all type definitions returned as a list of minimal information header.")
