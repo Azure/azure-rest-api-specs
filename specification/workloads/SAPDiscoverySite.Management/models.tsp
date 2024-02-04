@@ -422,6 +422,16 @@ model ServerInstanceProperties {
 }
 
 /**
+ * Defines the request body for updating Server Instances resource.
+ */
+model UpdateServerInstancesRequest {
+  /**
+   * Server instances properties.
+   */
+  properties?: ServerInstanceProperties;
+}
+
+/**
  * The SAP instance specific configuration data.
  */
 model ConfigurationData {

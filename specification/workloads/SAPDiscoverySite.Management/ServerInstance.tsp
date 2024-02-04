@@ -60,7 +60,7 @@ interface ServerInstances {
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     ServerInstance,
-    ServerInstanceProperties,
+    UpdateServerInstancesRequest,
     BaseParameters<ServerInstance>,
     ArmLroLocationHeader
   >;

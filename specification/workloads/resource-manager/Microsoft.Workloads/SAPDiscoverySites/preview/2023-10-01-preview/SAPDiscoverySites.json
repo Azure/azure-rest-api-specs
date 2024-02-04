@@ -1094,7 +1094,7 @@
             "description": "The Server Instance resource request body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerInstanceProperties"
+              "$ref": "#/definitions/UpdateServerInstancesRequest"
             },
             "x-ms-client-name": "body"
           }
@@ -2032,6 +2032,16 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "UpdateServerInstancesRequest": {
+      "type": "object",
+      "description": "Defines the request body for updating Server Instances resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerInstanceProperties",
+          "description": "Server instances properties."
         }
       }
     },
