@@ -1943,114 +1943,6 @@
         }
       }
     },
-    "CodeInterpreterImageOutput": {
-      "type": "object",
-      "description": "A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.",
-      "properties": {
-        "image": {
-          "$ref": "#/definitions/CodeInterpreterImageReference",
-          "description": "Referential information for the image associated with this output."
-        }
-      },
-      "required": [
-        "image"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CodeInterpreterToolCallOutput"
-        }
-      ],
-      "x-ms-discriminator-value": "image"
-    },
-    "CodeInterpreterImageReference": {
-      "type": "object",
-      "description": "An image reference emitted by a code interpreter tool in response to a tool call by the model.",
-      "properties": {
-        "file_id": {
-          "type": "string",
-          "description": "The ID of the file associated with this image.",
-          "x-ms-client-name": "fileId"
-        }
-      },
-      "required": [
-        "file_id"
-      ]
-    },
-    "CodeInterpreterLogOutput": {
-      "type": "object",
-      "description": "A representation of a log output emitted by a code interpreter tool in response to a tool call by the model.",
-      "properties": {
-        "logs": {
-          "type": "string",
-          "description": "The serialized log output emitted by the code interpreter."
-        }
-      },
-      "required": [
-        "logs"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CodeInterpreterToolCallOutput"
-        }
-      ],
-      "x-ms-discriminator-value": "logs"
-    },
-    "CodeInterpreterToolCall": {
-      "type": "object",
-      "description": "A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that\nrepresents inputs and outputs consumed and emitted by the code interpreter.",
-      "properties": {
-        "code_interpreter": {
-          "$ref": "#/definitions/CodeInterpreterToolCallDetails",
-          "description": "The details of the tool call to the code interpreter tool.",
-          "x-ms-client-name": "codeInterpreter"
-        }
-      },
-      "required": [
-        "code_interpreter"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "code_interpreter"
-    },
-    "CodeInterpreterToolCallDetails": {
-      "type": "object",
-      "description": "The detailed information about a code interpreter invocation by the model.",
-      "properties": {
-        "input": {
-          "type": "string",
-          "description": "The input provided by the model to the code interpreter tool."
-        },
-        "outputs": {
-          "type": "array",
-          "description": "The outputs produced by the code interpreter tool back to the model in response to the tool call.",
-          "items": {
-            "$ref": "#/definitions/CodeInterpreterToolCallOutput"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "input",
-        "outputs"
-      ]
-    },
-    "CodeInterpreterToolCallOutput": {
-      "type": "object",
-      "description": "An abstract representation of an emitted output from a code interpreter tool.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The object type."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an assistant.",
@@ -2261,49 +2153,6 @@
       "required": [
         "name",
         "parameters"
-      ]
-    },
-    "FunctionToolCall": {
-      "type": "object",
-      "description": "A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs\nand output consumed and emitted by the specified function.",
-      "properties": {
-        "function": {
-          "$ref": "#/definitions/FunctionToolCallDetails",
-          "description": "The detailed information about the function called by the model."
-        }
-      },
-      "required": [
-        "function"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "function"
-    },
-    "FunctionToolCallDetails": {
-      "type": "object",
-      "description": "The detailed information about the function called by the model.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the function."
-        },
-        "arguments": {
-          "type": "string",
-          "description": "The arguments that the model requires are provided to the named function."
-        },
-        "output": {
-          "type": "string",
-          "description": "The output of the function, only populated for function calls that have already have had their outputs submitted.",
-          "x-nullable": true
-        }
-      },
-      "required": [
-        "name",
-        "arguments",
-        "output"
       ]
     },
     "FunctionToolDefinition": {
@@ -2661,7 +2510,7 @@
       "description": "A representation of a requested call to a function tool, needed by the model to continue evaluation of a run.",
       "properties": {
         "function": {
-          "$ref": "#/definitions/FunctionDefinition",
+          "$ref": "#/definitions/RequiredFunctionToolCallDetails",
           "description": "Detailed information about the function to be executed by the tool that includes name and arguments."
         }
       },
@@ -2674,6 +2523,24 @@
         }
       ],
       "x-ms-discriminator-value": "function"
+    },
+    "RequiredFunctionToolCallDetails": {
+      "type": "object",
+      "description": "The detailed information for a function invocation, as provided by a required action invoking a function tool, that includes the name of and arguments to the function.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments to use when invoking the named function, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation."
+        }
+      },
+      "required": [
+        "name",
+        "arguments"
+      ]
     },
     "RequiredToolCall": {
       "type": "object",
@@ -2693,28 +2560,6 @@
         "type",
         "id"
       ]
-    },
-    "RetrievalToolCall": {
-      "type": "object",
-      "description": "A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents\nexecuted retrieval actions.",
-      "properties": {
-        "retrieval": {
-          "type": "object",
-          "description": "The key/value pairs produced by the retrieval tool.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "retrieval"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "retrieval"
     },
     "RetrievalToolDefinition": {
       "type": "object",
@@ -2922,6 +2767,114 @@
         "metadata"
       ]
     },
+    "RunStepCodeInterpreterImageOutput": {
+      "type": "object",
+      "description": "A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/RunStepCodeInterpreterImageReference",
+          "description": "Referential information for the image associated with this output."
+        }
+      },
+      "required": [
+        "image"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepCodeInterpreterToolCallOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "image"
+    },
+    "RunStepCodeInterpreterImageReference": {
+      "type": "object",
+      "description": "An image reference emitted by a code interpreter tool in response to a tool call by the model.",
+      "properties": {
+        "file_id": {
+          "type": "string",
+          "description": "The ID of the file associated with this image.",
+          "x-ms-client-name": "fileId"
+        }
+      },
+      "required": [
+        "file_id"
+      ]
+    },
+    "RunStepCodeInterpreterLogOutput": {
+      "type": "object",
+      "description": "A representation of a log output emitted by a code interpreter tool in response to a tool call by the model.",
+      "properties": {
+        "logs": {
+          "type": "string",
+          "description": "The serialized log output emitted by the code interpreter."
+        }
+      },
+      "required": [
+        "logs"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepCodeInterpreterToolCallOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "logs"
+    },
+    "RunStepCodeInterpreterToolCall": {
+      "type": "object",
+      "description": "A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that\nrepresents inputs and outputs consumed and emitted by the code interpreter.",
+      "properties": {
+        "code_interpreter": {
+          "$ref": "#/definitions/RunStepCodeInterpreterToolCallDetails",
+          "description": "The details of the tool call to the code interpreter tool.",
+          "x-ms-client-name": "codeInterpreter"
+        }
+      },
+      "required": [
+        "code_interpreter"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "code_interpreter"
+    },
+    "RunStepCodeInterpreterToolCallDetails": {
+      "type": "object",
+      "description": "The detailed information about a code interpreter invocation by the model.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The input provided by the model to the code interpreter tool."
+        },
+        "outputs": {
+          "type": "array",
+          "description": "The outputs produced by the code interpreter tool back to the model in response to the tool call.",
+          "items": {
+            "$ref": "#/definitions/RunStepCodeInterpreterToolCallOutput"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "input",
+        "outputs"
+      ]
+    },
+    "RunStepCodeInterpreterToolCallOutput": {
+      "type": "object",
+      "description": "An abstract representation of an emitted output from a code interpreter tool.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "RunStepDetails": {
       "type": "object",
       "description": "An abstract representation of the details for a run step.",
@@ -2978,6 +2931,49 @@
         ]
       }
     },
+    "RunStepFunctionToolCall": {
+      "type": "object",
+      "description": "A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs\nand output consumed and emitted by the specified function.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/RunStepFunctionToolCallDetails",
+          "description": "The detailed information about the function called by the model."
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "RunStepFunctionToolCallDetails": {
+      "type": "object",
+      "description": "The detailed information about the function called by the model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments that the model requires are provided to the named function."
+        },
+        "output": {
+          "type": "string",
+          "description": "The output of the function, only populated for function calls that have already have had their outputs submitted.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "name",
+        "arguments",
+        "output"
+      ]
+    },
     "RunStepMessageCreationDetails": {
       "type": "object",
       "description": "The detailed information associated with a message creation run step.",
@@ -3011,6 +3007,28 @@
       "required": [
         "message_id"
       ]
+    },
+    "RunStepRetrievalToolCall": {
+      "type": "object",
+      "description": "A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents\nexecuted retrieval actions.",
+      "properties": {
+        "retrieval": {
+          "type": "object",
+          "description": "The key/value pairs produced by the retrieval tool.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "retrieval"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "retrieval"
     },
     "RunStepStatus": {
       "type": "string",
@@ -3054,6 +3072,25 @@
         ]
       }
     },
+    "RunStepToolCall": {
+      "type": "object",
+      "description": "An abstract representation of a detailed tool call as recorded within a run step for an existing run.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the tool call. This ID must be referenced when you submit tool outputs."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "id"
+      ]
+    },
     "RunStepToolCallDetails": {
       "type": "object",
       "description": "The detailed information associated with a run step calling tools.",
@@ -3062,7 +3099,7 @@
           "type": "array",
           "description": "A list of tool call details for this run step.",
           "items": {
-            "$ref": "#/definitions/ToolCall"
+            "$ref": "#/definitions/RunStepToolCall"
           },
           "x-ms-client-name": "toolCalls"
         }
@@ -3429,25 +3466,6 @@
         "cancelled_at",
         "failed_at",
         "metadata"
-      ]
-    },
-    "ToolCall": {
-      "type": "object",
-      "description": "An abstract representation of a detailed tool call as recorded within a run step for an existing run.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The object type."
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the tool call. This ID must be referenced when you submit tool outputs."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type",
-        "id"
       ]
     },
     "ToolDefinition": {
