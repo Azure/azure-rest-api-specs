@@ -52,7 +52,7 @@
             "x-nullable": false,
             "description": "Returns the newly created API key",
             "schema": {
-              "$ref": "#/definitions/apiKey"
+              "$ref": "#/definitions/ApiKey"
             }
           },
           "default": {
@@ -79,6 +79,7 @@
           {
             "type": "string",
             "name": "apiKeyAlias",
+            "description": "The alias of your API key",
             "in": "path",
             "required": true
           },
@@ -202,7 +203,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiKey"
+            "$ref": "#/definitions/ApiKey"
           }
         },
         "nextLink": {
@@ -211,14 +212,16 @@
         }
       }
     },
-    "apiKey": {
+    "ApiKey": {
       "type": "object",
-      "description": "apiKey object",
+      "description": "ApiKey object containing both the key and its alias",
       "properties": {
         "keyAlias": {
+          "description": "The API key alias",
           "type": "string"
         },
         "key": {
+          "description": "The API key to be used when calling relevant Discovery endpoints",
           "type": "string"
         }
       }
