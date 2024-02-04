@@ -33,12 +33,10 @@ enum ApiVersions {
   v2023_09_01: "2023-09-01",
 }
 
-@doc("The Azure Active Directory OAuth2 Flow")
-model AuthToken
-  is OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit;
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
-      scopes: ["https://purview.azure.net/.default"];
-    }
-  ]>;
+alias AuthToken = OAuth2Auth<[
+  {
+    type: OAuth2FlowType.implicit;
+    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+    scopes: ["https://purview.azure.net/.default"];
+  }
+]>;

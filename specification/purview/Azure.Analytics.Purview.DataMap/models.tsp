@@ -672,11 +672,10 @@ model AtlasGlossaryBaseObject {
   updatedBy?: string;
 }
 
-@doc("The base model object.")
-model AtlasBaseModelObject {
+alias AtlasBaseModelObject = {
   @doc("The GUID of the object.")
   guid?: string;
-}
+};
 
 @doc("The glossary category.")
 model AtlasGlossaryCategory {
@@ -1500,8 +1499,7 @@ model AtlasConstraintDef {
   type?: string;
 }
 
-@doc("Base class that captures common-attributes for all types.")
-model AtlasBaseTypeDef {
+alias AtlasBaseTypeDef = {
   @doc("The enum of type category.")
   category?: TypeCategory;
 
@@ -1546,7 +1544,7 @@ model AtlasBaseTypeDef {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "It is an Atlas model"
   @doc("ETag for concurrency control.")
   lastModifiedTS?: string;
-}
+};
 
 @doc("The date format.")
 model DateFormat {

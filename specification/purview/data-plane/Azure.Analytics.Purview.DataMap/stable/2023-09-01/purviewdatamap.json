@@ -33,15 +33,14 @@
   ],
   "security": [
     {
-      "AuthToken": [
+      "OAuth2Auth": [
         "https://purview.azure.net/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "AuthToken": {
+    "OAuth2Auth": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
@@ -102,7 +101,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Atlas entity with extended information.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
@@ -240,7 +238,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "An array of entities to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
@@ -312,7 +309,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The request to associate a classification to multiple entities.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClassificationAssociateOptions"
@@ -345,7 +341,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Atlas entity headers.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntityHeaders"
@@ -1243,7 +1238,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Atlas entity with extended information.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
@@ -1763,7 +1757,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The glossary definition to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
@@ -2212,7 +2205,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The glossary category definition. A category must be anchored to a Glossary\nwhen creating.\nOptionally, terms belonging to the category and the hierarchy\ncan also be defined during creation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
@@ -2287,7 +2279,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The glossary category to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
@@ -2530,7 +2521,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The glossary term definition. A term must be anchored to a Glossary at the time\nof creation.\nOptionally it can be categorized as well.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
@@ -2624,7 +2614,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The glossary term to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
@@ -3169,7 +3158,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The AtlasRelationship object containing the information for the relationship to\nbe created.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasRelationship"
@@ -3203,7 +3191,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The AtlasRelationship object containing the information for the relationship to\nbe created.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasRelationship"
@@ -3930,7 +3917,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "A composite object that captures all type definition changes.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
@@ -3964,7 +3950,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "A composite wrapper object with corresponding lists of the type definition.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
@@ -4001,7 +3986,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "A composite object that captures all types to be deleted",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
@@ -4160,7 +4144,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Entity guids to be moved to target collection.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MoveEntitiesOptions"
@@ -4285,7 +4268,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "An object specifying the autocomplete criteria.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AutoCompleteOptions"
@@ -4324,7 +4306,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "An object specifying the search criteria.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QueryOptions"
@@ -4423,7 +4404,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "An object specifying the suggest criteria.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SuggestOptions"

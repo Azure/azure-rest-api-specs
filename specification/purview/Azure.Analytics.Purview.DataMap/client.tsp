@@ -11,26 +11,17 @@ using PurviewDataMap;
 })
 namespace Customizations;
 
-@@access(MoveEntitiesOptions, Access.public);
 @@projectedName(MoveEntitiesOptions, "csharp", "MoveEntitiesConfig");
-@@access(DateFormat, Access.public);
 @@projectedName(DateFormat, "csharp", "AtlasDateFormat");
-@@access(NumberFormat, Access.public);
 @@projectedName(NumberFormat, "csharp", "AtlasNumberFormat");
-@@access(TimeZone, Access.public);
 @@projectedName(TimeZone, "csharp", "AtlasTimeZone");
-@@access(SortType, Access.public);
 @@projectedName(SortType, "csharp", "AtlasSortType");
-@@access(ClassificationAssociateOptions, Access.public);
 @@projectedName(ClassificationAssociateOptions,
   "csharp",
   "ClassificationAssociateConfig"
 );
-@@access(QueryOptions, Access.public);
 @@projectedName(QueryOptions, "csharp", "QueryConfig");
-@@access(SuggestOptions, Access.public);
 @@projectedName(SuggestOptions, "csharp", "SuggestConfig");
-@@access(AutoCompleteOptions, Access.public);
 @@projectedName(AutoCompleteOptions, "csharp", "AutoCompleteConfig");
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
