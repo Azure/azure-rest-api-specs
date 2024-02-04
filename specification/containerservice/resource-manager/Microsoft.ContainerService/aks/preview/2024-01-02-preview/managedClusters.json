@@ -4697,7 +4697,8 @@
             "loadBalancer",
             "userDefinedRouting",
             "managedNATGateway",
-            "userAssignedNATGateway"
+            "userAssignedNATGateway",
+            "none"
           ],
           "x-ms-enum": {
             "name": "outboundType",
@@ -4718,6 +4719,10 @@
               {
                 "value": "userAssignedNATGateway",
                 "description": "The user-assigned NAT gateway associated to the cluster subnet is used for egress. This is an advanced scenario and requires proper network configuration."
+              },
+              {
+                "value": "none",
+                "description": "The egress network is not configured."
               }
             ]
           },
