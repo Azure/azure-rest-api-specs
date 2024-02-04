@@ -30,15 +30,23 @@ description: HDInsight AKS Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 azure-arm: true
-tag: package-preview-2023-11
+tag: package-2024-05
 ```
 
 
+### Tag: package-2024-05
+
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05'
+input-file:
+  - Microsoft.HDInsight/stable/2024-05-01/hdinsight.json
+```
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-11'
+``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.HDInsight/preview/2023-11-01-preview/hdinsight.json
   
@@ -66,6 +74,7 @@ suppressions:
       - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeAllClusterNodes
     reason: They are used for enabling or disabling a feature. Using a boolean type is more user friendly, and they will be not extended to other values.
 ```
+
 ### Tag: package-2023-06-preview
 
 These settings apply only when `--tag=package-2023-06-preview` is specified on the command line.
