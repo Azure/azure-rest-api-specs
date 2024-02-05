@@ -26,15 +26,7 @@ model DeviceLocationEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
-  location: DeviceLocationEnum;
-}
-
-/* Needed to add this enum because typespec was creating an x-ms-enum without a name
-   which was causing a failure during linting. */
-@doc("Location static endpoint enum")
-enum DeviceLocationEnum {
-  @doc("Static endpoint")
-  location: "location",
+  location: "location";
 }
 
 /// Request models

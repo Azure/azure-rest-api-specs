@@ -27,15 +27,7 @@ model DeviceNetworkRetrievalEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
-  network: DeviceNetworkEnum;
-}
-
-/* Needed to add this enum because typespec was creating an x-ms-enum without a name
-   which was causing a failure during linting. */
-@doc("Network static endpoint enum")
-enum DeviceNetworkEnum {
-  @doc("Static endpoint")
-  network: "network",
+  network: "network";
 }
 
 /// Common models
