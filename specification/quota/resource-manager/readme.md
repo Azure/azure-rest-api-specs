@@ -83,6 +83,9 @@ suppressions:
   - code: AllProxyResourcesShouldHaveDelete
     from: groupquota.json
     where: $.paths["/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/{resourceName}"].delete
+    reason: Quota cannot be deleted or reduced. It is not supported by any resource provider.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: groupquota.json
     where: $.paths["/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits/{resourceName}".delete
     reason: Quota cannot be deleted or reduced. It is not supported by any resource provider.
 ```
