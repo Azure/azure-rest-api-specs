@@ -1,0 +1,679 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.NexusIdentity management service",
+    "version": "2024-02-15-preview",
+    "description": "Microsoft.NexusIdentity Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "IdentitySet"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.NexusIdentity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_Maximum": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_Minimum": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NexusIdentity/identitySets": {
+      "get": {
+        "operationId": "IdentitySet_ListBySubscription",
+        "tags": [
+          "IdentitySet"
+        ],
+        "description": "List IdentitySetResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IdentitySetResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentitySet_ListBySubscription_Maximum": {
+            "$ref": "./examples/IdentitySet_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "IdentitySet_ListBySubscription_Minimum": {
+            "$ref": "./examples/IdentitySet_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NexusIdentity/identitySets": {
+      "get": {
+        "operationId": "IdentitySet_ListByResourceGroup",
+        "tags": [
+          "IdentitySet"
+        ],
+        "description": "List IdentitySetResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IdentitySetResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentitySet_ListByResourceGroup_Maximum": {
+            "$ref": "./examples/IdentitySet_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "IdentitySet_ListByResourceGroup_Minimum": {
+            "$ref": "./examples/IdentitySet_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NexusIdentity/identitySets/{name}": {
+      "get": {
+        "operationId": "IdentitySet_Get",
+        "tags": [
+          "IdentitySet"
+        ],
+        "description": "Get a IdentitySetResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Identity Set resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IdentitySetResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentitySet_Get_Maximum": {
+            "$ref": "./examples/IdentitySet_Get_MaximumSet_Gen.json"
+          },
+          "IdentitySet_Get_Minimum": {
+            "$ref": "./examples/IdentitySet_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IdentitySet_Create",
+        "tags": [
+          "IdentitySet"
+        ],
+        "description": "Create a IdentitySetResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Identity Set resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentitySetResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IdentitySetResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IdentitySetResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'IdentitySetResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IdentitySetResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentitySet_Create_Max": {
+            "$ref": "./examples/IdentitySet_Create_MaximumSet_Gen.json"
+          },
+          "IdentitySet_Create_Min": {
+            "$ref": "./examples/IdentitySet_Create_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "IdentitySet_Update",
+        "tags": [
+          "IdentitySet"
+        ],
+        "description": "Update a IdentitySetResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Identity Set resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentitySetResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IdentitySetResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentitySet_Update_Maximum": {
+            "$ref": "./examples/IdentitySet_Update_MaximumSet_Gen.json"
+          },
+          "IdentitySet_Update_Minimum": {
+            "$ref": "./examples/IdentitySet_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "IdentitySet_Delete",
+        "tags": [
+          "IdentitySet"
+        ],
+        "description": "Delete a IdentitySetResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Identity Set resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentitySet_Delete_Max": {
+            "$ref": "./examples/IdentitySet_Delete_MaximumSet_Gen.json"
+          },
+          "IdentitySet_Delete_Min": {
+            "$ref": "./examples/IdentitySet_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AccessType": {
+      "type": "string",
+      "description": "Access Type defines the type of access needed for the Roles.",
+      "enum": [
+        "Ssh",
+        "Web"
+      ],
+      "x-ms-enum": {
+        "name": "AccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ssh",
+            "value": "Ssh",
+            "description": "SSH access"
+          },
+          {
+            "name": "Web",
+            "value": "Web",
+            "description": "Web access"
+          }
+        ]
+      }
+    },
+    "IdentitySetResource": {
+      "type": "object",
+      "description": "Identity Set resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IdentitySetResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "IdentitySetResourceListResult": {
+      "type": "object",
+      "description": "The response of a IdentitySetResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IdentitySetResource items on this page",
+          "items": {
+            "$ref": "#/definitions/IdentitySetResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IdentitySetResourceProperties": {
+      "type": "object",
+      "description": "Identity Set Properties defines the properties of the Identity Set.",
+      "properties": {
+        "scopesTenantId": {
+          "type": "string",
+          "description": "Tenant id in which scopes are present. Identity service should have the User.Read.All permission on this tenant."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Scopes on which roles are to be watched. Valid scope are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'",
+          "items": {
+            "type": "string"
+          }
+        },
+        "roles": {
+          "type": "array",
+          "description": "Roles to be watched.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accessTypes": {
+          "type": "array",
+          "description": "The type of access needed for the Roles. Only the specified access types data will be sent.",
+          "items": {
+            "$ref": "#/definitions/AccessType"
+          }
+        },
+        "notificationUrl": {
+          "type": "string",
+          "description": "The URL to which the Nexus Identity Service will send notifications."
+        },
+        "appId": {
+          "type": "string",
+          "description": "The application Id of Identity Set resource",
+          "readOnly": true
+        },
+        "appName": {
+          "type": "string",
+          "description": "The application name of Identity Set resource",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "scopesTenantId",
+        "scopes",
+        "roles",
+        "accessTypes",
+        "notificationUrl"
+      ]
+    },
+    "IdentitySetResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the IdentitySetResource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/IdentitySetResourceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IdentitySetResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the IdentitySetResource.",
+      "properties": {
+        "scopesTenantId": {
+          "type": "string",
+          "description": "Tenant id in which scopes are present. Identity service should have the User.Read.All permission on this tenant."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Scopes on which roles are to be watched. Valid scope are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'",
+          "items": {
+            "type": "string"
+          }
+        },
+        "roles": {
+          "type": "array",
+          "description": "Roles to be watched.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accessTypes": {
+          "type": "array",
+          "description": "The type of access needed for the Roles. Only the specified access types data will be sent.",
+          "items": {
+            "$ref": "#/definitions/AccessType"
+          }
+        },
+        "notificationUrl": {
+          "type": "string",
+          "description": "The URL to which the Nexus Identity Service will send notifications."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of Identity Set resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The operation is accepted and in progress."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation is accepted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Versions": {
+      "type": "string",
+      "description": "API Versions",
+      "enum": [
+        "2024-02-15-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_02_15_preview",
+            "value": "2024-02-15-preview",
+            "description": "2024-02-15-preview version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
