@@ -3949,7 +3949,7 @@ model MECRole extends Role {
   /**
    * Role type.
    */
-  kind: "MEC";
+  kind: RoleTypes.MEC;
 }
 
 /**

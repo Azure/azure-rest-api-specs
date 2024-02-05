@@ -17,8 +17,7 @@ namespace Microsoft.DataLakeStore;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(DataLakeStoreAccountPropertiesBasic)
-model DataLakeStoreAccount extends TrackedResourceBase {
+model DataLakeStoreAccount extends Resource {
   /**
    * The name of the Data Lake Store account.
    */

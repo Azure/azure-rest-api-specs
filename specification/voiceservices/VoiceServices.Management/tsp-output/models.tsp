@@ -182,7 +182,7 @@ model PrimaryRegionProperties {
 * IP address to use to contact the ESRP from this region
 */
 @visibility("read", "create", "update")
-"esrpAddresses"?: string[];
+"esrpAddresses"?: string[] = ["911","933"];
 /**
 * The allowed source IP address or CIDR ranges for signaling
 */
