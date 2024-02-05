@@ -29,12 +29,16 @@ openapi-type: arm
 tag: package-2023-06-01-preview
 ```
 
+``` yaml
+modelerfour:
+    flatten-models: false
+```
 
 ### Tag: package-2023-06-01-preview
 
 These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06-01-preview'
+``` yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
   - Microsoft.Quota/preview/2023-06-01-preview/groupquota.json
   - Microsoft.Quota/stable/2023-02-01/quota.json
@@ -44,7 +48,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-02-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02-01'
+``` yaml $(tag) == 'package-2023-02-01'
 input-file:
   - Microsoft.Quota/stable/2023-02-01/quota.json
 ```
