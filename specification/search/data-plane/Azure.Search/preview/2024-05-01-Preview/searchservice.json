@@ -6598,11 +6598,54 @@
       },
       "description": "Specifies the properties for connecting to a user-defined vectorizer."
     },
+    "AIServicesVisionVectorizer": {
+      "type": "object",
+      "x-ms-discriminator-value": "aiServicesVision",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchVectorizer"
+        }
+      ],
+      "properties": {
+        "aiServicesVisionParameters": {
+          "x-ms-client-name": "AIServicesVisionParameters",
+          "$ref": "#/definitions/AIServicesVisionParameters",
+          "description": "Contains the parameters specific to AI Services Vision embedding vectorization."
+        }
+      },
+      "description": "Specifies the AI Services Vision parameters for vectorizing a query image or text."
+    },
+    "AIServicesVisionParameters": {
+      "type": "object",
+      "properties": {
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "API key of the designated AI Services resource."
+        },
+        "authResourceId": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Resource id for the AI Services resource for managed identity."
+        },
+        "authIdentity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the index, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+        }
+      },
+      "description": "Specifies the AI Services Vision parameters for vectorizing a query image or text."
+    },
     "VectorSearchVectorizerKind": {
       "type": "string",
       "enum": [
         "azureOpenAI",
-        "customWebApi"
+        "customWebApi",
+        "aiServicesVision"
       ],
       "x-ms-enum": {
         "name": "VectorSearchVectorizerKind",
@@ -6617,6 +6660,11 @@
             "value": "customWebApi",
             "name": "CustomWebApi",
             "description": "Generate embeddings using a custom web endpoint at query time."
+          },
+          {
+            "value": "aiServicesVision",
+            "name": "AIServicesVision",
+            "description": "Generate embeddings for an image or text input at query time using the Azure AI Services Vision Vectorize API."
           }
         ]
       },
@@ -9628,6 +9676,24 @@
         }
       },
       "description": "Allows you to generate a vector embedding for a given text input using the Azure OpenAI resource."
+    },
+    "VisionVectorizeSkill": {
+      "x-ms-client-name": "VisionVectorizeSkill",
+      "x-ms-discriminator-value": "#Microsoft.Skills.Vision.VectorizeSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified."
+        }
+      },
+      "description": "Allows you to generate a vector embedding for a given image or text input using the Azure AI Services Vision Vectorize API."
     },
     "ListSkillsetsResult": {
       "properties": {

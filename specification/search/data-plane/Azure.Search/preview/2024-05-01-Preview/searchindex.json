@@ -1922,11 +1922,45 @@
       ],
       "description": "The query parameters to use for vector search when a text value that needs to be vectorized is provided."
     },
+    "VectorizableImageUrlQuery": {
+      "type": "object",
+      "x-ms-discriminator-value": "imageUrl",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorQuery"
+        }
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of an image to be vectorized to perform a vector search query."
+        }
+      },
+      "description": "The query parameters to use for vector search when an url that represents an image value that needs to be vectorized is provided."
+    },
+    "VectorizableImageBinaryQuery": {
+      "type": "object",
+      "x-ms-discriminator-value": "imageBinary",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorQuery"
+        }
+      ],
+      "properties": {
+        "base64EncodedBinary": {
+          "type": "string",
+          "description": "The base 64 encoded binary of an image to be vectorized to perform a vector search query."
+        }
+      },
+      "description": "The query parameters to use for vector search when a base 64 encoded binary of an image that needs to be vectorized is provided."
+    },
     "VectorQueryKind": {
       "type": "string",
       "enum": [
         "vector",
-        "text"
+        "text",
+        "imageUrl",
+        "imageBinary"
       ],
       "x-ms-enum": {
         "name": "VectorQueryKind",
@@ -1941,6 +1975,16 @@
             "value": "text",
             "name": "Text",
             "description": "Vector query where a text value that needs to be vectorized is provided."
+          },
+          {
+            "value": "imageUrl",
+            "name": "ImageUrl",
+            "description": "Vector query where an url that represents an image value that needs to be vectorized is provided."
+          },
+          {
+            "value": "imageBinary",
+            "name": "ImageBinary",
+            "description": "Vector query where a base 64 encoded binary of an image that needs to be vectorized is provided."
           }
         ]
       },
