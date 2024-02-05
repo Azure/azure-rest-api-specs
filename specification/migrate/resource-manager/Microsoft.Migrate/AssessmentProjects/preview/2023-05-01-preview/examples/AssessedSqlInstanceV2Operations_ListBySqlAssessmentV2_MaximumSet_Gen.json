@@ -3,502 +3,505 @@
   "operationId": "AssessedSqlInstanceV2Operations_ListBySqlAssessmentV2",
   "parameters": {
     "api-version": "2023-05-01-preview",
-    "subscriptionId": "4bd2aa0f-2bd2-4d67-91a8-5a4533d58600",
+    "subscriptionId": "B93454BF-F8B7-4B87-A2C5-8FB4F88BA43C",
     "resourceGroupName": "rgmigrate",
-    "$filter": "(contains(Properties/InstanceName,'MSSQLSERVER'))",
-    "pageSize": 23,
-    "continuationToken": null,
-    "totalRecordCount": 1,
-    "projectName": "fci-test6904project",
-    "groupName": "test_fci_hadr",
-    "assessmentName": "test_swagger_1"
+    "$filter": "klnpyt",
+    "pageSize": 24,
+    "continuationToken": "msxgmnxjhtdgvtlcuakpustmz",
+    "totalRecordCount": 23,
+    "projectName": ")j(3Gm@VP,=g{zouN%{ktZRCWI_E;[W]FvoAl6(A0;sx^T7;vWa$on%[Ub+wM\\_7[+OlgYSH|GwSZ=rIY$q",
+    "groupName": "@fSYDt;*kMR+CC~.XU{z+rGyTbWNY[X3jeTb$QM_pbwe+YNlMa\"=DY8!IIhh3JR!`4uq$GOy$f'Q(d`wti{;,-(5;SDo\"wA12l4nwb6BT$`kTytJGo`MaVw=gM+Z^FZN'e3P20-{FpH*2C7Q{kH`D]nf;%;aq(U .udp$(P%iPL35mW@A,;.D'xbi2{q%=+d\\^*7dQv)'ntDF1'sa*5^;k3bdD\"\\Em}m5!s7k.gn1n,`l\"P8MX4r2",
+    "assessmentName": "0}8P6*[SZohsmy]\\6+G}OGe@jvuU-G;I]ElPnHLFJnR"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/dhlodhiccy/providers/Microsoft.Migrate/assessmentprojects/dhccy30279project/groups/test_paas_pref_grp_2812/sqlAssessments/test_train_250823/assessedSqlInstances/27b94796-026e-4278-a546-664d46977c0a",
-            "name": "27b94796-026e-4278-a546-664d46977c0a",
-            "type": "Microsoft.Migrate/assessmentprojects/groups/sqlAssessments/assessedSqlInstances",
-            "systemData": {
-              "createdAt": "0001-01-01T00:00:00",
-              "createdBy": null,
-              "createdByType": null,
-              "lastModifiedAt": "0001-01-01T00:00:00",
-              "lastModifiedBy": null,
-              "lastModifiedByType": null
-            },
             "properties": {
-              "azureSqlVMSuitabilityDetails": {
-                "azureSqlSku": {
-                  "virtualMachineSize": {
-                    "azureVmFamily": "Dasv4_series",
-                    "cores": 2,
-                    "azureSkuName": "Standard_D2as_v4",
-                    "availableCores": 2,
-                    "maxNetworkInterfaces": 0
-                  },
-                  "dataDiskSizes": [
-                    {
-                      "diskType": "Premium",
-                      "diskSize": "Premium_P2",
-                      "diskRedundancy": "LRS",
-                      "storageCost": 1.2
-                    }
-                  ],
-                  "logDiskSizes": [
-                    {
-                      "diskType": "Premium",
-                      "diskSize": "Premium_P3",
-                      "diskRedundancy": "LRS",
-                      "storageCost": 2.4
-                    }
-                  ],
-                  "azureSqlTargetType": "AzureSqlVirtualMachine"
-                },
-                "replicaAzureSqlSku": [],
-                "sharedResources": {
-                  "sharedDataDisks": [],
-                  "sharedLogDisks": [],
-                  "sharedTempDbDisks": [],
-                  "numberOfMounts": 0,
-                  "quorumWitness": null
-                },
-                "monthlyComputeCost": 26.361408,
-                "monthlyStorageCost": 3.6,
-                "costComponents": [
-                  {
-                    "name": "MonthlySecurityCost",
-                    "value": 15.0,
-                    "description": null
-                  }
-                ],
-                "securitySuitability": "Suitable",
-                "shouldProvisionReplicas": false,
-                "skuReplicationMode": "NotApplicable",
-                "migrationGuidelines": [
-                  {
-                    "guidelineId": "MigrateDataFromSourceSqlServerToVM",
-                    "migrationGuidelineCategory": "FailoverCluterInstanceGuideLine",
-                    "migrationGuidelineContext": []
-                  }
-                ],
-                "recommendationReasonings": [
-                  {
-                    "reasoningId": "MeetsVirtualMachineCpuScalingFactorRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "CpuType",
-                    "contextParameters": [
-                      {
-                        "contextKey": "CoreUtilizationPercentage",
-                        "contextValue": "0"
-                      },
-                      {
-                        "contextKey": "AllocatedCores",
-                        "contextValue": "4"
-                      },
-                      {
-                        "contextKey": "TargetCoresRecommended",
-                        "contextValue": "2"
-                      }
-                    ]
-                  },
-                  {
-                    "reasoningId": "MeetsVirtualMachineMemoryRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "MemoryType",
-                    "contextParameters": [
-                      {
-                        "contextKey": "BufferPoolSizeInGB",
-                        "contextValue": "0"
-                      },
-                      {
-                        "contextKey": "RAMRecommendedInGB",
-                        "contextValue": "8"
-                      }
-                    ]
-                  },
-                  {
-                    "reasoningId": "MeetsVirtualMachineIOPSRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "IOPSType",
-                    "contextParameters": [
-                      {
-                        "contextKey": "VirtualMachineIOPSRequiredInIOPerSec",
-                        "contextValue": "0"
-                      },
-                      {
-                        "contextKey": "VirtualMachineUncachedDiskIOPSAvailableInIOPerSec",
-                        "contextValue": "3200"
-                      }
-                    ]
-                  },
-                  {
-                    "reasoningId": "MeetsVirtualMachineIOThroughputRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "ThroughputType",
-                    "contextParameters": [
-                      {
-                        "contextKey": "VirtualMachineIOThroughputRequiredInInMBPerSec",
-                        "contextValue": "0"
-                      },
-                      {
-                        "contextKey": "VirtualMachineIOThroughputUncachedAvailableInIOPerSec",
-                        "contextValue": "48"
-                      }
-                    ]
-                  },
-                  {
-                    "reasoningId": "MeetsVirtualMachineStorageRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "StorageType",
-                    "contextParameters": [
-                      {
-                        "contextKey": "CommaSeperatedManagedDisks",
-                        "contextValue": "1 PremiumSSD_P2,1 PremiumSSD_P3"
-                      }
-                    ]
-                  },
-                  {
-                    "reasoningId": "MeetsVirtualMachineFamilyRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "ServiceTier",
-                    "contextParameters": [
-                      {
-                        "contextKey": "VirtualMachineSize",
-                        "contextValue": "standardDASv4Family"
-                      }
-                    ]
-                  }
-                ],
-                "migrationTargetPlatform": "AzureSqlVirtualMachine",
-                "suitability": "Suitable",
-                "migrationIssues": [
-                  {
-                    "issueId": "PerformanceDataMissing",
-                    "issueCategory": "Internal",
-                    "impactedObjects": []
-                  }
-                ]
-              },
-              "memoryInUseInMB": 0.0,
+              "memoryInUseInMB": 15,
               "hasScanOccurred": true,
-              "recommendedAzureSqlTargetType": "AzureSqlVirtualMachine",
-              "recommendedSuitability": "SuitableForSqlVM",
+              "recommendedAzureSqlTargetType": "Unknown",
+              "recommendedSuitability": "Unknown",
               "azureSqlMISuitabilityDetails": {
                 "azureSqlSku": {
-                  "azureSqlServiceTier": "GeneralPurpose",
-                  "azureSqlComputeTier": "Provisioned",
-                  "azureSqlHardwareGeneration": "Gen5",
-                  "storageMaxSizeInMB": 65536.0,
-                  "predictedDataSizeInMB": 6696.25,
-                  "predictedLogSizeInMB": 14220.125,
-                  "cores": 4,
-                  "azureSqlTargetType": "AzureSqlManagedInstance"
+                  "azureSqlServiceTier": "Unknown",
+                  "azureSqlComputeTier": "Unknown",
+                  "azureSqlHardwareGeneration": "Unknown",
+                  "storageMaxSizeInMB": 1,
+                  "predictedDataSizeInMB": 6,
+                  "predictedLogSizeInMB": 15,
+                  "cores": 10,
+                  "azureSqlTargetType": "Unknown"
                 },
-                "replicaAzureSqlSku": [],
-                "sharedResources": {
-                  "sharedDataDisks": [],
-                  "sharedLogDisks": [],
-                  "sharedTempDbDisks": [],
-                  "numberOfMounts": 0,
-                  "quorumWitness": null
-                },
-                "monthlyComputeCost": 199.999104,
-                "monthlyStorageCost": 3.68,
-                "costComponents": [
+                "replicaAzureSqlSku": [
                   {
-                    "name": "MonthlySecurityCost",
-                    "value": 15.0,
-                    "description": null
+                    "azureSqlServiceTier": "Unknown",
+                    "azureSqlComputeTier": "Unknown",
+                    "azureSqlHardwareGeneration": "Unknown",
+                    "storageMaxSizeInMB": 1,
+                    "predictedDataSizeInMB": 6,
+                    "predictedLogSizeInMB": 15,
+                    "cores": 10,
+                    "azureSqlTargetType": "Unknown"
                   }
                 ],
-                "securitySuitability": "Suitable",
-                "shouldProvisionReplicas": false,
+                "sharedResources": {
+                  "sharedDataDisks": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "sharedLogDisks": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "sharedTempDbDisks": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "numberOfMounts": 25,
+                  "quorumWitness": {
+                    "quorumWitnessType": "Unknown"
+                  }
+                },
+                "monthlyComputeCost": 9,
+                "monthlyStorageCost": 19,
+                "costComponents": [
+                  {
+                    "name": "Unknown",
+                    "value": 23,
+                    "description": "fvvrrffchhyjnbbluxzagujp"
+                  }
+                ],
+                "securitySuitability": "Unknown",
+                "shouldProvisionReplicas": true,
                 "skuReplicationMode": "NotApplicable",
                 "migrationGuidelines": [
                   {
-                    "guidelineId": "MigrateDataFromSourceSqlServerToMI",
-                    "migrationGuidelineCategory": "FailoverCluterInstanceGuideLine",
-                    "migrationGuidelineContext": []
+                    "guidelineId": "wxvyfekcykbasfuppunpctyh",
+                    "migrationGuidelineCategory": "Unknown",
+                    "migrationGuidelineContext": [
+                      {
+                        "contextKey": "tlmeiagyrergfvzjjwocxqjksu",
+                        "contextValue": "umxkrvdfsjt"
+                      }
+                    ]
                   }
                 ],
                 "recommendationReasonings": [
                   {
-                    "reasoningId": "MeetsInstanceCpuScalingFactorRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "CpuType",
+                    "reasoningId": "svkzbbuyfbjw",
+                    "reasoningString": "zqszgubjelswuqazwssesnzxcq",
+                    "reasoningCategory": "tvzbwhyqyvfr",
                     "contextParameters": [
                       {
-                        "contextKey": "CoreUtilizationPercentage",
-                        "contextValue": "0"
-                      },
-                      {
-                        "contextKey": "AllocatedCores",
-                        "contextValue": "4"
-                      },
-                      {
-                        "contextKey": "TargetCoresRecommended",
-                        "contextValue": "4"
-                      }
-                    ]
-                  },
-                  {
-                    "reasoningId": "MeetsInstanceStorageRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "StorageType",
-                    "contextParameters": [
-                      {
-                        "contextKey": "TotalStorageConsumedByDataFilesInGB",
-                        "contextValue": "6.539"
-                      },
-                      {
-                        "contextKey": "TotalStorageConsumedByLogFilesInGB",
-                        "contextValue": "13.887"
-                      },
-                      {
-                        "contextKey": "TotalRecommendedStorageInGB",
-                        "contextValue": "64"
-                      },
-                      {
-                        "contextKey": "IncrementsInStorageInGB",
-                        "contextValue": "32"
-                      },
-                      {
-                        "contextKey": "MaxAvailableStorageInGB",
-                        "contextValue": "2048"
-                      }
-                    ]
-                  },
-                  {
-                    "reasoningId": "MeetsInstanceIOThroughputRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "ThroughputType",
-                    "contextParameters": [
-                      {
-                        "contextKey": "InstanceLevelThroughputRequiredInMBPerSec",
-                        "contextValue": "0"
-                      },
-                      {
-                        "contextKey": "InstanceLevelThroughputAvailableInMBPerSec",
-                        "contextValue": "10"
-                      }
-                    ]
-                  },
-                  {
-                    "reasoningId": "MeetsInstanceIOPSDataLogRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "IOPSType",
-                    "contextParameters": [
-                      {
-                        "contextKey": "InstanceLevelIOPSRequiredInIOPerSec",
-                        "contextValue": "0"
-                      },
-                      {
-                        "contextKey": "InstanceLevelIOPSAvailableInIOPerSec",
-                        "contextValue": "6000"
-                      }
-                    ]
-                  },
-                  {
-                    "reasoningId": "MeetsProvisionedComputeTierRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "ComputeTier",
-                    "contextParameters": [
-                      {
-                        "contextKey": "ComputeTier",
-                        "contextValue": "Provisioned"
-                      }
-                    ]
-                  },
-                  {
-                    "reasoningId": "MeetsServiceTierRequirement",
-                    "reasoningString": null,
-                    "reasoningCategory": "ServiceTier",
-                    "contextParameters": [
-                      {
-                        "contextKey": "ServiceTier",
-                        "contextValue": "GeneralPurpose"
+                        "contextKey": "sspfp",
+                        "contextValue": "bceubvcykibmydajpptggz"
                       }
                     ]
                   }
                 ],
-                "migrationTargetPlatform": "AzureSqlManagedInstance",
-                "suitability": "Suitable",
+                "migrationTargetPlatform": "Unknown",
+                "suitability": "Unknown",
                 "migrationIssues": [
                   {
-                    "issueId": "PerformanceDataMissing",
-                    "issueCategory": "Internal",
-                    "impactedObjects": []
+                    "issueId": "n",
+                    "issueCategory": "Issue",
+                    "impactedObjects": [
+                      {
+                        "objectName": "jftubyviwsxmhwpsryeghwdlrs",
+                        "objectType": "mcujkntpdqrjqlyjlohheh"
+                      }
+                    ]
                   }
                 ]
               },
               "azureSqlDBSuitabilityDetails": {
-                "azureSqlSku": null,
-                "replicaAzureSqlSku": [],
-                "sharedResources": null,
-                "monthlyComputeCost": 1199.994624,
-                "monthlyStorageCost": 7.13,
-                "costComponents": [
+                "azureSqlSku": {
+                  "azureSqlServiceTier": "Unknown",
+                  "azureSqlComputeTier": "Unknown",
+                  "azureSqlHardwareGeneration": "Unknown",
+                  "storageMaxSizeInMB": 1,
+                  "predictedDataSizeInMB": 6,
+                  "predictedLogSizeInMB": 15,
+                  "cores": 10,
+                  "azureSqlTargetType": "Unknown"
+                },
+                "replicaAzureSqlSku": [
                   {
-                    "name": "MonthlySecurityCost",
-                    "value": 15.0,
-                    "description": null
+                    "azureSqlServiceTier": "Unknown",
+                    "azureSqlComputeTier": "Unknown",
+                    "azureSqlHardwareGeneration": "Unknown",
+                    "storageMaxSizeInMB": 1,
+                    "predictedDataSizeInMB": 6,
+                    "predictedLogSizeInMB": 15,
+                    "cores": 10,
+                    "azureSqlTargetType": "Unknown"
                   }
                 ],
-                "securitySuitability": "Suitable",
-                "shouldProvisionReplicas": false,
+                "sharedResources": {
+                  "sharedDataDisks": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "sharedLogDisks": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "sharedTempDbDisks": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "numberOfMounts": 25,
+                  "quorumWitness": {
+                    "quorumWitnessType": "Unknown"
+                  }
+                },
+                "monthlyComputeCost": 9,
+                "monthlyStorageCost": 19,
+                "costComponents": [
+                  {
+                    "name": "Unknown",
+                    "value": 23,
+                    "description": "fvvrrffchhyjnbbluxzagujp"
+                  }
+                ],
+                "securitySuitability": "Unknown",
+                "shouldProvisionReplicas": true,
                 "skuReplicationMode": "NotApplicable",
                 "migrationGuidelines": [
                   {
-                    "guidelineId": "MigrateDataFromSourceSqlServerToDB",
-                    "migrationGuidelineCategory": "FailoverCluterInstanceGuideLine",
-                    "migrationGuidelineContext": []
-                  }
-                ],
-                "recommendationReasonings": [],
-                "migrationTargetPlatform": "AzureSqlDatabase",
-                "suitability": "Suitable",
-                "migrationIssues": [
-                  {
-                    "issueId": "ServerCredentials",
-                    "issueCategory": "Warning",
-                    "impactedObjects": [
+                    "guidelineId": "wxvyfekcykbasfuppunpctyh",
+                    "migrationGuidelineCategory": "Unknown",
+                    "migrationGuidelineContext": [
                       {
-                        "objectName": "accessibilitytestdiag917",
-                        "objectType": "ServerCredential"
+                        "contextKey": "tlmeiagyrergfvzjjwocxqjksu",
+                        "contextValue": "umxkrvdfsjt"
                       }
                     ]
-                  },
+                  }
+                ],
+                "recommendationReasonings": [
                   {
-                    "issueId": "PerformanceDataMissing",
-                    "issueCategory": "Internal",
-                    "impactedObjects": []
+                    "reasoningId": "svkzbbuyfbjw",
+                    "reasoningString": "zqszgubjelswuqazwssesnzxcq",
+                    "reasoningCategory": "tvzbwhyqyvfr",
+                    "contextParameters": [
+                      {
+                        "contextKey": "sspfp",
+                        "contextValue": "bceubvcykibmydajpptggz"
+                      }
+                    ]
+                  }
+                ],
+                "migrationTargetPlatform": "Unknown",
+                "suitability": "Unknown",
+                "migrationIssues": [
+                  {
+                    "issueId": "n",
+                    "issueCategory": "Issue",
+                    "impactedObjects": [
+                      {
+                        "objectName": "jftubyviwsxmhwpsryeghwdlrs",
+                        "objectType": "mcujkntpdqrjqlyjlohheh"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "azureSqlVMSuitabilityDetails": {
+                "azureSqlSku": {
+                  "virtualMachineSize": {
+                    "azureVmFamily": "Unknown",
+                    "cores": 27,
+                    "azureSkuName": "Unknown",
+                    "availableCores": 8,
+                    "maxNetworkInterfaces": 19
+                  },
+                  "dataDiskSizes": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "logDiskSizes": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "azureSqlTargetType": "Unknown"
+                },
+                "replicaAzureSqlSku": [
+                  {
+                    "virtualMachineSize": {
+                      "azureVmFamily": "Unknown",
+                      "cores": 27,
+                      "azureSkuName": "Unknown",
+                      "availableCores": 8,
+                      "maxNetworkInterfaces": 19
+                    },
+                    "dataDiskSizes": [
+                      {
+                        "diskType": "Unknown",
+                        "diskSize": "Unknown",
+                        "diskRedundancy": "Unknown",
+                        "storageCost": 9,
+                        "recommendedSizeInGib": 29,
+                        "recommendedThroughputInMbps": 18,
+                        "recommendedIops": 1
+                      }
+                    ],
+                    "logDiskSizes": [
+                      {
+                        "diskType": "Unknown",
+                        "diskSize": "Unknown",
+                        "diskRedundancy": "Unknown",
+                        "storageCost": 9,
+                        "recommendedSizeInGib": 29,
+                        "recommendedThroughputInMbps": 18,
+                        "recommendedIops": 1
+                      }
+                    ],
+                    "azureSqlTargetType": "Unknown"
+                  }
+                ],
+                "sharedResources": {
+                  "sharedDataDisks": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "sharedLogDisks": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "sharedTempDbDisks": [
+                    {
+                      "diskType": "Unknown",
+                      "diskSize": "Unknown",
+                      "diskRedundancy": "Unknown",
+                      "storageCost": 9,
+                      "recommendedSizeInGib": 29,
+                      "recommendedThroughputInMbps": 18,
+                      "recommendedIops": 1
+                    }
+                  ],
+                  "numberOfMounts": 25,
+                  "quorumWitness": {
+                    "quorumWitnessType": "Unknown"
+                  }
+                },
+                "monthlyComputeCost": 3,
+                "monthlyStorageCost": 8,
+                "costComponents": [
+                  {
+                    "name": "Unknown",
+                    "value": 23,
+                    "description": "fvvrrffchhyjnbbluxzagujp"
+                  }
+                ],
+                "securitySuitability": "Unknown",
+                "shouldProvisionReplicas": true,
+                "skuReplicationMode": "NotApplicable",
+                "migrationGuidelines": [
+                  {
+                    "guidelineId": "wxvyfekcykbasfuppunpctyh",
+                    "migrationGuidelineCategory": "Unknown",
+                    "migrationGuidelineContext": [
+                      {
+                        "contextKey": "tlmeiagyrergfvzjjwocxqjksu",
+                        "contextValue": "umxkrvdfsjt"
+                      }
+                    ]
+                  }
+                ],
+                "recommendationReasonings": [
+                  {
+                    "reasoningId": "svkzbbuyfbjw",
+                    "reasoningString": "zqszgubjelswuqazwssesnzxcq",
+                    "reasoningCategory": "tvzbwhyqyvfr",
+                    "contextParameters": [
+                      {
+                        "contextKey": "sspfp",
+                        "contextValue": "bceubvcykibmydajpptggz"
+                      }
+                    ]
+                  }
+                ],
+                "migrationTargetPlatform": "Unknown",
+                "suitability": "Unknown",
+                "migrationIssues": [
+                  {
+                    "issueId": "n",
+                    "issueCategory": "Issue",
+                    "impactedObjects": [
+                      {
+                        "objectName": "jftubyviwsxmhwpsryeghwdlrs",
+                        "objectType": "mcujkntpdqrjqlyjlohheh"
+                      }
+                    ]
                   }
                 ]
               },
               "storageTypeBasedDetails": [
                 {
-                  "storageType": "Rows",
-                  "diskSizeInMB": 6696.25,
-                  "megabytesPerSecondOfRead": 0.0,
-                  "megabytesPerSecondOfWrite": 0.0,
-                  "numberOfReadOperationsPerSecond": 0.0,
-                  "numberOfWriteOperationsPerSecond": 0.0
-                },
-                {
-                  "storageType": "Log",
-                  "diskSizeInMB": 14220.125,
-                  "megabytesPerSecondOfRead": 0.0,
-                  "megabytesPerSecondOfWrite": 0.0,
-                  "numberOfReadOperationsPerSecond": 0.0,
-                  "numberOfWriteOperationsPerSecond": 0.0
+                  "storageType": "u",
+                  "diskSizeInMB": 8,
+                  "megabytesPerSecondOfRead": 10,
+                  "megabytesPerSecondOfWrite": 22,
+                  "numberOfReadOperationsPerSecond": 18,
+                  "numberOfWriteOperationsPerSecond": 27
                 }
               ],
               "productSupportStatus": {
-                "currentVersion": null,
-                "servicePackStatus": "Unknown",
-                "esuStatus": "Unknown",
-                "supportStatus": "Extended",
-                "eta": 34,
-                "currentEsuYear": "Unknown",
-                "mainstreamEndDate": "2021-07-13T00:00:00Z",
-                "extendedSupportEndDate": "2026-07-14T00:00:00Z",
-                "extendedSecurityUpdateYear1EndDate": "0001-01-01T00:00:00",
-                "extendedSecurityUpdateYear2EndDate": "0001-01-01T00:00:00",
-                "extendedSecurityUpdateYear3EndDate": "0001-01-01T00:00:00"
+                "currentVersion": "immfitlwkuuz",
+                "servicePackStatus": "ghom",
+                "esuStatus": "cyeglxfoyaluvjer",
+                "supportStatus": "qqsaiqa",
+                "eta": 11,
+                "currentEsuYear": "sectrldenjbtebcrig",
+                "mainstreamEndDate": "2024-02-05T10:18:09.097Z",
+                "extendedSupportEndDate": "2024-02-05T10:18:09.097Z",
+                "extendedSecurityUpdateYear1EndDate": "2024-02-05T10:18:09.097Z",
+                "extendedSecurityUpdateYear2EndDate": "2024-02-05T10:18:09.097Z",
+                "extendedSecurityUpdateYear3EndDate": "2024-02-05T10:18:09.097Z"
               },
-              "fciMetadata": null,
-              "availabilityReplicaSummary": null,
-              "isClustered": false,
-              "isHighAvailabilityEnabled": false,
+              "fciMetadata": {
+                "state": "Unknown",
+                "isMultiSubnet": true,
+                "fciSharedDiskCount": 17
+              },
+              "availabilityReplicaSummary": {
+                "numberOfSynchronousReadReplicas": 25,
+                "numberOfSynchronousNonReadReplicas": 30,
+                "numberOfAsynchronousReadReplicas": 3,
+                "numberOfAsynchronousNonReadReplicas": 23,
+                "numberOfPrimaryReplicas": 6
+              },
+              "isClustered": true,
+              "isHighAvailabilityEnabled": true,
               "recommendedTargetReasonings": [
                 {
-                  "reasoningId": "RecommendedForSQLVM",
-                  "reasoningString": null,
-                  "reasoningCategory": "RecommendedTargetReasoning",
+                  "reasoningId": "svkzbbuyfbjw",
+                  "reasoningString": "zqszgubjelswuqazwssesnzxcq",
+                  "reasoningCategory": "tvzbwhyqyvfr",
                   "contextParameters": [
                     {
-                      "contextKey": "MigrationIssuesCount",
-                      "contextValue": "0"
-                    },
-                    {
-                      "contextKey": "MigrationWarningsCount",
-                      "contextValue": "0"
-                    },
-                    {
-                      "contextKey": "RecommendedCost",
-                      "contextValue": "29.961408"
-                    }
-                  ]
-                },
-                {
-                  "reasoningId": "RecommendedCost",
-                  "reasoningString": null,
-                  "reasoningCategory": "RecommendedTargetReasoning",
-                  "contextParameters": [
-                    {
-                      "contextKey": "RecommendedCost",
-                      "contextValue": "29.961408"
-                    }
-                  ]
-                },
-                {
-                  "reasoningId": "SQLMICost",
-                  "reasoningString": null,
-                  "reasoningCategory": "RecommendedTargetReasoning",
-                  "contextParameters": [
-                    {
-                      "contextKey": "SQLMICost",
-                      "contextValue": "203.679104"
-                    }
-                  ]
-                },
-                {
-                  "reasoningId": "SQLDBCost",
-                  "reasoningString": null,
-                  "reasoningCategory": "RecommendedTargetReasoning",
-                  "contextParameters": [
-                    {
-                      "contextKey": "SQLDBCost",
-                      "contextValue": "1207.124624"
+                      "contextKey": "sspfp",
+                      "contextValue": "bceubvcykibmydajpptggz"
                     }
                   ]
                 }
               ],
-              "sizingCriterion": "PerformanceBased",
-              "machineArmId": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/dhlodhiccy/providers/Microsoft.Migrate/assessmentprojects/dhccy30279project/machines/daf51245-560b-4caa-9c18-5409ab93d319",
-              "machineName": "SQLTestDBVM46",
-              "instanceName": "MSSQLSERVER",
-              "sqlInstanceSdsArmId": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourcegroups/dhlodhiccy/providers/microsoft.offazure/mastersites/dhccy37819mastersite/sqlsites/dhccy37819sqlsites/sqlservers/a5a6441d-9f63-463e-a720-73fecd90a2e4",
-              "sqlEdition": "Enterprise Edition: Core-based Licensing (64-bit)",
-              "sqlVersion": "SQL Server 2016",
-              "numberOfCoresAllocated": 4,
-              "percentageCoresUtilization": 0.0,
+              "machineArmId": "izyofbusdetalxd",
+              "machineName": "rnvnp",
+              "instanceName": "xui",
+              "sqlInstanceSdsArmId": "hhoz",
+              "sqlEdition": "qryel",
+              "sqlVersion": "yegileyfjs",
+              "numberOfCoresAllocated": 3,
+              "percentageCoresUtilization": 20,
               "logicalDisks": [
                 {
-                  "diskId": "d:",
-                  "diskSizeInMB": 20916.375,
-                  "megabytesPerSecondOfRead": 0.0,
-                  "megabytesPerSecondOfWrite": 0.0,
-                  "numberOfReadOperationsPerSecond": 0.0,
-                  "numberOfWriteOperationsPerSecond": 0.0
+                  "diskId": "aumqoeaxejzlu",
+                  "diskSizeInMB": 25,
+                  "megabytesPerSecondOfRead": 1,
+                  "megabytesPerSecondOfWrite": 7,
+                  "numberOfReadOperationsPerSecond": 17,
+                  "numberOfWriteOperationsPerSecond": 25
                 }
               ],
               "databaseSummary": {
-                "numberOfUserDatabases": 12,
-                "totalDatabaseSizeInMB": 20916.375,
-                "largestDatabaseSizeInMB": 20815.0,
-                "totalDiscoveredUserDatabases": 12
+                "numberOfUserDatabases": 17,
+                "totalDatabaseSizeInMB": 13,
+                "largestDatabaseSizeInMB": 14,
+                "totalDiscoveredUserDatabases": 5
               },
-              "confidenceRatingInPercentage": 0.0,
-              "createdTimestamp": "2023-08-25T09:20:24.5544874Z",
-              "updatedTimestamp": "2023-08-25T09:20:25.2195402Z"
+              "confidenceRatingInPercentage": 13,
+              "sizingCriterion": "PerformanceBased",
+              "createdTimestamp": "2024-02-05T10:18:23.460Z",
+              "updatedTimestamp": "2024-02-05T10:18:23.460Z"
+            },
+            "id": "wtpodstgrbekkxdmarjspuciassrl",
+            "name": "rmxqgkcrxt",
+            "type": "zvsvhfnmotqerlliue",
+            "systemData": {
+              "createdBy": "bascdnwqpfqpbjbrw",
+              "createdByType": "User",
+              "createdAt": "2024-02-05T10:17:26.039Z",
+              "lastModifiedBy": "zuu",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-02-05T10:17:26.040Z"
             }
           }
         ],
-        "nextLink": null
+        "nextLink": "https://microsoft.com/ase"
       }
     }
   }
