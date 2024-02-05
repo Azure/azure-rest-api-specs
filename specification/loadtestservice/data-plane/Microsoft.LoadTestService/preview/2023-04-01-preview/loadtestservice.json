@@ -1367,6 +1367,7 @@
             "type": "string",
             "enum": [
               "JMX_FILE",
+              "TEST_SCRIPT_FILE",
               "USER_PROPERTIES",
               "ADDITIONAL_ARTIFACTS",
               "ZIPPED_ARTIFACTS",
@@ -1380,6 +1381,11 @@
                   "name": "JMX_FILE",
                   "value": "JMX_FILE",
                   "description": "If the file is a JMX script."
+                },
+                {
+                  "name": "TEST_SCRIPT_FILE",
+                  "value": "TEST_SCRIPT_FILE",
+                  "description": "If the file is a test script file."
                 },
                 {
                   "name": "USER_PROPERTIES",
@@ -1978,6 +1984,7 @@
       "description": "Types of file supported.",
       "enum": [
         "JMX_FILE",
+        "TEST_SCRIPT_FILE",
         "USER_PROPERTIES",
         "ADDITIONAL_ARTIFACTS",
         "ZIPPED_ARTIFACTS",
@@ -1991,6 +1998,11 @@
             "name": "JMX_FILE",
             "value": "JMX_FILE",
             "description": "If the file is a JMX script."
+          },
+          {
+            "name": "TEST_SCRIPT_FILE",
+            "value": "TEST_SCRIPT_FILE",
+            "description": "If the file is a test script file."
           },
           {
             "name": "USER_PROPERTIES",
@@ -2838,12 +2850,12 @@
           {
             "name": "VALIDATION_SUCCESS",
             "value": "VALIDATION_SUCCESS",
-            "description": "Test run JMX file is validated."
+            "description": "Test run script file is validated."
           },
           {
             "name": "VALIDATION_FAILURE",
             "value": "VALIDATION_FAILURE",
-            "description": "Test run JMX file validation is failed."
+            "description": "Test run script file validation is failed."
           }
         ]
       }
@@ -2917,6 +2929,10 @@
         "kind": {
           "$ref": "#/definitions/TestKind",
           "description": "Kind of test."
+        },
+        "engineType": {
+          "$ref": "#/definitions/EngineType",
+          "description": "Type of the engine to be used for the test."
         },
         "publicIPDisabled": {
           "type": "boolean",
@@ -3070,6 +3086,10 @@
           "$ref": "#/definitions/TestKind",
           "description": "Kind of test."
         },
+        "engineType": {
+          "$ref": "#/definitions/EngineType",
+          "description": "Type of the load test engine."
+        },
         "publicIPDisabled": {
           "type": "boolean",
           "description": "Inject load test engines without deploying public IP for outbound access"
@@ -3164,7 +3184,8 @@
       "description": "Test kind",
       "enum": [
         "URL",
-        "JMX"
+        "JMX",
+        "TEST_SCRIPT"
       ],
       "x-ms-enum": {
         "name": "TestKind",
@@ -3179,6 +3200,35 @@
             "name": "JMX",
             "value": "JMX",
             "description": "JMX Test"
+          },
+          {
+            "name": "TEST_SCRIPT",
+            "value": "TEST_SCRIPT",
+            "description": "Test Script"
+          }
+        ]
+      }
+    },
+    "EngineType": {
+      "type": "string",
+      "description": "Type of the load test engine.",
+      "enum": [
+        "JMETER",
+        "LOCUST"
+      ],
+      "x-ms-enum": {
+        "name": "EngineType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "JMETER",
+            "value": "JMETER",
+            "description": "JMeter engine."
+          },
+          {
+            "name": "LOCUST",
+            "value": "LOCUST",
+            "description": "Locust engine."
           }
         ]
       }
@@ -3317,6 +3367,11 @@
         "kind": {
           "$ref": "#/definitions/TestKind",
           "description": "Type of test.",
+          "readOnly": true
+        },
+        "engineType": {
+          "$ref": "#/definitions/EngineType",
+          "description": "Type of the load test engine.",
           "readOnly": true
         },
         "publicIPDisabled": {
@@ -4007,7 +4062,7 @@
     "OldTestRunIdQueryParam": {
       "name": "oldTestRunId",
       "in": "query",
-      "description": "Existing test run identifier that should be rerun, if this is provided, the\ntest will run with the JMX file, configuration and app components from the\nexisting test run. You can override the configuration values for new test run\nin the request body.",
+      "description": "Existing test run identifier that should be rerun, if this is provided, the\ntest will run with the test script file, configuration and app components from the\nexisting test run. You can override the configuration values for new test run\nin the request body.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
