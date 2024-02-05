@@ -6640,12 +6640,80 @@
       },
       "description": "Specifies the AI Services Vision parameters for vectorizing a query image or text."
     },
+    "AMLVectorizer": {
+      "type": "object",
+      "x-ms-discriminator-value": "aml",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchVectorizer"
+        }
+      ],
+      "properties": {
+        "amlParameters": {
+          "x-ms-client-name": "AMLParameters",
+          "$ref": "#/definitions/AMLParameters",
+          "description": "Specifies the properties of the AML vectorizer."
+        }
+      },
+      "description": "Specifies an Azure Machine Learning endpoint for generating the vector embedding of a query string."
+    },
+    "AMLParameters": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "x-ms-client-name": "ScoringUri",
+          "type": "string",
+          "format": "uri",
+          "x-nullable": true,
+          "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed."
+        },
+        "key": {
+          "x-ms-client-name": "AuthenticationKey",
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Required for key authentication) The key for the AML service."
+        },
+        "resourceId": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}."
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "x-nullable": true,
+          "description": "(Optional) When specified, indicates the timeout for the http client making the API call."
+        },
+        "region": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Optional for token authentication). The region the AML service is deployed in."
+        },
+        "inputKey": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The JSON path to place the input for the request to be sent to the AML endpoint."
+        },
+        "vectorOutputKey": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The JSON path to retrieve the output vector returned by the AML endpoint."
+        }
+      },
+      "required": [
+        "uri",
+        "inputKey",
+        "vectorOutputKey"
+      ],
+      "description": "Specifies the properties for connecting to an AML vectorizer."
+    },
     "VectorSearchVectorizerKind": {
       "type": "string",
       "enum": [
         "azureOpenAI",
         "customWebApi",
-        "aiServicesVision"
+        "aiServicesVision",
+        "aml"
       ],
       "x-ms-enum": {
         "name": "VectorSearchVectorizerKind",
@@ -6665,6 +6733,11 @@
             "value": "aiServicesVision",
             "name": "AIServicesVision",
             "description": "Generate embeddings for an image or text input at query time using the Azure AI Services Vision Vectorize API."
+          },
+          {
+            "value": "aml",
+            "name": "AML",
+            "description": "Generate embeddings using an Azure Machine Learning endpoint at query time."
           }
         ]
       },
