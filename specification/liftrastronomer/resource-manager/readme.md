@@ -27,7 +27,7 @@ These are the global settings for the astronomer service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-08-01-preview
+tag: package-2023-08-01
 ```
 
 ``` yaml
