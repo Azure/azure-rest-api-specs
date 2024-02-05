@@ -7273,6 +7273,10 @@
       "get": {
         "operationId": "Batch_GetNodeFile",
         "description": "Returns the content of the specified Compute Node file.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -7322,14 +7326,14 @@
           {
             "name": "nodeId",
             "in": "path",
-            "description": "The ID of the Compute Node from which you want to delete the file.",
+            "description": "The ID of the Compute Node.",
             "required": true,
             "type": "string"
           },
           {
             "name": "filePath",
             "in": "path",
-            "description": "The path to the file or directory that you want to delete.",
+            "description": "The path to the file or directory.",
             "required": true,
             "type": "string"
           },
@@ -7363,8 +7367,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             },
             "headers": {
               "client-request-id": {
@@ -7474,14 +7477,14 @@
           {
             "name": "nodeId",
             "in": "path",
-            "description": "The ID of the Compute Node from which you want to delete the file.",
+            "description": "The ID of the Compute Node.",
             "required": true,
             "type": "string"
           },
           {
             "name": "filePath",
             "in": "path",
-            "description": "The path to the file or directory that you want to delete.",
+            "description": "The path to the file or directory.",
             "required": true,
             "type": "string"
           },
@@ -7572,14 +7575,14 @@
           {
             "name": "nodeId",
             "in": "path",
-            "description": "The ID of the Compute Node from which you want to delete the file.",
+            "description": "The ID of the Compute Node.",
             "required": true,
             "type": "string"
           },
           {
             "name": "filePath",
             "in": "path",
-            "description": "The path to the file or directory that you want to delete.",
+            "description": "The path to the file or directory.",
             "required": true,
             "type": "string"
           },
@@ -10074,7 +10077,7 @@
           {
             "name": "Terminate",
             "value": "terminate",
-            "description": "Terminate the Job. The terminateReason in the Job's executionInfo is set to \"TaskFailed\"."
+            "description": "Terminate the Job. The terminationReason in the Job's executionInfo is set to \"TaskFailed\"."
           }
         ]
       }
@@ -10217,7 +10220,8 @@
         },
         "terminateReason": {
           "type": "string",
-          "description": "A string describing the reason the Job ended. This property is set only if the Job is in the completed state. If the Batch service terminates the Job, it sets the reason as follows: JMComplete - the Job Manager Task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry - the Job reached its maxWallClockTime constraint. TerminateJobSchedule - the Job ran as part of a schedule, and the schedule terminated. AllTasksComplete - the Job's onAllTasksComplete attribute is set to terminatejob, and all Tasks in the Job are complete. TaskFailed - the Job's onTaskFailure attribute is set to performExitOptionsJobAction, and a Task in the Job failed with an exit condition that specified a jobAction of terminatejob. Any other string is a user-defined reason specified in a call to the 'Terminate a Job' operation."
+          "description": "A string describing the reason the Job ended. This property is set only if the Job is in the completed state. If the Batch service terminates the Job, it sets the reason as follows: JMComplete - the Job Manager Task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry - the Job reached its maxWallClockTime constraint. TerminateJobSchedule - the Job ran as part of a schedule, and the schedule terminated. AllTasksComplete - the Job's onAllTasksComplete attribute is set to terminatejob, and all Tasks in the Job are complete. TaskFailed - the Job's onTaskFailure attribute is set to performExitOptionsJobAction, and a Task in the Job failed with an exit condition that specified a jobAction of terminatejob. Any other string is a user-defined reason specified in a call to the 'Terminate a Job' operation.",
+          "x-ms-client-name": "terminationReason"
         }
       },
       "required": [
@@ -11061,12 +11065,14 @@
         "userCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule."
+          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.",
+          "x-ms-client-name": "userCpuTime"
         },
         "kernelCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule."
+          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.",
+          "x-ms-client-name": "kernelCpuTime"
         },
         "wallClockTime": {
           "type": "string",
@@ -11412,12 +11418,14 @@
         "userCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job."
+          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.",
+          "x-ms-client-name": "userCpuTime"
         },
         "kernelCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job."
+          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.",
+          "x-ms-client-name": "kernelCpuTime"
         },
         "wallClockTime": {
           "type": "string",
@@ -11488,7 +11496,8 @@
       "properties": {
         "terminateReason": {
           "type": "string",
-          "description": "The text you want to appear as the Job's TerminateReason. The default is 'UserTerminate'."
+          "description": "The text you want to appear as the Job's TerminationReason. The default is 'UserTerminate'.",
+          "x-ms-client-name": "terminationReason"
         }
       }
     },
@@ -14629,12 +14638,14 @@
         "userCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task."
+          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.",
+          "x-ms-client-name": "userCpuTime"
         },
         "kernelCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task."
+          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.",
+          "x-ms-client-name": "kernelCpuTime"
         },
         "wallClockTime": {
           "type": "string",
@@ -14904,7 +14915,8 @@
         "lun": {
           "type": "integer",
           "format": "int32",
-          "description": "The logical unit number. The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive."
+          "description": "The logical unit number. The logicalUnitNumber is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct logicalUnitNumber. The value must be between 0 and 63, inclusive.",
+          "x-ms-client-name": "logicalUnitNumber"
         },
         "caching": {
           "$ref": "#/definitions/CachingType",
@@ -15298,36 +15310,6 @@
         "name"
       ]
     },
-    "IPAddressProvisioningType": {
-      "type": "string",
-      "description": "IPAddressProvisioningType enums",
-      "enum": [
-        "batchmanaged",
-        "usermanaged",
-        "nopublicipaddresses"
-      ],
-      "x-ms-enum": {
-        "name": "IPAddressProvisioningType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BatchManaged",
-            "value": "batchmanaged",
-            "description": "A public IP will be created and managed by Batch. There may be multiple public IPs depending on the size of the Pool."
-          },
-          {
-            "name": "UserManaged",
-            "value": "usermanaged",
-            "description": "Public IPs are provided by the user and will be used to provision the Compute Nodes."
-          },
-          {
-            "name": "NoPublicIPAddresses",
-            "value": "nopublicipaddresses",
-            "description": "No public IP Address will be created."
-          }
-        ]
-      }
-    },
     "ImageInfo": {
       "type": "object",
       "description": "A reference to the Azure Virtual Machines Marketplace Image and additional\ninformation about the Image.",
@@ -15560,6 +15542,36 @@
         }
       }
     },
+    "IpAddressProvisioningType": {
+      "type": "string",
+      "description": "IPAddressProvisioningType enums",
+      "enum": [
+        "batchmanaged",
+        "usermanaged",
+        "nopublicipaddresses"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressProvisioningType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BatchManaged",
+            "value": "batchmanaged",
+            "description": "A public IP will be created and managed by Batch. There may be multiple public IPs depending on the size of the Pool."
+          },
+          {
+            "name": "UserManaged",
+            "value": "usermanaged",
+            "description": "Public IPs are provided by the user and will be used to provision the Compute Nodes."
+          },
+          {
+            "name": "NoPublicIpAddresses",
+            "value": "nopublicipaddresses",
+            "description": "No public IP Address will be created."
+          }
+        ]
+      }
+    },
     "LinuxUserConfiguration": {
       "type": "object",
       "description": "Properties used to create a user Account on a Linux Compute Node.",
@@ -15654,7 +15666,7 @@
           "description": "The Azure Storage Container to mount using blob FUSE on each node. This property is mutually exclusive with all other properties."
         },
         "nfsMountConfiguration": {
-          "$ref": "#/definitions/NFSMountConfiguration",
+          "$ref": "#/definitions/NfsMountConfiguration",
           "description": "The NFS file system to mount on each node. This property is mutually exclusive with all other properties."
         },
         "cifsMountConfiguration": {
@@ -15693,28 +15705,6 @@
         "coordinationCommandLine"
       ]
     },
-    "NFSMountConfiguration": {
-      "type": "object",
-      "description": "Information used to connect to an NFS file system.",
-      "properties": {
-        "source": {
-          "type": "string",
-          "description": "The URI of the file system to mount."
-        },
-        "relativeMountPath": {
-          "type": "string",
-          "description": "The relative path on the compute node where the file system will be mounted. All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
-        },
-        "mountOptions": {
-          "type": "string",
-          "description": "Additional command line options to pass to the mount command. These are 'net use' options in Windows and 'mount' options in Linux."
-        }
-      },
-      "required": [
-        "source",
-        "relativeMountPath"
-      ]
-    },
     "NameValuePair": {
       "type": "object",
       "description": "Represents a name-value pair.",
@@ -15746,7 +15736,7 @@
           "description": "The configuration for endpoints on Compute Nodes in the Batch Pool. Pool endpoint configuration is only supported on Pools with the virtualMachineConfiguration property."
         },
         "publicIPAddressConfiguration": {
-          "$ref": "#/definitions/PublicIPAddressConfiguration",
+          "$ref": "#/definitions/PublicIpAddressConfiguration",
           "description": "The Public IPAddress configuration for Compute Nodes in the Batch Pool. Public IP configuration property is only supported on Pools with the virtualMachineConfiguration property.",
           "x-ms-client-name": "publicIpAddressConfiguration"
         },
@@ -15773,7 +15763,7 @@
           "description": "The configuration for endpoints on Compute Nodes in the Batch Pool. Pool endpoint configuration is only supported on Pools with the virtualMachineConfiguration property."
         },
         "publicIPAddressConfiguration": {
-          "$ref": "#/definitions/PublicIPAddressConfiguration",
+          "$ref": "#/definitions/PublicIpAddressConfiguration",
           "description": "The Public IPAddress configuration for Compute Nodes in the Batch Pool. Public IP configuration property is only supported on Pools with the virtualMachineConfiguration property.",
           "x-ms-client-name": "publicIpAddressConfiguration"
         },
@@ -15837,6 +15827,28 @@
           }
         ]
       }
+    },
+    "NfsMountConfiguration": {
+      "type": "object",
+      "description": "Information used to connect to an NFS file system.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The URI of the file system to mount."
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "description": "The relative path on the compute node where the file system will be mounted. All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
+        },
+        "mountOptions": {
+          "type": "string",
+          "description": "Additional command line options to pass to the mount command. These are 'net use' options in Windows and 'mount' options in Linux."
+        }
+      },
+      "required": [
+        "source",
+        "relativeMountPath"
+      ]
     },
     "OSDisk": {
       "type": "object",
@@ -15935,7 +15947,7 @@
           {
             "name": "TerminateJob",
             "value": "terminatejob",
-            "description": "Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'."
+            "description": "Terminate the Job. The Job's terminationReason is set to 'AllTasksComplete'."
           }
         ]
       }
@@ -15959,7 +15971,7 @@
           {
             "name": "PerformExitOptionsJobAction",
             "value": "performexitoptionsjobaction",
-            "description": "Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'."
+            "description": "Terminate the Job. The Job's terminationReason is set to 'AllTasksComplete'."
           }
         ]
       }
@@ -16069,12 +16081,12 @@
         "uploadCondition"
       ]
     },
-    "PublicIPAddressConfiguration": {
+    "PublicIpAddressConfiguration": {
       "type": "object",
       "description": "The public IP Address configuration of the networking configuration of a Pool.",
       "properties": {
         "provision": {
-          "$ref": "#/definitions/IPAddressProvisioningType",
+          "$ref": "#/definitions/IpAddressProvisioningType",
           "description": "The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.",
           "x-ms-client-name": "IpAddressProvisioningType"
         },
