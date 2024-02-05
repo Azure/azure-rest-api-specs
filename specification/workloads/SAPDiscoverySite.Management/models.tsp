@@ -9,9 +9,8 @@ using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 namespace Microsoft.Workloads;
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
  * Defines the provisioning states.
