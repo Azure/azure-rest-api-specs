@@ -197,7 +197,8 @@
             "in": "path",
             "description": "The quota name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -247,7 +248,8 @@
             "in": "path",
             "description": "The quota name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "name": "QuotaBucketRequest",
@@ -666,7 +668,7 @@
       "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/EncryptionIdentityType",
+          "$ref": "#/definitions/type",
           "description": "Managed identity type to use for accessing encryption key Url."
         },
         "resourceId": {
@@ -674,30 +676,6 @@
           "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.",
           "x-nullable": true
         }
-      }
-    },
-    "EncryptionIdentityType": {
-      "type": "string",
-      "description": "Managed identity type to use for accessing encryption key Url.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "EncryptionIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned identity."
-          }
-        ]
       }
     },
     "EncryptionProperties": {
@@ -1060,6 +1038,30 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "type": {
+      "type": "string",
+      "description": "Managed identity type to use for accessing encryption key Url.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned identity."
           }
         ]
       }

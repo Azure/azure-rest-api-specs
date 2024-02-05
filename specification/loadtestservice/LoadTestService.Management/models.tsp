@@ -49,8 +49,9 @@ enum ResourceState {
   ...ResourceProvisioningState,
 }
 
+// can be renamed but since the type is already used in published docs, it will be a breaking change.
 @doc("Managed identity type to use for accessing encryption key Url.")
-enum EncryptionIdentityType {
+enum type {
   @doc("System assigned identity.")
   SystemAssigned: "SystemAssigned",
 
@@ -96,7 +97,7 @@ model OutboundEnvironmentEndpoint {
 @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
 model EncryptionIdentity {
   @doc("Managed identity type to use for accessing encryption key Url.")
-  type?: EncryptionIdentityType;
+  type?: type;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "We need resourceId to be nullable."
   @doc("User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.")
@@ -145,6 +146,7 @@ model QuotaResource is ProxyResource<QuotaResourceProperties> {
   @key("quotaBucketName")
   @path
   @segment("quotas")
+  @extension("x-ms-parameter-location", "method")
   name: string;
 }
 
