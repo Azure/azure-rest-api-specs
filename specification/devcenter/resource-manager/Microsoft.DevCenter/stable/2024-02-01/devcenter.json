@@ -1055,31 +1055,31 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{environmentDefinitionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
+        }
+      ],
       "get": {
         "tags": [
           "Environment Definitions"
         ],
         "description": "Gets an environment definition from the catalog.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ProjectNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CatalogNameParameter"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
-          }
-        ],
         "operationId": "EnvironmentDefinitions_GetByProjectCatalog",
         "responses": {
           "200": {
@@ -3514,306 +3514,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/devboxdefinitions": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevCenterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CatalogNameParameter"
-        },
-        {
-          "$ref": "commonDefinitions.json#/parameters/TopParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "Catalog Dev Box Definitions"
-        ],
-        "description": "List Dev Box definitions in the catalog.",
-        "operationId": "CatalogDevBoxDefinitions_ListByCatalog",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DevBoxDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "CatalogDevBoxDefinitions_ListByCatalog": {
-            "$ref": "./examples/CatalogDevBoxDefinitions_ListByCatalog.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/devboxdefinitions/{devBoxDefinitionName}": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevCenterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CatalogNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevBoxDefinitionName"
-        }
-      ],
-      "get": {
-        "tags": [
-          "Catalog Dev Box Definitions"
-        ],
-        "description": "Gets a Dev Box definition from the catalog",
-        "operationId": "CatalogDevBoxDefinitions_Get",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DevBoxDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CatalogDevBoxDefinitions_Get": {
-            "$ref": "./examples/CatalogDevBoxDefinitions_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/devboxdefinitions/{devBoxDefinitionName}/getErrorDetails": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevCenterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CatalogNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevBoxDefinitionName"
-        }
-      ],
-      "post": {
-        "tags": [
-          "Catalog Dev Box Definitions"
-        ],
-        "description": "Gets Catalog Devbox Definition error details",
-        "operationId": "CatalogDevBoxDefinitions_GetErrorDetails",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "vdi.json#/definitions/CatalogResourceValidationErrorDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CatalogDevBoxDefinitions_GetErrorDetails": {
-            "$ref": "./examples/CatalogDevBoxDefinitions_GetErrorDetails.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevCenterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CatalogNameParameter"
-        },
-        {
-          "$ref": "commonDefinitions.json#/parameters/TopParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "Customization Tasks"
-        ],
-        "description": "List Tasks in the catalog.",
-        "operationId": "CustomizationTasks_ListByCatalog",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CustomizationTaskListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_ListByCatalog": {
-            "$ref": "./examples/CustomizationTasks_ListByCatalog.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevCenterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CatalogNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CustomizationTaskNameParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "Customization Tasks"
-        ],
-        "description": "Gets a Task from the catalog",
-        "operationId": "CustomizationTasks_Get",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CustomizationTask"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_Get": {
-            "$ref": "./examples/CustomizationTasks_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevCenterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CatalogNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CustomizationTaskNameParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "Customization Tasks"
-        ],
-        "description": "Gets Customization Task error details",
-        "operationId": "CustomizationTasks_GetErrorDetails",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "vdi.json#/definitions/CatalogResourceValidationErrorDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_GetErrorDetails": {
-            "$ref": "./examples/CustomizationTasks_GetErrorDetails.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/environmentDefinitions": {
       "get": {
         "tags": [
@@ -4017,7 +3717,33 @@
         "displayName": {
           "type": "string",
           "description": "The display name of the devcenter."
+        },
+        "projectCatalogSettings": {
+          "$ref": "#/definitions/DevCenterProjectCatalogSettings",
+          "description": "Dev Center settings to be used when associating a project with a catalog."
         }
+      }
+    },
+    "DevCenterProjectCatalogSettings": {
+      "type": "object",
+      "description": "Project catalog settings for project catalogs under a project associated to this dev center.",
+      "properties": {
+        "catalogItemSyncEnableStatus": {
+          "description": "Whether project catalogs associated with projects in this dev center can be configured to sync catalog items.",
+          "$ref": "#/definitions/CatalogItemSyncEnableStatus"
+        }
+      }
+    },
+    "CatalogItemSyncEnableStatus": {
+      "description": "Catalog item sync types enable or disable status. Indicates whether project catalogs are allowed to sync catalog items under projects associated to this dev center.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CatalogItemSyncEnableStatus",
+        "modelAsString": true
       }
     },
     "Encryption": {
@@ -4115,12 +3841,12 @@
           "description": "The display name of the project."
         },
         "catalogSettings": {
-          "$ref": "#/definitions/CatalogSettings",
+          "$ref": "#/definitions/ProjectCatalogSettings",
           "description": "Settings to be used when associating a project with a catalog."
         }
       }
     },
-    "CatalogSettings": {
+    "ProjectCatalogSettings": {
       "description": "Settings to be used when associating a project with a catalog.",
       "type": "object",
       "properties": {
@@ -4353,6 +4079,13 @@
           "format": "int32",
           "readOnly": true,
           "minimum": 0
+        },
+        "syncedCatalogItemTypes": {
+          "description": "Indicates catalog item types that were synced.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogItemType"
+          }
         }
       }
     },
@@ -5189,11 +4922,6 @@
         }
       ],
       "properties": {
-        "resourceId": {
-          "description": "The id of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "description": "Custom operation properties, populated only for a successful operation.",
           "type": "object",
@@ -5302,96 +5030,6 @@
         "value": {
           "description": "The name of the resource.",
           "type": "string"
-        }
-      }
-    },
-    "CustomizationTaskListResult": {
-      "description": "Results of the Task list operation.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Current page of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomizationTask"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "URL to get the next set of results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "CustomizationTask": {
-      "description": "Represents a Task to be used in customizing a Dev Box.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Task properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CustomizationTaskProperties"
-        }
-      }
-    },
-    "CustomizationTaskProperties": {
-      "description": "Properties of a Task.",
-      "type": "object",
-      "properties": {
-        "inputs": {
-          "description": "Inputs to the task.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/CustomizationTaskInput"
-          },
-          "readOnly": true
-        },
-        "timeout": {
-          "description": "The default timeout for the task.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "description": "Validation status for the Task.",
-          "$ref": "vdi.json#/definitions/CatalogResourceValidationStatus",
-          "readOnly": true
-        }
-      }
-    },
-    "CustomizationTaskInput": {
-      "description": "Input for a Task.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Description of the input.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of the input.",
-          "type": "string",
-          "enum": [
-            "string",
-            "number",
-            "boolean"
-          ],
-          "x-ms-enum": {
-            "name": "CustomizationTaskInputType",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "required": {
-          "description": "Whether or not the input is required.",
-          "type": "boolean",
-          "readOnly": true
         }
       }
     },
@@ -5680,17 +5318,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "CustomizationTaskNameParameter": {
-      "name": "taskName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the Task.",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
-      "minLength": 3,
-      "maxLength": 63
     },
     "EnvironmentDefinitionNameParameter": {
       "name": "environmentDefinitionName",
