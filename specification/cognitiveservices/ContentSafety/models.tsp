@@ -102,20 +102,6 @@ model AnalyzeTextOptions {
   @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("The incidents to detect.")
   incidents?: IncidentOptions;
-
-  @added(ContentSafety.Versions.v2023_10_30_Preview)
-  @doc("The customized categories will be analyzed. If they are not assigned, the analysis results for all available customized categories will be returned.")
-  customizedCategories?: CustomizedCategory[];
-}
-
-@added(ContentSafety.Versions.v2023_10_30_Preview)
-@doc("Customized category for inference.")
-model CustomizedCategory {
-  @doc("Category name")
-  categoryName: string;
-
-  @doc("Model ID for the category. If not provided, the latest available model will be used.")
-  modelId: string;
 }
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
@@ -143,29 +129,6 @@ model AnalyzeTextResult {
   @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("Chunks in the original text detected as harmful content. Analysis result and scores are caused by these.")
   citation?: string[];
-
-  @added(ContentSafety.Versions.v2023_10_30_Preview)
-  @doc("Analysis result for customized categories.")
-  customizedCategoriesAnalysis: TextCustomizedCategoryAnalysis[];
-}
-
-@added(ContentSafety.Versions.v2023_10_30_Preview)
-@doc("Text customized category analysis result.")
-model TextCustomizedCategoryAnalysis {
-  @doc("Customized category name")
-  categoryName: string;
-
-  @doc("customized category analysis")
-  customizedCategoriesAnalysis: TextCustomizedCategoryClassResult[];
-}
-
-@added(ContentSafety.Versions.v2023_10_30_Preview)
-@doc("customized category analysis result")
-model TextCustomizedCategoryClassResult {
-  id: int32;
-
-  @renamedFrom(Versions.v2023_10_30_Preview, "name")
-  className: string;
 }
 
 @doc("The result of blocklist match.")
@@ -611,13 +574,9 @@ model PreDefinedConcept {
 
 @added(Versions.v2023_10_30_Preview)
 @doc("Label definition.")
-@renamedFrom(Versions.v2023_10_30_Preview, "SubCategory")
-model Class {
+model SubCategory {
   id: int32;
-
-  @renamedFrom(Versions.v2023_10_30_Preview, "name")
-  className: string;
-
+  name: string;
   statements: string[];
 }
 
@@ -632,53 +591,10 @@ model TextCustomizedCategory {
   @maxLength(64)
   categoryName: string;
 
-  @doc("A predefined concept with its definition can be used directly in the subcategories.")
-  @added(Versions.v2023_10_30_Preview)
-  @removed(Versions.v2023_10_30_Preview)
   preDefinedConcepts?: PreDefinedConcept[];
-
-  @doc("Subcategories are detailed classes of the category. It is required there is a class 'safe' with id=0.")
-  @renamedFrom(Versions.v2023_10_30_Preview, "subCategories")
-  classes: Class[];
-
-  @added(Versions.v2023_10_30_Preview)
-  @removed(Versions.v2023_10_30_Preview)
+  subCategories: SubCategory[];
   emphases?: string[];
-
-  @doc("Blob that stores the examples.")
   exampleBlobUrl?: url;
-}
-
-@added(ContentSafety.Versions.v2023_10_30_Preview)
-@doc("The response for async training triggering.")
-model SubmitModelTrainingResponse {
-  ...AcceptedResponse;
-
-  @header("operation-location")
-  @doc("The location of the status API for monitoring the triggered model.")
-  modelUrl: string;
-}
-
-@added(ContentSafety.Versions.v2023_10_30_Preview)
-model AsyncJobWarning {
-  code: string;
-  messgae: string;
-}
-
-@added(ContentSafety.Versions.v2023_10_30_Preview)
-@resource("text/generatePromptTasks")
-model GeneratePromptTaskDetail {
-  @doc("The id of image batch analysis task.")
-  @key("taskId")
-  @visibility("read")
-  @maxLength(64)
-  taskId: string;
-
-  @doc("The status of the batch image analysis task.")
-  status: GeneratePromptStatus;
-
-  @doc("Return error detail when the task failed.")
-  error?: Azure.Core.Foundations.Error;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
@@ -689,20 +605,6 @@ enum ImageWithTextCategory {
   SelfHarm,
   Sexual,
   Violence,
-}
-
-@added(ContentSafety.Versions.v2023_10_30_Preview)
-@parentResource(TextCustomizedCategory)
-@resource("models")
-model TextTrainedModel {
-  @key
-  modelId: string;
-
-  status: ModelStatus;
-  createdTime: utcDateTime;
-  lastUpdateTime: utcDateTime;
-  warnings?: AsyncJobWarning[];
-  errors?: string[];
 }
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
