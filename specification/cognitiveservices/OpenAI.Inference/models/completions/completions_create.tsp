@@ -11,7 +11,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
-@removed(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
 The configuration information for a completions request.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
@@ -146,7 +145,6 @@ model CompletionsOptions {
   `model`?: string;
 }
 
-@removed(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
 Representation of the response data from a completions request.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
@@ -171,7 +169,6 @@ model Completions {
   results for different prompts may arrive at different times or in different orders.
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
-  @removed(ServiceApiVersions.v2024_02_15_Preview)
   @projectedName("json", "prompt_filter_results")
   promptFilterResults?: ContentFilterResultsForPrompt[];
 
@@ -190,7 +187,6 @@ model Completions {
   usage: CompletionsUsage;
 }
 
-@removed(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
 The representation of a single prompt completion as part of an overall completions request.
 Generally, `n` choices are generated per provided prompt with a default value of 1.
@@ -211,7 +207,6 @@ model Choice {
   determines the intensity and risk level of harmful content) and if it has been filtered or not.
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
-  @removed(ServiceApiVersions.v2024_02_15_Preview)
   @projectedName("json", "content_filter_results")
   contentFilterResults?: ContentFilterResultsForChoice;
 
@@ -230,7 +225,6 @@ model Choice {
 
 alias NullableFloat = float32 | null;
 
-@removed(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
 Representation of a log probabilities model for a completions generation.
 """)

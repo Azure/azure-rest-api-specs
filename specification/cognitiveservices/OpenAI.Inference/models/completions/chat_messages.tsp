@@ -136,7 +136,6 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   toolCalls?: ChatCompletionsToolCall[];
 
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @removed(ServiceApiVersions.v2024_02_15_Preview)
   @projectedName("json", "function_call")
   @doc("""
   The function call that must be resolved and have its output appended to subsequent input messages for the chat
@@ -161,7 +160,6 @@ model ChatRequestToolMessage extends ChatRequestMessage {
 }
 
 @added(ServiceApiVersions.v2023_07_01_Preview)
-@removed(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A request chat message representing requested output from a configured function.")
 model ChatRequestFunctionMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'function' for function messages.")
@@ -194,7 +192,6 @@ model ChatResponseMessage {
   toolCalls?: ChatCompletionsToolCall[];
 
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @removed(ServiceApiVersions.v2024_02_15_Preview)
   @projectedName("json", "function_call")
   @doc("""
   The function call that must be resolved and have its output appended to subsequent input messages for the chat

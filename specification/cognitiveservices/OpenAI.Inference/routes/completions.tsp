@@ -20,7 +20,6 @@ Completions support a wide variety of tasks and generate text that continues fro
 provided prompt data.
 """)
 @actionSeparator("/")
-@removed(ServiceApiVersions.v2024_02_15_Preview)
 @action("completions") //@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<
   Deployment,

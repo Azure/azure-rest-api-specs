@@ -63,7 +63,6 @@ model ChatCompletionsOptions {
 
   @doc("A list of functions the model may generate JSON inputs for.")
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @removed(ServiceApiVersions.v2024_02_15_Preview)
   functions?: FunctionDefinition[];
 
   @doc("""
@@ -74,7 +73,6 @@ model ChatCompletionsOptions {
     """)
   @projectedName("json", "function_call")
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @removed(ServiceApiVersions.v2024_02_15_Preview)
   functionCall?: FunctionCallConfig;
 
   @doc("The maximum number of tokens to generate.")
