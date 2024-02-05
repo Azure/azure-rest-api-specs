@@ -13,7 +13,8 @@ namespace Azure.ProgrammableConnectivity;
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   SupportsClientRequestId &
-  RequestHeadersTrait<ApcGatewayIdHeader>;
+  RequestHeadersTrait<ApcGatewayIdHeader> &
+  ResponseHeadersTrait<RequestIdResponseHeader>;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ApcError>;
 
