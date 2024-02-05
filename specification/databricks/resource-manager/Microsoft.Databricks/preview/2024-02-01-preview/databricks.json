@@ -881,7 +881,14 @@
             "id": {
               "type": "string",
               "format": "arm-id",
-              "description": "The resource ID of Azure Databricks Access Connector Resource."
+              "description": "The resource ID of Azure Databricks Access Connector Resource.",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.Databricks/accessConnectors"
+                  }
+                ]
+              }
             },
             "identityType": {
               "type": "string",
@@ -898,7 +905,14 @@
             "userAssignedIdentityId": {
               "type": "string",
               "format": "arm-id",
-              "description": "The resource ID of the User Assigned Identity associated with the Access Connector Resource. This is required for type 'UserAssigned' and not valid for type 'SystemAssigned'."
+              "description": "The resource ID of the User Assigned Identity associated with the Access Connector Resource. This is required for type 'UserAssigned' and not valid for type 'SystemAssigned'.",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+                  }
+                ]
+              }
             }
           },
           "required": [
