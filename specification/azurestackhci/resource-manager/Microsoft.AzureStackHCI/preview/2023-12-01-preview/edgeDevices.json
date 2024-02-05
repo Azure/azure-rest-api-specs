@@ -48,7 +48,7 @@
         "description": "List EdgeDevice resources by parent",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -64,7 +64,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -87,7 +87,7 @@
         "description": "Get a EdgeDevice",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -112,7 +112,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -130,7 +130,7 @@
         "description": "Create a EdgeDevice",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -177,7 +177,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -186,8 +186,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create Edge Device": {
-            "$ref": "./examples/PutEdgeDevices.json"
+          "Create HCI Edge Device": {
+            "$ref": "./examples/CreateHciEdgeDevice.json"
           }
         }
       },
@@ -199,7 +199,7 @@
         "description": "Delete a EdgeDevice",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -215,9 +215,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -238,7 +235,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -262,7 +259,7 @@
         "description": "A long-running resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -310,7 +307,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -339,25 +336,6 @@
           },
           "x-ms-identifiers": []
         },
-        "switchDetails": {
-          "type": "array",
-          "description": "List of switch details for edge device.",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SwitchDetail"
-          },
-          "x-ms-identifiers": []
-        },
-        "systemInfo": {
-          "$ref": "#/definitions/SystemInfo",
-          "description": "Specifies the system info obtained from the device.",
-          "readOnly": true
-        },
-        "sbeDeploymentPackageInfo": {
-          "$ref": "#/definitions/SbeDeploymentPackageInfo",
-          "description": "Solution builder extension (SBE) deployment package information.",
-          "readOnly": true
-        },
         "deviceMetadata": {
           "type": "string",
           "description": "device metadata details."
@@ -383,7 +361,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -412,18 +390,18 @@
       "type": "object",
       "description": "Edge Device properties",
       "properties": {
-        "deviceConfiguration": {
-          "$ref": "#/definitions/DeviceConfiguration",
-          "description": "Device Configuration"
-        },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "Provisioning state of edgeDevice resource",
           "readOnly": true
+        },
+        "deviceType": {
+          "$ref": "#/definitions/DeviceType"
         }
       },
+      "discriminator": "deviceType",
       "required": [
-        "deviceConfiguration"
+        "deviceType"
       ]
     },
     "NicDetail": {
@@ -500,65 +478,98 @@
         "adapterName"
       ]
     },
-    "ProvisioningState": {
+    "DeviceType": {
       "type": "string",
-      "description": "The provisioning state of a resource.",
+      "description": "Edge device type based on host OS installed.",
       "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "NotSpecified",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
+        "HCI",
+        "Linux"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "DeviceType",
         "modelAsString": true,
         "values": [
           {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
+            "name": "HCI",
+            "value": "HCI",
+            "description": "Arc-enabled edge device with HCI OS."
           },
           {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The resource provision state is not specified"
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource create request has been accepted"
+            "name": "Linux",
+            "value": "Linux",
+            "description": "Arc-enabled edge device with Linux OS."
           }
         ]
       }
+    },
+    "HciEdgeDevice": {
+      "type": "object",
+      "description": "Arc-enabled edge device with HCI OS.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HciEdgeDeviceProperties",
+          "description": "properties for Arc-enabled edge device with HCI OS."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDevice"
+        }
+      ]
+    },
+    "HciEdgeDeviceProperties": {
+      "type": "object",
+      "description": "properties for Arc-enabled edge device with HCI OS.",
+      "properties": {
+        "deviceConfiguration": {
+          "$ref": "#/definitions/HciDeviceConfiguration",
+          "description": "The device Configuration for HCI device."
+        }
+      },
+      "required": [
+        "deviceConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDeviceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "HCI"
+    },
+    "HciDeviceConfiguration": {
+      "type": "object",
+      "description": "The device Configuration for HCI device.",
+      "properties": {
+        "switchDetails": {
+          "type": "array",
+          "description": "List of switch details for edge device.",
+          "items": {
+            "$ref": "#/definitions/SwitchDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "switchName"
+          ]
+        },
+        "systemInfo": {
+          "$ref": "#/definitions/SystemInfo",
+          "description": "Specifies the system info obtained from the device.",
+          "readOnly": true
+        },
+        "sbeDeploymentPackageInfo": {
+          "$ref": "#/definitions/SbeDeploymentPackageInfo",
+          "description": "Solution builder extension (SBE) deployment package information.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceConfiguration"
+        }
+      ]
     },
     "SbeDeploymentPackageInfo": {
       "type": "object",

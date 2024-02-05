@@ -1,5 +1,6 @@
 import "./dstsapplication.tsp";
 import "./dsmsallowlist.tsp";
+import "./dstsserviceclientidentity.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
