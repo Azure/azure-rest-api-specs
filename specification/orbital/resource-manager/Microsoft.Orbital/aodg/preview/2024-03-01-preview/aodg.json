@@ -371,7 +371,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -560,7 +560,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -605,7 +605,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -645,7 +645,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -870,7 +870,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -912,7 +912,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1041,7 +1041,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1078,7 +1078,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1142,42 +1142,6 @@
       ],
       "description": "Ground Station contains one or more antennas."
     },
-    "CloudErrorBody": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the service."
-    },
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "description": "An error response from the service."
-    },
     "Capability": {
       "type": "string",
       "description": "Capability of the Ground Station.",
@@ -1197,22 +1161,12 @@
       ],
       "properties": {
         "globalCommunicationsSite": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "required": [
-            "id"
-          ],
-          "description": "A reference to Azure Orbital Digital Ground site.",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The Azure Orbital Digital Ground site's resource ID."
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
             }
-          }
+          ],
+          "description": "A reference to Azure Orbital Digital Ground site."
         }
       },
       "description": "Properties object for an edge site."
@@ -1417,21 +1371,11 @@
           "description": "Globally-unique identifier for this connection that is to be used as a circuit ID."
         },
         "edgeSite": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "required": [
-            "id"
-          ],
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The edge site's resource ID."
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
             }
-          },
+          ],
           "description": "A reference to an Microsoft.Orbital/edgeSites resource to route traffic for."
         },
         "edgeSitePartnerRouter": {
@@ -1453,21 +1397,11 @@
           "description": "The name of the partner router that cross-connects with the Orbital Edge Router at the edge site."
         },
         "groundStation": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "required": [
-            "id"
-          ],
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The ground station's resource ID."
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
             }
-          },
+          ],
           "description": "A reference to an Microsoft.Orbital/groundStations resource to route traffic for."
         },
         "groundStationPartnerRouter": {
@@ -1628,40 +1562,15 @@
           "description": "Release Status of a ground station."
         },
         "globalCommunicationsSite": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "required": [
-            "id"
-          ],
-          "description": "A reference to Azure Orbital Digital Ground site.",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The Azure Orbital Digital Ground site's resource ID."
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
             }
-          }
+          ],
+          "description": "A reference to Azure Orbital Digital Ground site."
         }
       },
       "description": "List of ground station resource properties."
-    },
-    "Status": {
-      "readOnly": true,
-      "description": "The status of operation.",
-      "type": "string",
-      "enum": [
-        "Succeeded",
-        "Canceled",
-        "Failed",
-        "Running"
-      ],
-      "x-ms-enum": {
-        "name": "Status",
-        "modelAsString": true
-      }
     },
     "ProvisionedBandwidth": {
       "type": "object",
@@ -1676,6 +1585,19 @@
         }
       },
       "description": "The approximate bandwidth provisioned for a partner on a global communications site."
+    },
+    "ResourceReference": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Resource Reference."
     }
   },
   "parameters": {
