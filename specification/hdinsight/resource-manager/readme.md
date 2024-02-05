@@ -45,12 +45,26 @@ input-file:
 suppressions:
   - code: ResourceNameRestriction
     reason: Keep compatibility with old API version.
-  - code: TrackedResourcePatchOperation
-    reason: This is a false positive, the "tags" property is defined in TrackedResource.
   - code: OperationIdNounVerb
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters"].get.operationId
     reason: The operation id is valid.
   - code: EnumInsteadOfBoolean
-    reason: The boolean property is expected.
+  - code: TrackedResourcePatchOperation
+    where:
+      - $.definitions.Cluster
+    reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
+  - code: EnumInsteadOfBoolean
+    where:
+      - $.definitions.ClusterAccessProfile.properties.enableInternalIngress
+      - $.definitions.ClusterPoolNetworkProfile.properties.enablePrivateApiServer
+      - $.definitions.ClusterRangerPluginProfile.properties.enabled
+      - $.definitions.RangerUsersyncSpec.properties.enabled
+      - $.definitions.KafkaProfile.properties.enableKRaft
+      - $.definitions.KafkaProfile.enablePublicEndpoints
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeClusterPool
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeAllClusterNodes
+    reason: They are used for enabling or disabling a feature. Using a boolean type is more user friendly, and they will be not extended to other values.
 ```
 ### Tag: package-2023-06-preview
 
