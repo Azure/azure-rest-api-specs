@@ -15,7 +15,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
  * Specify action.
  */
 enum Action {
+  @doc("This will allow the HTTP requests")
   Allow,
+
+  @doc("This will not allow the HTTP requests")
   Deny,
 }
 
@@ -23,7 +26,10 @@ enum Action {
  * Specify condition.
  */
 enum Condition {
+  @doc("and condition for all proxy rules")
   and,
+
+  @doc("or condition for all proxy rules")
   or,
 }
 
@@ -31,11 +37,22 @@ enum Condition {
  * The current provisioning state.
  */
 enum ProvisioningState {
+  @doc("Requested provisioing state has been accepted")
   Accepted,
+
+  @doc("Requested provisioing state has been successfully applied")
   Succeeded,
+
+  @doc("Requested provisioing state is being applied")
   Updating,
+
+  @doc("Requested provisioing state is deleting a resource")
   Deleting,
+
+  @doc("Requested provisioing state could not be applied")
   Failed,
+
+  @doc("Requested provisioing state has been has been canceled")
   Canceled,
 }
 
@@ -43,7 +60,10 @@ enum ProvisioningState {
  * Administrative state.
  */
 enum EnableDisableState {
+  @doc("Administrative state has been enabled")
   Enable,
+
+  @doc("Administrative state has been disabled")
   Disable,
 }
 
@@ -51,17 +71,40 @@ enum EnableDisableState {
  * Configuration state for the resource.
  */
 enum ConfigurationState {
+  @doc("Requested Configuration state for the resource has been applied")
   Succeeded,
+
+  @doc("Requested Configuration state for the resource could not be applied")
   Failed,
+
+  @doc("Requested Configuration state for the resource has been rejected")
   Rejected,
+
+  @doc("Requested Configuration state for the resource has been accepted")
   Accepted,
+
+  @doc("Requested Configuration state for the resource has been provisioned")
   Provisioned,
+  
+  @doc("Error in provisioning requested Configuration state for the resource")
   ErrorProvisioning,
+
+  @doc("Requested Configuration state for the resource is Deprovisioning")
   Deprovisioning,
+
+  @doc("Requested Configuration state for the resource has been Deprovisioned")
   Deprovisioned,
+
+  @doc("Error in Deprovisioning requested Configuration state for the resource")
   ErrorDeprovisioning,
+
+  @doc("Requested Configuration state for the resource has been deferred")
   DeferredControl,
+
+  @doc("Requested Configuration state for the resource is Provisioning")
   Provisioning,
+
+  @doc("Requested Configuration state for the resource is waiting for a commit")
   PendingCommit,
 }
 
@@ -69,9 +112,16 @@ enum ConfigurationState {
  * Administrative state of the BfdConfiguration. Example: Enabled | Disabled.
  */
 enum BfdAdministrativeState {
+  @doc("Administrative state of the BfdConfiguration is enabled")
   Enabled,
+
+  @doc("Administrative state of the BfdConfiguration is disabled")
   Disabled,
+
+  @doc("Administrative state of the BfdConfiguration is MAT")
   MAT,
+
+  @doc("Administrative state of the BfdConfiguration is RMA")
   RMA,
 }
 
@@ -79,7 +129,10 @@ enum BfdAdministrativeState {
  * IP Address type that needs to be matched.
  */
 enum SourceDestinationType {
+  @doc("IP Address that needs to be matched is from source")
   SourceIP,
+
+  @doc("Destination IP Address that needs to be matched")
   DestinationIP,
 }
 
@@ -87,7 +140,10 @@ enum SourceDestinationType {
  * IP Prefix Type that needs to be matched.
  */
 enum PrefixType {
+  @doc("Need to match only the prefix of IP address")
   Prefix,
+
+  @doc("Need to match the longest prefix of IP address")
   LongestPrefix,
 }
 
@@ -95,7 +151,10 @@ enum PrefixType {
  * Port type that needs to be matched.
  */
 enum PortType {
+  @doc("Need to match with source port")
   SourcePort,
+
+  @doc("Destination port needs to be match")
   DestinationPort,
 }
 
@@ -103,7 +162,10 @@ enum PortType {
  * Layer4 protocol type that needs to be matched.
  */
 enum Layer4Protocol {
+  @doc("TCP protocol needs to be matched for Layer4")
   TCP,
+
+  @doc("UDP protocol needs to be matched for Layer4")
   UDP,
 }
 
@@ -111,7 +173,10 @@ enum Layer4Protocol {
  * IP Address type.
  */
 enum IPAddressType {
+  @doc("IPv4 type IP address has been used")
   IPv4,
+
+  @doc("IPv6 type IP address has been used")
   IPv6,
 }
 
@@ -119,9 +184,16 @@ enum IPAddressType {
  * State defined to represent administrative actions or post actions on a particular resource.
  */
 enum AdministrativeState {
+  @doc("administrative actions on a particular resource is enabled")
   Enabled,
+
+  @doc("administrative actions on a particular resource is disabled")
   Disabled,
+
+  @doc("administrative actions on a particular resource is MAT")
   MAT,
+
+  @doc("administrative actions on a particular resource is RMA")
   RMA,
 }
 
@@ -129,7 +201,10 @@ enum AdministrativeState {
  * Boolean Enum. Example- True/False
  */
 enum BooleanEnumProperty {
+  @doc("Represent true for boolean enum")
   True,
+
+  @doc("Represent false for boolean enum")
   False,
 }
 
@@ -137,7 +212,10 @@ enum BooleanEnumProperty {
  * Peering option list.
  */
 enum PeeringOption {
+  @doc("Peering option is chosen from OptionA")
   OptionA,
+
+  @doc("Peering option is chosen from OptionB")
   OptionB,
 }
 
@@ -145,7 +223,10 @@ enum PeeringOption {
  * community action types. Example: Permit | Deny.
  */
 enum CommunityActionTypes {
+  @doc("Represent community action is permitted")
   Permit,
+
+  @doc("Represent community action is permitted")
   Deny,
 }
 
