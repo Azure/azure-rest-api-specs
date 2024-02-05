@@ -2019,6 +2019,45 @@
       },
       "description": "Determines whether or not filters are applied before or after the vector search is performed."
     },
+    "HybridSearch": {
+      "type": "object",
+      "properties": {
+        "maxTextRecallSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Determines the maximum number of documents to be retrieved by the text query portion of a hybrid search request. The values needs to be between 1 and 100 000. Default is 1000. A higher value allows paging through more documents, at the cost of a higher latency."
+        },
+        "countAndFacetMode": {
+          "$ref": "#/definitions/HybridCountAndFacetMode",
+          "description": "Determines whether the count and facets should includes all documents that matched the search query, or only the documents that are retrieved within the 'maxTextRecallSize' window."
+        }
+      },
+      "description": "TThe query parameters to configure hybrid search behaviors."
+    },
+    "HybridCountAndFacetMode": {
+      "type": "string",
+      "enum": [
+        "countRetrievableResults",
+        "countAllResults"
+      ],
+      "x-ms-enum": {
+        "name": "HybridCountAndFacetMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "countRetrievableResults",
+            "name": "CountRetrievableResults",
+            "description": "Only include documents that were matched within the 'maxTextRecallSize' retrieval window when computing 'count' and 'facets'."
+          },
+          {
+            "value": "countAllResults",
+            "name": "CountAllResults",
+            "description": "Include all documents that were matched by the search query when computing 'count' and 'facets', regardless of whether or not those documents are within the 'maxTextRecallSize' retrieval window."
+          }
+        ]
+      },
+      "description": "Determines whether the count and facets should includes all documents that matched the search query, or only the documents that are retrieved within the 'maxTextRecallSize' window."
+    },
     "QueryLanguage": {
       "type": "string",
       "enum": [
