@@ -66,21 +66,6 @@ enum BatchTaskStatus {
   Succeeded,
 }
 
-@added(ContentSafety.Versions.v2023_10_30_Preview)
-enum ModelStatus {
-  Created,
-  Training,
-  Ready,
-  Failed,
-}
-
-@added(ContentSafety.Versions.v2023_10_30_Preview)
-enum GeneratePromptStatus {
-  Running,
-  Ready,
-  Failed,
-}
-
 @doc("The text analysis request.")
 model AnalyzeTextOptions {
   @doc("The text needs to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
