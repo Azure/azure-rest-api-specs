@@ -8217,6 +8217,11 @@
         "functionAggregation": {
           "$ref": "#/definitions/ScoringFunctionAggregation",
           "description": "A value indicating how the results of individual scoring functions should be combined. Defaults to \"Sum\". Ignored if there are no scoring functions."
+        },
+        "resultsCombinationProfile": {
+          "$ref": "#/definitions/ResultsCombinationProfile",
+          "description": "Parameters to define how documents retrieved through vector queries and documents retrieved through a text query are combined together to produce a single result set.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -8268,6 +8273,290 @@
         ]
       },
       "description": "Defines the aggregation function used to combine the results of all the scoring functions in a scoring profile."
+    },
+    "ResultsCombinationProfile": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "type": "#/definitions/ResultsCombinationProfileKind",
+          "description": "Indicates the kind of results combination profile to use. Currently, only combineVectorsAndText is available."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "description": "Configure how documents retrieved through vector queries and documents retrieved through a text query are combined together to produce a single result set."
+    },
+    "ResultsCombinationProfileKind": {
+      "type": "string",
+      "enum": [
+        "combineVectorsAndText"
+      ],
+      "x-ms-enum": {
+        "name": "ResultsCombinationProfileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "combineVectorsAndText",
+            "name": "CombineVectorsAndText",
+            "description": "Combine the results of each vector-query pairs with the result of the text query using a single combination method."
+          }
+        ]
+      },
+      "description": "The results combination profile kind to be used to combine vectors and text results."
+    },
+    "CombineVectorsAndText": {
+      "type": "object",
+      "x-ms-discriminator-value": "combineVectorsAndText",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResultsCombinationProfile"
+        }
+      ],
+      "properties": {
+        "combineVectorsAndTextParameters": {
+          "type": "#/definitions/CombineVectorsAndTextParameters",
+          "description": "Set of parameters used to configure additional properties of the 'CombineVectorsAndText' profile.",
+          "x-nullable": true
+        }
+      },
+      "description": "Specifies how to combine the results of different vector queries, and/or different vector fields, and/or the results of a text queries, together in a single step."
+    },
+    "combineVectorsAndTextParameters": {
+        "properties": {
+          "method": {
+            "type": "#/definitions/ResultsCombinationMethod",
+            "description": "Specifies the algorithm used to combine the different result sets into a single one.",
+            "x-nullable": true
+          },
+          "textResults": {
+            "type": "#/definitions/TextResultsCombinationParameters",
+            "description": "Set of parameters to configure how the text result set get combined with the other vector query sets.",
+            "x-nullable": true
+          }
+          ,
+          "vectorResults": {
+            "type": "#/definitions/VectorResultsCombinationParameters",
+            "description": "Set of aprameters to configure how the vector result sets are combined within each other and/or with the text result set.",
+            "x-nullable": true
+          }
+        },
+        "description": "Set of parameters used to configure additional properties of the 'CombineVectorsAndText' profile."
+    },
+    "ResultsCombinationMethod": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "type": "#/definitions/ResultsCombinationMethodKind",
+          "description": "Indicates the kind of combination method to use. Valid values include reciprocalRankFusion, linear and max."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "description": "Base type for results combination methods."
+    },
+    "ResultsCombinationMethodKind": {
+      "type": "string",
+      "enum": [
+        "reciprocalRankFusion",
+        "linear",
+        "max"
+      ],
+      "x-ms-enum": {
+        "name": "ResultsCombinationMethodKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "reciprocalRankFusion",
+            "name": "ReciprocalRankFusion",
+            "description": "Combine results and produce a new score for each document using the reciprocal rank fusion formula."
+          },
+          {
+            "value": "linear",
+            "name": "Linear",
+            "description": "Combine results and produce a new score for each document by summing up its scores in each result set."
+          },
+          {
+            "value": "max",
+            "name": "Max",
+            "description": "Combine results and produce a new score for each document by taking its maximum score among all result set."
+          }
+        ]
+      },
+      "description": "The results combination method kind to be used to generate new scores for each documents by aggregating their original scores accross all result sets."
+    },
+    "ReciprocalRankFusionResultsCombinationMethod": {
+      "type": "object",
+      "x-ms-discriminator-value": "reciprocalRankFusion",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResultsCombinationMethod"
+        }
+      ],
+      "properties": {
+        "reciprocalRankFusionParameters": {
+          "type": "#/definitions/ReciprocalRankFusionCombinationMethodParameters",
+          "description": "Set of parameters to configure how the reciprocal rank fusion formula is applied.",
+          "x-nullable": true
+        }
+      },
+      "description": "Combine results and produce a new score for each document using the reciprocal rank fusion formula."
+    },
+    "LinearResultsCombinationMethod": {
+      "type": "object",
+      "x-ms-discriminator-value": "linear",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResultsCombinationMethod"
+        }
+      ],
+      "properties": {
+        "linearParameters": {
+          "type": "#/definitions/LinearCombinationMethodParameters",
+          "description": "Set of parameters to configure how the linear combination formula is applied.",
+          "x-nullable": true
+        }
+      },
+      "description": "Combine results and produce a new score for each document by summing up its scores in each result set."
+    },
+    "MaxResultsCombinationMethod": {
+      "type": "object",
+      "x-ms-discriminator-value": "max",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResultsCombinationMethod"
+        }
+      ],
+      "properties": {
+        "maxParameters": {
+          "type": "#/definitions/MaxCombinationMethodParameters",
+          "description": "Set of parameters to configure how the max formula is applied.",
+          "x-nullable": true
+        }
+      },
+      "description": "Combine results and produce a new score for each document by taking its maximum score among all result set."
+    },
+    "ReciprocalRankFusionCombinationMethodParameters": {
+      "type": "object",
+      "properties": {
+        "RankImpact": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This is the K parameter of the Reciprocal Rank Fusion formula. This parameter adjusts the influence of lower-ranked documents in search results. A higher value means lower ranked documents will have more impact on the final rankings. The default is 60.",
+          "x-nullable": true
+        }
+      },
+      "description": "Set of parameters to configure how the reciprocal rank fusion formula is applied."
+    },
+    "LinearCombinationMethodParameters": {
+      "type": "object",
+      "properties": {
+        "RankImpact": {
+          "type": "#/definitions/ResultsNormalization",
+          "description": "Defines whether the document scores from each result set should be normalized before being combined with other result sets, as well as what normalization function to use. Leaving this value null means the scores will not be normalized.",
+          "x-nullable": true
+        }
+      },
+      "description": "Set of parameters to configure how the linear combination formula is applied."
+    },
+    "MaxCombinationMethodParameters": {
+      "type": "object",
+      "properties": {
+        "RankImpact": {
+          "type": "#/definitions/ResultsNormalization",
+          "description": "Defines whether the document scores from each result set should be normalized before being combined with other result sets, as well as what normalization function to use. Leaving this value null means the scores will not be normalized.",
+          "x-nullable": true
+        }
+      },
+      "description": "Set of parameters to configure how the linear combination formula is applied."
+    },
+    "ResultsNormalization": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "type": "#/definitions/ResultsCombinationMethodKind",
+          "description": "Indicates the kind of combination function to use. Valid values include reciprocal rank fusion, linear and max."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "description": "Base type for normalization function to be used when normalizing scores within a single result set, before combining them with other result sets."
+    },
+    "ResultsNormalizationKind": {
+      "type": "string",
+      "enum": [
+        "minmax"
+      ],
+      "x-ms-enum": {
+        "name": "ResultsNormalizationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "minmax",
+            "name": "MinMax",
+            "description": "The Min-Max normalization function rescales each score in a result set to a specified range [0 to 1], by subtracting the minimum value and then dividing by the scoring range of the result set."
+          }
+        ]
+      },
+      "description": "Allow "
+    },
+    "MinMaxResultsNormalization": {
+      "type": "object",
+      "x-ms-discriminator-value": "minmax",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResultsNormalization"
+        }
+      ],
+      "description": "The Min-Max normalization function rescales each score in a result set to a specified range [0 to 1], by subtracting the minimum value and then dividing by the scoring range of the result set."
+    },
+    "textResultsCombinationParameters": {
+      "properties": {
+        "weight": {
+          "type": "number",
+          "format": "double",
+          "x-nullable": true,
+          "description": "A value representing the weight of documents that were retrieved by the text results set when compared against documents retrieved by the various vector queries."
+        },
+        "maxRecallSize": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The maximum number of documents to be retrieved by the text query when executing a hybrid vector request."
+        }
+      },
+      "description": "Provides parameters to configure how the documents retrieved by the text query influence the final combined result sets."
+    },
+    "vectorResultsCombinationParameters": {
+      "properties": {
+        "weights": {
+          "type": "#/definitions/VectorResultsFieldWeights",
+          "description": "A value representing the weight of documents that were retrieved by the text results set when compared against documents retrieved by the various vector queries."
+        }
+      },
+      "description": "Provides parameters to configure how the documents retrieved by the vector queries influence the final combined result sets."
+    },
+    "VectorResultsFieldWeights": {
+      "properties": {
+        "weights": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "format": "double",
+            "x-nullable": false
+          },
+          "description": "The dictionary of per-field weights to boost result sets when combining them. The keys are field names and the values are the weights for each field."
+        }
+      },
+      "required": [
+        "weights"
+      ],
+      "description": "Defines weights on vector fields to boost their result sets when combining them with other vector field's result sets or with the text query's result set."
     },
     "CorsOptions": {
       "properties": {
