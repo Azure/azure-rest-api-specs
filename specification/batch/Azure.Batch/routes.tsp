@@ -2104,11 +2104,11 @@ alias BatchNodeFileClientPathParameters = {
   @path
   poolId: string;
 
-  @doc("The ID of the Compute Node from which you want to delete the file.")
+  @doc("The ID of the Compute Node.")
   @path
   nodeId: string;
 
-  @doc("The path to the file or directory that you want to delete.")
+  @doc("The path to the file or directory.")
   @path
   filePath: string;
 };
