@@ -273,8 +273,8 @@ model ImageBatchTaskResult {
   createdTime: utcDateTime;
 
   @doc("The progress of the batch image analysis task, represented as a percentage (0-100).")
-  progressPercentage: float32;
-  
+  progressPercentage: int32;
+
   @doc("The blob parameters of result files.")
   analysisResults: BatchAnalyzeImagesResults;
 }
