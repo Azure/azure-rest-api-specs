@@ -85,7 +85,7 @@ enum ConfigurationState {
 
   @doc("Requested Configuration state for the resource has been provisioned")
   Provisioned,
-  
+
   @doc("Error in provisioning requested Configuration state for the resource")
   ErrorProvisioning,
 
@@ -233,7 +233,7 @@ enum CommunityActionTypes {
 /**
  * Internet Gateway Rule Properties defines the resource properties.
  */
-model InternetGatewayRuleProperties extends AnnotationResource {
+model InternetGatewayRuleProperties is AnnotationResource {
   /**
    * Rules for the InternetGateways
    */
@@ -319,7 +319,7 @@ model Resource {
 /**
  * The Internet Gateway Rules patch resource definition.
  */
-model InternetGatewayRulePatch extends TagsUpdate {}
+model InternetGatewayRulePatch is TagsUpdate;
 
 /**
  * Base tracked resource type for PATCH updates.
@@ -349,7 +349,7 @@ model ExtendedLocation {
 /**
  * Update administrative state on list of resources.
  */
-model UpdateAdministrativeState extends EnableDisableOnResources {
+model UpdateAdministrativeState is EnableDisableOnResources {
   /**
    * Administrative state.
    */
@@ -379,7 +379,7 @@ model UpdateVersion {
 /**
  * Common response for device updates.
  */
-model CommonPostActionResponseForDeviceUpdate extends ErrorResponse {
+model CommonPostActionResponseForDeviceUpdate is ErrorResponse {
   /**
    * Gets the configuration state.
    */
@@ -400,7 +400,7 @@ model CommonPostActionResponseForDeviceUpdate extends ErrorResponse {
 /**
  * Common response for the state updates.
  */
-model CommonPostActionResponseForStateUpdate extends ErrorResponse {
+model CommonPostActionResponseForStateUpdate is ErrorResponse {
   /**
    * Gets the configuration state.
    */
@@ -411,7 +411,7 @@ model CommonPostActionResponseForStateUpdate extends ErrorResponse {
 /**
  * The response of the action validate configuration.
  */
-model ValidateConfigurationResponse extends ErrorResponse {
+model ValidateConfigurationResponse is ErrorResponse {
   /**
    * Gets the configuration state.
    */
