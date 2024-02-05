@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-02-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-02-15-preview'
 input-file:
-  - stable/2024-02-15-preview/identityset.json
-  - stable/2024-02-15-preview/identityController.json
+  - preview/2024-02-15-preview/identityset.json
+  - preview/2024-02-15-preview/identityController.json
   
 ```
