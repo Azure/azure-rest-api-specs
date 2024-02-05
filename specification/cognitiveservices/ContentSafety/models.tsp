@@ -274,17 +274,24 @@ model ImageBatchTaskDetail {
   @doc("The status of the batch image analysis task.")
   status: BatchTaskStatus;
 
-  @doc("The timestamp of when batch image analysis task was created.")
-  createdTime: utcDateTime;
-
-  @doc("The blob parameters of result files.")
-  analysisResults: BatchAnalyzeImagesResults;
-
-  @doc("The progress of the batch image analysis task, represented as a percentage (0-100).")
-  progressPercentage: float32;
+  @doc("Batch task result.")
+  result: ImageBatchTaskResult;
 
   @doc("Return error detail when the task failed.")
   error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("Image batch task result.")
+model ImageBatchTaskResult {
+  @doc("The timestamp of when batch image analysis task was created.")
+  createdTime: utcDateTime;
+
+  @doc("The progress of the batch image analysis task, represented as a percentage (0-100).")
+  progressPercentage: float32;
+  
+  @doc("The blob parameters of result files.")
+  analysisResults: BatchAnalyzeImagesResults;
 }
 
 @doc("Text Blocklist.")

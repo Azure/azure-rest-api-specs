@@ -87,7 +87,7 @@ interface ImageBatchOperations {
   @doc("An asynchronous API for the batch analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.")
   @route("/image/batchAnalyses")
   @put
-  batchAnalyzeImage is ContentSafetyLongRunningRpcOperation<
+  batchAnalyzeImage is Azure.Core.RpcOperation<
     {
       @path
       @doc("The unique operation id.")
@@ -113,16 +113,6 @@ interface ImageBatchOperations {
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 }
-
-@doc("Long running RPC operation template")
-op ContentSafetyLongRunningRpcOperation<
-  TParams extends TypeSpec.Reflection.Model,
-  TResponse extends TypeSpec.Reflection.Model
-> is Azure.Core.Foundations.Operation<
-  TParams,
-  Azure.Core.Foundations.AcceptedResponse & TResponse,
-  Azure.Core.Foundations.ErrorResponse
->;
 
 interface BatchOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &

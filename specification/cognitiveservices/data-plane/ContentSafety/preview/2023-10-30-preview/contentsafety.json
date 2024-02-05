@@ -168,8 +168,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ImageBatchTaskDetail"
             }
@@ -2576,19 +2576,9 @@
           "$ref": "#/definitions/BatchTaskStatus",
           "description": "The status of the batch image analysis task."
         },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of when batch image analysis task was created."
-        },
-        "analysisResults": {
-          "$ref": "#/definitions/BatchAnalyzeImagesResults",
-          "description": "The blob parameters of result files."
-        },
-        "progressPercentage": {
-          "type": "number",
-          "format": "float",
-          "description": "The progress of the batch image analysis task, represented as a percentage (0-100)."
+        "result": {
+          "$ref": "#/definitions/ImageBatchTaskResult",
+          "description": "Batch task result."
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -2599,9 +2589,32 @@
         "id",
         "kind",
         "status",
+        "result"
+      ]
+    },
+    "ImageBatchTaskResult": {
+      "type": "object",
+      "description": "Image batch task result.",
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of when batch image analysis task was created."
+        },
+        "progressPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "The progress of the batch image analysis task, represented as a percentage (0-100)."
+        },
+        "analysisResults": {
+          "$ref": "#/definitions/BatchAnalyzeImagesResults",
+          "description": "The blob parameters of result files."
+        }
+      },
+      "required": [
         "createdTime",
-        "analysisResults",
-        "progressPercentage"
+        "progressPercentage",
+        "analysisResults"
       ]
     },
     "ImageCategoriesAnalysis": {
