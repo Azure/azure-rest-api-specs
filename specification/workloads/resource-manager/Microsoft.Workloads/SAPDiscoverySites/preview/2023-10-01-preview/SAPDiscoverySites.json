@@ -1055,7 +1055,7 @@
             "description": "The Server Instance resource request body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateServerInstancesRequest"
+              "$ref": "#/definitions/UpdateServerInstanceRequest"
             },
             "x-ms-client-name": "body"
           }
@@ -1180,20 +1180,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
-      "type": "object",
-      "description": "A managed identity assigned by the user.",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The active directory client identifier for this principal."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier for this principal."
-        }
-      }
-    },
     "ConfigurationData": {
       "type": "object",
       "description": "The SAP instance specific configuration data.",
@@ -1424,30 +1410,6 @@
         "name"
       ]
     },
-    "ManagedServiceIdentityType": {
-      "type": "string",
-      "description": "Type of managed service identity (only None, UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "The type of Managed Service Identity- None."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "The type of Managed Service Identity- UserAssigned."
-          }
-        ]
-      }
-    },
     "NativePerformanceData": {
       "type": "object",
       "description": "The SAP instance specific performance data for native discovery.",
@@ -1580,32 +1542,6 @@
         ]
       },
       "readOnly": true
-    },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      }
     },
     "SAPDiscoverySite": {
       "type": "object",
@@ -1996,7 +1932,7 @@
         }
       }
     },
-    "UpdateServerInstancesRequest": {
+    "UpdateServerInstanceRequest": {
       "type": "object",
       "description": "Defines the request body for updating Server Instances resource.",
       "properties": {
@@ -2005,26 +1941,6 @@
           "description": "Server instances properties."
         }
       }
-    },
-    "UserAssignedServiceIdentity": {
-      "type": "object",
-      "description": "Managed service identity (user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ManagedServiceIdentityType",
-          "description": "Type of manage identity"
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "User assigned identities dictionary",
-          "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
     },
     "Versions": {
       "type": "string",

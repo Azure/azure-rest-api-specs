@@ -157,17 +157,6 @@ enum DataSource {
 }
 
 /**
- * Type of managed service identity (only None, UserAssigned types are allowed).
- */
-enum ManagedServiceIdentityType {
-  @doc("The type of Managed Service Identity- None.")
-  None,
-
-  @doc("The type of Managed Service Identity- UserAssigned.")
-  UserAssigned,
-}
-
-/**
  * Defines the SAP Migration discovery site resource properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
@@ -249,35 +238,6 @@ model ExtendedLocation {
    * The extended location name.
    */
   name: string;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility("read")
-  systemData?: SystemData;
 }
 
 /**
@@ -423,7 +383,7 @@ model ServerInstanceProperties {
 /**
  * Defines the request body for updating Server Instances resource.
  */
-model UpdateServerInstancesRequest {
+model UpdateServerInstanceRequest {
   /**
    * Server instances properties.
    */
@@ -479,7 +439,7 @@ model ConfigurationData {
   /**
    * Provide the total disk volume capacity in GB. Add the disk volume for each individual disks and provide the total sum in this field.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is short for Gigabytes."
   @visibility("read")
   totalDiskSizeGB?: int32;
 
@@ -498,7 +458,7 @@ model ConfigurationData {
   /**
    *  Provide the target HANA database size you need. Applicable only if SAP instance type for this server instance is 'DB' and you are migrating an AnyDb database to SAP S/4HANA.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is short for Gigabytes."
   @visibility("read")
   targetHanaRamSizeGB?: int32;
 }
@@ -525,7 +485,7 @@ model ExcelPerformanceData extends PerformanceData {
   /**
    * Provide the source Database size in GB. Applicable only if SAP instance type for this server instance is 'DB'.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is short for Gigabytes."
   @visibility("read")
   totalSourceDbSizeGB?: int32;
 
@@ -543,19 +503,4 @@ model NativePerformanceData extends PerformanceData {
    * The data source for this resource.
    */
   dataSource: DataSource.Native;
-}
-
-/**
- * Managed service identity (user assigned identities)
- */
-model UserAssignedServiceIdentity {
-  /**
-   * Type of manage identity
-   */
-  type: ManagedServiceIdentityType;
-
-  /**
-   * User assigned identities dictionary
-   */
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
 }

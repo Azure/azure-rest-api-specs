@@ -15,8 +15,8 @@ namespace Microsoft.Workloads;
  * Define the SAP Migration discovery site resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "ExtendedLocation and Properties are top level attributes."
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(SAPDiscoverySiteProperties)
 model SAPDiscoverySite extends TrackedResourceBase {

@@ -16,7 +16,7 @@ namespace Microsoft.Workloads;
  * Define the Server Instance resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Properties is a top level attribute."
 @parentResource(SAPInstance)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ServerInstanceProperties)
@@ -60,7 +60,7 @@ interface ServerInstances {
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     ServerInstance,
-    UpdateServerInstancesRequest,
+    UpdateServerInstanceRequest,
     BaseParameters<ServerInstance>,
     ArmLroLocationHeader
   >;
@@ -78,7 +78,7 @@ interface ServerInstances {
    * Lists the Server Instance resources for the given SAP Instance resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Supporting existing name."
   @operationId("ServerInstances_List")
   list is ArmResourceListByParent<ServerInstance>;
 }

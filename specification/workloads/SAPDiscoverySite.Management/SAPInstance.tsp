@@ -16,7 +16,7 @@ namespace Microsoft.Workloads;
  * Define the SAP Instance resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Properties is a top level attribute."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 @parentResource(SAPDiscoverySite)
 @includeInapplicableMetadataInPayload(false)
@@ -80,7 +80,7 @@ interface SAPInstances {
    * Lists the SAP Instance resources for the given SAP Migration discovery site resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
   @operationId("SapInstances_List")
   list is ArmResourceListByParent<SAPInstance>;
 }
