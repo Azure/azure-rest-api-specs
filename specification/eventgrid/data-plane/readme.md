@@ -143,6 +143,7 @@ input-file:
 - Microsoft.ResourceNotifications/stable/2018-01-01/common.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -177,6 +178,7 @@ input-file:
 - Microsoft.ResourceNotifications/stable/2018-01-01/common.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 ```
 
 ### Tag: package-2023-10-01-preview
@@ -207,6 +209,7 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 
 ```
 
@@ -238,6 +241,7 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 
 ```
 
@@ -333,14 +337,14 @@ input-file:
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/common.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
-  - $(this-folder)/Microsoft.AVS/preview/2023-09-01-preview/PrivateCloud.json
+  - $(this-folder)/Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-exclude-file: 
- - $(this-folder)/Microsoft.EventGrid/preview/2023-06-01-preview/examples
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
