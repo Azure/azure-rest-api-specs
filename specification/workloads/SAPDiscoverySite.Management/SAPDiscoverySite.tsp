@@ -14,12 +14,9 @@ namespace Microsoft.Workloads;
 /**
  * Define the SAP Migration discovery site resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "ExtendedLocation and Properties are top level attributes."
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(SAPDiscoverySiteProperties)
-model SAPDiscoverySite extends TrackedResourceBase {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "ExtendedLocation is top level attributes."
+model SAPDiscoverySite is TrackedResource<SAPDiscoverySiteProperties> {
   /**
    * The name of the discovery site resource for SAP Migration.
    */
@@ -29,18 +26,12 @@ model SAPDiscoverySite extends TrackedResourceBase {
   @segment("sapDiscoverySites")
   @visibility("read")
   name: string;
-
   /**
    * The extended location definition.
    */
   extendedLocation?: ExtendedLocation;
-
-  /**
-   * The SAP Migration discovery site resource properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: SAPDiscoverySiteProperties;
 }
+@@doc(SAPDiscoverySite.properties, " The SAP Migration discovery site resource properties.");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 @armResourceOperations
@@ -48,13 +39,11 @@ interface SAPDiscoverySites {
   /**
    * Gets a SAP Migration discovery site resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   get is ArmResourceRead<SAPDiscoverySite>;
 
   /**
    * Creates a discovery site for SAP Migration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     SAPDiscoverySite,
     BaseParameters<SAPDiscoverySite>,
@@ -64,7 +53,6 @@ interface SAPDiscoverySites {
   /**
    * Updates a SAP Migration discovery site resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     SAPDiscoverySite,
@@ -76,7 +64,6 @@ interface SAPDiscoverySites {
   /**
    * Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances and Server Instances.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     SAPDiscoverySite,
     BaseParameters<SAPDiscoverySite>,
@@ -86,19 +73,16 @@ interface SAPDiscoverySites {
   /**
    * Gets all SAP Migration discovery site resources in a Resource Group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   listByResourceGroup is ArmResourceListByParent<SAPDiscoverySite>;
 
   /**
    * Gets all SAP Migration discovery site resources in a Subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   listBySubscription is ArmListBySubscription<SAPDiscoverySite>;
 
   /**
    * Import a SAP Migration discovery site resource and it's child resources, that is the SAP instances and Server instances.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   importEntities is ArmResourceActionAsync<
     SAPDiscoverySite,
     void,
@@ -108,21 +92,8 @@ interface SAPDiscoverySites {
   >;
 }
 
-@@projectedName(SAPDiscoverySites.create::parameters.resource, "json", "body");
-@@extension(SAPDiscoverySites.create::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(SAPDiscoverySites.create::parameters.resource,
   "SAP Migration discovery site resource request body."
-);
-@@projectedName(SAPDiscoverySites.update::parameters.properties,
-  "json",
-  "body"
-);
-@@extension(SAPDiscoverySites.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(SAPDiscoverySites.update::parameters.properties,
   "Request body to update a SAP Migration discovery site resource."

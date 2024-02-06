@@ -203,14 +203,13 @@
             "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "description": "SAP Migration discovery site resource request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SAPDiscoverySite"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -279,14 +278,13 @@
             "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
           },
           {
-            "name": "body",
+            "name": "properties",
             "in": "body",
             "description": "Request body to update a SAP Migration discovery site resource.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateSAPDiscoverySiteRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -593,14 +591,13 @@
             "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "description": "The SAP Instance request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SAPInstance"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -677,14 +674,13 @@
             "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
           },
           {
-            "name": "body",
+            "name": "properties",
             "in": "body",
             "description": "The SAP Instance resource request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateSAPInstanceRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -958,14 +954,13 @@
             "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "description": "The Server Instance request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServerInstance"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -1050,14 +1045,13 @@
             "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
           },
           {
-            "name": "body",
+            "name": "properties",
             "in": "body",
             "description": "The Server Instance resource request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateServerInstanceRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -1547,14 +1541,18 @@
       "type": "object",
       "description": "Define the SAP Migration discovery site resource.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/SAPDiscoverySiteProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location definition."
-        },
-        "properties": {
-          "$ref": "#/definitions/SAPDiscoverySiteProperties",
-          "description": "The SAP Migration discovery site resource properties.",
-          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1614,13 +1612,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SAPInstanceProperties",
-          "description": "The SAP Instance resource properties.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1819,8 +1818,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServerInstanceProperties",
-          "description": "Defines the SAP Instance properties.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [

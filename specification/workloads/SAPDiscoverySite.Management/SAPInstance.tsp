@@ -15,13 +15,10 @@ namespace Microsoft.Workloads;
 /**
  * Define the SAP Instance resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Properties is a top level attribute."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
+
 @parentResource(SAPDiscoverySite)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(SAPInstanceProperties)
-model SAPInstance extends TrackedResourceBase {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
+model SAPInstance is TrackedResource<SAPInstanceProperties> {
   /**
    * The name of SAP Instance resource for SAP Migration.
    */
@@ -31,12 +28,6 @@ model SAPInstance extends TrackedResourceBase {
   @segment("sapInstances")
   @visibility("read")
   name: string;
-
-  /**
-   * The SAP Instance resource properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: SAPInstanceProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
@@ -85,18 +76,8 @@ interface SAPInstances {
   list is ArmResourceListByParent<SAPInstance>;
 }
 
-@@projectedName(SAPInstances.create::parameters.resource, "json", "body");
-@@extension(SAPInstances.create::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(SAPInstances.create::parameters.resource,
   "The SAP Instance request body."
-);
-@@projectedName(SAPInstances.update::parameters.properties, "json", "body");
-@@extension(SAPInstances.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(SAPInstances.update::parameters.properties,
   "The SAP Instance resource request body."

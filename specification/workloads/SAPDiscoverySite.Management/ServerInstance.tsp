@@ -15,12 +15,8 @@ namespace Microsoft.Workloads;
 /**
  * Define the Server Instance resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Properties is a top level attribute."
 @parentResource(SAPInstance)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(ServerInstanceProperties)
-model ServerInstance extends ProxyResourceBase {
+model ServerInstance is ProxyResource<ServerInstanceProperties> {
   /**
    * The name of the Server instance resource for SAP Migration.
    */
@@ -30,12 +26,6 @@ model ServerInstance extends ProxyResourceBase {
   @segment("serverInstances")
   @visibility("read")
   name: string;
-
-  /**
-   * Defines the SAP Instance properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ServerInstanceProperties;
 }
 
 @armResourceOperations
@@ -83,18 +73,8 @@ interface ServerInstances {
   list is ArmResourceListByParent<ServerInstance>;
 }
 
-@@projectedName(ServerInstances.create::parameters.resource, "json", "body");
-@@extension(ServerInstances.create::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(ServerInstances.create::parameters.resource,
   "The Server Instance request body."
-);
-@@projectedName(ServerInstances.update::parameters.properties, "json", "body");
-@@extension(ServerInstances.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(ServerInstances.update::parameters.properties,
   "The Server Instance resource request body."
