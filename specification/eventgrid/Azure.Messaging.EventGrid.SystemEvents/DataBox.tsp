@@ -1,5 +1,5 @@
 @doc("EG DataBox Data Model")
-namespace Microsoft.EventGrid {
+namespace Microsoft.EventGrid.SystemEvents {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event.")
   model DataBoxCopyStartedEventData {
     ...DataBoxBase;

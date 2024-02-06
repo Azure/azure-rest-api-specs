@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure EventGrid events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace Microsoft.EventGrid;
+namespace Microsoft.EventGrid.SystemEvents;
 
 @friendlyName("EventGridMqttClientState")
 @doc("EventGrid MQTT Client State")
@@ -72,7 +72,7 @@ termination of the previous connection.
 
 @doc("""
 Schema of the Data property of an EventGridEvent for a
-Microsoft.EventGrid.SubscriptionValidationEvent event.
+Microsoft.EventGrid.SystemEvents.SubscriptionValidationEvent event.
 """)
 model SubscriptionValidationEventData {
   @doc("""
@@ -111,7 +111,7 @@ the validation of an event subscription.
 
 @doc("""
 Schema of the Data property of an EventGridEvent for a
-Microsoft.EventGrid.SubscriptionDeletedEvent event.
+Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEvent event.
 """)
 model SubscriptionDeletedEventData {
   @doc("The Azure resource ID of the deleted event subscription.")
@@ -121,7 +121,7 @@ model SubscriptionDeletedEventData {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientCreatedOrUpdatedEventData")
-@doc("Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event.")
+@doc("Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event.")
 model EventGridMQTTClientCreatedOrUpdatedEventData {
   ...EventGridMQTTClientEventData;
 
@@ -165,14 +165,14 @@ long, and supports UTF-8 characters.
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientDeletedEventData")
-@doc("Event data for Microsoft.EventGrid.MQTTClientDeleted event.")
+@doc("Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event.")
 model EventGridMQTTClientDeletedEventData {
   ...EventGridMQTTClientEventData;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientSessionConnectedEventData")
-@doc("Event data for Microsoft.EventGrid.MQTTClientSessionConnected event.")
+@doc("Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event.")
 model EventGridMQTTClientSessionConnectedEventData {
   ...EventGridMQTTClientEventData;
 
@@ -192,7 +192,7 @@ than the previous event.
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientSessionDisconnectedEventData")
-@doc("Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event.")
+@doc("Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event.")
 model EventGridMQTTClientSessionDisconnectedEventData {
   ...EventGridMQTTClientEventData;
 

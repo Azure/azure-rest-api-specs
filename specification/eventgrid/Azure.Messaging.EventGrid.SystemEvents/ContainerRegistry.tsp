@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace Microsoft.EventGrid;
+namespace Microsoft.EventGrid.SystemEvents;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.")

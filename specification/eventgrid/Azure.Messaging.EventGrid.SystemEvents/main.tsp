@@ -8,21 +8,19 @@ import "@azure-tools/typespec-azure-core";
 })
 @server(
   "{endpoint}",
-  "The host name of the namespace",
+  "",
   {
-    @doc("The host name of the namespace, e.g. namespaceName1.westus-1.eventgrid.azure.net")
+    @doc("")
     endpoint: url,
   }
 )
-@doc("Azure Messaging EventGrid Client")
+@doc("Azure Messaging EventGrid SystemEvents")
 @versioned(ServiceApiVersions)
-namespace Microsoft.EventGrid {
+namespace Microsoft.EventGrid.SystemEvents {
   using TypeSpec.Http;
   using TypeSpec.Rest;
   using TypeSpec.Versioning;
   using Azure.Core;
-  using Azure.Core.Foundations;
-  using Azure;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
   enum ServiceApiVersions {

@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace Microsoft.EventGrid;
+namespace Microsoft.EventGrid.SystemEvents;
 
 @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event")
 model AcsIncomingCallEventData {
