@@ -1736,7 +1736,7 @@
             "in": "body",
             "name": "stopSellSubscriptions",
             "schema": {
-              "$ref": "#/definitions/StopSellSubscriptions"
+              "$ref": "#/definitions/StopSellSubscriptionsProperties"
             }
           }
         ],
@@ -3474,6 +3474,17 @@
             "type": "string"
           },
           "readOnly": true
+        }
+      }
+    },
+    "StopSellSubscriptionsProperties": {
+      "description": "Private plans subscriptions properties",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StopSellSubscriptions",
+          "description": "Subscriptions details for stop sell private plans",
+          "x-ms-client-flatten": true
         }
       }
     },
