@@ -27,7 +27,7 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-02
+tag: package-preview-2024-03
 ```
 
 ``` yaml
@@ -38,6 +38,13 @@ directive:
 tag: package-preview-2024-03
 ```
 
+``` yaml
+directive:
+  - suppress: ResourceNameRestriction
+    from: sqlServerAvailabilityGroups.json
+    reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
+tag: package-preview-2024-03
+```
 
 ### Tag: package-preview-2024-03
 
