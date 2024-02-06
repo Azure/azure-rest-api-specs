@@ -80,7 +80,7 @@ model HealthInsightsOperationIdTrait {
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
-  NoClientRequestId &
+  SupportsClientRequestId &
   HealthInsightsRetryAfterTrait &
   HealthInsightsOperationIdTrait;
 

@@ -13,10 +13,15 @@ using TypeSpec.Http;
 namespace AzureHealthInsights;
 
 interface RadiologyInsights {
-  @summary("Get Radiology Insights Job")
+  @summary("Get Radiology Insights job details")
+  @tag("RadiologyInsights")
+  @doc("Gets the status and details of the Radiology Insights job.")
+  @get
   getJob is HealthInsightsOperations.ResourceRead<RadiologyInsightsResource>;
 
-  @summary("Create Radiology Insights Job")
+  @summary("Create Radiology Insights job")
+  @tag("RadiologyInsights")
+  @doc("Creates a Radiology Insights job with the given request body.")
   @pollingOperation(RadiologyInsights.getJob)
   createJob is HealthInsightsOperations.LongRunningResourceCreateOrReplace<RadiologyInsightsResource>;
 }

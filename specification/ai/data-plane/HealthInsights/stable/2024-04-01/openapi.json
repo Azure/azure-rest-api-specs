@@ -46,13 +46,20 @@
       "in": "header"
     }
   },
-  "tags": [],
+  "tags": [
+    {
+      "name": "RadiologyInsights"
+    }
+  ],
   "paths": {
     "/radiology-insights/jobs/{id}": {
       "get": {
         "operationId": "RadiologyInsights_GetJob",
-        "summary": "Get Radiology Insights Job",
-        "description": "Resource read operation template.",
+        "tags": [
+          "RadiologyInsights"
+        ],
+        "summary": "Get Radiology Insights job details",
+        "description": "Gets the status and details of the Radiology Insights job.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -64,6 +71,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -73,6 +83,11 @@
               "$ref": "#/definitions/RadiologyInsightsResource"
             },
             "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -106,8 +121,11 @@
       },
       "put": {
         "operationId": "RadiologyInsights_CreateJob",
-        "summary": "Create Radiology Insights Job",
-        "description": "Long-running resource create or replace operation template.",
+        "tags": [
+          "RadiologyInsights"
+        ],
+        "summary": "Create Radiology Insights job",
+        "description": "Creates a Radiology Insights job with the given request body.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -119,6 +137,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "resource",
@@ -137,6 +158,11 @@
               "$ref": "#/definitions/RadiologyInsightsResource"
             },
             "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -160,6 +186,11 @@
               "$ref": "#/definitions/RadiologyInsightsResource"
             },
             "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2955,6 +2986,16 @@
     }
   },
   "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
