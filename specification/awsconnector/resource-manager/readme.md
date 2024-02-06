@@ -48,6 +48,7 @@ These settings apply only when `--tag=package-2024-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/dynamoDBTable.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Instance.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2InstanceStatus.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2KeyPair.json
