@@ -68,7 +68,7 @@ interface TextOperations {
   @added(ContentSafety.Versions.v2024_02_15_Preview)
   @summary("Analyze text prompt injection attacks")
   @doc("A synchronous API for the analysis of text prompt injection attacks.")
-  @route("/text:promptShield")
+  @route("/text:shieldPrompt")
   @post
   detectTextPromptInjection is Azure.Core.RpcOperation<
     {
