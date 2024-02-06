@@ -26,7 +26,7 @@ These are the global settings for the Nexus Identity.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: rpaas
+openapi-subtype: providerHub
 tag: package-2024-02-15-preview
 ```
 
