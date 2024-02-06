@@ -3048,10 +3048,12 @@
       "description": "Pre-defined concept.",
       "properties": {
         "concept": {
-          "type": "string"
+          "type": "string",
+          "description": "The concept name."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "The concept description."
         }
       },
       "required": [
@@ -3126,13 +3128,16 @@
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The id of subcategory."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of subcategory."
         },
         "statements": {
           "type": "array",
+          "description": "The description of subcategory.",
           "items": {
             "type": "string"
           }
@@ -3301,6 +3306,7 @@
         },
         "preDefinedConcepts": {
           "type": "array",
+          "description": "Some pre defined concepts used in definition.",
           "items": {
             "$ref": "#/definitions/PreDefinedConcept"
           },
@@ -3308,19 +3314,22 @@
         },
         "subCategories": {
           "type": "array",
+          "description": "Subcategories in the customized category.",
           "items": {
             "$ref": "#/definitions/SubCategory"
           }
         },
         "emphases": {
           "type": "array",
+          "description": "Text customizedCategories emphases.",
           "items": {
             "type": "string"
           }
         },
         "exampleBlobUrl": {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "description": "Text url of example jsonl blob."
         }
       },
       "required": [

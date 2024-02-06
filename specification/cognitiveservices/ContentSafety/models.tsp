@@ -560,15 +560,20 @@ model AnnotateTextResult {
 @added(Versions.v2023_10_30_Preview)
 @doc("Pre-defined concept.")
 model PreDefinedConcept {
+  @doc("The concept name.")
   concept: string;
+  @doc("The concept description.")
   description: string;
 }
 
 @added(Versions.v2023_10_30_Preview)
 @doc("Label definition.")
 model SubCategory {
+  @doc("The id of subcategory.")
   id: int32;
+  @doc("The name of subcategory.")
   name: string;
+  @doc("The description of subcategory.") 
   statements: string[];
 }
 
@@ -583,9 +588,16 @@ model TextCustomizedCategory {
   @maxLength(64)
   categoryName: string;
 
+  @doc("Some pre defined concepts used in definition.")
   preDefinedConcepts?: PreDefinedConcept[];
+
+  @doc("Subcategories in the customized category.")
   subCategories: SubCategory[];
+
+  @doc("Text customizedCategories emphases.")
   emphases?: string[];
+
+  @doc("Text url of example jsonl blob.")
   exampleBlobUrl?: url;
 }
 
@@ -649,6 +661,7 @@ enum Task {
   QnA,
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MUST fix in next update"
 @added(Versions.v2023_10_30_Preview)
 @doc("Connection details for the GPT resource.")
 model GptResource {
