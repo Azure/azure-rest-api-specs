@@ -49,14 +49,14 @@ for file_name in file_names:
 
 # For each model_name add @@include to it
 include_statement = "@@usage("
-model_names_with_include = [include_statement + model_name + ", Usage.input | Usage.output);" for model_name in model_names]    
+model_names_with_include = [include_statement + model_name + ", Usage.output);" for model_name in model_names]    
 
 access_statement = "@@access("
 model_names_with_access = [access_statement + model_name + ", Access.public);" for model_name in model_names]   
 
 # For each enum_name add @@include to it
 include_statement = "@@usage("
-enum_names_with_include = [include_statement + enum_name + ", Usage.input | Usage.output);" for enum_name in enum_names]    
+enum_names_with_include = [include_statement + enum_name + ", Usage.output);" for enum_name in enum_names]    
 
 access_statement = "@@access("
 enum_names_with_access = [access_statement + enum_name + ", Access.public);" for enum_name in enum_names]  
