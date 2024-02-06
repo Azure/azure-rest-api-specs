@@ -312,9 +312,6 @@ model TextCustomizedCategoryBuildInfo {
   @doc("Last build trigger time.")
   lastBuildTriggeredTime: utcDateTime;
 
-  @doc("Last build update time.")
-  lastBuildUpdatedTime: utcDateTime;
-
   @doc("Error when building the category.")
   buildError?: Azure.Core.Foundations.ErrorResponse;
 }
@@ -322,10 +319,7 @@ model TextCustomizedCategoryBuildInfo {
 @doc("Detailed information of the customized category build.")
 model TextCustomizedCategoryDeleteInfo {
   @doc("Last build trigger time.")
-  lastDeleteTriggeredTime: utcDateTime;
-
-  @doc("Last build update time.")
-  lastDeleteUpdatedTime: utcDateTime;
+  deleteTriggeredTime: utcDateTime;
 
   @doc("Error when building the category.")
   deleteError?: Azure.Core.Foundations.ErrorResponse;

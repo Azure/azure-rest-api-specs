@@ -170,10 +170,10 @@ interface TextCustomizedCategoryOperations {
   //   }>
   // >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @get
   @route("/text/categories/{categoryName}")
-  getCustomizedCategory is Azure.Core.RpcOperation<
+  getCustomizedCategory is Azure.Core.Foundations.Operation<
     {
       @path
       @doc("Name of the customized category.")
