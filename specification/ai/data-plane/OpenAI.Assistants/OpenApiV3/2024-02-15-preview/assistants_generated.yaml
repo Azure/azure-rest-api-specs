@@ -1304,99 +1304,6 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The details used to create a new assistant thread.
-    CodeInterpreterImageOutput:
-      type: object
-      required:
-        - type
-        - image
-      properties:
-        type:
-          type: string
-          enum:
-            - image
-          description: The object type, which is always 'image'.
-        image:
-          allOf:
-            - $ref: '#/components/schemas/CodeInterpreterImageReference'
-          description: Referential information for the image associated with this output.
-      allOf:
-        - $ref: '#/components/schemas/CodeInterpreterToolCallOutput'
-      description: A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.
-    CodeInterpreterImageReference:
-      type: object
-      required:
-        - file_id
-      properties:
-        file_id:
-          type: string
-          description: The ID of the file associated with this image.
-      description: An image reference emitted by a code interpreter tool in response to a tool call by the model.
-    CodeInterpreterLogOutput:
-      type: object
-      required:
-        - type
-        - logs
-      properties:
-        type:
-          type: string
-          enum:
-            - logs
-          description: The object type, which is always 'logs'.
-        logs:
-          type: string
-          description: The serialized log output emitted by the code interpreter.
-      allOf:
-        - $ref: '#/components/schemas/CodeInterpreterToolCallOutput'
-      description: A representation of a log output emitted by a code interpreter tool in response to a tool call by the model.
-    CodeInterpreterToolCall:
-      type: object
-      required:
-        - type
-        - code_interpreter
-      properties:
-        type:
-          type: string
-          enum:
-            - code_interpreter
-          description: The object type, which is always 'code_interpreter'.
-        code_interpreter:
-          allOf:
-            - $ref: '#/components/schemas/CodeInterpreterToolCallDetails'
-          description: The details of the tool call to the code interpreter tool.
-      allOf:
-        - $ref: '#/components/schemas/ToolCall'
-      description: |-
-        A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
-        represents inputs and outputs consumed and emitted by the code interpreter.
-    CodeInterpreterToolCallDetails:
-      type: object
-      required:
-        - input
-        - outputs
-      properties:
-        input:
-          type: string
-          description: The input provided by the model to the code interpreter tool.
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CodeInterpreterToolCallOutput'
-          description: The outputs produced by the code interpreter tool back to the model in response to the tool call.
-      description: The detailed information about a code interpreter invocation by the model.
-    CodeInterpreterToolCallOutput:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          description: The object type.
-      discriminator:
-        propertyName: type
-        mapping:
-          logs: '#/components/schemas/CodeInterpreterLogOutput'
-          image: '#/components/schemas/CodeInterpreterImageOutput'
-      description: An abstract representation of an emitted output from a code interpreter tool.
     CodeInterpreterToolDefinition:
       type: object
       required:
@@ -1534,44 +1441,6 @@ components:
         parameters:
           description: The parameters the functions accepts, described as a JSON Schema object.
       description: The input definition information for a function.
-    FunctionToolCall:
-      type: object
-      required:
-        - type
-        - function
-      properties:
-        type:
-          type: string
-          enum:
-            - function
-          description: The object type, which is always 'function'.
-        function:
-          allOf:
-            - $ref: '#/components/schemas/FunctionToolCallDetails'
-          description: The detailed information about the function called by the model.
-      allOf:
-        - $ref: '#/components/schemas/ToolCall'
-      description: |-
-        A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
-        and output consumed and emitted by the specified function.
-    FunctionToolCallDetails:
-      type: object
-      required:
-        - name
-        - arguments
-        - output
-      properties:
-        name:
-          type: string
-          description: The name of the function.
-        arguments:
-          type: string
-          description: The arguments that the model requires are provided to the named function.
-        output:
-          type: string
-          nullable: true
-          description: The output of the function, only populated for function calls that have already have had their outputs submitted.
-      description: The detailed information about the function called by the model.
     FunctionToolDefinition:
       type: object
       required:
@@ -1858,11 +1727,24 @@ components:
           description: The object type of the required tool call. Always 'function' for function tools.
         function:
           allOf:
-            - $ref: '#/components/schemas/FunctionDefinition'
+            - $ref: '#/components/schemas/RequiredFunctionToolCallDetails'
           description: Detailed information about the function to be executed by the tool that includes name and arguments.
       allOf:
         - $ref: '#/components/schemas/RequiredToolCall'
       description: A representation of a requested call to a function tool, needed by the model to continue evaluation of a run.
+    RequiredFunctionToolCallDetails:
+      type: object
+      required:
+        - name
+        - arguments
+      properties:
+        name:
+          type: string
+          description: The name of the function.
+        arguments:
+          type: string
+          description: The arguments to use when invoking the named function, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation.
+      description: The detailed information for a function invocation, as provided by a required action invoking a function tool, that includes the name of and arguments to the function.
     RequiredToolCall:
       type: object
       required:
@@ -1880,27 +1762,6 @@ components:
         mapping:
           function: '#/components/schemas/RequiredFunctionToolCall'
       description: An abstract representation a a tool invocation needed by the model to continue a run.
-    RetrievalToolCall:
-      type: object
-      required:
-        - type
-        - retrieval
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always 'retrieval'.
-        retrieval:
-          type: object
-          additionalProperties:
-            type: string
-          description: The key/value pairs produced by the retrieval tool.
-      allOf:
-        - $ref: '#/components/schemas/ToolCall'
-      description: |-
-        A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents
-        executed retrieval actions.
     RetrievalToolDefinition:
       type: object
       required:
@@ -2024,6 +1885,99 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: Detailed information about a single step of an assistant thread run.
+    RunStepCodeInterpreterImageOutput:
+      type: object
+      required:
+        - type
+        - image
+      properties:
+        type:
+          type: string
+          enum:
+            - image
+          description: The object type, which is always 'image'.
+        image:
+          allOf:
+            - $ref: '#/components/schemas/RunStepCodeInterpreterImageReference'
+          description: Referential information for the image associated with this output.
+      allOf:
+        - $ref: '#/components/schemas/RunStepCodeInterpreterToolCallOutput'
+      description: A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.
+    RunStepCodeInterpreterImageReference:
+      type: object
+      required:
+        - file_id
+      properties:
+        file_id:
+          type: string
+          description: The ID of the file associated with this image.
+      description: An image reference emitted by a code interpreter tool in response to a tool call by the model.
+    RunStepCodeInterpreterLogOutput:
+      type: object
+      required:
+        - type
+        - logs
+      properties:
+        type:
+          type: string
+          enum:
+            - logs
+          description: The object type, which is always 'logs'.
+        logs:
+          type: string
+          description: The serialized log output emitted by the code interpreter.
+      allOf:
+        - $ref: '#/components/schemas/RunStepCodeInterpreterToolCallOutput'
+      description: A representation of a log output emitted by a code interpreter tool in response to a tool call by the model.
+    RunStepCodeInterpreterToolCall:
+      type: object
+      required:
+        - type
+        - code_interpreter
+      properties:
+        type:
+          type: string
+          enum:
+            - code_interpreter
+          description: The object type, which is always 'code_interpreter'.
+        code_interpreter:
+          allOf:
+            - $ref: '#/components/schemas/RunStepCodeInterpreterToolCallDetails'
+          description: The details of the tool call to the code interpreter tool.
+      allOf:
+        - $ref: '#/components/schemas/RunStepToolCall'
+      description: |-
+        A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
+        represents inputs and outputs consumed and emitted by the code interpreter.
+    RunStepCodeInterpreterToolCallDetails:
+      type: object
+      required:
+        - input
+        - outputs
+      properties:
+        input:
+          type: string
+          description: The input provided by the model to the code interpreter tool.
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunStepCodeInterpreterToolCallOutput'
+          description: The outputs produced by the code interpreter tool back to the model in response to the tool call.
+      description: The detailed information about a code interpreter invocation by the model.
+    RunStepCodeInterpreterToolCallOutput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          logs: '#/components/schemas/RunStepCodeInterpreterLogOutput'
+          image: '#/components/schemas/RunStepCodeInterpreterImageOutput'
+      description: An abstract representation of an emitted output from a code interpreter tool.
     RunStepDetails:
       type: object
       required:
@@ -2059,6 +2013,44 @@ components:
         - server_error
         - rate_limit_exceeded
       description: Possible error code values attributable to a failed run step.
+    RunStepFunctionToolCall:
+      type: object
+      required:
+        - type
+        - function
+      properties:
+        type:
+          type: string
+          enum:
+            - function
+          description: The object type, which is always 'function'.
+        function:
+          allOf:
+            - $ref: '#/components/schemas/RunStepFunctionToolCallDetails'
+          description: The detailed information about the function called by the model.
+      allOf:
+        - $ref: '#/components/schemas/RunStepToolCall'
+      description: |-
+        A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
+        and output consumed and emitted by the specified function.
+    RunStepFunctionToolCallDetails:
+      type: object
+      required:
+        - name
+        - arguments
+        - output
+      properties:
+        name:
+          type: string
+          description: The name of the function.
+        arguments:
+          type: string
+          description: The arguments that the model requires are provided to the named function.
+        output:
+          type: string
+          nullable: true
+          description: The output of the function, only populated for function calls that have already have had their outputs submitted.
+      description: The detailed information about the function called by the model.
     RunStepMessageCreationDetails:
       type: object
       required:
@@ -2086,6 +2078,27 @@ components:
           type: string
           description: The ID of the message created by this run step.
       description: The details of a message created as a part of a run step.
+    RunStepRetrievalToolCall:
+      type: object
+      required:
+        - type
+        - retrieval
+      properties:
+        type:
+          type: string
+          enum:
+            - retrieval
+          description: The object type, which is always 'retrieval'.
+        retrieval:
+          type: object
+          additionalProperties:
+            type: string
+          description: The key/value pairs produced by the retrieval tool.
+      allOf:
+        - $ref: '#/components/schemas/RunStepToolCall'
+      description: |-
+        A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents
+        executed retrieval actions.
     RunStepStatus:
       type: string
       enum:
@@ -2095,6 +2108,25 @@ components:
         - completed
         - expired
       description: Possible values for the status of a run step.
+    RunStepToolCall:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+          description: The object type.
+        id:
+          type: string
+          description: The ID of the tool call. This ID must be referenced when you submit tool outputs.
+      discriminator:
+        propertyName: type
+        mapping:
+          code_interpreter: '#/components/schemas/RunStepCodeInterpreterToolCall'
+          retrieval: '#/components/schemas/RunStepRetrievalToolCall'
+          function: '#/components/schemas/RunStepFunctionToolCall'
+      description: An abstract representation of a detailed tool call as recorded within a run step for an existing run.
     RunStepToolCallDetails:
       type: object
       required:
@@ -2109,7 +2141,7 @@ components:
         tool_calls:
           type: array
           items:
-            $ref: '#/components/schemas/ToolCall'
+            $ref: '#/components/schemas/RunStepToolCall'
           description: A list of tool call details for this run step.
       allOf:
         - $ref: '#/components/schemas/RunStepDetails'
@@ -2362,25 +2394,6 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: Data representing a single evaluation run of an assistant thread.
-    ToolCall:
-      type: object
-      required:
-        - type
-        - id
-      properties:
-        type:
-          type: string
-          description: The object type.
-        id:
-          type: string
-          description: The ID of the tool call. This ID must be referenced when you submit tool outputs.
-      discriminator:
-        propertyName: type
-        mapping:
-          code_interpreter: '#/components/schemas/CodeInterpreterToolCall'
-          retrieval: '#/components/schemas/RetrievalToolCall'
-          function: '#/components/schemas/FunctionToolCall'
-      description: An abstract representation of a detailed tool call as recorded within a run step for an existing run.
     ToolDefinition:
       type: object
       required:
