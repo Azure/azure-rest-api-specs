@@ -632,7 +632,7 @@
         }
       }
     },
-    "/text:promptShield": {
+    "/text:shieldPrompt": {
       "post": {
         "operationId": "TextOperations_DetectTextPromptInjection",
         "summary": "Analyze text prompt injection attacks",
@@ -867,7 +867,7 @@
         },
         "documents": {
           "type": "array",
-          "description": "The documents needs to be analyzed if they attempt to do indirect injection attacks.",
+          "description": "The documents needs to be analyzed if they attempt to do direct or indirect injection attacks.",
           "items": {
             "type": "string"
           }
@@ -884,7 +884,7 @@
         },
         "documentsAnalysisResults": {
           "type": "array",
-          "description": "Indirect injection attacks analysis result for documents input.",
+          "description": "Direct and indirect injection attacks analysis result for documents input.",
           "items": {
             "$ref": "#/definitions/TextPromptInjectionResult"
           },
@@ -1391,7 +1391,7 @@
       "properties": {
         "detected": {
           "type": "boolean",
-          "description": "Analysis result for text prompt injection attacks."
+          "description": "Analysis result for whether the prompt is classified as an injection attack."
         }
       },
       "required": [
