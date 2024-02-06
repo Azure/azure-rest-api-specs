@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace Azure.OpenAI;
 
-@doc("Generates audio from the input text.")
+@doc("Generates text-to-speech audio from the input text.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @action("audio/speech")
 @actionSeparator("/")

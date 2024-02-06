@@ -62,7 +62,7 @@
     "/deployments/{deploymentId}/audio/speech": {
       "post": {
         "operationId": "GetAudioSpeech",
-        "description": "Generates audio from the input text.",
+        "description": "Generates text-to-speech audio from the input text.",
         "produces": [
           "application/octet-stream",
           "application/json"
@@ -573,26 +573,28 @@
   "definitions": {
     "AudioSpeechOptions": {
       "type": "object",
-      "description": "Specifies the request for speech synthesis.",
+      "description": "A representation of the request options that control the behavior of a text-to-speech operation.",
       "properties": {
         "input": {
           "type": "string",
-          "description": "The text to synthesize audio for. The maximum length is 4096 characters.",
+          "description": "The text to generate audio for. The maximum length is 4096 characters.",
           "maxLength": 4096
         },
         "voice": {
           "$ref": "#/definitions/AudioSpeechVoice",
-          "description": "The voice to use for speech synthesis."
+          "description": "The voice to use for text-to-speech."
         },
         "response_format": {
           "$ref": "#/definitions/AudioSpeechOutputFormat",
-          "description": "The format to synthesize the audio in.",
+          "description": "The audio output format for the spoken text. By default, the MP3 format will be used.",
+          "default": "mp3",
           "x-ms-client-name": "responseFormat"
         },
         "speed": {
           "type": "number",
           "format": "float",
-          "description": "The speed of the synthesize audio. Select a value from `0.25` to `4.0`. `1.0` is the default.",
+          "description": "The speed of speech for generated audio. Values are valid in the range from 0.25 to 4.0, with 1.0 the default and higher values corresponding to faster speech.",
+          "default": 1,
           "minimum": 0.25,
           "maximum": 4
         }
@@ -604,7 +606,7 @@
     },
     "AudioSpeechOutputFormat": {
       "type": "string",
-      "description": "Represents the output format for speech synthesis.",
+      "description": "The supported audio output formats for text-to-speech.",
       "enum": [
         "mp3",
         "opus",
@@ -618,29 +620,29 @@
           {
             "name": "mp3",
             "value": "mp3",
-            "description": "Use mp3 as output format."
+            "description": "Use MP3 as the audio output format. MP3 is the default, general-purpose format."
           },
           {
             "name": "opus",
             "value": "opus",
-            "description": "Use opus as output format."
+            "description": "Use Opus as the audio output format. Opus is optimized for internet streaming and low latency."
           },
           {
             "name": "aac",
             "value": "aac",
-            "description": "Use aac as output format."
+            "description": "Use AAC as the audio output format. AAC is optimized for digital audio compression and is preferred by YouTube, Android, and iOS."
           },
           {
             "name": "flac",
             "value": "flac",
-            "description": "Use flac as output format."
+            "description": "Use FLAC as the audio output format. FLAC is a fully lossless format optimized for maximum quality at the expense of size."
           }
         ]
       }
     },
     "AudioSpeechVoice": {
       "type": "string",
-      "description": "Represents a voice for speech synthesis.",
+      "description": "The available voices for text-to-speech.",
       "enum": [
         "alloy",
         "echo",

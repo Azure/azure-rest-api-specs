@@ -37,7 +37,7 @@ interface OpenAIClient {
   getChatCompletions is Azure.OpenAI.getChatCompletions;
 
   getImageGenerations is Azure.OpenAI.getImageGenerations;
-  
+
   getAudioSpeech is Azure.OpenAI.getAudioSpeech;
 
   getEmbeddings is Azure.OpenAI.getEmbeddings;
