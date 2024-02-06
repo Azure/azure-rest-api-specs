@@ -26,12 +26,15 @@ model SAPDiscoverySite is TrackedResource<SAPDiscoverySiteProperties> {
   @segment("sapDiscoverySites")
   @visibility("read")
   name: string;
+
   /**
    * The extended location definition.
    */
   extendedLocation?: ExtendedLocation;
 }
-@@doc(SAPDiscoverySite.properties, " The SAP Migration discovery site resource properties.");
+@@doc(SAPDiscoverySite.properties,
+  " The SAP Migration discovery site resource properties."
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 @armResourceOperations
