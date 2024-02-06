@@ -1288,7 +1288,19 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ImageViewTypeParameter"
+            "in": "path",
+            "name": "imageViewType",
+            "description": "The view type of image.",
+            "required": true,
+            "enum": [
+              "original",
+              "small"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ImageViewType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2094,21 +2106,6 @@
     }
   },
   "parameters": {
-    "ImageViewTypeParameter": {
-      "in": "path",
-      "name": "imageViewType",
-      "description": "The view type of image.",
-      "required": true,
-      "enum": [
-        "original",
-        "small"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ImageViewType",
-        "modelAsString": true
-      }
-    },
     "ApiVersionParameter": {
       "in": "query",
       "name": "api-version",
