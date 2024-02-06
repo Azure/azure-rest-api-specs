@@ -832,6 +832,29 @@ model VaultAccessPolicyProperties {
 }
 
 /**
+ * Paged response containing resources
+ * @template TResource The type of the values returned in the paged response (must be a resource)
+ */
+@doc("The response of a {name} list operation.", TResource)
+@friendlyName("{name}ListResult", TResource)
+model TResourceListResult<TResource extends ArmResource> is Azure.Core.Page<TResource>;
+
+/**
+ * The ARM 200 response for a resource and Retry-After header
+ * @template T The contents of the response body
+ */
+@doc("ARM create operation completed successfully.")
+model ArmOkResponse<T> {
+  ...OkResponse;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+  ...Body<T>;
+  @doc("(specified only if operation does not finish synchronously) The URI to poll for completion status. The response of this URI may be synchronous or asynchronous.")
+  @header("Azure-AsyncOperation")
+  azureAsyncOperation?: string;
+}
+
+
+/**
  * List of vaults
  */
 model DeletedVaultListResult is Azure.Core.Page<DeletedVault>;

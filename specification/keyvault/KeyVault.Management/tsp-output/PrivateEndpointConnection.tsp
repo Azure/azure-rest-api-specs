@@ -37,12 +37,24 @@ interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the key vault.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get (
+    ...ResourceInstanceParameters<PrivateEndpointConnection>
+  ): ArmNoContentResponse<"Request successful. Resource does not exist."> //204 response
+  | ArmResponse<PrivateEndpointConnection>
+  | ErrorResponse;
 
-  /**
+    /**
    * Updates the specified private endpoint connection associated with the key vault.
    */
-  put is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
+    @armResourceCreateOrUpdate(PrivateEndpointConnection)
+    @put
+    put(
+      ...ResourceInstanceParameters<PrivateEndpointConnection,BaseParameters<PrivateEndpointConnectionParameter>>,
+      @doc("The intended state of private endpoint connection.")
+      @body
+      resource: PrivateEndpointConnection
+    ): ArmOkResponse<PrivateEndpointConnection>
+    | ErrorResponse; 
 
   /**
    * Deletes the specified private endpoint connection associated with the key vault.

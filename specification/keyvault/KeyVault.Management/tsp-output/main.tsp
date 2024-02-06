@@ -10,7 +10,7 @@ import "./ManagedHsm.tsp";
 import "./DeletedManagedHsm.tsp";
 import "./MhsmPrivateEndpointConnection.tsp";
 import "./Secret.tsp";
-import "./routes.tsp";
+// import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

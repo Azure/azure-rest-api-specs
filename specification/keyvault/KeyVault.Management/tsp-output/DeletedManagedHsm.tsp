@@ -37,8 +37,23 @@ interface DeletedManagedHsms {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("ManagedHsms_PurgeDeleted")
-  purgeDeleted is ArmResourceActionNoResponseContentAsync<
+  @segment("purge")
+  @post
+  purge(
+    ...ResourceInstanceParameters<DeletedManagedHsm>
+  ): ArmAcceptedLroResponse<"Accepted and the operation will complete asynchronously.">
+  | ErrorResponse;
+
+  /**
+   * The List operation gets information about the deleted managed HSMs associated with the subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId( "ManagedHsms_ListDeleted")
+  listDeleted is ArmResourceListByParent<
     DeletedManagedHsm,
-    void
+    {
+      ...ApiVersionParameter,
+      ...SubscriptionIdParameter
+    }
   >;
 }

@@ -21,6 +21,7 @@ model Secret is ProxyResource<SecretProperties> {
    * The name of the secret.
    */
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("secretName")
   @segment("secrets")
   name: string;
@@ -36,13 +37,32 @@ interface Secrets {
   /**
    * Create or update a secret in a key vault in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Secret>;
+  @armResourceCreateOrUpdate(Secret)
+  @put
+  createOrUpdate(
+    ...ResourceInstanceParameters<Secret,BaseParameters<SecretCreateOrUpdateParameters>>,
+    @doc("Parameters to create or update the secret")
+    @body
+    resource: SecretCreateOrUpdateParameters
+  ):ArmResourceUpdatedResponse<Secret> 
+  | ArmResourceCreatedSyncResponse<Secret>
+  | ErrorResponse;
+  // createOrUpdate is ArmResourceCreateOrReplaceSync<Secret>;
 
   /**
    * Update a secret in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments.  Users should use the data-plane REST service for interaction with vault secrets.
    */
-  @parameterVisibility("read")
-  update is ArmCustomPatchSync<Secret, SecretPatchParameters>;
+  @armResourceUpdate(Secret)
+  @patch
+  update(
+    ...ResourceInstanceParameters<Secret,BaseParameters<SecretPatchParameters>>,
+    @doc("Parameters to patch the secret")
+    @body
+    properties: SecretPatchParameters
+  ): ArmResponse<Secret>
+  | ArmResourceCreatedSyncResponse<Secret>
+  | ErrorResponse;
+  // update is ArmCustomPatchSync<Secret, SecretPatchParameters>;
 
   /**
    * The List operation gets information about the secrets in a vault.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.

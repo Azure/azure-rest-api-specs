@@ -19,6 +19,7 @@ model Vault is TrackedResource<VaultProperties> {
    * The name of the vault.
    */
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("vaultName")
   @segment("vaults")
   name: string;
@@ -34,13 +35,32 @@ interface Vaults {
   /**
    * Create or update a key vault in the specified subscription.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Vault>;
+  @armResourceCreateOrUpdate(Vault)
+  @put
+  createOrUpdate(
+    ...ResourceInstanceParameters<Vault,BaseParameters<VaultCreateOrUpdateParameters>>,
+    @doc("Parameters to create or update the vault")
+    @body
+    resource : VaultCreateOrUpdateParameters
+  ): ArmResponse<Vault>
+  | ArmResourceCreatedSyncResponse<Vault>
+  | ErrorResponse;
+  // createOrUpdate is ArmResourceCreateOrReplaceAsync<Vault>;
 
   /**
    * Update a key vault in the specified subscription.
    */
-  @parameterVisibility("read")
-  update is ArmCustomPatchSync<Vault, VaultPatchParameters>;
+  //@parameterVisibility("read")
+  @armResourceUpdate(Vault)
+  @patch
+  update(
+    ...ResourceInstanceParameters<Vault,BaseParameters<VaultPatchParameters>>,
+    @doc("Parameters to patch the vault")
+    @body
+    properties: VaultPatchParameters
+  ): ArmResponse<Vault>
+  | ArmResourceCreatedSyncResponse<Vault> //201
+  | ErrorResponse;
 
   /**
    * Deletes the specified Azure key vault.
@@ -52,23 +72,32 @@ interface Vaults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Vaults_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<
-    Vault,
-    {
-      ...BaseParameters<Vault>;
-
+  @segment("vaults")
+  listByResourceGroup (
+    ...ResourceParentParameters<Vault, BaseParameters<Vault>>,
       /**
        * Maximum number of results to return.
-       */
-      @query("$top")
-      $top?: int32;
-    }
-  >;
+       */    
+    @query("$top")
+    $top?: int32;
+  ): TResourceListResult<Vault>
+  | ErrorResponse;
 
   /**
    * The List operation gets information about the vaults associated with the subscription.
    */
-  listBySubscription is ArmListBySubscription<Vault>;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Vaults_ListBySubscription")
+  @segment("vaults")
+  listBySubscription (
+    ...ResourceParentParameters<Vault, SubscriptionBaseParameters>;
+      /**
+       * Maximum number of results to return.
+       */    
+    @query("$top")
+    $top?: int32;
+  ): TResourceListResult<Vault>
+  | ErrorResponse;
 
   /**
    * Checks that the vault name is valid and is not already in use.
@@ -78,37 +107,23 @@ interface Vaults {
     CheckNameAvailabilityResult
   >;
 
-  /**
+}
+
+@armResourceOperations
+interface PrivateLinkResources{
+    /**
    * Gets the private link resources supported for the key vault.
    */
   // FIXME: PrivateLinkResources_ListByVault could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("PrivateLinkResources_ListByVault")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateLinkResources")
+  @segment("privateLinkResources")
+  @armResourceRead(Vault)
   @get
-  listByVault is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-
-      /**
-       * Name of the resource group that contains the key vault.
-       */
-      @path
-      resourceGroupName: string;
-
-      /**
-       * The name of the key vault.
-       */
-      @pattern("^[a-zA-Z0-9-]{3,24}$")
-      @path
-      vaultName: string;
-    },
-    PrivateLinkResourceListResult
-  >;
+  listByVault
+  (
+    ...ResourceInstanceParameters<Vault, BaseParameters<Vault>>,
+  ) : ArmResponse<PrivateLinkResourceListResult> | ErrorResponse
 }
 
 @@projectedName(Vaults.createOrUpdate::parameters.resource,

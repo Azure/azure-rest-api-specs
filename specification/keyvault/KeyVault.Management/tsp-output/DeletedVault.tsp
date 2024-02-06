@@ -17,12 +17,29 @@ namespace Microsoft.KeyVault;
 @locationResource
 model DeletedVault is ProxyResource<DeletedVaultProperties> {
   /**
-   * The name of the vault.
+   * The name of the key vault.
    */
   @path
   @key("vaultName")
   @segment("deletedVaults")
   name: string;
+    /**
+   * The resource ID for the deleted key vault.
+   */
+    @visibility("read")
+    id?: string;
+  
+    /**
+     * The name of the key vault.
+     */
+    @visibility("read")
+    vaultName?: string;
+  
+    /**
+     * The resource type of the key vault.
+     */
+    @visibility("read")
+    type?: string;
 }
 
 @armResourceOperations
@@ -38,6 +55,26 @@ interface DeletedVaults {
    * Permanently deletes the specified vault. aka Purges the deleted Azure key vault.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @extension("x-ms-long-running-operation", true)
   @operationId("Vaults_PurgeDeleted")
-  purgeDeleted is ArmResourceActionAsync<DeletedVault, void, void>;
+  @segment("purge")
+  @post
+  purge(
+    ...ResourceInstanceParameters<DeletedVault,BaseParameters<DeletedVault>>
+  ): ArmResponse<DeletedVault>
+  | ArmAcceptedResponse<"Vault is being purged.">
+  | ErrorResponse;
+
+  /**
+   * Gets information about the deleted vaults in a subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Vaults_ListDeleted")
+  listDeleted is ArmResourceListByParent<
+    DeletedVault,
+    {
+      ...ApiVersionParameter,
+      ...SubscriptionIdParameter;
+    }
+  >;
 }

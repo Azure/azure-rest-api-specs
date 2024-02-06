@@ -46,7 +46,14 @@ interface MhsmPrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("MHSMPrivateEndpointConnections_Put")
-  put is ArmResourceCreateOrReplaceSync<MhsmPrivateEndpointConnection>;
+  @armResourceCreateOrUpdate(MhsmPrivateEndpointConnection)
+  @put
+  put(
+    ...ResourceInstanceParameters<MhsmPrivateEndpointConnection,BaseParameters<MhsmPrivateEndpointConnection>>,
+    @doc("Resource create parameters.")
+    @body
+    resource: MhsmPrivateEndpointConnection
+  ): ArmOkResponse<MhsmPrivateEndpointConnection>| ErrorResponse ;
 
   /**
    * Deletes the specified private endpoint connection associated with the managed hsm pool.
