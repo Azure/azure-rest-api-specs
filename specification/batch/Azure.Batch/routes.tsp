@@ -1403,7 +1403,7 @@ format is bytes=startRange-endRange.
         @header
         `ocp-range`?: string;
       },
-    FileResponseHeders & {
+    FileResponseHeaders & {
       @doc("Type of content")
       @header("content-type")
       contentType: "application/octet-stream";
@@ -1419,7 +1419,7 @@ format is bytes=startRange-endRange.
   @projectedName("java", "getTaskFilePropertiesInternal")
   getTaskFileProperties is Ops.ResourceInfoOperation<
     BatchTaskFileClientPathParameters & BatchModifiedSinceHeaders,
-    FileResponseHeders
+    FileResponseHeaders
   >;
 
   @summary("Lists the files in a Task's directory on its Compute Node.")
@@ -1857,7 +1857,7 @@ format is bytes=startRange-endRange.
         @header
         `ocp-range`?: string;
       },
-    FileResponseHeders & {
+    FileResponseHeaders & {
       @doc("Type of content")
       @header("content-type")
       contentType: "application/octet-stream";
@@ -1873,7 +1873,7 @@ format is bytes=startRange-endRange.
   @projectedName("java", "getNodeFilePropertiesInternal")
   getNodeFileProperties is Ops.ResourceInfoOperation<
     BatchNodeFileClientPathParameters & BatchModifiedSinceHeaders,
-    FileResponseHeders
+    FileResponseHeaders
   >;
 
   @summary("Lists all of the files in Task directories on the specified Compute Node.")
@@ -1938,7 +1938,7 @@ alias DataServiceResponseHeaders = {
   dataServiceId: string;
 };
 
-alias FileResponseHeders = {
+alias FileResponseHeaders = {
   @doc("A process exit code.")
   @statusCode
   code: "200";
