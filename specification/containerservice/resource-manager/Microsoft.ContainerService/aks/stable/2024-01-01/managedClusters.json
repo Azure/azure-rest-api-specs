@@ -4789,6 +4789,10 @@
           "$ref": "#/definitions/ManagedClusterStorageProfile",
           "description": "Storage profile for the managed cluster."
         },
+        "ingressProfile": {
+          "$ref": "#/definitions/ManagedClusterIngressProfile",
+          "description": "Ingress profile for the managed cluster."
+        },
         "publicNetworkAccess": {
           "type": "string",
           "enum": [
@@ -6492,6 +6496,51 @@
           "readOnly": true
         }
       }
+    },
+    "ManagedClusterIngressProfile": {
+      "type": "object",
+      "properties": {
+        "webAppRouting": {
+          "$ref": "#/definitions/ManagedClusterIngressProfileWebAppRouting",
+          "description": "App Routing settings for the ingress profile. You can find an overview and onboarding guide for this feature at https://learn.microsoft.com/en-us/azure/aks/app-routing?tabs=default%2Cdeploy-app-default."
+        }
+      },
+      "description": "Ingress profile for the container service cluster."
+    },
+    "ManagedClusterIngressProfileWebAppRouting": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable the Application Routing add-on."
+        },
+        "dnsZoneResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Network/dnszones"
+                },
+                {
+                  "type": "Microsoft.Network/privateDnsZones"
+                }
+              ]
+            }
+          },
+          "maxItems": 5,
+          "description": "Resource IDs of the DNS zones to be associated with the Application Routing add-on. Used only when Application Routing add-on is enabled. Public and private DNS zones can be in different resource groups, but all public DNS zones must be in the same resource group and all private DNS zones must be in the same resource group."
+        },
+        "identity": {
+          "readOnly": true,
+          "type": "object",
+          "$ref": "#/definitions/UserAssignedIdentity",
+          "description": "Managed identity of the Application Routing add-on. This is the identity that should be granted permissions, for example, to manage the associated Azure DNS resource and get certificates from Azure Key Vault. See [this overview of the add-on](https://learn.microsoft.com/en-us/azure/aks/web-app-routing?tabs=with-osm) for more instructions."
+        }
+      },
+      "description": "Application Routing add-on settings for the ingress profile."
     },
     "ManagedClusterSecurityProfile": {
       "type": "object",
