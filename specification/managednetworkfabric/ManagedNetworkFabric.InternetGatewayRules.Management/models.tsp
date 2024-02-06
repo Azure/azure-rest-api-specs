@@ -35,22 +35,22 @@ enum Condition {
  * The current provisioning state.
  */
 enum ProvisioningState {
-  @doc("Requested provisioing state has been accepted")
+  @doc("Requested provisioning state has been accepted")
   Accepted,
 
-  @doc("Requested provisioing state has been successfully applied")
+  @doc("Requested provisioning state has been successfully applied")
   Succeeded,
 
-  @doc("Requested provisioing state is being applied")
+  @doc("Requested provisioning state is being applied")
   Updating,
 
-  @doc("Requested provisioing state is deleting a resource")
+  @doc("Requested provisioning state is deleting a resource")
   Deleting,
 
-  @doc("Requested provisioing state could not be applied")
+  @doc("Requested provisioning state could not be applied")
   Failed,
 
-  @doc("Requested provisioing state has been has been canceled")
+  @doc("Requested provisioning state has been has been canceled")
   Canceled,
 }
 
