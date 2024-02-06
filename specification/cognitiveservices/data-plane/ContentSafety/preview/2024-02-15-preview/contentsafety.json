@@ -632,11 +632,11 @@
         }
       }
     },
-    "/text:detectXPIA": {
+    "/text:promptShield": {
       "post": {
-        "operationId": "TextOperations_DetectTextXpia",
-        "summary": "Analyze text cross-prompt injection attacks",
-        "description": "A synchronous API for the analysis of text cross-prompt injection attacks.",
+        "operationId": "TextOperations_DetectTextPromptInjection",
+        "summary": "Analyze text prompt injection attacks",
+        "description": "A synchronous API for the analysis of text prompt injection attacks.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -644,10 +644,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The text cross-prompt injection attacks analysis request.",
+            "description": "The text prompt injection attacks analysis request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnalyzeTextXPIAOptions"
+              "$ref": "#/definitions/AnalyzeTextPromptInjectionOptions"
             }
           }
         ],
@@ -655,7 +655,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeTextXPIAResult"
+              "$ref": "#/definitions/AnalyzeTextPromptInjectionResult"
             }
           },
           "default": {
@@ -857,6 +857,41 @@
         ]
       }
     },
+    "AnalyzeTextPromptInjectionOptions": {
+      "type": "object",
+      "description": "The text prompt injection attacks analysis request.",
+      "properties": {
+        "userPrompt": {
+          "type": "string",
+          "description": "The user prompt needs to be analyzed if it attempts to do direct injection attacks."
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents needs to be analyzed if they attempt to do indirect injection attacks.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AnalyzeTextPromptInjectionResult": {
+      "type": "object",
+      "description": "The text injection attacks analysis response.",
+      "properties": {
+        "userPromptAnalysisResult": {
+          "$ref": "#/definitions/TextPromptInjectionResult",
+          "description": "Direct injection analysis result for user prompt input."
+        },
+        "documentsAnalysisResults": {
+          "type": "array",
+          "description": "Indirect injection attacks analysis result for documents input.",
+          "items": {
+            "$ref": "#/definitions/TextPromptInjectionResult"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "AnalyzeTextProtectedMaterialOptions": {
       "type": "object",
       "description": "The protected material analysis request.",
@@ -907,32 +942,6 @@
       },
       "required": [
         "categoriesAnalysis"
-      ]
-    },
-    "AnalyzeTextXPIAOptions": {
-      "type": "object",
-      "description": "The text cross-prompt injection attacks analysis request.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The text needs to be analyzed if it attempts to do cross-prompt injection attacks."
-        }
-      },
-      "required": [
-        "text"
-      ]
-    },
-    "AnalyzeTextXPIAResult": {
-      "type": "object",
-      "description": "The text cross-prompt injection attacks analysis response.",
-      "properties": {
-        "xpiaAnalysisResult": {
-          "$ref": "#/definitions/XPIAAnalysisResult",
-          "description": "Analysis result for cross-prompt injection attacks."
-        }
-      },
-      "required": [
-        "xpiaAnalysisResult"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -1376,6 +1385,19 @@
         "modelAsString": true
       }
     },
+    "TextPromptInjectionResult": {
+      "type": "object",
+      "description": "The text injection attacks analysis response.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Analysis result for text prompt injection attacks."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
     "UngroundedDetails": {
       "type": "object",
       "description": "The detailed information about a text identified as ungrounded.",
@@ -1391,19 +1413,6 @@
       },
       "required": [
         "text"
-      ]
-    },
-    "XPIAAnalysisResult": {
-      "type": "object",
-      "description": "The text cross-prompt injection attacks analysis response.",
-      "properties": {
-        "detected": {
-          "type": "boolean",
-          "description": "Analysis result for cross-prompt injection attacks."
-        }
-      },
-      "required": [
-        "detected"
       ]
     }
   },
