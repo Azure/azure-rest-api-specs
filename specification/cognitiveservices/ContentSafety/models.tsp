@@ -57,7 +57,7 @@ model AnalyzeTextOptions {
 
   @doc("This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
-  
+
   @doc("Customized categories will be analyzed if they are assigned. If no customized categories are assigned, no analysis on them will be returned.")
   @added(ContentSafety.Versions.v2024_03_30_Preview)
   customizedCategories?: CustomizedCategoryOption[];
@@ -288,36 +288,59 @@ model TextCustomizedCategory {
 
   @doc("Build status of the customized category")
   @visibility("read")
-  buildStatus: CategoryBuildStatus;
+  status: CategoryStatus;
 
   @doc("Build information for the customized category.")
   @visibility("read")
   buildInfo: TextCustomizedCategoryBuildInfo;
+
+  @doc("Build information for the customized category.")
+  @visibility("read")
+  delteInfo: TextCustomizedCategoryDeleteInfo;
 }
 
 @doc("Detailed information of the customized category build.")
 model TextCustomizedCategoryBuildInfo {
-
   @doc("Last build trigger time.")
-  lastBuildTriggeringTime: utcDateTime;
+  lastBuildTriggeredTime: utcDateTime;
 
   @doc("Last build update time.")
   lastBuildUpdatedTime: utcDateTime;
 
-  @doc("Errors when building the category.")
-  buildErrors?: string[];
+  @doc("Error when building the category.")
+  buildError?: Azure.Core.Foundations.ErrorResponse;
+}
+
+@doc("Detailed information of the customized category build.")
+model TextCustomizedCategoryDeleteInfo {
+  @doc("Last build trigger time.")
+  lastDeleteTriggeredTime: utcDateTime;
+
+  @doc("Last build update time.")
+  lastDeleteUpdatedTime: utcDateTime;
+
+  @doc("Error when building the category.")
+  deleteError?: Azure.Core.Foundations.ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Status of the customized category build.")
-enum CategoryBuildStatus {
+enum CategoryStatus {
   BuildNotStarted,
   Building,
   BuildSucceeded,
   BuildFailed,
+  Deleting,
+  DeleteFailed,
 }
 
 @doc("Alias of TextCustomizedCategory")
 model TextCustomizedCategoryVersion {
-  ...TextCustomizedCategory
+  ...TextCustomizedCategory;
+}
+
+@doc("List of customized category versions.")
+model TextCustomizedCategoryVersionList {
+  @doc("List of customized category versions.")
+  value: TextCustomizedCategoryVersion[];
 }

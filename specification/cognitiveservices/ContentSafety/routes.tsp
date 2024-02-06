@@ -160,15 +160,31 @@ interface TextCustomizedCategoryOperations {
   @summary("Create a new version of text customized category.")
   @doc("Create new version")
   createOrUpdateTextCustomizedCategory is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomizedCategory>;
-  
-  getCustomizedCategory is TextCustomizedCategoryOps.ResourceRead<
-    TextCustomizedCategory,
-    QueryParametersTrait<{
+
+  // getCustomizedCategory is TextCustomizedCategoryOps.ResourceRead<
+  //   TextCustomizedCategory,
+  //   QueryParametersTrait<{
+  //     @query
+  //     @doc("If not provided, it will return the latest version.")
+  //     version?: int32;
+  //   }>
+  // >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params"
+  @get
+  @route("/text/categories/{categoryName}")
+  getCustomizedCategory is Azure.Core.RpcOperation<
+    {
+      @path
+      @doc("Name of the customized category.")
+      categoryName: string;
+
       @query
       @doc("If not provided, it will return the latest version.")
       version?: int32;
-    }>
-    >;
+    },
+    TextCustomizedCategoryVersionList
+  >;
 
   @doc("List categories of their latest versions.")
   listCustomizedCategory is TextCustomizedCategoryOps.ResourceList<
@@ -190,7 +206,7 @@ interface TextCustomizedCategoryOperations {
   // >;
 
   @doc("Delete a customized category or a specific version of it.")
-  deletCustomizedCategory is TextCustomizedCategoryOps.ResourceDelete<
+  deletCustomizedCategory is TextCustomizedCategoryOps.LongRunningResourceDelete<
     TextCustomizedCategory,
     QueryParametersTrait<{
       @query
@@ -210,22 +226,21 @@ interface TextCustomizedCategoryOperations {
     AcceptedResponse
   >;
 
+  // @doc("List all versions of the category.")
+  // @route("text/categories/{categoryName}:listVersion")
+  // @action
+  // @post
+  // listVersion is  Azure.Core.RpcOperation<
+  //   {
+  //     ...StandardListQueryParameters;
+  //     @path
+  //     @doc("Name of the customized category.")
+  //     categoryName: string;
 
-  @doc("List all versions of the category.")
-  @route("text/categories/{categoryName}:listVersion")
-  @action
-  @post
-  listVersion is  Azure.Core.RpcOperation<
-    {
-      ...StandardListQueryParameters;
-      @path
-      @doc("Name of the customized category.")
-      categoryName: string;
-
-      @query
-      @doc("Versions of the specified status will be returned. If not provided, all versions will be returned.")
-      buildStatus?: CategoryBuildStatus;
-    },
-    Foundations.CustomPage<TextCustomizedCategoryVersion>
-  >;
+  //     @query
+  //     @doc("Versions of the specified status will be returned. If not provided, all versions will be returned.")
+  //     buildStatus?: CategoryBuildStatus;
+  //   },
+  //   Foundations.CustomPage<TextCustomizedCategoryVersion>
+  // >;
 }
