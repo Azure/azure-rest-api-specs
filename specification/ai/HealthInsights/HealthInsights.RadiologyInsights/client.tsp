@@ -7,9 +7,7 @@ import "../HealthInsights.OpenAPI/service.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(
-  AzureHealthInsights.ApiVersion.v2023_09_01_Preview
-)
+@TypeSpec.Versioning.useDependency(AzureHealthInsights.ApiVersion.v2024_04_01)
 namespace ClientForAzureHealthInsights;
 
 @client({

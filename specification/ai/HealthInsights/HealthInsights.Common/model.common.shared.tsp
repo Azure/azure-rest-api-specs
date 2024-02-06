@@ -1,6 +1,44 @@
+using Azure.Core;
 using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
+
+/**
+ * Provides HealthInsights resource details for long running operations.
+ * @template TRequest The type of the operation request data.
+ * @template TResult The type of the operation result.
+ * @template TStatusError The type of the operation status error. If not provided, the default error is used.
+ */
+// @TypeSpec.Versioning.added(AzureHealthInsights.ApiVersion.v2024_04_01)
+@doc("Provides status details for long running operations.")
+@resource("radiology-insights/jobs")
+model HealthInsightsJobResourceBase {
+  @key("id")
+  @doc("The unique ID of the operation.")
+  @visibility("read", "create")
+  id: Azure.Core.uuid;
+
+  @doc("The status of the operation")
+  @visibility("read")
+  @lroStatus
+  status?: JobStatus;
+
+  @doc("The date and time when the processing job was created.")
+  @visibility("read")
+  createdDateTime?: utcDateTime;
+
+  @doc("The date and time when the processing job is set to expire.")
+  @visibility("read")
+  expirationDateTime?: utcDateTime;
+
+  @doc("The date and time when the processing job was last updated.")
+  @visibility("read")
+  lastUpdateDateTime?: utcDateTime;
+
+  @doc("Error object that describes the error when status is \"Failed\".")
+  @visibility("read")
+  error?: Foundations.Error;
+}
 
 @doc("ConditionStage")
 model ConditionStage {

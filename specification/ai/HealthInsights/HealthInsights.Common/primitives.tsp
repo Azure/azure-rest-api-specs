@@ -60,3 +60,31 @@ model HealthInsightsRetryAfterTrait {
     response: Foundations.RetryAfterHeader;
   };
 }
+
+@doc("The Operation-Id envelope.")
+model OperationIdHeader {
+  @doc("The Operation-Id header for the operation's status monitor.")
+  @header("Operation-Id")
+  operationId?: Azure.Core.uuid;
+}
+
+@trait("HealthInsightsOperationIdTrait")
+@doc("Health Insights Operation-Id trait")
+model HealthInsightsOperationIdTrait {
+  @doc("The Operation-Id header.")
+  operationId: {
+    @traitLocation(TraitLocation.Response)
+    response: OperationIdHeader;
+  };
+}
+
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId &
+  HealthInsightsRetryAfterTrait &
+  HealthInsightsOperationIdTrait;
+
+alias HealthInsightsOperations = ResourceOperations<
+  ServiceTraits,
+  Azure.Core.Foundations.ErrorResponse
+>;

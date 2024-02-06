@@ -57,6 +57,19 @@ model FindingOptions {
   provideFocusedSentenceEvidence?: boolean;
 }
 
+@doc("Response for the Radiology Insights request.")
+model RadiologyInsightsResource {
+  @doc("The request data for the operation.")
+  @visibility("read", "create")
+  requestData?: RadiologyInsightsData;
+
+  @doc("The result of the operation.")
+  @visibility("read")
+  result?: RadiologyInsightsInferenceResult;
+
+  ...HealthInsightsJobResourceBase;
+}
+
 @resource("radiology-insights/jobs")
 @doc("Response for the Radiology Insights request.")
 model RadiologyInsightsResult

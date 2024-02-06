@@ -13,24 +13,10 @@ using TypeSpec.Http;
 namespace AzureHealthInsights;
 
 interface RadiologyInsights {
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Service uses a jobId in the path"
-  @summary("Get Radiology Insights job details")
-  @tag("RadiologyInsights")
-  @doc("Gets the status and details of the Radiology Insights job.")
-  @get
-  @route("/radiology-insights/jobs/{id}")
-  getJob is HealthInsightsLongRunningPollOperation<RadiologyInsightsResult>;
+  @summary("Get Radiology Insights Job")
+  getJob is HealthInsightsOperations.ResourceRead<RadiologyInsightsResource>;
 
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"
-  @summary("Create Radiology Insights job")
-  @tag("RadiologyInsights")
-  @doc("Creates a Radiology Insights job with the given request body.")
+  @summary("Create Radiology Insights Job")
   @pollingOperation(RadiologyInsights.getJob)
-  @route("/radiology-insights/jobs")
-  createJob is HealthInsightsLongRunningRpcOperation<
-    RadiologyInsightsData,
-    RadiologyInsightsResult,
-    RadiologyInsightsInferenceResult
-  >;
+  createJob is HealthInsightsOperations.LongRunningResourceCreateOrReplace<RadiologyInsightsResource>;
 }
