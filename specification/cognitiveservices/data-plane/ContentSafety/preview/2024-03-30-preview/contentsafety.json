@@ -1590,17 +1590,35 @@
             "create"
           ]
         },
-        "sampleBlobUrl": {
+        "sampleBlobPath": {
           "type": "string",
           "description": "URL of sample jsonl blob.",
           "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         },
-        "sampleCopyBlobUrl": {
+        "sampleBlobCopyDirectory": {
+          "type": "string",
+          "description": "URL of directory to store copied sample files.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "sampleBlobCopyPath": {
           "type": "string",
           "description": "URL of copied sample jsonl blob.",
           "readOnly": true
+        },
+        "blobDelimiter": {
+          "type": "string",
+          "description": "Delimiter of blob url.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "version": {
           "type": "integer",
@@ -1633,8 +1651,6 @@
       "required": [
         "categoryName",
         "definition",
-        "sampleBlobUrl",
-        "sampleCopyBlobUrl",
         "version",
         "createdTime",
         "status",
@@ -1760,10 +1776,27 @@
             "create"
           ]
         },
-        "sampleCopyBlobUrl": {
+        "sampleBlobPath": {
+          "type": "string",
+          "description": "URL of sample jsonl blob.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sampleBlobCopyPath": {
           "type": "string",
           "description": "URL of copied sample jsonl blob.",
           "readOnly": true
+        },
+        "blobDelimiter": {
+          "type": "string",
+          "description": "Delimiter of blob url.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "version": {
           "type": "integer",
@@ -1796,7 +1829,6 @@
       "required": [
         "categoryName",
         "definition",
-        "sampleCopyBlobUrl",
         "version",
         "createdTime",
         "status",
@@ -1826,10 +1858,27 @@
             "create"
           ]
         },
-        "sampleCopyBlobUrl": {
+        "sampleBlobPath": {
+          "type": "string",
+          "description": "URL of sample jsonl blob.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sampleBlobCopyPath": {
           "type": "string",
           "description": "URL of copied sample jsonl blob.",
           "readOnly": true
+        },
+        "blobDelimiter": {
+          "type": "string",
+          "description": "Delimiter of blob url.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "version": {
           "type": "integer",
@@ -1862,7 +1911,6 @@
       "required": [
         "categoryName",
         "definition",
-        "sampleCopyBlobUrl",
         "version",
         "createdTime",
         "status",

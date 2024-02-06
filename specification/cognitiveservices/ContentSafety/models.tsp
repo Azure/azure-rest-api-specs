@@ -271,12 +271,20 @@ model TextCustomizedCategory {
   definition: string;
 
   @doc("URL of sample jsonl blob.")
-  @visibility("create")
-  sampleBlobUrl: string;
+  @visibility("create", "read", "update")
+  sampleBlobPath?: string;
+
+  @doc("URL of directory to store copied sample files.")
+  @visibility("create", "update")
+  sampleBlobCopyDirectory?: string;
 
   @doc("URL of copied sample jsonl blob.")
   @visibility("read")
-  sampleCopyBlobUrl: string;
+  sampleBlobCopyPath?: string;
+
+  @doc("Delimiter of blob url.")
+  @visibility("created", "read", "update")
+  blobDelimiter?: string;
 
   @doc("Version number of the customized category.")
   @visibility("read")
