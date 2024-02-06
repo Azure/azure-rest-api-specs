@@ -24,6 +24,8 @@ using Azure.ResourceManager;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.ManagedNetworkFabric;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 /**
  * The available API versions.
  */
