@@ -10,7 +10,7 @@ In order to automate the mapping of event definition with event type, please fol
 
 ### Write in Typespec
 
-Under the `Azure.Messaging.EventGrid.SystemEvents` folder find or create your service's `.tsp` file. This is where you will add your new event. For help with typespec conventions refer to [this doc](https://microsoft.github.io/typespec/) about typespec basics. Each new event will be represented as a typespec `model`. After you create your new event, in the `client.tsp` file under each service version, you need to add `@@usage(EventGrid.YourEventName, Usage.output)` and `@@access(EventGrid.YourEventName, Access.public)`.
+Under the `Azure.Messaging.EventGrid.SystemEvents` folder find or create your service's `.tsp` file. This is where you will add your new event. For help with typespec conventions refer to [this doc](https://microsoft.github.io/typespec/) about typespec basics. Each new event will be represented as a typespec `model`. After you create your new event, in the `client.tsp` file, you need to add `@@usage(EventGrid.YourEventName, Usage.output)` and `@@access(EventGrid.YourEventName, Access.public)`.
 
 A sample valid event definition is shown below:
 ~~~ markdown
@@ -27,7 +27,7 @@ model AcsChatMessageReceivedEventData {
 Adding `@usage` and `@access` to `client.tsp`:
 ~~~ markdown
 
-@@usage(EventGrid.AcsChatMessageReceivedEventData, Usage.input);
+@@usage(EventGrid.AcsChatMessageReceivedEventData, Usage.output);
 @@access(EventGrid.AcsChatMessageReceivedEventData, Access.public)
 ~~~
 
