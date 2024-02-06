@@ -17,7 +17,6 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-quota
 ```yaml $(java) && $(multiapi)
 batch:
   - tag: package-2023-02-01
-  - tag: package-2021-03-15-preview
   - tag: package-2023-06-01-preview
 ```
 
