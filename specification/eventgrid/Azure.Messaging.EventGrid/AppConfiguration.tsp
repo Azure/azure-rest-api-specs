@@ -52,7 +52,7 @@ Microsoft.AppConfiguration.SnapshotCreated event.
 model AppConfigurationSnapshotCreatedEventData
   extends AppConfigurationSnapshotEventData {}
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("""
 Schema of the Data property of an EventGridEvent for a
 Microsoft.AppConfiguration.SnapshotModified event.

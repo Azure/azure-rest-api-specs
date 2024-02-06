@@ -200,5 +200,5 @@ namespace Microsoft.EventGrid {
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     @doc("capacity of app service plan sku.")
     Capacity?: string;
-  };
+  }
 }

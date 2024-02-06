@@ -29,1343 +29,1046 @@ import "./systemEvents.tsp";
 using Azure.ClientGenerator.Core;
 
 // Models
-@@usage(Microsoft.EventGrid.ApiManagementUserCreatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementUserCreatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementUserCreatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.ApiManagementUserUpdatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementUserUpdatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementUserUpdatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.ApiManagementUserDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementUserDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementUserDeletedEventData, Access.public);
 @@usage(Microsoft.EventGrid.ApiManagementSubscriptionCreatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementSubscriptionCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementSubscriptionUpdatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementSubscriptionUpdatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementSubscriptionDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementSubscriptionDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.ApiManagementProductCreatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementProductCreatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementProductCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.ApiManagementProductUpdatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementProductUpdatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementProductUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.ApiManagementProductDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementProductDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementProductDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.ApiManagementApiCreatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementApiCreatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementApiCreatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.ApiManagementApiUpdatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementApiUpdatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementApiUpdatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.ApiManagementApiDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementApiDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementApiDeletedEventData, Access.public);
 @@usage(Microsoft.EventGrid.ApiManagementApiReleaseCreatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementApiReleaseCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementApiReleaseUpdatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementApiReleaseUpdatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementApiReleaseDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementApiReleaseDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.ApiManagementGatewayCreatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementGatewayCreatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementGatewayCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.ApiManagementGatewayUpdatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementGatewayUpdatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementGatewayUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.ApiManagementGatewayDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ApiManagementGatewayDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.ApiManagementGatewayDeletedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementGatewayHostnameConfigurationCreatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementGatewayHostnameConfigurationCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementGatewayHostnameConfigurationUpdatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementGatewayHostnameConfigurationUpdatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementGatewayHostnameConfigurationDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementGatewayHostnameConfigurationDeletedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementGatewayCertificateAuthorityCreatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementGatewayCertificateAuthorityCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementGatewayCertificateAuthorityUpdatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementGatewayCertificateAuthorityUpdatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementGatewayCertificateAuthorityDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementGatewayCertificateAuthorityDeletedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementGatewayApiAddedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementGatewayApiAddedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ApiManagementGatewayApiRemovedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ApiManagementGatewayApiRemovedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AppConfigurationKeyValueModifiedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AppConfigurationKeyValueModifiedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AppConfigurationKeyValueDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AppConfigurationKeyValueDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AppConfigurationSnapshotEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AppConfigurationSnapshotEventData, Usage.output);
 @@access(Microsoft.EventGrid.AppConfigurationSnapshotEventData, Access.public);
 @@usage(Microsoft.EventGrid.AppConfigurationSnapshotCreatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AppConfigurationSnapshotCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AppConfigurationSnapshotModifiedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AppConfigurationSnapshotModifiedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsIncomingCallEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsIncomingCallEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsIncomingCallEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsUserDisconnectedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsUserDisconnectedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsUserDisconnectedEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsChatMessageReceivedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsChatMessageReceivedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsChatMessageReceivedEventData, Access.public);
 @@usage(Microsoft.EventGrid.AcsChatMessageReceivedInThreadEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatMessageReceivedInThreadEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsChatMessageEditedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsChatMessageEditedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsChatMessageEditedEventData, Access.public);
 @@usage(Microsoft.EventGrid.AcsChatMessageEditedInThreadEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatMessageEditedInThreadEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsChatMessageDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsChatMessageDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsChatMessageDeletedEventData, Access.public);
 @@usage(Microsoft.EventGrid.AcsChatMessageDeletedInThreadEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatMessageDeletedInThreadEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsChatThreadCreatedWithUserEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatThreadCreatedWithUserEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsChatThreadCreatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsChatThreadCreatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsChatThreadCreatedEventData, Access.public);
 @@usage(Microsoft.EventGrid.AcsChatThreadWithUserDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatThreadWithUserDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsChatThreadDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsChatThreadDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsChatThreadDeletedEventData, Access.public);
 @@usage(Microsoft.EventGrid.AcsChatThreadPropertiesUpdatedPerUserEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatThreadPropertiesUpdatedPerUserEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsChatThreadPropertiesUpdatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatThreadPropertiesUpdatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsChatParticipantAddedToThreadWithUserEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatParticipantAddedToThreadWithUserEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsChatParticipantRemovedFromThreadWithUserEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatParticipantRemovedFromThreadWithUserEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsChatParticipantAddedToThreadEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatParticipantAddedToThreadEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsChatParticipantRemovedFromThreadEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatParticipantRemovedFromThreadEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsSmsDeliveryReportReceivedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsSmsDeliveryReportReceivedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsSmsReceivedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsSmsReceivedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsSmsReceivedEventData, Access.public);
 @@usage(Microsoft.EventGrid.AcsRecordingFileStatusUpdatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsRecordingFileStatusUpdatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsEmailDeliveryReportReceivedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsEmailDeliveryReportReceivedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsEmailEngagementTrackingReportReceivedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsEmailEngagementTrackingReportReceivedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsRouterJobCancelledEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterJobCancelledEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterJobCancelledEventData, Access.public);
 @@usage(Microsoft.EventGrid.AcsRouterJobClassificationFailedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsRouterJobClassificationFailedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsRouterJobClassifiedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterJobClassifiedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterJobClassifiedEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterJobClosedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterJobClosedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterJobClosedEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterJobCompletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterJobCompletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterJobCompletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterJobDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterJobDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterJobDeletedEventData, Access.public);
 @@usage(Microsoft.EventGrid.AcsRouterJobExceptionTriggeredEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsRouterJobExceptionTriggeredEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsRouterJobQueuedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterJobQueuedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterJobQueuedEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterJobReceivedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterJobReceivedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterJobReceivedEventData, Access.public);
 @@usage(Microsoft.EventGrid.AcsRouterJobSchedulingFailedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsRouterJobSchedulingFailedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsRouterJobUnassignedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterJobUnassignedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterJobUnassignedEventData, Access.public);
 @@usage(Microsoft.EventGrid.AcsRouterJobWaitingForActivationEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsRouterJobWaitingForActivationEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsRouterJobWorkerSelectorsExpiredEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsRouterJobWorkerSelectorsExpiredEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsRouterWorkerDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterWorkerDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterWorkerDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterWorkerDeregisteredEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterWorkerDeregisteredEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterWorkerDeregisteredEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsRouterWorkerOfferAcceptedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsRouterWorkerOfferAcceptedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.AcsRouterWorkerOfferDeclinedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsRouterWorkerOfferDeclinedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsRouterWorkerOfferExpiredEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterWorkerOfferExpiredEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterWorkerOfferExpiredEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsRouterWorkerOfferIssuedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterWorkerOfferIssuedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterWorkerOfferIssuedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsRouterWorkerOfferRevokedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterWorkerOfferRevokedEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterWorkerOfferRevokedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsRouterWorkerRegisteredEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterWorkerRegisteredEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterWorkerRegisteredEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterJobEventData, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.AcsRouterJobEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterJobEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterWorkerEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterWorkerEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterWorkerEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterEventData, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.AcsRouterEventData, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterEventData, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterChannelConfiguration,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterChannelConfiguration, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterChannelConfiguration, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterQueueDetails, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.AcsRouterQueueDetails, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterQueueDetails, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterCommunicationError,
-  Usage.input | Usage.output
-);
-// TODO: Internal for now -- investigating issue with .NET emitter
-@@access(Microsoft.EventGrid.AcsRouterCommunicationError, Access.internal);
-@@usage(Microsoft.EventGrid.AcsRouterWorkerSelector,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterCommunicationError, Usage.output);
+@@access(Microsoft.EventGrid.AcsRouterCommunicationError, Access.public);
+@@usage(Microsoft.EventGrid.AcsRouterWorkerSelector, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterWorkerSelector, Access.public);
-@@usage(Microsoft.EventGrid.AcsEmailDeliveryReportStatusDetails,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsEmailDeliveryReportStatusDetails, Usage.output);
 @@access(Microsoft.EventGrid.AcsEmailDeliveryReportStatusDetails,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsChatThreadEventBaseProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsChatThreadEventBaseProperties, Usage.output);
 @@access(Microsoft.EventGrid.AcsChatThreadEventBaseProperties, Access.public);
 @@usage(Microsoft.EventGrid.AcsChatThreadEventInThreadBaseProperties,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatThreadEventInThreadBaseProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsChatMessageEventBaseProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsChatMessageEventBaseProperties, Usage.output);
 @@access(Microsoft.EventGrid.AcsChatMessageEventBaseProperties, Access.public);
 @@usage(Microsoft.EventGrid.AcsChatMessageEventInThreadBaseProperties,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.AcsChatMessageEventInThreadBaseProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.AcsChatEventInThreadBaseProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsChatEventInThreadBaseProperties, Usage.output);
 @@access(Microsoft.EventGrid.AcsChatEventInThreadBaseProperties, Access.public);
-@@usage(Microsoft.EventGrid.AcsChatEventBaseProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsChatEventBaseProperties, Usage.output);
 @@access(Microsoft.EventGrid.AcsChatEventBaseProperties, Access.public);
-@@usage(Microsoft.EventGrid.AcsChatThreadParticipantProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsChatThreadParticipantProperties, Usage.output);
 @@access(Microsoft.EventGrid.AcsChatThreadParticipantProperties, Access.public);
-@@usage(Microsoft.EventGrid.AcsSmsEventBaseProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsSmsEventBaseProperties, Usage.output);
 @@access(Microsoft.EventGrid.AcsSmsEventBaseProperties, Access.public);
-@@usage(Microsoft.EventGrid.AcsSmsDeliveryAttemptProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsSmsDeliveryAttemptProperties, Usage.output);
 @@access(Microsoft.EventGrid.AcsSmsDeliveryAttemptProperties, Access.public);
-@@usage(Microsoft.EventGrid.AcsRecordingStorageInfoProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRecordingStorageInfoProperties, Usage.output);
 @@access(Microsoft.EventGrid.AcsRecordingStorageInfoProperties, Access.public);
-@@usage(Microsoft.EventGrid.AcsRecordingChunkInfoProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRecordingChunkInfoProperties, Usage.output);
 @@access(Microsoft.EventGrid.AcsRecordingChunkInfoProperties, Access.public);
-@@usage(Microsoft.EventGrid.AcsIncomingCallCustomContext,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsIncomingCallCustomContext, Usage.output);
 @@access(Microsoft.EventGrid.AcsIncomingCallCustomContext, Access.public);
-@@usage(Microsoft.EventGrid.CommunicationIdentifierModel,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.CommunicationIdentifierModel, Usage.output);
 @@access(Microsoft.EventGrid.CommunicationIdentifierModel, Access.public);
-@@usage(Microsoft.EventGrid.MicrosoftTeamsUserIdentifierModel,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MicrosoftTeamsUserIdentifierModel, Usage.output);
 @@access(Microsoft.EventGrid.MicrosoftTeamsUserIdentifierModel, Access.public);
-@@usage(Microsoft.EventGrid.PhoneNumberIdentifierModel,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.PhoneNumberIdentifierModel, Usage.output);
 @@access(Microsoft.EventGrid.PhoneNumberIdentifierModel, Access.public);
-@@usage(Microsoft.EventGrid.CommunicationUserIdentifierModel,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.CommunicationUserIdentifierModel, Usage.output);
 @@access(Microsoft.EventGrid.CommunicationUserIdentifierModel, Access.public);
 @@usage(Microsoft.EventGrid.ContainerRegistryImagePushedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerRegistryImagePushedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerRegistryImageDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerRegistryImageDeletedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerRegistryChartPushedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerRegistryChartPushedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerRegistryChartDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerRegistryChartDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.ContainerRegistryEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ContainerRegistryEventData, Usage.output);
 @@access(Microsoft.EventGrid.ContainerRegistryEventData, Access.public);
-@@usage(Microsoft.EventGrid.ContainerRegistryArtifactEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ContainerRegistryArtifactEventData, Usage.output);
 @@access(Microsoft.EventGrid.ContainerRegistryArtifactEventData, Access.public);
-@@usage(Microsoft.EventGrid.ContainerRegistryEventTarget,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ContainerRegistryEventTarget, Usage.output);
 @@access(Microsoft.EventGrid.ContainerRegistryEventTarget, Access.public);
-@@usage(Microsoft.EventGrid.ContainerRegistryArtifactEventTarget,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ContainerRegistryArtifactEventTarget, Usage.output);
 @@access(Microsoft.EventGrid.ContainerRegistryArtifactEventTarget,
   Access.public
 );
-@@usage(Microsoft.EventGrid.ContainerRegistryEventRequest,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ContainerRegistryEventRequest, Usage.output);
 @@access(Microsoft.EventGrid.ContainerRegistryEventRequest, Access.public);
-@@usage(Microsoft.EventGrid.ContainerRegistryEventActor,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ContainerRegistryEventActor, Usage.output);
 @@access(Microsoft.EventGrid.ContainerRegistryEventActor, Access.public);
-@@usage(Microsoft.EventGrid.ContainerRegistryEventSource,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ContainerRegistryEventSource, Usage.output);
 @@access(Microsoft.EventGrid.ContainerRegistryEventSource, Access.public);
 @@usage(Microsoft.EventGrid.ContainerRegistryEventConnectedRegistry,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerRegistryEventConnectedRegistry,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerServiceNewKubernetesVersionAvailableEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerServiceNewKubernetesVersionAvailableEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerServiceClusterSupportEndedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerServiceClusterSupportEndedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerServiceClusterSupportEndingEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerServiceClusterSupportEndingEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerServiceNodePoolRollingStartedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerServiceNodePoolRollingStartedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerServiceNodePoolRollingSucceededEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerServiceNodePoolRollingSucceededEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerServiceNodePoolRollingFailedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerServiceNodePoolRollingFailedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerServiceClusterSupportEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerServiceClusterSupportEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ContainerServiceNodePoolRollingEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ContainerServiceNodePoolRollingEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.DataBoxCopyStartedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.DataBoxCopyStartedEventData, Usage.output);
 @@access(Microsoft.EventGrid.DataBoxCopyStartedEventData, Access.public);
-@@usage(Microsoft.EventGrid.DataBoxCopyCompletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.DataBoxCopyCompletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.DataBoxCopyCompletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.DataBoxOrderCompletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.DataBoxOrderCompletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.DataBoxOrderCompletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SubscriptionValidationEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.SubscriptionValidationEventData, Usage.output);
 @@access(Microsoft.EventGrid.SubscriptionValidationEventData, Access.public);
-@@usage(Microsoft.EventGrid.SubscriptionValidationResponse,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.SubscriptionValidationResponse, Usage.output);
 @@access(Microsoft.EventGrid.SubscriptionValidationResponse, Access.public);
-@@usage(Microsoft.EventGrid.SubscriptionDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.SubscriptionDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.SubscriptionDeletedEventData, Access.public);
 @@usage(Microsoft.EventGrid.EventGridMQTTClientCreatedOrUpdatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.EventGridMQTTClientCreatedOrUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.EventGridMQTTClientEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.EventGridMQTTClientEventData, Usage.output);
 @@access(Microsoft.EventGrid.EventGridMQTTClientEventData, Access.public);
-@@usage(Microsoft.EventGrid.EventGridMQTTClientDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.EventGridMQTTClientDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.EventGridMQTTClientDeletedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.EventGridMQTTClientSessionConnectedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.EventGridMQTTClientSessionConnectedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.EventGridMQTTClientSessionDisconnectedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.EventGridMQTTClientSessionDisconnectedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.EventHubCaptureFileCreatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.EventHubCaptureFileCreatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.EventHubCaptureFileCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.HealthcareFhirResourceType,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.HealthcareFhirResourceType, Usage.output);
 @@access(Microsoft.EventGrid.HealthcareFhirResourceType, Access.public);
 @@usage(Microsoft.EventGrid.HealthcareFhirResourceCreatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.HealthcareFhirResourceCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.HealthcareFhirResourceUpdatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.HealthcareFhirResourceUpdatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.HealthcareFhirResourceDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.HealthcareFhirResourceDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.HealthcareDicomImageCreatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.HealthcareDicomImageCreatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.HealthcareDicomImageCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.HealthcareDicomImageDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.HealthcareDicomImageDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.HealthcareDicomImageDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.HealthcareDicomImageUpdatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.HealthcareDicomImageUpdatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.HealthcareDicomImageUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.DeviceLifeCycleEventProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.DeviceLifeCycleEventProperties, Usage.output);
 @@access(Microsoft.EventGrid.DeviceLifeCycleEventProperties, Access.public);
-@@usage(Microsoft.EventGrid.DeviceTwinMetadata, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.DeviceTwinMetadata, Usage.output);
 @@access(Microsoft.EventGrid.DeviceTwinMetadata, Access.public);
-@@usage(Microsoft.EventGrid.DeviceTwinProperties, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.DeviceTwinProperties, Usage.output);
 @@access(Microsoft.EventGrid.DeviceTwinProperties, Access.public);
-@@usage(Microsoft.EventGrid.DeviceTwinInfo, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.DeviceTwinInfo, Usage.output);
 @@access(Microsoft.EventGrid.DeviceTwinInfo, Access.public);
-@@usage(Microsoft.EventGrid.DeviceConnectionStateEventProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.DeviceConnectionStateEventProperties, Usage.output);
 @@access(Microsoft.EventGrid.DeviceConnectionStateEventProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.DeviceTelemetryEventProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.DeviceTelemetryEventProperties, Usage.output);
 @@access(Microsoft.EventGrid.DeviceTelemetryEventProperties, Access.public);
-@@usage(Microsoft.EventGrid.DeviceConnectionStateEventInfo,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.DeviceConnectionStateEventInfo, Usage.output);
 @@access(Microsoft.EventGrid.DeviceConnectionStateEventInfo, Access.public);
-@@usage(Microsoft.EventGrid.IotHubDeviceCreatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.IotHubDeviceCreatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.IotHubDeviceCreatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.IotHubDeviceDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.IotHubDeviceDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.IotHubDeviceDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.IotHubDeviceConnectedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.IotHubDeviceConnectedEventData, Usage.output);
 @@access(Microsoft.EventGrid.IotHubDeviceConnectedEventData, Access.public);
-@@usage(Microsoft.EventGrid.IotHubDeviceDisconnectedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.IotHubDeviceDisconnectedEventData, Usage.output);
 @@access(Microsoft.EventGrid.IotHubDeviceDisconnectedEventData, Access.public);
-@@usage(Microsoft.EventGrid.IotHubDeviceTelemetryEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.IotHubDeviceTelemetryEventData, Usage.output);
 @@access(Microsoft.EventGrid.IotHubDeviceTelemetryEventData, Access.public);
-@@usage(Microsoft.EventGrid.DeviceTwinInfoX509Thumbprint,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.DeviceTwinInfoX509Thumbprint, Usage.output);
 @@access(Microsoft.EventGrid.DeviceTwinInfoX509Thumbprint, Access.public);
-@@usage(Microsoft.EventGrid.DeviceTwinInfoProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.DeviceTwinInfoProperties, Usage.output);
 @@access(Microsoft.EventGrid.DeviceTwinInfoProperties, Access.public);
 @@usage(Microsoft.EventGrid.KeyVaultCertificateNewVersionCreatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.KeyVaultCertificateNewVersionCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.KeyVaultCertificateNearExpiryEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.KeyVaultCertificateNearExpiryEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.KeyVaultCertificateExpiredEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.KeyVaultCertificateExpiredEventData, Usage.output);
 @@access(Microsoft.EventGrid.KeyVaultCertificateExpiredEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.KeyVaultKeyNewVersionCreatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.KeyVaultKeyNewVersionCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.KeyVaultKeyNearExpiryEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.KeyVaultKeyNearExpiryEventData, Usage.output);
 @@access(Microsoft.EventGrid.KeyVaultKeyNearExpiryEventData, Access.public);
-@@usage(Microsoft.EventGrid.KeyVaultKeyExpiredEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.KeyVaultKeyExpiredEventData, Usage.output);
 @@access(Microsoft.EventGrid.KeyVaultKeyExpiredEventData, Access.public);
 @@usage(Microsoft.EventGrid.KeyVaultSecretNewVersionCreatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.KeyVaultSecretNewVersionCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.KeyVaultSecretNearExpiryEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.KeyVaultSecretNearExpiryEventData, Usage.output);
 @@access(Microsoft.EventGrid.KeyVaultSecretNearExpiryEventData, Access.public);
-@@usage(Microsoft.EventGrid.KeyVaultSecretExpiredEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.KeyVaultSecretExpiredEventData, Usage.output);
 @@access(Microsoft.EventGrid.KeyVaultSecretExpiredEventData, Access.public);
 @@usage(Microsoft.EventGrid.KeyVaultVaultAccessPolicyChangedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.KeyVaultVaultAccessPolicyChangedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MachineLearningServicesModelRegisteredEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MachineLearningServicesModelRegisteredEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MachineLearningServicesModelDeployedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MachineLearningServicesModelDeployedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MachineLearningServicesRunCompletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MachineLearningServicesRunCompletedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MachineLearningServicesDatasetDriftDetectedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MachineLearningServicesDatasetDriftDetectedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MachineLearningServicesRunStatusChangedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MachineLearningServicesRunStatusChangedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.MapsGeofenceEnteredEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MapsGeofenceEnteredEventData, Usage.output);
 @@access(Microsoft.EventGrid.MapsGeofenceEnteredEventData, Access.public);
-@@usage(Microsoft.EventGrid.MapsGeofenceExitedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MapsGeofenceExitedEventData, Usage.output);
 @@access(Microsoft.EventGrid.MapsGeofenceExitedEventData, Access.public);
-@@usage(Microsoft.EventGrid.MapsGeofenceResultEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MapsGeofenceResultEventData, Usage.output);
 @@access(Microsoft.EventGrid.MapsGeofenceResultEventData, Access.public);
-@@usage(Microsoft.EventGrid.MapsGeofenceEventProperties,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MapsGeofenceEventProperties, Usage.output);
 @@access(Microsoft.EventGrid.MapsGeofenceEventProperties, Access.public);
-@@usage(Microsoft.EventGrid.MapsGeofenceGeometry, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.MapsGeofenceGeometry, Usage.output);
 @@access(Microsoft.EventGrid.MapsGeofenceGeometry, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobStateChangeEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobStateChangeEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobStateChangeEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobError, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.MediaJobError, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobError, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobErrorDetail, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.MediaJobErrorDetail, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobErrorDetail, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobOutput, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.MediaJobOutput, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobOutput, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobOutputAsset, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.MediaJobOutputAsset, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobOutputAsset, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobOutputProgressEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobOutputProgressEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobOutputProgressEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobOutputStateChangeEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobOutputStateChangeEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobOutputStateChangeEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobScheduledEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobScheduledEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobScheduledEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobProcessingEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobProcessingEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobProcessingEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobCancelingEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobCancelingEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobCancelingEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobFinishedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobFinishedEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobFinishedEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobCanceledEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobCanceledEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobCanceledEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobErroredEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobErroredEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobErroredEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobOutputCanceledEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobOutputCanceledEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobOutputCanceledEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobOutputCancelingEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobOutputCancelingEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobOutputCancelingEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobOutputErroredEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobOutputErroredEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobOutputErroredEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobOutputFinishedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobOutputFinishedEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobOutputFinishedEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobOutputProcessingEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobOutputProcessingEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobOutputProcessingEventData, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobOutputScheduledEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.MediaJobOutputScheduledEventData, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobOutputScheduledEventData, Access.public);
 @@usage(Microsoft.EventGrid.MediaLiveEventEncoderConnectedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MediaLiveEventEncoderConnectedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MediaLiveEventConnectionRejectedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MediaLiveEventConnectionRejectedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MediaLiveEventEncoderDisconnectedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MediaLiveEventEncoderDisconnectedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MediaLiveEventIncomingStreamReceivedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MediaLiveEventIncomingStreamReceivedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MediaLiveEventIncomingStreamsOutOfSyncEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MediaLiveEventIncomingStreamsOutOfSyncEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MediaLiveEventIncomingDataChunkDroppedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MediaLiveEventIncomingDataChunkDroppedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MediaLiveEventIngestHeartbeatEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MediaLiveEventIngestHeartbeatEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MediaLiveEventTrackDiscontinuityDetectedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MediaLiveEventTrackDiscontinuityDetectedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.MediaLiveEventChannelArchiveHeartbeatEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.MediaLiveEventChannelArchiveHeartbeatEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.PolicyInsightsPolicyStateCreatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.PolicyInsightsPolicyStateCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.PolicyInsightsPolicyStateChangedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.PolicyInsightsPolicyStateChangedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.PolicyInsightsPolicyStateDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.PolicyInsightsPolicyStateDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.RedisPatchingCompletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.RedisPatchingCompletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.RedisPatchingCompletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.RedisScalingCompletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.RedisScalingCompletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.RedisScalingCompletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.RedisExportRDBCompletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.RedisExportRDBCompletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.RedisExportRDBCompletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.RedisImportRDBCompletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.RedisImportRDBCompletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.RedisImportRDBCompletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.ResourceWriteSuccessData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ResourceWriteSuccessData, Usage.output);
 @@access(Microsoft.EventGrid.ResourceWriteSuccessData, Access.public);
-@@usage(Microsoft.EventGrid.ResourceWriteFailureData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ResourceWriteFailureData, Usage.output);
 @@access(Microsoft.EventGrid.ResourceWriteFailureData, Access.public);
-@@usage(Microsoft.EventGrid.ResourceWriteCancelData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ResourceWriteCancelData, Usage.output);
 @@access(Microsoft.EventGrid.ResourceWriteCancelData, Access.public);
-@@usage(Microsoft.EventGrid.ResourceDeleteSuccessData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ResourceDeleteSuccessData, Usage.output);
 @@access(Microsoft.EventGrid.ResourceDeleteSuccessData, Access.public);
-@@usage(Microsoft.EventGrid.ResourceDeleteFailureData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ResourceDeleteFailureData, Usage.output);
 @@access(Microsoft.EventGrid.ResourceDeleteFailureData, Access.public);
-@@usage(Microsoft.EventGrid.ResourceDeleteCancelData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ResourceDeleteCancelData, Usage.output);
 @@access(Microsoft.EventGrid.ResourceDeleteCancelData, Access.public);
-@@usage(Microsoft.EventGrid.ResourceActionSuccessData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ResourceActionSuccessData, Usage.output);
 @@access(Microsoft.EventGrid.ResourceActionSuccessData, Access.public);
-@@usage(Microsoft.EventGrid.ResourceActionFailureData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ResourceActionFailureData, Usage.output);
 @@access(Microsoft.EventGrid.ResourceActionFailureData, Access.public);
-@@usage(Microsoft.EventGrid.ResourceActionCancelData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.ResourceActionCancelData, Usage.output);
 @@access(Microsoft.EventGrid.ResourceActionCancelData, Access.public);
-@@usage(Microsoft.EventGrid.ResourceHttpRequest, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.ResourceHttpRequest, Usage.output);
 @@access(Microsoft.EventGrid.ResourceHttpRequest, Access.public);
-@@usage(Microsoft.EventGrid.ResourceAuthorization, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.ResourceAuthorization, Usage.output);
 @@access(Microsoft.EventGrid.ResourceAuthorization, Access.public);
 @@usage(Microsoft.EventGrid.ServiceBusActiveMessagesAvailableWithNoListenersEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ServiceBusActiveMessagesAvailableWithNoListenersEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ServiceBusDeadletterMessagesAvailableWithNoListenersEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ServiceBusDeadletterMessagesAvailableWithNoListenersEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ServiceBusActiveMessagesAvailablePeriodicNotificationsEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ServiceBusActiveMessagesAvailablePeriodicNotificationsEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ServiceBusDeadletterMessagesAvailablePeriodicNotificationsEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ServiceBusDeadletterMessagesAvailablePeriodicNotificationsEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SignalRServiceClientConnectionConnectedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.SignalRServiceClientConnectionConnectedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SignalRServiceClientConnectionDisconnectedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.SignalRServiceClientConnectionDisconnectedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.StorageBlobCreatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.StorageBlobCreatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.StorageBlobCreatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.StorageBlobDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.StorageBlobDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.StorageBlobDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.StorageDirectoryCreatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.StorageDirectoryCreatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.StorageDirectoryCreatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.StorageDirectoryDeletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.StorageDirectoryDeletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.StorageDirectoryDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.StorageBlobRenamedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.StorageBlobRenamedEventData, Usage.output);
 @@access(Microsoft.EventGrid.StorageBlobRenamedEventData, Access.public);
-@@usage(Microsoft.EventGrid.StorageDirectoryRenamedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.StorageDirectoryRenamedEventData, Usage.output);
 @@access(Microsoft.EventGrid.StorageDirectoryRenamedEventData, Access.public);
 @@usage(Microsoft.EventGrid.StorageLifecyclePolicyCompletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.StorageLifecyclePolicyCompletedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.StorageLifecyclePolicyActionSummaryDetail,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.StorageLifecyclePolicyActionSummaryDetail,
   Access.public
 );
-@@usage(Microsoft.EventGrid.StorageBlobTierChangedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.StorageBlobTierChangedEventData, Usage.output);
 @@access(Microsoft.EventGrid.StorageBlobTierChangedEventData, Access.public);
 @@usage(Microsoft.EventGrid.StorageAsyncOperationInitiatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.StorageAsyncOperationInitiatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.StorageBlobInventoryPolicyCompletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.StorageBlobInventoryPolicyCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.StorageTaskCompletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.StorageTaskCompletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.StorageTaskCompletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.StorageTaskQueuedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.StorageTaskQueuedEventData, Usage.output);
 @@access(Microsoft.EventGrid.StorageTaskQueuedEventData, Access.public);
-@@usage(Microsoft.EventGrid.AppEventTypeDetail, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.AppEventTypeDetail, Usage.output);
 @@access(Microsoft.EventGrid.AppEventTypeDetail, Access.public);
-@@usage(Microsoft.EventGrid.WebAppUpdatedEventData, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.WebAppUpdatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.WebAppUpdatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.WebBackupOperationStartedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.WebBackupOperationStartedEventData, Usage.output);
 @@access(Microsoft.EventGrid.WebBackupOperationStartedEventData, Access.public);
-@@usage(Microsoft.EventGrid.WebBackupOperationCompletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.WebBackupOperationCompletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.WebBackupOperationCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.WebBackupOperationFailedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.WebBackupOperationFailedEventData, Usage.output);
 @@access(Microsoft.EventGrid.WebBackupOperationFailedEventData, Access.public);
-@@usage(Microsoft.EventGrid.WebRestoreOperationStartedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.WebRestoreOperationStartedEventData, Usage.output);
 @@access(Microsoft.EventGrid.WebRestoreOperationStartedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.WebRestoreOperationCompletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.WebRestoreOperationCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.WebRestoreOperationFailedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.WebRestoreOperationFailedEventData, Usage.output);
 @@access(Microsoft.EventGrid.WebRestoreOperationFailedEventData, Access.public);
-@@usage(Microsoft.EventGrid.WebSlotSwapStartedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.WebSlotSwapStartedEventData, Usage.output);
 @@access(Microsoft.EventGrid.WebSlotSwapStartedEventData, Access.public);
-@@usage(Microsoft.EventGrid.WebSlotSwapCompletedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.WebSlotSwapCompletedEventData, Usage.output);
 @@access(Microsoft.EventGrid.WebSlotSwapCompletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.WebSlotSwapFailedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.WebSlotSwapFailedEventData, Usage.output);
 @@access(Microsoft.EventGrid.WebSlotSwapFailedEventData, Access.public);
 @@usage(Microsoft.EventGrid.WebSlotSwapWithPreviewStartedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.WebSlotSwapWithPreviewStartedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.WebSlotSwapWithPreviewCancelledEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.WebSlotSwapWithPreviewCancelledEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.WebAppServicePlanUpdatedEventData,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.WebAppServicePlanUpdatedEventData, Usage.output);
 @@access(Microsoft.EventGrid.WebAppServicePlanUpdatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.AppServicePlanEventTypeDetail,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AppServicePlanEventTypeDetail, Usage.output);
 @@access(Microsoft.EventGrid.AppServicePlanEventTypeDetail, Access.public);
-@@usage(Microsoft.EventGrid.WebAppServicePlanUpdatedEventDataSku,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.WebAppServicePlanUpdatedEventDataSku, Usage.output);
 @@access(Microsoft.EventGrid.WebAppServicePlanUpdatedEventDataSku,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ResourceNotificationsResourceUpdatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ResourceNotificationsResourceUpdatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ResourceNotificationsResourceUpdatedDetails,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ResourceNotificationsResourceUpdatedDetails,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ResourceNotificationsOperationalDetails,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ResourceNotificationsOperationalDetails,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ResourceNotificationsHealthResourcesAnnotatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ResourceNotificationsHealthResourcesAnnotatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ResourceNotificationsResourceManagementCreatedOrUpdatedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ResourceNotificationsResourceManagementCreatedOrUpdatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ResourceNotificationsResourceManagementDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ResourceNotificationsResourceManagementDeletedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ResourceNotificationsResourceDeletedEventData,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ResourceNotificationsResourceDeletedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.ResourceNotificationsResourceDeletedDetails,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.ResourceNotificationsResourceDeletedDetails,
   Access.public
 );
 // Enums
-@@usage(Microsoft.EventGrid.AcsRouterJobStatus, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.AcsRouterJobStatus, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterJobStatus, Access.public);
-@@usage(Microsoft.EventGrid.recordingContentType, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.recordingContentType, Usage.output);
 @@access(Microsoft.EventGrid.recordingContentType, Access.public);
-@@usage(Microsoft.EventGrid.recordingChannelType, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.recordingChannelType, Usage.output);
 @@access(Microsoft.EventGrid.recordingChannelType, Access.public);
-@@usage(Microsoft.EventGrid.recordingFormatType, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.recordingFormatType, Usage.output);
 @@access(Microsoft.EventGrid.recordingFormatType, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterLabelOperator, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.AcsRouterLabelOperator, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterLabelOperator, Access.public);
-@@usage(Microsoft.EventGrid.AcsRouterWorkerSelectorState,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsRouterWorkerSelectorState, Usage.output);
 @@access(Microsoft.EventGrid.AcsRouterWorkerSelectorState, Access.public);
-@@usage(Microsoft.EventGrid.AcsEmailDeliveryReportStatus,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.AcsEmailDeliveryReportStatus, Usage.output);
 @@access(Microsoft.EventGrid.AcsEmailDeliveryReportStatus, Access.public);
-@@usage(Microsoft.EventGrid.AcsUserEngagement, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.AcsUserEngagement, Usage.output);
 @@access(Microsoft.EventGrid.AcsUserEngagement, Access.public);
-@@usage(Microsoft.EventGrid.CommunicationCloudEnvironmentModel,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.CommunicationCloudEnvironmentModel, Usage.output);
 @@access(Microsoft.EventGrid.CommunicationCloudEnvironmentModel, Access.public);
-@@usage(Microsoft.EventGrid.DataBoxStageName, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.DataBoxStageName, Usage.output);
 @@access(Microsoft.EventGrid.DataBoxStageName, Access.public);
-@@usage(Microsoft.EventGrid.EventGridMQTTClientState,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.EventGridMQTTClientState, Usage.output);
 @@access(Microsoft.EventGrid.EventGridMQTTClientState, Access.public);
 @@usage(Microsoft.EventGrid.EventGridMQTTClientDisconnectionReason,
-  Usage.input | Usage.output
+  Usage.output
 );
 @@access(Microsoft.EventGrid.EventGridMQTTClientDisconnectionReason,
   Access.public
 );
-@@usage(Microsoft.EventGrid.HealthcareFhirResourceType,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.HealthcareFhirResourceType, Usage.output);
 @@access(Microsoft.EventGrid.HealthcareFhirResourceType, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobState, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.MediaJobState, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobState, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobErrorCode, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.MediaJobErrorCode, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobErrorCode, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobErrorCategory, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.MediaJobErrorCategory, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobErrorCategory, Access.public);
-@@usage(Microsoft.EventGrid.MediaJobRetry, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.MediaJobRetry, Usage.output);
 @@access(Microsoft.EventGrid.MediaJobRetry, Access.public);
-@@usage(Microsoft.EventGrid.StorageTaskCompletedStatus,
-  Usage.input | Usage.output
-);
+@@usage(Microsoft.EventGrid.StorageTaskCompletedStatus, Usage.output);
 @@access(Microsoft.EventGrid.StorageTaskCompletedStatus, Access.public);
-@@usage(Microsoft.EventGrid.AppAction, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.AppAction, Usage.output);
 @@access(Microsoft.EventGrid.AppAction, Access.public);
-@@usage(Microsoft.EventGrid.StampKind, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.StampKind, Usage.output);
 @@access(Microsoft.EventGrid.StampKind, Access.public);
-@@usage(Microsoft.EventGrid.AppServicePlanAction, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.AppServicePlanAction, Usage.output);
 @@access(Microsoft.EventGrid.AppServicePlanAction, Access.public);
-@@usage(Microsoft.EventGrid.AsyncStatus, Usage.input | Usage.output);
+@@usage(Microsoft.EventGrid.AsyncStatus, Usage.output);
 @@access(Microsoft.EventGrid.AsyncStatus, Access.public);

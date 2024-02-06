@@ -136,11 +136,10 @@ model DeviceTwinInfoX509Thumbprint {
 }
 
 @doc("Properties JSON element.")
-model DeviceTwinInfoProperties
-{
+model DeviceTwinInfoProperties {
   @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
   desired?: DeviceTwinProperties;
 
   @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
   reported?: DeviceTwinProperties;
-};
+}

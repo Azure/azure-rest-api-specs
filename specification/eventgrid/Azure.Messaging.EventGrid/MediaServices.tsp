@@ -92,14 +92,16 @@ namespace Microsoft.EventGrid {
   Microsoft.Media.JobStateChange event.
   """)
   model MediaJobStateChangeEventData {
-  @doc("The previous state of the Job.")
-  @visibility("read")
-  "previousState"?: MediaJobState;
-  @doc("The new state of the Job.")
-  @visibility("read")
-  "state"?: MediaJobState;
-  @doc("Gets the Job correlation data.")
-  "correlationData"?: Record<string>;
+    @doc("The previous state of the Job.")
+    @visibility("read")
+    previousState?: MediaJobState;
+
+    @doc("The new state of the Job.")
+    @visibility("read")
+    state?: MediaJobState;
+
+    @doc("Gets the Job correlation data.")
+    correlationData?: Record<string>;
   }
 
   @doc("Details of JobOutput errors.")
@@ -139,7 +141,6 @@ namespace Microsoft.EventGrid {
   @doc("The event data for a Job output.")
   @discriminator("oDataType")
   model MediaJobOutput {
-
     @doc("Gets the Job output error.")
     error?: MediaJobError;
 
@@ -157,8 +158,9 @@ namespace Microsoft.EventGrid {
   model MediaJobOutputAsset extends MediaJobOutput {
     @doc("Gets the Job output asset name.")
     assetName?: string;
+
     @doc("The discriminator for derived types.")
-    "oDataType": "#Microsoft.Media.JobOutputAsset";
+    oDataType: "#Microsoft.Media.JobOutputAsset";
   }
 
   @doc("""
@@ -166,129 +168,130 @@ namespace Microsoft.EventGrid {
   EventGridEvent for a Microsoft.Media.JobOutputProgress event.
   """)
   model MediaJobOutputProgressEventData {
-  @doc("Gets the Job output label.")
-  "label"?: string;
-  @doc("Gets the Job output progress.")
-  "progress"?: int64;
-  @doc("Gets the Job correlation data.")
-  "jobCorrelationData"?: Record<string>;
+    @doc("Gets the Job output label.")
+    label?: string;
+
+    @doc("Gets the Job output progress.")
+    progress?: int64;
+
+    @doc("Gets the Job correlation data.")
+    jobCorrelationData?: Record<string>;
   }
-  
+
   @doc("""
   Schema of the Data property of an EventGridEvent for a
   Microsoft.Media.JobOutputStateChange event.
   """)
   model MediaJobOutputStateChangeEventData {
-  @doc("The previous state of the Job.")
-  @visibility("read")
-  "previousState"?: MediaJobState;
-  @doc("Gets the output.")
-  "output"?: MediaJobOutput;
-  @doc("Gets the Job correlation data.")
-  "jobCorrelationData"?: Record<string>;
+    @doc("The previous state of the Job.")
+    @visibility("read")
+    previousState?: MediaJobState;
+
+    @doc("Gets the output.")
+    output?: MediaJobOutput;
+
+    @doc("Gets the Job correlation data.")
+    jobCorrelationData?: Record<string>;
   }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job scheduled event data. Schema of the data property of an EventGridEvent for
 a Microsoft.Media.JobScheduled event.
 """)
-model MediaJobScheduledEventData extends MediaJobStateChangeEventData {
-}
+  model MediaJobScheduledEventData extends MediaJobStateChangeEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job processing event data. Schema of the data property of an EventGridEvent for
 a Microsoft.Media.JobProcessing event.
 """)
-model MediaJobProcessingEventData extends MediaJobStateChangeEventData {
-}
+  model MediaJobProcessingEventData extends MediaJobStateChangeEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job canceling event data. Schema of the data property of an EventGridEvent for
 a Microsoft.Media.JobCanceling event.
 """)
-model MediaJobCancelingEventData extends MediaJobStateChangeEventData {
-}
+  model MediaJobCancelingEventData extends MediaJobStateChangeEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job finished event data. Schema of the data property of an EventGridEvent for a
 Microsoft.Media.JobFinished event.
 """)
-model MediaJobFinishedEventData extends MediaJobStateChangeEventData {
-@doc("Gets the Job outputs.")
-"outputs"?: MediaJobOutput[];
-}
+  model MediaJobFinishedEventData extends MediaJobStateChangeEventData {
+    @doc("Gets the Job outputs.")
+    outputs?: MediaJobOutput[];
+  }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job canceled event data. Schema of the data property of an EventGridEvent for a
 Microsoft.Media.JobCanceled event.
 """)
-model MediaJobCanceledEventData extends MediaJobStateChangeEventData {
-@doc("Gets the Job outputs.")
-"outputs"?: MediaJobOutput[];
-}
+  model MediaJobCanceledEventData extends MediaJobStateChangeEventData {
+    @doc("Gets the Job outputs.")
+    outputs?: MediaJobOutput[];
+  }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job error state event data. Schema of the data property of an EventGridEvent
 for a Microsoft.Media.JobErrored event.
 """)
-model MediaJobErroredEventData extends MediaJobStateChangeEventData {
-@doc("Gets the Job outputs.")
-"outputs"?: MediaJobOutput[];
-}
+  model MediaJobErroredEventData extends MediaJobStateChangeEventData {
+    @doc("Gets the Job outputs.")
+    outputs?: MediaJobOutput[];
+  }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job output canceled event data. Schema of the data property of an
 EventGridEvent for a Microsoft.Media.JobOutputCanceled event.
 """)
-model MediaJobOutputCanceledEventData extends MediaJobOutputStateChangeEventData {
-}
+  model MediaJobOutputCanceledEventData
+    extends MediaJobOutputStateChangeEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job output canceling event data. Schema of the data property of an
 EventGridEvent for a Microsoft.Media.JobOutputCanceling event.
 """)
-model MediaJobOutputCancelingEventData extends MediaJobOutputStateChangeEventData {
-}
+  model MediaJobOutputCancelingEventData
+    extends MediaJobOutputStateChangeEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job output error event data. Schema of the data property of an EventGridEvent
 for a Microsoft.Media.JobOutputErrored event.
 """)
-model MediaJobOutputErroredEventData extends MediaJobOutputStateChangeEventData {
-}
+  model MediaJobOutputErroredEventData
+    extends MediaJobOutputStateChangeEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job output finished event data. Schema of the data property of an
 EventGridEvent for a Microsoft.Media.JobOutputFinished event.
 """)
-model MediaJobOutputFinishedEventData extends MediaJobOutputStateChangeEventData {
-}
+  model MediaJobOutputFinishedEventData
+    extends MediaJobOutputStateChangeEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job output processing event data. Schema of the data property of an
 EventGridEvent for a Microsoft.Media.JobOutputProcessing event.
 """)
-model MediaJobOutputProcessingEventData extends MediaJobOutputStateChangeEventData {
-}
+  model MediaJobOutputProcessingEventData
+    extends MediaJobOutputStateChangeEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+  @doc("""
 Job output scheduled event data. Schema of the data property of an
 EventGridEvent for a Microsoft.Media.JobOutputScheduled event.
 """)
-model MediaJobOutputScheduledEventData extends MediaJobOutputStateChangeEventData {
-}
+  model MediaJobOutputScheduledEventData
+    extends MediaJobOutputStateChangeEventData {}
 
   @doc("Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event.")
   model MediaLiveEventEncoderConnectedEventData {

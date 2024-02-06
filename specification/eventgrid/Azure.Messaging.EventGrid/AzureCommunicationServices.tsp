@@ -724,16 +724,12 @@ model AcsRouterQueueDetails {
 model AcsRouterCommunicationError {
   // @doc("Router Communication Error Code")
   // code?: string;
-
   // @doc("Router Communication Error Message")
   // message?: string;
-
   // @doc("Router Communication Error Target")
   // target?: string;
-
   // @doc("Router Communication Inner Error")
   // innererror?: AcsRouterCommunicationError;
-
   // @doc("List of Router Communication Errors")
   // details?: AcsRouterCommunicationError[];
 }
@@ -865,10 +861,10 @@ enum AcsRouterLabelOperator {
 @doc("Router Worker Selector State")
 enum AcsRouterWorkerSelectorState {
   @doc("Router Worker Selector State Active")
-  Active : "active";
+  Active: "active",
 
   @doc("Router Worker Selector State Expired")
-  Expired : "expired";
+  Expired: "expired",
 }
 
 @doc("The status of the email. Any value other than Delivered is considered failed.")
