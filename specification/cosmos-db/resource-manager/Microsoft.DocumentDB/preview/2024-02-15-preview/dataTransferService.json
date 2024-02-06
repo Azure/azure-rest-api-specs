@@ -250,6 +250,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/complete": {
+      "post": {
+        "operationId": "DataTransferJobs_Complete",
+        "description": "Completes a Data Transfer Online Job.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobComplete": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobComplete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Complete Job response",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs": {
       "get": {
         "operationId": "DataTransferJobs_ListByDatabaseAccount",
