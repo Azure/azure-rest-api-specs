@@ -972,11 +972,11 @@ model QueryResult {
 The total number of search results (not the number of documents in a single
 page).
 """)
-  @projectedName("json", "@search.count")
+  @encodedName("application/json", "@search.count")
   searchCount?: int32;
 
   @doc("'True' if the '@search.count' is an approximate value and vise versa.")
-  @projectedName("json", "@search.count.approximate")
+  @encodedName("application/json", "@search.count.approximate")
   searchCountApproximate?: boolean;
 
   @doc("The token used to get next batch of data. Absent if there's no more data.")
@@ -987,7 +987,7 @@ A facet list that consists of index fields assetType ,classification,
 contactId, and label. When the facet is specified in the request, the value of
 the facet is returned as an element of @search.facets.
 """)
-  @projectedName("json", "@search.facets")
+  @encodedName("application/json", "@search.facets")
   searchFacets?: SearchFacetResultValue;
 
   @doc("Search result value")
@@ -1046,7 +1046,7 @@ model SearchResultValue {
 The search score calculated by the search engine. The results are ordered by
 search score by default.
 """)
-  @projectedName("json", "@search.score")
+  @encodedName("application/json", "@search.score")
   searchScore?: float32;
 
   @doc("""
@@ -1055,7 +1055,7 @@ description, entityType. When the keyword appears in those fields, the value of
 the field, attached with emphasis mark, is returned as an element of
 @search.highlights.
 """)
-  @projectedName("json", "@search.highlights")
+  @encodedName("application/json", "@search.highlights")
   searchHighlights?: SearchHighlights;
 
   @doc("""
@@ -1208,14 +1208,14 @@ model SuggestResultValue {
 The search score calculated by the search engine. The results are ordered by
 search score by default.
 """)
-  @projectedName("json", "@search.score")
+  @encodedName("application/json", "@search.score")
   searchScore?: float32;
 
   @doc("""
 The target text that contains the keyword as prefix. The keyword is wrapped
 with emphasis mark.
 """)
-  @projectedName("json", "@search.text")
+  @encodedName("application/json", "@search.text")
   searchText?: string;
 
   @doc("""
