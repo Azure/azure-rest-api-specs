@@ -66,6 +66,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-go
 ```
 
 ## Python
@@ -79,3 +80,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
