@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 
 @useAuth(
   OAuth2Auth<[
@@ -60,85 +58,114 @@ enum ServiceApiVersions {
 
 // ROUTES
 alias resourceOperations = Azure.Core.StandardResourceOperations;
-@client({
-  name: "SchemaRegistryClient",
-  service: SchemaRegistry,
-})
-interface SchemaOperations {
-  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ SchemaId resource doesn't allow returning binary schema and headers."
-  @summary("Get list of schema groups.")
-  @doc("Gets the list of schema groups user is authorized to access.")
-  @route("/$schemaGroups")
-  listSchemaGroups is Azure.Core.Foundations.Operation<{}, StringsList, {}>;
 
-  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ SchemaId resource doesn't allow returning binary schema and headers."
-  @summary("Get a registered schema by its unique ID reference.")
-  @doc("Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.")
-  @route("/$schemaGroups/$schemas/{id}")
-  @get
-  getSchemaById is Azure.Core.Foundations.Operation<
-    Azure.Core.Foundations.ItemKeysOf<SchemaId>,
-    OkResponse & SchemaHeaders & SchemaContent & SchemaContentType
-  >;
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
+@summary("Get list of schema groups.")
+@doc("Gets the list of schema groups user is authorized to access.")
+@route("/$schemaGroups")
+op listSchemaGroups is Azure.Core.Foundations.Operation<{}, StringsList, {}>;
 
-  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions?api-version={apiVersion}
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ Version resource doesn't allow returning non-version response."
-  @summary("List schema versions.")
-  @doc("Gets the list of all versions of one schema.")
-  @route("/$schemaGroups/{groupName}/schemas/{name}/versions")
-  listSchemaVersions is Azure.Core.Foundations.Operation<
-    Azure.Core.Foundations.ItemKeysOf<SchemaName>,
-    Int32sList,
-    {}
-  >;
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions?api-version={apiVersion}
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
+@summary("List schema versions.")
+@doc("Gets the list of all versions of one schema.")
+@route("/$schemaGroups/{groupName}/schemas/{name}/versions")
+op listSchemaVersions is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name of schema group.")
+    @path
+    groupName: string;
 
-  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{version}?api-version={apiVersion}
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ Version resource doesn't allow returning non-version response."
-  @summary("Get specific schema versions.")
-  @doc("Gets one specific version of one schema.")
-  @route("/$schemaGroups/{groupName}/schemas/{name}/versions/{version}")
-  @get
-  getSchemaByVersion is Azure.Core.Foundations.Operation<
-    Azure.Core.Foundations.ItemKeysOf<SchemaVersion>,
-    OkResponse & SchemaHeaders & SchemaContent & SchemaContentType
-  >;
+    @doc("Name of schema.")
+    @path
+    name: string;
+  },
+  Int32sList,
+  {}
+>;
 
-  //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}:get-id?api-version={apiVersion}
-  #suppress "@azure-tools/typespec-azure-core/byos" "storage service is not used"
-  @summary("Get ID for existing schema.")
-  @doc("Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.")
-  @action("get-id")
-  getSchemaIdByContent is resourceOperations.ResourceAction<
-    SchemaName,
-    {
-      ...SchemaContentType;
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
+@summary("Get a registered schema by its unique ID reference.")
+@doc("Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.")
+@route("/$schemaGroups/$schemas/{id}")
+@get
+op getSchemaById is Azure.Core.Foundations.Operation<
+  {
+    @doc("Schema ID that uniquely identifies a schema in the registry namespace.")
+    @path
+    id: string;
+  },
+  Schema
+>;
 
-      @doc("String representation (UTF-8) of the registered schema.")
-      @body
-      schemaContent: bytes;
-    },
-    SchemaHeaders
-  >;
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{version}?api-version={apiVersion}
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
+@summary("Get specific schema versions.")
+@doc("Gets one specific version of one schema.")
+@route("/$schemaGroups/{groupName}/schemas/{name}/versions/{version}")
+@get
+op getSchemaByVersion is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name of schema group.")
+    @path
+    groupName: string;
 
-  //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}?api-version={apiVersion}
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard createOrReplace operation does not allow passing in binary body to request."
-  #suppress "@azure-tools/typespec-azure-core/byos" "storage service is not used"
-  @summary("Register new schema")
-  @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.")
-  @route("/$schemaGroups/{groupName}/schemas/{name}")
-  @put
-  registerSchema is Azure.Core.Foundations.Operation<
-    Azure.Core.Foundations.ItemKeysOf<SchemaName> &
-      SchemaContent &
-      SchemaContentType,
-    NoContentResponse<SchemaHeaders>
-  >;
-}
+    @doc("Name of schema.")
+    @path
+    name: string;
+
+    @doc("Version number of specific schema.")
+    @path
+    version: int32;
+  },
+  Schema
+>;
+
+//  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}:get-id?api-version={apiVersion}
+// Operation name more accurately reflects the return value than the action
+#suppress "@azure-tools/typespec-azure-core/byos" "storage service is not used"
+@summary("Get properties for existing schema.")
+@doc("Gets the properties referencing an existing schema within the specified schema group, as matched by schema content comparison.")
+@action("get-id")
+op getSchemaPropertiesByContent is resourceOperations.ResourceAction<
+  SchemaName,
+  {
+    ...SchemaContentType;
+
+    @doc("String representation (UTF-8) of the registered schema.")
+    @body
+    schemaContent: bytes;
+  },
+  SchemaProperties
+>;
+
+//  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}?api-version={apiVersion}
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
+#suppress "@azure-tools/typespec-azure-core/byos" "storage service is not used"
+@summary("Register new schema")
+@doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.")
+@route("/$schemaGroups/{groupName}/schemas/{name}")
+@put
+op registerSchema is Azure.Core.Foundations.Operation<
+  {
+    @doc("Name of schema group.")
+    @path
+    groupName: string;
+
+    @doc("Name of schema.")
+    @path
+    name: string;
+
+    ...SchemaContent;
+    ...SchemaContentType;
+  },
+  NoContentResponse<SchemaProperties>
+>;
+
 
 // Models
-
 alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
 union SchemaContentTypeValues {
@@ -157,22 +184,20 @@ union SchemaContentTypeValues {
   protobuf: "text/vnd.ms.protobuf",
 }
 
-@doc("The content type for given schema. Each schema type has an associated content-type.")
-model SchemaContentType {
+alias SchemaContentType = {
   @doc("The content type for given schema.")
   @header("Content-Type")
   contentType: SchemaContentTypeValues;
-}
+};
 
-@doc("Content of the schema.")
-model SchemaContent {
+alias SchemaContent = {
   @body
   @doc("String representation (UTF-8) of the schema.")
   content: bytes;
-}
+};
 
-@doc("Headers for metadata of a schema.")
-model SchemaHeaders {
+@doc("Metadata of a schema.")
+model SchemaProperties {
   @doc("URL location of schema, identified by schema group, schema name, and version.")
   @header("Location")
   location: string;
@@ -198,13 +223,12 @@ model SchemaHeaders {
   schemaVersion: int32;
 }
 
-@doc("Object received from the registry containing schema identifiers.")
-@resource("$schemaGroups/$schemas")
-model SchemaId {
-  @key("id")
-  @doc("Schema ID that uniquely identifies a schema in the registry namespace.")
-  @visibility("read")
-  id: string;
+@doc("The schema, including its metadata and content.")
+model Schema {
+  ...SchemaProperties;
+  ...SchemaContent;
+  ...SchemaContentType;
+  ...OkResponse;
 }
 
 /**
@@ -235,6 +259,7 @@ model Int32sList {
   nextLink?: string;
 }
 
+// Resource Models
 @doc("Schema Group resource.")
 @resource("$schemaGroups")
 model SchemaGroup {
@@ -254,14 +279,4 @@ model SchemaName {
   @maxLength(50)
   @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
   name: string;
-}
-
-@doc("Schema versions resource.")
-@resource("versions")
-@parentResource(SchemaName)
-model SchemaVersion {
-  @key("version")
-  @doc("Version number of specific schema.")
-  @visibility("read")
-  version: int32;
 }
