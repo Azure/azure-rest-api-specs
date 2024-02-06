@@ -66,20 +66,20 @@ interface TextOperations {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Operation types must use camelCase"
   @added(ContentSafety.Versions.v2024_02_15_Preview)
-  @summary("Analyze text cross-prompt injection attacks")
-  @doc("A synchronous API for the analysis of text cross-prompt injection attacks.")
-  @route("/text:detectXPIA")
+  @summary("Analyze text prompt injection attacks")
+  @doc("A synchronous API for the analysis of text prompt injection attacks.")
+  @route("/text:promptShield")
   @post
-  detectTextXPIA is Azure.Core.RpcOperation<
+  detectTextPromptInjection is Azure.Core.RpcOperation<
     {
       @body
-      @doc("The text cross-prompt injection attacks analysis request.")
+      @doc("The text prompt injection attacks analysis request.")
       @projectedName("csharp", "options")
       @projectedName("python", "options")
       @projectedName("java", "options")
-      body: AnalyzeTextXPIAOptions;
+      body: AnalyzeTextPromptInjectionOptions;
     },
-    AnalyzeTextXPIAResult
+    AnalyzeTextPromptInjectionResult
   >;
 }
 

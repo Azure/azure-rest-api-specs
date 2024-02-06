@@ -336,24 +336,28 @@ model DetectUngroundednessResult {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("The text cross-prompt injection attacks analysis request.")
-model AnalyzeTextXPIAOptions {
-  @doc("The text needs to be analyzed if it attempts to do cross-prompt injection attacks.")
-  text: string;
+@doc("The text prompt injection attacks analysis request.")
+model AnalyzeTextPromptInjectionOptions {
+  @doc("The user prompt needs to be analyzed if it attempts to do direct injection attacks.")
+  userPrompt?: string;
+  @doc("The documents needs to be analyzed if they attempt to do direct or indirect injection attacks.")
+  documents?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("The text cross-prompt injection attacks analysis response.")
-model AnalyzeTextXPIAResult {
-  @doc("Analysis result for cross-prompt injection attacks.")
-  xpiaAnalysisResult: XPIAAnalysisResult;
+@doc("The text injection attacks analysis response.")
+model AnalyzeTextPromptInjectionResult {
+  @doc("Direct injection analysis result for user prompt input.")
+  userPromptAnalysisResult?: TextPromptInjectionResult;
+  @doc("Direct and indirect injection attacks analysis result for documents input.")
+  documentsAnalysisResults?: TextPromptInjectionResult[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("The text cross-prompt injection attacks analysis response.")
-model XPIAAnalysisResult {
-  @doc("Analysis result for cross-prompt injection attacks.")
+@doc("The text injection attacks analysis response.")
+model TextPromptInjectionResult {
+  @doc("Analysis result for whether the prompt is classified as an injection attack.")
   detected: boolean;
 }
