@@ -10,7 +10,7 @@ In order to automate the mapping of event definition with event type, please fol
 
 ### Write in Typespec
 
-Under the `Azure.Messaging.EventGrid/SystemEvents` folder find or create your service's `.tsp` file. This is where you will add your new event. For help with typespec conventions refer to [this doc](https://microsoft.github.io/typespec/) about typespec basics. Each new event will be represented as a typespec `model`. After you create your new event, in the `client.tsp` file under each service version, you need to add `@@usage(EventGrid.YourEventName, Usage.output)` and `@@access(EventGrid.YourEventName, Access.public)`.
+Under the `Azure.Messaging.EventGrid.SystemEvents` folder find or create your service's `.tsp` file. This is where you will add your new event. For help with typespec conventions refer to [this doc](https://microsoft.github.io/typespec/) about typespec basics. Each new event will be represented as a typespec `model`. After you create your new event, in the `client.tsp` file under each service version, you need to add `@@usage(EventGrid.YourEventName, Usage.output)` and `@@access(EventGrid.YourEventName, Access.public)`.
 
 A sample valid event definition is shown below:
 ~~~ markdown
@@ -33,18 +33,13 @@ Adding `@usage` and `@access` to `client.tsp`:
 
 # How To Run
 
-There are three folders within Azure.Messaging.EventGrid that are important: `2018-01-01` (GA version), `2023-06-01-preview` (preview version), `SystemEvents` (the system events in typespec).
+Within Azure.Messaging.EventGrid.SystemEvents:
 
 
-To generate the GA version of EventGrid from TypeSpec:
+To generate the EventGrid SystemEvents from TypeSpec:
 
-With `2018-01-01` as your root directory:
-
-    `tsp compile client.tsp --emit YOUR_EMITTER`
-
-
-To generate the beta version of EventGrid from TypeSpec:
-
-With `2023-06-01-preview` as your root directory:
+With `Azure.Messaging.EventGrid.SystemEvents` as your root directory:
 
     `tsp compile client.tsp --emit YOUR_EMITTER`
+
+To generate the swagger file YOUR_EMITTER would be @azure-tools/typespec-autorest.
