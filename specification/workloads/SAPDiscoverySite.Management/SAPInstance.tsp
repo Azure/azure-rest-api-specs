@@ -15,9 +15,8 @@ namespace Microsoft.Workloads;
 /**
  * Define the SAP Instance resource.
  */
-
-@parentResource(SAPDiscoverySite)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
+@parentResource(SAPDiscoverySite)
 model SAPInstance is TrackedResource<SAPInstanceProperties> {
   /**
    * The name of SAP Instance resource for SAP Migration.
