@@ -14,7 +14,7 @@ interface DeviceNetwork {
   @doc("Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.")
   retrieve is Operations.ResourceAction<
     DeviceNetworkRetrievalEndpoint,
-    DeviceNetworkIdentifier,
+    NetworkIdentifier,
     NetworkRetrievalResult
   >;
 }
@@ -31,16 +31,6 @@ model DeviceNetworkRetrievalEndpoint {
 }
 
 /// Common models
-@doc("The device for which to find the network.")
-model DeviceNetworkIdentifier {
-  @doc("The type of device identifier given: 'IPv4' or 'IPv6'.")
-  identifierType: string;
-
-  /** The device identifier in a format matching the type above:
-  - IPv4 in dotted-quad format.
-  - IPV6 in IETF 5952 format.*/
-  deviceIdentifier: string;
-}
 
 @doc("The network that the device is on.")
 model NetworkRetrievalResult {

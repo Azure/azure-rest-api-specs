@@ -39,12 +39,12 @@ model DeviceLocationVerificationContent {
   @doc("Latitude of location to be verified")
   @minValue(-90)
   @maxValue(90)
-  latitude: float32;
+  latitude: float64;
 
   @doc("Longitude of location to be verified")
   @minValue(-180)
   @maxValue(180)
-  longitude: float32;
+  longitude: float64;
 
   @doc("Accuracy expected for location verification in kilometers")
   @minValue(2)
