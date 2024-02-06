@@ -16,7 +16,7 @@ alias ServiceTraits = NoRepeatableRequests &
   RequestHeadersTrait<ApcGatewayIdHeader> &
   ResponseHeadersTrait<RequestIdResponseHeader>;
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ApcError>;
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ApcErrorResponse>;
 
 @doc("Header to identify APC Gateway resource.")
 model ApcGatewayIdHeader {
@@ -53,16 +53,15 @@ model NetworkAccessIdentifierModel {
 }
 
 @error
-@doc("A custom error type for APC.")
+@doc("A custom error response for APC.")
+model ApcErrorResponse {
+  @doc("Error returned by APC")
+  error: ApcError;
+}
+
+@doc("A custom error for APC.")
 model ApcError {
-  @doc("The numerical error status eg 500, 404")
-  status: int32;
-
-  @doc("The error code")
-  code: string;
-
-  @doc("The detailed error message.")
-  message: string;
+  ...Azure.Core.Foundations.Error;
 
   @doc("The consent URL in case of a consent failure")
   consentUrl?: url;
