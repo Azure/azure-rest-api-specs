@@ -94,4 +94,4 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ``` yaml
 suppressions:
   - code: OperationsAPIImplementation
-    reason: Operations API for edge RP is already implemented in a common folder "edge" under the RP
+    reason: Operations API for edge RP is already implemented in a common folder "edge" under the RP.
