@@ -5835,6 +5835,10 @@
         "nodeProvisioningProfile": {
           "$ref": "#/definitions/ManagedClusterNodeProvisioningProfile",
           "description": "Node provisioning settings that apply to the whole cluster."
+        },
+        "bootstrapProfile": {
+          "$ref": "#/definitions/ManagedClusterBootstrapProfile",
+          "description": "Profile of the cluster bootstrap configuration."
         }
       },
       "description": "Properties of the managed cluster."
@@ -9279,6 +9283,48 @@
           "description": "Once the mode it set to Auto, it cannot be changed back to Manual."
         }
       }
+    },
+    "ManagedClusterBootstrapProfile": {
+      "description": "The bootstrap profile.",
+      "properties": {
+        "artifactSource": {
+          "type": "string",
+          "enum": [
+            "Direct",
+            "Cache"
+          ],
+          "x-ms-enum": {
+            "name": "ArtifactSource",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Cache",
+                "description": "pull images from Azure Container Registry with cache"
+              },
+              {
+                "value": "Direct",
+                "description": "pull images from Microsoft Artifact Registry"
+              }
+            ]
+          },
+          "default": "Direct",
+          "title": "The artifact source.",
+          "description": "The source where the artifacts are downloaded from."
+        },
+        "containerRegistryId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerRegistry/registries"
+              }
+            ]
+          },
+          "description": "The resource Id of Azure Container Registry. The registry must have private network access, premium SKU and zone redundancy."
+        }
+      },
+      "type": "object"
     },
     "AgentPoolDeleteMachinesParameter": {
       "type": "object",
