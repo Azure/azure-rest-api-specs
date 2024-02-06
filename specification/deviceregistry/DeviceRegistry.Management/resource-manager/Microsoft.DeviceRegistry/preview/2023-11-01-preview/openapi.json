@@ -1,0 +1,1648 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Device Registry",
+    "version": "2023-11-01-preview",
+    "description": "Asset resource type.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Assets"
+    },
+    {
+      "name": "AssetEndpointProfiles"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DeviceRegistry/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/assetEndpointProfiles": {
+      "get": {
+        "operationId": "AssetEndpointProfiles_ListBySubscription",
+        "tags": [
+          "AssetEndpointProfiles"
+        ],
+        "description": "List all Asset Endpoint Profiles in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssetEndpointProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Asset Endpoint Profiles in a Subscription": {
+            "$ref": "./examples/AssetEndpointProfiles_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/assets": {
+      "get": {
+        "operationId": "Assets_ListBySubscription",
+        "tags": [
+          "Assets"
+        ],
+        "description": "List all assets in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Assets in a Subscription": {
+            "$ref": "./examples/Assets_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatusOperations_Get",
+        "description": "Returns the current status of an async operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of Azure region.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The ID of an ongoing async operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "Standard ARM operation status response",
+              "properties": {
+                "status": {
+                  "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+                  "description": "The operation status"
+                },
+                "id": {
+                  "$ref": "#/definitions/Azure.Core.uuid",
+                  "description": "The unique identifier for the operationStatus resource"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name of the  operationStatus resource",
+                  "readOnly": true
+                },
+                "startTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Operation start time",
+                  "readOnly": true
+                },
+                "endTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Operation complete time",
+                  "readOnly": true
+                },
+                "percentComplete": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "The progress made toward completing the operation",
+                  "readOnly": true
+                },
+                "error": {
+                  "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+                  "description": "Errors that occurred if the operation ended with Canceled or Failed status",
+                  "readOnly": true
+                }
+              },
+              "required": [
+                "status",
+                "id"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/assetEndpointProfiles": {
+      "get": {
+        "operationId": "AssetEndpointProfiles_ListByResourceGroup",
+        "tags": [
+          "AssetEndpointProfiles"
+        ],
+        "description": "List all Asset Endpoint Profiles in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssetEndpointProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Asset Endpoint Profiles in a Resource Group": {
+            "$ref": "./examples/AssetEndpointProfiles_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/assetEndpointProfiles/{assetEndpointProfileName}": {
+      "get": {
+        "operationId": "AssetEndpointProfiles_Get",
+        "tags": [
+          "AssetEndpointProfiles"
+        ],
+        "description": "Retrieve a single Asset Endpoint Profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "assetEndpointProfileName",
+            "in": "path",
+            "description": "Asset Endpoint Profile name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssetEndpointProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an Asset Endpoint Profile": {
+            "$ref": "./examples/AssetEndpointProfiles_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AssetEndpointProfiles_CreateOrReplace",
+        "tags": [
+          "AssetEndpointProfiles"
+        ],
+        "description": "Create a new Asset Endpoint Profile or replace an existing Asset Endpoint Profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "assetEndpointProfileName",
+            "in": "path",
+            "description": "Asset Endpoint Profile name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "assetEndpointProfile",
+            "in": "body",
+            "description": "Resource create or replace parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetEndpointProfile"
+            },
+            "x-ms-client-name": "assetEndpointProfile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AssetEndpointProfile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AssetEndpointProfile"
+            }
+          },
+          "201": {
+            "description": "Resource 'AssetEndpointProfile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AssetEndpointProfile"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an Asset Endpoint Profile": {
+            "$ref": "./examples/AssetEndpointProfiles_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AssetEndpointProfiles_Update",
+        "tags": [
+          "AssetEndpointProfiles"
+        ],
+        "description": "Update specific Asset Endpoint Profile properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "assetEndpointProfileName",
+            "in": "path",
+            "description": "Asset Endpoint Profile name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "assetEndpointProfile",
+            "in": "body",
+            "description": "Resource Update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetEndpointProfilePatchPayload"
+            },
+            "x-ms-client-name": "assetEndpointProfile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssetEndpointProfile"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a Asset Endpoint Profile": {
+            "$ref": "./examples/AssetEndpointProfiles_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AssetEndpointProfiles_Delete",
+        "tags": [
+          "AssetEndpointProfiles"
+        ],
+        "description": "Delete an Asset Endpoint Profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "assetEndpointProfileName",
+            "in": "path",
+            "description": "Asset Endpoint Profile name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an Asset Endpoint Profile": {
+            "$ref": "./examples/AssetEndpointProfiles_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/assets": {
+      "get": {
+        "operationId": "Assets_ListByResourceGroup",
+        "tags": [
+          "Assets"
+        ],
+        "description": "List all assets in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Assets in a Resource Group": {
+            "$ref": "./examples/Assets_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/assets/{assetName}": {
+      "get": {
+        "operationId": "Assets_Get",
+        "tags": [
+          "Assets"
+        ],
+        "description": "Retrieve a single asset.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "description": "Asset name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an Asset": {
+            "$ref": "./examples/Assets_Get_Get_An_Asset.json"
+          },
+          "Get an Asset with Sync Status ": {
+            "$ref": "./examples/Assets_Get_Get_An_Asset_With_Sync_Status.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Assets_CreateOrReplace",
+        "tags": [
+          "Assets"
+        ],
+        "description": "Create a new asset or replace an existing asset.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "description": "Asset name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "asset",
+            "in": "body",
+            "description": "Resource create or replace parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            },
+            "x-ms-client-name": "asset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Asset' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "201": {
+            "description": "Resource 'Asset' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an Asset With External Asset Id": {
+            "$ref": "./examples/Assets_CreateOrReplace_Create_An_Asset_With_External_Asset_Id.json"
+          },
+          "Create an Asset Without Display Name": {
+            "$ref": "./examples/Assets_CreateOrReplace_Create_An_Asset_Without_Display_Name.json"
+          },
+          "Create an Asset Without External Asset Id": {
+            "$ref": "./examples/Assets_CreateOrReplace_Create_An_Asset_Without_External_Asset_Id.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Assets_Update",
+        "tags": [
+          "Assets"
+        ],
+        "description": "Update specific asset properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "description": "Asset name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "asset",
+            "in": "body",
+            "description": "Resource Update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetPatchPayload"
+            },
+            "x-ms-client-name": "asset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch an Asset": {
+            "$ref": "./examples/Assets_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Assets_Delete",
+        "tags": [
+          "Assets"
+        ],
+        "description": "Delete an asset.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "description": "Asset name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an Asset": {
+            "$ref": "./examples/Assets_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Asset": {
+      "type": "object",
+      "description": "Asset definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/AssetExtendedLocation",
+          "description": "The extended location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AssetEndpointProfile": {
+      "type": "object",
+      "description": "Asset Endpoint Profile definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssetEndpointProfileProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/AssetEndpointProfileExtendedLocation",
+          "description": "The extended location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AssetEndpointProfileExtendedLocation": {
+      "type": "object",
+      "description": "The extended location.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
+    "AssetEndpointProfileListResult": {
+      "type": "object",
+      "description": "The response of a AssetEndpointProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AssetEndpointProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/AssetEndpointProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AssetEndpointProfilePatchPayload": {
+      "type": "object",
+      "description": "Asset Endpoint Profile definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/AssetEndpointProfileProperties",
+          "description": "Asset Endpoint Profile resource properties."
+        }
+      }
+    },
+    "AssetEndpointProfileProperties": {
+      "type": "object",
+      "description": "Defines the Asset Endpoint Profile properties.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable id.",
+          "readOnly": true
+        },
+        "targetAddress": {
+          "type": "string",
+          "format": "uri",
+          "description": "The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration."
+        },
+        "userAuthentication": {
+          "$ref": "#/definitions/AssetEndpointProfilePropertiesUserAuthentication",
+          "description": "Defines the client authentication mechanism to the server."
+        },
+        "transportAuthentication": {
+          "$ref": "#/definitions/AssetEndpointProfilePropertiesTransportAuthentication",
+          "description": "Defines the authentication mechanism for the southbound connector connecting to the shop floor/OT device."
+        },
+        "additionalConfiguration": {
+          "type": "string",
+          "description": "Contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetAddress"
+      ]
+    },
+    "AssetEndpointProfilePropertiesTransportAuthentication": {
+      "type": "object",
+      "description": "Defines the authentication mechanism for the southbound connector connecting to the shop floor/OT device.",
+      "properties": {
+        "ownCertificates": {
+          "type": "array",
+          "description": "Defines a reference to a secret which contains all certificates and private keys that can be used by the southbound connector connecting to the shop floor/OT device. The accepted extensions are .der for certificates and .pfx/.pem for private keys.",
+          "items": {
+            "$ref": "#/definitions/AssetEndpointProfilePropertiesTransportAuthenticationOwnCertificatesItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "ownCertificates"
+      ]
+    },
+    "AssetEndpointProfilePropertiesTransportAuthenticationOwnCertificatesItem": {
+      "type": "object",
+      "properties": {
+        "certThumbprint": {
+          "type": "string",
+          "description": "Certificate thumbprint."
+        },
+        "certSecretReference": {
+          "type": "string",
+          "description": "Secret Reference name (cert and private key)."
+        },
+        "certPasswordReference": {
+          "type": "string",
+          "description": "Secret Reference Name (Pfx or Pem password)"
+        }
+      }
+    },
+    "AssetEndpointProfilePropertiesUserAuthentication": {
+      "type": "object",
+      "description": "Defines the client authentication mechanism to the server.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/Mode",
+          "description": "Defines the mode to authenticate the user of the client at the server.",
+          "default": "Certificate"
+        },
+        "usernamePasswordCredentials": {
+          "$ref": "#/definitions/AssetEndpointProfilePropertiesUserAuthenticationUsernamePasswordCredentials",
+          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
+        },
+        "x509Credentials": {
+          "$ref": "#/definitions/AssetEndpointProfilePropertiesUserAuthenticationX509Credentials",
+          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+        }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "AssetEndpointProfilePropertiesUserAuthenticationUsernamePasswordCredentials": {
+      "type": "object",
+      "description": "Defines the username and password references when UsernamePassword user authentication mode is selected.",
+      "properties": {
+        "usernameReference": {
+          "type": "string",
+          "description": "A reference to secret containing the username."
+        },
+        "passwordReference": {
+          "type": "string",
+          "description": "A reference to secret containing the password."
+        }
+      },
+      "required": [
+        "usernameReference",
+        "passwordReference"
+      ]
+    },
+    "AssetEndpointProfilePropertiesUserAuthenticationX509Credentials": {
+      "type": "object",
+      "description": "Defines the certificate reference when Certificate user authentication mode is selected.",
+      "properties": {
+        "certificateReference": {
+          "type": "string",
+          "description": "A reference to secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
+        }
+      },
+      "required": [
+        "certificateReference"
+      ]
+    },
+    "AssetExtendedLocation": {
+      "type": "object",
+      "description": "The extended location.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
+    "AssetListResult": {
+      "type": "object",
+      "description": "The response of a Asset list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Asset items on this page",
+          "items": {
+            "$ref": "#/definitions/Asset"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AssetPatchPayload": {
+      "type": "object",
+      "description": "Asset definition for Patch operation.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/AssetProperties",
+          "description": "Asset resource properties."
+        }
+      }
+    },
+    "AssetProperties": {
+      "type": "object",
+      "description": "Defines the asset properties.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable id.",
+          "readOnly": true
+        },
+        "assetType": {
+          "type": "string",
+          "description": "Resource path to asset type (model) definition."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Enabled/Disabled status of the asset."
+        },
+        "externalAssetId": {
+          "type": "string",
+          "description": "Asset id provided by the customer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the asset."
+        },
+        "assetEndpointProfileUri": {
+          "type": "string",
+          "description": "A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must have the format <ModuleCR.metadata.namespace>/<ModuleCR.metadata.name>.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An integer that is incremented each time the resource is modified.",
+          "readOnly": true
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Asset manufacturer name."
+        },
+        "manufacturerUri": {
+          "type": "string",
+          "description": "Asset manufacturer URI."
+        },
+        "model": {
+          "type": "string",
+          "description": "Asset model name."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Asset product code."
+        },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Revision number of the hardware."
+        },
+        "softwareRevision": {
+          "type": "string",
+          "description": "Revision number of the software."
+        },
+        "documentationUri": {
+          "type": "string",
+          "description": "Reference to the documentation."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Asset serial number."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        },
+        "defaultDataPointsConfiguration": {
+          "type": "string",
+          "description": "Protocol-specific default configuration for all data points. Each data point can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+        },
+        "defaultEventsConfiguration": {
+          "type": "string",
+          "description": "Protocol-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+        },
+        "dataPoints": {
+          "type": "array",
+          "description": "Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration. See below for more details for the definition of the dataPoints element.",
+          "items": {
+            "$ref": "#/definitions/AssetPropertiesDataPointsItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of events that are part of the asset. Each event can reference an asset type capability and have per-event configuration. See below for more details about the definition of the events element.",
+          "items": {
+            "$ref": "#/definitions/AssetPropertiesEventsItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/AssetPropertiesStatus",
+          "description": "Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AssetPropertiesDataPointsItem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the data point."
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "The address of the source of the data in the asset (e.g. URL) so that a client can access the data source on the asset."
+        },
+        "capabilityId": {
+          "type": "string",
+          "description": "The path to the type definition of the capability (e.g. DTMI, OPC UA information model node id, etc.), for example dtmi:com:example:Robot:_contents:__prop1;1."
+        },
+        "observabilityMode": {
+          "$ref": "#/definitions/DataPointsObservabilityMode",
+          "description": "An indication of how the data point should be mapped to OpenTelemetry.",
+          "default": "none"
+        },
+        "dataPointConfiguration": {
+          "type": "string",
+          "description": "Protocol-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+        }
+      },
+      "required": [
+        "dataSource"
+      ]
+    },
+    "AssetPropertiesEventsItem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the event."
+        },
+        "eventNotifier": {
+          "type": "string",
+          "description": "The address of the notifier of the event in the asset (e.g. URL) so that a client can access the event on the asset."
+        },
+        "capabilityId": {
+          "type": "string",
+          "description": "The path to the type definition of the capability (e.g. DTMI, OPC UA information model node id, etc.), for example dtmi:com:example:Robot:_contents:__prop1;1."
+        },
+        "observabilityMode": {
+          "$ref": "#/definitions/EventsObservabilityMode",
+          "description": "An indication of how the event should be mapped to OpenTelemetry.",
+          "default": "none"
+        },
+        "eventConfiguration": {
+          "type": "string",
+          "description": "Protocol-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+        }
+      },
+      "required": [
+        "eventNotifier"
+      ]
+    },
+    "AssetPropertiesStatus": {
+      "type": "object",
+      "description": "Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Array object to transfer and persist errors that originate from the Edge.",
+          "items": {
+            "$ref": "#/definitions/AssetPropertiesStatusErrorsItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version."
+        }
+      }
+    },
+    "AssetPropertiesStatusErrorsItem": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code for classification of errors (ex: 400, 404, 500, etc.)."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable helpful error message to provide additional context for error (ex: “capability Id 'foo' does not exist”)."
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "DataPointsObservabilityMode": {
+      "type": "string",
+      "description": "An indication of how the data point should be mapped to OpenTelemetry.",
+      "enum": [
+        "none",
+        "counter",
+        "gauge",
+        "histogram",
+        "log"
+      ],
+      "x-ms-enum": {
+        "name": "DataPointsObservabilityMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none"
+          },
+          {
+            "name": "Counter",
+            "value": "counter"
+          },
+          {
+            "name": "Gauge",
+            "value": "gauge"
+          },
+          {
+            "name": "Histogram",
+            "value": "histogram"
+          },
+          {
+            "name": "Log",
+            "value": "log"
+          }
+        ]
+      }
+    },
+    "EventsObservabilityMode": {
+      "type": "string",
+      "description": "An indication of how the event should be mapped to OpenTelemetry.",
+      "enum": [
+        "none",
+        "log"
+      ],
+      "x-ms-enum": {
+        "name": "EventsObservabilityMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none"
+          },
+          {
+            "name": "Log",
+            "value": "log"
+          }
+        ]
+      }
+    },
+    "Mode": {
+      "type": "string",
+      "description": "Defines the mode to authenticate the user of the client at the server.",
+      "enum": [
+        "Anonymous",
+        "Certificate",
+        "UsernamePassword"
+      ],
+      "x-ms-enum": {
+        "name": "Mode",
+        "modelAsString": true
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation has been canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted by the server."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2023-11-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_11_01_preview",
+            "value": "2023-11-01-preview",
+            "description": "The 2023-11-01-preview API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
