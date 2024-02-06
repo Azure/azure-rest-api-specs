@@ -70,11 +70,6 @@ model RadiologyInsightsResource {
   ...HealthInsightsJobResourceBase;
 }
 
-@resource("radiology-insights/jobs")
-@doc("Response for the Radiology Insights request.")
-model RadiologyInsightsResult
-  is HealthInsightsOperationStatus<RadiologyInsightsInferenceResult>;
-
 @doc("The inference results for the Radiology Insights request. If field 'status' has value 'succeeded', then field 'result' will contain an instance of RadiologyInsightsInferenceResult.")
 model RadiologyInsightsInferenceResult {
   @doc("Results for the patients given in the request.")
