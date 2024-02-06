@@ -37,6 +37,7 @@ model AppConfigurationSnapshotEventData {
   name?: string;
 
   @doc("The etag representing the new state of the snapshot.")
+  @friendlyName("ETag")
   etag?: string;
 
   @doc("The sync token representing the server state after the event.")

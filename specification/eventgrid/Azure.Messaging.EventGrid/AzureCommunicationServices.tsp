@@ -399,7 +399,6 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   requestedWorkerSelectors?: AcsRouterWorkerSelector[];
 
   @doc("Router Job Received Scheduled Time in UTC")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledOn?: utcDateTime;
 
   @doc("Unavailable For Matching for Router Job Received")
@@ -723,20 +722,20 @@ model AcsRouterQueueDetails {
 
 @doc("Router Communication Error")
 model AcsRouterCommunicationError {
-  @doc("Router Communication Error Code")
-  code?: string;
+  // @doc("Router Communication Error Code")
+  // code?: string;
 
-  @doc("Router Communication Error Message")
-  message?: string;
+  // @doc("Router Communication Error Message")
+  // message?: string;
 
-  @doc("Router Communication Error Target")
-  target?: string;
+  // @doc("Router Communication Error Target")
+  // target?: string;
 
-  @doc("Router Communication Inner Error")
-  innererror?: AcsRouterCommunicationError;
+  // @doc("Router Communication Inner Error")
+  // innererror?: AcsRouterCommunicationError;
 
-  @doc("List of Router Communication Errors")
-  details?: AcsRouterCommunicationError[];
+  // @doc("List of Router Communication Errors")
+  // details?: AcsRouterCommunicationError[];
 }
 
 @doc("Router Job Worker Selector")
@@ -745,7 +744,7 @@ model AcsRouterWorkerSelector {
   key?: string;
 
   @doc("Router Job Worker Selector Label Operator")
-  labelOperator?: AcsRouterLabelOperator;
+  operator?: AcsRouterLabelOperator;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of labelValue is object"
   @doc("Router Job Worker Selector Value")
@@ -756,10 +755,9 @@ model AcsRouterWorkerSelector {
   timeToLive?: duration;
 
   @doc("Router Job Worker Selector State")
-  state?: AcsRouterWorkerSelectorState;
+  selectorState?: AcsRouterWorkerSelectorState;
 
   @doc("Router Job Worker Selector Expiration Time")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 }
 
@@ -867,10 +865,10 @@ enum AcsRouterLabelOperator {
 @doc("Router Worker Selector State")
 enum AcsRouterWorkerSelectorState {
   @doc("Router Worker Selector State Active")
-  Active,
+  Active : "active";
 
   @doc("Router Worker Selector State Expired")
-  Expired,
+  Expired : "expired";
 }
 
 @doc("The status of the email. Any value other than Delivered is considered failed.")
