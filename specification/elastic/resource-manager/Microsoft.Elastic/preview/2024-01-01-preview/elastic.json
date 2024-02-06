@@ -788,12 +788,6 @@
               "$ref": "#/definitions/OpenAIIntegrationRPModel"
             }
           },
-          "201": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OpenAIIntegrationRPModel"
-            }
-          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -836,9 +830,6 @@
         "responses": {
           "200": {
             "description": "Success"
-          },
-          "204": {
-            "description": "No Content"
           },
           "default": {
             "description": "Default error response.",
@@ -2591,7 +2582,8 @@
         "lastRefreshAt": {
           "format": "date-time",
           "description": "Last Update Timestamp for key updation",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
