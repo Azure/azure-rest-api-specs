@@ -2,22 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Network Fabric Management Service API",
-    "version": "2024-02-15",
     "description": "Self service experience for Azure Network Fabric API.",
-    "x-typespec-generated": [
+    "version": "2024-02-15",
+	"x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "host": "management.azure.com",
-  "produces": [
+  "consumes": [
     "application/json"
   ],
-  "consumes": [
+  "produces": [
     "application/json"
   ],
   "security": [
@@ -30,1459 +30,483 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
-  "tags": [
-    {
-      "name": "Operations"
-    },
-    {
-      "name": "InternetGatewayRules"
-    }
-  ],
   "paths": {
-    "/providers/Microsoft.ManagedNetworkFabric/operations": {
-      "get": {
-        "operationId": "Operations_List",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/{internetGatewayRuleName}": {
+      "put": {
         "tags": [
-          "Operations"
+          "InternetGatewayRules"
         ],
-        "description": "List the operations for the provider",
+        "operationId": "InternetGatewayRules_Create",
+        "summary": "Creates an Internet Gateway rule.",
+        "description": "Creates an Internet Gateway rule resource.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayRuleNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRule"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Success",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/InternetGatewayRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_Create_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Create_MaximumSet_Gen.json"
+          }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules": {
+      },
       "get": {
-        "operationId": "InternetGatewayRules_ListBySubscription",
         "tags": [
           "InternetGatewayRules"
         ],
-        "description": "List all Internet Gateway rules in the given subscription.",
+        "operationId": "InternetGatewayRules_Get",
+        "summary": "Gets an Internet Gateway Rule.",
+        "description": "Gets an Internet Gateway Rule resource.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/InternetGatewayRuleNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InternetGatewayRuleListResult"
+              "$ref": "#/definitions/InternetGatewayRule"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "InternetGatewayRules_ListBySubscription": {
-            "$ref": "./examples/InternetGatewayRules_ListBySubscription_MaximumSet_Gen.json"
+          "InternetGatewayRules_Get_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "InternetGatewayRules"
+        ],
+        "operationId": "InternetGatewayRules_Update",
+        "summary": "Updates an Internet Gateway Rule.",
+        "description": "API to update certain properties of the Internet Gateway Rule resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayRuleNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Internet Gateway Rule properties to update.",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRulePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRule"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_Update_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "InternetGatewayRules"
+        ],
+        "operationId": "InternetGatewayRules_Delete",
+        "summary": "Deletes an Internet Gateway Rule.",
+        "description": "Implements Internet Gateway Rules DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Delete_MaximumSet_Gen.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules": {
       "get": {
         "operationId": "InternetGatewayRules_ListByResourceGroup",
-        "tags": [
-          "InternetGatewayRules"
-        ],
+        "summary": "List Internet Gateway Rules by resource group.",
         "description": "Implements Internet Gateway Rules list by resource group GET method.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Lists all Internet Gateway Rules under the resource group.",
             "schema": {
-              "$ref": "#/definitions/InternetGatewayRuleListResult"
+              "$ref": "#/definitions/InternetGatewayRulesListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "InternetGatewayRules_ListByResourceGroup": {
-            "$ref": "./examples/InternetGatewayRules_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_ListByResourceGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/{internetGatewayRuleName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules": {
       "get": {
-        "operationId": "InternetGatewayRules_Get",
-        "tags": [
-          "InternetGatewayRules"
-        ],
-        "description": "Gets an Internet Gateway Rule resource.",
+        "operationId": "InternetGatewayRules_ListBySubscription",
+        "summary": "List Internet Gateway Rules by subscription.",
+        "description": "List all Internet Gateway rules in the given subscription.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "internetGatewayRuleName",
-            "in": "path",
-            "description": "Name of the Internet Gateway rule.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Lists all Internet Gateway Rules under the subscription.",
             "schema": {
-              "$ref": "#/definitions/InternetGatewayRule"
+              "$ref": "#/definitions/InternetGatewayRulesListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "InternetGatewayRules_Get": {
-            "$ref": "./examples/InternetGatewayRules_Get_MaximumSet_Gen.json"
+          "InternetGatewayRules_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_ListBySubscription_MaximumSet_Gen.json"
           }
         }
-      },
-      "put": {
-        "operationId": "InternetGatewayRules_Create",
-        "tags": [
-          "InternetGatewayRules"
-        ],
-        "description": "Creates an Internet Gateway rule resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "internetGatewayRuleName",
-            "in": "path",
-            "description": "Name of the Internet Gateway rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request payload.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InternetGatewayRule"
-            },
-            "x-ms-client-name": "body"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'InternetGatewayRule' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/InternetGatewayRule"
-            }
-          },
-          "201": {
-            "description": "Resource 'InternetGatewayRule' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/InternetGatewayRule"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InternetGatewayRules_Create": {
-            "$ref": "./examples/InternetGatewayRules_Create_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "InternetGatewayRules_Update",
-        "tags": [
-          "InternetGatewayRules"
-        ],
-        "description": "API to update certain properties of the Internet Gateway Rule resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "internetGatewayRuleName",
-            "in": "path",
-            "description": "Name of the Internet Gateway rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Internet Gateway Rule properties to update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InternetGatewayRulePatch"
-            },
-            "x-ms-client-name": "body"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/InternetGatewayRule"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InternetGatewayRules_Update": {
-            "$ref": "./examples/InternetGatewayRules_Update_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "InternetGatewayRules_Delete",
-        "tags": [
-          "InternetGatewayRules"
-        ],
-        "description": "Implements Internet Gateway Rules DELETE method.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "internetGatewayRuleName",
-            "in": "path",
-            "description": "Name of the Internet Gateway rule.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InternetGatewayRules_Delete_Maxi": {
-            "$ref": "./examples/InternetGatewayRules_Delete_MaximumSet_Gen.json"
-          },
-          "InternetGatewayRules_Delete_Min": {
-            "$ref": "./examples/InternetGatewayRules_Delete_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "Action": {
-      "type": "string",
-      "description": "Specify action.",
-      "enum": [
-        "Allow",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "Action",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "Allow",
-            "description": "This will allow the HTTP requests"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "This will not allow the HTTP requests"
-          }
-        ]
-      }
-    },
-    "AdministrativeState": {
-      "type": "string",
-      "description": "State defined to represent administrative actions or post actions on a particular resource.",
-      "enum": [
-        "Enabled",
-        "Disabled",
-        "MAT",
-        "RMA"
-      ],
-      "x-ms-enum": {
-        "name": "AdministrativeState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "administrative actions on a particular resource is enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "administrative actions on a particular resource is disabled"
-          },
-          {
-            "name": "MAT",
-            "value": "MAT",
-            "description": "administrative actions on a particular resource is MAT"
-          },
-          {
-            "name": "RMA",
-            "value": "RMA",
-            "description": "administrative actions on a particular resource is RMA"
-          }
-        ]
-      }
-    },
-    "AnnotationResource": {
+    "InternetGatewayRuleProperties": {
       "type": "object",
-      "description": "Switch configuration entries require a description to discern between configuration groups.",
-      "properties": {
-        "annotation": {
-          "type": "string",
-          "description": "Switch configuration description."
-        }
-      }
-    },
-    "BfdAdministrativeState": {
-      "type": "string",
-      "description": "Administrative state of the BfdConfiguration. Example: Enabled | Disabled.",
-      "enum": [
-        "Enabled",
-        "Disabled",
-        "MAT",
-        "RMA"
-      ],
-      "x-ms-enum": {
-        "name": "BfdAdministrativeState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Administrative state of the BfdConfiguration is enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Administrative state of the BfdConfiguration is disabled"
-          },
-          {
-            "name": "MAT",
-            "value": "MAT",
-            "description": "Administrative state of the BfdConfiguration is MAT"
-          },
-          {
-            "name": "RMA",
-            "value": "RMA",
-            "description": "Administrative state of the BfdConfiguration is RMA"
-          }
-        ]
-      }
-    },
-    "BfdConfiguration": {
-      "type": "object",
-      "description": "BFD configuration properties",
-      "properties": {
-        "administrativeState": {
-          "$ref": "#/definitions/BfdAdministrativeState",
-          "description": "Administrative state of the BfdConfiguration. Example: Enabled | Disabled.",
-          "default": "Disabled",
-          "readOnly": true
-        },
-        "intervalInMilliSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Interval in milliseconds. Example: 300.",
-          "default": 300
-        },
-        "multiplier": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Multiplier for the Bfd Configuration. Example: 5.",
-          "default": 5
-        }
-      }
-    },
-    "BooleanEnumProperty": {
-      "type": "string",
-      "description": "Boolean Enum. Example- True/False",
-      "enum": [
-        "True",
-        "False"
-      ],
-      "x-ms-enum": {
-        "name": "BooleanEnumProperty",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "True",
-            "value": "True",
-            "description": "Represent true for boolean enum"
-          },
-          {
-            "name": "False",
-            "value": "False",
-            "description": "Represent false for boolean enum"
-          }
-        ]
-      }
-    },
-    "CommonDynamicMatchConfiguration": {
-      "type": "object",
-      "description": "Dynamic match configuration object.",
-      "properties": {
-        "ipGroups": {
-          "type": "array",
-          "description": "List of IP Groups.",
-          "items": {
-            "$ref": "#/definitions/IpGroupProperties"
-          },
-          "x-ms-identifiers": []
-        },
-        "vlanGroups": {
-          "type": "array",
-          "description": "List of vlan groups.",
-          "items": {
-            "$ref": "#/definitions/VlanGroupProperties"
-          },
-          "x-ms-identifiers": []
-        },
-        "portGroups": {
-          "type": "array",
-          "description": "List of the port groups.",
-          "items": {
-            "$ref": "#/definitions/PortGroupProperties"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "CommonMatchConditions": {
-      "type": "object",
-      "description": "Defines the common match conditions of the ACL and Network Tap Rule.",
-      "properties": {
-        "protocolTypes": {
-          "type": "array",
-          "description": "List of the protocols that need to be matched.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "vlanMatchCondition": {
-          "$ref": "#/definitions/VlanMatchCondition",
-          "description": "Vlan match condition that needs to be matched."
-        },
-        "ipCondition": {
-          "$ref": "#/definitions/IpMatchCondition",
-          "description": "IP condition that needs to be matched."
-        }
-      }
-    },
-    "CommunityActionTypes": {
-      "type": "string",
-      "description": "community action types. Example: Permit | Deny.",
-      "enum": [
-        "Permit",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "CommunityActionTypes",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Permit",
-            "value": "Permit",
-            "description": "Represent community action is permitted"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Represent community action is permitted"
-          }
-        ]
-      }
-    },
-    "Condition": {
-      "type": "string",
-      "description": "Specify condition.",
-      "enum": [
-        "and",
-        "or"
-      ],
-      "x-ms-enum": {
-        "name": "Condition",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "and",
-            "value": "and",
-            "description": "and condition for all proxy rules"
-          },
-          {
-            "name": "or",
-            "value": "or",
-            "description": "or condition for all proxy rules"
-          }
-        ]
-      }
-    },
-    "ConfigurationState": {
-      "type": "string",
-      "description": "Configuration state for the resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Rejected",
-        "Accepted",
-        "Provisioned",
-        "ErrorProvisioning",
-        "Deprovisioning",
-        "Deprovisioned",
-        "ErrorDeprovisioning",
-        "DeferredControl",
-        "Provisioning",
-        "PendingCommit"
-      ],
-      "x-ms-enum": {
-        "name": "ConfigurationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Requested Configuration state for the resource has been applied"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Requested Configuration state for the resource could not be applied"
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected",
-            "description": "Requested Configuration state for the resource has been rejected"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Requested Configuration state for the resource has been accepted"
-          },
-          {
-            "name": "Provisioned",
-            "value": "Provisioned",
-            "description": "Requested Configuration state for the resource has been provisioned"
-          },
-          {
-            "name": "ErrorProvisioning",
-            "value": "ErrorProvisioning",
-            "description": "Error in provisioning requested Configuration state for the resource"
-          },
-          {
-            "name": "Deprovisioning",
-            "value": "Deprovisioning",
-            "description": "Requested Configuration state for the resource is Deprovisioning"
-          },
-          {
-            "name": "Deprovisioned",
-            "value": "Deprovisioned",
-            "description": "Requested Configuration state for the resource has been Deprovisioned"
-          },
-          {
-            "name": "ErrorDeprovisioning",
-            "value": "ErrorDeprovisioning",
-            "description": "Error in Deprovisioning requested Configuration state for the resource"
-          },
-          {
-            "name": "DeferredControl",
-            "value": "DeferredControl",
-            "description": "Requested Configuration state for the resource has been deferred"
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "Requested Configuration state for the resource is Provisioning"
-          },
-          {
-            "name": "PendingCommit",
-            "value": "PendingCommit",
-            "description": "Requested Configuration state for the resource is waiting for a commit"
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "EnableDisableOnResources": {
-      "type": "object",
-      "description": "Update administrative state on list of resources.",
-      "properties": {
-        "resourceIds": {
-          "type": "array",
-          "description": "Network Fabrics or Network Rack resource Id.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "EnableDisableState": {
-      "type": "string",
-      "description": "Administrative state.",
-      "enum": [
-        "Enable",
-        "Disable"
-      ],
-      "x-ms-enum": {
-        "name": "EnableDisableState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enable",
-            "value": "Enable",
-            "description": "Administrative state has been enabled"
-          },
-          {
-            "name": "Disable",
-            "value": "Disable",
-            "description": "Administrative state has been disabled"
-          }
-        ]
-      }
-    },
-    "ExportRoutePolicyInformation": {
-      "type": "object",
-      "description": "Export Route Policy Configuration.",
-      "properties": {
-        "exportIpv4RoutePolicyId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Export IPv4 Route Policy Id.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedNetworkFabric/routePolicies"
-              }
-            ]
-          }
-        },
-        "exportIpv6RoutePolicyId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Export IPv6 Route Policy Id.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedNetworkFabric/routePolicies"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "ExtendedLocation": {
-      "type": "object",
-      "description": "The extended location.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The extended location type."
-        },
-        "name": {
-          "type": "string",
-          "description": "The extended location name."
-        }
-      }
-    },
-    "IPAddressType": {
-      "type": "string",
-      "description": "IP Address type.",
-      "enum": [
-        "IPv4",
-        "IPv6"
-      ],
-      "x-ms-enum": {
-        "name": "IPAddressType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "IPv4",
-            "value": "IPv4",
-            "description": "IPv4 type IP address has been used"
-          },
-          {
-            "name": "IPv6",
-            "value": "IPv6",
-            "description": "IPv6 type IP address has been used"
-          }
-        ]
-      }
-    },
-    "ImportRoutePolicyInformation": {
-      "type": "object",
-      "description": "Import Route Policy Configuration.",
-      "properties": {
-        "importIpv4RoutePolicyId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Import IPv4 Route Policy Id.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedNetworkFabric/routePolicies"
-              }
-            ]
-          }
-        },
-        "importIpv6RoutePolicyId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Import IPv6 Route Policy Id.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedNetworkFabric/routePolicies"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "InternetGatewayRule": {
-      "type": "object",
-      "description": "The Internet Gateway Rule resource definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/InternetGatewayRuleProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
+      "x-ms-client-flatten": true,
       "required": [
-        "properties"
+        "ruleProperties"
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
         }
-      ]
-    },
-    "InternetGatewayRuleListResult": {
-      "type": "object",
-      "description": "The response of a InternetGatewayRule list operation.",
+      ],
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "The InternetGatewayRule items on this page",
-          "items": {
-            "$ref": "#/definitions/InternetGatewayRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "InternetGatewayRulePatch": {
-      "type": "object",
-      "description": "The Internet Gateway Rules patch resource definition.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "InternetGatewayRuleProperties": {
-      "type": "object",
-      "description": "Internet Gateway Rule Properties defines the resource properties.",
-      "properties": {
-        "annotation": {
-          "type": "string",
-          "description": "Switch configuration description."
-        },
         "ruleProperties": {
-          "$ref": "#/definitions/RuleProperties",
-          "description": "Rules for the InternetGateways"
+          "description": "Rules for the InternetGateways",
+          "$ref": "#/definitions/RuleProperties"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
           "readOnly": true
         },
         "internetGatewayIds": {
           "type": "array",
           "description": "List of Internet Gateway resource Id.",
           "items": {
+            "description": "ARM Resource ID of the Internet Gateway.",
             "type": "string"
           },
           "readOnly": true
+        }
+      },
+      "description": "Internet Gateway Rule Properties defines the resource properties."
+    },
+    "InternetGatewayRule": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/InternetGatewayRuleProperties"
         }
       },
       "required": [
-        "ruleProperties"
-      ]
-    },
-    "IpGroupProperties": {
-      "type": "object",
-      "description": "IP Group properties.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "IP Group name.",
-          "minLength": 1
-        },
-        "ipAddressType": {
-          "$ref": "#/definitions/IPAddressType",
-          "description": "IP Address type."
-        },
-        "ipPrefixes": {
-          "type": "array",
-          "description": "List of IP Prefixes.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "IpMatchCondition": {
-      "type": "object",
-      "description": "Defines the condition that can be filtered using the selected IPs.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/SourceDestinationType",
-          "description": "IP Address type that needs to be matched."
-        },
-        "prefixType": {
-          "$ref": "#/definitions/PrefixType",
-          "description": "IP Prefix Type that needs to be matched."
-        },
-        "ipPrefixValues": {
-          "type": "array",
-          "description": "The list of IP Prefixes that need to be matched.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ipGroupNames": {
-          "type": "array",
-          "description": "The List of IP Group Names that need to be matched.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "Layer3IpPrefixProperties": {
-      "type": "object",
-      "description": "Layer 3 primary and secondary IP Address prefixes.",
-      "properties": {
-        "primaryIpv4Prefix": {
-          "type": "string",
-          "description": "IPv4 Address Prefix."
-        },
-        "primaryIpv6Prefix": {
-          "type": "string",
-          "description": "IPv6 Address Prefix."
-        },
-        "secondaryIpv4Prefix": {
-          "type": "string",
-          "description": "Secondary IPv4 Address Prefix."
-        },
-        "secondaryIpv6Prefix": {
-          "type": "string",
-          "description": "Secondary IPv6 Address Prefix."
-        }
-      }
-    },
-    "Layer4Protocol": {
-      "type": "string",
-      "description": "Layer4 protocol type that needs to be matched.",
-      "enum": [
-        "TCP",
-        "UDP"
+        "properties"
       ],
-      "x-ms-enum": {
-        "name": "Layer4Protocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "TCP",
-            "value": "TCP",
-            "description": "TCP protocol needs to be matched for Layer4"
-          },
-          {
-            "name": "UDP",
-            "value": "UDP",
-            "description": "UDP protocol needs to be matched for Layer4"
-          }
-        ]
-      }
+      "description": "The Internet Gateway Rule resource definition."
     },
-    "PeeringOption": {
-      "type": "string",
-      "description": "Peering option list.",
-      "enum": [
-        "OptionA",
-        "OptionB"
-      ],
-      "x-ms-enum": {
-        "name": "PeeringOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "OptionA",
-            "value": "OptionA",
-            "description": "Peering option is chosen from OptionA"
-          },
-          {
-            "name": "OptionB",
-            "value": "OptionB",
-            "description": "Peering option is chosen from OptionB"
-          }
-        ]
-      }
-    },
-    "PortCondition": {
+    "InternetGatewayRulePatch": {
       "type": "object",
-      "description": "Port condition that needs to be matched.",
-      "properties": {
-        "portType": {
-          "$ref": "#/definitions/PortType",
-          "description": "Port type that needs to be matched."
-        },
-        "layer4Protocol": {
-          "$ref": "#/definitions/Layer4Protocol",
-          "description": "Layer4 protocol type that needs to be matched."
-        },
-        "ports": {
-          "type": "array",
-          "description": "List of the Ports that need to be matched.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "portGroupNames": {
-          "type": "array",
-          "description": "List of the port Group Names that need to be matched.",
-          "items": {
-            "type": "string"
-          }
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "description": "Resource tags",
+          "$ref": "./common.json#/definitions/TagsUpdate"
         }
-      },
-      "required": [
-        "layer4Protocol"
-      ]
-    },
-    "PortGroupProperties": {
-      "type": "object",
-      "description": "Port Group properties.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the port group.",
-          "minLength": 1
-        },
-        "ports": {
-          "type": "array",
-          "description": "List of the ports that need to be matched.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PortType": {
-      "type": "string",
-      "description": "Port type that needs to be matched.",
-      "enum": [
-        "SourcePort",
-        "DestinationPort"
       ],
-      "x-ms-enum": {
-        "name": "PortType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SourcePort",
-            "value": "SourcePort",
-            "description": "Need to match with source port"
-          },
-          {
-            "name": "DestinationPort",
-            "value": "DestinationPort",
-            "description": "Destination port needs to be match"
-          }
-        ]
-      }
+      "description": "The Internet Gateway Rules patch resource definition."
     },
-    "PrefixType": {
-      "type": "string",
-      "description": "IP Prefix Type that needs to be matched.",
-      "enum": [
-        "Prefix",
-        "LongestPrefix"
-      ],
-      "x-ms-enum": {
-        "name": "PrefixType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Prefix",
-            "value": "Prefix",
-            "description": "Need to match only the prefix of IP address"
-          },
-          {
-            "name": "LongestPrefix",
-            "value": "LongestPrefix",
-            "description": "Need to match the longest prefix of IP address"
-          }
-        ]
-      }
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The current provisioning state.",
-      "enum": [
-        "Accepted",
-        "Succeeded",
-        "Updating",
-        "Deleting",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Requested provisioing state has been accepted"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Requested provisioing state has been successfully applied"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Requested provisioing state is being applied"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Requested provisioing state is deleting a resource"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Requested provisioing state could not be applied"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Requested provisioing state has been has been canceled"
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "Resource": {
+    "InternetGatewayRulesListResult": {
       "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "description": "List of Internet Gateway Rules.",
       "properties": {
-        "id": {
+        "value": {
+          "type": "array",
+          "description": "List of Internet Gateway Rule resources.",
+          "items": {
+            "$ref": "#/definitions/InternetGatewayRule"
+          }
+        },
+        "nextLink": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      }
-    },
-    "RouteTargetInformation": {
-      "type": "object",
-      "description": "Route Target Configuration.",
-      "properties": {
-        "importIpv4RouteTargets": {
-          "type": "array",
-          "description": "Route Targets to be applied for incoming routes into CE.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "importIpv6RouteTargets": {
-          "type": "array",
-          "description": "Route Targets to be applied for incoming routes from CE.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "exportIpv4RouteTargets": {
-          "type": "array",
-          "description": "Route Targets to be applied for outgoing routes into CE.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "exportIpv6RouteTargets": {
-          "type": "array",
-          "description": "Route Targets to be applied for outgoing routes from CE.",
-          "items": {
-            "type": "string"
-          }
+          "description": "Url to follow for getting next page of resources."
         }
       }
     },
     "RuleProperties": {
       "type": "object",
       "description": "Rules for the InternetGateways",
+      "required": [
+        "action",
+        "addressList"
+      ],
       "properties": {
         "action": {
-          "$ref": "#/definitions/Action",
-          "description": "Specify action."
+          "type": "string",
+          "description": "Specify action.",
+          "minLength": 1,
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "action"
+          },
+          "example": "Deny"
         },
         "condition": {
-          "$ref": "#/definitions/Condition",
-          "description": "Specify condition."
+          "type": "string",
+          "description": "Specify condition.",
+          "minLength": 1,
+          "enum": [
+            "and",
+            "or"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "condition"
+          },
+          "example": "or"
         },
         "addressList": {
           "type": "array",
           "description": "List of Addresses to be allowed or denied.",
+          "minItems": 1,
           "items": {
-            "type": "string"
+            "description": "Addresses to be allowed or denied.",
+            "type": "string",
+            "minLength": 1,
+            "example": "10.10.10.10:22 | www.foo.com"
           }
         },
         "sourceAddressList": {
           "type": "array",
           "description": "List of source remote ip to be allowed or denied.",
+          "minItems": 1,
           "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "action",
-        "addressList"
-      ]
-    },
-    "SourceDestinationType": {
-      "type": "string",
-      "description": "IP Address type that needs to be matched.",
-      "enum": [
-        "SourceIP",
-        "DestinationIP"
-      ],
-      "x-ms-enum": {
-        "name": "SourceDestinationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SourceIP",
-            "value": "SourceIP",
-            "description": "IP Address that needs to be matched is from source"
-          },
-          {
-            "name": "DestinationIP",
-            "value": "DestinationIP",
-            "description": "Destination IP Address that needs to be matched"
-          }
-        ]
-      }
-    },
-    "StaticRouteProperties": {
-      "type": "object",
-      "description": "Route Properties.",
-      "properties": {
-        "prefix": {
-          "type": "string",
-          "description": "Prefix of the route.",
-          "minLength": 1
-        },
-        "nextHop": {
-          "type": "array",
-          "description": "List of next hop addresses.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "prefix",
-        "nextHop"
-      ]
-    },
-    "TagsUpdate": {
-      "type": "object",
-      "description": "Base tracked resource type for PATCH updates.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateAdministrativeState": {
-      "type": "object",
-      "description": "Update administrative state on list of resources.",
-      "properties": {
-        "resourceIds": {
-          "type": "array",
-          "description": "Network Fabrics or Network Rack resource Id.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "state": {
-          "$ref": "#/definitions/EnableDisableState",
-          "description": "Administrative state."
-        }
-      }
-    },
-    "UpdateVersion": {
-      "type": "object",
-      "description": "Update version properties.",
-      "properties": {
-        "version": {
-          "type": "string",
-          "description": "Specify the version."
-        }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-02-15"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_02_15",
-            "value": "2024-02-15",
-            "description": "The 2024-02-15 API version."
-          }
-        ]
-      }
-    },
-    "VlanGroupProperties": {
-      "type": "object",
-      "description": "Vlan group properties.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Vlan group name.",
-          "minLength": 1
-        },
-        "vlans": {
-          "type": "array",
-          "description": "List of vlans.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "VlanMatchCondition": {
-      "type": "object",
-      "description": "The vlan match conditions that need to be matched.",
-      "properties": {
-        "vlans": {
-          "type": "array",
-          "description": "List of vlans that need to be matched.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "innerVlans": {
-          "type": "array",
-          "description": "List of inner vlans that need to be matched.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "vlanGroupNames": {
-          "type": "array",
-          "description": "List of vlan group names that need to be matched.",
-          "items": {
-            "type": "string"
+            "description": "Source remote ip to be allowed or denied.",
+            "type": "string",
+            "minLength": 1,
+            "example": "10.10.10.10"
           }
         }
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "InternetGatewayRuleNameParameter": {
+      "type": "string",
+      "description": "Name of the Internet Gateway rule.",
+      "in": "path",
+      "name": "internetGatewayRuleName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
