@@ -650,7 +650,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/openAIIntegration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/OpenAIIntegrations": {
       "get": {
         "tags": [
           "OpenAIIntegration"
@@ -658,9 +658,7 @@
         "summary": "List OpenAI integration rule for a given monitor resource.",
         "operationId": "OpenAI_List",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -700,7 +698,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/openAIIntegration/{integrationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/OpenAIIntegrations/{integrationName}": {
       "get": {
         "tags": [
           "OpenAIIntegration"
@@ -708,9 +706,7 @@
         "summary": "Get OpenAI integration rule for a given monitor resource.",
         "operationId": "OpenAI_Get",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -756,15 +752,10 @@
         "summary": "Create or update a OpenAI integration rule for a given monitor resource.",
         "operationId": "OpenAI_CreateOrUpdate",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -823,9 +814,7 @@
         "summary": "Delete OpenAI integration rule for a given monitor resource.",
         "operationId": "OpenAI_Delete",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -865,7 +854,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/openAIIntegration/{integrationName}/getStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/OpenAIIntegrations/{integrationName}/getStatus": {
       "post": {
         "tags": [
           "OpenAIIntegration"
@@ -873,9 +862,7 @@
         "summary": "Get OpenAI integration status for a given integration.",
         "operationId": "OpenAI_GetStatus",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -2582,11 +2569,13 @@
       }
     },
     "OpenAIIntegrationProperties": {
+      "description": "Open AI Integration details.",
       "type": "object",
       "properties": {
         "openAIResourceId": {
           "description": "The resource id of Open AI resource",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "openAIResourceEndpoint": {
@@ -2596,7 +2585,8 @@
         },
         "key": {
           "description": "Value of API key for Open AI resource",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "lastRefreshAt": {
           "format": "date-time",
@@ -2648,6 +2638,7 @@
       }
     },
     "OpenAIIntegrationStatusResponse": {
+      "description": "Status of the OpenAI Integration",
       "type": "object",
       "properties": {
         "properties": {
@@ -2656,6 +2647,7 @@
       }
     },
     "OpenAIIntegrationStatusResponseProperties": {
+      "description": "Status of the OpenAI Integration",
       "type": "object",
       "properties": {
         "status": {
