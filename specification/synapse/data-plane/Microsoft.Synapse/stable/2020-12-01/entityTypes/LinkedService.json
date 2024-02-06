@@ -4367,8 +4367,7 @@
       "type": "object",
       "properties": {
         "projectId": {
-          "description": "The default BigQuery project id to query against. Type: string (or Expression with resultType string).",
-          "x-ms-format": "dfe-string",
+          "description": "The default BigQuery project id to query against.",
           "type": "object"
         },
         "authenticationType": {
@@ -4384,21 +4383,20 @@
           }
         },
         "clientId": {
-          "x-ms-format": "dfe-string",
           "description": "The client id of the google application used to acquire the refresh token. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "clientSecret": {
           "description": "The client secret of the google application used to acquire the refresh token.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "refreshToken": {
           "description": "The refresh token obtained from Google for authorizing access to BigQuery for UserAuthentication.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "keyFileContent": {
-          "description": "The content of the .json key file that is used to authenticate the service account. Type: string (or Expression with resultType string).",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "description": "The content of the .json key file that is used to authenticate the service account.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         }
       },
       "required": [
