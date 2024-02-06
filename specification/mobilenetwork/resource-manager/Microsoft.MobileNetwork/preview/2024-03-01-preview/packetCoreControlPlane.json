@@ -1081,27 +1081,12 @@
         "containerNetworkInterface": {
           "$ref": "./common.json#/definitions/NexusL3NetworkResourceId",
           "description": "The Layer 3 Network that is used for creation of the container networking interface network."
-        },
-        "controlPlaneAccessInterface": {
-          "$ref": "./common.json#/definitions/NexusTrunkedNetworkResourceId",
-          "description": "The Trunked Network that is used for creation of the packet core control plane interface on the access network."
-        },
-        "userPlaneAccessInterface": {
-          "$ref": "./common.json#/definitions/NexusTrunkedNetworkResourceId",
-          "description": "The Trunked Network that is used for creation of the packet core user plane interface on the access network."
-        },
-        "userPlaneDataInterface": {
-          "$ref": "./common.json#/definitions/NexusTrunkedNetworkResourceId",
-          "description": "The Trunked Network that is used for creation of the packet core user plane interface on the data network."
         }
       },
       "required": [
         "loadBalancerIpAddresses",
         "cloudServicesNetwork",
-        "containerNetworkInterface",
-        "controlPlaneAccessInterface",
-        "userPlaneAccessInterface",
-        "userPlaneDataInterface"
+        "containerNetworkInterface"
       ]
     },
     "LocalDiagnosticsAccessConfiguration": {
