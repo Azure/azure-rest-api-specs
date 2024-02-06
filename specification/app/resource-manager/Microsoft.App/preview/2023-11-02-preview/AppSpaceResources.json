@@ -330,6 +330,19 @@
         }
       }
     },
+    "AppSpaceResourceLabel": {
+      "description": "Label indicating if a resource is a Favorite or not. Default is not favorite.",
+      "enum": [
+        "Default",
+        "Favorite"
+      ],
+      "type": "string",
+      "default": "Default",
+      "x-ms-enum": {
+        "name": "AppSpaceResourceLabel",
+        "modelAsString": true
+      }
+    },
     "AppSpaceResourceProperties": {
       "description": "AppSpaceResource resource-specific properties",
       "type": "object",
@@ -355,8 +368,8 @@
           "description": "Optional App Space Resource Deployment Information"
         },
         "isFavorite": {
-          "description": "Boolean marking whether or not this App Space Resource is a favorite (true or false, default is false)",
-          "type": "boolean"
+          "$ref": "#/definitions/AppSpaceResourceLabel",
+          "description": "Enum marking whether or not this App Space Resource is a favorite"
         },
         "metadata": {
           "description": "Property bag to add properties used by Portal UX.",
