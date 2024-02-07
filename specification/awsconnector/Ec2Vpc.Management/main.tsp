@@ -38,6 +38,7 @@ model Ec2Vpc is TrackedResource<Ec2VpcProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Ec2Vpc")
 model Ec2VpcProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model Ec2VpcProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsEc2Vpc")
 model AwsEc2VpcProperties {
   @doc("Gets and sets the property cidrBlock. The primary IPv4 CIDR block for the VPC.")
@@ -90,6 +92,7 @@ model AwsEc2VpcProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -100,6 +103,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface Ec2Vpcs {
   get is ArmResourceRead<Ec2Vpc>;

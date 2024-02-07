@@ -39,6 +39,7 @@ model NetworkFirewallRuleGroup
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of NetworkFirewallRuleGroup")
 model NetworkFirewallRuleGroupProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -48,6 +49,7 @@ model NetworkFirewallRuleGroupProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsNetworkFirewallRuleGroup")
 model AwsNetworkFirewallRuleGroupProperties {
   @doc("Gets and sets the property capacity.")
@@ -86,6 +88,7 @@ enum Type {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RuleGroup")
 model RuleGroup {
   @doc("Gets and sets the property referenceSets.")
@@ -102,6 +105,7 @@ model RuleGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -112,6 +116,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReferenceSets")
 model ReferenceSets {
   @doc("Gets and sets the property iPSetReferences.")
@@ -119,6 +124,7 @@ model ReferenceSets {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RuleVariables")
 model RuleVariables {
   @doc("Gets and sets the property iPSets.")
@@ -129,6 +135,7 @@ model RuleVariables {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RulesSource")
 model RulesSource {
   @doc("Gets and sets the property rulesSourceList.")
@@ -146,6 +153,7 @@ model RulesSource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StatefulRuleOptions")
 model StatefulRuleOptions {
   @doc("Gets and sets the property ruleOrder.")
@@ -153,6 +161,7 @@ model StatefulRuleOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of IPSetReference")
 model IPSetReference {
   @doc("Gets and sets the property referenceArn. A resource ARN.")
@@ -160,6 +169,7 @@ model IPSetReference {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of IPSet")
 model IPSet {
   @doc("Gets and sets the property definition.")
@@ -168,6 +178,7 @@ model IPSet {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of PortSet")
 model PortSet {
   @doc("Gets and sets the property definition.")
@@ -176,6 +187,7 @@ model PortSet {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RulesSourceList")
 model RulesSourceList {
   @doc("Gets and sets the property generatedRulesType.")
@@ -191,6 +203,7 @@ model RulesSourceList {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StatefulRule")
 model StatefulRule {
   @doc("Gets and sets the property action.")
@@ -220,6 +233,7 @@ enum StatefulRuleAction {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StatelessRulesAndCustomActions")
 model StatelessRulesAndCustomActions {
   @doc("Gets and sets the property customActions.")
@@ -232,6 +246,7 @@ model StatelessRulesAndCustomActions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Header")
 model Header {
   @doc("Gets and sets the property destination.")
@@ -263,6 +278,7 @@ enum HeaderDirection {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RuleOption")
 model RuleOption {
   @doc("Gets and sets the property keyword.")
@@ -334,6 +350,7 @@ enum HeaderProtocol {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of CustomAction")
 model CustomAction {
   @doc("Gets and sets the property actionDefinition.")
@@ -344,6 +361,7 @@ model CustomAction {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StatelessRule")
 model StatelessRule {
   @doc("Gets and sets the property priority.")
@@ -354,6 +372,7 @@ model StatelessRule {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ActionDefinition")
 model ActionDefinition {
   @doc("Gets and sets the property publishMetricAction.")
@@ -361,6 +380,7 @@ model ActionDefinition {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RuleDefinition")
 model RuleDefinition {
   @doc("Gets and sets the property actions.")
@@ -372,6 +392,7 @@ model RuleDefinition {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
   @doc("Gets and sets the property dimensions.")
@@ -380,6 +401,7 @@ model PublishMetricAction {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of MatchAttributes")
 model MatchAttributes {
   @doc("Gets and sets the property destinationPorts.")
@@ -408,6 +430,7 @@ model MatchAttributes {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Dimension")
 model Dimension {
   @doc("Gets and sets the property value.")
@@ -415,6 +438,7 @@ model Dimension {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of PortRange")
 model PortRange {
   @doc("Gets and sets the property fromPort.")
@@ -425,6 +449,7 @@ model PortRange {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Address")
 model Address {
   @doc("Gets and sets the property addressDefinition.")
@@ -432,6 +457,7 @@ model Address {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of TCPFlagField")
 model TCPFlagField {
   @doc("Gets and sets the property flags.")
@@ -444,6 +470,7 @@ model TCPFlagField {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface NetworkFirewallRuleGroups {
   get is ArmResourceRead<NetworkFirewallRuleGroup>;

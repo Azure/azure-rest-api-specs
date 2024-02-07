@@ -39,6 +39,7 @@ model Ec2Instance is ExtensionResource<Ec2InstanceProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Ec2Instance")
 model Ec2InstanceProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -48,6 +49,7 @@ model Ec2InstanceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsEc2Instance")
 model AwsEc2InstanceProperties {
   @doc("Gets and sets the property amiLaunchIndex.<p>The AMI launch index, which can be used to find this instance in the launch group.</p>")
@@ -249,6 +251,7 @@ enum ArchitectureValues {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ArchitectureValuesEnumValue")
 model ArchitectureValuesEnumValue {
   @doc("Gets and sets the property value.")
@@ -265,6 +268,7 @@ enum InstanceBootModeValues {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceBootModeValuesEnumValue")
 model InstanceBootModeValuesEnumValue {
   @doc("Gets and sets the property value.")
@@ -281,6 +285,7 @@ enum InstanceLifecycleType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceLifecycleTypeEnumValue")
 model InstanceLifecycleTypeEnumValue {
   @doc("Gets and sets the property value.")
@@ -294,6 +299,7 @@ enum PlatformValues {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of PlatformValuesEnumValue")
 model PlatformValuesEnumValue {
   @doc("Gets and sets the property value.")
@@ -310,6 +316,7 @@ enum VirtualizationType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of VirtualizationTypeEnumValue")
 model VirtualizationTypeEnumValue {
   @doc("Gets and sets the property value.")
@@ -317,6 +324,7 @@ model VirtualizationTypeEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceBlockDeviceMapping")
 model InstanceBlockDeviceMapping {
   @doc("Gets and sets the property deviceName.<p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>")
@@ -339,6 +347,7 @@ enum BootModeValues {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of BootModeValuesEnumValue")
 model BootModeValuesEnumValue {
   @doc("Gets and sets the property value.")
@@ -2596,6 +2605,7 @@ enum InstanceType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceTypeEnumValue")
 model InstanceTypeEnumValue {
   @doc("Gets and sets the property value.")
@@ -2603,6 +2613,7 @@ model InstanceTypeEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of CapacityReservationSpecificationResponse")
 model CapacityReservationSpecificationResponse {
   @doc("Gets and sets the property capacityReservationPreference.<p>Describes the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>")
@@ -2622,6 +2633,7 @@ enum HypervisorType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of HypervisorTypeEnumValue")
 model HypervisorTypeEnumValue {
   @doc("Gets and sets the property value.")
@@ -2638,6 +2650,7 @@ enum CapacityReservationPreference {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of CapacityReservationPreferenceEnumValue")
 model CapacityReservationPreferenceEnumValue {
   @doc("Gets and sets the property value.")
@@ -2645,6 +2658,7 @@ model CapacityReservationPreferenceEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of CpuOptions")
 model CpuOptions {
   @doc("Gets and sets the property amdSevSnp.<p>Indicates whether the instance is enabled for AMD SEV-SNP. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html'>AMD SEV-SNP</a>.</p>")
@@ -2667,6 +2681,7 @@ enum DeviceType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of DeviceTypeEnumValue")
 model DeviceTypeEnumValue {
   @doc("Gets and sets the property value.")
@@ -2674,6 +2689,7 @@ model DeviceTypeEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ElasticGpuAssociation")
 model ElasticGpuAssociation {
   @doc("Gets and sets the property elasticGpuAssociationId.<p>The ID of the association.</p>")
@@ -2699,6 +2715,7 @@ enum AmdSevSnpSpecification {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of AmdSevSnpSpecificationEnumValue")
 model AmdSevSnpSpecificationEnumValue {
   @doc("Gets and sets the property value.")
@@ -2706,6 +2723,7 @@ model AmdSevSnpSpecificationEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ElasticInferenceAcceleratorAssociation")
 model ElasticInferenceAcceleratorAssociation {
   @doc("Gets and sets the property elasticInferenceAcceleratorArn.<p> The Amazon Resource Name (ARN) of the elastic inference accelerator. </p>")
@@ -2722,6 +2740,7 @@ model ElasticInferenceAcceleratorAssociation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of EnclaveOptions")
 model EnclaveOptions {
   @doc("Gets and sets the property enabled.<p>If this parameter is set to <code>true</code>, the instance is enabled for Amazon Web Services Nitro Enclaves; otherwise, it is not enabled for Amazon Web Services Nitro Enclaves.</p>")
@@ -2729,6 +2748,7 @@ model EnclaveOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of HibernationOptions")
 model HibernationOptions {
   @doc("Gets and sets the property configured.<p>If <code>true</code>, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.</p>")
@@ -2736,6 +2756,7 @@ model HibernationOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of IamInstanceProfile")
 model IamInstanceProfile {
   @doc("Gets and sets the property arn.<p>The Amazon Resource Name (ARN) of the instance profile.</p>")
@@ -2746,6 +2767,7 @@ model IamInstanceProfile {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of LicenseConfiguration")
 model LicenseConfiguration {
   @doc("Gets and sets the property licenseConfigurationArn.<p>The Amazon Resource Name (ARN) of the license configuration.</p>")
@@ -2753,6 +2775,7 @@ model LicenseConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceMaintenanceOptions")
 model InstanceMaintenanceOptions {
   @doc("Gets and sets the property autoRecovery.<p>Provides information on the current automatic recovery behavior of your instance.</p>")
@@ -2769,6 +2792,7 @@ enum InstanceAutoRecoveryState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceAutoRecoveryStateEnumValue")
 model InstanceAutoRecoveryStateEnumValue {
   @doc("Gets and sets the property value.")
@@ -2776,6 +2800,7 @@ model InstanceAutoRecoveryStateEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceMetadataOptionsResponse")
 model InstanceMetadataOptionsResponse {
   @doc("Gets and sets the property httpEndpoint.<p>Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.</p> <p>If the value is <code>disabled</code>, you cannot access your instance metadata.</p>")
@@ -2807,6 +2832,7 @@ enum InstanceMetadataEndpointState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceMetadataEndpointStateEnumValue")
 model InstanceMetadataEndpointStateEnumValue {
   @doc("Gets and sets the property value.")
@@ -2823,6 +2849,7 @@ enum HttpTokensState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of HttpTokensStateEnumValue")
 model HttpTokensStateEnumValue {
   @doc("Gets and sets the property value.")
@@ -2839,6 +2866,7 @@ enum InstanceMetadataOptionsState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceMetadataOptionsStateEnumValue")
 model InstanceMetadataOptionsStateEnumValue {
   @doc("Gets and sets the property value.")
@@ -2846,6 +2874,7 @@ model InstanceMetadataOptionsStateEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Monitoring")
 model Monitoring {
   @doc("Gets and sets the property state.<p>Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.</p>")
@@ -2862,6 +2891,7 @@ enum InstanceMetadataProtocolState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceMetadataProtocolStateEnumValue")
 model InstanceMetadataProtocolStateEnumValue {
   @doc("Gets and sets the property value.")
@@ -2884,6 +2914,7 @@ enum MonitoringState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of MonitoringStateEnumValue")
 model MonitoringStateEnumValue {
   @doc("Gets and sets the property value.")
@@ -2891,6 +2922,7 @@ model MonitoringStateEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceNetworkInterface")
 model InstanceNetworkInterface {
   @doc("Gets and sets the property association.<p>The association information for an Elastic IPv4 associated with the network interface.</p>")
@@ -2963,6 +2995,7 @@ enum InstanceMetadataTagsState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceMetadataTagsStateEnumValue")
 model InstanceMetadataTagsStateEnumValue {
   @doc("Gets and sets the property value.")
@@ -2970,6 +3003,7 @@ model InstanceMetadataTagsStateEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Placement")
 model Placement {
   @doc("Gets and sets the property affinity.<p>The affinity setting for the instance on the Dedicated Host.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>")
@@ -3019,6 +3053,7 @@ enum NetworkInterfaceStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of NetworkInterfaceStatusEnumValue")
 model NetworkInterfaceStatusEnumValue {
   @doc("Gets and sets the property value.")
@@ -3026,6 +3061,7 @@ model NetworkInterfaceStatusEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of PrivateDnsNameOptionsResponse")
 model PrivateDnsNameOptionsResponse {
   @doc("Gets and sets the property enableResourceNameDnsAAAARecord.<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>")
@@ -3051,6 +3087,7 @@ enum Tenancy {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of TenancyEnumValue")
 model TenancyEnumValue {
   @doc("Gets and sets the property value.")
@@ -3058,6 +3095,7 @@ model TenancyEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ProductCode")
 model ProductCode {
   @doc("Gets and sets the property productCodeId.<p>The product code.</p>")
@@ -3077,6 +3115,7 @@ enum HostnameType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of HostnameTypeEnumValue")
 model HostnameTypeEnumValue {
   @doc("Gets and sets the property value.")
@@ -3084,6 +3123,7 @@ model HostnameTypeEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of GroupIdentifier")
 model GroupIdentifier {
   @doc("Gets and sets the property groupId.<p>The ID of the security group.</p>")
@@ -3103,6 +3143,7 @@ enum ProductCodeValues {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ProductCodeValuesEnumValue")
 model ProductCodeValuesEnumValue {
   @doc("Gets and sets the property value.")
@@ -3110,6 +3151,7 @@ model ProductCodeValuesEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceState")
 model InstanceState {
   @doc("Gets and sets the property code.<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>")
@@ -3141,6 +3183,7 @@ enum InstanceStateName {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceStateNameEnumValue")
 model InstanceStateNameEnumValue {
   @doc("Gets and sets the property value.")
@@ -3148,6 +3191,7 @@ model InstanceStateNameEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StateReason")
 model StateReason {
   @doc("Gets and sets the property code.<p>The reason code for the state change.</p>")
@@ -3158,6 +3202,7 @@ model StateReason {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>")
@@ -3168,6 +3213,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of EbsInstanceBlockDevice")
 model EbsInstanceBlockDevice {
   @doc("Gets and sets the property attachTime.<p>The time stamp when the attachment initiated.</p>")
@@ -3199,6 +3245,7 @@ enum AttachmentStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of AttachmentStatusEnumValue")
 model AttachmentStatusEnumValue {
   @doc("Gets and sets the property value.")
@@ -3206,6 +3253,7 @@ model AttachmentStatusEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of CapacityReservationTargetResponse")
 model CapacityReservationTargetResponse {
   @doc("Gets and sets the property capacityReservationId.<p>The ID of the targeted Capacity Reservation.</p>")
@@ -3216,6 +3264,7 @@ model CapacityReservationTargetResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceNetworkInterfaceAssociation")
 model InstanceNetworkInterfaceAssociation {
   @doc("Gets and sets the property carrierIp.<p>The carrier IP address associated with the network interface.</p>")
@@ -3235,6 +3284,7 @@ model InstanceNetworkInterfaceAssociation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceNetworkInterfaceAttachment")
 model InstanceNetworkInterfaceAttachment {
   @doc("Gets and sets the property attachTime.<p>The time stamp when the attachment initiated.</p>")
@@ -3257,6 +3307,7 @@ model InstanceNetworkInterfaceAttachment {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceIpv4Prefix")
 model InstanceIpv4Prefix {
   @doc("Gets and sets the property ipv4Prefix.<p>One or more IPv4 prefixes assigned to the network interface.</p>")
@@ -3264,6 +3315,7 @@ model InstanceIpv4Prefix {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceIpv6Address")
 model InstanceIpv6Address {
   @doc("Gets and sets the property ipv6Address.<p>The IPv6 address.</p>")
@@ -3274,6 +3326,7 @@ model InstanceIpv6Address {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceIpv6Prefix")
 model InstanceIpv6Prefix {
   @doc("Gets and sets the property ipv6Prefix.<p>One or more IPv6 prefixes assigned to the network interface.</p>")
@@ -3281,6 +3334,7 @@ model InstanceIpv6Prefix {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstancePrivateIpAddress")
 model InstancePrivateIpAddress {
   @doc("Gets and sets the property association.<p>The association information for an Elastic IP address for the network interface.</p>")

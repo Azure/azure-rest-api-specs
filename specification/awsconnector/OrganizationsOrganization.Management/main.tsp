@@ -39,6 +39,7 @@ model OrganizationsOrganization
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of OrganizationsOrganization")
 model OrganizationsOrganizationProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -48,6 +49,7 @@ model OrganizationsOrganizationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsOrganizationsOrganization")
 model AwsOrganizationsOrganizationProperties {
   @doc("Gets and sets the property arn. The Amazon Resource Name (ARN) of an organization.")
@@ -82,6 +84,7 @@ enum FeatureSet {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface OrganizationsOrganizations {
   get is ArmResourceRead<OrganizationsOrganization>;

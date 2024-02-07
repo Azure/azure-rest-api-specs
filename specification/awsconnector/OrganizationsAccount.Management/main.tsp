@@ -38,6 +38,7 @@ model OrganizationsAccount is TrackedResource<OrganizationsAccountProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of OrganizationsAccount")
 model OrganizationsAccountProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model OrganizationsAccountProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsOrganizationsAccount")
 model AwsOrganizationsAccountProperties {
   @doc("Gets and sets the property accountId. If the account was created successfully, the unique identifier (ID) of the new account.")
@@ -92,6 +94,7 @@ enum JoinedMethod {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key. The key identifier, or name, of the tag.")
@@ -114,6 +117,7 @@ enum Status {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface OrganizationsAccounts {
   get is ArmResourceRead<OrganizationsAccount>;

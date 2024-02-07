@@ -39,6 +39,7 @@ model NetworkFirewallFirewall
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of NetworkFirewallFirewall")
 model NetworkFirewallFirewallProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -48,6 +49,7 @@ model NetworkFirewallFirewallProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsNetworkFirewallFirewall")
 model AwsNetworkFirewallFirewallProperties {
   @doc("Gets and sets the property deleteProtection.")
@@ -91,6 +93,7 @@ model AwsNetworkFirewallFirewallProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of SubnetMapping")
 model SubnetMapping {
   @doc("Gets and sets the property iPAddressType. A IPAddressType")
@@ -101,6 +104,7 @@ model SubnetMapping {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -111,6 +115,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface NetworkFirewallFirewalls {
   get is ArmResourceRead<NetworkFirewallFirewall>;

@@ -38,6 +38,7 @@ model LogsLogGroup is TrackedResource<LogsLogGroupProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of LogsLogGroup")
 model LogsLogGroupProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,13 +48,14 @@ model LogsLogGroupProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsLogsLogGroup")
 model AwsLogsLogGroupProperties {
   @doc("Gets and sets the property arn. The CloudWatch log group ARN.")
   arn?: string;
 
   @doc("Gets and sets the property dataProtectionPolicy. The body of the policy document you want to use for this topic.You can only add one policy per topic.The policy must be in JSON string format.Length Constraints: Maximum length of 30720")
-  dataProtectionPolicy?: object;
+  dataProtectionPolicy?: unknown;
 
   @doc("Gets and sets the property kmsKeyId. The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.")
   kmsKeyId?: string;
@@ -82,6 +84,7 @@ enum LogGroupClass {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.")
@@ -92,6 +95,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface LogsLogGroups {
   get is ArmResourceRead<LogsLogGroup>;

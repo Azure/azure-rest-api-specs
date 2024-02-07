@@ -38,6 +38,7 @@ model Ec2RouteTable is TrackedResource<Ec2RouteTableProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Ec2RouteTable")
 model Ec2RouteTableProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model Ec2RouteTableProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsEc2RouteTable")
 model AwsEc2RouteTableProperties {
   @doc("Gets and sets the property routeTableId. The route table ID.")
@@ -61,6 +63,7 @@ model AwsEc2RouteTableProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -71,6 +74,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface Ec2RouteTables {
   get is ArmResourceRead<Ec2RouteTable>;

@@ -38,6 +38,7 @@ model LambdaFunction is TrackedResource<LambdaFunctionProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of LambdaFunction")
 model LambdaFunctionProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model LambdaFunctionProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsLambdaFunction")
 model AwsLambdaFunctionProperties {
   @doc("Gets and sets the property architectures.")
@@ -145,6 +147,7 @@ enum Architectures {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Code")
 model Code {
   @doc("Gets and sets the property imageUri. ImageUri.")
@@ -173,6 +176,7 @@ enum PackageType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of DeadLetterConfig")
 model DeadLetterConfig {
   @doc("Gets and sets the property targetArn. The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.")
@@ -180,6 +184,7 @@ model DeadLetterConfig {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Environment")
 model Environment {
   @doc("Gets and sets the property variables. Environment variable key-value pairs.")
@@ -187,6 +192,7 @@ model Environment {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of EphemeralStorage")
 model EphemeralStorage {
   @doc("Gets and sets the property size. The amount of ephemeral storage that your function has access to.")
@@ -194,6 +200,7 @@ model EphemeralStorage {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of FileSystemConfig")
 model FileSystemConfig {
   @doc("Gets and sets the property arn. The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.")
@@ -204,6 +211,7 @@ model FileSystemConfig {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ImageConfig")
 model ImageConfig {
   @doc("Gets and sets the property command. Command.")
@@ -219,6 +227,7 @@ model ImageConfig {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of LoggingConfig")
 model LoggingConfig {
   @doc("Gets and sets the property applicationLogLevel. Application log granularity level, can only be used when LogFormat is set to JSON")
@@ -268,6 +277,7 @@ enum LoggingConfigSystemLogLevel {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RuntimeManagementConfig")
 model RuntimeManagementConfig {
   @doc("Gets and sets the property runtimeVersionArn. Unique identifier for a runtime version arn")
@@ -287,6 +297,7 @@ enum LoggingConfigLogFormat {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of SnapStart")
 model SnapStart {
   @doc("Gets and sets the property applyOn. Applying SnapStart setting on function resource type.")
@@ -306,6 +317,7 @@ enum RuntimeManagementConfigUpdateRuntimeOn {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of SnapStartResponse")
 model SnapStartResponse {
   @doc("Gets and sets the property applyOn. Applying SnapStart setting on function resource type.")
@@ -334,6 +346,7 @@ enum SnapStartResponseOptimizationStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
@@ -353,6 +366,7 @@ enum SnapStartResponseApplyOn {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of TracingConfig")
 model TracingConfig {
   @doc("Gets and sets the property mode. The tracing mode.")
@@ -369,6 +383,7 @@ enum TracingConfigMode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of VpcConfig")
 model VpcConfig {
   @doc("Gets and sets the property ipv6AllowedForDualStack. A boolean indicating whether IPv6 protocols will be allowed for dual stack subnets")
@@ -384,6 +399,7 @@ model VpcConfig {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface LambdaFunctions {
   get is ArmResourceRead<LambdaFunction>;

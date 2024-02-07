@@ -38,6 +38,7 @@ model SageMakerApp is TrackedResource<SageMakerAppProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of SageMakerApp")
 model SageMakerAppProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model SageMakerAppProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsSageMakerApp")
 model AwsSageMakerAppProperties {
   @doc("Gets and sets the property appArn. The Amazon Resource Name (ARN) of the app.")
@@ -91,6 +93,7 @@ enum AppType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ResourceSpec")
 model ResourceSpec {
   @doc("Gets and sets the property instanceType. The instance type that the image version runs on.")
@@ -296,6 +299,7 @@ enum ResourceSpecInstanceType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -306,6 +310,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface SageMakerApps {
   get is ArmResourceRead<SageMakerApp>;

@@ -38,6 +38,7 @@ model LogsLogStream is TrackedResource<LogsLogStreamProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of LogsLogStream")
 model LogsLogStreamProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model LogsLogStreamProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsLogsLogStream")
 model AwsLogsLogStreamProperties {
   @doc("Gets and sets the property logGroupName. The name of the log group where the log stream is created.")
@@ -57,6 +59,7 @@ model AwsLogsLogStreamProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface LogsLogStreams {
   get is ArmResourceRead<LogsLogStream>;

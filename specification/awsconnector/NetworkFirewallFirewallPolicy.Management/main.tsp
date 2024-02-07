@@ -39,6 +39,7 @@ model NetworkFirewallFirewallPolicy
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of NetworkFirewallFirewallPolicy")
 model NetworkFirewallFirewallPolicyProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -48,6 +49,7 @@ model NetworkFirewallFirewallPolicyProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsNetworkFirewallFirewallPolicy")
 model AwsNetworkFirewallFirewallPolicyProperties {
   @doc("Gets and sets the property description.")
@@ -71,6 +73,7 @@ model AwsNetworkFirewallFirewallPolicyProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of FirewallPolicy")
 model FirewallPolicy {
   @doc("Gets and sets the property policyVariables.")
@@ -108,6 +111,7 @@ model FirewallPolicy {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -118,6 +122,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RuleVariables")
 model RuleVariablesModel {
   @doc("Gets and sets the property ruleVariables.")
@@ -125,6 +130,7 @@ model RuleVariablesModel {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StatefulEngineOptions")
 model StatefulEngineOptions {
   @doc("Gets and sets the property ruleOrder.")
@@ -135,6 +141,7 @@ model StatefulEngineOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StatefulRuleGroupReference")
 model StatefulRuleGroupReference {
   @doc("Gets and sets the property override.")
@@ -148,6 +155,7 @@ model StatefulRuleGroupReference {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of CustomAction")
 model CustomAction {
   @doc("Gets and sets the property actionDefinition.")
@@ -158,6 +166,7 @@ model CustomAction {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StatelessRuleGroupReference")
 model StatelessRuleGroupReference {
   @doc("Gets and sets the property priority.")
@@ -168,6 +177,7 @@ model StatelessRuleGroupReference {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of IPSet")
 model IPSet {
   @doc("Gets and sets the property definition.")
@@ -176,6 +186,7 @@ model IPSet {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StatefulRuleGroupOverride")
 model StatefulRuleGroupOverride {
   @doc("Gets and sets the property action.")
@@ -183,6 +194,7 @@ model StatefulRuleGroupOverride {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ActionDefinition")
 model ActionDefinition {
   @doc("Gets and sets the property publishMetricAction.")
@@ -190,6 +202,7 @@ model ActionDefinition {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
   @doc("Gets and sets the property dimensions.")
@@ -198,6 +211,7 @@ model PublishMetricAction {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Dimension")
 model Dimension {
   @doc("Gets and sets the property value.")
@@ -205,6 +219,7 @@ model Dimension {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface NetworkFirewallFirewallPolicies {
   get is ArmResourceRead<NetworkFirewallFirewallPolicy>;

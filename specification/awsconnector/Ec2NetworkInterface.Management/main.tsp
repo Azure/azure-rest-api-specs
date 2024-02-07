@@ -38,6 +38,7 @@ model Ec2NetworkInterface is TrackedResource<Ec2NetworkInterfaceProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Ec2NetworkInterface")
 model Ec2NetworkInterfaceProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model Ec2NetworkInterfaceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsEc2NetworkInterface")
 model AwsEc2NetworkInterfaceProperties {
   @doc("Gets and sets the property connectionTrackingSpecification.")
@@ -121,6 +123,7 @@ model AwsEc2NetworkInterfaceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ConnectionTrackingSpecification")
 model ConnectionTrackingSpecification {
   @doc("Gets and sets the property tcpEstablishedTimeout.")
@@ -134,6 +137,7 @@ model ConnectionTrackingSpecification {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Ipv4PrefixSpecification")
 model Ipv4PrefixSpecification {
   @doc("Gets and sets the property ipv4Prefix.")
@@ -141,6 +145,7 @@ model Ipv4PrefixSpecification {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceIpv6Address")
 model InstanceIpv6Address {
   @doc("Gets and sets the property ipv6Address.")
@@ -148,6 +153,7 @@ model InstanceIpv6Address {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Ipv6PrefixSpecification")
 model Ipv6PrefixSpecification {
   @doc("Gets and sets the property ipv6Prefix.")
@@ -155,6 +161,7 @@ model Ipv6PrefixSpecification {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of PrivateIpAddressSpecification")
 model PrivateIpAddressSpecification {
   @doc("Gets and sets the property primary.")
@@ -165,6 +172,7 @@ model PrivateIpAddressSpecification {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -175,6 +183,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface Ec2NetworkInterfaces {
   get is ArmResourceRead<Ec2NetworkInterface>;

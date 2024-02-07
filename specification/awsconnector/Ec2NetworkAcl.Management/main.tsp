@@ -38,6 +38,7 @@ model Ec2NetworkAcl is TrackedResource<Ec2NetworkAclProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Ec2NetworkAcl")
 model Ec2NetworkAclProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model Ec2NetworkAclProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsEc2NetworkAcl")
 model AwsEc2NetworkAclProperties {
   @doc("Gets and sets the property id.")
@@ -61,6 +63,7 @@ model AwsEc2NetworkAclProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -71,6 +74,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface Ec2NetworkAcls {
   get is ArmResourceRead<Ec2NetworkAcl>;

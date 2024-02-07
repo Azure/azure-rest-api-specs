@@ -39,6 +39,7 @@ model EksCluster is ExtensionResource<EksClusterProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of EksCluster")
 model EksClusterProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -48,6 +49,7 @@ model EksClusterProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsEksCluster")
 model AwsEksClusterProperties {
   @doc("Gets and sets the property accessConfig. An object representing the Access Config to use for the cluster.")
@@ -105,6 +107,7 @@ model AwsEksClusterProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of AccessConfig")
 model AccessConfig {
   @doc("Gets and sets the property authenticationMode. Specify the authentication mode that should be used to create your cluster.")
@@ -127,6 +130,7 @@ enum AccessConfigAuthenticationMode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of EncryptionConfig")
 model EncryptionConfig {
   @doc("Gets and sets the property provider. The encryption provider for the cluster.")
@@ -138,6 +142,7 @@ model EncryptionConfig {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of KubernetesNetworkConfig")
 model KubernetesNetworkConfig {
   @doc("Gets and sets the property ipFamily. Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on")
@@ -160,6 +165,7 @@ enum KubernetesNetworkConfigIpFamily {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Logging")
 model Logging {
   @doc("Gets and sets the property clusterLogging. The cluster control plane logging configuration for your cluster.  The cluster control plane logging configuration for your cluster. ")
@@ -167,6 +173,7 @@ model Logging {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of OutpostConfig")
 model OutpostConfig {
   @doc("Gets and sets the property controlPlaneInstanceType. Specify the Instance type of the machines that should be used to create your cluster.")
@@ -181,6 +188,7 @@ model OutpostConfig {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ResourcesVpcConfig")
 model ResourcesVpcConfig {
   @doc("Gets and sets the property endpointPrivateAccess. Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods.")
@@ -203,6 +211,7 @@ model ResourcesVpcConfig {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
@@ -213,6 +222,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Provider")
 model Provider {
   @doc("Gets and sets the property keyArn. Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.")
@@ -220,6 +230,7 @@ model Provider {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ClusterLogging")
 model ClusterLogging {
   @doc("Gets and sets the property enabledTypes. Enable control plane logs for your cluster, all log types will be disabled if the array is empty")
@@ -228,6 +239,7 @@ model ClusterLogging {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ControlPlanePlacement")
 model ControlPlanePlacement {
   @doc("Gets and sets the property groupName. Specify the placement group name of the control place machines for your cluster.")
@@ -235,6 +247,7 @@ model ControlPlanePlacement {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of LoggingTypeConfig")
 model LoggingTypeConfig {
   @doc("Gets and sets the property type. name of the log type")

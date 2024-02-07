@@ -38,6 +38,7 @@ model RdsDBInstance is TrackedResource<RdsDBInstanceProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RdsDBInstance")
 model RdsDBInstanceProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model RdsDBInstanceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsRdsDBInstance")
 model AwsRdsDBInstanceProperties {
   @doc("Gets and sets the property allocatedStorage. The amount of storage (in gigabytes) to be initially allocated for the database instance.")
@@ -295,6 +297,7 @@ model AwsRdsDBInstanceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of DBInstanceRole")
 model DBInstanceRole {
   @doc("Gets and sets the property featureName. The name of the feature associated with the AWS Identity and Access Management (IAM) role. IAM roles that are associated with a DB instance grant permission for the DB instance to access other AWS services on your behalf.")
@@ -305,6 +308,7 @@ model DBInstanceRole {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of CertificateDetails")
 model CertificateDetails {
   @doc("Gets and sets the property cAIdentifier. The CA identifier of the CA certificate used for the DB instance's server certificate.")
@@ -315,6 +319,7 @@ model CertificateDetails {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Endpoint")
 model Endpoint {
   @doc("Gets and sets the property address. Specifies the DNS address of the DB instance.")
@@ -328,6 +333,7 @@ model Endpoint {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of MasterUserSecret")
 model MasterUserSecret {
   @doc("Gets and sets the property kmsKeyId. The AWS KMS key identifier that is used to encrypt the secret.")
@@ -338,6 +344,7 @@ model MasterUserSecret {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ProcessorFeature")
 model ProcessorFeature {
   @doc("Gets and sets the property name. The name of the processor feature. Valid names are coreCount and threadsPerCore.")
@@ -357,6 +364,7 @@ enum ProcessorFeatureName {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ")
@@ -367,6 +375,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface RdsDBInstances {
   get is ArmResourceRead<RdsDBInstance>;

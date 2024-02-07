@@ -39,6 +39,7 @@ model LicenseManagerLicense
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of LicenseManagerLicense")
 model LicenseManagerLicenseProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -48,6 +49,7 @@ model LicenseManagerLicenseProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsLicenseManagerLicense")
 model AwsLicenseManagerLicenseProperties {
   @doc("Gets and sets the property beneficiary. Beneficiary of the license.")
@@ -93,6 +95,7 @@ model AwsLicenseManagerLicenseProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ConsumptionConfiguration")
 model ConsumptionConfiguration {
   @doc("Gets and sets the property borrowConfiguration.")
@@ -106,6 +109,7 @@ model ConsumptionConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Entitlement")
 model Entitlement {
   @doc("Gets and sets the property allowCheckIn.")
@@ -128,6 +132,7 @@ model Entitlement {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of IssuerData")
 model IssuerData {
   @doc("Gets and sets the property name.")
@@ -138,6 +143,7 @@ model IssuerData {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Metadata")
 model Metadata {
   @doc("Gets and sets the property name.")
@@ -148,6 +154,7 @@ model Metadata {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ValidityDateFormat")
 model ValidityDateFormat {
   @doc("Gets and sets the property begin. Validity begin date for the license.")
@@ -158,6 +165,7 @@ model ValidityDateFormat {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of BorrowConfiguration")
 model BorrowConfiguration {
   @doc("Gets and sets the property allowEarlyCheckIn.")
@@ -168,6 +176,7 @@ model BorrowConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ProvisionalConfiguration")
 model ProvisionalConfiguration {
   @doc("Gets and sets the property maxTimeToLiveInMinutes.")
@@ -175,6 +184,7 @@ model ProvisionalConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface LicenseManagerLicenses {
   get is ArmResourceRead<LicenseManagerLicense>;

@@ -38,6 +38,7 @@ model Ec2KeyPair is TrackedResource<Ec2KeyPairProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Ec2KeyPair")
 model Ec2KeyPairProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model Ec2KeyPairProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsEc2KeyPair")
 model AwsEc2KeyPairProperties {
   @doc("Gets and sets the property keyFingerprint. A short sequence of bytes used for public key verification")
@@ -82,6 +84,7 @@ enum KeyFormat {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
@@ -101,6 +104,7 @@ enum KeyType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface Ec2KeyPairs {
   get is ArmResourceRead<Ec2KeyPair>;

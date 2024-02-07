@@ -38,6 +38,7 @@ model RdsDBCluster is TrackedResource<RdsDBClusterProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RdsDBCluster")
 model RdsDBClusterProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model RdsDBClusterProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsRdsDBCluster")
 model AwsRdsDBClusterProperties {
   @doc("Gets and sets the property allocatedStorage. The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster.")
@@ -230,6 +232,7 @@ model AwsRdsDBClusterProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of DBClusterRole")
 model DBClusterRole {
   @doc("Gets and sets the property featureName. The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon RDS API Reference.")
@@ -240,6 +243,7 @@ model DBClusterRole {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Endpoint")
 model Endpoint {
   @doc("Gets and sets the property address. The connection endpoint for the DB cluster.")
@@ -250,6 +254,7 @@ model Endpoint {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of MasterUserSecret")
 model MasterUserSecret {
   @doc("Gets and sets the property kmsKeyId. The AWS KMS key identifier that is used to encrypt the secret.")
@@ -260,6 +265,7 @@ model MasterUserSecret {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReadEndpoint")
 model ReadEndpoint {
   @doc("Gets and sets the property address. The reader endpoint for the DB cluster.")
@@ -267,6 +273,7 @@ model ReadEndpoint {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ScalingConfiguration")
 model ScalingConfiguration {
   @doc("Gets and sets the property autoPause. A value that indicates whether to allow or disallow automatic pause for an Aurora DB cluster in serverless DB engine mode. A DB cluster can be paused only when it's idle (it has no connections).")
@@ -289,6 +296,7 @@ model ScalingConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ServerlessV2ScalingConfiguration")
 model ServerlessV2ScalingConfiguration {
   @doc("Gets and sets the property maxCapacity. The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.")
@@ -299,6 +307,7 @@ model ServerlessV2ScalingConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ")
@@ -309,6 +318,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface RdsDBClusters {
   get is ArmResourceRead<RdsDBCluster>;

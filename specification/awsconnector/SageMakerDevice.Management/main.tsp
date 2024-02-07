@@ -38,6 +38,7 @@ model SageMakerDevice is TrackedResource<SageMakerDeviceProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of SageMakerDevice")
 model SageMakerDeviceProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model SageMakerDeviceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsSageMakerDevice")
 model AwsSageMakerDeviceProperties {
   @doc("Gets and sets the property device. The Edge Device you want to register against a device fleet Edge device you want to create")
@@ -61,6 +63,7 @@ model AwsSageMakerDeviceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Device")
 model Device {
   @doc("Gets and sets the property description. Description of the device")
@@ -74,6 +77,7 @@ model Device {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ")
@@ -84,6 +88,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface SageMakerDevices {
   get is ArmResourceRead<SageMakerDevice>;

@@ -38,6 +38,7 @@ model S3Bucket is TrackedResource<S3BucketProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of S3Bucket")
 model S3BucketProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model S3BucketProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsS3Bucket")
 model AwsS3BucketProperties {
   @doc("Gets and sets the property accelerateConfiguration. Configuration for the transfer acceleration state.")
@@ -158,6 +160,7 @@ enum AccessControl {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of AccelerateConfiguration")
 model AccelerateConfiguration {
   @doc("Gets and sets the property accelerationStatus. Configures the transfer acceleration state for an Amazon S3 bucket.")
@@ -174,6 +177,7 @@ enum AccelerateConfigurationAccelerationStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of AnalyticsConfiguration")
 model AnalyticsConfiguration {
   @doc("Gets and sets the property id. The ID that identifies the analytics configuration.")
@@ -191,6 +195,7 @@ model AnalyticsConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of BucketEncryption")
 model BucketEncryption {
   @doc("Gets and sets the property serverSideEncryptionConfiguration. Specifies the default server-side-encryption configuration.")
@@ -199,6 +204,7 @@ model BucketEncryption {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of CorsConfiguration")
 model CorsConfiguration {
   @doc("Gets and sets the property corsRules.")
@@ -207,6 +213,7 @@ model CorsConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of IntelligentTieringConfiguration")
 model IntelligentTieringConfiguration {
   @doc("Gets and sets the property id. The ID used to identify the S3 Intelligent-Tiering configuration.")
@@ -237,6 +244,7 @@ enum IntelligentTieringConfigurationStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InventoryConfiguration")
 model InventoryConfiguration {
   @doc("Gets and sets the property destination. Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).")
@@ -281,6 +289,7 @@ enum InventoryConfigurationScheduleFrequency {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of LifecycleConfiguration")
 model LifecycleConfiguration {
   @doc("Gets and sets the property rules. A lifecycle rule for individual objects in an Amazon S3 bucket.")
@@ -337,6 +346,7 @@ enum InventoryConfigurationOptionalFields {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of LoggingConfiguration")
 model LoggingConfiguration {
   @doc("Gets and sets the property destinationBucketName. The name of an Amazon S3 bucket where Amazon S3 store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the LoggingConfiguration property is defined.")
@@ -350,6 +360,7 @@ model LoggingConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of MetricsConfiguration")
 model MetricsConfiguration {
   @doc("Gets and sets the property accessPointArn.")
@@ -367,6 +378,7 @@ model MetricsConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of NotificationConfiguration")
 model NotificationConfiguration {
   @doc("Gets and sets the property eventBridgeConfiguration. Describes the Amazon EventBridge notification configuration for an Amazon S3 bucket.")
@@ -386,6 +398,7 @@ model NotificationConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ObjectLockConfiguration")
 model ObjectLockConfiguration {
   @doc("Gets and sets the property objectLockEnabled.")
@@ -396,6 +409,7 @@ model ObjectLockConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of OwnershipControls")
 model OwnershipControls {
   @doc("Gets and sets the property rules.")
@@ -404,6 +418,7 @@ model OwnershipControls {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of PublicAccessBlockConfiguration")
 model PublicAccessBlockConfiguration {
   @doc("Gets and sets the property blockPublicAcls. Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior:- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public. - PUT Object calls fail if the request includes a public ACL.Enabling this setting doesn't affect existing policies or ACLs.")
@@ -420,6 +435,7 @@ model PublicAccessBlockConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReplicationConfiguration")
 model ReplicationConfiguration {
   @doc("Gets and sets the property role. The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects.")
@@ -431,6 +447,7 @@ model ReplicationConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -441,6 +458,7 @@ model Tag {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of VersioningConfiguration")
 model VersioningConfiguration {
   @doc("Gets and sets the property status. The versioning state of the bucket.")
@@ -457,6 +475,7 @@ enum VersioningConfigurationStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of WebsiteConfiguration")
 model WebsiteConfiguration {
   @doc("Gets and sets the property errorDocument. The name of the error document for the website.")
@@ -474,6 +493,7 @@ model WebsiteConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StorageClassAnalysis")
 model StorageClassAnalysis {
   @doc("Gets and sets the property dataExport. Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.")
@@ -481,6 +501,7 @@ model StorageClassAnalysis {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of TagFilter")
 model TagFilter {
   @doc("Gets and sets the property key.")
@@ -491,6 +512,7 @@ model TagFilter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ServerSideEncryptionRule")
 model ServerSideEncryptionRule {
   @doc("Gets and sets the property bucketKeyEnabled. Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.")
@@ -501,6 +523,7 @@ model ServerSideEncryptionRule {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of CorsRule")
 model CorsRule {
   @doc("Gets and sets the property allowedHeaders. Headers that are specified in the Access-Control-Request-Headers header.")
@@ -545,6 +568,7 @@ enum CorsRuleAllowedMethods {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Tiering")
 model Tiering {
   @doc("Gets and sets the property accessTier. S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.")
@@ -564,6 +588,7 @@ enum TieringAccessTier {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Destination")
 model Destination {
   @doc("Gets and sets the property bucketAccountId. The account ID that owns the destination S3 bucket. ")
@@ -592,6 +617,7 @@ enum DestinationFormat {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Rule")
 model Rule {
   @doc("Gets and sets the property abortIncompleteMultipartUpload. Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.")
@@ -656,16 +682,18 @@ enum RuleStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of TargetObjectKeyFormat")
 model TargetObjectKeyFormat {
   @doc("Gets and sets the property simplePrefix. This format defaults the prefix to the given log file prefix for delivering server access log file.")
-  simplePrefix?: object;
+  simplePrefix?: unknown;
 
   @doc("Gets and sets the property partitionedPrefix. This format appends a time based prefix to the given log file prefix for delivering server access log file.")
   partitionedPrefix?: PartitionedPrefix;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of EventBridgeConfiguration")
 model EventBridgeConfiguration {
   @doc("Gets and sets the property eventBridgeEnabled. Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.")
@@ -673,6 +701,7 @@ model EventBridgeConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of LambdaConfiguration")
 model LambdaConfiguration {
   @doc("Gets and sets the property event. The Amazon S3 bucket event for which to invoke the AWS Lambda function.")
@@ -686,6 +715,7 @@ model LambdaConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of QueueConfiguration")
 model QueueConfiguration {
   @doc("Gets and sets the property event. The Amazon S3 bucket event about which you want to publish messages to Amazon SQS.")
@@ -699,6 +729,7 @@ model QueueConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of TopicConfiguration")
 model TopicConfiguration {
   @doc("Gets and sets the property event. The Amazon S3 bucket event about which to send notifications.")
@@ -712,6 +743,7 @@ model TopicConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ObjectLockRule")
 model ObjectLockRule {
   @doc("Gets and sets the property defaultRetention. The default retention period that you want to apply to new objects placed in the specified bucket.")
@@ -719,6 +751,7 @@ model ObjectLockRule {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of OwnershipControlsRule")
 model OwnershipControlsRule {
   @doc("Gets and sets the property objectOwnership. Specifies an object ownership rule.")
@@ -738,6 +771,7 @@ enum OwnershipControlsRuleObjectOwnership {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReplicationRule")
 model ReplicationRule {
   @doc("Gets and sets the property deleteMarkerReplication.")
@@ -775,6 +809,7 @@ enum ReplicationRuleStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RedirectAllRequestsTo")
 model RedirectAllRequestsTo {
   @doc("Gets and sets the property hostName. Name of the host where requests are redirected.")
@@ -794,6 +829,7 @@ enum RedirectAllRequestsToProtocol {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RoutingRule")
 model RoutingRule {
   @doc("Gets and sets the property redirectRule. Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return. Specifies how requests are redirected. In the event of an error, you can specify a different error code to return.")
@@ -804,6 +840,7 @@ model RoutingRule {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of DataExport")
 model DataExport {
   @doc("Gets and sets the property destination. Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).")
@@ -814,6 +851,7 @@ model DataExport {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ServerSideEncryptionByDefault")
 model ServerSideEncryptionByDefault {
   @doc("Gets and sets the property kMSMasterKeyID. 'KMSMasterKeyID' can only be used when you set the value of SSEAlgorithm as aws:kms or aws:kms:dsse.")
@@ -836,6 +874,7 @@ enum ServerSideEncryptionByDefaultSSEAlgorithm {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of AbortIncompleteMultipartUpload")
 model AbortIncompleteMultipartUpload {
   @doc("Gets and sets the property daysAfterInitiation. Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.")
@@ -843,6 +882,7 @@ model AbortIncompleteMultipartUpload {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of NoncurrentVersionExpiration")
 model NoncurrentVersionExpiration {
   @doc("Gets and sets the property newerNoncurrentVersions. Specified the number of newer noncurrent and current versions that must exists before performing the associated action")
@@ -853,6 +893,7 @@ model NoncurrentVersionExpiration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of NoncurrentVersionTransition")
 model NoncurrentVersionTransition {
   @doc("Gets and sets the property newerNoncurrentVersions. Specified the number of newer noncurrent and current versions that must exists before performing the associated action")
@@ -887,6 +928,7 @@ enum NoncurrentVersionTransitionStorageClass {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Transition")
 model Transition {
   @doc("Gets and sets the property storageClass.")
@@ -921,6 +963,7 @@ enum TransitionStorageClass {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of PartitionedPrefix")
 model PartitionedPrefix {
   @doc("Gets and sets the property partitionDateSource. Date Source for creating a partitioned prefix. This can be event time or delivery time.")
@@ -937,6 +980,7 @@ enum PartitionedPrefixPartitionDateSource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of NotificationFilter")
 model NotificationFilter {
   @doc("Gets and sets the property s3Key. A container for object key name prefix and suffix filtering rules.")
@@ -944,6 +988,7 @@ model NotificationFilter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of DefaultRetention")
 model DefaultRetention {
   @doc("Gets and sets the property days.")
@@ -966,6 +1011,7 @@ enum DefaultRetentionMode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of DeleteMarkerReplication")
 model DeleteMarkerReplication {
   @doc("Gets and sets the property status.")
@@ -982,6 +1028,7 @@ enum DeleteMarkerReplicationStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReplicationDestination")
 model ReplicationDestination {
   @doc("Gets and sets the property accessControlTranslation. Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object.")
@@ -1034,6 +1081,7 @@ enum ReplicationDestinationStorageClass {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReplicationRuleFilter")
 model ReplicationRuleFilter {
   @doc("Gets and sets the property and.")
@@ -1047,6 +1095,7 @@ model ReplicationRuleFilter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of SourceSelectionCriteria")
 model SourceSelectionCriteria {
   @doc("Gets and sets the property replicaModifications. A filter that you can specify for selection for modifications on replicas.")
@@ -1057,6 +1106,7 @@ model SourceSelectionCriteria {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RedirectRule")
 model RedirectRule {
   @doc("Gets and sets the property hostName. The host name to use in the redirect request.")
@@ -1085,6 +1135,7 @@ enum RedirectRuleProtocol {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RoutingRuleCondition")
 model RoutingRuleCondition {
   @doc("Gets and sets the property httpErrorCodeReturnedEquals. The HTTP error code when the redirect is applied. ")
@@ -1095,6 +1146,7 @@ model RoutingRuleCondition {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of S3KeyFilter")
 model S3KeyFilter {
   @doc("Gets and sets the property rules.")
@@ -1103,6 +1155,7 @@ model S3KeyFilter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of AccessControlTranslation")
 model AccessControlTranslation {
   @doc("Gets and sets the property owner.")
@@ -1110,6 +1163,7 @@ model AccessControlTranslation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of EncryptionConfiguration")
 model EncryptionConfiguration {
   @doc("Gets and sets the property replicaKmsKeyID. Specifies the ID (Key ARN or Alias ARN) of the customer managed customer master key (CMK) stored in AWS Key Management Service (KMS) for the destination bucket.")
@@ -1117,6 +1171,7 @@ model EncryptionConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Metrics")
 model Metrics {
   @doc("Gets and sets the property eventThreshold.")
@@ -1136,6 +1191,7 @@ enum MetricsStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReplicationTime")
 model ReplicationTime {
   @doc("Gets and sets the property status.")
@@ -1155,6 +1211,7 @@ enum ReplicationTimeStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReplicationRuleAndOperator")
 model ReplicationRuleAndOperator {
   @doc("Gets and sets the property prefix.")
@@ -1166,6 +1223,7 @@ model ReplicationRuleAndOperator {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReplicaModifications")
 model ReplicaModifications {
   @doc("Gets and sets the property status. Specifies whether Amazon S3 replicates modifications on replicas.")
@@ -1182,6 +1240,7 @@ enum ReplicaModificationsStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of SseKmsEncryptedObjects")
 model SseKmsEncryptedObjects {
   @doc("Gets and sets the property status. Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service.")
@@ -1198,6 +1257,7 @@ enum SseKmsEncryptedObjectsStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of FilterRule")
 model FilterRule {
   @doc("Gets and sets the property name.")
@@ -1208,6 +1268,7 @@ model FilterRule {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReplicationTimeValue")
 model ReplicationTimeValue {
   @doc("Gets and sets the property minutes.")
@@ -1215,6 +1276,7 @@ model ReplicationTimeValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface S3Buckets {
   get is ArmResourceRead<S3Bucket>;

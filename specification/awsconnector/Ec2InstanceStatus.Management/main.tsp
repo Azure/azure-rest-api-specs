@@ -38,6 +38,7 @@ model Ec2InstanceStatus is TrackedResource<Ec2InstanceStatusProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of Ec2InstanceStatus")
 model Ec2InstanceStatusProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model Ec2InstanceStatusProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsEc2InstanceStatus")
 model AwsEc2InstanceStatusProperties {
   @doc("Gets and sets the property availabilityZone.<p>The Availability Zone of the instance.</p>")
@@ -73,6 +75,7 @@ model AwsEc2InstanceStatusProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceStatusEvent")
 model InstanceStatusEvent {
   @doc("Gets and sets the property code.<p>The event code.</p>")
@@ -113,6 +116,7 @@ enum EventCode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of EventCodeEnumValue")
 model EventCodeEnumValue {
   @doc("Gets and sets the property value.")
@@ -120,6 +124,7 @@ model EventCodeEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceState")
 model InstanceState {
   @doc("Gets and sets the property code.<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>")
@@ -151,6 +156,7 @@ enum InstanceStateName {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceStateNameEnumValue")
 model InstanceStateNameEnumValue {
   @doc("Gets and sets the property value.")
@@ -158,6 +164,7 @@ model InstanceStateNameEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceStatusSummary")
 model InstanceStatusSummary {
   @doc("Gets and sets the property details.<p>The system instance health or application instance health.</p>")
@@ -187,6 +194,7 @@ enum SummaryStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of SummaryStatusEnumValue")
 model SummaryStatusEnumValue {
   @doc("Gets and sets the property value.")
@@ -194,6 +202,7 @@ model SummaryStatusEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of InstanceStatusDetails")
 model InstanceStatusDetails {
   @doc("Gets and sets the property impairedSince.<p>The time when a status check failed. For an instance that was launched and impaired, this is the time when the instance was launched.</p>")
@@ -213,6 +222,7 @@ enum StatusName {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StatusNameEnumValue")
 model StatusNameEnumValue {
   @doc("Gets and sets the property value.")
@@ -235,6 +245,7 @@ enum StatusType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of StatusTypeEnumValue")
 model StatusTypeEnumValue {
   @doc("Gets and sets the property value.")
@@ -242,6 +253,7 @@ model StatusTypeEnumValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface Ec2InstanceStatuses {
   get is ArmResourceRead<Ec2InstanceStatus>;

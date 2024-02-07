@@ -38,6 +38,7 @@ model S3AccessPoint is TrackedResource<S3AccessPointProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of S3AccessPoint")
 model S3AccessPointProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -47,6 +48,7 @@ model S3AccessPointProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of awsS3AccessPoint")
 model AwsS3AccessPointProperties {
   @doc("Gets and sets the property `alias`. The alias of this Access Point. This alias can be used for compatibility purposes with other AWS services and third-party applications.")
@@ -68,7 +70,7 @@ model AwsS3AccessPointProperties {
   networkOrigin?: NetworkOrigin;
 
   @doc("Gets and sets the property policy. The Access Point Policy you want to apply to this access point.")
-  policy?: object;
+  policy?: unknown;
 
   @doc("Gets and sets the property publicAccessBlockConfiguration. The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.")
   publicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
@@ -87,6 +89,7 @@ enum NetworkOrigin {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of PublicAccessBlockConfiguration")
 model PublicAccessBlockConfiguration {
   @doc("Gets and sets the property blockPublicAcls. Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public. - PUT Object calls fail if the request includes a public ACL.. - PUT Bucket calls fail if the request includes a public ACL.Enabling this setting doesn't affect existing policies or ACLs.")
@@ -103,6 +106,7 @@ model PublicAccessBlockConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of VpcConfiguration")
 model VpcConfiguration {
   @doc("Gets and sets the property vpcId. If this field is specified, this access point will only allow connections from the specified VPC ID.")
@@ -110,6 +114,7 @@ model VpcConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface S3AccessPoints {
   get is ArmResourceRead<S3AccessPoint>;
