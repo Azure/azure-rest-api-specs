@@ -96,6 +96,8 @@ directive:
     reason: Property is CamelCase in aws
   - suppress: AvoidAdditionalProperties
     reason: Property represents user defined awsTags
+  - suppress: PatchPropertiesCorrespondToPutProperties
+    reason: Issue in LintDiff tool
 ```
 
 ---
