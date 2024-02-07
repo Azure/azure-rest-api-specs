@@ -30,12 +30,12 @@ openapi-subtype: rpaas
 tag: package-2024-02-15
 ```
 
+
 ### Tag: package-2023-06-15
 
 These settings apply only when `--tag=package-2023-06-15` is specified on the command line.
 
 ```yaml $(tag) == 'package-2023-06-15'
-input-file:
 input-file:
   - Microsoft.ManagedNetworkFabric/stable/2023-06-15/AccessControlLists.json
   - Microsoft.ManagedNetworkFabric/stable/2023-06-15/InternetGateways.json
