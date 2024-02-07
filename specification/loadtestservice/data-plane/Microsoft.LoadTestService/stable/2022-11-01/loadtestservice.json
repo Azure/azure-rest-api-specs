@@ -2230,30 +2230,6 @@
         }
       }
     },
-    "PFAction": {
-      "type": "string",
-      "description": "Action to take on failure of pass/fail criteria.",
-      "enum": [
-        "continue",
-        "stop"
-      ],
-      "x-ms-enum": {
-        "name": "PFAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "continue",
-            "value": "continue",
-            "description": "Test will continue to run even if pass fail metric criteria metric gets failed."
-          },
-          {
-            "name": "stop",
-            "value": "stop",
-            "description": "Test run will stop if pass fail criteria metric is not passed."
-          }
-        ]
-      }
-    },
     "PFAgFunc": {
       "type": "string",
       "description": "Aggregation functions for pass/fail criteria.",
@@ -2527,9 +2503,29 @@
           "description": "The value to compare with the client metric. Allowed values - ‘error : [0.0 ,\n100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms."
         },
         "action": {
-          "$ref": "#/definitions/PFAction",
+          "type": "string",
           "description": "Action taken after the threshold is met. Default is ‘continue’.",
-          "default": "continue"
+          "default": "continue",
+          "enum": [
+            "continue",
+            "stop"
+          ],
+          "x-ms-enum": {
+            "name": "PFAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "continue",
+                "value": "continue",
+                "description": "Test will continue to run even if pass fail metric criteria metric gets failed."
+              },
+              {
+                "name": "stop",
+                "value": "stop",
+                "description": "Test run will stop if pass fail criteria metric is not passed."
+              }
+            ]
+          }
         },
         "actualValue": {
           "type": "number",
