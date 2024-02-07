@@ -691,12 +691,30 @@
           "type": "boolean",
           "default": true,
           "description": "Determines whether BGP route propagation is enabled. Defaults to true."
+        },
+        "localRouteSetting": {
+          "$ref": "#/definitions/RoutingRuleCollectionLocalRouteSetting",
+          "description": "Indicates local route setting for this particular rule collection."
         }
       },
       "required": [
-        "appliesTo"
+        "appliesTo",
+        "localRouteSetting"
       ],
       "description": "Defines the routing rule collection properties."
+    },
+    "RoutingRuleCollectionLocalRouteSetting": {
+      "type": "string",
+      "description": "Routing rule collection local route setting.",
+      "enum": [
+        "NotSpecified",
+        "DirectRoutingWithinVNet",
+        "DirectRoutingWithinSubnet"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingRuleCollectionLocalRouteSetting",
+        "modelAsString": true
+      }
     },
     "NetworkManagerRoutingGroupItem": {
       "type": "object",
@@ -775,10 +793,6 @@
           "$ref": "#/definitions/RoutingRuleNextHop",
           "required": true,
           "description": "Indicates the next hop for this particular rule."
-        },
-        "nextHopSetting": {
-          "$ref": "#/definitions/RoutingRuleNextHopSetting",
-          "description": "Indicates next hop setting for this particular rule."
         }
       },
       "description": "Routing routing rule resource."
@@ -842,19 +856,6 @@
       ],
       "x-ms-enum": {
         "name": "RoutingRuleDestinationType",
-        "modelAsString": true
-      }
-    },
-    "RoutingRuleNextHopSetting": {
-      "type": "string",
-      "description": "Routing rule next hop setting.",
-      "enum": [
-        "SkipSameVnet",
-        "SkipSameSubnet",
-        "Always"
-      ],
-      "x-ms-enum": {
-        "name": "RoutingRuleNextHopSetting",
         "modelAsString": true
       }
     },
