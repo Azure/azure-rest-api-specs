@@ -96,7 +96,11 @@ directive:
   - suppress: AvoidAdditionalProperties
     reason: Property represents user defined awsTags
   - suppress: PatchPropertiesCorrespondToPutProperties
-    reason: Issue in LintDiff tool
+    reason: Issue in LintDiff tool. In patch we allow tags update only and in our TypeSpec we use ArmCustomPatchAsync{Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>}. So, tags property in patch body is not present in the corresponding put body and causing the issue. In case of the put we are using TrackedResource and same has tags.
+  - suppress: EvenSegmentedPathForPutOperation
+    reason: Issue in LintDiff tool. In TypeSpec we use @singleton (OpenAPI path ends with /default), we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
+  - suppress: XmsPageableForListCalls
+    reason: Issue in LintDiff tool. In TypeSpec we use @singleton (OpenAPI path ends with /default), we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
 ```
 
 ---
