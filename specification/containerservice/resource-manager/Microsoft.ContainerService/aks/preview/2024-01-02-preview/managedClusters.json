@@ -3973,6 +3973,9 @@
           "title": "The ID of the subnet which pods will join when launched.",
           "description": "If omitted, pod IPs are statically assigned on the node subnet (see vnetSubnetID for more details). This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
         },
+        "podIPAllocationMode": {
+          "$ref": "#/definitions/PodIPAllocationMode"
+        },
         "maxPods": {
           "type": "integer",
           "format": "int32",
@@ -6615,6 +6618,29 @@
         }
       },
       "description": "The list of available agent pool versions."
+    },
+    "PodIPAllocationMode": {
+      "type": "string",
+      "enum": [
+        "DynamicIndividual",
+        "StaticBlock"
+      ],
+      "x-ms-enum": {
+        "name": "PodIPAllocationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DynamicIndividual",
+            "description": "Each pod gets a single IP address assigned. This is better for maximizing a small to medium subnet of size /16 or smaller. The Azure CNI cluster with dynamic IP allocation defaults to this mode if the customer does not explicitly specify a podIPAllocationMode"
+          },
+          {
+            "value": "StaticBlock",
+            "description": "Each node is statically allocated CIDR block(s) of size /28 = 16 IPs per block to satisfy the maxPods per node. Number of CIDR blocks >= (maxPods / 16). The block, rather than a single IP, counts against the Azure Vnet Private IP limit of 65K. Therefore block mode is suitable for running larger workloads with more than the current limit of 65K pods in a cluster. This mode is better suited to scale with larger subnets of /15 or bigger"
+          }
+        ]
+      },
+      "title": "Pod IP Allocation Mode",
+      "description": "The IP allocation mode for pods in the agent pool. Must be used with podSubnetId. The default is 'DynamicIndividual'."
     },
     "OSType": {
       "type": "string",
