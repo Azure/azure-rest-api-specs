@@ -75,5 +75,5 @@ model ModifyUpdateProperties {
   /**
    * The Status
    */
-  status?: string;
+  status?: UpdateStatus;
 }
