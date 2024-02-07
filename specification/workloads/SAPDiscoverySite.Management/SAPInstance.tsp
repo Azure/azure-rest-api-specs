@@ -40,11 +40,7 @@ interface SAPInstances {
   /**
    * Creates the SAP Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
    */
-  create is ArmResourceCreateOrReplaceAsync<
-    SAPInstance,
-    BaseParameters<SAPInstance>,
-    ArmLroLocationHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<SAPInstance>;
 
   /**
    * Updates the SAP Instance resource.
@@ -52,26 +48,18 @@ interface SAPInstances {
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     SAPInstance,
-    UpdateSAPInstanceRequest,
-    BaseParameters<SAPInstance>,
-    ArmLroLocationHeader
-  >;
+    UpdateSAPInstanceRequest>;
 
   /**
    * Deletes the SAP Instance resource. <br><br>This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
    */
   delete is ArmResourceDeleteAsync<
-    SAPInstance,
-    BaseParameters<SAPInstance>,
-    ArmLroLocationHeader
-  >;
+    SAPInstance>;
 
   /**
    * Lists the SAP Instance resources for the given SAP Migration discovery site resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
-  @operationId("SapInstances_List")
   list is ArmResourceListByParent<SAPInstance>;
 }
 

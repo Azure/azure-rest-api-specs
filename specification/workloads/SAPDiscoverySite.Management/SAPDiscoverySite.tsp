@@ -32,9 +32,6 @@ model SAPDiscoverySite is TrackedResource<SAPDiscoverySiteProperties> {
    */
   extendedLocation?: ExtendedLocation;
 }
-@@doc(SAPDiscoverySite.properties,
-  " The SAP Migration discovery site resource properties."
-);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
 @armResourceOperations
@@ -47,11 +44,7 @@ interface SAPDiscoverySites {
   /**
    * Creates a discovery site for SAP Migration.
    */
-  create is ArmResourceCreateOrReplaceAsync<
-    SAPDiscoverySite,
-    BaseParameters<SAPDiscoverySite>,
-    ArmLroLocationHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<SAPDiscoverySite>;
 
   /**
    * Updates a SAP Migration discovery site resource.
@@ -59,19 +52,12 @@ interface SAPDiscoverySites {
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     SAPDiscoverySite,
-    UpdateSAPDiscoverySiteRequest,
-    BaseParameters<SAPDiscoverySite>,
-    ArmLroLocationHeader
-  >;
+    UpdateSAPDiscoverySiteRequest>;
 
   /**
    * Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances and Server Instances.
    */
-  delete is ArmResourceDeleteAsync<
-    SAPDiscoverySite,
-    BaseParameters<SAPDiscoverySite>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<SAPDiscoverySite>;
 
   /**
    * Gets all SAP Migration discovery site resources in a Resource Group.
@@ -89,10 +75,7 @@ interface SAPDiscoverySites {
   importEntities is ArmResourceActionAsync<
     SAPDiscoverySite,
     void,
-    OperationStatusResult,
-    BaseParameters<SAPDiscoverySite>,
-    ArmLroLocationHeader
-  >;
+    OperationStatusResult>;
 }
 
 @@doc(SAPDiscoverySites.create::parameters.resource,

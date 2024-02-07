@@ -39,10 +39,7 @@ interface ServerInstances {
    * Creates the Server Instance resource. <br><br>;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
    */
   create is ArmResourceCreateOrReplaceAsync<
-    ServerInstance,
-    BaseParameters<ServerInstance>,
-    ArmLroLocationHeader
-  >;
+    ServerInstance>;
 
   /**
    * Updates the Server Instance resource. This operation on a resource by end user will return a Bad Request error.
@@ -50,26 +47,18 @@ interface ServerInstances {
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     ServerInstance,
-    UpdateServerInstanceRequest,
-    BaseParameters<ServerInstance>,
-    ArmLroLocationHeader
-  >;
+    UpdateServerInstanceRequest>;
 
   /**
    * Deletes the Server Instance resource. <br><br>;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
    */
   delete is ArmResourceDeleteAsync<
-    ServerInstance,
-    BaseParameters<ServerInstance>,
-    ArmLroLocationHeader
-  >;
+    ServerInstance>;
 
   /**
    * Lists the Server Instance resources for the given SAP Instance resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Supporting existing name."
-  @operationId("ServerInstances_List")
   list is ArmResourceListByParent<ServerInstance>;
 }
 
