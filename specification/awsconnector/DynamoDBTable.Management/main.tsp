@@ -315,7 +315,6 @@ model Csv {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @armResourceOperations
 interface DynamoDBTables {
   get is ArmResourceRead<DynamoDBTable>;

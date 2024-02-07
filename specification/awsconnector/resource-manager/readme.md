@@ -55,7 +55,6 @@ input-file:
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2NetworkAcl.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2NetworkInterface.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2RouteTable.json
-  - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2SecurityGroup.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Subnet.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Volume.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Vpc.json
