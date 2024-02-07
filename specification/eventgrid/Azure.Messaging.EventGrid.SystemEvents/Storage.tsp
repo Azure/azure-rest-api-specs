@@ -189,7 +189,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentQueued event.")
   model StorageTaskAssignmentQueuedEventData {
     @doc("The time at which a storage task was queued.")
-    @encode("ISO8601")
+    // @encode("ISO8601")
     @friendlyName("queuedOn")
     queuedDateTime?: utcDateTime;
 
@@ -203,7 +203,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     status?: StorageTaskAssignmentCompletedStatus;
 
     @doc("The time at which a storage task was completed.")
-    @encode("ISO8601")
+    // @encode("ISO8601")
     @friendlyName("completedOn")
     completedDateTime?: utcDateTime;
 
