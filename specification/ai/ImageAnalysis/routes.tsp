@@ -73,7 +73,6 @@ alias SharedAnalyzeQuery = {
 #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to analyze an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
 @doc("Performs a single Image Analysis operation")
 @route("imageanalysis:analyze")
-@projectedName("python", "analyze")
 @post
 @sharedRoute
 op analyzeFromImageData is Azure.Core.RpcOperation<

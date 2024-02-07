@@ -28,8 +28,6 @@ using Azure.ClientGenerator.Core;
 
 @@projectedName(ImageAnalysis.VisualFeatures, "csharp", "VisualFeaturesImpl");
 
-@@access(ImageAnalysis.analyzeFromUrl, Access.internal, "python");
-
 @@access(ImageAnalysis.analyzeFromImageData, Access.internal, "java");
 @@access(ImageAnalysis.analyzeFromUrl, Access.internal, "java");
 
@@ -53,3 +51,28 @@ using Azure.ClientGenerator.Core;
 @@access(ImageAnalysis.SmartCropsResult, Access.public, "java");
 @@access(ImageAnalysis.TagsResult, Access.public, "java");
 @@access(ImageAnalysis.VisualFeatures, Access.public, "java");
+
+@@access(ImageAnalysis.analyzeFromImageData, Access.internal, "python");
+@@access(ImageAnalysis.analyzeFromUrl, Access.internal, "python");
+
+@@access(ImageAnalysis.CaptionResult, Access.public, "python");
+@@access(ImageAnalysis.CropRegion, Access.public, "python");
+@@access(ImageAnalysis.DenseCaption, Access.public, "python");
+@@access(ImageAnalysis.DenseCaptionsResult, Access.public, "python");
+@@access(ImageAnalysis.DetectedObject, Access.public, "python");
+@@access(ImageAnalysis.DetectedPerson, Access.public, "python");
+@@access(ImageAnalysis.DetectedTag, Access.public, "python");
+@@access(ImageAnalysis.DetectedTextBlock, Access.public, "python");
+@@access(ImageAnalysis.DetectedTextLine, Access.public, "python");
+@@access(ImageAnalysis.DetectedTextWord, Access.public, "python");
+@@access(ImageAnalysis.ImageAnalysisResult, Access.public, "python");
+@@access(ImageAnalysis.ImageBoundingBox, Access.public, "python");
+@@access(ImageAnalysis.ImageMetadata, Access.public, "python");
+@@access(ImageAnalysis.ImagePoint, Access.public, "python");
+@@access(ImageAnalysis.ObjectsResult, Access.public, "python");
+@@access(ImageAnalysis.PeopleResult, Access.public, "python");
+@@access(ImageAnalysis.ReadResult, Access.public, "python");
+@@access(ImageAnalysis.SmartCropsResult, Access.public, "python");
+@@access(ImageAnalysis.TagsResult, Access.public, "python");
+@@access(ImageAnalysis.VisualFeatures, Access.public, "python");
+
