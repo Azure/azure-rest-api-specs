@@ -83,7 +83,7 @@ model AwsEc2InstanceProperties {
   @doc("Gets and sets the property ebsOptimized.<p>Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.</p>")
   ebsOptimized?: boolean;
 
-  @doc("Gets and sets the property elasticGpuAssociations.<p>The Elastic GPU associated with the instance.</p>")
+  @doc("Gets and sets the property elasticGpuAssociations.<p>Deprecated.</p> <note> <p>Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances.</p> </note>")
   @extension("x-ms-identifiers", [])
   elasticGpuAssociations?: ElasticGpuAssociation[];
 
@@ -153,7 +153,7 @@ model AwsEc2InstanceProperties {
   @doc("Gets and sets the property placement.<p>The location where the instance launched, if applicable.</p>")
   placement?: Placement;
 
-  @doc("Gets and sets the property platform.<p>The value is <code>Windows</code> for Windows instances; otherwise blank.</p>")
+  @doc("Gets and sets the property platform.<p>The platform. This value is <code>windows</code> for Windows instances; otherwise, it is empty.</p>")
   platform?: PlatformValuesEnumValue;
 
   @doc("Gets and sets the property platformDetails.<p>The platform details value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>")
@@ -277,6 +277,9 @@ model InstanceBootModeValuesEnumValue {
 
 @doc("InstanceLifecycleType enum")
 enum InstanceLifecycleType {
+  @doc("InstanceLifecycleType enum capacity-block")
+  CapacityBlock: "capacity-block",
+
   @doc("InstanceLifecycleType enum scheduled")
   Scheduled: "scheduled",
 
@@ -734,6 +737,42 @@ enum InstanceType {
   @doc("InstanceType enum c6in.xlarge")
   C6inXlarge: "c6in.xlarge",
 
+  @doc("InstanceType enum c7a.12xlarge")
+  C7a12xlarge: "c7a.12xlarge",
+
+  @doc("InstanceType enum c7a.16xlarge")
+  C7a16xlarge: "c7a.16xlarge",
+
+  @doc("InstanceType enum c7a.24xlarge")
+  C7a24xlarge: "c7a.24xlarge",
+
+  @doc("InstanceType enum c7a.2xlarge")
+  C7a2xlarge: "c7a.2xlarge",
+
+  @doc("InstanceType enum c7a.32xlarge")
+  C7a32xlarge: "c7a.32xlarge",
+
+  @doc("InstanceType enum c7a.48xlarge")
+  C7a48xlarge: "c7a.48xlarge",
+
+  @doc("InstanceType enum c7a.4xlarge")
+  C7a4xlarge: "c7a.4xlarge",
+
+  @doc("InstanceType enum c7a.8xlarge")
+  C7a8xlarge: "c7a.8xlarge",
+
+  @doc("InstanceType enum c7a.large")
+  C7aLarge: "c7a.large",
+
+  @doc("InstanceType enum c7a.medium")
+  C7aMedium: "c7a.medium",
+
+  @doc("InstanceType enum c7a.metal-48xl")
+  C7aMetal48xl: "c7a.metal-48xl",
+
+  @doc("InstanceType enum c7a.xlarge")
+  C7aXlarge: "c7a.xlarge",
+
   @doc("InstanceType enum c7g.12xlarge")
   C7g12xlarge: "c7g.12xlarge",
 
@@ -833,6 +872,12 @@ enum InstanceType {
   @doc("InstanceType enum c7i.large")
   C7iLarge: "c7i.large",
 
+  @doc("InstanceType enum c7i.metal-24xl")
+  C7iMetal24xl: "c7i.metal-24xl",
+
+  @doc("InstanceType enum c7i.metal-48xl")
+  C7iMetal48xl: "c7i.metal-48xl",
+
   @doc("InstanceType enum c7i.xlarge")
   C7iXlarge: "c7i.xlarge",
 
@@ -892,6 +937,9 @@ enum InstanceType {
 
   @doc("InstanceType enum dl1.24xlarge")
   Dl124xlarge: "dl1.24xlarge",
+
+  @doc("InstanceType enum dl2q.24xlarge")
+  Dl2q24xlarge: "dl2q.24xlarge",
 
   @doc("InstanceType enum f1.16xlarge")
   F116xlarge: "f1.16xlarge",
@@ -1118,8 +1166,14 @@ enum InstanceType {
   @doc("InstanceType enum i4g.xlarge")
   I4gXlarge: "i4g.xlarge",
 
+  @doc("InstanceType enum i4i.12xlarge")
+  I4i12xlarge: "i4i.12xlarge",
+
   @doc("InstanceType enum i4i.16xlarge")
   I4i16xlarge: "i4i.16xlarge",
+
+  @doc("InstanceType enum i4i.24xlarge")
+  I4i24xlarge: "i4i.24xlarge",
 
   @doc("InstanceType enum i4i.2xlarge")
   I4i2xlarge: "i4i.2xlarge",
@@ -1763,11 +1817,20 @@ enum InstanceType {
   @doc("InstanceType enum m7i.large")
   M7iLarge: "m7i.large",
 
+  @doc("InstanceType enum m7i.metal-24xl")
+  M7iMetal24xl: "m7i.metal-24xl",
+
+  @doc("InstanceType enum m7i.metal-48xl")
+  M7iMetal48xl: "m7i.metal-48xl",
+
   @doc("InstanceType enum m7i.xlarge")
   M7iXlarge: "m7i.xlarge",
 
   @doc("InstanceType enum mac1.metal")
   Mac1Metal: "mac1.metal",
+
+  @doc("InstanceType enum mac2-m2.metal")
+  Mac2M2Metal: "mac2-m2.metal",
 
   @doc("InstanceType enum mac2-m2pro.metal")
   Mac2M2proMetal: "mac2-m2pro.metal",
@@ -2258,6 +2321,9 @@ enum InstanceType {
   @doc("InstanceType enum r7a.medium")
   R7aMedium: "r7a.medium",
 
+  @doc("InstanceType enum r7a.metal-48xl")
+  R7aMetal48xl: "r7a.metal-48xl",
+
   @doc("InstanceType enum r7a.xlarge")
   R7aXlarge: "r7a.xlarge",
 
@@ -2312,6 +2378,39 @@ enum InstanceType {
   @doc("InstanceType enum r7gd.xlarge")
   R7gdXlarge: "r7gd.xlarge",
 
+  @doc("InstanceType enum r7i.12xlarge")
+  R7i12xlarge: "r7i.12xlarge",
+
+  @doc("InstanceType enum r7i.16xlarge")
+  R7i16xlarge: "r7i.16xlarge",
+
+  @doc("InstanceType enum r7i.24xlarge")
+  R7i24xlarge: "r7i.24xlarge",
+
+  @doc("InstanceType enum r7i.2xlarge")
+  R7i2xlarge: "r7i.2xlarge",
+
+  @doc("InstanceType enum r7i.48xlarge")
+  R7i48xlarge: "r7i.48xlarge",
+
+  @doc("InstanceType enum r7i.4xlarge")
+  R7i4xlarge: "r7i.4xlarge",
+
+  @doc("InstanceType enum r7i.8xlarge")
+  R7i8xlarge: "r7i.8xlarge",
+
+  @doc("InstanceType enum r7i.large")
+  R7iLarge: "r7i.large",
+
+  @doc("InstanceType enum r7i.metal-24xl")
+  R7iMetal24xl: "r7i.metal-24xl",
+
+  @doc("InstanceType enum r7i.metal-48xl")
+  R7iMetal48xl: "r7i.metal-48xl",
+
+  @doc("InstanceType enum r7i.xlarge")
+  R7iXlarge: "r7i.xlarge",
+
   @doc("InstanceType enum r7iz.12xlarge")
   R7iz12xlarge: "r7iz.12xlarge",
 
@@ -2332,6 +2431,12 @@ enum InstanceType {
 
   @doc("InstanceType enum r7iz.large")
   R7izLarge: "r7iz.large",
+
+  @doc("InstanceType enum r7iz.metal-16xl")
+  R7izMetal16xl: "r7iz.metal-16xl",
+
+  @doc("InstanceType enum r7iz.metal-32xl")
+  R7izMetal32xl: "r7iz.metal-32xl",
 
   @doc("InstanceType enum r7iz.xlarge")
   R7izXlarge: "r7iz.xlarge",
@@ -2812,7 +2917,7 @@ model InstanceMetadataOptionsResponse {
   @doc("Gets and sets the property httpPutResponseHopLimit.<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p> <p>Default: 1</p> <p>Possible values: Integers from 1 to 64</p>")
   httpPutResponseHopLimit?: int32;
 
-  @doc("Gets and sets the property httpTokens.<p>IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP tokens is <code>optional</code> (in other words, indicates whether the use of IMDSv2 is <code>optional</code>) or <code>required</code> (in other words, indicates whether the use of IMDSv2 is <code>required</code>).</p> <ul> <li> <p> <code>optional</code> - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.</p> </li> <li> <p> <code>required</code> - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.</p> </li> </ul> <p>Default: <code>optional</code> </p>")
+  @doc("Gets and sets the property httpTokens.<p>Indicates whether IMDSv2 is required.</p> <ul> <li> <p> <code>optional</code> - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.</p> </li> <li> <p> <code>required</code> - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.</p> </li> </ul>")
   httpTokens?: HttpTokensStateEnumValue;
 
   @doc("Gets and sets the property instanceMetadataTags.<p>Indicates whether access to instance tags from the instance metadata is enabled or disabled. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS'>Work with instance tags using the instance metadata</a>.</p>")
@@ -2930,6 +3035,9 @@ model InstanceNetworkInterface {
 
   @doc("Gets and sets the property attachment.<p>The network interface attachment.</p>")
   attachment?: InstanceNetworkInterfaceAttachment;
+
+  @doc("Gets and sets the property connectionTrackingConfiguration.<p>A security group connection tracking configuration that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts'>Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>")
+  connectionTrackingConfiguration?: ConnectionTrackingSpecificationResponse;
 
   @doc("Gets and sets the property description.<p>The description.</p>")
   description?: string;
@@ -3197,7 +3305,7 @@ model StateReason {
   @doc("Gets and sets the property code.<p>The reason code for the state change.</p>")
   code?: string;
 
-  @doc("Gets and sets the property message.<p>The message for the state change.</p> <ul> <li> <p> <code>Server.InsufficientInstanceCapacity</code>: There was insufficient capacity available to satisfy the launch request.</p> </li> <li> <p> <code>Server.InternalError</code>: An internal error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Server.ScheduledStop</code>: The instance was stopped due to a scheduled retirement.</p> </li> <li> <p> <code>Server.SpotInstanceShutdown</code>: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Server.SpotInstanceTermination</code>: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Client.InstanceInitiatedShutdown</code>: The instance was shut down using the <code>shutdown -h</code> command from the instance.</p> </li> <li> <p> <code>Client.InstanceTerminated</code>: The instance was terminated or rebooted during AMI creation.</p> </li> <li> <p> <code>Client.InternalError</code>: A client error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Client.InvalidSnapshot.NotFound</code>: The specified snapshot was not found.</p> </li> <li> <p> <code>Client.UserInitiatedHibernate</code>: Hibernation was initiated on the instance.</p> </li> <li> <p> <code>Client.UserInitiatedShutdown</code>: The instance was shut down using the Amazon EC2 API.</p> </li> <li> <p> <code>Client.VolumeLimitExceeded</code>: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.</p> </li> </ul>")
+  @doc("Gets and sets the property message.<p>The message for the state change.</p> <ul> <li> <p> <code>Server.InsufficientInstanceCapacity</code>: There was insufficient capacity available to satisfy the launch request.</p> </li> <li> <p> <code>Server.InternalError</code>: An internal error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Server.ScheduledStop</code>: The instance was stopped due to a scheduled retirement.</p> </li> <li> <p> <code>Server.SpotInstanceShutdown</code>: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Server.SpotInstanceTermination</code>: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Client.InstanceInitiatedShutdown</code>: The instance was shut down from the operating system of the instance.</p> </li> <li> <p> <code>Client.InstanceTerminated</code>: The instance was terminated or rebooted during AMI creation.</p> </li> <li> <p> <code>Client.InternalError</code>: A client error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Client.InvalidSnapshot.NotFound</code>: The specified snapshot was not found.</p> </li> <li> <p> <code>Client.UserInitiatedHibernate</code>: Hibernation was initiated on the instance.</p> </li> <li> <p> <code>Client.UserInitiatedShutdown</code>: The instance was shut down using the Amazon EC2 API.</p> </li> <li> <p> <code>Client.VolumeLimitExceeded</code>: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.</p> </li> </ul>")
   message?: string;
 }
 
@@ -3216,6 +3324,9 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of EbsInstanceBlockDevice")
 model EbsInstanceBlockDevice {
+  @doc("Gets and sets the property associatedResource.<p>The ARN of the Amazon ECS or Fargate task to which the volume is attached.</p>")
+  associatedResource?: string;
+
   @doc("Gets and sets the property attachTime.<p>The time stamp when the attachment initiated.</p>")
   attachTime?: utcDateTime;
 
@@ -3227,6 +3338,9 @@ model EbsInstanceBlockDevice {
 
   @doc("Gets and sets the property volumeId.<p>The ID of the EBS volume.</p>")
   volumeId?: string;
+
+  @doc("Gets and sets the property volumeOwnerId.<p>The ID of the Amazon Web Services account that owns the volume.</p> <p>This parameter is returned only for volumes that are attached to Fargate tasks.</p>")
+  volumeOwnerId?: string;
 }
 
 @doc("AttachmentStatus enum")
@@ -3299,11 +3413,28 @@ model InstanceNetworkInterfaceAttachment {
   @doc("Gets and sets the property deviceIndex.<p>The index of the device on the instance for the network interface attachment.</p>")
   deviceIndex?: int32;
 
+  @doc("Gets and sets the property enaSrdSpecification.<p>Contains the ENA Express settings for the network interface that's attached to the instance.</p>")
+  enaSrdSpecification?: InstanceAttachmentEnaSrdSpecification;
+
   @doc("Gets and sets the property networkCardIndex.<p>The index of the network card.</p>")
   networkCardIndex?: int32;
 
   @doc("Gets and sets the property status.<p>The attachment state.</p>")
   status?: AttachmentStatusEnumValue;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+@doc("Definition of ConnectionTrackingSpecificationResponse")
+model ConnectionTrackingSpecificationResponse {
+  @doc("Gets and sets the property tcpEstablishedTimeout.<p>Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.</p>")
+  tcpEstablishedTimeout?: int32;
+
+  @doc("Gets and sets the property udpStreamTimeout.<p>Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.</p>")
+  udpStreamTimeout?: int32;
+
+  @doc("Gets and sets the property udpTimeout.<p>Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>")
+  udpTimeout?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -3350,6 +3481,25 @@ model InstancePrivateIpAddress {
   privateIpAddress?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+@doc("Definition of InstanceAttachmentEnaSrdSpecification")
+model InstanceAttachmentEnaSrdSpecification {
+  @doc("Gets and sets the property enaSrdEnabled.<p>Indicates whether ENA Express is enabled for the network interface.</p>")
+  enaSrdEnabled?: boolean;
+
+  @doc("Gets and sets the property enaSrdUdpSpecification.<p>Configures ENA Express for UDP network traffic.</p>")
+  enaSrdUdpSpecification?: InstanceAttachmentEnaSrdUdpSpecification;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+@doc("Definition of InstanceAttachmentEnaSrdUdpSpecification")
+model InstanceAttachmentEnaSrdUdpSpecification {
+  @doc("Gets and sets the property enaSrdUdpEnabled.<p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, you must first enable ENA Express.</p>")
+  enaSrdUdpEnabled?: boolean;
+}
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
 @armResourceOperations
 interface Ec2Instances {
@@ -3369,6 +3519,6 @@ interface Ec2Instances {
 //
 // Related information for backend service:
 // AWS Servcie : EC2
-// Product Version : 3.7.660.0
-// SDK Version : 3.7.219.0
+// Product Version : 3.7.742.0
+// SDK Version : 3.7.314.4
 //--------------------------------------------------------------------------------------------

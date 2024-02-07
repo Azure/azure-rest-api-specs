@@ -58,6 +58,9 @@ model AwsElasticLoadBalancingV2LoadBalancerProperties {
   @doc("Gets and sets the property dNSName. The public DNS name of the load balancer.")
   dNSName?: string;
 
+  @doc("Gets and sets the property enforceSecurityGroupInboundRulesOnPrivateLinkTraffic. Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through PrivateLink")
+  enforceSecurityGroupInboundRulesOnPrivateLinkTraffic?: string;
+
   @doc("Gets and sets the property ipAddressType. The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).")
   ipAddressType?: string;
 

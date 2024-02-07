@@ -701,10 +701,38 @@
       "type": "object",
       "description": "Definition of KinesisStreamSpecification",
       "properties": {
+        "approximateCreationDateTimePrecision": {
+          "$ref": "#/definitions/KinesisStreamSpecificationApproximateCreationDateTimePrecision",
+          "description": "Gets and sets the property approximateCreationDateTimePrecision."
+        },
         "streamArn": {
           "type": "string",
           "description": "Gets and sets the property streamArn."
         }
+      }
+    },
+    "KinesisStreamSpecificationApproximateCreationDateTimePrecision": {
+      "type": "string",
+      "description": "KinesisStreamSpecificationApproximateCreationDateTimePrecision enum",
+      "enum": [
+        "MICROSECOND",
+        "MILLISECOND"
+      ],
+      "x-ms-enum": {
+        "name": "KinesisStreamSpecificationApproximateCreationDateTimePrecision",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MICROSECOND",
+            "value": "MICROSECOND",
+            "description": "KinesisStreamSpecificationApproximateCreationDateTimePrecision enum MICROSECOND"
+          },
+          {
+            "name": "MILLISECOND",
+            "value": "MILLISECOND",
+            "description": "KinesisStreamSpecificationApproximateCreationDateTimePrecision enum MILLISECOND"
+          }
+        ]
       }
     },
     "LocalSecondaryIndex": {

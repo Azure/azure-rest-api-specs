@@ -186,8 +186,20 @@ model KeySchema {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of KinesisStreamSpecification")
 model KinesisStreamSpecification {
+  @doc("Gets and sets the property approximateCreationDateTimePrecision.")
+  approximateCreationDateTimePrecision?: KinesisStreamSpecificationApproximateCreationDateTimePrecision;
+
   @doc("Gets and sets the property streamArn.")
   streamArn?: string;
+}
+
+@doc("KinesisStreamSpecificationApproximateCreationDateTimePrecision enum")
+enum KinesisStreamSpecificationApproximateCreationDateTimePrecision {
+  @doc("KinesisStreamSpecificationApproximateCreationDateTimePrecision enum MICROSECOND")
+  MICROSECOND: "MICROSECOND",
+
+  @doc("KinesisStreamSpecificationApproximateCreationDateTimePrecision enum MILLISECOND")
+  MILLISECOND: "MILLISECOND",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
