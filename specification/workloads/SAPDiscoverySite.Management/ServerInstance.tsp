@@ -67,9 +67,7 @@ interface ServerInstances {
   /**
    * Lists the Server Instance resources for the given SAP Instance resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Supporting existing name."
-  @operationId("ServerInstances_List")
   list is ArmResourceListByParent<ServerInstance>;
 }
 
