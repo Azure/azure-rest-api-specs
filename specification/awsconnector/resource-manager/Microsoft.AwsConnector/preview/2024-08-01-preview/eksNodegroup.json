@@ -419,8 +419,11 @@
           "x-ms-identifiers": []
         },
         "labels": {
-          "$ref": "#/definitions/object",
-          "description": "Gets and sets the property labels. The Kubernetes labels to be applied to the nodes in the node group when they are created."
+          "type": "object",
+          "description": "Gets and sets the property labels. The Kubernetes labels to be applied to the nodes in the node group when they are created.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "launchTemplate": {
           "$ref": "#/definitions/LaunchTemplateSpecification",
@@ -455,8 +458,11 @@
           "x-ms-identifiers": []
         },
         "tags": {
-          "$ref": "#/definitions/object",
-          "description": "Gets and sets the property tags. The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency."
+          "type": "object",
+          "description": "Gets and sets the property tags. The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "taints": {
           "type": "array",
@@ -721,10 +727,6 @@
           "description": "Gets and sets the property maxUnavailablePercentage. The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value."
         }
       }
-    },
-    "object": {
-      "type": "object",
-      "description": "Represent a model"
     }
   },
   "parameters": {}

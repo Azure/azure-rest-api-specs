@@ -575,8 +575,11 @@
       "description": "Definition of Environment",
       "properties": {
         "variables": {
-          "$ref": "#/definitions/object",
-          "description": "Gets and sets the property variables. Environment variable key-value pairs."
+          "type": "object",
+          "description": "Gets and sets the property variables. Environment variable key-value pairs.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1147,10 +1150,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "object": {
-      "type": "object",
-      "description": "Represent a model"
     }
   },
   "parameters": {}

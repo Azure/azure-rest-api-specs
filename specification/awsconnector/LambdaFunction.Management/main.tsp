@@ -183,7 +183,7 @@ model DeadLetterConfig {
 @doc("Definition of Environment")
 model Environment {
   @doc("Gets and sets the property variables. Environment variable key-value pairs.")
-  variables?: object;
+  variables?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."

@@ -75,7 +75,7 @@ model AwsEksNodegroupProperties {
   instanceTypes?: string[];
 
   @doc("Gets and sets the property labels. The Kubernetes labels to be applied to the nodes in the node group when they are created.")
-  labels?: object;
+  labels?: Record<string>;
 
   @doc("Gets and sets the property launchTemplate. An object representing a node group's launch template specification. An object representing a launch template specification for AWS EKS Nodegroup.")
   launchTemplate?: LaunchTemplateSpecification;
@@ -100,7 +100,7 @@ model AwsEksNodegroupProperties {
   subnets?: string[];
 
   @doc("Gets and sets the property tags. The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.")
-  tags?: object;
+  tags?: Record<string>;
 
   @doc("Gets and sets the property taints. The Kubernetes taints to be applied to the nodes in the node group when they are created.")
   @extension("x-ms-identifiers", [])

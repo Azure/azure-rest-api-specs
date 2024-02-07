@@ -73,6 +73,7 @@ model AwsDynamoDBTableProperties {
   importSourceSpecification?: ImportSourceSpecification;
 
   @doc("Gets and sets the property keySchema.")
+  @extension("x-ms-identifiers", [])
   keySchema?: KeySchema[];
 
   @doc("Gets and sets the property kinesisStreamSpecification.")
