@@ -52,19 +52,13 @@ enum SentimentValue {
 @doc("Sentiment analysis per document.")
 model SentimentResponse is AnalyzeTextPreBuiltResult {
   @doc("Response by document")
-  @typeChangedFrom(
-    Versions.v2023_04_15_preview,
-    Array<SentimentDocumentResult>
-  )
   documents: Array<SentimentResponseWithDocumentDetectedLanguage>;
 }
 
 @doc("Sentiment analysis per document.")
 model SentimentResponseWithDocumentDetectedLanguage
-  is AnalyzeTextPreBuiltResult {
+  is SentimentDocumentResult {
   ...DocumentDetectedLanguage;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  documents: Array<SentimentDocumentResult>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"

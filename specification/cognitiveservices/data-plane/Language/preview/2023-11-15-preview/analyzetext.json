@@ -5676,48 +5676,6 @@
         "negative"
       ]
     },
-    "SentimentDocumentResult": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "sentiment": {
-          "$ref": "#/definitions/Sentiment",
-          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
-        },
-        "confidenceScores": {
-          "$ref": "#/definitions/SentimentConfidenceScores"
-        },
-        "sentences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SentenceSentiment"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "sentiment",
-        "confidenceScores",
-        "sentences"
-      ]
-    },
     "SentimentLROResult": {
       "type": "object",
       "properties": {
@@ -5770,8 +5728,7 @@
           "description": "Response by document",
           "items": {
             "$ref": "#/definitions/SentimentResponseWithDocumentDetectedLanguage"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -5784,35 +5741,47 @@
       "type": "object",
       "description": "Sentiment analysis per document.",
       "properties": {
-        "errors": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/AnalyzeTextDocumentError"
-          }
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
+        "sentiment": {
+          "$ref": "#/definitions/Sentiment",
+          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores"
+        },
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SentenceSentiment"
+          },
+          "x-ms-identifiers": []
         },
         "detectedLanguage": {
           "type": "string",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        },
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SentimentDocumentResult"
-          }
         }
       },
       "required": [
-        "errors",
-        "modelVersion",
-        "documents"
+        "id",
+        "warnings",
+        "sentiment",
+        "confidenceScores",
+        "sentences"
       ]
     },
     "SentimentTaskResult": {
