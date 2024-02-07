@@ -227,7 +227,7 @@ directive:
     reason: Secrets are OK to return in a POST response.
   - suppress: ResourceNameRestriction
     from:
-      - Microsoft.Elastic/stable/2024-01-01/elastic.json
+      - Microsoft.Elastic/preview/2024-01-01/elastic.json
     where:
       - $.definitions.parameters.MonitorNameParameter
     reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions
