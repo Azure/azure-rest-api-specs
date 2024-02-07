@@ -2752,8 +2752,8 @@
               "$ref": "#/definitions/ConnectionSharedKey"
             }
           },
-          "202": {
-            "description": "Accepted and the operation set shared key of VpnLink connection will complete asynchronously.",
+          "201": {
+            "description": "Request successful. The operation set the shared key of VpnLink connection.",
             "schema": {
               "$ref": "#/definitions/ConnectionSharedKey"
             }
@@ -2835,8 +2835,8 @@
               "$ref": "#/definitions/ConnectionResetSharedKey"
             }
           },
-          "202": {
-            "description": "Accepted and the operation ResetConnection will complete asynchronously.",
+          "201": {
+            "description": "Request successful. The operation Reset shared key of VpnLink connection.",
             "schema": {
               "$ref": "#/definitions/ConnectionResetSharedKey"
             }
@@ -7973,7 +7973,7 @@
         "dpdTimeoutSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "DPD timeout in seconds for VpnLink connection."
+          "description": "Dead Peer Detection timeout in seconds for VpnLink connection."
         }
       },
       "description": "Parameters for VpnConnection."
@@ -9948,7 +9948,8 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "The VpnLink connection shared key value."
+          "description": "The VpnLink connection shared key value.",
+          "x-ms-secret": true
         }
       },
       "allOf": [
