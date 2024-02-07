@@ -149,7 +149,7 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 ``` yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.Security/stable/2024-01-01/pricings.json
-  - Microsoft.Security/stable/2024-01-01/Integrations.json
+  - Microsoft.Security/stable/2024-01-31/Integrations.json
 ```
 
 ### Tag: package-preview-2023-05
