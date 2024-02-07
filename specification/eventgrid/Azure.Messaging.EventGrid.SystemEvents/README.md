@@ -15,11 +15,11 @@ Under the `Azure.Messaging.EventGrid.SystemEvents` folder find or create your se
 A sample valid event definition is shown below:
 ~~~ markdown
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.")
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
 model AcsChatMessageReceivedEventData {
   ...AcsChatMessageEventBaseProperties;
 
-  @doc("The body of the chat message.")
+  /** The body of the chat message. */
   messageBody ?: string;
 }
 ~~~

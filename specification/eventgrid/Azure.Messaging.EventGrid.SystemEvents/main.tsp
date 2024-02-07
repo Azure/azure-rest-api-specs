@@ -24,10 +24,10 @@ import "./Web.tsp";
 import "./EventGrid.tsp";
 import "./ResourceNotifications.tsp";
 
+/** Azure Messaging EventGrid SystemEvents */
 @service({
   title: "Azure.Messaging.SystemEvents",
 })
-@doc("Azure Messaging EventGrid SystemEvents")
 @versioned(ServiceApiVersions)
 namespace Microsoft.EventGrid.SystemEvents {
   using TypeSpec.Versioning;

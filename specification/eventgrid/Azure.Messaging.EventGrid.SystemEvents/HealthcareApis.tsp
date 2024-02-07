@@ -566,20 +566,20 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   alias HealthcareFhirResourceBaseEventData = {
-    @friendlyName("FhirServiceHostName")
     /** Domain name of FHIR account for this resource. */
+    @friendlyName("FhirServiceHostName")
     resourceFhirAccount?: string;
 
-    @friendlyName("FhirResourceId")
     /** Id of HL7 FHIR resource. */
+    @friendlyName("FhirResourceId")
     resourceFhirId?: string;
 
-    @friendlyName("FhirResourceVersionId")
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
+    @friendlyName("FhirResourceVersionId")
     resourceVersionId?: int64;
 
-    @friendlyName("FhirResourceType")
     /** Type of HL7 FHIR resource. */
+    @friendlyName("FhirResourceType")
     resourceType?: HealthcareFhirResourceType;
   };
 }

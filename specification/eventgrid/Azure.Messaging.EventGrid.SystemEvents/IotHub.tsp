@@ -1,10 +1,10 @@
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after the existing service swagger."
 /** Describes the schema of the Azure IoT Hub events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after the existing service swagger."
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted). */
 model DeviceLifeCycleEventProperties {
-  /** The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '. */
+  /** The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '. */
   deviceId?: string;
 
   /** Name of the IoT Hub where the device was created or deleted. */
@@ -72,10 +72,10 @@ model DeviceTwinInfo {
 
 /** Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected). */
 model DeviceConnectionStateEventProperties {
-  /** The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '. */
+  /** The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '. */
   deviceId?: string;
 
-  /** The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '. */
+  /** The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '. */
   moduleId?: string;
 
   /** Name of the IoT Hub where the device was created or deleted. */
@@ -87,8 +87,8 @@ model DeviceConnectionStateEventProperties {
 
 /** Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry). */
 model DeviceTelemetryEventProperties {
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of body is object"
   /** The content of the message from the device. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of body is object"
   body?: unknown;
 
   /** Application properties are user-defined strings that can be added to the message. These fields are optional. */
@@ -104,26 +104,26 @@ model DeviceConnectionStateEventInfo {
   sequenceNumber?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Event data for Microsoft.Devices.DeviceCreated event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model IotHubDeviceCreatedEventData extends DeviceLifeCycleEventProperties {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Event data for Microsoft.Devices.DeviceDeleted event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model IotHubDeviceDeletedEventData extends DeviceLifeCycleEventProperties {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Event data for Microsoft.Devices.DeviceConnected event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model IotHubDeviceConnectedEventData
   extends DeviceConnectionStateEventProperties {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Event data for Microsoft.Devices.DeviceDisconnected event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model IotHubDeviceDisconnectedEventData
   extends DeviceConnectionStateEventProperties {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Event data for Microsoft.Devices.DeviceTelemetry event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
 
 /** The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate. */

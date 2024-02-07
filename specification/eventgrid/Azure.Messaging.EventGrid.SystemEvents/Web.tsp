@@ -185,20 +185,20 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** name of app service plan sku. */
     name?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     /** tier of app service plan sku. */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     Tier?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     /** size of app service plan sku. */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     Size?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     /** family of app service plan sku. */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     Family?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     /** capacity of app service plan sku. */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     Capacity?: string;
   }
 }

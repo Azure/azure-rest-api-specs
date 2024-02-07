@@ -1,23 +1,23 @@
 /** Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model ContainerRegistryImagePushedEventData
   extends ContainerRegistryEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model ContainerRegistryImageDeletedEventData
   extends ContainerRegistryEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model ContainerRegistryChartPushedEventData
   extends ContainerRegistryArtifactEventData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model ContainerRegistryChartDeletedEventData
   extends ContainerRegistryArtifactEventData {}
 
@@ -129,8 +129,8 @@ model ContainerRegistryEventSource {
   /** The IP or hostname and the port of the registry node that generated the event. Generally, this will be resolved by os.Hostname() along with the running port. */
   addr?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after the existing service swagger."
   /** The running instance of an application. Changes after each restart. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after the existing service swagger."
   instanceID?: string;
 }
 

@@ -1,8 +1,8 @@
 /** Describes the schema of the Azure EventGrid events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
-@friendlyName("EventGridMqttClientState")
 /** EventGrid MQTT Client State */
+@friendlyName("EventGridMqttClientState")
 enum EventGridMQTTClientState {
   /** Enabled */
   Enabled,
@@ -11,32 +11,19 @@ enum EventGridMQTTClientState {
   Disabled,
 }
 
-@friendlyName("EventGridMqttClientDisconnectionReason")
 /** EventGrid MQTT Client Disconnection Reason */
+@friendlyName("EventGridMqttClientDisconnectionReason")
 enum EventGridMQTTClientDisconnectionReason {
-  @doc("""
-The client got disconnected for any authentication reasons (for example,
-certificate expired, client got disabled, or client configuration changed).
-""")
+  /** The client got disconnected for any authentication reasons (for example, certificate expired, client got disabled, or client configuration changed). */
   ClientAuthenticationError,
 
-  @doc("""
-The client got disconnected for any authorization reasons (for example, because
-of a change in the configuration of topic spaces, permission bindings, or
-client groups).
-""")
+  /** The client got disconnected for any authorization reasons (for example, because of a change in the configuration of topic spaces, permission bindings, or client groups). */
   ClientAuthorizationError,
 
-  @doc("""
-The client sent a bad request or used one of the unsupported features that
-resulted in a connection termination by the service.
-""")
+  /** The client sent a bad request or used one of the unsupported features that resulted in a connection termination by the service. */
   ClientError,
 
-  @doc("""
-The client initiates a graceful disconnect through a DISCONNECT packet for MQTT
-or a close frame for MQTT over WebSocket.
-""")
+  /** The client initiated a graceful disconnect through a DISCONNECT packet for MQTT or a close frame for MQTT over WebSocket. */
   ClientInitiatedDisconnect,
 
   /** The client-server connection is lost. (EXCHANGE ONLINE PROTECTION). */
@@ -45,10 +32,7 @@ or a close frame for MQTT over WebSocket.
   /** The client's IP address is blocked by IP filter or Private links configuration. */
   IpForbidden,
 
-  @doc("""
-The client exceeded one or more of the throttling limits that resulted in a
-connection termination by the service.
-""")
+  /** The client exceeded one or more of the throttling limits that resulted in a connection termination by the service. */
   QuotaExceeded,
 
   /** The connection got terminated due to an unexpected server error. */
@@ -57,103 +41,83 @@ connection termination by the service.
   /** The server initiates a graceful disconnect for any operational reason. */
   ServerInitiatedDisconnect,
 
-  @doc("""
-The client's queue for unacknowledged QoS1 messages reached its limit, which
-resulted in a connection termination by the server.
-""")
+  /** The client's queue for unacknowledged QoS1 messages reached its limit, which resulted in a connection termination by the server. */
   SessionOverflow,
 
-  @doc("""
-The client reconnected with the same authentication name, which resulted in the
-termination of the previous connection.
-""")
+  /** The client reconnected with the same authentication name, which resulted in the termination of the previous connection. */
   SessionTakenOver,
 }
 
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.EventGrid.SystemEvents.SubscriptionValidationEvent event.
-""")
+/** Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SystemEvents.SubscriptionValidationEvent event. */
 model SubscriptionValidationEventData {
-  @doc("""
-The validation code sent by Azure Event Grid to validate an event subscription.
-To complete the validation handshake, the subscriber must either respond with
-this validation code as part of the validation response, or perform a GET
-request on the validationUrl (available starting version 2018-05-01-preview).
-""")
+  /** The validation code sent by Azure Event Grid to validate an event subscription.
+   * To complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response,
+   * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
   @visibility("read")
   validationCode?: string;
 
-  @doc("""
-The validation URL sent by Azure Event Grid (available starting version
-2018-05-01-preview). To complete the validation handshake, the subscriber must
-either respond with the validationCode as part of the validation response, or
-perform a GET request on the validationUrl (available starting version
-2018-05-01-preview).
-""")
+  /** The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).
+   * To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,
+   * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
   @visibility("read")
   validationUrl?: string;
 }
 
-@doc("""
+/**
 To complete an event subscription validation handshake, a subscriber can use
 either the validationCode or the validationUrl received in a
 SubscriptionValidationEvent. When the validationCode is used, the
 SubscriptionValidationResponse can be used to build the response.
-""")
+*/
 model SubscriptionValidationResponse {
-  @doc("""
-The validation response sent by the subscriber to Azure Event Grid to complete
-the validation of an event subscription.
-""")
+  /** The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription. */
   validationResponse?: string;
 }
 
-@doc("""
+/** 
 Schema of the Data property of an EventGridEvent for a
 Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEvent event.
-""")
+*/
 model SubscriptionDeletedEventData {
   /** The Azure resource ID of the deleted event subscription. */
   @visibility("read")
   eventSubscriptionId?: string;
 }
 
+/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientCreatedOrUpdatedEventData")
-/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event. */
 model EventGridMQTTClientCreatedOrUpdatedEventData {
   ...EventGridMQTTClientEventData;
 
-  @friendlyName("EventGridMqttClientState")
   /** Configured state of the client. The value could be Enabled or Disabled */
+  @friendlyName("EventGridMqttClientState")
   state?: EventGridMQTTClientState;
 
   /** Time the client resource is created based on the provider's UTC time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdOn?: utcDateTime;
 
-  @doc("""
+  /** 
 Time the client resource is last updated based on the provider's UTC time. If
 the client resource was never updated, this value is identical to the value of
 the 'createdOn' property.
-""")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+*/
   updatedOn?: utcDateTime;
 
   /** The key-value attributes that are assigned to the client resource. */
   attributes?: Record<string>;
 }
 
+/** Schema of the Data property of an EventGridEvent for MQTT Client state changes. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientEventData")
-/** Schema of the Data property of an EventGridEvent for MQTT Client state changes. */
 model EventGridMQTTClientEventData {
-  @doc("""
+  /** 
 Unique identifier for the MQTT client that the client presents to the service
 for authentication. This case-sensitive string can be up to 128 characters
 long, and supports UTF-8 characters.
-""")
+*/
   clientAuthenticationName?: string;
 
   /** Name of the client resource in the Event Grid namespace. */
@@ -163,55 +127,55 @@ long, and supports UTF-8 characters.
   namespaceName?: string;
 }
 
+/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientDeletedEventData")
-/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event. */
 model EventGridMQTTClientDeletedEventData {
   ...EventGridMQTTClientEventData;
 }
 
+/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientSessionConnectedEventData")
-/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event. */
 model EventGridMQTTClientSessionConnectedEventData {
   ...EventGridMQTTClientEventData;
 
-  @doc("""
+  /** 
 Unique identifier for the MQTT client's session. This case-sensitive string can
 be up to 128 characters long, and supports UTF-8 characters.
-""")
+*/
   clientSessionName?: string;
 
-  @doc("""
+  /**
 A number that helps indicate order of MQTT client session connected or
 disconnected events. Latest event will have a sequence number that is higher
 than the previous event.
-""")
+*/
   sequenceNumber?: int64;
 }
 
+/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientSessionDisconnectedEventData")
-/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event. */
 model EventGridMQTTClientSessionDisconnectedEventData {
   ...EventGridMQTTClientEventData;
 
-  @doc("""
+  /**
 Unique identifier for the MQTT client's session. This case-sensitive string can
 be up to 128 characters long, and supports UTF-8 characters.
-""")
+*/
   clientSessionName?: string;
 
-  @doc("""
+  /**
 A number that helps indicate order of MQTT client session connected or
 disconnected events. Latest event will have a sequence number that is higher
 than the previous event.
-""")
+*/
   sequenceNumber?: int64;
 
-  @doc("""
+  /**
 Reason for the disconnection of the MQTT client's session. The value could be
 one of the values in the disconnection reasons table.
-""")
+*/
   disconnectionReason?: EventGridMQTTClientDisconnectionReason;
 }

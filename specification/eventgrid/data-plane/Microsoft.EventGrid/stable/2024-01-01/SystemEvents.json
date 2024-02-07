@@ -379,6 +379,13 @@
             "type": "string"
           }
         },
+        "metadata": {
+          "type": "object",
+          "description": "The chat thread created metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "participants": {
           "type": "array",
           "description": "The list of properties of participants who are part of the thread",
@@ -405,6 +412,13 @@
         "properties": {
           "type": "object",
           "description": "The thread properties",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The chat thread created metadata",
           "additionalProperties": {
             "type": "string"
           }
@@ -877,7 +891,7 @@
     },
     "AcsRouterJobCancelledEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobCancelled event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCancelled event",
       "properties": {
         "note": {
           "type": "string",
@@ -896,7 +910,7 @@
     },
     "AcsRouterJobClassificationFailedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobClassificationFailed event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassificationFailed event",
       "properties": {
         "classificationPolicyId": {
           "type": "string",
@@ -919,7 +933,7 @@
     },
     "AcsRouterJobClassifiedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobClassified event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassified event",
       "properties": {
         "queueDetails": {
           "$ref": "#/definitions/AcsRouterQueueDetails",
@@ -951,7 +965,7 @@
     },
     "AcsRouterJobClosedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobClosed event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClosed event",
       "properties": {
         "assignmentId": {
           "type": "string",
@@ -974,7 +988,7 @@
     },
     "AcsRouterJobCompletedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobCompleted event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCompleted event",
       "properties": {
         "assignmentId": {
           "type": "string",
@@ -993,7 +1007,7 @@
     },
     "AcsRouterJobDeletedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobDeleted event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobDeleted event",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1031,7 +1045,7 @@
     },
     "AcsRouterJobExceptionTriggeredEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobExceptionTriggered event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobExceptionTriggered event",
       "properties": {
         "ruleKey": {
           "type": "string",
@@ -1050,7 +1064,7 @@
     },
     "AcsRouterJobQueuedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobQueued event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobQueued event",
       "properties": {
         "priority": {
           "type": "integer",
@@ -1082,7 +1096,7 @@
     },
     "AcsRouterJobReceivedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobReceived event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobReceived event",
       "properties": {
         "jobStatus": {
           "$ref": "#/definitions/AcsRouterJobStatus",
@@ -1126,7 +1140,7 @@
     },
     "AcsRouterJobSchedulingFailedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobSchedulingFailed event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobSchedulingFailed event",
       "properties": {
         "priority": {
           "type": "integer",
@@ -1251,7 +1265,7 @@
     },
     "AcsRouterJobUnassignedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobUnassigned event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobUnassigned event",
       "properties": {
         "assignmentId": {
           "type": "string",
@@ -1270,7 +1284,7 @@
     },
     "AcsRouterJobWaitingForActivationEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobWaitingForActivation event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWaitingForActivation event",
       "properties": {
         "priority": {
           "type": "integer",
@@ -1314,7 +1328,7 @@
     },
     "AcsRouterJobWorkerSelectorsExpiredEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobWorkerSelectorsExpired event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWorkerSelectorsExpired event",
       "properties": {
         "expiredRequestedWorkerSelectors": {
           "type": "array",
@@ -1410,7 +1424,7 @@
     },
     "AcsRouterWorkerDeletedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerDeleted event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeleted event",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -1419,7 +1433,7 @@
     },
     "AcsRouterWorkerDeregisteredEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerDeregistered event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeregistered event",
       "properties": {
         "workerId": {
           "type": "string",
@@ -1444,7 +1458,7 @@
     },
     "AcsRouterWorkerOfferAcceptedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerOfferAccepted event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferAccepted event",
       "properties": {
         "queueId": {
           "type": "string",
@@ -1500,7 +1514,7 @@
     },
     "AcsRouterWorkerOfferDeclinedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerOfferDeclined event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferDeclined event",
       "properties": {
         "queueId": {
           "type": "string",
@@ -1519,7 +1533,7 @@
     },
     "AcsRouterWorkerOfferExpiredEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerOfferExpired event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferExpired event",
       "properties": {
         "queueId": {
           "type": "string",
@@ -1538,7 +1552,7 @@
     },
     "AcsRouterWorkerOfferIssuedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerOfferIssued event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferIssued event",
       "properties": {
         "queueId": {
           "type": "string",
@@ -1600,7 +1614,7 @@
     },
     "AcsRouterWorkerOfferRevokedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerOfferRevoked event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferRevoked event",
       "properties": {
         "queueId": {
           "type": "string",
@@ -1619,7 +1633,7 @@
     },
     "AcsRouterWorkerRegisteredEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerRegistered event",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerRegistered event",
       "properties": {
         "workerId": {
           "type": "string",
@@ -2199,7 +2213,7 @@
     },
     "AppConfigurationSnapshotCreatedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.AppConfiguration.SnapshotCreated event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event.",
       "allOf": [
         {
           "$ref": "#/definitions/AppConfigurationSnapshotEventData"
@@ -2226,7 +2240,7 @@
     },
     "AppConfigurationSnapshotModifiedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.AppConfiguration.SnapshotModified event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotModified event.",
       "allOf": [
         {
           "$ref": "#/definitions/AppConfigurationSnapshotEventData"
@@ -3001,11 +3015,11 @@
       "properties": {
         "deviceId": {
           "type": "string",
-          "description": "The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '."
+          "description": "The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '."
         },
         "moduleId": {
           "type": "string",
-          "description": "The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '."
+          "description": "The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '."
         },
         "hubName": {
           "type": "string",
@@ -3023,7 +3037,7 @@
       "properties": {
         "deviceId": {
           "type": "string",
-          "description": "The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '."
+          "description": "The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '."
         },
         "hubName": {
           "type": "string",
@@ -3243,22 +3257,22 @@
           {
             "name": "ClientAuthenticationError",
             "value": "ClientAuthenticationError",
-            "description": "The client got disconnected for any authentication reasons (for example,\ncertificate expired, client got disabled, or client configuration changed)."
+            "description": "The client got disconnected for any authentication reasons (for example, certificate expired, client got disabled, or client configuration changed)."
           },
           {
             "name": "ClientAuthorizationError",
             "value": "ClientAuthorizationError",
-            "description": "The client got disconnected for any authorization reasons (for example, because\nof a change in the configuration of topic spaces, permission bindings, or\nclient groups)."
+            "description": "The client got disconnected for any authorization reasons (for example, because of a change in the configuration of topic spaces, permission bindings, or client groups)."
           },
           {
             "name": "ClientError",
             "value": "ClientError",
-            "description": "The client sent a bad request or used one of the unsupported features that\nresulted in a connection termination by the service."
+            "description": "The client sent a bad request or used one of the unsupported features that resulted in a connection termination by the service."
           },
           {
             "name": "ClientInitiatedDisconnect",
             "value": "ClientInitiatedDisconnect",
-            "description": "The client initiates a graceful disconnect through a DISCONNECT packet for MQTT\nor a close frame for MQTT over WebSocket."
+            "description": "The client initiated a graceful disconnect through a DISCONNECT packet for MQTT or a close frame for MQTT over WebSocket."
           },
           {
             "name": "ConnectionLost",
@@ -3273,7 +3287,7 @@
           {
             "name": "QuotaExceeded",
             "value": "QuotaExceeded",
-            "description": "The client exceeded one or more of the throttling limits that resulted in a\nconnection termination by the service."
+            "description": "The client exceeded one or more of the throttling limits that resulted in a connection termination by the service."
           },
           {
             "name": "ServerError",
@@ -3288,12 +3302,12 @@
           {
             "name": "SessionOverflow",
             "value": "SessionOverflow",
-            "description": "The client's queue for unacknowledged QoS1 messages reached its limit, which\nresulted in a connection termination by the server."
+            "description": "The client's queue for unacknowledged QoS1 messages reached its limit, which resulted in a connection termination by the server."
           },
           {
             "name": "SessionTakenOver",
             "value": "SessionTakenOver",
-            "description": "The client reconnected with the same authentication name, which resulted in the\ntermination of the previous connection."
+            "description": "The client reconnected with the same authentication name, which resulted in the termination of the previous connection."
           }
         ]
       }
@@ -5627,7 +5641,7 @@
     },
     "MediaJobOutputProgressEventData": {
       "type": "object",
-      "description": "Job Output Progress Event Data. Schema of the Data property of an\nEventGridEvent for a Microsoft.Media.JobOutputProgress event.",
+      "description": "Job Output Progress Event Data. Schema of the Data property of an\n  EventGridEvent for a Microsoft.Media.JobOutputProgress event.",
       "properties": {
         "label": {
           "type": "string",
@@ -5658,7 +5672,7 @@
     },
     "MediaJobOutputStateChangeEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Media.JobOutputStateChange event.",
+      "description": "Schema of the Data property of an EventGridEvent for a\n  Microsoft.Media.JobOutputStateChange event.",
       "properties": {
         "previousState": {
           "$ref": "#/definitions/MediaJobState",
@@ -5776,7 +5790,7 @@
     },
     "MediaJobStateChangeEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Media.JobStateChange event.",
+      "description": "Schema of the Data property of an EventGridEvent for a\n  Microsoft.Media.JobStateChange event.",
       "properties": {
         "previousState": {
           "$ref": "#/definitions/MediaJobState",
@@ -6017,12 +6031,12 @@
         },
         "timescaleOfMinLastTimestamp": {
           "type": "string",
-          "description": "Gets the timescale in which \"MinLastTimestamp\" is represented.",
+          "description": "Gets the timescale in which \\\"MinLastTimestamp\\\" is represented.",
           "readOnly": true
         },
         "timescaleOfMaxLastTimestamp": {
           "type": "string",
-          "description": "Gets the timescale in which \"MaxLastTimestamp\" is represented.",
+          "description": "Gets the timescale in which \\\"MaxLastTimestamp\\\" is represented.",
           "readOnly": true
         }
       }
@@ -6345,7 +6359,7 @@
         },
         "status": {
           "type": "string",
-          "description": "The status of this event. Failed or  succeeded "
+          "description": "The status of this event. Failed or  succeeded"
         }
       }
     },
@@ -6364,7 +6378,7 @@
         },
         "status": {
           "type": "string",
-          "description": "The status of this event. Failed or  succeeded "
+          "description": "The status of this event. Failed or  succeeded"
         }
       }
     },
@@ -6383,7 +6397,7 @@
         },
         "status": {
           "type": "string",
-          "description": "The status of this event. Failed or  succeeded "
+          "description": "The status of this event. Failed or  succeeded"
         }
       }
     },
@@ -6402,7 +6416,7 @@
         },
         "status": {
           "type": "string",
-          "description": "The status of this event. Failed or  succeeded "
+          "description": "The status of this event. Failed or  succeeded"
         }
       }
     },
@@ -7834,16 +7848,16 @@
     },
     "SubscriptionValidationEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.EventGrid.SystemEvents.SubscriptionValidationEvent event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SystemEvents.SubscriptionValidationEvent event.",
       "properties": {
         "validationCode": {
           "type": "string",
-          "description": "The validation code sent by Azure Event Grid to validate an event subscription.\nTo complete the validation handshake, the subscriber must either respond with\nthis validation code as part of the validation response, or perform a GET\nrequest on the validationUrl (available starting version 2018-05-01-preview).",
+          "description": "The validation code sent by Azure Event Grid to validate an event subscription.\nTo complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response,\nor perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
           "readOnly": true
         },
         "validationUrl": {
           "type": "string",
-          "description": "The validation URL sent by Azure Event Grid (available starting version\n2018-05-01-preview). To complete the validation handshake, the subscriber must\neither respond with the validationCode as part of the validation response, or\nperform a GET request on the validationUrl (available starting version\n2018-05-01-preview).",
+          "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).\nTo complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,\nor perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
           "readOnly": true
         }
       }
@@ -7854,7 +7868,7 @@
       "properties": {
         "validationResponse": {
           "type": "string",
-          "description": "The validation response sent by the subscriber to Azure Event Grid to complete\nthe validation of an event subscription."
+          "description": "The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription."
         }
       }
     },

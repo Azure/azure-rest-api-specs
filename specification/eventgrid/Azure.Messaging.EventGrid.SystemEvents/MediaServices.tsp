@@ -87,10 +87,10 @@ namespace Microsoft.EventGrid.SystemEvents {
     MayRetry,
   }
 
-  @doc("""
+  /**
   Schema of the Data property of an EventGridEvent for a
   Microsoft.Media.JobStateChange event.
-  """)
+  */
   model MediaJobStateChangeEventData {
     /** The previous state of the Job. */
     @visibility("read")
@@ -106,35 +106,35 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** Details of JobOutput errors. */
   model MediaJobError {
-    @visibility("read")
     /** Error code describing the error. */
+    @visibility("read")
     code?: MediaJobErrorCode;
 
-    @visibility("read")
     /** A human-readable language-dependent representation of the error. */
+    @visibility("read")
     message?: string;
 
-    @visibility("read")
     /** Helps with categorization of errors. */
+    @visibility("read")
     category?: MediaJobErrorCategory;
 
-    @visibility("read")
     /** Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal. */
+    @visibility("read")
     retry?: MediaJobRetry;
 
-    @visibility("read")
     /** An array of details about specific errors that led to this reported error. */
+    @visibility("read")
     details?: MediaJobErrorDetail[];
   }
 
   /** Details of JobOutput errors. */
   model MediaJobErrorDetail {
-    @visibility("read")
     /** Code describing the error detail. */
+    @visibility("read")
     code?: string;
 
-    @visibility("read")
     /** A human-readable representation of the error. */
+    @visibility("read")
     message?: string;
   }
 
@@ -163,10 +163,10 @@ namespace Microsoft.EventGrid.SystemEvents {
     oDataType: "#Microsoft.Media.JobOutputAsset";
   }
 
-  @doc("""
+  /**
   Job Output Progress Event Data. Schema of the Data property of an
   EventGridEvent for a Microsoft.Media.JobOutputProgress event.
-  """)
+  */
   model MediaJobOutputProgressEventData {
     /** Gets the Job output label. */
     label?: string;
@@ -178,10 +178,10 @@ namespace Microsoft.EventGrid.SystemEvents {
     jobCorrelationData?: Record<string>;
   }
 
-  @doc("""
+  /**
   Schema of the Data property of an EventGridEvent for a
   Microsoft.Media.JobOutputStateChange event.
-  """)
+  */
   model MediaJobOutputStateChangeEventData {
     /** The previous state of the Job. */
     @visibility("read")
@@ -194,102 +194,102 @@ namespace Microsoft.EventGrid.SystemEvents {
     jobCorrelationData?: Record<string>;
   }
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job scheduled event data. Schema of the data property of an EventGridEvent for
 a Microsoft.Media.JobScheduled event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobScheduledEventData extends MediaJobStateChangeEventData {}
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job processing event data. Schema of the data property of an EventGridEvent for
 a Microsoft.Media.JobProcessing event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobProcessingEventData extends MediaJobStateChangeEventData {}
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job canceling event data. Schema of the data property of an EventGridEvent for
 a Microsoft.Media.JobCanceling event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobCancelingEventData extends MediaJobStateChangeEventData {}
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job finished event data. Schema of the data property of an EventGridEvent for a
 Microsoft.Media.JobFinished event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobFinishedEventData extends MediaJobStateChangeEventData {
     /** Gets the Job outputs. */
     outputs?: MediaJobOutput[];
   }
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job canceled event data. Schema of the data property of an EventGridEvent for a
 Microsoft.Media.JobCanceled event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobCanceledEventData extends MediaJobStateChangeEventData {
     /** Gets the Job outputs. */
     outputs?: MediaJobOutput[];
   }
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job error state event data. Schema of the data property of an EventGridEvent
 for a Microsoft.Media.JobErrored event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobErroredEventData extends MediaJobStateChangeEventData {
     /** Gets the Job outputs. */
     outputs?: MediaJobOutput[];
   }
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job output canceled event data. Schema of the data property of an
 EventGridEvent for a Microsoft.Media.JobOutputCanceled event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobOutputCanceledEventData
     extends MediaJobOutputStateChangeEventData {}
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job output canceling event data. Schema of the data property of an
 EventGridEvent for a Microsoft.Media.JobOutputCanceling event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobOutputCancelingEventData
     extends MediaJobOutputStateChangeEventData {}
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job output error event data. Schema of the data property of an EventGridEvent
 for a Microsoft.Media.JobOutputErrored event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobOutputErroredEventData
     extends MediaJobOutputStateChangeEventData {}
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job output finished event data. Schema of the data property of an
 EventGridEvent for a Microsoft.Media.JobOutputFinished event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobOutputFinishedEventData
     extends MediaJobOutputStateChangeEventData {}
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job output processing event data. Schema of the data property of an
 EventGridEvent for a Microsoft.Media.JobOutputProcessing event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobOutputProcessingEventData
     extends MediaJobOutputStateChangeEventData {}
 
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-  @doc("""
+  /**
 Job output scheduled event data. Schema of the data property of an
 EventGridEvent for a Microsoft.Media.JobOutputScheduled event.
-""")
+*/
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobOutputScheduledEventData
     extends MediaJobOutputStateChangeEventData {}
 
@@ -316,244 +316,244 @@ EventGridEvent for a Microsoft.Media.JobOutputScheduled event.
 
   /** Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamReceived event. */
   model MediaLiveEventIncomingStreamReceivedEventData {
-    @visibility("read")
     /** Gets the ingest URL provided by the live event. */
+    @visibility("read")
     ingestUrl?: string;
 
-    @visibility("read")
     /** Gets the type of the track (Audio / Video). */
+    @visibility("read")
     trackType?: string;
 
-    @visibility("read")
     /** Gets the track name. */
+    @visibility("read")
     trackName?: string;
 
-    @visibility("read")
     /** Gets the bitrate of the track. */
+    @visibility("read")
     bitrate?: int64;
 
-    @visibility("read")
     /** Gets the remote IP. */
+    @visibility("read")
     encoderIp?: string;
 
-    @visibility("read")
     /** Gets the remote port. */
+    @visibility("read")
     encoderPort?: string;
 
-    @visibility("read")
     /** Gets the first timestamp of the data chunk received. */
+    @visibility("read")
     timestamp?: string;
 
-    @visibility("read")
     /** Gets the duration of the first data chunk. */
+    @visibility("read")
     duration?: string;
 
-    @visibility("read")
     /** Gets the timescale in which timestamp is represented. */
+    @visibility("read")
     timescale?: string;
   }
 
   /** Incoming streams out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamsOutOfSync event. */
   model MediaLiveEventIncomingStreamsOutOfSyncEventData {
-    @visibility("read")
     /** Gets the minimum last timestamp received. */
+    @visibility("read")
     minLastTimestamp?: string;
 
-    @visibility("read")
     /** Gets the type of stream with minimum last timestamp. */
+    @visibility("read")
     typeOfStreamWithMinLastTimestamp?: string;
 
-    @visibility("read")
     /** Gets the maximum timestamp among all the tracks (audio or video). */
+    @visibility("read")
     maxLastTimestamp?: string;
 
-    @visibility("read")
     /** Gets the type of stream with maximum last timestamp. */
+    @visibility("read")
     typeOfStreamWithMaxLastTimestamp?: string;
 
-    @visibility("read")
     /** Gets the timescale in which \"MinLastTimestamp\" is represented. */
+    @visibility("read")
     timescaleOfMinLastTimestamp?: string;
 
-    @visibility("read")
     /** Gets the timescale in which \"MaxLastTimestamp\" is represented. */
+    @visibility("read")
     timescaleOfMaxLastTimestamp?: string;
   }
 
   /** Incoming video stream out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync event. */
   model MediaLiveEventIncomingVideoStreamsOutOfSyncEventData {
-    @visibility("read")
     /** Gets the first timestamp received for one of the quality levels. */
+    @visibility("read")
     firstTimestamp?: string;
 
-    @visibility("read")
     /** Gets the duration of the data chunk with first timestamp. */
+    @visibility("read")
     firstDuration?: string;
 
-    @visibility("read")
     /** Gets the timestamp received for some other quality levels. */
+    @visibility("read")
     secondTimestamp?: string;
 
-    @visibility("read")
     /** Gets the duration of the data chunk with second timestamp. */
+    @visibility("read")
     secondDuration?: string;
 
-    @visibility("read")
     /** Gets the timescale in which both the timestamps and durations are represented. */
+    @visibility("read")
     timescale?: string;
   }
 
   /** Ingest fragment dropped event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingDataChunkDropped event. */
   model MediaLiveEventIncomingDataChunkDroppedEventData {
-    @visibility("read")
     /** Gets the timestamp of the data chunk dropped. */
+    @visibility("read")
     timestamp?: string;
 
-    @visibility("read")
     /** Gets the type of the track (Audio / Video). */
+    @visibility("read")
     trackType?: string;
 
-    @visibility("read")
     /** Gets the bitrate of the track. */
+    @visibility("read")
     bitrate?: int64;
 
-    @visibility
     /** Gets the timescale of the Timestamp. */
+    @visibility
     timescale?: string;
 
-    @visibility("read")
     /** Gets the result code for fragment drop operation. */
+    @visibility("read")
     resultCode?: string;
 
-    @visibility("read")
     /** Gets the name of the track for which fragment is dropped. */
+    @visibility("read")
     trackName?: string;
   }
 
   /** Ingest heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIngestHeartbeat event. */
   model MediaLiveEventIngestHeartbeatEventData {
-    @visibility("read")
     /** Gets the type of the track (Audio / Video). */
+    @visibility("read")
     trackType?: string;
 
-    @visibility("read")
     /** Gets the track name. */
+    @visibility("read")
     trackName?: string;
 
-    @visibility("read")
     /** Gets the Live Transcription language. */
+    @visibility("read")
     transcriptionLanguage?: string;
 
-    @visibility("read")
     /** Gets the Live Transcription state. */
+    @visibility("read")
     transcriptionState?: string;
 
-    @visibility("read")
     /** Gets the bitrate of the track. */
+    @visibility("read")
     bitrate?: int64;
 
-    @visibility("read")
     /** Gets the incoming bitrate. */
+    @visibility("read")
     incomingBitrate?: int64;
 
-    @visibility("read")
     /** Gets the track ingest drift value. */
+    @visibility("read")
     ingestDriftValue?: string;
 
-    @visibility("read")
     /** Gets the arrival UTC time of the last fragment. */
+    @visibility("read")
     lastFragmentArrivalTime?: string;
 
-    @visibility("read")
     /** Gets the last timestamp. */
+    @visibility("read")
     lastTimestamp?: string;
 
-    @visibility("read")
     /** Gets the timescale of the last timestamp. */
+    @visibility("read")
     timescale?: string;
 
-    @visibility("read")
     /** Gets the fragment Overlap count. */
+    @visibility("read")
     overlapCount?: int64;
 
-    @visibility("read")
     /** Gets the fragment Discontinuity count. */
+    @visibility("read")
     discontinuityCount?: int64;
 
-    @visibility("read")
     /** Gets Non increasing count. */
+    @visibility("read")
     nonincreasingCount?: int64;
 
-    @visibility("read")
     /** Gets a value indicating whether unexpected bitrate is present or not. */
+    @visibility("read")
     unexpectedBitrate?: boolean;
 
-    @visibility("read")
     /** Gets the state of the live event. */
+    @visibility("read")
     state?: string;
 
-    @visibility("read")
     /** Gets a value indicating whether preview is healthy or not. */
+    @visibility("read")
     healthy?: boolean;
   }
 
   /** Ingest track discontinuity detected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventTrackDiscontinuityDetected event. */
   model MediaLiveEventTrackDiscontinuityDetectedEventData {
-    @visibility("read")
     /** Gets the type of the track (Audio / Video). */
+    @visibility("read")
     trackType?: string;
 
-    @visibility("read")
     /** Gets the track name. */
+    @visibility("read")
     trackName?: string;
 
-    @visibility("read")
     /** Gets the bitrate. */
+    @visibility("read")
     bitrate?: int64;
 
-    @visibility("read")
     /** Gets the timestamp of the previous fragment. */
+    @visibility("read")
     previousTimestamp?: string;
 
-    @visibility("read")
     /** Gets the timestamp of the current fragment. */
+    @visibility("read")
     newTimestamp?: string;
 
-    @visibility("read")
     /** Gets the timescale in which both timestamps and discontinuity gap are represented. */
+    @visibility("read")
     timescale?: string;
 
-    @visibility("read")
     /** Gets the discontinuity gap between PreviousTimestamp and NewTimestamp. */
+    @visibility("read")
     discontinuityGap?: string;
   }
 
   /** Channel Archive heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventChannelArchiveHeartbeat event. */
   model MediaLiveEventChannelArchiveHeartbeatEventData {
-    @visibility("read")
     /** Gets the channel latency in ms. */
+    @visibility("read")
     channelLatencyMs: string;
 
-    @visibility("read")
     /** Gets the latency result code. */
+    @visibility("read")
     latencyResultCode: string;
   }
 
   alias MediaLiveEventConnectionBaseData = {
-    @visibility("read")
     /** Gets the ingest URL provided by the live event. */
+    @visibility("read")
     ingestUrl?: string;
 
-    @visibility("read")
     /** Gets the stream Id. */
+    @visibility("read")
     streamId?: string;
 
-    @visibility("read")
     /** Gets the remote IP. */
+    @visibility("read")
     encoderIp?: string;
 
-    @visibility("read")
     /** Gets the remote port. */
+    @visibility("read")
     encoderPort?: string;
   };
 }

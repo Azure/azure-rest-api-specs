@@ -249,8 +249,8 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** The identity of the requester that triggered this event. */
     identity?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is Any"
     /** For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers. */
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is Any"
     storageDiagnostics?: unknown;
   };
 

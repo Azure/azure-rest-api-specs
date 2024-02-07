@@ -71,12 +71,12 @@ namespace Microsoft.EventGrid.SystemEvents {
     @projectedName("json", "Version")
     version?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     /** Not before date of the object that triggered this event */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     NBF?: float32;
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     /** The expiration date of the object that triggered this event */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     EXP?: float32;
   };
 }

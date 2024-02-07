@@ -7,7 +7,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** The name of this event. */
     name?: string;
 
-    /** The status of this event. Failed or  succeeded  */
+    /** The status of this event. Failed or  succeeded */
     status?: string;
   };
 
@@ -21,14 +21,14 @@ namespace Microsoft.EventGrid.SystemEvents {
     ...RedisBaseEventData;
   }
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ExportRDBCompleted event. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
   model RedisExportRDBCompletedEventData {
     ...RedisBaseEventData;
   }
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ImportRDBCompleted event. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
   model RedisImportRDBCompletedEventData {
     ...RedisBaseEventData;
   }

@@ -31,22 +31,22 @@ model AcsUserDisconnectedEventData {
   userCommunicationIdentifier?: CommunicationIdentifierModel;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageReceivedEventData
   extends AcsChatMessageEventBaseProperties {
   ...AcsChatMessageBaseEventData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageReceivedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   ...AcsChatMessageBaseEventData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageEditedEventData extends AcsChatMessageEventBaseProperties {
   ...AcsChatMessageBaseEventData;
 
@@ -54,8 +54,8 @@ model AcsChatMessageEditedEventData extends AcsChatMessageEventBaseProperties {
   editTime?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageEditedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   ...AcsChatMessageBaseEventData;
@@ -64,72 +64,72 @@ model AcsChatMessageEditedInThreadEventData
   editTime?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageDeletedEventData extends AcsChatMessageEventBaseProperties {
   /** The time at which the message was deleted */
   deleteTime?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageDeletedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   /** The time at which the message was deleted */
   deleteTime?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadCreatedWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   ...AcsChatThreadBaseEventData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadCreatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadBaseEventData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadWithUserDeletedEventData
   extends AcsChatThreadEventBaseProperties {
   ...AcsChatThreadDeletedBaseEventData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadDeletedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadDeletedBaseEventData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadPropertiesUpdatedPerUserEventData
   extends AcsChatThreadEventBaseProperties {
   ...AcsChatThredPropertiesBaseEventData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadPropertiesUpdatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThredPropertiesBaseEventData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatParticipantAddedToThreadWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   ...AcsChatParticipantBaseEventData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatParticipantRemovedFromThreadWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   /** The time at which the user was removed to the thread */
@@ -142,8 +142,8 @@ model AcsChatParticipantRemovedFromThreadWithUserEventData
   participantRemoved?: AcsChatThreadParticipantProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatParticipantAddedToThreadEventData
   extends AcsChatEventInThreadBaseProperties {
   ...AcsChatParticipantBaseEventData;
@@ -152,8 +152,8 @@ model AcsChatParticipantAddedToThreadEventData
   version?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatParticipantRemovedFromThreadEventData
   extends AcsChatEventInThreadBaseProperties {
   /** The time at which the user was removed to the thread */
@@ -169,8 +169,8 @@ model AcsChatParticipantRemovedFromThreadEventData
   version?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   /** Status of Delivery */
   deliveryStatus?: string;
@@ -188,8 +188,8 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   tag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   /** The SMS content */
   message?: string;
@@ -270,11 +270,8 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   engagementType?: AcsUserEngagement;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCancelled event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobCancelled event
-""")
 model AcsRouterJobCancelledEventData extends AcsRouterJobEventData {
   /** Router Job Note */
   note?: string;
@@ -283,11 +280,8 @@ model AcsRouterJobCancelledEventData extends AcsRouterJobEventData {
   dispositionCode?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassificationFailed event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobClassificationFailed event
-""")
 model AcsRouterJobClassificationFailedEventData extends AcsRouterJobEventData {
   /** Router Job Classification Policy Id */
   classificationPolicyId?: string;
@@ -296,11 +290,8 @@ model AcsRouterJobClassificationFailedEventData extends AcsRouterJobEventData {
   errors?: AcsRouterCommunicationError[];
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassified event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobClassified event
-""")
 model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
   /** Router Job Queue Info */
   queueDetails?: AcsRouterQueueDetails;
@@ -315,11 +306,8 @@ model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
   attachedWorkerSelectors?: AcsRouterWorkerSelector[];
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClosed event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobClosed event
-""")
 model AcsRouterJobClosedEventData extends AcsRouterJobEventData {
   /** Router Job Closed Assignment Id */
   assignmentId?: string;
@@ -331,11 +319,8 @@ model AcsRouterJobClosedEventData extends AcsRouterJobEventData {
   dispositionCode?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCompleted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobCompleted event
-""")
 model AcsRouterJobCompletedEventData extends AcsRouterJobEventData {
   /** Router Job Completed Assignment Id */
   assignmentId?: string;
@@ -344,18 +329,12 @@ model AcsRouterJobCompletedEventData extends AcsRouterJobEventData {
   workerId?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobDeleted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobDeleted event
-""")
 model AcsRouterJobDeletedEventData extends AcsRouterJobEventData {}
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobExceptionTriggered event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobExceptionTriggered event
-""")
 model AcsRouterJobExceptionTriggeredEventData extends AcsRouterJobEventData {
   /** Router Job Exception Triggered Rule Key */
   ruleKey?: string;
@@ -364,11 +343,8 @@ model AcsRouterJobExceptionTriggeredEventData extends AcsRouterJobEventData {
   exceptionRuleId?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobQueued event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobQueued event
-""")
 model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
   /** Router Job Priority */
   priority?: int32;
@@ -380,11 +356,8 @@ model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
   requestedWorkerSelectors?: AcsRouterWorkerSelector[];
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobReceived event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobReceived event
-""")
 model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   /** Router Job Received Job Status */
   jobStatus?: AcsRouterJobStatus;
@@ -444,11 +417,8 @@ enum AcsRouterJobStatus {
   WaitingForActivation,
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobSchedulingFailed event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobSchedulingFailed event
-""")
 model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
   /** Router Job Priority */
   priority?: int32;
@@ -467,11 +437,8 @@ model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
   failureReason?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobUnassigned event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobUnassigned event
-""")
 model AcsRouterJobUnassignedEventData extends AcsRouterJobEventData {
   /** Router Job Unassigned Assignment Id */
   assignmentId?: string;
@@ -480,11 +447,8 @@ model AcsRouterJobUnassignedEventData extends AcsRouterJobEventData {
   workerId?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWaitingForActivation event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobWaitingForActivation event
-""")
 model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   /** Router Job Waiting For Activation Priority */
   priority?: int32;
@@ -503,11 +467,8 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   unavailableForMatching: boolean;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWorkerSelectorsExpired event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterJobWorkerSelectorsExpired event
-""")
 model AcsRouterJobWorkerSelectorsExpiredEventData
   extends AcsRouterJobEventData {
   /** Router Job Worker Selectors Expired Requested Worker Selectors */
@@ -517,27 +478,18 @@ model AcsRouterJobWorkerSelectorsExpiredEventData
   expiredAttachedWorkerSelectors?: AcsRouterWorkerSelector[];
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeleted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterWorkerDeleted event
-""")
 model AcsRouterWorkerDeletedEventData extends AcsRouterWorkerEventData {}
 
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterWorkerDeregistered event
-""")
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeregistered event */
 model AcsRouterWorkerDeregisteredEventData {
   /** Router Worker Deregistered Worker Id */
   workerId?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferAccepted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterWorkerOfferAccepted event
-""")
 model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Accepted Queue Id */
   queueId?: string;
@@ -564,11 +516,8 @@ model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
   jobTags?: Record<string>;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferDeclined event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterWorkerOfferDeclined event
-""")
 model AcsRouterWorkerOfferDeclinedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Declined Queue Id */
   queueId?: string;
@@ -577,11 +526,8 @@ model AcsRouterWorkerOfferDeclinedEventData extends AcsRouterWorkerEventData {
   offerId?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferExpired event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterWorkerOfferExpired event
-""")
 model AcsRouterWorkerOfferExpiredEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Expired Queue Id */
   queueId?: string;
@@ -590,11 +536,8 @@ model AcsRouterWorkerOfferExpiredEventData extends AcsRouterWorkerEventData {
   offerId?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferIssued event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterWorkerOfferIssued event
-""")
 model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Issued Queue Id */
   queueId?: string;
@@ -626,11 +569,8 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   jobTags?: Record<string>;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferRevoked event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterWorkerOfferRevoked event
-""")
 model AcsRouterWorkerOfferRevokedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Revoked Queue Id */
   queueId?: string;
@@ -639,10 +579,7 @@ model AcsRouterWorkerOfferRevokedEventData extends AcsRouterWorkerEventData {
   offerId?: string;
 }
 
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.Communication.RouterWorkerRegistered event
-""")
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerRegistered event */
 model AcsRouterWorkerRegisteredEventData {
   /** Router Worker Registered Worker Id */
   workerId?: string;
@@ -664,8 +601,8 @@ model AcsRouterWorkerRegisteredEventData {
 }
 
 // Base Properties
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of common properties of all Router Job events */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobEventData extends AcsRouterEventData {
   /** Router Job events Queue Id */
   queueId?: string;
@@ -677,8 +614,8 @@ model AcsRouterJobEventData extends AcsRouterEventData {
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of common properties of all Router Worker events */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterWorkerEventData extends AcsRouterEventData {
   /** Router Worker events Worker Id */
   workerId?: string;
@@ -742,8 +679,8 @@ model AcsRouterWorkerSelector {
   /** Router Job Worker Selector Label Operator */
   operator?: AcsRouterLabelOperator;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of labelValue is object"
   /** Router Job Worker Selector Value */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of labelValue is object"
   labelValue?: unknown;
 
   /** Router Job Worker Selector Time to Live in Seconds */
@@ -769,8 +706,8 @@ alias AcsChatThreadBaseEventData = {
   /** The communication identifier of the user who created the thread */
   createdByCommunicationIdentifier?: CommunicationIdentifierModel;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
   /** The thread properties */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
   properties?: Record<string>;
 
   /** The chat thread created metadata */
@@ -897,8 +834,8 @@ model AcsEmailDeliveryReportStatusDetails {
   statusMessage?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of common properties of all chat thread events */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
   /** The original creation time of the thread */
   createTime?: utcDateTime;
@@ -907,8 +844,8 @@ model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
   version?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of common properties of all chat thread events */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadEventInThreadBaseProperties
   extends AcsChatEventInThreadBaseProperties {
   /** The original creation time of the thread */
@@ -918,8 +855,8 @@ model AcsChatThreadEventInThreadBaseProperties
   version?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of common properties of all chat message events */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   /** The chat message id */
   messageId?: string;
@@ -940,8 +877,8 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   version?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 /** Schema of common properties of all thread-level chat message events */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageEventInThreadBaseProperties
   extends AcsChatEventInThreadBaseProperties {
   /** The chat message id */

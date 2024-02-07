@@ -27,12 +27,12 @@ model MachineLearningServicesModelDeployedEventData {
   /** A common separated list of model IDs. The IDs of the models deployed in the service. */
   modelIds?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Service tags is type any"
   /** The tags of the deployed service. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Service tags is type any"
   serviceTags?: unknown;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Service properties is type any"
   /** The properties of the deployed service. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Service properties is type any"
   serviceProperties?: unknown;
 }
 
@@ -50,12 +50,12 @@ model MachineLearningServicesRunCompletedEventData {
   /** The Run Type of the completed Run. */
   runType?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Run tags is type any"
   /** The tags of the completed Run. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Run tags is type any"
   runTags?: unknown;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Run properties is type any"
   /** The properties of the completed Run. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Run properties is type any"
   runProperties?: unknown;
 }
 

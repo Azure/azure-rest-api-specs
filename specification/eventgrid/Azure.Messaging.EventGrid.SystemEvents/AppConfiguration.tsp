@@ -44,18 +44,12 @@ model AppConfigurationSnapshotEventData {
   syncToken?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.AppConfiguration.SnapshotCreated event.
-""")
 model AppConfigurationSnapshotCreatedEventData
   extends AppConfigurationSnapshotEventData {}
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotModified event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@doc("""
-Schema of the Data property of an EventGridEvent for a
-Microsoft.AppConfiguration.SnapshotModified event.
-""")
 model AppConfigurationSnapshotModifiedEventData
   extends AppConfigurationSnapshotEventData {}

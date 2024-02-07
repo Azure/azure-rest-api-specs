@@ -1,14 +1,14 @@
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
 /** Describes the schema of the Azure SignalR Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
 namespace Microsoft.EventGrid.SystemEvents {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
   /** Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionConnected event. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
   model SignalRServiceClientConnectionConnectedEventData {
     ...SignalRServiceBaseEventdata;
   }
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
   /** Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionDisconnected event. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
   model SignalRServiceClientConnectionDisconnectedEventData {
     ...SignalRServiceBaseEventdata;
 
