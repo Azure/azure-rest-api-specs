@@ -186,6 +186,47 @@ namespace Microsoft.EventGrid.SystemEvents {
     taskExecutionId?: string;
   }
 
+  @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentQueued event.")
+  model StorageTaskAssignmentQueuedEventData {
+    @doc("The time at which a storage task was queued.")
+    @encode("ISO8601")
+    @friendlyName("queuedOn")
+    queuedDateTime?: utcDateTime;
+
+    @doc("The execution id for a storage task.")
+    taskExecutionId?: string;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentCompleted event.")
+  model StorageTaskAssignmentCompletedEventData {
+    @doc("The status for a storage task.")
+    status?: StorageTaskAssignmentCompletedStatus;
+
+    @doc("The time at which a storage task was completed.")
+    @encode("ISO8601")
+    @friendlyName("completedOn")
+    completedDateTime?: utcDateTime;
+
+    @doc("The execution id for a storage task.")
+    taskExecutionId?: string;
+
+    @doc("The task name for a storage task.")
+    taskName?: string;
+
+    @doc("The summary report blob url for a storage task")
+    @friendlyName("summaryReportBlobUri")
+    summaryReportBlobUrl?: url;
+  }
+
+  @doc("The status for a storage task.")
+  enum StorageTaskAssignmentCompletedStatus {
+    @doc("Succeeded")
+    Succeeded,
+
+    @doc("Failed")
+    Failed,
+  }
+
   @doc("The status for a storage task.")
   enum StorageTaskCompletedStatus {
     @doc("Succeeded")

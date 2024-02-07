@@ -2324,6 +2324,202 @@
         ]
       }
     },
+    "AvsClusterCreatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterCreated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsClusterEventData"
+        }
+      ]
+    },
+    "AvsClusterDeletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsClusterEventData"
+        }
+      ]
+    },
+    "AvsClusterEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for Microsoft.AVS/clusters events.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Id of the operation that caused this event."
+        },
+        "addedHostNames": {
+          "type": "array",
+          "description": "Hosts added to the cluster in this event, if any.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "removedHostNames": {
+          "type": "array",
+          "description": "Hosts removed from the cluster in this event, if any.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inMaintenanceHostNames": {
+          "type": "array",
+          "description": "Hosts in Maintenance mode in the cluster, if any.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "addedHostNames",
+        "removedHostNames",
+        "inMaintenanceHostNames"
+      ]
+    },
+    "AvsClusterFailedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterFailed event.",
+      "properties": {
+        "failureMessage": {
+          "type": "string",
+          "description": "Failure reason of an event."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsClusterEventData"
+        }
+      ]
+    },
+    "AvsClusterUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterUpdated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsClusterEventData"
+        }
+      ]
+    },
+    "AvsClusterUpdatingEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterUpdating event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsClusterEventData"
+        }
+      ]
+    },
+    "AvsPrivateCloudEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for Microsoft.AVS/privateClouds events.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Id of the operation that caused this event."
+        }
+      }
+    },
+    "AvsPrivateCloudFailedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.PrivateCloudFailed event.",
+      "properties": {
+        "failureMessage": {
+          "type": "string",
+          "description": "Failure reason of an event."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsPrivateCloudEventData"
+        }
+      ]
+    },
+    "AvsPrivateCloudUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.PrivateCloudUpdated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsPrivateCloudEventData"
+        }
+      ]
+    },
+    "AvsPrivateCloudUpdatingEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.PrivateCloudUpdating event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsPrivateCloudEventData"
+        }
+      ]
+    },
+    "AvsScriptExecutionCancelledEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionCancelled event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsScriptExecutionEventData"
+        }
+      ]
+    },
+    "AvsScriptExecutionEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for Microsoft.AVS/scriptExecutions events.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Id of the operation that caused this event."
+        },
+        "cmdletId": {
+          "type": "string",
+          "description": "Cmdlet referenced in the execution that caused this event."
+        },
+        "output": {
+          "type": "array",
+          "description": "Stdout outputs from the execution, if any.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AvsScriptExecutionFailedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionFailed event.",
+      "properties": {
+        "failureMessage": {
+          "type": "string",
+          "description": "Failure reason of an event."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsScriptExecutionEventData"
+        }
+      ]
+    },
+    "AvsScriptExecutionFinishedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionFinished event.",
+      "properties": {
+        "namedOutputs": {
+          "type": "object",
+          "description": "Named outputs of completed execution, if any.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "namedOutputs"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsScriptExecutionEventData"
+        }
+      ]
+    },
     "CommunicationCloudEnvironmentModel": {
       "type": "string",
       "description": "Communication cloud environment model.",
@@ -7503,6 +7699,73 @@
         "tierToArchiveSummary": {
           "$ref": "#/definitions/StorageLifecyclePolicyActionSummaryDetail",
           "description": "Execution statistics of a specific policy action in a Blob Management cycle."
+        }
+      }
+    },
+    "StorageTaskAssignmentCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentCompleted event.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/StorageTaskAssignmentCompletedStatus",
+          "description": "The status for a storage task."
+        },
+        "completedDateTime": {
+          "type": "string",
+          "format": "ISO8601",
+          "description": "The time at which a storage task was completed."
+        },
+        "taskExecutionId": {
+          "type": "string",
+          "description": "The execution id for a storage task."
+        },
+        "taskName": {
+          "type": "string",
+          "description": "The task name for a storage task."
+        },
+        "summaryReportBlobUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The summary report blob url for a storage task"
+        }
+      }
+    },
+    "StorageTaskAssignmentCompletedStatus": {
+      "type": "string",
+      "description": "The status for a storage task.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "StorageTaskAssignmentCompletedStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          }
+        ]
+      }
+    },
+    "StorageTaskAssignmentQueuedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentQueued event.",
+      "properties": {
+        "queuedDateTime": {
+          "type": "string",
+          "format": "ISO8601",
+          "description": "The time at which a storage task was queued."
+        },
+        "taskExecutionId": {
+          "type": "string",
+          "description": "The execution id for a storage task."
         }
       }
     },
