@@ -1,6 +1,3 @@
-import "@azure-tools/typespec-azure-core";
-import "@typespec/rest";
-import "@typespec/http";
 import "./model.radiologyinsights.tsp";
 import "./model.radiologyinsights.valuesets.tsp";
 import "../HealthInsights.Common/primitives.tsp";
