@@ -2030,6 +2030,41 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/createProductSerialNumber": {
+      "post": {
+        "operationId": "PaloAltoNetworksCloudngfw_createProductSerialNumber",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductSerialNumberStatusRequest"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaloAltoNetworksCloudngfw_createProductSerialNumber_MaximumSet_Gen": {
+            "$ref": "./examples/PaloAltoNetworksCloudngfw_createProductSerialNumber_MaximumSet_Gen.json"
+          },
+          "PaloAltoNetworksCloudngfw_createProductSerialNumber_MinimumSet_Gen": {
+            "$ref": "./examples/PaloAltoNetworksCloudngfw_createProductSerialNumber_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/firewalls": {
       "get": {
         "tags": [
@@ -2068,6 +2103,81 @@
           },
           "Firewalls_ListBySubscription_MinimumSet_Gen": {
             "$ref": "./examples/Firewalls_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/listCloudManagerTenants": {
+      "post": {
+        "operationId": "PaloAltoNetworksCloudngfw_listCloudManagerTenants",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudManagerTenant"
+              },
+              "x-ms-identifiers": [],
+              "x-cadl-name": "CloudManagerTenant[]"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaloAltoNetworksCloudngfw_listCloudManagerTenants_MaximumSet_Gen": {
+            "$ref": "./examples/PaloAltoNetworksCloudngfw_listCloudManagerTenants_MaximumSet_Gen.json"
+          },
+          "PaloAltoNetworksCloudngfw_listCloudManagerTenants_MinimumSet_Gen": {
+            "$ref": "./examples/PaloAltoNetworksCloudngfw_listCloudManagerTenants_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/listProductSerialNumberStatus": {
+      "post": {
+        "operationId": "PaloAltoNetworksCloudngfw_listProductSerialNumberStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductSerialNumberStatus"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaloAltoNetworksCloudngfw_listProductSerialNumberStatus_MaximumSet_Gen": {
+            "$ref": "./examples/PaloAltoNetworksCloudngfw_listProductSerialNumberStatus_MaximumSet_Gen.json"
+          },
+          "PaloAltoNetworksCloudngfw_listProductSerialNumberStatus_MinimumSet_Gen": {
+            "$ref": "./examples/PaloAltoNetworksCloudngfw_listProductSerialNumberStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -4925,6 +5035,23 @@
         "changes"
       ]
     },
+    "CloudManagerTenant": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of Cloud Manager Tenant"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Cloud Manager Tenant ID"
+        }
+      },
+      "description": "Cloud Manager Tenant",
+      "required": [
+        "name"
+      ]
+    },
     "CountriesResponse": {
       "type": "object",
       "properties": {
@@ -6570,6 +6697,36 @@
         "prefixList"
       ]
     },
+    "ProductSerialNumberStatus": {
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "product Serial associated with given resource"
+        },
+        "status": {
+          "$ref": "#/definitions/productSerialStatusValues",
+          "description": "allocation status of the product serial number"
+        }
+      },
+      "description": "Product serial and status for the service",
+      "required": [
+        "status"
+      ]
+    },
+    "ProductSerialNumberStatusRequest": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "allocation status of the product serial number"
+        }
+      },
+      "description": "Create Product Serial Number Request status",
+      "required": [
+        "status"
+      ]
+    },
     "ProtocolType": {
       "type": "string",
       "description": "Protocol Enum",
@@ -7261,6 +7418,18 @@
       "required": [
         "entry"
       ]
+    },
+    "productSerialStatusValues": {
+      "type": "string",
+      "description": "allocation status of the product serial number",
+      "enum": [
+        "Allocated",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "productSerialStatusValues",
+        "modelAsString": false
+      }
     },
     "securityServices": {
       "type": "object",
