@@ -149,7 +149,7 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 ``` yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.Security/stable/2024-01-01/pricings.json
-  - Microsoft.Security/stable/2024-01-31/Integrations.json
+  - Microsoft.Security/stable/2024-01-31/integrations.json
 ```
 
 ### Tag: package-preview-2023-05
@@ -488,7 +488,7 @@ input-file:
 - Microsoft.Security/stable/2023-01-01/pricings.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
-- Microsoft.Security/stable/2024-01-01/Integrations.json
+- Microsoft.Security/stable/2024-01-01/integrations.json
 
 # Autorest suppressions
 suppressions:
