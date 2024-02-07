@@ -1,18 +1,18 @@
-@doc("Describes the schema of the Azure EventGrid events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
+/** Describes the schema of the Azure EventGrid events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
 @friendlyName("EventGridMqttClientState")
-@doc("EventGrid MQTT Client State")
+/** EventGrid MQTT Client State */
 enum EventGridMQTTClientState {
-  @doc("Enabled")
+  /** Enabled */
   Enabled,
 
-  @doc("Disabled")
+  /** Disabled */
   Disabled,
 }
 
 @friendlyName("EventGridMqttClientDisconnectionReason")
-@doc("EventGrid MQTT Client Disconnection Reason")
+/** EventGrid MQTT Client Disconnection Reason */
 enum EventGridMQTTClientDisconnectionReason {
   @doc("""
 The client got disconnected for any authentication reasons (for example,
@@ -39,10 +39,10 @@ or a close frame for MQTT over WebSocket.
 """)
   ClientInitiatedDisconnect,
 
-  @doc("The client-server connection is lost. (EXCHANGE ONLINE PROTECTION).")
+  /** The client-server connection is lost. (EXCHANGE ONLINE PROTECTION). */
   ConnectionLost,
 
-  @doc("The client's IP address is blocked by IP filter or Private links configuration.")
+  /** The client's IP address is blocked by IP filter or Private links configuration. */
   IpForbidden,
 
   @doc("""
@@ -51,10 +51,10 @@ connection termination by the service.
 """)
   QuotaExceeded,
 
-  @doc("The connection got terminated due to an unexpected server error.")
+  /** The connection got terminated due to an unexpected server error. */
   ServerError,
 
-  @doc("The server initiates a graceful disconnect for any operational reason.")
+  /** The server initiates a graceful disconnect for any operational reason. */
   ServerInitiatedDisconnect,
 
   @doc("""
@@ -114,22 +114,22 @@ Schema of the Data property of an EventGridEvent for a
 Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEvent event.
 """)
 model SubscriptionDeletedEventData {
-  @doc("The Azure resource ID of the deleted event subscription.")
+  /** The Azure resource ID of the deleted event subscription. */
   @visibility("read")
   eventSubscriptionId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientCreatedOrUpdatedEventData")
-@doc("Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event.")
+/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event. */
 model EventGridMQTTClientCreatedOrUpdatedEventData {
   ...EventGridMQTTClientEventData;
 
   @friendlyName("EventGridMqttClientState")
-  @doc("Configured state of the client. The value could be Enabled or Disabled")
+  /** Configured state of the client. The value could be Enabled or Disabled */
   state?: EventGridMQTTClientState;
 
-  @doc("Time the client resource is created based on the provider's UTC time.")
+  /** Time the client resource is created based on the provider's UTC time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdOn?: utcDateTime;
 
@@ -141,13 +141,13 @@ the 'createdOn' property.
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedOn?: utcDateTime;
 
-  @doc("The key-value attributes that are assigned to the client resource.")
+  /** The key-value attributes that are assigned to the client resource. */
   attributes?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientEventData")
-@doc("Schema of the Data property of an EventGridEvent for MQTT Client state changes.")
+/** Schema of the Data property of an EventGridEvent for MQTT Client state changes. */
 model EventGridMQTTClientEventData {
   @doc("""
 Unique identifier for the MQTT client that the client presents to the service
@@ -156,23 +156,23 @@ long, and supports UTF-8 characters.
 """)
   clientAuthenticationName?: string;
 
-  @doc("Name of the client resource in the Event Grid namespace.")
+  /** Name of the client resource in the Event Grid namespace. */
   clientName?: string;
 
-  @doc("Name of the Event Grid namespace where the MQTT client was created or updated.")
+  /** Name of the Event Grid namespace where the MQTT client was created or updated. */
   namespaceName?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientDeletedEventData")
-@doc("Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event.")
+/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event. */
 model EventGridMQTTClientDeletedEventData {
   ...EventGridMQTTClientEventData;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientSessionConnectedEventData")
-@doc("Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event.")
+/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event. */
 model EventGridMQTTClientSessionConnectedEventData {
   ...EventGridMQTTClientEventData;
 
@@ -192,7 +192,7 @@ than the previous event.
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
 @friendlyName("EventGridMqttClientSessionDisconnectedEventData")
-@doc("Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event.")
+/** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event. */
 model EventGridMQTTClientSessionDisconnectedEventData {
   ...EventGridMQTTClientEventData;
 

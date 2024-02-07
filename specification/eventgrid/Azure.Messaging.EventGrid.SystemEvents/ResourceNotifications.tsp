@@ -13,17 +13,17 @@ event.
 model ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
 
-@doc("Describes the schema of the common properties across all ARN system topic events")
+/** Describes the schema of the common properties across all ARN system topic events */
 model ResourceNotificationsResourceUpdatedEventData {
-  @doc("resourceInfo details for update event")
+  /** resourceInfo details for update event */
   @projectedName("json", "resourceInfo")
   resourceDetails?: ResourceNotificationsResourceUpdatedDetails;
 
-  @doc("details about operational info")
+  /** details about operational info */
   @projectedName("json", "operationalInfo")
   operationalDetails?: ResourceNotificationsOperationalDetails;
 
-  @doc("api version of the resource properties bag")
+  /** api version of the resource properties bag */
   apiVersion?: string;
 }
 
@@ -32,29 +32,29 @@ Describes the schema of the properties under resource info which are common
 across all ARN system topic events
 """)
 model ResourceNotificationsResourceUpdatedDetails {
-  @doc("id of the resource for which the event is being emitted")
+  /** id of the resource for which the event is being emitted */
   id?: string;
 
-  @doc("name of the resource for which the event is being emitted")
+  /** name of the resource for which the event is being emitted */
   name?: string;
 
-  @doc("the type of the resource for which the event is being emitted")
+  /** the type of the resource for which the event is being emitted */
   type?: string;
 
-  @doc("the location of the resource for which the event is being emitted")
+  /** the location of the resource for which the event is being emitted */
   location?: string;
 
-  @doc("the tags on the resource for which the event is being emitted")
+  /** the tags on the resource for which the event is being emitted */
   tags?: string;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties object"
-  @doc("properties in the payload of the resource for which the event is being emitted")
+  /** properties in the payload of the resource for which the event is being emitted */
   properties?: Record<unknown>;
 }
 
-@doc("details of operational info")
+/** details of operational info */
 model ResourceNotificationsOperationalDetails {
-  @doc("Date and Time when resource was updated")
+  /** Date and Time when resource was updated */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   resourceEventTime?: utcDateTime;
 }
@@ -90,11 +90,11 @@ Describes the schema of the common properties across all ARN system topic
 delete events
 """)
 model ResourceNotificationsResourceDeletedEventData {
-  @doc("resourceInfo details for delete event")
+  /** resourceInfo details for delete event */
   @projectedName("json", "resourceInfo")
   resourceDetails?: ResourceNotificationsResourceDeletedDetails;
 
-  @doc("details about operational info")
+  /** details about operational info */
   @projectedName("json", "operationalInfo")
   operationalDetails?: ResourceNotificationsOperationalDetails;
 }
@@ -104,12 +104,12 @@ Describes the schema of the properties under resource info which are common
 across all ARN system topic delete events
 """)
 model ResourceNotificationsResourceDeletedDetails {
-  @doc("id of the resource for which the event is being emitted")
+  /** id of the resource for which the event is being emitted */
   id?: string;
 
-  @doc("name of the resource for which the event is being emitted")
+  /** name of the resource for which the event is being emitted */
   name?: string;
 
-  @doc("the type of the resource for which the event is being emitted")
+  /** the type of the resource for which the event is being emitted */
   type?: string;
 }
