@@ -1,0 +1,217 @@
+import "@typespec/versioning";
+import "../common/models.tsp";
+import "../threads/models.tsp";
+import "../tools/models.tsp";
+
+namespace Azure.AI.OpenAI.Assistants;
+
+using TypeSpec.Versioning;
+
+@doc("Data representing a single evaluation run of an assistant thread.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model ThreadRun {
+  @doc("The identifier, which can be referenced in API endpoints.")
+  id: string;
+
+  @doc("The object type, which is always 'thread.run'.")
+  object: "thread.run";
+
+  @projectedName("json", "thread_id")
+  @doc("The ID of the thread associated with this run.")
+  threadId: string;
+
+  @projectedName("json", "assistant_id")
+  @doc("The ID of the assistant associated with the thread this run was performed against.")
+  assistantId: string;
+
+  @doc("The status of the assistant thread run.")
+  status: RunStatus;
+
+  // Internal note: API reference describes this as nullable and the spec explicitly defines it as required and
+  //                nullable, but actual test traffic confirms that runs without tool calls do not present
+  //                required_action on their responses. We split the difference to be optional and nullable.
+  //                https://platform.openai.com/docs/api-reference/runs/object#runs/object-expires_at
+  //                https://github.com/openai/openai-openapi/blob/master/openapi.yaml#L8245
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @projectedName("json", "required_action")
+  @doc("The details of the action required for the assistant thread run to continue.")
+  requiredAction?: RequiredAction | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @projectedName("json", "last_error")
+  @doc("The last error, if any, encountered by this assistant thread run.")
+  lastError: RunError | null;
+
+  @doc("The ID of the model to use.")
+  `model`: string;
+
+  @doc("The overridden system instructions used for this assistant thread run.")
+  instructions: string;
+
+  @doc("The overridden enabled tools used for this assistant thread run.")
+  tools: ToolDefinition[] = [];
+
+  @projectedName("json", "file_ids")
+  @doc("A list of attached file IDs, ordered by creation date in ascending order.")
+  fileIds: string[] = [];
+
+  @projectedName("json", "created_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @doc("The Unix timestamp, in seconds, representing when this object was created.")
+  createdAt: utcDateTime;
+
+  // Internal note: API reference describes this as non-nullable, but retrieveThreadRun gets a null expiresAt
+  //                for completed runs.
+  //                https://platform.openai.com/docs/api-reference/runs/object#runs/object-expires_at
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @projectedName("json", "expires_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @doc("The Unix timestamp, in seconds, representing when this item expires.")
+  expiresAt: utcDateTime | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @projectedName("json", "started_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @doc("The Unix timestamp, in seconds, representing when this item was started.")
+  startedAt: utcDateTime | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @projectedName("json", "completed_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @doc("The Unix timestamp, in seconds, representing when this completed.")
+  completedAt: utcDateTime | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @projectedName("json", "cancelled_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @doc("The Unix timestamp, in seconds, representing when this was cancelled.")
+  cancelledAt: utcDateTime | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @projectedName("json", "failed_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @doc("The Unix timestamp, in seconds, representing when this failed.")
+  failedAt: utcDateTime | null;
+
+  ...RequiredNullableMetadata;
+}
+
+@doc("The details used when creating a new run of an assistant thread.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model CreateRunOptions {
+  @doc("The ID of the assistant that should run the thread.")
+  @projectedName("json", "assistant_id")
+  assistantId: string;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The overridden model name that the assistant should use to run the thread.")
+  `model`?: string | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The overridden system instructions that the assistant should use to run the thread.")
+  instructions?: string | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @projectedName("json", "additional_instructions")
+  @doc("""
+  Additional instructions to append at the end of the instructions for the run. This is useful for modifying the behavior
+  on a per-run basis without overriding other instructions.
+  """)
+  additionalInstructions?: string | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The overridden list of enabled tools that the assistant should use to run the thread.")
+  tools?: ToolDefinition[] | null;
+
+  ...OptionalNullableMetadata;
+}
+
+@doc("The details of an error as encountered by an assistant thread run.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunError {
+  @doc("The status for the error.")
+  code: string;
+
+  @doc("The human-readable text associated with the error.")
+  message: string;
+}
+
+@doc("Possible values for the status of an assistant thread run.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+enum RunStatus {
+  @doc("Represents a run that is queued to start.")
+  queued: "queued",
+
+  @doc("Represents a run that is in progress.")
+  inProgress: "in_progress",
+
+  @doc("Represents a run that needs another operation, such as tool output submission, to continue.")
+  requiresAction: "requires_action",
+
+  @doc("Represents a run that is in the process of cancellation.")
+  cancelling: "cancelling",
+
+  @doc("Represents a run that has been cancelled.")
+  cancelled: "cancelled",
+
+  @doc("Represents a run that failed.")
+  failed: "failed",
+
+  @doc("Represents a run that successfully completed.")
+  completed: "completed",
+
+  @doc("Represents a run that expired before it could otherwise finish.")
+  expired: "expired",
+}
+
+@discriminator("type")
+@doc("An abstract representation of a required action for an assistant thread run to continue.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RequiredAction {
+  @doc("The object type.")
+  type: string;
+}
+
+@doc("The details for required tool calls that must be submitted for an assistant thread run to continue.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model SubmitToolOutputsAction extends RequiredAction {
+  @doc("The object type, which is always 'submit_tool_outputs'.")
+  type: "submit_tool_outputs";
+
+  @projectedName("json", "submit_tool_outputs")
+  @doc("The details describing tools that should be called to submit tool outputs.")
+  submitToolOutputs: SubmitToolOutputsDetails;
+}
+
+@doc("The details describing tools that should be called to submit tool outputs.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model SubmitToolOutputsDetails {
+  @projectedName("json", "tool_calls")
+  @doc("The list of tool calls that must be resolved for the assistant thread run to continue.")
+  toolCalls: RequiredToolCall[];
+}
+
+@doc("The details used when creating and immediately running a new assistant thread.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model CreateAndRunThreadOptions {
+  @projectedName("json", "assistant_id")
+  @doc("The ID of the assistant for which the thread should be created.")
+  assistantId: string;
+
+  @doc("The details used to create the new thread.")
+  thread?: AssistantThreadCreationOptions;
+
+  @doc("The overridden model that the assistant should use to run the thread.")
+  @projectedName("csharp", "overrideModelName")
+  `model`?: string;
+
+  @doc("The overridden system instructions the assistant should use to run the thread.")
+  @projectedName("csharp", "overrideInstructions")
+  instructions?: string;
+
+  @doc("The overridden list of enabled tools the assistant should use to run the thread.")
+  @projectedName("csharp", "overrideTools")
+  tools?: ToolDefinition[];
+
+  ...OptionalNullableMetadata;
+}
