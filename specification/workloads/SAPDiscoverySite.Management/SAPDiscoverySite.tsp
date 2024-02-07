@@ -52,7 +52,8 @@ interface SAPDiscoverySites {
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     SAPDiscoverySite,
-    UpdateSAPDiscoverySiteRequest>;
+    UpdateSAPDiscoverySiteRequest
+  >;
 
   /**
    * Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances and Server Instances.
@@ -75,7 +76,8 @@ interface SAPDiscoverySites {
   importEntities is ArmResourceActionAsync<
     SAPDiscoverySite,
     void,
-    OperationStatusResult>;
+    OperationStatusResult
+  >;
 }
 
 @@doc(SAPDiscoverySites.create::parameters.resource,
