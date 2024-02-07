@@ -852,7 +852,7 @@ enum AcsRouterLabelOperator {
   Less,
 
   @doc("Router Label Operator Greater than or equal")
-  GreaterThanorEqual,
+  GreaterThanOrEqual,
 
   @doc("Router Label Operator Less than or equal")
   LessThanOrEqual,
