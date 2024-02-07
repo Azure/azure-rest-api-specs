@@ -269,13 +269,13 @@ model GptResource {
 @doc("The request of ungroundedness detection.")
 model DetectUngroundednessOptions {
   @doc("""
-  The domain of the text for analysis.
+  The domain of the text for analysis. Allowed values: Medical, Generic.
   This field is optional, with a default value of Generic.
   """)
   domain?: Domain;
 
   @doc("""
-  The task type for the text analysis.
+  The task type for the text analysis. Type of task: QnA, Summarization.
   This field is optional, with a default value of Summarization.
   """)
   task?: Task;
@@ -284,12 +284,17 @@ model DetectUngroundednessOptions {
   The user's question input in a QnA scenario.
   This field is optional, but if the task type is set to QnA, it becomes required.
   """)
+  @maxLength(7500)
   query?: string;
 
-  @doc("The text requiring analysis.")
+  @doc("The specific text that needs to be checked.")
+  @maxLength(7500)
   text: string;
 
-  @doc("The source information used as a grounding reference.")
+  @doc("""
+  Leverages a vast array of grounding sources to validate AI-generated text.
+  Limit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters.
+  """)
   groundingSources: string[];
 
   @doc("""
@@ -312,7 +317,7 @@ model UngroundedDetails {
   text: string;
 
   @doc("""
-  The explanation for identifying the text as ungrounded. 
+  The explanation for detected ungroundedness, enhancing understanding.
   Only when the 'reasoning' field in the input is set to true 'reason' field will be returned.
   """)
   reason?: string;
@@ -321,16 +326,20 @@ model UngroundedDetails {
 @added(Versions.v2024_02_15_Preview)
 @doc("The response of ungroundedness detection.")
 model DetectUngroundednessResult {
-  @doc("Detection result for ungrounded text.")
+  @doc("Indicates whether the text exhibits ungroundedness.")
   ungrounded: boolean;
 
-  @doc("Confidence score of the model in the analysis results.")
+  @doc("Assesses the likelihood of ungrounded content with a numerical score.The score will range from 0 to 1.")
   confidenceScore: float32;
 
-  @doc("Percentage of ungrounded Text.")
+  @doc("""
+  Specifies the proportion of the text identified as ungrounded, 
+  expressed as a decimal between 0 and 1,
+  where 0 indicates no ungrounded content and 1 indicates entirely ungrounded content..
+  """)
   ungroundedPercentage: float32;
 
-  @doc("The detailed information about a text identified as ungrounded.")
+  @doc("Provides insights into ungrounded content with specific examples and percentages.")
   ungroundedDetails: UngroundedDetails[];
 }
 
