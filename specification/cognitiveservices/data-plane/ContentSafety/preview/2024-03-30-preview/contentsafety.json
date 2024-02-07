@@ -514,7 +514,7 @@
     "/text/categories/{categoryName}": {
       "get": {
         "operationId": "TextCustomizedCategoryOperations_GetCustomizedCategory",
-        "description": "The most basic operation.",
+        "description": "Get a customized category or a specific version of it.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -559,7 +559,7 @@
       "put": {
         "operationId": "TextCustomizedCategoryOperations_CreateOrUpdateTextCustomizedCategory",
         "summary": "Create a new version of text customized category.",
-        "description": "Create new version",
+        "description": "Create new category version.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -621,7 +621,7 @@
         }
       },
       "delete": {
-        "operationId": "TextCustomizedCategoryOperations_DeletCustomizedCategory",
+        "operationId": "TextCustomizedCategoryOperations_DeleteCustomizedCategory",
         "description": "Delete a customized category or a specific version of it.",
         "parameters": [
           {
@@ -1603,6 +1603,7 @@
           "type": "string",
           "description": "URL of directory to store copied sample files.",
           "x-ms-mutability": [
+            "read",
             "update",
             "create"
           ]
@@ -1642,7 +1643,7 @@
           "description": "Build information for the customized category.",
           "readOnly": true
         },
-        "delteInfo": {
+        "deleteInfo": {
           "$ref": "#/definitions/TextCustomizedCategoryDeleteInfo",
           "description": "Build information for the customized category.",
           "readOnly": true
@@ -1655,7 +1656,7 @@
         "createdTime",
         "status",
         "buildInfo",
-        "delteInfo"
+        "deleteInfo"
       ]
     },
     "TextCustomizedCategoryBuildInfo": {
@@ -1667,19 +1668,13 @@
           "format": "date-time",
           "description": "Last build trigger time."
         },
-        "lastBuildUpdatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last build update time."
-        },
         "buildError": {
           "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
           "description": "Error when building the category."
         }
       },
       "required": [
-        "lastBuildTriggeredTime",
-        "lastBuildUpdatedTime"
+        "lastBuildTriggeredTime"
       ]
     },
     "TextCustomizedCategoryBuildInfoItem": {
@@ -1691,34 +1686,23 @@
           "format": "date-time",
           "description": "Last build trigger time."
         },
-        "lastBuildUpdatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last build update time."
-        },
         "buildError": {
           "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponseItem",
           "description": "Error when building the category."
         }
       },
       "required": [
-        "lastBuildTriggeredTime",
-        "lastBuildUpdatedTime"
+        "lastBuildTriggeredTime"
       ]
     },
     "TextCustomizedCategoryDeleteInfo": {
       "type": "object",
       "description": "Detailed information of the customized category build.",
       "properties": {
-        "lastDeleteTriggeredTime": {
+        "deleteTriggeredTime": {
           "type": "string",
           "format": "date-time",
           "description": "Last build trigger time."
-        },
-        "lastDeleteUpdatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last build update time."
         },
         "deleteError": {
           "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
@@ -1726,23 +1710,17 @@
         }
       },
       "required": [
-        "lastDeleteTriggeredTime",
-        "lastDeleteUpdatedTime"
+        "deleteTriggeredTime"
       ]
     },
     "TextCustomizedCategoryDeleteInfoItem": {
       "type": "object",
       "description": "Detailed information of the customized category build.",
       "properties": {
-        "lastDeleteTriggeredTime": {
+        "deleteTriggeredTime": {
           "type": "string",
           "format": "date-time",
           "description": "Last build trigger time."
-        },
-        "lastDeleteUpdatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last build update time."
         },
         "deleteError": {
           "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponseItem",
@@ -1750,8 +1728,7 @@
         }
       },
       "required": [
-        "lastDeleteTriggeredTime",
-        "lastDeleteUpdatedTime"
+        "deleteTriggeredTime"
       ]
     },
     "TextCustomizedCategoryItem": {
@@ -1785,6 +1762,15 @@
             "create"
           ]
         },
+        "sampleBlobCopyDirectory": {
+          "type": "string",
+          "description": "URL of directory to store copied sample files.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "sampleBlobCopyPath": {
           "type": "string",
           "description": "URL of copied sample jsonl blob.",
@@ -1820,7 +1806,7 @@
           "description": "Build information for the customized category.",
           "readOnly": true
         },
-        "delteInfo": {
+        "deleteInfo": {
           "$ref": "#/definitions/TextCustomizedCategoryDeleteInfoItem",
           "description": "Build information for the customized category.",
           "readOnly": true
@@ -1833,7 +1819,7 @@
         "createdTime",
         "status",
         "buildInfo",
-        "delteInfo"
+        "deleteInfo"
       ]
     },
     "TextCustomizedCategoryVersion": {
@@ -1867,6 +1853,15 @@
             "create"
           ]
         },
+        "sampleBlobCopyDirectory": {
+          "type": "string",
+          "description": "URL of directory to store copied sample files.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "sampleBlobCopyPath": {
           "type": "string",
           "description": "URL of copied sample jsonl blob.",
@@ -1902,7 +1897,7 @@
           "description": "Build information for the customized category.",
           "readOnly": true
         },
-        "delteInfo": {
+        "deleteInfo": {
           "$ref": "#/definitions/TextCustomizedCategoryDeleteInfoItem",
           "description": "Build information for the customized category.",
           "readOnly": true
@@ -1915,7 +1910,7 @@
         "createdTime",
         "status",
         "buildInfo",
-        "delteInfo"
+        "deleteInfo"
       ]
     },
     "TextCustomizedCategoryVersionList": {

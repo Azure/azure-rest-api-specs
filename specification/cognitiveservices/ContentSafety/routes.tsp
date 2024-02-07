@@ -158,7 +158,7 @@ interface TextCustomizedCategoryOps
 @added(ContentSafety.Versions.v2024_03_30_Preview)
 interface TextCustomizedCategoryOperations {
   @summary("Create a new version of text customized category.")
-  @doc("Create new version")
+  @doc("Create new category version.")
   createOrUpdateTextCustomizedCategory is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomizedCategory>;
 
   // getCustomizedCategory is TextCustomizedCategoryOps.ResourceRead<
@@ -171,6 +171,7 @@ interface TextCustomizedCategoryOperations {
   // >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get a customized category or a specific version of it.")
   @get
   @route("/text/categories/{categoryName}")
   getCustomizedCategory is Azure.Core.Foundations.Operation<
@@ -206,7 +207,7 @@ interface TextCustomizedCategoryOperations {
   // >;
 
   @doc("Delete a customized category or a specific version of it.")
-  deletCustomizedCategory is TextCustomizedCategoryOps.LongRunningResourceDelete<
+  deleteCustomizedCategory is TextCustomizedCategoryOps.LongRunningResourceDelete<
     TextCustomizedCategory,
     QueryParametersTrait<{
       @query
@@ -225,6 +226,17 @@ interface TextCustomizedCategoryOperations {
     },
     AcceptedResponse
   >;
+
+  // @doc("Trigger the category deploy process.")
+  // deploy is TextCustomizedCategoryOps.ResourceAction<
+  //   TextCustomizedCategory,
+  //   {
+  //     @query
+  //     @doc("The deploy will target on the specicied category version")
+  //     version: int32;
+  //   },
+  //   AcceptedResponse
+  // >;
 
   // @doc("List all versions of the category.")
   // @route("text/categories/{categoryName}:listVersion")

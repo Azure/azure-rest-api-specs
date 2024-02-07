@@ -275,7 +275,7 @@ model TextCustomizedCategory {
   sampleBlobPath?: string;
 
   @doc("URL of directory to store copied sample files.")
-  @visibility("create", "update")
+  @visibility("create", "read", "update")
   sampleBlobCopyDirectory?: string;
 
   @doc("URL of copied sample jsonl blob.")
@@ -304,7 +304,7 @@ model TextCustomizedCategory {
 
   @doc("Build information for the customized category.")
   @visibility("read")
-  delteInfo: TextCustomizedCategoryDeleteInfo;
+  deleteInfo: TextCustomizedCategoryDeleteInfo;
 }
 
 @doc("Detailed information of the customized category build.")
