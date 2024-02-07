@@ -52,6 +52,18 @@ model NetworkAccessIdentifierModel {
   networkAccessIdentifier?: string;
 }
 
+@doc("Fields for API's that require the frontend authorisation flow.")
+model FrontendAuthFieldsModel {
+  @doc("The code provided by the network operator as part of the frontend authorisation flow.")
+  operatorCode?: string;
+
+  @doc("The code provided by APC is exchange for the operator code.")
+  apcCode?: string;
+
+  @doc("The redirection URI of the developer.")
+  redirectUri?: string;
+}
+
 @error
 @doc("A custom error response for APC.")
 model ApcErrorResponse {
