@@ -1975,6 +1975,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "enum": [
             "Accepted",
             "Creating",
@@ -2021,6 +2022,18 @@
           "maximum": 1200,
           "format": "int32"
         }
+      }
+    },
+    "JobConfigurationDataType": {
+      "description": "Gets or sets job configuration type.",
+      "type": "string",
+      "enum": [
+        "BuiltIn",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "jobConfigurationDataType",
+        "modelAsString": true
       }
     },
     "oracleUpdateJobConfigurationsProperties": {
