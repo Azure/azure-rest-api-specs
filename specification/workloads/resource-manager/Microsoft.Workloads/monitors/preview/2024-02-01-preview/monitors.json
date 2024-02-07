@@ -387,6 +387,281 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/oracleJobConfigurations": {
+      "get": {
+        "tags": [
+          "OracleJobConfigurations"
+        ],
+        "operationId": "OracleJobConfigurations_List",
+        "summary": "Gets a list of Oracle job configurations in the specified SAP monitor.",
+        "description": "Gets a list of Oracle job configurations in the specified SAP monitor. The operations returns various properties of each Oracle job configurations.",
+        "x-ms-examples": {
+          "List all SAP monitors providers in a subscription": {
+            "$ref": "./examples/OracleJobConfigurations/OracleJobConfigurations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/oracleJobConfigurationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/oracleJobConfigurations/{jobConfigurationName}": {
+      "get": {
+        "tags": [
+          "OracleJobConfigurations"
+        ],
+        "operationId": "OracleJobConfigurations_Get",
+        "summary": "Gets oracle job configurations.",
+        "description": "Gets oracle job configuration for the specified subscription, resource group, SAP monitor name and job configurations name.",
+        "x-ms-examples": {
+          "Get oracle job configuration": {
+            "$ref": "./examples/OracleJobConfigurations/OracleJobConfigurations_Get.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/oracleJobConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OracleJobConfigurations"
+        ],
+        "operationId": "OracleJobConfigurations_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Create oracle job configuration.",
+        "description": "Create oracle job configuration for the specified subscription, resource group, SAP monitor name and job configurations Name",
+        "x-ms-examples": {
+          "Create oracle job configuration": {
+            "$ref": "./examples/OracleJobConfigurations/OracleJobConfigurations_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobConfigurationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/oracleJobConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created Oracle job configurations",
+            "schema": {
+              "$ref": "#/definitions/oracleJobConfiguration"
+            }
+          },
+          "201": {
+            "description": "Creating Oracle job configurations",
+            "schema": {
+              "$ref": "#/definitions/oracleJobConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OracleJobConfigurations"
+        ],
+        "operationId": "OracleJobConfigurations_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Delete oracle job configuration.",
+        "description": "Delete oracle job configuration for the specified subscription, resource group, SAP monitor name, and job configurations Name.",
+        "x-ms-examples": {
+          "Delete oracle job configuration": {
+            "$ref": "./examples/OracleJobConfigurations/OracleJobConfigurations_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Deleting Oracle job configurations",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "No Oracle job configurations to delete"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "OracleJobConfigurations"
+        ],
+        "operationId": "OracleJobConfigurations_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Update Oracle job configuration.",
+        "description": "Update Oracle job configuration for the specified subscription, resource group, SAP monitor name and job configurations Name",
+        "x-ms-examples": {
+          "Update Oracle job configuration": {
+            "$ref": "./examples/OracleJobConfigurations/OracleJobConfigurations_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobConfigurationNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "The update job configuration request body.",
+            "schema": {
+              "$ref": "#/definitions/oracleUpdateJobConfigurationsProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Oracle job configurations",
+            "schema": {
+              "$ref": "#/definitions/oracleJobConfiguration"
+            }
+          },
+          "202": {
+            "description": "Updating Oracle job configurations",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alertTemplates": {
       "get": {
         "tags": [
@@ -762,6 +1037,9 @@
           "Get properties of a Db2 provider": {
             "$ref": "./examples/Db2ProviderInstances/Db2ProviderInstances_Get.json"
           },
+          "Get properties of a Oracle provider": {
+            "$ref": "./examples/OracleProviderInstances/OracleProviderInstances_Get.json"
+          },
           "Get properties of a MsSqlServer provider": {
             "$ref": "./examples/MsSqlServerProviderInstance/MsSqlServerProviderInstance_Get.json"
           },
@@ -828,6 +1106,9 @@
           "Create a Db2 provider": {
             "$ref": "./examples/Db2ProviderInstances/Db2ProviderInstances_Create.json"
           },
+          "Create a Oracle provider": {
+            "$ref": "./examples/OracleProviderInstances/OracleProviderInstances_Create.json"
+          },
           "Create a MsSqlServer provider": {
             "$ref": "./examples/MsSqlServerProviderInstance/MsSqlServerProviderInstance_Create.json"
           },
@@ -845,6 +1126,9 @@
           },
           "Create a Db2 provider with Root Certificate": {
             "$ref": "./examples/Db2ProviderInstances/Db2ProviderInstances_Create_Root_Certificate.json"
+          },
+          "Create a Oracle provider with Root Certificate": {
+            "$ref": "./examples/OracleProviderInstances/OracleProviderInstances_Create_Root_Certificate.json"
           },
           "Create a MsSqlServer provider with Root Certificate": {
             "$ref": "./examples/MsSqlServerProviderInstance/MsSqlServerProviderInstance_Create_Root_Certificate.json"
@@ -1604,6 +1888,164 @@
         }
       },
       "description": "The response from the List provider instances operation."
+    },
+    "oracleJobConfigurationsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/oracleJobConfiguration"
+          },
+          "description": "The list of oracle Job Configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of oracle Job Configurations."
+        }
+      },
+      "description": "The response from the List oracle Job Configurations operation."
+    },
+    "oracleJobConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/oracleJobConfigurationsProperties",
+          "description": "Oracle job configurations properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A Oracle job configurations associated with SAP monitor."
+    },
+    "OracleProviderInstanceProperties": {
+      "description": "Gets or sets the Oracle provider properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "properties": {
+        "hostname": {
+          "description": "Gets or sets the target virtual machine name.",
+          "type": "string"
+        },
+        "dbName": {
+          "description": "Gets or sets the oracle database name.",
+          "type": "string"
+        },
+        "dbPort": {
+          "description": "Gets or sets the oracle database sql port.",
+          "type": "string"
+        },
+        "dbUsername": {
+          "description": "Gets or sets the oracle database user name.",
+          "type": "string"
+        },
+        "dbPassword": {
+          "description": "Gets or sets the oracle database password.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "dbPasswordUri": {
+          "description": "Gets or sets the key vault URI to secret with the database password.",
+          "type": "string"
+        },
+        "sapSid": {
+          "description": "Gets or sets the SAP System Identifier",
+          "type": "string"
+        },
+        "sslPreference": {
+          "$ref": "#/definitions/SslPreference"
+        },
+        "sslCertificateUri": {
+          "description": "Gets or sets the blob URI to SSL certificate for the Oracle Database.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Oracle"
+    },
+    "oracleJobConfigurationsProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "JobConfigurationProvisioningState",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the ORA job configurations."
+        },
+        "logTableName": {
+          "description": "Gets or sets the name of the custom log table used to store data in log Analytics.",
+          "type": "string"
+        },
+        "frequencyInMinutes": {
+          "description": "Gets or sets the value of the default frequency of execution for the job.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1440,
+          "format": "int32"
+        },
+        "type": {
+          "description": "Gets or sets the type for the job configuration.",
+          "$ref": "#/definitions/JobConfigurationType"
+        },
+        "dataType": {
+          "description": "Gets or sets the type for the job configuration.",
+          "$ref": "#/definitions/JobConfigurationDataType"
+        },
+        "query": {
+          "description": "Gets or sets the sql query for the job configuration.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "Gets or sets the timeout in seconds for the job configuration.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1200,
+          "format": "int32"
+        }
+      }
+    },
+    "oracleUpdateJobConfigurationsProperties": {
+      "type": "object",
+      "description": "Oracle job configurations update properties",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/oracleJobConfigurationsPatchProperties",
+          "description": "Oracle job configurations patch properties"
+        }
+      }
+    },
+    "oracleJobConfigurationsPatchProperties": {
+      "type": "object",
+      "description": "Oracle job configurations patch properties",
+      "properties": {
+        "frequencyInMinutes": {
+          "description": "Gets or sets the value of the default frequency of execution for the job.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1440,
+          "format": "int32"
+        }
+      }
     },
     "AlertsListResult": {
       "type": "object",
@@ -2718,6 +3160,16 @@
         "$ref": "#/definitions/Monitor"
       },
       "description": "Request body representing a SAP monitor",
+      "x-ms-parameter-location": "method"
+    },
+    "oracleJobConfigurationParameter": {
+      "name": "oracleJobConfigurationsParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/oracleJobConfiguration"
+      },
+      "description": "Request body representing a  job configurations",
       "x-ms-parameter-location": "method"
     },
     "AlertParameter": {

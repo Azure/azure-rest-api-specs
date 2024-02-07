@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "mySapMonitor",
+    "jobConfigurationName": "myoracleJobConfigurations",
+    "body": {
+      "properties": {
+        "frequencyInMinutes": 180
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/oracleJobConfigurations/myoracleJobConfigurations",
+        "name": "myoracleJobConfigurations",
+        "type": "Microsoft.Workloads/monitors/oracleJobConfigurations",
+        "systemData": {
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+        },
+        "properties": {
+          "logTableName": "ORA_SystemInfo",
+          "frequencyInMinutes": 180,
+          "type": "BuiltIn",
+          "dataType": "Log",
+          "query": "SELECT * FROM DUMMY.DUMMY",
+          "timeout": 120
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Workloads/operationResults/{operationId}"
+      }
+    }
+  }
+}
