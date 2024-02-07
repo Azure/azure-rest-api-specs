@@ -14,9 +14,9 @@ using Azure.Core.Traits;
 namespace Microsoft.MachineLearningServices;
 
 
-@doc("Index asset definition.")
+@doc("Index asset resource definition.")
 @resource("indexes")
-model Index {
+model IndexResource {
   @key("indexName")
   @doc("Name of the index.")
   @visibility("external")
@@ -24,7 +24,7 @@ model Index {
 }
 
 @doc("AssetVersion Definition")
-@parentResource(Index)
+@parentResource(IndexResource)
 @resource("versions")
 model AssetVersion {
   
@@ -59,12 +59,12 @@ model AssetVersion {
 }
 
 @doc("Index resource Definition")
-model IndexVersion is AssetVersion {
+model Index is AssetVersion {
 
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
   storageUri: string;
 }
 
 @doc("Paged collection of IndexVersion items.")
-model IndexVersionList is Azure.Core.Page<IndexVersion>;
+model IndexList is Azure.Core.Page<Index>;
 

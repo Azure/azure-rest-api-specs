@@ -101,7 +101,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedIndexVersion"
+              "$ref": "#/definitions/PagedIndex"
             }
           },
           "default": {
@@ -155,7 +155,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IndexVersion"
+              "$ref": "#/definitions/Index"
             }
           },
           "default": {
@@ -230,7 +230,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedIndexVersion"
+              "$ref": "#/definitions/PagedIndex"
             }
           },
           "default": {
@@ -291,7 +291,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IndexVersion"
+              "$ref": "#/definitions/Index"
             }
           },
           "default": {
@@ -348,7 +348,7 @@
             "description": "Properties of an Index Version.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IndexVersion"
+              "$ref": "#/definitions/Index"
             }
           }
         ],
@@ -356,13 +356,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IndexVersion"
+              "$ref": "#/definitions/Index"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/IndexVersion"
+              "$ref": "#/definitions/Index"
             }
           },
           "default": {
@@ -414,7 +414,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedIndexVersion"
+              "$ref": "#/definitions/PagedIndex"
             }
           },
           "default": {
@@ -468,7 +468,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IndexVersion"
+              "$ref": "#/definitions/Index"
             }
           },
           "default": {
@@ -543,7 +543,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedIndexVersion"
+              "$ref": "#/definitions/PagedIndex"
             }
           },
           "default": {
@@ -604,7 +604,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IndexVersion"
+              "$ref": "#/definitions/Index"
             }
           },
           "default": {
@@ -661,7 +661,7 @@
             "description": "Properties of an Index Version.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IndexVersion"
+              "$ref": "#/definitions/Index"
             }
           }
         ],
@@ -669,13 +669,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IndexVersion"
+              "$ref": "#/definitions/Index"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/IndexVersion"
+              "$ref": "#/definitions/Index"
             }
           },
           "default": {
@@ -812,10 +812,6 @@
     },
     "Index": {
       "type": "object",
-      "description": "Index asset definition."
-    },
-    "IndexVersion": {
-      "type": "object",
       "description": "Index resource Definition",
       "properties": {
         "name": {
@@ -868,15 +864,19 @@
         "storageUri"
       ]
     },
-    "PagedIndexVersion": {
+    "IndexResource": {
+      "type": "object",
+      "description": "Index asset resource definition."
+    },
+    "PagedIndex": {
       "type": "object",
       "description": "Paged collection of IndexVersion items.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The IndexVersion items on this page",
+          "description": "The Index items on this page",
           "items": {
-            "$ref": "#/definitions/IndexVersion"
+            "$ref": "#/definitions/Index"
           },
           "x-ms-identifiers": []
         },

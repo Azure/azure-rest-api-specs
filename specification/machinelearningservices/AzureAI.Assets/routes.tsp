@@ -37,10 +37,10 @@ interface IndexVersionsRegistries {
 
       @doc("Properties of an Index Version.")
       @body
-      indexDefinition: IndexVersion;
+      indexDefinition: Index;
 
     },
-    ResourceCreatedOrOkResponse<IndexVersion>
+    ResourceCreatedOrOkResponse<Index>
   >;
 
   @route("/registries/{registryName}/indexes/{indexName}/versions/{indexVersion}")
@@ -61,7 +61,7 @@ interface IndexVersionsRegistries {
       @path
       indexVersion: string;
     },
-    IndexVersion
+    Index
    >;
 
    @route("/registries/{registryName}/indexes/{indexName}/versions")
@@ -86,7 +86,7 @@ interface IndexVersionsRegistries {
 
        ...StandardListQueryParameters
      },
-     IndexVersionList
+     IndexList
     >;
 }
 
@@ -112,10 +112,10 @@ interface IndexVersionsWorkspace {
 
       @doc("Properties of an Index Version.")
       @body
-      indexDefinition: IndexVersion;
+      indexDefinition: Index;
 
     },
-    ResourceCreatedOrOkResponse<IndexVersion>
+    ResourceCreatedOrOkResponse<Index>
   >;
 
   @route("/workspaces/{workspaceName}/indexes/{indexName}/versions/{indexVersion}")
@@ -136,7 +136,7 @@ interface IndexVersionsWorkspace {
       @path
       indexVersion: string;
     },
-    IndexVersion
+    Index
    >;
 
    @route("/workspaces/{workspaceName}/indexes/{indexName}/versions")
@@ -161,7 +161,7 @@ interface IndexVersionsWorkspace {
 
        ...StandardListQueryParameters
      },
-     IndexVersionList
+     IndexList
     >;
 }
 
@@ -182,7 +182,7 @@ interface Indexes {
       @path
       indexName: string;
     },
-    IndexVersion
+    Index
    >;
 
   @doc("List the latest version of each index.")
@@ -197,7 +197,7 @@ interface Indexes {
 
       ...StandardListQueryParameters
     },
-    IndexVersionList
+    IndexList
    >;
 
    @doc("Get latest Index.")
@@ -215,7 +215,7 @@ interface Indexes {
        @path
        indexName: string;
      },
-     IndexVersion
+     Index
     >;
 
    @doc("List the latest version of each index.")
@@ -230,7 +230,7 @@ interface Indexes {
  
        ...StandardListQueryParameters
      },
-     IndexVersionList
+     IndexList
     >;
 }
 
