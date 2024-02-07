@@ -60,12 +60,21 @@ model HealthInsightsRetryAfterTrait {
     response: Foundations.RetryAfterHeader;
   };
 }
+alias ExpandQueryParams = QueryParametersTrait<
+  {
+    @doc("The $expand query parameter.")
+    @query expand?: "request-data";
+  }
+>;
+
+
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   SupportsClientRequestId &
-  HealthInsightsRetryAfterTrait;
-  
+  HealthInsightsRetryAfterTrait &
+  ExpandQueryParams;
+
 alias HealthInsightsOperations = ResourceOperations<
   ServiceTraits,
   Azure.Core.Foundations.ErrorResponse
