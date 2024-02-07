@@ -30,19 +30,19 @@ A given identifier for the patient. Has to be unique across all patients in a si
   @doc("""
 Patient structured information, including demographics and known structured clinical information.
 """)
-  info?: PatientInfo;
+  details?: PatientDetails;
 
   @doc("Patient encounters/visits.")
-  encounters?: Array<Encounter>;
+  encounters?: Array<PatientEncounter>;
 
   @doc("Patient unstructured clinical data, given as documents.")
   patientDocuments?: Array<PatientDocument>;
 }
 
 @doc("Patient structured information, including demographics and known structured clinical information.")
-model PatientInfo {
+model PatientDetails {
   @doc("The patient's sex.")
-  sex?: PatientInfoSex;
+  sex?: PatientSex;
 
   @doc("The patient's date of birth.")
   birthDate?: plainDate;
@@ -53,7 +53,7 @@ model PatientInfo {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The patient's sex.")
-enum PatientInfoSex {
+enum PatientSex {
   Female: "female",
   Male: "male",
   Unspecified: "unspecified",
@@ -137,7 +137,7 @@ model DocumentAdministrativeMetadata {
 }
 
 @doc("visit/encounter information")
-model Encounter {
+model PatientEncounter {
   @doc("The id of the visit.")
   id: string;
 

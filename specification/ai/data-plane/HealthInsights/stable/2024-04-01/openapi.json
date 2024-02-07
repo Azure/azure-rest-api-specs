@@ -92,11 +92,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Operation-Id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "The Operation-Id header for the operation's status monitor."
               }
             }
           },
@@ -168,11 +163,6 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Operation-Id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "The Operation-Id header for the operation's status monitor."
-              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
@@ -195,11 +185,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Operation-Id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "The Operation-Id header for the operation's status monitor."
               },
               "Operation-Location": {
                 "type": "string",
@@ -534,27 +519,6 @@
           }
         ]
       }
-    },
-    "Encounter": {
-      "type": "object",
-      "description": "visit/encounter information",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the visit."
-        },
-        "period": {
-          "$ref": "#/definitions/TimePeriod",
-          "description": "Time period of the visit.\nIn case of admission, use timePeriod.start to indicate the admission time and timePeriod.end to indicate the discharge time."
-        },
-        "class": {
-          "$ref": "#/definitions/EncounterClass",
-          "description": "The class of the encounter."
-        }
-      },
-      "required": [
-        "id"
-      ]
     },
     "EncounterClass": {
       "type": "string",
@@ -2397,6 +2361,28 @@
         }
       }
     },
+    "PatientDetails": {
+      "type": "object",
+      "description": "Patient structured information, including demographics and known structured clinical information.",
+      "properties": {
+        "sex": {
+          "$ref": "#/definitions/PatientSex",
+          "description": "The patient's sex."
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The patient's date of birth."
+        },
+        "clinicalInfo": {
+          "type": "array",
+          "description": "Known clinical information for the patient, structured.",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Resource"
+          }
+        }
+      }
+    },
     "PatientDocument": {
       "type": "object",
       "description": "A clinical document related to a patient. Document here is in the wide sense - not just a text document (note).",
@@ -2449,29 +2435,60 @@
         "content"
       ]
     },
-    "PatientInfo": {
+    "PatientEncounter": {
       "type": "object",
-      "description": "Patient structured information, including demographics and known structured clinical information.",
+      "description": "visit/encounter information",
       "properties": {
-        "sex": {
-          "$ref": "#/definitions/PatientInfoSex",
-          "description": "The patient's sex."
-        },
-        "birthDate": {
+        "id": {
           "type": "string",
-          "format": "date",
-          "description": "The patient's date of birth."
+          "description": "The id of the visit."
         },
-        "clinicalInfo": {
+        "period": {
+          "$ref": "#/definitions/TimePeriod",
+          "description": "Time period of the visit.\nIn case of admission, use timePeriod.start to indicate the admission time and timePeriod.end to indicate the discharge time."
+        },
+        "class": {
+          "$ref": "#/definitions/EncounterClass",
+          "description": "The class of the encounter."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "PatientRecord": {
+      "type": "object",
+      "description": "A patient record, including their clinical information and data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A given identifier for the patient. Has to be unique across all patients in a single request.",
+          "minLength": 1
+        },
+        "details": {
+          "$ref": "#/definitions/PatientDetails",
+          "description": "Patient structured information, including demographics and known structured clinical information."
+        },
+        "encounters": {
           "type": "array",
-          "description": "Known clinical information for the patient, structured.",
+          "description": "Patient encounters/visits.",
           "items": {
-            "$ref": "#/definitions/Fhir.R4.Resource"
+            "$ref": "#/definitions/PatientEncounter"
+          }
+        },
+        "patientDocuments": {
+          "type": "array",
+          "description": "Patient unstructured clinical data, given as documents.",
+          "items": {
+            "$ref": "#/definitions/PatientDocument"
           }
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
-    "PatientInfoSex": {
+    "PatientSex": {
       "type": "string",
       "description": "The patient's sex.",
       "enum": [
@@ -2480,7 +2497,7 @@
         "unspecified"
       ],
       "x-ms-enum": {
-        "name": "PatientInfoSex",
+        "name": "PatientSex",
         "modelAsString": true,
         "values": [
           {
@@ -2497,38 +2514,6 @@
           }
         ]
       }
-    },
-    "PatientRecord": {
-      "type": "object",
-      "description": "A patient record, including their clinical information and data.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A given identifier for the patient. Has to be unique across all patients in a single request.",
-          "minLength": 1
-        },
-        "info": {
-          "$ref": "#/definitions/PatientInfo",
-          "description": "Patient structured information, including demographics and known structured clinical information."
-        },
-        "encounters": {
-          "type": "array",
-          "description": "Patient encounters/visits.",
-          "items": {
-            "$ref": "#/definitions/Encounter"
-          }
-        },
-        "patientDocuments": {
-          "type": "array",
-          "description": "Patient unstructured clinical data, given as documents.",
-          "items": {
-            "$ref": "#/definitions/PatientDocument"
-          }
-        }
-      },
-      "required": [
-        "id"
-      ]
     },
     "ProcedureRecommendation": {
       "type": "object",
