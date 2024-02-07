@@ -358,36 +358,6 @@
         ]
       }
     },
-    "ConnectivityStatusEnumForUpdate": {
-      "type": "string",
-      "description": "The Status",
-      "enum": [
-        "Connected",
-        "NotRecentlyConnected",
-        "NeedsAttention"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectivityStatusEnumForUpdate",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Connected",
-            "value": "Connected",
-            "description": "The device is in Connected state"
-          },
-          {
-            "name": "NotRecentlyConnected",
-            "value": "NotRecentlyConnected",
-            "description": "The device was NotRecentlyConnected"
-          },
-          {
-            "name": "NeedsAttention",
-            "value": "NeedsAttention",
-            "description": "The device NeedsAttention"
-          }
-        ]
-      }
-    },
     "ConnectivityStatusListResult": {
       "type": "object",
       "description": "The response of a ConnectivityStatus list operation.",
@@ -440,7 +410,7 @@
       "description": "The updatable properties of the ConnectivityStatus.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/ConnectivityStatusEnumForUpdate",
+          "$ref": "#/definitions/ConnectivityStatusEnum",
           "description": "The Status"
         }
       }
@@ -451,11 +421,7 @@
       "enum": [
         "Succeeded",
         "Failed",
-        "Canceled",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -475,26 +441,6 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "Resource is in provisioning state."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Resource is in updating state."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Resource is in deleting state."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Resource is in accepted state."
           }
         ]
       },

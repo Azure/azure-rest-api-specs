@@ -32,26 +32,6 @@ enum ConnectivityStatusEnum {
 }
 
 /**
- * The Status
- */
-enum ConnectivityStatusEnumForUpdate {
-  /**
-   * The device is in Connected state
-   */
-  Connected,
-
-  /**
-   * The device was NotRecentlyConnected
-   */
-  NotRecentlyConnected,
-
-  /**
-   * The device NeedsAttention
-   */
-  NeedsAttention,
-}
-
-/**
  * ConnectivityStatus properties
  */
 model ConnectivityStatusProperties {
@@ -85,5 +65,5 @@ model ConnectivityStatusUpdateProperties {
   /**
    * The Status
    */
-  status?: ConnectivityStatusEnumForUpdate;
+  status?: ConnectivityStatusEnum;
 }
