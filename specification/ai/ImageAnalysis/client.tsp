@@ -28,6 +28,8 @@ using Azure.ClientGenerator.Core;
 
 @@projectedName(ImageAnalysis.VisualFeatures, "csharp", "VisualFeaturesImpl");
 
+@@access(ImageAnalysis.analyzeFromUrl, Access.internal, "python");
+
 @@access(ImageAnalysis.analyzeFromImageData, Access.internal, "java");
 @@access(ImageAnalysis.analyzeFromUrl, Access.internal, "java");
 

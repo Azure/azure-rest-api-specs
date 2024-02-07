@@ -84,7 +84,7 @@ op analyzeFromImageData is Azure.Core.RpcOperation<
 
     @doc("The image to be analyzed")
     @body
-    imageContent: bytes;
+    imageData: bytes;
 
     ...SharedAnalyzeQuery;
   },
@@ -103,7 +103,7 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
 
     @doc("The image to be analyzed")
     @body
-    imageContent: ImageUrl;
+    imageUrl: ImageUrl;
 
     ...SharedAnalyzeQuery;
   },
