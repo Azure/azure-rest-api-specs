@@ -75,4 +75,3 @@ using Azure.ClientGenerator.Core;
 @@access(ImageAnalysis.SmartCropsResult, Access.public, "python");
 @@access(ImageAnalysis.TagsResult, Access.public, "python");
 @@access(ImageAnalysis.VisualFeatures, Access.public, "python");
-
