@@ -73,14 +73,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List_Maximum": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_Minimum": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -116,8 +108,8 @@
           }
         },
         "x-ms-examples": {
-          "InternetGatewayRules_ListBySubscription": {
-            "$ref": "./examples/InternetGatewayRules_ListBySubscription_MaximumSet_Gen.json"
+          "InternetGatewayRules_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -158,8 +150,8 @@
           }
         },
         "x-ms-examples": {
-          "InternetGatewayRules_ListByResourceGroup": {
-            "$ref": "./examples/InternetGatewayRules_ListByResourceGroup_MaximumSet_Gen.json"
+          "InternetGatewayRules_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -207,8 +199,8 @@
           }
         },
         "x-ms-examples": {
-          "InternetGatewayRules_Get": {
-            "$ref": "./examples/InternetGatewayRules_Get_MaximumSet_Gen.json"
+          "InternetGatewayRules_Get_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Get.json"
           }
         }
       },
@@ -278,8 +270,8 @@
           }
         },
         "x-ms-examples": {
-          "InternetGatewayRules_Create": {
-            "$ref": "./examples/InternetGatewayRules_Create_MaximumSet_Gen.json"
+          "InternetGatewayRules_Create_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -350,8 +342,8 @@
           }
         },
         "x-ms-examples": {
-          "InternetGatewayRules_Update": {
-            "$ref": "./examples/InternetGatewayRules_Update_MaximumSet_Gen.json"
+          "InternetGatewayRules_Update_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -409,10 +401,10 @@
           }
         },
         "x-ms-examples": {
-          "InternetGatewayRules_Delete_Max": {
+          "InternetGatewayRules_Delete_MaximumSet_Gen": {
             "$ref": "./examples/InternetGatewayRules_Delete_MaximumSet_Gen.json"
           },
-          "InternetGatewayRules_Delete_Min": {
+          "InternetGatewayRules_Delete_MinimumSet_Gen": {
             "$ref": "./examples/InternetGatewayRules_Delete_MinimumSet_Gen.json"
           }
         },
@@ -448,52 +440,14 @@
         ]
       }
     },
-    "BooleanEnumProperty": {
-      "type": "string",
-      "description": "Boolean Enum. Example- True/False",
-      "enum": [
-        "True",
-        "False"
-      ],
-      "x-ms-enum": {
-        "name": "BooleanEnumProperty",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "True",
-            "value": "True",
-            "description": "Represent true for boolean enum"
-          },
-          {
-            "name": "False",
-            "value": "False",
-            "description": "Represent false for boolean enum"
-          }
-        ]
-      }
-    },
-    "CommunityActionTypes": {
-      "type": "string",
-      "description": "community action types. Example: Permit | Deny.",
-      "enum": [
-        "Permit",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "CommunityActionTypes",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Permit",
-            "value": "Permit",
-            "description": "Represent community action is permitted"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Represent community action is permitted"
-          }
-        ]
+    "AnnotationResource": {
+      "type": "object",
+      "description": "Switch configuration entries require a description to discern between configuration groups.",
+      "properties": {
+        "annotation": {
+          "type": "string",
+          "description": "Switch configuration description."
+        }
       }
     },
     "Condition": {
@@ -516,30 +470,6 @@
             "name": "or",
             "value": "or",
             "description": "or condition for all proxy rules"
-          }
-        ]
-      }
-    },
-    "IPAddressType": {
-      "type": "string",
-      "description": "IP Address type.",
-      "enum": [
-        "IPv4",
-        "IPv6"
-      ],
-      "x-ms-enum": {
-        "name": "IPAddressType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "IPv4",
-            "value": "IPv4",
-            "description": "IPv4 type IP address has been used"
-          },
-          {
-            "name": "IPv6",
-            "value": "IPv6",
-            "description": "IPv6 type IP address has been used"
           }
         ]
       }
@@ -601,6 +531,10 @@
       "type": "object",
       "description": "Internet Gateway Rule Properties defines the resource properties.",
       "properties": {
+        "annotation": {
+          "type": "string",
+          "description": "Switch configuration description."
+        },
         "ruleProperties": {
           "$ref": "#/definitions/RuleProperties",
           "description": "Rules for the InternetGateways"
@@ -710,16 +644,16 @@
           "$ref": "#/definitions/Action",
           "description": "Specify action."
         },
-        "condition": {
-          "$ref": "#/definitions/Condition",
-          "description": "Specify condition."
-        },
         "addressList": {
           "type": "array",
           "description": "List of Addresses to be allowed or denied.",
           "items": {
             "type": "string"
           }
+        },
+        "condition": {
+          "$ref": "#/definitions/Condition",
+          "description": "Specify condition."
         },
         "sourceAddressList": {
           "type": "array",
@@ -733,30 +667,6 @@
         "action",
         "addressList"
       ]
-    },
-    "SourceDestinationType": {
-      "type": "string",
-      "description": "IP Address type that needs to be matched.",
-      "enum": [
-        "SourceIP",
-        "DestinationIP"
-      ],
-      "x-ms-enum": {
-        "name": "SourceDestinationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SourceIP",
-            "value": "SourceIP",
-            "description": "IP Address that needs to be matched is from source"
-          },
-          {
-            "name": "DestinationIP",
-            "value": "DestinationIP",
-            "description": "Destination IP Address that needs to be matched"
-          }
-        ]
-      }
     },
     "TagsUpdate": {
       "type": "object",
