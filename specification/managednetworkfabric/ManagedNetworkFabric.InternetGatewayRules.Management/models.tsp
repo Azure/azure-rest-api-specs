@@ -9,6 +9,8 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ManagedNetworkFabric;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 /**
  * Specify action.
  */
@@ -55,53 +57,9 @@ enum ProvisioningState {
 }
 
 /**
- * IP Address type that needs to be matched.
- */
-enum SourceDestinationType {
-  @doc("IP Address that needs to be matched is from source")
-  SourceIP,
-
-  @doc("Destination IP Address that needs to be matched")
-  DestinationIP,
-}
-
-/**
- * IP Address type.
- */
-enum IPAddressType {
-  @doc("IPv4 type IP address has been used")
-  IPv4,
-
-  @doc("IPv6 type IP address has been used")
-  IPv6,
-}
-
-/**
- * Boolean Enum. Example- True/False
- */
-enum BooleanEnumProperty {
-  @doc("Represent true for boolean enum")
-  True,
-
-  @doc("Represent false for boolean enum")
-  False,
-}
-
-/**
- * community action types. Example: Permit | Deny.
- */
-enum CommunityActionTypes {
-  @doc("Represent community action is permitted")
-  Permit,
-
-  @doc("Represent community action is permitted")
-  Deny,
-}
-
-/**
  * Internet Gateway Rule Properties defines the resource properties.
  */
-model InternetGatewayRuleProperties {
+model InternetGatewayRuleProperties is AnnotationResource {
   /**
    * Rules for the InternetGateways
    */
@@ -130,19 +88,29 @@ model RuleProperties {
   action: Action;
 
   /**
-   * Specify condition.
-   */
-  condition?: Condition;
-
-  /**
    * List of Addresses to be allowed or denied.
    */
   addressList: string[];
 
   /**
+   * Specify condition.
+   */
+  condition?: Condition;
+
+  /**
    * List of source remote ip to be allowed or denied.
    */
   sourceAddressList?: string[];
+}
+
+/**
+ * Switch configuration entries require a description to discern between configuration groups.
+ */
+model AnnotationResource {
+  /**
+   * Switch configuration description.
+   */
+  annotation?: string;
 }
 
 /**
