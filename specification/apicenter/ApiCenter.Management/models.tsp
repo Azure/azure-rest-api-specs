@@ -38,9 +38,7 @@ union ActionType {
 }
 
 /** The provisioning state of the resource */
-union ProvisioningState {
-  string,
-
+enum ProvisioningState {
   ...Azure.ResourceManager.ResourceProvisioningState,
 }
 

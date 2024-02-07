@@ -20,9 +20,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /** Provisioning state of the resource. */
 @doc("Provisioning state of resource.")
 @lroStatus
-union ProvisioningState {
-  string,
-
+enum ProvisioningState {
   ...ResourceProvisioningState,
 
   /** The resource is being provisioned */

@@ -202,9 +202,7 @@ union NetworkFunctionOperationalStatus {
 
 @doc("Provisioning state of the resource")
 @Azure.Core.lroStatus
-union ProvisioningState {
-  string,
-
+enum ProvisioningState {
   ...ResourceProvisioningState,
 
   @doc("Resource is getting provisioned")

@@ -35,9 +35,7 @@ model UpdateRun is ProxyResource<UpdateRunProperties> {
 }
 
 @doc("The provisioning state of the UpdateRun resource.")
-union UpdateRunProvisioningState {
-  string,
-
+enum UpdateRunProvisioningState {
   ...ResourceProvisioningState,
 }
 

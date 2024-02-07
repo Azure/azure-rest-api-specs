@@ -75,9 +75,7 @@ union EnablementStatus {
 
 @doc("The status of the current operation.")
 @lroStatus
-union ProvisioningState {
-  string,
-
+enum ProvisioningState {
   ...ResourceProvisioningState,
 
   @doc("Creation in progress..")

@@ -30,9 +30,7 @@ union ExtendedLocationType {
 }
 
 @doc("The enum defining status of resource.")
-union ProvisioningState {
-  string,
-
+enum ProvisioningState {
   ...ResourceProvisioningState,
 
   @doc("Resource is getting provisioned.")
