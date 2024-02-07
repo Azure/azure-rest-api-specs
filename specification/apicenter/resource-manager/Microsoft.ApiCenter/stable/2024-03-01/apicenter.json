@@ -83,7 +83,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
@@ -122,7 +122,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The service list.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServiceCollection"
             }
@@ -164,7 +164,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServiceCollection"
             }
@@ -210,7 +210,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Service"
             }
@@ -314,7 +314,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The service was successfully updated.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Service"
             }
@@ -358,7 +358,7 @@
             "description": "The service was successfully deleted."
           },
           "204": {
-            "description": "The service was successfully deleted."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -404,7 +404,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The result of export operation.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MetadataSchemaExportResult"
             }
@@ -453,7 +453,7 @@
         "description": "Returns a collection of metadata schemas.",
         "responses": {
           "200": {
-            "description": "Paginated collection of metadata schemas.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MetadataSchemaCollection"
             }
@@ -594,7 +594,7 @@
             "description": "The metadata schema was successfully deleted."
           },
           "204": {
-            "description": "The metadata schema was successfully deleted."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -644,7 +644,7 @@
         "description": "Returns a collection of workspaces.",
         "responses": {
           "200": {
-            "description": "Paginated collection of workspaces.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WorkspaceCollection"
             }
@@ -802,7 +802,7 @@
             "description": "The workspace was successfully deleted."
           },
           "204": {
-            "description": "The workspace was successfully deleted."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -872,7 +872,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paginated collection of APIs.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ApiCollection"
             }
@@ -1016,7 +1016,7 @@
             "description": "The API was successfully deleted."
           },
           "204": {
-            "description": "The API was successfully deleted."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1056,42 +1056,478 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ODataFilterParameter"
-        }
-      ],
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/deployments": {
       "get": {
+        "operationId": "Deployments_List",
         "tags": [
-          "ApiVersion"
+          "Deployments"
         ],
-        "operationId": "ApiVersions_List",
-        "summary": "List API versions",
-        "description": "Returns a collection of API versions.",
+        "description": "Returns a collection of API deployments.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Paginated collection of API versions.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApiVersionCollection"
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_ListByApi": {
+            "$ref": "./examples/Deployments_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/deployments/{deploymentName}": {
+      "get": {
+        "operationId": "Deployments_Get",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Returns details of the API deployment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the API deployment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Get": {
+            "$ref": "./examples/Deployments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Deployments_CreateOrUpdate",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Creates new or updates existing API deployment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the API deployment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "x-ms-client-name": "resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Deployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "201": {
+            "description": "Resource 'Deployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_CreateOrUpdate": {
+            "$ref": "./examples/Deployments_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Deployments_Delete",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Deletes API deployment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the API deployment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Delete": {
+            "$ref": "./examples/Deployments_Delete.json"
+          }
+        }
+      },
+      "head": {
+        "operationId": "Deployments_Head",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Checks if specified API deployment exists.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the API deployment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Head": {
+            "$ref": "./examples/Deployments_Head.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions": {
+      "get": {
+        "operationId": "ApiVersions_List",
+        "tags": [
+          "ApiVersions"
+        ],
+        "description": "Returns a collection of API versions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApiVersionListResult"
             }
           },
           "default": {
@@ -1102,7 +1538,7 @@
           }
         },
         "x-ms-examples": {
-          "ApiVersions_List": {
+          "ApiVersions_ListByApi": {
             "$ref": "./examples/ApiVersions_List.json"
           }
         },
@@ -1112,46 +1548,73 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
-        "tags": [
-          "ApiVersion"
-        ],
-        "summary": "Get API version",
         "operationId": "ApiVersions_Get",
+        "tags": [
+          "ApiVersions"
+        ],
         "description": "Returns details of the API version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the API version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "The response body contains the API version entity.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ApiVersion"
             },
             "headers": {
               "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
+                "type": "string",
+                "description": "The entity tag for the response."
               }
             }
           },
@@ -1170,10 +1633,8 @@
       },
       "put": {
         "tags": [
-          "ApiVersion"
+          "ApiVersions"
         ],
-        "summary": "Create or update API version",
-        "operationId": "ApiVersions_CreateOrUpdate",
         "description": "Creates new or updates existing API version.",
         "parameters": [
           {
@@ -1183,31 +1644,31 @@
             "schema": {
               "$ref": "#/definitions/ApiVersion"
             },
-            "description": "API version entity."
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
           "200": {
-            "description": "API version was successfully updated.",
+            "description": "Resource 'ApiVersion' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ApiVersion"
             },
             "headers": {
               "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
+                "type": "string",
+                "description": "The entity tag for the response."
               }
             }
           },
           "201": {
-            "description": "API version was successfully created.",
+            "description": "Resource 'ApiVersion' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ApiVersion"
             },
             "headers": {
               "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
+                "type": "string",
+                "description": "The entity tag for the response."
               }
             }
           },
@@ -1226,17 +1687,66 @@
       },
       "delete": {
         "tags": [
-          "ApiVersion"
+          "ApiVersions"
         ],
-        "summary": "Delete API version",
-        "operationId": "ApiVersions_Delete",
         "description": "Deletes specified API version",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the API version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "The API version was successfully deleted."
+            "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "The API version was successfully deleted."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1253,11 +1763,60 @@
       },
       "head": {
         "tags": [
-          "ApiVersion"
+          "ApiVersions"
         ],
-        "summary": "Check if API version exists",
-        "operationId": "ApiVersions_Head",
         "description": "Checks if specified API version exists.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the API version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1277,55 +1836,82 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ODataFilterParameter"
-        }
-      ],
       "get": {
-        "tags": [
-          "ApiDefinition"
-        ],
         "operationId": "ApiDefinitions_List",
-        "summary": "List API definitions",
+        "tags": [
+          "ApiDefinitions"
+        ],
         "description": "Returns a collection of API definitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the API version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Paginated collection of API definitions.",
+            "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApiDefinitionCollection"
+              "$ref": "#/definitions/ApiDefinitionListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "ApiDefinitions_List": {
+          "ApiDefinitions_ListByApiVersion": {
             "$ref": "./examples/ApiDefinitions_List.json"
           }
         },
@@ -1335,49 +1921,83 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiDefinitionNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
-        "tags": [
-          "ApiDefinition"
-        ],
-        "summary": "Get API definition",
         "operationId": "ApiDefinitions_Get",
+        "tags": [
+          "ApiDefinitions"
+        ],
         "description": "Returns details of the API definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the API version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "The name of the API definition.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "The response body contains the API definition entity.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ApiDefinition"
             },
             "headers": {
               "ETag": {
-                "description": "Current entity state definition. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
+                "type": "string",
+                "description": "The entity tag for the response."
               }
             }
           },
@@ -1395,45 +2015,104 @@
         }
       },
       "put": {
-        "tags": [
-          "ApiDefinition"
-        ],
         "operationId": "ApiDefinitions_CreateOrUpdate",
-        "summary": "Create or update API definition",
+        "tags": [
+          "ApiDefinitions"
+        ],
         "description": "Creates new or updates existing API definition.",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the API version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "The name of the API definition.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
             "name": "payload",
             "in": "body",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApiDefinition"
             },
-            "description": "API definition entity."
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
           "200": {
-            "description": "API definition was successfully updated.",
+            "description": "Resource 'ApiDefinition' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ApiDefinition"
             },
             "headers": {
               "ETag": {
-                "description": "Current entity state definition. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
+                "type": "string",
+                "description": "The entity tag for the response."
               }
             }
           },
           "201": {
-            "description": "API definition was successfully created.",
+            "description": "Resource 'ApiDefinition' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ApiDefinition"
             },
             "headers": {
               "ETag": {
-                "description": "Current entity state definition. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
+                "type": "string",
+                "description": "The entity tag for the response."
               }
             }
           },
@@ -1451,18 +2130,78 @@
         }
       },
       "delete": {
-        "tags": [
-          "ApiDefinition"
-        ],
         "operationId": "ApiDefinitions_Delete",
-        "summary": "Delete API definition",
+        "tags": [
+          "ApiDefinitions"
+        ],
         "description": "Deletes specified API definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the API version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "The name of the API definition.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "The API definition was successfully deleted."
+            "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "The API definition was successfully deleted."
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1478,15 +2217,75 @@
         }
       },
       "head": {
-        "tags": [
-          "ApiDefinition"
-        ],
-        "summary": "Check if API definition exists",
         "operationId": "ApiDefinitions_Head",
+        "tags": [
+          "ApiDefinitions"
+        ],
         "description": "Checks if specified API definition exists.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the API version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "The name of the API definition.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1502,41 +2301,180 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}/importSpecification": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiDefinitionNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}/exportSpecification": {
       "post": {
+        "operationId": "ApiDefinitions_ExportSpecification",
         "tags": [
-          "ApiVersion"
+          "ApiDefinitions"
         ],
-        "summary": "Import API specification",
+        "description": "Exports the API specification.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the API version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "The name of the API definition.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApiSpecExportResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_ExportSpecification": {
+            "$ref": "./examples/ApiDefinitions_ExportSpecification.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}/importSpecification": {
+      "post": {
         "operationId": "ApiDefinitions_ImportSpecification",
+        "tags": [
+          "ApiDefinitions"
+        ],
         "description": "Imports the API specification.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The name of the API.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the API version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "The name of the API definition.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
           {
             "name": "payload",
             "in": "body",
@@ -1544,7 +2482,7 @@
             "schema": {
               "$ref": "#/definitions/ApiSpecImportRequest"
             },
-            "description": "The API specification source entity."
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -1552,7 +2490,18 @@
             "description": "The API specification was successfully imported."
           },
           "202": {
-            "description": "Request to import an API specification was accepted. The 'Location' response header contains the URL where the status of the long running operation can be checked."
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1565,103 +2514,59 @@
           "ApiDefinitions_ImportSpecification": {
             "$ref": "./examples/ApiDefinitions_ImportSpecification.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}/exportSpecification": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiDefinitionNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "ApiVersion"
-        ],
-        "summary": "Export API specification",
-        "operationId": "ApiDefinitions_ExportSpecification",
-        "description": "Exports the API specification.",
-        "responses": {
-          "200": {
-            "description": "The result of export operation.",
-            "schema": {
-              "$ref": "#/definitions/ApiSpecExportResult"
-            }
-          },
-          "202": {
-            "description": "Request to export the API specification was accepted. The 'Location' response header contains the URL where the status of the long running operation can be checked."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ApiDefinitions_ExportSpecification": {
-            "$ref": "./examples/ApiDefinitions_ExportSpecification.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/deployments": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ODataFilterParameter"
-        }
-      ],
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/environments": {
       "get": {
+        "operationId": "Environments_List",
         "tags": [
-          "Deployment"
+          "Environments"
         ],
-        "operationId": "Deployments_List",
-        "summary": "List deployments",
-        "description": "Returns a collection of API deployments.",
+        "description": "Returns a collection of environments.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Paginated collection of API deployments.",
+            "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DeploymentCollection"
+              "$ref": "#/definitions/EnvironmentListResult"
             }
           },
           "default": {
@@ -1672,8 +2577,8 @@
           }
         },
         "x-ms-examples": {
-          "Deployments_List": {
-            "$ref": "./examples/Deployments_List.json"
+          "Environments_ListByWorkspace": {
+            "$ref": "./examples/Environments_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1681,156 +2586,66 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/deployments/{deploymentName}": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiDeploymentNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "delete": {
-        "tags": [
-          "Deployment"
-        ],
-        "summary": "Delete API deployment",
-        "operationId": "Deployments_Delete",
-        "description": "Deletes API deployment.",
-        "responses": {
-          "200": {
-            "description": "The API deployment was successfully deleted."
-          },
-          "204": {
-            "description": "The API deployment was successfully deleted."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deployments_Delete": {
-            "$ref": "./examples/Deployments_Delete.json"
-          }
-        }
-      },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/environments/{environmentName}": {
       "get": {
+        "operationId": "Environments_Get",
         "tags": [
-          "Deployment"
+          "Environments"
         ],
-        "operationId": "Deployments_Get",
-        "summary": "Get API deployment",
-        "description": "Returns details of the API deployment.",
-        "responses": {
-          "200": {
-            "description": "The response body contains the API deployment entity.",
-            "schema": {
-              "$ref": "#/definitions/Deployment"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deployments_Get": {
-            "$ref": "./examples/Deployments_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Deployment"
-        ],
-        "operationId": "Deployments_CreateOrUpdate",
-        "summary": "Create or update API deployment",
-        "description": "Creates new or updates existing API deployment.",
+        "description": "Returns details of the environment.",
         "parameters": [
           {
-            "name": "payload",
-            "in": "body",
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Deployment"
-            },
-            "description": "API deployment entity."
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The name of the environment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
           }
         ],
         "responses": {
           "200": {
-            "description": "API deployment was successfully updated.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/Environment"
             },
             "headers": {
               "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
+                "type": "string",
+                "description": "The entity tag for the response."
               }
             }
-          },
-          "201": {
-            "description": "API deployment was successfully created.",
-            "schema": {
-              "$ref": "#/definitions/Deployment"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deployments_CreateOrUpdate": {
-            "$ref": "./examples/Deployments_CreateOrUpdate.json"
-          }
-        }
-      },
-      "head": {
-        "tags": [
-          "Deployment"
-        ],
-        "operationId": "Deployments_Head",
-        "summary": "Check if API deployment exists",
-        "description": "Checks if specified API deployment exists.",
-        "responses": {
-          "200": {
-            "description": "OK"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1840,93 +2655,57 @@
           }
         },
         "x-ms-examples": {
-          "Deployments_Head": {
-            "$ref": "./examples/Deployments_Head.json"
+          "Environments_Get": {
+            "$ref": "./examples/Environments_Get.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/environments": {
-      "get": {
-        "tags": [
-          "Environment"
-        ],
-        "operationId": "Environments_List",
-        "summary": "List environments",
-        "description": "Returns a collection of environments.",
-        "responses": {
-          "200": {
-            "description": "The response body contains the environment entity.",
-            "schema": {
-              "$ref": "#/definitions/EnvironmentCollection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Environments_List": {
-            "$ref": "./examples/Environments_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ODataFilterParameter"
-        }
-      ]
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/environments/{environmentName}": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/EnvironmentNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
       "put": {
-        "tags": [
-          "Environment"
-        ],
         "operationId": "Environments_CreateOrUpdate",
-        "summary": "Create or update environment",
+        "tags": [
+          "Environments"
+        ],
         "description": "Creates new or updates existing environment.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The name of the environment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
           {
             "name": "payload",
             "in": "body",
@@ -1987,7 +2766,7 @@
             "description": "The environment was successfully deleted."
           },
           "204": {
-            "description": "The environment was successfully deleted."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
