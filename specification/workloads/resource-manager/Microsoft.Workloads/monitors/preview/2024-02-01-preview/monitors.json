@@ -1910,12 +1910,12 @@
           "format": "int32",
           "description": "Default Threshold Value Associated with the Alert Template"
         },
-        "minThresholdValue": {
+        "lowerBound": {
           "type": "integer",
           "format": "int32",
           "description": "Minimum possible Default Threshold Value Associated with the Alert Template"
         },
-        "maxThresholdValue": {
+        "upperBound": {
           "type": "integer",
           "format": "int32",
           "description": "Maximum possible Default Threshold Value Associated with the Alert Template"
@@ -2003,7 +2003,9 @@
           "type": "string",
           "description": "Type of the Query Input Parameter",
           "enum": [
-            "LogAnalyticsQuery"
+            "LogAnalyticsQuery",
+            "ProviderProperty",
+            "CustomInput"
           ],
           "x-ms-enum": {
             "name": "alertTemplateParameterType",

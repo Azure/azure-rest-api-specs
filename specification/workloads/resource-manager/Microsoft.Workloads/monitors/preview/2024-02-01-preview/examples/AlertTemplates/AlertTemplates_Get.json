@@ -20,8 +20,8 @@
             "query": "SapHana_LoadHistory_CL | where PROVIDER_INSTANCE_s == '{ProviderInstance}' | where HOST_s == '{Aggregate}' | extend memoryPercent=MEMORY_USED_d/MEMORY_SIZE_d*100 | summarize AggregatedCPU = percentile(CPU_d,95), AggregatedMemory = percentile(memoryPercent,95) by bin(TimeGenerated, 5m), HOST_s| extend AggregatedValue = iff(AggregatedCPU > 80 and AggregatedMemory > 80, 0, 1)",
             "thresholdOperator": "LessThan",
             "defaultThreshold": 1,
-            "minThresholdValue": 0,
-            "maxThresholdValue": 100,
+            "lowerBound": 0,
+            "upperBound": 100,
             "isThresholdInputRequired": false,
             "alertUnit": "percent",
             "metricMeasurement": {
