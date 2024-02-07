@@ -17,12 +17,12 @@
         "type": "Microsoft.Batch/batchAccounts/pools",
         "etag": "W/\"0x8DB51E64D3C3B69\"",
         "properties": {
-          "lastModified": "2023-05-11T07:44:44.8580493Z",
-          "creationTime": "2023-05-11T07:44:44.8580493Z",
+          "lastModified": "2023-05-11T06:09:38.3178089Z",
+          "creationTime": "2023-05-11T06:09:38.3178089Z",
           "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2023-05-11T07:44:44.8580493Z",
+          "provisioningStateTransitionTime": "2023-05-11T06:09:38.3178089Z",
           "allocationState": "Steady",
-          "allocationStateTransitionTime": "2023-05-11T07:45:42.0881659Z",
+          "allocationStateTransitionTime": "2023-05-11T06:10:31.4670326Z",
           "vmSize": "STANDARD_D4S_V3",
           "interNodeCommunication": "Disabled",
           "taskSlotsPerNode": 1,
@@ -41,8 +41,8 @@
               "windowsConfiguration": {
                 "enableAutomaticUpdates": false
               },
-              "serviceArtifactReference": {
-                "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/vmArtifactsProfile"
+              "nodePlacementConfiguration": {
+                "policy": "Zonal"
               }
             }
           },
@@ -57,7 +57,7 @@
             "targetDedicatedNodes": 2,
             "nodeDeallocationOption": "Requeue",
             "resizeTimeout": "PT15M",
-            "startTime": "2023-05-11T07:44:44.8580493Z"
+            "startTime": "2023-05-11T06:09:38.3178089Z"
           },
           "currentDedicatedNodes": 2,
           "currentLowPriorityNodes": 0,
@@ -65,7 +65,19 @@
           "upgradePolicy": {
             "mode": "automatic",
             "automaticOSUpgradePolicy": {
-              "enableAutomaticOSUpgrade": true
+              "disableAutomaticRollback": true,
+              "enableAutomaticOSUpgrade": true,
+              "useRollingUpgradePolicy": true,
+              "osRollingUpgradeDeferral": true
+            },
+            "rollingUpgradePolicy": {
+              "enableCrossZoneUpgrade": true,
+              "maxBatchInstancePercent": 20,
+              "maxUnhealthyInstancePercent": 20,
+              "maxUnhealthyUpgradedInstancePercent": 20,
+              "pauseTimeBetweenBatches": "PT0S",
+              "prioritizeUnhealthyInstances": false,
+              "rollbackFailedInstancesOnPolicyBreach": false
             }
           }
         }
