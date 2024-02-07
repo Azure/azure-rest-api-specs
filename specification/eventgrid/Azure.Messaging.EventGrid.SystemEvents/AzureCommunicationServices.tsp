@@ -773,6 +773,9 @@ alias AcsChatThreadBaseEventData = {
   /** The thread properties */
   properties?: Record<string>;
 
+  /** The chat thread created metadata */
+  metadata?: Record<string>;
+
   /** The list of properties of participants who are part of the thread */
   participants?: AcsChatThreadParticipantProperties[];
 };
