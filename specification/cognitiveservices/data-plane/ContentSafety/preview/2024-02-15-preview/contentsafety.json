@@ -1011,23 +1011,25 @@
       "properties": {
         "domain": {
           "$ref": "#/definitions/Domain",
-          "description": "The domain of the text for analysis.\nThis field is optional, with a default value of Generic."
+          "description": "The domain of the text for analysis. Allowed values: Medical, Generic.\nThis field is optional, with a default value of Generic."
         },
         "task": {
           "$ref": "#/definitions/Task",
-          "description": "The task type for the text analysis.\nThis field is optional, with a default value of Summarization."
+          "description": "The task type for the text analysis. Type of task: QnA, Summarization.\nThis field is optional, with a default value of Summarization."
         },
         "query": {
           "type": "string",
-          "description": "The user's question input in a QnA scenario.\nThis field is optional, but if the task type is set to QnA, it becomes required."
+          "description": "The user's question input in a QnA scenario.\nThis field is optional, but if the task type is set to QnA, it becomes required.",
+          "maxLength": 7500
         },
         "text": {
           "type": "string",
-          "description": "The text requiring analysis."
+          "description": "The specific text that needs to be checked.",
+          "maxLength": 7500
         },
         "groundingSources": {
           "type": "array",
-          "description": "The source information used as a grounding reference.",
+          "description": "Leverages a vast array of grounding sources to validate AI-generated text.\nLimit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters.",
           "items": {
             "type": "string"
           }
@@ -1052,21 +1054,21 @@
       "properties": {
         "ungrounded": {
           "type": "boolean",
-          "description": "Detection result for ungrounded text."
+          "description": "Indicates whether the text exhibits ungroundedness."
         },
         "confidenceScore": {
           "type": "number",
           "format": "float",
-          "description": "Confidence score of the model in the analysis results."
+          "description": "Assesses the likelihood of ungrounded content with a numerical score.The score will range from 0 to 1."
         },
         "ungroundedPercentage": {
           "type": "number",
           "format": "float",
-          "description": "Percentage of ungrounded Text."
+          "description": "Specifies the proportion of the text identified as ungrounded, \nexpressed as a decimal between 0 and 1,\nwhere 0 indicates no ungrounded content and 1 indicates entirely ungrounded content.."
         },
         "ungroundedDetails": {
           "type": "array",
-          "description": "The detailed information about a text identified as ungrounded.",
+          "description": "Provides insights into ungrounded content with specific examples and percentages.",
           "items": {
             "$ref": "#/definitions/UngroundedDetails"
           },
@@ -1408,7 +1410,7 @@
         },
         "reason": {
           "type": "string",
-          "description": "The explanation for identifying the text as ungrounded. \nOnly when the 'reasoning' field in the input is set to true 'reason' field will be returned."
+          "description": "The explanation for detected ungroundedness, enhancing understanding.\nOnly when the 'reasoning' field in the input is set to true 'reason' field will be returned."
         }
       },
       "required": [
