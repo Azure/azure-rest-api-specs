@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow.",
+      "description": "Specifies an implicit grant flow, as supported on the Microsoft Identity platform.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -1298,7 +1298,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the list of all Search quota usages for the given subscription.",
+            "description": "The operation succeeded. The response contains the list of all search service quota usages for the given subscription.",
             "schema": {
               "$ref": "#/definitions/QuotaUsagesListResult"
             }
@@ -1368,7 +1368,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "description": "Gets a list of NSP configurations for a search service.",
+        "description": "Gets a list of network security perimeter configurations for a search service.",
         "operationId": "NetworkSecurityPerimeterConfigurations_ListByService",
         "x-ms-examples": {
           "List NSP configs by search service": {
@@ -1490,7 +1490,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Reconcile NSP Configuration operation accepted",
+            "description": "Reconcile network security perimeter configuration operation accepted.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -1783,7 +1783,7 @@
               {
                 "value": "Disabled",
                 "name": "Disabled",
-                "description": "No enforcement will be made and the search service can have non customer encrypted resources."
+                "description": "No enforcement of customer-managed key encryption will be made. Only the built-in service-managed encryption is used."
               },
               {
                 "value": "Enabled",
@@ -1824,7 +1824,7 @@
           }
         }
       },
-      "description": "Describes a policy that determines how resources within the search service are to be encrypted with Customer Managed Keys."
+      "description": "Describes a policy that determines how resources within the search service are to be encrypted with customer managed keys."
     },
     "PrivateEndpointConnection": {
       "properties": {
@@ -1891,7 +1891,7 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "The resource id of the private endpoint resource from Microsoft.Network provider."
+              "description": "The resource ID of the private endpoint resource from Microsoft.Network provider."
             }
           },
           "description": "The private endpoint resource from Microsoft.Network provider."
@@ -2035,17 +2035,17 @@
           {
             "value": "disabled",
             "name": "disabled",
-            "description": "Indicates that semantic search is disabled for the search service. This is the default."
+            "description": "Indicates that semantic reranker is disabled for the search service. This is the default."
           },
           {
             "value": "free",
             "name": "free",
-            "description": "Enables semantic ranking on a search service and indicates that it is to be used within the limits of the free tier. This would cap the volume of semantic ranking requests and is offered at no extra charge. This is the default for newly provisioned search services."
+            "description": "Enables semantic reranker on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of semantic ranking requests and is offered at no extra charge. This is the default for newly provisioned search services."
           },
           {
             "value": "standard",
             "name": "standard",
-            "description": "Enables semantic search on a search service as a billable feature, with higher throughput and volume of semantic search queries."
+            "description": "Enables semantic reranker on a search service as a billable feature, with higher throughput and volume of semantically reranked queries."
           }
         ]
       },
@@ -2602,7 +2602,7 @@
           }
         }
       },
-      "description": "The details of a long running asynchronous shared private link resource operation"
+      "description": "The details of a long running asynchronous shared private link resource operation."
     },
     "CloudError": {
       "type": "object",
@@ -2994,7 +2994,7 @@
       "description": "Describes the quota usage for a particular SKU."
     },
     "NetworkSecurityPerimeterConfiguration": {
-      "description": "NSP Configuration for a server.",
+      "description": "Network security perimeter configuration for a server.",
       "type": "object",
       "allOf": [
         {
@@ -3010,7 +3010,7 @@
       }
     },
     "NetworkSecurityPerimeterConfigurationListResult": {
-      "description": "A list of NSP configurations for a server.",
+      "description": "A list of network security perimeter configurations for a server.",
       "type": "object",
       "properties": {
         "value": {
@@ -3029,7 +3029,7 @@
       }
     },
     "NetworkSecurityPerimeterConfigurationProperties": {
-      "description": "The properties of an NSP config.",
+      "description": "The properties of a network security perimeter configuration.",
       "type": "object",
       "properties": {
         "provisioningState": {
