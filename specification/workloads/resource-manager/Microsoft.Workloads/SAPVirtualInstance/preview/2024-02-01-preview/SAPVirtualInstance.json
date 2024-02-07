@@ -3544,41 +3544,54 @@
       "properties": {
         "calProductId": {
           "type": "string",
-          "description": "The CAL product ID. Refer the CAL portal for this."
+          "description": "The CAL product ID in GUID format. Refer the CAL portal for this."
         },
         "deploymentServerResourceGroup": {
           "type": "string",
           "description": "The deployment server resource group."
         },
-        "privateDnsZoneId": {
+        "privateDnsZoneResourceId": {
           "type": "string",
-          "description": "The private DNS zone."
+          "description": "The private DNS zone ARM resource ID."
         },
-        "deploymentServerSubnetId": {
+        "deploymentServerSubnetResourceId": {
           "type": "string",
-          "description": "The deployment server subnet."
+          "description": "The deployment server subnet ARM resource ID."
         },
-        "executionEngineSubnetId": {
+        "executionEngineSubnetResourceId": {
           "type": "string",
-          "description": "The execution engine subnet."
-        },
-        "keyVaultId": {
-          "type": "string",
-          "description": "The keyvault ID that contains the technical communication user password."
+          "description": "The execution engine subnet ARM resource ID."
         },
         "technicalCommunicationUser": {
           "type": "string",
           "description": "The CAL technical communication user."
         },
-        "technicalCommunicationUserPasswordSecretName": {
-          "type": "string",
-          "description": "The technical communication user password secret name. The password should be stored in the keyvault ID against this secret name."
+        "keyVaultConfig": {
+          "description": "The keyvault configuration for SAP installation through CAL.",
+          "$ref": "#/definitions/CalInstallKeyVaultConfiguration"
         }
       },
       "required": [
         "calProductId",
-        "keyVaultId",
         "technicalCommunicationUser",
+        "keyVaultConfig"
+      ]
+    },
+    "CalInstallKeyVaultConfiguration": {
+      "description": "Gets or sets the keyvault configuration for SAP installation through CAL.",
+      "type": "object",
+      "properties": {
+        "keyVaultResourceId": {
+          "type": "string",
+          "description": "The keyvault ARM resource ID that contains the technical communication user password."
+        },
+        "technicalCommunicationUserPasswordSecretName": {
+          "type": "string",
+          "description": "The technical communication user password secret name. The password should be stored in the keyvault against this secret name."
+        }
+      },
+      "required": [
+        "keyVaultResourceId",
         "technicalCommunicationUserPasswordSecretName"
       ]
     },
