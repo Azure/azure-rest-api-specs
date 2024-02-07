@@ -9,7 +9,9 @@ using TypeSpec.Versioning;
 namespace Microsoft.LoadTestService;
 
 @doc("Metrics for pass/fail criteria.")
-enum PFMetrics {
+union PFMetrics {
+  string,
+
   @doc("Pass fail criteria for response time metric in milliseconds.")
   response_time_ms,
 
@@ -20,7 +22,9 @@ enum PFMetrics {
 }
 
 @doc("Aggregation functions for pass/fail criteria.")
-enum PFAgFunc {
+union PFAgFunc {
+  string,
+
   @doc("Criteria applies for count value.") count,
   @doc("Criteria applies for given percentage value.") percentage,
   @doc("Criteria applies for avg value.") avg,
@@ -33,7 +37,9 @@ enum PFAgFunc {
 }
 
 @doc("Action to take on failure of pass/fail criteria.")
-enum PFAction {
+union PFAction {
+  string,
+
   @doc("Test will continue to run even if pass fail metric criteria metric gets failed.")
   continue,
 
@@ -41,25 +47,33 @@ enum PFAction {
 }
 
 @doc("Pass/fail criteria result.")
-enum PFResult {
+union PFResult {
+  string,
+
   @doc("Given pass fail criteria metric has passed.") passed,
   @doc("Given pass fail criteria metric couldn't determine.") undetermined,
   @doc("Given pass fail criteria metric has failed.") failed,
 }
 
 @doc("Types of secrets supported.")
-enum SecretType {
+union SecretType {
+  string,
+
   @doc("If the secret is stored in an Azure Key Vault.") AKV_SECRET_URI,
   @doc("If the secret value provided as plain text.") SECRET_VALUE,
 }
 
 @doc("Types of certificates supported.")
-enum CertificateType {
+union CertificateType {
+  string,
+
   @doc("If the certificate is stored in an Azure Key Vault.") AKV_CERT_URI,
 }
 
 @doc("Types of file supported.")
-enum FileType {
+union FileType {
+  string,
+
   @doc("If the file is a JMX script.") JMX_FILE,
   @doc("If the file is a user properties file.") USER_PROPERTIES,
 
@@ -76,7 +90,9 @@ enum FileType {
 }
 
 @doc("File status.")
-enum FileStatus {
+union FileStatus {
+  string,
+
   @doc("File is not validated.") NOT_VALIDATED,
   @doc("File is validated.") VALIDATION_SUCCESS,
   @doc("File validation is failed.") VALIDATION_FAILURE,
@@ -85,14 +101,18 @@ enum FileStatus {
 }
 
 @doc("Test result based on pass/fail criteria.")
-enum PFTestResult {
+union PFTestResult {
+  string,
+
   @doc("Pass/fail criteria has passed.") PASSED,
   @doc("Pass/fail criteria is not applicable.") NOT_APPLICABLE,
   @doc("Pass/fail criteria has failed.") FAILED,
 }
 
 @doc("Test run status.")
-enum Status {
+union Status {
+  string,
+
   @doc("Test run request is accepted.") ACCEPTED,
   @doc("Test run is not yet started.") NOTSTARTED,
   @doc("Test run is provisioning.") PROVISIONING,
@@ -112,7 +132,9 @@ enum Status {
 }
 
 @doc("Aggregation type.")
-enum AggregationType {
+union AggregationType {
+  string,
+
   @doc("Average value.") Average,
   @doc("Total count.") Count,
   @doc("Aggregation will be average in this case.") None,
@@ -123,7 +145,9 @@ enum AggregationType {
 }
 
 @doc("Metric unit.")
-enum MetricUnit {
+union MetricUnit {
+  string,
+
   @doc("No unit specified.") NotSpecified,
   @doc("Percentage.") Percent,
   @doc("Value count.") Count,
@@ -135,7 +159,9 @@ enum MetricUnit {
 }
 
 @doc("Time Grain")
-enum TimeGrain {
+union TimeGrain {
+  string,
+
   @doc("5 seconds, available only if test run duration is less than 10 minutes.")
   PT5S,
 
@@ -153,7 +179,9 @@ enum TimeGrain {
 
 @added(APIVersions.v2023_04_01_preview)
 @doc("Test kind")
-enum TestKind {
+union TestKind {
+  string,
+
   @doc("URL Test") URL,
   @doc("JMX Test") JMX,
 }
@@ -419,7 +447,7 @@ model TestAppComponents {
   @doc("""
 Azure resource collection { resource id (fully qualified resource Id e.g
 subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object } 
+: resource object }
 """)
   components: Record<AppComponent>;
 
@@ -901,7 +929,7 @@ model TestRunAppComponents {
   @doc("""
 Azure resource collection { resource id (fully qualified resource Id e.g
 subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object } 
+: resource object }
 """)
   components: Record<AppComponent>;
 

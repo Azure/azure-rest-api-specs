@@ -69,7 +69,9 @@ model RouterReturnConditionalResponseHeaders<TVersionAdded extends EnumMember | 
 }
 
 @doc("Describes the various status of a job.")
-enum RouterJobStatus {
+union RouterJobStatus {
+  string,
+
   @doc("Job is waiting to be classified.")
   pendingClassification,
 
@@ -108,7 +110,9 @@ enum RouterJobStatus {
 }
 
 @doc("Describes supported operations on label values.")
-enum LabelOperator {
+union LabelOperator {
+  string,
+
   @doc("Equal.")
   equal,
 
@@ -129,7 +133,9 @@ enum LabelOperator {
 }
 
 @doc("Describes the status of a worker selector.")
-enum RouterWorkerSelectorStatus {
+union RouterWorkerSelectorStatus {
+  string,
+
   @doc("Worker selector is valid.")
   active,
 
@@ -138,7 +144,9 @@ enum RouterWorkerSelectorStatus {
 }
 
 @doc("Enums used to filters jobs by status.")
-enum RouterJobStatusSelector {
+union RouterJobStatusSelector {
+  string,
+
   @doc("Default")
   all,
 
@@ -183,7 +191,9 @@ enum RouterJobStatusSelector {
 }
 
 @doc("Enums for worker states.")
-enum RouterWorkerState {
+union RouterWorkerState {
+  string,
+
   @doc("Worker is active and available to take offers.")
   active,
 
@@ -195,7 +205,9 @@ enum RouterWorkerState {
 }
 
 @doc("Enums used to filters workers by state")
-enum RouterWorkerStateSelector {
+union RouterWorkerStateSelector {
+  string,
+
   @doc("Worker is active and available to take offers.")
   active,
 
@@ -210,7 +222,9 @@ enum RouterWorkerStateSelector {
 }
 
 @doc("Supported parameters for scoring workers used with BestWorkerMode.")
-enum ScoringRuleParameterSelector {
+union ScoringRuleParameterSelector {
+  string,
+
   @doc("Parameter to add job labels to scoring payload.  Property is sent as `job`.")
   jobLabels,
 
@@ -219,13 +233,17 @@ enum ScoringRuleParameterSelector {
 }
 
 @doc("Available expression languages that can be configured.")
-enum ExpressionRouterRuleLanguage {
+union ExpressionRouterRuleLanguage {
+  string,
+
   @doc("PowerFx")
   powerFx,
 }
 
 @doc("Discriminators for supported matching mode types.")
-enum JobMatchingModeKind {
+union JobMatchingModeKind {
+  string,
+
   @doc("Discriminator value for QueueAndMatchMode.")
   queueAndMatch,
 
@@ -237,7 +255,9 @@ enum JobMatchingModeKind {
 }
 
 @doc("Discriminators for supported router rule types.")
-enum RouterRuleKind {
+union RouterRuleKind {
+  string,
+
   @doc("Discriminator value for DirectMapRouterRule.")
   directMap,
 
@@ -255,7 +275,9 @@ enum RouterRuleKind {
 }
 
 @doc("Discriminators for supported distribution mode types.")
-enum DistributionModeKind {
+union DistributionModeKind {
+  string,
+
   @doc("Discriminator value for BestWorkerMode.")
   bestWorker,
 
@@ -267,7 +289,9 @@ enum DistributionModeKind {
 }
 
 @doc("Discriminators for supported exception trigger types.")
-enum ExceptionTriggerKind {
+union ExceptionTriggerKind {
+  string,
+
   @doc("Discriminator value for QueueLengthExceptionTrigger.")
   queueLength,
 
@@ -276,7 +300,9 @@ enum ExceptionTriggerKind {
 }
 
 @doc("Discriminators for supported exception action types.")
-enum ExceptionActionKind {
+union ExceptionActionKind {
+  string,
+
   @doc("Discriminator value for CancelExceptionAction.")
   cancel,
 
@@ -288,7 +314,9 @@ enum ExceptionActionKind {
 }
 
 @doc("Discriminators for supported queue selector attachment types.")
-enum QueueSelectorAttachmentKind {
+union QueueSelectorAttachmentKind {
+  string,
+
   @doc("Discriminator value for ConditionalQueueSelectorAttachment.")
   conditional,
 
@@ -306,7 +334,9 @@ enum QueueSelectorAttachmentKind {
 }
 
 @doc("Discriminators for supported worker selector attachment types.")
-enum WorkerSelectorAttachmentKind {
+union WorkerSelectorAttachmentKind {
+  string,
+
   @doc("Discriminator value for ConditionalWorkerSelectorAttachment.")
   conditional,
 

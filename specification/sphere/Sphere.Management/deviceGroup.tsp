@@ -144,7 +144,9 @@ model DeviceGroupProperties {
 }
 
 @doc("OS feed type values.")
-enum OSFeedType {
+union OSFeedType {
+  string,
+
   /** Retail OS feed type. */
   Retail,
 
@@ -153,7 +155,9 @@ enum OSFeedType {
 }
 
 @doc("Update policy values.")
-enum UpdatePolicy {
+union UpdatePolicy {
+  string,
+
   /** Update all policy. */
   UpdateAll,
 

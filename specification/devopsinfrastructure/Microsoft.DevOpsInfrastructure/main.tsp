@@ -106,7 +106,9 @@ model AzureDevOpsPermissionProfile {
   groups?: string[];
 }
 @doc("Determines who has admin permissions to the Azure DevOps pool.")
-enum AzureDevOpsPermissionType {
+union AzureDevOpsPermissionType {
+  string,
+
   @doc("Pool will inherit permissions from the project or organization.")
   Inherit,
 
@@ -154,7 +156,9 @@ model StorageProfile {
 }
 
 @doc("The storage account type of the OS disk.")
-enum OsDiskStorageAccountType {
+union OsDiskStorageAccountType {
+  string,
+
   @doc("Standard OS disk type.")
   Standard,
 
@@ -196,7 +200,9 @@ model SecretsManagementSettings {
   keyExportable: boolean;
 }
 @doc("Determines how the service should be run.")
-enum LogonType {
+union LogonType {
+  string,
+
   @doc("Run as a service.")
   Service,
 
@@ -233,7 +239,9 @@ model Stateful extends AgentProfile {
 model ResourcePredictions {}
 
 @doc("The status of the current operation.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /** Represents a succeeded operation. */
   Succeeded,
 

@@ -39,7 +39,9 @@ model SkipTokenParameter {
 }
 
 /** The objectType of the member. */
-enum ObjectType {
+union ObjectType {
+  string,
+
   /** AAD User object type. */
   User,
 
@@ -51,7 +53,9 @@ enum ObjectType {
 }
 
 /** The effect for rule */
-enum Decision {
+union Decision {
+  string,
+
   /** Access permitted */
   Permit,
 

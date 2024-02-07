@@ -10,7 +10,9 @@ namespace AnomalyDetector.Multivariate;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Field that indicates how missing values will be filled.")
-enum FillNAMethod {
+union FillNAMethod {
+  string,
+
   Previous,
   Subsequent,
   Linear,
@@ -19,7 +21,9 @@ enum FillNAMethod {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum MultivariateBatchDetectionStatus {
+union MultivariateBatchDetectionStatus {
+  string,
+
   Created: "CREATED",
   Running: "RUNNING",
   Ready: "READY",
@@ -27,7 +31,9 @@ enum MultivariateBatchDetectionStatus {
 }
 
 @doc("Data schema of the input data source. The default is OneTable.")
-enum DataSchema {
+union DataSchema {
+  string,
+
   @doc("OneTable means that your input data is in one CSV file, which contains one time stamp column and several variable columns. The default DataSchema value is OneTable.")
   OneTable,
 
@@ -36,13 +42,17 @@ enum DataSchema {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum AlignMode {
+union AlignMode {
+  string,
+
   Inner,
   Outer,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ModelStatus {
+union ModelStatus {
+  string,
+
   @doc("The model has been created. Training has been scheduled but not yet started.")
   Created: "CREATED",
 

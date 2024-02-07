@@ -24,7 +24,9 @@ model ExtendedLocation {
 
 @lroStatus
 @doc("The provisioning status of the resource.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 
   @doc("The resource is being updated.")
@@ -64,7 +66,9 @@ model ReconciliationPolicy {
 }
 
 @doc("Policies to control how the resource should reconcile.")
-enum ReconciliationPolicies {
+union ReconciliationPolicies {
+  string,
+
   @doc("Allows resource to reconcile periodically.")
   periodic: "periodic",
 }

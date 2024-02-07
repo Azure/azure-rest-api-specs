@@ -47,7 +47,9 @@ namespace Microsoft.EventGrid {
   using Azure;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
-  enum ServiceApiVersions {
+  union ServiceApiVersions {
+  string,
+
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_11_01: "2023-11-01",
 
@@ -129,7 +131,9 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("Supported delays for release operation.")
-  enum ReleaseDelay {
+  union ReleaseDelay {
+  string,
+
     @doc("Release the event after 0 seconds.")
     By0Seconds: 0,
 

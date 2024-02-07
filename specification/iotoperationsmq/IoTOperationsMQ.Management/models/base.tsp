@@ -22,13 +22,17 @@ model ExtendedLocationProperty {
 }
 
 @doc("The enum defining type of ExtendedLocation accepted.")
-enum ExtendedLocationType {
+union ExtendedLocationType {
+  string,
+
   @doc("CustomLocation type")
   CustomLocation,
 }
 
 @doc("The enum defining status of resource.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 
   @doc("Resource is getting provisioned.")
@@ -122,7 +126,9 @@ model SanForCert {
 }
 
 @doc("Mqtt Protocol types")
-enum MqttProtocol {
+union MqttProtocol {
+  string,
+
   @doc("Mqttv3")
   v3,
 

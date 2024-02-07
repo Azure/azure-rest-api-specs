@@ -72,7 +72,9 @@ model ImageProperties {
 }
 
 @doc("Image type values.")
-enum ImageType {
+union ImageType {
+  string,
+
   /** Invalid image. */
   InvalidImageType,
 

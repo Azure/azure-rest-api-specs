@@ -19,7 +19,9 @@ using Azure.ResourceManager;
 namespace Microsoft.AzurePlaywrightService;
 
 @doc("Microsoft.AzurePlaywrightService Management API Versions.")
-enum Versions {
+union Versions {
+  string,
+
   /** 2024-02-01-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -61,7 +63,9 @@ model AccountProperties {
 }
 
 @doc("The enablement status of a feature.")
-enum EnablementStatus {
+union EnablementStatus {
+  string,
+
   @doc("The feature is Enabled.")
   Enabled,
 
@@ -71,7 +75,9 @@ enum EnablementStatus {
 
 @doc("The status of the current operation.")
 @lroStatus
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 
   @doc("Creation in progress..")
@@ -113,7 +119,9 @@ model Quota is ProxyResource<QuotaProperties> {
 }
 
 @doc("The enum for quota name.")
-enum QuotaNames {
+union QuotaNames {
+  string,
+
   @doc("The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
   ScalableExecution,
 }
@@ -185,7 +193,9 @@ model AccountFreeTrialProperties {
 }
 
 @doc("The free-trial state.")
-enum FreeTrialState {
+union FreeTrialState {
+  string,
+
   @doc("The free-trial is Active.")
   Active,
 

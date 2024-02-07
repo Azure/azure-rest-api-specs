@@ -36,7 +36,9 @@ model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
 }
 
 @doc("The provisioning state of the UpdateStrategy resource.")
-enum FleetUpdateStrategyProvisioningState {
+union FleetUpdateStrategyProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 }
 

@@ -107,7 +107,9 @@ model AzureCognitiveSearchIndexFieldMappingOptions {
 The type of Azure Cognitive Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.
 """)
 @added(ServiceApiVersions.v2023_08_01_Preview)
-enum AzureCognitiveSearchQueryType {
+union AzureCognitiveSearchQueryType {
+  string,
+
   @doc("Represents the default, simple query parser.")
   simple: "simple",
 

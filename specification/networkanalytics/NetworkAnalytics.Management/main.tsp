@@ -28,7 +28,9 @@ enum Versions {
 }
 
 @doc("The status of the current operation.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /** Represents a succeeded operation. */
   Succeeded,
 
@@ -92,7 +94,9 @@ model ResourceAccessRules {
 }
 
 @doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
-enum Bypass {
+union Bypass {
+  string,
+
   @doc("Represents no bypassing of traffic.")
   None,
 
@@ -107,7 +111,9 @@ enum Bypass {
 }
 
 @doc("Specifies the default action of allow or deny when no other rules match.")
-enum DefaultAction {
+union DefaultAction {
+  string,
+
   @doc("Represents allow action.")
   Allow,
 
@@ -246,7 +252,9 @@ model EncryptionKeyDetails {
 
 @doc("The data type state")
 @added(Versions.v2023_11_15)
-enum ControlState {
+union ControlState {
+  string,
+
   @doc("Field to enable a setting.")
   Enabled,
 
@@ -378,7 +386,9 @@ model DataTypeProperties {
 
 @doc("The data type state")
 @added(Versions.v2023_11_15)
-enum DataTypeState {
+union DataTypeState {
+  string,
+
   @doc("Field to specify stopped state.")
   Stopped,
 
@@ -410,7 +420,9 @@ model ListRoleAssignments {
 
 @doc("The data type state")
 @added(Versions.v2023_11_15)
-enum DataProductUserRole {
+union DataProductUserRole {
+  string,
+
   @doc("Field to specify user of type Reader.")
   Reader,
 

@@ -1330,7 +1330,9 @@ model ObservedValue {
 }
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("A list of asset types to cascade the updates to.")
-enum AssetUpdateTransfers {
+union AssetUpdateTransfers {
+  string,
+
   as,
   contact,
   domain,
@@ -1343,7 +1345,9 @@ enum AssetUpdateTransfers {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of billable asset.")
-enum ReportBillableAssetBreakdownKind {
+union ReportBillableAssetBreakdownKind {
+  string,
+
   domain,
   host,
   ipAddress,
@@ -1351,7 +1355,9 @@ enum ReportBillableAssetBreakdownKind {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state the task is in.")
-enum TaskState {
+union TaskState {
+  string,
+
   pending,
   running,
   paused,
@@ -1363,7 +1369,9 @@ enum TaskState {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The phase the task is in.")
-enum TaskPhase {
+union TaskPhase {
+  string,
+
   running,
   polling,
   complete,
@@ -1371,14 +1379,18 @@ enum TaskPhase {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of data connection.")
-enum DataConnectionKind {
+union DataConnectionKind {
+  string,
+
   logAnalytics,
   azureDataExplorer,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The rate at which the data connection will receive updates.")
-enum DataConnectionFrequency {
+union DataConnectionFrequency {
+  string,
+
   daily,
   weekly,
   monthly,
@@ -1386,7 +1398,9 @@ enum DataConnectionFrequency {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of asset.")
-enum AssetKind {
+union AssetKind {
+  string,
+
   as,
   contact,
   domain,
@@ -1399,7 +1413,9 @@ enum AssetKind {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The State of the disco run.")
-enum DiscoRunState {
+union DiscoRunState {
+  string,
+
   pending,
   running,
   completed,
@@ -1408,14 +1424,18 @@ enum DiscoRunState {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The type of data the data connection will transfer")
-enum DataConnectionContent {
+union DataConnectionContent {
+  string,
+
   assets,
   attackSurfaceInsights,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of disco source.")
-enum DiscoSourceKind {
+union DiscoSourceKind {
+  string,
+
   as,
   attribute,
   contact,
@@ -1425,7 +1445,9 @@ enum DiscoSourceKind {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-enum ObservedPortStateValue {
+union ObservedPortStateValue {
+  string,
+
   open,
   closed,
   filtered,
@@ -1433,7 +1455,9 @@ enum ObservedPortStateValue {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state to update the asset to.")
-enum AssetUpdateState {
+union AssetUpdateState {
+  string,
+
   candidate,
   confirmed,
   dismissed,
@@ -1443,14 +1467,18 @@ enum AssetUpdateState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-enum AssetState {
+union AssetState {
+  string,
+
   ...AssetUpdateState,
   archived,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of asset.")
-enum AuditTrailItemKind {
+union AuditTrailItemKind {
+  string,
+
   as,
   contact,
   domain,
@@ -1462,7 +1490,9 @@ enum AuditTrailItemKind {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-enum PageAssetRedirectType {
+union PageAssetRedirectType {
+  string,
+
   httpHeader,
   metaRefresh,
   javascript,
@@ -1470,7 +1500,9 @@ enum PageAssetRedirectType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-enum SslCertAssetValidationType {
+union SslCertAssetValidationType {
+  string,
+
   domainValidation,
   organizationValidation,
   extendedValidation,

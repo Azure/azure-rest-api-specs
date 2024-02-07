@@ -20,7 +20,9 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /** Provisioning state of the resource. */
 @doc("Provisioning state of resource.")
 @lroStatus
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 
   /** The resource is being provisioned */
@@ -37,7 +39,9 @@ enum ProvisioningState {
 }
 
 @doc("Regional data boundary values.")
-enum RegionalDataBoundary {
+union RegionalDataBoundary {
+  string,
+
   /** No data boundary */
   None,
 
@@ -46,7 +50,9 @@ enum RegionalDataBoundary {
 }
 
 @doc("Allow crash dumps values.")
-enum AllowCrashDumpCollection {
+union AllowCrashDumpCollection {
+  string,
+
   /** Crash dump collection enabled */
   Enabled,
 
@@ -55,7 +61,9 @@ enum AllowCrashDumpCollection {
 }
 
 @doc("Certificate status values.")
-enum CertificateStatus {
+union CertificateStatus {
+  string,
+
   /** Certificate is active */
   Active,
 

@@ -337,7 +337,9 @@ model VolumeClaimSpecSelectorMatchExpressions {
 }
 
 @doc("The enum defining run mode of the broker deployment")
-enum RunMode {
+union RunMode {
+  string,
+
   @doc("Automatically provision Frontend and Backend pods.")
   auto,
 
@@ -346,7 +348,9 @@ enum RunMode {
 }
 
 @doc("The memory profile settings of the Broker")
-enum BrokerMemoryProfile {
+union BrokerMemoryProfile {
+  string,
+
   @doc("Tiny memory profile.")
   tiny,
 
@@ -419,7 +423,9 @@ model BrokerListenerProperties {
 }
 
 @doc("Kubernetes Service Types supported by Listener")
-enum ServiceType {
+union ServiceType {
+  string,
+
   @doc("Cluster IP Service.")
   clusterIp,
 
@@ -688,7 +694,9 @@ model ResourceInfoDefinition {
 }
 
 @doc("ResourceInfoDefinition methods allowed")
-enum ResourceInfoDefinitionMethods {
+union ResourceInfoDefinitionMethods {
+  string,
+
   @doc("Allowed Connecting to Broker")
   Connect,
 

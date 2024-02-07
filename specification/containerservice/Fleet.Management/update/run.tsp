@@ -35,7 +35,9 @@ model UpdateRun is ProxyResource<UpdateRunProperties> {
 }
 
 @doc("The provisioning state of the UpdateRun resource.")
-enum UpdateRunProvisioningState {
+union UpdateRunProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 }
 
@@ -62,15 +64,15 @@ model UpdateRunProperties {
 
     Setting both "updateStrategyId" and "strategy" is invalid.
 
-    UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field. 
-    Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate. 
+    UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field.
+    Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate.
     UpdateRunStrategy changes can be made directly on the "strategy" field before launching the UpdateRun.
     """)
   @added(Versions.v2023_08_15_preview)
   updateStrategyId?: FleetUpdateStrategyResourceId;
 
   @doc("""
-The strategy defines the order in which the clusters will be updated. 
+The strategy defines the order in which the clusters will be updated.
 If not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.
 The strategy of the UpdateRun can be modified until the run is started.
 """)
@@ -105,7 +107,9 @@ model NodeImageSelection {
 
 @doc("The node image upgrade type.")
 @added(Versions.v2023_06_15_preview)
-enum NodeImageSelectionType {
+union NodeImageSelectionType {
+  string,
+
   @doc("Use the latest image version when upgrading nodes. Clusters may use different image versions (e.g., 'AKSUbuntu-1804gen2containerd-2021.10.12' and 'AKSUbuntu-1804gen2containerd-2021.10.19') because, for example, the latest available version is different in different regions.")
   Latest,
 
@@ -129,7 +133,9 @@ NodeImageOnly requires the KubernetesVersion property not to be set.
 }
 
 @doc("The type of upgrade to perform when targeting ManagedClusters.")
-enum ManagedClusterUpgradeType {
+union ManagedClusterUpgradeType {
+  string,
+
   @doc("Full upgrades the control plane and all agent pools of the target ManagedClusters.")
   Full,
 
@@ -138,7 +144,9 @@ enum ManagedClusterUpgradeType {
 }
 
 @doc("The state of the UpdateRun, UpdateStage, UpdateGroup, or MemberUpdate.")
-enum UpdateState {
+union UpdateState {
+  string,
+
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has not been started.")
   NotStarted,
 

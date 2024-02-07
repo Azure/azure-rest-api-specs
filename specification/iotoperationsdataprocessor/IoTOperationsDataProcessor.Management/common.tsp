@@ -24,7 +24,9 @@ model ExtendedLocation {
 
 @lroStatus
 @doc("The provisioning status of the resource.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 
   @doc("The resource is being created.")

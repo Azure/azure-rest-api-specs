@@ -16,7 +16,9 @@ model OdataFilterParameter {
 }
 
 /** The expected types of origin */
-enum Origin {
+union Origin {
+  string,
+
   /** Origin with User */
   user,
 
@@ -28,18 +30,24 @@ enum Origin {
 }
 
 /** The type of action */
-enum ActionType {
+union ActionType {
+  string,
+
   /** an internal action */
   Internal,
 }
 
 /** The provisioning state of the resource */
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   ...Azure.ResourceManager.ResourceProvisioningState,
 }
 
 /** The type of managed service identity */
-enum ManagedServiceIdentityType {
+union ManagedServiceIdentityType {
+  string,
+
   /** No identity */
   None,
 
@@ -54,7 +62,9 @@ enum ManagedServiceIdentityType {
 }
 
 /** How the resource was created */
-enum CreatedByType {
+union CreatedByType {
+  string,
+
   /** Created by user */
   User,
 
@@ -69,7 +79,9 @@ enum CreatedByType {
 }
 
 /** Assignment entity for Metadata */
-enum MetadataAssignmentEntity {
+union MetadataAssignmentEntity {
+  string,
+
   /** Assigned to API */
   api,
 
@@ -81,7 +93,9 @@ enum MetadataAssignmentEntity {
 }
 
 /** The format for schema export */
-enum MetadataSchemaExportFormat {
+union MetadataSchemaExportFormat {
+  string,
+
   @doc("The inlined content of a schema document.")
   inline,
 
@@ -90,7 +104,9 @@ enum MetadataSchemaExportFormat {
 }
 
 /** The kind of the API */
-enum ApiKind {
+union ApiKind {
+  string,
+
   /** A Representational State Transfer Api */
   rest,
 
@@ -111,7 +127,9 @@ enum ApiKind {
 }
 
 /** The stage of the Api development lifecycle */
-enum LifecycleStage {
+union LifecycleStage {
+  string,
+
   /** design stage */
   design,
 
@@ -135,7 +153,9 @@ enum LifecycleStage {
 }
 
 /** Source format for imported Api spec */
-enum ApiSpecImportSourceFormat {
+union ApiSpecImportSourceFormat {
+  string,
+
   @doc("The inlined content of a specification document.") inline,
 
   @doc("""
@@ -146,7 +166,9 @@ address.
 }
 
 /** Result format for exported Api spec */
-enum ApiSpecExportResultFormat {
+union ApiSpecExportResultFormat {
+  string,
+
   @doc("The inlined content of a specification document.") inline,
 
   @doc("The link to the result of the export operation. The URL is valid for 5 minutes.")
@@ -154,7 +176,9 @@ enum ApiSpecExportResultFormat {
 }
 
 /** State of the Deployment */
-enum DeploymentState {
+union DeploymentState {
+  string,
+
   /** Active State */
   active,
 
@@ -163,7 +187,9 @@ enum DeploymentState {
 }
 
 /** The kind of environment */
-enum EnvironmentKind {
+union EnvironmentKind {
+  string,
+
   /** Development environment */
   development,
 
@@ -178,7 +204,9 @@ enum EnvironmentKind {
 }
 
 /** The type of environment server */
-enum EnvironmentServerType {
+union EnvironmentServerType {
+  string,
+
   /** Api Management Server */
   `Azure API Management`,
 

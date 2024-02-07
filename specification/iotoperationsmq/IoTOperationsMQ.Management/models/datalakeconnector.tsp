@@ -69,7 +69,9 @@ model DataLakeConnectorProperties {
 }
 
 @doc("DataLake possible database formats")
-enum DataLakeDatabaseFormat {
+union DataLakeDatabaseFormat {
+  string,
+
   @doc("Delta format.")
   delta,
 
@@ -142,7 +144,9 @@ model DataLakeFabricStorageAuthentication {
 
 // Add Fabric path type
 @doc("Fabric path type to use.")
-enum FabricPathType {
+union FabricPathType {
+  string,
+
   @doc("Fabric path type is Files.")
   files,
 
@@ -264,7 +268,9 @@ model DeltaTableSchema {
 }
 
 @doc("Delta table format properties")
-enum DeltaTableFormatEnum {
+union DeltaTableFormatEnum {
+  string,
+
   @doc("Bool format")
   boolean,
 

@@ -77,7 +77,9 @@ model ElasticsearchIndexFieldMappingOptions {
 The type of Elasticsearch® retrieval query that should be executed when using it as an Azure OpenAI chat extension.
 """)
 @added(ServiceApiVersions.v2023_12_01_Preview)
-enum ElasticsearchQueryType {
+union ElasticsearchQueryType {
+  string,
+
   @doc("Represents the default, simple query parser.")
   simple: "simple",
 

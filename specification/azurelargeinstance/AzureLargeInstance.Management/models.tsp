@@ -11,7 +11,9 @@ namespace Microsoft.AzureLargeInstance;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Enum of the hardware options (vendor and/or their product name) for an Azure Large Instance")
-enum AzureLargeInstanceHardwareTypeNamesEnum {
+union AzureLargeInstanceHardwareTypeNamesEnum {
+  string,
+
   @doc("Hardware type of UCS from vendor Cisco")
   Cisco_UCS,
 
@@ -23,7 +25,9 @@ enum AzureLargeInstanceHardwareTypeNamesEnum {
 }
 
 @doc("Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://docs.microsoft.com/azure/sap/large-instances/hana-available-skus")
-enum AzureLargeInstanceSizeNamesEnum {
+union AzureLargeInstanceSizeNamesEnum {
+  string,
+
   @doc("Type I class SKU that can't be purchased anymore")
   S72m,
 
@@ -161,7 +165,9 @@ enum AzureLargeInstanceSizeNamesEnum {
 }
 
 @doc("Power states that an Azure Large Instance can be in")
-enum AzureLargeInstancePowerStateEnum {
+union AzureLargeInstancePowerStateEnum {
+  string,
+
   @doc("Starting means that the Azure Large Instance resource is turning on.")
   starting,
 
@@ -182,7 +188,9 @@ enum AzureLargeInstancePowerStateEnum {
 }
 
 @doc("Provisioning states that an Azure Large Instance can be in")
-enum AzureLargeInstanceProvisioningStatesEnum {
+union AzureLargeInstanceProvisioningStatesEnum {
+  string,
+
   @doc("Accepted means Azure Large Instance resource provisioning has been accepted.")
   Accepted,
 
@@ -209,7 +217,9 @@ enum AzureLargeInstanceProvisioningStatesEnum {
 }
 
 @doc("The type of identity that created the resource: User, Application, ManagedIdentity")
-enum CreatedByType {
+union CreatedByType {
+  string,
+
   @doc("An AAD user. The createdByType/lastModifiedBy property will be a user principal name (email address).")
   User,
 
@@ -224,7 +234,9 @@ enum CreatedByType {
 }
 
 @doc("Enum of two possible values to determine if the ALI instance restart operation should forcefully terminate and halt any existing processes that may be running on the server or not.")
-enum AzureLargeInstanceForcePowerState {
+union AzureLargeInstanceForcePowerState {
+  string,
+
   @doc("Active means that the restart operation will terminate and halt existing processes that may be running on the server")
   active,
 
@@ -233,7 +245,9 @@ enum AzureLargeInstanceForcePowerState {
 }
 
 @doc("An enum of possible operation states for an AzureLargeStorageInstances")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   @doc("Accepted means ARM resource has been accepted.")
   Accepted,
 
@@ -376,7 +390,7 @@ model IpAddress {
   ipAddress?: string;
 }
 
-@doc(""" 
+@doc("""
 The active state empowers the server with the ability to forcefully terminate
 and halt any existing processes that may be running on the server
 """)

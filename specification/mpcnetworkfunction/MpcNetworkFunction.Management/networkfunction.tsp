@@ -109,7 +109,9 @@ interface NetworkFunctions {
 }
 
 @doc("SKU Definitions")
-enum SkuDefinitions {
+union SkuDefinitions {
+  string,
+
   @doc("Azure Lab SKU")
   AzureLab,
 
@@ -124,7 +126,9 @@ enum SkuDefinitions {
 }
 
 @doc("Type of Network Function")
-enum NetworkFunctionType {
+union NetworkFunctionType {
+  string,
+
   @doc("Access and Mobility Function")
   AMF,
 
@@ -169,7 +173,9 @@ enum NetworkFunctionType {
 }
 
 @doc("Network Function Administrative State enumerations")
-enum NetworkFunctionAdministrativeState {
+union NetworkFunctionAdministrativeState {
+  string,
+
   @doc("Resource has been commissioned")
   Commissioned,
 
@@ -178,7 +184,9 @@ enum NetworkFunctionAdministrativeState {
 }
 
 @doc("Network Function Operational Status enumerations")
-enum NetworkFunctionOperationalStatus {
+union NetworkFunctionOperationalStatus {
+  string,
+
   @doc("Resource is inactive")
   Inactive,
 
@@ -194,7 +202,9 @@ enum NetworkFunctionOperationalStatus {
 
 @doc("Provisioning state of the resource")
 @Azure.Core.lroStatus
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 
   @doc("Resource is getting provisioned")

@@ -66,7 +66,9 @@ model PoolProperties {
 }
 
 @doc("Availability Zones")
-enum Zone {
+union Zone {
+  string,
+
   @doc("First availability zone.")
   Zone1: "1",
 
@@ -104,7 +106,9 @@ model PoolType {
 }
 
 @doc("Reclaim policy")
-enum ReclaimPolicy {
+union ReclaimPolicy {
+  string,
+
   @doc("Delete resource")
   Delete,
 
@@ -149,7 +153,9 @@ model AzureDisk {
 }
 
 @doc("SKU of the underlying managed disk")
-enum AzureDiskSkuName {
+union AzureDiskSkuName {
+  string,
+
   @doc("Premium_LRS SKU")
   Premium_LRS,
 
@@ -190,7 +196,9 @@ model ElasticSan {
 
 /** Sku Name enum type */
 @doc("ElasticSAN SKUs")
-enum ElasticSanSkuName {
+union ElasticSanSkuName {
+  string,
+
   @doc("Premium_LRS SKU")
   Premium_LRS,
 
@@ -210,7 +218,9 @@ model EphemeralDisk {
 
 @doc("Provisioning state of the resource.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 
   @doc("The resource is being provisioned")
@@ -236,7 +246,9 @@ model ResourceOperationalStatus {
 }
 
 @doc("State of the resource.")
-enum ResourceOperationStatusState {
+union ResourceOperationStatusState {
+  string,
+
   @doc("The resource is pending.")
   Pending,
 
@@ -353,7 +365,9 @@ model AssignmentStatus {
 }
 
 @doc("Status of the assignment resource")
-enum AssignmentStatusState {
+union AssignmentStatusState {
+  string,
+
   @doc("The assignment of the pool to the resource is in progress")
   Assigning,
 

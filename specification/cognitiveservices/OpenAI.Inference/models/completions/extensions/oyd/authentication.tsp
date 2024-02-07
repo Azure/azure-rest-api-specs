@@ -8,7 +8,9 @@ using TypeSpec.Versioning;
 The authentication types supported with Azure OpenAI On Your Data.
 """)
 @added(ServiceApiVersions.v2023_08_01_Preview)
-enum OnYourDataAuthenticationType {
+union OnYourDataAuthenticationType {
+  string,
+
   @doc("Authentication via API key.")
   apiKey: "APIKey",
 

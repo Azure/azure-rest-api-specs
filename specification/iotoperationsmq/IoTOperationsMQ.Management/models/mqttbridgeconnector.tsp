@@ -83,7 +83,9 @@ model MqttBridgeRemoteBrokerConnectionSpec {
 }
 
 @doc("Protocol for remote connection.")
-enum MqttBridgeRemoteBrokerProtocol {
+union MqttBridgeRemoteBrokerProtocol {
+  string,
+
   @doc("MQTT protocol.")
   mqtt,
 
@@ -179,7 +181,9 @@ model MqttBridgeRoutes {
 }
 
 @doc("MqttBridgeRoute direction properties")
-enum MqttBridgeRouteDirection {
+union MqttBridgeRouteDirection {
+  string,
+
   @doc("Remote to Local Broker.")
   RemoteToLocal: "remote-to-local",
 

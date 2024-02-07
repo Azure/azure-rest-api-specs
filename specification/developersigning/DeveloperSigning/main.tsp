@@ -76,7 +76,9 @@ interface CertificateProfileOperations {
 }
 
 @doc("Algorithms supported for signing.")
-enum SignatureAlgorithm {
+union SignatureAlgorithm {
+  string,
+
   @doc("RSASSA-PKCS1-v1_5 using SHA-256 hash algorithm.")
   RS256,
 
@@ -148,7 +150,7 @@ model SignResult {
   signature?: bytes;
 
   @doc("""
-Signing certificate corresponding to the private key used to sign the requested 
+Signing certificate corresponding to the private key used to sign the requested
 digest.
 """)
   signingCertificate?: bytes;

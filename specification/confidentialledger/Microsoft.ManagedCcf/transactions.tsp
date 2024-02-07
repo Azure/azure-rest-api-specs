@@ -9,7 +9,9 @@ import "./common.tsp";
 namespace Microsoft.ManagedCcf.Transactions;
 
 @doc("Possible states for a CCF transaction. See docs for details: https://microsoft.github.io/CCF/main/use_apps/verify_tx.html#checking-for-commit")
-enum TransactionStatus {
+union TransactionStatus {
+  string,
+
   @doc("This is not a transaction the current node knows, but could exist in future. This may be returned when a transaction is created on one node then immediately queried on another, before it has been replicated.")
   Unknown,
 

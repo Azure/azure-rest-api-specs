@@ -94,7 +94,9 @@ model Account {
 }
 
 @doc("The account state.")
-enum AccountState {
+union AccountState {
+  string,
+
   @doc("The account is Active.")
   Active,
 
@@ -103,7 +105,9 @@ enum AccountState {
 }
 
 @doc("The ARM-based subscription state.")
-enum SubscriptionState {
+union SubscriptionState {
+  string,
+
   @doc("The subscription state is Registered.")
   Registered,
 
@@ -154,7 +158,9 @@ model AccessToken {
 }
 
 @doc("The access-token state.")
-enum AccessTokenState {
+union AccessTokenState {
+  string,
+
   @doc("The access-token is Active.")
   Active,
 
@@ -163,7 +169,9 @@ enum AccessTokenState {
 }
 
 @doc("The enablement status of a feature.")
-enum EnablementStatus {
+union EnablementStatus {
+  string,
+
   @doc("The feature is Enabled.")
   Enabled,
 

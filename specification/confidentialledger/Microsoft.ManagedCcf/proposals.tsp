@@ -20,7 +20,9 @@ model Action {
 }
 
 @doc("Possible states for a proposal.")
-enum ProposalState {
+union ProposalState {
+  string,
+
   @doc("Proposal is active and can be voted on.")
   Open,
 

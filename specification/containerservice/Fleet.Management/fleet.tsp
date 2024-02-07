@@ -124,7 +124,9 @@ model AgentProfile {
 
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
-enum FleetProvisioningState {
+union FleetProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 
   @doc("The provisioning state of a fleet being created.")

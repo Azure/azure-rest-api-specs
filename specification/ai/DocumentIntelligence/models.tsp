@@ -12,7 +12,9 @@ using OpenAPI;
 namespace DocumentIntelligence;
 
 @doc("Method used to compute string offset and length.")
-enum StringIndexType {
+union StringIndexType {
+  string,
+
   @doc("""
   User-perceived display character, or grapheme cluster, as defined by Unicode
   8.0.0.
@@ -30,7 +32,9 @@ enum StringIndexType {
 }
 
 @doc("Format of the content in analyzed result.")
-enum ContentFormat {
+union ContentFormat {
+  string,
+
   @doc("Plain text representation of the document content without any formatting.")
   text,
 
@@ -42,7 +46,9 @@ enum ContentFormat {
 }
 
 @doc("Document analysis features to enable.")
-enum DocumentAnalysisFeature {
+union DocumentAnalysisFeature {
+  string,
+
   @doc("Perform OCR at a higher resolution to handle documents with fine print.")
   ocrHighResolution,
 
@@ -66,13 +72,17 @@ enum DocumentAnalysisFeature {
 }
 
 @doc("The unit used by the width, height, and polygon properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".")
-enum LengthUnit {
+union LengthUnit {
+  string,
+
   @doc("Length unit for image files.") pixel,
   @doc("Length unit for PDF files.") inch,
 }
 
 @doc("State of the selection mark.")
-enum DocumentSelectionMarkState {
+union DocumentSelectionMarkState {
+  string,
+
   @doc("""
   The selection mark is selected, often indicated by a check ✓ or cross X inside
   the selection mark.
@@ -84,7 +94,9 @@ enum DocumentSelectionMarkState {
 }
 
 @doc("Barcode kind.")
-enum DocumentBarcodeKind {
+union DocumentBarcodeKind {
+  string,
+
   @doc("QR code, as defined in ISO/IEC 18004:2015.")
   QRCode,
 
@@ -138,13 +150,17 @@ enum DocumentBarcodeKind {
 }
 
 @doc("Formula kind.")
-enum DocumentFormulaKind {
+union DocumentFormulaKind {
+  string,
+
   @doc("A formula embedded within the content of a paragraph.") inline,
   @doc("A formula in display mode that takes up an entire line.") display,
 }
 
 @doc("Semantic role of the paragraph.")
-enum ParagraphRole {
+union ParagraphRole {
+  string,
+
   @doc("Text near the top edge of the page.") pageHeader,
   @doc("Text near the bottom edge of the page.") pageFooter,
   @doc("Page number.") pageNumber,
@@ -155,7 +171,9 @@ enum ParagraphRole {
 }
 
 @doc("Table cell kind.")
-enum DocumentTableCellKind {
+union DocumentTableCellKind {
+  string,
+
   @doc("Contains the main content/data.") content,
   @doc("Describes the content of the row.") rowHeader,
   @doc("Describes the content of the column.") columnHeader,
@@ -167,19 +185,25 @@ enum DocumentTableCellKind {
 }
 
 @doc("Font style.")
-enum FontStyle {
+union FontStyle {
+  string,
+
   @doc("Characters are represented normally.") normal,
   @doc("Characters are visually slanted to the right.") italic,
 }
 
 @doc("Font weight.")
-enum FontWeight {
+union FontWeight {
+  string,
+
   @doc("Characters are represented normally.") normal,
   @doc("Characters are represented with thicker strokes.") bold,
 }
 
 @doc("Semantic data type of the field value.")
-enum DocumentFieldType {
+union DocumentFieldType {
+  string,
+
   @doc("Plain text.")
   string,
 
@@ -224,19 +248,25 @@ enum DocumentFieldType {
 }
 
 @doc("Presence of signature.")
-enum DocumentSignatureType {
+union DocumentSignatureType {
+  string,
+
   @doc("A signature is detected.") signed,
   @doc("No signatures are detected.") unsigned,
 }
 
 @doc("Custom document model build mode.")
-enum DocumentBuildMode {
+union DocumentBuildMode {
+  string,
+
   @doc("Target documents with similar visual templates.") template,
   @doc("Support documents with diverse visual templates.") neural,
 }
 
 @doc("Type of operation.")
-enum OperationKind {
+union OperationKind {
+  string,
+
   @doc("Build a new custom document model.")
   documentModelBuild,
 
@@ -254,7 +284,9 @@ enum OperationKind {
 }
 
 @doc("Document splitting mode.")
-enum SplitMode {
+union SplitMode {
+  string,
+
   @doc("Automatically split file into documents.") auto,
   @doc("Treat the entire file as a single document.") none,
   @doc("Treat each page in the file as a separate document.") perPage,
@@ -262,7 +294,9 @@ enum SplitMode {
 
 @lroStatus
 @doc("Operation status.")
-enum OperationStatus {
+union OperationStatus {
+  string,
+
   @doc("The operation has not started yet.") notStarted,
   @doc("The operation is in progress.") running,
   @doc("The operation has failed.") @lroFailed failed,
@@ -271,7 +305,9 @@ enum OperationStatus {
 }
 
 @doc("Type of content source.")
-enum ContentSourceKind {
+union ContentSourceKind {
+  string,
+
   @doc("Content at a specific URL.")
   url,
 

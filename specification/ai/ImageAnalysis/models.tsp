@@ -282,7 +282,9 @@ model TagsResult {
 }
 
 @doc("The visual features supported by the Image Analysis service")
-enum VisualFeatures {
+union VisualFeatures {
+  string,
+
   @doc("Extract content tags for thousands of recognizable objects, living beings, scenery, and actions that appear in the image.")
   tags,
 

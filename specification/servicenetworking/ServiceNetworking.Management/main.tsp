@@ -72,7 +72,9 @@ model AssociationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum AssociationType {
+union AssociationType {
+  string,
+
   subnets,
 }
 
@@ -114,7 +116,9 @@ model TrafficControllerProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @lroStatus
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   Provisioning,
   Updating,
   Deleting,

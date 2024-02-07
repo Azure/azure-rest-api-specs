@@ -50,7 +50,9 @@ model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.Arm
 
 @doc("Provisioning state of the resource")
 @Azure.Core.lroStatus
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   ...ResourceProvisioningState,
 
   @doc("Resource is getting provisioned")
@@ -102,7 +104,9 @@ model OperationalStatus {
 }
 
 @doc("Infrastructure Type Definitions")
-enum InfrastructureType {
+union InfrastructureType {
+  string,
+
   @doc("Azure Core")
   AzureCore,
 
@@ -111,7 +115,9 @@ enum InfrastructureType {
 }
 
 @doc("Deployment Type Definitions")
-enum SkuDeploymentType {
+union SkuDeploymentType {
+  string,
+
   @doc("Production Deployment")
   Production,
 
@@ -120,7 +126,9 @@ enum SkuDeploymentType {
 }
 
 @doc("Cluster Type Definitions")
-enum ClusterType {
+union ClusterType {
+  string,
+
   @doc("Azure Kubernetes Service")
   Aks,
 
