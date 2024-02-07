@@ -14,7 +14,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * Specify action.
  */
-enum Action {
+enum action {
   @doc("This will allow the HTTP requests")
   Allow,
 
@@ -85,7 +85,7 @@ model RuleProperties {
   /**
    * Specify action.
    */
-  action: Action;
+  action: action;
 
   /**
    * List of Addresses to be allowed or denied.

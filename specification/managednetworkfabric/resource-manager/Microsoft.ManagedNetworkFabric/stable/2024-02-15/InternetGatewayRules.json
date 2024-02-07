@@ -416,30 +416,6 @@
     }
   },
   "definitions": {
-    "Action": {
-      "type": "string",
-      "description": "Specify action.",
-      "enum": [
-        "Allow",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "Action",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "Allow",
-            "description": "This will allow the HTTP requests"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "This will not allow the HTTP requests"
-          }
-        ]
-      }
-    },
     "AnnotationResource": {
       "type": "object",
       "description": "Switch configuration entries require a description to discern between configuration groups.",
@@ -641,7 +617,7 @@
       "description": "Rules for the InternetGateways",
       "properties": {
         "action": {
-          "$ref": "#/definitions/Action",
+          "$ref": "#/definitions/action",
           "description": "Specify action."
         },
         "addressList": {
@@ -695,6 +671,30 @@
             "name": "v2024_02_15",
             "value": "2024-02-15",
             "description": "The 2024-02-15 API version."
+          }
+        ]
+      }
+    },
+    "action": {
+      "type": "string",
+      "description": "Specify action.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "action",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "This will allow the HTTP requests"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "This will not allow the HTTP requests"
           }
         ]
       }
