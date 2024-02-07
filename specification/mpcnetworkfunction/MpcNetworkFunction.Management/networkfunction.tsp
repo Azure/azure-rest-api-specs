@@ -113,16 +113,16 @@ union SkuDefinitions {
   string,
 
   @doc("Azure Lab SKU")
-  AzureLab,
+  "AzureLab",
 
   @doc("Azure Production SKU")
-  AzureProduction,
+  "AzureProduction",
 
   @doc("Nexus Lab SKU")
-  NexusLab,
+  "NexusLab",
 
   @doc("Nexus Production SKU")
-  NexusProduction,
+  "NexusProduction",
 }
 
 @doc("Type of Network Function")
@@ -130,46 +130,46 @@ union NetworkFunctionType {
   string,
 
   @doc("Access and Mobility Function")
-  AMF,
+  "AMF",
 
   @doc("Session Management Function")
-  SMF,
+  "SMF",
 
   @doc("User Plane Function")
-  UPF,
+  "UPF",
 
   @doc("Network Repository Function")
-  NRF,
+  "NRF",
 
   @doc("Network Slice Selection Function")
-  NSSF,
+  "NSSF",
 
   @doc("Mobility Management Entity")
-  MME,
+  "MME",
 
   @doc("System Architecture Evolution Gateway Control Plane, control and user plane separation (CUPS) architecture")
-  SaegwControlPlane,
+  "SaegwControlPlane",
 
   @doc("System Architecture Evolution Gateway User Plane, control and user plane separation (CUPS) architecture")
-  SaegwUserPlane,
+  "SaegwUserPlane",
 
   @doc("System Architecture Evolution Gateway.  This combines the Serving Gateway (SGW) and the Packet Data Network Gateway (PGW) functionality")
-  Saegw,
+  "Saegw",
 
   @doc("Evolved Packet Data Gateway")
-  ePDG,
+  "ePDG",
 
   @doc("Non-3GPP Interworking Function")
-  N3IWF,
+  "N3IWF",
 
   @doc("Remote Platform As A Service Components")
-  RemotePaaS,
+  "RemotePaaS",
 
   @doc("Element Management System")
-  EMS,
+  "EMS",
 
   @doc("Operations and Policy Manager")
-  OperationsPolicyManager,
+  "OperationsPolicyManager",
 }
 
 @doc("Network Function Administrative State enumerations")
@@ -177,10 +177,10 @@ union NetworkFunctionAdministrativeState {
   string,
 
   @doc("Resource has been commissioned")
-  Commissioned,
+  "Commissioned",
 
   @doc("Resource has been decommissioned")
-  Decommissioned,
+  "Decommissioned",
 }
 
 @doc("Network Function Operational Status enumerations")
@@ -188,16 +188,16 @@ union NetworkFunctionOperationalStatus {
   string,
 
   @doc("Resource is inactive")
-  Inactive,
+  "Inactive",
 
   @doc("Resource has been deployed, awaiting provisioning")
-  InstantiatedNotProvisioned,
+  "InstantiatedNotProvisioned",
 
   @doc("Resource has been deployed and provisioned, awaiting testing")
-  InstantiatedProvisioned,
+  "InstantiatedProvisioned",
 
   @doc("Resource is fully deployed and operational")
-  Active,
+  "Active",
 }
 
 @doc("Provisioning state of the resource")

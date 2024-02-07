@@ -18,10 +18,10 @@ union MemberStatus {
   string,
 
   @doc("Member has been approved to join the service, but have not yet submitted an ACK to indicate their participation. These members should not be considered by constitutions in quorum calculations, and their signed requests will be rejected until they become Active.")
-  Accepted,
+  "Accepted",
 
   @doc("Member has submitted a valid ACK and is a full voting participant.")
-  Active,
+  "Active",
 }
 
 @doc("Information on individual members within a consortium.")
@@ -49,13 +49,13 @@ union NodeStatus {
   string,
 
   @doc("Indicates a node which has successfully completed a join request to the service (including attestation checks), but has not yet been approved by governance.")
-  Pending,
+  "Pending",
 
   @doc("Indicates a node which has been approved by governance, and is a full participant in the service.")
-  Trusted,
+  "Trusted",
 
   @doc("Indicates a node which has been removed from a service by a reconfiguration.")
-  Retired,
+  "Retired",
 }
 
 @doc("Common type for attestation information, describing the cryptographically-endorsed claim of what code is executing, and what platform it is executing on. Derived types contain platform-specific details.")
@@ -142,13 +142,13 @@ union ForwardingRequired {
   string,
 
   @doc("Indicates that this request should be forwarded if-and-only-if it is needed to maintain session consistency. If stale reads are acceptable then they can be completed on a backup, and the request will not be forwarded. This should be the default behavior for read-only endpoints.")
-  Sometimes,
+  "Sometimes",
 
   @doc("Indicates that this request should always be forwarded. This will trigger forwarding of any additional requests on the same session, even those marked ForwardRequired::Sometimes. This should be the default behavior for any endpoint which writes to the Key-Value store.")
-  Always,
+  "Always",
 
   @doc("Indicates endpoints which will never be forwarded, even when this will result in a break of session consistency. This should be used only to access node-local information, or when weaker consistency is acceptable.")
-  Never,
+  "Never",
 }
 
 @doc("Describes the execution requirements of a specific endpoint.")
@@ -156,13 +156,13 @@ union JsExecMode {
   string,
 
   @doc("Indicates that the endpoint does (or may) produces writes to the Key-Value store.")
-  ReadWrite,
+  "ReadWrite",
 
   @doc("Indicates that the endpoint is a pure read, and will never write to the Key-Value store. Note that this includes endpoints which only access node-local state, and do not read from the Key-Value store at all.")
-  ReadOnly,
+  "ReadOnly",
 
   @doc("Indicates that the endpoint operates over a historical write to the Key-Value store rather than the latest, current state. These endpoints are also read-only, and may not produce writes.")
-  Historical,
+  "Historical",
 }
 
 @doc("Describes an endpoint implemented by a Javascript handler.")
@@ -294,16 +294,16 @@ union ServiceStatus {
   string,
 
   @doc("Services which have not yet passed a `transition_service_to_open` proposal.")
-  Opening,
+  "Opening",
 
   @doc("Services which are operating normally and accepting user transactions.")
-  Open,
+  "Open",
 
   @doc("Recovered services which cannot yet access private state.")
-  WaitingForRecoveryShares,
+  "WaitingForRecoveryShares",
 
   @doc("Recovered services which are actively replaying transactions from previous service, to reach the same state.")
-  Recovering,
+  "Recovering",
 }
 
 @doc("General information about the current service.")

@@ -24,17 +24,17 @@ union ImputeMode {
 union AnomalyDetectorErrorCodes {
   string,
 
-  InvalidCustomInterval,
-  BadArgument,
-  InvalidGranularity,
-  InvalidPeriod,
-  InvalidModelArgument,
-  InvalidSeries,
-  InvalidJsonFormat,
-  RequiredGranularity,
-  RequiredSeries,
-  InvalidImputeMode,
-  InvalidImputeFixedValue,
+  "InvalidCustomInterval",
+  "BadArgument",
+  "InvalidGranularity",
+  "InvalidPeriod",
+  "InvalidModelArgument",
+  "InvalidSeries",
+  "InvalidJsonFormat",
+  "RequiredGranularity",
+  "RequiredSeries",
+  "InvalidImputeMode",
+  "InvalidImputeFixedValue",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"

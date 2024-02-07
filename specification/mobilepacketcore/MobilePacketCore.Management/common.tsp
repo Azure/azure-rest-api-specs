@@ -106,10 +106,10 @@ union InfrastructureType {
   string,
 
   @doc("Azure Core")
-  AzureCore,
+  "AzureCore",
 
   @doc("Azure Operator Nexus")
-  AzureOperatorNexus,
+  "AzureOperatorNexus",
 }
 
 @doc("Deployment Type Definitions")
@@ -117,10 +117,10 @@ union SkuDeploymentType {
   string,
 
   @doc("Production Deployment")
-  Production,
+  "Production",
 
   @doc("Lab Deployment")
-  Lab,
+  "Lab",
 }
 
 @doc("Cluster Type Definitions")
@@ -128,10 +128,10 @@ union ClusterType {
   string,
 
   @doc("Azure Kubernetes Service")
-  Aks,
+  "Aks",
 
   @doc("Azure Operator Nexus Kubernetes Service")
-  NexusAks,
+  "NexusAks",
 }
 
 @doc("Usage SKU Definition")

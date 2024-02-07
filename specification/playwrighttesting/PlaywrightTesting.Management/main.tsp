@@ -195,16 +195,16 @@ union FreeTrialState {
   string,
 
   @doc("The free-trial is Active.")
-  Active,
+  "Active",
 
   @doc("The free-trial is Expired.")
-  Expired,
+  "Expired",
 
   @doc("The free-trial is Not Eligible.")
-  NotEligible,
+  "NotEligible",
 
   @doc("The free-trial is Not Registered.")
-  NotRegistered,
+  "NotRegistered",
 }
 
 @armResourceOperations

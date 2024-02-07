@@ -127,11 +127,11 @@ union SingleSignOnStates {
   string,
 
   @doc("Initial state of the SSO resource")
-  Initial,
+  "Initial",
 
   @doc("State of the SSO resource when it is enabled")
-  Enable,
+  "Enable",
 
   @doc("State of the SSO resource when it is disabled")
-  Disable,
+  "Disable",
 }

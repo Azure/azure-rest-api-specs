@@ -110,10 +110,10 @@ union ReclaimPolicy {
   string,
 
   @doc("Delete resource")
-  Delete,
+  "Delete",
 
   @doc("Retain resource")
-  Retain,
+  "Retain",
 }
 
 @doc("Model for disk for that pool is using")
@@ -157,25 +157,25 @@ union AzureDiskSkuName {
   string,
 
   @doc("Premium_LRS SKU")
-  Premium_LRS,
+  "Premium_LRS",
 
   @doc("Standard_LRS SKU")
-  Standard_LRS,
+  "Standard_LRS",
 
   @doc("StandardSSD_LRS SKU")
-  StandardSSD_LRS,
+  "StandardSSD_LRS",
 
   @doc("UltraSSD_LRS SKU")
-  UltraSSD_LRS,
+  "UltraSSD_LRS",
 
   @doc("Premium_ZRS SKU")
-  Premium_ZRS,
+  "Premium_ZRS",
 
   @doc("PremiumV2_LRS SKU")
-  PremiumV2_LRS,
+  "PremiumV2_LRS",
 
   @doc("StandardSSD_ZRS SKU")
-  StandardSSD_ZRS,
+  "StandardSSD_ZRS",
 }
 
 @doc("Encryption key properties for the pool.")
@@ -200,10 +200,10 @@ union ElasticSanSkuName {
   string,
 
   @doc("Premium_LRS SKU")
-  Premium_LRS,
+  "Premium_LRS",
 
   @doc("Premium_ZRS SKU")
-  Premium_ZRS,
+  "Premium_ZRS",
 }
 
 @doc("Ephemeral Disk Pool Properties")
@@ -248,13 +248,13 @@ union ResourceOperationStatusState {
   string,
 
   @doc("The resource is pending.")
-  Pending,
+  "Pending",
 
   @doc("The resource is available.")
-  Available,
+  "Available",
 
   @doc("The resource is unavailable.")
-  Unavailable,
+  "Unavailable",
 }
 
 // END POOL

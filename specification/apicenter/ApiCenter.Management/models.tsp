@@ -20,13 +20,13 @@ union Origin {
   string,
 
   /** Origin with User */
-  user,
+  "user",
 
   /** Origin with System */
-  system,
+  "system",
 
   /** Origin with user and system */
-  `user,system`,
+  "user,system",
 }
 
 /** The type of action */
@@ -34,7 +34,7 @@ union ActionType {
   string,
 
   /** an internal action */
-  Internal,
+  "Internal",
 }
 
 /** The provisioning state of the resource */
@@ -47,16 +47,16 @@ union ManagedServiceIdentityType {
   string,
 
   /** No identity */
-  None,
+  "None",
 
   /** Assigned by the system */
-  SystemAssigned,
+  "SystemAssigned",
 
   /** assigned by the user */
-  UserAssigned,
+  "UserAssigned",
 
   /** Both system-assigned and user-assigned identities */
-  `SystemAssigned,UserAssigned`,
+  "SystemAssigned,UserAssigned",
 }
 
 /** How the resource was created */
@@ -64,16 +64,16 @@ union CreatedByType {
   string,
 
   /** Created by user */
-  User,
+  "User",
 
   /** Created by Application */
-  Application,
+  "Application",
 
   /** Created by Managed Identity */
-  ManagedIdentity,
+  "ManagedIdentity",
 
   /** Created By Key */
-  Key,
+  "Key",
 }
 
 /** Assignment entity for Metadata */
@@ -81,13 +81,13 @@ union MetadataAssignmentEntity {
   string,
 
   /** Assigned to API */
-  api,
+  "api",
 
   /** Assigned to Environment */
-  environment,
+  "environment",
 
   /** Assigned to Deployment */
-  deployment,
+  "deployment",
 }
 
 /** The format for schema export */
@@ -95,10 +95,10 @@ union MetadataSchemaExportFormat {
   string,
 
   @doc("The inlined content of a schema document.")
-  inline,
+  "inline",
 
   @doc("The link to a schema document. The URL is valid for 5 minutes.")
-  link,
+  "link",
 }
 
 /** The kind of the API */
@@ -106,22 +106,22 @@ union ApiKind {
   string,
 
   /** A Representational State Transfer Api */
-  rest,
+  "rest",
 
   /** A Graph query language Api */
-  graphql,
+  "graphql",
 
   /** A gRPC Api */
-  grpc,
+  "grpc",
 
   /** A SOAP Api */
-  soap,
+  "soap",
 
   /** Web Hook */
-  webhook,
+  "webhook",
 
   /** Web Socket */
-  websocket,
+  "websocket",
 }
 
 /** The stage of the Api development lifecycle */
@@ -129,25 +129,25 @@ union LifecycleStage {
   string,
 
   /** design stage */
-  design,
+  "design",
 
   /** development stage */
-  development,
+  "development",
 
   /** testing stage */
-  testing,
+  "testing",
 
   /** In preview */
-  preview,
+  "preview",
 
   /** In production */
-  production,
+  "production",
 
   /** deprecated stage */
-  deprecated,
+  "deprecated",
 
   /** Retired stage */
-  retired,
+  "retired",
 }
 
 /** Source format for imported Api spec */
@@ -160,7 +160,7 @@ union ApiSpecImportSourceFormat {
 The link to a specification document hosted on a publicly accessible internet
 address.
 """)
-  link,
+  "link",
 }
 
 /** Result format for exported Api spec */
@@ -170,7 +170,7 @@ union ApiSpecExportResultFormat {
   @doc("The inlined content of a specification document.") inline,
 
   @doc("The link to the result of the export operation. The URL is valid for 5 minutes.")
-  link,
+  "link",
 }
 
 /** State of the Deployment */
@@ -178,10 +178,10 @@ union DeploymentState {
   string,
 
   /** Active State */
-  active,
+  "active",
 
   /** Inactive State */
-  inactive,
+  "inactive",
 }
 
 /** The kind of environment */
@@ -189,16 +189,16 @@ union EnvironmentKind {
   string,
 
   /** Development environment */
-  development,
+  "development",
 
   /** Testing environment */
-  testing,
+  "testing",
 
   /** Staging environment */
-  staging,
+  "staging",
 
   /** Production environment */
-  production,
+  "production",
 }
 
 /** The type of environment server */
@@ -206,25 +206,25 @@ union EnvironmentServerType {
   string,
 
   /** Api Management Server */
-  `Azure API Management`,
+  "Azure API Management",
 
   /** Compute server */
-  `Azure compute service`,
+  "Azure compute service",
 
   /** Apigee server */
-  `Apigee API Management`,
+  "Apigee API Management",
 
   /** AWS Api Gateway server */
-  `AWS API Gateway`,
+  "AWS API Gateway",
 
   /** Kong API Gateway server */
-  `Kong API Gateway`,
+  "Kong API Gateway",
 
   /** Kubernetes server */
-  Kubernetes,
+  "Kubernetes",
 
   /** Mulesoft Api Management server */
-  `MuleSoft API Management`,
+  "MuleSoft API Management",
 }
 
 @doc("The properties of the service.")

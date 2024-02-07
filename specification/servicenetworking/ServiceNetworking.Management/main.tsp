@@ -116,9 +116,7 @@ model TrafficControllerProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @lroStatus
-union ProvisioningState {
-  string,
-
+enum ProvisioningState {
   Provisioning,
   Updating,
   Deleting,

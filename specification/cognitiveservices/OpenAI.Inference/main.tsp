@@ -40,9 +40,7 @@ https://westus.api.cognitive.microsoft.com).
 namespace Azure.OpenAI;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
-union ServiceApiVersions {
-  string,
-
+enum ServiceApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_12_01: "2022-12-01",
 

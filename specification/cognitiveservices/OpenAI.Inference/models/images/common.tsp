@@ -15,22 +15,22 @@ union AzureOpenAIOperationState {
   string,
 
   @doc("The operation was created and is queued to be processed in the future.")
-  notRunning,
+  "notRunning",
 
   @doc("The operation has started to be processed.")
-  running,
+  "running",
 
   @lroSucceeded
   @doc("The operation has successfully be processed and is ready for consumption.")
-  succeeded,
+  "succeeded",
 
   @lroCanceled
   @doc("The operation has been canceled and is incomplete.")
-  canceled,
+  "canceled",
 
   @lroFailed
   @doc("The operation has completed processing with a failure and cannot be further consumed.")
-  failed,
+  "failed",
 }
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"

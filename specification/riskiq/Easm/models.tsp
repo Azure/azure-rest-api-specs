@@ -1333,14 +1333,14 @@ model ObservedValue {
 union AssetUpdateTransfers {
   string,
 
-  as,
-  contact,
-  domain,
-  host,
-  ipAddress,
-  ipBlock,
-  page,
-  sslCert,
+  "as",
+  "contact",
+  "domain",
+  "host",
+  "ipAddress",
+  "ipBlock",
+  "page",
+  "sslCert",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1348,9 +1348,9 @@ union AssetUpdateTransfers {
 union ReportBillableAssetBreakdownKind {
   string,
 
-  domain,
-  host,
-  ipAddress,
+  "domain",
+  "host",
+  "ipAddress",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1358,13 +1358,13 @@ union ReportBillableAssetBreakdownKind {
 union TaskState {
   string,
 
-  pending,
-  running,
-  paused,
-  complete,
-  incomplete,
-  failed,
-  warning,
+  "pending",
+  "running",
+  "paused",
+  "complete",
+  "incomplete",
+  "failed",
+  "warning",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1372,9 +1372,9 @@ union TaskState {
 union TaskPhase {
   string,
 
-  running,
-  polling,
-  complete,
+  "running",
+  "polling",
+  "complete",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1382,8 +1382,8 @@ union TaskPhase {
 union DataConnectionKind {
   string,
 
-  logAnalytics,
-  azureDataExplorer,
+  "logAnalytics",
+  "azureDataExplorer",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1391,9 +1391,9 @@ union DataConnectionKind {
 union DataConnectionFrequency {
   string,
 
-  daily,
-  weekly,
-  monthly,
+  "daily",
+  "weekly",
+  "monthly",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1401,14 +1401,14 @@ union DataConnectionFrequency {
 union AssetKind {
   string,
 
-  as,
-  contact,
-  domain,
-  host,
-  ipAddress,
-  ipBlock,
-  page,
-  sslCert,
+  "as",
+  "contact",
+  "domain",
+  "host",
+  "ipAddress",
+  "ipBlock",
+  "page",
+  "sslCert",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1416,10 +1416,10 @@ union AssetKind {
 union DiscoRunState {
   string,
 
-  pending,
-  running,
-  completed,
-  failed,
+  "pending",
+  "running",
+  "completed",
+  "failed",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1427,8 +1427,8 @@ union DiscoRunState {
 union DataConnectionContent {
   string,
 
-  assets,
-  attackSurfaceInsights,
+  "assets",
+  "attackSurfaceInsights",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1436,21 +1436,21 @@ union DataConnectionContent {
 union DiscoSourceKind {
   string,
 
-  as,
-  attribute,
-  contact,
-  domain,
-  host,
-  ipBlock,
+  "as",
+  "attribute",
+  "contact",
+  "domain",
+  "host",
+  "ipBlock",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union ObservedPortStateValue {
   string,
 
-  open,
-  closed,
-  filtered,
+  "open",
+  "closed",
+  "filtered",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1458,20 +1458,20 @@ union ObservedPortStateValue {
 union AssetUpdateState {
   string,
 
-  candidate,
-  confirmed,
-  dismissed,
-  candidateInvestigate,
-  associatedPartner,
-  associatedThirdparty,
+  "candidate",
+  "confirmed",
+  "dismissed",
+  "candidateInvestigate",
+  "associatedPartner",
+  "associatedThirdparty",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union AssetState {
   string,
 
-  ...AssetUpdateState,
-  archived,
+  AssetUpdateState,
+  "archived",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1479,33 +1479,33 @@ union AssetState {
 union AuditTrailItemKind {
   string,
 
-  as,
-  contact,
-  domain,
-  host,
-  ipAddress,
-  ipBlock,
-  page,
-  sslCert,
+  "as",
+  "contact",
+  "domain",
+  "host",
+  "ipAddress",
+  "ipBlock",
+  "page",
+  "sslCert",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union PageAssetRedirectType {
   string,
 
-  httpHeader,
-  metaRefresh,
-  javascript,
-  final,
+  "httpHeader",
+  "metaRefresh",
+  "javascript",
+  "final",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union SslCertAssetValidationType {
   string,
 
-  domainValidation,
-  organizationValidation,
-  extendedValidation,
+  "domainValidation",
+  "organizationValidation",
+  "extendedValidation",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"

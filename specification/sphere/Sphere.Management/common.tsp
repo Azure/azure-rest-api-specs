@@ -41,10 +41,10 @@ union RegionalDataBoundary {
   string,
 
   /** No data boundary */
-  None,
+  "None",
 
   /** EU data boundary */
-  EU,
+  "EU",
 }
 
 @doc("Allow crash dumps values.")
@@ -52,10 +52,10 @@ union AllowCrashDumpCollection {
   string,
 
   /** Crash dump collection enabled */
-  Enabled,
+  "Enabled",
 
   /** Crash dump collection disabled */
-  Disabled,
+  "Disabled",
 }
 
 @doc("Certificate status values.")
@@ -63,16 +63,16 @@ union CertificateStatus {
   string,
 
   /** Certificate is active */
-  Active,
+  "Active",
 
   /** Certificate is inactive */
-  Inactive,
+  "Inactive",
 
   /** Certificate has expired */
-  Expired,
+  "Expired",
 
   /** Certificate has been revoked */
-  Revoked,
+  "Revoked",
 }
 
 @doc("Provides the custom '$filter' query parameter for list operations")

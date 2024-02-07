@@ -12,10 +12,10 @@ namespace ContentSafety;
 union TextCategory {
   string,
 
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+  "Hate",
+  "SelfHarm",
+  "Sexual",
+  "Violence",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
@@ -23,10 +23,10 @@ union TextCategory {
 union ImageCategory {
   string,
 
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+  "Hate",
+  "SelfHarm",
+  "Sexual",
+  "Violence",
 }
 
 @doc("The type of text analysis output.")
@@ -34,10 +34,10 @@ union AnalyzeTextOutputType {
   string,
 
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  FourSeverityLevels,
+  "FourSeverityLevels",
 
   @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
-  EightSeverityLevels,
+  "EightSeverityLevels",
 }
 
 @doc("The type of image analysis output.")
@@ -45,7 +45,7 @@ union AnalyzeImageOutputType {
   string,
 
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  FourSeverityLevels,
+  "FourSeverityLevels",
 }
 
 @doc("The text analysis request.")

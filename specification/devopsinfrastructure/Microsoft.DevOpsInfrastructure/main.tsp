@@ -110,13 +110,13 @@ union AzureDevOpsPermissionType {
   string,
 
   @doc("Pool will inherit permissions from the project or organization.")
-  Inherit,
+  "Inherit",
 
   @doc("Only the pool creator will be an admin of the pool.")
-  CreatorOnly,
+  "CreatorOnly",
 
   @doc("Only the specified accounts will be admins of the pool.")
-  SpecificAccounts,
+  "SpecificAccounts",
 }
 
 @doc("Defines the type of fabric the agent will run on.")
@@ -160,13 +160,13 @@ union OsDiskStorageAccountType {
   string,
 
   @doc("Standard OS disk type.")
-  Standard,
+  "Standard",
 
   @doc("Premium OS disk type.")
-  Premium,
+  "Premium",
 
   @doc("Standard SSD OS disk type.")
-  StandardSSD,
+  "StandardSSD",
 }
 
 @doc("The VM image of the machines in the pool.")
@@ -204,10 +204,10 @@ union LogonType {
   string,
 
   @doc("Run as a service.")
-  Service,
+  "Service",
 
   @doc("Run in interactive mode.")
-  Interactive,
+  "Interactive",
 }
 
 @doc("The network profile of the machines in the pool.")
@@ -239,9 +239,7 @@ model Stateful extends AgentProfile {
 model ResourcePredictions {}
 
 @doc("The status of the current operation.")
-union ProvisioningState {
-  string,
-
+enum ProvisioningState {
   /** Represents a succeeded operation. */
   Succeeded,
 

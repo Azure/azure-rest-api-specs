@@ -28,9 +28,7 @@ enum Versions {
 }
 
 @doc("The status of the current operation.")
-union ProvisioningState {
-  string,
-
+enum ProvisioningState {
   /** Represents a succeeded operation. */
   Succeeded,
 
@@ -98,16 +96,16 @@ union Bypass {
   string,
 
   @doc("Represents no bypassing of traffic.")
-  None,
+  "None",
 
   @doc("Represents bypassing logging traffic.")
-  Logging,
+  "Logging",
 
   @doc("Represents bypassing metrics traffic.")
-  Metrics,
+  "Metrics",
 
   @doc("Represents bypassing azure services traffic.")
-  AzureServices,
+  "AzureServices",
 }
 
 @doc("Specifies the default action of allow or deny when no other rules match.")
@@ -115,10 +113,10 @@ union DefaultAction {
   string,
 
   @doc("Represents allow action.")
-  Allow,
+  "Allow",
 
   @doc("Represents deny action.")
-  Deny,
+  "Deny",
 }
 
 @doc("Data Product Network rule set")

@@ -39,9 +39,7 @@ using Azure.Core;
 namespace Azure.AI.OpenAI.Assistants;
 
 @doc("The known set of supported API versions.")
-union ServiceApiVersions {
-  string,
-
+enum ServiceApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The initial version of Azure OpenAI Assistants that corresponds to functionality in OpenAI's first beta release.")
   v2024_02_15_preview: "2024-02-15-preview",

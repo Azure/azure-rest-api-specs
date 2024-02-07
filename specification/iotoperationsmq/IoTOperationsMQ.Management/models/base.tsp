@@ -128,10 +128,10 @@ union MqttProtocol {
   string,
 
   @doc("Mqttv3")
-  v3,
+  "v3",
 
   @doc("Mqttv5")
-  v5,
+  "v5",
 }
 
 @doc("Mqtt Local Broker ConnectionSpec details")
