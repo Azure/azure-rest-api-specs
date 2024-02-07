@@ -159,7 +159,7 @@ interface TextCustomizedCategoryOps
 interface TextCustomizedCategoryOperations {
   @summary("Create a new version of text customized category.")
   @doc("Create new category version.")
-  createOrUpdateTextCustomizedCategory is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomizedCategory>;
+  createOrUpdateTextCustomizedCategory is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomizedCategoryVersion>;
 
   // getCustomizedCategory is TextCustomizedCategoryOps.ResourceRead<
   //   TextCustomizedCategory,
@@ -189,7 +189,7 @@ interface TextCustomizedCategoryOperations {
 
   @doc("List categories of their latest versions.")
   listCustomizedCategory is TextCustomizedCategoryOps.ResourceList<
-    TextCustomizedCategory,
+    TextCustomizedCategoryVersion,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
@@ -208,7 +208,7 @@ interface TextCustomizedCategoryOperations {
 
   @doc("Delete a customized category or a specific version of it.")
   deleteCustomizedCategory is TextCustomizedCategoryOps.LongRunningResourceDelete<
-    TextCustomizedCategory,
+    TextCustomizedCategoryVersion,
     QueryParametersTrait<{
       @query
       @doc("If not provided, it will delete the category")
@@ -218,7 +218,7 @@ interface TextCustomizedCategoryOperations {
 
   @doc("Trigger the category build process.")
   build is TextCustomizedCategoryOps.ResourceAction<
-    TextCustomizedCategory,
+    TextCustomizedCategoryVersion,
     {
       @query
       @doc("The build will target on the specicied category version")

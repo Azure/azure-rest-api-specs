@@ -490,7 +490,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTextCustomizedCategory"
+              "$ref": "#/definitions/PagedTextCustomizedCategoryVersion"
             }
           },
           "default": {
@@ -577,7 +577,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextCustomizedCategory"
+              "$ref": "#/definitions/TextCustomizedCategoryVersionCreateOrUpdate"
             }
           }
         ],
@@ -585,7 +585,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextCustomizedCategory"
+              "$ref": "#/definitions/TextCustomizedCategoryVersion"
             },
             "headers": {
               "x-ms-error-code": {
@@ -597,7 +597,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/TextCustomizedCategory"
+              "$ref": "#/definitions/TextCustomizedCategoryVersion"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1370,15 +1370,15 @@
         "value"
       ]
     },
-    "PagedTextCustomizedCategory": {
+    "PagedTextCustomizedCategoryVersion": {
       "type": "object",
-      "description": "Paged collection of TextCustomizedCategory items",
+      "description": "Paged collection of TextCustomizedCategoryVersion items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TextCustomizedCategory items on this page",
+          "description": "The TextCustomizedCategoryVersion items on this page",
           "items": {
-            "$ref": "#/definitions/TextCustomizedCategoryItem"
+            "$ref": "#/definitions/TextCustomizedCategoryVersionItem"
           },
           "x-ms-identifiers": []
         },
@@ -1568,97 +1568,6 @@
         "detected"
       ]
     },
-    "TextCustomizedCategory": {
-      "type": "object",
-      "description": "Text customized category",
-      "properties": {
-        "categoryName": {
-          "type": "string",
-          "description": "Name of the customized category",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "definition": {
-          "type": "string",
-          "description": "Definition or description of the customized category.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "sampleBlobPath": {
-          "type": "string",
-          "description": "URL of sample jsonl blob.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "sampleBlobCopyDirectory": {
-          "type": "string",
-          "description": "URL of directory to store copied sample files.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "sampleBlobCopyPath": {
-          "type": "string",
-          "description": "URL of copied sample jsonl blob.",
-          "readOnly": true
-        },
-        "blobDelimiter": {
-          "type": "string",
-          "description": "Delimiter of blob url.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Version number of the customized category.",
-          "readOnly": true
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation time of the customized category.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/CategoryStatus",
-          "description": "Build status of the customized category",
-          "readOnly": true
-        },
-        "buildInfo": {
-          "$ref": "#/definitions/TextCustomizedCategoryBuildInfo",
-          "description": "Build information for the customized category.",
-          "readOnly": true
-        },
-        "deleteInfo": {
-          "$ref": "#/definitions/TextCustomizedCategoryDeleteInfo",
-          "description": "Build information for the customized category.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "categoryName",
-        "definition",
-        "version",
-        "createdTime",
-        "status",
-        "buildInfo",
-        "deleteInfo"
-      ]
-    },
     "TextCustomizedCategoryBuildInfo": {
       "type": "object",
       "description": "Detailed information of the customized category build.",
@@ -1731,7 +1640,7 @@
         "deleteTriggeredTime"
       ]
     },
-    "TextCustomizedCategoryItem": {
+    "TextCustomizedCategoryVersion": {
       "type": "object",
       "description": "Text customized category",
       "properties": {
@@ -1753,36 +1662,19 @@
             "create"
           ]
         },
-        "sampleBlobPath": {
+        "sampleBlobUrl": {
           "type": "string",
-          "description": "URL of sample jsonl blob.",
+          "description": "URL of sample jsonl blob. Read & write access to the last layer virtual directory is required.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
         },
-        "sampleBlobCopyDirectory": {
+        "sampleBlobCopyUrl": {
           "type": "string",
-          "description": "URL of directory to store copied sample files.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "sampleBlobCopyPath": {
-          "type": "string",
-          "description": "URL of copied sample jsonl blob.",
+          "description": "URL of copied sample jsonl blob. If sampleBlobUrl is not provided in the request, this field will not be shown in the response.",
           "readOnly": true
-        },
-        "blobDelimiter": {
-          "type": "string",
-          "description": "Delimiter of blob url.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
         },
         "version": {
           "type": "integer",
@@ -1802,12 +1694,12 @@
           "readOnly": true
         },
         "buildInfo": {
-          "$ref": "#/definitions/TextCustomizedCategoryBuildInfoItem",
+          "$ref": "#/definitions/TextCustomizedCategoryBuildInfo",
           "description": "Build information for the customized category.",
           "readOnly": true
         },
         "deleteInfo": {
-          "$ref": "#/definitions/TextCustomizedCategoryDeleteInfoItem",
+          "$ref": "#/definitions/TextCustomizedCategoryDeleteInfo",
           "description": "Build information for the customized category.",
           "readOnly": true
         }
@@ -1822,9 +1714,9 @@
         "deleteInfo"
       ]
     },
-    "TextCustomizedCategoryVersion": {
+    "TextCustomizedCategoryVersionCreateOrUpdate": {
       "type": "object",
-      "description": "Alias of TextCustomizedCategory",
+      "description": "Text customized category",
       "properties": {
         "categoryName": {
           "type": "string",
@@ -1844,36 +1736,63 @@
             "create"
           ]
         },
-        "sampleBlobPath": {
+        "sampleBlobUrl": {
           "type": "string",
-          "description": "URL of sample jsonl blob.",
+          "description": "URL of sample jsonl blob. Read & write access to the last layer virtual directory is required.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "sampleBlobCopyDirectory": {
-          "type": "string",
-          "description": "URL of directory to store copied sample files.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "sampleBlobCopyPath": {
-          "type": "string",
-          "description": "URL of copied sample jsonl blob.",
-          "readOnly": true
         },
         "blobDelimiter": {
           "type": "string",
-          "description": "Delimiter of blob url.",
+          "description": "Delimiter of blob url. If not provided, '/' will be used as the delimiter to parse the sampleBlobUrl.",
           "x-ms-mutability": [
-            "read",
             "update"
           ]
+        }
+      },
+      "required": [
+        "categoryName",
+        "definition"
+      ]
+    },
+    "TextCustomizedCategoryVersionItem": {
+      "type": "object",
+      "description": "Text customized category",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "Name of the customized category",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "definition": {
+          "type": "string",
+          "description": "Definition or description of the customized category.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sampleBlobUrl": {
+          "type": "string",
+          "description": "URL of sample jsonl blob. Read & write access to the last layer virtual directory is required.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sampleBlobCopyUrl": {
+          "type": "string",
+          "description": "URL of copied sample jsonl blob. If sampleBlobUrl is not provided in the request, this field will not be shown in the response.",
+          "readOnly": true
         },
         "version": {
           "type": "integer",
@@ -1921,7 +1840,7 @@
           "type": "array",
           "description": "List of customized category versions.",
           "items": {
-            "$ref": "#/definitions/TextCustomizedCategoryVersion"
+            "$ref": "#/definitions/TextCustomizedCategoryVersionItem"
           },
           "x-ms-identifiers": []
         }
