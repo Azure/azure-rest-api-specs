@@ -3337,6 +3337,10 @@
           },
           "description": "The virtual machine zones."
         },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "The virtual machine automatic zone placement feature."
+        },
         "extendedLocation": {
           "$ref": "../../../common-types/v1/common.json#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine."
@@ -3576,6 +3580,29 @@
         }
       },
       "description": "Describes the properties of the last installed patch summary."
+    },
+    "Placement": {
+      "properties": {
+        "zonePlacementPolicy": {
+          "type": "string",
+          "description": "Specifies policy for auto zone placement."
+        },
+        "includeZones": {
+          "type": "array",
+          "items":{
+            "type": "string"
+          },
+          "description": "List of zones to include for auto zone placement."
+        },
+        "excludeZones": {
+          "type": "array",
+          "items":{
+            "type": "string"
+          },
+          "description": "List of zones to exclude for auto zone placement."
+        }
+      },
+      "description": "The virtual machine automatic zone placement feature."
     }
   }
 }
