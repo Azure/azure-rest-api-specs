@@ -12,4 +12,14 @@ typescript:
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
+
+directive:
+  - from: azurelargeinstance.json 
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstances/{azureLargeInstanceName}"].patch.parameters[4]'
+    transform: >
+      delete $["x-ms-client-name"]
+  - from: azurelargeinstance.json 
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstances/{azureLargeStorageInstanceName}"].patch.parameters[4]'
+    transform: >
+      delete $["x-ms-client-name"]
 ```
