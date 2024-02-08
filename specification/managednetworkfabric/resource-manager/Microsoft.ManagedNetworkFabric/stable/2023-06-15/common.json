@@ -963,6 +963,36 @@
         "modelAsString": true,
         "name": "IPAddressType"
       }
+    },
+    "DeviceRoCommand": {
+      "type": "object",
+      "description": "Provide the RO command",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "Specify the command."
+        }
+      }
+    },
+    "CommonPostActionResponseForDeviceROCommands": {
+      "type": "object",
+      "description": "Common response for device Ro Commands.",
+      "properties": {
+        "configurationState": {
+          "description": "Gets the configuration state.",
+          "$ref": "#/definitions/ConfigurationState"
+        },
+        "outputUrl": {
+          "description": "Predefined link containing Device RO Command output.",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "description": "The error message.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      ]
     }
   },
   "parameters": {}

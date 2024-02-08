@@ -957,6 +957,74 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkDevices/{networkDeviceName}/runRoCommand": {
+      "post": {
+        "tags": [
+          "NetworkDevices"
+        ],
+        "operationId": "NetworkDevices_runRoCommand",
+        "description": "Run the RO Command on the Network Device.",
+        "summary": "Implements the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkDeviceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request the command.",
+            "schema": {
+              "$ref": "./common.json#/definitions/DeviceRoCommand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForDeviceROCommands"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForDeviceROCommands"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkDevices_Upgrade_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkDevices_RunDeviceRoCommand_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
