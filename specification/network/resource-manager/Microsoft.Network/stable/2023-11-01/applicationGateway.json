@@ -2642,12 +2642,35 @@
           "type": "string",
           "description": "Header name of the header configuration."
         },
+        "headerValueMatcher": {
+          "type": "object",
+          "$ref": "#/definitions/HeaderValueMatcher",
+          "description": "An optional field under \"Rewrite Action\". It lets you capture and modify the value(s) of a specific header when multiple headers with the same name exist. Currently supported for Set-Cookie Response header only. For more details, visit https://aka.ms/appgwheadercrud"
+        },
         "headerValue": {
           "type": "string",
           "description": "Header value of the header configuration."
         }
       },
       "description": "Header configuration of the Actions set in Application Gateway."
+    },
+    "HeaderValueMatcher": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "The pattern, either fixed string or regular expression, that evaluates if a header value should be selected for rewrite."
+        },
+        "ignoreCase": {
+          "type": "boolean",
+          "description": "Setting this parameter to truth value with force the pattern to do a case in-sensitive comparison."
+        },
+        "negate": {
+          "type": "boolean",
+          "description": "Setting this value as truth will force to check the negation of the condition given by the user in the pattern field."
+        }
+      },
+      "description": "An optional field under \"Rewrite Action\". It lets you capture and modify the value(s) of a specific header when multiple headers with the same name exist. Currently supported for Set-Cookie Response header only. For more details, visit https://aka.ms/appgwheadercrud"
     },
     "ApplicationGatewayUrlConfiguration": {
       "properties": {
