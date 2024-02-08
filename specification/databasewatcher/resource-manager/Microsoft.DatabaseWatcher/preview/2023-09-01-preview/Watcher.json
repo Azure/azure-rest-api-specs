@@ -69,7 +69,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -108,7 +108,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WatcherListResult"
             }
@@ -150,7 +150,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WatcherListResult"
             }
@@ -200,7 +200,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Watcher"
             }
@@ -325,7 +325,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Watcher"
             }
@@ -405,7 +405,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -453,7 +453,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
@@ -503,7 +503,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SharedPrivateLinkResourceListResult"
             }
@@ -561,7 +561,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SharedPrivateLinkResource"
             }
@@ -710,7 +710,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -758,7 +758,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Watcher"
             }
@@ -819,7 +819,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Watcher"
             }
@@ -880,7 +880,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TargetListResult"
             }
@@ -938,7 +938,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Target"
             }
@@ -1087,7 +1087,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1539,27 +1539,11 @@
       "properties": {
         "sqlEpResourceId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "The ARM ResourceId of an Azure SQL DB elastic pool target.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Sql/servers/elasticPools"
-              }
-            ]
-          }
+          "description": "The ARM ResourceId of an Azure SQL DB elastic pool target."
         },
         "anchorDatabaseResourceId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "The ARM ResourceId of the anchor database used to connect to an elastic pool.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Sql/servers/databases"
-              }
-            ]
-          }
+          "description": "The ARM ResourceId of the anchor database used to connect to an elastic pool."
         },
         "readIntent": {
           "type": "boolean",
@@ -1578,53 +1562,13 @@
       ],
       "x-ms-discriminator-value": "SqlEp"
     },
-    "SqlDbSingleDatabaseTargetProperties": {
-      "type": "object",
-      "description": "The properties specific to single database in Azure SQL Database.",
-      "properties": {
-        "sqlDbResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM ResourceId of an Azure SQL DB single database target.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Sql/servers/databases"
-              }
-            ]
-          }
-        },
-        "readIntent": {
-          "type": "boolean",
-          "description": "Set to true to monitor a high availability replica of specified target, if any.",
-          "default": false
-        }
-      },
-      "required": [
-        "sqlDbResourceId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "SqlDb"
-    },
     "SqlMiTargetProperties": {
       "type": "object",
       "description": "The properties specific to Azure SQL Managed Instance targets.",
       "properties": {
         "sqlMiResourceId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "The ARM ResourceId of an Azure SQL Managed Instance target.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Sql/managedInstances"
-              }
-            ]
-          }
+          "description": "The ARM ResourceId of an Azure SQL Managed Instance target."
         },
         "connectionTcpPort": {
           "type": "integer",
@@ -1654,15 +1598,7 @@
       "properties": {
         "sqlVmResourceId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "The ARM ResourceId of an Azure SQL VM target.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
-              }
-            ]
-          }
+          "description": "The ARM ResourceId of an Azure SQL VM target."
         },
         "connectionTcpPort": {
           "type": "integer",
