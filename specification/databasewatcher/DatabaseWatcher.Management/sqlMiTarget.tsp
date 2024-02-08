@@ -17,7 +17,11 @@ model SqlMiTargetProperties extends TargetProperties {
   targetType: "SqlMi";
 
   @doc("The ARM ResourceId of an Azure SQL Managed Instance target.")
-  sqlMiResourceId: string;
+  sqlMiResourceId: ResourceIdentifier<[
+    {
+      type: "Microsoft.Sql/managedInstances";
+    }
+  ]>;
 
   @doc("The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target.")
   connectionTcpPort?: int32 = 1433;
