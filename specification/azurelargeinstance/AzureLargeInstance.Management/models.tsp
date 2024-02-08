@@ -188,32 +188,30 @@ union AzureLargeInstancePowerStateEnum {
 }
 
 @doc("Provisioning states that an Azure Large Instance can be in")
-union AzureLargeInstanceProvisioningStatesEnum {
-  string,
-
+enum AzureLargeInstanceProvisioningStatesEnum {
   @doc("Accepted means Azure Large Instance resource provisioning has been accepted.")
-  "Accepted",
+  Accepted,
 
   @doc("Creating means Azure Large Instance resource is being created.")
-  "Creating",
+  Creating,
 
   @doc("Updating means an existing Azure Large Instance resource is being updated")
-  "Updating",
+  Updating,
 
   @doc("Failed means Azure Large Instance resource is in failed state")
-  "Failed",
+  Failed,
 
   @doc("Succeeded means Azure Large Instance resource creation succeeded during last create/update")
-  "Succeeded",
+  Succeeded,
 
   @doc("Deleting means Azure Large Instance resource is in the process of being deleted")
-  "Deleting",
+  Deleting,
 
   @doc("Migrating means Azure Large Instance resource is being migrated from one subscription or resource group to another")
-  "Migrating",
+  Migrating,
 
   @doc("Cancelled Azure Large Instance resource operation has been cancelled")
-  "Canceled",
+  Canceled,
 }
 
 @doc("The type of identity that created the resource: User, Application, ManagedIdentity")

@@ -241,116 +241,102 @@ union ExpressionRouterRuleLanguage {
 }
 
 @doc("Discriminators for supported matching mode types.")
-union JobMatchingModeKind {
-  string,
-
+enum JobMatchingModeKind {
   @doc("Discriminator value for QueueAndMatchMode.")
-  "queueAndMatch",
+  queueAndMatch,
 
   @doc("Discriminator value for ScheduleAndSuspendMode.")
-  "scheduleAndSuspend",
+  scheduleAndSuspend,
 
   @doc("Discriminator value for SuspendMode.")
-  "suspend",
+  suspend,
 }
 
 @doc("Discriminators for supported router rule types.")
-union RouterRuleKind {
-  string,
-
+enum RouterRuleKind {
   @doc("Discriminator value for DirectMapRouterRule.")
-  "directMap",
+  directMap,
 
   @doc("Discriminator value for ExpressionRouterRule.")
-  "expression",
+  expression,
 
   @doc("Discriminator value for FunctionRouterRule.")
-  "function",
+  function,
 
   @doc("Discriminator value for StaticRouterRule.")
-  "static",
+  static,
 
   @doc("Discriminator value for WebhookRouterRule.")
-  "webhook",
+  webhook,
 }
 
 @doc("Discriminators for supported distribution mode types.")
-union DistributionModeKind {
-  string,
-
+enum DistributionModeKind {
   @doc("Discriminator value for BestWorkerMode.")
-  "bestWorker",
+  bestWorker,
 
   @doc("Discriminator value for LongestIdleMode.")
-  "longestIdle",
+  longestIdle,
 
   @doc("Discriminator value for RoundRobinMode.")
-  "roundRobin",
+  roundRobin,
 }
 
 @doc("Discriminators for supported exception trigger types.")
-union ExceptionTriggerKind {
-  string,
-
+enum ExceptionTriggerKind {
   @doc("Discriminator value for QueueLengthExceptionTrigger.")
-  "queueLength",
+  queueLength,
 
   @doc("Discriminator value for WaitTimeExceptionTrigger.")
-  "waitTime",
+  waitTime,
 }
 
 @doc("Discriminators for supported exception action types.")
-union ExceptionActionKind {
-  string,
-
+enum ExceptionActionKind {
   @doc("Discriminator value for CancelExceptionAction.")
-  "cancel",
+  cancel,
 
   @doc("Discriminator value for ManualReclassifyExceptionAction.")
-  "manualReclassify",
+  manualReclassify,
 
   @doc("Discriminator value for ReclassifyExceptionAction.")
-  "reclassify",
+  reclassify,
 }
 
 @doc("Discriminators for supported queue selector attachment types.")
-union QueueSelectorAttachmentKind {
-  string,
-
+enum QueueSelectorAttachmentKind {
   @doc("Discriminator value for ConditionalQueueSelectorAttachment.")
-  "conditional",
+  conditional,
 
   @doc("Discriminator value for PassThroughQueueSelectorAttachment.")
-  "passThrough",
+  passThrough,
 
   @doc("Discriminator value for RuleEngineQueueSelectorAttachment.")
-  "ruleEngine",
+  ruleEngine,
 
   @doc("Discriminator value for StaticQueueSelectorAttachment.")
-  "static",
+  static,
 
   @doc("Discriminator value for WeightedAllocationQueueSelectorAttachment.")
-  "weightedAllocation",
+  weightedAllocation,
 }
 
 @doc("Discriminators for supported worker selector attachment types.")
-union WorkerSelectorAttachmentKind {
-  string,
-
+enum WorkerSelectorAttachmentKind {
   @doc("Discriminator value for ConditionalWorkerSelectorAttachment.")
-  "conditional",
+  conditional,
 
   @doc("Discriminator value for PassThroughWorkerSelectorAttachment.")
-  "passThrough",
+  passThrough,
 
   @doc("Discriminator value for RuleEngineWorkerSelectorAttachment.")
-  "ruleEngine",
+  ruleEngine,
 
   @doc("Discriminator value for StaticWorkerSelectorAttachment.")
-  "static",
+  static,
 
   @doc("Discriminator value for WeightedAllocationWorkerSelectorAttachment.")
-  "weightedAllocation",
+  weightedAllocation,
 }
 
 @projectedName("java", "ClassificationPolicyInternal")

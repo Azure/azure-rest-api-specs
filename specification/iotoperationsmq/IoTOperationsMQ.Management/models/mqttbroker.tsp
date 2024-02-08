@@ -341,10 +341,10 @@ union RunMode {
   string,
 
   @doc("Automatically provision Frontend and Backend pods.")
-  auto,
+  "auto",
 
   @doc("Use Cardinality to set Frontend and Backend pods.")
-  distributed,
+  "distributed",
 }
 
 @doc("The memory profile settings of the Broker")
@@ -352,16 +352,16 @@ union BrokerMemoryProfile {
   string,
 
   @doc("Tiny memory profile.")
-  tiny,
+  "tiny",
 
   @doc("Low memory profile.")
-  low,
+  "low",
 
   @doc("Medium memory profile.")
-  medium,
+  "medium",
 
   @doc("High memory profile.")
-  high,
+  "high",
 }
 
 /** ******************* */
@@ -427,13 +427,13 @@ union ServiceType {
   string,
 
   @doc("Cluster IP Service.")
-  clusterIp,
+  "clusterIp",
 
   @doc("Load Balancer Service.")
-  loadBalancer,
+  "loadBalancer",
 
   @doc("Node Port Service.")
-  nodePort,
+  "nodePort",
 }
 
 @doc("Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported")
@@ -698,11 +698,11 @@ union ResourceInfoDefinitionMethods {
   string,
 
   @doc("Allowed Connecting to Broker")
-  Connect,
+  "Connect",
 
   @doc("Allowed Publishing to Broker")
-  Publish,
+  "Publish",
 
   @doc("Allowed Subscribing to Broker")
-  Subscribe,
+  "Subscribe",
 }

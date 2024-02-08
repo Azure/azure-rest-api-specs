@@ -254,10 +254,10 @@ union ControlState {
   string,
 
   @doc("Field to enable a setting.")
-  Enabled,
+  "Enabled",
 
   @doc("Field to disable a setting.")
-  Disabled,
+  "Disabled",
 }
 
 @doc("Details of Consumption Properties")
@@ -388,10 +388,10 @@ union DataTypeState {
   string,
 
   @doc("Field to specify stopped state.")
-  Stopped,
+  "Stopped",
 
   @doc("Field to specify running state.")
-  Running,
+  "Running",
 }
 
 @doc("The details for container sas creation.")
@@ -422,13 +422,13 @@ union DataProductUserRole {
   string,
 
   @doc("Field to specify user of type Reader.")
-  Reader,
+  "Reader",
 
   @doc("""
 Field to specify user of type SensitiveReader.
 This user has privileged access to read sensitive data of a data product.
 """)
-  SensitiveReader,
+  "SensitiveReader",
 }
 
 @doc("The details for role assignment common properties.")

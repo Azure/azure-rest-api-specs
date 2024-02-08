@@ -73,10 +73,10 @@ union DataLakeDatabaseFormat {
   string,
 
   @doc("Delta format.")
-  delta,
+  "delta",
 
   @doc("Parquet format.")
-  parquet,
+  "parquet",
 }
 
 // GENERATION FIX TEMP - add "minProperties": 1 and "maxProperties": 1 to this property after creation.

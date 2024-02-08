@@ -19,9 +19,7 @@ using Azure.ResourceManager;
 namespace Microsoft.AzurePlaywrightService;
 
 @doc("Microsoft.AzurePlaywrightService Management API Versions.")
-union Versions {
-  string,
-
+enum Versions {
   /** 2024-02-01-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)

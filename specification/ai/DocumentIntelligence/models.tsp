@@ -264,23 +264,21 @@ union DocumentBuildMode {
 }
 
 @doc("Type of operation.")
-union OperationKind {
-  string,
-
+enum OperationKind {
   @doc("Build a new custom document model.")
-  "documentModelBuild",
+  documentModelBuild,
 
   @doc("Compose a new custom document model from existing models.")
-  "documentModelCompose",
+  documentModelCompose,
 
   @doc("""
   Copy an existing document model to potentially a different resource, region, or
   subscription.
   """)
-  "documentModelCopyTo",
+  documentModelCopyTo,
 
   @doc("Build a new custom classifier model.")
-  "documentClassifierBuild",
+  documentClassifierBuild,
 }
 
 @doc("Document splitting mode.")
@@ -294,14 +292,12 @@ union SplitMode {
 
 @lroStatus
 @doc("Operation status.")
-union OperationStatus {
-  string,
-
-  @doc("The operation has not started yet.") "notStarted",
-  @doc("The operation is in progress.") "running",
-  @doc("The operation has failed.") @lroFailed "failed",
-  @doc("The operation has succeeded.") @lroSucceeded "succeeded",
-  @doc("The operation has been canceled.") @lroCanceled "canceled",
+enum OperationStatus {
+  @doc("The operation has not started yet.") notStarted,
+  @doc("The operation is in progress.") running,
+  @doc("The operation has failed.") @lroFailed failed,
+  @doc("The operation has succeeded.") @lroSucceeded succeeded,
+  @doc("The operation has been canceled.") @lroCanceled canceled,
 }
 
 @doc("Type of content source.")
@@ -309,7 +305,7 @@ union ContentSourceKind {
   string,
 
   @doc("Content at a specific URL.")
-  url,
+  "url",
 
   @doc("Content represented via Base64 encoding.")
   "base64",

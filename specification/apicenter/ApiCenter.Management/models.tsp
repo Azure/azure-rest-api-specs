@@ -154,7 +154,7 @@ union LifecycleStage {
 union ApiSpecImportSourceFormat {
   string,
 
-  @doc("The inlined content of a specification document.") inline,
+  @doc("The inlined content of a specification document.") "inline",
 
   @doc("""
 The link to a specification document hosted on a publicly accessible internet
@@ -167,7 +167,7 @@ address.
 union ApiSpecExportResultFormat {
   string,
 
-  @doc("The inlined content of a specification document.") inline,
+  @doc("The inlined content of a specification document.") "inline",
 
   @doc("The link to the result of the export operation. The URL is valid for 5 minutes.")
   "link",

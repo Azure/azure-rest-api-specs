@@ -13,11 +13,11 @@ namespace AnomalyDetector.Multivariate;
 union FillNAMethod {
   string,
 
-  Previous,
-  Subsequent,
-  Linear,
-  Zero,
-  Fixed,
+  "Previous",
+  "Subsequent",
+  "Linear",
+  "Zero",
+  "Fixed",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
@@ -35,18 +35,18 @@ union DataSchema {
   string,
 
   @doc("OneTable means that your input data is in one CSV file, which contains one time stamp column and several variable columns. The default DataSchema value is OneTable.")
-  OneTable,
+  "OneTable",
 
   @doc("MultiTable means that your input data is separated in multiple CSV files. Each file contains one time stamp column and one variable column, and the CSV file name should indicate the name of the variable. The default DataSchema value is OneTable.")
-  MultiTable,
+  "MultiTable",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 union AlignMode {
   string,
 
-  Inner,
-  Outer,
+  "Inner",
+  "Outer",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"

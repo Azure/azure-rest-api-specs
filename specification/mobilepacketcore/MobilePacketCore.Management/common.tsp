@@ -124,14 +124,12 @@ union SkuDeploymentType {
 }
 
 @doc("Cluster Type Definitions")
-union ClusterType {
-  string,
-
+enum ClusterType {
   @doc("Azure Kubernetes Service")
-  "Aks",
+  Aks,
 
   @doc("Azure Operator Nexus Kubernetes Service")
-  "NexusAks",
+  NexusAks,
 }
 
 @doc("Usage SKU Definition")

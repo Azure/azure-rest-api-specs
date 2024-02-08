@@ -249,10 +249,10 @@ union JwtIssuerKeyFilter {
   string,
 
   @doc("Accepts any JWT issuer.")
-  All,
+  "All",
 
   @doc("Only accepts JWTs issued by a token provider running in SGX, which provides a suitable attestation and additional claims.")
-  Sgx,
+  "Sgx",
 }
 
 @doc("Description of a JWT issuer or identity provider that the current service will trust tokens from.")

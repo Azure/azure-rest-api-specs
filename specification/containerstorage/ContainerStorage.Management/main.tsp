@@ -367,16 +367,16 @@ union AssignmentStatusState {
   string,
 
   @doc("The assignment of the pool to the resource is in progress")
-  Assigning,
+  "Assigning",
 
   @doc("The assignment to the pool was successful.")
-  Assigned,
+  "Assigned",
 
   @doc("The pool is being unassigned.")
-  Unassigning,
+  "Unassigning",
 
   @doc("The operation of assigning or unassigning the pool failed.")
-  Failed,
+  "Failed",
 }
 
 scalar AssignmentId

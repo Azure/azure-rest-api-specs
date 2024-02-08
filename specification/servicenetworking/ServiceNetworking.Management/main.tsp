@@ -75,7 +75,7 @@ model AssociationProperties {
 union AssociationType {
   string,
 
-  subnets,
+  "subnets",
 }
 
 @doc("Association Subnet.")
