@@ -3,7 +3,7 @@
   "info": {
     "title": "SearchIndexClient",
     "description": "Client that can be used to query an index and upload, merge, or delete documents.",
-    "version": "2024-05-01-Preview",
+    "version": "2024-05-01-preview",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true,
       "syncMethods": "None"
@@ -1471,6 +1471,7 @@
       "description": "The breakdown of subscores between the text and vector query components of the search query for this document. Each vector query is shown as a separate object in the same order they were received."
     },
     "TextResult": {
+      "type": "object",
       "properties": {
         "searchScore": {
           "type": "number",
@@ -1496,6 +1497,7 @@
       "description": "The vector similarity and @search.score values for each vector query. Each cross-field vector query will have separate subscores for each referenced field."
     },
     "SingleVectorFieldResult": {
+      "type": "object",
       "properties": {
         "searchScore": {
           "type": "number",
