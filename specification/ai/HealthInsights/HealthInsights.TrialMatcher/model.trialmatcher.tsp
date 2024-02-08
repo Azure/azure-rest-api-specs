@@ -2,6 +2,7 @@ import "../HealthInsights.Common/model.common.request.tsp";
 import "../HealthInsights.Common/model.common.response.tsp";
 import "../HealthInsights.Common/model.common.shared.tsp";
 import "../HealthInsights.Common/model.common.fhir.elements.tsp";
+import "../HealthInsights.OpenAPI/service.tsp";
 
 using TypeSpec.Rest;
 
