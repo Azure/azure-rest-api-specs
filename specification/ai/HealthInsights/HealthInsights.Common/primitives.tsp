@@ -71,14 +71,14 @@ model RequestIdResponseHeaderTrait {
 }
 
 alias ExpandQueryParams = QueryParametersTrait<{
-  @doc("The expand query parameter.")
+  @doc("A comma separated list of related properties to be included in line with the job.")
   @query({format: "csv"})
   expand?: ExpandQueryParamsType;
 }>;
 
-@doc("a list of the related resources to be included in line with each resource.")
+@doc("Supported properties to be included in line with the job.")
 enum ExpandQueryParamsType {
-  @doc("Use this value to expand responses with jobData property.")
+  @doc("Use this value to expand the job with jobData property.")
   JobData: "jobData",
 }
 
