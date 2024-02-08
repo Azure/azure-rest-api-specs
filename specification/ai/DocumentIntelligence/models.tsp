@@ -270,21 +270,23 @@ union DocumentBuildMode {
 }
 
 @doc("Type of operation.")
-enum OperationKind {
+union OperationKind {
+  string,
+
   @doc("Build a new custom document model.")
-  documentModelBuild,
+  documentModelBuild: "documentModelBuild",
 
   @doc("Compose a new custom document model from existing models.")
-  documentModelCompose,
+  documentModelCompose: "documentModelCompose",
 
   @doc("""
   Copy an existing document model to potentially a different resource, region, or
   subscription.
   """)
-  documentModelCopyTo,
+  documentModelCopyTo: "documentModelCopyTo",
 
   @doc("Build a new custom classifier model.")
-  documentClassifierBuild,
+  documentClassifierBuild: "documentClassifierBuild",
 }
 
 @doc("Document splitting mode.")
