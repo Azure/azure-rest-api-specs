@@ -202,7 +202,7 @@ model BatchAnalyzeImagesOptions {
   images: BatchAnalyzeImages;
 
   @doc("The blob parameters of result files.")
-  analysisResults: BatchAnalyzeImagesResults;
+  resultsBlob: BatchAnalyzeImagesResultsBlob;
 
   @doc("The storage mode for the batch task results, either 'CollectiveResultFile' or 'IndividualResultFiles'.")
   resultsStorageMode?: BatchResultsStorageMode = BatchResultsStorageMode.CollectiveResultFile;
@@ -235,7 +235,7 @@ model BatchAnalyzeImages {
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("The image batch analysis output.")
-model BatchAnalyzeImagesResults {
+model BatchAnalyzeImagesResultsBlob {
   @doc("The URL to a blob prefix which represents a directory. The analysis result file(s) will be written to this directory.")
   blobPrefixLocation: url;
 
@@ -276,7 +276,7 @@ model ImageBatchTaskResult {
   progressPercentage: int32;
 
   @doc("The blob parameters of result files.")
-  analysisResults: BatchAnalyzeImagesResults;
+  resultsBlob: BatchAnalyzeImagesResultsBlob;
 }
 
 @doc("Text Blocklist.")
@@ -562,18 +562,21 @@ model AnnotateTextResult {
 model PreDefinedConcept {
   @doc("The concept name.")
   concept: string;
+
   @doc("The concept description.")
   description: string;
 }
 
 @added(Versions.v2023_10_30_Preview)
 @doc("Label definition.")
-model SubCategory {
+model Subcategory {
   @doc("The id of subcategory.")
   id: int32;
+
   @doc("The name of subcategory.")
   name: string;
-  @doc("The description of subcategory.") 
+
+  @doc("The description of subcategory.")
   statements: string[];
 }
 
@@ -592,7 +595,7 @@ model TextCustomizedCategory {
   preDefinedConcepts?: PreDefinedConcept[];
 
   @doc("Subcategories in the customized category.")
-  subCategories: SubCategory[];
+  subcategories: Subcategory[];
 
   @doc("Text customizedCategories emphases.")
   emphases?: string[];

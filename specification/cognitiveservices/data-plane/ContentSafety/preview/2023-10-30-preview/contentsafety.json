@@ -2340,8 +2340,8 @@
           "$ref": "#/definitions/BatchAnalyzeImages",
           "description": "The blob parameters of images to be analyzed."
         },
-        "analysisResults": {
-          "$ref": "#/definitions/BatchAnalyzeImagesResults",
+        "resultsBlob": {
+          "$ref": "#/definitions/BatchAnalyzeImagesResultsBlob",
           "description": "The blob parameters of result files."
         },
         "resultsStorageMode": {
@@ -2368,10 +2368,10 @@
       },
       "required": [
         "images",
-        "analysisResults"
+        "resultsBlob"
       ]
     },
-    "BatchAnalyzeImagesResults": {
+    "BatchAnalyzeImagesResultsBlob": {
       "type": "object",
       "description": "The image batch analysis output.",
       "properties": {
@@ -2606,15 +2606,15 @@
           "format": "int32",
           "description": "The progress of the batch image analysis task, represented as a percentage (0-100)."
         },
-        "analysisResults": {
-          "$ref": "#/definitions/BatchAnalyzeImagesResults",
+        "resultsBlob": {
+          "$ref": "#/definitions/BatchAnalyzeImagesResultsBlob",
           "description": "The blob parameters of result files."
         }
       },
       "required": [
         "createdTime",
         "progressPercentage",
-        "analysisResults"
+        "resultsBlob"
       ]
     },
     "ImageCategoriesAnalysis": {
@@ -3122,7 +3122,7 @@
         "incidentSampleIds"
       ]
     },
-    "SubCategory": {
+    "Subcategory": {
       "type": "object",
       "description": "Label definition.",
       "properties": {
@@ -3312,11 +3312,11 @@
           },
           "x-ms-identifiers": []
         },
-        "subCategories": {
+        "subcategories": {
           "type": "array",
           "description": "Subcategories in the customized category.",
           "items": {
-            "$ref": "#/definitions/SubCategory"
+            "$ref": "#/definitions/Subcategory"
           }
         },
         "emphases": {
@@ -3334,7 +3334,7 @@
       },
       "required": [
         "categoryName",
-        "subCategories"
+        "subcategories"
       ]
     },
     "TextIncident": {
