@@ -24,12 +24,12 @@ namespace Azure.ProgrammableConnectivity;
   split into two operations, one for the redirect, and one for the result.
 """)
 interface NumberVerification {
-  @doc("Verifies the phone number (MSISDN) associated with a device. As part of the frontend authorisation flow, the device is redirected to the operator network to authenticate directly.")
+  @doc("Verifies the phone number (MSISDN) associated with a device. As part of the frontend authorization flow, the device is redirected to the operator network to authenticate directly.")
   @sharedRoute
   @action("verify")
   verifyWithoutCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
-    NumberVerificationContent,
+    NumberVerificationWithoutCodeContent,
     TypeSpec.Http.Response<302> & EmptyResponse,
     TraitOverride<ResponseHeadersTrait<{
       @header location: string;
@@ -41,16 +41,16 @@ interface NumberVerification {
   @action("verify")
   verifyWithCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
-    NumberVerificationContent,
+    NumberVerificationWithCodeContent,
     NumberVerificationResult
   >;
 
-  @doc("Retrieves the phone number (MSISDN) associated with a device. As part of the frontend authorisation flow, the device is redirected to the operator network to authenticate directly.")
+  @doc("Retrieves the phone number (MSISDN) associated with a device. As part of the frontend authorization flow, the device is redirected to the operator network to authenticate directly.")
   @sharedRoute
   @action("retrieve")
   retrieveWithoutCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
-    NumberRetrievalContent,
+    NumberRetrievalWithoutCodeContent,
     TypeSpec.Http.Response<302> & EmptyResponse,
     TraitOverride<ResponseHeadersTrait<{
       @header location: string;
@@ -62,7 +62,7 @@ interface NumberVerification {
   @action("retrieve")
   retrieveWithCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
-    NumberRetrievalContent,
+    NumberRetrievalWithCodeContent,
     NumberRetrievalResult
   >;
 }
@@ -80,24 +80,38 @@ model NumberVerificationEndpoint {
 
 /// Request models
 
-@doc("Request to verify number of device")
-model NumberVerificationContent {
+@doc("Request to verify number of device - first call")
+model NumberVerificationWithoutCodeContent {
+  @doc("Identifier for the network to query for this device.")
+  networkIdentifier: NetworkIdentifier;
+
+  ...NumberDevice;
+}
+
+@doc("Request to verify number of device - second call")
+model NumberVerificationWithCodeContent {
   @doc("Identifier for the network to query for this device.")
   networkIdentifier: NetworkIdentifier;
 
   ...NumberDevice;
 
-  @doc("The code provided by APC is exchange for the operator code.")
-  apcCode?: string;
+  @doc("The code provided by APC in exchange for the operator code.")
+  apcCode: string;
 }
 
-@doc("Request to retrieve number of device")
-model NumberRetrievalContent {
+@doc("Request to retrieve number of device - first call")
+model NumberRetrievalWithoutCodeContent {
+  @doc("Identifier for the network to query for this device.")
+  networkIdentifier: NetworkIdentifier;
+}
+
+@doc("Request to retrieve number of device - second call")
+model NumberRetrievalWithCodeContent {
   @doc("Identifier for the network to query for this device.")
   networkIdentifier: NetworkIdentifier;
 
-  @doc("The code provided by APC is exchange for the operator code.")
-  apcCode?: string;
+  @doc("The code provided by APC in exchange for the operator code.")
+  apcCode: string;
 }
 
 /// Response models

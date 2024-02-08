@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Programmable Connectivity",
-    "version": "v2024_02_09_preview",
+    "version": "2024-02-09-preview",
     "description": "Azure Programmable Connectivity (APC) provides a unified interface to the Network APIs of multiple Telecom Operators. Note that Operators may deprecate a Network API with less advance notice than the Azure standard, in which case APC will also deprecate that Network API.",
     "x-typespec-generated": [
       {
@@ -96,7 +96,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -152,7 +158,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -166,7 +178,7 @@
     "/number-verification/number:retrieve": {
       "post": {
         "operationId": "NumberVerification_RetrieveWithoutCode",
-        "description": "Retrieves the phone number (MSISDN) associated with a device. As part of the frontend authorisation flow, the device is redirected to the operator network to authenticate directly.",
+        "description": "Retrieves the phone number (MSISDN) associated with a device. As part of the frontend authorization flow, the device is redirected to the operator network to authenticate directly.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -182,7 +194,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NumberRetrievalContent"
+              "$ref": "#/definitions/NumberRetrievalWithoutCodeContent"
             }
           }
         ],
@@ -211,8 +223,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
+          }
+        },
+        "x-ms-examples": {
+          "NumberVerification_RetrieveWithoutCode": {
+            "$ref": "./examples/NumberVerification_RetrieveWithoutCode_MaximumSet_Gen.json"
           }
         }
       }
@@ -220,7 +243,7 @@
     "/number-verification/number:verify": {
       "post": {
         "operationId": "NumberVerification_VerifyWithoutCode",
-        "description": "Verifies the phone number (MSISDN) associated with a device. As part of the frontend authorisation flow, the device is redirected to the operator network to authenticate directly.",
+        "description": "Verifies the phone number (MSISDN) associated with a device. As part of the frontend authorization flow, the device is redirected to the operator network to authenticate directly.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -236,7 +259,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NumberVerificationContent"
+              "$ref": "#/definitions/NumberVerificationWithoutCodeContent"
             }
           }
         ],
@@ -265,8 +288,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
+          }
+        },
+        "x-ms-examples": {
+          "NumberVerification_VerifyWithoutCode": {
+            "$ref": "./examples/NumberVerification_VerifyWithoutCode_MaximumSet_Gen.json"
           }
         }
       }
@@ -316,7 +350,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -372,7 +412,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -404,7 +450,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NumberRetrievalContent"
+              "$ref": "#/definitions/NumberRetrievalWithCodeContent"
             }
           }
         ],
@@ -430,8 +476,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
+          }
+        },
+        "x-ms-examples": {
+          "NumberVerification_RetrieveWithCode": {
+            "$ref": "./examples/NumberVerification_RetrieveWithCode_MaximumSet_Gen.json"
           }
         }
       }
@@ -455,7 +512,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NumberVerificationContent"
+              "$ref": "#/definitions/NumberVerificationWithCodeContent"
             }
           }
         ],
@@ -481,8 +538,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
+          }
+        },
+        "x-ms-examples": {
+          "NumberVerification_VerifyWithCode": {
+            "$ref": "./examples/NumberVerification_VerifyWithCode_MaximumSet_Gen.json"
           }
         }
       }
@@ -493,7 +561,7 @@
       "type": "string",
       "description": "APC Versions",
       "enum": [
-        "v2024_02_09_preview"
+        "2024-02-09-preview"
       ],
       "x-ms-enum": {
         "name": "APCVersions",
@@ -501,7 +569,7 @@
         "values": [
           {
             "name": "v2024_02_09_preview",
-            "value": "v2024_02_09_preview",
+            "value": "2024-02-09-preview",
             "description": "Version 2024-02-09-preview"
           }
         ]
@@ -591,6 +659,19 @@
       "required": [
         "code",
         "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
@@ -850,23 +931,6 @@
         }
       }
     },
-    "NumberRetrievalContent": {
-      "type": "object",
-      "description": "Request to retrieve number of device",
-      "properties": {
-        "networkIdentifier": {
-          "$ref": "#/definitions/NetworkIdentifier",
-          "description": "Identifier for the network to query for this device."
-        },
-        "apcCode": {
-          "type": "string",
-          "description": "The code provided by APC is exchange for the operator code."
-        }
-      },
-      "required": [
-        "networkIdentifier"
-      ]
-    },
     "NumberRetrievalResult": {
       "type": "object",
       "description": "Response with number of device",
@@ -881,26 +945,31 @@
         "phoneNumber"
       ]
     },
-    "NumberVerificationContent": {
+    "NumberRetrievalWithCodeContent": {
       "type": "object",
-      "description": "Request to verify number of device",
+      "description": "Request to retrieve number of device - second call",
       "properties": {
         "networkIdentifier": {
           "$ref": "#/definitions/NetworkIdentifier",
           "description": "Identifier for the network to query for this device."
         },
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
-          "pattern": "^\\+?[0-9]{5,15}$"
-        },
-        "hashedPhoneNumber": {
-          "type": "string",
-          "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
-        },
         "apcCode": {
           "type": "string",
-          "description": "The code provided by APC is exchange for the operator code."
+          "description": "The code provided by APC in exchange for the operator code."
+        }
+      },
+      "required": [
+        "networkIdentifier",
+        "apcCode"
+      ]
+    },
+    "NumberRetrievalWithoutCodeContent": {
+      "type": "object",
+      "description": "Request to retrieve number of device - first call",
+      "properties": {
+        "networkIdentifier": {
+          "$ref": "#/definitions/NetworkIdentifier",
+          "description": "Identifier for the network to query for this device."
         }
       },
       "required": [
@@ -938,6 +1007,55 @@
       },
       "required": [
         "verificationResult"
+      ]
+    },
+    "NumberVerificationWithCodeContent": {
+      "type": "object",
+      "description": "Request to verify number of device - second call",
+      "properties": {
+        "networkIdentifier": {
+          "$ref": "#/definitions/NetworkIdentifier",
+          "description": "Identifier for the network to query for this device."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
+          "pattern": "^\\+?[0-9]{5,15}$"
+        },
+        "hashedPhoneNumber": {
+          "type": "string",
+          "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
+        },
+        "apcCode": {
+          "type": "string",
+          "description": "The code provided by APC in exchange for the operator code."
+        }
+      },
+      "required": [
+        "networkIdentifier",
+        "apcCode"
+      ]
+    },
+    "NumberVerificationWithoutCodeContent": {
+      "type": "object",
+      "description": "Request to verify number of device - first call",
+      "properties": {
+        "networkIdentifier": {
+          "$ref": "#/definitions/NetworkIdentifier",
+          "description": "Identifier for the network to query for this device."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
+          "pattern": "^\\+?[0-9]{5,15}$"
+        },
+        "hashedPhoneNumber": {
+          "type": "string",
+          "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
+        }
+      },
+      "required": [
+        "networkIdentifier"
       ]
     },
     "PhoneNumberModel": {
