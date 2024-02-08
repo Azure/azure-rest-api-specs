@@ -7,6 +7,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.Core.Foundations;
 
 namespace Easm;
 
@@ -46,7 +47,7 @@ interface DataConnections {
   validateDataConnection is Operations.ResourceCollectionAction<
     DataConnection,
     DataConnectionData,
-    ValidateResult
+    ErrorResponse
   >;
   @doc("Retrieve a data connection with a given dataConnectionName.")
   getDataConnection is Operations.ResourceRead<DataConnection>;
@@ -73,7 +74,7 @@ interface DiscoveryGroups {
   validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
     DiscoGroupData,
-    ValidateResult
+    ErrorResponse
   >;
   @doc("Retrieve a discovery group with a given groupName.")
   getDiscoGroup is Operations.ResourceRead<DiscoGroup>;

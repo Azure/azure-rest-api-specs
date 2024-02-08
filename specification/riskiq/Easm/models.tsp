@@ -111,7 +111,7 @@ model AlexaInfo {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model AsAsset extends InventoryAsset {
+model AsAsset {
   asn?: int64;
   asNames?: ObservedString[];
   orgNames?: ObservedString[];
@@ -263,6 +263,7 @@ model AssetUpdateData {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "AttributeDetails")
 model Attribute {
   attributeType?: string;
   attributeValue?: string;
@@ -305,6 +306,7 @@ model AzureDataExplorerDataConnectionProperties
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+// generic name
 model Banner {
   port?: int32;
 
@@ -344,7 +346,7 @@ model Cvss3Summary {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model ContactAsset extends InventoryAsset {
+model ContactAsset {
   email?: string;
   names?: ObservedString[];
   organizations?: ObservedString[];
@@ -355,6 +357,7 @@ model ContactAsset extends InventoryAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+// generic name
 model Cookie {
   cookieName?: string;
   cookieDomain?: string;
@@ -465,6 +468,7 @@ model DependentResource {
 }
 
 @doc("A request body used to create a discovery group.")
+@projectedName("csharp", "DiscoveryGroupData")
 model DiscoGroupData {
   @doc("The name for a disco group.")
   name?: string;
@@ -493,6 +497,7 @@ model DiscoGroupData {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("discoGroups")
+@projectedName("csharp", "DiscoveryGroup")
 model DiscoGroup {
   @doc("The system generated unique id for the resource.")
   id?: string;
@@ -535,6 +540,7 @@ model DiscoGroup {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @pagedResult
+@projectedName("csharp", "DiscoveryGroupRunPageResult")
 model DiscoRunPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -549,6 +555,7 @@ model DiscoRunPageResult {
 }
 
 @doc("The latest run of this disco group with some limited information, null if the group has never been run.")
+@projectedName("csharp", "DiscoveryRunResult")
 model DiscoRunResult {
   @doc("The date for when the disco run was created in the system.")
   submittedDate?: utcDateTime;
@@ -579,6 +586,7 @@ model DiscoRunResult {
 }
 
 @doc("Source entity used to drive discovery.")
+@projectedName("csharp", "DiscoverySource")
 model DiscoSource {
   @doc("The kind of disco source.")
   kind?: DiscoSourceKind;
@@ -589,6 +597,7 @@ model DiscoSource {
 
 @doc("The items in the current page of results.")
 @resource("discoTemplates")
+@projectedName("csharp", "DiscoveryTemplate")
 model DiscoTemplate {
   @doc("The system generated unique id for the resource.")
   @key("templateId")
@@ -624,7 +633,7 @@ model DiscoTemplate {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model DomainAsset extends InventoryAsset {
+model DomainAsset {
   domain?: string;
   whoisId?: int64;
   registrarIanaIds?: ObservedInteger[];
@@ -658,23 +667,6 @@ model DomainAsset extends InventoryAsset {
   technicalPhones?: ObservedString[];
 }
 
-@doc("This is the top-level error object whose code matches the x-ms-error-code response header.")
-model ErrorDetail {
-  @doc("This is one of a server-defined set of error codes.")
-  code: string;
-
-  @doc("This is a human-readable representation of the error.")
-  message: string;
-
-  @doc("This is the error target.")
-  target?: string;
-
-  @doc("This is an array of details about specific errors that led to this reported error.")
-  details?: ErrorDetail[];
-
-  @doc("This is an object containing more specific information than the current object about the error.")
-  innererror?: InnerError;
-}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model GuidPair {
@@ -685,7 +677,7 @@ model GuidPair {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model HostAsset extends InventoryAsset {
+model HostAsset {
   host?: string;
   domain?: string;
   ipAddresses?: ObservedString[];
@@ -774,10 +766,7 @@ model InnerError {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model InventoryAsset {}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model IpAddressAsset extends InventoryAsset {
+model IpAddressAsset {
   ipAddress?: string;
   asns?: ObservedLong[];
   reputations?: Reputation[];
@@ -818,7 +807,7 @@ model IpBlock {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model IpBlockAsset extends InventoryAsset {
+model IpBlockAsset {
   ipBlock?: string;
   asns?: ObservedLong[];
   bgpPrefixes?: ObservedString[];
@@ -853,6 +842,7 @@ model IpBlockAsset extends InventoryAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "ObservedLocationDetails")
 model Location {
   countryCode?: string;
   countryName?: string;
@@ -925,7 +915,7 @@ model ObservedString extends ObservedValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model PageAsset extends InventoryAsset {
+model PageAsset {
   url?: url;
   httpMethod?: string;
   service?: string;
@@ -1002,8 +992,9 @@ model PageCause {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "PortDetails")
 model Port {
-  @projectedName("csharp", "portProperty")
+  @projectedName("csharp", "portName")
   port?: int32;
 
   firstSeen?: utcDateTime;
@@ -1125,6 +1116,7 @@ model Reputation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "ResourceUri")
 model ResourceUrl {
   url?: url;
   resources?: DependentResource[];
@@ -1170,6 +1162,7 @@ model ScanMetadata {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "AssetService")
 model Service {
   scheme?: string;
   port?: int32;
@@ -1207,7 +1200,7 @@ model Source {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model SslCertAsset extends InventoryAsset {
+model SslCertAsset {
   sha1?: string;
   subjectCommonNames?: string[];
   organizations?: string[];
@@ -1268,6 +1261,7 @@ model SubResourceIntegrityCheck {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("tasks")
+@projectedName("csharp", "TaskResource")
 model Task {
   @doc("The unique identifier of the task.")
   @key("taskId")
@@ -1295,12 +1289,6 @@ model Task {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Attributes unique to the task.  This differs by task type.")
   metadata?: Record<unknown>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model ValidateResult {
-  @doc("This is the top-level error object whose code matches the x-ms-error-code response header.")
-  error?: ErrorDetail;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1351,6 +1339,7 @@ enum ReportBillableAssetBreakdownKind {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state the task is in.")
+@projectedName("csharp", "TaskResourceState")
 enum TaskState {
   pending,
   running,
@@ -1363,6 +1352,7 @@ enum TaskState {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The phase the task is in.")
+@projectedName("csharp", "TaskResourcePhase")
 enum TaskPhase {
   running,
   polling,
@@ -1585,6 +1575,7 @@ model AzureDataExplorerDataConnection extends DataConnection {
 }
 
 @doc("The unique identifier for the discovery group.")
+@projectedName("csharp", "DiscoveryGroupNameParameter")
 model DiscoGroupNameParameter {
   @doc("The unique identifier for the discovery group.")
   @path("groupName")
