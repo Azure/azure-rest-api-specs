@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./model.trialmatcher.tsp";
 import "../HealthInsights.Common/primitives.tsp";
+import "../HealthInsights.OpenAPI/service.tsp";
 
 using Azure.Core;
 using TypeSpec.Rest;

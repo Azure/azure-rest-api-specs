@@ -5,6 +5,7 @@ import "@typespec/http";
 import "./model.radiologyinsights.tsp";
 import "./model.radiologyinsights.valuesets.tsp";
 import "../HealthInsights.Common/primitives.tsp";
+import "../HealthInsights.OpenAPI/service.tsp";
 
 using Azure.Core;
 using TypeSpec.Rest;

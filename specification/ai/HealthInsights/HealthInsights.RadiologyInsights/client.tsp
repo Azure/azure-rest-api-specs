@@ -3,7 +3,6 @@ import "./route.radiologyinsights.tsp";
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../HealthInsights.OpenAPI/service.tsp";
 
 using Azure.ClientGenerator.Core;
 

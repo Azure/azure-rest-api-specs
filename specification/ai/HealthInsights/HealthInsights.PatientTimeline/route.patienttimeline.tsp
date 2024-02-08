@@ -4,6 +4,7 @@ import "@typespec/http";
 
 import "./model.patienttimeline.tsp";
 import "../HealthInsights.Common/primitives.tsp";
+import "../HealthInsights.OpenAPI/service.tsp";
 
 using Azure.Core;
 using TypeSpec.Rest;
