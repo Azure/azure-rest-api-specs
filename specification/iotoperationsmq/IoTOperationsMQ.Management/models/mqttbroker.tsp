@@ -352,16 +352,16 @@ union BrokerMemoryProfile {
   string,
 
   @doc("Tiny memory profile.")
-  "tiny",
+  tiny: "tiny",
 
   @doc("Low memory profile.")
-  "low",
+  low: "low",
 
   @doc("Medium memory profile.")
-  "medium",
+  medium: "medium",
 
   @doc("High memory profile.")
-  "high",
+  high: "high",
 }
 
 /** ******************* */
@@ -427,13 +427,13 @@ union ServiceType {
   string,
 
   @doc("Cluster IP Service.")
-  "clusterIp",
+  clusterIp: "clusterIp",
 
   @doc("Load Balancer Service.")
-  "loadBalancer",
+  loadBalancer: "loadBalancer",
 
   @doc("Node Port Service.")
-  "nodePort",
+  nodePort: "nodePort",
 }
 
 @doc("Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported")

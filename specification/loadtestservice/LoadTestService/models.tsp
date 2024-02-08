@@ -41,9 +41,10 @@ union PFAction {
   string,
 
   @doc("Test will continue to run even if pass fail metric criteria metric gets failed.")
-  "continue",
+  continue: "continue",
 
-  @doc("Test run will stop if pass fail criteria metric is not passed.") "stop",
+  @doc("Test run will stop if pass fail criteria metric is not passed.")
+  stop: "stop",
 }
 
 @doc("Pass/fail criteria result.")
@@ -163,18 +164,19 @@ union TimeGrain {
   string,
 
   @doc("5 seconds, available only if test run duration is less than 10 minutes.")
-  "PT5S",
+  PT5S: "PT5S",
 
   @doc("10 seconds, available only if test run duration is less than 10 minutes.")
-  "PT10S",
+  PT10S: "PT10S",
 
-  @doc("1 minute") "PT1M",
+  @doc("1 minute")
+  PT1M: "PT1M",
 
   @doc("5 minutes, available only if test run duration is greater than 1 minute.")
-  "PT5M",
+  PT5M: "PT5M",
 
   @doc("1 hour, available only if test run duration is greater than 1 minute.")
-  "PT1H",
+  PT1H: "PT1H",
 }
 
 @added(APIVersions.v2023_04_01_preview)

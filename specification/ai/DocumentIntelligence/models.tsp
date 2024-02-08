@@ -19,16 +19,16 @@ union StringIndexType {
   User-perceived display character, or grapheme cluster, as defined by Unicode
   8.0.0.
   """)
-  "textElements",
+  textElements: "textElements",
 
   @doc("Character unit represented by a single unicode code point.  Used by Python 3.")
-  "unicodeCodePoint",
+  unicodeCodePoint: "unicodeCodePoint",
 
   @doc("""
   Character unit represented by a 16-bit Unicode code unit.  Used by JavaScript,
   Java, and .NET.
   """)
-  "utf16CodeUnit",
+  utf16CodeUnit: "utf16CodeUnit",
 }
 
 @doc("Format of the content in analyzed result.")
@@ -36,13 +36,13 @@ union ContentFormat {
   string,
 
   @doc("Plain text representation of the document content without any formatting.")
-  "text",
+  text: "text",
 
   @doc("""
   Markdown representation of the document content with section headings, tables,
   etc.
   """)
-  "markdown",
+  markdown: "markdown",
 }
 
 @doc("Document analysis features to enable.")
@@ -174,14 +174,20 @@ union ParagraphRole {
 union DocumentTableCellKind {
   string,
 
-  @doc("Contains the main content/data.") "content",
-  @doc("Describes the content of the row.") "rowHeader",
-  @doc("Describes the content of the column.") "columnHeader",
+  @doc("Contains the main content/data.")
+  content: "content",
+
+  @doc("Describes the content of the row.")
+  rowHeader: "rowHeader",
+
+  @doc("Describes the content of the column.")
+  columnHeader: "columnHeader",
 
   @doc("Describes the row headers, usually located at the top left corner of a table.")
-  "stubHead",
+  stubHead: "stubHead",
 
-  @doc("Describes the content in (parts of) the table.") "description",
+  @doc("Describes the content in (parts of) the table.")
+  description: "description",
 }
 
 @doc("Font style.")
@@ -285,9 +291,14 @@ enum OperationKind {
 union SplitMode {
   string,
 
-  @doc("Automatically split file into documents.") "auto",
-  @doc("Treat the entire file as a single document.") "none",
-  @doc("Treat each page in the file as a separate document.") "perPage",
+  @doc("Automatically split file into documents.")
+  auto: "auto",
+
+  @doc("Treat the entire file as a single document.")
+  none: "none",
+
+  @doc("Treat each page in the file as a separate document.")
+  perPage: "perPage",
 }
 
 @lroStatus

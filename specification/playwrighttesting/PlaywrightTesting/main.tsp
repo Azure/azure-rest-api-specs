@@ -173,10 +173,10 @@ union EnablementStatus {
   string,
 
   @doc("The feature is Enabled.")
-  "Enabled",
+  Enabled: "Enabled",
 
   @doc("The feature is Disabled.")
-  "Disabled",
+  Disabled: "Disabled",
 }
 
 // Operations ////////////////////

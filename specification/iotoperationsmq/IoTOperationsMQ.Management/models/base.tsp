@@ -26,7 +26,7 @@ union ExtendedLocationType {
   string,
 
   @doc("CustomLocation type")
-  CustomLocation,
+  "CustomLocation",
 }
 
 @doc("The enum defining status of resource.")

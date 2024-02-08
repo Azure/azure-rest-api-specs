@@ -65,10 +65,10 @@ union EnablementStatus {
   string,
 
   @doc("The feature is Enabled.")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The feature is Disabled.")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("The status of the current operation.")
@@ -119,7 +119,7 @@ union QuotaNames {
   string,
 
   @doc("The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
-  ScalableExecution,
+  "ScalableExecution",
 }
 
 @doc("The subscription quota resource properties.")

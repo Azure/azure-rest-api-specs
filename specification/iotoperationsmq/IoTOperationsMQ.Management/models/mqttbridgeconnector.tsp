@@ -87,10 +87,10 @@ union MqttBridgeRemoteBrokerProtocol {
   string,
 
   @doc("MQTT protocol.")
-  "mqtt",
+  mqtt: "mqtt",
 
   @doc("MQTT over WebSocket protocol.")
-  "webSocket",
+  webSocket: "webSocket",
 }
 
 // GENERATION FIX TEMP - add "minProperties": 1 and "maxProperties": 1 to this property after creation.

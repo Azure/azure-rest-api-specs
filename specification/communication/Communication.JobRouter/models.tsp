@@ -148,46 +148,46 @@ union RouterJobStatusSelector {
   string,
 
   @doc("Default")
-  "all",
+  all: "all",
 
   @doc("Job is waiting to be classified.")
-  "pendingClassification",
+  pendingClassification: "pendingClassification",
 
   @doc("Job has been queued.")
-  "queued",
+  queued: "queued",
 
   @doc("Job has been assigned to a worker.")
-  "assigned",
+  assigned: "assigned",
 
   @doc("Job has been completed by a worker.")
-  "completed",
+  completed: "completed",
 
   @doc("Job has been closed by a worker.")
-  "closed",
+  closed: "closed",
 
   @doc("Job has been cancelled.")
-  "cancelled",
+  cancelled: "cancelled",
 
   @doc("Classification process failed for the job.")
-  "classificationFailed",
+  classificationFailed: "classificationFailed",
 
   @doc("Job has been created.")
-  "created",
+  created: "created",
 
   @doc("Job has been created but not been scheduled yet.")
-  "pendingSchedule",
+  pendingSchedule: "pendingSchedule",
 
   @doc("Job has been scheduled successfully.")
-  "scheduled",
+  scheduled: "scheduled",
 
   @doc("Job scheduling failed.")
-  "scheduleFailed",
+  scheduleFailed: "scheduleFailed",
 
   @doc("Job is in a suspended state and waiting for an update.")
-  "waitingForActivation",
+  waitingForActivation: "waitingForActivation",
 
   @doc("Job is in a state of PendingClassification or Queued or Assigned or ClassificationFailed or Completed or PendingSchedule or Scheduled or ScheduleFailed or WaitingForActivation.")
-  "active",
+  active: "active",
 }
 
 @doc("Enums for worker states.")
@@ -209,16 +209,16 @@ union RouterWorkerStateSelector {
   string,
 
   @doc("Worker is active and available to take offers.")
-  "active",
+  active: "active",
 
   @doc("Worker is not active, if there are existing offers they are being revoked. No new offers are sent.")
-  "draining",
+  draining: "draining",
 
   @doc("Worker is not active. No new offers are sent.")
-  "inactive",
+  inactive: "inactive",
 
   @doc("Worker is active or draining or inactive.")
-  "all",
+  all: "all",
 }
 
 @doc("Supported parameters for scoring workers used with BestWorkerMode.")
@@ -226,10 +226,10 @@ union ScoringRuleParameterSelector {
   string,
 
   @doc("Parameter to add job labels to scoring payload.  Property is sent as `job`.")
-  "jobLabels",
+  jobLabels: "jobLabels",
 
   @doc("Parameter to add worker selectors from a job to scoring payload.  Property is sent as `selectors`.")
-  "workerSelectors",
+  workerSelectors: "workerSelectors",
 }
 
 @doc("Available expression languages that can be configured.")

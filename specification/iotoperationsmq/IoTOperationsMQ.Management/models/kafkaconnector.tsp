@@ -243,16 +243,16 @@ union KafkaMessageCompressionType {
   string,
 
   @doc("No Kafka message compression.")
-  "none",
+  none: "none",
 
   @doc("Gzip Kafka message compression.")
-  "gzip",
+  gzip: "gzip",
 
   @doc("Snappy Kafka message compression.")
-  "snappy",
+  snappy: "snappy",
 
   @doc("Lz4 Kafka message compression.")
-  "lz4",
+  lz4: "lz4",
 }
 
 // Add Kafka Partition Strategy
@@ -261,16 +261,16 @@ union KafkaPartitionStrategy {
   string,
 
   @doc("Default partition strategy.")
-  "default",
+  default: "default",
 
   @doc("Static partition strategy.")
-  "static",
+  static: "static",
 
   @doc("Topic partition strategy.")
-  "topic",
+  topic: "topic",
 
   @doc("Property partition strategy.")
-  "property",
+  property: "property",
 }
 
 // Add Kafka Routes properties.
