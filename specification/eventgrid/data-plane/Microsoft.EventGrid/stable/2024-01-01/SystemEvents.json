@@ -869,7 +869,33 @@
     },
     "AcsRouterCommunicationError": {
       "type": "object",
-      "description": "Router Communication Error"
+      "description": "Router Communication Error",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Router Communication Error Code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Router Communication Error Message"
+        },
+        "target": {
+          "type": "string",
+          "description": "Router Communication Error Target"
+        },
+        "innererror": {
+          "$ref": "#/definitions/AcsRouterCommunicationError",
+          "description": "Router Communication Inner Error"
+        },
+        "details": {
+          "type": "array",
+          "description": "List of Router Communication Errors",
+          "items": {
+            "$ref": "#/definitions/AcsRouterCommunicationError"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "AcsRouterEventData": {
       "type": "object",
