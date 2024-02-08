@@ -24,16 +24,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the quantum.
 
-```yaml
+``` yaml
 openapi-type: data-plane
-tag: package-2023-11-13-preview
+tag: package-preview-2024-03
 ```
 
+
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.Quantum/preview/2024-03-01-preview/quantum.json
+```
 ### Tag: package-2019-11-04-preview
 
 These settings apply only when `--tag=package-2019-11-04-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11-04-preview'
+``` yaml $(tag) == 'package-2019-11-04-preview'
 input-file:
   - Microsoft.Quantum/preview/2019-11-04-preview/quantum.json
 ```
@@ -42,7 +51,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-05-06-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-05-06-preview'
+``` yaml $(tag) == 'package-2021-05-06-preview'
 input-file:
   - Microsoft.Quantum/preview/2021-05-06-preview/quantum.json
 ```
@@ -51,7 +60,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-11-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-11-01-preview'
+``` yaml $(tag) == 'package-2021-11-01-preview'
 input-file:
   - Microsoft.Quantum/preview/2021-11-01-preview/quantum.json
 ```
@@ -60,7 +69,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-09-12-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-09-12-preview'
+``` yaml $(tag) == 'package-2022-09-12-preview'
 input-file:
   - Microsoft.Quantum/preview/2022-09-12-preview/quantum.json
 ```
@@ -69,7 +78,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-11-13-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11-13-preview'
+``` yaml $(tag) == 'package-2023-11-13-preview'
 input-file:
   - Microsoft.Quantum/preview/2023-11-13-preview/quantum.json
 ```
@@ -93,4 +102,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-
