@@ -1,4 +1,9 @@
 // imports to rest,http and versioning should be done outside of this file (csharp emitter issue)
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
