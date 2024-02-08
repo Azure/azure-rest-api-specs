@@ -70,12 +70,11 @@ model RequestIdResponseHeaderTrait {
   };
 }
 
-alias ExpandQueryParams = QueryParametersTrait<
-  {
-    @doc("The expand query parameter.")
-    @query expand?: "jobData";
-  }
->;
+alias ExpandQueryParams = QueryParametersTrait<{
+  @doc("The expand query parameter.")
+  @query
+  expand?: "jobData";
+}>;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &

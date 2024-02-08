@@ -1,4 +1,3 @@
-// import "@azure-tools/typespec-client-generator-core";
 // import "./route.oncophenotype.tsp";
 
 // import "@typespec/rest";
@@ -85,4 +84,5 @@
 // @@projectedName(Fhir.R4.ResearchStudy, "java", "Fhir_R4_ResearchStudy");
 // @@projectedName(Fhir.R4.ResearchStudy, "csharp", "Fhir_R4_ResearchStudy");
 // @@projectedName(AzureHealthInsights.PatientInfoSex, "client", "PatientSex");
+// import "@azure-tools/typespec-client-generator-core";
 // @@projectedName(AzureHealthInsights.PatientInfo, "client", "PatientDetails");

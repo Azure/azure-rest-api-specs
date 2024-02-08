@@ -82,5 +82,3 @@ interface RadiologyInsightsClient {
 );
 @@projectedName(Fhir.R4.ResearchStudy, "java", "Fhir_R4_ResearchStudy");
 @@projectedName(Fhir.R4.ResearchStudy, "csharp", "Fhir_R4_ResearchStudy");
-@@projectedName(AzureHealthInsights.PatientInfoSex, "client", "PatientSex");
-@@projectedName(AzureHealthInsights.PatientInfo, "client", "PatientDetails");
