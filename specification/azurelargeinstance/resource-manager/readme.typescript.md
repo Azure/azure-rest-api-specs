@@ -15,11 +15,20 @@ typescript:
 
 directive:
   - from: azurelargeinstance.json 
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstances/{azureLargeInstanceName}"].patch.parameters[4]'
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstances/{azureLargeInstanceName}"].patch.parameters'
     transform: >
-      delete $["x-ms-client-name"]
+      for (const param of $) {
+        if (param['name'] == 'tagsParameter') {
+           delete param["x-ms-client-name"]
+        }
+      }
   - from: azurelargeinstance.json 
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstances/{azureLargeStorageInstanceName}"].patch.parameters[4]'
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstances/{azureLargeStorageInstanceName}"].patch.parameters'
     transform: >
-      delete $["x-ms-client-name"]
+      for (const param of $) {
+        if (param['name'] == 'tagsParameter') {
+           delete param["x-ms-client-name"]
+        }
+      }
+
 ```
