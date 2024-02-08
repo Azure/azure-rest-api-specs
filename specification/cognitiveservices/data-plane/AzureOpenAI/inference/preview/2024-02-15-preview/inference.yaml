@@ -631,7 +631,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -640,11 +640,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/listAssistantsResponse'
+      x-ms-examples:
+        Create an image.:
+          $ref: ./examples/list_assistants.yaml
     post:
       operationId: Create_Assistant
       tags:
         - Assistants
       summary: Create an assistant with a model and instructions.
+      parameters:
+      - in: query
+        name: api-version
+        required: true
+        schema:
+          type: string
+          example: 2024-02-15-preview
+          description: api version
       requestBody:
         required: true
         content:
@@ -658,6 +669,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/assistantObject'
+      x-ms-examples:
+        Create an assistant.:
+          $ref: ./examples/create_assistant.yaml
   /assistants/{assistant_id}:
     get:
       operationId: Get_Assistant
@@ -676,7 +690,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -685,6 +699,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/assistantObject'
+      x-ms-examples:
+        Create an assistant.:
+          $ref: ./examples/retrieve_assistant.yaml
     post:
       operationId: Modify_Assistant
       tags:
@@ -697,6 +714,13 @@ paths:
           schema:
             type: string
           description: The ID of the assistant to modify.
+        - in: query
+          name: api-version
+          required: true
+          schema:
+            type: string
+            example: 2024-02-15-preview
+            description: api version
       requestBody:
         required: true
         content:
@@ -710,6 +734,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/assistantObject'
+      x-ms-examples:
+        Create an assistant.:
+          $ref: ./examples/modify_assistant.yaml
     delete:
       operationId: Delete_Assistant
       tags:
@@ -722,6 +749,13 @@ paths:
           schema:
             type: string
           description: The ID of the assistant to delete.
+        - in: query
+          name: api-version
+          required: true
+          schema:
+            type: string
+            example: 2024-02-15-preview
+            description: api version
       responses:
         '200':
           description: OK
@@ -729,6 +763,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/deleteAssistantResponse'
+      x-ms-examples:
+        Create an assistant.:
+          $ref: ./examples/delete_assistant.yaml
   /threads:
     post:
       operationId: Create_Thread
@@ -741,7 +778,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       requestBody:
         required: true
@@ -756,6 +793,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/threadObject'
+      x-ms-examples:
+        Create a thread.:
+          $ref: ./examples/create_thread.yaml
   /threads/{thread_id}:
     get:
       operationId: Get_Thread
@@ -774,7 +814,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -783,6 +823,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/threadObject'
+      x-ms-examples:
+        Create a thread.:
+          $ref: ./examples/retrieve_thread.yaml
     post:
       operationId: Modify_Thread
       tags:
@@ -795,6 +838,13 @@ paths:
           schema:
             type: string
           description: The ID of the thread to modify. Only the `metadata` can be modified.
+        - in: query
+          name: api-version
+          required: true
+          schema:
+            type: string
+            example: 2024-02-15-preview
+            description: api version
       requestBody:
         required: true
         content:
@@ -808,6 +858,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/threadObject'
+      x-ms-examples:
+        Modify a thread.:
+          $ref: ./examples/modify_thread.yaml
     delete:
       operationId: Delete_Thread
       tags:
@@ -820,6 +873,13 @@ paths:
           schema:
             type: string
           description: The ID of the thread to delete.
+        - in: query
+          name: api-version
+          required: true
+          schema:
+            type: string
+            example: 2024-02-15-preview
+            description: api version
       responses:
         '200':
           description: OK
@@ -827,6 +887,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/deleteThreadResponse'
+      x-ms-examples:
+        Delete a thread.:
+          $ref: ./examples/delete_thread.yaml
   /threads/{thread_id}/messages:
     get:
       operationId: List_Messages
@@ -883,7 +946,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -892,6 +955,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/listMessagesResponse'
+      x-ms-examples:
+        List messages.:
+          $ref: ./examples/list_messages.yaml
     post:
       operationId: Create_Message
       tags:
@@ -909,7 +975,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       requestBody:
         required: true
@@ -924,6 +990,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/messageObject'
+      x-ms-examples:
+        Create a message.:
+          $ref: ./examples/create_message.yaml
   /threads/{thread_id}/messages/{message_id}:
     get:
       operationId: Get_Message
@@ -948,7 +1017,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -957,6 +1026,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/messageObject'
+      x-ms-examples:
+        Retrieve a message.:
+          $ref: ./examples/get_message.yaml
     post:
       operationId: Modify_Message
       tags:
@@ -980,7 +1052,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       requestBody:
         required: true
@@ -995,6 +1067,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/messageObject'
+      x-ms-examples:
+        Modify a message.:
+          $ref: ./examples/modify_message.yaml
   /threads/runs:
     post:
       operationId: Create_Thread_And_Run
@@ -1007,7 +1082,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       requestBody:
         required: true
@@ -1022,6 +1097,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/runObject'
+      x-ms-examples:
+        Create a thread and run it.:
+          $ref: ./examples/create_thread_and_run.yaml
   /threads/{thread_id}/runs:
     get:
       operationId: List_Runs
@@ -1078,7 +1156,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -1087,6 +1165,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/listRunsResponse'
+      x-ms-examples:
+        List runs.:
+          $ref: ./examples/list_runs.yaml
     post:
       operationId: Create_Run
       tags:
@@ -1104,7 +1185,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       requestBody:
         required: true
@@ -1119,6 +1200,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/runObject'
+      x-ms-examples:
+        Create a run.:
+          $ref: ./examples/create_run.yaml
   /threads/{thread_id}/runs/{run_id}:
     get:
       operationId: Get_Run
@@ -1143,7 +1227,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -1152,6 +1236,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/runObject'
+      x-ms-examples:
+        Retrieve a run.:
+          $ref: ./examples/get_run.yaml
     post:
       operationId: Modify_Run
       tags:
@@ -1175,7 +1262,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       requestBody:
         required: true
@@ -1190,6 +1277,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/runObject'
+      x-ms-examples:
+        Modify a run.:
+          $ref: ./examples/modify_run.yaml
   /threads/{thread_id}/runs/{run_id}/submit_tool_outputs:
     post:
       operationId: Submit_Tool_Outputs_To_Run
@@ -1215,7 +1305,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       requestBody:
         required: true
@@ -1230,6 +1320,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/runObject'
+      x-ms-examples:
+        Submit tool outputs to a run.:
+          $ref: ./examples/submit_tool_outputs_to_run.yaml
   /threads/{thread_id}/runs/{run_id}/cancel:
     post:
       operationId: Cancel_Run
@@ -1254,7 +1347,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -1263,6 +1356,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/runObject'
+      x-ms-examples:
+        Cancel a run.:
+          $ref: ./examples/cancel_run.yaml
   /threads/{thread_id}/runs/{run_id}/steps:
     get:
       operationId: List_Run_Steps
@@ -1325,7 +1421,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -1334,6 +1430,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/listRunStepsResponse'
+      x-ms-examples:
+        List run steps.:
+          $ref: ./examples/list_run_steps.yaml
   /threads/{thread_id}/runs/{run_id}/steps/{step_id}:
     get:
       operationId: Get_Run_Step
@@ -1364,7 +1463,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -1373,6 +1472,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/runStepObject'
+      x-ms-examples:
+        Retrieve a run step.:
+          $ref: ./examples/get_run_step.yaml
   /assistants/{assistant_id}/files:
     get:
       operationId: List_Assistant_Files
@@ -1429,7 +1531,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -1438,6 +1540,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/listAssistantFilesResponse'
+      x-ms-examples:
+        List assistant files.:
+          $ref: ./examples/list_assistant_files.yaml
     post:
       operationId: Create_Assistant_File
       tags:
@@ -1457,7 +1562,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       requestBody:
         required: true
@@ -1472,6 +1577,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/assistantFileObject'
+      x-ms-examples:
+        Create an assistant file.:
+          $ref: ./examples/create_assistant_file.yaml
   /assistants/{assistant_id}/files/{file_id}:
     get:
       operationId: Get_Assistant_File
@@ -1496,7 +1604,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -1505,6 +1613,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/assistantFileObject'
+      x-ms-examples:
+        Retrieve an assistant file.:
+          $ref: ./examples/get_assistant_file.yaml
     delete:
       operationId: Delete_Assistant_File
       tags:
@@ -1528,7 +1639,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -1537,6 +1648,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/deleteAssistantFileResponse'
+      x-ms-examples:
+        Delete an assistant file.:
+          $ref: ./examples/delete_assistant_file.yaml
   /threads/{thread_id}/messages/{message_id}/files:
     get:
       operationId: List_Message_Files
@@ -1599,7 +1713,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -1608,6 +1722,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/listMessageFilesResponse'
+      x-ms-examples:
+        List message files.:
+          $ref: ./examples/list_message_files.yaml
   /threads/{thread_id}/messages/{message_id}/files/{file_id}:
     get:
       operationId: Get_Message_File
@@ -1641,7 +1758,7 @@ paths:
           required: true
           schema:
             type: string
-            example: 2024-01-01-preview
+            example: 2024-02-15-preview
             description: api version
       responses:
         '200':
@@ -1650,6 +1767,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/messageFileObject'
+      x-ms-examples:
+        Retrieve a message file.:
+          $ref: ./examples/get_message_file.yaml
 components:
   schemas:
     errorResponse:
@@ -3923,16 +4043,16 @@ components:
           description: The identifier, which can be referenced in API endpoints.
           type: string
         object:
-          description: The object type, which is always `assistant.run`.
+          description: The object type, which is always `thread.run`.
           type: string
           enum:
-            - assistant.run
+            - thread.run
           x-ms-enum:
             name: runObjectType
             modelAsString: true
             values:
-              - value: assistant.run
-                description: The run object type which is always assistant.run
+              - value: thread.run
+                description: The run object type which is always thread.run
         created_at:
           description: The Unix timestamp (in seconds) for when the run was created.
           type: integer

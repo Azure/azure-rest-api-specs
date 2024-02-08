@@ -924,7 +924,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -940,6 +940,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "List all assistants.": {
+            "$ref": "./examples/list_assistants.json"
+          }
         }
       },
       "post": {
@@ -948,6 +953,18 @@
           "Assistants"
         ],
         "summary": "Create an assistant with a model and instructions.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2024-02-15-preview",
+              "description": "api version"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -968,6 +985,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create an assistant.": {
+            "$ref": "./examples/create_assistant.json"
           }
         }
       }
@@ -995,7 +1017,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1010,6 +1032,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves an assistant.": {
+            "$ref": "./examples/retrieve_assistant.json"
           }
         }
       },
@@ -1028,6 +1055,16 @@
               "type": "string"
             },
             "description": "The ID of the assistant to modify."
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2024-02-15-preview",
+              "description": "api version"
+            }
           }
         ],
         "requestBody": {
@@ -1051,6 +1088,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Modifies an assistant.": {
+            "$ref": "./examples/modify_assistant.json"
+          }
         }
       },
       "delete": {
@@ -1068,6 +1110,16 @@
               "type": "string"
             },
             "description": "The ID of the assistant to delete."
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2024-02-15-preview",
+              "description": "api version"
+            }
           }
         ],
         "responses": {
@@ -1080,6 +1132,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an assistant.": {
+            "$ref": "./examples/delete_assistant.json"
           }
         }
       }
@@ -1098,7 +1155,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1123,6 +1180,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a thread.": {
+            "$ref": "./examples/create_thread.json"
           }
         }
       }
@@ -1150,7 +1212,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1165,6 +1227,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a thread.": {
+            "$ref": "./examples/retrieve_thread.json"
           }
         }
       },
@@ -1183,6 +1250,16 @@
               "type": "string"
             },
             "description": "The ID of the thread to modify. Only the `metadata` can be modified."
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2024-02-15-preview",
+              "description": "api version"
+            }
           }
         ],
         "requestBody": {
@@ -1206,6 +1283,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Modify a thread.": {
+            "$ref": "./examples/modify_thread.json"
+          }
         }
       },
       "delete": {
@@ -1223,6 +1305,16 @@
               "type": "string"
             },
             "description": "The ID of the thread to delete."
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2024-02-15-preview",
+              "description": "api version"
+            }
           }
         ],
         "responses": {
@@ -1235,6 +1327,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a thread.": {
+            "$ref": "./examples/delete_thread.json"
           }
         }
       }
@@ -1315,7 +1412,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1330,6 +1427,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all messages.": {
+            "$ref": "./examples/list_messages.json"
           }
         }
       },
@@ -1355,7 +1457,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1380,6 +1482,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a message.": {
+            "$ref": "./examples/create_message.json"
           }
         }
       }
@@ -1416,7 +1523,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1431,6 +1538,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a message.": {
+            "$ref": "./examples/get_message.json"
           }
         }
       },
@@ -1465,7 +1577,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1491,6 +1603,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Modify a message.": {
+            "$ref": "./examples/modify_message.json"
+          }
         }
       }
     },
@@ -1508,7 +1625,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1533,6 +1650,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a thread and run it.": {
+            "$ref": "./examples/create_thread_and_run.json"
           }
         }
       }
@@ -1613,7 +1735,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1628,6 +1750,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all runs.": {
+            "$ref": "./examples/list_runs.json"
           }
         }
       },
@@ -1653,7 +1780,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1678,6 +1805,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a run.": {
+            "$ref": "./examples/create_run.json"
           }
         }
       }
@@ -1714,7 +1846,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1729,6 +1861,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a run.": {
+            "$ref": "./examples/get_run.json"
           }
         }
       },
@@ -1763,7 +1900,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1788,6 +1925,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Modify a run.": {
+            "$ref": "./examples/modify_run.json"
           }
         }
       }
@@ -1824,7 +1966,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1849,6 +1991,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Submit tool outputs to a run.": {
+            "$ref": "./examples/submit_tool_outputs_to_run.json"
           }
         }
       }
@@ -1885,7 +2032,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -1900,6 +2047,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a run.": {
+            "$ref": "./examples/cancel_run.json"
           }
         }
       }
@@ -1989,7 +2141,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -2004,6 +2156,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all run steps.": {
+            "$ref": "./examples/list_run_steps.json"
           }
         }
       }
@@ -2049,7 +2206,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -2064,6 +2221,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a run step.": {
+            "$ref": "./examples/get_run_step.json"
           }
         }
       }
@@ -2144,7 +2306,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -2159,6 +2321,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all assistant files.": {
+            "$ref": "./examples/list_assistant_files.json"
           }
         }
       },
@@ -2184,7 +2351,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -2209,6 +2376,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create an assistant file.": {
+            "$ref": "./examples/create_assistant_file.json"
           }
         }
       }
@@ -2245,7 +2417,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -2260,6 +2432,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve an assistant file.": {
+            "$ref": "./examples/get_assistant_file.json"
           }
         }
       },
@@ -2294,7 +2471,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -2309,6 +2486,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an assistant file.": {
+            "$ref": "./examples/delete_assistant_file.json"
           }
         }
       }
@@ -2398,7 +2580,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -2413,6 +2595,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all message files.": {
+            "$ref": "./examples/list_message_files.json"
           }
         }
       }
@@ -2458,7 +2645,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-01-01-preview",
+              "example": "2024-02-15-preview",
               "description": "api version"
             }
           }
@@ -2473,6 +2660,11 @@
                 }
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a message file.": {
+            "$ref": "./examples/get_message_file.json"
           }
         }
       }
@@ -5791,18 +5983,18 @@
             "type": "string"
           },
           "object": {
-            "description": "The object type, which is always `assistant.run`.",
+            "description": "The object type, which is always `thread.run`.",
             "type": "string",
             "enum": [
-              "assistant.run"
+              "thread.run"
             ],
             "x-ms-enum": {
               "name": "runObjectType",
               "modelAsString": true,
               "values": [
                 {
-                  "value": "assistant.run",
-                  "description": "The run object type which is always assistant.run"
+                  "value": "thread.run",
+                  "description": "The run object type which is always thread.run"
                 }
               ]
             }
