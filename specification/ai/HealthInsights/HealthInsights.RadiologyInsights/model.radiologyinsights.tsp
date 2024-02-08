@@ -210,7 +210,7 @@ model FollowupRecommendationInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.FollowupRecommendation;
 
   @doc("Date and time are displayed when the procedure is recommended to be done at a specific point in time.")
-  effectiveDateTime?: Fhir.R4.fhirDateTime;
+  effectiveAt?: Fhir.R4.fhirDateTime;
 
   @doc("The period is shown if a specific period is mentioned, with a start and end date-time.")
   effectivePeriod?: Fhir.R4.Period;
@@ -309,7 +309,7 @@ model FollowupCommunicationInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.FollowupCommunication;
 
   @doc("Communication date and time.")
-  dateTime?: Array<utcDateTime>;
+  communicatedAt?: Array<utcDateTime>;
 
   @doc("Recipient of the communication.")
   recipient?: Array<MedicalProfessionalType>;

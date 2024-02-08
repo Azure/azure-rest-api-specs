@@ -1,6 +1,3 @@
-import "@typespec/http";
-import "@typespec/rest";
-
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
