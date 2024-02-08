@@ -94,9 +94,9 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: Property is CamelCase in aws
   - suppress: AvoidAdditionalProperties
-    reason: 1. Property represents user defined awsTags. 2. All swagger has awsTags. So, we cannot add from clause.
+    reason: 1. Property represents user defined awsTags. 2. All swagger has awsTags.So, we cannot add from clause.
   - suppress: PatchPropertiesCorrespondToPutProperties
-    reason: 1. Issue in LintDiff tool. 2. In patch we allow tags update only and in our TypeSpec we use ArmCustomPatchAsync{Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>}. So, tags property in patch body and the same is not present in the corresponding put body and causing the issue. In case of the put we are using TrackedResource type and same has tags. 3. All typespec has TagsUpdateModel. So, we cannot add from clause.
+    reason: 1. Issue in LintDiff tool. 2. In patch we allow tags update only and in our TypeSpec we use ArmCustomPatchAsync{Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>}. So, tags property in patch body and the same is not present in the corresponding put body and causing the issue. In case of the put we are using TrackedResource type and same has tags. 3. All typespec has TagsUpdateModel.So, we cannot add from clause.
   - suppress: EvenSegmentedPathForPutOperation
     reason: 1. Issue in LintDiff tool. 2. In TypeSpec we use @singleton (OpenAPI path ends with /default), we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
     from:
