@@ -39,3 +39,14 @@ enum ProvisioningState {
   @doc("The resource was accepted by the server.")
   Accepted,
 }
+
+@doc("The Microsoft.IoTOperationsDataProcessor versions.")
+enum Versions {
+  @doc("Microsoft IoT Operations Data Processor version 2023-10-04-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  Preview20230928: "2023-10-04-preview",
+
+  @doc("Microsoft IoT Operations Data Processor version 2024-02-01-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  Preview20240201: "2024-02-01-preview",
+}

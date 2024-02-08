@@ -479,31 +479,19 @@
       "type": "object",
       "description": "Data source that telemetry data required for experimentation will be retrieved from.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Resource id of the data source."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Controls whether data flow from the configured data source into the experimentation workspace is enabled."
+        "logAnalytics": {
+          "$ref": "#/definitions/LogAnalytics",
+          "description": "Log Analytics data source."
         }
-      },
-      "required": [
-        "resourceId",
-        "enabled"
-      ]
+      }
     },
     "DataSourceUpdate": {
       "type": "object",
       "description": "Data source that telemetry data required for experimentation will be retrieved from.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Resource id of the data source."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Controls whether data flow from the configured data source into the experimentation workspace is enabled."
+        "logAnalytics": {
+          "$ref": "#/definitions/LogAnalyticsUpdate",
+          "description": "Log Analytics data source."
         }
       }
     },
@@ -615,6 +603,71 @@
           "$ref": "#/definitions/DataSourceUpdate",
           "description": "Data source that telemetry data required for experimentation will be retrieved from."
         }
+      }
+    },
+    "LogAnalytics": {
+      "type": "object",
+      "description": "The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/LogAnalyticsWorkspaceResourceId",
+          "description": "Resource id of the Log Analytics workspace."
+        },
+        "storageAccountResourceId": {
+          "$ref": "#/definitions/StorageAccountResourceId",
+          "description": "Resource id of the storage account associated with the Log Analytics workspace."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Controls whether data flow from the configured Log Analytics workspace into the experimentation workspace is enabled."
+        }
+      },
+      "required": [
+        "resourceId",
+        "storageAccountResourceId",
+        "enabled"
+      ]
+    },
+    "LogAnalyticsUpdate": {
+      "type": "object",
+      "description": "The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/LogAnalyticsWorkspaceResourceId",
+          "description": "Resource id of the Log Analytics workspace."
+        },
+        "storageAccountResourceId": {
+          "$ref": "#/definitions/StorageAccountResourceId",
+          "description": "Resource id of the storage account associated with the Log Analytics workspace."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Controls whether data flow from the configured Log Analytics workspace into the experimentation workspace is enabled."
+        }
+      }
+    },
+    "LogAnalyticsWorkspaceResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.OperationalInsights/workspaces"
+          }
+        ]
+      }
+    },
+    "StorageAccountResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Storage/storageAccounts"
+          }
+        ]
       }
     },
     "Versions": {

@@ -48,10 +48,33 @@ model AccessPolicy {
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
 model DataSource {
-  @doc("Resource id of the data source.")
-  resourceId: string;
+  @doc("Log Analytics data source.")
+  logAnalytics?: LogAnalytics;
+}
 
-  @doc("Controls whether data flow from the configured data source into the experimentation workspace is enabled.")
+scalar LogAnalyticsWorkspaceResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.OperationalInsights/workspaces",
+    }
+  ]>;
+
+scalar StorageAccountResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts",
+    }
+  ]>;
+
+@doc("The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.")
+model LogAnalytics {
+  @doc("Resource id of the Log Analytics workspace.")
+  resourceId: LogAnalyticsWorkspaceResourceId;
+
+  @doc("Resource id of the storage account associated with the Log Analytics workspace.")
+  storageAccountResourceId: StorageAccountResourceId;
+
+  @doc("Controls whether data flow from the configured Log Analytics workspace into the experimentation workspace is enabled.")
   enabled: boolean;
 }
 
