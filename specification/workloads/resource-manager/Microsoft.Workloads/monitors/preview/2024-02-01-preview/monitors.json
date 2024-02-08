@@ -711,7 +711,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alertTemplates/{alertTemplateName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alertTemplates/{alertTemplateId}": {
       "get": {
         "tags": [
           "AlertTemplates"
@@ -741,7 +741,7 @@
             "$ref": "#/parameters/monitorNameParameter"
           },
           {
-            "$ref": "#/parameters/AlertTemplateNameParameter"
+            "$ref": "#/parameters/AlertTemplateIdParameter"
           }
         ],
         "responses": {
@@ -3139,13 +3139,13 @@
       "description": "Name of the SAP monitor alert resource.",
       "x-ms-parameter-location": "method"
     },
-    "AlertTemplateNameParameter": {
-      "name": "alertTemplateName",
+    "AlertTemplateIdParameter": {
+      "name": "alertTemplateId",
       "in": "path",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9-_]+$",
-      "description": "Name of the SAP monitor alert template resource.",
+      "description": "Id of the SAP monitor alert template resource.",
       "x-ms-parameter-location": "method"
     },
     "ProviderInstanceNameParameter": {
