@@ -58,6 +58,7 @@ model FindingOptions {
 }
 
 @doc("Response for the Radiology Insights request.")
+@resource("radiology-insights/jobs")
 model RadiologyInsightsJob {
   @doc("The request data for the operation.")
   @visibility("read", "create")

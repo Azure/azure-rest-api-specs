@@ -12,10 +12,9 @@ namespace AzureHealthInsights;
  */
 // @TypeSpec.Versioning.added(AzureHealthInsights.ApiVersion.v2024_04_01)
 @doc("Provides status details for long running operations.")
-@resource("radiology-insights/jobs")
 model HealthInsightsJobBase {
   @key("id")
-  @doc("The unique ID of the operation.")
+  @doc("The unique ID of the job.")
   @visibility("read")
   @maxLength(36)
   @minLength(3)
@@ -23,10 +22,10 @@ model HealthInsightsJobBase {
   @path
   id: string;
 
-  @doc("The status of the operation")
+  @doc("The status of the job.")
   @visibility("read")
   @lroStatus
-  status?: JobStatus;
+  status: JobStatus;
 
   @doc("The date and time when the processing job was created.")
   @visibility("read")
