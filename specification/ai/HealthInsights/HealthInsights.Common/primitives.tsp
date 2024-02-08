@@ -60,19 +60,28 @@ model HealthInsightsRetryAfterTrait {
     response: Foundations.RetryAfterHeader;
   };
 }
+@doc("Provides the 'x-ms-request-id' header to enable request correlation in responses.")
+@trait("RequestIdResponseHeader")
+model RequestIdResponseHeaderTrait {
+  @doc("An opaque, globally-unique, server-generated string identifier for the request.")
+  requestId: {
+    @traitLocation(TraitLocation.Response)
+    response: RequestIdResponseHeader;
+  };
+}
+
 alias ExpandQueryParams = QueryParametersTrait<
   {
-    @doc("The $expand query parameter.")
-    @query expand?: "request-data";
+    @doc("The expand query parameter.")
+    @query expand?: "jobData";
   }
 >;
 
-
-
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
-  SupportsClientRequestId &
+  NoClientRequestId &
   HealthInsightsRetryAfterTrait &
+  RequestIdResponseHeaderTrait &
   ExpandQueryParams;
 
 alias HealthInsightsOperations = ResourceOperations<

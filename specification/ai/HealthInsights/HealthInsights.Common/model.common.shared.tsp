@@ -1,5 +1,9 @@
-using Azure.Core;
+import "@typespec/http";
+import "@typespec/rest";
+
+using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.Core;
 
 namespace AzureHealthInsights;
 
@@ -12,11 +16,15 @@ namespace AzureHealthInsights;
 // @TypeSpec.Versioning.added(AzureHealthInsights.ApiVersion.v2024_04_01)
 @doc("Provides status details for long running operations.")
 @resource("radiology-insights/jobs")
-model HealthInsightsJobResourceBase {
+model HealthInsightsJobBase {
   @key("id")
   @doc("The unique ID of the operation.")
-  @visibility("read", "create")
-  id: Azure.Core.uuid;
+  @visibility("read")
+  @maxLength(36)
+  @minLength(3)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
+  @path
+  id: string;
 
   @doc("The status of the operation")
   @visibility("read")
@@ -25,15 +33,15 @@ model HealthInsightsJobResourceBase {
 
   @doc("The date and time when the processing job was created.")
   @visibility("read")
-  createdDateTime?: utcDateTime;
+  createdAt?: utcDateTime;
 
   @doc("The date and time when the processing job is set to expire.")
   @visibility("read")
-  expirationDateTime?: utcDateTime;
+  expiresAt?: utcDateTime;
 
   @doc("The date and time when the processing job was last updated.")
   @visibility("read")
-  lastUpdateDateTime?: utcDateTime;
+  updatedAt?: utcDateTime;
 
   @doc("Error object that describes the error when status is \"Failed\".")
   @visibility("read")

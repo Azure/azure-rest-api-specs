@@ -2,12 +2,11 @@
   "operationId": "RadiologyInsights_CreateJob",
   "title": "Creates a Radiology Insights job with the given request body.",
   "parameters": {
-    "endpoint": "{endpoint}",
+    "endpoint": "{endpoint}/health-insights/radiology-insights/jobs/{id}?api-version={api-version}",
     "api-version": "2024-04-01",
-    "id": "ad28aef5-87f3-4d2d-97eb-5cdeb4519d12",
+    "id": "ad28aef5-87f3-4d2d-97eb-5cdeb4519d12", 
     "resource": {
-      "id": "ad28aef5-87f3-4d2d-97eb-5cdeb4519d12",
-      "requestData": {
+      "jobData": {
         "configuration": {
           "inferenceOptions": {
             "followupRecommendationOptions": {
@@ -81,7 +80,7 @@
                   }
                 ],
                 "specialtyType": "radiology",
-                "createdDateTime": "2023-12-21T00:00:00",
+                "createdAt": "2023-12-21T00:00:00",
                 "administrativeMetadata": {
                   "orderedProcedures": [
                     {
@@ -113,6 +112,7 @@
   "responses": {
     "200": {
       "headers": {
+        "x-ms-request-id": "c7e9a8d7-6b5f-4e3d-9a2c-1f8b0e2c3f4a",
         "Operation-Location": "{endpoint}/health-insights/radiology-insights/jobs/{id}?api-version=2024-04-01",
         "Retry-After": "1"
       },
@@ -123,6 +123,7 @@
     },
     "201": {
       "headers": {
+        "x-ms-request-id": "c7e9a8d7-6b5f-4e3d-9a2c-1f8b0e2c3f4a",
         "Operation-Location": "{endpoint}/health-insights/radiology-insights/jobs/{id}?api-version=2024-04-01",
         "Retry-After": "1"
       },

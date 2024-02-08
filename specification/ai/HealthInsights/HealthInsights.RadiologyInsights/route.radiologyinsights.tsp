@@ -16,11 +16,11 @@ interface RadiologyInsights {
   @tag("RadiologyInsights")
   @doc("Gets the status and details of the Radiology Insights job.")
   @get
-  getJob is HealthInsightsOperations.ResourceRead<RadiologyInsightsResource>;
+  getJob is HealthInsightsOperations.ResourceRead<RadiologyInsightsJob>;
 
   @summary("Create Radiology Insights job")
   @tag("RadiologyInsights")
   @doc("Creates a Radiology Insights job with the given request body.")
   @pollingOperation(RadiologyInsights.getJob)
-  createJob is HealthInsightsOperations.LongRunningResourceCreateOrReplace<RadiologyInsightsResource>;
+  createJob is HealthInsightsOperations.LongRunningResourceCreateOrReplace<RadiologyInsightsJob>;
 }

@@ -111,7 +111,7 @@ model PatientDocument {
   language?: string;
 
   @doc("The date and time when the document was created.")
-  createdDateTime?: utcDateTime;
+  createdAt?: utcDateTime;
 
   @doc("Document author(s)")
   authors?: Array<DocumentAuthor>;

@@ -70,19 +70,18 @@
             "description": "The unique ID of the operation.",
             "required": true,
             "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
           {
             "name": "expand",
             "in": "query",
-            "description": "The $expand query parameter.",
+            "description": "The expand query parameter.",
             "required": false,
             "type": "string",
             "enum": [
-              "request-data"
+              "jobData"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -93,18 +92,18 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RadiologyInsightsResource"
+              "$ref": "#/definitions/RadiologyInsightsJob"
             },
             "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -144,19 +143,18 @@
             "description": "The unique ID of the operation.",
             "required": true,
             "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
           {
             "name": "expand",
             "in": "query",
-            "description": "The $expand query parameter.",
+            "description": "The expand query parameter.",
             "required": false,
             "type": "string",
             "enum": [
-              "request-data"
+              "jobData"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -168,7 +166,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RadiologyInsightsResource"
+              "$ref": "#/definitions/RadiologyInsightsJobCreateOrUpdate"
             }
           }
         ],
@@ -176,18 +174,18 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RadiologyInsightsResource"
+              "$ref": "#/definitions/RadiologyInsightsJob"
             },
             "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "Operation-Location": {
                 "type": "string",
@@ -199,18 +197,18 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/RadiologyInsightsResource"
+              "$ref": "#/definitions/RadiologyInsightsJob"
             },
             "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "Operation-Location": {
                 "type": "string",
@@ -312,11 +310,6 @@
           "description": "Inner error."
         }
       }
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
     },
     "ClinicalDocumentType": {
       "type": "string",
@@ -2430,7 +2423,7 @@
           "type": "string",
           "description": "A 2 letter ISO 639-1 representation of the language of the document."
         },
-        "createdDateTime": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "The date and time when the document was created."
@@ -2725,6 +2718,78 @@
         ]
       }
     },
+    "RadiologyInsightsJob": {
+      "type": "object",
+      "description": "Response for the Radiology Insights request.",
+      "properties": {
+        "jobData": {
+          "$ref": "#/definitions/RadiologyInsightsData",
+          "description": "The request data for the operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "result": {
+          "$ref": "#/definitions/RadiologyInsightsInferenceResult",
+          "description": "The result of the operation.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job was created.",
+          "readOnly": true
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job is set to expire.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job was last updated.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "RadiologyInsightsJobCreateOrUpdate": {
+      "type": "object",
+      "description": "Response for the Radiology Insights request.",
+      "properties": {
+        "jobData": {
+          "$ref": "#/definitions/RadiologyInsightsData",
+          "description": "The request data for the operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
     "RadiologyInsightsModelConfiguration": {
       "type": "object",
       "description": "Configuration affecting the Radiology Insights model's inference.",
@@ -2776,64 +2841,6 @@
       "required": [
         "patientId",
         "inferences"
-      ]
-    },
-    "RadiologyInsightsResource": {
-      "type": "object",
-      "description": "Response for the Radiology Insights request.",
-      "properties": {
-        "requestData": {
-          "$ref": "#/definitions/RadiologyInsightsData",
-          "description": "The request data for the operation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "result": {
-          "$ref": "#/definitions/RadiologyInsightsInferenceResult",
-          "description": "The result of the operation.",
-          "readOnly": true
-        },
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique ID of the operation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The status of the operation",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the processing job was created.",
-          "readOnly": true
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the processing job is set to expire.",
-          "readOnly": true
-        },
-        "lastUpdateDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the processing job was last updated.",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error object that describes the error when status is \"Failed\".",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id"
       ]
     },
     "RadiologyProcedureInference": {
@@ -2997,16 +3004,6 @@
     }
   },
   "parameters": {
-    "Azure.Core.ClientRequestIdHeader": {
-      "name": "x-ms-client-request-id",
-      "in": "header",
-      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-      "required": false,
-      "type": "string",
-      "format": "uuid",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "clientRequestId"
-    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",

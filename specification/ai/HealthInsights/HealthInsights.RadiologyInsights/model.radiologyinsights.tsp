@@ -58,16 +58,16 @@ model FindingOptions {
 }
 
 @doc("Response for the Radiology Insights request.")
-model RadiologyInsightsResource {
+model RadiologyInsightsJob {
   @doc("The request data for the operation.")
   @visibility("read", "create")
-  requestData?: RadiologyInsightsData;
+  jobData?: RadiologyInsightsData;
 
   @doc("The result of the operation.")
   @visibility("read")
   result?: RadiologyInsightsInferenceResult;
 
-  ...HealthInsightsJobResourceBase;
+  ...HealthInsightsJobBase;
 }
 
 @doc("The inference results for the Radiology Insights request. If field 'status' has value 'succeeded', then field 'result' will contain an instance of RadiologyInsightsInferenceResult.")
