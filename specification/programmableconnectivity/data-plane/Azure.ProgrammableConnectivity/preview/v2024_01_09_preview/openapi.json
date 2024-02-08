@@ -165,8 +165,8 @@
     },
     "/number-verification/number:retrieve": {
       "post": {
-        "operationId": "NumberVerification_Retrieve",
-        "description": "Retrieves the phone number (MSISDN) associated with a device.",
+        "operationId": "NumberVerification_RetrieveWithoutCode",
+        "description": "Retrieves the phone number (MSISDN) associated with a device. As part of the frontend authorisation flow, the device is redirected to the operator network to authenticate directly.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -182,26 +182,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkIdentifier"
+              "$ref": "#/definitions/NumberRetrievalContent"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "302": {
+            "description": "Redirection",
             "schema": {
-              "$ref": "#/definitions/NumberRetrievalResult"
+              "$ref": "#/definitions/EmptyResponse"
             },
             "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              "location": {
+                "type": "string"
               },
               "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
             }
           },
@@ -211,18 +214,13 @@
               "$ref": "#/definitions/ApcErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "NumberVerification_Retrieve": {
-            "$ref": "./examples/NumberVerification_Retrieve_MaximumSet_Gen.json"
-          }
         }
       }
     },
     "/number-verification/number:verify": {
       "post": {
-        "operationId": "NumberVerification_Verify",
-        "description": "Verifies the phone number (MSISDN) associated with a device.",
+        "operationId": "NumberVerification_VerifyWithoutCode",
+        "description": "Verifies the phone number (MSISDN) associated with a device. As part of the frontend authorisation flow, the device is redirected to the operator network to authenticate directly.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -243,21 +241,24 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "302": {
+            "description": "Redirection",
             "schema": {
-              "$ref": "#/definitions/NumberVerificationResult"
+              "$ref": "#/definitions/EmptyResponse"
             },
             "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              "location": {
+                "type": "string"
               },
               "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
             }
           },
@@ -266,11 +267,6 @@
             "schema": {
               "$ref": "#/definitions/ApcErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "NumberVerification_Verify": {
-            "$ref": "./examples/NumberVerification_Verify_MaximumSet_Gen.json"
           }
         }
       }
@@ -383,6 +379,110 @@
         "x-ms-examples": {
           "SimSwap_Verify": {
             "$ref": "./examples/SimSwap_Verify_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/number-verification/number:retrieve?_overload=retrieveWithCode": {
+      "post": {
+        "operationId": "NumberVerification_RetrieveWithCode",
+        "description": "Retrieves the phone number (MSISDN) associated with a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ApcGatewayIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NumberRetrievalContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NumberRetrievalResult"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApcErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/number-verification/number:verify?_overload=verifyWithCode": {
+      "post": {
+        "operationId": "NumberVerification_VerifyWithCode",
+        "description": "Verifies the phone number (MSISDN) associated with a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ApcGatewayIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NumberVerificationContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NumberVerificationResult"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApcErrorResponse"
+            }
           }
         }
       }
@@ -602,6 +702,16 @@
         "network"
       ]
     },
+    "EmptyResponse": {
+      "type": "object",
+      "description": "Empty model to return as part of 302 redirect",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Optional content"
+        }
+      }
+    },
     "Ipv4Address": {
       "type": "object",
       "description": "IPv4 device indicator",
@@ -740,6 +850,23 @@
         }
       }
     },
+    "NumberRetrievalContent": {
+      "type": "object",
+      "description": "Request to retrieve number of device",
+      "properties": {
+        "networkIdentifier": {
+          "$ref": "#/definitions/NetworkIdentifier",
+          "description": "Identifier for the network to query for this device."
+        },
+        "apcCode": {
+          "type": "string",
+          "description": "The code provided by APC is exchange for the operator code."
+        }
+      },
+      "required": [
+        "networkIdentifier"
+      ]
+    },
     "NumberRetrievalResult": {
       "type": "object",
       "description": "Response with number of device",
@@ -770,6 +897,10 @@
         "hashedPhoneNumber": {
           "type": "string",
           "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
+        },
+        "apcCode": {
+          "type": "string",
+          "description": "The code provided by APC is exchange for the operator code."
         }
       },
       "required": [

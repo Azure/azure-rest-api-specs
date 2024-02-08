@@ -4,6 +4,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace Azure.ProgrammableConnectivity;
 
@@ -12,10 +13,9 @@ namespace Azure.ProgrammableConnectivity;
 @doc("""
   Number operations include Frontend Authentication.
 
-  This means that each operation has 2 responses.
-
-  The first response is a 302 redirect, which redirects the device to the device's Network
-  to authenticate directly. The Network responds with another 302 redirect and a token.
+  Users must first make a call to triggerFrontendAuthentication, which redirects the device
+  to the device's Network to authenticate directly. The Network responds with a token.
+  
   This redirects the device to APC, where the token is used to verify / retrieve
   the device number. The second response is a 200 containing the result of the query.
 
@@ -24,37 +24,45 @@ namespace Azure.ProgrammableConnectivity;
   split into two operations, one for the redirect, and one for the result.
 """)
 interface NumberVerification {
-  @doc("Verifies the phone number (MSISDN) associated with a device. As part of the frontend authorisation flow, the device is redirected to the oprator network to authenticate directly.")
-  verifyRedirect is Operations.ResourceAction<
+  @doc("Verifies the phone number (MSISDN) associated with a device. As part of the frontend authorisation flow, the device is redirected to the operator network to authenticate directly.")
+  @sharedRoute
+  @action("verify")
+  verifyWithoutCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
     NumberVerificationContent,
-    TypeSpec.Http.Response<302> & NumberVerificationRedirectResult,
-    ResponseHeadersTrait<{
-      @header Location: string;
-    }>
+    TypeSpec.Http.Response<302> & EmptyResponse,
+    TraitOverride<ResponseHeadersTrait<{
+      @header location: string;
+    } & RequestIdResponseHeader>>
   >;
 
   @doc("Verifies the phone number (MSISDN) associated with a device.")
-  verify is Operations.ResourceAction<
+  @sharedRoute
+  @action("verify")
+  verifyWithCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
     NumberVerificationContent,
     NumberVerificationResult
   >;
 
-  @doc("Retrieves the phone number (MSISDN) associated with a device. As part of the frontend authorisation flow, the device is redirected to the oprator network to authenticate directly.")
-  retrieveRedirect is Operations.ResourceAction<
+  @doc("Retrieves the phone number (MSISDN) associated with a device. As part of the frontend authorisation flow, the device is redirected to the operator network to authenticate directly.")
+  @sharedRoute
+  @action("retrieve")
+  retrieveWithoutCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
-    NumberRetrieveContent,
-    TypeSpec.Http.Response<302> & NumberRerieveRedirectResult,
-    ResponseHeadersTrait<{
-      @header Location: string;
-    }>
+    NumberRetrievalContent,
+    TypeSpec.Http.Response<302> & EmptyResponse,
+    TraitOverride<ResponseHeadersTrait<{
+      @header location: string;
+    } & RequestIdResponseHeader>>
   >;
-
+  
   @doc("Retrieves the phone number (MSISDN) associated with a device.")
-  retrieve is Operations.ResourceAction<
+  @sharedRoute
+  @action("retrieve")
+  retrieveWithCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
-    NumberRetrieveContent,
+    NumberRetrievalContent,
     NumberRetrievalResult
   >;
 }
@@ -78,30 +86,33 @@ model NumberVerificationContent {
   networkIdentifier: NetworkIdentifier;
 
   ...NumberDevice;
-  ...FrontendAuthFieldsModel;
+
+  @doc("The code provided by APC is exchange for the operator code.")
+  apcCode?: string;
 }
 
 @doc("Request to retrieve number of device")
-model NumberRetrieveContent {
+model NumberRetrievalContent {
   @doc("Identifier for the network to query for this device.")
-  networkIdentifier?: NetworkIdentifier;
+  networkIdentifier: NetworkIdentifier;
 
-  ...FrontendAuthFieldsModel;
+  @doc("The code provided by APC is exchange for the operator code.")
+  apcCode?: string;
 }
 
 /// Response models
+
+@doc("Empty model to return as part of 302 redirect")
+model EmptyResponse {
+  @doc("Optional content")
+  content?: string;
+}
 
 @doc("Response verifying number of device")
 model NumberVerificationResult {
   @doc("True if number if the phone number matches the device, False otherwise")
   verificationResult: boolean;
 }
-
-@doc("Number verification result with a 302 redirect to the operators network.")
-model NumberVerificationRedirectResult {}
-
-@doc("Number retrieve response with a 302 redirect to the operators network.")
-model NumberRerieveRedirectResult {}
 
 @doc("Response with number of device")
 model NumberRetrievalResult {

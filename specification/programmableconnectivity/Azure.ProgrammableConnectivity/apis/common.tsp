@@ -14,6 +14,8 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   SupportsClientRequestId &
   RequestHeadersTrait<ApcGatewayIdHeader> &
+  // Note that ResponseHeadersTrait is overridden in number operations
+  // If you modify this, you must also modify it in the number operations.
   ResponseHeadersTrait<RequestIdResponseHeader>;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ApcErrorResponse>;
@@ -50,18 +52,6 @@ model PhoneNumberModel {
 model NetworkAccessIdentifierModel {
   @doc("External identifier or network access identifier of the device")
   networkAccessIdentifier?: string;
-}
-
-@doc("Fields for API's that require the frontend authorisation flow.")
-model FrontendAuthFieldsModel {
-  @doc("The code provided by the network operator as part of the frontend authorisation flow.")
-  operatorCode?: string;
-
-  @doc("The code provided by APC is exchange for the operator code.")
-  apcCode?: string;
-
-  @doc("The redirection URI of the developer.")
-  redirectUri?: string;
 }
 
 @error
