@@ -72,7 +72,9 @@ model RequestIdResponseHeaderTrait {
 
 alias ExpandQueryParams = QueryParametersTrait<{
   @doc("A comma separated list of related properties to be included in line with the job.")
-  @query({format: "csv"})
+  @query({
+    format: "csv",
+  })
   expand?: ExpandQueryParamsType;
 }>;
 

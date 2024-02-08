@@ -1,5 +1,3 @@
-// import "./route.patienttimeline.tsp";
-
 // import "@typespec/rest";
 // import "@typespec/http";
 // import "../HealthInsights.OpenAPI/service.tsp";
@@ -85,4 +83,5 @@
 // @@projectedName(Fhir.R4.ResearchStudy, "csharp", "Fhir_R4_ResearchStudy");
 // @@projectedName(AzureHealthInsights.PatientInfoSex, "client", "PatientSex");
 // import "@azure-tools/typespec-client-generator-core";
+// import "./route.patienttimeline.tsp";
 // @@projectedName(AzureHealthInsights.PatientInfo, "client", "PatientDetails");
