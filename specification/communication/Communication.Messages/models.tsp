@@ -127,7 +127,8 @@ model TemplateNotificationContent extends NotificationContent {
 
 @doc("The template object used to create templates.")
 model MessageTemplate {
-  @doc("Name of the template.")
+  @doc("Template binding reference name")
+  @projectedName("java", "refValue")
   name: string;
 
   @doc("The template's language, in the ISO 639 format, consist of a two-letter language code followed by an optional two-letter country code, e.g., 'en' or 'en_US'.")
