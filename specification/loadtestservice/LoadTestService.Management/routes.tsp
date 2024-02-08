@@ -22,15 +22,19 @@ interface LoadTests {
   listBySubscription is ArmListBySubscription<LoadTestResource>;
   listByResourceGroup is ArmResourceListByParent<LoadTestResource>;
   get is ArmResourceRead<LoadTestResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsyncCustom<LoadTestResource>;
-  update is ArmCustomPatchAsyncCustom<
+  #suppress "@azure-tools/typespec-azure-resource-manager/retry-after" "Retry-After header is not in already published"
+  createOrUpdate is CustomOperations.ArmResourceCreateOrUpdateAsyncCustom<LoadTestResource>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/retry-after" "Retry-After header is not in already published"
+  update is CustomOperations.ArmCustomPatchAsyncCustom<
     LoadTestResource,
     LoadTestResourcePatchRequestBody
   >;
-  delete is ArmResourceDeleteAsyncCustom<LoadTestResource>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/retry-after" "Retry-After header is not in already published"
+  delete is CustomOperations.ArmResourceDeleteAsyncCustom<LoadTestResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationId in already published GA spec is different from the auto generated one"
-  outboundNetworkDependenciesEndpoint is OutboundNetworkDependenciesEndpoint<OutboundEnvironmentEndpointCollection>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Operation is GET but endpoint is similar to action on resource"
+  outboundNetworkDependenciesEndpoint is CustomOperations.OutboundNetworkDependenciesEndpoint<OutboundEnvironmentEndpointCollection>;
 }
 
 @armResourceOperations
@@ -42,7 +46,7 @@ interface Quotas {
   list is ArmListBySubscription<QuotaResource>;
 
   @doc("Check Quota Availability on quota bucket per region per subscription.")
-  checkAvailability is ArmResourceActionSyncCustom<
+  checkAvailability is CustomOperations.ArmResourceActionSyncCustom<
     QuotaResource,
     QuotaBucketRequest,
     CheckQuotaAvailabilityResponse
