@@ -1373,16 +1373,19 @@
     },
     "HealthCheckRetryTimeout": {
       "type": "string",
+      "x-ms-format": "duration-constant",
       "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
       "default": "PT0H10M0S"
     },
     "HealthCheckStableDuration": {
       "type": "string",
+      "x-ms-format": "duration-constant",
       "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
       "default": "PT0H2M0S"
     },
     "HealthCheckWaitDuration": {
       "type": "string",
+      "x-ms-format": "duration-constant",
       "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
       "default": "0"
     },
@@ -2134,6 +2137,7 @@
         },
         "instanceCloseDelayDuration": {
           "type": "string",
+          "x-ms-format": "duration-constant",
           "description": "Delay duration for RequestDrain feature to ensures that the endpoint advertised by the stateless instance is removed before the delay starts prior to closing the instance. This delay enables existing requests to drain gracefully before the instance actually goes down (https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-application-upgrade-advanced#avoid-connection-drops-during-stateless-service-planned-downtime-preview). It is represented in ISO 8601 format (hh:mm:ss.s)."
         }
       }
@@ -2196,11 +2200,13 @@
     },
     "UpgradeDomainTimeout": {
       "type": "string",
+      "x-ms-format": "duration-constant",
       "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
       "default": "P10675199DT02H48M05.4775807S"
     },
     "UpgradeTimeout": {
       "type": "string",
+      "x-ms-format": "duration-constant",
       "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
       "default": "P10675199DT02H48M05.4775807S"
     },
