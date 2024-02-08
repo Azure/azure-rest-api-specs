@@ -661,12 +661,16 @@ model AcsRouterQueueDetails {
 model AcsRouterCommunicationError {
   /** Router Communication Error Code */
   code?: string;
+
   /** Router Communication Error Message */
   message?: string;
+
   /** Router Communication Error Target */
   target?: string;
+
   /** Router Communication Inner Error */
   innererror?: AcsRouterCommunicationError;
+
   /** List of Router Communication Errors */
   details?: AcsRouterCommunicationError[];
 }
