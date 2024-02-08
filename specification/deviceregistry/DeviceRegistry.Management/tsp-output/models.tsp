@@ -6,10 +6,29 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
+/**
+ * Returns list of operations.
+ */
 interface Operations extends Azure.ResourceManager.Operations {}
+
+interface OperationStatusOperations{
+  /**
+   * Returns the current status of an async operation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/operationStatuses/{operationId}")
+  @operationId("OperationStatus_Get")
+  @get
+  list(
+    ...LocationBaseParameters,
+    ...OperationIdParameter
+  ):ArmResponse<OperationListResult>
+  | ErrorResponse;
+}
 
 /**
  * An indication of how the data point should be mapped to OpenTelemetry.

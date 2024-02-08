@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Asset.tsp";
 import "./AssetEndpointProfile.tsp";
-import "./routes.tsp";
+// import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

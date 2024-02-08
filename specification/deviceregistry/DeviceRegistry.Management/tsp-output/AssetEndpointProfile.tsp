@@ -43,7 +43,24 @@ interface AssetEndpointProfiles {
   /**
    * Create a new Asset Endpoint Profile or replace an existing Asset Endpoint Profile.
    */
-  createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
+  @armResourceCreateOrUpdate(AssetEndpointProfile)
+  @extension("x-ms-long-running-operation",true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @put
+  createOrReplace(
+    ...ResourceInstanceParameters<AssetEndpointProfile>,
+    @doc("Resource create or replace parameters.")
+    @body
+    resource: AssetEndpointProfile
+  ): ArmResponse<AssetEndpointProfile>
+  | ArmResourceCreatedSyncResponse<AssetEndpointProfile>
+  | ErrorResponse;
+  // createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
 
   /**
    * Update specific Asset Endpoint Profile properties.

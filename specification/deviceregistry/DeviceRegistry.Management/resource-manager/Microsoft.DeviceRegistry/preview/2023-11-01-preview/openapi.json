@@ -161,99 +161,38 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/operationStatuses/{operationId}": {
       "get": {
-        "operationId": "OperationStatusOperations_Get",
+        "operationId": "OperationStatus_Get",
         "description": "Returns the current status of an async operation.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The name of Azure region.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "description": "The ID of an ongoing async operation.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
-              "type": "object",
-              "description": "Standard ARM operation status response",
-              "properties": {
-                "status": {
-                  "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-                  "description": "The operation status"
-                },
-                "id": {
-                  "$ref": "#/definitions/Azure.Core.uuid",
-                  "description": "The unique identifier for the operationStatus resource"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "The name of the  operationStatus resource",
-                  "readOnly": true
-                },
-                "startTime": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "Operation start time",
-                  "readOnly": true
-                },
-                "endTime": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "Operation complete time",
-                  "readOnly": true
-                },
-                "percentComplete": {
-                  "type": "number",
-                  "format": "double",
-                  "description": "The progress made toward completing the operation",
-                  "readOnly": true
-                },
-                "error": {
-                  "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
-                  "description": "Errors that occurred if the operation ended with Canceled or Failed status",
-                  "readOnly": true
-                }
-              },
-              "required": [
-                "status",
-                "id"
-              ]
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -386,7 +325,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AssetEndpointProfile' update operation succeeded",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssetEndpointProfile"
             }
@@ -395,13 +334,6 @@
             "description": "Resource 'AssetEndpointProfile' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/AssetEndpointProfile"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -1382,103 +1314,6 @@
         }
       }
     },
-    "Azure.Core.Foundations.Error": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "description": "A response containing error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Azure.Core.Foundations.InnerError": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
-        }
-      }
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "DataPointsObservabilityMode": {
       "type": "string",
       "description": "An indication of how the data point should be mapped to OpenTelemetry.",
@@ -1633,16 +1468,5 @@
       }
     }
   },
-  "parameters": {
-    "Azure.Core.Foundations.ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The API version to use for this operation.",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "apiVersion"
-    }
-  }
+  "parameters": {}
 }
