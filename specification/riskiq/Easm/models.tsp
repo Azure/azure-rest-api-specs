@@ -1404,6 +1404,7 @@ enum DataConnectionContent {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "DiscoverySourceKind")
 @doc("The kind of disco source.")
 enum DiscoSourceKind {
   as,
