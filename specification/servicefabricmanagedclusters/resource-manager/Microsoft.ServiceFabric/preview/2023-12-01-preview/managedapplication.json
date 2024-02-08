@@ -1823,6 +1823,7 @@
     },
     "HealthCheckRetryTimeout": {
       "type": "string",
+      "x-ms-format": "duration-constant",
       "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
     },
     "HealthCheckStableDuration": {
@@ -2752,18 +2753,22 @@
         },
         "replicaRestartWaitDuration": {
           "type": "string",
+          "x-ms-format": "duration-constant",
           "description": "The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format \"hh:mm:ss\"."
         },
         "quorumLossWaitDuration": {
           "type": "string",
+          "x-ms-format": "duration-constant",
           "description": "The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format \"hh:mm:ss\"."
         },
         "standByReplicaKeepDuration": {
           "type": "string",
+          "x-ms-format": "duration-constant",
           "description": "The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format \"hh:mm:ss\"."
         },
         "servicePlacementTimeLimit": {
           "type": "string",
+          "x-ms-format": "duration-constant",
           "description": "The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format \"hh:mm:ss\"."
         }
       }
