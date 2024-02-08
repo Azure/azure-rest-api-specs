@@ -19,7 +19,7 @@ model SqlDbElasticPoolTargetProperties extends TargetProperties {
   @doc("The ARM ResourceId of an Azure SQL DB elastic pool target.")
   sqlEpResourceId: ResourceIdentifier<[
     {
-      type: "Microsoft.Sql/servers/elasticpools";
+      type: "Microsoft.Sql/servers/elasticPools";
     }
   ]>;
 
