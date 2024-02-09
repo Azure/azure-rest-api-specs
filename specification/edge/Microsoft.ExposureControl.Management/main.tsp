@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of Edge RP in edge folder."
 @armProviderNamespace
 @service({
   title: "ExposureControlService",
