@@ -38,6 +38,10 @@ enum Versions {
   @doc("The 2023-11-15 stable version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_11_15: "2023-11-15",
+
+  @doc("The 2024-04-01-preview version.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2024_04_01_preview: "2024-04-01-preview",
 }
 
 @doc("The data lake house resource")
@@ -663,21 +667,44 @@ model VirtualNetworkRule {
   @doc("Resource ID of a subnet")
   id: string;
 
+  @added(Versions.v2022_11_15_preview)
+  @removed(Versions.v2024_04_01_preview)
+  @renamedFrom(Versions.v2024_04_01_preview, "action")
   @doc("The action of virtual network rule.")
-  action?: string;
+  oldAction?: string;
 
+  @added(Versions.v2024_04_01_preview)
+  @doc("The action of virtual network rule.")
+  action?: DefaultAction = DefaultAction.Allow;
+
+  @removed(Versions.v2024_04_01_preview)
   @doc("Gets the state of virtual network rule.")
   state?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Suppressing casing style warning for iprules for now."
 @doc("IP rule with specific IP or IP range in CIDR format.")
+@added(Versions.v2022_11_15_preview)
 model IPRules {
+  @added(Versions.v2022_11_15_preview)
+  @removed(Versions.v2024_04_01_preview)
+  @renamedFrom(Versions.v2024_04_01_preview, "value")
   @doc("IP Rules Value")
-  value?: string;
+  oldValue?: string;
 
+  @added(Versions.v2024_04_01_preview)
+  @doc("IP Rules Value")
+  value: string;
+
+  @added(Versions.v2022_11_15_preview)
+  @removed(Versions.v2024_04_01_preview)
+  @renamedFrom(Versions.v2024_04_01_preview, "action")
   @doc("The action of virtual network rule.")
-  action: string;
+  oldAction: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("The action of IP rule.")
+  action?: DefaultAction = DefaultAction.Allow;
 }
 
 @doc("Resource Access Rules.")
@@ -739,12 +766,29 @@ model NetworkAcls {
 @added(Versions.v2023_11_15)
 model DataProductNetworkAcls {
   @doc("Virtual Network Rule")
-  virtualNetworkRule: VirtualNetworkRule[];
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
+  @renamedFrom(Versions.v2024_04_01_preview, "virtualNetworkRule")
+  oldVirtualNetworkRule: VirtualNetworkRule[];
 
+  @doc("Virtual Network Rule")
+  @added(Versions.v2024_04_01_preview)
+  virtualNetworkRule?: VirtualNetworkRule[];
+
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
+  @renamedFrom(Versions.v2024_04_01_preview, "ipRules")
   @doc("IP rule with specific IP or IP range in CIDR format.")
   @extension("x-ms-identifiers", [])
-  ipRules: IPRules[];
+  oldIpRules: IPRules[];
 
+  @added(Versions.v2024_04_01_preview)
+  @doc("IP rule with specific IP or IP range in CIDR format.")
+  @extension("x-ms-identifiers", [])
+  ipRules?: IPRules[];
+
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("The list of query ips in the format of CIDR allowed to connect to query/visualization endpoint.")
   allowedQueryIpRangeList: string[];
 
@@ -876,12 +920,29 @@ model DataProductProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Data product publisher name.")
   @visibility("create", "read")
+  @renamedFrom(Versions.v2024_04_01_preview, "publisher")
+  oldPublisher: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Data product publisher name.")
+  @visibility("read")
   publisher: string;
 
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Product name of data product.")
   @visibility("create", "read")
+  @renamedFrom(Versions.v2024_04_01_preview, "product")
+  oldProduct: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Product name of data product.")
+  @visibility("read")
+  @renamedFrom(Versions.v2024_04_01_preview, "product")
   product: string;
 
   @doc("Major version of data product.")
@@ -898,16 +959,36 @@ model DataProductProperties {
 
   @doc("Purview account url for data product to connect to.")
   @visibility("create", "update", "read")
-  purviewAccount?: string;
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
+  @renamedFrom(Versions.v2024_04_01_preview, "purviewAccount")
+  oldPurviewAccount?: string;
 
   @doc("Purview collection url for data product to connect to.")
   @visibility("create", "update", "read")
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
+  @renamedFrom(Versions.v2024_04_01_preview, "purviewCollection")
+  oldPurviewCollection?: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Purview account url for data product to connect to.")
+  @visibility("create", "read")
+  purviewAccount?: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Purview collection url for data product to connect to.")
+  @visibility("create", "read")
   purviewCollection?: string;
 
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable private link for data product resource.")
   @visibility("create", "update", "read")
   privateLinksEnabled?: ControlState;
 
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable public access of data product resource.")
   @visibility("create", "read")
   publicNetworkAccess?: ControlState;
@@ -920,6 +1001,8 @@ model DataProductProperties {
   @visibility("create", "read")
   customerEncryptionKey?: EncryptionKeyDetails;
 
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Network rule set for data product.")
   @visibility("create", "read")
   networkacls?: DataProductNetworkAcls;
@@ -928,16 +1011,62 @@ model DataProductProperties {
   @visibility("create")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
+  @added(Versions.v2024_04_01_preview)
+  @doc("Flag to enable or disable public access to the ingestion endpoint of data product resource.")
+  @visibility("create", "update", "read")
+  ingestionPublicNetworkAccess?: ControlState = ControlState.Enabled;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Network rule set for ingestion endpoint of data product.")
+  @visibility("create", "update", "read")
+  ingestionNetworkAcls?: DataProductNetworkAcls;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Flag to enable or disable public access to the insights/fileaccess endpoint of data product resource.")
+  @visibility("create", "update", "read")
+  insightsStoragePublicNetworkAccess?: ControlState = ControlState.Enabled;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Network rule set for insights/fileaccess endpoint of data product.")
+  @visibility("create", "update", "read")
+  insightsStorageNetworkAcls?: DataProductNetworkAcls;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Flag to enable or disable public access to the query endpoint of data product resource.")
+  @visibility("create", "update", "read")
+  insightsQueryNetworkAccess?: ControlState = ControlState.Enabled;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("The list of query IPAddress in the format of Public IPv4 IPAddress or CIDR allowed to connect to query/visualization endpoint.")
+  @visibility("create", "update", "read")
+  insightsQueryAllowedQueryIpRangeList?: string[];
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Flag to enable or disable copilot access for a data product resource.")
+  @visibility("create", "read")
+  copilotAccess?: ControlState = ControlState.Disabled;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Option to select between dev or prod SKU for query cluster.")
+  @visibility("create", "read")
+  workload: WorkloadType = WorkloadType.Production;
+
+  @added(Versions.v2023_11_15)
   @doc("List of available minor versions of the data product resource.")
   @visibility("read")
+  @removed(Versions.v2024_04_01_preview)
   availableMinorVersions?: string[];
 
+  @added(Versions.v2023_11_15)
   @doc("Current configured minor version of the data product resource.")
   @visibility("read", "update")
+  @removed(Versions.v2024_04_01_preview)
   currentMinorVersion?: string;
 
+  @added(Versions.v2023_11_15)
   @doc("Documentation link for the data product based on definition file.")
   @visibility("read")
+  @removed(Versions.v2024_04_01_preview)
   documentation?: string;
 
   @doc("Resource links which exposed to the customer to query the data.")
@@ -947,6 +1076,16 @@ model DataProductProperties {
   @doc("Key vault url.")
   @visibility("read")
   keyVaultUrl?: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Provide uniqueId of data product offer to be associated with dataproduct resource.")
+  @visibility("create", "read")
+  dataProductOfferId: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Absolute version of dataproduct.")
+  @visibility("create", "read")
+  version?: string;
 }
 
 @doc("Encryption key details.")
@@ -972,12 +1111,34 @@ enum ControlState {
   Disabled,
 }
 
+@doc("Workload  type for query resource.")
+@added(Versions.v2024_04_01_preview)
+enum WorkloadType {
+  @doc("Field for dev or test query workload type.")
+  `Development/Testing`,
+
+  @doc("Field to production query workload type.")
+  Production,
+}
+
 @doc("Details of Consumption Properties")
 @added(Versions.v2023_11_15)
 model ConsumptionEndpointsProperties {
+  @added(Versions.v2023_11_15)
   @doc("Ingestion url to upload the data.")
   @visibility("read")
+  @removed(Versions.v2024_04_01_preview)
   ingestionUrl?: string;
+
+  @doc("Blob URL of Ingestion endpoint upload the data.")
+  @visibility("read")
+  @added(Versions.v2024_04_01_preview)
+  ingestionBlobUrl?: string;
+
+  @doc("Datalake URL of Ingestion endpoint to upload the data.")
+  @visibility("read")
+  @added(Versions.v2024_04_01_preview)
+  ingestionDataLakeUrl?: string;
 
   @doc("Resource Id of ingestion endpoint.")
   @visibility("read")
@@ -1010,6 +1171,11 @@ model ConsumptionEndpointsProperties {
       type: "Microsoft.Kusto/clusters";
     }
   ]>;
+
+  @doc("Copilot webinterface URL.")
+  @visibility("read")
+  @added(Versions.v2024_04_01_preview)
+  copilotWebInterfaceUrl?: string;
 }
 
 @doc("The details for storage account sas creation.")
@@ -1118,6 +1284,8 @@ model RoleAssignmentDetail is RoleAssignmentCommonProperties {
 @doc("list role assignments.")
 @added(Versions.v2023_11_15)
 model ListRoleAssignments {
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Count of role assignments.")
   count: int32;
 
@@ -1142,15 +1310,21 @@ This user has privileged access to read sensitive data of a data product.
 @doc("The details for role assignment common properties.")
 @added(Versions.v2023_11_15)
 model RoleAssignmentCommonProperties {
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Role Id of the Built-In Role")
   roleId: string;
 
   @doc("Object ID of the AAD principal or security-group.")
   principalId: string;
 
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("User name.")
   userName: string;
 
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Data Type Scope at which the role assignment is created.")
   dataTypeScope: string[];
 
@@ -1202,6 +1376,14 @@ model DataProductInformation {
   @doc("Description about data product.")
   description: string;
 
+  @added(Versions.v2024_04_01_preview)
+  @doc("DataProduct Offer Id for a data product.")
+  dataProductOfferId: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Documentation for data product.")
+  documentation: string;
+
   @doc("Version information of data product.")
   dataProductVersions: DataProductVersion[];
 }
@@ -1209,8 +1391,200 @@ model DataProductInformation {
 @doc("Data Product Version.")
 @added(Versions.v2023_11_15)
 model DataProductVersion {
+  @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Version of data product")
   version: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Major version of data product")
+  majorVersion: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Major version state of data product")
+  majorVersionState: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Available versions of data product")
+  versions: VersionInformation[];
+}
+
+@doc("The data product offer resource.")
+@added(Versions.v2024_04_01_preview)
+model VersionInformation {
+  @added(Versions.v2024_04_01_preview)
+  @doc("Version of data product")
+  version: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Status of version of d")
+  state: string;
+}
+
+@doc("The data product offer resource.")
+@added(Versions.v2024_04_01_preview)
+model DataProductOffer is TrackedResource<DataProductOfferProperties> {
+  @doc("The data product offer resource name")
+  @key("dataProductOfferName")
+  @segment("dataProductOffers")
+  @path
+  name: string;
+}
+
+@doc("Target Audience Type for data product offer resource.")
+@added(Versions.v2024_04_01_preview)
+enum TargetAudienceType {
+  @doc("Field to specify Publisher Tenant Audience Type.")
+  PublisherTenant,
+
+  @doc("Field to specify Specifc Subscription Audience Type.")
+  SpecificSubscriptions,
+
+  @doc("Field to specify All Audience Type.")
+  Everyone,
+}
+
+@doc("Charging Mode for metering details.")
+@added(Versions.v2024_04_01_preview)
+enum chargingMode {
+  @doc("Field to specify free mode.")
+  Free,
+
+  @doc("Field to specify metered mode.")
+  Metered,
+}
+
+@doc("Parameters for metering details.")
+@added(Versions.v2024_04_01_preview)
+model MeteringDetailsParameters {
+  @doc("Field to specify charging mode for meter.")
+  mode: chargingMode = chargingMode.Free;
+
+  @doc("Field to specify price for meter.")
+  price?: string;
+}
+
+@doc("Publishing Status for data product offer.")
+@added(Versions.v2024_04_01_preview)
+enum DataProductOfferPublishedStatus {
+  @doc("Field to specify status as Published.")
+  Published,
+
+  @doc("Field to specify status as Unpublished.")
+  Unpublished,
+
+  @doc("Field to specify status as WaitingForApproval.")
+  WaitingForApproval,
+}
+
+@doc("The data product offer properties.")
+@added(Versions.v2024_04_01_preview)
+model DataProductOfferProperties {
+  @doc("Latest provisioning state of data product offer resource.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+
+  @doc("External name of data product offer resource.")
+  @visibility("create", "read")
+  externalName: string;
+
+  @doc("Description of data product offer resource.")
+  @visibility("create", "read")
+  description: string;
+
+  @doc("Publisher name of data product offer resource.")
+  @visibility("create", "read")
+  publisherName: string;
+
+  @doc("Documentation URL of data product offer resource.")
+  @visibility("create", "read")
+  documentation?: string;
+
+  @doc("Unique Id of data product offer resource.")
+  @visibility("read")
+  dataProductOfferId: string;
+
+  @doc("Target Audience of data product offer resource.")
+  @visibility("create", "read")
+  targetAudience?: TargetAudienceType = TargetAudienceType.PublisherTenant;
+
+  @doc("Allowed subscription for data product offer resource.")
+  @visibility("create", "update", "read")
+  allowedSubscriptions?: string[];
+
+  @doc("Metering Details for data product offer resource.")
+  @visibility("create", "read")
+  meteringDetails?: MeteringDetailsParameters;
+
+  @doc("Live Versions of data product offer resource.")
+  @visibility("read")
+  liveVersions: string[];
+
+  @doc("Published status of data product offer resource.")
+  @visibility("read")
+  publishedStatus: DataProductOfferPublishedStatus = DataProductOfferPublishedStatus.Unpublished;
+}
+
+@doc("The data product offer version resource.")
+@added(Versions.v2024_04_01_preview)
+@parentResource(DataProductOffer)
+model DataProductOfferVersion
+  is ProxyResource<DataProductOfferVersionProperties> {
+  @doc("The data product offer version resource name")
+  @key("versionName")
+  @segment("versions")
+  @path
+  name: string;
+}
+
+@doc("Types of major state of data product offer resource.")
+@added(Versions.v2024_04_01_preview)
+enum DataProductOfferMajorState {
+  @doc("Field to specify development state of data product offer major state.")
+  Development,
+
+  @doc("Field to specify active state of data product offer major state.")
+  Active,
+
+  @doc("Field to specify deprecated state of data product offer major state.")
+  Deprecated,
+}
+
+@doc("The data product offer version state.")
+@added(Versions.v2024_04_01_preview)
+enum DataProductOfferVersionState {
+  @doc("Field to specify Preview as version of data product offer.")
+  Preview,
+
+  @doc("Field to specify BecomingLive as version of data product offer.")
+  BecomingLive,
+
+  @doc("Field to specify Live as version of data product offer.")
+  Live,
+
+  @doc("Field to specify Previous as version of data product offer.")
+  Previous,
+}
+
+@doc("The data product offer version properties.")
+@added(Versions.v2024_04_01_preview)
+model DataProductOfferVersionProperties {
+  @doc("Latest provisioning state of data product offer version resource.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+
+  @doc("Field to specify storage account SAS URL.")
+  @secret
+  @visibility("create")
+  sasUrl: string;
+
+  @doc("Field to specify major state of data product offer resource.")
+  @visibility("read")
+  majorState: DataProductOfferMajorState = DataProductOfferMajorState.Development;
+
+  @doc("Field to specify version state of data product offer resource.")
+  @visibility("read")
+  versionState: DataProductOfferVersionState = DataProductOfferVersionState.Preview;
 }
 
 @armResourceOperations
@@ -1358,4 +1732,71 @@ interface DataProducts {
 
   @doc("List data products by subscription.")
   listBySubscription is ArmListBySubscription<DataProduct>;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Get per region capacity for DataProduct resource type.")
+  @segment("providers/Microsoft.NetworkAnalytics/dataProducts/getDataProductRegionalCapacity")
+  @get
+  @armResourceRead(DataProduct)
+  getDataProductRegionalCapacity(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+  ): ArmResponse<Record<int32>> | ErrorResponse;
+}
+
+@doc("Operations on data product offer resource.")
+@added(Versions.v2024_04_01_preview)
+@armResourceOperations
+interface DataProductOffers {
+  @doc("Create data product offer resource.")
+  create is ArmResourceCreateOrUpdateAsync<DataProductOffer>;
+
+  @doc("Retrieve data product offer resource.")
+  get is ArmResourceRead<DataProductOffer>;
+
+  @doc("Update data product offer resource.")
+  update is ArmResourcePatchAsync<DataProductOffer, DataProductOfferProperties>;
+
+  @doc("Delete data product offer resource.")
+  delete is ArmResourceDeleteWithoutOkAsync<DataProductOffer>;
+
+  @doc("List data product offers by resource group.")
+  listByResourceGroup is ArmResourceListByParent<DataProductOffer>;
+
+  @doc("List data product offers by subscription.")
+  listBySubscription is ArmListBySubscription<DataProductOffer>;
+}
+
+@doc("Operations on data product offer version resource.")
+@added(Versions.v2024_04_01_preview)
+@armResourceOperations
+interface DataProductOfferVersions {
+  @doc("Create data product offer version resource.")
+  create is ArmResourceCreateOrUpdateAsync<DataProductOfferVersion>;
+
+  @doc("Retrieve data product offer version resource.")
+  get is ArmResourceRead<DataProductOfferVersion>;
+
+  @doc("Delete data product offer version resource.")
+  delete is ArmResourceDeleteWithoutOkAsync<DataProductOfferVersion>;
+
+  @doc("List data product offers version by resource group.")
+  listByResourceGroup is ArmResourceListByParent<DataProductOfferVersion>;
+
+  @doc("List data product offers version by subscription.")
+  listBySubscription is ArmListBySubscription<DataProductOfferVersion>;
+
+  @doc("Publish data product offer version.")
+  publish is ArmResourceActionNoContentAsync<DataProductOfferVersion, {}>;
+
+  @doc("Deprecate data product offer version.")
+  deprecate is ArmResourceActionNoContentAsync<DataProductOfferVersion, {}>;
+
+  @doc("Download data product offer version file.")
+  @segment("download")
+  @get
+  @armResourceRead(DataProductOfferVersion)
+  download(
+    ...ResourceInstanceParameters<DataProductOfferVersion>,
+  ): ArmNoContentResponse | ErrorResponse;
 }
