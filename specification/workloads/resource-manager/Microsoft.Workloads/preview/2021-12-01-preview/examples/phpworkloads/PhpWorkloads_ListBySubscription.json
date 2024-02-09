@@ -1,0 +1,158 @@
+{
+  "parameters": {
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0",
+    "api-version": "2021-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsot.Workloads/phpWorkloads/wp39",
+            "name": "wp39",
+            "type": "Microsot.Workloads/phpWorkloads",
+            "tags": {},
+            "location": "eastus2",
+            "kind": "WordPress",
+            "sku": {
+              "name": "Large"
+            },
+            "systemData": {
+              "createdBy": "php_user@xyz.com",
+              "createdByType": "User",
+              "createdAt": "2021-08-19T15:10:46.196Z",
+              "lastModifiedBy": "php_user@xyz.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+            },
+            "properties": {
+              "appLocation": "eastus",
+              "managedResourceGroupConfiguration": {
+                "name": "php-mrg-wp39"
+              },
+              "provisioningState": "Succeeded",
+              "adminUserProfile": {
+                "userName": "wpadmin",
+                "sshPublicKey": "===SSH=PUBLIC=KEY==="
+              },
+              "webNodesProfile": {
+                "name": "web-server",
+                "nodeSku": "Standard_DS2_v2",
+                "osImage": {
+                  "publisher": "Canonical",
+                  "offer": "UbuntuServer",
+                  "sku": "18.0-LTS",
+                  "version": "latest"
+                },
+                "osDisk": {
+                  "storageType": "Premium_LRS",
+                  "sizeInGB": 30
+                },
+                "autoScaleMinCount": 1,
+                "autoScaleMaxCount": 1,
+                "nodeResourceIds": [
+                  "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Compute/virtualMachineScaleSets/vmss-fymfur"
+                ]
+              },
+              "controllerProfile": {
+                "name": "contoller-vm",
+                "nodeSku": "Standard_DS2_v2",
+                "osImage": {
+                  "publisher": "Canonical",
+                  "offer": "UbuntuServer",
+                  "sku": "18.0-LTS",
+                  "version": "latest"
+                },
+                "osDisk": {
+                  "storageType": "Premium_LRS",
+                  "sizeInGB": 30
+                },
+                "dataDisks": [
+                  {
+                    "storageType": "Premium_LRS",
+                    "sizeInGB": 100
+                  }
+                ],
+                "nodeResourceIds": [
+                  "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Compute/virtualMachines/controller-fymfur"
+                ]
+              },
+              "networkProfile": {
+                "loadBalancerType": "LoadBalancer",
+                "loadBalancerSku": "Standard",
+                "azureFrontDoorEnabled": "Enabled",
+                "vNetResourceId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Network/virtualNetworks/vnet-fymfur",
+                "loadBalancerResourceId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Network/loadBalancers/lb-fymfur",
+                "frontEndPublicIpResourceId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Network/publicIPAddresses/lb-pubip-fymfur",
+                "azureFrontDoorResourceId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Network/frontdoors/afd-fymfur",
+                "outboundPublicIpResourceIds": [
+                  "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Network/publicIPAddresses/lb-outpubip001-fymfur",
+                  "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Network/publicIPAddresses/lb-outpubip002-fymfur"
+                ]
+              },
+              "databaseProfile": {
+                "type": "MySql",
+                "serverName": "wp-db-server",
+                "version": "5.7",
+                "sku": "Standard_D32s_v4",
+                "tier": "GeneralPurpose",
+                "haEnabled": "Disabled",
+                "storageSku": "Premium_LRS",
+                "storageInGB": 128,
+                "storageIops": 200,
+                "backupRetentionDays": 7,
+                "sslEnforcementEnabled": "Enabled",
+                "serverResourceId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.DBforMySQL/servers/mysql-fymfur"
+              },
+              "siteProfile": {
+                "domainName": "www.example.com"
+              },
+              "fileshareProfile": {
+                "shareType": "AzureFiles",
+                "storageType": "Premium_LRS",
+                "shareSizeInGB": 100,
+                "storageResourceId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Storage/storageAccounts/absfymfuraf",
+                "shareName": "wp"
+              },
+              "phpProfile": {
+                "version": "7.3"
+              },
+              "searchProfile": {
+                "nodeSku": "Standard_DS2_v2",
+                "osImage": {
+                  "publisher": "Canonical",
+                  "offer": "UbuntuServer",
+                  "sku": "18.0-LTS",
+                  "version": "latest"
+                },
+                "osDisk": {
+                  "storageType": "Premium_LRS",
+                  "sizeInGB": 0
+                },
+                "dataDisks": [],
+                "searchType": "Elastic",
+                "nodeResourceIds": [
+                  "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Compute/virtualMachines/elastic-vm-01-fymfur",
+                  "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Compute/virtualMachines/elastic-vm-02-fymfur",
+                  "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Compute/virtualMachines/elastic-vm-03-fymfur"
+                ]
+              },
+              "cacheProfile": {
+                "name": "wp-cache",
+                "skuName": "Basic",
+                "family": "C",
+                "capacity": 0,
+                "cacheResourceId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/php-mrg-wp39/providers/Microsoft.Cache/redis/redis-fymfur"
+              },
+              "backupProfile": {
+                "backupEnabled": "Disabled",
+                "vaultResourceId": ""
+              }
+            }
+          }
+        ]
+      },
+      "nextLink": ""
+    }
+  }
+}

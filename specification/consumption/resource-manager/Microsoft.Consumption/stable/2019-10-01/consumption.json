@@ -1481,6 +1481,11 @@
         ],
         "operationId": "Operations_List",
         "description": "Lists all of the available consumption REST API operations.",
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1724,6 +1729,9 @@
             "schema": {
               "$ref": "#/definitions/CreditSummary"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2778,7 +2786,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/RevisedResource"
         }
       ],
       "properties": {
@@ -2791,6 +2799,7 @@
     },
     "ReservationSummariesListResult": {
       "description": "Result of listing reservation summaries.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of reservation summaries.",
@@ -2809,6 +2818,7 @@
     },
     "ReservationSummaryProperties": {
       "description": "The properties of the reservation summary.",
+      "type": "object",
       "properties": {
         "reservationOrderId": {
           "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
@@ -2903,7 +2913,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/RevisedResource"
         }
       ],
       "properties": {
@@ -2916,6 +2926,7 @@
     },
     "ReservationDetailsListResult": {
       "description": "Result of listing reservation details.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of reservation details.",
@@ -2934,6 +2945,7 @@
     },
     "ReservationDetailProperties": {
       "description": "The properties of the reservation detail.",
+      "type": "object",
       "properties": {
         "reservationOrderId": {
           "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
@@ -3013,10 +3025,6 @@
           "type": "string",
           "description": "Resource sku"
         },
-        "eTag": {
-          "type": "string",
-          "description": "Resource eTag."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3026,6 +3034,7 @@
     },
     "ReservationRecommendationDetailsProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
       "properties": {
         "currency": {
           "description": "An ISO 4217 currency code identifier for the costs and savings ",
@@ -3061,6 +3070,7 @@
     },
     "ReservationRecommendationDetailsCalculatedSavingsProperties": {
       "description": "Details of estimated savings.",
+      "type": "object",
       "properties": {
         "onDemandCost": {
           "description": "The cost without reservation.",
@@ -3100,6 +3110,7 @@
     },
     "ReservationRecommendationDetailsResourceProperties": {
       "description": "Details of the resource.",
+      "type": "object",
       "properties": {
         "appliedScopes": {
           "description": "List of subscriptions for which the reservation is applied.",
@@ -3138,6 +3149,7 @@
     },
     "ReservationRecommendationDetailsSavingsProperties": {
       "description": "Details of the estimated savings.",
+      "type": "object",
       "properties": {
         "calculatedSavings": {
           "description": "List of calculated savings.",
@@ -3176,6 +3188,7 @@
     },
     "ReservationRecommendationDetailsUsageProperties": {
       "description": "Details about historical usage data that has been used for computing the recommendation.",
+      "type": "object",
       "properties": {
         "firstConsumptionDate": {
           "description": "The first usage date used for looking back for computing the recommendation.",
@@ -3209,6 +3222,7 @@
     },
     "ReservationRecommendationsListResult": {
       "description": "Result of listing reservation recommendations.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of reservation recommendations.",
@@ -3241,7 +3255,7 @@
       "discriminator": "kind",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/RevisedResource"
         },
         {
           "$ref": "#/definitions/ResourceAttributes"
@@ -3287,6 +3301,7 @@
     },
     "LegacyReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
       "properties": {
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
@@ -3376,6 +3391,7 @@
     },
     "SkuProperty": {
       "description": "The Sku property",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of sku property.",
@@ -3398,11 +3414,6 @@
           "description": "Properties for modern reservation recommendation",
           "$ref": "#/definitions/ModernReservationRecommendationProperties",
           "x-ms-client-flatten": true
-        },
-        "eTag": {
-          "description": "Resource eTag.",
-          "type": "string",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -3416,6 +3427,7 @@
     },
     "ModernReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -3486,9 +3498,15 @@
           "format": "date-time",
           "readOnly": true
         },
-        "scope": {
-          "description": "Shared or single recommendation.",
+        "resourceType": {
+          "description": "Resource type.",
           "type": "string",
+          "readOnly": true
+        },
+        "scope": {
+          "description": "Shared (corresponds to integer 2) or single (corresponds to integer 1) recommendation.",
+          "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "skuProperties": {
@@ -3504,20 +3522,17 @@
           "type": "string",
           "readOnly": true
         },
-        "resourceType": {
-          "description": "The Azure resource type.",
-          "type": "string",
-          "readOnly": true
-        },
         "subscriptionId": {
-          "description": "The Azure subscription ID.",
+          "description": "Subscription ID",
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         }
       }
     },
     "ModernReservationTransactionProperties": {
       "description": "The properties of a modern reservation transaction.",
+      "type": "object",
       "properties": {
         "amount": {
           "description": "The charge of the transaction.",
@@ -3628,7 +3643,6 @@
     "ModernReservationTransaction": {
       "description": "Modern Reservation transaction resource.",
       "type": "object",
-      "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransactionResource"
@@ -3666,6 +3680,7 @@
     },
     "LegacyReservationTransactionProperties": {
       "description": "The properties of a legacy reservation transaction.",
+      "type": "object",
       "properties": {
         "eventDate": {
           "description": "The date of the transaction",
@@ -3791,6 +3806,7 @@
     },
     "ReservationTransactionsListResult": {
       "description": "Result of listing reservation recommendations.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of reservation recommendations.",
@@ -3809,6 +3825,7 @@
     },
     "ModernReservationTransactionsListResult": {
       "description": "Result of listing reservation recommendations.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of reservation recommendations.",
@@ -4526,7 +4543,7 @@
       "discriminator": "kind",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/RevisedResource"
         }
       ],
       "properties": {
@@ -4598,7 +4615,7 @@
           "format": "decimal",
           "readOnly": true
         },
-        "marketplaceCharges": {
+        "azureMarketplaceCharges": {
           "description": "Marketplace Charges.",
           "type": "number",
           "format": "decimal",
@@ -4688,6 +4705,11 @@
         "isInvoiced": {
           "description": "Is charge Invoiced",
           "type": "boolean",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Subscription guid.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -4854,7 +4876,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4991,7 +5013,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5077,7 +5099,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5228,6 +5250,41 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource etag."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "RevisedResource": {
+      "description": "The Resource model definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "eTag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource eTag."
         },
         "tags": {
           "readOnly": true,

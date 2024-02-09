@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestPacketCoreCP",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
+            "type": "Microsoft.MobileNetwork/packetCoreControlPlane",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "location": "eastus",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "mobileNetwork": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+              },
+              "platform": {
+                "type": "AKS-HCI",
+                "azureStackEdgeDevice": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/TestAzureStackEdgeDevice"
+                },
+                "connectedCluster": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/TestConnectedCluster"
+                },
+                "customLocation": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
+                }
+              },
+              "coreNetworkTechnology": "5GC",
+              "version": "0.2.0",
+              "controlPlaneAccessInterface": {
+                "name": "N2"
+              },
+              "sku": "testSku",
+              "localDiagnosticsAccess": {
+                "httpsServerCertificate": {
+                  "certificateUrl": "https://contosovault.vault.azure.net/certificates/ingress"
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}

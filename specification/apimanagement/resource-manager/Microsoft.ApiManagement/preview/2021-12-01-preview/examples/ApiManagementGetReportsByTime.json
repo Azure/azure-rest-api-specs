@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "subid",
+    "$filter": "timestamp ge datetime'2017-06-01T00:00:00' and timestamp le datetime'2017-06-04T00:00:00'",
+    "interval": "PT15M"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "timestamp": "2017-06-03T00:15:00Z",
+            "interval": "PT15M",
+            "callCountSuccess": 4,
+            "callCountBlocked": 0,
+            "callCountFailed": 0,
+            "callCountOther": 0,
+            "callCountTotal": 4,
+            "bandwidth": 3243,
+            "cacheHitCount": 0,
+            "cacheMissCount": 0,
+            "apiTimeAvg": 1337.46335,
+            "apiTimeMin": 885.0839000000001,
+            "apiTimeMax": 1819.2173,
+            "serviceTimeAvg": 1255.917425,
+            "serviceTimeMin": 882.8264,
+            "serviceTimeMax": 1697.3612
+          },
+          {
+            "timestamp": "2017-06-03T00:30:00Z",
+            "interval": "PT15M",
+            "callCountSuccess": 9,
+            "callCountBlocked": 1,
+            "callCountFailed": 0,
+            "callCountOther": 0,
+            "callCountTotal": 10,
+            "bandwidth": 7776,
+            "cacheHitCount": 0,
+            "cacheMissCount": 0,
+            "apiTimeAvg": 872.7818777777778,
+            "apiTimeMin": 330.3206,
+            "apiTimeMax": 1093.8407,
+            "serviceTimeAvg": 824.2847111111112,
+            "serviceTimeMin": 215.24,
+            "serviceTimeMax": 973.2262000000001
+          }
+        ],
+        "count": 2,
+        "nextLink": ""
+      }
+    }
+  }
+}

@@ -28,6 +28,22 @@
         - ${AUTHOR}
         - ${ASSIGNEE}
 
+
+- scheduleTask:
+    action: sendEmail
+    scope: pull_request
+    name: "send email to Arc review board"
+    trigger:
+      - label
+    args:
+      booleanFilterExpression: "ArcReview"
+      message: "<p>Hi, Arc review board,</p><p>Please review the PR ${URL} . You receive the email because the PR is labeled with ArcReview. <br> One or more change(s) have been detected in your Arc enabled VM or Arc enabled Server RPs. Please review the changes and ensure that no gaps have been introduced with respect to the ARM API modeling consistency across Azure Arc and Azure Compute. For further details, see guidelines at Consistency in ARM Modeling. To approve the change(s), add the label ArcSignedOff.</p>"
+      subject: "Action Required ArcReview: Please review PR ${URL}"
+      to: arcboard@microsoft.com
+      cc:
+        - ${AUTHOR}
+        - ${ASSIGNEE}
+
 - scheduleTask:
     action: sendEmail
     scope: pull_request
@@ -53,7 +69,7 @@
     args:
       limit: 72h
       booleanFilterExpression: (Reviewed-ChangesRequired||ARMChangesRequested)
-      message: '<p>Dear PR author,</p><p>The PR Reviewer has commented on your PR ${URL} , putting on the label "Reviewed-ChangesRequired" or "ARMChangeRequest". Please check out the comment by clicking the PR link attached previously, and update your commits accordingly.</p><p>Please ensure to remove "Reviewed-ChangesRequired" or "ARMChangeRequest" label, after you complete updates and comment back. If you need ARM board or swagger reviewer revisit your PR, please label the PR with "WaitForARMRevisit" and "WaitForReviewRevisit" respectively.</p><p>Quick info.</p><ul><li>How to fix CI error:&nbsp;<a href="https://aka.ms/ci-fix">https://aka.ms/ci-fix</a></li></ul><p><em>DO NOT REPLY: This is an automated email. If you have any questions, please send an email to the Swagger and Tools Team (vscswagger@microsoft.com).</em></p><p>Best regards,</p><p>Swagger and Tools Team, Azure Management Experience</p>'
+      message: '<p>Dear PR author,</p><p>The PR reviewer has commented on your PR ${URL} and the PR now has the label "ARMChangesRequested". Please address the comments by clicking the PR link attached previously, and update your commits accordingly.</p><p>Please ensure to remove the "ARMChangesRequested" label, after you complete updates and comment back.</p><p>Quick info.</p><ul><li>How to fix CI error:&nbsp;<a href="https://aka.ms/ci-fix">https://aka.ms/ci-fix</a></li></ul><p><em>DO NOT REPLY: This is an automated email. If you have any questions, please send an email to the Swagger and Tools Team (vscswagger@microsoft.com).</em></p><p>Best regards,</p><p>Swagger and Tools Team, Azure Management Experience</p>'
       subject: "Action Required: Please update your PR ${URL}"
       to: ${AUTHOR}
       cc:

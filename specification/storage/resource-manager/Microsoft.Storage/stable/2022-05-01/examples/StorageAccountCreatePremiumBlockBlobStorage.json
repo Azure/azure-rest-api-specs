@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "res9101",
+    "accountName": "sto4445",
+    "api-version": "2021-09-01",
+    "parameters": {
+      "sku": {
+        "name": "Premium_LRS"
+      },
+      "kind": "BlockBlobStorage",
+      "location": "eastus",
+      "properties": {
+        "minimumTlsVersion": "TLS1_2",
+        "allowSharedKeyAccess": true,
+        "encryption": {
+          "services": {
+            "file": {
+              "keyType": "Account",
+              "enabled": true
+            },
+            "blob": {
+              "keyType": "Account",
+              "enabled": true
+            }
+          },
+          "requireInfrastructureEncryption": false,
+          "keySource": "Microsoft.Storage"
+        }
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
+        "kind": "Storage",
+        "location": "eastus",
+        "name": "sto4445",
+        "properties": {
+          "allowBlobPublicAccess": false,
+          "minimumTlsVersion": "TLS1_2",
+          "creationTime": "2017-05-24T13:25:33.4863236Z",
+          "primaryEndpoints": {
+            "blob": "https://sto4445.blob.core.windows.net/",
+            "web": "https://sto4445.web.core.windows.net/",
+            "dfs": "https://sto4445.dfs.core.windows.net/"
+          },
+          "primaryLocation": "eastus2euap",
+          "accessTier": "Premium",
+          "provisioningState": "Succeeded",
+          "encryption": {
+            "services": {
+              "file": {
+                "keyType": "Account",
+                "enabled": true,
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              },
+              "blob": {
+                "keyType": "Account",
+                "enabled": true,
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              }
+            },
+            "requireInfrastructureEncryption": false,
+            "keySource": "Microsoft.Storage"
+          },
+          "statusOfPrimary": "available",
+          "statusOfSecondary": "available",
+          "supportsHttpsTrafficOnly": true
+        },
+        "sku": {
+          "name": "Premium_LRS",
+          "tier": "Premium"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "type": "Microsoft.Storage/storageAccounts"
+      }
+    },
+    "202": {}
+  }
+}

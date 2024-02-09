@@ -19,8 +19,22 @@ directive:
 - rename-model:
    from: 'RedisResource'
    to: 'ResourceInfo'
-modelerfour:
-  lenient-model-deduplication: true
+- from: swagger-document
+  where: $.definitions.RedisCreateProperties
+  transform: >
+    $["x-ms-external"] = false
+- from: swagger-document
+  where: $.definitions.RedisUpdateProperties
+  transform: >
+    $["x-ms-external"] = false
+- from: swagger-document
+  where: $.definitions.RedisProperties
+  transform: >
+    $["x-ms-external"] = false
+- from: swagger-document
+  where: $.definitions.OperationStatus
+  transform: >
+    $["x-ms-external"] = false
 ```
 
 ### Go multi-api

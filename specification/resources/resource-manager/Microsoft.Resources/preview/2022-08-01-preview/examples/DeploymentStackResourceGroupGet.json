@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "deploymentStacksRG",
+    "deploymentStackName": "simpleDeploymentStack"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+        "type": "Microsoft.Resources/deploymentStacks",
+        "name": "simpleDeploymentStack",
+        "location": "eastus",
+        "tags": {
+          "tagkey": "tagVal"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
+        },
+        "properties": {
+          "deploymentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Resources/deployments/simpleDeploymentStack-20210301-3f41c",
+          "deploymentScope": "/subscriptions/00000000-1111-1111-1111-000000000000",
+          "actionOnUnmanage": {
+            "resources": "delete",
+            "resourceGroups": "delete",
+            "managementGroups": "detach"
+          },
+          "denySettings": {
+            "mode": "denyDelete",
+            "excludedPrincipals": [
+              "principal"
+            ],
+            "excludedActions": [
+              "action"
+            ],
+            "applyToChildScopes": false
+          },
+          "description": "my Description",
+          "parameters": {
+            "parameter1": {
+              "value": "a string"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "resources": [
+            {
+              "id": "/subscriptions/00000000-2222-2222-2222-000000000000/resourceGroups/templateSpecsRG/providers/Microsoft.Resources/templateSpecs/templateSpec/versions/1.0",
+              "status": "Managed",
+              "denyStatus": "denyDelete"
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/storageAccounts/myStorageAccount",
+              "status": "Managed",
+              "denyStatus": "denyDelete"
+            }
+          ],
+          "outputs": {
+            "myOut": "myVal"
+          },
+          "duration": "PT1D12H"
+        }
+      }
+    }
+  }
+}

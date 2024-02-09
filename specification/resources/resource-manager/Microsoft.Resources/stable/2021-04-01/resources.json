@@ -2056,7 +2056,7 @@
           "Providers"
         ],
         "operationId": "Providers_RegisterAtManagementGroupScope",
-        "description": "Registers a management group with a resource provider.",
+        "description": "Registers a management group with a resource provider. Use this operation to register a resource provider with resource types that can be deployed at the management group scope. It does not recursively register subscriptions within the management group. Instead, you must register subscriptions individually.",
         "parameters": [
           {
             "name": "resourceProviderNamespace",
@@ -2957,7 +2957,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The number of results to return. If null is passed, returns all resources."
+            "description": "The number of recommendations per page if a paged version of this API is being used."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3400,7 +3400,7 @@
           "Resources"
         ],
         "operationId": "Resources_CheckExistenceById",
-        "description": "Checks by ID whether a resource exists.",
+        "description": "Checks by ID whether a resource exists. This API currently works only for a limited set of Resource providers. In the event that a Resource provider does not implement this API, ARM will respond with a 405. The alternative then is to use the GET API to check for the existence of the resource.",
         "parameters": [
           {
             "name": "resourceId",

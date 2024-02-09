@@ -2,10 +2,25 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go)
+```yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/powerplatform/armpowerplatform
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi) 
+batch:
+  - tag: package-2020-10-30-preview
 ```
 
 ### Tag: package-2020-10-30-preview and go

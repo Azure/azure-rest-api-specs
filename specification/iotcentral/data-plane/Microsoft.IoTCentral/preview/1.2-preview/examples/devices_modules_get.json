@@ -1,0 +1,34 @@
+{
+  "title": "Get modules from an Edge device",
+  "description": "Get the list of modules in an IoT Edge device.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "deviceId": "edgedevice1",
+    "api-version": "1.2-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@id": "<id>",
+            "@type": [
+              "Relationship",
+              "SemanticType/EdgeModule"
+            ],
+            "name": "Environment"
+          },
+          {
+            "@id": "<id>",
+            "@type": [
+              "Relationship",
+              "SemanticType/EdgeModule"
+            ],
+            "name": "Camera"
+          }
+        ]
+      }
+    }
+  }
+}

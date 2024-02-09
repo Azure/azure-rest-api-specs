@@ -706,7 +706,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../common/v1/types.json#/definitions/CloudError"
             }
           }
         },
@@ -760,7 +760,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -827,6 +827,9 @@
           "application/json"
         ],
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Start integration runtime": {
             "$ref": "./examples/IntegrationRuntimes_Start.json"
@@ -1429,7 +1432,11 @@
         },
         "id": {
           "description": "The id of the managed virtual network.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1577,7 +1584,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomSetupBase"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -2010,7 +2018,8 @@
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeNode"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "otherErrors": {
           "description": "The errors that occurred on this integration runtime.",
@@ -2018,7 +2027,8 @@
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "lastOperation": {
           "description": "The last operation result that occurred on this integration runtime.",
@@ -2028,6 +2038,7 @@
       }
     },
     "ManagedIntegrationRuntimeOperationResult": {
+      "type": "object",
       "description": "Properties of managed integration runtime operation result.",
       "properties": {
         "type": {
@@ -2071,6 +2082,7 @@
       }
     },
     "ManagedIntegrationRuntimeNode": {
+      "type": "object",
       "description": "Properties of integration runtime node.",
       "properties": {
         "nodeId": {
@@ -2091,14 +2103,16 @@
           "x-ms-enum": {
             "name": "ManagedIntegrationRuntimeNodeStatus",
             "modelAsString": true
-          }
+          },
+          "x-ms-identifiers": []
         },
         "errors": {
           "description": "The errors that occurred on this integration runtime node.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeError"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -2106,6 +2120,7 @@
       }
     },
     "ManagedIntegrationRuntimeError": {
+      "type": "object",
       "description": "Error definition for managed integration runtime.",
       "properties": {
         "time": {
@@ -2190,7 +2205,8 @@
           "x-ms-enum": {
             "name": "IntegrationRuntimeInternalChannelEncryptionMode",
             "modelAsString": true
-          }
+          },
+          "x-ms-identifiers": []
         },
         "version": {
           "description": "Version of the integration runtime.",
@@ -2202,7 +2218,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "scheduledUpdateDate": {
           "description": "The date at which the integration runtime will be scheduled to update, in ISO8601 format.",
@@ -2252,7 +2269,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedIntegrationRuntime"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "pushedVersion": {
           "description": "The version that the integration runtime is going to update to.",
@@ -2282,7 +2300,8 @@
       "x-ms-enum": {
         "name": "IntegrationRuntimeAutoUpdate",
         "modelAsString": true
-      }
+      },
+      "x-ms-identifiers": []
     },
     "LinkedIntegrationRuntime": {
       "description": "The linked integration runtime information.",
@@ -2317,6 +2336,7 @@
       }
     },
     "SelfHostedIntegrationRuntimeNode": {
+      "type": "object",
       "description": "Properties of Self-hosted integration runtime node.",
       "properties": {
         "nodeName": {
@@ -2532,7 +2552,8 @@
           "description": "Integration runtime node monitoring data.",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeNodeMonitoringData"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2891,6 +2912,7 @@
       }
     },
     "IntegrationRuntimeResource": {
+      "type": "object",
       "description": "Integration runtime resource type.",
       "allOf": [
         {
@@ -2950,6 +2972,7 @@
       }
     },
     "IntegrationRuntimeStatusResponse": {
+      "type": "object",
       "description": "Integration runtime status response.",
       "properties": {
         "name": {
@@ -2997,7 +3020,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3014,7 +3038,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3031,7 +3056,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },

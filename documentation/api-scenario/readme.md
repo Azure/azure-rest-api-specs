@@ -1,24 +1,23 @@
 # API Scenario Documentation
 
-API Scenario is a YAML file defining RESTful API usage scenarios of your service with a series of API calls. API scenario can be used for service functional test, API quality validation and SDK/CLIs test generation.
-
-_**Caution**: This project is in early preview phase, hence breaking changes should be expected._
+API Scenario is a YAML file defining RESTful API usage scenarios of your service with a sequence of API calls. API scenario can be used for service API functional test, API quality validation and SDK/CLIs test generation.
 
 ## Features
 
-- Simple to use: Intuitive step definition based on Swagger examples and raw REST call.
+- Simple to use: Intuitive step definition based on Swagger operations or examples, describing parameters and expected responses with scoped variables.
 - ARM Template integration: Support creating external Azure resources with ARM Template and executing Azure Powershell or Azure CLI scripts with ARM Template deployment script.
-- Implementation independent: [oav](https://github.com/Azure/oav) is the default API scenario runner, and more runners will be supported, like SDKs in different languages.
+- Implementation independent: [oav](https://github.com/Azure/oav) is the default API scenario runner. More runners will be supported, like SDKs in different languages.
 
 ### Demo gif
 
 ![demo](./how-to/runApiTest.gif)
 
-## Quick start
+## Quick starts
 
 - [Example: Write and run your first API scenario file](./how-to/QuickStart.md)
-- [Example: Generate a basic API scenario file](./how-to/generateABasicApiScenario.md)
-- [Example: use armTemplate to generate unique resourceName](./how-to/apiScenarioWithARMTemplate.md)
+- [Example: Generate a basic API scenario file](./how-to/GenerateABasicApiScenario.md)
+- [Example: Resolve external dependencies](./how-to/ResolveDependencies.md)
+- [Example: Make traffic recording with test-proxy](./how-to/MakeTestProxyRecording.md)
 - [API scenario file sample](../samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/scenarios/quickStart.yaml)
 
 ## References
@@ -26,4 +25,11 @@ _**Caution**: This project is in early preview phase, hence breaking changes sho
 - [API Scenario Definition Reference](./references/ApiScenarioDefinition.md)
 - [API Scenario Variable Definition Reference](./references/Variables.md)
 - [API Scenario Runner Reference](./references/Runner.md)
-- [API Scenario JSON Schema](./references/v1.1/schema.json)
+- [API Scenario JSON Schema](./references/v1.2/schema.json)
+
+## Feedback
+
+If you have any question or need support, feel free to contact us via:
+- [StackOverflow](https://stackoverflow.microsoft.com/posts/tagged/28051)
+- Teams channel: https://aka.ms/SwaggerSupport (for MS FTEs)
+- Email: vscswagger@microsoft.com.

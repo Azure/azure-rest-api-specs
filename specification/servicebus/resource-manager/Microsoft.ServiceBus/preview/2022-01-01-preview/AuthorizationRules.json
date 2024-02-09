@@ -1,0 +1,1256 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceBusManagementClient",
+    "description": "Azure Service Bus client",
+    "version": "2022-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules": {
+      "get": {
+        "tags": [
+          "Namespaces AuthorizationRule"
+        ],
+        "operationId": "Namespaces_ListAuthorizationRules",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListAll": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleListAll.json"
+          }
+        },
+        "description": "Gets the authorization rules for a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace authorization rules returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "Namespaces AuthorizationRule"
+        ],
+        "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleCreate": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleCreate.json"
+          }
+        },
+        "description": "Creates or updates an authorization rule for a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            },
+            "description": "The shared access authorization rule."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace authorization rule created.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Namespaces AuthorizationRule"
+        ],
+        "operationId": "Namespaces_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleDelete": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleDelete.json"
+          }
+        },
+        "description": "Deletes a namespace authorization rule.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace authorization rule successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Namespaces AuthorizationRule"
+        ],
+        "operationId": "Namespaces_GetAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleGet": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleGet.json"
+          }
+        },
+        "description": "Gets an authorization rule for a namespace by rule name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace authorization rule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "Namespaces AuthorizationRule"
+        ],
+        "operationId": "Namespaces_ListKeys",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListKey": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleListKey.json"
+          }
+        },
+        "description": "Gets the primary and secondary connection strings for the namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "Namespaces AuthorizationRule"
+        ],
+        "operationId": "Namespaces_RegenerateKeys",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleRegenerateKey": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleRegenerateKey.json"
+          }
+        },
+        "description": "Regenerates the primary or secondary connection strings for the namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
+            },
+            "description": "Parameters supplied to regenerate the authorization rule."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rule successfully regenerated.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "Queues AuthorizationRule"
+        ],
+        "operationId": "Queues_ListAuthorizationRules",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleListAll": {
+            "$ref": "./examples/Queues/SBQueueAuthorizationRuleListAll.json"
+          }
+        },
+        "description": "Gets all authorization rules for a queue.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705607.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/QueueNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rules successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "Queues AuthorizationRule"
+        ],
+        "operationId": "Queues_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleCreate": {
+            "$ref": "./examples/Queues/SBQueueAuthorizationRuleCreate.json"
+          }
+        },
+        "description": "Creates an authorization rule for a queue.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/QueueNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            },
+            "description": "The shared access authorization rule."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rule successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Queues AuthorizationRule"
+        ],
+        "operationId": "Queues_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleDelete": {
+            "$ref": "./examples/Queues/SBQueueAuthorizationRuleDelete.json"
+          }
+        },
+        "description": "Deletes a queue authorization rule.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705609.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/QueueNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rule successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Queues AuthorizationRule"
+        ],
+        "operationId": "Queues_GetAuthorizationRule",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleGet": {
+            "$ref": "./examples/Queues/SBQueueAuthorizationRuleGet.json"
+          }
+        },
+        "description": "Gets an authorization rule for a queue by rule name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/QueueNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rule successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}/ListKeys": {
+      "post": {
+        "tags": [
+          "Queues AuthorizationRule"
+        ],
+        "operationId": "Queues_ListKeys",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleListKey": {
+            "$ref": "./examples/Queues/SBQueueAuthorizationRuleListKey.json"
+          }
+        },
+        "description": "Primary and secondary connection strings to the queue.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705608.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/QueueNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "Queues AuthorizationRule"
+        ],
+        "operationId": "Queues_RegenerateKeys",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleRegenerateKey": {
+            "$ref": "./examples/Queues/SBQueueAuthorizationRuleRegenerateKey.json"
+          }
+        },
+        "description": "Regenerates the primary or secondary connection strings to the queue.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705606.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/QueueNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
+            },
+            "description": "Parameters supplied to regenerate the authorization rule."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings successfully regenerated.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "Topics AuthorizationRule"
+        ],
+        "operationId": "Topics_ListAuthorizationRules",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleListAll": {
+            "$ref": "./examples/Topics/SBTopicAuthorizationRuleListAll.json"
+          }
+        },
+        "description": "Gets authorization rules for a topic.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rules successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "Topics AuthorizationRule"
+        ],
+        "operationId": "Topics_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleCreate": {
+            "$ref": "./examples/Topics/SBTopicAuthorizationRuleCreate.json"
+          }
+        },
+        "description": "Creates an authorization rule for the specified topic.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            },
+            "description": "The shared access authorization rule."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic authorization rule successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Topics AuthorizationRule"
+        ],
+        "operationId": "Topics_GetAuthorizationRule",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleGet": {
+            "$ref": "./examples/Topics/SBTopicAuthorizationRuleGet.json"
+          }
+        },
+        "description": "Returns the specified authorization rule.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic authorization rule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Topics AuthorizationRule"
+        ],
+        "operationId": "Topics_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleDelete": {
+            "$ref": "./examples/Topics/SBTopicAuthorizationRuleDelete.json"
+          }
+        },
+        "description": "Deletes a topic authorization rule.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic authorization rule successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}/ListKeys": {
+      "post": {
+        "tags": [
+          "Topics AuthorizationRule"
+        ],
+        "operationId": "Topics_ListKeys",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleListKey": {
+            "$ref": "./examples/Topics/SBTopicAuthorizationRuleListKey.json"
+          }
+        },
+        "description": "Gets the primary and secondary connection strings for the topic.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720677.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "Topics AuthorizationRule"
+        ],
+        "operationId": "Topics_RegenerateKeys",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleRegenerateKey": {
+            "$ref": "./examples/Topics/SBTopicAuthorizationRuleRegenerateKey.json"
+          }
+        },
+        "description": "Regenerates primary or secondary connection strings for the topic.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720679.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
+            },
+            "description": "Parameters supplied to regenerate the authorization rule."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings successfully regenerated.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules": {
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_ListAuthorizationRules",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListAll": {
+            "$ref": "./examples/disasterRecoveryConfigs/SBAliasAuthorizationRuleListAll.json"
+          }
+        },
+        "description": "Gets the authorization rules for a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DisasterRecoveryConfigs authorization rules returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}": {
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_GetAuthorizationRule",
+        "x-ms-examples": {
+          "DisasterRecoveryConfigsAuthorizationRuleGet": {
+            "$ref": "./examples/disasterRecoveryConfigs/SBAliasAuthorizationRuleGet.json"
+          }
+        },
+        "description": "Gets an authorization rule for a namespace by rule name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DisasterRecoveryConfigs authorization rule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_ListKeys",
+        "x-ms-examples": {
+          "DisasterRecoveryConfigsAuthorizationRuleListKey": {
+            "$ref": "./examples/disasterRecoveryConfigs/SBAliasAuthorizationRuleListKey.json"
+          }
+        },
+        "description": "Gets the primary and secondary connection strings for the namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SBAuthorizationRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SBAuthorizationRule"
+          },
+          "description": "Result of the List Authorization Rules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Authorization Rules."
+        }
+      },
+      "description": "The response to the List Namespace operation."
+    },
+    "SBAuthorizationRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "rights": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Manage",
+                  "Send",
+                  "Listen"
+                ],
+                "x-ms-enum": {
+                  "name": "AccessRights",
+                  "modelAsString": true
+                }
+              },
+              "description": "The rights associated with the rule."
+            }
+          },
+          "required": [
+            "rights"
+          ],
+          "description": "AuthorizationRule properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Description of a namespace authorization rule."
+    },
+    "AccessKeys": {
+      "type": "object",
+      "properties": {
+        "primaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Primary connection string of the created namespace authorization rule."
+        },
+        "secondaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Secondary connection string of the created namespace authorization rule."
+        },
+        "aliasPrimaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Primary connection string of the alias if GEO DR is enabled"
+        },
+        "aliasSecondaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Secondary  connection string of the alias if GEO DR is enabled"
+        },
+        "primaryKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
+        },
+        "secondaryKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
+        },
+        "keyName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A string that describes the authorization rule."
+        }
+      },
+      "description": "Namespace/ServiceBus Connection String"
+    },
+    "RegenerateAccessKeyParameters": {
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "The access key to regenerate.",
+          "enum": [
+            "PrimaryKey",
+            "SecondaryKey"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true
+          }
+        },
+        "key": {
+          "type": "string",
+          "description": "Optional, if the key value provided, is reset for KeyType value or autogenerate Key value set for keyType"
+        }
+      },
+      "required": [
+        "keyType"
+      ],
+      "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key needs to be reset."
+    }
+  },
+  "parameters": {}
+}

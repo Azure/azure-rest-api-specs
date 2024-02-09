@@ -5,9 +5,19 @@
     "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
     "parameters": {
       "type": "Usage",
-      "timeframe": "MonthToDate",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2022-08-01T00:00:00+00:00",
+        "to": "2022-08-31T23:59:59+00:00"
+      },
       "dataset": {
         "granularity": "Daily",
+        "aggregation": {
+          "totalCost": {
+            "name": "Cost",
+            "function": "Sum"
+          }
+        },
         "filter": {
           "and": [
             {
@@ -55,7 +65,7 @@
       "body": {
         "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/query/00000000-0000-0000-0000-000000000000",
         "name": "55312978-ba1b-415c-9304-cfd9c43c0481",
-        "type": "microsoft.costmanagement/Query",
+        "type": "Microsoft.CostManagement/query",
         "properties": {
           "nextLink": null,
           "columns": [

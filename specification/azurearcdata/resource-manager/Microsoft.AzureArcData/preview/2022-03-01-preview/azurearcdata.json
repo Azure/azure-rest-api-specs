@@ -259,7 +259,7 @@
             "description": "Successfully deleted the SQL Managed Instance."
           },
           "202": {
-            "description": "Resource deletion is in progress.."
+            "description": "Resource deletion is in progress."
           },
           "default": {
             "description": "*** Error Responses: ***",
@@ -865,6 +865,9 @@
               "$ref": "./dataControllers.json#/definitions/DataControllerResource"
             }
           },
+          "202": {
+            "description": "Resource update is in progress."
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
@@ -876,6 +879,10 @@
           "Updates a dataController tags.": {
             "$ref": "./examples/UpdateDataController.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },

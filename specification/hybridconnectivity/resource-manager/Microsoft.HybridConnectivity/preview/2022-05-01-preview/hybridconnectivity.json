@@ -1,0 +1,641 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hybrid Connectivity Management API",
+    "description": "REST API for Hybrid Connectivity",
+    "version": "2022-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.HybridConnectivity/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists the available Hybrid Connectivity REST API operations.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityOperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "List of endpoints to the target resource.",
+        "operationId": "Endpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsGet": {
+            "$ref": "./examples/EndpointsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of endpoints.",
+            "schema": {
+              "$ref": "#/definitions/EndpointsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Gets the endpoint to the resource.",
+        "operationId": "Endpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsGetDefault": {
+            "$ref": "./examples/EndpointsGetDefault.json"
+          },
+          "HybridConnectivityEndpointsGetCustom": {
+            "$ref": "./examples/EndpointsGetCustom.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endpoint details",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Create or update the endpoint to the target resource.",
+        "operationId": "Endpoints_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPutDefault": {
+            "$ref": "./examples/EndpointsPutDefault.json"
+          },
+          "HybridConnectivityEndpointsPutCustom": {
+            "$ref": "./examples/EndpointsPutCustom.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "name": "EndpointResource",
+            "description": "Endpoint details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endpoint details.",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Update the endpoint to the target resource.",
+        "operationId": "Endpoints_Update",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPatchDefault": {
+            "$ref": "./examples/EndpointsPatchDefault.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "name": "EndpointResource",
+            "description": "Endpoint details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endpoint resource.",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Deletes the endpoint access to the target resource.",
+        "operationId": "Endpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsDeleteDefault": {
+            "$ref": "./examples/EndpointsDeleteDefault.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The endpoint is deleted successfully."
+          },
+          "204": {
+            "description": "The endpoint has been deleted already."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/listCredentials": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Gets the endpoint access credentials to the resource.",
+        "operationId": "Endpoints_ListCredentials",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPostListCredentials": {
+            "$ref": "./examples/EndpointsPostListCredentials.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessTokenExpirationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endpoint access credentials",
+            "schema": {
+              "$ref": "#/definitions/EndpointAccessResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/listManagedProxyDetails": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Fetches the managed proxy details ",
+        "operationId": "Endpoints_ListManagedProxyDetails",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPostListManagedProxyDetails": {
+            "$ref": "./examples/EndpointsPostListManagedProxyDetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "name": "ManagedProxyRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedProxyRequest"
+            },
+            "description": "Object of type ManagedProxyRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Managed Proxy",
+            "schema": {
+              "$ref": "#/definitions/ManagedProxyResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "RelayNamespaceAccessProperties": {
+      "type": "object",
+      "description": "Azure relay hybrid connection access properties",
+      "required": [
+        "namespaceName",
+        "namespaceNameSuffix",
+        "hybridConnectionName"
+      ],
+      "properties": {
+        "namespaceName": {
+          "type": "string",
+          "description": "The namespace name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "namespaceNameSuffix": {
+          "type": "string",
+          "description": "The suffix domain name of relay namespace.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "hybridConnectionName": {
+          "type": "string",
+          "description": "Azure Relay hybrid connection name for the resource."
+        },
+        "accessKey": {
+          "type": "string",
+          "description": "Access key for hybrid connection.",
+          "readOnly": true
+        },
+        "expiresOn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The expiration of access key in unix time."
+        }
+      }
+    },
+    "IngressGatewayResource": {
+      "description": "The ingress gateway access credentials",
+      "type": "object",
+      "properties": {
+        "relay": {
+          "$ref": "#/definitions/RelayNamespaceAccessProperties",
+          "x-ms-client-flatten": true
+        },
+        "ingress": {
+          "$ref": "#/definitions/IngressProfileProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IngressProfileProperties": {
+      "type": "object",
+      "description": "Ingress gateway profile",
+      "required": [
+        "hostname",
+        "aadProfile"
+      ],
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "The ingress hostname."
+        },
+        "aadProfile": {
+          "$ref": "#/definitions/AADProfileProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AADProfileProperties": {
+      "type": "object",
+      "description": "The AAD Profile",
+      "required": [
+        "serverId",
+        "tenantId"
+      ],
+      "properties": {
+        "serverId": {
+          "type": "string",
+          "description": "The arc ingress gateway server app id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The target resource home tenant id."
+        }
+      }
+    },
+    "EndpointAccessResource": {
+      "description": "The endpoint access for the target resource.",
+      "type": "object",
+      "properties": {
+        "relay": {
+          "$ref": "#/definitions/RelayNamespaceAccessProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EndpointProperties": {
+      "type": "object",
+      "description": "Endpoint details",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of endpoint.",
+          "enum": [
+            "default",
+            "custom"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The resource Id of the connectivity endpoint (optional)."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource provisioning state."
+        }
+      }
+    },
+    "EndpointResource": {
+      "description": "The endpoint for the target resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "System data of endpoint resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "x-ms-client-flatten": true
+        },
+        "properties": {
+          "description": "The endpoint properties.",
+          "$ref": "#/definitions/EndpointProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EndpointsList": {
+      "description": "The list of endpoints.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of endpoints list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointResource"
+          }
+        }
+      }
+    },
+    "ManagedProxyResource": {
+      "type": "object",
+      "description": "Managed Proxy",
+      "required": [
+        "proxy",
+        "expiresOn"
+      ],
+      "properties": {
+        "proxy": {
+          "type": "string",
+          "description": "The short lived proxy name."
+        },
+        "expiresOn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The expiration time of short lived proxy name in unix epoch."
+        }
+      }
+    },
+    "ManagedProxyRequest": {
+      "type": "object",
+      "description": "Represent ManageProxy Request object.",
+      "required": [
+        "service"
+      ],
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "The name of the service."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The target host name."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "EndpointNameParameter": {
+      "name": "endpointName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The endpoint name.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "AccessTokenExpirationParameter": {
+      "name": "expiresin",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "default": 10800,
+      "minimum": 600,
+      "maximum": 10800,
+      "description": "The is how long the endpoint access token is valid (in seconds).",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

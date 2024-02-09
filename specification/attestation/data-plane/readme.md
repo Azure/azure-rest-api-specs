@@ -25,7 +25,7 @@ These are the global settings for the Attestation APIs.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2020-10-01
+tag: package-2022-08-01
 ```
 
 ### Tag: package-2018-09-01
@@ -46,6 +46,24 @@ input-file:
 - Microsoft.Attestation/stable/2020-10-01/attestation.json
 ```
 
+### Tag: package-2022-08-01
+
+These settings apply only when `--tag=package-2022-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08-01'
+input-file:
+- Microsoft.Attestation/stable/2022-08-01/attestation.json
+```
+
+### Tag: package-2022-09-01-preview
+
+These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09-01-preview'
+input-file:
+- Microsoft.Attestation/preview/2022-09-01-preview/attestation.json
+```
+
 ---
 # Code Generation
 
@@ -56,10 +74,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-go
 ```
 
 ## Python
@@ -128,5 +143,25 @@ directive:
     from: attestation.json
     where: $.definitions.AttestationResult.properties.rp_data
     reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.OpenIDConfigurationResponse.properties.response_types_supported
+    reason: Follows the OpenID spec and existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.OpenIDConfigurationResponse.properties.id_token_signing_alg_values_supported
+    reason: Follows the OpenID spec and existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.OpenIDConfigurationResponse.properties.revocation_endpoint
+    reason: Follows the OpenID spec and existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.OpenIDConfigurationResponse.properties.jwks_uri
+    reason: Follows the OpenID spec and existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.OpenIDConfigurationResponse.properties.claims_supported
+    reason: Follows the OpenID spec and existing Clients use these definitions which must be maintained.
 ```
 

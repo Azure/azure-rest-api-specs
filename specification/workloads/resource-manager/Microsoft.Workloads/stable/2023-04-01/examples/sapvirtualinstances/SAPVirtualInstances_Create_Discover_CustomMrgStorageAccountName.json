@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0",
+    "resourceGroupName": "test-rg",
+    "sapVirtualInstanceName": "X00",
+    "api-version": "2023-04-01",
+    "body": {
+      "properties": {
+        "environment": "NonProd",
+        "sapProduct": "S4HANA",
+        "configuration": {
+          "configurationType": "Discovery",
+          "centralServerVmId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/sapq20scsvm0",
+          "managedRgStorageAccountName": "q20saacssgrs"
+        }
+      },
+      "location": "northeurope",
+      "tags": {
+        "test": "abc",
+        "createdby": "abc@microsoft.com"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Workloads/sapVirtualInstances/Q20",
+        "name": "Q20",
+        "type": "microsoft.workloads/sapvirtualinstances",
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2022-07-27T08:22:52.3318907Z",
+          "lastModifiedBy": "abc@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-07-27T11:44:17.9310503Z"
+        },
+        "properties": {
+          "environment": "NonProd",
+          "sapProduct": "S4HANA",
+          "configuration": {
+            "configurationType": "Discovery",
+            "centralServerVmId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg-infra/providers/Microsoft.Compute/virtualMachines/q20ascsvm0",
+            "managedRgStorageAccountName": "q20saacssgrs",
+            "appLocation": "westeurope"
+          },
+          "state": "RegistrationComplete",
+          "provisioningState": "Succeeded",
+          "managedResourceGroupConfiguration": {
+            "name": "mrg-Q20-5b0097"
+          },
+          "status": "Running",
+          "health": "Healthy"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Workloads/sapVirtualInstances/Q20",
+        "name": "Q20",
+        "type": "microsoft.workloads/sapvirtualinstances",
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2022-07-27T08:22:52.3318907Z",
+          "lastModifiedBy": "abc@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-07-27T11:44:17.9310503Z"
+        },
+        "properties": {
+          "environment": "NonProd",
+          "sapProduct": "S4HANA",
+          "configuration": {
+            "configurationType": "Discovery",
+            "centralServerVmId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg-infra/providers/Microsoft.Compute/virtualMachines/q20ascsvm0",
+            "managedRgStorageAccountName": "q20saacssgrs"
+          },
+          "state": "RegistrationComplete",
+          "provisioningState": "Succeeded",
+          "managedResourceGroupConfiguration": {
+            "name": "mrg-Q20-5b0097"
+          },
+          "status": "Running",
+          "health": "Healthy"
+        }
+      }
+    }
+  }
+}

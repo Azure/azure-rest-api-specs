@@ -10,9 +10,12 @@ typescript:
   azure-arm: true
   generate-metadata: true
 
+modelerfour:
+  treat-type-object-as-anything: true
+
 directive:
     # dynamically add a DummyOrchestrationServiceName value to the enum 
-  - from: compute.json
+  - from: virtualMachineScaleSet.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 

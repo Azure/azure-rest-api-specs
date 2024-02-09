@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "clusterName": "myClusterName",
+    "api-version": "2021-04-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.Automanage/configurationProfileAssignments/default",
+            "name": "default",
+            "type": "Microsoft.Automanage/ConfigurationProfileAssignments",
+            "properties": {
+              "targetId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName",
+              "configurationProfile": "/providers/Microsoft.Automanage/bestPractices/AzureBestPracticesDevTest",
+              "profileOverrides": null,
+              "status": "Compliant"
+            },
+            "systemData": {
+              "createdBy": "user1@outlook.com",
+              "createdByType": "User",
+              "createdAt": "2020-02-03T01:01:01.1075056Z",
+              "lastModifiedBy": "user2@outlook.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+            }
+          },
+          {
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.HybridCompute/machines/myArcMachineName/providers/Microsoft.Automanage/configurationProfileAssignments/default",
+            "name": "default",
+            "type": "Microsoft.Automanage/ConfigurationProfileAssignments",
+            "properties": {
+              "targetId": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.HybridCompute/machines/myArcMachineName",
+              "configurationProfile": "/providers/Microsoft.Automanage/bestPractices/AzureBestPracticesProduction",
+              "profileOverrides": null,
+              "status": "NotCompliant "
+            },
+            "systemData": {
+              "createdBy": "user1@outlook.com",
+              "createdByType": "User",
+              "createdAt": "2020-02-03T01:01:01.1075056Z",
+              "lastModifiedBy": "user2@outlook.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

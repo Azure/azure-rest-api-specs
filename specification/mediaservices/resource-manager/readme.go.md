@@ -15,6 +15,13 @@ module-name: sdk/resourcemanager/mediaservices/armmediaservices
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+ - rename-operation:
+     from: OperationStatuses_Get
+     to: AssetTrackOperationStatuses_Get
+ - rename-operation:
+     from: OperationResults_Get
+     to: AssetTrackOperationResults_Get
 ```
 
 ### Go multi-api

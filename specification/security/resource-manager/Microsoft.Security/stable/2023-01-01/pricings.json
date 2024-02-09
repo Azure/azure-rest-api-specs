@@ -1,0 +1,368 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2023-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings": {
+      "get": {
+        "x-ms-examples": {
+          "Get pricings on subscription": {
+            "$ref": "./examples/Pricings/ListPricings_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Lists Microsoft Defender for Cloud pricing configurations in the subscription.",
+        "operationId": "Pricings_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PricingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings/{pricingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get pricings on subscription - VirtualMachines plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameVirtualMachines_example.json"
+          },
+          "Get pricings on subscription - Dns plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameDns_example.json"
+          },
+          "Get pricings on subscription - StorageAccounts plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameStorageAccounts_example.json"
+          },
+          "Get pricings on subscription - Containers plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameContainers_example.json"
+          },
+          "Get pricings on subscription - CloudPosture plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameCloudPosture_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Gets a provided Microsoft Defender for Cloud pricing configuration in the subscription.",
+        "operationId": "Pricings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update pricing on subscription": {
+            "$ref": "./examples/Pricings/PutPricingByName_example.json"
+          },
+          "Update pricing on subscription - partial success": {
+            "$ref": "./examples/Pricings/PutPricingByNamePartialSuccess_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the subscription.",
+        "operationId": "Pricings_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          },
+          {
+            "$ref": "#/parameters/Pricing"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PricingList": {
+      "description": "List of pricing configurations response.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pricing configurations",
+          "items": {
+            "$ref": "#/definitions/Pricing"
+          }
+        }
+      }
+    },
+    "Pricing": {
+      "type": "object",
+      "description": "Microsoft Defender for Cloud is provided in two pricing tiers: free and standard. The standard tier offers advanced security capabilities, while the free tier offers basic security features.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Pricing data",
+          "$ref": "#/definitions/PricingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PricingProperties": {
+      "type": "object",
+      "description": "Pricing properties for the relevant scope",
+      "properties": {
+        "pricingTier": {
+          "type": "string",
+          "description": "The pricing tier value. Microsoft Defender for Cloud is provided in two pricing tiers: free and standard. The standard tier offers advanced security capabilities, while the free tier offers basic security features.",
+          "enum": [
+            "Free",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "pricingTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Free",
+                "description": "Get free Microsoft Defender for Cloud experience with basic security features"
+              },
+              {
+                "value": "Standard",
+                "description": "Get the standard Microsoft Defender for Cloud experience with advanced security features"
+              }
+            ]
+          }
+        },
+        "subPlan": {
+          "type": "string",
+          "description": "The sub-plan selected for a Standard pricing configuration, when more than one sub-plan is available. Each sub-plan enables a set of security features. When not specified, full plan is applied."
+        },
+        "freeTrialRemainingTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "The duration left for the subscriptions free trial period - in ISO 8601 format (e.g. P3Y6M4DT12H30M5S)."
+        },
+        "enablementTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Optional. If `pricingTier` is `Standard` then this property holds the date of the last time the `pricingTier` was set to `Standard`, when available (e.g 2023-03-01T12:42:42.1921106Z)."
+        },
+        "deprecated": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Optional. True if the plan is deprecated. If there are replacing plans they will appear in `replacedBy` property"
+        },
+        "replacedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Optional. List of plans that replace this plan. This property exists only if this plan is deprecated."
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "description": "Optional. List of extensions offered under a plan.",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "pricingTier"
+      ]
+    },
+    "Extension": {
+      "type": "object",
+      "description": "A plan's extension properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The extension name. Supported values are: <br><br>**AgentlessDiscoveryForKubernetes** - API-based discovery of information about Kubernetes cluster architecture, workload objects, and setup. Required for Kubernetes inventory, identity and network exposure detection, attack path analysis and risk hunting as part of the cloud security explorer.\r\nAvailable for CloudPosture plan.<br><br>**OnUploadMalwareScanning** - Limits the GB to be scanned per month for each storage account within the subscription. Once this limit reached on a given storage account, Blobs won't be scanned during current calendar month.\r\nAvailable for StorageAccounts plan.<br><br>**SensitiveDataDiscovery** - Sensitive data discovery identifies Blob storage container with sensitive data such as credentials, credit cards, and more, to help prioritize and investigate security events.\r\nAvailable for StorageAccounts and CloudPosture plans.<br><br>**ContainerRegistriesVulnerabilityAssessments** - Provides vulnerability management for images stored in your container registries.\r\nAvailable for CloudPosture and Containers plans."
+        },
+        "isEnabled": {
+          "type": "string",
+          "description": "Indicates whether the extension is enabled.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "isEnabled",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "True",
+                "description": "Indicates the extension is enabled"
+              },
+              {
+                "value": "False",
+                "description": "Indicates the extension is disabled"
+              }
+            ]
+          }
+        },
+        "additionalExtensionProperties": {
+          "type": "object",
+          "description": "Property values associated with the extension.",
+          "additionalProperties": {}
+        },
+        "operationStatus": {
+          "type": "object",
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true,
+          "description": "Optional. A status describing the success/failure of the extension's enablement/disablement operation."
+        }
+      },
+      "required": [
+        "name",
+        "isEnabled"
+      ]
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "A status describing the success/failure of the extension's enablement/disablement operation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The operation status code.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "code",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "Extension was created/updated successfully."
+              },
+              {
+                "value": "Failed",
+                "description": "Extension was not created/updated successfully. See operation status message for more details."
+              }
+            ]
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional information regarding the success/failure of the operation."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PricingName": {
+      "name": "pricingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the pricing configuration",
+      "x-ms-parameter-location": "method"
+    },
+    "Pricing": {
+      "name": "pricing",
+      "in": "body",
+      "required": true,
+      "description": "Pricing object",
+      "schema": {
+        "$ref": "#/definitions/Pricing"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
