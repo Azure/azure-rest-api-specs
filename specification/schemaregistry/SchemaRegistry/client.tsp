@@ -44,7 +44,6 @@ union ContentTypeEnum {
   custom: "text/plain; charset=utf-8",
 
   @doc("The protobuf schema content type.")
-  @added(ServiceApiVersions.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
 
   string,

@@ -53,12 +53,5 @@ These settings apply only when `--tag=package-2023-07-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-07-01'
 input-file:
-  - Microsoft.EventHub/stable/2023-07-01/schemaregistry.json
-```
-
-These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-07-01-preview'
-input-file:
-  - Microsoft.EventHub/preview/2023-07-01/SchemaRegistry.json
+  - Microsoft.SchemaRegistry/stable/2023-07-01/schemaregistry.json
 ```
