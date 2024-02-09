@@ -49,7 +49,7 @@ interface DataConnections {
   validateDataConnection is Operations.ResourceCollectionAction<
     DataConnection,
     DataConnectionData,
-    ErrorResponse
+    ValidateResult
   >;
   @doc("Retrieve a data connection with a given dataConnectionName.")
   getDataConnection is Operations.ResourceRead<DataConnection>;
@@ -81,7 +81,7 @@ interface DiscoveryGroups {
   validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
     DiscoGroupData,
-    ErrorResponse
+    ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
   @projectedName("csharp", "GetDiscoveryGroup")

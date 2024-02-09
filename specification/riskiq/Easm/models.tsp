@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Foundations;
 using Azure.Core.Traits;
 
 namespace Easm;
@@ -1290,6 +1291,9 @@ model Task {
   @doc("Attributes unique to the task.  This differs by task type.")
   metadata?: Record<unknown>;
 }
+
+@doc("Validate result for validate action endpoints")
+model ValidateResult is ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model WebComponent {
