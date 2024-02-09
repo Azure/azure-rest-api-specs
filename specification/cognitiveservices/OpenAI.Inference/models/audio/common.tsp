@@ -17,7 +17,7 @@ enum AudioTaskLabel {
 }
 
 alias AudioTextResponse = {
-  @doc("The text response data.")
+  @doc("Representation of the response data of audio text.")
   @body
   body: string;
 };

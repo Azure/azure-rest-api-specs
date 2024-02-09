@@ -28,7 +28,7 @@ alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTr
 }>;
 
 alias TextPlainResponseHeadersTraits = Azure.Core.Traits.ResponseHeadersTrait<{
-  @doc("'text/plain' content type for the resonse.")
+  @doc("The content type 'text/plain' for the audio text response.")
   @header("content-type")
   contentType: "text/plain";
 }>;
