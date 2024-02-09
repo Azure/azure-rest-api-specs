@@ -373,7 +373,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     "MedicinalProductPharmaceutical",
 
     /** The FHIR resource type defined in R4. */
-    MedicinalProductUndesirableEffect,
+    "MedicinalProductUndesirableEffect",
 
     /** The FHIR resource type defined in STU3 and R4. */
     "MessageDefinition",

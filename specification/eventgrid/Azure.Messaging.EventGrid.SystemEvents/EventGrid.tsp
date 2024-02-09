@@ -5,10 +5,10 @@ namespace Microsoft.EventGrid.SystemEvents;
 @friendlyName("EventGridMqttClientState")
 union EventGridMQTTClientState {
   /** Enabled */
-  Enabled,
+  "Enabled",
 
   /** Disabled */
-  Disabled,
+  "Disabled",
 }
 
 /** EventGrid MQTT Client Disconnection Reason */

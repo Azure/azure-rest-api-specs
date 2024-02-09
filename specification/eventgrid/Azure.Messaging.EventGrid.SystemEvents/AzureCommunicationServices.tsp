@@ -826,10 +826,10 @@ union AcsEmailDeliveryReportStatus {
   "FilteredSpam",
 
   /** The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION). */
-  Quarantined,
+  "Quarantined",
 
   /** The email was suppressed */
-  Suppressed,
+  "Suppressed",
 }
 
 /** Detailed information about the status if any */
