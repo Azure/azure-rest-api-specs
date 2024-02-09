@@ -841,6 +841,18 @@
           "description": "The number of secondary replicas that must be in a synchronized state for a commit to complete.",
           "format": "int32"
         },
+        "clusterType": {
+          "type": "string",
+          "description": "Set to WSFC when availability group is on a failover cluster instance on a Windows Server failover cluster. Set to NONE when availability group not using WSFC for cluster coordination.",
+          "enum": [
+            "WSFC",
+            "NONE"
+          ],
+          "x-ms-enum": {
+            "name": "clusterType",
+            "modelAsString": false
+          }
+        },
         "listener": {
           "description": "The listener for the sql server availability group",
           "$ref": "#/definitions/SqlAvailabilityGroupStaticIPListenerProperties"
