@@ -20,7 +20,7 @@ model Workspace {
   @key("workspaceName")
   @segment("workspaces")
   @visibility("external")
-  @Autorest.useRef("machineLearningServices.json#/parameters/WorkspaceNameParameter")
+  @Autorest.useRef("../../../../resource-manager/Microsoft.MachineLearningServices/stable/2023-10-01/machineLearningServices.json#/parameters/WorkspaceNameParameter")
   name: string;
 }
 
