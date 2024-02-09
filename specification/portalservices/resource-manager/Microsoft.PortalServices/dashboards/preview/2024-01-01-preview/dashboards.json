@@ -1015,12 +1015,9 @@
       "type": "object",
       "description": "The dashboard parameter values.",
       "properties": {
-        "parameterNames": {
-          "type": "array",
-          "description": "The unique names to serve as placeholders for the parameter values.",
-          "items": {
-            "type": "string"
-          }
+        "parameterName": {
+          "type": "string",
+          "description": "The name of the parameter."
         },
         "values": {
           "type": "array",
@@ -1031,7 +1028,7 @@
         }
       },
       "required": [
-        "parameterNames",
+        "parameterName",
         "values"
       ]
     },
@@ -1636,24 +1633,6 @@
       "required": [
         "resourceId"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Azure Portal Services Dashboards Management API versions.",
-      "enum": [
-        "2024-01-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_01_01_preview",
-            "value": "2024-01-01-preview",
-            "description": "Azure Portal Services Dashboards Management API version 2024-01-01-preview."
-          }
-        ]
-      }
     },
     "VisualizationType": {
       "type": "string",
