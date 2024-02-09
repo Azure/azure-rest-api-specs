@@ -29,6 +29,11 @@ openapi-type: arm
 tag: package-2023-07-20-preview
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
 ### Tag: package-2023-07-20-preview
 
 These settings apply only when `--tag=package-2023-07-20-preview` is specified on the command line.
