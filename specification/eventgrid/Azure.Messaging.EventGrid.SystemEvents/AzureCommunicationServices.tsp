@@ -381,40 +381,40 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
 /** Acs Router Job Status */
 union AcsRouterJobStatus {
   /** Router Job Status Pending Classification */
-  PendingClassification,
+  "PendingClassification",
 
   /** Router Job Status Queued */
-  Queued,
+  "Queued",
 
   /** Router Job Status Assigned */
-  Assigned,
+  "Assigned",
 
   /** Router Job Status Completed */
-  Completed,
+  "Completed",
 
   /** Router Job Status Closed */
-  Closed,
+  "Closed",
 
   /** Router Job Status Cancelled */
-  Cancelled,
+  "Cancelled",
 
   /** Router Job Status Classification Failed */
-  ClassificationFailed,
+  "ClassificationFailed",
 
   /** Router Job Status Created */
-  Created,
+  "Created",
 
   /** Router Job Status Pending Schedule */
-  PendingSchedule,
+  "PendingSchedule",
 
   /** Router Job Status Scheduled */
-  Scheduled,
+  "Scheduled",
 
   /** Router Job Status Schedule Failed */
-  ScheduleFailed,
+  "ScheduleFailed",
 
   /** Router Job Status Waiting For Activation */
-  WaitingForActivation,
+  "WaitingForActivation",
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobSchedulingFailed event */
@@ -754,52 +754,52 @@ alias AcsChatParticipantBaseEventData = {
 /** Recording content type */
 union recordingContentType {
   /** AudioVideo content type */
-  AudioVideo,
+  "AudioVideo",
 
   /** Audio content type */
-  Audio,
+  "Audio",
 }
 
 /** Recording channel type */
 union recordingChannelType {
   /** Mixed channel type */
-  Mixed,
+  "Mixed",
 
   /** Unmixed channel type */
-  Unmixed,
+  "Unmixed",
 }
 
 /** Recording format type */
 union recordingFormatType {
   /** WAV format */
-  Wav,
+  "Wav",
 
   /** MP3 format */
-  Mp3,
+  "Mp3",
 
   /** MP4 format */
-  Mp4,
+  "Mp4",
 }
 
 /** Router Job Worker Selector Label Operator */
 union AcsRouterLabelOperator {
   /** Router Label Operator Equal */
-  Equal,
+  "Equal",
 
   /** Router Label Operator Not Equal */
-  NotEqual,
+  "NotEqual",
 
   /** Router Label Operator Greater */
-  Greater,
+  "Greater",
 
   /** Router Label Operator Less */
-  Less,
+  "Less",
 
   /** Router Label Operator Greater than or equal */
-  GreaterThanOrEqual,
+  "GreaterThanOrEqual",
 
   /** Router Label Operator Less than or equal */
-  LessThanOrEqual,
+  "LessThanOrEqual",
 }
 
 /** Router Worker Selector State */
@@ -814,16 +814,16 @@ union AcsRouterWorkerSelectorState {
 /** The status of the email. Any value other than Delivered is considered failed. */
 union AcsEmailDeliveryReportStatus {
   /** Hard bounce detected while sending the email */
-  Bounced,
+  "Bounced",
 
   /** The email was delivered */
-  Delivered,
+  "Delivered",
 
   /** The email failed to be delivered */
-  Failed,
+  "Failed",
 
   /** The message was identified as spam and was rejected or blocked (not quarantined). */
-  FilteredSpam,
+  "FilteredSpam",
 
   /** The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION). */
   Quarantined,
@@ -993,10 +993,10 @@ model AcsIncomingCallCustomContext {
 /** The type of engagement user have with email. */
 union AcsUserEngagement {
   /** View */
-  view,
+  "view",
 
   /** Click */
-  click,
+  "click",
 }
 
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
@@ -1041,11 +1041,11 @@ model CommunicationUserIdentifierModel {
 /** Communication cloud environment model. */
 union CommunicationCloudEnvironmentModel {
   /** Public */
-  public,
+  "public",
 
   /** Dod */
-  dod,
+  "dod",
 
   /** Gcch */
-  gcch,
+  "gcch",
 }

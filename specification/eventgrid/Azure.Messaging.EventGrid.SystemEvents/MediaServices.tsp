@@ -3,88 +3,88 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** State of a Media Job. */
   union MediaJobState {
     /** The job was canceled. This is a final state for the job. */
-    Canceled,
+    "Canceled",
 
     /** The job is in the process of being canceled. This is a transient state for the job. */
-    Canceling,
+    "Canceling",
 
     /** The job has encountered an error. This is a final state for the job. */
-    Error,
+    "Error",
 
     /** The job is finished. This is a final state for the job. */
-    Finished,
+    "Finished",
 
     /** The job is processing. This is a transient state for the job. */
-    Processing,
+    "Processing",
 
     /** The job is in a queued state, waiting for resources to become available. This is a transient state. */
-    Queued,
+    "Queued",
 
     /** The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states. */
-    Scheduled,
+    "Scheduled",
   }
 
   /** Media Job Error Codes. */
   union MediaJobErrorCode {
     /** Fatal service error, please contact support. */
-    ServiceError,
+    "ServiceError",
 
     /** Transient error, please retry, if retry is unsuccessful, please contact support. */
-    ServiceTransientError,
+    "ServiceTransientError",
 
     /** While trying to download the input files, the files were not accessible, please check the availability of the source. */
-    DownloadNotAccessible,
+    "DownloadNotAccessible",
 
     /** While trying to download the input files, there was an issue during transfer (storage service, network errors), see details and check your source. */
-    DownloadTransientError,
+    "DownloadTransientError",
 
     /** While trying to upload the output files, the destination was not reachable, please check the availability of the destination. */
-    UploadNotAccessible,
+    "UploadNotAccessible",
 
     /** While trying to upload the output files, there was an issue during transfer (storage service, network errors), see details and check your destination. */
-    UploadTransientError,
+    "UploadTransientError",
 
     /** There was a problem with the combination of input files and the configuration settings applied, fix the configuration settings and retry with the same input, or change input to match the configuration. */
-    ConfigurationUnsupported,
+    "ConfigurationUnsupported",
 
     /** There was a problem with the input content (for example: zero byte files, or corrupt/non-decodable files), check the input files. */
-    ContentMalformed,
+    "ContentMalformed",
 
     /** There was a problem with the format of the input (not valid media file, or an unsupported file/codec), check the validity of the input files. */
-    ContentUnsupported,
+    "ContentUnsupported",
 
     /** There is an error verifying to the account identity. Check and fix the identity configurations and retry. If unsuccessful, please contact support. */
-    IdentityUnsupported,
+    "IdentityUnsupported",
   }
 
   /** Error categories for Media Job Errors. */
   union MediaJobErrorCategory {
     /** The error is service related. */
-    Service,
+    "Service",
 
     /** The error is download related. */
-    Download,
+    "Download",
 
     /** The error is upload related. */
-    Upload,
+    "Upload",
 
     /** The error is configuration related. */
-    Configuration,
+    "Configuration",
 
     /** The error is related to data in the input files. */
-    Content,
+    "Content",
 
     /** The error is related to account information. */
-    Account,
+    "Account",
   }
 
   /** Media Job Retry Options. */
   union MediaJobRetry {
     /** Issue needs to be investigated and then the job resubmitted with corrections or retried once the underlying issue has been corrected. */
-    DoNotRetry,
+    "DoNotRetry",
 
     /** Issue may be resolved after waiting for a period of time and resubmitting the same Job. */
-    MayRetry,
+    "MayRetry",
   }
 
   /**

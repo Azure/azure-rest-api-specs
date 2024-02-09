@@ -15,37 +15,37 @@ union EventGridMQTTClientState {
 @friendlyName("EventGridMqttClientDisconnectionReason")
 union EventGridMQTTClientDisconnectionReason {
   /** The client got disconnected for any authentication reasons (for example, certificate expired, client got disabled, or client configuration changed). */
-  ClientAuthenticationError,
+  "ClientAuthenticationError",
 
   /** The client got disconnected for any authorization reasons (for example, because of a change in the configuration of topic spaces, permission bindings, or client groups). */
-  ClientAuthorizationError,
+  "ClientAuthorizationError",
 
   /** The client sent a bad request or used one of the unsupported features that resulted in a connection termination by the service. */
-  ClientError,
+  "ClientError",
 
   /** The client initiated a graceful disconnect through a DISCONNECT packet for MQTT or a close frame for MQTT over WebSocket. */
-  ClientInitiatedDisconnect,
+  "ClientInitiatedDisconnect",
 
   /** The client-server connection is lost. (EXCHANGE ONLINE PROTECTION). */
-  ConnectionLost,
+  "ConnectionLost",
 
   /** The client's IP address is blocked by IP filter or Private links configuration. */
-  IpForbidden,
+  "IpForbidden",
 
   /** The client exceeded one or more of the throttling limits that resulted in a connection termination by the service. */
-  QuotaExceeded,
+  "QuotaExceeded",
 
   /** The connection got terminated due to an unexpected server error. */
-  ServerError,
+  "ServerError",
 
   /** The server initiates a graceful disconnect for any operational reason. */
-  ServerInitiatedDisconnect,
+  "ServerInitiatedDisconnect",
 
   /** The client's queue for unacknowledged QoS1 messages reached its limit, which resulted in a connection termination by the server. */
-  SessionOverflow,
+  "SessionOverflow",
 
   /** The client reconnected with the same authentication name, which resulted in the termination of the previous connection. */
-  SessionTakenOver,
+  "SessionTakenOver",
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SystemEvents.SubscriptionValidationEvent event. */

@@ -29,12 +29,12 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of DataBox Stage Name enumeration. */
   union DataBoxStageName {
     /** Copy has started */
-    CopyStarted,
+    "CopyStarted",
 
     /** Copy has completed */
-    CopyCompleted,
+    "CopyCompleted",
 
     /** Order has been completed */
-    OrderCompleted,
+    "OrderCompleted",
   }
 }

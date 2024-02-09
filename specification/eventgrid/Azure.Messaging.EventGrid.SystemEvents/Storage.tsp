@@ -221,19 +221,19 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** The status for a storage task. */
   union StorageTaskAssignmentCompletedStatus {
     /** Succeeded */
-    Succeeded,
+    "Succeeded",
 
     /** Failed */
-    Failed,
+    "Failed",
   }
 
   /** The status for a storage task. */
   union StorageTaskCompletedStatus {
     /** Succeeded */
-    Succeeded,
+    "Succeeded",
 
     /** Failed */
-    Failed,
+    "Failed",
   }
 
   alias StorageBaseEventData = {
