@@ -25,8 +25,8 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the modsimworkbench.
 
 ```yaml
-openapi-type: rpaas
-openapi-subtype: providerHub
+openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2021-03-01-preview
 ```
 
@@ -37,12 +37,6 @@ These settings apply only when `--tag=package-2021-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
   - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/modsimworkbenches.json
-  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/connectors.json
-  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/chambers.json
-  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/workloads.json
-  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/storages.json
-  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/files.json
-  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/fileRequests.json
 ```
 
 ---
