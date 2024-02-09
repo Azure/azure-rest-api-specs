@@ -66,7 +66,7 @@ enum LicenseActivated {
   False,
 }
 
-@doc("Enumeration for copy and paste permmissions")
+@doc("Enumeration for copy and paste permissions")
 enum CopyPastePermission {
   @doc("Copy and paste enabled.")
   enabled,
