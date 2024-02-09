@@ -82,7 +82,17 @@ model RequiredFunctionToolCall extends RequiredToolCall {
   type: "function";
 
   @doc("Detailed information about the function to be executed by the tool that includes name and arguments.")
-  function: FunctionDefinition;
+  function: RequiredFunctionToolCallDetails;
+}
+
+@added(ServiceApiVersions.v2024_02_15_preview)
+@doc("The detailed information for a function invocation, as provided by a required action invoking a function tool, that includes the name of and arguments to the function.")
+model RequiredFunctionToolCallDetails {
+  @doc("The name of the function.")
+  name: string;
+
+  @doc("The arguments to use when invoking the named function, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation.")
+  arguments: string;
 }
 
 //
@@ -92,7 +102,7 @@ model RequiredFunctionToolCall extends RequiredToolCall {
 @discriminator("type")
 @doc("An abstract representation of a detailed tool call as recorded within a run step for an existing run.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model ToolCall {
+model RunStepToolCall {
   @doc("The object type.")
   type: string;
 
@@ -105,13 +115,13 @@ A record of a call to a code interpreter tool, issued by the model in evaluation
 represents inputs and outputs consumed and emitted by the code interpreter.
 """)
 @added(ServiceApiVersions.v2024_02_15_preview)
-model CodeInterpreterToolCall extends ToolCall {
+model RunStepCodeInterpreterToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'code_interpreter'.")
   type: "code_interpreter";
 
   @projectedName("json", "code_interpreter")
   @doc("The details of the tool call to the code interpreter tool.")
-  codeInterpreter: CodeInterpreterToolCallDetails;
+  codeInterpreter: RunStepCodeInterpreterToolCallDetails;
 }
 
 @doc("""
@@ -119,7 +129,7 @@ A record of a call to a retrieval tool, issued by the model in evaluation of a d
 executed retrieval actions.
 """)
 @added(ServiceApiVersions.v2024_02_15_preview)
-model RetrievalToolCall extends ToolCall {
+model RunStepRetrievalToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'retrieval'.")
   type: "retrieval";
 
@@ -132,37 +142,38 @@ A record of a call to a function tool, issued by the model in evaluation of a de
 and output consumed and emitted by the specified function.
 """)
 @added(ServiceApiVersions.v2024_02_15_preview)
-model FunctionToolCall extends ToolCall {
+model RunStepFunctionToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'function'.")
   type: "function";
 
   @doc("The detailed information about the function called by the model.")
-  function: FunctionToolCallDetails;
+  function: RunStepFunctionToolCallDetails;
 }
 
 // Call details: Code Interpreter
 
 @doc("The detailed information about a code interpreter invocation by the model.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model CodeInterpreterToolCallDetails {
+model RunStepCodeInterpreterToolCallDetails {
   @doc("The input provided by the model to the code interpreter tool.")
   input: string;
 
   @doc("The outputs produced by the code interpreter tool back to the model in response to the tool call.")
-  outputs: CodeInterpreterToolCallOutput[];
+  outputs: RunStepCodeInterpreterToolCallOutput[];
 }
 
 @discriminator("type")
 @doc("An abstract representation of an emitted output from a code interpreter tool.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model CodeInterpreterToolCallOutput {
+model RunStepCodeInterpreterToolCallOutput {
   @doc("The object type.")
   type: string;
 }
 
 @doc("A representation of a log output emitted by a code interpreter tool in response to a tool call by the model.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model CodeInterpreterLogOutput extends CodeInterpreterToolCallOutput {
+model RunStepCodeInterpreterLogOutput
+  extends RunStepCodeInterpreterToolCallOutput {
   @doc("The object type, which is always 'logs'.")
   type: "logs";
 
@@ -172,17 +183,18 @@ model CodeInterpreterLogOutput extends CodeInterpreterToolCallOutput {
 
 @doc("A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model CodeInterpreterImageOutput extends CodeInterpreterToolCallOutput {
+model RunStepCodeInterpreterImageOutput
+  extends RunStepCodeInterpreterToolCallOutput {
   @doc("The object type, which is always 'image'.")
   type: "image";
 
   @doc("Referential information for the image associated with this output.")
-  image: CodeInterpreterImageReference;
+  image: RunStepCodeInterpreterImageReference;
 }
 
 @doc("An image reference emitted by a code interpreter tool in response to a tool call by the model.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model CodeInterpreterImageReference {
+model RunStepCodeInterpreterImageReference {
   @projectedName("json", "file_id")
   @doc("The ID of the file associated with this image.")
   fileId: string;
@@ -192,7 +204,7 @@ model CodeInterpreterImageReference {
 
 @doc("The detailed information about the function called by the model.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model FunctionToolCallDetails {
+model RunStepFunctionToolCallDetails {
   @doc("The name of the function.")
   name: string;
 

@@ -1660,14 +1660,54 @@
           "default": 1
         },
         "size": {
-          "$ref": "#/definitions/ImageSize",
+          "type": "string",
           "description": "The desired dimensions for generated images.\nDall-e-2 models support 256x256, 512x512, or 1024x1024.\nDall-e-3 models support 1024x1024, 1792x1024, or 1024x1792.",
-          "default": "1024x1024"
+          "default": "1024x1024",
+          "enum": [
+            "256x256",
+            "512x512"
+          ],
+          "x-ms-enum": {
+            "name": "ImageSize",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "size256x256",
+                "value": "256x256",
+                "description": "Very small image size of 256x256 pixels.\nOnly supported with dall-e-2 models."
+              },
+              {
+                "name": "size512x512",
+                "value": "512x512",
+                "description": "A smaller image size of 512x512 pixels.\nOnly supported with dall-e-2 models."
+              }
+            ]
+          }
         },
         "response_format": {
-          "$ref": "#/definitions/ImageGenerationResponseFormat",
+          "type": "string",
           "description": "The format in which image generation response items should be presented.",
           "default": "url",
+          "enum": [
+            "url",
+            "b64_json"
+          ],
+          "x-ms-enum": {
+            "name": "ImageGenerationResponseFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "url",
+                "value": "url",
+                "description": "Image generation response items should provide a URL from which the image may be retrieved."
+              },
+              {
+                "name": "base64",
+                "value": "b64_json",
+                "description": "Image generation response items should provide image data as a base64-encoded string."
+              }
+            ]
+          },
           "x-ms-client-name": "responseFormat"
         },
         "user": {
@@ -1678,30 +1718,6 @@
       "required": [
         "prompt"
       ]
-    },
-    "ImageGenerationResponseFormat": {
-      "type": "string",
-      "description": "The format in which the generated images are returned.",
-      "enum": [
-        "url",
-        "b64_json"
-      ],
-      "x-ms-enum": {
-        "name": "ImageGenerationResponseFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "url",
-            "value": "url",
-            "description": "Image generation response items should provide a URL from which the image may be retrieved."
-          },
-          {
-            "name": "base64",
-            "value": "b64_json",
-            "description": "Image generation response items should provide image data as a base64-encoded string."
-          }
-        ]
-      }
     },
     "ImageGenerations": {
       "type": "object",
@@ -1725,30 +1741,6 @@
         "created",
         "data"
       ]
-    },
-    "ImageSize": {
-      "type": "string",
-      "description": "The desired size of generated images.",
-      "enum": [
-        "256x256",
-        "512x512"
-      ],
-      "x-ms-enum": {
-        "name": "ImageSize",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "size256x256",
-            "value": "256x256",
-            "description": "Very small image size of 256x256 pixels.\nOnly supported with dall-e-2 models."
-          },
-          {
-            "name": "size512x512",
-            "value": "512x512",
-            "description": "A smaller image size of 512x512 pixels.\nOnly supported with dall-e-2 models."
-          }
-        ]
-      }
     },
     "OnYourDataAccessTokenAuthenticationOptions": {
       "type": "object",
