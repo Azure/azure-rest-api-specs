@@ -1379,7 +1379,7 @@
           "GroupQuotasEnforcement"
         ],
         "summary": "Enables the GroupQuotas enforcement for the resource provider and the location specified.",
-        "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level. The subscriptions share the GroupQuota assigned to the GroupQuota. If the GroupQuota is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource.",
+        "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level. The subscriptions share the GroupQuota assigned to the GroupQuota. If the GroupQuota is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource. If the Enforcement is in progress for that resourceProvider/location, then Conflict will be returned.",
         "operationId": "GroupQuotaEnforcement_Update",
         "x-ms-examples": {
           "GroupQuotaEnforcement_Patch": {
@@ -1441,8 +1441,8 @@
         "tags": [
           "GroupQuotasEnforcement"
         ],
-        "summary": "Gets the GroupQuotas enforcement status fot the resource provider/location.",
-        "description": "Gets the GroupQuotas enforcement status fot the ResourceProvider/location.",
+        "summary": "Gets the GroupQuotas enforcement status for the resource provider/location.",
+        "description": "Gets the GroupQuotas enforcement status for the ResourceProvider/location. The locations, where GroupQuota enforcement is not enabled will return Not Found.",
         "operationId": "GroupQuotaEnforcement_Get",
         "x-ms-examples": {
           "GroupQuotasEnforcement_Get": {
@@ -1491,7 +1491,7 @@
           "GroupQuotasEnforcement"
         ],
         "summary": "Returns a list of the Azure regions where the GroupQuotas enforcement is enabled.",
-        "description": "Returns only the list of the Azure regions where the GroupQuotas enforcement is enabled.",
+        "description": "Returns only the list of the Azure regions where the GroupQuotas enforcement is enabled. The locations not included in GroupQuota Enforcement will not be listed, the regions in failed status with listed as status Failed.",
         "operationId": "GroupQuotaEnforcement_List",
         "x-ms-examples": {
           "GroupQuotaEnforcement_List": {
