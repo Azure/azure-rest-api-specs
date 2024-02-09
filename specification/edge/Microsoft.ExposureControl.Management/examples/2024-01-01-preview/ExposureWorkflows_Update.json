@@ -5,6 +5,7 @@
     "api-version": "2024-01-01-preview",
     "subscriptionId": "dc4ac3fc-8889-44d6-a8f8-a8fa229c659e",
     "resourceGroupName": "azstec-global-test",
+    "featureName": "TestFeature",
     "exposureWorkflowName": "TestWorkflow",
     "properties": {
       "properties": {
@@ -16,18 +17,17 @@
     "200": {
       "body": {
         "properties": {
-          "exposureFeatureId": "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureFeatures/TestFeature",
-          "discriminator": "ubuntu:offer:sku:*",
+          "manifestDiscriminator": "ubuntu:offer:sku:*",
           "exposureWorkflowManifestId": "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureWorkflowManifests/TestManifest",
           "rings": [
             {
-              "name": "Ring1",
+              "ringName": "Ring1",
               "exposureGroupProperties": [
                 {
                   "filterConditions": [
                     {
                       "type": "Subscription",
-                      "values": [
+                      "conditions": [
                         "dc4ac3fc-8889-44d6-a8f8-a8fa229c659e"
                       ]
                     }
@@ -36,7 +36,7 @@
                 }
               ],
               "status": "Cancelled",
-              "retryTimes": 28,
+              "retryAttempts": 28,
               "progressionSetting": {
                 "method": {
                   "operationType": "TimeBased",
@@ -54,7 +54,7 @@
           "workflowStatus": "Cancelled",
           "provisioningState": "Succeeded"
         },
-        "id": "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureWorkflow/TestWorkflow",
+        "id": "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureFeatures/TestFeature/TestWorkflow",
         "name": "TestWorkflow",
         "type": "Microsoft.Edge/ExposureWorkflow",
         "systemData": {

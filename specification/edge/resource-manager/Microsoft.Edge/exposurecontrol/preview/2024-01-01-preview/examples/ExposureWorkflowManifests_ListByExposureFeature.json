@@ -1,14 +1,15 @@
 {
-  "title": "ExposureWorkflowManifests_ListByResourceGroup",
-  "operationId": "ExposureWorkflowManifests_ListByResourceGroup",
+  "title": "ExposureWorkflowManifests_ListByExposureFeature",
+  "operationId": "ExposureWorkflowManifests_ListByExposureFeature",
   "parameters": {
     "api-version": "2024-01-01-preview",
     "subscriptionId": "dc4ac3fc-8889-44d6-a8f8-a8fa229c659e",
-    "resourceGroupName": "azstec-global-test",
+    "resourceGroupName": "rgexposurecontrol",
     "top": 24,
     "skip": 11,
     "maxpagesize": 13,
-    "filter": "bdkcnrpfaodvwlhtjijzlttytvk"
+    "filter": "bdkcnrpfaodvwlhtjijzlttytvk",
+    "featureName": "."
   },
   "responses": {
     "200": {
@@ -16,15 +17,11 @@
         "value": [
           {
             "properties": {
-              "exposureFeatureId": "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureFeatures/TestFeature",
-              "discriminator": "ubuntu:offer:sku:*",
+              "manifestDiscriminator": "ubuntu:offer:sku:*",
               "overrideDefaultStartRing": "Ring1",
               "ringConfigurations": [
                 {
-                  "name": "Ring1",
-                  "exposureGroupIds": [
-                    "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureGroups/TestGroup"
-                  ],
+                  "ringName": "Ring1",
                   "status": "Waiting",
                   "progressionSetting": {
                     "method": {
@@ -33,14 +30,17 @@
                       "statusPollingInterval": "PT40M"
                     },
                     "gateStatus": "Open",
-                    "onSuccessRing": "",
-                    "onFailureRing": ""
-                  }
+                    "onSuccessRing": "pycgowszxfjpygq",
+                    "onFailureRing": "xmmwdkrigav"
+                  },
+                  "exposureGroupResourceIds": [
+                    "rtulznjfw"
+                  ]
                 }
               ],
               "provisioningState": "Succeeded"
             },
-            "id": "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureWorkflowManifests/TestManifest",
+            "id": "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureFeatures/TestFeature/TestManifest",
             "name": "TestManifest",
             "type": "Microsoft.Edge/ExposureWorkflowManifests",
             "systemData": {

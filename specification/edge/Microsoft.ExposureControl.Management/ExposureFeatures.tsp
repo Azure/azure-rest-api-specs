@@ -17,7 +17,7 @@ using Azure.ResourceManager;
 @doc("Exposure Control Resource Provider Service API.")
 namespace Microsoft.Edge;
 
-@doc("A exposure control feature resource")
+@doc("An exposure control feature resource")
 model ExposureFeature is ProxyResource<ExposureFeatureProperties> {
   @doc("Name of Feature")
   @pattern("^[-\\w\\._]+$")
@@ -27,9 +27,9 @@ model ExposureFeature is ProxyResource<ExposureFeatureProperties> {
   name: string;
 }
 
-@doc("Feature Properties")
+@doc("Exposure Feature Properties")
 model ExposureFeatureProperties {
-  @doc("Feature description.")
+  @doc("Exposure Feature description.")
   description?: string;
 
   @visibility("read")

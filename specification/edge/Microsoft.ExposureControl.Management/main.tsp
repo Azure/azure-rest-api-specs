@@ -34,8 +34,6 @@ enum Versions {
   v2024_00_01: "2024-01-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 @armResourceOperations
 interface ExposureGroups
   extends Azure.ResourceManager.ProxyResourceOperations<

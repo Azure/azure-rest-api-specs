@@ -38,11 +38,11 @@ model ExposureGroupProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Filter Conditions")
+@doc("Filter Conditions defined per group")
 model FilterCondition {
   @doc("filter condition type.")
   type: string;
 
   @doc("filter condition values.")
-  values: Array<string>;
+  conditions: Array<string>;
 }

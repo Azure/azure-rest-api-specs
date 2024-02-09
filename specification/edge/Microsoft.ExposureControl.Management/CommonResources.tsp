@@ -34,24 +34,24 @@ enum ProvisioningState {
 
 @doc("Ring status enum.")
 enum RingStatus {
-  @doc("Ring waiting.")
+  @doc("Ring/Stage is waiting for its dependency.")
   Waiting,
 
-  @doc("Ring active.")
+  @doc("Ring/Stage started and it is in progress.")
   Active,
 
-  @doc("Ring completed.")
+  @doc("Ring/Stage reached completion.")
   Completed,
 
-  @doc("Ring cancelled.")
+  @doc("Ring/Stage is cancelled.")
   Cancelled,
 
-  @doc("Ring failed.")
+  @doc("Ring/Stage is failed.")
   Failed,
 
-  @doc("Ring bypassed.")
+  @doc("Ring/Stage is passed for business reasons.")
   AutoPassed,
 
-  @doc("Ring Omitted.")
+  @doc("Ring/Stage is skipped for business reasons.")
   Omitted,
 }

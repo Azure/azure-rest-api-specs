@@ -21,16 +21,14 @@ namespace Microsoft.Edge;
 
 @doc("Exposure workflow manifest definition Properties")
 model ExposureWorkflowManifestProperties {
-  @doc("Feature Name.")
-  exposureFeatureId: string;
 
-  @doc("Ring description.")
-  discriminator: string;
+  @doc("Manifest identifier expression.")
+  manifestDiscriminator: string;
 
-  @doc("default override start ring.")
+  @doc("Overrides default start ring.")
   overrideDefaultStartRing?: string;
 
-  #suppress "@azure-tools/typespec-providerhub/no-identifier-property-in-array-item" "Error items have no unique identifier."
+  @extension("x-ms-identifiers", ["ringName"])
   @doc("ring configuration properties.")
   ringConfigurations: Array<RingConfigurationProperties>;
 
@@ -39,6 +37,7 @@ model ExposureWorkflowManifestProperties {
   provisioningState?: ProvisioningState;
 }
 
+@parentResource(ExposureFeature)
 @doc("A exposure control manifest resource")
 model ExposureWorkflowManifest
   is ProxyResource<ExposureWorkflowManifestProperties> {
@@ -50,18 +49,18 @@ model ExposureWorkflowManifest
   name: string;
 }
 
-@doc("Progression settings.")
+@doc("Configuration for Ring Progression.")
 model ProgressionSetting {
-  @doc("Progression methods.")
+  @doc("Different types of progression method supported.")
   method: ProgressionMethod;
 
-  @doc("Gate Status.")
+  @doc("Ring progression Gate Status.")
   gateStatus: GateStatus;
 
-  @doc("Onsuccess ring settings.")
+  @doc("Specifies the next ring to be transitioned on success.")
   onSuccessRing: string;
 
-  @doc("OnFailure ring settings.")
+  @doc("Specifies the next ring to be transitioned on failure.")
   onFailureRing: string;
 }
 
@@ -86,22 +85,22 @@ enum ProgressionType {
   Custom,
 }
 
-@doc("GateStatus enum.")
+@doc("Progression Gate status enum.")
 enum GateStatus {
-  @doc("Gate status Open.")
+  @doc("Gate status Open when ring is started/active.")
   Open,
 
-  @doc("Gate status Closed.")
+  @doc("Gate status Closed when ring is completed.")
   Closed,
 }
 
 @doc("Ring configuration Properties")
 model RingConfigurationProperties {
-  @doc("Ring name.")
-  name: string;
+  @doc("unique ring identifier.")
+  ringName: string;
 
-  @doc("Exposure Group Id's.")
-  exposureGroupIds: Array<string>;
+  @doc("Exposure Group ARM Id's.")
+  exposureGroupResourceIds: Array<string>;
 
   @doc("Ring status.")
   status: RingStatus;

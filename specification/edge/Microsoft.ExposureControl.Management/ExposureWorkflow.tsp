@@ -5,6 +5,7 @@ import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
+import "@typespec/openapi";
 
 import "./CommonResources.tsp";
 import "./ExposureWorkflowManifest.tsp";
@@ -14,10 +15,12 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 @doc("Exposure Control Resource Provider Service API.")
 namespace Microsoft.Edge;
 
+@parentResource(ExposureFeature)
 @doc("A exposure workflow resource")
 model ExposureWorkflow is ProxyResource<ExposureWorkflowProperties> {
   @doc("Name of Exposure Workflow")
@@ -30,21 +33,18 @@ model ExposureWorkflow is ProxyResource<ExposureWorkflowProperties> {
 
 @doc("Exposure workflow Properties")
 model ExposureWorkflowProperties {
-  @doc("Feature unique Id.")
-  exposureFeatureId?: string;
-
-  @doc("Workflow discriminator.")
-  discriminator: string;
+  @doc("Workflow manifest identifier expression.")
+  manifestDiscriminator: string;
 
   @doc("Workflow manifest Id.")
   exposureWorkflowManifestId?: string;
 
-  #suppress "@azure-tools/typespec-providerhub/no-identifier-property-in-array-item" "Error items have no unique identifier."
+  @extension("x-ms-identifiers", ["ringName"])
   @doc("Ring configuration details.")
   @visibility("read")
   rings: Array<ExposureWorkflowRingConfigurationProperties>;
 
-  @doc("Default start Ring.")
+  @doc("overrides default start Ring.")
   overrideDefaultStartRing?: string;
 
   @doc("Exposure workflow current ring status.")
@@ -61,39 +61,39 @@ model ExposureWorkflowProperties {
 
 @doc("Exposure Workflow Status")
 enum ExposureWorkflowStatus {
-  @doc("Workflow waiting.")
+  @doc("Workflow status is waiting.")
   Waiting,
 
-  @doc("Workflow active.")
+  @doc("Workflow started or in-progress.")
   Active,
 
-  @doc("Workflow completed.")
+  @doc("Workflow reached completion successfully.")
   Succeeded,
 
-  @doc("Workflow cancelled.")
+  @doc("Workflow is cancelled.")
   Cancelled,
 
-  @doc("workflow Failed.")
+  @doc("workflow reached completion with Failed status.")
   Failed,
 }
 
 @doc("Exposure workflow ring configuration Properties")
 model ExposureWorkflowRingConfigurationProperties {
-  @doc("Ring name.")
+  @doc("Unique ring identifier.")
   @visibility("read")
-  name: string;
+  ringName: string;
 
-  #suppress "@azure-tools/typespec-providerhub/no-identifier-property-in-array-item" "Error items have no unique identifier."
-  @doc("Group Properties.")
+  @extension("x-ms-identifiers", [])
+  @doc("Exposure Group Properties.")
   @visibility("read")
   exposureGroupProperties: Array<ExposureGroupProperties>;
 
   @doc("Ring status.")
   status: RingStatus;
 
-  @doc("Retry times.")
+  @doc("Number of retries attempted. Retry policy is service configured")
   @visibility("read")
-  retryTimes: int32;
+  retryAttempts: int32;
 
   @doc("Progression settings.")
   @visibility("read")
