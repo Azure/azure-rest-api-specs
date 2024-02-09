@@ -19,7 +19,10 @@ alias ServiceTraits = NoRepeatableRequests &
   ResponseHeadersTrait<RequestIdResponseHeader>;
 
 // alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ApcErrorResponse>;
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits, Azure.Core.Foundations.ErrorResponse>;
+alias Operations = Azure.Core.ResourceOperations<
+  ServiceTraits,
+  Azure.Core.Foundations.ErrorResponse
+>;
 
 @doc("Header to identify APC Gateway resource.")
 model ApcGatewayIdHeader {
@@ -60,7 +63,7 @@ model NetworkAccessIdentifierModel {
 model ApcErrorResponse {
   @doc("Error returned by APC")
   error: ApcError;
-  
+
   @header("x-ms-error-code")
   @doc("String error code indicating what went wrong.")
   errorCode?: string;

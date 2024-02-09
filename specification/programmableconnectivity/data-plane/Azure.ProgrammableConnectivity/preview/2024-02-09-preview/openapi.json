@@ -175,71 +175,6 @@
         }
       }
     },
-    "/number-verification/number:retrieve": {
-      "post": {
-        "operationId": "NumberVerification_RetrieveWithoutCode",
-        "description": "Retrieves the phone number (MSISDN) associated with a device. As part of the frontend authorization flow, the device is redirected to the operator network to authenticate directly.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "$ref": "#/parameters/ApcGatewayIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NumberRetrievalWithoutCodeContent"
-            }
-          }
-        ],
-        "responses": {
-          "302": {
-            "description": "Redirection",
-            "schema": {
-              "$ref": "#/definitions/EmptyResponse"
-            },
-            "headers": {
-              "location": {
-                "type": "string"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NumberVerification_RetrieveWithoutCode": {
-            "$ref": "./examples/NumberVerification_RetrieveWithoutCode_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/number-verification/number:verify": {
       "post": {
         "operationId": "NumberVerification_VerifyWithoutCode",
@@ -267,7 +202,7 @@
           "302": {
             "description": "Redirection",
             "schema": {
-              "$ref": "#/definitions/EmptyResponse"
+              "$ref": "#/definitions/EmptyResult"
             },
             "headers": {
               "location": {
@@ -431,68 +366,6 @@
     }
   },
   "x-ms-paths": {
-    "/number-verification/number:retrieve?_overload=retrieveWithCode": {
-      "post": {
-        "operationId": "NumberVerification_RetrieveWithCode",
-        "description": "Retrieves the phone number (MSISDN) associated with a device.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "$ref": "#/parameters/ApcGatewayIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NumberRetrievalWithCodeContent"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/NumberRetrievalResult"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NumberVerification_RetrieveWithCode": {
-            "$ref": "./examples/NumberVerification_RetrieveWithCode_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/number-verification/number:verify?_overload=verifyWithCode": {
       "post": {
         "operationId": "NumberVerification_VerifyWithCode",
@@ -783,7 +656,7 @@
         "network"
       ]
     },
-    "EmptyResponse": {
+    "EmptyResult": {
       "type": "object",
       "description": "Empty model to return as part of 302 redirect",
       "properties": {
@@ -930,51 +803,6 @@
           "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
         }
       }
-    },
-    "NumberRetrievalResult": {
-      "type": "object",
-      "description": "Response with number of device",
-      "properties": {
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
-          "pattern": "^\\+?[0-9]{5,15}$"
-        }
-      },
-      "required": [
-        "phoneNumber"
-      ]
-    },
-    "NumberRetrievalWithCodeContent": {
-      "type": "object",
-      "description": "Request to retrieve number of device - second call",
-      "properties": {
-        "networkIdentifier": {
-          "$ref": "#/definitions/NetworkIdentifier",
-          "description": "Identifier for the network to query for this device."
-        },
-        "apcCode": {
-          "type": "string",
-          "description": "The code provided by APC in exchange for the operator code."
-        }
-      },
-      "required": [
-        "networkIdentifier",
-        "apcCode"
-      ]
-    },
-    "NumberRetrievalWithoutCodeContent": {
-      "type": "object",
-      "description": "Request to retrieve number of device - first call",
-      "properties": {
-        "networkIdentifier": {
-          "$ref": "#/definitions/NetworkIdentifier",
-          "description": "Identifier for the network to query for this device."
-        }
-      },
-      "required": [
-        "networkIdentifier"
-      ]
     },
     "NumberVerificationEndpoint": {
       "type": "object",

@@ -30,7 +30,9 @@ interface NumberVerification {
   verifyWithoutCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
     NumberVerificationWithoutCodeContent,
-    TypeSpec.Http.Response<302> & EmptyResponse,
+    // Typespec requires that non-204 responses have a non-empty body. This requirement cannot be suppressed.
+    // Return a model containing only one optional field to get around this.
+    TypeSpec.Http.Response<302> & EmptyResult,
     TraitOverride<ResponseHeadersTrait<{
       @header location: string;
     } & RequestIdResponseHeader>>
@@ -43,27 +45,6 @@ interface NumberVerification {
     NumberVerificationEndpoint,
     NumberVerificationWithCodeContent,
     NumberVerificationResult
-  >;
-
-  @doc("Retrieves the phone number (MSISDN) associated with a device. As part of the frontend authorization flow, the device is redirected to the operator network to authenticate directly.")
-  @sharedRoute
-  @action("retrieve")
-  retrieveWithoutCode is Operations.ResourceAction<
-    NumberVerificationEndpoint,
-    NumberRetrievalWithoutCodeContent,
-    TypeSpec.Http.Response<302> & EmptyResponse,
-    TraitOverride<ResponseHeadersTrait<{
-      @header location: string;
-    } & RequestIdResponseHeader>>
-  >;
-  
-  @doc("Retrieves the phone number (MSISDN) associated with a device.")
-  @sharedRoute
-  @action("retrieve")
-  retrieveWithCode is Operations.ResourceAction<
-    NumberVerificationEndpoint,
-    NumberRetrievalWithCodeContent,
-    NumberRetrievalResult
   >;
 }
 
@@ -99,25 +80,10 @@ model NumberVerificationWithCodeContent {
   apcCode: string;
 }
 
-@doc("Request to retrieve number of device - first call")
-model NumberRetrievalWithoutCodeContent {
-  @doc("Identifier for the network to query for this device.")
-  networkIdentifier: NetworkIdentifier;
-}
-
-@doc("Request to retrieve number of device - second call")
-model NumberRetrievalWithCodeContent {
-  @doc("Identifier for the network to query for this device.")
-  networkIdentifier: NetworkIdentifier;
-
-  @doc("The code provided by APC in exchange for the operator code.")
-  apcCode: string;
-}
-
 /// Response models
 
 @doc("Empty model to return as part of 302 redirect")
-model EmptyResponse {
+model EmptyResult {
   @doc("Optional content")
   content?: string;
 }
@@ -126,13 +92,6 @@ model EmptyResponse {
 model NumberVerificationResult {
   @doc("True if number if the phone number matches the device, False otherwise")
   verificationResult: boolean;
-}
-
-@doc("Response with number of device")
-model NumberRetrievalResult {
-  @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
-  @pattern("^\\+?[0-9]{5,15}$")
-  phoneNumber: string;
 }
 
 /// Common models
