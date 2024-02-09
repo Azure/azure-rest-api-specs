@@ -1,11 +1,11 @@
-# VMware Solution
+# Azure VMware Solution
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for VMware Solution.
+This is the AutoRest configuration file for Azure VMware Solution.
 
 ## Getting Started
-To build the SDK for VMware Solution, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Azure VMware Solution, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -21,7 +21,16 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-05-01
+tag: package-2023-03-01
+```
+
+### Tag: package-2023-03-01
+
+These settings apply only when `--tag=package-2023-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03-01'
+input-file:
+- Microsoft.AVS/stable/2023-03-01/vmware.json
 ```
 
 ### Tag: package-2022-05-01
@@ -104,7 +113,8 @@ swagger-to-sdk:
 directive:
   - suppress: pathresourceprovidernamepascalcase
     reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-    from: vmware.json
+    from:
+      - vmware.json
 
   - suppress: TrackedResourceListByImmediateParent
     reason: list by immediate parent operations are defined
@@ -148,6 +158,7 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
+
 ```
 
 ### AutoRest v3 Suppressions

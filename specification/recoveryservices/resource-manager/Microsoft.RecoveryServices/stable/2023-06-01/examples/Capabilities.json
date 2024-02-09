@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "77777777-b0c6-47a2-b37c-d8e65a629c18",
+    "api-version": "2023-06-01",
+    "location": "westus",
+    "input": {
+      "type": "Microsoft.RecoveryServices/Vaults",
+      "properties": {
+        "dnsZones": [
+          {
+            "subResource": "AzureBackup"
+          },
+          {
+            "subResource": "AzureSiteRecovery"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.RecoveryServices/Vaults",
+        "properties": {
+          "dnsZones": [
+            {
+              "subResource": "AzureBackup",
+              "requiredZoneNames": [
+                "privatelink.wus.backup.windowsazure.com",
+                "privatelink.queue.core.windows.net",
+                "privatelink.blob.core.windows.net"
+              ]
+            },
+            {
+              "subResource": "AzureSiteRecovery",
+              "requiredZoneNames": [
+                "privatelink.siterecovery.windowsazure.com"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

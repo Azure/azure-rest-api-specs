@@ -92,6 +92,10 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event.",
       "type": "object",
       "properties": {
+        "partitionName": {
+          "description": "Data partition name",
+          "type": "string"
+        },
         "imageStudyInstanceUid": {
           "description": "Unique identifier for the Study",
           "type": "string"
@@ -123,10 +127,53 @@
         }
       }
     },
+    "HealthcareDicomImageUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageUpdated event.",
+      "type": "object",
+      "properties": {
+        "partitionName": {
+          "description": "Data partition name",
+          "type": "string"
+        },
+        "imageStudyInstanceUid": {
+          "description": "Unique identifier for the Study",
+          "type": "string"
+        },
+        "imageSeriesInstanceUid": {
+          "description": "Unique identifier for the Series",
+          "type": "string"
+        },
+        "imageSopInstanceUid": {
+          "description": "Unique identifier for the DICOM Image",
+          "type": "string"
+        },
+        "serviceHostName": {
+          "description": "Domain name of the DICOM account for this image.",
+          "type": "string"
+        },
+        "sequenceNumber": {
+          "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "x-ms-examples": {
+        "DicomImageUpdatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/dicom_image_updated.json"
+        },
+        "DicomImageUpdatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/dicom_image_updated.json"
+        }
+      }
+    },
     "HealthcareDicomImageDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event.",
       "type": "object",
       "properties": {
+        "partitionName": {
+          "description": "Data partition name",
+          "type": "string"
+        },
         "imageStudyInstanceUid": {
           "description": "Unique identifier for the Study",
           "type": "string"

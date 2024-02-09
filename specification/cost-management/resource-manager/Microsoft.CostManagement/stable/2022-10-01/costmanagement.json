@@ -1115,7 +1115,7 @@
           "ReservedInstances"
         ],
         "operationId": "GenerateReservationDetailsReport_ByBillingAccountId",
-        "description": "Generates the reservations details report for provided date range asynchronously based on enrollment id. The Reservation usage details can be viewed only by certain enterprise roles. For more details on the roles see, https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/understand-ea-roles#usage-and-costs-access-by-role",
+        "description": "Generates the reservations details report for provided date range asynchronously based on enrollment id. The Reservation usage details can be viewed only by certain enterprise roles. For more details on the roles see, https://docs.microsoft.com/azure/cost-management-billing/manage/understand-ea-roles#usage-and-costs-access-by-role",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1178,7 +1178,7 @@
           "ReservedInstances"
         ],
         "operationId": "GenerateReservationDetailsReport_ByBillingProfileId",
-        "description": "Generates the reservations details report for provided date range asynchronously by billing profile. The Reservation usage details can be viewed by only certain enterprise roles by default. For more details on the roles see, https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/reservation-utilization#view-utilization-in-the-azure-portal-with-azure-rbac-access",
+        "description": "Generates the reservations details report for provided date range asynchronously by billing profile. The Reservation usage details can be viewed by only certain enterprise roles by default. For more details on the roles see, https://docs.microsoft.com/azure/cost-management-billing/reservations/reservation-utilization#view-utilization-in-the-azure-portal-with-azure-rbac-access",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1481,12 +1481,22 @@
       "description": "The type of the column in the report.",
       "type": "string",
       "enum": [
-        "Tag",
+        "TagKey",
         "Dimension"
       ],
       "x-ms-enum": {
-        "name": "ReportConfigColumnType",
-        "modelAsString": true
+        "name": "QueryColumnType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TagKey",
+            "description": "The tag associated with the cost data."
+          },
+          {
+            "value": "Dimension",
+            "description": "The dimension of cost data."
+          }
+        ]
       }
     },
     "ReportConfigComparisonExpression": {
@@ -1586,7 +1596,7 @@
         "dateRange": {
           "description": "Date range of the current view.",
           "type": "string",
-          "readOnly": true
+          "readOnly": false
         },
         "currency": {
           "description": "Currency of the current view.",
@@ -2742,12 +2752,22 @@
       "description": "The type of the column in the export.",
       "type": "string",
       "enum": [
-        "Tag",
+        "TagKey",
         "Dimension"
       ],
       "x-ms-enum": {
         "name": "QueryColumnType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TagKey",
+            "description": "The tag associated with the cost data."
+          },
+          {
+            "value": "Dimension",
+            "description": "The dimension of cost data."
+          }
+        ]
       }
     },
     "QueryComparisonExpression": {

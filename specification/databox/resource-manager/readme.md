@@ -26,7 +26,62 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-02
+tag: package-2024-02-preview
+```
+
+### Tag: package-2024-02-preview
+
+These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02-preview'
+input-file:
+- Microsoft.DataBox/preview/2024-02-01-preview/databox.json
+```
+
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-12'
+input-file:
+- Microsoft.DataBox/stable/2023-12-01/databox.json
+```
+
+### Tag: package-2023-03
+
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03'
+input-file:
+- Microsoft.DataBox/stable/2023-03-01/databox.json
+```
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12'
+input-file:
+- Microsoft.DataBox/stable/2022-12-01/databox.json
+```
+
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+- Microsoft.DataBox/stable/2022-10-01/databox.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+- Microsoft.DataBox/stable/2022-09-01/databox.json
 ```
 
 ### Tag: package-2022-02

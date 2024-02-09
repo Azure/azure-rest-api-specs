@@ -1,0 +1,33 @@
+{
+  "title": "Endpoints_Update_AzureStorageBlobContainer",
+  "operationId": "Endpoints_Update",
+  "parameters": {
+    "api-version": "2023-10-01",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "endpointName": "examples-endpointName",
+    "endpoint": {
+      "properties": {
+        "endpointType": "AzureStorageBlobContainer",
+        "description": "Updated Endpoint Description"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-endpointName",
+        "name": "examples-endpointName",
+        "type": "Microsoft.StorageMover/storageMovers/endpoints",
+        "properties": {
+          "endpointType": "AzureStorageBlobContainer",
+          "storageAccountResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.Storage/storageAccounts/examplesa",
+          "blobContainerName": "examples-blobcontainer",
+          "description": "Updated Endpoint Description",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

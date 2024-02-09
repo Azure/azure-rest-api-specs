@@ -28,11 +28,14 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2022-10-preview
+tag: package-2023-12
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
+suppressions:
+  - code: ResourceNameRestriction
+    reason: 'BackupInstance Resource is created by DPP Service, so regex wont add much value here.'
 ```
 
 ### Validations
@@ -44,6 +47,87 @@ azure-validator: true
 model-validator: true
 semantic-validator: true
 message-format: json
+```
+
+
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12'
+input-file:
+  - Microsoft.DataProtection/stable/2023-12-01/dataprotection.json
+```
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.DataProtection/stable/2023-11-01/dataprotection.json
+```
+
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.DataProtection/preview/2023-08-01-preview/dataprotection.json
+```
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.DataProtection/preview/2023-06-01-preview/dataprotection.json
+```
+
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05'
+input-file:
+- Microsoft.DataProtection/stable/2023-05-01/dataprotection.json
+```
+
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - Microsoft.DataProtection/preview/2023-04-01-preview/dataprotection.json
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01'
+input-file:
+- Microsoft.DataProtection/stable/2023-01-01/dataprotection.json
+```
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12'
+input-file:
+- Microsoft.DataProtection/stable/2022-12-01/dataprotection.json
+```
+
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.DataProtection/preview/2022-11-01-preview/dataprotection.json
 ```
 
 ### Tag: package-2022-10-preview
@@ -59,10 +143,11 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.DataProtection/preview/2022-09-01-preview/dataprotection.json
 ```
+
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
@@ -220,3 +305,13 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: ParametersInPost
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchSecondaryRecoveryPoints"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchCrossRegionRestoreJobs"].post
+```

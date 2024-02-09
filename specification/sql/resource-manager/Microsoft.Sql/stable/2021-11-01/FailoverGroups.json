@@ -498,7 +498,15 @@
           "description": "List of databases in the failover group.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Sql/servers/databases"
+                }
+              ]
+            }
           }
         }
       }
@@ -595,6 +603,7 @@
       "properties": {
         "id": {
           "description": "Resource identifier of the partner server.",
+          "format": "arm-id",
           "type": "string"
         },
         "location": {

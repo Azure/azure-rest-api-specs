@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "name": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "subid",
+    "linkedServerName": "cache2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1/linkedServers/cache2",
+        "name": "cache2",
+        "type": "Microsoft.Cache/Redis/linkedServers",
+        "properties": {
+          "linkedRedisCacheId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache2",
+          "linkedRedisCacheLocation": "West US",
+          "geoReplicatedPrimaryHostName": "cache2.geo.redis.cache.windows.net",
+          "primaryHostName": "cache1.redis.cache.windows.net",
+          "provisioningState": "Succeeded",
+          "serverRole": "Secondary"
+        }
+      }
+    }
+  }
+}

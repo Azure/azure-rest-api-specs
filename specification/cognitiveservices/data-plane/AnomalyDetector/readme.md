@@ -54,8 +54,7 @@ These settings apply only when `--tag=release_1_1` is specified on the command l
 
 ```yaml $(tag) == 'release_1_1'
 input-file:
-  - stable/v1.1/UnivariateAnomalyDetector.json
-  - stable/v1.1/MultivariateAnomalyDetector.json
+  - stable/v1.1/openapi.json
 ```
 
 ## Swagger to SDK
@@ -106,8 +105,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/v1.0/AnomalyDetector.json
-  - $(this-folder)/stable/v1.1/UnivariateAnomalyDetector.json
-  - $(this-folder)/stable/v1.1/MultivariateAnomalyDetector.json
+  - $(this-folder)/stable/v1.1/openapi.json
   - $(this-folder)/preview/v1.1-preview/MultivariateAnomalyDetector.json
   - $(this-folder)/preview/v1.1-preview.1/MultivariateAnomalyDetector.json
   - $(this-folder)/preview/v1.1-preview.2/AnomalyDetector.json

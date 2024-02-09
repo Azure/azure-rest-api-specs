@@ -863,7 +863,15 @@
         },
         "subnetId": {
           "description": "Subnet resource ID for the managed instance.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         },
         "state": {
           "description": "The state of the managed instance.",
@@ -907,6 +915,7 @@
         },
         "dnsZonePartner": {
           "description": "The resource id of another managed instance whose DNS zone this managed instance will share after creation.",
+          "format": "arm-id",
           "type": "string",
           "x-ms-mutability": [
             "create"
@@ -919,6 +928,7 @@
         "sourceManagedInstanceId": {
           "description": "The resource identifier of the source managed instance associated with create operation of this instance.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1011,7 +1021,15 @@
         },
         "primaryUserAssignedIdentityId": {
           "description": "The resource id of a user assigned identity to be used by default.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         },
         "keyId": {
           "description": "A CMK URI of the key to use for encryption.",

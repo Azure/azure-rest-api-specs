@@ -15,5 +15,5 @@ clear-output-folder: true
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/loadtestservice/azure-mgmt-loadtesting/azure/mgmt/loadtesting
+output-folder: $(python-sdks-folder)/loadtesting/azure-mgmt-loadtesting/azure/mgmt/loadtesting
 ```
