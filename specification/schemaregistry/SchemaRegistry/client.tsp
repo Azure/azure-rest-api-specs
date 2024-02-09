@@ -6,12 +6,13 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using SchemaRegistry;
 
-@TypeSpec.Versioning.useDependency(
-  ServiceApiVersions.V2023_07_01
-)
+@TypeSpec.Versioning.useDependency(ServiceApiVersions.V2023_07_01)
 namespace ClientCustomizations;
 
-@client({name: "SchemaRegistryClient", service: SchemaRegistry})
+@client({
+  name: "SchemaRegistryClient",
+  service: SchemaRegistry,
+})
 interface SchemaOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ SchemaId resource doesn't allow returning binary schema and headers."
   listSchemaGroups is SchemaRegistry.listSchemaGroups;
@@ -32,21 +33,21 @@ interface SchemaOperations {
 
 // csharp modifications
 @doc("The content type for the schema.")
-enum ContentTypeEnum {
+union ContentTypeEnum {
   @doc("The Avro schema content type.")
   avro: "application/json; serialization=Avro",
 
   @doc("The JSON schema content type.")
-  @added(ServiceApiVersions.V2022_10)
   json: "application/json; serialization=Json",
 
   @doc("The custom schema content type.")
-  @added(ServiceApiVersions.V2022_10)
   custom: "text/plain; charset=utf-8",
 
   @doc("The protobuf schema content type.")
   @added(ServiceApiVersions.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
+
+  string,
 }
 
 @@access(ContentTypeEnum, Access.internal);

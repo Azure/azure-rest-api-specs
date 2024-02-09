@@ -43,11 +43,9 @@ namespace SchemaRegistry;
 
 @doc("Represents the Schema Registry API version to use for requests.")
 enum ServiceApiVersions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("Azure Schema Registry 2021-10 Version")
   V2021_10: "2021-10",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("Azure Schema Registry 2022-10 Version")
   V2022_10: "2022-10",
 
@@ -164,20 +162,13 @@ op registerSchema is Azure.Core.Foundations.Operation<
   NoContentResponse<SchemaProperties>
 >;
 
-
 // Models
 alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
 union SchemaContentTypeValues {
-  @added(ServiceApiVersions.V2022_10)
   customBinary: "application/octet-stream",
-
-  @added(ServiceApiVersions.V2022_10)
   custom: "text/plain; charset=utf-8",
-
   avro: "application/json; serialization=Avro",
-
-  @added(ServiceApiVersions.V2022_10)
   json: "application/json; serialization=Json",
 
   @added(ServiceApiVersions.V2023_07_01)
