@@ -17,15 +17,15 @@ namespace Microsoft.MachineLearningServices;
 
 interface IndexVersions {
   @doc("Fetch a IndexVersion by name.")
-  getIndexVersion is ResourceRead<Index>;
+  get is ResourceRead<Index>;
 
   @doc("Creates or updates a IndexVersion.")
-  createIndexVersion is ResourceCreateOrUpdate<Index>;
+  createOrUpdate is ResourceCreateOrUpdate<Index>;
 
   @route("/workspaces/{workspaceName}/indexes/{indexName}/versions")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to use same model in both list calls."
-  listIndexVersion is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the workspace.")
       @path
@@ -49,12 +49,12 @@ interface IndexVersions {
     >;
 }
 
-interface IndexesLatest {
+interface IndexLatest {
    @doc("Get latest Index.")
    @route("/workspaces/{workspaceName}/indexes/{indexName}")
    @get
    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-   getIndexWorkspace is Azure.Core.Foundations.Operation<
+   getLatest is Azure.Core.Foundations.Operation<
      {
        @doc("Name of the workspace.")
        @path
@@ -73,7 +73,7 @@ interface IndexesLatest {
    @route("/workspaces/{workspaceName}/indexes/")
    @get
    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-   listIndexWorkspace is Azure.Core.Foundations.Operation<
+   listLatest is Azure.Core.Foundations.Operation<
      {
        @doc("Name of the workspace.")
        @path

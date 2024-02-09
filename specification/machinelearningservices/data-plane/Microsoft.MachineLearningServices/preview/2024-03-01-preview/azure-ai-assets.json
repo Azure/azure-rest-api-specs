@@ -74,7 +74,7 @@
   "paths": {
     "/workspaces/{workspaceName}/indexes": {
       "get": {
-        "operationId": "IndexesLatest_ListIndexWorkspace",
+        "operationId": "IndexesLatest_ListLatest",
         "description": "List the latest version of each index.",
         "parameters": [
           {
@@ -118,19 +118,19 @@
             }
           }
         },
-        "x-ms-examples": {
-          "IndexesLatest_ListIndexWorkspace": {
-            "$ref": "./examples/IndexesLatest_ListIndexWorkspace_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IndexesLatest_ListLatest_MaximumSet_Gen": {
+            "$ref": "./examples/IndexesLatest_ListLatest_MaximumSet_Gen.json"
+          }
         }
       }
     },
     "/workspaces/{workspaceName}/indexes/{indexName}": {
       "get": {
-        "operationId": "IndexesLatest_GetIndexWorkspace",
+        "operationId": "IndexesLatest_GetLatest",
         "description": "Get latest Index.",
         "parameters": [
           {
@@ -174,15 +174,15 @@
           }
         },
         "x-ms-examples": {
-          "IndexesLatest_GetIndexWorkspace": {
-            "$ref": "./examples/IndexesLatest_GetIndexWorkspace_MaximumSet_Gen.json"
+          "IndexesLatest_GetLatest_MaximumSet_Gen": {
+            "$ref": "./examples/IndexesLatest_GetLatest_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/workspaces/{workspaceName}/indexes/{indexName}/versions": {
       "get": {
-        "operationId": "IndexVersions_ListIndexVersion",
+        "operationId": "IndexVersions_List",
         "description": "The most basic operation.",
         "parameters": [
           {
@@ -249,19 +249,19 @@
             }
           }
         },
-        "x-ms-examples": {
-          "IndexVersions_ListIndexVersion": {
-            "$ref": "./examples/IndexVersions_ListIndexVersion_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IndexVersions_List_MaximumSet_Gen": {
+            "$ref": "./examples/IndexVersions_List_MaximumSet_Gen.json"
+          }
         }
       }
     },
     "/workspaces/{workspaceName}/indexes/{indexName}/versions/{indexVersion}": {
       "get": {
-        "operationId": "IndexVersions_GetIndexVersion",
+        "operationId": "IndexVersions_Get",
         "description": "Fetch a IndexVersion by name.",
         "parameters": [
           {
@@ -311,13 +311,13 @@
           }
         },
         "x-ms-examples": {
-          "IndexVersions_GetIndexVersion": {
-            "$ref": "./examples/IndexVersions_GetIndexVersion_MaximumSet_Gen.json"
+          "IndexVersions_Get_MaximumSet_Gen": {
+            "$ref": "./examples/IndexVersions_Get_MaximumSet_Gen.json"
           }
         }
       },
       "patch": {
-        "operationId": "IndexVersions_CreateIndexVersion",
+        "operationId": "IndexVersions_CreateOrUpdate",
         "description": "Creates or updates a IndexVersion.",
         "consumes": [
           "application/merge-patch+json"
@@ -385,8 +385,8 @@
           }
         },
         "x-ms-examples": {
-          "IndexVersions_CreateIndexVersion": {
-            "$ref": "./examples/IndexVersions_CreateIndexVersion_MaximumSet_Gen.json"
+          "IndexVersions_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/IndexVersions_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       }
