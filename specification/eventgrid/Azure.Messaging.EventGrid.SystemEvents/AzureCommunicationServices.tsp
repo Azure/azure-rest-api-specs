@@ -379,7 +379,7 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
 }
 
 /** Acs Router Job Status */
-enum AcsRouterJobStatus {
+union AcsRouterJobStatus {
   /** Router Job Status Pending Classification */
   PendingClassification,
 
@@ -752,7 +752,7 @@ alias AcsChatParticipantBaseEventData = {
 };
 
 /** Recording content type */
-enum recordingContentType {
+union recordingContentType {
   /** AudioVideo content type */
   AudioVideo,
 
@@ -761,7 +761,7 @@ enum recordingContentType {
 }
 
 /** Recording channel type */
-enum recordingChannelType {
+union recordingChannelType {
   /** Mixed channel type */
   Mixed,
 
@@ -770,7 +770,7 @@ enum recordingChannelType {
 }
 
 /** Recording format type */
-enum recordingFormatType {
+union recordingFormatType {
   /** WAV format */
   Wav,
 
@@ -782,7 +782,7 @@ enum recordingFormatType {
 }
 
 /** Router Job Worker Selector Label Operator */
-enum AcsRouterLabelOperator {
+union AcsRouterLabelOperator {
   /** Router Label Operator Equal */
   Equal,
 
@@ -803,7 +803,7 @@ enum AcsRouterLabelOperator {
 }
 
 /** Router Worker Selector State */
-enum AcsRouterWorkerSelectorState {
+union AcsRouterWorkerSelectorState {
   /** Router Worker Selector State Active */
   Active: "active",
 
@@ -812,7 +812,7 @@ enum AcsRouterWorkerSelectorState {
 }
 
 /** The status of the email. Any value other than Delivered is considered failed. */
-enum AcsEmailDeliveryReportStatus {
+union AcsEmailDeliveryReportStatus {
   /** Hard bounce detected while sending the email */
   Bounced,
 
@@ -991,7 +991,7 @@ model AcsIncomingCallCustomContext {
 }
 
 /** The type of engagement user have with email. */
-enum AcsUserEngagement {
+union AcsUserEngagement {
   /** View */
   view,
 
@@ -1039,7 +1039,7 @@ model CommunicationUserIdentifierModel {
 }
 
 /** Communication cloud environment model. */
-enum CommunicationCloudEnvironmentModel {
+union CommunicationCloudEnvironmentModel {
   /** Public */
   public,
 

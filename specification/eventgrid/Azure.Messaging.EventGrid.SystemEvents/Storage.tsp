@@ -219,7 +219,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** The status for a storage task. */
-  enum StorageTaskAssignmentCompletedStatus {
+  union StorageTaskAssignmentCompletedStatus {
     /** Succeeded */
     Succeeded,
 
@@ -228,7 +228,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** The status for a storage task. */
-  enum StorageTaskCompletedStatus {
+  union StorageTaskCompletedStatus {
     /** Succeeded */
     Succeeded,
 

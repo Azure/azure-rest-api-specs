@@ -80,7 +80,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of FHIR resource type enumeration. */
-  enum HealthcareFhirResourceType {
+  union HealthcareFhirResourceType {
     /** The FHIR resource type defined in STU3 and R4. */
     Account,
 
