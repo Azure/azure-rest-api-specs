@@ -5,8 +5,8 @@
     "api-version": "2021-03-01-preview",
     "subscriptionId": "d9f252e3-8046-4707-bfbd-e5b9e6011e07",
     "resourceGroupName": "rg1",
-    "name": "test-workbench",
-    "body": {
+    "workbenchName": "test-workbench",
+    "resource": {
       "location": "Central US",
       "properties": {
         "appOidc": {
@@ -27,7 +27,9 @@
           "appOidc": {
             "clientId": "test-clientid",
             "secretUri": "test-clientsecret"
-          }
+          },
+          "sku": "Basic",
+          "provisioningState": "Processing"
         }
       }
     },
@@ -44,7 +46,9 @@
           "appOidc": {
             "clientId": "test-clientid",
             "secretUri": "test-clientsecret"
-          }
+          },
+          "sku": "Basic",
+          "provisioningState": "Processing"
         }
       }
     }
