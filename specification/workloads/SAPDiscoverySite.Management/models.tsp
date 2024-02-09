@@ -16,28 +16,28 @@ namespace Microsoft.Workloads;
  * Defines the provisioning states.
  */
 enum ProvisioningState {
-  @doc("The provisioning state Succeeded.")
+  /** The provisioning state Succeeded. */
   Succeeded,
 
-  @doc("The provisioning state Updating.")
+  /** The provisioning state Updating. */
   Updating,
 
-  @doc("The provisioning state Failed.")
+  /** The provisioning state Failed. */
   Failed,
 
-  @doc("The provisioning state Creating.")
+  /** The provisioning state Creating. */
   Creating,
 
-  @doc("The provisioning state Cancelled.")
+  /** The provisioning state Cancelled. */
   Canceled,
 
-  @doc("The provisioning state Accepted.")
+  /** The provisioning state Accepted. */
   Accepted,
 
-  @doc("The provisioning state Deleting.")
+  /** The provisioning state Deleting. */
   Deleting,
 
-  @doc("The provisioning state Unknown.")
+  /** The provisioning state Unknown. */
   Unknown,
 }
 
@@ -45,28 +45,28 @@ enum ProvisioningState {
  * The Environment; PRD, QA, DEV, etc to which SAP system belongs to. Select from the list of available dropdown values.
  */
 enum SapInstanceEnvironment {
-  @doc("The type of Sap Instance Environment- Production.")
+  /** The type of Sap Instance Environment- Production. */
   Production,
 
-  @doc("The type of Sap Instance Environment- PreProduction.")
+  /** The type of Sap Instance Environment- PreProduction. */
   PreProduction,
 
-  @doc("The type of Sap Instance Environment- Test.")
+  /** The type of Sap Instance Environment- Test. */
   Test,
 
-  @doc("The type of Sap Instance Environment- QualityAssurance.")
+  /** The type of Sap Instance Environment- QualityAssurance. */
   QualityAssurance,
 
-  @doc("The type of Sap Instance Environment- Development.")
+  /** The type of Sap Instance Environment- Development. */
   Development,
 
-  @doc("The type of Sap Instance Environment- Sandbox.")
+  /** The type of Sap Instance Environment- Sandbox. */
   Sandbox,
 
-  @doc("The type of Sap Instance Environment- DisasterRecovery.")
+  /** The type of Sap Instance Environment- DisasterRecovery. */
   DisasterRecovery,
 
-  @doc("The type of Sap Instance Environment- Training.")
+  /** The type of Sap Instance Environment- Training. */
   Training,
 }
 
@@ -74,19 +74,19 @@ enum SapInstanceEnvironment {
  * The SAP instance type running on this machine, e.g., App, ASCS, DB, etc. Select from the list of available dropdown values. Only single server and distributed architectures are supported.
  */
 enum SapInstanceType {
-  @doc("The type of Sap Instance- ASCS.")
+  /** The type of Sap Instance- ASCS. */
   ASCS,
 
-  @doc("The type of Sap Instance- DB.")
+  /** The type of Sap Instance- DB. */
   DB,
 
-  @doc("The type of Sap Instance- APP.")
+  /** The type of Sap Instance- APP. */
   APP,
 
-  @doc("The type of Sap Instance- SCS.")
+  /** The type of Sap Instance- SCS. */
   SCS,
 
-  @doc("The type of Sap Instance- WEBDISP.")
+  /** The type of Sap Instance- WEBDISP. */
   WEBDISP,
 }
 
@@ -94,22 +94,22 @@ enum SapInstanceType {
  * This is Operating System on which the host server is running.
  */
 enum OperatingSystem {
-  @doc("The type of Operating system- IBMAIX.")
+  /** The type of Operating system- IBMAIX. */
   IBMAIX,
 
-  @doc("The type of Operating system- RedHat.")
+  /** The type of Operating system- RedHat. */
   RedHat,
 
-  @doc("The type of Operating system- SUSE.")
+  /** The type of Operating system- SUSE. */
   SUSE,
 
-  @doc("The type of Operating system- Solaris.")
+  /** The type of Operating system- Solaris. */
   Solaris,
 
-  @doc("The type of Operating system- Unix.")
+  /** The type of Operating system- Unix. */
   Unix,
 
-  @doc("The type of Operating system- WindowsServer.")
+  /** The type of Operating system- WindowsServer. */
   WindowsServer,
 }
 
@@ -117,31 +117,31 @@ enum OperatingSystem {
  * Select the database if this is a database server. Leave blank or add Not Applicable for all other instances except the Database Instance.
  */
 enum DatabaseType {
-  @doc("The type of Database- Adabas.")
+  /** The type of Database- Adabas. */
   Adabas,
 
-  @doc("The type of Database- Oracle.")
+  /** The type of Database- Oracle. */
   Oracle,
 
-  @doc("The type of Database- SAPMaxDB.")
+  /** The type of Database- SAPMaxDB. */
   SAPMaxDB,
 
-  @doc("The type of Database- Db2.")
+  /** The type of Database- Db2. */
   Db2,
 
-  @doc("The type of Database- SAPASE.")
+  /** The type of Database- SAPASE. */
   SAPASE,
 
-  @doc("The type of Database- SQLServer.")
+  /** The type of Database- SQLServer. */
   SQLServer,
 
-  @doc("The type of Database- Informix.")
+  /** The type of Database- Informix. */
   Informix,
 
-  @doc("The type of Database- SAPDB.")
+  /** The type of Database- SAPDB. */
   SAPDB,
 
-  @doc("The type of Database- HANA.")
+  /** The type of Database- HANA. */
   HANA,
 }
 
@@ -149,10 +149,10 @@ enum DatabaseType {
  * The data source for this resource.
  */
 enum DataSource {
-  @doc("The type of DataSource- Excel.")
+  /** The type of DataSource- Excel. */
   Excel,
 
-  @doc("The type of DataSource- Native.")
+  /** The type of DataSource- Native. */
   Native,
 }
 
@@ -241,17 +241,6 @@ model ExtendedLocation {
 }
 
 /**
- * Defines the request body for updating SAP Discovery site resource.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
-model UpdateSAPDiscoverySiteRequest {
-  /**
-   * Gets or sets the Resource tags.
-   */
-  tags?: Record<string>;
-}
-
-/**
  * Defines the SAP Instance properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
@@ -302,17 +291,6 @@ model SAPInstanceProperties {
    */
   @visibility("read")
   errors?: SAPMigrateError;
-}
-
-/**
- * Defines the request body for updating SAP Instance resource.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
-model UpdateSAPInstanceRequest {
-  /**
-   * Gets or sets the Resource tags.
-   */
-  tags?: Record<string>;
 }
 
 /**
@@ -468,7 +446,7 @@ model ConfigurationData {
  */
 @discriminator("dataSource")
 model PerformanceData {
-  @doc("The data source of the performance data.")
+  /** The data source of the performance data. */
   dataSource: DataSource;
 }
 

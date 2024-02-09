@@ -21,7 +21,7 @@ model SAPInstance is TrackedResource<SAPInstanceProperties> {
   /**
    * The name of SAP Instance resource for SAP Migration.
    */
-  @pattern("^[A-Za-z][\\w-]*[A-Za-z0-9]$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$")
   @path
   @key("sapInstanceName")
   @segment("sapInstances")
@@ -46,7 +46,7 @@ interface SAPInstances {
    * Updates the SAP Instance resource.
    */
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<SAPInstance, UpdateSAPInstanceRequest>;
+  update is ArmTagsPatchSync<SAPInstance>;
 
   /**
    * Deletes the SAP Instance resource. <br><br>This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
@@ -59,10 +59,3 @@ interface SAPInstances {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
   list is ArmResourceListByParent<SAPInstance>;
 }
-
-@@doc(SAPInstances.create::parameters.resource,
-  "The SAP Instance request body."
-);
-@@doc(SAPInstances.update::parameters.properties,
-  "The SAP Instance resource request body."
-);

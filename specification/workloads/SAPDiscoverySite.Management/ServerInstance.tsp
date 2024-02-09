@@ -20,7 +20,7 @@ model ServerInstance is ProxyResource<ServerInstanceProperties> {
   /**
    * The name of the Server instance resource for SAP Migration.
    */
-  @pattern("^[A-Za-z][\\w-]*[A-Za-z0-9]$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$")
   @path
   @key("serverInstanceName")
   @segment("serverInstances")
@@ -57,10 +57,3 @@ interface ServerInstances {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Supporting existing name."
   list is ArmResourceListByParent<ServerInstance>;
 }
-
-@@doc(ServerInstances.create::parameters.resource,
-  "The Server Instance request body."
-);
-@@doc(ServerInstances.update::parameters.properties,
-  "The Server Instance resource request body."
-);

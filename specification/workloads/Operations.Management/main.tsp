@@ -14,7 +14,6 @@ using TypeSpec.Versioning;
  * Workloads client provides access to various workload operations.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Workloads Client",
 })

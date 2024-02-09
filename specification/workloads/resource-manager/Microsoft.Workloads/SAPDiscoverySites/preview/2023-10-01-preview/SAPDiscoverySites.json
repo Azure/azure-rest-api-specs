@@ -22,21 +22,20 @@
   ],
   "security": [
     {
-      "AadOauth2Auth": [
+      "azure_auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "AadOauth2Auth": {
+    "azure_auth": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "flow": "accessCode",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
-      },
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "tags": [
@@ -155,7 +154,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
@@ -200,12 +199,12 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "resource",
             "in": "body",
-            "description": "SAP Migration discovery site resource request body.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SAPDiscoverySite"
@@ -271,15 +270,15 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Request body to update a SAP Migration discovery site resource.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateSAPDiscoverySiteRequest"
+              "$ref": "#/definitions/SAPDiscoverySiteTagsUpdate"
             }
           }
         ],
@@ -288,20 +287,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SAPDiscoverySite"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
             }
           },
           "default": {
@@ -315,11 +300,7 @@
           "Updates a SAP Migration discovery site resource.": {
             "$ref": "./examples/SAPDiscoverySites_Update.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "SapDiscoverySites_Delete",
@@ -343,7 +324,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
@@ -408,7 +389,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
@@ -473,7 +454,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
@@ -523,7 +504,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "sapInstanceName",
@@ -531,7 +512,7 @@
             "description": "The name of SAP Instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
@@ -576,7 +557,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "sapInstanceName",
@@ -584,12 +565,12 @@
             "description": "The name of SAP Instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "resource",
             "in": "body",
-            "description": "The SAP Instance request body.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SAPInstance"
@@ -655,7 +636,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "sapInstanceName",
@@ -663,15 +644,15 @@
             "description": "The name of SAP Instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "The SAP Instance resource request body.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateSAPInstanceRequest"
+              "$ref": "#/definitions/SAPInstanceTagsUpdate"
             }
           }
         ],
@@ -680,20 +661,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SAPInstance"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
             }
           },
           "default": {
@@ -707,11 +674,7 @@
           "Updates the SAP Instance resource.": {
             "$ref": "./examples/SAPInstances_Update.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "SapInstances_Delete",
@@ -735,7 +698,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "sapInstanceName",
@@ -743,7 +706,7 @@
             "description": "The name of SAP Instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
@@ -808,7 +771,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "sapInstanceName",
@@ -816,7 +779,7 @@
             "description": "The name of SAP Instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
@@ -866,7 +829,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "sapInstanceName",
@@ -874,7 +837,7 @@
             "description": "The name of SAP Instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "serverInstanceName",
@@ -882,7 +845,7 @@
             "description": "The name of the Server instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
@@ -927,7 +890,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "sapInstanceName",
@@ -935,7 +898,7 @@
             "description": "The name of SAP Instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "serverInstanceName",
@@ -943,12 +906,12 @@
             "description": "The name of the Server instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "resource",
             "in": "body",
-            "description": "The Server Instance request body.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServerInstance"
@@ -1014,7 +977,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "sapInstanceName",
@@ -1022,7 +985,7 @@
             "description": "The name of SAP Instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "serverInstanceName",
@@ -1030,12 +993,12 @@
             "description": "The name of the Server instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "The Server Instance resource request body.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateServerInstanceRequest"
@@ -1102,7 +1065,7 @@
             "description": "The name of the discovery site resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "sapInstanceName",
@@ -1110,7 +1073,7 @@
             "description": "The name of SAP Instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
             "name": "serverInstanceName",
@@ -1118,7 +1081,7 @@
             "description": "The name of the Server instance resource for SAP Migration.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
@@ -1594,6 +1557,19 @@
         }
       }
     },
+    "SAPDiscoverySiteTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SAPDiscoverySite resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "SAPInstance": {
       "type": "object",
       "description": "Define the SAP Instance resource.",
@@ -1684,6 +1660,19 @@
           "$ref": "#/definitions/SAPMigrateError",
           "description": "Defines the errors related to SAP Instance resource.",
           "readOnly": true
+        }
+      }
+    },
+    "SAPInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SAPInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1894,32 +1883,6 @@
           "$ref": "#/definitions/SAPMigrateError",
           "description": "Defines the errors related to SAP Instance resource.",
           "readOnly": true
-        }
-      }
-    },
-    "UpdateSAPDiscoverySiteRequest": {
-      "type": "object",
-      "description": "Defines the request body for updating SAP Discovery site resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Gets or sets the Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateSAPInstanceRequest": {
-      "type": "object",
-      "description": "Defines the request body for updating SAP Instance resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Gets or sets the Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },

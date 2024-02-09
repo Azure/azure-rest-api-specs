@@ -20,7 +20,7 @@ model SAPDiscoverySite is TrackedResource<SAPDiscoverySiteProperties> {
   /**
    * The name of the discovery site resource for SAP Migration.
    */
-  @pattern("^[A-Za-z][\\w-]*[A-Za-z0-9]$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$")
   @path
   @key("sapDiscoverySiteName")
   @segment("sapDiscoverySites")
@@ -50,10 +50,7 @@ interface SAPDiscoverySites {
    * Updates a SAP Migration discovery site resource.
    */
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    SAPDiscoverySite,
-    UpdateSAPDiscoverySiteRequest
-  >;
+  update is ArmTagsPatchSync<SAPDiscoverySite>;
 
   /**
    * Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances and Server Instances.
@@ -79,10 +76,3 @@ interface SAPDiscoverySites {
     OperationStatusResult
   >;
 }
-
-@@doc(SAPDiscoverySites.create::parameters.resource,
-  "SAP Migration discovery site resource request body."
-);
-@@doc(SAPDiscoverySites.update::parameters.properties,
-  "Request body to update a SAP Migration discovery site resource."
-);
