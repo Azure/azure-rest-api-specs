@@ -12,7 +12,7 @@ namespace Microsoft.MachineLearningServices;
 
 // Workspace definitions are to correctly nest resources under workspaces (not to redefine the definitions in swagger)
 @doc("Machine learning workspace.")
-@Autorest.useRef("workspaceRP.json#/definitions/Workspaces")
+@Autorest.useRef("../../../../resource-manager/Microsoft.MachineLearningServices/stable/2023-10-01/workspaceRP.json#/definitions/Workspaces")
 @resource("workspaces")
 model Workspace {
   @doc("Name of the workspace")
@@ -20,7 +20,6 @@ model Workspace {
   @key("workspaceName")
   @segment("workspaces")
   @visibility("external")
-  @Autorest.useRef("../../../../resource-manager/Microsoft.MachineLearningServices/stable/2023-10-01/machineLearningServices.json#/parameters/WorkspaceNameParameter")
   name: string;
 }
 

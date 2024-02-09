@@ -85,7 +85,8 @@
             "in": "path",
             "description": "Name of the workspace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -117,13 +118,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "IndexesLatest_ListIndexWorkspace_MaximumSet_Gen": {
+          "IndexesLatest_ListIndexWorkspace": {
             "$ref": "./examples/IndexesLatest_ListIndexWorkspace_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -140,7 +141,8 @@
             "in": "path",
             "description": "Name of the workspace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "indexName",
@@ -172,7 +174,7 @@
           }
         },
         "x-ms-examples": {
-          "IndexesLatest_GetIndexWorkspace_MaximumSet_Gen": {
+          "IndexesLatest_GetIndexWorkspace": {
             "$ref": "./examples/IndexesLatest_GetIndexWorkspace_MaximumSet_Gen.json"
           }
         }
@@ -191,7 +193,8 @@
             "in": "path",
             "description": "Name of the workspace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "indexName",
@@ -246,13 +249,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "IndexVersions_ListIndexVersion_MaximumSet_Gen": {
+          "IndexVersions_ListIndexVersion": {
             "$ref": "./examples/IndexVersions_ListIndexVersion_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -265,7 +268,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "../../../../resource-manager/Microsoft.MachineLearningServices/stable/2023-10-01/machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the workspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "indexName",
@@ -303,7 +311,7 @@
           }
         },
         "x-ms-examples": {
-          "IndexVersions_GetIndexVersion_MaximumSet_Gen": {
+          "IndexVersions_GetIndexVersion": {
             "$ref": "./examples/IndexVersions_GetIndexVersion_MaximumSet_Gen.json"
           }
         }
@@ -319,7 +327,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "../../../../resource-manager/Microsoft.MachineLearningServices/stable/2023-10-01/machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the workspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "indexName",
@@ -372,7 +385,7 @@
           }
         },
         "x-ms-examples": {
-          "IndexVersions_CreateIndexVersion_MaximumSet_Gen": {
+          "IndexVersions_CreateIndexVersion": {
             "$ref": "./examples/IndexVersions_CreateIndexVersion_MaximumSet_Gen.json"
           }
         }

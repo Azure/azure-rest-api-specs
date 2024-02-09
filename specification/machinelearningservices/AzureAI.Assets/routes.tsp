@@ -29,7 +29,8 @@ interface IndexVersions {
     {
       @doc("Name of the workspace.")
       @path
-      workspaceName: Workspace.name;
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      workspaceName: string;
 
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
@@ -57,7 +58,8 @@ interface IndexesLatest {
      {
        @doc("Name of the workspace.")
        @path
-       workspaceName: Workspace.name;
+       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+       workspaceName: string;
  
        @doc("Name of the index.")
        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
@@ -75,7 +77,8 @@ interface IndexesLatest {
      {
        @doc("Name of the workspace.")
        @path
-       workspaceName: Workspace.name;
+       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+       workspaceName: string;
  
        ...StandardListQueryParameters
      },
