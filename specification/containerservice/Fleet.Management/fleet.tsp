@@ -56,6 +56,7 @@ model FleetProperties {
   @added(Versions.v2023_08_15_preview)
   @removed(Versions.v2023_10_15)
   @added(Versions.v2024_02_02_preview)
+  @added(Versions.v2024_05_02_preview)
   hubProfile?: FleetHubProfile;
 }
 
