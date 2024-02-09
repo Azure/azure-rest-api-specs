@@ -110,7 +110,7 @@ interface Watchers {
   get is ArmResourceRead<Watcher>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Watcher>;
   update is ArmResourcePatchAsync<Watcher, WatcherProperties>;
-  delete is ArmResourceDeleteAsync<Watcher>;
+  delete is ArmResourceDeleteWithoutOkAsync<Watcher>;
   listByResourceGroup is ArmResourceListByParent<Watcher>;
   listBySubscription is ArmListBySubscription<Watcher>;
 
