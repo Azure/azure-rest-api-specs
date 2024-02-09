@@ -1,0 +1,733 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2024-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/query": {
+      "post": {
+        "x-ms-examples": {
+          "Get all file imports.": {
+            "$ref": "./examples/threatIntelligence/PostThreatIntelligenceQuery.json"
+          }
+        },
+        "tags": [
+          "ThreatIntelligence"
+        ],
+        "description": "Gets all TI objects for the workspace.",
+        "operationId": "ThreatIntelligence_Query",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          },
+          {
+            "$ref": "#/parameters/Query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TIObject": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/TIOBjectKind"
+        }
+      ],
+      "description": "Represents a threat intelligence object in Azure Security Insights.",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
+    "TIOBjectKind": {
+      "description": "Describes the kind of a TI object.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/TIOBjectInnerKind",
+          "description": "The kind of the TI object."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
+    "TIOBjectInnerKind": {
+      "description": "The kind of the TI object",
+      "enum": [
+        "AttackPattern",
+        "Identity",
+        "Indicator",
+        "Relationship",
+        "ThreatActor"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TIOBjectKind",
+        "values": [
+          {
+            "description": "A TI object that represents an attack pattern.",
+            "value": "AttackPattern"
+          },
+          {
+            "description": "A TI object that represents an identity.",
+            "value": "Identity"
+          },
+          {
+            "description": "A TI object that represents an indicator.",
+            "value": "Indicator"
+          },
+          {
+            "description": "A TI object that represents a relationship between two TI objects.",
+            "value": "Relationship"
+          },
+          {
+            "description": "A TI object that represents a threat actor.",
+            "value": "ThreatActor"
+          }
+        ]
+      }
+    },
+    "ThreatActor": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObject"
+        }
+      ],
+      "description": "Represents a threat actor in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ThreatActorProperties",
+          "description": "threat actor properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "AttackPattern": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObject"
+        }
+      ],
+      "description": "Represents an attack pattern in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AttackPatternProperties",
+          "description": "attack pattern properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "Identity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObject"
+        }
+      ],
+      "description": "Represents an identity in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "identity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "Relationship": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObject"
+        }
+      ],
+      "description": "Represents a relationship in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RelationshipProperties",
+          "description": "Relationship properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "Indicator": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObject"
+        }
+      ],
+      "description": "Represents an indicator in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IndicatorProperties",
+          "description": "Indicator properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceList": {
+      "description": "List all the threat intelligence objects.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of threat intelligence objects.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of threat intelligence objects.",
+          "items": {
+            "$ref": "#/definitions/TIObject"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "TIObjectCommonProperties": {
+      "description": "Describes properties common to all threat intelligence objects",
+      "properties": {
+        "data": {
+          "description": "The core STIX object that this TI object represents.",
+          "readOnly": true,
+          "type": "object"
+        },
+        "createdBy": {
+          "description": "The UserInfo of the user/entity which originally created this TI object.",
+          "readOnly": true,
+          "type": "object"
+        },
+        "source": {
+          "description": "The source name for this TI object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "firstIngestedTimeUtc": {
+          "description": "The timestamp for the first time this object was ingested.",
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastIngestedTimeUtc": {
+          "description": "The timestamp for the last time this object was ingested.",
+          "readOnly": true,
+          "format": "date-time",
+          "type": "guid"
+        },
+        "ingestionRulesVersion": {
+          "description": "The ID of the rules version that was active when this TI object was last ingested.",
+          "readOnly": true,
+          "format": "uuid",
+          "type": "string"
+        },
+        "lastUpdateMethod": {
+          "description": "The name of the method/application that initiated the last write to this TI object.",
+          "readOnly": true,
+          "enum": [
+            "TAXII Connector",
+            "ISG Connector",
+            "Sentinel REST API",
+            "TI Matching Connector",
+            "Microsoft TI Connector",
+            "File Import",
+            "Indicator Refresher",
+            "TI Manager",
+            "Threat Intelligence Upload Indicators API",
+            "UploadStixObjectsAPI",
+            "Threat Intelligence Bulk Actions",
+            "Unknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "lastUpdateMethod",
+            "values": [
+              {
+                "value": "TAXII Connector"
+              },
+              {
+                "value": "ISG Connector"
+              },
+              {
+                "value": "Sentinel REST API"
+              },
+              {
+                "value": "TI Matching Connector"
+              },
+              {
+                "value": "Microsoft TI Connector"
+              },
+              {
+                "value": "File Import"
+              },
+              {
+                "value": "Indicator Refresher"
+              },
+              {
+                "value": "TI Manager"
+              },
+              {
+                "value": "Threat Intelligence Upload Indicators API"
+              },
+              {
+                "value": "UploadStixObjectsAPI"
+              },
+              {
+                "value": "Threat Intelligence Bulk Actions"
+              }
+            ]
+          }
+        },
+        "lastModifiedBy": {
+          "description": "The UserInfo of the user/entity which last modified this TI object.",
+          "readOnly": true,
+          "type": "object"
+        },
+        "lastUpdatedDateTimeUtc": {
+          "description": "The timestamp for the last time this TI object was updated.",
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string"
+        },
+        "relationshipHints": {
+          "description": "A dictionary used to help follow relationships from this object to other STIX objects. The keys are field names from the STIX object (in the 'data' field), and the values are lists of sources that can be prepended to the object ID in order to efficiently locate the target TI object.",
+          "readOnly": true,
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "AttackPatternProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Attack pattern property bag.",
+      "type": "object"
+    },
+    "IndicatorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Indicator property bag.",
+      "properties": {
+        "observables": {
+          "description": "The observables of this indicator",
+          "items": {
+            "description": "An observable of this indicator",
+            "type": "object"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatActorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Threat actor property bag.",
+      "type": "object"
+    },
+    "IdentityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Identity property bag.",
+      "type": "object"
+    },
+    "RelationshipProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Relationship property bag.",
+      "type": "object"
+    },
+    "Query": {
+      "description": "Represents a query to run on the TI objects in the workspace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryProperties",
+          "description": "Query properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "QueryProperties": {
+      "description": "Describes the query properties",
+      "properties": {
+        "condition": {
+          "properties": {
+            "$ref": "#/definitions/NormalizedCondition",
+            "description": "Represents a condition used to query for TI objects.",
+            "x-ms-client-flatten": true
+          }
+        },
+        "sortBy": {
+          "description": "The content type of this file.",
+          "enum": [
+            "BasicIndicator",
+            "StixIndicator",
+            "Unspecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "FileImportContentType",
+            "values": [
+              {
+                "description": "File containing records with the core fields of an indicator, plus the observables to construct the STIX pattern.",
+                "value": "BasicIndicator"
+              },
+              {
+                "description": "File containing STIX indicators.",
+                "value": "StixIndicator"
+              },
+              {
+                "description": "File containing other records.",
+                "value": "Unspecified"
+              }
+            ]
+          }
+        },
+        "maxPageSize": {
+          "description": "Represents the maximum size of the page that will be returned from the query API.",
+          "readOnly": true,
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPageSize": {
+          "description": "Represents the minimum size of the page that will be returned from the query API.",
+          "readOnly": true,
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SortByProperties": {
+      "description": "An object that specifies how to sort the query results.",
+      "properties": {
+        "direction": {
+          "description": "The direction to sort the results by.",
+          "enum": [
+            "ASC",
+            "DESC"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SortingDirection",
+            "values": [
+              {
+                "description": "Indicates that the query should be sorted from lowest-to-highest value.",
+                "value": "ASC"
+              },
+              {
+                "description": "Indicates that the query should be sorted from lowest-to-highest value.",
+                "value": "DESC"
+              }
+            ]
+          }
+        },
+        "field": {
+          "description": "Represents the field to sort the results by.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Connective": {
+      "description": "Represents boolean connectives used to join clauses in conditions.",
+      "readOnly": true,
+      "enum": [
+        "And",
+        "Or"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Connective",
+        "values": [
+          {
+            "description": "'And' connective",
+            "value": "And"
+          },
+          {
+            "description": "'Or' connective",
+            "value": "Or"
+          }
+        ]
+      }
+    },
+    "NormalizedCondition": {
+      "description": "Represents a condition used to query for TI objects.",
+      "properties": {
+        "stixObjectType": {
+          "description": "The STIX type for the objects returned by this query.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clauses": {
+          "description": "The list of clauses to be evaluated in disjunction or conjunction base on the specified top level connective operator.",
+          "items": {
+            "$ref": "#/definitions/ConditionClause"
+          },
+          "type": "array"
+        },
+        "conditionConnective": {
+          "description": "The top level connective operator for this condition.",
+          "properties": {
+            "$ref": "#/definitions/Connective",
+            "description": "Connective properties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "required": [
+        "clauses"
+      ],
+      "type": "object"
+    },
+    "ConditionClause": {
+      "description": "Represents a single clause to be evaluated by a NormalizedCondition.",
+      "properties": {
+        "clauseConnective": {
+          "description": "The connective used to join all values in this ConditionClause",
+          "properties": {
+            "$ref": "#/definitions/Connective",
+            "description": "Connective properties",
+            "x-ms-client-flatten": true
+          }
+        },
+        "field": {
+          "description": "The name of the field that is evaluated.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Represents an operator in a ConditionClause.",
+          "type": "string",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "LessThan",
+            "LessThanEqual",
+            "GreaterThan",
+            "GreaterThanEqual",
+            "StringContains",
+            "StringNotContains",
+            "StringStartsWith",
+            "StringNotStartsWith",
+            "StringEndsWith",
+            "StringNotEndsWith",
+            "StringIsEmpty",
+            "IsNull",
+            "IsTrue",
+            "IsFalse",
+            "ArrayContains",
+            "ArrayNotContains",
+            "OnOrAfterRelative",
+            "AfterRelative",
+            "OnOrBeforeRelative",
+            "BeforeRelative",
+            "OnOrAfterAbsolute",
+            "AfterAbsolute",
+            "OnOrBeforeAbsolute",
+            "BeforeAbsolute"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Connective",
+            "values": [
+              {
+                "value": "Equals"
+              },
+              {
+                "value": "NotEquals"
+              },
+              {
+                "value": "LessThan"
+              },
+              {
+                "value": "LessThanEqual"
+              },
+              {
+                "value": "GreaterThan"
+              },
+              {
+                "value": "GreaterThanEqual"
+              },
+              {
+                "value": "StringContains"
+              },
+              {
+                "value": "StringNotContains"
+              },
+              {
+                "value": "StringStartsWith"
+              },
+              {
+                "value": "StringNotStartsWith"
+              },
+              {
+                "value": "StringEndsWith"
+              },
+              {
+                "value": "StringNotEndsWith"
+              },
+              {
+                "value": "StringIsEmpty"
+              },
+              {
+                "value": "IsNull"
+              },
+              {
+                "value": "IsTrue"
+              },
+              {
+                "value": "IsFalse"
+              },
+              {
+                "value": "ArrayContains"
+              },
+              {
+                "value": "ArrayNotContains"
+              },
+              {
+                "value": "OnOrAfterRelative"
+              },
+              {
+                "value": "AfterRelative"
+              },
+              {
+                "value": "OnOrBeforeRelative"
+              },
+              {
+                "value": "BeforeRelative"
+              },
+              {
+                "value": "OnOrAfterAbsolute"
+              },
+              {
+                "value": "AfterAbsolute"
+              },
+              {
+                "value": "OnOrBeforeAbsolute"
+              },
+              {
+                "value": "BeforeAbsolute"
+              }
+            ]
+          }
+        },
+        "values": {
+          "description": "The top level connective operator for this condition.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "field",
+        "operator",
+        "values"
+      ],
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "Query": {
+      "description": "The query to run on the TI objects in the workspace.",
+      "in": "body",
+      "name": "query",
+      "schema": {
+        "$ref": "#/definitions/Query"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+
+}
