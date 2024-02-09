@@ -153,7 +153,6 @@ union LifecycleStage {
 /** Source format for imported Api spec */
 union ApiSpecImportSourceFormat {
   string,
-
   @doc("The inlined content of a specification document.") "inline",
 
   @doc("""
@@ -166,7 +165,6 @@ address.
 /** Result format for exported Api spec */
 union ApiSpecExportResultFormat {
   string,
-
   @doc("The inlined content of a specification document.") "inline",
 
   @doc("The link to the result of the export operation. The URL is valid for 5 minutes.")

@@ -143,7 +143,6 @@ model TranslationResult {
 @doc("Translation text type")
 union TextType {
   string,
-
   Plain: "Plain",
   Html: "Html",
 }
@@ -151,7 +150,6 @@ union TextType {
 @doc("Translator profanity actions")
 union ProfanityAction {
   string,
-
   NoAction: "NoAction",
   Marked: "Marked",
   Deleted: "Deleted",
@@ -160,7 +158,6 @@ union ProfanityAction {
 @doc("Translator profanity markers")
 union ProfanityMarker {
   string,
-
   Asterisk: "Asterisk",
   Tag: "Tag",
 }

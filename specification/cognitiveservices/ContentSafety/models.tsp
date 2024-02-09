@@ -11,7 +11,6 @@ namespace ContentSafety;
 @doc("Text analyze category.")
 union TextCategory {
   string,
-
   "Hate",
   "SelfHarm",
   "Sexual",
@@ -22,7 +21,6 @@ union TextCategory {
 @doc("Image analyze category.")
 union ImageCategory {
   string,
-
   "Hate",
   "SelfHarm",
   "Sexual",

@@ -11,7 +11,6 @@ namespace AnomalyDetector.Univariate;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 union ImputeMode {
   string,
-
   Auto: "auto",
   Previous: "previous",
   Linear: "linear",
@@ -23,7 +22,6 @@ union ImputeMode {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 union AnomalyDetectorErrorCodes {
   string,
-
   "InvalidCustomInterval",
   "BadArgument",
   "InvalidGranularity",
@@ -40,7 +38,6 @@ union AnomalyDetectorErrorCodes {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 union TimeGranularity {
   string,
-
   Yearly: "yearly",
   Monthly: "monthly",
   Weekly: "weekly",

@@ -1332,7 +1332,6 @@ model ObservedValue {
 @doc("A list of asset types to cascade the updates to.")
 union AssetUpdateTransfers {
   string,
-
   "as",
   "contact",
   "domain",
@@ -1347,7 +1346,6 @@ union AssetUpdateTransfers {
 @doc("The kind of billable asset.")
 union ReportBillableAssetBreakdownKind {
   string,
-
   "domain",
   "host",
   "ipAddress",
@@ -1357,7 +1355,6 @@ union ReportBillableAssetBreakdownKind {
 @doc("The state the task is in.")
 union TaskState {
   string,
-
   "pending",
   "running",
   "paused",
@@ -1371,7 +1368,6 @@ union TaskState {
 @doc("The phase the task is in.")
 union TaskPhase {
   string,
-
   "running",
   "polling",
   "complete",
@@ -1381,7 +1377,6 @@ union TaskPhase {
 @doc("The kind of data connection.")
 union DataConnectionKind {
   string,
-
   "logAnalytics",
   "azureDataExplorer",
 }
@@ -1390,7 +1385,6 @@ union DataConnectionKind {
 @doc("The rate at which the data connection will receive updates.")
 union DataConnectionFrequency {
   string,
-
   "daily",
   "weekly",
   "monthly",
@@ -1400,7 +1394,6 @@ union DataConnectionFrequency {
 @doc("The kind of asset.")
 union AssetKind {
   string,
-
   "as",
   "contact",
   "domain",
@@ -1415,7 +1408,6 @@ union AssetKind {
 @doc("The State of the disco run.")
 union DiscoRunState {
   string,
-
   "pending",
   "running",
   "completed",
@@ -1426,7 +1418,6 @@ union DiscoRunState {
 @doc("The type of data the data connection will transfer")
 union DataConnectionContent {
   string,
-
   "assets",
   "attackSurfaceInsights",
 }
@@ -1435,7 +1426,6 @@ union DataConnectionContent {
 @doc("The kind of disco source.")
 union DiscoSourceKind {
   string,
-
   "as",
   "attribute",
   "contact",
@@ -1447,7 +1437,6 @@ union DiscoSourceKind {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union ObservedPortStateValue {
   string,
-
   "open",
   "closed",
   "filtered",
@@ -1457,7 +1446,6 @@ union ObservedPortStateValue {
 @doc("The state to update the asset to.")
 union AssetUpdateState {
   string,
-
   "candidate",
   "confirmed",
   "dismissed",
@@ -1469,7 +1457,6 @@ union AssetUpdateState {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union AssetState {
   string,
-
   AssetUpdateState,
   "archived",
 }
@@ -1478,7 +1465,6 @@ union AssetState {
 @doc("The kind of asset.")
 union AuditTrailItemKind {
   string,
-
   "as",
   "contact",
   "domain",
@@ -1492,7 +1478,6 @@ union AuditTrailItemKind {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union PageAssetRedirectType {
   string,
-
   "httpHeader",
   "metaRefresh",
   "javascript",
@@ -1502,7 +1487,6 @@ union PageAssetRedirectType {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union SslCertAssetValidationType {
   string,
-
   "domainValidation",
   "organizationValidation",
   "extendedValidation",

@@ -74,7 +74,6 @@ model AssociationProperties {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 union AssociationType {
   string,
-
   "subnets",
 }
 

@@ -12,7 +12,6 @@ namespace AnomalyDetector.Multivariate;
 @doc("Field that indicates how missing values will be filled.")
 union FillNAMethod {
   string,
-
   "Previous",
   "Subsequent",
   "Linear",
@@ -23,7 +22,6 @@ union FillNAMethod {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 union MultivariateBatchDetectionStatus {
   string,
-
   Created: "CREATED",
   Running: "RUNNING",
   Ready: "READY",
@@ -44,7 +42,6 @@ union DataSchema {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 union AlignMode {
   string,
-
   "Inner",
   "Outer",
 }

@@ -24,7 +24,6 @@ union PFMetrics {
 @doc("Aggregation functions for pass/fail criteria.")
 union PFAgFunc {
   string,
-
   @doc("Criteria applies for count value.") "count",
   @doc("Criteria applies for given percentage value.") "percentage",
   @doc("Criteria applies for avg value.") "avg",
@@ -50,7 +49,6 @@ union PFAction {
 @doc("Pass/fail criteria result.")
 union PFResult {
   string,
-
   @doc("Given pass fail criteria metric has passed.") "passed",
   @doc("Given pass fail criteria metric couldn't determine.") "undetermined",
   @doc("Given pass fail criteria metric has failed.") "failed",
@@ -59,7 +57,6 @@ union PFResult {
 @doc("Types of secrets supported.")
 union SecretType {
   string,
-
   @doc("If the secret is stored in an Azure Key Vault.") "AKV_SECRET_URI",
   @doc("If the secret value provided as plain text.") "SECRET_VALUE",
 }
@@ -67,14 +64,12 @@ union SecretType {
 @doc("Types of certificates supported.")
 union CertificateType {
   string,
-
   @doc("If the certificate is stored in an Azure Key Vault.") "AKV_CERT_URI",
 }
 
 @doc("Types of file supported.")
 union FileType {
   string,
-
   @doc("If the file is a JMX script.") "JMX_FILE",
   @doc("If the file is a user properties file.") "USER_PROPERTIES",
 
@@ -93,7 +88,6 @@ union FileType {
 @doc("File status.")
 union FileStatus {
   string,
-
   @doc("File is not validated.") "NOT_VALIDATED",
   @doc("File is validated.") "VALIDATION_SUCCESS",
   @doc("File validation is failed.") "VALIDATION_FAILURE",
@@ -104,7 +98,6 @@ union FileStatus {
 @doc("Test result based on pass/fail criteria.")
 union PFTestResult {
   string,
-
   @doc("Pass/fail criteria has passed.") "PASSED",
   @doc("Pass/fail criteria is not applicable.") "NOT_APPLICABLE",
   @doc("Pass/fail criteria has failed.") "FAILED",
@@ -113,7 +106,6 @@ union PFTestResult {
 @doc("Test run status.")
 union Status {
   string,
-
   @doc("Test run request is accepted.") "ACCEPTED",
   @doc("Test run is not yet started.") "NOTSTARTED",
   @doc("Test run is provisioning.") "PROVISIONING",
@@ -135,7 +127,6 @@ union Status {
 @doc("Aggregation type.")
 union AggregationType {
   string,
-
   @doc("Average value.") "Average",
   @doc("Total count.") "Count",
   @doc("Aggregation will be average in this case.") "None",
@@ -148,7 +139,6 @@ union AggregationType {
 @doc("Metric unit.")
 union MetricUnit {
   string,
-
   @doc("No unit specified.") "NotSpecified",
   @doc("Percentage.") "Percent",
   @doc("Value count.") "Count",
@@ -183,7 +173,6 @@ union TimeGrain {
 @doc("Test kind")
 union TestKind {
   string,
-
   @doc("URL Test") "URL",
   @doc("JMX Test") "JMX",
 }
