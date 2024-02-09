@@ -1143,7 +1143,7 @@ model SavedFilter {
   id?: string;
 
   @doc("The caller provided unique name for the resource.")
-  @key("filterName")
+  @key("savedFilterName")
   @visibility("read")
   name: string;
 
