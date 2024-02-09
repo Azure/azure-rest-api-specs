@@ -75,7 +75,7 @@ enum CopyPastePermission {
   disabled,
 }
 
-@doc("ETX configuation")
+@doc("ETX configuration")
 model Etx {
   @visibility("read")
   @doc("Connection node count")

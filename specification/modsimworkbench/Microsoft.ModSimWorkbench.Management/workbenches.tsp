@@ -15,18 +15,6 @@ using Azure.ResourceManager;
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.ModSimWorkbench;
 
-// @doc("Performace tier of chamber storage.")
-// enum PerformaceTier {
-
-//   @doc("Standard tier.")
-//   Standard,
-
-//   @doc("Premium tier.")
-//   Premium,
-
-//   @doc("Ultra tier.")
-//   Ultra
-// }
 @doc("AppOidc Properties")
 model AppOidc {
   @visibility("read", "create", "update")

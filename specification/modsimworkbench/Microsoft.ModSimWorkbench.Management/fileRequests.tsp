@@ -16,7 +16,7 @@ using Azure.ResourceManager;
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.ModSimWorkbench;
 
-@doc("File resquest approval details.")
+@doc("File request approval details.")
 model FileRequestApproval {
   ...TimestampProperty;
 
@@ -33,7 +33,7 @@ model FileRequestApproval {
   userId: string;
 }
 
-@doc("File resquest dowload deatils")
+@doc("File request download details")
 model FileRequestDownload {
   @visibility("read")
   @doc("Download destination location.")
@@ -48,7 +48,7 @@ model FileRequestDownload {
   completeTime: utcDateTime;
 }
 
-@doc("Internal meta-data assiciated with file request.")
+@doc("Internal meta-data associated with file request.")
 model FileRequestInternalMetadata {
   @visibility("read")
   @doc("SAS userid")
@@ -66,7 +66,7 @@ enum FileRequestAction {
   Reject, // TODO: This should be lowercase
 }
 
-@doc("Paramaters for managing file request.")
+@doc("Parameters for managing file request.")
 model FileRequestManageParameters {
   @doc("Whether to approve teh request.")
   action: FileRequestAction;
@@ -75,7 +75,7 @@ model FileRequestManageParameters {
   description: string;
 }
 
-@doc("FileReqyest properties.")
+@doc("FileRequest properties.")
 model FileRequestProperties {
   ...ProvisioningStateProperty;
   ...TimestampProperty;

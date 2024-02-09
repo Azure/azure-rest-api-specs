@@ -41,7 +41,7 @@ enum ProvisioningState {
   @doc("Resource is being validated.")
   Validating,
 
-  @doc("Resource provioniong in proegess.")
+  @doc("Resource provisioning in progress.")
   Processing,
 
   @doc("Resource is being deleted.")

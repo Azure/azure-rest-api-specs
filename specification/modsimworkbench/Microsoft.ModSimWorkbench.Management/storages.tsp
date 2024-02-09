@@ -16,8 +16,8 @@ using Azure.ResourceManager;
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.ModSimWorkbench;
 
-@doc("Performace tier of chamber storage.")
-enum StoragePerformaceTier {
+@doc("Performance tier of chamber storage.")
+enum StoragePerformanceTier {
   @doc("Standard tier.")
   Standard,
 
@@ -40,7 +40,7 @@ model StorageProperties {
 
   @visibility("read", "create", "update")
   @doc("Performance tier of the chamber storage.")
-  performanceTier: StoragePerformaceTier = StoragePerformaceTier.Standard;
+  performanceTier: StoragePerformanceTier = StoragePerformanceTier.Standard;
 }
 
 @doc("Storage tracked resource.")
