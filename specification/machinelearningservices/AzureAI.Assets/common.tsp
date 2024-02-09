@@ -24,19 +24,6 @@ model Workspace {
   name: string;
 }
 
-// Registry definitions are to correctly nest resources under workspaces (not to redefine the definitions in swagger)
-@doc("Machine learning registry.")
-@Autorest.useRef("registies.json#/definitions/Registry")
-@resource("registries")
-model Registry {
-  @doc("Name of the registry")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-  @key("registryName")
-  @visibility("external")
-  @Autorest.useRef("registries.json#/parameters/RegistryNameParameter")
-  name: string;
-}
-
 @doc("Metadata pertaining to creation and last modification of the resource.")
 model SystemData {
 

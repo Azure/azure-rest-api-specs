@@ -15,6 +15,7 @@ namespace Microsoft.MachineLearningServices;
 
 
 @doc("Index asset resource definition.")
+@parentResource(Workspace)
 @resource("indexes")
 model IndexResource {
   @key("indexName")
@@ -67,4 +68,3 @@ model Index is AssetVersion {
 
 @doc("Paged collection of IndexVersion items.")
 model IndexList is Azure.Core.Page<Index>;
-
