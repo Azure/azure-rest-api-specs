@@ -121,6 +121,29 @@ enum Connectivity {
   PublicAddress,
 }
 
+@doc("Configuration for voice services which use AI")
+@added(Versions.v2024_02_05_preview)
+model AiVoiceServices {
+  @doc("Azure Operator Call Protection details")
+  @visibility("read", "update", "create")
+  @added(Versions.v2024_02_05_preview)
+  callProtection?: CallProtectionDetails;
+}
+
+@doc("Configuration for Azure Operator Call Protection")
+@added(Versions.v2024_02_05_preview)
+model CallProtectionDetails {
+  @doc("Whether Azure Operator Call Protection is enabled or not. Defaults to false.")
+  @visibility("read", "update", "create")
+  @added(Versions.v2024_02_05_preview)
+  enabled?: boolean;
+
+  @doc("Storage account for Azure Operator Call Protection logs")
+  @visibility("read", "update", "create")
+  @added(Versions.v2024_02_05_preview)
+  logStorageAccount?: string;
+}
+
 @doc("The service region configuration needed for Teams Callings.")
 model ServiceRegionProperties {
   @doc("The name of the region in which the resources needed for Teams Calling will be deployed.")
@@ -166,6 +189,10 @@ enum CommunicationsPlatform {
   @doc("Zoom Platform")
   @added(Versions.v2023_09_21)
   Zoom,
+
+  @doc("AI Voice Services")
+  @added(Versions.v2024_02_05_preview)
+  AiVoiceServices,
 }
 
 @doc("API Bridge activation state.")
@@ -384,6 +411,11 @@ model CommunicationsGatewayProperties is ResourceProperties {
   @visibility("read", "update", "create")
   @added(Versions.v2023_09_21)
   zoomConfig?: ZoomConfig;
+
+  @doc("Configuration for AI Voice services")
+  @visibility("read", "update", "create")
+  @added(Versions.v2024_02_05_preview)
+  aiVoiceServices?: AiVoiceServices;
 }
 
 @armResourceOperations

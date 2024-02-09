@@ -769,6 +769,21 @@
     }
   },
   "definitions": {
+    "AiVoiceServices": {
+      "type": "object",
+      "description": "Configuration for voice services which use AI",
+      "properties": {
+        "callProtection": {
+          "$ref": "#/definitions/CallProtectionDetails",
+          "description": "Azure Operator Call Protection details",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
     "ApiBridgeActivationState": {
       "type": "string",
       "description": "API Bridge activation state.",
@@ -863,6 +878,30 @@
             "description": "Generated domain name label is always unique."
           }
         ]
+      }
+    },
+    "CallProtectionDetails": {
+      "type": "object",
+      "description": "Configuration for Azure Operator Call Protection",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether Azure Operator Call Protection is enabled or not. Defaults to false.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "logStorageAccount": {
+          "type": "string",
+          "description": "Storage account for Azure Operator Call Protection logs",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
       }
     },
     "CheckNameAvailabilityReason": {
@@ -1139,6 +1178,15 @@
             "update",
             "create"
           ]
+        },
+        "aiVoiceServices": {
+          "$ref": "#/definitions/AiVoiceServices",
+          "description": "Configuration for AI Voice services",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1177,7 +1225,8 @@
         "OperatorConnect",
         "TeamsPhoneMobile",
         "TeamsDirectRouting",
-        "Zoom"
+        "Zoom",
+        "AiVoiceServices"
       ],
       "x-ms-enum": {
         "name": "CommunicationsPlatform",
@@ -1202,6 +1251,11 @@
             "name": "Zoom",
             "value": "Zoom",
             "description": "Zoom Platform"
+          },
+          {
+            "name": "AiVoiceServices",
+            "value": "AiVoiceServices",
+            "description": "AI Voice Services"
           }
         ]
       }
