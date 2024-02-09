@@ -26,14 +26,34 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-08-preview
+tag: package-2023-11-preview
+```
+
+
+### Tag: package-2023-11-preview-only
+
+These settings apply only when `--tag=package-2023-11-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2023-11-01-preview/containerregistry.json
+```
+
+### Tag: package-2023-11-preview
+
+These settings apply only when `--tag=package-2023-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2023-11-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2023-08-preview-only
 
 These settings apply only when `--tag=package-2023-08-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-preview-only'
+``` yaml $(tag) == 'package-2023-08-preview-only'
 input-file:
   - Microsoft.ContainerRegistry/preview/2023-08-01-preview/containerregistry.json
 ```
@@ -42,7 +62,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-preview'
+``` yaml $(tag) == 'package-2023-08-preview'
 input-file:
   - Microsoft.ContainerRegistry/preview/2023-08-01-preview/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json

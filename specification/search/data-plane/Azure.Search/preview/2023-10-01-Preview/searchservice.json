@@ -6049,8 +6049,10 @@
       "description": "Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter)."
     },
     "SemanticSettings": {
+      "x-ms-client-name": "SemanticSearch",
       "properties": {
         "defaultConfiguration": {
+          "x-ms-client-name": "defaultConfigurationName",
           "type": "string",
           "description": "Allows you to set the name of a default semantic configuration in your index, making it optional to pass it on as a query parameter every time."
         },
@@ -6093,12 +6095,14 @@
       "description": "Defines a specific configuration to be used in the context of semantic capabilities."
     },
     "PrioritizedFields": {
+      "x-ms-client-name": "SemanticPrioritizedFields",
       "properties": {
         "titleField": {
           "$ref": "#/definitions/SemanticField",
           "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
         },
         "prioritizedContentFields": {
+          "x-ms-client-name": "contentFields",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SemanticField"
@@ -6106,6 +6110,7 @@
           "description": "Defines the content fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
         },
         "prioritizedKeywordsFields": {
+          "x-ms-client-name": "keywordsFields",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SemanticField"
@@ -6126,6 +6131,9 @@
           "x-nullable": false
         }
       },
+      "required": [
+        "fieldName"
+      ],
       "description": "A field that is used as part of the semantic configuration."
     },
     "VectorSearch": {
@@ -6167,6 +6175,7 @@
           "x-nullable": false
         },
         "algorithm": {
+          "x-ms-client-name": "algorithmConfigurationName",
           "type": "string",
           "description": "The name of the vector search algorithm configuration that specifies the algorithm and optional parameters.",
           "x-nullable": false
@@ -6208,6 +6217,7 @@
       "description": "Contains configuration options specific to the algorithm used during indexing or querying."
     },
     "HnswVectorSearchAlgorithmConfiguration": {
+      "x-ms-client-name": "HnswAlgorithmConfiguration",
       "type": "object",
       "x-ms-discriminator-value": "hnsw",
       "allOf": [
@@ -6263,6 +6273,7 @@
       "description": "Contains the parameters specific to the HNSW algorithm."
     },
     "ExhaustiveKnnVectorSearchAlgorithmConfiguration": {
+      "x-ms-client-name": "ExhaustiveKnnAlgorithmConfiguration",
       "type": "object",
       "x-ms-discriminator-value": "exhaustiveKnn",
       "allOf": [
@@ -6415,15 +6426,15 @@
         }
       ],
       "properties": {
-        "customVectorizerParameters": {
-          "x-ms-client-name": "CustomVectorizerParameters",
-          "$ref": "#/definitions/CustomVectorizerParameters",
+        "customWebApiParameters": {
+          "x-ms-client-name": "CustomWebApiParameters",
+          "$ref": "#/definitions/CustomWebApiParameters",
           "description": "Specifies the properties of the user-defined vectorizer."
         }
       },
       "description": "Specifies a user-defined vectorizer for generating the vector embedding of a query string. Integration of an external vectorizer is achieved using the custom Web API interface of a skillset."
     },
-    "CustomVectorizerParameters": {
+    "CustomWebApiParameters": {
       "type": "object",
       "properties": {
         "uri": {
@@ -7646,6 +7657,7 @@
           "x-nullable": true
         },
         "dimensions": {
+          "x-ms-client-name": "vectorSearchDimensions",
           "type": "integer",
           "format": "int32",
           "x-nullable": true,
@@ -7654,6 +7666,7 @@
           "description": "The dimensionality of the vector field."
         },
         "vectorSearchProfile": {
+          "x-ms-client-name": "vectorSearchProfileName",
           "type": "string",
           "x-nullable": true,
           "description": "The name of the vector search profile that specifies the algorithm and vectorizer to use when searching the vector field."
@@ -8174,7 +8187,7 @@
           "externalDocs": {
             "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
           },
-          "x-ms-client-name": "SemanticSettings",
+          "x-ms-client-name": "SemanticSearch",
           "x-nullable": true
         },
         "vectorSearch": {
@@ -9158,6 +9171,7 @@
           "description": "A parameter that provides various ways to mask the personal information detected in the input text. Default is 'none'."
         },
         "maskingCharacter": {
+          "x-ms-client-name": "mask",
           "type": "string",
           "x-nullable": true,
           "maxLength": 1,
@@ -9376,6 +9390,7 @@
         "authResourceId": {
           "type": "string",
           "x-nullable": true,
+          "x-ms-format": "arm-id",
           "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token."
         },
         "authIdentity": {
@@ -10758,20 +10773,56 @@
     "SplitSkillLanguage": {
       "type": "string",
       "enum": [
+        "am",
+        "bs",
+        "cs",
         "da",
         "de",
         "en",
         "es",
+        "et",
         "fi",
         "fr",
+        "he",
+        "hi",
+        "hr",
+        "hu",
+        "id",
+        "is",
         "it",
+        "ja",
         "ko",
-        "pt"
+        "lv",
+        "nb",
+        "nl",
+        "pl",
+        "pt",
+        "pt-br",
+        "ru",
+        "sk",
+        "sl",
+        "sr",
+        "sv",
+        "tr",
+        "ur",
+        "zh"
       ],
       "x-ms-enum": {
         "name": "SplitSkillLanguage",
         "modelAsString": true,
         "values": [
+          {
+            "value": "am",
+            "description": "Amharic"
+          },
+          {
+            "value": "bs",
+            "description": "Bosnian"
+          },
+          {
+            "value": "cs",
+            "description": "Czech"
+          },
           {
             "value": "da",
             "description": "Danish"
@@ -10789,6 +10840,10 @@
             "description": "Spanish"
           },
           {
+            "value": "et",
+            "description": "Estonian"
+          },
+          {
             "value": "fi",
             "description": "Finnish"
           },
@@ -10797,16 +10852,96 @@
             "description": "French"
           },
           {
+            "value": "he",
+            "description": "Hebrew"
+          },
+          {
+            "value": "hi",
+            "description": "Hindi"
+          },
+          {
+            "value": "hr",
+            "description": "Croatian"
+          },
+          {
+            "value": "hu",
+            "description": "Hungarian"
+          },
+          {
+            "value": "id",
+            "description": "Indonesian"
+          },
+          {
+            "value": "is",
+            "description": "Icelandic"
+          },
+          {
             "value": "it",
             "description": "Italian"
+          },
+          {
+            "value": "ja",
+            "description": "Japanese"
           },
           {
             "value": "ko",
             "description": "Korean"
           },
           {
+            "value": "lv",
+            "description": "Latvian"
+          },
+          {
+            "value": "nb",
+            "description": "Norwegian"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch"
+          },
+          {
+            "value": "pl",
+            "description": "Polish"
+          },
+          {
             "value": "pt",
-            "description": "Portuguese"
+            "description": "Portuguese (Portugal)"
+          },
+          {
+            "value": "pt-br",
+            "description": "Portuguese (Brazil)"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "sk",
+            "description": "Slovak"
+          },
+          {
+            "value": "sl",
+            "description": "Slovenian"
+          },
+          {
+            "value": "sr",
+            "description": "Serbian"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish"
+          },
+          {
+            "value": "ur",
+            "description": "Urdu"
+          },
+          {
+            "value": "zh",
+            "description": "Chinese (Simplified)"
           }
         ]
       },

@@ -1,12 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
-// import "@typespec/versioning";
-
-// import "./routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-// using TypeSpec.Versioning;
 
 @doc("A specific deployment")
 @TypeSpec.Rest.resource("deployments")
