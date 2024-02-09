@@ -49,7 +49,7 @@ interface IndexVersions {
     >;
 }
 
-interface IndexLatest {
+interface IndexesLatest {
    @doc("Get latest Index.")
    @route("/workspaces/{workspaceName}/indexes/{indexName}")
    @get
