@@ -43,6 +43,9 @@ model BrokerProperties {
 
   @doc("The details of Node Tolerations for Broker Pods.")
   brokerNodeTolerations?: NodeTolerations;
+  
+  @doc("The setting to generate resource limits for broker's resources.")
+  generateResourceLimits?: GenerateResourceLimits;
 
   @doc("The cardinality details of the broker.")
   cardinality?: Cardinality;
@@ -74,6 +77,12 @@ model BrokerProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+}
+
+@doc("GenerateResourceLimits properties")
+model GenerateResourceLimits {
+  @doc("Enable generation of CPU resource limits")
+  cpu?: boolean = true;
 }
 
 @doc("Cardinality properties")
