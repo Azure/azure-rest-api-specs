@@ -7,7 +7,7 @@
 In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your typespec:
 - The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
 - The description of the new event should include the event type. This is the `eventType` name in an `EventGridEvent` or `type` name in `CloudEvent`. For e.g. `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event."` Here `Microsoft.Communication.ChatMessageReceived` is the event name. If your event is in preview, you may add the word preview: `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived preview event."`
-- Make sure that you add your SystemEvent CloudEvent Schema examples under `samples/stable/2024-01-01/YOUR_SERVICE_NAME/`
+- Make sure to add add your service's SystemEvent CloudEvent Schema examples under `samples/stable/2024-01-01/YOUR_SERVICE_NAME/`
 
 ### Write in Typespec
 
