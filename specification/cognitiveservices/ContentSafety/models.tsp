@@ -34,10 +34,10 @@ union AnalyzeTextOutputType {
   string,
 
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  "FourSeverityLevels",
+  FourSeverityLevels: "FourSeverityLevels",
 
   @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
-  "EightSeverityLevels",
+  EightSeverityLevels: "EightSeverityLevels",
 }
 
 @doc("The type of image analysis output.")
@@ -45,7 +45,7 @@ union AnalyzeImageOutputType {
   string,
 
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  "FourSeverityLevels",
+  FourSeverityLevels: "FourSeverityLevels",
 }
 
 @doc("The text analysis request.")
