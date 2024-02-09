@@ -1744,11 +1744,13 @@
         },
         "url": {
           "description": "The URL to access the cluster API server.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "ip": {
           "description": "The IP of the cluster API server.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1820,7 +1822,8 @@
       "properties": {
         "url": {
           "description": "The URL to access the cluster console.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1842,6 +1845,16 @@
         },
         "description": {
           "description": "Friendly name of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "EffectiveOutboundIP": {
+      "description": "EffectiveOutboundIP represents an effective outbound IP resource of the cluster public load balancer.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The fully qualified Azure resource id of an IP address resource.",
           "type": "string"
         }
       }
@@ -1884,7 +1897,27 @@
         },
         "ip": {
           "description": "The IP of the ingress.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LoadBalancerProfile": {
+      "description": "LoadBalancerProfile represents the profile of the cluster public load balancer.",
+      "type": "object",
+      "properties": {
+        "managedOutboundIps": {
+          "$ref": "#/definitions/ManagedOutboundIPs",
+          "description": "The desired managed outbound IPs for the cluster public load balancer."
+        },
+        "effectiveOutboundIps": {
+          "description": "The list of effective outbound IP addresses of the public load balancer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveOutboundIP"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1952,6 +1985,17 @@
         }
       }
     },
+    "ManagedOutboundIPs": {
+      "description": "ManagedOutboundIPs represents the desired managed outbound IPs for the cluster public load balancer.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "Count represents the desired number of IPv4 outbound IPs created and managed by Azure for the cluster public load balancer.  Allowed values are in the range of 1 - 20.  The default value is 1.",
+          "type": "integer"
+        }
+      }
+    },
     "MasterProfile": {
       "description": "MasterProfile represents a master profile.",
       "type": "object",
@@ -1989,6 +2033,10 @@
         "outboundType": {
           "$ref": "#/definitions/OutboundType",
           "description": "The OutboundType used for egress traffic."
+        },
+        "loadBalancerProfile": {
+          "$ref": "#/definitions/LoadBalancerProfile",
+          "description": "The cluster load balancer profile."
         },
         "preconfiguredNSG": {
           "$ref": "#/definitions/PreconfiguredNSG",
@@ -2253,6 +2301,7 @@
       "description": "ProvisioningState represents a provisioning state.",
       "enum": [
         "AdminUpdating",
+        "Cancelled",
         "Creating",
         "Deleting",
         "Failed",
@@ -2510,7 +2559,7 @@
           "description": "The size of the worker VMs."
         },
         "diskSizeGB": {
-          "description": "The disk size of the worker VMs.",
+                    "description": "The disk size of the worker VMs.",
           "type": "integer",
           "format": "int32"
         },
