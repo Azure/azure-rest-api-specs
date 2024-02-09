@@ -75,7 +75,6 @@ An indication whether to perform a preliminary step on the patient's documents t
 @doc("The type of the Onco Phenotype inference.")
 union OncoPhenotypeInferenceType {
   string,
-
   TumorSite: "tumorSite",
   Histology: "histology",
   ClinicalStageT: "clinicalStageT",

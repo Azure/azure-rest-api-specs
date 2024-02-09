@@ -74,7 +74,6 @@ union DocumentAnalysisFeature {
 @doc("The unit used by the width, height, and polygon properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".")
 union LengthUnit {
   string,
-
   @doc("Length unit for image files.") "pixel",
   @doc("Length unit for PDF files.") "inch",
 }
@@ -152,7 +151,6 @@ union DocumentBarcodeKind {
 @doc("Formula kind.")
 union DocumentFormulaKind {
   string,
-
   @doc("A formula embedded within the content of a paragraph.") "inline",
   @doc("A formula in display mode that takes up an entire line.") "display",
 }
@@ -160,7 +158,6 @@ union DocumentFormulaKind {
 @doc("Semantic role of the paragraph.")
 union ParagraphRole {
   string,
-
   @doc("Text near the top edge of the page.") "pageHeader",
   @doc("Text near the bottom edge of the page.") "pageFooter",
   @doc("Page number.") "pageNumber",
@@ -193,7 +190,6 @@ union DocumentTableCellKind {
 @doc("Font style.")
 union FontStyle {
   string,
-
   @doc("Characters are represented normally.") "normal",
   @doc("Characters are visually slanted to the right.") "italic",
 }
@@ -201,7 +197,6 @@ union FontStyle {
 @doc("Font weight.")
 union FontWeight {
   string,
-
   @doc("Characters are represented normally.") "normal",
   @doc("Characters are represented with thicker strokes.") "bold",
 }
@@ -211,7 +206,7 @@ union DocumentFieldType {
   string,
 
   @doc("Plain text.")
-  string,
+  "string",
 
   @doc("Date, normalized to ISO 8601 (YYYY-MM-DD) format.")
   "date",
@@ -256,7 +251,6 @@ union DocumentFieldType {
 @doc("Presence of signature.")
 union DocumentSignatureType {
   string,
-
   @doc("A signature is detected.") "signed",
   @doc("No signatures are detected.") "unsigned",
 }
@@ -264,7 +258,6 @@ union DocumentSignatureType {
 @doc("Custom document model build mode.")
 union DocumentBuildMode {
   string,
-
   @doc("Target documents with similar visual templates.") "template",
   @doc("Support documents with diverse visual templates.") "neural",
 }

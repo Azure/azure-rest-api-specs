@@ -64,7 +64,6 @@ model Inference {
 @lroStatus
 union JobStatus {
   string,
-
   NotStarted: "notStarted",
   Running: "running",
   Succeeded: "succeeded",

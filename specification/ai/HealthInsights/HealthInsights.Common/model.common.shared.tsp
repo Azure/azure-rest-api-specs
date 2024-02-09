@@ -148,8 +148,8 @@ union VerificationStatusType {
 // See: https://terminology.hl7.org/5.1.0/CodeSystem-condition-clinical.html
 // """)
 // union ClinicalStatusType {
-  string,
-
+//  string,
+//
 //   @doc("The subject is currently experiencing the condition or situation, there is evidence of the condition or situation, or considered to be a significant risk.")
 //   Active: "active";
 //   @doc("The subject is experiencing a reoccurrence or repeating of a previously resolved condition or situation, e.g. urinary tract infection, food insecurity.")

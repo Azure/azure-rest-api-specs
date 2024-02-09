@@ -55,7 +55,6 @@ model PatientInfo {
 @doc("The patient's sex.")
 union PatientInfoSex {
   string,
-
   Female: "female",
   Male: "male",
   Unspecified: "unspecified",
@@ -65,7 +64,6 @@ union PatientInfoSex {
 @doc("The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).")
 union DocumentType {
   string,
-
   Note: "note",
   FhirBundle: "fhirBundle",
   Dicom: "dicom",
@@ -76,7 +74,6 @@ union DocumentType {
 @doc("The type of the clinical document.")
 union ClinicalDocumentType {
   string,
-
   Consultation: "consultation",
   DischargeSummary: "dischargeSummary",
   HistoryAndPhysical: "historyAndPhysical",

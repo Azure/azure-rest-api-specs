@@ -291,7 +291,6 @@ model ClinicalTrialResearchFacility {
 @doc("Possible phases of a clinical trial.")
 union ClinicalTrialPhase {
   string,
-
   NotApplicable: "notApplicable",
   EarlyPhase1: "earlyPhase1",
   Phase1: "phase1",
@@ -304,7 +303,6 @@ union ClinicalTrialPhase {
 @doc("Possible study types of a clinical trial.")
 union ClinicalTrialStudyType {
   string,
-
   Interventional: "interventional",
   Observational: "observational",
   ExpandedAccess: "expandedAccess",
@@ -315,7 +313,6 @@ union ClinicalTrialStudyType {
 @doc("Possible recruitment status of a clinical trial.")
 union ClinicalTrialRecruitmentStatus {
   string,
-
   UnknownStatus: "unknownStatus",
   NotYetRecruiting: "notYetRecruiting",
   Recruiting: "recruiting",
@@ -326,7 +323,6 @@ union ClinicalTrialRecruitmentStatus {
 @doc("Possible purposes of a clinical trial.")
 union ClinicalTrialPurpose {
   string,
-
   NotApplicable: "notApplicable",
   Screening: "screening",
   Diagnostic: "diagnostic",
@@ -343,7 +339,6 @@ union ClinicalTrialPurpose {
 @doc("Possible sources of a clinical trial.")
 union ClinicalTrialSource {
   string,
-
   Custom: "custom",
   ClinicaltrialsGov: "clinicaltrials.gov",
 }
@@ -352,7 +347,6 @@ union ClinicalTrialSource {
 @doc("`GeoJSON` type.")
 union GeoJsonType {
   string,
-
   Feature: "Feature",
 }
 
@@ -360,7 +354,6 @@ union GeoJsonType {
 @doc("`GeoJSON` geometry type.")
 union GeoJsonGeometryType {
   string,
-
   Point: "Point",
 }
 
@@ -368,7 +361,6 @@ union GeoJsonGeometryType {
 @doc("`GeoJSON` object sub-type.")
 union GeoJsonPropertiesSubType {
   string,
-
   Circle: "Circle",
 }
 
@@ -376,6 +368,5 @@ union GeoJsonPropertiesSubType {
 @doc("The type of the Trial Matcher inference.")
 union TrialMatcherInferenceType {
   string,
-
   TrialEligibility: "trialEligibility",
 }
