@@ -52,12 +52,12 @@ enum BgpReviewStateEnum {
   AttentionRequired,
 }
 
-@doc("Cache node configration setup state")
+@doc("Cache node configuration setup state")
 enum ConfigurationState {
-  /** connnected cache setup configured */
+  /** connected cache setup configured */
   Configured,
 
-  /** connnected cache setup not configured */
+  /** connected cache setup not configured */
   NotConfigured_Ip,
 }
 
@@ -588,7 +588,7 @@ model AdditionalCacheNodeProperties {
   @doc("Auto update or fast update version")
   autoUpdateVersion?: string;
 
-  @doc("update realted information details")
+  @doc("Update related information details")
   updateInfoDetails?: string;
 
   @doc("customer requested date time for mcc install of update cycle")
