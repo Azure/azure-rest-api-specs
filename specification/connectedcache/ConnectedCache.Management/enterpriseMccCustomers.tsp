@@ -37,5 +37,6 @@ interface EnterpriseMccCustomers {
   delete is ArmResourceDeleteWithoutOkAsync<EnterpriseMccCustomerResource>;
   @doc("This api gets the information about all enterprise mcc customer resources under the given subscription and resource group")
   listByResourceGroup is ArmResourceListByParent<EnterpriseMccCustomerResource>;
+  @doc("This api gets information about all enterpriseMccCustomer resources under the given subscription")
   listBySubscription is ArmListBySubscription<EnterpriseMccCustomerResource>;
 }

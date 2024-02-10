@@ -36,62 +36,57 @@ enum OsType {
   /** cache node installs on Linux Operating system */
   Linux,
 }
-@doc("Describes the Resource Provider Operation")
-model ResourceProviderOperationDefinition {
-  @doc("Resource provider operation name")
-  name?: string;
 
-  @doc("Indicates whether the operation is a data action")
-  isDataAction?: string;
-
-  @doc("Resource provider display properties")
-  display?: ResourceProviderOperationDisplay;
-
-  @doc("Origin of the operation")
-  origin?: string;
+@doc("Cache node resource Bgp review state as integer")
+enum BgpReviewStateEnum {
+  /** bgp not configured */
+  NotConfigured,  
+  /** bgp is in review state */
+  InReview, 
+  /** bgp is in Approved state */
+  Approved, 
+  /** bgp is setup need an attention for more troubleshoot */
+  AttentionRequired
 }
 
-@doc("Describes the properties of the Operation")
-model ResourceProviderOperationDisplay {
-  @doc("Name of the resource provider")
-  provider?: string;
-
-  @doc("Name of the resource type")
-  resource?: string;
-
-  @doc("Name of the resource provider operation")
-  operation?: string;
-
-  @doc("Description of the resource provider operation")
-  description?: string;
+@doc("Cache node configration setup state")
+enum ConfigurationState
+{
+  /** connnected cache setup configured */
+    Configured,
+  /** connnected cache setup not configured*/
+    NotConfigured_Ip
 }
 
-// @doc("Error response indicates that the service is not able to process the incoming request")
-// @error
-// model MCCErrorResponse {
-//   @doc("status of the HTTP error code")
-//   @visibility("read")
-//   status?: string;
-
-//   @doc("The error details")
-//   error?: ErrorDefinition;
-// }
-
-@doc("Error definition")
-model ErrorDefinition {
-  @doc("Service specific error code which serves as the substatus for the HTTP error code")
-  @visibility("read")
-  code?: string;
-
-  @doc("Description of the error")
-  @visibility("read")
-  message?: string;
-
-  @doc("Internal error details")
-  @visibility("read")
-  details?: ErrorDefinition[];
+@doc("Proxy details enum")
+enum ProxyRequired {
+  /** Proxy is not required in setup */
+  None,
+  /** proxy is required in setup */
+  Required,
 }
 
+@doc("Customer resource transit states") 
+enum CustomerTransitState
+{
+  /**do not have transit */
+    NoTransit,
+  /** transit provider and have own subscribers */
+    CombinedTransit,  
+  /** pure transit provider or network service provider */
+    TransitOnly
+}
+
+@doc("Update Cycle type") 
+enum CycleType{  
+  /**customer selection of preview update install mcc on their physical vm  */
+  Preview,  
+  /**customer selection of slow update to install mcc on their physical vm */
+  Slow,
+ /**customer selection of fast / auto update to install mcc on their physical vm */
+  Fast
+  }
+  
 @doc("Model representing Cache Node for ConnectedCache resource")
 model CacheNodeOldResponse {
   @doc("The provisioned state of the resource")
@@ -112,7 +107,7 @@ model CacheNodeOldResponse {
   status?: string;
 
   @doc("The error details")
-  error?: ErrorDefinition;
+  error?: ErrorDetail;
 }
 
 @doc("Mcc PATCH operation properties.")
@@ -152,12 +147,12 @@ model CustomerProperty {
 
   @doc("Mcc response error details.")
   @visibility("read")
-  error?: ErrorDefinition;
+  error?: ErrorDetail;
 }
 
 @doc("Model representing Customer resource for ConnectedCache resource")
 model CustomerEntity {
-  @doc("Customer resource Arm fully qualified resource Id.")
+  @doc("Customer resource Azure fully qualified resource Id.")
   fullyQualifiedResourceId?: string;
 
   @doc("Customer resource Guid Id.")
@@ -182,61 +177,30 @@ model CustomerEntity {
   @doc("Customer resource Mcc release version.")
   releaseVersion?: int32;
 
-  @doc("Customer resource creation Arm Correlation Id.")
+  @doc("Customer resource create async operation Id.")
   @visibility("read")
-  createCorrelationId?: string;
+  createAsyncOperationId?: string;
 
-  @doc("Customer resource update Arm Correlation Id.")
-  @visibility("read")
-  updateCorrelationId?: string;
-
-  @doc("Customer resource marked for deletion flag as boolean.")
-  shouldDelete?: boolean;
-
-  @doc("Customer resource deletion Arm Correlation Id.")
-  @visibility("read")
-  deleteRectifierCorrelationId?: string;
-
-  @doc("Customer resource deletion RPaaS async operation Id.")
+  @doc("Customer resource deletion async operation Id.")
   @visibility("read")
   deleteAsyncOperationId?: string;
 
   @doc("Customer resource client tenant Id of subscription.")
   clientTenantId?: string;
 
-  @doc("Customer resource attempted deletions.")
-  attemptedDeletes?: int32;
-
-  @doc("Customer resource deletion flag set timestamp.")
+  @doc("Customer resource sync attempts.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  deletedFlagSetDateTime?: utcDateTime;
+  synchWithAzureAttemptsCount?: int32;
 
-  @doc("Customer resource timestamp of last attempted delete")
+  @doc("Customer resource last Azure sync timestamp.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastAttemptedDeleteTime?: utcDateTime;
-
-  @doc("Customer resource Arm sync attempts.")
-  @visibility("read")
-  synchWithArmAttemptsCount?: int32;
-
-  @doc("Customer resource last Arm sync timestamp.")
-  @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastSyncWithArmTimestamp?: utcDateTime;
+  lastSyncWithAzureTimestamp?: utcDateTime;
 
   @doc("Customer resource flag for enterprise management as boolean.")
   isEnterpriseManaged?: boolean;
 
   @doc("Customer resource flag for migration.")
   shouldMigrate?: boolean;
-
-  @doc("Customer resource transit state.")
-  transitState?: string;
-
-  @doc("Customer resource transit Asn.")
-  transitAsn?: string;
 
   @doc("Customer resource flag for resending signup code as boolean.")
   resendSignupCode?: boolean;
@@ -245,6 +209,8 @@ model CustomerEntity {
   verifySignupCode?: boolean;
 
   @doc("Customer resource phrase for verifying signup.")
+  @visibility("create","update")
+  @secret
   verifySignupPhrase?: string;
 }
 
@@ -252,7 +218,6 @@ model CustomerEntity {
 model AdditionalCustomerProperties {
   @doc("Customer resource last PeeringDB update timestamp.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   peeringDbLastUpdateTime?: utcDateTime;
 
   @doc("Customer resource cache efficiency.")
@@ -273,7 +238,6 @@ model AdditionalCustomerProperties {
 
   @doc("Customer resource peak egress timestamp.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   customerPropertiesOverviewEgressMbpsMaxDateTime?: utcDateTime;
 
   @doc("Customer resource maximum cache miss throughput in Mbps.")
@@ -282,7 +246,6 @@ model AdditionalCustomerProperties {
 
   @doc("Customer resource peak cache miss throughput timestamp.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   customerPropertiesOverviewMissMbpsMaxDateTime?: utcDateTime;
 
   @doc("Customer resource total healthy cache nodes.")
@@ -313,7 +276,7 @@ model AdditionalCustomerProperties {
 
   @doc("Customer resource last PeeringDB update timestamp.")
   @visibility("read")
-  peeringDbLastUpdateDate?: string;
+  peeringDbLastUpdateDate?: utcDateTime;
 
   @doc("Customer resource owner organization name.")
   @visibility("read")
@@ -325,9 +288,10 @@ model AdditionalCustomerProperties {
   @doc("Customer resource transit Asn (autonomous system number).")
   customerTransitAsn?: string;
 
-  @doc("Customer resource transit state.")
-  customerTransitState?: string;
+  @doc("Customer resource transit state.") 
+  customerTransitState?: CustomerTransitState;
 
+  
   @doc("Customer resource Asn (autonomous system number).")
   customerAsn?: string;
 
@@ -345,7 +309,7 @@ model AdditionalCustomerProperties {
   customerEntitlementSkuName?: string;
 
   @doc("Customer resource entitlement expiration date string.")
-  customerEntitlementExpiration?: string;
+  customerEntitlementExpiration?: utcDateTime;
 
   @doc("Optional property #1 of Mcc response object.")
   optionalProperty1?: string;
@@ -389,12 +353,12 @@ model CacheNodeProperty {
   status?: string;
 
   @doc("Mcc response error details.")
-  error?: ErrorDefinition;
+  error?: ErrorDetail;
 }
 
 @doc("Model representing Cache Node for ConnectedCache resource")
 model CacheNodeEntity {
-  @doc("Cache node resource Arm fully qualified resource Id.")
+  @doc("Cache node resource Azure fully qualified resource Id.")
   fullyQualifiedResourceId?: string;
 
   @doc("Cache node resource customer resource GUID Id.")
@@ -419,9 +383,6 @@ model CacheNodeEntity {
   @doc("Cache node resource customer resource Asn (autonomous system number)")
   customerAsn?: int32;
 
-  @doc("Cache node resource country codes.")
-  countryCodes?: string;
-
   @doc("Cache node resource flag for indicating if cache node is enabled.")
   isEnabled?: boolean;
 
@@ -429,15 +390,19 @@ model CacheNodeEntity {
   maxAllowableEgressInMbps?: int32;
 
   @doc("Cache node resource maximum allowed probability of egress.")
+  @visibility("read")
   maxAllowableProbability?: float32;
 
-  @doc("Cache node resource Arm XCid.")
+  @doc("Cache node resource Azure XCid.")
   xCid?: string;
 
   @doc("Cache node resource flag for determining if managed by enterprise as boolean.")
   isEnterpriseManaged?: boolean;
 
-  @doc("Cache node resource deletion RPaaS async operation Id.")
+  @doc("Cache node resource create async operation Id.")
+  createAsyncOperationId?: string;
+
+  @doc("Cache node resource deletion async operation Id.")
   deleteAsyncOperationId?: string;
 
   @doc("Cache node resource customer resource client tenant Id of subscription.")
@@ -446,55 +411,41 @@ model CacheNodeEntity {
   @doc("Cache node resource category.")
   category?: string;
 
-  @doc("Cache node resource deletion flag set timestamp.")
-  @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  deletedFlagSetDateTime?: utcDateTime;
-
-  @doc("Cache node resource last deletion attempt timestamp.")
-  @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastAttemptedDeleteTime?: utcDateTime;
-
   @doc("Cache node resource release version.")
   releaseVersion?: int32;
 
-  @doc("Cache node resource last Arm sync timestamp.")
-  lastSyncWithArmTimestamp?: string;
+  @doc("Cache node resource last sync timestamp.") 
+  lastSyncWithAzureTimestamp?: utcDateTime;
 
-  @doc("Cache node resource attempts to sync with Arm.")
+  @doc("Cache node resource attempts to sync with Azure.")
   @visibility("read")
-  synchWithArmAttemptsCount?: int32;
+  synchWithAzureAttemptsCount?: int32;
 
   @doc("Cache node resource container configuration details.")
   containerConfigurations?: string;
 
   @doc("Cache node resource comma separated values of Cidrs.")
-  cidrCsv?: string;
+  cidrCsv?: string[];
 
   @doc("Cache node resource last Cidr Csv update timestamp")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @visibility("read")
   cidrCsvLastUpdateTime?: utcDateTime;
 
-  @doc("Cache node resource comma separated value of Bgp Cidrs")
-  bgpCidrCsv?: string;
-
   @doc("Cache node resource last Bgp Cidr Csv update timestamp")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @visibility("read")
   bgpCidrCsvLastUpdateTime?: utcDateTime;
 
   @doc("Cache node resource last Bgp report timestamp.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   bgpLastReportedTime?: utcDateTime;
 
-  @doc("Cache node resource Bgp review state string text.")
+  @doc("Cache node resource Bgp review state string text in detail.")
   @visibility("read")
   bgpReviewStateText?: string;
 
-  @doc("Cache node resource Bgp review state as integer.")
+  @doc("Cache node resource Bgp review state string text.")
   @visibility("read")
-  bgpReviewState?: int32;
+  bgpReviewState?: BgpReviewStateEnum;
 
   @doc("Cache node resource Bgp review feedback text.")
   @visibility("read")
@@ -513,6 +464,7 @@ model CacheNodeEntity {
   bgpCidrBlocksCount?: int32;
 
   @doc("Cache node resource total addressable space defined by Bgp and Cidr Csv blocks.")
+  @visibility("read")
   bgpAddressSpace?: int32;
 
   @doc("Cache node resource flag for determining if customer will be migrated.")
@@ -526,47 +478,31 @@ model CacheNodeEntity {
   cidrSelectionType?: int32;
 
   @doc("Cache node resource flag for indicating the cache node resource is frozen (not selectable, not editable in UI).")
-  isFrozen?: boolean;
-
-  @doc("Cache node resource controlling cache node Id")
-  controllingCacheNodeId?: string;
+  @visibility("read")
+  isFrozen?: boolean; 
 
   @doc("Cache node resource review process state as integer")
+  @visibility("read")
   reviewState?: int32;
 
   @doc("Cache node resource review state text.")
+  @visibility("read")
   reviewStateText?: string;
 
   @doc("Cache node resource review feedback text.")
+  @visibility("read")
   reviewFeedback?: string;
 
-  @doc("Cache node resource configuration state as integer.")
-  configurationState?: int32;
+  @doc("Cache node resource configuration state.")
+  @visibility("read")
+  configurationState?: ConfigurationState;
 
   @doc("Cache node resource configuration state text.")
+  @visibility("read")
   configurationStateText?: string;
 
   @doc("Cache node resource total addressable space defined by the Cidr Csv block.")
   addressSpace?: int32;
-
-  @doc("Cache node resource flag for determining if resource is verified.")
-  isVerified?: boolean;
-
-  @doc("Cache node resource deletion flag.")
-  isDeleted?: boolean;
-
-  @doc("Cache node resource creation Arm Correlation Id.")
-  createCorrelationId?: string;
-
-  @doc("Cache node resource update Arm Correlation Id.")
-  updateCorrelationId?: string;
-
-  @doc("Cache node resource deletion Arm Correlation Id for rectifier.")
-  deleteRectifierCorrelationId?: string;
-
-  @doc("Cache node resource Arm Correlation Id for Iot Central rectification.")
-  @visibility("read")
-  iotRectifierCorrelationId?: string;
 
   @doc("Cache node resource Mcc container deployment worker connection count.")
   @visibility("read")
@@ -574,7 +510,6 @@ model CacheNodeEntity {
 
   @doc("Cache node resource last updated Mcc container deployment worker connection count timestamp.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   workerConnectionsLastUpdatedDateTime?: utcDateTime;
 
   @doc("Cache node resource Mcc container configuration details re-sync trigger.")
@@ -590,9 +525,6 @@ model CacheNodeEntity {
 model AdditionalCacheNodeProperties {
   @doc("issues list to return the issues as part of the additional cache node properties")
   cacheNodePropertiesDetailsIssuesList?: string[];
-
-  @doc("Cache node resource Bgp Cidrs.")
-  bgpCidrs?: string;
 
   @doc("Cache node resource aggregated status details.")
   @visibility("read")
@@ -610,7 +542,8 @@ model AdditionalCacheNodeProperties {
   @visibility("read")
   productVersion?: string;
 
-  @doc("Cache node resource flag indicating if cache node is provisioned.")
+  @doc("Cache node resource flag indicating if cache node has been physically installed or provisioned on their physical lab.")
+  @visibility("read")
   isProvisioned?: boolean;
 
   @doc("Cache node resource detailed state text.")
@@ -637,11 +570,23 @@ model AdditionalCacheNodeProperties {
   @doc("Cache node resource Mcc proxy Url")
   proxyUrl?: string;
 
-  @doc("Check Cache node resource need proxy")
-  isProxyUsed?: boolean;
+  @doc("Cache node resource requires a proxy")
+  isProxyRequired?: ProxyRequired;
 
   @doc("Operating system of the cache node")
   osType?: OsType;
+
+  @doc("Update Cycle Type")
+  updateCycleType?: CycleType;
+
+  @doc("Auto update or fast update version")
+  autoUpdateVersion?: string;
+
+  @doc("update realted information details")
+  updateInfoDetails?: string;
+
+  @doc("customer requested date time for mcc install of update cycle")
+  updateRequestedDateTime?: utcDateTime;
 
   @doc("Optional property #1 of Mcc response object")
   optionalProperty1?: string;
@@ -667,7 +612,9 @@ model CacheNodeDriveConfiguration {
   @doc("physical size of the drive used for caching content")
   sizeInGb?: int32;
 
-  @doc("corresponding nginx cache number. Valid cache numbers are 1 - 10")
+  @doc("corresponding nginx cache number. Valid cache numbers are 1 - 20")
+  @minValue(1)
+  @maxValue(20)
   cacheNumber?: int32;
 
   @doc("full binding for corresponding nginx cache drive")
@@ -697,6 +644,7 @@ model MccCacheNodeBgpCidrDetails {
 @doc("Mcc cache node Bgp Cidr details.")
 model BgpCidrsConfiguration {
   @doc("Mcc cache node Bgp Cidr details.")
+  @visibility("read")
   bgpCidrs?: string[];
 }
 
@@ -718,13 +666,16 @@ model CacheNodeInstallProperties {
 
   @doc("Mcc primary account key. Internal to Mcc.")
   @visibility("read")
+  @secret
   primaryAccountKey?: string;
 
   @doc("Mcc secondary account key. Internal to Mcc.")
   @visibility("read")
+  @secret
   secondaryAccountKey?: string;
 
   @doc("Mcc Iot Central temporary device registration key, used once.")
   @visibility("read")
+  @secret
   registrationKey?: string;
 }

@@ -182,7 +182,7 @@
         "tags": [
           "EnterpriseMccCustomers"
         ],
-        "description": "List EnterpriseMccCustomerResource resources by subscription ID",
+        "description": "This api gets information about all enterpriseMccCustomer resources under the given subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2206,10 +2206,6 @@
             "type": "string"
           }
         },
-        "bgpCidrs": {
-          "type": "string",
-          "description": "Cache node resource Bgp Cidrs."
-        },
         "aggregatedStatusDetails": {
           "type": "string",
           "description": "Cache node resource aggregated status details.",
@@ -2233,7 +2229,8 @@
         },
         "isProvisioned": {
           "type": "boolean",
-          "description": "Cache node resource flag indicating if cache node is provisioned."
+          "description": "Cache node resource flag indicating if cache node has been physically installed or provisioned on their physical lab.",
+          "readOnly": true
         },
         "cacheNodeStateDetailedText": {
           "type": "string",
@@ -2271,13 +2268,30 @@
           "type": "string",
           "description": "Cache node resource Mcc proxy Url"
         },
-        "isProxyUsed": {
-          "type": "boolean",
-          "description": "Check Cache node resource need proxy"
+        "isProxyRequired": {
+          "$ref": "#/definitions/ProxyRequired",
+          "description": "Cache node resource requires a proxy"
         },
         "osType": {
           "$ref": "#/definitions/OsType",
           "description": "Operating system of the cache node"
+        },
+        "updateCycleType": {
+          "$ref": "#/definitions/CycleType",
+          "description": "Update Cycle Type"
+        },
+        "autoUpdateVersion": {
+          "type": "string",
+          "description": "Auto update or fast update version"
+        },
+        "updateInfoDetails": {
+          "type": "string",
+          "description": "update realted information details"
+        },
+        "updateRequestedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "customer requested date time for mcc install of update cycle"
         },
         "optionalProperty1": {
           "type": "string",
@@ -2392,6 +2406,7 @@
         },
         "peeringDbLastUpdateDate": {
           "type": "string",
+          "format": "date-time",
           "description": "Customer resource last PeeringDB update timestamp.",
           "readOnly": true
         },
@@ -2409,7 +2424,7 @@
           "description": "Customer resource transit Asn (autonomous system number)."
         },
         "customerTransitState": {
-          "type": "string",
+          "$ref": "#/definitions/CustomerTransitState",
           "description": "Customer resource transit state."
         },
         "customerAsn": {
@@ -2436,6 +2451,7 @@
         },
         "customerEntitlementExpiration": {
           "type": "string",
+          "format": "date-time",
           "description": "Customer resource entitlement expiration date string."
         },
         "optionalProperty1": {
@@ -2469,7 +2485,8 @@
           "description": "Mcc cache node Bgp Cidr details.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -2481,6 +2498,42 @@
           "type": "string",
           "description": "Asn to ip address mapping"
         }
+      }
+    },
+    "BgpReviewStateEnum": {
+      "type": "string",
+      "description": "Cache node resource Bgp review state as integer",
+      "enum": [
+        "NotConfigured",
+        "InReview",
+        "Approved",
+        "AttentionRequired"
+      ],
+      "x-ms-enum": {
+        "name": "BgpReviewStateEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotConfigured",
+            "value": "NotConfigured",
+            "description": "bgp not configured"
+          },
+          {
+            "name": "InReview",
+            "value": "InReview",
+            "description": "bgp is in review state"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "bgp is in Approved state"
+          },
+          {
+            "name": "AttentionRequired",
+            "value": "AttentionRequired",
+            "description": "bgp is setup need an attention for more troubleshoot"
+          }
+        ]
       }
     },
     "CacheNodeDriveConfiguration": {
@@ -2499,7 +2552,9 @@
         "cacheNumber": {
           "type": "integer",
           "format": "int32",
-          "description": "corresponding nginx cache number. Valid cache numbers are 1 - 10"
+          "description": "corresponding nginx cache number. Valid cache numbers are 1 - 20",
+          "minimum": 1,
+          "maximum": 20
         },
         "nginxMapping": {
           "type": "string",
@@ -2513,7 +2568,7 @@
       "properties": {
         "fullyQualifiedResourceId": {
           "type": "string",
-          "description": "Cache node resource Arm fully qualified resource Id."
+          "description": "Cache node resource Azure fully qualified resource Id."
         },
         "customerId": {
           "type": "string",
@@ -2545,10 +2600,6 @@
           "format": "int32",
           "description": "Cache node resource customer resource Asn (autonomous system number)"
         },
-        "countryCodes": {
-          "type": "string",
-          "description": "Cache node resource country codes."
-        },
         "isEnabled": {
           "type": "boolean",
           "description": "Cache node resource flag for indicating if cache node is enabled."
@@ -2561,19 +2612,24 @@
         "maxAllowableProbability": {
           "type": "number",
           "format": "float",
-          "description": "Cache node resource maximum allowed probability of egress."
+          "description": "Cache node resource maximum allowed probability of egress.",
+          "readOnly": true
         },
         "xCid": {
           "type": "string",
-          "description": "Cache node resource Arm XCid."
+          "description": "Cache node resource Azure XCid."
         },
         "isEnterpriseManaged": {
           "type": "boolean",
           "description": "Cache node resource flag for determining if managed by enterprise as boolean."
         },
+        "createAsyncOperationId": {
+          "type": "string",
+          "description": "Cache node resource create async operation Id."
+        },
         "deleteAsyncOperationId": {
           "type": "string",
-          "description": "Cache node resource deletion RPaaS async operation Id."
+          "description": "Cache node resource deletion async operation Id."
         },
         "clientTenantId": {
           "type": "string",
@@ -2583,31 +2639,20 @@
           "type": "string",
           "description": "Cache node resource category."
         },
-        "deletedFlagSetDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Cache node resource deletion flag set timestamp.",
-          "readOnly": true
-        },
-        "lastAttemptedDeleteTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Cache node resource last deletion attempt timestamp.",
-          "readOnly": true
-        },
         "releaseVersion": {
           "type": "integer",
           "format": "int32",
           "description": "Cache node resource release version."
         },
-        "lastSyncWithArmTimestamp": {
+        "lastSyncWithAzureTimestamp": {
           "type": "string",
-          "description": "Cache node resource last Arm sync timestamp."
+          "format": "date-time",
+          "description": "Cache node resource last sync timestamp."
         },
-        "synchWithArmAttemptsCount": {
+        "synchWithAzureAttemptsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Cache node resource attempts to sync with Arm.",
+          "description": "Cache node resource attempts to sync with Azure.",
           "readOnly": true
         },
         "containerConfigurations": {
@@ -2615,22 +2660,23 @@
           "description": "Cache node resource container configuration details."
         },
         "cidrCsv": {
-          "type": "string",
-          "description": "Cache node resource comma separated values of Cidrs."
+          "type": "array",
+          "description": "Cache node resource comma separated values of Cidrs.",
+          "items": {
+            "type": "string"
+          }
         },
         "cidrCsvLastUpdateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Cache node resource last Cidr Csv update timestamp"
-        },
-        "bgpCidrCsv": {
-          "type": "string",
-          "description": "Cache node resource comma separated value of Bgp Cidrs"
+          "description": "Cache node resource last Cidr Csv update timestamp",
+          "readOnly": true
         },
         "bgpCidrCsvLastUpdateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Cache node resource last Bgp Cidr Csv update timestamp"
+          "description": "Cache node resource last Bgp Cidr Csv update timestamp",
+          "readOnly": true
         },
         "bgpLastReportedTime": {
           "type": "string",
@@ -2640,13 +2686,12 @@
         },
         "bgpReviewStateText": {
           "type": "string",
-          "description": "Cache node resource Bgp review state string text.",
+          "description": "Cache node resource Bgp review state string text in detail.",
           "readOnly": true
         },
         "bgpReviewState": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Cache node resource Bgp review state as integer.",
+          "$ref": "#/definitions/BgpReviewStateEnum",
+          "description": "Cache node resource Bgp review state string text.",
           "readOnly": true
         },
         "bgpReviewFeedback": {
@@ -2675,7 +2720,8 @@
         "bgpAddressSpace": {
           "type": "integer",
           "format": "int32",
-          "description": "Cache node resource total addressable space defined by Bgp and Cidr Csv blocks."
+          "description": "Cache node resource total addressable space defined by Bgp and Cidr Csv blocks.",
+          "readOnly": true
         },
         "shouldMigrate": {
           "type": "boolean",
@@ -2694,63 +2740,39 @@
         },
         "isFrozen": {
           "type": "boolean",
-          "description": "Cache node resource flag for indicating the cache node resource is frozen (not selectable, not editable in UI)."
-        },
-        "controllingCacheNodeId": {
-          "type": "string",
-          "description": "Cache node resource controlling cache node Id"
+          "description": "Cache node resource flag for indicating the cache node resource is frozen (not selectable, not editable in UI).",
+          "readOnly": true
         },
         "reviewState": {
           "type": "integer",
           "format": "int32",
-          "description": "Cache node resource review process state as integer"
+          "description": "Cache node resource review process state as integer",
+          "readOnly": true
         },
         "reviewStateText": {
           "type": "string",
-          "description": "Cache node resource review state text."
+          "description": "Cache node resource review state text.",
+          "readOnly": true
         },
         "reviewFeedback": {
           "type": "string",
-          "description": "Cache node resource review feedback text."
+          "description": "Cache node resource review feedback text.",
+          "readOnly": true
         },
         "configurationState": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Cache node resource configuration state as integer."
+          "$ref": "#/definitions/ConfigurationState",
+          "description": "Cache node resource configuration state.",
+          "readOnly": true
         },
         "configurationStateText": {
           "type": "string",
-          "description": "Cache node resource configuration state text."
+          "description": "Cache node resource configuration state text.",
+          "readOnly": true
         },
         "addressSpace": {
           "type": "integer",
           "format": "int32",
           "description": "Cache node resource total addressable space defined by the Cidr Csv block."
-        },
-        "isVerified": {
-          "type": "boolean",
-          "description": "Cache node resource flag for determining if resource is verified."
-        },
-        "isDeleted": {
-          "type": "boolean",
-          "description": "Cache node resource deletion flag."
-        },
-        "createCorrelationId": {
-          "type": "string",
-          "description": "Cache node resource creation Arm Correlation Id."
-        },
-        "updateCorrelationId": {
-          "type": "string",
-          "description": "Cache node resource update Arm Correlation Id."
-        },
-        "deleteRectifierCorrelationId": {
-          "type": "string",
-          "description": "Cache node resource deletion Arm Correlation Id for rectifier."
-        },
-        "iotRectifierCorrelationId": {
-          "type": "string",
-          "description": "Cache node resource Arm Correlation Id for Iot Central rectification.",
-          "readOnly": true
         },
         "workerConnections": {
           "type": "integer",
@@ -2791,18 +2813,24 @@
         },
         "primaryAccountKey": {
           "type": "string",
+          "format": "password",
           "description": "Mcc primary account key. Internal to Mcc.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "secondaryAccountKey": {
           "type": "string",
+          "format": "password",
           "description": "Mcc secondary account key. Internal to Mcc.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "registrationKey": {
           "type": "string",
+          "format": "password",
           "description": "Mcc Iot Central temporary device registration key, used once.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -2833,7 +2861,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "The error details"
         }
       }
@@ -2914,9 +2942,33 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "Mcc response error details."
         }
+      }
+    },
+    "ConfigurationState": {
+      "type": "string",
+      "description": "Cache node configration setup state",
+      "enum": [
+        "Configured",
+        "NotConfigured_Ip"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Configured",
+            "value": "Configured",
+            "description": "connnected cache setup configured"
+          },
+          {
+            "name": "NotConfigured_Ip",
+            "value": "NotConfigured_Ip",
+            "description": "connnected cache setup not configured"
+          }
+        ]
       }
     },
     "ConnectedCachePatchResource": {
@@ -2942,7 +2994,7 @@
       "properties": {
         "fullyQualifiedResourceId": {
           "type": "string",
-          "description": "Customer resource Arm fully qualified resource Id."
+          "description": "Customer resource Azure fully qualified resource Id."
         },
         "customerId": {
           "type": "string",
@@ -2974,61 +3026,30 @@
           "format": "int32",
           "description": "Customer resource Mcc release version."
         },
-        "createCorrelationId": {
+        "createAsyncOperationId": {
           "type": "string",
-          "description": "Customer resource creation Arm Correlation Id.",
-          "readOnly": true
-        },
-        "updateCorrelationId": {
-          "type": "string",
-          "description": "Customer resource update Arm Correlation Id.",
-          "readOnly": true
-        },
-        "shouldDelete": {
-          "type": "boolean",
-          "description": "Customer resource marked for deletion flag as boolean."
-        },
-        "deleteRectifierCorrelationId": {
-          "type": "string",
-          "description": "Customer resource deletion Arm Correlation Id.",
+          "description": "Customer resource create async operation Id.",
           "readOnly": true
         },
         "deleteAsyncOperationId": {
           "type": "string",
-          "description": "Customer resource deletion RPaaS async operation Id.",
+          "description": "Customer resource deletion async operation Id.",
           "readOnly": true
         },
         "clientTenantId": {
           "type": "string",
           "description": "Customer resource client tenant Id of subscription."
         },
-        "attemptedDeletes": {
+        "synchWithAzureAttemptsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Customer resource attempted deletions."
-        },
-        "deletedFlagSetDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Customer resource deletion flag set timestamp.",
+          "description": "Customer resource sync attempts.",
           "readOnly": true
         },
-        "lastAttemptedDeleteTime": {
+        "lastSyncWithAzureTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Customer resource timestamp of last attempted delete",
-          "readOnly": true
-        },
-        "synchWithArmAttemptsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Customer resource Arm sync attempts.",
-          "readOnly": true
-        },
-        "lastSyncWithArmTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Customer resource last Arm sync timestamp.",
+          "description": "Customer resource last Azure sync timestamp.",
           "readOnly": true
         },
         "isEnterpriseManaged": {
@@ -3038,14 +3059,6 @@
         "shouldMigrate": {
           "type": "boolean",
           "description": "Customer resource flag for migration."
-        },
-        "transitState": {
-          "type": "string",
-          "description": "Customer resource transit state."
-        },
-        "transitAsn": {
-          "type": "string",
-          "description": "Customer resource transit Asn."
         },
         "resendSignupCode": {
           "type": "boolean",
@@ -3057,7 +3070,13 @@
         },
         "verifySignupPhrase": {
           "type": "string",
-          "description": "Customer resource phrase for verifying signup."
+          "format": "password",
+          "description": "Customer resource phrase for verifying signup.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -3099,10 +3118,70 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "Mcc response error details.",
           "readOnly": true
         }
+      }
+    },
+    "CustomerTransitState": {
+      "type": "string",
+      "description": "Customer resource transit states",
+      "enum": [
+        "NoTransit",
+        "CombinedTransit",
+        "TransitOnly"
+      ],
+      "x-ms-enum": {
+        "name": "CustomerTransitState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoTransit",
+            "value": "NoTransit",
+            "description": "do not have transit"
+          },
+          {
+            "name": "CombinedTransit",
+            "value": "CombinedTransit",
+            "description": "transit provider and have own subscribers"
+          },
+          {
+            "name": "TransitOnly",
+            "value": "TransitOnly",
+            "description": "pure transit provider or network service provider"
+          }
+        ]
+      }
+    },
+    "CycleType": {
+      "type": "string",
+      "description": "Update Cycle type",
+      "enum": [
+        "Preview",
+        "Slow",
+        "Fast"
+      ],
+      "x-ms-enum": {
+        "name": "CycleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Preview",
+            "value": "Preview",
+            "description": "customer selection of preview update install mcc on their physical vm"
+          },
+          {
+            "name": "Slow",
+            "value": "Slow",
+            "description": "customer selection of slow update to install mcc on their physical vm"
+          },
+          {
+            "name": "Fast",
+            "value": "Fast",
+            "description": "customer selection of fast / auto update to install mcc on their physical vm"
+          }
+        ]
       }
     },
     "EnterpriseMccCacheNodeResource": {
@@ -3227,31 +3306,6 @@
       "required": [
         "value"
       ]
-    },
-    "ErrorDefinition": {
-      "type": "object",
-      "description": "Error definition",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Service specific error code which serves as the substatus for the HTTP error code",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Description of the error",
-          "readOnly": true
-        },
-        "details": {
-          "type": "array",
-          "description": "Internal error details",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
     },
     "IspCacheNodeResource": {
       "type": "object",
@@ -3503,6 +3557,30 @@
         ]
       }
     },
+    "ProxyRequired": {
+      "type": "string",
+      "description": "Proxy details enum",
+      "enum": [
+        "None",
+        "Required"
+      ],
+      "x-ms-enum": {
+        "name": "ProxyRequired",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Proxy is not required in setup"
+          },
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "proxy is required in setup"
+          }
+        ]
+      }
+    },
     "ProxyUrlConfiguration": {
       "type": "object",
       "description": "ProxyUrl configuration of cache node",
@@ -3510,50 +3588,6 @@
         "proxyUrl": {
           "type": "string",
           "description": "Host Proxy Address configuration along with port number. This can be a proxy or ip address. ex: xx.xx.xx.xxxx:80 or host name http://exampleproxy.com:80"
-        }
-      }
-    },
-    "ResourceProviderOperationDefinition": {
-      "type": "object",
-      "description": "Describes the Resource Provider Operation",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Resource provider operation name"
-        },
-        "isDataAction": {
-          "type": "string",
-          "description": "Indicates whether the operation is a data action"
-        },
-        "display": {
-          "$ref": "#/definitions/ResourceProviderOperationDisplay",
-          "description": "Resource provider display properties"
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin of the operation"
-        }
-      }
-    },
-    "ResourceProviderOperationDisplay": {
-      "type": "object",
-      "description": "Describes the properties of the Operation",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Name of the resource provider"
-        },
-        "resource": {
-          "type": "string",
-          "description": "Name of the resource type"
-        },
-        "operation": {
-          "type": "string",
-          "description": "Name of the resource provider operation"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the resource provider operation"
         }
       }
     },
