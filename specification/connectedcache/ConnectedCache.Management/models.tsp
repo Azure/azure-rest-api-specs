@@ -40,53 +40,60 @@ enum OsType {
 @doc("Cache node resource Bgp review state as integer")
 enum BgpReviewStateEnum {
   /** bgp not configured */
-  NotConfigured,  
+  NotConfigured,
+
   /** bgp is in review state */
-  InReview, 
+  InReview,
+
   /** bgp is in Approved state */
-  Approved, 
+  Approved,
+
   /** bgp is setup need an attention for more troubleshoot */
-  AttentionRequired
+  AttentionRequired,
 }
 
 @doc("Cache node configration setup state")
-enum ConfigurationState
-{
+enum ConfigurationState {
   /** connnected cache setup configured */
-    Configured,
-  /** connnected cache setup not configured*/
-    NotConfigured_Ip
+  Configured,
+
+  /** connnected cache setup not configured */
+  NotConfigured_Ip,
 }
 
 @doc("Proxy details enum")
 enum ProxyRequired {
   /** Proxy is not required in setup */
   None,
+
   /** proxy is required in setup */
   Required,
 }
 
-@doc("Customer resource transit states") 
-enum CustomerTransitState
-{
-  /**do not have transit */
-    NoTransit,
+@doc("Customer resource transit states")
+enum CustomerTransitState {
+  /** do not have transit */
+  NoTransit,
+
   /** transit provider and have own subscribers */
-    CombinedTransit,  
+  CombinedTransit,
+
   /** pure transit provider or network service provider */
-    TransitOnly
+  TransitOnly,
 }
 
-@doc("Update Cycle type") 
-enum CycleType{  
-  /**customer selection of preview update install mcc on their physical vm  */
-  Preview,  
-  /**customer selection of slow update to install mcc on their physical vm */
+@doc("Update Cycle type")
+enum CycleType {
+  /** customer selection of preview update install mcc on their physical vm */
+  Preview,
+
+  /** customer selection of slow update to install mcc on their physical vm */
   Slow,
- /**customer selection of fast / auto update to install mcc on their physical vm */
-  Fast
-  }
-  
+
+  /** customer selection of fast / auto update to install mcc on their physical vm */
+  Fast,
+}
+
 @doc("Model representing Cache Node for ConnectedCache resource")
 model CacheNodeOldResponse {
   @doc("The provisioned state of the resource")
@@ -209,7 +216,7 @@ model CustomerEntity {
   verifySignupCode?: boolean;
 
   @doc("Customer resource phrase for verifying signup.")
-  @visibility("create","update")
+  @visibility("create", "update")
   @secret
   verifySignupPhrase?: string;
 }
@@ -288,10 +295,9 @@ model AdditionalCustomerProperties {
   @doc("Customer resource transit Asn (autonomous system number).")
   customerTransitAsn?: string;
 
-  @doc("Customer resource transit state.") 
+  @doc("Customer resource transit state.")
   customerTransitState?: CustomerTransitState;
 
-  
   @doc("Customer resource Asn (autonomous system number).")
   customerAsn?: string;
 
@@ -414,7 +420,7 @@ model CacheNodeEntity {
   @doc("Cache node resource release version.")
   releaseVersion?: int32;
 
-  @doc("Cache node resource last sync timestamp.") 
+  @doc("Cache node resource last sync timestamp.")
   lastSyncWithAzureTimestamp?: utcDateTime;
 
   @doc("Cache node resource attempts to sync with Azure.")
@@ -479,7 +485,7 @@ model CacheNodeEntity {
 
   @doc("Cache node resource flag for indicating the cache node resource is frozen (not selectable, not editable in UI).")
   @visibility("read")
-  isFrozen?: boolean; 
+  isFrozen?: boolean;
 
   @doc("Cache node resource review process state as integer")
   @visibility("read")
