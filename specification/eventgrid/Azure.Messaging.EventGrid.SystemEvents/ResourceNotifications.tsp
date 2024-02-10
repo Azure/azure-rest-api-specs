@@ -16,12 +16,12 @@ model ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData
 /** Describes the schema of the common properties across all ARN system topic events */
 model ResourceNotificationsResourceUpdatedEventData {
   /** resourceInfo details for update event */
-  @friendlyName("resourceDetails")
+  @projectedName("json", "resourceInfo")
   resourceInfo?: ResourceNotificationsResourceUpdatedDetails;
 
   /** details about operational info */
-  @friendlyName("operationalDetails")
-  operationalInfo?: ResourceNotificationsOperationalDetails;
+  @projectedName("json", "operationalInfo")
+  operationalDetails?: ResourceNotificationsOperationalDetails;
 
   /** api version of the resource properties bag */
   apiVersion?: string;
