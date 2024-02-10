@@ -615,7 +615,8 @@
         "deliveryAttemptTimeStamp": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the email delivery report received timestamp"
+          "description": "The time at which the email delivery report received timestamp",
+          "x-ms-client-name": "deliveryAttemptTimestamp"
         }
       }
     },
@@ -696,7 +697,8 @@
         "userActionTimeStamp": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the user interacted with the email"
+          "description": "The time at which the user interacted with the email",
+          "x-ms-client-name": "userActionTimestamp"
         },
         "engagementContext": {
           "type": "string",
@@ -3203,7 +3205,7 @@
         }
       }
     },
-    "EventGridMqttClientCreatedOrUpdatedEventData": {
+    "EventGridMQTTClientCreatedOrUpdatedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event.",
       "properties": {
@@ -3220,7 +3222,7 @@
           "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
         },
         "state": {
-          "$ref": "#/definitions/EventGridMqttClientState",
+          "$ref": "#/definitions/EventGridMQTTClientState",
           "description": "Configured state of the client. The value could be Enabled or Disabled"
         },
         "createdOn": {
@@ -3242,7 +3244,7 @@
         }
       }
     },
-    "EventGridMqttClientDeletedEventData": {
+    "EventGridMQTTClientDeletedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event.",
       "properties": {
@@ -3260,7 +3262,7 @@
         }
       }
     },
-    "EventGridMqttClientDisconnectionReason": {
+    "EventGridMQTTClientDisconnectionReason": {
       "type": "string",
       "description": "EventGrid MQTT Client Disconnection Reason",
       "enum": [
@@ -3338,7 +3340,7 @@
         ]
       }
     },
-    "EventGridMqttClientEventData": {
+    "EventGridMQTTClientEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for MQTT Client state changes.",
       "properties": {
@@ -3356,7 +3358,7 @@
         }
       }
     },
-    "EventGridMqttClientSessionConnectedEventData": {
+    "EventGridMQTTClientSessionConnectedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event.",
       "properties": {
@@ -3383,7 +3385,7 @@
         }
       }
     },
-    "EventGridMqttClientSessionDisconnectedEventData": {
+    "EventGridMQTTClientSessionDisconnectedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event.",
       "properties": {
@@ -3409,12 +3411,12 @@
           "description": "A number that helps indicate order of MQTT client session connected or\ndisconnected events. Latest event will have a sequence number that is higher\nthan the previous event."
         },
         "disconnectionReason": {
-          "$ref": "#/definitions/EventGridMqttClientDisconnectionReason",
+          "$ref": "#/definitions/EventGridMQTTClientDisconnectionReason",
           "description": "Reason for the disconnection of the MQTT client's session. The value could be\none of the values in the disconnection reasons table."
         }
       }
     },
-    "EventGridMqttClientState": {
+    "EventGridMQTTClientState": {
       "type": "string",
       "description": "EventGrid MQTT Client State",
       "enum": [
@@ -3444,7 +3446,8 @@
       "properties": {
         "fileUrl": {
           "type": "string",
-          "description": "The path to the capture file."
+          "description": "The path to the capture file.",
+          "x-ms-client-name": "fileurl"
         },
         "fileType": {
           "type": "string",
@@ -3585,20 +3588,24 @@
       "properties": {
         "resourceFhirAccount": {
           "type": "string",
-          "description": "Domain name of FHIR account for this resource."
+          "description": "Domain name of FHIR account for this resource.",
+          "x-ms-client-name": "FhirServiceHostName"
         },
         "resourceFhirId": {
           "type": "string",
-          "description": "Id of HL7 FHIR resource."
+          "description": "Id of HL7 FHIR resource.",
+          "x-ms-client-name": "FhirResourceId"
         },
         "resourceVersionId": {
           "type": "integer",
           "format": "int64",
-          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion)."
+          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
+          "x-ms-client-name": "FhirResourceVersionId"
         },
         "resourceType": {
           "$ref": "#/definitions/HealthcareFhirResourceType",
-          "description": "Type of HL7 FHIR resource."
+          "description": "Type of HL7 FHIR resource.",
+          "x-ms-client-name": "FhirResourceType"
         }
       }
     },
@@ -3608,20 +3615,24 @@
       "properties": {
         "resourceFhirAccount": {
           "type": "string",
-          "description": "Domain name of FHIR account for this resource."
+          "description": "Domain name of FHIR account for this resource.",
+          "x-ms-client-name": "FhirServiceHostName"
         },
         "resourceFhirId": {
           "type": "string",
-          "description": "Id of HL7 FHIR resource."
+          "description": "Id of HL7 FHIR resource.",
+          "x-ms-client-name": "FhirResourceId"
         },
         "resourceVersionId": {
           "type": "integer",
           "format": "int64",
-          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion)."
+          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
+          "x-ms-client-name": "FhirResourceVersionId"
         },
         "resourceType": {
           "$ref": "#/definitions/HealthcareFhirResourceType",
-          "description": "Type of HL7 FHIR resource."
+          "description": "Type of HL7 FHIR resource.",
+          "x-ms-client-name": "FhirResourceType"
         }
       }
     },
@@ -4609,20 +4620,24 @@
       "properties": {
         "resourceFhirAccount": {
           "type": "string",
-          "description": "Domain name of FHIR account for this resource."
+          "description": "Domain name of FHIR account for this resource.",
+          "x-ms-client-name": "FhirServiceHostName"
         },
         "resourceFhirId": {
           "type": "string",
-          "description": "Id of HL7 FHIR resource."
+          "description": "Id of HL7 FHIR resource.",
+          "x-ms-client-name": "FhirResourceId"
         },
         "resourceVersionId": {
           "type": "integer",
           "format": "int64",
-          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion)."
+          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
+          "x-ms-client-name": "FhirResourceVersionId"
         },
         "resourceType": {
           "$ref": "#/definitions/HealthcareFhirResourceType",
-          "description": "Type of HL7 FHIR resource."
+          "description": "Type of HL7 FHIR resource.",
+          "x-ms-client-name": "FhirResourceType"
         }
       }
     },
@@ -7684,10 +7699,11 @@
           "$ref": "#/definitions/StorageTaskAssignmentCompletedStatus",
           "description": "The status for a storage task."
         },
-        "completedDateTime": {
+        "completedOn": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which a storage task was completed."
+          "description": "The time at which a storage task was completed.",
+          "x-ms-client-name": "completedDateTime"
         },
         "taskExecutionId": {
           "type": "string",
@@ -7697,10 +7713,11 @@
           "type": "string",
           "description": "The task name for a storage task."
         },
-        "summaryReportBlobUrl": {
+        "summaryReportBlobUri": {
           "type": "string",
           "format": "uri",
-          "description": "The summary report blob url for a storage task"
+          "description": "The summary report blob url for a storage task",
+          "x-ms-client-name": "summaryReportBlobUrl"
         }
       }
     },
@@ -7735,7 +7752,8 @@
         "queuedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which a storage task was queued."
+          "description": "The time at which a storage task was queued.",
+          "x-ms-client-name": "queuedOn"
         },
         "taskExecutionId": {
           "type": "string",

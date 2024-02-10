@@ -190,8 +190,8 @@ namespace Microsoft.EventGrid.SystemEvents {
   model StorageTaskAssignmentQueuedEventData {
     /** The time at which a storage task was queued. */
     // @encode("ISO8601")
-    @friendlyName("queuedOn")
-    queuedDateTime?: utcDateTime;
+    @encodedName("application/json", "queuedDateTime")
+    queuedOn?: utcDateTime;
 
     /** The execution id for a storage task. */
     taskExecutionId?: string;
@@ -204,7 +204,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The time at which a storage task was completed. */
     // @encode("ISO8601")
-    @friendlyName("completedOn")
+    @encodedName("application/json", "completedOn")
     completedDateTime?: utcDateTime;
 
     /** The execution id for a storage task. */
@@ -214,7 +214,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     taskName?: string;
 
     /** The summary report blob url for a storage task */
-    @friendlyName("summaryReportBlobUri")
+    @encodedName("application/json", "summaryReportBlobUri")
     summaryReportBlobUrl?: url;
   }
 

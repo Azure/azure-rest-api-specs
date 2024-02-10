@@ -241,8 +241,8 @@ model AcsEmailDeliveryReportReceivedEventData {
   deliveryStatusDetails?: AcsEmailDeliveryReportStatusDetails;
 
   /** The time at which the email delivery report received timestamp */
-  @friendlyName("deliveryAttemptTimestamp")
-  deliveryAttemptTimeStamp?: utcDateTime;
+  @encodedName("application/json", "deliveryAttemptTimeStamp")
+  deliveryAttemptTimestamp?: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event. */
@@ -257,8 +257,8 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   messageId?: string;
 
   /** The time at which the user interacted with the email */
-  @friendlyName("userActionTimestamp")
-  userActionTimeStamp?: utcDateTime;
+  @encodedName("application/json", "userActionTimeStamp")
+  userActionTimestamp?: utcDateTime;
 
   /** The context of the type of engagement user had with email */
   engagementContext?: string;

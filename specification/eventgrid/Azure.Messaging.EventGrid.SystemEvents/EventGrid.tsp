@@ -2,7 +2,6 @@
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** EventGrid MQTT Client State */
-@friendlyName("EventGridMqttClientState")
 union EventGridMQTTClientState {
   /** Enabled */
   "Enabled",
@@ -12,7 +11,6 @@ union EventGridMQTTClientState {
 }
 
 /** EventGrid MQTT Client Disconnection Reason */
-@friendlyName("EventGridMqttClientDisconnectionReason")
 union EventGridMQTTClientDisconnectionReason {
   /** The client got disconnected for any authentication reasons (for example, certificate expired, client got disabled, or client configuration changed). */
   "ClientAuthenticationError",
@@ -86,12 +84,10 @@ model SubscriptionDeletedEventData {
 
 /** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-@friendlyName("EventGridMqttClientCreatedOrUpdatedEventData")
 model EventGridMQTTClientCreatedOrUpdatedEventData {
   ...EventGridMQTTClientEventData;
 
   /** Configured state of the client. The value could be Enabled or Disabled */
-  @friendlyName("EventGridMqttClientState")
   state?: EventGridMQTTClientState;
 
   /** Time the client resource is created based on the provider's UTC time. */
@@ -111,7 +107,6 @@ the 'createdOn' property.
 
 /** Schema of the Data property of an EventGridEvent for MQTT Client state changes. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-@friendlyName("EventGridMqttClientEventData")
 model EventGridMQTTClientEventData {
   /** 
 Unique identifier for the MQTT client that the client presents to the service
@@ -129,14 +124,12 @@ long, and supports UTF-8 characters.
 
 /** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-@friendlyName("EventGridMqttClientDeletedEventData")
 model EventGridMQTTClientDeletedEventData {
   ...EventGridMQTTClientEventData;
 }
 
 /** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-@friendlyName("EventGridMqttClientSessionConnectedEventData")
 model EventGridMQTTClientSessionConnectedEventData {
   ...EventGridMQTTClientEventData;
 
@@ -156,7 +149,6 @@ than the previous event.
 
 /** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-@friendlyName("EventGridMqttClientSessionDisconnectedEventData")
 model EventGridMQTTClientSessionDisconnectedEventData {
   ...EventGridMQTTClientEventData;
 
