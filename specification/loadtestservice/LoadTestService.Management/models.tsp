@@ -38,7 +38,7 @@ model LoadTestResourcePatchRequestBody {
 
   @doc("LoadTest resource properties.")
   @extension("x-ms-client-flatten", true)
-  properties?: LoadTestProperties;
+  properties?: LoadTestResourcePatchRequestBodyProperties;
 }
 
 @doc("Resources provisioning states.")
@@ -95,7 +95,7 @@ model OutboundEnvironmentEndpoint {
 }
 
 @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
-model EncryptionIdentity {
+model EncryptionPropertiesIdentity {
   @doc("Managed identity type to use for accessing encryption key Url.")
   type?: type;
 
@@ -107,7 +107,7 @@ model EncryptionIdentity {
 @doc("Key and identity details for Customer Managed Key encryption of load test resource.")
 model EncryptionProperties {
   @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
-  identity?: EncryptionIdentity;
+  identity?: EncryptionPropertiesIdentity;
 
   @doc("key encryption key Url, versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek.")
   keyUrl?: string;
@@ -227,11 +227,11 @@ model QuotaBucketRequestProperties {
   newQuota?: int32;
 
   @doc("Dimensions for new quota request.")
-  dimensions?: QuotaDimensions;
+  dimensions?: QuotaBucketRequestPropertiesDimensions;
 }
 
 @doc("Dimensions for new quota request.")
-model QuotaDimensions {
+model QuotaBucketRequestPropertiesDimensions {
   @doc("Subscription Id dimension for new quota request of the quota bucket.")
   @minLength(1)
   subscriptionId?: string;
@@ -252,6 +252,27 @@ model OutboundEnvironmentEndpointCollection {
   @doc("The continuation token.")
   @nextLink
   nextLink?: ResourceLocation<OutboundEnvironmentEndpoint>;
+}
+
+// duplicate to remove SDK breaking changes
+@doc("LoadTest resource properties.")
+model LoadTestResourcePatchRequestBodyProperties{
+  @maxLength(512)
+  @doc("Description of the resource.")
+  description?: string;
+
+  @visibility("read")
+  @doc("Resource provisioning state.")
+  provisioningState?: ResourceState;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "URI is an abbervation and should be upper case"
+  @visibility("read")
+  @maxLength(2083)
+  @doc("Resource data plane URI.")
+  dataPlaneURI?: string;
+
+  @doc("CMK Encryption property.")
+  encryption?: EncryptionProperties;
 }
 
 //model OutboundEnvironmentEndpointListResult2 is Azure.Core.Page<OutboundEnvironmentEndpoint2>;

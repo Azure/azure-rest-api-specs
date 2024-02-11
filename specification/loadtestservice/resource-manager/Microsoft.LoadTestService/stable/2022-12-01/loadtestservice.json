@@ -64,7 +64,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
@@ -103,9 +103,9 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LoadTestResourceListResult"
+              "$ref": "#/definitions/LoadTestResourcePageList"
             }
           },
           "default": {
@@ -149,9 +149,9 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/QuotaResourceListResult"
+              "$ref": "#/definitions/QuotaResourceList"
             }
           },
           "default": {
@@ -203,7 +203,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/QuotaResource"
             }
@@ -302,9 +302,9 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LoadTestResourceListResult"
+              "$ref": "#/definitions/LoadTestResourcePageList"
             }
           },
           "default": {
@@ -352,7 +352,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             }
@@ -476,7 +476,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             }
@@ -534,7 +534,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "The request has succeeded."
           },
           "202": {
             "description": "Resource deletion accepted.",
@@ -546,7 +546,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -663,7 +663,21 @@
         }
       }
     },
-    "EncryptionIdentity": {
+    "EncryptionProperties": {
+      "type": "object",
+      "description": "Key and identity details for Customer Managed Key encryption of load test resource.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EncryptionPropertiesIdentity",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "key encryption key Url, versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        }
+      }
+    },
+    "EncryptionPropertiesIdentity": {
       "type": "object",
       "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
       "properties": {
@@ -675,20 +689,6 @@
           "type": "string",
           "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.",
           "x-nullable": true
-        }
-      }
-    },
-    "EncryptionProperties": {
-      "type": "object",
-      "description": "Key and identity details for Customer Managed Key encryption of load test resource.",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/EncryptionIdentity",
-          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
-        },
-        "keyUrl": {
-          "type": "string",
-          "description": "key encryption key Url, versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
         }
       }
     },
@@ -781,7 +781,7 @@
         }
       ]
     },
-    "LoadTestResourceListResult": {
+    "LoadTestResourcePageList": {
       "type": "object",
       "description": "The response of a LoadTestResource list operation.",
       "properties": {
@@ -819,9 +819,35 @@
           "description": "The managed service identities assigned to this resource."
         },
         "properties": {
-          "$ref": "#/definitions/LoadTestProperties",
+          "$ref": "#/definitions/LoadTestResourcePatchRequestBodyProperties",
           "description": "LoadTest resource properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LoadTestResourcePatchRequestBodyProperties": {
+      "type": "object",
+      "description": "LoadTest resource properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the resource.",
+          "maxLength": 512
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "dataPlaneURI": {
+          "type": "string",
+          "description": "Resource data plane URI.",
+          "maxLength": 2083,
+          "readOnly": true
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperties",
+          "description": "CMK Encryption property."
         }
       }
     },
@@ -921,12 +947,12 @@
           "minimum": 0
         },
         "dimensions": {
-          "$ref": "#/definitions/QuotaDimensions",
+          "$ref": "#/definitions/QuotaBucketRequestPropertiesDimensions",
           "description": "Dimensions for new quota request."
         }
       }
     },
-    "QuotaDimensions": {
+    "QuotaBucketRequestPropertiesDimensions": {
       "type": "object",
       "description": "Dimensions for new quota request.",
       "properties": {
@@ -962,7 +988,7 @@
         }
       ]
     },
-    "QuotaResourceListResult": {
+    "QuotaResourceList": {
       "type": "object",
       "description": "The response of a QuotaResource list operation.",
       "properties": {

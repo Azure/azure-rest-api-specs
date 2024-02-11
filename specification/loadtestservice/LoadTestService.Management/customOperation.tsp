@@ -156,7 +156,7 @@ interface CustomOperations {
   @delete
   ArmResourceDeleteAsyncCustom<
     Resource extends ArmResource,
-    Response = ArmDeletedResponse | ArmAcceptedLroDeleteResponse | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmAcceptedLroDeleteResponseCustom | ArmDeletedNoContentResponse,
     BaseParameters = DefaultBaseParameters<Resource>
   >(
     ...ResourceInstanceParameters<Resource, BaseParameters>,
@@ -178,11 +178,16 @@ model ArmResourceCreatedResponseCustom {
   ...ArmAsyncOperationHeader;
 }
 
-@doc(Description)
-model ArmAcceptedLroDeleteResponse<
-  Description extends valueof string = "Resource deletion accepted.",
-  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader
-> {
+@doc("Resource deletion accepted.")
+model ArmAcceptedLroDeleteResponseCustom{
   ...AcceptedResponse;
-  ...LroHeaders;
+  ...ArmLroLocationHeader;
 }
+
+@doc("The response of a {name} list operation.", LoadTestResource)
+@friendlyName("LoadTestResourcePageList")
+model LoadTestResourcePageList is Azure.Core.Page<LoadTestResource>;
+
+@doc("The response of a {name} list operation.", QuotaResource)
+@friendlyName("QuotaResourceList")
+model QuotaResourceList is Azure.Core.Page<QuotaResource>;
