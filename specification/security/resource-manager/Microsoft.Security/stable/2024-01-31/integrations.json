@@ -250,17 +250,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success - Integration was deleted",
+          "202": {
+            "description": "Accepted - The operation still in progress",
             "headers": {
               "location": {
                 "type": "string",
                 "description": "Location URL for the deletion status"
               }
             }
-          },
-          "202": {
-            "description": "Accepted - The operation still in progress"
           },
           "204": {
             "description": "No Content - Integration does not exist"
@@ -538,6 +535,7 @@
         },
         {
           "properties": {
+            "type": "object",
             "authenticationDetails": {
               "type": "object",
               "description": "Integration authentication details",
