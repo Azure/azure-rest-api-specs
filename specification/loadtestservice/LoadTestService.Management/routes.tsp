@@ -19,7 +19,19 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
 interface LoadTests {
+  @extension(
+    "x-ms-pageable",
+    {
+      nextLinkName: "nextLink",
+    }
+  )
   listBySubscription is ArmListBySubscription<LoadTestResource, Response = LoadTestResourcePageList>;
+  @extension(
+    "x-ms-pageable",
+    {
+      nextLinkName: "nextLink",
+    }
+  )
   listByResourceGroup is ArmResourceListByParent<LoadTestResource, Response = LoadTestResourcePageList>;
   get is ArmResourceRead<LoadTestResource>;
 
@@ -44,6 +56,12 @@ interface Quotas {
   @doc("Get the available quota for a quota bucket per region per subscription.")
   get is ArmResourceRead<QuotaResource>;
 
+  @extension(
+    "x-ms-pageable",
+    {
+      nextLinkName: "nextLink",
+    }
+  )
   @doc("List quotas for a given subscription Id.")
   list is ArmListBySubscription<QuotaResource, Response = QuotaResourceList>;
 

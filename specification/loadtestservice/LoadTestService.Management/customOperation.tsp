@@ -185,9 +185,23 @@ model ArmAcceptedLroDeleteResponseCustom{
 }
 
 @doc("The response of a {name} list operation.", LoadTestResource)
-@friendlyName("LoadTestResourcePageList")
-model LoadTestResourcePageList is Azure.Core.Page<LoadTestResource>;
+model LoadTestResourcePageList{
+  @doc("The {name} items on this page", LoadTestResource)
+  @items
+  value?: LoadTestResource[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<LoadTestResource>;
+}
 
 @doc("The response of a {name} list operation.", QuotaResource)
-@friendlyName("QuotaResourceList")
-model QuotaResourceList is Azure.Core.Page<QuotaResource>;
+model QuotaResourceList{
+  @doc("The {name} items on this page", QuotaResource)
+  @items
+  value?: QuotaResource[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<QuotaResource>;
+}
