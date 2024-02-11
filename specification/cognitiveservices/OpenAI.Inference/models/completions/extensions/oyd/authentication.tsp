@@ -10,25 +10,25 @@ The authentication types supported with Azure OpenAI On Your Data.
 @added(ServiceApiVersions.v2023_08_01_Preview)
 enum OnYourDataAuthenticationType {
   @doc("Authentication via API key.")
-  apiKey: "APIKey",
+  apiKey: "api_key",
 
   @doc("Authentication via connection string.")
-  connectionString: "ConnectionString",
+  connectionString: "connection_string",
 
   @doc("Authentication via key and key ID pair.")
-  keyAndKeyId: "KeyAndKeyId",
+  keyAndKeyId: "key_and_key_id",
 
   @doc("Authentication via encoded API key.")
-  encodedApiKey: "EncodedAPIKey",
+  encodedApiKey: "encoded_api_key",
 
   @doc("Authentication via access token.")
-  accessToken: "AccessToken",
+  accessToken: "access_token",
 
   @doc("Authentication via system-assigned managed identity.")
-  systemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+  systemAssignedManagedIdentity: "system_assigned_managed_identity",
 
   @doc("Authentication via user-assigned managed identity.")
-  userAssignedManagedIdentity: "UserAssignedManagedIdentity",
+  userAssignedManagedIdentity: "user_assigned_managed_identity",
 }
 
 @discriminator("type")
@@ -62,6 +62,7 @@ model OnYourDataConnectionStringAuthenticationOptions
   type: OnYourDataAuthenticationType.connectionString;
 
   @doc("The connection string to use for authentication.")
+  @projectedName("json", "connection_string")
   connectionString: string;
 }
 
@@ -78,6 +79,7 @@ model OnYourDataKeyAndKeyIdAuthenticationOptions
   key: string;
 
   @doc("The key ID to use for authentication.")
+  @projectedName("json", "key_id")
   keyId: string;
 }
 
@@ -91,6 +93,7 @@ model OnYourDataEncodedApiKeyAuthenticationOptions
   type: OnYourDataAuthenticationType.encodedApiKey;
 
   @doc("The encoded API key to use for authentication.")
+  @projectedName("json", "encoded_api_key")
   encodedApiKey: string;
 }
 
@@ -104,6 +107,7 @@ model OnYourDataAccessTokenAuthenticationOptions
   type: OnYourDataAuthenticationType.accessToken;
 
   @doc("The access token to use for authentication.")
+  @projectedName("json", "access_token")
   accessToken: string;
 }
 
@@ -127,5 +131,6 @@ model OnYourDataUserAssignedManagedIdentityAuthenticationOptions
   type: OnYourDataAuthenticationType.userAssignedManagedIdentity;
 
   @doc("The resource ID of the user-assigned managed identity to use for authentication.")
+  @projectedName("json", "managed_identity_resource_id")
   managedIdentityResourceId: string;
 }

@@ -24,11 +24,12 @@ model AzureMachineLearningIndexChatExtensionConfiguration
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("Parameters for the Azure Machine Learning vector index chat extension. The supported authentication types are AccessToken, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.")
+@doc("Parameters for the Azure Machine Learning vector index chat extension. The supported authentication types are `access_token`, `system_assigned_managed_identity` and `user_assigned_managed_identity`.")
 model AzureMachineLearningIndexChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
   @doc("The resource ID of the Azure Machine Learning project.")
+  @projectedName("json", "project_resource_id")
   @projectedName("csharp", "ProjectResourceId")
   projectResourceId: string;
 

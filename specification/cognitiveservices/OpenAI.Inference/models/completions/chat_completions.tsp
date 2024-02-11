@@ -182,7 +182,7 @@ model ChatCompletionsOptions {
   //        "extensions" instead of "data sources" for representing the additional configuration information. A future
   //        service API version will absorb these proposed changes and allow us to retire the extra complexity.
   @added(ServiceApiVersions.v2023_08_01_Preview)
-  @projectedName("json", "dataSources")
+  @projectedName("json", "data_sources")
   @projectedName("csharp", "InternalAzureExtensionsDataSources")
   dataSources?: AzureChatExtensionConfiguration[];
 
