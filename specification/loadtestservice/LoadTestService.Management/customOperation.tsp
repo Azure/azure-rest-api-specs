@@ -179,13 +179,13 @@ model ArmResourceCreatedResponseCustom {
 }
 
 @doc("Resource deletion accepted.")
-model ArmAcceptedLroDeleteResponseCustom{
+model ArmAcceptedLroDeleteResponseCustom {
   ...AcceptedResponse;
   ...ArmLroLocationHeader;
 }
 
 @doc("The response of a {name} list operation.", LoadTestResource)
-model LoadTestResourcePageList{
+model LoadTestResourcePageList {
   @doc("The {name} items on this page", LoadTestResource)
   @items
   value?: LoadTestResource[];
@@ -196,7 +196,7 @@ model LoadTestResourcePageList{
 }
 
 @doc("The response of a {name} list operation.", QuotaResource)
-model QuotaResourceList{
+model QuotaResourceList {
   @doc("The {name} items on this page", QuotaResource)
   @items
   value?: QuotaResource[];

@@ -256,7 +256,7 @@ model OutboundEnvironmentEndpointCollection {
 
 // duplicate to remove SDK breaking changes
 @doc("LoadTest resource properties.")
-model LoadTestResourcePatchRequestBodyProperties{
+model LoadTestResourcePatchRequestBodyProperties {
   @maxLength(512)
   @doc("Description of the resource.")
   description?: string;

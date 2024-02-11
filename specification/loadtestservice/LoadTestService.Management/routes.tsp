@@ -25,14 +25,20 @@ interface LoadTests {
       nextLinkName: "nextLink",
     }
   )
-  listBySubscription is ArmListBySubscription<LoadTestResource, Response = LoadTestResourcePageList>;
+  listBySubscription is ArmListBySubscription<
+    LoadTestResource,
+    Response = LoadTestResourcePageList
+  >;
   @extension(
     "x-ms-pageable",
     {
       nextLinkName: "nextLink",
     }
   )
-  listByResourceGroup is ArmResourceListByParent<LoadTestResource, Response = LoadTestResourcePageList>;
+  listByResourceGroup is ArmResourceListByParent<
+    LoadTestResource,
+    Response = LoadTestResourcePageList
+  >;
   get is ArmResourceRead<LoadTestResource>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/retry-after" "Retry-After header is not in already published"
@@ -42,9 +48,12 @@ interface LoadTests {
     LoadTestResource,
     LoadTestResourcePatchRequestBody
   >;
-  
+
   #suppress "@azure-tools/typespec-azure-resource-manager/retry-after" "Retry-After header is not in already published"
-  delete is ArmResourceDeleteAsync<LoadTestResource, Response = ArmAcceptedLroDeleteResponseCustom | OkResponse | NoContentResponse>;
+  delete is ArmResourceDeleteAsync<
+    LoadTestResource,
+    Response = ArmAcceptedLroDeleteResponseCustom | OkResponse | NoContentResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationId in already published GA spec is different from the auto generated one"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Operation is GET but endpoint is similar to action on resource"
