@@ -12,7 +12,7 @@ To build the SDK for Security, simply [Install AutoRest](https://aka.ms/autorest
 
 > `autorest`
 
-To see additional help and options, run: 
+To see additional help and options, run:
 
 > `autorest --help`
 
@@ -65,6 +65,7 @@ directive:
     from: pricings.json
     reason: It does have a LIST API, but it is wrapped with PricingList object.
 ```
+
 ``` yaml
 suppressions:
   - code: ResourceNameRestriction
@@ -77,6 +78,7 @@ suppressions:
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
 ```
+
 ### Basic Information
 
 These are the global settings for the Security API.
@@ -85,7 +87,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-composite-v3
+tag: package-preview-2024-03
 ```
 
 ### Composite packages
@@ -93,6 +95,14 @@ tag: package-composite-v3
 The following packages may be composed from multiple api-versions.
 
 
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.Security/preview/2024-03-01-preview/securityConnectors.json
+```
 ### Tag: package-2023-11-15
 
 These settings apply only when `--tag=package-2023-11-15` is specified on the command line.
@@ -101,19 +111,21 @@ These settings apply only when `--tag=package-2023-11-15` is specified on the co
 input-file:
   - Microsoft.Security/stable/2023-11-15/apiCollections.json
 ```
+
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
 ```
+
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-09'
+``` yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
 suppressions:
@@ -134,7 +146,7 @@ suppressions:
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01'
+``` yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.Security/stable/2024-01-01/pricings.json
 ```
