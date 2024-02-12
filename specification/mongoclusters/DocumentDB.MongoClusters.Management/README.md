@@ -1,6 +1,6 @@
 # Getting started with Typespec ARM specifications
 
-Swagger APIs and examples are generated from Typespec definitions in folder `DocumentDB.MongoClusters.Managment`.
+Swagger APIs and examples are generated from Typespec definitions in folder `DocumentDB.MongoCluster.Managment`.
 
 The generated specs and examples are located under `resource-manager/Microsoft.DocumentDB` and should not be edited directly.
 
@@ -11,8 +11,8 @@ See instructions [here](https://github.com/Azure/azure-rest-api-specs/blob/main/
 # Folder layout
 
 ```
-mongoclusters
-├── DocumentDB.MongoClusters.Managment  [ARM API TypeSpec Definition]
+mongocluster
+├── DocumentDB.MongoCluster.Managment  [ARM API TypeSpec Definition]
 |   ├── tspconfig.yaml
 |   ├── main.tsp
 |   ├── MongoCluster.tsp
@@ -72,7 +72,7 @@ See complete [documentation](https://github.com/Azure/azure-rest-api-specs/tree/
 
 API scenario file are located alongside examples for each API version
 ```
-mongoclusters
+mongocluster
 └── resource-manager
     └── Microsoft.DocumentDB
         ├── preview
