@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  mongoClusterName:
+    type: string
+    prefix: mongoclu
+  administratorLoginPassword:
+    type: secureString
+  firewallRuleName:
+    type: string
+    prefix: firewall
+scenarios:
+  - scenario: basic
+    description: Basic scenario for creating, reading and deleting a Mongo Cluster.
+    steps:
+      - step: MongoClusters_CheckNameAvailability
+        exampleFile: ../examples/CosmosDBMongoClusterNameAvailability.json
+      - step: MongoClusters_CreateOrUpdate
+        exampleFile: ../examples/CosmosDBMongoClusterCreate.json
+        requestUpdate:
+          - replace: /resource/properties/administratorLoginPassword
+            value: $(administratorLoginPassword)
+      - step: MongoClusters_ListByResourceGroup
+        exampleFile: ../examples/CosmosDBMongoClusterListByResourceGroup.json
+      - step: MongoClusters_Get
+        exampleFile: ../examples/CosmosDBMongoClusterGet.json
+      - step: FirewallRules_CreateOrUpdate
+        exampleFile: ../examples/CosmosDBMongoClusterFirewallRuleCreate.json
+      - step: FirewallRules_ListByMongoCluster
+        exampleFile: ../examples/CosmosDBMongoClusterFirewallRuleList.json
+      - step: FirewallRules_Get
+        exampleFile: ../examples/CosmosDBMongoClusterFirewallRuleGet.json
+      - step: MongoClusters_ListConnectionStrings
+        exampleFile: ../examples/CosmosDBMongoClusterListConnectionStrings.json
+      - step: MongoClusters_Update
+        exampleFile: ../examples/CosmosDBMongoClusterPatchDiskSize.json
+      - step: FirewallRules_Delete
+        exampleFile: ../examples/CosmosDBMongoClusterFirewallRuleDelete.json
+      - step: MongoClusters_Delete
+        exampleFile: ../examples/CosmosDBMongoClusterDelete.json

@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.DocumentDB
-  output-folder: $(csharp-sdks-folder)/cosmosdbmongoclusters/management/Microsoft.DocumentDB/GeneratedProtocol
+  namespace: [[ResourceProviderName]]
+  output-folder: $(csharp-sdks-folder)/cosmosdbmongocluster/management/[[ResourceProviderName]]/GeneratedProtocol
 ```

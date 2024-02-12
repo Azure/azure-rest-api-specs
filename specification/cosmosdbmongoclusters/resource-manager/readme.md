@@ -1,8 +1,8 @@
-# cosmosdbmongoclusters
+# cosmosdbmongocluster
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for cosmosdbmongoclusters.
+This is the AutoRest configuration file for cosmosdbmongocluster.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the cosmosdbmongoclusters.
+These are the global settings for the cosmosdbmongocluster.
 
 ```yaml
 openapi-type: arm
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
-  - Microsoft.DocumentDB/preview/2024-03-01-preview/cosmosdbmongoclusters.json
+  - Microsoft.DocumentDB/preview/2024-03-01-preview/mongoCluster.json
 ```
 
 ---

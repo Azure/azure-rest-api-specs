@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: cosmosdbmongoclusters
-    namespace: azure.mgmt.cosmosdbmongoclusters
-    package-name: azure-mgmt-cosmosdbmongoclusters
-az-output-folder: $(azure-cli-extension-folder)/src/cosmosdbmongoclusters
-python-sdk-output-folder: "$(az-output-folder)/azext_cosmosdbmongoclusters/vendored_sdks/cosmosdbmongoclusters"
+    extensions: cosmosdbmongocluster
+    namespace: azure.mgmt.cosmosdbmongocluster
+    package-name: azure-mgmt-cosmosdbmongocluster
+az-output-folder: $(azure-cli-extension-folder)/src/cosmosdbmongocluster
+python-sdk-output-folder: "$(az-output-folder)/azext_cosmosdbmongocluster/vendored_sdks/cosmosdbmongocluster"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_cosmosdbmongoclusters/vendo
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: cosmosdbmongoclusters
-  namespace: azure.mgmt.cosmosdbmongoclusters
-  package-name: azure-mgmt-cosmosdbmongoclusters
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/cosmosdbmongoclusters
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/cosmosdbmongoclusters"
+  extensions: cosmosdbmongocluster
+  namespace: azure.mgmt.cosmosdbmongocluster
+  package-name: azure-mgmt-cosmosdbmongocluster
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/cosmosdbmongocluster
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/cosmosdbmongocluster"
 ``` 
