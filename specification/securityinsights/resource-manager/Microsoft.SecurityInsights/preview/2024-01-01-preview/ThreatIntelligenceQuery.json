@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/query": {
       "post": {
         "x-ms-examples": {
-          "Get all file imports.": {
+          "Get all TI objects in the workspace using a query": {
             "$ref": "./examples/threatintelligence/PostThreatIntelligenceQuery.json"
           }
         },
@@ -58,9 +58,6 @@
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
           },
           {
             "$ref": "#/parameters/Query"
@@ -421,6 +418,7 @@
         }
       ],
       "description": "Relationship property bag.",
+      "properties": {},
       "type": "object"
     },
     "Query": {
@@ -442,34 +440,17 @@
             "$ref": "#/definitions/NormalizedCondition",
             "description": "Represents a condition used to query for TI objects.",
             "x-ms-client-flatten": true
-          }
+          },
+          "type": "object"
         },
         "sortBy": {
-          "description": "The content type of this file.",
-          "enum": [
-            "BasicIndicator",
-            "StixIndicator",
-            "Unspecified"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "FileImportContentType",
-            "values": [
-              {
-                "description": "File containing records with the core fields of an indicator, plus the observables to construct the STIX pattern.",
-                "value": "BasicIndicator"
-              },
-              {
-                "description": "File containing STIX indicators.",
-                "value": "StixIndicator"
-              },
-              {
-                "description": "File containing other records.",
-                "value": "Unspecified"
-              }
-            ]
-          }
+          "description": "Specifies how to sort the query results.",
+          "properties": {
+            "$ref": "#/definitions/SortByProperties",
+            "description": "sortBy properties",
+            "x-ms-client-flatten": true
+          },
+          "type": "object"
         },
         "maxPageSize": {
           "description": "Represents the maximum size of the page that will be returned from the query API.",
@@ -559,6 +540,7 @@
         },
         "conditionConnective": {
           "description": "The top level connective operator for this condition.",
+          "type": "object",
           "properties": {
             "$ref": "#/definitions/Connective",
             "description": "Connective properties",
@@ -576,6 +558,7 @@
       "properties": {
         "clauseConnective": {
           "description": "The connective used to join all values in this ConditionClause",
+          "type": "object",
           "properties": {
             "$ref": "#/definitions/Connective",
             "description": "Connective properties",
@@ -619,7 +602,7 @@
           ],
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "Connective",
+            "name": "Operator",
             "values": [
               {
                 "value": "Equals"
