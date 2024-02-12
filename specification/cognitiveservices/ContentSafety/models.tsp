@@ -40,6 +40,32 @@ enum AnalyzeImageOutputType {
   FourSeverityLevels,
 }
 
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The type of batch results storage mode.")
+enum BatchResultsStorageMode {
+  @doc("Merge each result into one file.")
+  CollectiveResultFile,
+
+  @doc("Store each result in a single file.")
+  IndividualResultFiles,
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The type of batch analysis task status.")
+enum BatchTaskStatus {
+  @doc("The task has not started yet.")
+  NotStarted,
+
+  @doc("The task is in progress.")
+  Running,
+
+  @doc("The task has failed.")
+  Failed,
+
+  @doc("The task has been succeeded.")
+  Succeeded,
+}
+
 @doc("The text analysis request.")
 model AnalyzeTextOptions {
   @doc("The text needs to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
@@ -85,7 +111,7 @@ model AnalyzeTextResult {
   @doc("The incident match details.")
   incidentMatches?: IncidentMatch[];
 
-  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("Chunks in the original text detected as harmful content. Analysis result and scores are caused by these.")
   citation?: string[];
 }
@@ -167,6 +193,90 @@ model ImageCategoriesAnalysis {
 
   @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6.")
   severity?: int32;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The image batch analysis request.")
+model BatchAnalyzeImagesOptions {
+  @doc("The blob parameters of images to be analyzed.")
+  images: BatchAnalyzeImages;
+
+  @doc("The blob parameters of result files.")
+  resultsBlob: BatchAnalyzeImagesResultsBlob;
+
+  @doc("The storage mode for the batch task results, either 'CollectiveResultFile' or 'IndividualResultFiles'.")
+  resultsStorageMode?: BatchResultsStorageMode = BatchResultsStorageMode.CollectiveResultFile;
+
+  @doc("The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
+  categories?: ImageCategory[];
+
+  @doc("This refers to the type of image analysis output. If no value is assigned, the default value will be 'FourSeverityLevels'.")
+  outputType?: AnalyzeImageOutputType = AnalyzeImageOutputType.FourSeverityLevels;
+
+  @doc("The incidents to detect.")
+  incidents?: IncidentOptions;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The image batch analysis input.")
+model BatchAnalyzeImages {
+  @doc("The URL to a blob prefix which represents a directory containing all the images to be analyzed in this batch task.")
+  blobPrefixLocation: url;
+
+  @doc("The delimiter character you desire to use in the location URL, typically '/'.")
+  delimiter: string;
+
+  @doc("An array of strings indicating file extensions of desired images within the logical folder.")
+  extensions: string[];
+
+  @doc("The last modified time (in RFC1123 format) of blobs. Only images that were modified before this time will be analyzed.")
+  lastModified?: utcDateTime;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The image batch analysis output.")
+model BatchAnalyzeImagesResultsBlob {
+  @doc("The URL to a blob prefix which represents a directory. The analysis result file(s) will be written to this directory.")
+  blobPrefixLocation: url;
+
+  @doc("The delimiter character you desire to use in the location URL, typically '/'.")
+  delimiter: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("Image batch analyze task.")
+@resource("image/batchAnalyses")
+model ImageBatchTaskDetail {
+  @doc("The id of image batch analysis task.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The kind of operation.")
+  kind: string;
+
+  @doc("The status of the batch image analysis task.")
+  status: BatchTaskStatus;
+
+  @doc("Batch task result.")
+  result: ImageBatchTaskResult;
+
+  @doc("Return error detail when the task failed.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("Image batch task result.")
+model ImageBatchTaskResult {
+  @doc("The timestamp of when batch image analysis task was created.")
+  createdTime: utcDateTime;
+
+  @doc("The progress of the batch image analysis task, represented as a percentage (0-100).")
+  progressPercentage: int32;
+
+  @doc("The blob parameters of result files.")
+  resultsBlob: BatchAnalyzeImagesResultsBlob;
 }
 
 @doc("Text Blocklist.")
@@ -450,15 +560,23 @@ model AnnotateTextResult {
 @added(Versions.v2023_10_30_Preview)
 @doc("Pre-defined concept.")
 model PreDefinedConcept {
+  @doc("The concept name.")
   concept: string;
+
+  @doc("The concept description.")
   description: string;
 }
 
 @added(Versions.v2023_10_30_Preview)
 @doc("Label definition.")
-model SubCategory {
+model Subcategory {
+  @doc("The id of subcategory.")
   id: int32;
+
+  @doc("The name of subcategory.")
   name: string;
+
+  @doc("The description of subcategory.")
   statements: string[];
 }
 
@@ -473,9 +591,16 @@ model TextCustomizedCategory {
   @maxLength(64)
   categoryName: string;
 
+  @doc("Some pre defined concepts used in definition.")
   preDefinedConcepts?: PreDefinedConcept[];
-  subCategories: SubCategory[];
+
+  @doc("Subcategories in the customized category.")
+  subcategories: Subcategory[];
+
+  @doc("Text customizedCategories emphases.")
   emphases?: string[];
+
+  @doc("Text url of example jsonl blob.")
   exampleBlobUrl?: url;
 }
 
@@ -539,6 +664,7 @@ enum Task {
   QnA,
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MUST fix in next update"
 @added(Versions.v2023_10_30_Preview)
 @doc("Connection details for the GPT resource.")
 model GptResource {

@@ -81,6 +81,40 @@ interface ImageOperations {
   >;
 }
 
+interface ImageBatchOperations {
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "MUST fix in next update"
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @summary("Start Batch Analyze Images")
+  @doc("An asynchronous API for the batch analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.")
+  @route("/image/batchAnalyses")
+  @put
+  batchAnalyzeImage is Azure.Core.RpcOperation<
+    {
+      @path
+      @doc("The unique operation id.")
+      operationId: string;
+
+      @body
+      @doc("The image batch analysis request.")
+      body: BatchAnalyzeImagesOptions;
+    },
+    ImageBatchTaskDetail
+  >;
+
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @summary("Get Image Batch Analysis task Status")
+  @doc("Check the status of a batch image analysis task.")
+  getBatchTaskStatus is Azure.Core.ResourceRead<ImageBatchTaskDetail>;
+
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @summary("List All Image Batch Analysis Tasks")
+  @doc("List all batch image analysis tasks.")
+  listBatchTasks is Azure.Core.ResourceList<
+    ImageBatchTaskDetail,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+}
+
 interface BlockOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
