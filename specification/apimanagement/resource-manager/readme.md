@@ -1142,18 +1142,18 @@ suppressions:
     reason: Certificate is a secret and it should not be available through get request
   - code: GetCollectionOnlyHasValueAndNextLink
     from: apimworkspacebackends.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends"].get.responses["200"].schema["$ref"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends"].get.responses["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
     from: apimworkspacediagnostics.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/diagnostics"].get.responses["200"].schema["$ref"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/diagnostics"].get.responses["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
     from: apimworkspacediagnostics.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}/diagnostics"].get.responses.["200"].schema["$ref"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}/diagnostics"].get.responses.["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
     from: apimworkspaceloggers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/loggers"].get.responses["200"].schema["$ref"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/loggers"].get.responses["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
 ```
