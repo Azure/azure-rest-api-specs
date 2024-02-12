@@ -46,7 +46,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -110,11 +110,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -160,7 +164,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -221,11 +225,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -268,7 +276,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -326,11 +334,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -340,6 +352,48 @@
         "x-ms-examples": {
           "PoliciesPutByBillingAccount": {
             "$ref": "./examples/policiesPutByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/policies/default": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Lists the policies that are managed by the Billing Admin for the defined subscriptions. This is supported for Microsoft Online Services Program, Microsoft Customer Agreement (EA and MCA-E) and Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_GetBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at subscription scope.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PoliciesGetBySubscription": {
+            "$ref": "./examples/policiesGetBySubscription.json"
           }
         }
       }
@@ -371,50 +425,13 @@
       "description": "A policy at billing account scope.",
       "type": "object",
       "properties": {
-        "enrollmentAuthorizationLevel": {
-          "description": "The state showing the enrollment auth level.",
-          "enum": [
-            "Other",
-            "MicrosoftAccountOnly",
-            "MixedAccount",
-            "OrganizationalAccountCrossTenant",
-            "OrganizationalAccountOnly"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EnrollmentAuthLevelState",
-            "modelAsString": true
-          }
-        },
-        "enrollmentAccountOwnerViewCharges": {
-          "description": "The policy that controls whether account owner can view charges.",
-          "enum": [
-            "Other",
-            "Allowed",
-            "Disabled",
-            "NotAllowed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "EnrollmentAccountOwnerViewCharges",
-            "modelAsString": true
-          }
-        },
-        "enrollmentDepartmentAdminViewCharges": {
-          "description": "The policy that controls whether department admin can view charges.",
-          "enum": [
-            "Other",
-            "Allowed",
-            "Disabled",
-            "NotAllowed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "EnrollmentDepartmentAdminViewCharges",
-            "modelAsString": true
-          }
+        "enterpriseAgreementPolicies": {
+          "description": "The policies for Enterprise Agreement enrollments.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnterpriseAgreementPolicies"
+            }
+          ]
         },
         "marketplacePurchases": {
           "description": "The policy that controls whether Azure marketplace purchases are allowed.",
@@ -458,6 +475,16 @@
             "name": "SavingsPlanPurchasesPolicy",
             "modelAsString": true
           }
+        },
+        "policies": {
+          "description": "List of all policies defined at the billing scope.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySummary"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -486,6 +513,9 @@
       "description": "A policy at billing profile scope.",
       "type": "object",
       "properties": {
+        "enterpriseAgreementPolicies": {
+          "$ref": "#/definitions/EnterpriseAgreementPolicies"
+        },
         "invoiceSectionLabelManagement": {
           "description": "The policy that controls invoice section label management at invoice section scope. This is allowed by default.",
           "enum": [
@@ -495,7 +525,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "InvoiceSectionLabelManagement",
+            "name": "InvoiceSectionLabelManagementPolicy",
             "modelAsString": true
           }
         },
@@ -551,9 +581,19 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ViewCharges",
+            "name": "ViewChargesPolicy",
             "modelAsString": true
           }
+        },
+        "policies": {
+          "description": "List of all policies defined at the billing scope.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySummary"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -594,9 +634,138 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ViewCharges",
+            "name": "ViewChargesPolicy",
             "modelAsString": true
           }
+        },
+        "policies": {
+          "description": "List of all policies defined at the billing scope.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySummary"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "EnterpriseAgreementPolicies": {
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "enum": [
+            "Other",
+            "MicrosoftAccountOnly",
+            "MixedAccount",
+            "OrganizationalAccountCrossTenant",
+            "OrganizationalAccountOnly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnrollmentAuthLevelState",
+            "modelAsString": true
+          }
+        },
+        "accountOwnerViewCharges": {
+          "enum": [
+            "Other",
+            "Allowed",
+            "Disabled",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnrollmentAccountOwnerViewCharges",
+            "modelAsString": true
+          }
+        },
+        "departmentAdminViewCharges": {
+          "enum": [
+            "Other",
+            "Allowed",
+            "Disabled",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnrollmentDepartmentAdminViewCharges",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PolicySummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the policy.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the policy.",
+          "type": "string"
+        },
+        "policyType": {
+          "description": "The type of the policy.",
+          "enum": [
+            "Other",
+            "UserControlled",
+            "SystemControlled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyType",
+            "modelAsString": true
+          }
+        },
+        "scope": {
+          "description": "The scope at which the policy is defined.",
+          "type": "string"
+        },
+        "additionalProperties": {
+          "description": "Additional properties related to the policy.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SubscriptionPolicy": {
+      "description": "A policy at subscription scope.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a(n) SubscriptionPolicy",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SubscriptionPolicyProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SubscriptionPolicyProperties": {
+      "description": "A policy at subscription scope.",
+      "type": "object",
+      "properties": {
+        "policies": {
+          "description": "List of all policies defined at the billing scope.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySummary"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     }
