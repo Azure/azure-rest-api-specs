@@ -2443,6 +2443,20 @@
         }
       }
     },
+    "TagRule": {
+      "description": "The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name (also known as the key) of the tag.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the tag.",
+          "type": "string"
+        }
+      }
+    },
     "MonitoringType": {
       "description": "The type of monitoring to be enabled. Allowed values: logs, metrics and agents.",
       "enum": [
@@ -2464,7 +2478,7 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "MonitoringType"
+        "name": "ResourceType"
       }
     },
     "ResourceTypeTags": {
@@ -2472,21 +2486,26 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Unique name to indentity the monitored resource type.",
+          "description": "Unique name to identify the monitored resource type.",
           "type": "string"
         },
-        "monitroingType": {
+        "monitoringType": {
           "description": "Logs, metrics or agent monitoring",
           "type": "array",
           "items": {
-            "$ref": "#/definition/MonitoringType"
+            "$ref": "#/definitions/MonitoringType"
           }
         },
-        "filteringTags": {
-          "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FilteringTag"
+        "filteringAction": {
+          "description": "Valid actions for allowing given resource type and filtering tag. Exclusion takes priority over inclusion.",
+          "enum": [
+            "Include",
+            "Exclude"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "filteringAction"
           }
         },
         "resourceType": {
@@ -2496,21 +2515,16 @@
             "$ref": "#/definitions/ResourceType"
           }
         },
-        "resourceTypeFiltering": {
-          "description": "Valid actions for allwoing given resource type. Exclusion takes priority over inclusion.",
-          "enum": [
-            "Include",
-            "Exclude"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ResourceTypeFiltering"
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagRule"
           }
         }
       }
     },
-    "TagRules": {
+    "MoniotringTags": {
       "description": "Set of rules for the monitor resource.",
       "type": "object",
       "properties": {
@@ -2527,28 +2541,28 @@
       "description": "Set of rules for sending logs or metrics and installing agents for the monitor resource.",
       "type": "object",
       "properties": {
-        "sendAadLogs": {
+        "enableAadLogs": {
           "description": "Flag specifying if AAD logs should be sent for the monitor resource.",
           "type": "boolean"
         },
-        "sendSubscriptionLogs": {
+        "enableSubscriptionLogs": {
           "description": "Flag specifying if Azure subscription logs should be sent for the monitor resource.",
           "type": "boolean"
         },
-        "sendResourceLogs": {
+        "enableLogs": {
           "description": "Flag specifying if Azure resource logs should be sent for the monitor resource.",
           "type": "boolean"
         },
-        "sendResourceMetrics": {
+        "enableMetrics": {
           "description": "Flag specifying if Azure resource metrics should be sent for the monitor resource.",
           "type": "boolean"
         },
-        "enableAgentMonitoring": {
+        "enableAgents": {
           "description": "Flag specifying if agent be installed on Azure resource for the monitor resource.",
           "type": "boolean"
         },
-        "tagRules": {
-            "$ref": "#/definitions/TagRules"
+        "moniotringTags": {
+            "$ref": "#/definitions/MoniotringTags"
         }
       }
     },
@@ -2711,7 +2725,10 @@
       "description": "Monitor resource name",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9_][a-zA-Z0-9_-]+$",
+      "minLength": 2,
+      "maxLength": 32
     },
     "DatadogOrganizationId": {
       "in": "query",

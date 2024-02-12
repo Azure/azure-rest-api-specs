@@ -36,21 +36,30 @@
           "automuting": true,
           "customMetrics": false,
           "tagRulesSet": {
-            "sendAadLogs": false,
-            "sendSubscriptionLogs": true,
-            "sendResourceLogs": true,
-            "sendResourceMetrics": true,
-            "enableAgentMoniotring":true,
-            "tagRules": {
+            "enableAadLogs": false,
+            "enableSubscriptionLogs": true,
+            "enableLogs": true,
+            "enableMetrics": true,
+            "enableAgents": true,
+            "moniotringTags": {
               "resourceTypeTags": [
                 {
                   "name": "ruleSet1",
-                  "resourceType": ["virtualMachines"],
-                  "filteringTags": [],
-                  "type":["agent"],
-                  "resourceTypeFiltering": "Include"
+                  "monitoringType": [
+                    "agent"
+                  ],
+                  "filteringAction": "Include",
+                  "resourceType": [
+                    "virtualMachines"
+                  ],
+                  "filteringTags": [
+                    {
+                      "name": "Environment",
+                      "value": "Prod"
+                    }
+                  ]
                 }
-              ] 
+              ]
             }
           }
         }
