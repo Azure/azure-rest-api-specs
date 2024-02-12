@@ -668,6 +668,23 @@ model DomainAsset {
   technicalPhones?: ObservedString[];
 }
 
+@doc("This is the top-level error object whose code matches the x-ms-error-code response header.")
+model ErrorDetail {
+  @doc("This is one of a server-defined set of error codes.")
+  code: string;
+
+  @doc("This is a human-readable representation of the error.")
+  message: string;
+
+  @doc("This is the error target.")
+  target?: string;
+
+  @doc("This is an array of details about specific errors that led to this reported error.")
+  details?: ErrorDetail[];
+
+  @doc("This is an object containing more specific information than the current object about the error.")
+  innererror?: InnerError;
+}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model GuidPair {
@@ -1293,7 +1310,10 @@ model Task {
 }
 
 @doc("Validate result for validate action endpoints")
-model ValidateResult is ErrorResponse;
+model ValidateResult {
+  @doc("This is the top-level error object whose code matches the x-ms-error-code response header.")
+  error?: ErrorDetail;
+}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model WebComponent {
