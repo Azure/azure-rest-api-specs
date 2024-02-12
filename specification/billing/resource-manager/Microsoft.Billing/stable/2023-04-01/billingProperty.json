@@ -38,7 +38,7 @@
           {
             "in": "query",
             "name": "includeTransitionStatus",
-            "description": "A flag that specifies whether or not to include transition status.",
+            "description": "A flag that specifies whether or not to include transition status for billing accounts with agreement type Microsoft Customer Agreement.",
             "type": "boolean",
             "default": false
           },
@@ -76,7 +76,7 @@
         "tags": [
           "BillingProperty"
         ],
-        "description": "Updates the billing property of a subscription. Currently, only cost center can be updated for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Updates the billing property of a subscription. Currently, cost center can be updated for billing accounts with agreement type Microsoft Customer Agreement and subscription service usage address can be updated for billing accounts with agreement type Microsoft Online Service Program.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -297,7 +297,7 @@
             "$ref": "#/definitions/SpendingLimitDetails"
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         },
         "billingProfileStatus": {
           "description": "The status of the billing profile.",
@@ -355,7 +355,7 @@
           "readOnly": true
         },
         "costCenter": {
-          "description": "The cost center applied to the subscription. Available for agreement type Microsoft Customer Agreement and Microsoft Partner Agreement.",
+          "description": "The cost center applied to the subscription. Available for agreement type Microsoft Customer Agreement and Microsoft Partner Agreement. This property can be updated via patch.",
           "type": "string"
         },
         "customerDisplayName": {
@@ -475,7 +475,7 @@
             "$ref": "#/definitions/BillingSubscriptionStatusDetails"
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         },
         "subscriptionBillingType": {
           "description": "The type of billing subscription.",
@@ -494,7 +494,7 @@
           }
         },
         "subscriptionServiceUsageAddress": {
-          "description": "The address of the individual or organization where service subscription is being used. Available for agreement type Microsoft Online Services Program.",
+          "description": "The address of the individual or organization where service subscription is being used. Available for agreement type Microsoft Online Services Program. This property can be updated via patch.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/AddressDetails"

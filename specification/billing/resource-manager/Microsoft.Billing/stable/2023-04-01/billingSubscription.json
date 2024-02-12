@@ -29,22 +29,10 @@
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "in": "path",
-            "name": "billingProfileName",
-            "description": "The fully qualified ID that uniquely identifies a billing profile.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
+            "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
             "$ref": "./types.json#/parameters/billingSubscriptionName"
-          },
-          {
-            "in": "query",
-            "name": "includeDeleted",
-            "description": "Can be used to get deleted billing subscriptions.",
-            "type": "boolean",
-            "default": false
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -158,6 +146,82 @@
           },
           "BillingSubscriptionsListByBillingProfileEA": {
             "$ref": "./examples/billingSubscriptionsListByBillingProfileEA.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/billingSubscriptions": {
+      "get": {
+        "tags": [
+          "BillingSubscription"
+        ],
+        "description": "Lists the subscriptions for a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingSubscriptions_ListByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "in": "query",
+            "name": "includeDeleted",
+            "description": "Can be used to get deleted billing subscriptions.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing subscriptions.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingSubscriptionsListByCustomer": {
+            "$ref": "./examples/billingSubscriptionsListByCustomer.json"
           }
         },
         "x-ms-pageable": {
@@ -315,7 +379,7 @@
         "tags": [
           "BillingSubscription"
         ],
-        "description": "Moves a subscription's charges to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Moves charges for a subscription to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -387,7 +451,7 @@
         "tags": [
           "BillingSubscription"
         ],
-        "description": "Validates if a subscription's charges can be moved to a new invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Validates if charges for a subscription can be moved to a new invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -446,7 +510,7 @@
         "tags": [
           "BillingSubscription"
         ],
-        "description": "Cancels a billing subscription.",
+        "description": "Cancels a billing subscription. This operation is supported only for billing accounts of type Microsoft Partner Agreement or Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -521,20 +585,6 @@
             "$ref": "./types.json#/parameters/billingSubscriptionName"
           },
           {
-            "in": "query",
-            "name": "includeDeleted",
-            "description": "Can be used to get deleted billing subscriptions.",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "in": "query",
-            "name": "includeFailed",
-            "description": "Can be used to get failed billing subscriptions.",
-            "type": "boolean",
-            "default": false
-          },
-          {
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
@@ -568,7 +618,7 @@
         "tags": [
           "BillingSubscription"
         ],
-        "description": "Updates the properties of a billing subscription. Cost center can only be updated for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Updates the properties of a billing subscription.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -640,7 +690,7 @@
         "tags": [
           "BillingSubscription"
         ],
-        "description": "Lists the subscriptions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement or Enterprise Agreement.",
+        "description": "Lists the subscriptions for a billing account.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -712,79 +762,6 @@
         "x-ms-examples": {
           "BillingSubscriptionsListByBillingAccount": {
             "$ref": "./examples/billingSubscriptionsListByBillingAccount.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions": {
-      "get": {
-        "tags": [
-          "BillingSubscription"
-        ],
-        "description": "Lists the subscriptions for a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingSubscriptions_ListByCustomer",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/customerName"
-          },
-          {
-            "in": "query",
-            "name": "includeDeleted",
-            "description": "Can be used to get deleted billing subscriptions.",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of billing subscriptions.",
-            "schema": {
-              "$ref": "#/definitions/BillingSubscriptionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingSubscriptionsListByCustomer": {
-            "$ref": "./examples/billingSubscriptionsListByCustomer.json"
           }
         },
         "x-ms-pageable": {
@@ -1049,7 +1026,7 @@
           "readOnly": true
         },
         "productCategory": {
-          "description": "Category of the subscription. Possible values include: ReservationOrder, SavingsPlanOrder, AzureSupport, UsageBased, Hardware, SaaS, SeatBased, and Software.",
+          "description": "Category of the subscription.",
           "enum": [
             "Other",
             "ReservationOrder",
@@ -1086,7 +1063,7 @@
         },
         "quantity": {
           "format": "int64",
-          "description": "The number of licenses purchased for the subscription.",
+          "description": "The quantity of licenses or fulfillment units for the subscription.",
           "type": "integer"
         },
         "reseller": {
@@ -1098,7 +1075,7 @@
           ]
         },
         "renewalTermDetails": {
-          "description": "Details for the subscription's next renewal term.",
+          "description": "Details for the next renewal term of a subscription.",
           "allOf": [
             {
               "$ref": "#/definitions/RenewalTermDetails"
@@ -1191,7 +1168,7 @@
             }
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         },
         "suspensionReasonDetails": {
           "description": "The suspension details for a subscription. This field is not available for Enterprise Agreement billing accounts.",
@@ -1200,7 +1177,7 @@
             "$ref": "#/definitions/BillingSubscriptionStatusDetails"
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1386,7 +1363,7 @@
       }
     },
     "RenewalTermDetails": {
-      "description": "Details for the subscription's next renewal term.",
+      "description": "Details for the next renewal term of a subscription.",
       "type": "object",
       "properties": {
         "billingFrequency": {
@@ -1407,7 +1384,7 @@
         },
         "quantity": {
           "format": "int64",
-          "description": "The number of licenses purchased for the subscription.",
+          "description": "The quantity of licenses or fulfillment units for the subscription.",
           "type": "integer"
         },
         "termEndDate": {
