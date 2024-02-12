@@ -38,7 +38,6 @@ model CommunityTraining is TrackedResource<CommunityTrainingProperties> {
 @Azure.Core.lroStatus
 union ProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("Initial provisioning in progress")

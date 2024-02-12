@@ -126,7 +126,6 @@ model AgentProfile {
 @doc("The provisioning state of the last accepted operation.")
 union FleetProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("The provisioning state of a fleet being created.")

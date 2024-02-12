@@ -241,6 +241,7 @@ model ResourcePredictions {}
 @doc("The status of the current operation.")
 union ProvisioningState {
   string,
+
   /** Represents a succeeded operation. */
   Succeeded: "Succeeded",
 
