@@ -38,7 +38,7 @@
       "post": {
         "x-ms-examples": {
           "Get all file imports.": {
-            "$ref": "./examples/threatIntelligence/PostThreatIntelligenceQuery.json"
+            "$ref": "./examples/threatintelligence/PostThreatIntelligenceQuery.json"
           }
         },
         "tags": [
@@ -93,7 +93,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         },
         {
-          "$ref": "#/definitions/TIOBjectKind"
+          "$ref": "#/definitions/TIObjectKind"
         }
       ],
       "description": "Represents a threat intelligence object in Azure Security Insights.",
@@ -103,11 +103,11 @@
       ],
       "type": "object"
     },
-    "TIOBjectKind": {
+    "TIObjectKind": {
       "description": "Describes the kind of a TI object.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/TIOBjectInnerKind",
+          "$ref": "#/definitions/TIObjectInnerKind",
           "description": "The kind of the TI object."
         }
       },
@@ -116,7 +116,7 @@
       ],
       "type": "object"
     },
-    "TIOBjectInnerKind": {
+    "TIObjectInnerKind": {
       "description": "The kind of the TI object",
       "enum": [
         "AttackPattern",
@@ -128,7 +128,7 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "TIOBjectKind",
+        "name": "TIObjectKind",
         "values": [
           {
             "description": "A TI object that represents an attack pattern.",
