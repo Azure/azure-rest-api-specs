@@ -170,7 +170,6 @@ model ImageGenerations {
   A timestamp representing when this operation was started.
   Expressed in seconds since the Unix epoch of 1970-01-01T00:00:00+0000.
   """)
-  @encodedName("application/json", "created")
   @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
@@ -197,7 +196,6 @@ model BatchImageGenerationOperationResponse {
   id: string;
 
   @doc("A timestamp when this job or item was created (in unix epochs).")
-  @encodedName("application/json", "created")
   @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
