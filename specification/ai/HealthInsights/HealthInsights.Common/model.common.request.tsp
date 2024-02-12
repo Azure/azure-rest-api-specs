@@ -114,6 +114,7 @@ model PatientDocument {
   createdAt?: utcDateTime;
 
   @doc("Document author(s)")
+  @maxItems(1)
   authors?: Array<DocumentAuthor>;
 
   @doc("specialty type the document")
@@ -139,6 +140,7 @@ model DocumentAdministrativeMetadata {
 @doc("visit/encounter information")
 model PatientEncounter {
   @doc("The id of the visit.")
+  @minLength(1)
   id: string;
 
   @doc("""

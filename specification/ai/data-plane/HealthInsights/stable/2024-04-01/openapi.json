@@ -392,6 +392,7 @@
         "missingBodyParts": {
           "type": "array",
           "description": "List of missing body parts required by a complete order : SNOMED CT codes.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
@@ -399,6 +400,7 @@
         "missingBodyPartMeasurements": {
           "type": "array",
           "description": "List of missing body parts that require measurement by a complete order : SNOMED CT codes.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
@@ -2023,6 +2025,7 @@
         "communicatedAt": {
           "type": "array",
           "description": "Communication date and time.",
+          "minItems": 1,
           "items": {
             "type": "string",
             "format": "date-time"
@@ -2031,6 +2034,7 @@
         "recipient": {
           "type": "array",
           "description": "Recipient of the communication.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/MedicalProfessionalType"
           }
@@ -2309,6 +2313,7 @@
         "presentBodyParts": {
           "type": "array",
           "description": "List of body parts found in the document : SNOMED CT codes.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
@@ -2316,6 +2321,7 @@
         "presentBodyPartMeasurements": {
           "type": "array",
           "description": "List of body parts that are measured according to the document : SNOMED CT codes.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
@@ -2449,6 +2455,7 @@
         "authors": {
           "type": "array",
           "description": "Document author(s)",
+          "maxItems": 1,
           "items": {
             "$ref": "#/definitions/DocumentAuthor"
           }
@@ -2478,7 +2485,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The id of the visit."
+          "description": "The id of the visit.",
+          "minLength": 1
         },
         "period": {
           "$ref": "#/definitions/TimePeriod",
@@ -2559,6 +2567,13 @@
         "kind": {
           "type": "string",
           "description": "Discriminator property for ProcedureRecommendation."
+        },
+        "extension": {
+          "type": "array",
+          "description": "Additional Content defined by implementations",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
         }
       },
       "discriminator": "kind",
@@ -2649,6 +2664,7 @@
         "patientResults": {
           "type": "array",
           "description": "Results for the patients given in the request.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/RadiologyInsightsPatientResult"
           },
@@ -2656,7 +2672,8 @@
         },
         "modelVersion": {
           "$ref": "#/definitions/ModelVersion",
-          "description": "The version of the model used for inference, expressed as the model date."
+          "description": "The version of the model used for inference, expressed as the model date.",
+          "pattern": "^(?:[2][0-9]{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])(?:-preview)?)$"
         }
       },
       "required": [
@@ -2826,6 +2843,7 @@
         "inferenceTypes": {
           "type": "array",
           "description": "This is a list of inference types to be inferred for the current request. It could be used if only part of the Radiology Insights inferences are required. If this list is omitted or empty, the model will return all the inference types.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/RadiologyInsightsInferenceType"
           }
@@ -2851,6 +2869,7 @@
         "inferences": {
           "type": "array",
           "description": "The model's inferences for the given patient.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/RadiologyInsightsInference"
           },
@@ -2902,13 +2921,6 @@
       "type": "object",
       "description": "Finding reference for recommendation.",
       "properties": {
-        "extension": {
-          "type": "array",
-          "description": "Additional Content defined by implementations",
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "finding": {
           "$ref": "#/definitions/Fhir.R4.Observation",
           "description": "Finding linked to a recommendation."
@@ -2920,6 +2932,13 @@
         "recommendationFindingStatus": {
           "$ref": "#/definitions/RecommendationFindingStatusType",
           "description": "Recommendation finding status."
+        },
+        "extension": {
+          "type": "array",
+          "description": "Additional Content defined by implementations",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
         }
       },
       "required": [
