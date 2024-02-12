@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: [[ResourceProviderName]]
-  output-folder: $(csharp-sdks-folder)/cosmosdbmongocluster/management/[[ResourceProviderName]]/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/mongocluster/management/[[ResourceProviderName]]/GeneratedProtocol
 ```

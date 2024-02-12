@@ -6,15 +6,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-cosmosdbmongocluster
-namespace: azure.mgmt.cosmosdbmongocluster
+package-name: azure-mgmt-mongocluster
+namespace: azure.mgmt.mongocluster
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/cosmosdbmongocluster/azure-mgmt-cosmosdbmongocluster/azure/mgmt/cosmosdbmongocluster
+output-folder: $(python-sdks-folder)/mongocluster/azure-mgmt-mongocluster/azure/mgmt/mongocluster
 ```
 
 ``` yaml $(python)

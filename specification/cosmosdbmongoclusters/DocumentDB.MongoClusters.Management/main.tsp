@@ -17,7 +17,7 @@ using Azure.ResourceManager;
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Existing resource provider namespace."
 @armProviderNamespace
 @service({
-  title: "CosmosDBMongoClusterManagementClient",
+  title: "MongoClusterManagementClient",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)

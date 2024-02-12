@@ -1,8 +1,8 @@
-# cosmosdbmongocluster
+# mongocluster
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for cosmosdbmongocluster.
+This is the AutoRest configuration file for mongocluster.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the cosmosdbmongocluster.
+These are the global settings for the mongocluster.
 
 ```yaml
 openapi-type: arm

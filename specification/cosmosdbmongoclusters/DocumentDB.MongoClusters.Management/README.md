@@ -11,7 +11,7 @@ See instructions [here](https://github.com/Azure/azure-rest-api-specs/blob/main/
 # Folder layout
 
 ```
-cosmosdbmongoclusters
+mongoclusters
 ├── DocumentDB.MongoClusters.Managment  [ARM API TypeSpec Definition]
 |   ├── tspconfig.yaml
 |   ├── main.tsp
@@ -20,8 +20,8 @@ cosmosdbmongoclusters
 |   ├── ...
 |   └── examples                         [API Examples]
 |       ├── 2023-11-15-preview
-|       |   ├── CosmosDBMongoClusterCreate.json
-|       |   ├── CosmosDBMongoClusterGet.json
+|       |   ├── MongoClusterCreate.json
+|       |   ├── MongoClusterGet.json
 |       |   ├── ...
 |       └── 2024-03-01-preview
 |           ├── ...
@@ -30,7 +30,7 @@ cosmosdbmongoclusters
         └── preview
             ├── 2023-11-15-preview
             |   ├── mongoCluster.json     [Swagger specs generated from TypeSpec]
-            |   └── exmaples
+            |   └── examples
             |   |   └── ...               [examples generated from TypeSpec]
             |   └── scenarios             [API Test Scenarios - non-generated]
             |       └── basic.yaml
@@ -72,7 +72,7 @@ See complete [documentation](https://github.com/Azure/azure-rest-api-specs/tree/
 
 API scenario file are located alongside examples for each API version
 ```
-cosmosdbmongoclusters
+mongoclusters
 └── resource-manager
     └── Microsoft.DocumentDB
         ├── preview
@@ -97,6 +97,6 @@ Rule of thumb is to author or generate practical API spec examples that can be t
 Example Scenarios:
  - Basic [DONE] - covers common operations such as create, add firewall, data disk scaling, delete operations.
 
-## Running API scenarios for Cosmos DB Mongo Clusters API
+## Running API scenarios for Mongo Clusters API
 
 __Full instructions on [wiki page here](https://msdata.visualstudio.com/CosmosDB/_git/pgmongo?path=/docs/pgmongo/mongo_arm/api_specification/typespec-authoring.md&version=GBolivert/arm_spec_docs&_a=preview)__
