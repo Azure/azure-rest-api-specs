@@ -138,10 +138,10 @@ model CallProtectionDetails {
   @added(Versions.v2024_02_05_preview)
   enabled?: boolean;
 
-  @doc("Storage account for Azure Operator Call Protection logs")
+  @doc("Resource ID of the storage account to write Azure Operator Call Protection logs to.")
   @visibility("read", "update", "create")
   @added(Versions.v2024_02_05_preview)
-  logStorageAccount?: string;
+  logStorageAccountId?: string;
 }
 
 @doc("The service region configuration needed for Teams Callings.")
