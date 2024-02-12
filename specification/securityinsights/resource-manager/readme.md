@@ -62,6 +62,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/Settings.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/SourceControls.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/TriggeredAnalyticsRuleRuns.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/Watchlists.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/WorkspaceManagerAssignments.json
