@@ -175,7 +175,7 @@ These settings apply only when `--tag=package-2024-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-03-01'
 input-file:
-  - Microsoft.Elastic/preview/2024-03-01/elastic.json
+  - Microsoft.Elastic/stable/2024-03-01/elastic.json
 suppressions:
   - code: ResourceNameRestriction
     from: elastic.json
