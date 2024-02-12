@@ -35,7 +35,25 @@
                 "filteringTags": []
               },
               "automuting": true,
-              "customMetrics": false
+              "customMetrics": false,
+              "tagRulesSet": {
+                "sendAadLogs": false,
+                "sendSubscriptionLogs": true,
+                "sendResourceLogs": true,
+                "sendResourceMetrics": true,
+                "enableAgentMoniotring":true,
+                "tagRules": {
+                  "resourceTypeTags": [
+                    {
+                      "name": "ruleSet1",
+                      "resourceType": ["virtualMachines"],
+                      "filteringTags": [],
+                      "type":["agent"],
+                      "resourceTypeFiltering": "Include"
+                    }
+                  ] 
+                }
+              }
             }
           }
         ]
