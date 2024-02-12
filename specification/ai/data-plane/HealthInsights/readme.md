@@ -40,7 +40,7 @@ directive:
     reason: The spec is auto-generated. Tracking issue to fix is https://github.com/Azure/typespec-azure-pr/issues/3349
 ```
 
-### Release 2024-04-01
+### Release package-2024-04-01
 
 
 These settings apply only when `--tag=2024-04-01` is specified on the command line.
