@@ -16,8 +16,12 @@ using TypeSpec.Versioning;
     endpoint: url,
   }
 )
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+@useAuth(AzureKey)
 namespace AzureHealthInsights;
+
+@doc("The secret key for your Azure Cognitive Services subscription.")
+model AzureKey
+  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum ApiVersion {

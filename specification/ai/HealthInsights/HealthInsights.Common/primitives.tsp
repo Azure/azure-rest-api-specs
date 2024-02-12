@@ -54,6 +54,7 @@ namespace AzureHealthInsights;
 @trait("HealthInsightsRetryAfterTrait")
 @doc("Health Insights retry after trait")
 model HealthInsightsRetryAfterTrait {
+  @traitContext(TraitContext.Read)
   @doc("The retry-after header.")
   retryAfter: {
     @traitLocation(TraitLocation.Response)

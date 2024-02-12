@@ -36,12 +36,13 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
+      "AzureKey": []
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
+    "AzureKey": {
       "type": "apiKey",
+      "description": "The secret key for your Azure Cognitive Services subscription.",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     }
@@ -195,11 +196,6 @@
               "$ref": "#/definitions/RadiologyInsightsJob"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -218,11 +214,6 @@
               "$ref": "#/definitions/RadiologyInsightsJob"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",
