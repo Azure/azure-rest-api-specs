@@ -7,7 +7,7 @@ Configuration for generating Health Insights SDK.
 The current release is `2024-04-01`.
 
 ```yaml
-tag: 2024-04-01
+tag: package-2024-04-01
 add-credentials: true
 openapi-type: data-plane
 ```
