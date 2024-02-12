@@ -20,20 +20,21 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /** Provisioning state of the resource. */
 @doc("Provisioning state of resource.")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   /** The resource is being provisioned */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /** The resource is being updated */
-  Updating,
+  Updating: "Updating",
 
   /** The resource is being deleted */
-  Deleting,
+  Deleting: "Deleting",
 
   /** The resource create request has been accepted */
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Regional data boundary values.")

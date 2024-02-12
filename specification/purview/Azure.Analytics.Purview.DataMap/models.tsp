@@ -7,7 +7,9 @@ using TypeSpec.Http;
 namespace PurviewDataMap;
 
 @doc("Enum for business attribute update behavior")
-enum BusinessAttributeUpdateBehavior {
+union BusinessAttributeUpdateBehavior {
+  string,
+
   @doc("Ignore the business attribute payload for update.")
   Ignore: "ignore",
 
@@ -19,7 +21,9 @@ enum BusinessAttributeUpdateBehavior {
 }
 
 @doc("Status - can be active or deleted")
-enum EntityStatus {
+union EntityStatus {
+  string,
+
   @doc("The status is active.")
   Active: "ACTIVE",
 
@@ -28,7 +32,9 @@ enum EntityStatus {
 }
 
 @doc("Status for term assignment")
-enum AtlasTermAssignmentStatus {
+union AtlasTermAssignmentStatus {
+  string,
+
   @doc("The status is discovered.")
   Discovered: "DISCOVERED",
 
@@ -52,7 +58,9 @@ enum AtlasTermAssignmentStatus {
 }
 
 @doc("Type for sorting")
-enum SortType {
+union SortType {
+  string,
+
   @doc("No sorting order")
   None: "NONE",
 
@@ -64,7 +72,9 @@ enum SortType {
 }
 
 @doc("Status for import")
-enum ImportStatus {
+union ImportStatus {
+  string,
+
   @doc("Success")
   Success: "SUCCESS",
 
@@ -73,7 +83,9 @@ enum ImportStatus {
 }
 
 @doc("Status for atlas term relationship")
-enum AtlasTermRelationshipStatus {
+union AtlasTermRelationshipStatus {
+  string,
+
   @doc("draft")
   Draft: "DRAFT",
 
@@ -91,22 +103,26 @@ enum AtlasTermRelationshipStatus {
 }
 
 @doc("Status for term")
-enum TermStatus {
+union TermStatus {
+  string,
+
   @doc("draft")
-  Draft,
+  Draft: "Draft",
 
   @doc("approved")
-  Approved,
+  Approved: "Approved",
 
   @doc("alert")
-  Alert,
+  Alert: "Alert",
 
   @doc("expired")
-  Expired,
+  Expired: "Expired",
 }
 
 @doc("Status for atlas relationship")
-enum StatusAtlasRelationship {
+union StatusAtlasRelationship {
+  string,
+
   @doc("active")
   Active: "ACTIVE",
 
@@ -115,7 +131,9 @@ enum StatusAtlasRelationship {
 }
 
 @doc("Lineage direction")
-enum LineageDirection {
+union LineageDirection {
+  string,
+
   @doc("input")
   Input: "INPUT",
 
@@ -127,7 +145,9 @@ enum LineageDirection {
 }
 
 @doc("Cardinality")
-enum CardinalityValue {
+union CardinalityValue {
+  string,
+
   @doc("single")
   Single: "SINGLE",
 
@@ -139,7 +159,9 @@ enum CardinalityValue {
 }
 
 @doc("Type Category")
-enum TypeCategory {
+union TypeCategory {
+  string,
+
   @doc("primitive")
   Primitive: "PRIMITIVE",
 
@@ -172,7 +194,9 @@ enum TypeCategory {
 }
 
 @doc("Rounding Mode")
-enum RoundingMode {
+union RoundingMode {
+  string,
+
   @doc("up")
   Up: "UP",
 
@@ -199,7 +223,9 @@ enum RoundingMode {
 }
 
 @doc("Relationship Category")
-enum RelationshipCategory {
+union RelationshipCategory {
+  string,
+
   @doc("association")
   Association: "ASSOCIATION",
 
@@ -211,39 +237,41 @@ enum RelationshipCategory {
 }
 
 @doc("Search Filter Operator")
-enum FilterOperator {
+union FilterOperator {
+  string,
+
   @doc("equal")
-  eq,
+  eq: "eq",
 
   @doc("not equal")
-  ne,
+  ne: "ne",
 
   @doc("greater than")
-  gt,
+  gt: "gt",
 
   @doc("less than")
-  lt,
+  lt: "lt",
 
   @doc("greater than or equal to")
-  ge,
+  ge: "ge",
 
   @doc("less than or equal to")
-  le,
+  le: "le",
 
   @doc("contains")
-  contains,
+  contains: "contains",
 
   @doc("start with")
-  startswith,
+  startswith: "startswith",
 
   @doc("prefix")
-  prefix,
+  prefix: "prefix",
 
   @doc("time range")
-  timerange,
+  timerange: "timerange",
 
   @doc("exists")
-  exists,
+  exists: "exists",
 }
 
 @doc("""
@@ -949,7 +977,9 @@ model SearchFacetSort {
 }
 
 @doc("Search sort order")
-enum SearchSortOrder {
+union SearchSortOrder {
+  string,
+
   @doc("Use ascending order for sorting")
   Ascend: "asc",
 
@@ -1731,9 +1761,9 @@ specify cardinality, an EntityDef type name and name and optionally
 whether the
 end is a container.
 RelationshipDefs can have AttributeDefs - though only
-primitive types are allowed. 
+primitive types are allowed.
 RelationshipDefs have a relationshipCategory
-specifying the UML type of relationship required 
+specifying the UML type of relationship required
 The way EntityDefs and
 RelationshipDefs are intended to be used is that EntityDefs will define
 AttributeDefs these AttributeDefs
@@ -1743,15 +1773,15 @@ RelationshipDefs introduce new attributes to the entity
 instances. For example
 EntityDef A might have attributes attr1,attr2,attr3
 
-EntityDef B might have attributes attr4,attr5,attr6 
+EntityDef B might have attributes attr4,attr5,attr6
 RelationshipDef
-AtoB might define 2 ends 
+AtoB might define 2 ends
 
 end1:  type A, name attr7
-end2:  type B, name attr8 
+end2:  type B, name attr8
 
 When an instance of EntityDef A is created, it
-will have attributes attr1,attr2,attr3,attr7 
+will have attributes attr1,attr2,attr3,attr7
 When an instance of EntityDef
 B is created, it will have attributes attr4,attr5,attr6,attr8
 
@@ -1783,9 +1813,9 @@ it  is the container end of the relationship.
 The Relationship category determines the style of relationship around
 containment and lifecycle.
 UML terminology is used for the values.
-ASSOCIATION is a relationship with no containment. 
+ASSOCIATION is a relationship with no containment.
 COMPOSITION and AGGREGATION are containment relationships.
-The difference being in the lifecycles of the container and its children. 
+The difference being in the lifecycles of the container and its children.
 In the COMPOSITION case, the children cannot exist without the container.
 For AGGREGATION, the life cycles of the container and children are totally independent.
 """)
@@ -1891,11 +1921,11 @@ The Relationship category determines the style of relationship around
 containment and lifecycle.
 UML terminology is used for the values.
 
-ASSOCIATION is a relationship with no containment. 
+ASSOCIATION is a relationship with no containment.
 COMPOSITION and AGGREGATION are containment relationships.
 
-The difference being in the lifecycles of the container and its children. 
-In the COMPOSITION case, the children cannot exist without the container. 
+The difference being in the lifecycles of the container and its children.
+In the COMPOSITION case, the children cannot exist without the container.
 For AGGREGATION, the life cycles of the container and children are totally independent.
 """)
   relationshipCategory?: RelationshipCategory;

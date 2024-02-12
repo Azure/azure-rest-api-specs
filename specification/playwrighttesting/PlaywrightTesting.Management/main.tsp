@@ -73,17 +73,18 @@ union EnablementStatus {
 
 @doc("The status of the current operation.")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Creation in progress..")
-  Creating,
+  Creating: "Creating",
 
   @doc("Deletion in progress..")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Change accepted for processing..")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @armResourceOperations

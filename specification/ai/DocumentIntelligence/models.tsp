@@ -298,12 +298,26 @@ union SplitMode {
 
 @lroStatus
 @doc("Operation status.")
-enum OperationStatus {
-  @doc("The operation has not started yet.") notStarted,
-  @doc("The operation is in progress.") running,
-  @doc("The operation has failed.") @lroFailed failed,
-  @doc("The operation has succeeded.") @lroSucceeded succeeded,
-  @doc("The operation has been canceled.") @lroCanceled canceled,
+union OperationStatus {
+  string,
+
+  @doc("The operation has not started yet.")
+  notStarted: "notStarted",
+
+  @doc("The operation is in progress.")
+  running: "running",
+
+  @doc("The operation has failed.")
+  @lroFailed
+  failed: "failed",
+
+  @doc("The operation has succeeded.")
+  @lroSucceeded
+  succeeded: "succeeded",
+
+  @doc("The operation has been canceled.")
+  @lroCanceled
+  canceled: "canceled",
 }
 
 @doc("Type of content source.")

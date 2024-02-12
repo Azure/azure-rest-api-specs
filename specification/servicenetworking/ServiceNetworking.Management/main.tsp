@@ -115,14 +115,15 @@ model TrafficControllerProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @lroStatus
-enum ProvisioningState {
-  Provisioning,
-  Updating,
-  Deleting,
-  Accepted,
-  Succeeded,
-  Failed,
-  Canceled,
+union ProvisioningState {
+  string,
+  Provisioning: "Provisioning",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Accepted: "Accepted",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 @doc("Resource ID definition used by parent to reference child resources.")

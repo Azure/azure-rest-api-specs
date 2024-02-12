@@ -38,8 +38,9 @@ union ActionType {
 }
 
 /** The provisioning state of the resource */
-enum ProvisioningState {
-  ...Azure.ResourceManager.ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  Azure.ResourceManager.ResourceProvisioningState,
 }
 
 /** The type of managed service identity */

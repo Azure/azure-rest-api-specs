@@ -239,27 +239,28 @@ model Stateful extends AgentProfile {
 model ResourcePredictions {}
 
 @doc("The status of the current operation.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
   /** Represents a succeeded operation. */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** Represents a failed operation. */
-  Failed,
+  Failed: "Failed",
 
   /** Represents a canceled operation. */
-  Canceled,
+  Canceled: "Canceled",
 
   /** Represents a pending operation. */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /** Represents a pending operation. */
-  Updating,
+  Updating: "Updating",
 
   /** Represents an operation under deletion. */
-  Deleting,
+  Deleting: "Deleting",
 
   /** Represents an accepted operation. */
-  Accepted,
+  Accepted: "Accepted",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

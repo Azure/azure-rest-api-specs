@@ -218,20 +218,21 @@ model EphemeralDisk {
 
 @doc("Provisioning state of the resource.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("The resource is being provisioned")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("The resource is updating")
-  Updating,
+  Updating: "Updating",
 
   @doc("The resource is being deleted")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The resource create request has been accepted")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Status of the resource")

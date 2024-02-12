@@ -30,20 +30,21 @@ union ExtendedLocationType {
 }
 
 @doc("The enum defining status of resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Resource is getting provisioned.")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Resource is Updating.")
-  Updating,
+  Updating: "Updating",
 
   @doc("Resource is Deleting.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Resource has been Accepted.")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Defines the Docker image details")
