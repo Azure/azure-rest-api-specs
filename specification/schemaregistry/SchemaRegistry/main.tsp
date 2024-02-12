@@ -160,7 +160,6 @@ op registerSchema is Azure.Core.Foundations.Operation<
 alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
 union SchemaContentTypeValues {
-  customBinary: "application/octet-stream",
   custom: "text/plain; charset=utf-8",
   avro: "application/json; serialization=Avro",
   json: "application/json; serialization=Json",
