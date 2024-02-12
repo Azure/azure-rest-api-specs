@@ -1972,7 +1972,7 @@
       "required": [
         "type"
       ],
-      "x-ms-discriminator": "type"
+      "discriminator": "type"
     },
     "ApiKeyAuthModel": {
       "description": "Model for authentication with the API Key. Will result in additional header on the request (default behavior) to the remote server: 'ApiKeyName: ApiKeyIdentifier ApiKey'. If 'IsApiKeyInPostPayload' is true it will send it in the body of the request and not the header.",
@@ -2411,7 +2411,7 @@
           "x-nullable": true
         },
         "isGzipCompressed": {
-          "description": "The value indicating whether the remote server support Gzip and we should expect Gzipped response.",
+          "description": "The value indicating whether the remote server support Gzip and we should expect Gzip response.",
           "type": "boolean"
         },
         "compressionAlgo": {
