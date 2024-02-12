@@ -51,7 +51,7 @@ model AudioTranslationOptions {
   @doc("""
   The requested format of the translation response data, which will influence the content and detail of the result.
   """)
-  @projectedName("json", "response_format")
+  @encodedName("application/json", "response_format")
   responseFormat?: AudioTranslationFormat;
 
   @doc("""
@@ -102,16 +102,16 @@ model AudioTranslationSegment {
   temperature: float32;
 
   @doc("The average log probability associated with this audio segment.")
-  @projectedName("json", "avg_logprob")
+  @encodedName("application/json", "avg_logprob")
   @projectedName("csharp", "AverageLogProbability")
   avgLogprob: float32;
 
   @doc("The compression ratio of this audio segment.")
-  @projectedName("json", "compression_ratio")
+  @encodedName("application/json", "compression_ratio")
   compressionRatio: float32;
 
   @doc("The probability of no speech detection within this audio segment.")
-  @projectedName("json", "no_speech_prob")
+  @encodedName("application/json", "no_speech_prob")
   @projectedName("csharp", "NoSpeechProbability")
   noSpeechProb: float32;
 
