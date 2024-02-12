@@ -359,7 +359,13 @@
         "relationshipHints": {
           "description": "A dictionary used to help follow relationships from this object to other STIX objects. The keys are field names from the STIX object (in the 'data' field), and the values are lists of sources that can be prepended to the object ID in order to efficiently locate the target TI object.",
           "readOnly": true,
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "string"
+            }
+          }
         }
       },
       "type": "object"
@@ -385,12 +391,20 @@
           "description": "The observables of this indicator",
           "items": {
             "description": "An observable of this indicator",
-            "type": "object"
+            "properties": {
+              "Type": {
+                "description": "The type of the observable of this indicator",
+                "type": "string"
+              },
+              "Value": {
+                "description": "The value of the observable of this indicator",
+                "type": "string"
+              }
+            },
+            "readOnly": true,
+            "type": "array"
+            }
           },
-          "readOnly": true,
-          "type": "array"
-        }
-      },
       "type": "object"
     },
     "ThreatActorProperties": {
