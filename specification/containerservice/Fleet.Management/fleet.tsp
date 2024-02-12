@@ -132,7 +132,7 @@ union FleetProvisioningState {
   Creating: "Creating",
 
   @doc("The provisioning state of a fleet being updated.")
-  Updating: "Creating",
+  Updating: "Updating",
 
   @doc("The provisioning state of a fleet being deleted.")
   Deleting: "Deleting",
