@@ -1141,6 +1141,11 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/certificates/{certificateId}"].put
     reason: Certificate is a secret and it should not be available through get request
   - code: GetCollectionOnlyHasValueAndNextLink
+    from: apimworkspacecertificates.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/certificates].get.responses["200"].schema.properties
+    reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
+  - code: GetCollectionOnlyHasValueAndNextLink
+  - code: GetCollectionOnlyHasValueAndNextLink
     from: apimworkspacebackends.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends"].get.responses["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
