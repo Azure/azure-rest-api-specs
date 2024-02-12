@@ -13,16 +13,16 @@ scenarios:
   - scenario: basic
     description: Basic scenario for creating, reading and deleting a Mongo Cluster.
     steps:
-      - step: MongoCluster_CheckNameAvailability
+      - step: MongoClusters_CheckNameAvailability
         exampleFile: ../examples/MongoClusterNameAvailability.json
-      - step: MongoCluster_CreateOrUpdate
+      - step: MongoClusters_CreateOrUpdate
         exampleFile: ../examples/MongoClusterCreate.json
         requestUpdate:
           - replace: /resource/properties/administratorLoginPassword
             value: $(administratorLoginPassword)
-      - step: MongoCluster_ListByResourceGroup
+      - step: MongoClusters_ListByResourceGroup
         exampleFile: ../examples/MongoClusterListByResourceGroup.json
-      - step: MongoCluster_Get
+      - step: MongoClusters_Get
         exampleFile: ../examples/MongoClusterGet.json
       - step: FirewallRules_CreateOrUpdate
         exampleFile: ../examples/MongoClusterFirewallRuleCreate.json
@@ -30,11 +30,11 @@ scenarios:
         exampleFile: ../examples/MongoClusterFirewallRuleList.json
       - step: FirewallRules_Get
         exampleFile: ../examples/MongoClusterFirewallRuleGet.json
-      - step: MongoCluster_ListConnectionStrings
+      - step: MongoClusters_ListConnectionStrings
         exampleFile: ../examples/MongoClusterListConnectionStrings.json
-      - step: MongoCluster_Update
+      - step: MongoClusters_Update
         exampleFile: ../examples/MongoClusterPatchDiskSize.json
       - step: FirewallRules_Delete
         exampleFile: ../examples/MongoClusterFirewallRuleDelete.json
-      - step: MongoCluster_Delete
+      - step: MongoClusters_Delete
         exampleFile: ../examples/MongoClusterDelete.json
