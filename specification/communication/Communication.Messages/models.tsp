@@ -305,7 +305,7 @@ model CommunicationChannel {
   @key
   @visibility("read")
   @doc("The registration ID of the channel.")
-  channelId: string;
+  channelId: uuid;
 }
 
 @resource("messages/streams")
