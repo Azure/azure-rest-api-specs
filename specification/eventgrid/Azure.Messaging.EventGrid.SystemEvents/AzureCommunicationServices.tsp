@@ -4,10 +4,12 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event */
 model AcsIncomingCallEventData {
   /** The communication identifier of the target user. */
-  toCommunicationIdentifierModel?: CommunicationIdentifierModel;
+  @encodedName("application/json", "to")
+  toCommunicationIdentifier?: CommunicationIdentifierModel;
 
   /** The communication identifier of the user who initiated the call. */
-  fromCommunicationIdentifierModel?: CommunicationIdentifierModel;
+  @encodedName("application/json", "from")
+  fromCommunicationIdentifier?: CommunicationIdentifierModel;
 
   /** The Id of the server call */
   serverCallId?: string;
@@ -267,7 +269,8 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   userAgent?: string;
 
   /** The type of engagement user have with email */
-  engagementType?: AcsUserEngagement;
+  @encodedName("application/json", "engagementType")
+  engagement?: AcsUserEngagement;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCancelled event */

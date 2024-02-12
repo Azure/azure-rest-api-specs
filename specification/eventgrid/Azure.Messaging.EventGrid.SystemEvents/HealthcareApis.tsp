@@ -572,18 +572,18 @@ namespace Microsoft.EventGrid.SystemEvents {
     FhirServiceHostName?: string;
 
     /** Id of HL7 FHIR resource. */
-    @encodedName("application/json", "resourceFhirId")
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after swagger"
+    @encodedName("application/json", "resourceFhirId")
     FhirResourceId?: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
-    @encodedName("application/json", "resourceVersionId")
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after swagger"
+    @encodedName("application/json", "resourceVersionId")
     FhirResourceVersionId?: int64;
 
     /** Type of HL7 FHIR resource. */
-    @encodedName("application/json", "resourceType")
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after swagger"
+    @encodedName("application/json", "resourceType")
     FhirResourceType?: HealthcareFhirResourceType;
   };
 }

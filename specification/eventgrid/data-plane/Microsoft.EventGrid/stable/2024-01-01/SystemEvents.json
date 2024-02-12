@@ -710,7 +710,8 @@
         },
         "engagementType": {
           "$ref": "#/definitions/AcsUserEngagement",
-          "description": "The type of engagement user have with email"
+          "description": "The type of engagement user have with email",
+          "x-ms-client-name": "engagement"
         }
       }
     },
@@ -738,13 +739,15 @@
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
       "properties": {
-        "toCommunicationIdentifierModel": {
+        "to": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The communication identifier of the target user."
+          "description": "The communication identifier of the target user.",
+          "x-ms-client-name": "toCommunicationIdentifier"
         },
-        "fromCommunicationIdentifierModel": {
+        "from": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The communication identifier of the user who initiated the call."
+          "description": "The communication identifier of the user who initiated the call.",
+          "x-ms-client-name": "fromCommunicationIdentifier"
         },
         "serverCallId": {
           "type": "string",
@@ -3186,7 +3189,8 @@
       "properties": {
         "lastUpdated": {
           "type": "string",
-          "description": "The ISO8601 timestamp of the last time the properties were updated."
+          "description": "The ISO8601 timestamp of the last time the properties were updated.",
+          "x-ms-client-name": "$lastUpdated"
         }
       }
     },
@@ -3196,12 +3200,14 @@
       "properties": {
         "metadata": {
           "$ref": "#/definitions/DeviceTwinMetadata",
-          "description": "Metadata information for the properties JSON document."
+          "description": "Metadata information for the properties JSON document.",
+          "x-ms-client-name": "$metadata"
         },
         "version": {
           "type": "number",
           "format": "float",
-          "description": "Version of device twin properties."
+          "description": "Version of device twin properties.",
+          "x-ms-client-name": "$version"
         }
       }
     },
@@ -6890,7 +6896,8 @@
       "properties": {
         "resourceInfo": {
           "$ref": "#/definitions/ResourceNotificationsResourceUpdatedDetails",
-          "description": "resourceInfo details for update event"
+          "description": "resourceInfo details for update event",
+          "x-ms-client-name": "resourceDetails"
         },
         "operationalInfo": {
           "$ref": "#/definitions/ResourceNotificationsOperationalDetails",
@@ -7699,11 +7706,11 @@
           "$ref": "#/definitions/StorageTaskAssignmentCompletedStatus",
           "description": "The status for a storage task."
         },
-        "completedOn": {
+        "completedDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "The time at which a storage task was completed.",
-          "x-ms-client-name": "completedDateTime"
+          "x-ms-client-name": "completedOn"
         },
         "taskExecutionId": {
           "type": "string",
@@ -7713,11 +7720,11 @@
           "type": "string",
           "description": "The task name for a storage task."
         },
-        "summaryReportBlobUri": {
+        "summaryReportBlobUrl": {
           "type": "string",
           "format": "uri",
           "description": "The summary report blob url for a storage task",
-          "x-ms-client-name": "summaryReportBlobUrl"
+          "x-ms-client-name": "summaryReportBlobUri"
         }
       }
     },
