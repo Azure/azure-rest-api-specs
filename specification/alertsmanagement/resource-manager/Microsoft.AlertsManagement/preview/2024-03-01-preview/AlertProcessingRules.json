@@ -810,6 +810,28 @@
           "x-ms-enum": {
             "name": "NotificationsForCorrelatedAlerts",
             "modelAsString": true
+          },
+          "correlationUpdates": {
+            "type": "object",
+            "description": "Defines the updates to be applied for correlation.",
+            "properties": {
+              "updateType": {
+                "type": "string",
+                "description": "The type of update that needs to be performed."
+              },
+              "updateInterval": {
+                "type": "string",
+                "description": "The update interval in ISO8601 format."
+              },
+              "actionGroups": {
+                "type": "array",
+                "description": "The action group ids.",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["updateType", "updateInterval", "actionGroups"]
           }
         }
       }
