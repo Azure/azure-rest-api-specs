@@ -43,7 +43,7 @@ directive:
 ### Release package-2024-04-01
 
 
-These settings apply only when `--tag=2024-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-04-01` is specified on the command line.
 
 ```yaml $(tag) == '2024-04-01'
 input-file:
