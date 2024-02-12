@@ -14,27 +14,27 @@ scenarios:
     description: Basic scenario for creating, reading and deleting a Mongo Cluster.
     steps:
       - step: MongoClusters_CheckNameAvailability
-        exampleFile: ../examples/CosmosDBMongoClusterNameAvailability.json
+        exampleFile: ../examples/MongoClusterNameAvailability.json
       - step: MongoClusters_CreateOrUpdate
-        exampleFile: ../examples/CosmosDBMongoClusterCreate.json
+        exampleFile: ../examples/MongoClusterCreate.json
         requestUpdate:
           - replace: /resource/properties/administratorLoginPassword
             value: $(administratorLoginPassword)
       - step: MongoClusters_ListByResourceGroup
-        exampleFile: ../examples/CosmosDBMongoClusterListByResourceGroup.json
+        exampleFile: ../examples/MongoClusterListByResourceGroup.json
       - step: MongoClusters_Get
-        exampleFile: ../examples/CosmosDBMongoClusterGet.json
+        exampleFile: ../examples/MongoClusterGet.json
       - step: FirewallRules_CreateOrUpdate
-        exampleFile: ../examples/CosmosDBMongoClusterFirewallRuleCreate.json
+        exampleFile: ../examples/MongoClusterFirewallRuleCreate.json
       - step: FirewallRules_ListByMongoCluster
-        exampleFile: ../examples/CosmosDBMongoClusterFirewallRuleList.json
+        exampleFile: ../examples/MongoClusterFirewallRuleList.json
       - step: FirewallRules_Get
-        exampleFile: ../examples/CosmosDBMongoClusterFirewallRuleGet.json
+        exampleFile: ../examples/MongoClusterFirewallRuleGet.json
       - step: MongoClusters_ListConnectionStrings
-        exampleFile: ../examples/CosmosDBMongoClusterListConnectionStrings.json
+        exampleFile: ../examples/MongoClusterListConnectionStrings.json
       - step: MongoClusters_Update
-        exampleFile: ../examples/CosmosDBMongoClusterPatchDiskSize.json
+        exampleFile: ../examples/MongoClusterPatchDiskSize.json
       - step: FirewallRules_Delete
-        exampleFile: ../examples/CosmosDBMongoClusterFirewallRuleDelete.json
+        exampleFile: ../examples/MongoClusterFirewallRuleDelete.json
       - step: MongoClusters_Delete
-        exampleFile: ../examples/CosmosDBMongoClusterDelete.json
+        exampleFile: ../examples/MongoClusterDelete.json
