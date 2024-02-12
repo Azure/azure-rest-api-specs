@@ -1141,19 +1141,19 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/certificates/{certificateId}"].put
     reason: Certificate is a secret and it should not be available through get request
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: definitions.json
-    where: $.definitions.BackendCollection
+    from: apimworkspacebackends.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends"].get.responses["200"].schema["$ref"]
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: definitions.json
-    where: .definitions.CertificateCollection
+    from: apimworkspacediagnostics.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/diagnostics"].get.responses["200"].schema["$ref"]
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: definitions.json
-    where: $.definitions.DiagnosticCollection
+    from: apimworkspacediagnostics.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}/diagnostics"].get.responses.["200"].schema["$ref"]
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: definitions.json
-    where: $.definitions.LoggerCollection
+    from: apimworkspaceloggers.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/loggers"].get.responses["200"].schema["$ref"]
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
 ```
