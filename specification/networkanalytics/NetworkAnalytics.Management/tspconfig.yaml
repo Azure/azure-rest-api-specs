@@ -1,14 +1,8 @@
 parameters:
-  "python-sdk-folder":
-    default: "{project-root}/azure-sdk-for-python/"
-  "java-sdk-folder":
-    default: "{project-root}/azure-sdk-for-java/"
-  "js-sdk-folder":
-    default: "{project-root}/azure-sdk-for-js/"
-  "csharp-sdk-folder":
-    default: "{project-root}/azure-sdk-for-net/"
-  "service-directory-name":
-    default: "networkanalytics"
+  "service-dir":
+    default: "sdk/networkanalytics"
+  "dependencies":
+    default: ""
 emit:
   - '@azure-tools/typespec-autorest'
 linter:
@@ -23,9 +17,8 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/networkanalytics.json"
     examples-directory: "{project-root}/examples"
   "@azure-tools/typespec-python":
-    "basic-setup-py": true
-    "package-version": 1.0.0b1
-    "package-name": azure-mgmt-networkanalytics
+    package-dir: "azure-mgmt-networkanalytics"
+    package-name: "{package-dir}"
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true
