@@ -12,7 +12,12 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 @armResourceOperations
-interface Targets extends ProxyResourceOperations<Target> {}
+interface Targets {
+  get is ArmResourceRead<Target>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Target>;
+  delete is ArmResourceDeleteSync<Target>;
+  listByResourceGroup is ArmResourceListByParent<Target>;
+}
 
 @parentResource(Watcher)
 model Target is ProxyResource<TargetProperties> {
