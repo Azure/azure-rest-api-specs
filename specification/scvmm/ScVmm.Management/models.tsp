@@ -1,14 +1,28 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.ScVmm;
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+alias VmmServerId = ResourceIdentifier<[
+  {
+    type: "Microsoft.ScVmm/vmmServers";
+  }
+]>;
+
+alias VirtualNetworkId = ResourceIdentifier<[
+  {
+    type: "Microsoft.ScVmm/virtualNetwork";
+  }
+]>;
 
 /** A reusable query option to force delete a resource. */
 model QueryForceDelete {
@@ -195,7 +209,7 @@ model CloudProperties {
   uuid?: string;
 
   /** ARM Id of the vmmServer resource in which this resource resides. */
-  vmmServerId?: string;
+  vmmServerId?: VmmServerId;
 
   /** Name of the cloud in VmmServer. */
   @visibility("read")
@@ -218,14 +232,14 @@ model CloudProperties {
 /** Cloud Capacity model */
 model CloudCapacity {
   /** CPUCount specifies the maximum number of CPUs that can be allocated in the cloud. */
-  cpuCount?: int32;
+  cpuCount?: int64;
 
   /** MemoryMB specifies a memory usage limit in megabytes. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
-  memoryMB?: int32;
+  memoryMB?: int64;
 
   /** VMCount gives the max number of VMs that can be deployed in the cloud. */
-  vmCount?: int32;
+  vmCount?: int64;
 }
 
 /** The StorageQoSPolicy definition. */
@@ -237,13 +251,13 @@ model StorageQosPolicy {
   id?: string;
 
   /** The maximum IO operations per second. */
-  iopsMaximum?: int32;
+  iopsMaximum?: int64;
 
   /** The minimum IO operations per second. */
-  iopsMinimum?: int32;
+  iopsMinimum?: int64;
 
   /** The Bandwidth Limit for internet traffic. */
-  bandwidthLimit?: int32;
+  bandwidthLimit?: int64;
 
   /** The underlying policy. */
   policyId?: string;
@@ -259,7 +273,7 @@ model VirtualNetworkProperties {
   uuid?: string;
 
   /** ARM Id of the vmmServer resource in which this resource resides. */
-  vmmServerId?: string;
+  vmmServerId?: VmmServerId;
 
   /** Name of the virtual network in vmmServer. */
   @visibility("read")
@@ -280,7 +294,7 @@ model VirtualMachineTemplateProperties {
   uuid?: string;
 
   /** ARM Id of the vmmServer resource in which this resource resides. */
-  vmmServerId?: string;
+  vmmServerId?: VmmServerId;
 
   /** Gets the type of the os. */
   @visibility("read")
@@ -367,7 +381,7 @@ model NetworkInterface {
   macAddress?: string;
 
   /** Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic. */
-  virtualNetworkId?: string;
+  virtualNetworkId?: VirtualNetworkId;
 
   /** Gets the name of the virtual network in vmmServer that the nic is connected to. */
   @visibility("read")
@@ -454,7 +468,7 @@ model AvailabilitySetProperties {
   availabilitySetName?: string;
 
   /** ARM Id of the vmmServer resource in which this resource resides. */
-  vmmServerId?: string;
+  vmmServerId?: VmmServerId;
 
   /** Provisioning state of the resource. */
   @visibility("read")
@@ -513,7 +527,11 @@ model VirtualMachineInstanceProperties {
 /** Availability Set model */
 model AvailabilitySetListItem {
   /** Gets the ARM Id of the microsoft.scvmm/availabilitySets resource. */
-  id?: string;
+  id?: ResourceIdentifier<[
+    {
+      type: "Microsoft.ScVmm/availabilitySets";
+    }
+  ]>;
 
   /** Gets or sets the name of the availability set. */
   name?: string;
@@ -572,12 +590,14 @@ model HardwareProfile {
 /** Defines the resource properties. */
 model NetworkProfile {
   /** Gets or sets the list of network interfaces associated with the virtual machine. */
+  @extension("x-ms-identifiers", ["name", "nicId"])
   networkInterfaces?: NetworkInterface[];
 }
 
 /** Defines the resource properties. */
 model StorageProfile {
   /** Gets or sets the list of virtual disks associated with the virtual machine. */
+  @extension("x-ms-identifiers", ["diskId", "name"])
   disks?: VirtualDisk[];
 }
 
@@ -587,13 +607,21 @@ model InfrastructureProfile {
   inventoryItemId?: string;
 
   /** ARM Id of the vmmServer resource in which this resource resides. */
-  vmmServerId?: string;
+  vmmServerId?: VmmServerId;
 
   /** ARM Id of the cloud resource to use for deploying the vm. */
-  cloudId?: string;
+  cloudId?: ResourceIdentifier<[
+    {
+      type: "Microsoft.ScVmm/clouds";
+    }
+  ]>;
 
   /** ARM Id of the template resource to use for deploying the vm. */
-  templateId?: string;
+  templateId?: ResourceIdentifier<[
+    {
+      type: "Microsoft.ScVmm/virtualMachineTemplates";
+    }
+  ]>;
 
   /** VMName is the name of VM on the SCVmm server. */
   @minLength(1)
@@ -608,6 +636,7 @@ model InfrastructureProfile {
   lastRestoredVmCheckpoint?: Checkpoint;
 
   /** Checkpoints in the vm. */
+  @visibility("read")
   checkpoints?: Checkpoint[];
 
   /** Type of checkpoint supported for the vm. */
@@ -692,7 +721,6 @@ model VirtualDiskUpdate {
   vhdType?: string;
 
   /** The QoS policy for the disk. */
-  @projectedName("json", "storageQoSPolicy")
   storageQosPolicy?: StorageQosPolicyDetails;
 }
 
@@ -711,7 +739,7 @@ model NetworkInterfaceUpdate {
   macAddress?: string;
 
   /** Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic. */
-  virtualNetworkId?: string;
+  virtualNetworkId?: VirtualNetworkId;
 
   /** Gets or sets the ipv4 address type. */
   ipv4AddressType?: AllocationMethod;
@@ -894,18 +922,4 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
 
   /** They inventory type. */
   inventoryType: "VirtualMachine";
-}
-
-/** Managed service identity. */
-model Identity {
-  /** The principal id of managed service identity. */
-  @visibility("read")
-  principalId?: string;
-
-  /** The tenant of managed service identity. */
-  @visibility("read")
-  tenantId?: string;
-
-  /** The type of managed service identity. */
-  type: IdentityType;
 }

@@ -3107,7 +3107,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets the ARM Id of the microsoft.scvmm/availabilitySets resource."
+          "format": "arm-id",
+          "description": "Gets the ARM Id of the microsoft.scvmm/availabilitySets resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/availabilitySets"
+              }
+            ]
+          }
         },
         "name": {
           "type": "string",
@@ -3147,7 +3155,15 @@
         },
         "vmmServerId": {
           "type": "string",
-          "description": "ARM Id of the vmmServer resource in which this resource resides."
+          "format": "arm-id",
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3226,17 +3242,17 @@
       "properties": {
         "cpuCount": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "CPUCount specifies the maximum number of CPUs that can be allocated in the cloud."
         },
         "memoryMB": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "MemoryMB specifies a memory usage limit in megabytes."
         },
         "vmCount": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "VMCount gives the max number of VMs that can be deployed in the cloud."
         }
       }
@@ -3287,7 +3303,15 @@
         },
         "vmmServerId": {
           "type": "string",
-          "description": "ARM Id of the vmmServer resource in which this resource resides."
+          "format": "arm-id",
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
         },
         "cloudName": {
           "type": "string",
@@ -3574,29 +3598,6 @@
         }
       }
     },
-    "Identity": {
-      "type": "object",
-      "description": "Managed service identity.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal id of managed service identity.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant of managed service identity.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of managed service identity."
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
     "IdentityType": {
       "type": "string",
       "description": "Type of managed service identity.",
@@ -3631,15 +3632,39 @@
         },
         "vmmServerId": {
           "type": "string",
-          "description": "ARM Id of the vmmServer resource in which this resource resides."
+          "format": "arm-id",
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
         },
         "cloudId": {
           "type": "string",
-          "description": "ARM Id of the cloud resource to use for deploying the vm."
+          "format": "arm-id",
+          "description": "ARM Id of the cloud resource to use for deploying the vm.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/clouds"
+              }
+            ]
+          }
         },
         "templateId": {
           "type": "string",
-          "description": "ARM Id of the template resource to use for deploying the vm."
+          "format": "arm-id",
+          "description": "ARM Id of the template resource to use for deploying the vm.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/virtualMachineTemplates"
+              }
+            ]
+          }
         },
         "vmName": {
           "type": "string",
@@ -3662,6 +3687,7 @@
           "items": {
             "$ref": "#/definitions/Checkpoint"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "checkpointType": {
@@ -3894,7 +3920,15 @@
         },
         "virtualNetworkId": {
           "type": "string",
-          "description": "Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic."
+          "format": "arm-id",
+          "description": "Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/virtualNetwork"
+              }
+            ]
+          }
         },
         "networkName": {
           "type": "string",
@@ -3933,7 +3967,15 @@
         },
         "virtualNetworkId": {
           "type": "string",
-          "description": "Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic."
+          "format": "arm-id",
+          "description": "Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/virtualNetwork"
+              }
+            ]
+          }
         },
         "ipv4AddressType": {
           "$ref": "#/definitions/AllocationMethod",
@@ -3963,7 +4005,10 @@
           "items": {
             "$ref": "#/definitions/NetworkInterface"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name",
+            "nicId"
+          ]
         }
       }
     },
@@ -4178,7 +4223,10 @@
           "items": {
             "$ref": "#/definitions/VirtualDisk"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "diskId",
+            "name"
+          ]
         }
       }
     },
@@ -4210,17 +4258,17 @@
         },
         "iopsMaximum": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The maximum IO operations per second."
         },
         "iopsMinimum": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The minimum IO operations per second."
         },
         "bandwidthLimit": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The Bandwidth Limit for internet traffic."
         },
         "policyId": {
@@ -4367,10 +4415,9 @@
           "type": "string",
           "description": "Gets or sets the disk vhd type."
         },
-        "storageQoSPolicy": {
+        "storageQosPolicy": {
           "$ref": "#/definitions/StorageQosPolicyDetails",
-          "description": "The QoS policy for the disk.",
-          "x-ms-client-name": "storageQosPolicy"
+          "description": "The QoS policy for the disk."
         }
       }
     },
@@ -4696,7 +4743,15 @@
         },
         "vmmServerId": {
           "type": "string",
-          "description": "ARM Id of the vmmServer resource in which this resource resides."
+          "format": "arm-id",
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
         },
         "osType": {
           "$ref": "#/definitions/OsType",
@@ -4874,7 +4929,15 @@
         },
         "vmmServerId": {
           "type": "string",
-          "description": "ARM Id of the vmmServer resource in which this resource resides."
+          "format": "arm-id",
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
         },
         "networkName": {
           "type": "string",
