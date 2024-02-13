@@ -61,27 +61,30 @@ model AccountProperties {
 }
 
 @doc("The enablement status of a feature.")
-enum EnablementStatus {
+union EnablementStatus {
+  string,
+
   @doc("The feature is Enabled.")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The feature is Disabled.")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("The status of the current operation.")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Creation in progress..")
-  Creating,
+  Creating: "Creating",
 
   @doc("Deletion in progress..")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Change accepted for processing..")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @armResourceOperations
@@ -113,9 +116,11 @@ model Quota is ProxyResource<QuotaProperties> {
 }
 
 @doc("The enum for quota name.")
-enum QuotaNames {
+union QuotaNames {
+  string,
+
   @doc("The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
-  ScalableExecution,
+  "ScalableExecution",
 }
 
 @doc("The subscription quota resource properties.")
@@ -185,18 +190,20 @@ model AccountFreeTrialProperties {
 }
 
 @doc("The free-trial state.")
-enum FreeTrialState {
+union FreeTrialState {
+  string,
+
   @doc("The free-trial is Active.")
-  Active,
+  "Active",
 
   @doc("The free-trial is Expired.")
-  Expired,
+  "Expired",
 
   @doc("The free-trial is Not Eligible.")
-  NotEligible,
+  "NotEligible",
 
   @doc("The free-trial is Not Registered.")
-  NotRegistered,
+  "NotRegistered",
 }
 
 @armResourceOperations
