@@ -404,10 +404,10 @@
           "description": "Version of the index.",
           "readOnly": true
         },
-        "isArchived": {
-          "type": "boolean",
-          "description": "Update stage to 'Archived' for soft delete.",
-          "default": false
+        "stage": {
+          "type": "string",
+          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
+          "default": "Development"
         },
         "description": {
           "type": "string",
@@ -436,7 +436,7 @@
       "required": [
         "name",
         "version",
-        "isArchived"
+        "stage"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -514,10 +514,10 @@
           "description": "Version of the index.",
           "readOnly": true
         },
-        "isArchived": {
-          "type": "boolean",
-          "description": "Update stage to 'Archived' for soft delete.",
-          "default": false
+        "stage": {
+          "type": "string",
+          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
+          "default": "Development"
         },
         "description": {
           "type": "string",
@@ -550,7 +550,7 @@
       "required": [
         "name",
         "version",
-        "isArchived",
+        "stage",
         "storageUri"
       ]
     },

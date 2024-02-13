@@ -42,8 +42,8 @@ model AssetVersion {
   @visibility("read")
   version: string;
 
-  @doc("Update stage to 'Archived' for soft delete.")
-  isArchived: boolean = false;
+  @doc("Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.")
+  stage: string = "Development";
 
   @doc("Description information of the asset.")
   description?: string;
