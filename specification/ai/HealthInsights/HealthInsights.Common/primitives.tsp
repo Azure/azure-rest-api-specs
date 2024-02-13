@@ -71,7 +71,6 @@ model RequestIdResponseHeaderTrait {
   };
 }
 
-
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId &
