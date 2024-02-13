@@ -14,13 +14,11 @@ using Azure.Core.Foundations;
 
 namespace Microsoft.MachineLearningServices;
 
-
 interface IndexVersions {
-
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Fetch a IndexVersion by name.")
   @route("/workspaces/{workspaceName}/indexes/{indexName}/versions/{indexVersion}")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   get is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the workspace.")
@@ -37,12 +35,12 @@ interface IndexVersions {
       indexVersion: string;
     },
     Index | Foundations.ErrorResponse
-   >;
+  >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Creates or updates a IndexVersion.")
   @route("/workspaces/{workspaceName}/indexes/{indexName}/versions/{indexVersion}")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the workspace.")
@@ -61,14 +59,13 @@ interface IndexVersions {
       @doc("Properties of an Index Version.")
       @body
       body: Index;
-
     },
     ResourceCreatedOrOkResponse<Index> | Foundations.ErrorResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to use same model in both list calls."
   @route("/workspaces/{workspaceName}/indexes/{indexName}/versions")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to use same model in both list calls."
   list is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the workspace.")
@@ -82,51 +79,52 @@ interface IndexVersions {
       indexName: string;
 
       @doc("View type for including/excluding (for example) archived entities.")
-      @query listViewType: string = "ActiveOnly";
+      @query
+      listViewType: string = "ActiveOnly";
 
       @doc("Ordering of list.")
-      @query orderBy: string;
+      @query
+      orderBy: string;
 
-      ...StandardListQueryParameters
+      ...StandardListQueryParameters;
     },
-    IndexList | Foundations.ErrorResponse
-    >;
+    PagedIndex | Foundations.ErrorResponse
+  >;
 }
 
 interface IndexesLatest {
-   @doc("Get latest Index.")
-   @route("/workspaces/{workspaceName}/indexes/{indexName}")
-   @get
-   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-   getLatest is Azure.Core.Foundations.Operation<
-     {
-       @doc("Name of the workspace.")
-       @path
-       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-       workspaceName: string;
- 
-       @doc("Name of the index.")
-       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-       @path
-       indexName: string;
-     },
-     Index | Foundations.ErrorResponse
-    >;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
+  @doc("Get latest Index.")
+  @route("/workspaces/{workspaceName}/indexes/{indexName}")
+  @get
+  getLatest is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the workspace.")
+      @path
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      workspaceName: string;
 
-   @doc("List the latest version of each index.")
-   @route("/workspaces/{workspaceName}/indexes/")
-   @get
-   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-   listLatest is Azure.Core.Foundations.Operation<
-     {
-       @doc("Name of the workspace.")
-       @path
-       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-       workspaceName: string;
- 
-       ...StandardListQueryParameters
-     },
-     IndexList | Foundations.ErrorResponse
-    >;
+      @doc("Name of the index.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      @path
+      indexName: string;
+    },
+    Index | Foundations.ErrorResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
+  @doc("List the latest version of each index.")
+  @route("/workspaces/{workspaceName}/indexes/")
+  @get
+  listLatest is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the workspace.")
+      @path
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      workspaceName: string;
+
+      ...StandardListQueryParameters;
+    },
+    PagedIndex | Foundations.ErrorResponse
+  >;
 }
-

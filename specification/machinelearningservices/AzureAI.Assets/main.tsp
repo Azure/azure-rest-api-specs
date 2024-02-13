@@ -10,7 +10,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
     {

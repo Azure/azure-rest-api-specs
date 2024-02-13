@@ -25,7 +25,6 @@ model Workspace {
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
 model SystemData {
-
   @visibility("read")
   @doc("The timestamp the resource was created at.")
   createdAt?: utcDateTime;
@@ -42,4 +41,3 @@ model SystemData {
   @doc("The timestamp of resource last modification (UTC)")
   lastModifiedAt?: utcDateTime;
 }
-
