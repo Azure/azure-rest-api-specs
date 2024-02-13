@@ -38,7 +38,7 @@
         "tags": [
           "ContainerAppsLabels"
         ],
-        "summary": "Get the labeles associated with the revisions of current app.",
+        "summary": "Get the labels associated with the revisions of current app.",
         "operationId": "ContainerAppsLabels_List",
         "parameters": [
           {
@@ -234,6 +234,14 @@
         "responses": {
           "200": {
             "description": "Container App Labels deleted successfully."
+          },
+          "202": {
+            "description": "Delete operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Container App Labels collection does not exist."

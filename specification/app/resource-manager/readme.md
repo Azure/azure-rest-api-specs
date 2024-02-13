@@ -62,6 +62,7 @@ input-file:
   - Microsoft.App/preview/2023-11-02-preview/Usages.json
   - Microsoft.App/preview/2023-11-02-preview/JavaComponents.json
   - Microsoft.App/preview/2023-11-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2023-11-02-preview/Labels.json
 ```
 ### Tag: package-preview-2023-08
 
