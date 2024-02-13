@@ -1622,11 +1622,17 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
+          "EventsGetByBillingAccount-Primary": {
+            "$ref": "./examples/EventsGetByBillingAccount-Primary.json"
+          },
           "EventsGetByBillingAccount-Contributor": {
             "$ref": "./examples/EventsGetByBillingAccount-Contributor.json"
           },
           "EventsGetByBillingAccount": {
             "$ref": "./examples/EventsGetByBillingAccount.json"
+          },
+          "EventsGetByBillingAccountWithFilters-Primary": {
+            "$ref": "./examples/EventsGetByBillingAccountWithFilters-Primary.json"
           },
           "EventsGetByBillingAccountWithFilters-Contributor.json": {
             "$ref": "./examples/EventsGetByBillingAccountWithFilters-Contributor.json"
@@ -5155,6 +5161,16 @@
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
+        "billingAccountId": {
+          "description": "Identifier of the billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountDisplayName": {
+          "description": "Name of the billing account.",
+          "type": "string",
+          "readOnly": true
+        },
         "eventType": {
           "description": "Identifies the type of the event.",
           "type": "string",
@@ -5239,7 +5255,7 @@
           "$ref": "#/definitions/AmountWithExchangeRate"
         },
         "closedBalanceInBillingCurrency": {
-          "description": "The balance in billing currency after the event.",
+          "description": "The balance in billing currency after the event, Note: This will not be returned for Contributor Organization Type in Multi-Entity consumption commitment",
           "readOnly": true,
           "$ref": "#/definitions/AmountWithExchangeRate"
         },
@@ -5293,7 +5309,7 @@
       "description": "The lot properties.",
       "properties": {
         "originalAmount": {
-          "description": "The original amount of a lot.",
+          "description": "The original amount of a lot, Note: This will not be returned for Contributor Organization Type in Multi-Entity consumption commitment",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
@@ -5367,7 +5383,7 @@
           "readOnly": true
         },
         "originalAmountInBillingCurrency": {
-          "description": "The original amount of a lot in billing currency.",
+          "description": "The original amount of a lot in billing currency,  Note: This will not be returned for Contributor Organization Type in Multi-Entity consumption commitment",
           "readOnly": true,
           "$ref": "#/definitions/AmountWithExchangeRate"
         },
@@ -5391,7 +5407,7 @@
           "type": "string",
           "description": "The eTag for the resource."
         },
-        "orgType": {
+        "OrganizationType": {
           "description": "The organization type of the lot.",
           "type": "string",
           "enum": [
@@ -5400,18 +5416,18 @@
           ],
           "readOnly": true,
           "x-ms-enum": {
-            "name": "OrgType",
+            "name": "OrganizationType",
             "modelAsString": true,
             "values": [
               {
                 "value": "Primary",
                 "description": "Primary organization type for Multi-Entity consumption commitment.",
-                "name": "PrimaryOrgType"
+                "name": "PrimaryOrganizationType"
               },
               {
                 "value": "Contributor",
                 "description": "Contributor organization type for Multi-Entity consumption commitment.",
-                "name": "ContributorOrgType"
+                "name": "ContributorOrganizationType"
               }
             ]
           }

@@ -17,9 +17,28 @@ pr:
     - package.json
     - tsconfig.json
     - eng
+    - specification/common-types
+
+resources:
+  pipelines:
+  - pipeline: typespec
+    source: typespec - CI
+    project: internal
+    trigger:
+      branches:
+        include:
+        - main
+  - pipeline: typespec-azure
+    source: typespec-azure - CI
+    project: internal
+    trigger:
+      branches:
+        include:
+        - main
 
 jobs:
-- job: Validate_All_Specs
+- job:
+  displayName: Validate All Specs
 
   strategy:
     matrix:
@@ -35,17 +54,9 @@ jobs:
     vmImage: $(OSVmImage)
 
   steps:
-  - script: npm --version --loglevel info
-    displayName: npm --version
-
-  - script: npm ci
-    displayName: npm ci
-
-  - script: npm ls -a
-    displayName: npm ls -a
-    condition: succeededOrFailed()
+  - template: /eng/pipelines/templates/steps/npm-install.yml
 
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory) -GitClean
+      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 -CheckAll -GitClean -Verbose
     displayName: Validate All Specs
-    condition: succeededOrFailed()
+    ignoreLASTEXITCODE: true
