@@ -16,7 +16,7 @@ interface Targets {
   get is ArmResourceRead<Target>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Target>;
   delete is ArmResourceDeleteSync<Target>;
-  listByResourceGroup is ArmResourceListByParent<Target>;
+  listByParent is ArmResourceListByParent<Target>;
 }
 
 @parentResource(Watcher)
