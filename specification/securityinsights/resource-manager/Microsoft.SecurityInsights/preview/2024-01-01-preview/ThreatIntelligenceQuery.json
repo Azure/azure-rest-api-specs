@@ -406,314 +406,314 @@
           }
         },
         "type": "object"
-      },
-      "ThreatActorProperties": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/TIObjectCommonProperties"
-          }
-        ],
-        "description": "Threat actor property bag.",
-        "type": "object"
-      },
-      "IdentityProperties": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/TIObjectCommonProperties"
-          }
-        ],
-        "description": "Identity property bag.",
-        "type": "object"
-      },
-      "RelationshipProperties": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/TIObjectCommonProperties"
-          }
-        ],
-        "description": "Relationship property bag.",
-        "properties": {},
-        "type": "object"
-      },
-      "Query": {
-        "description": "Represents a query to run on the TI objects in the workspace.",
+      }
+    },
+    "ThreatActorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Threat actor property bag.",
+      "type": "object"
+    },
+    "IdentityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Identity property bag.",
+      "type": "object"
+    },
+    "RelationshipProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Relationship property bag.",
+      "properties": {},
+      "type": "object"
+    },
+    "Query": {
+      "description": "Represents a query to run on the TI objects in the workspace.",
+      "properties": {
         "properties": {
+          "$ref": "#/definitions/QueryProperties",
+          "description": "Query properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "QueryProperties": {
+      "description": "Describes the query properties",
+      "properties": {
+        "condition": {
           "properties": {
-            "$ref": "#/definitions/QueryProperties",
-            "description": "Query properties",
+            "$ref": "#/definitions/NormalizedCondition",
+            "description": "Represents a condition used to query for TI objects.",
+            "x-ms-client-flatten": true
+          },
+          "type": "object"
+        },
+        "sortBy": {
+          "description": "Specifies how to sort the query results.",
+          "properties": {
+            "$ref": "#/definitions/SortByProperties",
+            "description": "sortBy properties",
+            "x-ms-client-flatten": true
+          },
+          "type": "object"
+        },
+        "maxPageSize": {
+          "description": "Represents the maximum size of the page that will be returned from the query API.",
+          "readOnly": true,
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPageSize": {
+          "description": "Represents the minimum size of the page that will be returned from the query API.",
+          "readOnly": true,
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SortByProperties": {
+      "description": "An object that specifies how to sort the query results.",
+      "properties": {
+        "direction": {
+          "description": "The direction to sort the results by.",
+          "enum": [
+            "ASC",
+            "DESC"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SortingDirection",
+            "values": [
+              {
+                "description": "Indicates that the query should be sorted from lowest-to-highest value.",
+                "value": "ASC"
+              },
+              {
+                "description": "Indicates that the query should be sorted from lowest-to-highest value.",
+                "value": "DESC"
+              }
+            ]
+          }
+        },
+        "field": {
+          "description": "Represents the field to sort the results by.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Connective": {
+      "description": "Represents boolean connectives used to join clauses in conditions.",
+      "readOnly": true,
+      "enum": [
+        "And",
+        "Or"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Connective",
+        "values": [
+          {
+            "description": "'And' connective",
+            "value": "And"
+          },
+          {
+            "description": "'Or' connective",
+            "value": "Or"
+          }
+        ]
+      }
+    },
+    "NormalizedCondition": {
+      "description": "Represents a condition used to query for TI objects.",
+      "properties": {
+        "stixObjectType": {
+          "description": "The STIX type for the objects returned by this query.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clauses": {
+          "description": "The list of clauses to be evaluated in disjunction or conjunction base on the specified top level connective operator.",
+          "items": {
+            "$ref": "#/definitions/ConditionClause"
+          },
+          "type": "array"
+        },
+        "conditionConnective": {
+          "description": "The top level connective operator for this condition.",
+          "type": "object",
+          "properties": {
+            "$ref": "#/definitions/Connective",
+            "description": "Connective properties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "required": [
+        "clauses"
+      ],
+      "type": "object"
+    },
+    "ConditionClause": {
+      "description": "Represents a single clause to be evaluated by a NormalizedCondition.",
+      "properties": {
+        "clauseConnective": {
+          "description": "The connective used to join all values in this ConditionClause",
+          "type": "object",
+          "properties": {
+            "$ref": "#/definitions/Connective",
+            "description": "Connective properties",
             "x-ms-client-flatten": true
           }
         },
-        "type": "object"
-      },
-      "QueryProperties": {
-        "description": "Describes the query properties",
-        "properties": {
-          "condition": {
-            "properties": {
-              "$ref": "#/definitions/NormalizedCondition",
-              "description": "Represents a condition used to query for TI objects.",
-              "x-ms-client-flatten": true
-            },
-            "type": "object"
-          },
-          "sortBy": {
-            "description": "Specifies how to sort the query results.",
-            "properties": {
-              "$ref": "#/definitions/SortByProperties",
-              "description": "sortBy properties",
-              "x-ms-client-flatten": true
-            },
-            "type": "object"
-          },
-          "maxPageSize": {
-            "description": "Represents the maximum size of the page that will be returned from the query API.",
-            "readOnly": true,
-            "format": "int32",
-            "type": "integer"
-          },
-          "minPageSize": {
-            "description": "Represents the minimum size of the page that will be returned from the query API.",
-            "readOnly": true,
-            "format": "int32",
-            "type": "integer"
+        "field": {
+          "description": "The name of the field that is evaluated.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Represents an operator in a ConditionClause.",
+          "type": "string",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "LessThan",
+            "LessThanEqual",
+            "GreaterThan",
+            "GreaterThanEqual",
+            "StringContains",
+            "StringNotContains",
+            "StringStartsWith",
+            "StringNotStartsWith",
+            "StringEndsWith",
+            "StringNotEndsWith",
+            "StringIsEmpty",
+            "IsNull",
+            "IsTrue",
+            "IsFalse",
+            "ArrayContains",
+            "ArrayNotContains",
+            "OnOrAfterRelative",
+            "AfterRelative",
+            "OnOrBeforeRelative",
+            "BeforeRelative",
+            "OnOrAfterAbsolute",
+            "AfterAbsolute",
+            "OnOrBeforeAbsolute",
+            "BeforeAbsolute"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Operator",
+            "values": [
+              {
+                "value": "Equals"
+              },
+              {
+                "value": "NotEquals"
+              },
+              {
+                "value": "LessThan"
+              },
+              {
+                "value": "LessThanEqual"
+              },
+              {
+                "value": "GreaterThan"
+              },
+              {
+                "value": "GreaterThanEqual"
+              },
+              {
+                "value": "StringContains"
+              },
+              {
+                "value": "StringNotContains"
+              },
+              {
+                "value": "StringStartsWith"
+              },
+              {
+                "value": "StringNotStartsWith"
+              },
+              {
+                "value": "StringEndsWith"
+              },
+              {
+                "value": "StringNotEndsWith"
+              },
+              {
+                "value": "StringIsEmpty"
+              },
+              {
+                "value": "IsNull"
+              },
+              {
+                "value": "IsTrue"
+              },
+              {
+                "value": "IsFalse"
+              },
+              {
+                "value": "ArrayContains"
+              },
+              {
+                "value": "ArrayNotContains"
+              },
+              {
+                "value": "OnOrAfterRelative"
+              },
+              {
+                "value": "AfterRelative"
+              },
+              {
+                "value": "OnOrBeforeRelative"
+              },
+              {
+                "value": "BeforeRelative"
+              },
+              {
+                "value": "OnOrAfterAbsolute"
+              },
+              {
+                "value": "AfterAbsolute"
+              },
+              {
+                "value": "OnOrBeforeAbsolute"
+              },
+              {
+                "value": "BeforeAbsolute"
+              }
+            ]
           }
         },
-        "type": "object"
-      },
-      "SortByProperties": {
-        "description": "An object that specifies how to sort the query results.",
-        "properties": {
-          "direction": {
-            "description": "The direction to sort the results by.",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "modelAsString": true,
-              "name": "SortingDirection",
-              "values": [
-                {
-                  "description": "Indicates that the query should be sorted from lowest-to-highest value.",
-                  "value": "ASC"
-                },
-                {
-                  "description": "Indicates that the query should be sorted from lowest-to-highest value.",
-                  "value": "DESC"
-                }
-              ]
-            }
-          },
-          "field": {
-            "description": "Represents the field to sort the results by.",
-            "readOnly": true,
+        "values": {
+          "description": "The top level connective operator for this condition.",
+          "items": {
             "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "Connective": {
-        "description": "Represents boolean connectives used to join clauses in conditions.",
-        "readOnly": true,
-        "enum": [
-          "And",
-          "Or"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "modelAsString": true,
-          "name": "Connective",
-          "values": [
-            {
-              "description": "'And' connective",
-              "value": "And"
-            },
-            {
-              "description": "'Or' connective",
-              "value": "Or"
-            }
-          ]
+          },
+          "type": "array"
         }
       },
-      "NormalizedCondition": {
-        "description": "Represents a condition used to query for TI objects.",
-        "properties": {
-          "stixObjectType": {
-            "description": "The STIX type for the objects returned by this query.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "clauses": {
-            "description": "The list of clauses to be evaluated in disjunction or conjunction base on the specified top level connective operator.",
-            "items": {
-              "$ref": "#/definitions/ConditionClause"
-            },
-            "type": "array"
-          },
-          "conditionConnective": {
-            "description": "The top level connective operator for this condition.",
-            "type": "object",
-            "properties": {
-              "$ref": "#/definitions/Connective",
-              "description": "Connective properties",
-              "x-ms-client-flatten": true
-            }
-          }
-        },
-        "required": [
-          "clauses"
-        ],
-        "type": "object"
-      },
-      "ConditionClause": {
-        "description": "Represents a single clause to be evaluated by a NormalizedCondition.",
-        "properties": {
-          "clauseConnective": {
-            "description": "The connective used to join all values in this ConditionClause",
-            "type": "object",
-            "properties": {
-              "$ref": "#/definitions/Connective",
-              "description": "Connective properties",
-              "x-ms-client-flatten": true
-            }
-          },
-          "field": {
-            "description": "The name of the field that is evaluated.",
-            "type": "string"
-          },
-          "operator": {
-            "description": "Represents an operator in a ConditionClause.",
-            "type": "string",
-            "enum": [
-              "Equals",
-              "NotEquals",
-              "LessThan",
-              "LessThanEqual",
-              "GreaterThan",
-              "GreaterThanEqual",
-              "StringContains",
-              "StringNotContains",
-              "StringStartsWith",
-              "StringNotStartsWith",
-              "StringEndsWith",
-              "StringNotEndsWith",
-              "StringIsEmpty",
-              "IsNull",
-              "IsTrue",
-              "IsFalse",
-              "ArrayContains",
-              "ArrayNotContains",
-              "OnOrAfterRelative",
-              "AfterRelative",
-              "OnOrBeforeRelative",
-              "BeforeRelative",
-              "OnOrAfterAbsolute",
-              "AfterAbsolute",
-              "OnOrBeforeAbsolute",
-              "BeforeAbsolute"
-            ],
-            "x-ms-enum": {
-              "modelAsString": true,
-              "name": "Operator",
-              "values": [
-                {
-                  "value": "Equals"
-                },
-                {
-                  "value": "NotEquals"
-                },
-                {
-                  "value": "LessThan"
-                },
-                {
-                  "value": "LessThanEqual"
-                },
-                {
-                  "value": "GreaterThan"
-                },
-                {
-                  "value": "GreaterThanEqual"
-                },
-                {
-                  "value": "StringContains"
-                },
-                {
-                  "value": "StringNotContains"
-                },
-                {
-                  "value": "StringStartsWith"
-                },
-                {
-                  "value": "StringNotStartsWith"
-                },
-                {
-                  "value": "StringEndsWith"
-                },
-                {
-                  "value": "StringNotEndsWith"
-                },
-                {
-                  "value": "StringIsEmpty"
-                },
-                {
-                  "value": "IsNull"
-                },
-                {
-                  "value": "IsTrue"
-                },
-                {
-                  "value": "IsFalse"
-                },
-                {
-                  "value": "ArrayContains"
-                },
-                {
-                  "value": "ArrayNotContains"
-                },
-                {
-                  "value": "OnOrAfterRelative"
-                },
-                {
-                  "value": "AfterRelative"
-                },
-                {
-                  "value": "OnOrBeforeRelative"
-                },
-                {
-                  "value": "BeforeRelative"
-                },
-                {
-                  "value": "OnOrAfterAbsolute"
-                },
-                {
-                  "value": "AfterAbsolute"
-                },
-                {
-                  "value": "OnOrBeforeAbsolute"
-                },
-                {
-                  "value": "BeforeAbsolute"
-                }
-              ]
-            }
-          },
-          "values": {
-            "description": "The top level connective operator for this condition.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "field",
-          "operator",
-          "values"
-        ],
-        "type": "object"
-      }
+      "required": [
+        "field",
+        "operator",
+        "values"
+      ],
+      "type": "object"
     }
   },
   "parameters": {
