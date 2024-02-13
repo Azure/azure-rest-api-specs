@@ -44,6 +44,9 @@ model ExperimentationWorkspaceProperties {
 model AccessPolicy {
   @doc("Application id used for access to the experimentation workspace.")
   applicationId: string;
+
+  @doc("Endpoint used for access to the experimentation workspace.")
+  dataPlaneEndpoint?: string;
 }
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
