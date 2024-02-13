@@ -201,9 +201,6 @@
         "responses": {
           "302": {
             "description": "Redirection",
-            "schema": {
-              "$ref": "#/definitions/EmptyResult"
-            },
             "headers": {
               "location": {
                 "type": "string"
@@ -610,9 +607,9 @@
           "minimum": 2,
           "maximum": 100
         },
-        "locationDevice": {
+        "device": {
           "$ref": "#/definitions/LocationDevice",
-          "description": "The device to find the location for."
+          "description": "The device to find the location for. Exactly one of Network Access Code, Phone Number, IPv4 address, or IPv6 address"
         }
       },
       "required": [
@@ -620,7 +617,7 @@
         "latitude",
         "longitude",
         "accuracy",
-        "locationDevice"
+        "device"
       ]
     },
     "DeviceLocationVerificationResult": {
@@ -656,23 +653,13 @@
         "network"
       ]
     },
-    "EmptyResult": {
-      "type": "object",
-      "description": "Empty model to return as part of 302 redirect",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "Optional content"
-        }
-      }
-    },
     "Ipv4Address": {
       "type": "object",
       "description": "IPv4 device indicator",
       "properties": {
         "ipv4": {
           "type": "string",
-          "description": "IPv4 address may be specified in form <address/mask> as:\n          - address - an IPv4 number in dotted-quad form 1.2.3.4. Only this exact IP number will match the flow control rule.\n          - address/mask - an IP number as above with a mask width of the form 1.2.3.4/24.\n            In this case, all IP numbers from 1.2.3.0 to 1.2.3.255 will match. The bit width MUST be valid for the IP version."
+          "description": "An IPv4 address. This may be specified as an exact address, or as a subnet in CIDR notation."
         },
         "port": {
           "type": "integer",
@@ -701,7 +688,7 @@
       "properties": {
         "ipv6": {
           "type": "string",
-          "description": "IPv6 address, following IETF 5952 format, may be specified in form <address/mask> as:\n          - address - The /128 subnet is optional for single addresses:\n            - 2001:db8:85a3:8d3:1319:8a2e:370:7344\n            - 2001:db8:85a3:8d3:1319:8a2e:370:7344/128\n          - address/mask - an IP v6 number with a mask:\n            - 2001:db8:85a3:8d3::0/64\n            - 2001:db8:85a3:8d3::/64"
+          "description": "An IPv6 address. This may be specified as an exact address, or as a subnet in CIDR notation."
         },
         "port": {
           "type": "integer",
@@ -767,7 +754,7 @@
         },
         "identifier": {
           "type": "string",
-          "description": "The network identifier in a format matching the type above:\n  - IPv4 of a device in dotted-quad form 1.2.3.4.\n  - IPv6 of a device in IETF 5952 format.\n  - NetworkCode matching our documentation or an output from /Network:retrieve.\""
+          "description": "The network identifier, based on the identifierType: an IPv4 address, and IPv6 address, or a Network Code.\nA Network Code may be obtained from APC documentation or from the APC /Network:retrieve endpoint."
         }
       },
       "required": [

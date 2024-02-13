@@ -13,26 +13,24 @@ namespace Azure.ProgrammableConnectivity;
 @doc("""
   Number operations include Frontend Authentication.
 
-  Users must first make a call to triggerFrontendAuthentication, which redirects the device
-  to the device's Network to authenticate directly. The Network responds with a token.
+  Users first make a call to the endpoint /Number:verify, which returns a redirect to the device's 
+  Network. This is followed by the device to authenticate directly with the Network. The Network 
+  responds with a token and a redirect. This token can be exchanged with APC for a code.
   
-  This redirects the device to APC, where the token is used to verify / retrieve
-  the device number. The second response is a 200 containing the result of the query.
+  Users make a second call to the endpoint /Number:verify including the code. The code is used 
+  to verify the device number. The second response is a 200 containing the result of the query.
 
-  This flow requires some manual interaction from the developer between receiving the 302 redirect,
-  and making a second call to obtain the number verification result. This has therefore been
-  split into two operations, one for the redirect, and one for the result.
+  For more information on the steps required to use Number Verificaiton, see the APC documentation.
 """)
 interface NumberVerification {
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "302 redirect has no response body"
   @doc("Verifies the phone number (MSISDN) associated with a device. As part of the frontend authorization flow, the device is redirected to the operator network to authenticate directly.")
   @sharedRoute
   @action("verify")
   verifyWithoutCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
     NumberVerificationWithoutCodeContent,
-    // Typespec requires that non-204 responses have a non-empty body. This requirement cannot be suppressed.
-    // Return a model containing only one optional field to get around this.
-    TypeSpec.Http.Response<302> & EmptyResult,
+    TypeSpec.Http.Response<302> & {},
     TraitOverride<ResponseHeadersTrait<{
       @header location: string;
     } & RequestIdResponseHeader>>
@@ -82,12 +80,6 @@ model NumberVerificationWithCodeContent {
 
 /// Response models
 
-@doc("Empty model to return as part of 302 redirect")
-model EmptyResult {
-  @doc("Optional content")
-  content?: string;
-}
-
 @doc("Response verifying number of device")
 model NumberVerificationResult {
   @doc("True if number if the phone number matches the device, False otherwise")
@@ -95,6 +87,10 @@ model NumberVerificationResult {
 }
 
 /// Common models
+
+// NumberDevice represents a Device as required by the Number Verification API. The APC team aims
+// to drive commonisation of the underlying CAMARA APIs so that all APIs can share a common Device
+// model in future.
 @doc("Device information to verify phone number. Include exactly one form of phone number.")
 model NumberDevice {
   ...PhoneNumberModel;

@@ -76,6 +76,9 @@ model SimSwapVerificationResult {
 
 /// Common models
 
+// SimSwapDevice represents a Device as required by the Sim Swap API. The APC team aims
+// to drive commonisation of the underlying CAMARA APIs so that all APIs can share a common Device
+// model in future.
 @doc("Device information needed by operator to find sim swap information.")
 model SimSwapDevice {
   ...PhoneNumberModel;

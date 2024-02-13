@@ -39,7 +39,8 @@ input-file:
   - Azure.ProgrammableConnectivity/preview/2024-02-09-preview/openapi.json
 suppressions:
   - code: ValidResponseCodeRequired
-    reason: APC must return a 302 as part of a non-standard 
+    reason: APC must return a 302 as part of a non-standard frontend authentication flow
+    where: $.paths./number-verification/number:verify.post.responses
 ```
 
 # Code Generation

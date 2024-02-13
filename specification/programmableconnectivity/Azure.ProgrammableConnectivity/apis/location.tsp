@@ -51,8 +51,8 @@ model DeviceLocationVerificationContent {
   @maxValue(100)
   accuracy: int32;
 
-  @doc("The device to find the location for.")
-  locationDevice: LocationDevice;
+  @doc("The device to find the location for. Exactly one of Network Access Code, Phone Number, IPv4 address, or IPv6 address")
+  device: LocationDevice;
 }
 
 /// Response models
@@ -64,6 +64,10 @@ model DeviceLocationVerificationResult {
 }
 
 /// Common models
+
+// LocationDevice represents a Device as required by the Location API. The APC team aims
+// to drive commonisation of the underlying CAMARA APIs so that all APIs can share a common Device
+// model in future.
 @doc("Device information needed by operator to provide location information. Include exactly one of these properties to identify your device.")
 model LocationDevice {
   ...NetworkAccessIdentifierModel;
