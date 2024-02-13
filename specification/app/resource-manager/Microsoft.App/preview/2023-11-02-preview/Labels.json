@@ -288,7 +288,8 @@
               "enum": [
                 "InProgress",
                 "Succeeded",
-                "Failed"
+                "Failed",
+                "Canceled"
               ],
               "type": "string",
               "readOnly": true,
@@ -300,7 +301,7 @@
             "labels": {
               "description": "Labels for the Container App.",
               "type": "object",
-              "properties": {
+              "additionalProperties": {
                 "$ref": "#/definitions/Label"
               }
             }
