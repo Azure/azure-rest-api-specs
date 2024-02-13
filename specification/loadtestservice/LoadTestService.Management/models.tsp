@@ -298,3 +298,10 @@ model QuotaResourceList {
   @nextLink
   nextLink?: ResourceLocation<QuotaResource>;
 }
+
+@doc("URL to query for status of the operation.")
+model AzureAsyncOperationHeader {
+  @doc("URL to query for status of the operation.")
+  @header("Azure-AsyncOperation")
+  azureAsyncOperation?: string;
+}

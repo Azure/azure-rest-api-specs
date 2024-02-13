@@ -71,11 +71,15 @@ interface LoadTests {
   >;
   get is ArmResourceRead<LoadTestResource>;
 
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LoadTestResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    LoadTestResource,
+    LroHeaders = AzureAsyncOperationHeader
+  >;
 
   update is ArmCustomPatchAsync<
     LoadTestResource,
-    LoadTestResourcePatchRequestBody
+    LoadTestResourcePatchRequestBody,
+    LroHeaders = AzureAsyncOperationHeader
   >;
 
   delete is ArmResourceDeleteAsync<LoadTestResource>;
