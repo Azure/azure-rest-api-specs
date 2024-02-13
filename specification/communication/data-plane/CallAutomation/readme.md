@@ -39,13 +39,13 @@ input-file:
 title: Azure Communication Services
 ```
 
-### Tag: package-2023-03-06
+### Tag: package-2023-10-15
 
-These settings apply only when `--tag=package-2023-03-06` is specified on the command line.
+These settings apply only when `--tag=package-2023-10-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03-06'
+```yaml $(tag) == 'package-2023-10-15'
 input-file:
-  - stable/2023-03-06/communicationservicescallautomation.json
+  - stable/2023-10-15/communicationservicescallautomation.json
 title:
   Azure Communication Services
 ```
