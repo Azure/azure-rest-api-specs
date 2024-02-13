@@ -1416,22 +1416,6 @@ directive:
     from: scheduledQueryRule_API.json
     where: $.definitions.Actions.properties.actionProperties
     reason: 'This is a key-value collection which we do not validate and just pass as-is to a service which is several hops down the pipe where they are interpreted. Unknown keys are ignored and there are no invalid values.'
-  - suppress: AvoidAdditionalProperties
-    from: scheduledQueryRule_API.json
-    where: $.definitions.ScheduledQueryRuleProperties.properties.actions
-    reason: 'This is a key-value collection which we do not validate and just pass as-is to a service which is several hops down the pipe where they are interpreted. Unknown keys are ignored and there are no invalid values.'
-  - suppress: AvoidAdditionalProperties
-    from: scheduledQueryRule_API.json
-    where: $.definitions.ScheduledQueryRuleResource.properties.properties
-    reason: 'This is a key-value collection which we do not validate and just pass as-is to a service which is several hops down the pipe where they are interpreted. Unknown keys are ignored and there are no invalid values.'
-  - suppress: AvoidAdditionalProperties
-    from: scheduledQueryRule_API.json
-    where: $.definitions.ScheduledQueryRuleResourcePatch.properties.properties
-    reason: 'This is a key-value collection which we do not validate and just pass as-is to a service which is several hops down the pipe where they are interpreted. Unknown keys are ignored and there are no invalid values.'
-  - suppress: AvoidAdditionalProperties
-    from: scheduledQueryRule_API.json
-    where: $.definitions.ScheduledQueryRuleResourceCollection.properties.value.items
-    reason: 'This is a key-value collection which we do not validate and just pass as-is to a service which is several hops down the pipe where they are interpreted. Unknown keys are ignored and there are no invalid values.'
 ```
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.
