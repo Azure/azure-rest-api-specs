@@ -1,0 +1,115 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "labels-rg",
+    "containerAppName": "myapp",
+    "labelsName": "current",
+    "api-version": "2023-11-02-preview",
+    "labelsEnvelope": {
+      "properties": {
+        "labels": {
+          "production": {
+            "revisionName": "myapp-ab1234",
+            "trafficWeight": 100
+          },
+          "canary": {
+            "revisionName": "myapp-cd5678",
+            "trafficWeight": 0
+          }
+        }      
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/labels-rg/providers/Microsoft.App/containerApps/myapp/labels/current",
+        "name": "current",
+        "type": "Microsoft.App/containerapps/labels",
+        "properties": {
+          "labels": {
+            "production": {
+              "revisionName": "myapp-ab1234",
+              "trafficWeight": 100,
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerApp0:v1",
+                    "name": "testcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ]
+              }
+            },
+            "canary": {
+              "revisionName": "myapp-cd5678",
+              "trafficWeight": 0,
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerApp0:v2",
+                    "name": "testcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "location": "https://localhost/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/labels-rg/providers/Microsoft.App/containerApps/myapp/sourcecontrols/currentInOperationModel/operationresults/5a7f31af-8ae5-489b-a67e-f0a2d11df796?api-version=2021-03-01"
+      },
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/labels-rg/providers/Microsoft.App/containerApps/myapp/labels/current",
+        "name": "current",
+        "type": "Microsoft.App/containerapps/labels",
+        "properties": {
+          "labels": {
+            "production": {
+              "revisionName": "myapp-ab1234",
+              "trafficWeight": 100,
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerApp0:v1",
+                    "name": "testcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ]
+              }
+            },
+            "canary": {
+              "revisionName": "myapp-cd5678",
+              "trafficWeight": 0,
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerApp0:v2",
+                    "name": "testcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
