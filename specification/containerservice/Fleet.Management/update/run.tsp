@@ -134,7 +134,7 @@ union ManagedClusterUpgradeType {
   @doc("Full upgrades the control plane and all agent pools of the target ManagedClusters.")
   "Full",
 
-  @doc("NodeImageOnly upgrades only the node images of the target ManagedClusters.")
+  @doc("NodeImageOnly upgrades only the node images of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to NOT be set.")
   "NodeImageOnly",
 
   @doc("ControlPlaneOnly upgrades only targets the KubernetesVersion of the ManagedClusters and will not be applied to the AgentPool. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set.")
