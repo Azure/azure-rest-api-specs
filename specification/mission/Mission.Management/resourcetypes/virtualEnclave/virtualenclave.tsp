@@ -41,6 +41,7 @@ model EnclaveDefaultSettings {
   @doc("Key Vault Resource Id.")
   keyVaultResourceId?: KeyVaultResourceId;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   @removed(Microsoft.Mission.Versions.v2024_01_01_preview)
   @doc("Log Analytics Resource Id.")
   logAnalyticsResourceId?: LogAnalyticsResourceId;
@@ -48,10 +49,12 @@ model EnclaveDefaultSettings {
   @doc("Storage Account Resource Id.")
   storageAccountResourceId?: StorageAccountResourceId;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
   @added(Microsoft.Mission.Versions.v2024_01_01_preview)
   @doc("Log Analytics Resource Ids.")
   logAnalyticsResourceIdCollection?: LogAnalyticsResourceId[];
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
   @added(Microsoft.Mission.Versions.v2024_01_01_preview)
   @doc("Diagnostic Destination.")
   diagnosticDestination?: DiagnosticDestination;
