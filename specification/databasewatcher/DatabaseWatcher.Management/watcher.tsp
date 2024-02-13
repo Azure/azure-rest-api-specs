@@ -68,23 +68,18 @@ model Datastore {
   @doc("The Kusto cluster display name.")
   kustoClusterDisplayName?: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The Kusto cluster URI.")
   kustoClusterUri: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The Kusto data ingestion URI.")
   kustoDataIngestionUri: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The name of a Kusto database.")
   kustoDatabaseName: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The Kusto management URL.")
   kustoManagementUrl: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The type of a Kusto offering.")
   kustoOfferingType: KustoOfferingType;
 }

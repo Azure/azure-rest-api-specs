@@ -32,7 +32,6 @@ model Target is ProxyResource<TargetProperties> {
 @doc("The generic properties of a target.")
 @discriminator("targetType")
 model TargetProperties {
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The type of authentication to use when connecting to a target.")
   targetAuthenticationType: TargetAuthenticationType;
 
