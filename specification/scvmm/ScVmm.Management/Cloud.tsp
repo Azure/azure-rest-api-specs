@@ -30,7 +30,7 @@ interface Clouds {
   /** Implements Cloud GET method. */
   get is ArmResourceRead<Cloud>;
   /** Onboards the ScVmm fabric cloud as an Azure cloud resource. */
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Cloud>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Cloud>;
   /** Updates the Clouds resource. */
   update is ArmTagsPatchAsync<Cloud>;
   /** Deregisters the ScVmm fabric cloud from Azure. */

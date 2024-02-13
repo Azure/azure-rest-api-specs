@@ -541,6 +541,7 @@ model AvailabilitySetListItem {
 model OsProfileForVmInstance {
   /** Admin password of the virtual machine. */
   @visibility("create", "update")
+  @secret
   adminPassword?: string;
 
   /** Gets or sets computer name. */

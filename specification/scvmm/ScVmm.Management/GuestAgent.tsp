@@ -27,7 +27,7 @@ interface GuestAgents {
   /** Implements GuestAgent GET method. */
   get is ArmResourceRead<GuestAgent>;
   /** Create Or Update GuestAgent. */
-  create is ArmResourceCreateOrUpdateAsync<GuestAgent>;
+  create is ArmResourceCreateOrReplaceAsync<GuestAgent>;
   /** Implements GuestAgent DELETE method. */
   delete is ArmResourceDeleteSync<GuestAgent>;
   /** Returns the list of GuestAgent of the given vm. */

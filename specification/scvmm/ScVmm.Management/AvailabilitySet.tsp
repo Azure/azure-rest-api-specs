@@ -30,7 +30,7 @@ interface AvailabilitySets {
   /** Implements AvailabilitySet GET method. */
   get is ArmResourceRead<AvailabilitySet>;
   /** Onboards the ScVmm availability set as an Azure resource. */
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<AvailabilitySet>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AvailabilitySet>;
   /** Updates the AvailabilitySets resource. */
   update is ArmTagsPatchAsync<AvailabilitySet>;
   /** Deregisters the ScVmm availability set from Azure. */
