@@ -720,14 +720,16 @@
           "items": {
             "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup"
           },
-          "description": "Application security groups in which the private endpoint IP configuration is included."
+          "description": "Application security groups in which the private endpoint IP configuration is included.",
+          "x-ms-identifiers": ["id"]
         },
         "ipConfigurations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointIPConfiguration"
           },
-          "description": "A list of IP configurations of the private endpoint. This will be used to map to the First Party Service's endpoints."
+          "description": "A list of IP configurations of the private endpoint. This will be used to map to the First Party Service's endpoints.",
+          "x-ms-identifiers": ["name"]
         },
         "customNetworkInterfaceName": {
           "type": "string",
@@ -922,7 +924,8 @@
           "items": {
             "$ref": "#/definitions/PrivateDnsZoneConfig"
           },
-          "description": "A collection of private dns zone configurations of the private dns zone group."
+          "description": "A collection of private dns zone configurations of the private dns zone group.",
+          "x-ms-identifiers": ["name"]
         }
       },
       "description": "Properties of the private dns zone group."
