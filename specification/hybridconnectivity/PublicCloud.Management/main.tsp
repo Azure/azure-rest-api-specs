@@ -289,24 +289,6 @@ interface GenerateAwsTemplate {
   ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnectorId}")
-interface TestPermissions {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
-  @route("testPermissions")
-  @post
-  @action
-  @tag("TestPermissions")
-  @doc("Test permissions of solution configurations of a connector.")
-  post(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    @doc("ConnectorId to check permissions of.")
-    publicCloudConnectorId: string,
-  ): Azure.ResourceManager.ArmAcceptedLroResponse<"Asynchronous operation in progress."> | TestPermissionResponse | Azure.ResourceManager.ErrorResponse;
-}
-
 @armResourceOperations
 interface PublicCloudConnectors {
   get is ArmResourceRead<PublicCloudConnector>;
@@ -318,6 +300,12 @@ interface PublicCloudConnectors {
   delete is ArmResourceDeleteSync<PublicCloudConnector>;
   listByResourceGroup is ArmResourceListByParent<PublicCloudConnector>;
   listBySubscription is ArmListBySubscription<PublicCloudConnector>;
+
+  testPermissions is ArmResourceActionAsync<
+    PublicCloudConnector,
+    void,
+    TestPermissionResponse
+  >;
 }
 
 @armResourceOperations
