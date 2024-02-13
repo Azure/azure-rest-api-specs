@@ -12465,6 +12465,25 @@
         }
       }
     },
+    "ClusterFailoverJobDetails": {
+      "description": "This class represents the details for a failover job of cluster.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "protectedItemDetails": {
+          "description": "The test VM details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FailoverReplicationProtectedItemDetails"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ClusterFailoverJobDetails"
+    },
     "ClusterProviderSpecificRecoveryPointDetails": {
       "description": "Replication provider specific cluster recovery point details.",
       "type": "object",
@@ -12546,6 +12565,22 @@
           "description": "The provider specific details for the recovery point."
         }
       }
+    },
+    "ClusterSwitchProtectionJobDetails": {
+      "description": "This class represents details for switch cluster protection job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "newReplicationProtectionClusterId": {
+          "description": "ARM Id of the new replication protection cluster.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "ClusterSwitchProtectionJobDetails"
     },
     "ClusterTestFailoverCleanupInput": {
       "description": "Input definition for test failover cleanup for cluster.",
