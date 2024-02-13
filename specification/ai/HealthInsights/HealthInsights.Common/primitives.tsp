@@ -92,7 +92,12 @@ alias ServiceTraits = NoRepeatableRequests &
   RequestIdResponseHeaderTrait &
   ExpandQueryParams;
 
+ 
+  model HealthInsightsErrorResponse is Azure.Core.Foundations.ErrorResponse{
+    ...RequestIdResponseHeaderTrait;
+  }
+
 alias HealthInsightsOperations = ResourceOperations<
   ServiceTraits,
-  Azure.Core.Foundations.ErrorResponse
->;
+  HealthInsightsErrorResponse
+  >;
