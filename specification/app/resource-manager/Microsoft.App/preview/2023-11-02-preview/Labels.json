@@ -1,0 +1,320 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-11-02-preview",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/labels": {
+      "get": {
+        "tags": [
+          "ContainerAppsLabels"
+        ],
+        "summary": "Get the labeles associated with the revisions of current app.",
+        "operationId": "ContainerAppsLabels_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LabelsCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App's Source Controls": {
+            "$ref": "./examples/Labels_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/labels/{labelsName}": {
+      "get": {
+        "tags": [
+          "ContainerAppsLabels"
+        ],
+        "summary": "Get a labels to revisions mapping for a Container App.",
+        "operationId": "ContainerAppsLabels_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "labelsName",
+            "in": "path",
+            "description": "Name of the Container App Labels mapping.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Labels"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container App's Labels": {
+            "$ref": "./examples/Labels_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ContainerAppsLabels"
+        ],
+        "summary": "Create or update the Labels for a Container App.",
+        "description": "Create or update the Labels for a Container App.",
+        "operationId": "ContainerAppsLabels_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "labelsName",
+            "in": "path",
+            "description": "Name of the Container App Labels collection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "labelsEnvelope",
+            "in": "body",
+            "description": "Properties used to create a Container App Labels collection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Labels"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Labels"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Labels"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Container App SourceControl": {
+            "$ref": "./examples/Labels_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ContainerAppsLabels"
+        ],
+        "summary": "Delete Container App's Labels.",
+        "description": "Delete Container App's Labels.",
+        "operationId": "ContainerAppsLabels_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "labelsName",
+            "in": "path",
+            "description": "Name of the Container App Labels collection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Container App Labels deleted successfully."
+          },
+          "204": {
+            "description": "Container App Labels collection does not exist."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Container App SourceControl": {
+            "$ref": "./examples/Labels_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Labels": {
+      "description": "Container App Labels.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Labels specific properties",
+          "type": "object",
+          "properties": {
+            "labels": {
+              "description": "Labels for the Container App.",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Label"
+              }
+            }
+          },
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "Label": {
+      "description": "Label for the Container App.",
+      "type": "object",
+      "properties": {
+        "revisionName": {
+          "description": "Name of the revision associated with the label.",
+          "type": "string"
+        },
+        "trafficWeight": {
+          "description": "Percent of the traffic that will be routed to the revision in this label.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "template": {
+          "$ref": "./CommonDefinitions.json#/definitions/Template",
+          "description": "Container App versioned application definition.",
+          "readOnly": true
+        }
+      }
+    },
+    "LabelsCollection": {
+      "description": "Labels collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Labels"
+          }
+        }
+      }
+    }
+  }
+}
