@@ -3195,7 +3195,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The amount of storage currently allocated for the database tables and billed for, rounded up.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "apexDetails": {
           "$ref": "#/definitions/ApexDetailsType",
@@ -3406,10 +3409,7 @@
       },
       "discriminator": "dataBaseType",
       "required": [
-        "dataBaseType",
-        "characterSet",
-        "ncharacterSet",
-        "vnetId"
+        "dataBaseType"
       ]
     },
     "AutonomousDatabaseCharacterSet": {
@@ -3939,6 +3939,15 @@
             "read",
             "update",
             "create"
+          ]
+        },
+        "allocatedStorageSizeInTbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of storage currently allocated for the database tables and billed for, rounded up.",
+          "x-ms-mutability": [
+            "read",
+            "update"
           ]
         },
         "databaseEdition": {
