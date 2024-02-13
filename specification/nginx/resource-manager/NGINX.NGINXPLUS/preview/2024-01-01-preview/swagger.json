@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Nginx.NginxPlus",
-    "version": "2023-09-01"
+    "version": "2024-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -581,6 +581,9 @@
         "x-ms-examples": {
           "Deployments_Get": {
             "$ref": "./examples/Deployments_Get.json"
+          },
+          "Deployments_Get_AutoScale": {
+            "$ref": "./examples/Deployments_Get_AutoScale.json"
           }
         }
       },
@@ -847,7 +850,7 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "List all operations provided by Nginx.NginxPlus for the 2023-09-01 api version.",
+        "summary": "List all operations provided by Nginx.NginxPlus for the 2024-01-01-preview api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -883,6 +886,57 @@
     }
   },
   "definitions": {
+    "ScaleProfile": {
+      "type": "object",
+      "description": "The autoscale profile.",
+      "required": [
+        "name",
+        "capacity"
+      ],
+      "x-ms-client-flatten": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "ExampleProfile"
+        },
+        "capacity": {
+          "type": "object",
+          "required": [
+            "min",
+            "max"
+          ],
+          "description": "The capacity parameters of the profile.",
+          "properties": {
+            "min": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The minimum number of NCUs the deployment can be autoscaled to.",
+              "minimum": 0
+            },
+            "max": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of NCUs the deployment can be autoscaled to.",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "AutoUpgradeProfile": {
+      "type": "object",
+      "description": "Autoupgrade settings of a deployment.",
+      "required": [
+        "upgradeChannel"
+      ],
+      "properties": {
+        "upgradeChannel": {
+          "description": "Channel used for autoupgrade.",
+          "type": "string",
+          "example": "stable"
+        }
+      }
+    },
     "ProvisioningState": {
       "enum": [
         "Accepted",
@@ -1250,11 +1304,29 @@
     },
     "NginxDeploymentScalingProperties": {
       "type": "object",
+      "description": "Information on how the deployment will be scaled.",
       "properties": {
         "capacity": {
           "format": "int32",
           "type": "integer",
           "example": 20
+        },
+        "autoScaleSettings": {
+          "type": "object",
+          "required": [
+            "profiles"
+          ],
+          "description": "The settings for enabling automatic scaling of the deployment. If this field is specified, 'scale.capacity' must be empty.",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "profiles": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScaleProfile"
+              },
+              "x-ms-identifiers": []
+            }
+          }
         }
       }
     },
@@ -1304,6 +1376,9 @@
         },
         "scalingProperties": {
           "$ref": "#/definitions/NginxDeploymentScalingProperties"
+        },
+        "autoUpgradeProfile": {
+          "$ref": "#/definitions/AutoUpgradeProfile"
         },
         "userProfile": {
           "$ref": "#/definitions/NginxDeploymentUserProfile"
@@ -1364,6 +1439,9 @@
         },
         "userProfile": {
           "$ref": "#/definitions/NginxDeploymentUserProfile"
+        },
+        "autoUpgradeProfile": {
+          "$ref": "#/definitions/AutoUpgradeProfile"
         }
       }
     },
@@ -1514,14 +1592,14 @@
             "errors": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AnalysisError"
+                "$ref": "#/definitions/AnalysisDiagnostic"
               }
             }
           }
         }
       }
     },
-    "AnalysisError": {
+    "AnalysisDiagnostic": {
       "type": "object",
       "description": "An error object found during the analysis of an NGINX configuration.",
       "required": [
