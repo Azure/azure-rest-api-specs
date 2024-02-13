@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
 
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DeviceRegistry;
 
 @doc("The extended location.")

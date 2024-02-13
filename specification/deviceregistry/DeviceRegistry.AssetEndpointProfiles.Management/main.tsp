@@ -20,5 +20,4 @@ using Azure.ResourceManager.Foundations;
 })
 @doc("Microsoft.DeviceRegistry Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DeviceRegistry;
