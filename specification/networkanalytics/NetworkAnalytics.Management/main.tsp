@@ -1022,12 +1022,12 @@ model DataProductProperties {
   ingestionNetworkAcls?: DataProductNetworkAcls;
 
   @added(Versions.v2024_04_01_preview)
-  @doc("Flag to enable or disable public access to the insights/fileaccess endpoint of data product resource.")
+  @doc("Flag to enable or disable public access to the insights or the file access endpoint of data product resource.")
   @visibility("create", "update", "read")
   insightsStoragePublicNetworkAccess?: ControlState = ControlState.Enabled;
 
   @added(Versions.v2024_04_01_preview)
-  @doc("Network rule set for insights/fileaccess endpoint of data product.")
+  @doc("Network rule set for insights or the file access endpoint of data product.")
   @visibility("create", "update", "read")
   insightsStorageNetworkAcls?: DataProductNetworkAcls;
 
@@ -1078,12 +1078,12 @@ model DataProductProperties {
   keyVaultUrl?: string;
 
   @added(Versions.v2024_04_01_preview)
-  @doc("Provide uniqueId of data product offer to be associated with dataproduct resource.")
+  @doc("Provide uniqueId of data product offer to be associated with the data product resource.")
   @visibility("create", "read")
   dataProductOfferId: string;
 
   @added(Versions.v2024_04_01_preview)
-  @doc("Absolute version of dataproduct.")
+  @doc("Absolute version of the data product.")
   @visibility("create", "read")
   version?: string;
 }
@@ -1172,7 +1172,7 @@ model ConsumptionEndpointsProperties {
     }
   ]>;
 
-  @doc("Copilot webinterface URL.")
+  @doc("Copilot web interface URL.")
   @visibility("read")
   @added(Versions.v2024_04_01_preview)
   copilotWebInterfaceUrl?: string;
@@ -1437,7 +1437,7 @@ enum TargetAudienceType {
   @doc("Field to specify Publisher Tenant Audience Type.")
   PublisherTenant,
 
-  @doc("Field to specify Specifc Subscription Audience Type.")
+  @doc("Field to specify specific Subscription Audience Type.")
   SpecificSubscriptions,
 
   @doc("Field to specify All Audience Type.")
