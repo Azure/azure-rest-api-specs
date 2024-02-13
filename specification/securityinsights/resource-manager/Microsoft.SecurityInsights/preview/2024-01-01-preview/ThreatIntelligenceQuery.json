@@ -96,7 +96,6 @@
       "description": "Represents a threat intelligence object in Azure Security Insights.",
       "discriminator": "kind",
       "required": [
-        "kind"
       ],
       "type": "object"
     },
@@ -359,13 +358,22 @@
         "relationshipHints": {
           "description": "A dictionary used to help follow relationships from this object to other STIX objects. The keys are field names from the STIX object (in the 'data' field), and the values are lists of sources that can be prepended to the object ID in order to efficiently locate the target TI object.",
           "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelationshipHint"
           }
+        }
+      },
+      "type": "object"
+    },
+    "RelationshipHint": {
+      "description": "An object used to help follow relationships from this object to other STIX objects.",
+      "properties": {
+        "fieldName": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
         }
       },
       "type": "object"
