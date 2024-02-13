@@ -37,7 +37,9 @@ directive:
       - $.definitions.ManagedResource
   - suppress: TopLevelResourcesListBySubscription
     reason: The list by scope includes also list by subscription, this is an extension resource.
-    from: AlertsManagement.json    
+    from: AlertsManagement.json
+  - suppress: OperationsAPIImplementation
+    reason: The API is implemented in Operation API - false positive
 ```
 
 ``` yaml
