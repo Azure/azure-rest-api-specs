@@ -1414,7 +1414,7 @@ directive:
     reason: 'metrics API is really a GET action that allows some parameters to be in the body due to length concerns. It would also be a breaking change to modify this now'
   - suppress: AvoidAdditionalProperties
     from: scheduledQueryRule_API.json
-    where: $.definitions.Actions.actionProperties
+    where: $.definitions.Actions.properties.actionProperties
     reason: 'This is a key-value collection which we do not validate and just pass as-is to a service which is several hops down the pipe where they are interpreted. Unknown keys are ignored and there are no invalid values.'
 ```
 
