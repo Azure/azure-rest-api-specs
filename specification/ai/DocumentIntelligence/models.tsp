@@ -287,14 +287,14 @@ enum ContentSourceKind {
 
 @doc("Document analysis parameters.")
 model AnalyzeDocumentRequest {
-  @doc("Document URL to analyze.  Either urlSource or base64Source must be specified.")
+  @doc("Document URL to analyze.  Either urlSource or bytesSource must be specified.")
   urlSource?: url;
 
   @doc("""
-  Base64 encoding of the document to analyze.  Either urlSource or base64Source
+  Document bytes to analyze.  Either urlSource or bytesSource
   must be specified.
   """)
-  base64Source?: bytes;
+  bytesSource?: bytes;
 }
 
 @doc("Error response object.")
@@ -1301,14 +1301,14 @@ model DocumentClassifierDetails {
 
 @doc("Document classification parameters.")
 model ClassifyDocumentRequest {
-  @doc("Document URL to classify.  Either urlSource or base64Source must be specified.")
+  @doc("Document URL to classify.  Either urlSource or bytesSource must be specified.")
   urlSource?: url;
 
   @doc("""
-  Base64 encoding of the document to classify.  Either urlSource or base64Source
+  Document bytes to classify.  Either urlSource or bytesSource
   must be specified.
   """)
-  base64Source?: bytes;
+  bytesSource?: bytes;
 }
 
 @doc("General information regarding the current resource.")
