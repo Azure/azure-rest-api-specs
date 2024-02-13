@@ -18,4 +18,5 @@ cli:
     - name: Delete Certificate Profile
     - name: Delete Code Signing Account
     - name: List Code Signing Account operations
+    - name: Revoke certificate
 ```
