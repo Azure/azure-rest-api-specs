@@ -52,7 +52,8 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -76,6 +77,9 @@
           "List App's Labels": {
             "$ref": "./examples/Labels_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -105,7 +109,8 @@
             "in": "path",
             "description": "Name of the Container App Labels mapping.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -157,7 +162,8 @@
             "in": "path",
             "description": "Name of the Container App Labels collection.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "labelsEnvelope",
@@ -225,7 +231,8 @@
             "in": "path",
             "description": "Name of the Container App Labels collection.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -276,7 +283,7 @@
           "description": "Labels specific properties",
           "type": "object",
           "properties": {
-            "operationState": {
+            "provisioningState": {
               "description": "Current provisioning State of the operation",
               "enum": [
                 "InProgress",
@@ -286,14 +293,14 @@
               "type": "string",
               "readOnly": true,
               "x-ms-enum": {
-                "name": "LabelsOperationState",
+                "name": "LabelsProvisioningState",
                 "modelAsString": true
               }
             },
             "labels": {
               "description": "Labels for the Container App.",
               "type": "object",
-              "additionalProperties": {
+              "properties": {
                 "$ref": "#/definitions/Label"
               }
             }
@@ -335,6 +342,10 @@
           "items": {
             "$ref": "#/definitions/Labels"
           }
+        },
+        "nextLink": {
+          "description": "The URL to get the next set of results.",
+          "type": "string"
         }
       }
     }
