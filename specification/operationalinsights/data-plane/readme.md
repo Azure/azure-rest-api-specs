@@ -28,7 +28,26 @@ title: OperationalInsightsDataClient
 description: Log Analytics Data Plane Client
 add-credentials: true
 openapi-type: data-plane
-tag: v1
+```
+
+### Default
+
+``` yaml
+input-file:
+- Microsoft.OperationalInsights/stable/2022-10-27/OperationalInsights.json
+directive:
+  - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
+    remove-operation: Query_Get
+```
+
+### Tag: 20221027
+
+``` yaml $(tag) == '20221027'
+input-file:
+- Microsoft.OperationalInsights/stable/2022-10-27/OperationalInsights.json
+directive:
+  - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
+    remove-operation: Query_Get
 ```
 
 ### Tag: v1
@@ -65,7 +84,9 @@ directive:
     transform: $.operationId = "Query"
 ```
 
-``` yaml $(tag) == '20221027'
+### Tag: 20221027Preview
+
+``` yaml $(tag) == '20221027Preview'
 input-file:
 - Microsoft.OperationalInsights/preview/2022-10-27_Preview/OperationalInsights.json
 ```

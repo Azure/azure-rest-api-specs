@@ -152,7 +152,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Setting"
             }
@@ -192,10 +192,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded."
+            "description": "Setting deleted successfully."
           },
           "204": {
-            "description": "OK. The request has succeeded."
+            "description": "Setting is already deleted or not found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -245,8 +245,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/TagInheritanceProperties",
-          "title": "Tag Inheritance properties"
+          "$ref": "#/definitions/TagInheritanceProperties"
         }
       }
     },
@@ -272,7 +271,7 @@
       ],
       "properties": {
         "preferContainerTags": {
-          "description": "Prefer Container tags to override container tags with resource tags in case of conflicts.",
+          "description": "When resource has the same tag as subscription or resource group and this property is set to true - the subscription or resource group tag will be applied. If subscription and resource group tags are also the same, subscription tag will be applied.",
           "type": "boolean"
         }
       }
@@ -284,7 +283,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with setting. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billing profile scope.",
+      "description": "The scope associated with this setting. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billing profile scope.",
       "x-ms-parameter-location": "method"
     },
     "settingTypeParameter": {
@@ -303,7 +302,7 @@
         "values": [
           {
             "value": "taginheritance",
-            "description": "Tag Inheritance Settings is to inherit user defined tags from container(subscription/resource group) to its respective resources.",
+            "description": "This setting applies resource group and subscription tags to usage data of child resources. Inherited tags will  be seen within 24 hours for the current month's usage data.",
             "name": "TagInheritance"
           }
         ]

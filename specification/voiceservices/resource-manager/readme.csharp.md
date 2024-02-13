@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.VoiceServices
-  output-folder: $(csharp-sdks-folder)/voiceservice/management/Microsoft.VoiceServices/GeneratedProtocol
+  namespace: Azure.ResourceManager.VoiceServices
+  output-folder: $(csharp-sdks-folder)/voiceservice/management/Azure.ResourceManager.VoiceServices/GeneratedProtocol
 ```

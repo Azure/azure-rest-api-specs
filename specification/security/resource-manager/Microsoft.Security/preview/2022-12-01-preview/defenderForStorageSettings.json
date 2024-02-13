@@ -1,0 +1,261 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2022-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the Defender for Storage settings for the specified resource.": {
+            "$ref": "./examples/DefenderForStorage/GetDefenderForStorageSettings_example.json"
+          }
+        },
+        "tags": [
+          "DefenderForStorage"
+        ],
+        "description": "Gets the Defender for Storage settings for the specified storage account.",
+        "operationId": "DefenderForStorage_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/DefenderForStorageSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to get Defender for Storage settings.",
+            "schema": {
+              "$ref": "#/definitions/DefenderForStorageSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates the Defender for Storage settings on a specified resource.": {
+            "$ref": "./examples/DefenderForStorage/PutDefenderForStorageSettings_example.json"
+          }
+        },
+        "tags": [
+          "DefenderForStorage"
+        ],
+        "description": "Creates or updates the Defender for Storage settings on a specified storage account.",
+        "operationId": "DefenderForStorage_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/DefenderForStorageSettingName"
+          },
+          {
+            "$ref": "#/parameters/DefenderForStorageSetting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to create or update Defender for Storage settings.",
+            "schema": {
+              "$ref": "#/definitions/DefenderForStorageSetting"
+            }
+          },
+          "201": {
+            "description": "Request to  create or update Defender for Storage settings partially succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DefenderForStorageSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DefenderForStorageSetting": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DefenderForStorageSettingProperties"
+        }
+      },
+      "description": "The Defender for Storage resource."
+    },
+    "DefenderForStorageSettingProperties": {
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether Defender for Storage is enabled on this storage account."
+        },
+        "malwareScanning": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MalwareScanningProperties"
+        },
+        "sensitiveDataDiscovery": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SensitiveDataDiscoveryProperties"
+        },
+        "overrideSubscriptionLevelSettings": {
+          "type": "boolean",
+          "description": "Indicates whether the settings defined for this storage account should override the settings defined for the subscription."
+        }
+      },
+      "description": "Defender for Storage resource properties."
+    },
+    "MalwareScanningProperties": {
+      "type": "object",
+      "properties": {
+        "onUpload": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnUploadProperties"
+        },
+        "scanResultsEventGridTopicResourceId": {
+          "type": "string",
+          "description": "Optional. Resource id of an Event Grid Topic to send scan results to."
+        },
+        "operationStatus": {
+          "type": "object",
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true,
+          "description": "Upon failure or partial success. Additional data describing Malware Scanning enable/disable operation."
+        }
+      },
+      "description": "Properties of Malware Scanning."
+    },
+    "OnUploadProperties": {
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether On Upload malware scanning should be enabled."
+        },
+        "capGBPerMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines the max GB to be scanned per Month. Set to -1 if no capping is needed."
+        }
+      },
+      "description": "Properties of On Upload malware scanning."
+    },
+    "SensitiveDataDiscoveryProperties": {
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether Sensitive Data Discovery should be enabled."
+        },
+        "operationStatus": {
+          "type": "object",
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true,
+          "description": "Upon failure or partial success. Additional data describing Sensitive Data Discovery enable/disable operation."
+        }
+      },
+      "description": "Properties of Sensitive Data Discovery."
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "A status describing the success/failure of the enablement/disablement operation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The operation status code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional information regarding the success/failure of the operation."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DefenderForStorageSettingName": {
+      "name": "settingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "enum": [
+        "current"
+      ],
+      "x-ms-enum": {
+        "name": "settingName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "current",
+            "description": "Name of the Defender for Storage Settings name."
+          }
+        ]
+      },
+      "description": "Defender for Storage setting name.",
+      "x-ms-parameter-location": "method"
+    },
+    "DefenderForStorageSetting": {
+      "name": "defenderForStorageSetting",
+      "in": "body",
+      "required": true,
+      "description": "Defender for Storage Settings",
+      "schema": {
+        "$ref": "#/definitions/DefenderForStorageSetting"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

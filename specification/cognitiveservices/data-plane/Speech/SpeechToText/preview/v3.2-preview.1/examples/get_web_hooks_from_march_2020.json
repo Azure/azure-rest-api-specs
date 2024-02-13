@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "skip": 0,
+    "top": 2,
+    "filter": "createdDateTime%20ge%202020-03-011T00:00:00Z%20and%20createdDateTime%20lt%202020-04-01T00:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "values": [
+          {
+            "displayName": "A test web hook",
+            "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/webhooks/aff13a6e-17c4-4247-862f-70e99469c553",
+            "links": {
+              "ping": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d:test",
+              "test": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d:ping"
+            },
+            "properties": {
+              "apiVersion": "v3.2-preview1",
+              "secret": "$CREDENTIAL_PLACEHOLDER$"
+            },
+            "webUrl": "https://contoso.com/call/me/back",
+            "events": {
+              "transcriptionCompletion": true
+            },
+            "description": "I registered this URL to get a POST request for each completed transcription.",
+            "createdDateTime": "2020-03-11T14:13:12Z",
+            "lastActionDateTime": "2020-03-11T14:13:12Z",
+            "status": "Succeeded"
+          },
+          {
+            "displayName": "Beta version web hook",
+            "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/webhooks/9db10a08-189e-4de4-b31a-38b39d993b37",
+            "links": {
+              "ping": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d:test",
+              "test": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d:ping"
+            },
+            "properties": {
+              "apiVersion": "v3.2-preview1",
+              "secret": "$CREDENTIAL_PLACEHOLDER$"
+            },
+            "webUrl": "https://contoso.com/call/me/back",
+            "events": {
+              "transcriptionCompletion": true
+            },
+            "description": "I registered this URL to get a POST request for each completed transcription.",
+            "createdDateTime": "2020-03-21T09:07:43Z",
+            "lastActionDateTime": "2020-03-21T09:07:43Z",
+            "status": "Succeeded"
+          }
+        ],
+        "@nextLink": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/webhooks?skip=2&top=2&filter=createdDateTime%20ge%202020-03-011T00:00:00Z%20and%20createdDateTime%20lt%202020-04-01T00:00:00Z"
+      }
+    }
+  }
+}

@@ -14,17 +14,21 @@ SDK Automation is launched with matrix in azure pipeline. For each language conf
 
 2. Get the PR changed file list. For each changed file, find the nearest readme.md in parent folder. Get list of related readme.md.
 
-3. Filter the list of readme.md with: find the `swagger-to-sdk` section in the readme.md, and see if the specified language is configured for that readme.md. Example of `swagger-to-sdk` in SDK Automation:
-```
-```yaml $(swagger-to-sdk)
-swagger-to-sdk:
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-``` <EOL>
-```
-If the configured language is not found here, generation for this readme.md will be skipped.
+3. Filter which sdk will be generated:
+
+    1. For Swagger PR, filter the list of readme.md with: find the `swagger-to-sdk` section in the readme.md, and see if the specified language is configured for that readme.md. Example of `swagger-to-sdk` in SDK Automation:
+        ```
+        ```yaml $(swagger-to-sdk)
+        swagger-to-sdk:
+          - repo: azure-sdk-for-python
+          - repo: azure-sdk-for-java
+          - repo: azure-sdk-for-go
+          - repo: azure-sdk-for-js
+        ``` <EOL>
+        ```
+    2. For TypeSpec PR, filter the list of tspconfig.yaml: find the `options` config in tspconfig.yaml, and see if the specified language is configure for that tsp-location.yaml.
+    
+    If the configured language is not found here, generation for this typespec project will be skipped.
 
 4. Get `specificationRepositoryConfiguration.json` from spec repo default branch. See [SpecRepoConfig](#specrepoconfig). Get the repo and branch config in the file.
 

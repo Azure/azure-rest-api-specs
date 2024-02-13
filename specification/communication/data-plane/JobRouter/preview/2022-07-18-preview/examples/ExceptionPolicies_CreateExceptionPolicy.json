@@ -47,6 +47,29 @@
           }
         }
       }
+    },
+    "201": {
+      "body": {
+        "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
+        "name": "Main",
+        "exceptionRules": {
+          "MaxWaitTimeExceeded": {
+            "trigger": {
+              "kind": "wait-time",
+              "thresholdSeconds": 20
+            },
+            "actions": {
+              "MoveJobToEscalatedQueue": {
+                "kind": "reclassify",
+                "classificationPolicyId": "Main",
+                "labelsToUpsert": {
+                  "escalated": true
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
