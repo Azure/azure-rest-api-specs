@@ -36,24 +36,6 @@
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
           }
         ],
         "responses": {
@@ -342,7 +324,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The billing properties of a subscription."
+            "description": "The billing properties of a subscription.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscription"
+            }
           },
           "202": {
             "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
@@ -932,7 +917,7 @@
           }
         },
         "beneficiary": {
-          "description": "The billing subcription's beneficiary.",
+          "description": "The beneficiary of the billing subscription.",
           "allOf": [
             {
               "$ref": "#/definitions/Beneficiary"
