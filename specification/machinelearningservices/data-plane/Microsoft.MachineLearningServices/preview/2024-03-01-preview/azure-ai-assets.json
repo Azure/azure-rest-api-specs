@@ -270,17 +270,17 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "Name of the workspace",
+            "description": "Name of the workspace.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "type": "string"
           },
           {
             "name": "indexName",
             "in": "path",
             "description": "Name of the index.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "indexVersion",
@@ -316,12 +316,9 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "operationId": "IndexVersions_CreateOrUpdate",
         "description": "Creates or updates a IndexVersion.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -329,17 +326,17 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "Name of the workspace",
+            "description": "Name of the workspace.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "type": "string"
           },
           {
             "name": "indexName",
             "in": "path",
             "description": "Name of the index.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "indexVersion",
@@ -349,12 +346,12 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
+            "description": "Properties of an Index Version.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IndexCreateOrUpdate"
+              "$ref": "#/definitions/Index"
             }
           }
         ],
@@ -556,39 +553,6 @@
         "isArchived",
         "storageUri"
       ]
-    },
-    "IndexCreateOrUpdate": {
-      "type": "object",
-      "description": "Index resource Definition",
-      "properties": {
-        "isArchived": {
-          "type": "boolean",
-          "description": "Update stage to 'Archived' for soft delete.",
-          "default": false
-        },
-        "description": {
-          "type": "string",
-          "description": "Description information of the asset."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Asset's tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "type": "object",
-          "description": "Asset's properties.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "storageUri": {
-          "type": "string",
-          "description": "Default workspace blob storage Uri. Should work across storage types and auth scenarios."
-        }
-      }
     },
     "IndexResource": {
       "type": "object",

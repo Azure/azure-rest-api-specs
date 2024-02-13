@@ -16,11 +16,55 @@ namespace Microsoft.MachineLearningServices;
 
 
 interface IndexVersions {
+
   @doc("Fetch a IndexVersion by name.")
-  get is ResourceRead<Index>;
+  @route("/workspaces/{workspaceName}/indexes/{indexName}/versions/{indexVersion}")
+  @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  get is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the workspace.")
+      @path
+      workspaceName: Workspace.name;
+
+      @doc("Name of the index.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      @path
+      indexName: string;
+
+      @doc("Version of the index.")
+      @path
+      indexVersion: string;
+    },
+    Index | Foundations.ErrorResponse
+   >;
 
   @doc("Creates or updates a IndexVersion.")
-  createOrUpdate is ResourceCreateOrUpdate<Index>;
+  @route("/workspaces/{workspaceName}/indexes/{indexName}/versions/{indexVersion}")
+  @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  createOrUpdate is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the workspace.")
+      @path
+      workspaceName: Workspace.name;
+
+      @doc("Name of the index.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      @path
+      indexName: string;
+
+      @doc("Version of the index.")
+      @path
+      indexVersion: string;
+
+      @doc("Properties of an Index Version.")
+      @body
+      body: Index;
+
+    },
+    ResourceCreatedOrOkResponse<Index> | Foundations.ErrorResponse
+  >;
 
   @route("/workspaces/{workspaceName}/indexes/{indexName}/versions")
   @get
