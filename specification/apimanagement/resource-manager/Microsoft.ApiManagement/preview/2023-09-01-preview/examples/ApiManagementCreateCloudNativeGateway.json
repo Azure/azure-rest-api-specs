@@ -35,26 +35,14 @@
         "location": "East US",
         "etag": "AAAAAAAmRAM=",
         "properties": {
-          "publisherEmail": "samir@microsoft.com",
-          "publisherName": "foo",
-          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Created",
           "targetProvisioningState": "Activating",
           "createdAtUtc": "2022-07-11T18:41:01.2506031Z",
-          "gatewayUrl": "https://apimService1.azure-api.net",
-          "hostnameConfigurations": [
-            {
-              "type": "Proxy",
-              "hostName": "apimService1.azure-api.net",
-              "negotiateClientCertificate": false,
-              "defaultSslBinding": true,
-              "certificateSource": "BuiltIn"
+          "backend": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/sn1"
             }
-          ],
-          "virtualNetworkType": "None",
-          "disableGateway": false,
-          "publicNetworkAccess": "Enabled",
-          "platformVersion": "undetermined"
+          }
         },
         "sku": {
           "name": "CloudNativeBasic",
@@ -81,44 +69,20 @@
         "location": "East US",
         "etag": "AAAAAAAmREI=",
         "properties": {
-          "publisherEmail": "samir@microsoft.com",
-          "publisherName": "foo",
-          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Succeeded",
           "targetProvisioningState": "",
           "createdAtUtc": "2022-07-11T18:41:01.2506031Z",
-          "gatewayUrl": "https://apimService1.azure-api.net",
-          "gatewayRegionalUrl": "https://apimService1-eastus-01.regional.azure-api.net",
-          "portalUrl": "https://apimService1.portal.azure-api.net",
-          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
-          "managementApiUrl": "https://apimService1.management.azure-api.net",
-          "scmUrl": "https://apimService1.scm.azure-api.net",
-          "hostnameConfigurations": [
-            {
-              "type": "Proxy",
-              "hostName": "apimService1.azure-api.net",
-              "negotiateClientCertificate": false,
-              "defaultSslBinding": true,
-              "certificateSource": "BuiltIn"
-            }
-          ],
-          "publicIPAddresses": [
-            "13.90.229.33"
-          ],
-          "customProperties": {
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+          "frontend": {
+            "hostname": "apimCloudNativeGateway1.eastus.gateway.azure-api.net"
           },
-          "virtualNetworkType": "None",
-          "disableGateway": false,
-          "publicNetworkAccess": "Enabled",
-          "platformVersion": "stv1"
+          "backend": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/sn1"
+            }
+          },
+          "configurationApi": {
+            "hostname": "apimCloudNativeGateway1.eastus.configuration.gateway.azure-api.net"
+          }
         },
         "sku": {
           "name": "CloudNativeBasic",
