@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "labels-rg",
+    "containerAppName": "myapp",
+    "api-version": "2023-11-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/labels-rg/providers/Microsoft.App/containerApps/myapp/labels/current",
+            "name": "current",
+            "type": "Microsoft.App/containerapps/labels",
+            "properties": {
+              "operationState": "Succeeded",
+              "labels": {
+                "production": {
+                  "revisionName": "myapp-ab1234",
+                  "trafficWeight": 100,
+                  "template": {
+                    "containers": [
+                      {
+                        "image": "repo/testcontainerApp0:v1",
+                        "name": "testcontainerApp0",
+                        "resources": {
+                          "cpu": 0.2,
+                          "memory": "100Mi"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "canary": {
+                  "revisionName": "myapp-cd5678",
+                  "trafficWeight": 0,
+                  "template": {
+                    "containers": [
+                      {
+                        "image": "repo/testcontainerApp0:v2",
+                        "name": "testcontainerApp0",
+                        "resources": {
+                          "cpu": 0.2,
+                          "memory": "100Mi"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
