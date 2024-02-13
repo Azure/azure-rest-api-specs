@@ -112,12 +112,14 @@ model SignedCapabilityImageResponse {
 }
 
 @doc("Capability image type")
-enum CapabilityType {
+union CapabilityType {
+  string,
+
   /** Application development capability */
-  ApplicationDevelopment,
+  "ApplicationDevelopment",
 
   /** Field servicing capability */
-  FieldServicing,
+  "FieldServicing",
 }
 
 @doc("The properties of device patch")
