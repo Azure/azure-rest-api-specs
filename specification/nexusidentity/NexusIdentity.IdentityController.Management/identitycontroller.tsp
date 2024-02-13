@@ -41,8 +41,11 @@ model OnboardedApp {
   @doc("App Name which will create identity sets")
   appName: string;
 
-  @doc("Roles to be watched for identity sets")
-  roles: Array<string>;
+  @doc("""
+  Roles to be watched for identity sets. Role Definition Ids to be passed here 
+  e.g /providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635
+  """)
+  roleDefinitionIds: Array<string>;
 }
 
 /** The resource provisioning state. */

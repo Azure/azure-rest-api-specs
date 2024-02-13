@@ -35,14 +35,17 @@ model IdentitySetResourceProperties {
   """)
   scopes: Array<string>;
 
-  @doc("Roles to be watched.")
-  roles: Array<string>;
+  @doc("""
+  Roles to be watched. Role Definition Ids to be passed here
+  e.g /providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635
+  """)
+  roleDefinitionIds: Array<string>;
 
   @doc("The type of access needed for the Roles. Only the specified access types data will be sent.")
   accessTypes: Array<AccessType>;
 
   @doc("The URL to which the Nexus Identity Service will send notifications.")
-  notificationUrl: string;
+  notificationUrl: url;
 
   @doc("The application Id of Identity Set resource")
   @visibility("read")
