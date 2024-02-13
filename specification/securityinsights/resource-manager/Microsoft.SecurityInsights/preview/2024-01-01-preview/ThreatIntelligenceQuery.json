@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/query": {
       "post": {
         "x-ms-examples": {
-          "Get all TI objects in the workspace using a query": {
+          "Get TI objects": {
             "$ref": "./examples/threatintelligence/PostThreatIntelligenceQuery.json"
           }
         },
@@ -452,7 +452,7 @@
       "properties": {
         "condition": {
           "properties": {
-            "$ref": "#/definitions/NormalizedCondition",
+            "$ref": "#/definitions/ConditionProperties",
             "description": "Represents a condition used to query for TI objects.",
             "x-ms-client-flatten": true
           },
@@ -538,7 +538,7 @@
         ]
       }
     },
-    "NormalizedCondition": {
+    "ConditionProperties": {
       "description": "Represents a condition used to query for TI objects.",
       "properties": {
         "stixObjectType": {
