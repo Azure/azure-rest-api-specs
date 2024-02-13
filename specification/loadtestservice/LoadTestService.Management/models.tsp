@@ -170,8 +170,9 @@ model LoadTestProperties {
   encryption?: EncryptionProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "CheckQuotaAvailabilityResponse has a allOf relationship with Resource"
 @doc("Check quota availability response object.")
-model CheckQuotaAvailabilityResponse is Resource {
+model CheckQuotaAvailabilityResponse extends Resource {
   @doc("Check quota availability response properties.")
   @extension("x-ms-client-flatten", true)
   properties?: CheckQuotaAvailabilityResponseProperties;
@@ -205,8 +206,9 @@ model Resource {
   systemData?: SystemData;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "QuotaBucketRequest has a allOf relationship with Resource"
 @doc("Request object of new quota for a quota bucket.")
-model QuotaBucketRequest is Resource {
+model QuotaBucketRequest extends Resource {
   @extension("x-ms-client-flatten", true)
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
@@ -275,4 +277,24 @@ model LoadTestResourcePatchRequestBodyProperties {
   encryption?: EncryptionProperties;
 }
 
-//model OutboundEnvironmentEndpointListResult2 is Azure.Core.Page<OutboundEnvironmentEndpoint2>;
+@doc("The response of a {name} list operation.", LoadTestResource)
+model LoadTestResourcePageList {
+  @doc("The {name} items on this page", LoadTestResource)
+  @items
+  value?: LoadTestResource[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<LoadTestResource>;
+}
+
+@doc("The response of a {name} list operation.", QuotaResource)
+model QuotaResourceList {
+  @doc("The {name} items on this page", QuotaResource)
+  @items
+  value?: QuotaResource[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<QuotaResource>;
+}

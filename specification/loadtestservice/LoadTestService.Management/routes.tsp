@@ -17,6 +17,36 @@ namespace Microsoft.LoadTestService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@@projectedName(LoadTests.createOrUpdate::parameters.resource,
+  "client",
+  "LoadTestResource"
+);
+
+@@projectedName(LoadTests.createOrUpdate::parameters.resource,
+  "json",
+  "LoadTestResource"
+);
+
+@@projectedName(LoadTests.update::parameters.properties,
+  "client",
+  "LoadTestResourcePatchRequestBody"
+);
+
+@@projectedName(LoadTests.update::parameters.properties,
+  "json",
+  "LoadTestResourcePatchRequestBody"
+);
+
+@@projectedName(Quotas.checkAvailability::parameters.body,
+  "json",
+  "QuotaBucketRequest"
+);
+
+@@projectedName(Quotas.checkAvailability::parameters.body,
+  "client",
+  "QuotaBucketRequest"
+);
+
 @armResourceOperations
 interface LoadTests {
   @extension(
@@ -41,23 +71,23 @@ interface LoadTests {
   >;
   get is ArmResourceRead<LoadTestResource>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/retry-after" "Retry-After header is not in already published"
-  createOrUpdate is CustomOperations.ArmResourceCreateOrUpdateAsyncCustom<LoadTestResource>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/retry-after" "Retry-After header is not in already published"
-  update is CustomOperations.ArmCustomPatchAsyncCustom<
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<LoadTestResource>;
+
+  update is ArmCustomPatchAsync<
     LoadTestResource,
     LoadTestResourcePatchRequestBody
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/retry-after" "Retry-After header is not in already published"
-  delete is ArmResourceDeleteAsync<
-    LoadTestResource,
-    Response = ArmAcceptedLroDeleteResponseCustom | OkResponse | NoContentResponse
-  >;
+  delete is ArmResourceDeleteAsync<LoadTestResource>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationId in already published GA spec is different from the auto generated one"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Operation is GET but endpoint is similar to action on resource"
-  outboundNetworkDependenciesEndpoint is CustomOperations.OutboundNetworkDependenciesEndpoint<OutboundEnvironmentEndpointCollection>;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationID already published."
+  @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
+  @doc("Lists the endpoints that agents may call as part of load testing.")
+  outboundNetworkDependenciesEndpoints is CustomOperations.ArmResourceActionSyncCustomGet<
+    LoadTestResource,
+    void,
+    OutboundEnvironmentEndpointCollection
+  >;
 }
 
 @armResourceOperations
@@ -75,7 +105,7 @@ interface Quotas {
   list is ArmListBySubscription<QuotaResource, Response = QuotaResourceList>;
 
   @doc("Check Quota Availability on quota bucket per region per subscription.")
-  checkAvailability is CustomOperations.ArmResourceActionSyncCustom<
+  checkAvailability is ArmResourceActionSync<
     QuotaResource,
     QuotaBucketRequest,
     CheckQuotaAvailabilityResponse

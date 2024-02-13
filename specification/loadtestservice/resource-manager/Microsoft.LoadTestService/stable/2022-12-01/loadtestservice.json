@@ -258,12 +258,13 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/QuotaBucketRequest"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CheckQuotaAvailabilityResponse"
             }
@@ -401,7 +402,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
-            }
+            },
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
@@ -412,14 +414,15 @@
             }
           },
           "201": {
-            "description": "Created -- LoadTest resource created.",
+            "description": "Resource 'LoadTestResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -471,7 +474,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadTestResourcePatchRequestBody"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -482,11 +486,16 @@
             }
           },
           "202": {
-            "description": "Accepted -- LoadTest resource patch request accepted.",
+            "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -534,11 +543,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Resource deleted successfully."
           },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -546,7 +560,7 @@
             }
           },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -575,18 +589,18 @@
         "description": "Lists the endpoints that agents may call as part of load testing.",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "loadTestName",
             "in": "path",
-            "description": "Load Test name.",
+            "description": "Load Test name",
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -594,7 +608,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
             }
@@ -610,9 +624,6 @@
           "Lists the endpoints that agents may call as part of load testing.": {
             "$ref": "./examples/LoadTests_ListOutboundNetworkDependenciesEndpoints.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -622,32 +633,17 @@
       "type": "object",
       "description": "Check quota availability response object.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
           "description": "Check quota availability response properties.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "CheckQuotaAvailabilityResponseProperties": {
       "type": "object",
@@ -894,32 +890,17 @@
       "type": "object",
       "description": "Request object of new quota for a quota bucket.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/QuotaBucketRequestProperties",
           "description": "Request object of new quota for a quota bucket.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "QuotaBucketRequestProperties": {
       "type": "object",
@@ -1022,6 +1003,32 @@
         "provisioningState": {
           "$ref": "#/definitions/ResourceState",
           "description": "Resource provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common properties for resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         }
       }
