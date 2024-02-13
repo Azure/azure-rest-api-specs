@@ -69,7 +69,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/ErrorResponse"
             }
           }
         },
@@ -102,7 +102,8 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
           },
           {
             "name": "labelsName",
@@ -126,7 +127,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/ErrorResponse"
             }
           }
         },
@@ -195,7 +196,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/ErrorResponse"
             }
           }
         },
@@ -255,7 +256,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/ErrorResponse"
             }
           }
         },
