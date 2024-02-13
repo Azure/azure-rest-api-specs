@@ -128,27 +128,18 @@ model ManagedClusterUpgradeSpec {
 }
 
 @doc("The type of upgrade to perform when targeting ManagedClusters.")
-<<<<<<< HEAD
 union ManagedClusterUpgradeType {
   string,
 
-  @doc("Full upgrades the control plane and all agent pools of the target ManagedClusters.")
+  @doc("Full upgrades the control plane and all agent pools of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set.")
   "Full",
 
-  @doc("NodeImageOnly upgrades only the node images of the target ManagedClusters.")
-  "NodeImageOnly",
-=======
-enum ManagedClusterUpgradeType {
-  @doc("Full upgrades the control plane and all agent pools of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set.")
-  Full,
-
   @doc("NodeImageOnly upgrades only the node images of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to NOT be set.")
-  NodeImageOnly,
+  "NodeImageOnly",
 
   @doc("ControlPlaneOnly upgrades only targets the KubernetesVersion of the ManagedClusters and will not be applied to the AgentPool. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set.")
   @added(Versions.v2024_02_02_preview)
-  ControlPlaneOnly,
->>>>>>> b9d233b317 (Add ControlPlaneOnly enum to ManagedClusterUpgradeSpec (#27491))
+  "ControlPlaneOnly",
 }
 
 @doc("The state of the UpdateRun, UpdateStage, UpdateGroup, or MemberUpdate.")
