@@ -137,7 +137,7 @@
         "tags": [
           "Policy"
         ],
-        "description": "Lists the policies for a billing profile. This operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Lists the policies for a billing profile. This operation is supported only for billing accounts with agreement type Microsoft Customer Agreement (EA and MCA-E).",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -514,7 +514,12 @@
       "type": "object",
       "properties": {
         "enterpriseAgreementPolicies": {
-          "$ref": "#/definitions/EnterpriseAgreementPolicies"
+          "description": "The policies for Enterprise Agreement enrollments.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnterpriseAgreementPolicies"
+            }
+          ]
         },
         "invoiceSectionLabelManagement": {
           "description": "The policy that controls invoice section label management at invoice section scope. This is allowed by default.",
@@ -651,9 +656,11 @@
       }
     },
     "EnterpriseAgreementPolicies": {
+      "description": "The policies for Enterprise Agreement enrollments.",
       "type": "object",
       "properties": {
         "authenticationType": {
+          "description": "The state showing the enrollment auth level.",
           "enum": [
             "Other",
             "MicrosoftAccountOnly",
@@ -668,6 +675,7 @@
           }
         },
         "accountOwnerViewCharges": {
+          "description": "The policy that controls whether account owner can view charges.",
           "enum": [
             "Other",
             "Allowed",
@@ -681,6 +689,7 @@
           }
         },
         "departmentAdminViewCharges": {
+          "description": "The policy that controls whether department admin can view charges.",
           "enum": [
             "Other",
             "Allowed",
