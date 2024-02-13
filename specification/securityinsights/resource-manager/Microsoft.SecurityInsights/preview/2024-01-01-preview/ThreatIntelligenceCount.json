@@ -111,12 +111,9 @@
       "description": "Describes the query properties",
       "properties": {
         "condition": {
-          "properties": {
-            "$ref": "#/definitions/ConditionProperties",
-            "description": "Represents a condition used to query for TI objects.",
-            "x-ms-client-flatten": true
-          },
-          "type": "object"
+          "$ref": "#/definitions/ConditionProperties",
+          "description": "Represents a condition used to query for TI objects.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -138,12 +135,8 @@
         },
         "conditionConnective": {
           "description": "The top level connective operator for this condition.",
-          "type": "object",
-          "properties": {
-            "$ref": "#/definitions/Connective",
-            "description": "Connective properties",
-            "x-ms-client-flatten": true
-          }
+          "type": "string",
+          "$ref": "#/definitions/Connective"
         }
       },
       "required": [
@@ -156,12 +149,8 @@
       "properties": {
         "clauseConnective": {
           "description": "The connective used to join all values in this ConditionClause",
-          "type": "object",
-          "properties": {
-            "$ref": "#/definitions/Connective",
-            "description": "Connective properties",
-            "x-ms-client-flatten": true
-          }
+          "type": "string",
+          "$ref": "#/definitions/Connective"
         },
         "field": {
           "description": "The name of the field that is evaluated.",

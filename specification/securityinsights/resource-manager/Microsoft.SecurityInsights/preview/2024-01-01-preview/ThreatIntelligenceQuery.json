@@ -363,7 +363,7 @@
           "additionalProperties": {
             "type": "array",
             "items": {
-              "$ref": "string"
+              "type": "string"
             }
           }
         }
@@ -386,6 +386,7 @@
         }
       ],
       "description": "Indicator property bag.",
+      "type": "object",
       "properties": {
         "observables": {
           "description": "The observables of this indicator",
@@ -401,11 +402,10 @@
                 "type": "string"
               }
             },
-            "readOnly": true,
-            "type": "array"
-          }
-        },
-        "type": "object"
+            "readOnly": true
+          },
+          "type": "array"
+        }
       }
     },
     "ThreatActorProperties": {
@@ -451,21 +451,14 @@
       "description": "Describes the query properties",
       "properties": {
         "condition": {
-          "properties": {
-            "$ref": "#/definitions/ConditionProperties",
-            "description": "Represents a condition used to query for TI objects.",
-            "x-ms-client-flatten": true
-          },
-          "type": "object"
+          "$ref": "#/definitions/ConditionProperties",
+          "description": "Represents a condition used to query for TI objects.",
+          "type": "string"
         },
         "sortBy": {
           "description": "Specifies how to sort the query results.",
-          "properties": {
-            "$ref": "#/definitions/SortByProperties",
-            "description": "sortBy properties",
-            "x-ms-client-flatten": true
-          },
-          "type": "object"
+          "$ref": "#/definitions/SortByProperties",
+          "type": "string"
         },
         "maxPageSize": {
           "description": "Represents the maximum size of the page that will be returned from the query API.",
@@ -517,7 +510,6 @@
     },
     "Connective": {
       "description": "Represents boolean connectives used to join clauses in conditions.",
-      "readOnly": true,
       "enum": [
         "And",
         "Or"
@@ -555,12 +547,8 @@
         },
         "conditionConnective": {
           "description": "The top level connective operator for this condition.",
-          "type": "object",
-          "properties": {
-            "$ref": "#/definitions/Connective",
-            "description": "Connective properties",
-            "x-ms-client-flatten": true
-          }
+          "type": "string",
+          "$ref": "#/definitions/Connective"
         }
       },
       "required": [
@@ -573,12 +561,8 @@
       "properties": {
         "clauseConnective": {
           "description": "The connective used to join all values in this ConditionClause",
-          "type": "object",
-          "properties": {
-            "$ref": "#/definitions/Connective",
-            "description": "Connective properties",
-            "x-ms-client-flatten": true
-          }
+          "type": "string",
+          "$ref": "#/definitions/Connective"
         },
         "field": {
           "description": "The name of the field that is evaluated.",
