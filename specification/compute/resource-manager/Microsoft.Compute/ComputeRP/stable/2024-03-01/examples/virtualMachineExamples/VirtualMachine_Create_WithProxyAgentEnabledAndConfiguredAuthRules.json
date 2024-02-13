@@ -13,7 +13,52 @@
         "securityProfile": {
           "proxyAgentSettings": {
             "enabled": true,
-            "mode": "Enforce"
+            "imds": {
+              "accessControlProfile": {
+                "defaultAccess": "deny",
+                "mode": "Enforce",
+                "rules": {
+                  "/metadata/identity": [
+                    {
+                      "filters": [
+                        {
+                          "userName": "testUser"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "wireserver": {
+              "accessControlProfile": {
+                "defaultAccess": "deny",
+                "mode": "audit",
+                "rules": {
+                  "/machine": [
+                    {
+                      "queryParameters": {"comp": "goalstate", "version": "1"},
+                      "filters": [
+                        {
+                          "processName": "guestagent.exe"
+                        }
+                      ]
+                    },
+                    {
+                      "queryParameters": {"comp": "health"},
+                      "filter": [
+                        {
+                          "processName": "guestagent.exe"
+                        },
+                        {
+                          "processName": "winpa.exe"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
           }
         },
         "storageProfile": {
@@ -95,7 +140,52 @@
           "securityProfile": {
             "proxyAgentSettings": {
               "enabled": true,
-              "mode": "Enforce"
+              "imds": {
+                "accessControlProfile": {
+                  "defaultAccess": "deny",
+                  "mode": "Enforce",
+                  "rules": {
+                    "/metadata/identity": [
+                      {
+                        "filters": [
+                          {
+                            "userName": "testUser"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "wireserver": {
+                "accessControlProfile": {
+                  "defaultAccess": "deny",
+                  "mode": "audit",
+                  "rules": {
+                    "/machine": [
+                      {
+                        "queryParameters": {"comp": "goalstate", "version": "1"},
+                        "filters": [
+                          {
+                            "processName": "guestagent.exe"
+                          }
+                        ]
+                      },
+                      {
+                        "queryParameters": {"comp": "health"},
+                        "filter": [
+                          {
+                            "processName": "guestagent.exe"
+                          },
+                          {
+                            "processName": "winpa.exe"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
             }
           },
           "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
@@ -153,7 +243,52 @@
           "securityProfile": {
             "proxyAgentSettings": {
               "enabled": true,
-              "mode": "Enforce"
+              "imds": {
+                "accessControlProfile": {
+                  "defaultAccess": "deny",
+                  "mode": "Enforce",
+                  "rules": {
+                    "/metadata/identity": [
+                      {
+                        "filters": [
+                          {
+                            "userName": "testUser"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "wireserver": {
+                "accessControlProfile": {
+                  "defaultAccess": "deny",
+                  "mode": "audit",
+                  "rules": {
+                    "/machine": [
+                      {
+                        "queryParameters": {"comp": "goalstate", "version": "1"},
+                        "filters": [
+                          {
+                            "processName": "guestagent.exe"
+                          }
+                        ]
+                      },
+                      {
+                        "queryParameters": {"comp": "health"},
+                        "filter": [
+                          {
+                            "processName": "guestagent.exe"
+                          },
+                          {
+                            "processName": "winpa.exe"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
             }
           },
           "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
