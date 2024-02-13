@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-The current release is `release_2023_10_01`
+The current release is `2024-03-01-preview`
 
 ``` yaml
 
@@ -31,4 +31,11 @@ These settings apply only when `--tag=2023-02-01-preview` is specified on the co
 
 ``` yaml $(tag) == '2023-02-01-preview'
 input-file: preview/2023-02-01-preview/UnifiedVision.json
+```
+
+### 2024-03-01-preview
+These settings apply only when `--tag=2024-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == '2024-03-01-preview'
+input-file: preview/2024-03-01-preview/UnifiedVision.json
 ```
