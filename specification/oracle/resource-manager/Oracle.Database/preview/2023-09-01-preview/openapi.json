@@ -3195,10 +3195,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The amount of storage currently allocated for the database tables and billed for, rounded up.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
+          "readOnly": true
         },
         "apexDetails": {
           "$ref": "#/definitions/ApexDetailsType",
@@ -3939,15 +3936,6 @@
             "read",
             "update",
             "create"
-          ]
-        },
-        "allocatedStorageSizeInTbs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The amount of storage currently allocated for the database tables and billed for, rounded up.",
-          "x-ms-mutability": [
-            "read",
-            "update"
           ]
         },
         "databaseEdition": {
@@ -7195,7 +7183,18 @@
         },
         "termUnit": {
           "type": "string",
-          "description": "Term Unit. P1Y, P3Y, etc, see Durations https://en.wikipedia.org/wiki/ISO_8601"
+          "description": "Term Unit. P1Y, P3Y, etc, see Durations https://en.wikipedia.org/wiki/ISO_8601",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product code for the term unit",
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
@@ -7248,9 +7247,12 @@
       "type": "object",
       "description": "The updatable properties of the OracleSubscription.",
       "properties": {
-        "termUnit": {
+        "productCode": {
           "type": "string",
-          "description": "Term Unit. P1Y, P3Y, etc, see Durations https://en.wikipedia.org/wiki/ISO_8601"
+          "description": "Product code for the term unit",
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
