@@ -76,26 +76,7 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
           {
-            "name": "expand",
-            "in": "query",
-            "description": "A comma separated list of related properties to be included in line with the job.",
-            "required": false,
-            "type": "string",
-            "collectionFormat": "csv",
-            "enum": [
-              "jobData"
-            ],
-            "x-ms-enum": {
-              "name": "ExpandQueryParamsType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "JobData",
-                  "value": "jobData",
-                  "description": "Use this value to expand the job with jobData property."
-                }
-              ]
-            }
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
           }
         ],
         "responses": {
@@ -163,26 +144,7 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
           {
-            "name": "expand",
-            "in": "query",
-            "description": "A comma separated list of related properties to be included in line with the job.",
-            "required": false,
-            "type": "string",
-            "collectionFormat": "csv",
-            "enum": [
-              "jobData"
-            ],
-            "x-ms-enum": {
-              "name": "ExpandQueryParamsType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "JobData",
-                  "value": "jobData",
-                  "description": "Use this value to expand the job with jobData property."
-                }
-              ]
-            }
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
           },
           {
             "name": "resource",
@@ -3043,6 +3005,18 @@
     }
   },
   "parameters": {
+    "Azure.Core.ExpandQueryParameter": {
+      "name": "expand",
+      "in": "query",
+      "description": "Expand the indicated resources into the response.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",

@@ -71,26 +71,13 @@ model RequestIdResponseHeaderTrait {
   };
 }
 
-alias ExpandQueryParams = QueryParametersTrait<{
-  @doc("A comma separated list of related properties to be included in line with the job.")
-  @query({
-    format: "csv",
-  })
-  expand?: ExpandQueryParamsType;
-}>;
-
-@doc("Supported properties to be included in line with the job.")
-enum ExpandQueryParamsType {
-  @doc("Use this value to expand the job with jobData property.")
-  JobData: "jobData",
-}
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId &
   HealthInsightsRetryAfterTrait &
   RequestIdResponseHeaderTrait &
-  ExpandQueryParams;
+  QueryParametersTrait<Azure.Core.ExpandQueryParameter>;
 
 model HealthInsightsErrorResponse is Azure.Core.Foundations.ErrorResponse {
   ...RequestIdResponseHeaderTrait;
