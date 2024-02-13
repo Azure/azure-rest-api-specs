@@ -88,16 +88,20 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/TIObjectKind"
         }
       ],
       "description": "Represents a threat intelligence object in Azure Security Insights.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/TIObjectKind",
+          "description": "The kind of the alert rule"
+        }
+      },
       "discriminator": "kind",
+      "type": "object",
       "required": [
-      ],
-      "type": "object"
+        "kind"
+      ]
     },
     "TIObjectKind": {
       "description": "Describes the kind of a TI object.",
@@ -410,6 +414,7 @@
                 "type": "string"
               }
             },
+            "type": "object",
             "readOnly": true
           },
           "type": "array"
