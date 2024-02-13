@@ -451,11 +451,13 @@
       "properties": {
         "password": {
           "description": "Gets or sets the password to connect with the guest.",
+          "format": "password",
           "type": "string",
           "x-ms-mutability": [
             "create",
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "username": {
           "description": "Gets or sets username to connect with the guest.",
@@ -494,40 +496,6 @@
           "$ref": "#/definitions/IsHighlyAvailable",
           "description": "Gets highly available property.",
           "readOnly": true
-        },
-        "limitCpuForMigration": {
-          "$ref": "#/definitions/LimitCpuForMigration",
-          "description": "Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs."
-        },
-        "memoryMB": {
-          "description": "MemoryMB is the size of a virtual machine's memory, in MB.",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "HardwareProfileUpdate": {
-      "description": "Defines the resource properties.",
-      "properties": {
-        "cpuCount": {
-          "description": "Gets or sets the number of vCPUs for the vm.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "dynamicMemoryEnabled": {
-          "$ref": "#/definitions/DynamicMemoryEnabled",
-          "description": "Gets or sets a value indicating whether to enable dynamic memory or not."
-        },
-        "dynamicMemoryMaxMB": {
-          "description": "Gets or sets the max dynamic memory for the vm.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "dynamicMemoryMinMB": {
-          "description": "Gets or sets the min dynamic memory for the vm.",
-          "format": "int32",
-          "type": "integer"
         },
         "limitCpuForMigration": {
           "$ref": "#/definitions/LimitCpuForMigration",
@@ -653,16 +621,6 @@
         "vmName": {
           "description": "VMName is the name of VM on the SCVmm server.",
           "minLength": 1,
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "InfrastructureProfileUpdate": {
-      "description": "Specifies the vmmServer infrastructure specific settings for the virtual machine instance for update.",
-      "properties": {
-        "checkpointType": {
-          "description": "Type of checkpoint supported for the vm.",
           "type": "string"
         }
       },
@@ -906,48 +864,6 @@
       },
       "type": "object"
     },
-    "NetworkInterfaceUpdate": {
-      "description": "Network Interface model",
-      "properties": {
-        "ipv4AddressType": {
-          "$ref": "#/definitions/AllocationMethod",
-          "description": "Gets or sets the ipv4 address type."
-        },
-        "ipv6AddressType": {
-          "$ref": "#/definitions/AllocationMethod",
-          "description": "Gets or sets the ipv6 address type."
-        },
-        "macAddress": {
-          "description": "Gets or sets the nic MAC address.",
-          "type": "string"
-        },
-        "macAddressType": {
-          "$ref": "#/definitions/AllocationMethod",
-          "description": "Gets or sets the mac address type."
-        },
-        "name": {
-          "description": "Gets or sets the name of the network interface.",
-          "type": "string"
-        },
-        "nicId": {
-          "description": "Gets or sets the nic id.",
-          "type": "string"
-        },
-        "virtualNetworkId": {
-          "description": "Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic.",
-          "format": "arm-id",
-          "type": "string",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ScVmm/virtualNetwork"
-              }
-            ]
-          }
-        }
-      },
-      "type": "object"
-    },
     "NetworkProfile": {
       "description": "Defines the resource properties.",
       "properties": {
@@ -961,20 +877,6 @@
             "name",
             "nicId"
           ]
-        }
-      },
-      "type": "object"
-    },
-    "NetworkProfileUpdate": {
-      "description": "Defines the resource properties.",
-      "properties": {
-        "networkInterfaces": {
-          "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
-          "items": {
-            "$ref": "#/definitions/NetworkInterfaceUpdate"
-          },
-          "type": "array",
-          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -1185,20 +1087,6 @@
       },
       "type": "object"
     },
-    "StorageProfileUpdate": {
-      "description": "Defines the resource properties.",
-      "properties": {
-        "disks": {
-          "description": "Gets or sets the list of virtual disks associated with the virtual machine.",
-          "items": {
-            "$ref": "#/definitions/VirtualDiskUpdate"
-          },
-          "type": "array",
-          "x-ms-identifiers": []
-        }
-      },
-      "type": "object"
-    },
     "StorageQosPolicy": {
       "description": "The StorageQoSPolicy definition.",
       "properties": {
@@ -1330,47 +1218,6 @@
         "volumeType": {
           "description": "Gets the disk volume type.",
           "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "VirtualDiskUpdate": {
-      "description": "Virtual disk model",
-      "properties": {
-        "bus": {
-          "description": "Gets or sets the disk bus.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "busType": {
-          "description": "Gets or sets the disk bus type.",
-          "type": "string"
-        },
-        "diskId": {
-          "description": "Gets or sets the disk id.",
-          "type": "string"
-        },
-        "diskSizeGB": {
-          "description": "Gets or sets the disk total size.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "lun": {
-          "description": "Gets or sets the disk lun.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "name": {
-          "description": "Gets or sets the name of the disk.",
-          "type": "string"
-        },
-        "storageQosPolicy": {
-          "$ref": "#/definitions/StorageQosPolicyDetails",
-          "description": "The QoS policy for the disk."
-        },
-        "vhdType": {
-          "description": "Gets or sets the disk vhd type.",
           "type": "string"
         }
       },
@@ -1984,11 +1831,13 @@
       "properties": {
         "password": {
           "description": "Password to use to connect to VmmServer.",
+          "format": "password",
           "type": "string",
           "x-ms-mutability": [
             "create",
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "username": {
           "description": "Username to use to connect to VmmServer.",

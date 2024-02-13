@@ -187,6 +187,7 @@ model VmmCredential {
 
   /** Password to use to connect to VmmServer. */
   @visibility("create", "update")
+  @secret
   password?: string;
 }
 
@@ -667,100 +668,6 @@ model Checkpoint {
   description?: string;
 }
 
-/** Defines the resource properties. */
-model HardwareProfileUpdate {
-  /** MemoryMB is the size of a virtual machine's memory, in MB. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
-  memoryMB?: int32;
-
-  /** Gets or sets the number of vCPUs for the vm. */
-  cpuCount?: int32;
-
-  /** Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs. */
-  limitCpuForMigration?: LimitCpuForMigration;
-
-  /** Gets or sets a value indicating whether to enable dynamic memory or not. */
-  dynamicMemoryEnabled?: DynamicMemoryEnabled;
-
-  /** Gets or sets the max dynamic memory for the vm. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
-  dynamicMemoryMaxMB?: int32;
-
-  /** Gets or sets the min dynamic memory for the vm. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
-  dynamicMemoryMinMB?: int32;
-}
-
-/** Defines the resource properties. */
-model StorageProfileUpdate {
-  /** Gets or sets the list of virtual disks associated with the virtual machine. */
-  disks?: VirtualDiskUpdate[];
-}
-
-/** Virtual disk model */
-model VirtualDiskUpdate {
-  /** Gets or sets the name of the disk. */
-  name?: string;
-
-  /** Gets or sets the disk id. */
-  diskId?: string;
-
-  /** Gets or sets the disk total size. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is distinct from Gb"
-  diskSizeGB?: int32;
-
-  /** Gets or sets the disk bus. */
-  bus?: int32;
-
-  /** Gets or sets the disk lun. */
-  lun?: int32;
-
-  /** Gets or sets the disk bus type. */
-  busType?: string;
-
-  /** Gets or sets the disk vhd type. */
-  vhdType?: string;
-
-  /** The QoS policy for the disk. */
-  storageQosPolicy?: StorageQosPolicyDetails;
-}
-
-/** Defines the resource properties. */
-model NetworkProfileUpdate {
-  /** Gets or sets the list of network interfaces associated with the virtual machine. */
-  networkInterfaces?: NetworkInterfaceUpdate[];
-}
-
-/** Network Interface model */
-model NetworkInterfaceUpdate {
-  /** Gets or sets the name of the network interface. */
-  name?: string;
-
-  /** Gets or sets the nic MAC address. */
-  macAddress?: string;
-
-  /** Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic. */
-  virtualNetworkId?: VirtualNetworkId;
-
-  /** Gets or sets the ipv4 address type. */
-  ipv4AddressType?: AllocationMethod;
-
-  /** Gets or sets the ipv6 address type. */
-  ipv6AddressType?: AllocationMethod;
-
-  /** Gets or sets the mac address type. */
-  macAddressType?: AllocationMethod;
-
-  /** Gets or sets the nic id. */
-  nicId?: string;
-}
-
-/** Specifies the vmmServer infrastructure specific settings for the virtual machine instance for update. */
-model InfrastructureProfileUpdate {
-  /** Type of checkpoint supported for the vm. */
-  checkpointType?: string;
-}
-
 /** Defines the stop action properties. */
 model StopVirtualMachineOptions {
   /** Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false. */
@@ -836,6 +743,7 @@ model GuestCredential {
 
   /** Gets or sets the password to connect with the guest. */
   @visibility("create", "update")
+  @secret
   password: string;
 }
 
