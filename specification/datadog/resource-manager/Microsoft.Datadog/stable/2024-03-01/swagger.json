@@ -2470,7 +2470,7 @@
         "name": "MonitoringType"
       }
     },
-    "ResourceType": {
+    "AzureResourceType": {
       "description": "The resource types to be monitored. Currently supported: virtual machines.",
       "enum": [
         "virtualMachines"
@@ -2478,7 +2478,7 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "ResourceType"
+        "name": "AzureResourceType"
       }
     },
     "ResourceTypeTags": {
@@ -2486,7 +2486,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Unique name to identify the monitored resource type.",
+          "description": "Name to identify the rules associated to monitor resource type.",
           "type": "string"
         },
         "monitoringType": {
@@ -2508,11 +2508,11 @@
             "name": "filteringAction"
           }
         },
-        "resourceType": {
+        "azureResourceType": {
           "description": "List of resource types to be used for monitoring with defined filtering tags. If empty, all resources will be captured.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceType"
+            "$ref": "#/definitions/AzureResourceType"
           }
         },
         "filteringTags": {
