@@ -46,11 +46,9 @@ enum ContentFilterSeverity {
 @doc("Information about filtered content severity level and if it has been filtered or not.")
 model ContentFilterResult {
   @doc("Ratings for the intensity and risk level of filtered content.")
-  @projectedName("json", "severity")
   severity: ContentFilterSeverity;
 
   @doc("A value indicating whether or not the content has been filtered.")
-  @projectedName("json", "filtered")
   filtered: boolean;
 }
 
@@ -82,7 +80,7 @@ alias ContentFilterResultsBase = {
   Describes language related to physical actions intended to purposely hurt, injure,
   or damage one’s body, or kill oneself.
   """)
-  @projectedName("json", "self_harm")
+  @encodedName("application/json", "self_harm")
   selfHarm?: ContentFilterResult;
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
@@ -90,7 +88,7 @@ alias ContentFilterResultsBase = {
   profanity?: ContentFilterDetectionResult;
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
-  @projectedName("json", "custom_blocklists")
+  @encodedName("application/json", "custom_blocklists")
   @doc("Describes detection results against configured custom blocklists.")
   customBlocklists?: ContentFilterBlocklistIdResult[];
 
@@ -117,12 +115,12 @@ model ContentFilterResultsForChoice {
   ...ContentFilterResultsBase;
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
-  @projectedName("json", "protected_material_text")
+  @encodedName("application/json", "protected_material_text")
   @doc("Information about detection of protected text material.")
   protectedMaterialText?: ContentFilterDetectionResult;
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
-  @projectedName("json", "protected_material_code")
+  @encodedName("application/json", "protected_material_code")
   @doc("Information about detection of protected code material.")
   protectedMaterialCode?: ContentFilterCitedDetectionResult;
 }
@@ -133,11 +131,11 @@ Content filtering results for a single prompt in the request.
 """)
 model ContentFilterResultsForPrompt {
   @doc("The index of this prompt in the set of prompt results")
-  @projectedName("json", "prompt_index")
+  @encodedName("application/json", "prompt_index")
   promptIndex: int32;
 
   @doc("Content filtering results for this prompt")
-  @projectedName("json", "content_filter_results")
+  @encodedName("application/json", "content_filter_results")
   contentFilterResults: ContentFilterResultDetailsForPrompt;
 }
 
@@ -156,7 +154,7 @@ model ContentFilterDetectionResult {
 model ContentFilterCitedDetectionResult {
   ...ContentFilterDetectionResult;
 
-  @projectedName("json", "URL")
+  @encodedName("application/json", "URL")
   @doc("The internet location associated with the detection.")
   url?: url;
 

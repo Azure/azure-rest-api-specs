@@ -50,20 +50,21 @@ model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.Arm
 
 @doc("Provisioning state of the resource")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Resource is getting provisioned")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Resource is updating")
-  Updating,
+  Updating: "Updating",
 
   @doc("Resource is getting deleted")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Resource has been accepted")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("ARM resource ID of a cluster.")
@@ -102,30 +103,36 @@ model OperationalStatus {
 }
 
 @doc("Infrastructure Type Definitions")
-enum InfrastructureType {
+union InfrastructureType {
+  string,
+
   @doc("Azure Core")
-  AzureCore,
+  "AzureCore",
 
   @doc("Azure Operator Nexus")
-  AzureOperatorNexus,
+  "AzureOperatorNexus",
 }
 
 @doc("Deployment Type Definitions")
-enum SkuDeploymentType {
+union SkuDeploymentType {
+  string,
+
   @doc("Production Deployment")
-  Production,
+  "Production",
 
   @doc("Lab Deployment")
-  Lab,
+  "Lab",
 }
 
 @doc("Cluster Type Definitions")
-enum ClusterType {
+union ClusterType {
+  string,
+
   @doc("Azure Kubernetes Service")
-  Aks,
+  Aks: "Aks",
 
   @doc("Azure Operator Nexus Kubernetes Service")
-  NexusAks,
+  NexusAks: "NexusAks",
 }
 
 @doc("Usage SKU Definition")
