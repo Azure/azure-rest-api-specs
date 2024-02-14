@@ -9065,10 +9065,10 @@
           "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
-        "readBehavior": {
-          "description": "The read behavior for the operation. Default is query. Allowed values: query/queryAll. Type: string (or Expression with resultType string).",
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object",
-          "x-ms-format": "dfe-string"
+          "x-ms-format": "dfe-bool"
         }
       }
     },
@@ -9086,27 +9086,15 @@
           "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
-        "readBehavior": {
-          "description": "The read behavior for the operation. Default is query. Allowed values: query/queryAll. Type: string (or Expression with resultType string).",
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object",
-          "x-ms-format": "dfe-string"
+          "x-ms-format": "dfe-bool"
         },
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
-      }
-    },
-    "SalesforceV2SourceReadBehavior": {
-      "description": "The Salesforce read behavior for the operation",
-      "type": "string",
-      "enum": [
-        "query",
-        "queryAll"
-      ],
-      "x-ms-enum": {
-        "name": "SalesforceV2SourceReadBehavior",
-        "modelAsString": true
       }
     },
     "SalesforceV2Sink": {
