@@ -99,7 +99,6 @@
         "summary": "Get properties for existing schema.",
         "description": "Gets the properties referencing an existing schema within the specified schema group, as matched by schema content comparison.",
         "consumes": [
-          "application/octet-stream",
           "text/plain; charset=utf-8",
           "application/json; serialization=Avro",
           "application/json; serialization=Json",
@@ -193,7 +192,6 @@
         "summary": "Register new schema",
         "description": "Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.",
         "consumes": [
-          "application/octet-stream",
           "text/plain; charset=utf-8",
           "application/json; serialization=Avro",
           "application/json; serialization=Json",
@@ -339,7 +337,6 @@
         "summary": "Get specific schema versions.",
         "description": "Gets one specific version of one schema.",
         "produces": [
-          "application/octet-stream",
           "text/plain; charset=utf-8",
           "application/json; serialization=Avro",
           "application/json; serialization=Json",
@@ -409,7 +406,6 @@
                 "type": "string",
                 "description": "The content type for given schema.",
                 "enum": [
-                  "application/octet-stream",
                   "text/plain; charset=utf-8",
                   "application/json; serialization=Avro",
                   "application/json; serialization=Json",
@@ -419,10 +415,6 @@
                   "name": "SchemaContentTypeValues",
                   "modelAsString": false,
                   "values": [
-                    {
-                      "name": "customBinary",
-                      "value": "application/octet-stream"
-                    },
                     {
                       "name": "custom",
                       "value": "text/plain; charset=utf-8"
@@ -470,7 +462,6 @@
         "summary": "Get a registered schema by its unique ID reference.",
         "description": "Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.",
         "produces": [
-          "application/octet-stream",
           "text/plain; charset=utf-8",
           "application/json; serialization=Avro",
           "application/json; serialization=Json",
@@ -525,7 +516,6 @@
                 "type": "string",
                 "description": "The content type for given schema.",
                 "enum": [
-                  "application/octet-stream",
                   "text/plain; charset=utf-8",
                   "application/json; serialization=Avro",
                   "application/json; serialization=Json",
@@ -535,10 +525,6 @@
                   "name": "SchemaContentTypeValues",
                   "modelAsString": false,
                   "values": [
-                    {
-                      "name": "customBinary",
-                      "value": "application/octet-stream"
-                    },
                     {
                       "name": "custom",
                       "value": "text/plain; charset=utf-8"
@@ -681,7 +667,6 @@
     "SchemaContentTypeValues": {
       "type": "string",
       "enum": [
-        "application/octet-stream",
         "text/plain; charset=utf-8",
         "application/json; serialization=Avro",
         "application/json; serialization=Json",
@@ -691,10 +676,6 @@
         "name": "SchemaContentTypeValues",
         "modelAsString": false,
         "values": [
-          {
-            "name": "customBinary",
-            "value": "application/octet-stream"
-          },
           {
             "name": "custom",
             "value": "text/plain; charset=utf-8"
