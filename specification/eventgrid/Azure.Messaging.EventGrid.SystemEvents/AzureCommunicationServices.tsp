@@ -4,10 +4,12 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event */
 model AcsIncomingCallEventData {
   /** The communication identifier of the target user. */
-  to?: CommunicationIdentifierModel;
+  @encodedName("application/json", "to")
+  toCommunicationIdentifier?: CommunicationIdentifierModel;
 
   /** The communication identifier of the user who initiated the call. */
-  from?: CommunicationIdentifierModel;
+  @encodedName("application/json", "from")
+  fromCommunicationIdentifier?: CommunicationIdentifierModel;
 
   /** The Id of the server call */
   serverCallId?: string;
@@ -241,7 +243,8 @@ model AcsEmailDeliveryReportReceivedEventData {
   deliveryStatusDetails?: AcsEmailDeliveryReportStatusDetails;
 
   /** The time at which the email delivery report received timestamp */
-  deliveryAttemptTimeStamp?: utcDateTime;
+  @encodedName("application/json", "deliveryAttemptTimeStamp")
+  deliveryAttemptTimestamp?: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event. */
@@ -256,7 +259,8 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   messageId?: string;
 
   /** The time at which the user interacted with the email */
-  userActionTimeStamp?: utcDateTime;
+  @encodedName("application/json", "userActionTimeStamp")
+  userActionTimestamp?: utcDateTime;
 
   /** The context of the type of engagement user had with email */
   engagementContext?: string;
@@ -265,7 +269,8 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   userAgent?: string;
 
   /** The type of engagement user have with email */
-  engagementType?: AcsUserEngagement;
+  @encodedName("application/json", "engagementType")
+  engagement?: AcsUserEngagement;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCancelled event */

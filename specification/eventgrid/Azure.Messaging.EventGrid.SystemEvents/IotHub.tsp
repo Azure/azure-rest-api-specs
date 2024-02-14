@@ -17,16 +17,19 @@ model DeviceLifeCycleEventProperties {
 /** Metadata information for the properties JSON document. */
 model DeviceTwinMetadata {
   /** The ISO8601 timestamp of the last time the properties were updated. */
-  lastUpdated?: string;
+  @encodedName("application/json", "lastUpdated")
+  $lastUpdated?: string;
 }
 
 /** A portion of the properties that can be written only by the application back-end, and read by the device. */
 model DeviceTwinProperties {
   /** Metadata information for the properties JSON document. */
-  metadata?: DeviceTwinMetadata;
+  @encodedName("application/json", "metadata")
+  $metadata?: DeviceTwinMetadata;
 
   /** Version of device twin properties. */
-  version?: float32;
+  @encodedName("application/json", "version")
+  $version?: float32;
 }
 
 //THIS IS WHAT IS CAUSING THE ISSUE

@@ -4,7 +4,8 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for a Microsoft.EventHub.CaptureFileCreated event. */
 model EventHubCaptureFileCreatedEventData {
   /** The path to the capture file. */
-  fileUrl?: string;
+  @encodedName("application/json", "fileUrl")
+  fileurl?: string;
 
   /** The file type of the capture file. */
   fileType?: string;
