@@ -139,20 +139,14 @@
       },
       "patch": {
         "tags": [
-          "ApiManagementService"
+          "ApiManagementGateway"
         ],
-        "operationId": "ApiManagementService_Update",
-        "description": "Updates an existing API Management service.",
+        "operationId": "ApiManagementGateway_Update",
+        "description": "Updates an existing API Management gateway.",
         "x-ms-examples": {
           "ApiManagementUpdateServiceDisableTls10": {
             "$ref": "./examples/ApiManagementUpdateServiceDisableTls10.json"
           },
-          "ApiManagementUpdateServicePublisherDetails": {
-            "$ref": "./examples/ApiManagementUpdateServicePublisherDetails.json"
-          },
-          "ApiManagementUpdateServiceToNewVnetAndAvailabilityZones": {
-            "$ref": "./examples/ApiManagementUpdateServiceToNewVnetAndAZs.json"
-          }
         },
         "parameters": [
           {
@@ -166,9 +160,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiManagementServiceUpdateParameters"
+              "$ref": "#/definitions/ApiManagementGatewayUpdateParameters"
             },
-            "description": "Parameters supplied to the CreateOrUpdate API Management service operation."
+            "description": "Parameters supplied to the CreateOrUpdate API Management gateway operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -179,13 +173,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The service was successfully updated.",
+            "description": "The gateway was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/ApiManagementServiceResource"
+              "$ref": "#/definitions/ApiManagementGatewayResource"
             }
           },
           "202": {
-            "description": "The service update request was Accepted.",
+            "description": "The gateway update request was Accepted.",
             "headers": {
               "location": {
                 "description": "Location header",
@@ -204,19 +198,13 @@
       },
       "get": {
         "tags": [
-          "ApiManagementService"
+          "ApiManagementGateway"
         ],
-        "operationId": "ApiManagementService_Get",
-        "description": "Gets an API Management service resource description.",
+        "operationId": "ApiManagementGateway_Get",
+        "description": "Gets an API Management gateway resource description.",
         "x-ms-examples": {
-          "ApiManagementServiceGetService": {
-            "$ref": "./examples/ApiManagementServiceGetService.json"
-          },
-          "ApiManagementServiceGetServiceHavingMsi": {
-            "$ref": "./examples/ApiManagementServiceGetServiceHavingMsi.json"
-          },
-          "ApiManagementServiceGetMultiRegionInternalVnet": {
-            "$ref": "./examples/ApiManagementServiceGetMultiRegionInternalVnet.json"
+          "ApiManagementGatewayGetGateway": {
+            "$ref": "./examples/ApiManagementGatewayGetGateway.json"
           }
         },
         "parameters": [
@@ -235,9 +223,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully got the API Management Service Resource.",
+            "description": "Successfully got the API Management gateway Resource.",
             "schema": {
-              "$ref": "#/definitions/ApiManagementServiceResource"
+              "$ref": "#/definitions/ApiManagementGatewayResource"
             }
           },
           "default": {
@@ -250,13 +238,13 @@
       },
       "delete": {
         "tags": [
-          "ApiManagementService"
+          "ApiManagementGateway"
         ],
-        "operationId": "ApiManagementService_Delete",
-        "description": "Deletes an existing API Management service.",
+        "operationId": "ApiManagementGateway_Delete",
+        "description": "Deletes an existing API Management gateway.",
         "x-ms-examples": {
-          "ApiManagementServiceDeleteService": {
-            "$ref": "./examples/ApiManagementServiceDeleteService.json"
+          "ApiManagementGatewayDeleteGateway": {
+            "$ref": "./examples/ApiManagementGatewayDeleteGateway.json"
           }
         },
         "parameters": [
@@ -275,12 +263,12 @@
         ],
         "responses": {
           "200": {
-            "description": "Service was successfully deleted."
+            "description": "Gateway was successfully deleted."
           },
           "202": {
-            "description": "The service delete request was Accepted.",
+            "description": "The gateway delete request was accepted.",
             "schema": {
-              "$ref": "#/definitions/ApiManagementServiceResource"
+              "$ref": "#/definitions/ApiManagementGatewayResource"
             },
             "headers": {
               "location": {
@@ -290,7 +278,7 @@
             }
           },
           "204": {
-            "description": "The service does not exist."
+            "description": "The gateway does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -302,7 +290,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/gateway": {
       "get": {
         "tags": [
           "ApiManagementGateway"
@@ -500,13 +488,13 @@
             "values": [
               {
                 "value": "CloudNativeBasic",
-                "description": "Basic SKU of a cloud-native Api gateway."
+                "description": "Basic SKU of a cloud-native API gateway."
               }
             ]
           }
         }
       },
-      "description": "Describes an available API Management SKU."
+      "description": "Describes an available API Management SKU for gateways."
     },
     "ConfigurationApi": {
       "type": "object",
@@ -553,23 +541,11 @@
     "ApiManagementGatewayProperties": {
       "type": "object",
       "properties": {
-        "publisherEmail": {
-          "type": "string",
-          "description": "Publisher email.",
-          "maxLength": 100
-        },
-        "publisherName": {
-          "type": "string",
-          "description": "Publisher name.",
-          "maxLength": 100
-        }
       },
       "allOf": [
         {
           "$ref": "#/definitions/ApiManagementGatewayBaseProperties"
         }
-      ],
-      "required": [
       ],
       "description": "Properties of an API Management gateway resource description."
     },
@@ -594,13 +570,13 @@
         },
         "targetProvisioningState": {
           "type": "string",
-          "description": "The provisioning state of the API Management service, which is targeted by the long running operation started on the service.",
+          "description": "The provisioning state of the API Management gateway, which is targeted by the long running operation started on the gateway.",
           "readOnly": true
         },
         "createdAtUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "Creation UTC date of the API Management service.The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.",
+          "description": "Creation UTC date of the API Management gateway.The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.",
           "readOnly": true
         },
         "frontend": {
@@ -623,11 +599,11 @@
       "properties": {
         "minApiVersion": {
           "type": "string",
-          "description": "Limit control plane API calls to API Management service with version equal to or newer than this value.",
+          "description": "Limit control plane API calls to API Management gateway with version equal to or newer than this value.",
           "example": "2019-01-01"
         }
       },
-      "description": "Control Plane Apis version constraint for the API Management service."
+      "description": "Control Plane Apis version constraint for the API Management gateway."
     },
     "ApiManagementGatewaySkuProperties": {
       "type": "object",
@@ -662,23 +638,19 @@
         "name",
         "capacity"
       ],
-      "description": "API Management service resource SKU properties."
+      "description": "API Management gateway resource SKU properties."
     },
-    "ApiManagementServiceResource": {
+    "ApiManagementGatewayResource": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiManagementGatewayProperties",
-          "description": "Properties of the API Management service."
+          "description": "Properties of the API Management gateway."
         },
         "sku": {
           "$ref": "#/definitions/ApiManagementGatewaySkuProperties",
-          "description": "SKU properties of the API Management service."
-        },
-        "identity": {
-          "$ref": "#/definitions/ApiManagementServiceIdentity",
-          "description": "Managed service identity of the Api Management service."
+          "description": "SKU properties of the API Management gateway."
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
@@ -697,13 +669,6 @@
           "type": "string",
           "description": "ETag of the resource.",
           "readOnly": true
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of availability zones denoting where the resource needs to come from."
         }
       },
       "allOf": [
@@ -716,7 +681,7 @@
         "sku",
         "properties"
       ],
-      "description": "A single API Management service resource in List or Get response."
+      "description": "A single API Management gateway resource in List or Get response."
     },
     "ApimResource": {
       "type": "object",
@@ -747,33 +712,26 @@
       },
       "x-ms-azure-resource": true
     },
-    "ApiManagementServiceUpdateParameters": {
+    "ApiManagementGatewayUpdateParameters": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiManagementGatewayUpdateProperties",
-          "description": "Properties of the API Management service."
+          "description": "Properties of the API Management gateway."
         },
         "sku": {
           "$ref": "#/definitions/ApiManagementGatewaySkuProperties",
-          "description": "SKU properties of the API Management service."
+          "description": "SKU properties of the API Management gateway."
         },
         "identity": {
-          "$ref": "#/definitions/ApiManagementServiceIdentity",
-          "description": "Managed service identity of the Api Management service."
+          "$ref": "#/definitions/ApiManagementGatewayIdentity",
+          "description": "Managed gateway identity of the API Management gateway."
         },
         "etag": {
           "type": "string",
           "description": "ETag of the resource.",
           "readOnly": true
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of availability zones denoting where the resource needs to come from."
         }
       },
       "allOf": [
@@ -781,122 +739,7 @@
           "$ref": "#/definitions/ApimResource"
         }
       ],
-      "description": "Parameter supplied to Update Api Management Service."
-    },
-    "ApiManagementServiceIdentity": {
-      "type": "object",
-      "description": "Identity properties of the Api Management service resource.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ApimIdentityType",
-            "modelAsString": true
-          }
-        },
-        "principalId": {
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true,
-          "description": "The principal id of the identity."
-        },
-        "tenantId": {
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true,
-          "description": "The client tenant id of the identity."
-        },
-        "userAssignedIdentities": {
-          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserIdentityProperties"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "UserIdentityProperties": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "The principal id of user assigned identity.",
-          "type": "string"
-        },
-        "clientId": {
-          "description": "The client id of user assigned identity.",
-          "type": "string"
-        }
-      }
-    },
-    "Operation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that describes the operation.",
-          "properties": {
-            "provider": {
-              "description": "Friendly name of the resource provider",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: read, write, delete, listKeys/action, etc.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource type on which the operation is performed.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Friendly name of the operation",
-              "type": "string"
-            }
-          }
-        },
-        "origin": {
-          "type": "string",
-          "description": "The operation origin."
-        },
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "description": "The operation properties."
-        }
-      }
-    },
-    "OperationListResult": {
-      "type": "object",
-      "description": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "List of operations supported by the resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
+      "description": "Parameter supplied to Update API Management gateway."
     }
   },
   "parameters": {}
