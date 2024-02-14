@@ -77,6 +77,15 @@ model PagedIndex {
   nextLink?: ResourceLocation<Index>;
 }
 
+@doc("Next version definition.")
+model VersionInfo {
+  @doc("Next version as defined by the server.")
+  nextVersion?: int64;
+
+  @doc("Current latest version of the resource.")
+  latestVersion: string;
+}
+
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
   T;

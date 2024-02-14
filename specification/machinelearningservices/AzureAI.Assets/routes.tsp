@@ -113,6 +113,25 @@ interface IndexesLatest {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
+  @doc("Get next Index version.")
+  @route("/workspaces/{workspaceName}/indexes/{indexName}:getNextVersion")
+  @post
+  getNextVersion is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the workspace.")
+      @path
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      workspaceName: string;
+
+      @doc("Name of the index.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      @path
+      indexName: string;
+    },
+    VersionInfo | Foundations.ErrorResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
   @doc("List the latest version of each index.")
   @route("/workspaces/{workspaceName}/indexes/")
   @get
