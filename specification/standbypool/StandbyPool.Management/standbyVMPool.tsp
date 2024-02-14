@@ -34,12 +34,6 @@ model StandbyVirtualMachinePoolResource
 
 @doc("Details of the StandbyVirtualMachinePool.")
 model StandbyVirtualMachinePoolResourceProperties {
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
-  @doc("Specifies maximum number of standby VMs. When the pool is attached to VMScaleSets, the limit applies to each VMScaleSet.")
-  @maxValue(2000)
-  @removed(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
-  maxReadyCapacity: int64;
-
   @doc("Specifies the elasticity profile of the standby virtual machine pools.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
   elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
@@ -47,11 +41,6 @@ model StandbyVirtualMachinePoolResourceProperties {
   @doc("Specifies the desired state of virtual machines in the pool.")
   @extension("x-ms-identifiers", ["vmState"])
   virtualMachineState: VirtualMachineState;
-
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
-  @doc("Specifies list of VMScaleSets' fully qualified resource IDs the pool is attached to. When multiple VMScaleSets are specified, standby VMs are created for each VMScaleSet independently.")
-  @removed(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
-  attachedVirtualMachineScaleSetIds?: string[];
 
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
