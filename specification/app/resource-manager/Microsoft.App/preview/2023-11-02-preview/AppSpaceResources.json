@@ -343,6 +343,20 @@
         "modelAsString": true
       }
     },
+    "MetadataProperty": {
+      "description": "Property used by Portal UX that is in the list of metadata properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "property name",
+          "type": "string"
+        },
+        "value": {
+          "description": "property value",
+          "type": "string"
+        }
+      }
+    },
     "AppSpaceResourceProperties": {
       "description": "AppSpaceResource resource-specific properties",
       "type": "object",
@@ -367,13 +381,16 @@
           "$ref": "#/definitions/DeploymentInformation",
           "description": "Optional App Space Resource Deployment Information"
         },
-        "isFavorite": {
+        "appSpaceResourceLabel": {
           "$ref": "#/definitions/AppSpaceResourceLabel",
-          "description": "Enum marking whether or not this App Space Resource is a favorite"
+          "description": "Enum marking whether or not this App Space Resource is a favorite (values are Default, Favorite)"
         },
         "metadata": {
-          "description": "Property bag to add properties used by Portal UX.",
-          "type": "object"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataProperty"
+          },
+          "description": "Property bag - array that contains the properties (name/value) used by Portal UX."
         },
         "dependencies": {
           "type": "array",
