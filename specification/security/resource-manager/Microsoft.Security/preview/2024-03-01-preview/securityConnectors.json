@@ -685,10 +685,7 @@
             "DefenderForDatabasesGcp",
             "DefenderCspmAws",
             "DefenderCspmGcp",
-            "DefenderForDevOpsGithub",
-            "DefenderForDevOpsAzureDevOps",
-            "CspmMonitorGitLab",
-            "DefenderForDevOpsGitLab"
+            "CspmMonitorGitLab"
           ],
           "x-ms-enum": {
             "name": "offeringType",
@@ -1673,28 +1670,6 @@
         }
       }
     },
-    "defenderForDevOpsGithubOffering": {
-      "type": "object",
-      "description": "The Defender for DevOps for Github offering",
-      "x-ms-discriminator-value": "DefenderForDevOpsGithub",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
-      "properties": {}
-    },
-    "defenderForDevOpsAzureDevOpsOffering": {
-      "type": "object",
-      "description": "The Defender for DevOps for Azure DevOps offering",
-      "x-ms-discriminator-value": "DefenderForDevOpsAzureDevOps",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
-      "properties": {}
-    },
     "cspmMonitorGitLabOffering": {
       "type": "object",
       "description": "The CSPM (Cloud security posture management) monitoring for gitlab offering",
@@ -1706,18 +1681,6 @@
       ],
       "properties": {}
     },
-    "defenderForDevOpsGitLabOffering": {
-      "type": "object",
-      "description": "The Defender for DevOps for Gitlab offering",
-      "x-ms-discriminator-value": "DefenderForDevOpsGitLab",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
-      "properties": {}
-    }
-  },
   "parameters": {
     "securityConnectorName": {
       "name": "securityConnectorName",
