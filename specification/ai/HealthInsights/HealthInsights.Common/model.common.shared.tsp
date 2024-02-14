@@ -225,8 +225,7 @@ model TimePeriod {
 }
 
 @doc("Procedure information")
-model OrderedProcedure  {
-  
+model OrderedProcedure {
   @doc("Procedure code")
   code?: Fhir.R4.CodeableConcept;
 
