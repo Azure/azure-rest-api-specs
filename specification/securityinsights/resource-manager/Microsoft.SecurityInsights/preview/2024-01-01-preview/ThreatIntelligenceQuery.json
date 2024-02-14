@@ -92,8 +92,14 @@
       ],
       "description": "Represents a threat intelligence object in Azure Security Insights.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/TIObjectCommonProperties",
+          "description": "The properties of the TI object",
+          "x-ms-client-flatten": true
+        },
         "kind": {
           "$ref": "#/definitions/TIObjectKind",
+          "type": "source",
           "description": "The kind of the alert rule"
         }
       },
@@ -104,19 +110,6 @@
       ]
     },
     "TIObjectKind": {
-      "description": "Describes the kind of a TI object.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/TIObjectInnerKind",
-          "description": "The kind of the TI object."
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "type": "string"
-    },
-    "TIObjectInnerKind": {
       "description": "The kind of the TI object",
       "enum": [
         "attack-pattern",
