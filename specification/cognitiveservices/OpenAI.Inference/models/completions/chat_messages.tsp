@@ -68,7 +68,7 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
 @added(ServiceApiVersions.v2023_12_01_Preview)
 model ChatMessageImageUrl {
   @doc("The URL of the image.")
-  url: url;
+  url: string;
 
   @doc("""
   The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
