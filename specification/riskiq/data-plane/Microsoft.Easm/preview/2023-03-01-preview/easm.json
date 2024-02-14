@@ -14,34 +14,13 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "name": "endpoint",
         "in": "path",
-        "description": "The endpoint hosting the requested resource. For example, https://{region}.easm.defender.microsoft.com",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "subscriptionId",
-        "in": "path",
-        "description": "The ID of the target subscription.",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "resourceGroupName",
-        "in": "path",
-        "description": "The name of the Resource Group.",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "workspaceName",
-        "in": "path",
-        "description": "The name of the Workspace.",
+        "description": "The endpoint hosting the requested resource. For example, https://{region}.easm.defender.microsoft.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}",
         "required": true,
         "type": "string"
       }
@@ -1053,7 +1032,7 @@
         }
       }
     },
-    "/savedFilters/{filterName}": {
+    "/savedFilters/{savedFilterName}": {
       "get": {
         "operationId": "SavedFilters_GetSavedFilter",
         "tags": [
@@ -1065,7 +1044,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "filterName",
+            "name": "savedFilterName",
             "in": "path",
             "description": "The caller provided unique name for the resource.",
             "required": true,
@@ -1109,7 +1088,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "filterName",
+            "name": "savedFilterName",
             "in": "path",
             "description": "The caller provided unique name for the resource.",
             "required": true,
@@ -1161,7 +1140,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "filterName",
+            "name": "savedFilterName",
             "in": "path",
             "description": "The caller provided unique name for the resource.",
             "required": true,
@@ -1530,12 +1509,7 @@
           "type": "string",
           "format": "date-time"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InventoryAsset"
-        }
-      ]
+      }
     },
     "AsAssetResource": {
       "type": "object",
@@ -2119,12 +2093,7 @@
           "type": "integer",
           "format": "int64"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InventoryAsset"
-        }
-      ]
+      }
     },
     "ContactAssetResource": {
       "type": "object",
@@ -2982,12 +2951,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InventoryAsset"
-        }
-      ]
+      }
     },
     "DomainAssetResource": {
       "type": "object",
@@ -3268,12 +3232,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InventoryAsset"
-        }
-      ]
+      }
     },
     "HostAssetResource": {
       "type": "object",
@@ -3460,9 +3419,6 @@
         }
       }
     },
-    "InventoryAsset": {
-      "type": "object"
-    },
     "IpAddressAsset": {
       "type": "object",
       "properties": {
@@ -3620,12 +3576,7 @@
         "ipv6": {
           "type": "boolean"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InventoryAsset"
-        }
-      ]
+      }
     },
     "IpAddressAssetResource": {
       "type": "object",
@@ -3863,12 +3814,7 @@
         "ipv6": {
           "type": "boolean"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InventoryAsset"
-        }
-      ]
+      }
     },
     "IpBlockAssetResource": {
       "type": "object",
@@ -4551,12 +4497,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InventoryAsset"
-        }
-      ]
+      }
     },
     "PageAssetRedirectType": {
       "type": "string",
@@ -5394,12 +5335,7 @@
         "validationType": {
           "$ref": "#/definitions/SslCertAssetValidationType"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InventoryAsset"
-        }
-      ]
+      }
     },
     "SslCertAssetResource": {
       "type": "object",
@@ -5579,6 +5515,7 @@
     },
     "ValidateResult": {
       "type": "object",
+      "description": "Validate result for validate action endpoints",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDetail",
