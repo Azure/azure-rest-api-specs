@@ -6759,6 +6759,30 @@
         ]
       }
     },
+    "Intent": {
+      "type": "string",
+      "description": "Intent enum",
+      "enum": [
+        "Retain",
+        "Reset"
+      ],
+      "x-ms-enum": {
+        "name": "Intent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Retain",
+            "value": "Retain",
+            "description": "Retain value"
+          },
+          {
+            "name": "Reset",
+            "value": "Reset",
+            "description": "Reset value"
+          }
+        ]
+      }
+    },
     "IormLifecycleState": {
       "type": "string",
       "description": "IORMLifecycleState enum",
@@ -7195,6 +7219,13 @@
           "x-ms-mutability": [
             "update"
           ]
+        },
+        "intent": {
+          "$ref": "#/definitions/Intent",
+          "description": "Intent for the update operation",
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
@@ -7250,6 +7281,13 @@
         "productCode": {
           "type": "string",
           "description": "Product code for the term unit",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "intent": {
+          "$ref": "#/definitions/Intent",
+          "description": "Intent for the update operation",
           "x-ms-mutability": [
             "update"
           ]
