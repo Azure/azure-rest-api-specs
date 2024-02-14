@@ -1178,18 +1178,6 @@
               "type": "object",
               "description": "Specify access control profile for IMDS endpoint",
               "properties": {
-                "defaultAccess": {
-                  "type": "string",
-                  "description": "The default action of the request if no rule configured for the request URL. Default is Allow.",
-                  "enum": [
-                    "Allow",
-                    "Deny"
-                  ],
-                  "x-ms-enum": {
-                    "name": "DefaultAccess",
-                    "modelAsString": true
-                  }
-                },
                 "mode": {
                   "type": "string",
                   "description": "Specifies the mode that ProxyAgent will execute on. ProxyAgent will start to simulate and log access control over requests to IMDS endpoints in Audit mode, while in Enforce mode it will enforce access control. The default value is Disabled mode.",
@@ -1234,18 +1222,6 @@
               "type": "object",
               "description": "Specify access control profile for wireserver endpoint",
               "properties": {
-                "defaultAccess": {
-                  "type": "string",
-                  "description": "The default action of the request if no rule configured for the request URL. Default is Deny",
-                  "enum": [
-                    "Allow",
-                    "Deny"
-                  ],
-                  "x-ms-enum": {
-                    "name": "DefaultAccess",
-                    "modelAsString": true
-                  }
-                },
                 "mode": {
                   "type": "string",
                   "description": "Specifies the mode that ProxyAgent will execute on. ProxyAgent will start to simulate and log access control over requests to wireserver endpoints in Audit mode, while in Enforce mode it will enforce access control. Default is Audit mode.",
