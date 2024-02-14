@@ -307,7 +307,7 @@ model AzureDataExplorerDataConnectionProperties
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-// generic name
+@projectedName("csharp", "BannerDetails")
 model Banner {
   port?: int32;
 
@@ -358,7 +358,7 @@ model ContactAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-// generic name
+@projectedName("csharp", "CookieDetails")
 model Cookie {
   cookieName?: string;
   cookieDomain?: string;
