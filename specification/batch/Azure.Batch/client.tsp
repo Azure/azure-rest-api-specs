@@ -4,15 +4,15 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 // operation overrides
-@@access(Azure.Batch.Ops.ListOperation, Access.internal, "java");
-@@access(Azure.Batch.Ops.ReadOperation, Access.internal, "java");
-@@access(Azure.Batch.Ops.DeleteOperation, Access.internal, "java");
-@@access(Azure.Batch.Ops.CreateOperation, Access.internal, "java");
-@@access(Azure.Batch.Ops.UpdateOperation, Access.internal, "java");
-@@access(Azure.Batch.Ops.ReplaceOperation, Access.internal, "java");
-@@access(Azure.Batch.Ops.PostOperation, Access.internal, "java");
-@@access(Azure.Batch.Ops.ResourceInfoOperation, Access.internal, "java");
-@@access(Azure.Batch.Ops.ResourceInfoOperationWithAdditionalResponse,
+@@access(Azure.Batch.BatchOps.ListOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchOps.ReadOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchOps.DeleteOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchOps.CreateOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchOps.UpdateOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchOps.ReplaceOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchOps.PostOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchOps.ResourceInfoOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchOps.ResourceInfoOperationWithAdditionalResponse,
   Access.internal,
   "java"
 );
@@ -21,29 +21,26 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.Batch.BatchApplicationListResult, Access.public, "java");
 @@access(Azure.Batch.BatchApplication, Access.public, "java");
 @@access(Azure.Batch.BatchPoolListUsageMetricsResult, Access.public, "java");
-@@access(Azure.Batch.BatchPoolCreateParameters, Access.public, "java");
+@@access(Azure.Batch.BatchPoolCreateContent, Access.public, "java");
 @@access(Azure.Batch.BatchPoolListResult, Access.public, "java");
 @@access(Azure.Batch.BatchPool, Access.public, "java");
-@@access(Azure.Batch.BatchPoolUpdateParameters, Access.public, "java");
-@@access(Azure.Batch.BatchPoolEnableAutoScaleParameters, Access.public, "java");
-@@access(Azure.Batch.BatchPoolEvaluateAutoScaleParameters,
-  Access.public,
-  "java"
-);
+@@access(Azure.Batch.BatchPoolUpdateContent, Access.public, "java");
+@@access(Azure.Batch.BatchPoolEnableAutoScaleContent, Access.public, "java");
+@@access(Azure.Batch.BatchPoolEvaluateAutoScaleContent, Access.public, "java");
 @@access(Azure.Batch.AutoScaleRun, Access.public, "java");
-@@access(Azure.Batch.BatchPoolResizeParameters, Access.public, "java");
-@@access(Azure.Batch.BatchPoolReplaceParameters, Access.public, "java");
-@@access(Azure.Batch.BatchNodeRemoveParameters, Access.public, "java");
+@@access(Azure.Batch.BatchPoolResizeContent, Access.public, "java");
+@@access(Azure.Batch.BatchPoolReplaceContent, Access.public, "java");
+@@access(Azure.Batch.BatchNodeRemoveContent, Access.public, "java");
 @@access(Azure.Batch.BatchAccountListSupportedImagesResult,
   Access.public,
   "java"
 );
 @@access(Azure.Batch.BatchPoolNodeCountsListResult, Access.public, "java");
 @@access(Azure.Batch.BatchJob, Access.public, "java");
-@@access(Azure.Batch.BatchJobUpdateParameters, Access.public, "java");
-@@access(Azure.Batch.BatchJobDisableParameters, Access.public, "java");
-@@access(Azure.Batch.BatchJobTerminateParameters, Access.public, "java");
-@@access(Azure.Batch.BatchJobCreateParameters, Access.public, "java");
+@@access(Azure.Batch.BatchJobUpdateContent, Access.public, "java");
+@@access(Azure.Batch.BatchJobDisableContent, Access.public, "java");
+@@access(Azure.Batch.BatchJobTerminateContent, Access.public, "java");
+@@access(Azure.Batch.BatchJobCreateContent, Access.public, "java");
 @@access(Azure.Batch.BatchJobListResult, Access.public, "java");
 @@access(Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult,
   Access.public,
@@ -53,32 +50,29 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.Batch.BatchCertificate, Access.public, "java");
 @@access(Azure.Batch.BatchCertificateListResult, Access.public, "java");
 @@access(Azure.Batch.BatchJobSchedule, Access.public, "java");
-@@access(Azure.Batch.BatchJobScheduleUpdateParameters, Access.public, "java");
-@@access(Azure.Batch.BatchJobScheduleCreateParameters, Access.public, "java");
+@@access(Azure.Batch.BatchJobScheduleUpdateContent, Access.public, "java");
+@@access(Azure.Batch.BatchJobScheduleCreateContent, Access.public, "java");
 @@access(Azure.Batch.BatchJobScheduleListResult, Access.public, "java");
-@@access(Azure.Batch.BatchTaskCreateParameters, Access.public, "java");
+@@access(Azure.Batch.BatchTaskCreateContent, Access.public, "java");
 @@access(Azure.Batch.BatchTaskListResult, Access.public, "java");
-@@access(Azure.Batch.BatchTaskCollection, Access.public, "java");
+@@access(Azure.Batch.BatchTaskGroup, Access.public, "java");
 @@access(Azure.Batch.BatchTaskAddCollectionResult, Access.public, "java");
 @@access(Azure.Batch.BatchTask, Access.public, "java");
 @@access(Azure.Batch.BatchTaskListSubtasksResult, Access.public, "java");
-@@access(Azure.Batch.BatchTaskFileClientPathParameters, Access.public, "java");
+@@access(Azure.Batch.BatchTaskFileClientPathContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeFileListResult, Access.public, "java");
-@@access(Azure.Batch.BatchNodeUserCreateParameters, Access.public, "java");
-@@access(Azure.Batch.BatchNodeUserUpdateParameters, Access.public, "java");
+@@access(Azure.Batch.BatchNodeUserCreateContent, Access.public, "java");
+@@access(Azure.Batch.BatchNodeUserUpdateContent, Access.public, "java");
 @@access(Azure.Batch.BatchNode, Access.public, "java");
-@@access(Azure.Batch.BatchNodeRebootParameters, Access.public, "java");
-@@access(Azure.Batch.BatchNodeReimageParameters, Access.public, "java");
-@@access(Azure.Batch.BatchNodeDisableSchedulingParameters,
-  Access.public,
-  "java"
-);
+@@access(Azure.Batch.BatchNodeRebootContent, Access.public, "java");
+@@access(Azure.Batch.BatchNodeReimageContent, Access.public, "java");
+@@access(Azure.Batch.BatchNodeDisableSchedulingContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeRemoteLoginSettings, Access.public, "java");
-@@access(Azure.Batch.UploadBatchServiceLogsParameters, Access.public, "java");
+@@access(Azure.Batch.UploadBatchServiceLogsContent, Access.public, "java");
 @@access(Azure.Batch.UploadBatchServiceLogsResult, Access.public, "java");
 @@access(Azure.Batch.BatchNodeListResult, Access.public, "java");
 @@access(Azure.Batch.BatchNodeVMExtension, Access.public, "java");
 @@access(Azure.Batch.BatchNodeVMExtensionListResult, Access.public, "java");
-@@access(Azure.Batch.BatchNodeFileClientPathParameters, Access.public, "java");
+@@access(Azure.Batch.BatchNodeFileClientPathContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeFileListResult, Access.public, "java");
 @@access(Azure.Batch.BatchError, Access.public, "java");

@@ -944,7 +944,7 @@
             "description": "The Job to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchJobCreateParameters"
+              "$ref": "#/definitions/BatchJobCreateContent"
             }
           }
         ],
@@ -1369,7 +1369,7 @@
             "description": "The options to use for updating the Job.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchJobUpdateParameters"
+              "$ref": "#/definitions/BatchJobUpdateContent"
             }
           }
         ],
@@ -1586,7 +1586,7 @@
             "description": "The Tasks to be added.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchTaskCollection"
+              "$ref": "#/definitions/BatchTaskGroup"
             }
           }
         ],
@@ -1722,12 +1722,12 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "content",
             "in": "body",
             "description": "The options to use for disabling the Job.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchJobDisableParameters"
+              "$ref": "#/definitions/BatchJobDisableContent"
             }
           }
         ],
@@ -2308,7 +2308,7 @@
             "description": "The Task to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchTaskCreateParameters"
+              "$ref": "#/definitions/BatchTaskCreateContent"
             }
           }
         ],
@@ -3780,7 +3780,7 @@
             "description": "The options to use for terminating the Job.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/BatchJobTerminateParameters"
+              "$ref": "#/definitions/BatchJobTerminateContent"
             }
           }
         ],
@@ -4004,7 +4004,7 @@
             "description": "The Job Schedule to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchJobScheduleCreateParameters"
+              "$ref": "#/definitions/BatchJobScheduleCreateContent"
             }
           }
         ],
@@ -4428,7 +4428,7 @@
             "description": "The options to use for updating the Job Schedule.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchJobScheduleUpdateParameters"
+              "$ref": "#/definitions/BatchJobScheduleUpdateContent"
             }
           }
         ],
@@ -5509,7 +5509,7 @@
             "description": "The Pool to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolCreateParameters"
+              "$ref": "#/definitions/BatchPoolCreateContent"
             }
           }
         ],
@@ -5835,7 +5835,7 @@
             "description": "The pool properties to update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolUpdateParameters"
+              "$ref": "#/definitions/BatchPoolUpdateContent"
             }
           }
         ],
@@ -6297,12 +6297,12 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "content",
             "in": "body",
             "description": "The options to use for enabling automatic scaling.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolEnableAutoScaleParameters"
+              "$ref": "#/definitions/BatchPoolEnableAutoScaleContent"
             }
           }
         ],
@@ -6402,12 +6402,12 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "content",
             "in": "body",
             "description": "The options to use for evaluating the automatic scaling formula.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolEvaluateAutoScaleParameters"
+              "$ref": "#/definitions/BatchPoolEvaluateAutoScaleContent"
             }
           }
         ],
@@ -6756,7 +6756,7 @@
             "description": "The options to use for disabling scheduling on the Compute Node.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/BatchNodeDisableSchedulingParameters"
+              "$ref": "#/definitions/BatchNodeDisableSchedulingContent"
             }
           }
         ],
@@ -7834,7 +7834,7 @@
             "description": "The options to use for rebooting the Compute Node.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/BatchNodeRebootParameters"
+              "$ref": "#/definitions/BatchNodeRebootContent"
             }
           }
         ],
@@ -7946,7 +7946,7 @@
             "description": "The options to use for reimaging the Compute Node.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/BatchNodeReimageParameters"
+              "$ref": "#/definitions/BatchNodeReimageContent"
             }
           }
         ],
@@ -8152,12 +8152,12 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "content",
             "in": "body",
             "description": "The Azure Batch service log files upload options.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UploadBatchServiceLogsParameters"
+              "$ref": "#/definitions/UploadBatchServiceLogsContent"
             }
           }
         ],
@@ -8268,7 +8268,7 @@
             "description": "The options to use for creating the user.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchNodeUserCreateParameters"
+              "$ref": "#/definitions/BatchNodeUserCreateContent"
             }
           }
         ],
@@ -8382,12 +8382,12 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "content",
             "in": "body",
             "description": "The options to use for updating the user.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchNodeUserUpdateParameters"
+              "$ref": "#/definitions/BatchNodeUserUpdateContent"
             }
           }
         ],
@@ -8613,12 +8613,12 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "content",
             "in": "body",
             "description": "The options to use for removing the node.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchNodeRemoveParameters"
+              "$ref": "#/definitions/BatchNodeRemoveContent"
             }
           }
         ],
@@ -8752,12 +8752,12 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "content",
             "in": "body",
             "description": "The options to use for resizing the pool.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolResizeParameters"
+              "$ref": "#/definitions/BatchPoolResizeContent"
             }
           }
         ],
@@ -8989,7 +8989,7 @@
             "description": "The options to use for replacing properties on the pool.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolReplaceParameters"
+              "$ref": "#/definitions/BatchPoolReplaceContent"
             }
           }
         ],
@@ -10098,7 +10098,7 @@
         }
       }
     },
-    "BatchJobCreateParameters": {
+    "BatchJobCreateContent": {
       "type": "object",
       "description": "Parameters for creating an Azure Batch Job.",
       "properties": {
@@ -10183,7 +10183,7 @@
         "poolInfo"
       ]
     },
-    "BatchJobDisableParameters": {
+    "BatchJobDisableContent": {
       "type": "object",
       "description": "Parameters for disabling an Azure Batch Job.",
       "properties": {
@@ -10900,7 +10900,7 @@
           "readOnly": true
         },
         "schedule": {
-          "$ref": "#/definitions/Schedule",
+          "$ref": "#/definitions/BatchJobScheduleConfiguration",
           "description": "The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time."
         },
         "jobSpecification": {
@@ -10930,7 +10930,33 @@
         "jobSpecification"
       ]
     },
-    "BatchJobScheduleCreateParameters": {
+    "BatchJobScheduleConfiguration": {
+      "type": "object",
+      "description": "The schedule according to which Jobs will be created. All times are fixed\nrespective to UTC and are not impacted by daylight saving time.",
+      "properties": {
+        "doNotRunUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest time at which any Job may be created under this Job Schedule. If you do not specify a doNotRunUntil time, the schedule becomes ready to create Jobs immediately."
+        },
+        "doNotRunAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A time after which no Job will be created under this Job Schedule. The schedule will move to the completed state as soon as this deadline is past and there is no active Job under this Job Schedule. If you do not specify a doNotRunAfter time, and you are creating a recurring Job Schedule, the Job Schedule will remain active until you explicitly terminate it."
+        },
+        "startWindow": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time interval, starting from the time at which the schedule indicates a Job should be created, within which a Job must be created. If a Job is not created within the startWindow interval, then the 'opportunity' is lost; no Job will be created until the next recurrence of the schedule. If the schedule is recurring, and the startWindow is longer than the recurrence interval, then this is equivalent to an infinite startWindow, because the Job that is 'due' in one recurrenceInterval is not carried forward into the next recurrence interval. The default is infinite. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+        },
+        "recurrenceInterval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time interval between the start times of two successive Jobs under the Job Schedule. A Job Schedule can have at most one active Job under it at any given time. Because a Job Schedule can have at most one active Job under it at any given time, if it is time to create a new Job under a Job Schedule, but the previous Job is still running, the Batch service will not create the new Job until the previous Job finishes. If the previous Job does not finish within the startWindow period of the new recurrenceInterval, then no new Job will be scheduled for that interval. For recurring Jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when Jobs are created, add Tasks to the Jobs and terminate the Jobs ready for the next recurrence. The default is that the schedule does not recur: one Job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that Job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+        }
+      }
+    },
+    "BatchJobScheduleCreateContent": {
       "type": "object",
       "description": "Parameters for creating an Azure Batch Job Schedule",
       "properties": {
@@ -10943,7 +10969,7 @@
           "description": "The display name for the schedule. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
         "schedule": {
-          "$ref": "#/definitions/Schedule",
+          "$ref": "#/definitions/BatchJobScheduleConfiguration",
           "description": "The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time."
         },
         "jobSpecification": {
@@ -11137,12 +11163,12 @@
         "waitTime"
       ]
     },
-    "BatchJobScheduleUpdateParameters": {
+    "BatchJobScheduleUpdateContent": {
       "type": "object",
       "description": "Parameters for updating an Azure Batch Job Schedule.",
       "properties": {
         "schedule": {
-          "$ref": "#/definitions/Schedule",
+          "$ref": "#/definitions/BatchJobScheduleConfiguration",
           "description": "The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time. If you do not specify this element, the existing schedule is left unchanged."
         },
         "jobSpecification": {
@@ -11490,7 +11516,7 @@
         "waitTime"
       ]
     },
-    "BatchJobTerminateParameters": {
+    "BatchJobTerminateContent": {
       "type": "object",
       "description": "Parameters for terminating an Azure Batch Job.",
       "properties": {
@@ -11501,7 +11527,7 @@
         }
       }
     },
-    "BatchJobUpdateParameters": {
+    "BatchJobUpdateContent": {
       "type": "object",
       "description": "Parameters for updating an Azure Batch Job.",
       "properties": {
@@ -11835,6 +11861,16 @@
         ]
       }
     },
+    "BatchNodeDisableSchedulingContent": {
+      "type": "object",
+      "description": "Parameters for disabling scheduling on an Azure Batch Compute Node.",
+      "properties": {
+        "nodeDisableSchedulingOption": {
+          "$ref": "#/definitions/BatchNodeDisableSchedulingOption",
+          "description": "What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue."
+        }
+      }
+    },
     "BatchNodeDisableSchedulingOption": {
       "type": "string",
       "description": "BatchNodeDisableSchedulingOption enums",
@@ -11863,16 +11899,6 @@
             "description": "Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Enter offline state when all Tasks have completed."
           }
         ]
-      }
-    },
-    "BatchNodeDisableSchedulingParameters": {
-      "type": "object",
-      "description": "Parameters for disabling scheduling on an Azure Batch Compute Node.",
-      "properties": {
-        "nodeDisableSchedulingOption": {
-          "$ref": "#/definitions/BatchNodeDisableSchedulingOption",
-          "description": "What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue."
-        }
       }
     },
     "BatchNodeEndpointConfiguration": {
@@ -12069,6 +12095,16 @@
         ]
       }
     },
+    "BatchNodeRebootContent": {
+      "type": "object",
+      "description": "Parameters for rebooting an Azure Batch Compute Node.",
+      "properties": {
+        "nodeRebootOption": {
+          "$ref": "#/definitions/BatchNodeRebootOption",
+          "description": "When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue."
+        }
+      }
+    },
     "BatchNodeRebootOption": {
       "type": "string",
       "description": "BatchNodeRebootOption enums",
@@ -12105,13 +12141,13 @@
         ]
       }
     },
-    "BatchNodeRebootParameters": {
+    "BatchNodeReimageContent": {
       "type": "object",
-      "description": "Parameters for rebooting an Azure Batch Compute Node.",
+      "description": "Parameters for reimaging an Azure Batch Compute Node.",
       "properties": {
-        "nodeRebootOption": {
-          "$ref": "#/definitions/BatchNodeRebootOption",
-          "description": "When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue."
+        "nodeReimageOption": {
+          "$ref": "#/definitions/BatchNodeReimageOption",
+          "description": "When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue."
         }
       }
     },
@@ -12151,16 +12187,6 @@
         ]
       }
     },
-    "BatchNodeReimageParameters": {
-      "type": "object",
-      "description": "Parameters for reimaging an Azure Batch Compute Node.",
-      "properties": {
-        "nodeReimageOption": {
-          "$ref": "#/definitions/BatchNodeReimageOption",
-          "description": "When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue."
-        }
-      }
-    },
     "BatchNodeRemoteLoginSettings": {
       "type": "object",
       "description": "The remote login settings for a Compute Node.",
@@ -12181,7 +12207,7 @@
         "remoteLoginPort"
       ]
     },
-    "BatchNodeRemoveParameters": {
+    "BatchNodeRemoveContent": {
       "type": "object",
       "description": "Parameters for removing nodes from an Azure Batch Pool.",
       "properties": {
@@ -12296,7 +12322,7 @@
         ]
       }
     },
-    "BatchNodeUserCreateParameters": {
+    "BatchNodeUserCreateContent": {
       "type": "object",
       "description": "Parameters for creating a user account for RDP or SSH access on an Azure Batch Compute Node.",
       "properties": {
@@ -12326,7 +12352,7 @@
         "name"
       ]
     },
-    "BatchNodeUserUpdateParameters": {
+    "BatchNodeUserUpdateContent": {
       "type": "object",
       "description": "Parameters for updating a user account for RDP or SSH access on an Azure Batch Compute Node.",
       "properties": {
@@ -12621,7 +12647,7 @@
         }
       }
     },
-    "BatchPoolCreateParameters": {
+    "BatchPoolCreateContent": {
       "type": "object",
       "description": "Parameters for creating an Azure Batch Pool.",
       "properties": {
@@ -12758,7 +12784,7 @@
         "vmSize"
       ]
     },
-    "BatchPoolEnableAutoScaleParameters": {
+    "BatchPoolEnableAutoScaleContent": {
       "type": "object",
       "description": "Parameters for enabling automatic scaling on an Azure Batch Pool.",
       "properties": {
@@ -12806,7 +12832,7 @@
         }
       }
     },
-    "BatchPoolEvaluateAutoScaleParameters": {
+    "BatchPoolEvaluateAutoScaleContent": {
       "type": "object",
       "description": "Parameters for evaluating an automatic scaling formula on an Azure Batch Pool.",
       "properties": {
@@ -12990,7 +13016,7 @@
         }
       }
     },
-    "BatchPoolReplaceParameters": {
+    "BatchPoolReplaceContent": {
       "type": "object",
       "description": "Parameters for replacing properties on an Azure Batch Pool.",
       "properties": {
@@ -13033,7 +13059,7 @@
         "metadata"
       ]
     },
-    "BatchPoolResizeParameters": {
+    "BatchPoolResizeContent": {
       "type": "object",
       "description": "Parameters for changing the size of an Azure Batch Pool.",
       "properties": {
@@ -13457,7 +13483,7 @@
         "lastUpdateTime"
       ]
     },
-    "BatchPoolUpdateParameters": {
+    "BatchPoolUpdateContent": {
       "type": "object",
       "description": "Parameters for updating an Azure Batch Pool.",
       "properties": {
@@ -14052,22 +14078,6 @@
         ]
       }
     },
-    "BatchTaskCollection": {
-      "type": "object",
-      "description": "A collection of Azure Batch Tasks to add.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The collection of Tasks to add. The maximum count of Tasks is 100. The total serialized size of this collection must be less than 1MB. If it is greater than 1MB (for example if each Task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer Tasks.",
-          "items": {
-            "$ref": "#/definitions/BatchTaskCreateParameters"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "BatchTaskConstraints": {
       "type": "object",
       "description": "Execution constraints to apply to a Task.",
@@ -14210,7 +14220,7 @@
         "taskSlotCounts"
       ]
     },
-    "BatchTaskCreateParameters": {
+    "BatchTaskCreateContent": {
       "type": "object",
       "description": "Parameters for creating an Azure Batch Task.",
       "properties": {
@@ -14430,6 +14440,22 @@
       },
       "required": [
         "category"
+      ]
+    },
+    "BatchTaskGroup": {
+      "type": "object",
+      "description": "A collection of Azure Batch Tasks to add.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection of Tasks to add. The maximum count of Tasks is 100. The total serialized size of this collection must be less than 1MB. If it is greater than 1MB (for example if each Task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer Tasks.",
+          "items": {
+            "$ref": "#/definitions/BatchTaskCreateContent"
+          }
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "BatchTaskIdRange": {
@@ -15178,7 +15204,7 @@
           "description": "A process exit code."
         },
         "exitOptions": {
-          "$ref": "#/definitions/ExitOptions",
+          "$ref": "#/definitions/ExitConfig",
           "description": "How the Batch service should respond if the Task exits with this exit code."
         }
       },
@@ -15202,7 +15228,7 @@
           "description": "The last exit code in the range."
         },
         "exitOptions": {
-          "$ref": "#/definitions/ExitOptions",
+          "$ref": "#/definitions/ExitConfig",
           "description": "How the Batch service should respond if the Task exits with an exit code in the range start to end (inclusive)."
         }
       },
@@ -15233,26 +15259,26 @@
           "x-ms-identifiers": []
         },
         "preProcessingError": {
-          "$ref": "#/definitions/ExitOptions",
+          "$ref": "#/definitions/ExitConfig",
           "description": "How the Batch service should respond if the Task fails to start due to an error."
         },
         "fileUploadError": {
-          "$ref": "#/definitions/ExitOptions",
+          "$ref": "#/definitions/ExitConfig",
           "description": "How the Batch service should respond if a file upload error occurs. If the Task exited with an exit code that was specified via exitCodes or exitCodeRanges, and then encountered a file upload error, then the action specified by the exit code takes precedence."
         },
         "default": {
-          "$ref": "#/definitions/ExitOptions",
+          "$ref": "#/definitions/ExitConfig",
           "description": "How the Batch service should respond if the Task fails with an exit condition not covered by any of the other properties. This value is used if the Task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behavior on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection."
         }
       }
     },
-    "ExitOptions": {
+    "ExitConfig": {
       "type": "object",
       "description": "Specifies how the Batch service responds to a particular exit condition.",
       "properties": {
         "jobAction": {
           "$ref": "#/definitions/BatchJobAction",
-          "description": "An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitOptionsJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitConfigJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "dependencyAction": {
           "$ref": "#/definitions/DependencyAction",
@@ -15989,7 +16015,7 @@
           "description": "The destination for the output file(s)."
         },
         "uploadOptions": {
-          "$ref": "#/definitions/OutputFileUploadOptions",
+          "$ref": "#/definitions/OutputFileUploadConfig",
           "description": "Additional options for the upload operation, including under what conditions to perform the upload."
         }
       },
@@ -16068,7 +16094,7 @@
         ]
       }
     },
-    "OutputFileUploadOptions": {
+    "OutputFileUploadConfig": {
       "type": "object",
       "description": "Options for an output file upload operation, including under what conditions\nto perform the upload.",
       "properties": {
@@ -16166,32 +16192,6 @@
         "identityReference": {
           "$ref": "#/definitions/BatchNodeIdentityReference",
           "description": "The reference to the user assigned identity to use to access Azure Blob Storage specified by storageContainerUrl or httpUrl."
-        }
-      }
-    },
-    "Schedule": {
-      "type": "object",
-      "description": "The schedule according to which Jobs will be created. All times are fixed\nrespective to UTC and are not impacted by daylight saving time.",
-      "properties": {
-        "doNotRunUntil": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The earliest time at which any Job may be created under this Job Schedule. If you do not specify a doNotRunUntil time, the schedule becomes ready to create Jobs immediately."
-        },
-        "doNotRunAfter": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A time after which no Job will be created under this Job Schedule. The schedule will move to the completed state as soon as this deadline is past and there is no active Job under this Job Schedule. If you do not specify a doNotRunAfter time, and you are creating a recurring Job Schedule, the Job Schedule will remain active until you explicitly terminate it."
-        },
-        "startWindow": {
-          "type": "string",
-          "format": "duration",
-          "description": "The time interval, starting from the time at which the schedule indicates a Job should be created, within which a Job must be created. If a Job is not created within the startWindow interval, then the 'opportunity' is lost; no Job will be created until the next recurrence of the schedule. If the schedule is recurring, and the startWindow is longer than the recurrence interval, then this is equivalent to an infinite startWindow, because the Job that is 'due' in one recurrenceInterval is not carried forward into the next recurrence interval. The default is infinite. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
-        },
-        "recurrenceInterval": {
-          "type": "string",
-          "format": "duration",
-          "description": "The time interval between the start times of two successive Jobs under the Job Schedule. A Job Schedule can have at most one active Job under it at any given time. Because a Job Schedule can have at most one active Job under it at any given time, if it is time to create a new Job under a Job Schedule, but the previous Job is still running, the Batch service will not create the new Job until the previous Job finishes. If the previous Job does not finish within the startWindow period of the new recurrenceInterval, then no new Job will be scheduled for that interval. For recurring Jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when Jobs are created, add Tasks to the Jobs and terminate the Jobs ready for the next recurrence. The default is that the schedule does not recur: one Job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that Job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         }
       }
     },
@@ -16375,7 +16375,7 @@
         }
       }
     },
-    "UploadBatchServiceLogsParameters": {
+    "UploadBatchServiceLogsContent": {
       "type": "object",
       "description": "The Azure Batch service log files upload parameters for a Compute Node.",
       "properties": {

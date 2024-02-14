@@ -1107,7 +1107,7 @@ model BatchJobSchedule {
   previousStateTransitionTime?: utcDateTime;
 
   @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time.")
-  schedule?: Schedule;
+  schedule?: BatchJobScheduleConfiguration;
 
   @doc("The details of the Jobs to be created on this schedule.")
   jobSpecification: BatchJobSpecification;
@@ -1127,9 +1127,9 @@ model BatchJobSchedule {
 @doc("""
 Parameters for updating an Azure Batch Job Schedule.
 """)
-model BatchJobScheduleUpdateParameters {
+model BatchJobScheduleUpdateContent {
   @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time. If you do not specify this element, the existing schedule is left unchanged.")
-  schedule?: Schedule;
+  schedule?: BatchJobScheduleConfiguration;
 
   @doc("The details of the Jobs to be created on this schedule. Updates affect only Jobs that are started after the update has taken place. Any currently active Job continues with the older specification.")
   jobSpecification?: BatchJobSpecification;
@@ -1141,7 +1141,7 @@ model BatchJobScheduleUpdateParameters {
 @doc("""
 Parameters for creating an Azure Batch Job Schedule
 """)
-model BatchJobScheduleCreateParameters {
+model BatchJobScheduleCreateContent {
   @doc("A string that uniquely identifies the schedule within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   id: string;
 
@@ -1149,7 +1149,7 @@ model BatchJobScheduleCreateParameters {
   displayName?: string;
 
   @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time.")
-  schedule: Schedule;
+  schedule: BatchJobScheduleConfiguration;
 
   @doc("The details of the Jobs to be created on this schedule.")
   jobSpecification: BatchJobSpecification;
@@ -1162,7 +1162,7 @@ model BatchJobScheduleCreateParameters {
 The schedule according to which Jobs will be created. All times are fixed
 respective to UTC and are not impacted by daylight saving time.
 """)
-model Schedule {
+model BatchJobScheduleConfiguration {
   @doc("The earliest time at which any Job may be created under this Job Schedule. If you do not specify a doNotRunUntil time, the schedule becomes ready to create Jobs immediately.")
   doNotRunUntil?: utcDateTime;
 
@@ -1415,7 +1415,7 @@ model OutputFile {
   destination: OutputFileDestination;
 
   @doc("Additional options for the upload operation, including under what conditions to perform the upload.")
-  uploadOptions: OutputFileUploadOptions;
+  uploadOptions: OutputFileUploadConfig;
 }
 
 @doc("The destination to which a file should be uploaded.")
@@ -1452,7 +1452,7 @@ model HttpHeader {
 Options for an output file upload operation, including under what conditions
 to perform the upload.
 """)
-model OutputFileUploadOptions {
+model OutputFileUploadConfig {
   @doc("The conditions under which the Task output file or set of files should be uploaded. The default is taskcompletion.")
   uploadCondition: OutputFileUploadCondition;
 }
@@ -2398,7 +2398,7 @@ model BatchJob {
 }
 
 @doc("Parameters for creating an Azure Batch Job.")
-model BatchJobCreateParameters {
+model BatchJobCreateContent {
   @doc("A string that uniquely identifies the Job within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   id: string;
 
@@ -2449,7 +2449,7 @@ model BatchJobCreateParameters {
 }
 
 @doc("Parameters for updating an Azure Batch Job.")
-model BatchJobUpdateParameters {
+model BatchJobUpdateContent {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged.")
   priority?: int32;
 
@@ -2507,13 +2507,13 @@ model BatchJobSchedulingError {
 }
 
 @doc("Parameters for disabling an Azure Batch Job.")
-model BatchJobDisableParameters {
+model BatchJobDisableContent {
   @doc("What to do with active Tasks associated with the Job.")
   disableTasks: DisableBatchJobOption;
 }
 
 @doc("Parameters for terminating an Azure Batch Job.")
-model BatchJobTerminateParameters {
+model BatchJobTerminateContent {
   @doc("The text you want to appear as the Job's TerminationReason. The default is 'UserTerminate'.")
   @projectedName("client", "terminationReason")
   terminateReason?: string;
@@ -2873,7 +2873,7 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 }
 
 @doc("Parameters for creating an Azure Batch Pool.")
-model BatchPoolCreateParameters {
+model BatchPoolCreateContent {
   @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two Pool IDs within an Account that differ only by case).")
   id: string;
 
@@ -2953,7 +2953,7 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 }
 
 @doc("Parameters for replacing properties on an Azure Batch Pool.")
-model BatchPoolReplaceParameters {
+model BatchPoolReplaceContent {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool.")
   startTask?: BatchStartTask;
 
@@ -2978,7 +2978,7 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 }
 
 @doc("Parameters for updating an Azure Batch Pool.")
-model BatchPoolUpdateParameters {
+model BatchPoolUpdateContent {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is left unchanged.")
   startTask?: BatchStartTask;
 
@@ -3075,7 +3075,7 @@ model BatchPoolListResult {
 }
 
 @doc("Parameters for enabling automatic scaling on an Azure Batch Pool.")
-model BatchPoolEnableAutoScaleParameters {
+model BatchPoolEnableAutoScaleContent {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is checked for validity before it is applied to the Pool. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).")
   autoScaleFormula?: string;
 
@@ -3084,13 +3084,13 @@ model BatchPoolEnableAutoScaleParameters {
 }
 
 @doc("Parameters for evaluating an automatic scaling formula on an Azure Batch Pool.")
-model BatchPoolEvaluateAutoScaleParameters {
+model BatchPoolEvaluateAutoScaleContent {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).")
   autoScaleFormula: string;
 }
 
 @doc("Parameters for changing the size of an Azure Batch Pool.")
-model BatchPoolResizeParameters {
+model BatchPoolResizeContent {
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
   targetDedicatedNodes?: int32;
 
@@ -3105,7 +3105,7 @@ model BatchPoolResizeParameters {
 }
 
 @doc("Parameters for removing nodes from an Azure Batch Pool.")
-model BatchNodeRemoveParameters {
+model BatchNodeRemoveContent {
   @doc("A list containing the IDs of the Compute Nodes to be removed from the specified Pool. A maximum of 100 nodes may be removed per request.")
   nodeList: string[];
 
@@ -3239,7 +3239,7 @@ model BatchTask {
 @doc("""
 Parameters for creating an Azure Batch Task.
 """)
-model BatchTaskCreateParameters {
+model BatchTaskCreateContent {
   @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within a Job that differ only by case).")
   id: string;
 
@@ -3298,13 +3298,13 @@ model ExitConditions {
   exitCodeRanges?: ExitCodeRangeMapping[];
 
   @doc("How the Batch service should respond if the Task fails to start due to an error.")
-  preProcessingError?: ExitOptions;
+  preProcessingError?: ExitConfig;
 
   @doc("How the Batch service should respond if a file upload error occurs. If the Task exited with an exit code that was specified via exitCodes or exitCodeRanges, and then encountered a file upload error, then the action specified by the exit code takes precedence.")
-  fileUploadError?: ExitOptions;
+  fileUploadError?: ExitConfig;
 
   @doc("How the Batch service should respond if the Task fails with an exit condition not covered by any of the other properties. This value is used if the Task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behavior on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection.")
-  default?: ExitOptions;
+  default?: ExitConfig;
 }
 
 @doc("""
@@ -3316,12 +3316,12 @@ model ExitCodeMapping {
   code: int32;
 
   @doc("How the Batch service should respond if the Task exits with this exit code.")
-  exitOptions: ExitOptions;
+  exitOptions: ExitConfig;
 }
 
 @doc("Specifies how the Batch service responds to a particular exit condition.")
-model ExitOptions {
-  @doc("An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitOptionsJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+model ExitConfig {
+  @doc("An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitConfigJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   jobAction?: BatchJobAction;
 
   @doc("An action that the Batch service performs on Tasks that depend on this Task. Possible values are 'satisfy' (allowing dependent tasks to progress) and 'block' (dependent tasks continue to wait). Batch does not yet support cancellation of dependent tasks.")
@@ -3340,7 +3340,7 @@ model ExitCodeRangeMapping {
   end: int32;
 
   @doc("How the Batch service should respond if the Task exits with an exit code in the range start to end (inclusive).")
-  exitOptions: ExitOptions;
+  exitOptions: ExitConfig;
 }
 
 @doc("""
@@ -3501,9 +3501,9 @@ model BatchTaskListResult {
 }
 
 @doc("A collection of Azure Batch Tasks to add.")
-model BatchTaskCollection {
+model BatchTaskGroup {
   @doc("The collection of Tasks to add. The maximum count of Tasks is 100. The total serialized size of this collection must be less than 1MB. If it is greater than 1MB (for example if each Task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer Tasks.")
-  value: BatchTaskCreateParameters[];
+  value: BatchTaskCreateContent[];
 }
 
 @doc("The result of adding a collection of Tasks to a Job.")
@@ -3586,7 +3586,7 @@ model BatchSubtask {
 }
 
 @doc("Parameters for creating a user account for RDP or SSH access on an Azure Batch Compute Node.")
-model BatchNodeUserCreateParameters {
+model BatchNodeUserCreateContent {
   @doc("The user name of the Account.")
   name: string;
 
@@ -3604,7 +3604,7 @@ model BatchNodeUserCreateParameters {
 }
 
 @doc("Parameters for updating a user account for RDP or SSH access on an Azure Batch Compute Node.")
-model BatchNodeUserUpdateParameters {
+model BatchNodeUserUpdateContent {
   @doc("The password of the Account. The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.")
   password?: string;
 
@@ -3806,19 +3806,19 @@ model VirtualMachineInfo {
 }
 
 @doc("Parameters for rebooting an Azure Batch Compute Node.")
-model BatchNodeRebootParameters {
+model BatchNodeRebootContent {
   @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeRebootOption?: BatchNodeRebootOption;
 }
 
 @doc("Parameters for reimaging an Azure Batch Compute Node.")
-model BatchNodeReimageParameters {
+model BatchNodeReimageContent {
   @doc("When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeReimageOption?: BatchNodeReimageOption;
 }
 
 @doc("Parameters for disabling scheduling on an Azure Batch Compute Node.")
-model BatchNodeDisableSchedulingParameters {
+model BatchNodeDisableSchedulingContent {
   @doc("What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue.")
   nodeDisableSchedulingOption?: BatchNodeDisableSchedulingOption;
 }
@@ -3835,7 +3835,7 @@ model BatchNodeRemoteLoginSettings {
 }
 
 @doc("The Azure Batch service log files upload parameters for a Compute Node.")
-model UploadBatchServiceLogsParameters {
+model UploadBatchServiceLogsContent {
   @doc("The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s). If a user assigned managed identity is not being used, the URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified.")
   containerUrl: string;
 
