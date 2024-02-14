@@ -43,8 +43,8 @@ model SharedPrivateLinkResourceProperties {
   @doc("The request message for requesting approval of the shared private link resource.")
   requestMessage: string;
 
-  @doc("Optional. Can be used to specify the Azure Resource Manager location of the resource to which a shared private link is to be created. This is only required for those resources whose DNS configuration are regional (such as Kusto).")
-  resourceRegion?: string;
+  @doc("The DNS zone to be included in the DNS name of the shared private link. Value is service-specific.")
+  dnsZone?: string;
 
   @visibility("read")
   @doc("Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected.")
