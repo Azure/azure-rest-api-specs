@@ -85,6 +85,14 @@ enum UpgradeChannel {
   NodeImage,
 }
 
+@doc("The ListUpdateRunsResult response.")
+model ListUpdateRunsResult {
+  @visibility("read")
+  @doc("Array of UpdateRun.")
+  @extension("x-ms-identifiers", ["name"])
+  updateRuns?: UpdateRun[];
+}
+
 @added(Versions.v2024_05_02_preview)
 @armResourceOperations
 interface AutoUpgradeProfiles {
@@ -103,4 +111,10 @@ interface AutoUpgradeProfiles {
   >;
 
   listByParent is ArmResourceListByParent<AutoUpgradeProfile>;
+
+  @doc("List UpdateRuns created by AutoUpgradeProfile.")
+  listUpdateRuns is ArmResourceNoRequestBodyActionSync<
+    AutoUpgradeProfile,
+    ListUpdateRunsResult
+  >;
 }
