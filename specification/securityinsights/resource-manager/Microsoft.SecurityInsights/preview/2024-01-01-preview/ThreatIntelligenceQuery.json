@@ -308,7 +308,6 @@
           "properties": {
             "stixObjectType": {
               "description": "The STIX type for the objects returned by this query.",
-              "readOnly": true,
               "type": "string"
             },
             "clauses": {
@@ -331,53 +330,45 @@
         },
         "sortBy": {
           "description": "Specifies how to sort the query results.",
-          "$ref": "#/definitions/SortByProperties",
-          "type": "string"
+          "properties": {
+            "direction": {
+              "description": "The direction to sort the results by.",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "SortingDirection",
+                "values": [
+                  {
+                    "description": "Indicates that the query should be sorted from lowest-to-highest value.",
+                    "value": "ASC"
+                  },
+                  {
+                    "description": "Indicates that the query should be sorted from lowest-to-highest value.",
+                    "value": "DESC"
+                  }
+                ]
+              }
+            },
+            "field": {
+              "description": "Represents the field to sort the results by.",
+              "type": "string"
+            }
+          },
+          "type": "object"
         },
         "maxPageSize": {
           "description": "Represents the maximum size of the page that will be returned from the query API.",
-          "readOnly": true,
           "format": "int32",
           "type": "integer"
         },
         "minPageSize": {
           "description": "Represents the minimum size of the page that will be returned from the query API.",
-          "readOnly": true,
           "format": "int32",
           "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "SortByProperties": {
-      "description": "An object that specifies how to sort the query results.",
-      "properties": {
-        "direction": {
-          "description": "The direction to sort the results by.",
-          "enum": [
-            "ASC",
-            "DESC"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "SortingDirection",
-            "values": [
-              {
-                "description": "Indicates that the query should be sorted from lowest-to-highest value.",
-                "value": "ASC"
-              },
-              {
-                "description": "Indicates that the query should be sorted from lowest-to-highest value.",
-                "value": "DESC"
-              }
-            ]
-          }
-        },
-        "field": {
-          "description": "Represents the field to sort the results by.",
-          "readOnly": true,
-          "type": "string"
         }
       },
       "type": "object"
