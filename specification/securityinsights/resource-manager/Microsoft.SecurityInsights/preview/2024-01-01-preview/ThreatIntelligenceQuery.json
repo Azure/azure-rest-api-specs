@@ -153,6 +153,7 @@
         "value": {
           "description": "Array of threat intelligence objects.",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/TIObject"
           },
           "type": "array"
@@ -169,10 +170,12 @@
         "data": {
           "description": "The core STIX object that this TI object represents.",
           "readOnly": true,
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {}
         },
         "createdBy": {
           "description": "The UserInfo of the user/entity which originally created this TI object.",
+          "$ref": "#/definitions/UserInfo",
           "readOnly": true,
           "type": "object"
         },
@@ -259,6 +262,7 @@
         },
         "lastModifiedBy": {
           "description": "The UserInfo of the user/entity which last modified this TI object.",
+          "$ref": "#/definitions/UserInfo",
           "readOnly": true,
           "type": "object"
         },
@@ -520,6 +524,31 @@
             "type": "string"
           },
           "type": "array"
+        }
+      },
+      "required": [
+        "field",
+        "operator",
+        "values"
+      ],
+      "type": "object"
+    },
+    "UserInfo": {
+      "description": "Data about a user or client application.",
+      "properties": {
+        "objectId": {
+          "description": "The user's object ID.",
+          "readOnly": true,
+          "format": "uuid",
+          "type": "string"
+        },
+        "email": {
+          "description": "The user's email address.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The user's name.",
+          "type": "string"
         }
       },
       "required": [
