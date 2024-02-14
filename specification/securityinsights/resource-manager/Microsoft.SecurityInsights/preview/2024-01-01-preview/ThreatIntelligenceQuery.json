@@ -95,12 +95,45 @@
         "properties": {
           "$ref": "#/definitions/TIObjectCommonProperties",
           "description": "The properties of the TI object",
+          "type": "object",
           "x-ms-client-flatten": true
         },
         "kind": {
-          "$ref": "#/definitions/TIObjectKind",
+          "description": "The kind of the TI object",
+          "enum": [
+            "Attack-pattern",
+            "Identity",
+            "Indicator",
+            "Relationship",
+            "Threat-actor"
+          ],
           "type": "string",
-          "description": "The kind of the TI object."
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "TIObjectKind",
+            "values": [
+              {
+                "description": "A TI object that represents an attack pattern.",
+                "value": "Attack-pattern"
+              },
+              {
+                "description": "A TI object that represents an identity.",
+                "value": "Identity"
+              },
+              {
+                "description": "A TI object that represents an indicator.",
+                "value": "Indicator"
+              },
+              {
+                "description": "A TI object that represents a relationship between two TI objects.",
+                "value": "Relationship"
+              },
+              {
+                "description": "A TI object that represents a threat actor.",
+                "value": "Threat-actor"
+              }
+            ]
+          }
         }
       },
       "discriminator": "kind",
@@ -108,43 +141,6 @@
       "required": [
         "kind"
       ]
-    },
-    "TIObjectKind": {
-      "description": "The kind of the TI object",
-      "enum": [
-        "attack-pattern",
-        "identity",
-        "indicator",
-        "relationship",
-        "threat-actor"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "TIObjectKind",
-        "values": [
-          {
-            "description": "A TI object that represents an attack pattern.",
-            "value": "attack-pattern"
-          },
-          {
-            "description": "A TI object that represents an identity.",
-            "value": "identity"
-          },
-          {
-            "description": "A TI object that represents an indicator.",
-            "value": "indicator"
-          },
-          {
-            "description": "A TI object that represents a relationship between two TI objects.",
-            "value": "relationship"
-          },
-          {
-            "description": "A TI object that represents a threat actor.",
-            "value": "threat-actor"
-          }
-        ]
-      }
     },
     "ThreatIntelligenceList": {
       "description": "List all the threat intelligence objects.",
