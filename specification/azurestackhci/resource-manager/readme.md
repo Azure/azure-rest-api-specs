@@ -114,6 +114,13 @@ suppressions:
     from:
       - clusters.json
 
+  - code: ResourceNameRestriction
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+    from: securitySettings.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}"]
+
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
     from:
@@ -170,6 +177,8 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/virtualMachineInstances.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/deploymentSettings.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/edgeDevices.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/offers.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/operations.json
@@ -178,6 +187,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/updateRuns.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/updates.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/securitySettings.json
 ```
 
 ### Tag: package-preview-2023-11
