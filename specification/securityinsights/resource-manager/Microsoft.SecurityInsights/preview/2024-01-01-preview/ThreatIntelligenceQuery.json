@@ -550,7 +550,155 @@
         }
       },
       "type": "object"
+    },
+    "ThreatActor": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObject"
+        }
+      ],
+      "description": "Represents a threat actor in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ThreatActorProperties",
+          "description": "threat actor properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "AttackPattern": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObject"
+        }
+      ],
+      "description": "Represents an attack pattern in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AttackPatternProperties",
+          "description": "attack pattern properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "Identity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObject"
+        }
+      ],
+      "description": "Represents an identity in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "identity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "Relationship": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObject"
+        }
+      ],
+      "description": "Represents a relationship in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RelationshipProperties",
+          "description": "Relationship properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "Indicator": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObject"
+        }
+      ],
+      "description": "Represents an indicator in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IndicatorProperties",
+          "description": "Indicator properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "AttackPatternProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Attack pattern property bag.",
+      "type": "object"
+    },
+    "IndicatorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Indicator property bag.",
+      "type": "object",
+      "properties": {
+        "observables": {
+          "description": "The observables of this indicator",
+          "items": {
+            "description": "An observable of this indicator",
+            "properties": {
+              "type": {
+                "description": "The type of the observable of this indicator",
+                "type": "string"
+              },
+              "value": {
+                "description": "The value of the observable of this indicator",
+                "type": "string"
+              }
+            },
+            "type": "object",
+            "readOnly": true
+          },
+          "type": "array"
+        }
+      }
+    },
+    "ThreatActorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Threat actor property bag.",
+      "type": "object"
+    },
+    "IdentityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Identity property bag.",
+      "type": "object"
+    },
+    "RelationshipProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TIObjectCommonProperties"
+        }
+      ],
+      "description": "Relationship property bag.",
+      "properties": {},
+      "type": "object"
     }
+
   },
   "parameters": {
     "Query": {
