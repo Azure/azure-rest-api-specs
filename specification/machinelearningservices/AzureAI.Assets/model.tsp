@@ -15,18 +15,7 @@ using Azure.Core.Traits;
 
 namespace Microsoft.MachineLearningServices;
 
-@doc("Index asset resource definition.")
-@parentResource(Workspace)
-@resource("indexes")
-model IndexResource {
-  @key("indexName")
-  @doc("Name of the index.")
-  @visibility("external")
-  indexName: string;
-}
-
 @doc("AssetVersion Definition")
-@parentResource(IndexResource)
 @resource("versions")
 model AssetVersion {
   @key("indexVersion")

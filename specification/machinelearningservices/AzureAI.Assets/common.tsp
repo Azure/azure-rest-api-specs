@@ -10,19 +10,6 @@ using Azure.Core;
 
 namespace Microsoft.MachineLearningServices;
 
-// Workspace definitions are to correctly nest resources under workspaces (not to redefine the definitions in swagger)
-@doc("Machine learning workspace.")
-@Autorest.useRef("../../../../resource-manager/Microsoft.MachineLearningServices/stable/2023-10-01/workspaceRP.json#/definitions/Workspaces")
-@resource("workspaces")
-model Workspace {
-  @doc("Name of the workspace")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-  @key("workspaceName")
-  @segment("workspaces")
-  @visibility("external")
-  name: string;
-}
-
 @doc("Metadata pertaining to creation and last modification of the resource.")
 model SystemData {
   @visibility("read")

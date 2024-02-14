@@ -324,7 +324,8 @@
             "in": "path",
             "description": "Name of the workspace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "indexName",
@@ -380,7 +381,8 @@
             "in": "path",
             "description": "Name of the workspace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "indexName",
@@ -605,10 +607,6 @@
         "stage",
         "storageUri"
       ]
-    },
-    "IndexResource": {
-      "type": "object",
-      "description": "Index asset resource definition."
     },
     "PagedIndex": {
       "type": "object",
