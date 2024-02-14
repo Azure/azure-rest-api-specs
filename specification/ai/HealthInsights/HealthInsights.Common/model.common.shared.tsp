@@ -225,12 +225,15 @@ model TimePeriod {
 }
 
 @doc("Procedure information")
-model OrderedProcedure is Fhir.R4.Extendible {
+model OrderedProcedure  {
+  
   @doc("Procedure code")
   code?: Fhir.R4.CodeableConcept;
 
   @doc("Procedure description")
   description?: string;
+
+  ...Fhir.R4.Extendible;
 }
 
 @doc("""
