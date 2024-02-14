@@ -294,11 +294,9 @@
     "Query": {
       "description": "Represents a query to run on the TI objects in the workspace.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/QueryProperties",
-          "description": "Query properties",
-          "x-ms-client-flatten": true
-        }
+        "$ref": "#/definitions/QueryProperties",
+        "description": "Query properties",
+        "x-ms-client-flatten": true
       },
       "type": "object"
     },
@@ -306,9 +304,30 @@
       "description": "Describes the query properties",
       "properties": {
         "condition": {
-          "$ref": "#/definitions/ConditionProperties",
           "description": "Represents a condition used to query for TI objects.",
-          "type": "string"
+          "properties": {
+            "stixObjectType": {
+              "description": "The STIX type for the objects returned by this query.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "clauses": {
+              "description": "The list of clauses to be evaluated in disjunction or conjunction base on the specified top level connective operator.",
+              "items": {
+                "$ref": "#/definitions/ConditionClause"
+              },
+              "type": "array"
+            },
+            "conditionConnective": {
+              "description": "The top level connective operator for this condition.",
+              "type": "string",
+              "$ref": "#/definitions/Connective"
+            }
+          },
+          "required": [
+            "clauses"
+          ],
+          "type": "object"
         },
         "sortBy": {
           "description": "Specifies how to sort the query results.",
@@ -384,32 +403,6 @@
           }
         ]
       }
-    },
-    "ConditionProperties": {
-      "description": "Represents a condition used to query for TI objects.",
-      "properties": {
-        "stixObjectType": {
-          "description": "The STIX type for the objects returned by this query.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "clauses": {
-          "description": "The list of clauses to be evaluated in disjunction or conjunction base on the specified top level connective operator.",
-          "items": {
-            "$ref": "#/definitions/ConditionClause"
-          },
-          "type": "array"
-        },
-        "conditionConnective": {
-          "description": "The top level connective operator for this condition.",
-          "type": "string",
-          "$ref": "#/definitions/Connective"
-        }
-      },
-      "required": [
-        "clauses"
-      ],
-      "type": "object"
     },
     "ConditionClause": {
       "description": "Represents a single clause to be evaluated by a NormalizedCondition.",
