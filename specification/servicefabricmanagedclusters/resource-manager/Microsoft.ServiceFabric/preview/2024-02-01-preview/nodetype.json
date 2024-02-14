@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2023-12-01-preview"
+    "version": "2024-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1184,9 +1184,10 @@
         },
         "securityType": {
           "type": "string",
-          "description": "Specifies the security type of the nodeType. Only TrustedLaunch is currently supported",
+          "description": "Specifies the security type of the nodeType. Only Standard and TrustedLaunch are currently supported",
           "enum": [
-            "TrustedLaunch"
+            "TrustedLaunch",
+            "Standard"
           ],
           "x-ms-enum": {
             "name": "securityType",
@@ -1195,6 +1196,10 @@
               {
                 "value": "TrustedLaunch",
                 "description": "Trusted Launch is a security type that secures generation 2 virtual machines."
+              },
+              {
+                "value": "Standard",
+                "description": "Standard is the default security type for all machines."
               }
             ]
           }
@@ -1237,6 +1242,14 @@
             ]
           },
           "description": "Specifies the resource id of a NAT Gateway to attach to the subnet of this node type. Node type must use custom load balancer."
+        },
+        "natConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeTypeNatConfig"
+          },
+          "x-ms-identifiers": [],
+          "description": "Specifies the NAT configuration on default public Load Balancer for the node type. This is only supported for node types use the default public Load Balancer."
         },
         "vmImagePlan": {
           "$ref": "#/definitions/VmImagePlan",
@@ -1296,6 +1309,33 @@
         }
       },
       "description": "Node type list results"
+    },
+    "NodeTypeNatConfig": {
+      "type": "object",
+      "properties": {
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "The internal port for the NAT configuration."
+        },
+        "frontendPortRangeStart": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65534,
+          "description": "The port range start for the external endpoint."
+        },
+        "frontendPortRangeEnd": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65534,
+          "description": "The port range end for the external endpoint."
+        }
+      },
+      "description": "Provides information about NAT configuration on the default public Load Balancer for the node type."
     },
     "NodeTypeUpdateParameters": {
       "type": "object",
@@ -1953,7 +1993,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-12-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-02-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
