@@ -11,11 +11,16 @@
             "properties": {
               "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm",
               "provisioningState": "Succeeded",
-              "sqlImageOffer": "SQL2016-WS2016",
+              "sqlServerLicenseType": "PAYG",
               "sqlImageSku": "Enterprise",
-              "sqlServerLicenseType": "AHUB",
-              "leastPrivilegeMode": "NotSet",
-              "enableAutomaticUpgrade": false
+              "sqlImageOffer": "SQL2022-WS2022",
+              "sqlManagement": "Full",
+              "leastPrivilegeMode": "Enabled",
+              "enableAutomaticUpgrade": true,
+              "additionalVmPatch": "WUMU",
+              "virtualMachineIdentitySettings": {
+                "type": "SystemAssigned"
+              }
             },
             "location": "northeurope",
             "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
@@ -26,11 +31,16 @@
             "properties": {
               "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm1",
               "provisioningState": "Succeeded",
-              "sqlImageOffer": "SQL2017-WS2016",
+              "sqlServerLicenseType": "AHUB",
               "sqlImageSku": "Enterprise",
-              "sqlServerLicenseType": "PAYG",
+              "sqlImageOffer": "SQL2019-WS2022",
+              "sqlManagement": "Full",
               "leastPrivilegeMode": "Enabled",
-              "enableAutomaticUpgrade": false
+              "enableAutomaticUpgrade": false,
+              "additionalVmPatch": "WUMU",
+              "virtualMachineIdentitySettings": {
+                "type": "None"
+              }
             },
             "location": "northeurope",
             "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm1",
@@ -41,11 +51,16 @@
             "properties": {
               "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg1/providers/Microsoft.Compute/virtualMachines/testvm2",
               "provisioningState": "Succeeded",
-              "sqlImageOffer": "SQL2016-WS2016",
-              "sqlImageSku": "Enterprise",
               "sqlServerLicenseType": "PAYG",
-              "leastPrivilegeMode": "NotSet",
-              "enableAutomaticUpgrade": false
+              "sqlImageSku": "Developer",
+              "sqlImageOffer": "SQL2016-WS2016",
+              "sqlManagement": "Full",
+              "leastPrivilegeMode": "Enabled",
+              "enableAutomaticUpgrade": false,
+              "additionalVmPatch": "WU",
+              "virtualMachineIdentitySettings": {
+                "type": "SystemAssigned"
+              }
             },
             "location": "northeurope",
             "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg1/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
