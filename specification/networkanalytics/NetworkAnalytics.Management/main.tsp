@@ -1402,7 +1402,7 @@ model DataProductVersion {
 
   @added(Versions.v2024_04_01_preview)
   @doc("Major version state of data product")
-  majorVersionState: string;
+  majorVersionState: MajorVersionState;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Available versions of data product")
@@ -1417,8 +1417,8 @@ model VersionInformation {
   version: string;
 
   @added(Versions.v2024_04_01_preview)
-  @doc("Status of version of d")
-  state: string;
+  @doc("Status of the version of the data product.")
+  state: State;
 }
 
 @doc("The data product offer resource.")
@@ -1429,6 +1429,41 @@ model DataProductOffer is TrackedResource<DataProductOfferProperties> {
   @segment("dataProductOffers")
   @path
   name: string;
+}
+
+@doc("State of the data product major version.")
+@added(Versions.v2024_04_01_preview)
+enum MajorVersionState {
+  @doc("The development state.")
+  Development,
+
+  @doc("The active state.")
+  Active,
+
+  @doc("The deprecated state.")
+  Deprecated,
+
+  @doc("The deleted state.")
+  Deleted,
+}
+
+@doc("State of the data product's version.")
+@added(Versions.v2024_04_01_preview)
+enum State {
+  @doc("The preview state.")
+  Preview,
+
+  @doc("The resource is waiting for approval to become live.")
+  BecomingLive,
+
+  @doc("The live state.")
+  Live,
+
+  @doc("The previous state.")
+  Previous,
+
+  @doc("The deleted state.")
+  Deleted,
 }
 
 @doc("Target Audience Type for data product offer resource.")
@@ -1534,6 +1569,7 @@ model DataProductOfferVersion
   @key("versionName")
   @segment("versions")
   @path
+  @pattern("^(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)$")
   name: string;
 }
 
