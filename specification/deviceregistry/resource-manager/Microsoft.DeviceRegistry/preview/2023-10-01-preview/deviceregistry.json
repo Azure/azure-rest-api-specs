@@ -526,6 +526,10 @@
           "x-ms-identifiers": [
             "type",
             "address"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
           ]
         }
       },
@@ -540,17 +544,6 @@
         "assigned": {
           "type": "array",
           "description": "Actively used endpoints a device can use to connect to several services.",
-          "items": {
-            "$ref": "#/definitions/Endpoint"
-          },
-          "x-ms-identifiers": [
-            "type",
-            "address"
-          ]
-        },
-        "unassigned": {
-          "type": "array",
-          "description": "List of most recently removed endpoints.",
           "items": {
             "$ref": "#/definitions/Endpoint"
           },
@@ -649,11 +642,19 @@
         },
         "operatingSystemVersion": {
           "type": "string",
-          "description": "operating system version."
+          "description": "operating system version.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "#/definitions/DeviceIdentity",
-          "description": "Identity for the resource."
+          "description": "Identity for the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "endpoints": {
           "$ref": "#/definitions/DeviceEndpoints",
@@ -700,14 +701,6 @@
         "deviceGroupId": {
           "type": "string",
           "description": "The AAD group the device is a member of."
-        },
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "operating system version."
-        },
-        "identity": {
-          "$ref": "#/definitions/DeviceIdentity",
-          "description": "Identity for the resource."
         },
         "endpoints": {
           "$ref": "#/definitions/DeviceEndpointsUpdate",

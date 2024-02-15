@@ -64,9 +64,11 @@ model DeviceProperties {
   operatingSystem?: string;
 
   @doc("operating system version.")
+  @visibility("read", "create")
   operatingSystemVersion?: string;
 
   @doc("Identity for the resource.")
+  @visibility("read", "create")
   identity?: DeviceIdentity;
 
   @doc("Property bag containing the device's unassigned and assigned endpoints.")
@@ -100,6 +102,7 @@ model DeviceEndpoints {
 
   @doc("List of most recently removed endpoints.")
   @extension("x-ms-identifiers", ["type", "address"])
+  @visibility("read", "create")
   unassigned?: Endpoint[];
 }
 
