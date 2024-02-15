@@ -511,6 +511,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Lists the AutoUpgradeProfile resources by fleet.": {
+            "$ref": "./examples/AutoUpgradeProfiles_ListByFleet.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -566,6 +571,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an AutoUpgradeProfile resource.": {
+            "$ref": "./examples/AutoUpgradeProfiles_Get.json"
           }
         }
       },
@@ -661,7 +671,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or Update an AutoUpgradeProfile.": {
+            "$ref": "./examples/AutoUpgradeProfiles_CreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "operationId": "AutoUpgradeProfiles_Delete",
@@ -739,7 +754,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete an AutoUpgradeProfile resource.": {
+            "$ref": "./examples/AutoUpgradeProfiles_Delete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/autoUpgradeProfiles/{autoUpgradeProfileName}/listUpdateRuns": {
@@ -792,6 +812,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the UpdateRuns created by an AutoUpgradeProfile.": {
+            "$ref": "./examples/AutoUpgradeProfiles_ListUpdateRuns.json"
           }
         }
       }
