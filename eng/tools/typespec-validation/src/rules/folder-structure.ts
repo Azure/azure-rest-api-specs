@@ -65,7 +65,7 @@ export class FolderStructureRule implements Rule {
     let clientExists = await host.checkFileExists(path.join(folder, "client.tsp"));
 
     if (!mainExists && !clientExists) {
-      errorOutput += `Invalid folder structure: Package must contain main.tsp or client.tsp.`;
+      errorOutput += `Invalid folder structure: Spec folder must contain main.tsp or client.tsp.`;
       success = false;
     }
 
