@@ -2812,7 +2812,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
+              "$ref": "#/definitions/SharedKeyProperties"
             },
             "description": "Parameters supplied to the Begin Set vpn site link connection Shared key operation throughNetwork resource provider."
           },
@@ -2837,93 +2837,6 @@
         "x-ms-examples": {
           "ResetVpnLinkConnection": {
             "$ref": "./examples/VpnSiteLinkConnectionSharedKeySet.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKey/{sharedKeyName}/reset": {
-      "post": {
-        "tags": [
-          "vpnLinkConnections"
-        ],
-        "operationId": "VpnLinkConnections_Reset_SharedKey",
-        "description": "Put the shared key of VpnLink connection specified.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "gatewayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gateway."
-          },
-          {
-            "name": "connectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the vpn connection."
-          },
-          {
-            "name": "linkConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the vpn link connection."
-          },
-          {
-            "name": "sharedKeyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the vpn link connection shared key."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConnectionResetSharedKey"
-            },
-            "description": "Parameters supplied to the begin reset VpnLink connection shared key operation through network resource provider."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation Reset shared key of VpnLink connection.",
-            "schema": {
-              "$ref": "#/definitions/SharedKey"
-            }
-          },
-          "202": {
-            "description": "Request is successfully accepted to Reset shared key of VpnLink connection."
-          },
-          "default": {
-            "description": "The operation ResetConnection could not be completed.",
-            "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ResetVpnLinkConnection": {
-            "$ref": "./examples/VpnSiteLinkConnectionSharedKeyReset.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -10068,38 +9981,6 @@
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
-    },
-    "ConnectionSharedKey": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The VpnLink connection shared key value."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ],
-      "required": [
-        "value"
-      ],
-      "description": "Response for get VpnLink connection shared key value service call."
-    },
-    "ConnectionResetSharedKey": {
-      "properties": {
-        "keyLength": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 128,
-          "description": "The VpnLink connection reset shared key length, should between 1 and 128."
-        }
-      },
-      "required": [
-        "keyLength"
-      ],
-      "description": "The VpnLink connection reset shared key."
     }
   }
 }
