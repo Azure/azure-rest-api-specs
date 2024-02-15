@@ -70,7 +70,7 @@ export class FolderStructureRule implements Rule {
     }
 
     if (mainExists && !(await host.checkFileExists(path.join(folder, "examples")))) {
-      errorOutput += `Invalid folder structure: Package with main.tsp must contain examples folder.`;
+      errorOutput += `Invalid folder structure: Spec folder with main.tsp must contain examples folder.`;
       success = false;
     }
 
