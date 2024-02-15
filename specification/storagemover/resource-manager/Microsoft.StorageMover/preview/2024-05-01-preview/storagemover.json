@@ -344,8 +344,11 @@
         "operationId": "Agents_List",
         "description": "Lists all Agents in a Storage Mover.",
         "x-ms-examples": {
-          "Agents_List": {
-            "$ref": "./examples/Agents_List.json"
+          "Agents_List_MinimumSet": {
+            "$ref": "./examples/Agents_List_MinimumSet.json"
+          },
+          "Agents_List_MaximumSet": {
+            "$ref": "./examples/Agents_List_MaximumSet.json"
           }
         },
         "parameters": [
@@ -389,8 +392,11 @@
         "operationId": "Agents_Get",
         "description": "Gets an Agent resource.",
         "x-ms-examples": {
-          "Agents_Get": {
-            "$ref": "./examples/Agents_Get.json"
+          "Agents_Get_MinimumSet": {
+            "$ref": "./examples/Agents_Get_MinimumSet.json"
+          },
+          "Agents_Get_MaximumSet": {
+            "$ref": "./examples/Agents_Get_MaximumSet.json"
           }
         },
         "parameters": [
@@ -432,8 +438,11 @@
         "operationId": "Agents_CreateOrUpdate",
         "description": "Creates or updates an Agent resource, which references a hybrid compute machine that can run jobs.",
         "x-ms-examples": {
-          "Agents_CreateOrUpdate": {
-            "$ref": "./examples/Agents_CreateOrUpdate.json"
+          "Agents_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/Agents_CreateOrUpdate_MinimumSet.json"
+          },
+          "Agents_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Agents_CreateOrUpdate_MaximumSet.json"
           }
         },
         "parameters": [
@@ -1628,6 +1637,15 @@
           "description": "Uptime of the Agent in seconds.",
           "readOnly": true
         },
+        "timeZone": {
+          "description": "The agent's VM local time zone represented in Windows format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "uploadLimitSchedule": {
+          "description": "The WAN-link upload limit schedule that should apply to the Agent's Job Runs according to its VM local time.",
+          "$ref": "#/definitions/UploadLimitSchedule"
+        },
         "errorDetails": {
           "type": "object",
           "properties": {
@@ -1688,6 +1706,10 @@
         "description": {
           "type": "string",
           "description": "A description for the Agent."
+        },
+        "uploadLimitSchedule": {
+          "description": "The WAN-link upload limit schedule that should apply to the Agent's Job Runs according to its VM local time.",
+          "$ref": "#/definitions/UploadLimitSchedule"
         }
       }
     },
@@ -1718,6 +1740,134 @@
           "readOnly": true
         }
       }
+    },
+    "UploadLimitSchedule": {
+      "description": "The WAN-link upload limit schedule.",
+      "type": "object",
+      "properties": {
+        "weeklyRecurrences": {
+          "description": "The list of recurrences for the WAN-link upload limit schedule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UploadLimitWeeklyRecurrence"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Recurrence": {
+      "description": "The recurrence for the WAN-link upload limit schedule.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "The start time of the schedule recurrence.",
+          "$ref": "#/definitions/Time"
+        },
+        "endTime": {
+          "description": "The end time of the schedule recurrence.",
+          "$ref": "#/definitions/Time"
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
+    },
+    "WeeklyRecurrence": {
+      "type": "object",
+      "description": "The schedule weekly recurrence.",
+      "properties": {
+        "days": {
+          "description": "The days of week of the schedule recurrence.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          }
+        }
+      },
+      "required": [
+        "days"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Recurrence"
+        }
+      ]
+    },
+    "DayOfWeek": {
+      "description": "The day of week.",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": false
+      }
+    },
+    "UploadLimit": {
+      "description": "The schedule recurrence for the WAN-link upload limit.",
+      "type": "object",
+      "properties": {
+        "limitInMbps": {
+          "description": "The WAN-link upload bandwidth (maximum data transfer rate) in megabits per second. Limit of 0 indicates no throughput is allowed.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "limitInMbps"
+      ]
+    },
+    "UploadLimitWeeklyRecurrence": {
+      "description": "The recurrence for the WAN-link upload limit schedule.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WeeklyRecurrence"
+        },
+        {
+          "$ref": "#/definitions/UploadLimit"
+        }
+      ]
+    },
+    "Time": {
+      "description": "The time of day.",
+      "type": "object",
+      "properties": {
+        "hour": {
+          "description": "The hour element of the time.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 24
+        },
+        "minute": {
+          "description": "The minute element of the time.",
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            30
+          ],
+          "default": 0,
+          "x-ms-enum": {
+            "name": "Minute",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "hour"
+      ]
     },
     "StorageMoverProperties": {
       "description": "The resource specific properties for the Storage Mover resource.",
