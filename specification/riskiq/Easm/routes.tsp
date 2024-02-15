@@ -21,7 +21,7 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 interface Assets {
   @doc("Retrieve a list of assets for the provided search parameters.")
   listAssetResource is Operations.ResourceList<AssetResource, AssetsListTrait>;
-  
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update labels on assets matching the provided filter.")
   @route("/assets")
