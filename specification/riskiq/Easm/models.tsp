@@ -370,6 +370,7 @@ model Cookie {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "CveDetails")
 model Cve {
   name?: string;
   cweId?: string;
@@ -1122,6 +1123,7 @@ model ReportBillableAssetSummaryResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "ReputationDetails")
 model Reputation {
   listName?: string;
   threatType?: string;
@@ -1207,6 +1209,7 @@ model SoaRecord {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "SourceDetails")
 model Source {
   @projectedName("csharp", "sourceProperty")
   source?: string;
