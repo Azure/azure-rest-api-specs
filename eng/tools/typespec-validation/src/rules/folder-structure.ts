@@ -78,7 +78,7 @@ export class FolderStructureRule implements Rule {
       !packageFolder.includes("Shared") &&
       !(await host.checkFileExists(path.join(folder, "tspconfig.yaml")))
     ) {
-      errorOutput += `Invalid folder structure: Package must contain tspconfig.yaml.`;
+      errorOutput += `Invalid folder structure: Spec folder must contain tspconfig.yaml.`;
       success = false;
     }
 
