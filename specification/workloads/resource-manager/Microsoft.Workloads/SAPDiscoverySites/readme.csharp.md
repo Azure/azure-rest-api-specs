@@ -7,8 +7,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Azure.ResourceManager.ResourceDiscoverySap
+  namespace: Azure.ResourceManager.MigrationDiscoverySap
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/workloads/Azure.ResourceManager.ResourceDiscoverySap/src/Generated
+  output-folder: $(csharp-sdks-folder)/migrationdiscovery/Azure.ResourceManager.MigrationDiscoverySap/src/Generated
   clear-output-folder: true
 ```

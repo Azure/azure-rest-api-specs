@@ -5,12 +5,12 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 azure-arm: true
 fluent: true
-namespace: com.azure.resourcemanager.resourcediscoverysap
+namespace: com.azure.resourcemanager.migrationdiscoverysap
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resourcediscoverysap
-title: ResourceDiscoverySAPClient
-description: "Resource Discovery SAP Client"
+output-folder: $(azure-libraries-for-java-folder)/azure-resourcemanager-migrationdiscoverysap
+title: MigrationDiscoverySapClient
+description: "Migration Discovery SAP Client"
 ```
 
 ### Java multi-api
@@ -27,8 +27,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-preview-2023-10' && $(java) && $(multiapi)
 java:
-  namespace: com.azure.resourcemanager.resourcediscoverysap.v2023_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/resourcediscoverysap/resource-manager/v2023_10_01_preview
+  namespace: com.azure.resourcemanager.migrationdiscoverysap.v2023_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/migrationdiscovery/resource-manager/v2023_10_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
