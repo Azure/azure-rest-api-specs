@@ -99,9 +99,9 @@
         "summary": "Get properties for existing schema.",
         "description": "Gets the properties referencing an existing schema within the specified schema group, as matched by schema content comparison.",
         "consumes": [
-          "text/plain; charset=utf-8",
           "application/json; serialization=Avro",
           "application/json; serialization=Json",
+          "text/plain; charset=utf-8",
           "text/vnd.ms.protobuf"
         ],
         "parameters": [
@@ -186,15 +186,15 @@
         }
       }
     },
-    "/$schemaGroups/{groupName}/schemas/{name}": {
+    "/$schemaGroups/{groupName}/schemas/{schemaName}": {
       "put": {
         "operationId": "RegisterSchema",
         "summary": "Register new schema",
         "description": "Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.",
         "consumes": [
-          "text/plain; charset=utf-8",
           "application/json; serialization=Avro",
           "application/json; serialization=Json",
+          "text/plain; charset=utf-8",
           "text/vnd.ms.protobuf"
         ],
         "parameters": [
@@ -209,7 +209,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "schemaName",
             "in": "path",
             "description": "Name of schema.",
             "required": true,
@@ -277,7 +277,7 @@
         }
       }
     },
-    "/$schemaGroups/{groupName}/schemas/{name}/versions": {
+    "/$schemaGroups/{groupName}/schemas/{schemaName}/versions": {
       "get": {
         "operationId": "ListSchemaVersions",
         "summary": "List schema versions.",
@@ -294,7 +294,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "schemaName",
             "in": "path",
             "description": "Name of schema.",
             "required": true,
@@ -331,15 +331,15 @@
         }
       }
     },
-    "/$schemaGroups/{groupName}/schemas/{name}/versions/{version}": {
+    "/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}": {
       "get": {
         "operationId": "GetSchemaByVersion",
         "summary": "Get specific schema versions.",
         "description": "Gets one specific version of one schema.",
         "produces": [
-          "text/plain; charset=utf-8",
           "application/json; serialization=Avro",
           "application/json; serialization=Json",
+          "text/plain; charset=utf-8",
           "text/vnd.ms.protobuf",
           "application/json"
         ],
@@ -355,14 +355,14 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "schemaName",
             "in": "path",
             "description": "Name of schema.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "version",
+            "name": "schemaVersion",
             "in": "path",
             "description": "Version number of specific schema.",
             "required": true,
@@ -406,9 +406,9 @@
                 "type": "string",
                 "description": "The content type for given schema.",
                 "enum": [
-                  "text/plain; charset=utf-8",
                   "application/json; serialization=Avro",
                   "application/json; serialization=Json",
+                  "text/plain; charset=utf-8",
                   "text/vnd.ms.protobuf"
                 ],
                 "x-ms-enum": {
@@ -416,16 +416,16 @@
                   "modelAsString": false,
                   "values": [
                     {
-                      "name": "custom",
-                      "value": "text/plain; charset=utf-8"
-                    },
-                    {
                       "name": "avro",
                       "value": "application/json; serialization=Avro"
                     },
                     {
                       "name": "json",
                       "value": "application/json; serialization=Json"
+                    },
+                    {
+                      "name": "custom",
+                      "value": "text/plain; charset=utf-8"
                     },
                     {
                       "name": "protobuf",
@@ -462,9 +462,9 @@
         "summary": "Get a registered schema by its unique ID reference.",
         "description": "Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.",
         "produces": [
-          "text/plain; charset=utf-8",
           "application/json; serialization=Avro",
           "application/json; serialization=Json",
+          "text/plain; charset=utf-8",
           "text/vnd.ms.protobuf",
           "application/json"
         ],
@@ -516,9 +516,9 @@
                 "type": "string",
                 "description": "The content type for given schema.",
                 "enum": [
-                  "text/plain; charset=utf-8",
                   "application/json; serialization=Avro",
                   "application/json; serialization=Json",
+                  "text/plain; charset=utf-8",
                   "text/vnd.ms.protobuf"
                 ],
                 "x-ms-enum": {
@@ -526,16 +526,16 @@
                   "modelAsString": false,
                   "values": [
                     {
-                      "name": "custom",
-                      "value": "text/plain; charset=utf-8"
-                    },
-                    {
                       "name": "avro",
                       "value": "application/json; serialization=Avro"
                     },
                     {
                       "name": "json",
                       "value": "application/json; serialization=Json"
+                    },
+                    {
+                      "name": "custom",
+                      "value": "text/plain; charset=utf-8"
                     },
                     {
                       "name": "protobuf",
@@ -667,9 +667,9 @@
     "SchemaContentTypeValues": {
       "type": "string",
       "enum": [
-        "text/plain; charset=utf-8",
         "application/json; serialization=Avro",
         "application/json; serialization=Json",
+        "text/plain; charset=utf-8",
         "text/vnd.ms.protobuf"
       ],
       "x-ms-enum": {
@@ -677,16 +677,16 @@
         "modelAsString": false,
         "values": [
           {
-            "name": "custom",
-            "value": "text/plain; charset=utf-8"
-          },
-          {
             "name": "avro",
             "value": "application/json; serialization=Avro"
           },
           {
             "name": "json",
             "value": "application/json; serialization=Json"
+          },
+          {
+            "name": "custom",
+            "value": "text/plain; charset=utf-8"
           },
           {
             "name": "protobuf",
@@ -709,11 +709,15 @@
         "groupName"
       ]
     },
-    "SchemaName": {
+    "SchemaProperties": {
+      "type": "object",
+      "description": "Metadata of a schema."
+    },
+    "SchemasName": {
       "type": "object",
       "description": "Schemas resource.",
       "properties": {
-        "name": {
+        "schemaName": {
           "type": "string",
           "description": "Name of schema.",
           "maxLength": 50,
@@ -722,23 +726,31 @@
         }
       },
       "required": [
-        "name"
+        "schemaName"
       ]
     },
-    "SchemaProperties": {
-      "type": "object",
-      "description": "Metadata of a schema."
-    },
-    "ServiceApiVersions": {
+    "ServiceVersion": {
       "type": "string",
       "description": "Represents the Schema Registry API version to use for requests.",
       "enum": [
+        "2021-10",
+        "2022-10",
         "2023-07-01"
       ],
       "x-ms-enum": {
-        "name": "ServiceApiVersions",
+        "name": "ServiceVersion",
         "modelAsString": true,
         "values": [
+          {
+            "name": "V2021_10",
+            "value": "2021-10",
+            "description": "Azure Schema Registry 2021-10 Version"
+          },
+          {
+            "name": "V2022_10",
+            "value": "2022-10",
+            "description": "Azure Schema Registry 2022-10 Version"
+          },
           {
             "name": "V2023_07_01",
             "value": "2023-07-01",
