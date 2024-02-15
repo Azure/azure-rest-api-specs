@@ -12,7 +12,7 @@ add-credentials: true
 ```
 ## Releases
 
-### 2023-10-01
+### 2024-03-01-preview
 These settings apply only when `--tag=2024-03-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == '2024-03-01-preview'
