@@ -101,6 +101,7 @@
   "paths": {
     "/tilesets": {
       "post": {
+        "summary": "The Tileset Create request creates a tileset from the specified dataset. A tileset contains a set of tiles that can be consumed from the [Get Map Tile](/rest/api/maps/render/get-map-tile) to retrieve custom tiles.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Create request creates a tileset from the specified dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps-creator/dataset/create).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an **optional request body** as [tileset configuration](/rest/api/maps-creator/tileset/create#tilesetconfiguration). The `datasetId` query parameter will be used as the source of the tileset data.\n\nThe Create Tileset API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "Tileset_Create",
         "x-ms-long-running-operation": true,
@@ -145,6 +146,7 @@
         }
       },
       "get": {
+        "summary": "The Tileset List request allows the caller to fetch a list of all tilesets created.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset List request allows the caller to fetch a list of all tilesets created.  \n<br>",
         "operationId": "Tileset_List",
         "x-ms-examples": {
@@ -179,6 +181,7 @@
     },
     "/tilesets/{tilesetId}": {
       "get": {
+        "summary": "The Tileset Get request allows the caller to fetch a tileset.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Get request allows the caller to fetch a tileset.",
         "operationId": "Tileset_Get",
         "x-ms-examples": {
@@ -210,6 +213,7 @@
         }
       },
       "delete": {
+        "summary": "The Tileset Delete request allows the caller to delete a created tileset. You can use this API if a tileset is no longer needed.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Delete request allows the caller to delete a created tileset. You can use this API if a tileset is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `tilesetId` of the tileset to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Tileset Delete API returns a HTTP `204 No Content` response with an empty body, if the tileset was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the tileset with the passed-in `tilesetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Tileset Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
         "operationId": "Tileset_Delete",
         "x-ms-examples": {
@@ -240,6 +244,7 @@
     },
     "/tilesets:fetchConfiguration": {
       "get": {
+        "summary": "The Tileset Get Configuration request allows the caller to get a default [tileset configuration](/rest/api/maps-creator/tileset/get-configuration#tilesetconfiguration) based on the dataset provided. Then the tileset configuration can be used to create custom tileset using the [Tileset Create API](/rest/api/maps-creator/tileset/create).",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Get Configuration request allows the caller to get a default [tileset configuration](/rest/api/maps-creator/tileset/get-configuration#tilesetconfiguration) based on the dataset provided. Then the tileset configuration can be used to create custom tileset using the [Tileset Create API](/rest/api/maps-creator/tileset/create).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.",
         "operationId": "Tileset_GetConfiguration",
         "x-ms-examples": {
@@ -273,6 +278,7 @@
     },
     "/tilesets:validateConfiguration": {
       "post": {
+        "summary": "The Tileset Validate Configuration request allows the caller to validate a [tileset configuration](/rest/api/maps-creator/tileset/validate-configuration#tilesetconfiguration).",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Validate Configuration request allows the caller to validate a [tileset configuration](/rest/api/maps-creator/tileset/validate-configuration#tilesetconfiguration).",
         "operationId": "Tileset_ValidateConfiguration",
         "x-ms-examples": {
@@ -315,7 +321,8 @@
     },
     "/tilesets/operations/{operationId}": {
       "get": {
-        "description": "This path will be obtained from a call to /tilesets/create.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
+        "summary": "This path will be obtained from a call to /tilesets/create. While in progress, an HTTP 200 will be returned with no extra headers - followed by an HTTP 200 with Resource-Location header once successfully completed",
+        "description": "This path will be obtained from a call to /tilesets/create.  While in progress, an HTTP 200 response status code will be returned with no extra headers - followed by an HTTP 200 response status code with Resource-Location header once successfully completed.",
         "operationId": "Tileset_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {

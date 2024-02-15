@@ -127,6 +127,7 @@
   "paths": {
     "/featureStateSets": {
       "post": {
+        "summary": "This POST API allows the user to create a new Stateset and define stateset style using request body.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis POST API allows the user to create a new Stateset and define stateset style using request body.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Feature State API is part of Creator. \n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the Stateset. Like Tileset, Stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that statesetId to post feature state updates and retrieve the current feature states. A feature can have only one state at a given point in time. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. Please refer to the [State Tile documentation](https://docs.microsoft.com/rest/api/maps/render/get-map-state-tile) for more information.",
         "operationId": "FeatureState_CreateStateset",
         "x-ms-examples": {
@@ -170,6 +171,7 @@
         }
       },
       "get": {
+        "summary": "This API allows the caller to fetch a list of all previously successfully created statesets.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n This API allows the caller to fetch a list of all previously successfully created statesets.",
         "operationId": "FeatureState_ListStatesets",
         "x-ms-examples": {
@@ -204,6 +206,7 @@
     },
     "/featureStateSets/{statesetId}": {
       "put": {
+        "summary": "This PUT API allows the user to update the stateset style rules.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis PUT API allows the user to update the stateset style rules.",
         "operationId": "FeatureState_UpdateStateset",
         "x-ms-examples": {
@@ -241,6 +244,7 @@
         }
       },
       "delete": {
+        "summary": "This DELETE API allows the user to delete the stateset and the associated data..",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n This DELETE API allows the user to delete the stateset and the associated data.",
         "operationId": "FeatureState_DeleteStateset",
         "x-ms-examples": {
@@ -269,6 +273,7 @@
         }
       },
       "get": {
+        "summary": "This GET API allows the user to get the stateset Information. The stateset Information includes the datasetId associated to the stateset, and the styles of that stateset.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis GET API allows the user to get the stateset Information.\n\nThe stateset Information includes the datasetId associated to the stateset, and the styles of that stateset.",
         "operationId": "FeatureState_GetStateset",
         "x-ms-examples": {
@@ -303,6 +308,7 @@
     "/featureStateSets/{statesetId}/featureStates/{featureId}": {
       "put": {
         "operationId": "FeatureState_UpdateStates",
+        "summary": "This PUT API allows the user to update the state of the given feature in the given stateset.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis PUT API allows the user to update the state of the given feature in the given stateset.",
         "x-ms-examples": {
           "Update the states of a feature": {
@@ -343,6 +349,7 @@
       },
       "delete": {
         "operationId": "FeatureState_DeleteState",
+        "summary": "This API deletes the state information identified by the StateKeyName parameter for the feature identified by the FeatureId parameter in the the stateset.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n This API deletes the state information identified by the StateKeyName parameter for the feature identified by the FeatureId parameter in the the stateset.",
         "x-ms-examples": {
           "Delete the given feature state": {
@@ -377,6 +384,7 @@
       },
       "get": {
         "operationId": "FeatureState_ListStates",
+        "summary": "This API returns the current state information associated with the given feature in the given stateset.",
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n This API returns the current state information associated with the given feature in the given stateset.",
         "x-ms-examples": {
           "Get the current states of a feature": {
