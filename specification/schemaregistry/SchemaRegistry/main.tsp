@@ -37,12 +37,20 @@ using Azure.Core;
     fullyQualifiedNamespace: url,
   }
 )
-@versioned(ServiceApiVersions)
+@versioned(ServiceVersion)
 @doc("SchemaRegistryClient is a client for registering and retrieving schemas from the Azure Schema Registry service.")
 namespace SchemaRegistry;
 
 @doc("Represents the Schema Registry API version to use for requests.")
-enum ServiceApiVersions {
+enum ServiceVersion {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("Azure Schema Registry 2021-10 Version")
+  V2021_10: "2021-10",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("Azure Schema Registry 2022-10 Version")
+  V2022_10: "2022-10",
+
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("Azure Schema Registry 2023-07-01 Version. This is the default version.")
   V2023_07_01: "2023-07-01",
@@ -160,9 +168,12 @@ op registerSchema is Azure.Core.Foundations.Operation<
 alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
 union SchemaContentTypeValues {
-  custom: "text/plain; charset=utf-8",
   avro: "application/json; serialization=Avro",
+  @added(ServiceVersion.V2022_10)
   json: "application/json; serialization=Json",
+  @added(ServiceVersion.V2022_10)
+  custom: "text/plain; charset=utf-8",
+  @added(ServiceVersion.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
 }
 
