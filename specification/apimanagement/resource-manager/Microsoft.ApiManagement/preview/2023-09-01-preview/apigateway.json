@@ -280,6 +280,45 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/gateway": {
+      "get": {
+        "tags": [
+          "ApiManagementGateway"
+        ],
+        "operationId": "ApiManagementGateway_List",
+        "description": "List all API Management gateways within a subscription.",
+        "x-ms-examples": {
+          "ApiManagementListGatewaysBySubscription": {
+            "$ref": "./examples/ApiManagementListGatewaysBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The API Management gateways list.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -554,10 +593,6 @@
         "sku": {
           "$ref": "#/definitions/ApiManagementGatewaySkuProperties",
           "description": "SKU properties of the API Management gateway."
-        },
-        "identity": {
-          "$ref": "#/definitions/ApiManagementGatewayIdentity",
-          "description": "Managed gateway identity of the API Management gateway."
         },
         "etag": {
           "type": "string",
