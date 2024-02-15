@@ -1351,6 +1351,9 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: deploymentStacks.json
     reason: A deployment stack resource is a proxy location-mapped resource type.
+  - suppress: AvoidAdditionalProperties
+    from: deploymentStacks.json
+    reason: Deployment properties such as 'parameters', 'outputs', and 'template' are dynamic types. For example, properties of the parameters object are defined by the template content.
 ```
 
 ---
