@@ -95,7 +95,7 @@ model Etx {
 
   @visibility("read", "create")
   @doc("License key URI.")
-  licenseKeyUri: string;
+  licenseKeyUri?: string;
 }
 
 @doc("Remote desktop configuration")
