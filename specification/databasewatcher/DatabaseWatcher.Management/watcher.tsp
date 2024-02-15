@@ -7,7 +7,6 @@ import "./sqlDbElasticPoolTarget.tsp";
 import "./sqlMiTarget.tsp";
 import "./sqlVmTarget.tsp";
 import "./sharedPrivateLinkResource.tsp";
-import "./privateLinkResource.tsp";
 
 @service({
   title: "Microsoft.DatabaseWatcher",
