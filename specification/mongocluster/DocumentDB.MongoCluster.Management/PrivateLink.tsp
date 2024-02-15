@@ -1,0 +1,42 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "./common.tsp";
+import "./MongoCluster.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+
+namespace Microsoft.DocumentDB;
+
+@parentResource(MongoCluster)
+model PrivateEndpointConnectionResource
+  is ProxyResource<PrivateEndpointConnectionProperties> {
+  ...PrivateEndpointConnectionParameter;
+}
+
+@armResourceOperations(PrivateEndpointConnectionResource)
+interface PrivateEndpointConnections {
+  /** List existing private connections */
+  listConnections is ArmResourceListByParent<PrivateEndpointConnectionResource>;
+  /** Get a specific private connection */
+  get is ArmResourceRead<PrivateEndpointConnectionResource>;
+  /** Create a Private endpoint connection */
+  create is ArmResourceCreateOrReplaceSync<PrivateEndpointConnectionResource>;
+  /** Delete the private endpoint connection */
+  delete is ArmResourceDeleteSync<PrivateEndpointConnectionResource>;
+}
+
+#suppress "@azure-tools/typespec-providerhub-controller/no-resource-operations" "Expected for private links"
+@parentResource(MongoCluster)
+model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+  ...PrivateLinkResourceParameter;
+}
+
+@armResourceOperations(PrivateLinkResource)
+interface PrivateLinks {
+  /** list private links on the given resource */
+  list is ArmResourceListByParent<PrivateLinkResource>;
+}

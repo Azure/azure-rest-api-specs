@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
 import "./MongoCluster.tsp";
 import "./FirewallRule.tsp";
+import "./PrivateLink.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
