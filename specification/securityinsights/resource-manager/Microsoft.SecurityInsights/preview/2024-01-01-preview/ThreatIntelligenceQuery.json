@@ -142,7 +142,7 @@
       ]
     },
     "ThreatIntelligenceList": {
-      "description": "List all the threat intelligence objects.",
+      "description": "List all the threat intelligence objects on the workspace that match the provided query.",
       "properties": {
         "nextLink": {
           "description": "URL to fetch the next set of threat intelligence objects.",
@@ -150,7 +150,7 @@
           "type": "string"
         },
         "value": {
-          "description": "Array of threat intelligence objects.",
+          "description": "Array of threat intelligence objects on the workspace that match the provided query.",
           "items": {
             "$ref": "#/definitions/TIObject"
           },
@@ -203,60 +203,7 @@
         "lastUpdateMethod": {
           "description": "The name of the method/application that initiated the last write to this TI object.",
           "readOnly": true,
-          "enum": [
-            "TAXII Connector",
-            "ISG Connector",
-            "Sentinel REST API",
-            "TI Matching Connector",
-            "Microsoft TI Connector",
-            "File Import",
-            "Indicator Refresher",
-            "TI Manager",
-            "Threat Intelligence Upload Indicators API",
-            "UploadStixObjectsAPI",
-            "Threat Intelligence Bulk Actions",
-            "Unknown"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "lastUpdateMethod",
-            "values": [
-              {
-                "value": "TAXII Connector"
-              },
-              {
-                "value": "ISG Connector"
-              },
-              {
-                "value": "Sentinel REST API"
-              },
-              {
-                "value": "TI Matching Connector"
-              },
-              {
-                "value": "Microsoft TI Connector"
-              },
-              {
-                "value": "File Import"
-              },
-              {
-                "value": "Indicator Refresher"
-              },
-              {
-                "value": "TI Manager"
-              },
-              {
-                "value": "Threat Intelligence Upload Indicators API"
-              },
-              {
-                "value": "UploadStixObjectsAPI"
-              },
-              {
-                "value": "Threat Intelligence Bulk Actions"
-              }
-            ]
-          }
+          "type": "string"
         },
         "lastModifiedBy": {
           "description": "The UserInfo of the user/entity which last modified this TI object.",
@@ -698,7 +645,6 @@
       "properties": {},
       "type": "object"
     }
-
   },
   "parameters": {
     "Query": {
