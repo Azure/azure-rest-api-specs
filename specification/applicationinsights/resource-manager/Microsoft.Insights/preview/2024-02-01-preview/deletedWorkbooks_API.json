@@ -59,13 +59,13 @@
           "200": {
             "description": "A list containing 0 or more workbook definitions.",
             "schema": {
-              "$ref": "#/definitions/WorkbooksListResult"
+              "$ref": "#/definitions/DeletedWorkbooksListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookError"
+              "$ref": "#/definitions/DeletedWorkbookError"
             }
           }
         },
@@ -81,7 +81,7 @@
     }
   },
   "definitions": {
-    "WorkbookResource": {
+    "DeletedWorkbookResource": {
       "type": "object",
       "description": "An azure resource object",
       "x-ms-azure-resource": true,
@@ -108,14 +108,14 @@
         }
       }
     },
-    "WorkbooksListResult": {
+    "DeletedWorkbooksListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Workbook"
+            "$ref": "#/definitions/DeletedWorkbook"
           },
           "description": "An array of workbooks."
         },
@@ -125,19 +125,19 @@
       },
       "description": "Workbook list result."
     },
-    "Workbook": {
+    "DeletedWorkbook": {
       "description": "A workbook definition.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/WorkbookResource"
+          "$ref": "#/definitions/DeletedWorkbookResource"
         }
       ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a workbook for an Azure resource.",
-          "$ref": "#/definitions/WorkbookProperties"
+          "$ref": "#/definitions/DeletedWorkbookProperties"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
@@ -145,7 +145,7 @@
         }
       }
     },
-    "WorkbookProperties": {
+    "DeletedWorkbookProperties": {
       "description": "Properties that contain a workbook.",
       "type": "object",
       "required": [
@@ -211,17 +211,17 @@
         }
       }
     },
-    "WorkbookError": {
+    "DeletedWorkbookError": {
       "description": "Error response.",
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/WorkbookErrorDefinition",
+          "$ref": "#/definitions/DeletedWorkbookErrorDefinition",
           "description": "The error details."
         }
       }
     },
-    "WorkbookErrorDefinition": {
+    "DeletedWorkbookErrorDefinition": {
       "description": "Error definition.",
       "type": "object",
       "properties": {
@@ -237,12 +237,12 @@
         },
         "innererror": {
           "description": "Internal error details.",
-          "$ref": "#/definitions/WorkbookInnerErrorTrace",
+          "$ref": "#/definitions/DeletedWorkbookInnerErrorTrace",
           "readOnly": true
         }
       }
     },
-    "WorkbookInnerErrorTrace": {
+    "DeletedWorkbookInnerErrorTrace": {
       "description": "Error details",
       "type": "object",
       "properties": {
