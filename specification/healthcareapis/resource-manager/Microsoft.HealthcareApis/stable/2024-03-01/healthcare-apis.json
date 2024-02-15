@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-03-01",
+    "version": "2023-11-01",
     "title": "HealthcareApisClient",
     "description": "Use this API to manage Microsoft HealthcareApis services in your Azure subscription."
   },
@@ -3439,6 +3439,10 @@
         "encryption": {
           "description": "The encryption settings of the DICOM service",
           "$ref": "#/definitions/Encryption"
+        },
+        "storageConfiguration": {
+          "description": "The configuration of external storage account",
+          "$ref": "#/definitions/StorageConfiguration"
         }
       }
     },
@@ -3903,67 +3907,7 @@
           "type": "boolean",
           "description": "If the SMART on FHIR proxy is enabled",
           "readOnly": false
-        },
-        "smartIdentityProviders": {
-          "type": "array",
-          "description": "The array of identity provider configurations for SMART on FHIR authentication.",
-          "readOnly": false,
-          "items": {
-            "$ref": "#/definitions/SmartIdentityProviderConfiguration"
-          },
-          "x-ms-identifiers": []
         }
-      }
-    },
-    "SmartIdentityProviderConfiguration": {
-      "description": "An object to configure an identity provider for use with SMART on FHIR authentication.",
-      "type": "object",
-      "properties": {
-        "authority": {
-          "description": "The identity provider token authority also known as the token issuing authority.",
-          "type": "string"
-        },
-        "applications": {
-          "type": "array",
-          "description": "The array of identity provider applications for SMART on FHIR authentication.",
-          "readOnly": false,
-          "items": {
-            "$ref": "#/definitions/SmartIdentityProviderApplication"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "SmartIdentityProviderApplication": {
-      "description": "An Application configured in the Identity Provider used to access FHIR resources.",
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "The application client id defined in the identity provider. This value will be used to validate bearer tokens against the given authority.",
-          "type": "string"
-        },
-        "audience": {
-          "description": "The audience that will be used to validate bearer tokens against the given authority.",
-          "type": "string"
-        },
-        "allowedDataActions": {
-          "description": "The actions that are permitted to be performed on FHIR resources for the application.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SmartDataActions"
-          }
-        }
-      }
-    },
-    "SmartDataActions": {
-      "type": "string",
-      "description": "The Data Actions that can be enabled for a Smart Identity Provider Application.",
-      "enum": [
-        "Read"
-      ],
-      "x-ms-enum": {
-        "name": "SmartDataActions",
-        "modelAsString": true
       }
     },
     "FhirServiceCorsConfiguration": {
@@ -4153,6 +4097,22 @@
               "readOnly": false
             }
           }
+        }
+      }
+    },
+    "StorageConfiguration": {
+      "description": "The configuration of external storage",
+      "type": "object",
+      "properties": {
+        "storageResourceId": {
+          "type": "string",
+          "description": "The resource id of external storage account.",
+          "readOnly": false
+        },
+        "fileSystemName": {
+          "type": "string",
+          "description": "The filesystem name of external storage account.",
+          "readOnly": false
         }
       }
     },

@@ -7,7 +7,12 @@
     "api-version": "2024-03-01",
     "dicomservice": {
       "location": "westus",
-      "properties": {}
+      "properties": {
+        "storageConfiguration": {
+          "storageResourceId": "/subscriptions/ab309d4e-4c2e-4241-be2e-08e1c8dd4246/resourceGroups/rgname/providers/Microsoft.Storage/storageAccounts/accountname",
+          "fileSystemName": "fileSystemName"
+        }
+      }
     }
   },
   "responses": {
@@ -50,6 +55,10 @@
             "customerManagedKeyEncryption": {
               "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
             }
+          },
+          "storageConfiguration": {
+            "storageResourceId": "/subscriptions/ab309d4e-4c2e-4241-be2e-08e1c8dd4246/resourceGroups/rgname/providers/Microsoft.Storage/storageAccounts/accountname",
+            "fileSystemName": "fileSystemName"
           }
         },
         "identity": {
@@ -81,13 +90,13 @@
             "customerManagedKeyEncryption": {
               "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
             }
-          }
+          },
+          "storageConfiguration": {}
         },
         "identity": {
-          "type": "UserAssigned",
-          "userAssignedIdentities": {
-            "/subscriptions/subid/resourcegroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-mi": {}
-          }
+          "principalId": "2f1f372f-edcf-43f5-aedb-173da3cc5c1e",
+          "tenantId": "abfde7b2-df0f-47e6-aabf-2462b07508dc",
+          "type": "SystemAssigned"
         }
       }
     },
@@ -112,7 +121,8 @@
             "customerManagedKeyEncryption": {
               "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
             }
-          }
+          },
+          "storageConfiguration": {}
         },
         "identity": {
           "type": "UserAssigned",
