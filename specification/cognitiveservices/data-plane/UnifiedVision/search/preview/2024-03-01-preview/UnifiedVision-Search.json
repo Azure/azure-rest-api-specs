@@ -1,0 +1,1227 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Computer Vision Client",
+    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to extract text using Read OCR, caption an image using descriptive natural language, detect objects, people, and more.",
+    "version": "2023-04-01-preview"
+  },
+  "paths": {
+    "/retrieval/indexes/{indexName}": {
+      "put": {
+        "tags": [
+          "IngestionApi"
+        ],
+        "summary": "Creates an index for the documents to be ingested.",
+        "description": "This method creates an index, which can then be used to ingest documents.\r\nAn index needs to be created before ingestion can be performed.",
+        "operationId": "CreateIndex",
+        "consumes": [
+          "application/json-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "indexName",
+            "description": "The name of the index to be created.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body containing the metadata that could be used for searching.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateIngestionIndexRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GetIngestionIndexResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateIndex_MaximumSet_Gen": {
+            "$ref": "./examples/Retrieval_CreateIndex.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "IngestionApi"
+        ],
+        "summary": "Retrieves the index.",
+        "description": "Retrieves the index with the specified name.",
+        "operationId": "GetIndex",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "indexName",
+            "description": "The name of the index to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetIngestionIndexResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetIndex_MaximumSet_Gen": {
+            "$ref": "./examples/Retrieval_GetIndex.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IngestionApi"
+        ],
+        "summary": "Updates an index.",
+        "description": "Updates an index with the specified name.",
+        "operationId": "UpdateIndex",
+        "consumes": [
+          "application/json-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "indexName",
+            "description": "The name of the index to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body containing the updates to be applied to the index.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateIngestionIndexRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetIngestionIndexResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateIndex_MaximumSet_Gen": {
+            "$ref": "./examples/Retrieval_UpdateIndex.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IngestionApi"
+        ],
+        "summary": "Deletes an index.",
+        "description": "Deletes an index and all its associated ingestion documents.",
+        "operationId": "DeleteIndex",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "indexName",
+            "description": "The name of the index to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "DeleteIndex_MaximumSet_Gen": {
+            "$ref": "./examples/Retrieval_DeleteIndex.json"
+          }
+        }
+      }
+    },
+    "/retrieval/indexes": {
+      "get": {
+        "tags": [
+          "IngestionApi"
+        ],
+        "summary": "Retrieves all indexes.",
+        "description": "Retrieves a list of all indexes across all ingestions.",
+        "operationId": "ListIndexes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "Number of datasets to be skipped.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Number of datasets to be returned after skipping.",
+            "type": "integer",
+            "format": "int32",
+            "default": 10,
+            "maximum": 30,
+            "minimum": 1
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetIngestionIndexResponseModelCollectionApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListIndexes_MaximumSet_Gen": {
+            "$ref": "./examples/Retrieval_ListIndexes.json"
+          }
+        }
+      }
+    },
+    "/retrieval/indexes/{indexName}/ingestions/{ingestionName}": {
+      "put": {
+        "tags": [
+          "IngestionApi"
+        ],
+        "summary": "Creates an ingestion for a specific index and ingestion name.",
+        "description": "It can have one of the three modes (add, update or remove).\r\nAdd mode will create an ingestion and process the document.\r\nUpdate mode will update the metadata only. In order to reprocess the document, the ingestion needs to be deleted and recreated.",
+        "operationId": "CreateIngestion",
+        "consumes": [
+          "application/json-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "indexName",
+            "description": "The name of the index to which the ingestion is to be created.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "ingestionName",
+            "description": "The name of the ingestion to be created.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body containing the ingestion request to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateIngestionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/IngestionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateIngestion_MaximumSet_Gen": {
+            "$ref": "./examples/Retrieval_CreateIngestion.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "IngestionApi"
+        ],
+        "summary": "Gets the ingestion status.",
+        "description": "Gets the ingestion status for the specified index and ingestion name.",
+        "operationId": "GetIngestion",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "indexName",
+            "description": "The name of the index for which the ingestion status to be checked.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "ingestionName",
+            "description": "The name of the ingestion to be retrieved.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "in": "query",
+            "name": "detailLevel",
+            "description": "A level to indicate detail level per document ingestion status.",
+            "type": "string",
+            "enum": [
+              "none",
+              "failed",
+              "succeeded",
+              "all"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetIngestion_MaximumSet_Gen": {
+            "$ref": "./examples/Retrieval_GetIngestion.json"
+          }
+        }
+      }
+    },
+    "/retrieval/indexes/{indexName}/ingestions": {
+      "get": {
+        "tags": [
+          "IngestionApi"
+        ],
+        "summary": "Retrieves all ingestions.",
+        "description": "Retrieves all ingestions for the specific index.",
+        "operationId": "ListIngestions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "indexName",
+            "description": "The name of the index for which to retrieve the ingestions.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionResponseModelCollectionApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListIngestions_MaximumSet_Gen": {
+            "$ref": "./examples/Retrieval_ListIngestions.json"
+          }
+        }
+      }
+    },
+    "/retrieval/indexes/{indexName}/documents": {
+      "get": {
+        "tags": [
+          "IngestionApi"
+        ],
+        "summary": "Retrieves all documents.",
+        "description": "Retrieves all documents for the specific index.",
+        "operationId": "ListDocuments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "indexName",
+            "description": "The name of the index for which to retrieve the documents.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "Number of datasets to be skipped.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Number of datasets to be returned after skipping.",
+            "type": "integer",
+            "format": "int32",
+            "default": 10,
+            "maximum": 30,
+            "minimum": 1
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionDocumentResponseModelCollectionApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListDocuments_MaximumSet_Gen": {
+            "$ref": "./examples/Retrieval_ListDocuments.json"
+          }
+        }
+      }
+    },
+    "/retrieval/indexes/{indexName}:queryByText": {
+      "post": {
+        "tags": [
+          "SearchApi"
+        ],
+        "summary": "Performs a text-based search.",
+        "description": "Performs a text-based search on the specified index.",
+        "operationId": "SearchByText",
+        "consumes": [
+          "application/json-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "indexName",
+            "description": "The name of the index to search.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body containing the query and other parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchQueryTextRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchResultDocumentModelCollectionApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchByText_MaximumSet_Gen": {
+            "$ref": "./examples/Retrieval_SearchByText.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateIngestionIndexRequest": {
+      "description": "Represents the create ingestion index request model for the JSON document.",
+      "type": "object",
+      "properties": {
+        "metadataSchema": {
+          "$ref": "#/definitions/MetadataSchema"
+        },
+        "features": {
+          "description": "Gets or sets the list of features for the document. Default is \"vision\".",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feature"
+          }
+        },
+        "userData": {
+          "description": "Gets or sets the user data for the document.",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "CreateIngestionRequest": {
+      "description": "Represents the create ingestion request model for the JSON document.",
+      "type": "object",
+      "properties": {
+        "videos": {
+          "description": "Gets or sets the list of video document ingestion requests in the JSON document.",
+          "maxItems": 100,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionDocumentRequest"
+          }
+        },
+        "moderation": {
+          "description": "Gets or sets the moderation flag, indicating if the content should be moderated.",
+          "type": "boolean"
+        },
+        "documentAuthenticationKind": {
+          "description": "Gets or sets the authentication kind that is be used for downloading the documents.",
+          "enum": [
+            "none",
+            "managedIdentity"
+          ],
+          "type": "string"
+        },
+        "speechTranscriptionLanguage": {
+          "description": "Gets or sets the language to be used in speech transcription.",
+          "type": "string"
+        }
+      }
+    },
+    "DatetimeFilter": {
+      "description": "Represents a datetime filter to apply on a search query.",
+      "required": [
+        "fieldName"
+      ],
+      "type": "object",
+      "properties": {
+        "fieldName": {
+          "description": "Gets or sets the name of the field to filter on.",
+          "maxLength": 36,
+          "minLength": 1,
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Gets or sets the start time of the range to filter on.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "Gets or sets the end time of the range to filter on.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Response returned when an error occurs.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseDetails"
+        }
+      }
+    },
+    "ErrorResponseDetails": {
+      "description": "Error info.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Target of the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "List of detailed errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseDetails"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/ErrorResponseInnerError"
+        }
+      }
+    },
+    "ErrorResponseInnerError": {
+      "description": "Detailed error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/ErrorResponseInnerError"
+        }
+      }
+    },
+    "Feature": {
+      "description": "Represents a feature in the index.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the feature.",
+          "enum": [
+            "vision",
+            "speech",
+            "ocr"
+          ],
+          "type": "string"
+        },
+        "modelVersion": {
+          "description": "Gets or sets the model version of the feature.",
+          "type": "string"
+        },
+        "domain": {
+          "description": "Gets or sets the model domain of the feature.",
+          "enum": [
+            "generic",
+            "medical",
+            "surveillance",
+            "egocentric"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "GetIngestionIndexResponse": {
+      "description": "Represents the get ingestion index response model for the JSON document.",
+      "required": [
+        "createdDateTime",
+        "eTag",
+        "lastModifiedDateTime"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the index name property.",
+          "type": "string"
+        },
+        "metadataSchema": {
+          "$ref": "#/definitions/MetadataSchema"
+        },
+        "userData": {
+          "description": "Gets or sets the user data for the document.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "features": {
+          "description": "Gets or sets the list of features in the index.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feature"
+          }
+        },
+        "eTag": {
+          "description": "Gets or sets the etag.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created date and time property.",
+          "type": "string"
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last modified date and time property.",
+          "type": "string"
+        }
+      }
+    },
+    "GetIngestionIndexResponseModelCollectionApiModel": {
+      "description": "Contains an array of results that may be paginated.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GetIngestionIndexResponse"
+          }
+        },
+        "nextLink": {
+          "description": "A link to the next set of paginated results, if there are more results available; not present otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "IngestionDocumentRequest": {
+      "description": "Represents a document ingestion request in the JSON document.",
+      "required": [
+        "documentUrl",
+        "mode"
+      ],
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "Gets or sets the mode of the ingestion for document.",
+          "enum": [
+            "add",
+            "update",
+            "remove"
+          ],
+          "type": "string"
+        },
+        "documentId": {
+          "description": "Gets or sets the document ID.",
+          "type": "string"
+        },
+        "documentUrl": {
+          "format": "uri",
+          "description": "Gets or sets the document URL. Shared access signature (SAS), if any, will be removed from the URL.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Gets or sets the metadata for the document as a dictionary of name-value pairs.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "userData": {
+          "description": "Gets or sets the user data for the document.",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "IngestionDocumentResponse": {
+      "description": "Represents an ingestion document response object in the JSON document.",
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "description": "Gets or sets the document ID.",
+          "type": "string"
+        },
+        "documentUrl": {
+          "format": "uri",
+          "description": "Gets or sets the document URL. Shared access signature (SAS), if any, will be removed from the URL.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Gets or sets the key-value pairs of metadata.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponseDetails"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created date and time of the document.",
+          "type": "string"
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last modified date and time of the document.",
+          "type": "string"
+        },
+        "userData": {
+          "description": "Gets or sets the user data for the document.",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "IngestionDocumentResponseModelCollectionApiModel": {
+      "description": "Contains an array of results that may be paginated.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionDocumentResponse"
+          }
+        },
+        "nextLink": {
+          "description": "A link to the next set of paginated results, if there are more results available; not present otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "IngestionErrorDetails": {
+      "description": "Represents the ingestion error information for each document.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/IngestionInnerErrorDetails"
+        }
+      }
+    },
+    "IngestionInnerErrorDetails": {
+      "description": "Represents the ingestion inner-error information for each document.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/IngestionInnerErrorDetails"
+        }
+      }
+    },
+    "IngestionResponse": {
+      "description": "Represents the ingestion response model for the JSON document.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the ingestion.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Gets or sets the state of the ingestion.",
+          "enum": [
+            "notStarted",
+            "running",
+            "completed",
+            "failed",
+            "partiallySucceeded"
+          ],
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponseDetails"
+        },
+        "batchName": {
+          "description": "The name of the batch associated with this ingestion.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created date and time of the ingestion.",
+          "type": "string"
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last modified date and time of the ingestion.",
+          "type": "string"
+        },
+        "fileStatusDetails": {
+          "description": "The list of ingestion statuses for each document.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionStatusDetails"
+          }
+        }
+      }
+    },
+    "IngestionResponseModelCollectionApiModel": {
+      "description": "Contains an array of results that may be paginated.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionResponse"
+          }
+        },
+        "nextLink": {
+          "description": "A link to the next set of paginated results, if there are more results available; not present otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "IngestionStatusDetails": {
+      "description": "Represents the ingestion status detail for each document.",
+      "required": [
+        "documentId",
+        "lastUpdateTime",
+        "succeeded"
+      ],
+      "type": "object",
+      "properties": {
+        "lastUpdateTime": {
+          "format": "date-time",
+          "description": "Status update time of the batch chunk.",
+          "type": "string"
+        },
+        "documentId": {
+          "description": "The document ID.",
+          "type": "string"
+        },
+        "documentUrl": {
+          "format": "uri",
+          "description": "The url of the document.",
+          "type": "string"
+        },
+        "succeeded": {
+          "description": "A flag to indicate if inference was successful.",
+          "type": "boolean"
+        },
+        "error": {
+          "$ref": "#/definitions/IngestionErrorDetails"
+        }
+      }
+    },
+    "MetadataSchema": {
+      "description": "Represents the metadata schema for the document.",
+      "required": [
+        "fields"
+      ],
+      "type": "object",
+      "properties": {
+        "fields": {
+          "description": "Gets or sets the list of fields in the metadata schema.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataSchemaField"
+          }
+        }
+      }
+    },
+    "MetadataSchemaField": {
+      "description": "Represents a field in the metadata schema.",
+      "required": [
+        "filterable",
+        "name",
+        "searchable",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the field.",
+          "maxLength": 36,
+          "minLength": 1,
+          "type": "string"
+        },
+        "searchable": {
+          "description": "Gets or sets a value indicating whether the field is searchable.",
+          "type": "boolean"
+        },
+        "filterable": {
+          "description": "Gets or sets a value indicating whether the field is filterable.",
+          "type": "boolean"
+        },
+        "type": {
+          "description": "Gets or sets the type of the field. It could be string or datetime.",
+          "enum": [
+            "string",
+            "datetime"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "SearchFilters": {
+      "description": "Represents the filters to apply on a search query.",
+      "type": "object",
+      "properties": {
+        "stringFilters": {
+          "description": "Gets or sets the string filters to apply on the search query.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StringFilter"
+          }
+        },
+        "datetimeFilters": {
+          "description": "Gets or sets the datetime filters to apply on the search query.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatetimeFilter"
+          }
+        },
+        "featureFilters": {
+          "description": "Gets or sets the feature filters to apply on the search query.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "vision",
+              "speech",
+              "ocr"
+            ],
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SearchQueryTextRequest": {
+      "description": "Represents a search query request model for text-based search.",
+      "required": [
+        "disableMetadataSearch",
+        "queryText",
+        "skip"
+      ],
+      "type": "object",
+      "properties": {
+        "queryText": {
+          "description": "Gets or sets the query text.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "filters": {
+          "$ref": "#/definitions/SearchFilters"
+        },
+        "moderation": {
+          "description": "Gets or sets a boolean value indicating whether the moderation is enabled or disabled.",
+          "type": "boolean"
+        },
+        "top": {
+          "format": "int32",
+          "description": "Gets or sets the number of results to retrieve.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "skip": {
+          "format": "int32",
+          "description": "Gets or sets the number of results to skip.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "additionalIndexNames": {
+          "description": "Gets or sets the additional index names to include in the search query.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disableMetadataSearch": {
+          "description": "Gets or sets a boolean value indicating whether metadata is disabled in the search or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SearchResultDocument": {
+      "description": "Represents a search query response.",
+      "required": [
+        "confidence"
+      ],
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "description": "Gets or sets the ID of the document.",
+          "type": "string"
+        },
+        "documentKind": {
+          "description": "Gets or sets the kind of the document.",
+          "type": "string"
+        },
+        "start": {
+          "description": "Gets or sets the start time of the document. This property is only applicable for video documents.",
+          "type": "string"
+        },
+        "end": {
+          "description": "Gets or sets the end time of the document. This property is only applicable for video documents.",
+          "type": "string"
+        },
+        "best": {
+          "description": "Gets or sets the timestamp of the document with highest relevance score. This property is only applicable for video documents.",
+          "type": "string"
+        },
+        "confidence": {
+          "format": "double",
+          "description": "Gets or sets the confidence score of the document.",
+          "type": "number"
+        },
+        "additionalMetadata": {
+          "description": "Gets or sets the additional metadata related to search.",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "SearchResultDocumentModelCollectionApiModel": {
+      "description": "Contains an array of results that may be paginated.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResultDocument"
+          }
+        },
+        "nextLink": {
+          "description": "A link to the next set of paginated results, if there are more results available; not present otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "StringFilter": {
+      "description": "Represents a string filter to apply on a search query.",
+      "required": [
+        "fieldName",
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "fieldName": {
+          "description": "Gets or sets the name of the field to filter on.",
+          "maxLength": 36,
+          "minLength": 1,
+          "type": "string"
+        },
+        "values": {
+          "description": "Gets or sets the values to filter on.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateIngestionIndexRequest": {
+      "description": "Represents the update ingestion index request model for the JSON document.",
+      "type": "object",
+      "properties": {
+        "metadataSchema": {
+          "$ref": "#/definitions/MetadataSchema"
+        },
+        "userData": {
+          "description": "Gets or sets the user data for the document.",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersion": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Requested API version.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
