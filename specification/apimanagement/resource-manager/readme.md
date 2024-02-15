@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimallpolicies.json
+  - Microsoft.ApiManagement/preview/2023-09-01-preview/apigateway.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimanagement.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimapis.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimapisByTags.json
