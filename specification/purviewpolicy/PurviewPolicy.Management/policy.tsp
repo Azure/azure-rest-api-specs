@@ -39,24 +39,28 @@ model SkipTokenParameter {
 }
 
 /** The objectType of the member. */
-enum ObjectType {
+union ObjectType {
+  string,
+
   /** AAD User object type. */
-  User,
+  "User",
 
   /** AAD Group object type. */
-  Group,
+  "Group",
 
   /** Service Principal object type. */
-  ServicePrincipal,
+  "ServicePrincipal",
 }
 
 /** The effect for rule */
-enum Decision {
+union Decision {
+  string,
+
   /** Access permitted */
-  Permit,
+  "Permit",
 
   /** Access denied */
-  Deny,
+  "Deny",
 }
 
 /** A paginated list of purview RBAC policies */
