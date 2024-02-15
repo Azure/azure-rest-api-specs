@@ -959,6 +959,13 @@
             "description": "Resource 'PrivateEndpointConnectionResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -972,7 +979,11 @@
           "Approves a private endpoint connection on a Mongo Cluster resource.": {
             "$ref": "./examples/MongoClusters_PrivateEndpointConnectionPut.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "PrivateEndpointConnections_Delete",
@@ -1005,8 +1016,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -1022,7 +1044,11 @@
           "Get a private endpoint connection on a Mongo Cluster resource.": {
             "$ref": "./examples/MongoClusters_PrivateEndpointConnectionDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/privateLinkResources": {

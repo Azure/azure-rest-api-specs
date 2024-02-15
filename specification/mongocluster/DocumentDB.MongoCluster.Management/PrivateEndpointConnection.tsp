@@ -24,9 +24,9 @@ interface PrivateEndpointConnections {
   /** Get a specific private connection */
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
   /** Create a Private endpoint connection */
-  create is ArmResourceCreateOrReplaceSync<PrivateEndpointConnectionResource>;
+  create is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnectionResource>;
   /** Delete the private endpoint connection */
-  delete is ArmResourceDeleteSync<PrivateEndpointConnectionResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnectionResource>;
 }
 
 #suppress "@azure-tools/typespec-providerhub-controller/no-resource-operations" "Expected for private links"
