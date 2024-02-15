@@ -9185,6 +9185,7 @@
         "2022-08-01-preview",
         "2023-03-03",
         "2023-03-15",
+        "2023-04-01-preview",
         "2023-05-01-preview",
         "2023-07-07-preview"
       ],
@@ -9229,6 +9230,11 @@
           },
           {
             "name": "v2023_04_01_preview",
+            "value": "2023-04-01-preview",
+            "description": "2023-04-01-preview API Version."
+          },
+          {
+            "name": "v2023_05_01_preview",
             "value": "2023-05-01-preview",
             "description": "2023-05-01-preview API Version."
           },
@@ -11914,18 +11920,24 @@
           },
           "readOnly": true
         },
-        "failuresToTolerateAndRaidLevel": {
-          "$ref": "#/definitions/FttAndRaidLevel",
-          "description": "Failures to tolerate and RAID level in a common property."
+        "failuresToTolerateAndRaidLevelList": {
+          "type": "array",
+          "description": "List of Failures to tolerate and RAID levels in a common property.",
+          "items": {
+            "$ref": "#/definitions/FttAndRaidLevel"
+          }
         },
         "vcpuOversubscription": {
           "type": "number",
           "format": "float",
           "description": "VCPU over subscription."
         },
-        "nodeType": {
-          "$ref": "#/definitions/AzureAvsNodeType",
-          "description": "AVS node type."
+        "nodeTypes": {
+          "type": "array",
+          "description": "AVS node types.",
+          "items": {
+            "$ref": "#/definitions/AzureAvsNodeType"
+          }
         },
         "reservedInstance": {
           "$ref": "#/definitions/AzureReservedInstance",
@@ -11988,6 +12000,15 @@
           "format": "float",
           "description": "Predicted total Storage used in GB.",
           "readOnly": true
+        },
+        "recommendedNodes": {
+          "type": "array",
+          "description": "RecommendedNodes AVS SKU for Assessment.",
+          "items": {
+            "$ref": "#/definitions/AvsRecommendedNode"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "numberOfMachines": {
           "type": "integer",
@@ -12185,6 +12206,64 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "AvsRecommendedNode": {
+      "type": "object",
+      "description": "Details on the Recommended nodes for AVS Assessment.",
+      "properties": {
+        "MonthlyPrice": {
+          "type": "number",
+          "format": "float",
+          "description": "Total monthly cost for type and number of nodes."
+        },
+        "NodeType": {
+          "$ref": "#/definitions/AzureAvsNodeType",
+          "description": "Recommended SKU."
+        },
+        "NodeNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes that will be needed."
+        },
+        "CpuUtilization": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted CPU utilization."
+        },
+        "RamUtilization": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted RAM utilization."
+        },
+        "StorageUtilization": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted storage utilization."
+        },
+        "TotalCpu": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted total CPU cores across the set of nodes."
+        },
+        "TotalRam": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted total RAM used in GB."
+        },
+        "TotalStorage": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted total Storage used in GB."
+        },
+        "PricingModel": {
+          "type": "string",
+          "description": "Pricing model indicates what hour multiplier to use while estimating the Nodes cost."
+        },
+        "FttRaidLevel": {
+          "$ref": "#/definitions/FttAndRaidLevel",
+          "description": "FttRaidLevel recommended for Node."
         }
       }
     },
