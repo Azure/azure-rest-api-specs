@@ -1,0 +1,435 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerApps API Client",
+    "version": "2023-11-02-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/deployments": {
+      "get": {
+        "tags": [
+          "ContainerAppsS2CDeployments"
+        ],
+        "summary": "Get the Deployments in a given Container App.",
+        "operationId": "ContainerAppsS2CDeployments_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully",
+            "schema": {
+              "ref": "#/definitions/DeploymentCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/deployments/{deploymentName}": {
+      "get": {
+        "tags": [
+          "ContainerAppsS2CDeployments"
+        ],
+        "description": "Get a Deployment in a given Container App.",
+        "operationId": "ContainerAppsS2CDeployment_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ContainerAppsS2CDeployments"
+        ],
+        "operationId": "ContainerAppsS2CDeployments_CreateOrUpdate",
+        "description": "Create or update a Container App Deployment Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "deploymentEnvelope",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM create or update operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          "201": {
+            "description": "ARM create or update operation has been started.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ContainerAppsS2CDeployments"
+        ],
+        "operationId": "ContainerAppsS2CDeployments_Update",
+        "description": "Update a Container App Deployment Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "deploymentEnvelope",
+            "in": "body",
+            "required": true,
+            "description": "Resource update parameters.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM update operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          "201": {
+            "description": "ARM update operation has been started.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ContainerAppsS2CDeployments"
+        ],
+        "operationId": "ContainerAppsS2CDeployments_Delete",
+        "description": "Delete a Container App Deployment Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM delete operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          "202": {
+            "description": "ARM delete operation has been started.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "DeploymentCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "ref": "#/definitions/DeploymentResource"
+          },
+          "description": "The deployments in the given Container App."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The definition of a list of deployment resources.",
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentResource": {
+      "type": "object",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/DeploymentProperties",
+            "description": "The resource-specific properties for this resource.",
+            "x-ms-client-flatten": true,
+            "x-ms-mutability": [
+              "read",
+              "create"
+            ]
+          },
+          "identity": {
+            "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "description": "The managed service identities assigned to be used for container app s2c deployment."
+          }
+        },
+        "description": "Information about the SourceToCloud deployment resource.",
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          }
+        ]
+    },
+    "DeploymentProperties": {
+      "type": "object",
+        "properties": {
+          "provisioningState": {
+            "$ref": "#/definitions/DeploymentProvisioningState",
+            "description": "Provisioning state of a deployment resource.",
+            "readOnly": true
+          },
+          "environmentId": {
+            "type": "string",
+            "description": "Resource ID of the container apps environment that the deployment is associated with.",
+            "format": "arm-id"
+          },
+          "containerRegistries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ContainerRegistry"
+            },
+            "x-ms-identifiers": [
+              "containerRegistryServer"
+            ],
+            "description": "List of mappings of container registries and the managed identity used to connect to it."
+          }
+        },
+        "description": "The deployment properties.",
+        "required": [
+          "environmentId"
+        ]
+    },
+    "ContainerRegistry": {
+      "type": "object",
+      "properties": {
+        "containerRegistryServer": {
+          "type": "string",
+          "description": "Login server of the container registry."
+        },
+        "identityResourceId": {
+          "type": "string",
+          "description": "Resource ID of the managed identity.",
+          "format": "arm-id"
+        }
+      },
+      "description": "Model representing a mapping from a container registry to the identity used to connect to it.",
+      "required": [
+        "containerRegistryServer",
+        "identityResourceId"
+      ]
+    },
+    "DeploymentProvisioningState": {
+      "type": "string",
+      "description": "Resource instance provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {
+    "DeploymentNameParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the contianer app deployment.",
+      "minLength": 2,
+      "maxLength": 32,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
