@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DeploymentStacksClient",
-    "description": "The APIs listed in this specification can be used to manage deployment stack resources through the Azure Resource Manager.",
+    "description": "The APIs listed in this specification can be used to manage Deployment stack resources through the Azure Resource Manager.",
     "version": "2024-03-01"
   },
   "host": "management.azure.com",
@@ -40,7 +40,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_ListAtResourceGroup",
-        "description": "Lists all the Deployment Stacks within the specified resource group.",
+        "description": "Lists all the Deployment stacks within the specified Resource Group.",
         "x-ms-examples": {
           "DeploymentStacksResourceGroupList": {
             "$ref": "./examples/DeploymentStackResourceGroupList.json"
@@ -59,7 +59,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of Deployment Stacks.",
+            "description": "OK - Returns an array of Deployment stacks.",
             "schema": {
               "$ref": "#/definitions/DeploymentStackListResult"
             }
@@ -82,7 +82,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_ListAtSubscription",
-        "description": "Lists all the Deployment Stacks within the specified subscription.",
+        "description": "Lists all the Deployment stacks within the specified Subscription.",
         "x-ms-examples": {
           "DeploymentStacksSubscriptionList": {
             "$ref": "./examples/DeploymentStackSubscriptionList.json"
@@ -98,7 +98,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of Deployment Stacks.",
+            "description": "OK - Returns an array of Deployment stacks.",
             "schema": {
               "$ref": "#/definitions/DeploymentStackListResult"
             }
@@ -121,7 +121,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_ListAtManagementGroup",
-        "description": "Lists all the Deployment Stacks within the specified management group.",
+        "description": "Lists all the Deployment stacks within the specified Management Group.",
         "x-ms-examples": {
           "DeploymentStacksManagementGroupList": {
             "$ref": "./examples/DeploymentStackManagementGroupList.json"
@@ -137,7 +137,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of Deployment Stacks.",
+            "description": "OK - Returns an array of Deployment stacks.",
             "schema": {
               "$ref": "#/definitions/DeploymentStackListResult"
             }
@@ -164,7 +164,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "description": "Creates or updates a Deployment Stack.",
+        "description": "Creates or updates a Deployment stack at Resource Group scope.",
         "x-ms-examples": {
           "DeploymentStacksResourceGroupCreateOrUpdate": {
             "$ref": "./examples/DeploymentStackResourceGroupCreate.json"
@@ -190,18 +190,18 @@
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             },
-            "description": "Deployment Stack supplied to the operation."
+            "description": "Deployment stack supplied to the operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - The Deployment Stack update request has succeeded.",
+            "description": "OK - The Deployment stack update request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             }
           },
           "201": {
-            "description": "Deployment Stack created.",
+            "description": "Deployment stack created.",
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             }
@@ -219,7 +219,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_GetAtResourceGroup",
-        "description": "Gets a Deployment Stack with a given name.",
+        "description": "Gets a Deployment stack with a given name at Resource Group scope.",
         "x-ms-examples": {
           "DeploymentStacksResourceGroupGet": {
             "$ref": "./examples/DeploymentStackResourceGroupGet.json"
@@ -241,7 +241,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the Deployment Stack.",
+            "description": "OK - Returns information about the Deployment stack.",
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             }
@@ -259,7 +259,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_DeleteAtResourceGroup",
-        "description": "Deletes a Deployment Stack by name. When operation completes, status code 200 returned without content.",
+        "description": "Deletes a Deployment stack by name at Resource Group scope. When operation completes, status code 200 returned without content.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -291,7 +291,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Deployment Stack deleted."
+            "description": "OK - Deployment stack deleted."
           },
           "202": {
             "description": "Accepted - Check location header for deletion status.",
@@ -302,7 +302,7 @@
             }
           },
           "204": {
-            "description": "Deployment Stack does not exist."
+            "description": "Deployment stack does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -323,7 +323,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "description": "Creates or updates a Deployment Stack.",
+        "description": "Creates or updates a Deployment stack at Subscription scope.",
         "x-ms-examples": {
           "DeploymentStacksSubscriptionCreateOrUpdate": {
             "$ref": "./examples/DeploymentStackSubscriptionCreate.json"
@@ -346,18 +346,18 @@
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             },
-            "description": "Deployment Stack supplied to the operation."
+            "description": "Deployment stack supplied to the operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - The Deployment Stack update request has succeeded.",
+            "description": "OK - The Deployment stack update request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             }
           },
           "201": {
-            "description": "Deployment Stack created.",
+            "description": "Deployment stack created.",
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             }
@@ -375,7 +375,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_GetAtSubscription",
-        "description": "Gets a Deployment Stack with a given name.",
+        "description": "Gets a Deployment stack with a given name at Subscription scope.",
         "x-ms-examples": {
           "DeploymentStacksSubscriptionGet": {
             "$ref": "./examples/DeploymentStackSubscriptionGet.json"
@@ -394,7 +394,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the Deployment Stack.",
+            "description": "OK - Returns information about the Deployment stack.",
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             }
@@ -412,7 +412,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_DeleteAtSubscription",
-        "description": "Deletes a Deployment Stack by name. When operation completes, status code 200 returned without content.",
+        "description": "Deletes a Deployment stack by name at Subscription scope. When operation completes, status code 200 returned without content.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -441,7 +441,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Deployment Stack deleted."
+            "description": "OK - Deployment stack deleted."
           },
           "202": {
             "description": "Accepted - Check location header for deletion status.",
@@ -452,7 +452,7 @@
             }
           },
           "204": {
-            "description": "Deployment Stack does not exist."
+            "description": "Deployment stack does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -473,7 +473,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "description": "Creates or updates a Deployment Stack.",
+        "description": "Creates or updates a Deployment stack at Management Group scope.",
         "x-ms-examples": {
           "DeploymentStacksManagementGroupCreateOrUpdate": {
             "$ref": "./examples/DeploymentStackManagementGroupCreate.json"
@@ -496,18 +496,18 @@
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             },
-            "description": "Deployment Stack supplied to the operation."
+            "description": "Deployment stack supplied to the operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - The Deployment Stack update request has succeeded.",
+            "description": "OK - The Deployment stack update request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             }
           },
           "201": {
-            "description": "Deployment Stack created.",
+            "description": "Deployment stack created.",
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             }
@@ -525,7 +525,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_GetAtManagementGroup",
-        "description": "Gets a Deployment Stack with a given name.",
+        "description": "Gets a Deployment stack with a given name at Management Group scope.",
         "x-ms-examples": {
           "DeploymentStacksManagementGroupGet": {
             "$ref": "./examples/DeploymentStackManagementGroupGet.json"
@@ -544,7 +544,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the Deployment Stack.",
+            "description": "OK - Returns information about the Deployment stack.",
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             }
@@ -562,7 +562,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_DeleteAtManagementGroup",
-        "description": "Deletes a Deployment Stack by name. When operation completes, status code 200 returned without content.",
+        "description": "Deletes a Deployment stack by name at Management Group scope. When operation completes, status code 200 returned without content.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -594,7 +594,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Deployment Stack deleted."
+            "description": "OK - Deployment stack deleted."
           },
           "202": {
             "description": "Accepted - Check location header for deletion status.",
@@ -605,7 +605,7 @@
             }
           },
           "204": {
-            "description": "Deployment Stack does not exist."
+            "description": "Deployment stack does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -622,7 +622,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_ExportTemplateAtResourceGroup",
-        "description": "Exports the template used to create the deployment stack.",
+        "description": "Exports the template used to create the Deployment stack at Resource Group scope.",
         "x-ms-examples": {
           "DeploymentStacksResourceGroupExportTemplate": {
             "$ref": "./examples/DeploymentStackExportTemplate.json"
@@ -664,7 +664,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_ExportTemplateAtSubscription",
-        "description": "Exports the template used to create the deployment stack.",
+        "description": "Exports the template used to create the Deployment stack at Subscription scope.",
         "x-ms-examples": {
           "DeploymentStacksSubscriptionExportTemplate": {
             "$ref": "./examples/DeploymentStackSubscriptionExportTemplate.json"
@@ -703,7 +703,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_ExportTemplateAtManagementGroup",
-        "description": "Exports the template used to create the deployment stack.",
+        "description": "Exports the template used to create the Deployment stack at Management Group scope.",
         "x-ms-examples": {
           "DeploymentStacksManagementGroupExportTemplate": {
             "$ref": "./examples/DeploymentStackManagementGroupExportTemplate.json"
@@ -742,7 +742,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_PreflightValidateStackAtResourceGroup",
-        "description": "Runs preflight validation on the deployment stack template to verify its acceptance to Azure Resource Manager.",
+        "description": "Runs preflight validation on the Resource Group scoped Deployment stack template to verify its acceptance to Azure Resource Manager.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -772,7 +772,7 @@
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             },
-            "description": "Deployment Stack to validate."
+            "description": "Deployment stack to validate."
           }
         ],
         "responses": {
@@ -799,7 +799,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_PreflightValidateStackAtSubscription",
-        "description": "Runs preflight validation on the deployment stack template to verify its acceptance to Azure Resource Manager.",
+        "description": "Runs preflight validation on the Subscription scoped Deployment stack template to verify its acceptance to Azure Resource Manager.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -826,7 +826,7 @@
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             },
-            "description": "Deployment Stack to validate."
+            "description": "Deployment stack to validate."
           }
         ],
         "responses": {
@@ -853,7 +853,7 @@
           "DeploymentStacks"
         ],
         "operationId": "DeploymentStacks_PreflightValidateStackAtManagementGroup",
-        "description": "Runs preflight validation on the deployment stack template to verify its acceptance to Azure Resource Manager.",
+        "description": "Runs preflight validation on the Management Group scoped Deployment stack template to verify its acceptance to Azure Resource Manager.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -880,7 +880,7 @@
             "schema": {
               "$ref": "#/definitions/DeploymentStack"
             },
-            "description": "Deployment Stack to validate."
+            "description": "Deployment stack to validate."
           }
         ],
         "responses": {
@@ -918,7 +918,7 @@
             "read",
             "create"
           ],
-          "description": "The location of the deployment stack. It cannot be changed after creation. It must be one of the supported Azure locations."
+          "description": "The location of the Deployment stack. It cannot be changed after creation. It must be one of the supported Azure locations."
         },
         "tags": {
           "type": "object",
@@ -978,7 +978,7 @@
         },
         "actionOnUnmanage": {
           "type": "object",
-          "description": "Defines the behavior of resources that are not managed immediately after the stack is updated.",
+          "description": "Defines the behavior of resources that are no longer managed after the stack is updated or deleted.",
           "required": [
             "resources"
           ],
@@ -1009,7 +1009,7 @@
         "description": {
           "type": "string",
           "maxLength": 4096,
-          "description": "Deployment stack description."
+          "description": "Deployment stack description. Max length of 4096 characters."
         },
         "denySettings": {
           "type": "object",
@@ -1050,7 +1050,7 @@
           "items": {
             "$ref": "#/definitions/ResourceReference"
           },
-          "description": "An array of resources that were detached during the most recent update."
+          "description": "An array of resources that were detached during the most recent Deployment stack update. Detached means that the resource was removed from the template, but no relevant deletion operations were specified. So, the resource still exists while no longer being associated with the stack."
         },
         "deletedResources": {
           "type": "array",
@@ -1058,7 +1058,7 @@
           "items": {
             "$ref": "#/definitions/ResourceReference"
           },
-          "description": "An array of resources that were deleted during the most recent update."
+          "description": "An array of resources that were deleted during the most recent Deployment stack update. Deleted means that the resource was removed from the template and relevant deletion operations were specified."
         },
         "failedResources": {
           "type": "array",
@@ -1066,7 +1066,7 @@
           "items": {
             "$ref": "#/definitions/ResourceReferenceExtended"
           },
-          "description": "An array of resources that failed to reach goal state during the most recent update."
+          "description": "An array of resources that failed to reach goal state during the most recent update. Each resourceId is accompanied by an error message."
         },
         "resources": {
           "type": "array",
@@ -1084,17 +1084,17 @@
         "outputs": {
           "type": "object",
           "readOnly": true,
-          "description": "The outputs of the underlying deployment."
+          "description": "The outputs of the deployment resource created by the deployment stack."
         },
         "duration": {
           "type": "string",
           "readOnly": true,
-          "description": "The duration of the deployment stack update."
+          "description": "The duration of the last successful Deployment stack update."
         }
       }
     },
     "DeploymentStackListResult": {
-      "description": "List of deployment stacks.",
+      "description": "List of Deployment stacks.",
       "type": "object",
       "properties": {
         "value": {
@@ -1102,7 +1102,7 @@
           "items": {
             "$ref": "#/definitions/DeploymentStack"
           },
-          "description": "An array of deployment stacks."
+          "description": "An array of Deployment stacks."
         },
         "nextLink": {
           "readOnly": true,
@@ -1113,7 +1113,7 @@
     },
     "ResourceReference": {
       "type": "object",
-      "description": "The resource Id model.",
+      "description": "The resourceId model.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1213,10 +1213,10 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
         }
       ],
-      "description": "The resource Id extended model."
+      "description": "The resourceId extended model. This is used to document failed resources with a resourceId and a corresponding error."
     },
     "DenySettings": {
-      "description": "Defines how resources deployed by the deployment stack are locked.",
+      "description": "Defines how resources deployed by the Deployment stack are locked.",
       "type": "object",
       "required": [
         "mode"
@@ -1224,7 +1224,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "denySettings Mode.",
+          "description": "denySettings Mode that defines denied actions.",
           "enum": [
             "denyDelete",
             "denyWriteAndDelete",
@@ -1240,7 +1240,7 @@
               },
               {
                 "value": "denyWriteAndDelete",
-                "description": "Authorized users can only read from a resource, but cannot modify or delete it."
+                "description": "Authorized users can read from a resource, but cannot modify or delete it."
               },
               {
                 "value": "none",
@@ -1265,7 +1265,7 @@
         },
         "applyToChildScopes": {
           "type": "boolean",
-          "description": "DenySettings will be applied to child scopes."
+          "description": "DenySettings will be applied to child resource scopes of every managed resource with a deny assignment."
         }
       }
     },
@@ -1299,7 +1299,7 @@
     },
     "DeploymentStackTemplateDefinition": {
       "type": "object",
-      "description": "Export Template specific properties of the Stack.",
+      "description": "Export Template specific properties of the Deployment stack.",
       "properties": {
         "template": {
           "type": "object",
@@ -1321,11 +1321,11 @@
         },
         "id": {
           "type": "string",
-          "description": "The resource id of a Template Spec. Use either the id or uri property, but not both."
+          "description": "The resourceId of a Template Spec. Use either the id or uri property, but not both."
         },
         "relativePath": {
           "type": "string",
-          "description": "The relativePath property can be used to deploy a linked template at a location relative to the parent. If the parent template was linked with a TemplateSpec, this will reference an artifact in the TemplateSpec.  If the parent was linked with a URI, the child deployment will be a combination of the parent and relativePath URIs"
+          "description": "The relativePath property can be used to deploy a linked template at a location relative to the parent. If the parent template was linked with a TemplateSpec, this will reference an artifact in the TemplateSpec.  If the parent was linked with a URI, the child deployment will be a combination of the parent and relativePath URIs."
         },
         "queryString": {
           "type": "string",
@@ -1378,7 +1378,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Azure Key Vault resource id."
+          "description": "Azure Key Vault resourceId."
         }
       },
       "required": [
@@ -1419,7 +1419,7 @@
         "delete",
         "detach"
       ],
-      "description": "Specifies the action that should be taken on the resource when the deployment stack is deleted. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.",
+      "description": "Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.",
       "x-ms-enum": {
         "name": "DeploymentStacksDeleteDetachEnum",
         "modelAsString": true
@@ -1433,7 +1433,7 @@
       "required": true,
       "type": "string",
       "pattern": "^[-\\w\\._\\(\\)]+$",
-      "description": "Management Group.",
+      "description": "Management Group id.",
       "minLength": 1,
       "maxLength": 90,
       "x-ms-parameter-location": "method"
@@ -1463,7 +1463,7 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "method",
-      "description": "Flag to indicate delete rather than detach for the resources."
+      "description": "Flag to indicate delete rather than detach for unmanaged resources."
     },
     "DeleteResourceGroupParameter": {
       "name": "unmanageAction.ResourceGroups",
@@ -1479,7 +1479,7 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "method",
-      "description": "Flag to indicate delete rather than detach for the resource groups."
+      "description": "Flag to indicate delete rather than detach for unmanaged resource groups."
     },
     "DeleteManagementGroupParameter": {
       "name": "unmanageAction.ManagementGroups",
@@ -1495,7 +1495,7 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "method",
-      "description": "Flag to indicate delete rather than detach for the management groups."
+      "description": "Flag to indicate delete rather than detach for unmanaged management groups."
     }
   }
 }
