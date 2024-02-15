@@ -745,7 +745,7 @@
           "SqlVirtualMachines"
         ],
         "description": "Starts SQL best practices Assessment with Disk Config rules on SQL virtual machine",
-        "operationId": "SqlVirtualMachines_StartDiskConfigAssessment",
+        "operationId": "SqlVirtualMachines_FetchDCAssessment",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -756,6 +756,7 @@
           {
             "name": "runDiskConfigRules",
             "in": "query",
+            "description": "Boolean to run disk config assesment. Use false to fetch past assessment.",
             "required": false,
             "type": "boolean"
           },
