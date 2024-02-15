@@ -169,10 +169,13 @@ alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
 union SchemaContentTypeValues {
   avro: "application/json; serialization=Avro",
+
   @added(ServiceVersion.V2022_10)
   json: "application/json; serialization=Json",
+
   @added(ServiceVersion.V2022_10)
   custom: "text/plain; charset=utf-8",
+
   @added(ServiceVersion.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
 }
