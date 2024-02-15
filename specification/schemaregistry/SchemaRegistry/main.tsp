@@ -269,7 +269,7 @@ model SchemaGroup {
 @parentResource(SchemaGroup)
 @resource("schemas")
 model SchemasName {
-  @key("name")
+  @key("schemaName")
   @doc("Name of schema.")
   @visibility("read")
   @maxLength(50)

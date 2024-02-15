@@ -5,7 +5,7 @@
     "endpoint": "mynamespace.servicebus.windows.net",
     "groupName": "sample-sr-group",
     "schemaName": "sample-schema-name",
-    "schemaContent": "{\"type\":\"record\",\"name\":\"ExampleUser\",\"namespace\":\"com.azure.schemaregistry.samples\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"favoriteNumber\",\"type\":\"int\"}]}",
+    "content": "{\"type\":\"record\",\"name\":\"ExampleUser\",\"namespace\":\"com.azure.schemaregistry.samples\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"favoriteNumber\",\"type\":\"int\"}]}",
     "api-version": "2021-10"
   },
   "responses": {
@@ -17,17 +17,6 @@
         "Schema-Group-Name": "sample-sr-group",
         "Schema-Name": "sample-schema-name",
         "Schema-Version": 3
-      }
-    },
-    "415": {
-      "headers": {
-        "x-ms-error-code": "InvalidSchemaType"
-      },
-      "body": {
-        "error": {
-          "code": "InvalidSchemaType",
-          "message": "Invalid schema type for PUT request. 'not-valid' is not supported. TrackingId:a20c52d6-9818-4748-b91a-aad9ca35212e_G23, SystemTracker:endpoint:$schemaGroups/sample-sr-group/schemas/sample-schema-name, Timestamp:2021-11-10T07:53:30"
-        }
       }
     }
   }
