@@ -23,7 +23,7 @@ using Azure.Core.Traits;
   title: "Azure Machine Learning Services",
 })
 @server(
-  "{endpoint}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices",
+  "{endpoint}/genericasset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices",
   "Machinelearning Services Asset APIs",
   {
     @doc("""
