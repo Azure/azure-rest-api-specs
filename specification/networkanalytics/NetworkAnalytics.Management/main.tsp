@@ -1427,6 +1427,7 @@ model DataProductOffer is TrackedResource<DataProductOfferProperties> {
   @doc("The data product offer resource name")
   @key("dataProductOfferName")
   @segment("dataProductOffers")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
