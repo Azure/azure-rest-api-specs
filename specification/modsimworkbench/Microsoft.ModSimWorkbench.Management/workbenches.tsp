@@ -50,7 +50,8 @@ model Workbench is TrackedResource<WorkbenchProperties> {
 }
 
 @armResourceOperations
-interface Workbenches extends BaseResource<Workbench, WorkbenchProperties> {
+interface Workbenches
+  extends BaseResourceOperations<Workbench, WorkbenchProperties> {
   listByResourceGroup is ArmResourceListByParent<Workbench>;
   listBySubscription is ArmListBySubscription<Workbench>;
 }

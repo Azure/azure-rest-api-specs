@@ -39,7 +39,7 @@ model WorkloadProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Fixing this would be a breaking change."
   @visibility("read")
   @doc("The chamber workload private IP address.")
-  privateIP: string; // TODO: Should be "privateIp"
+  privateIP?: string; // TODO: Should be "privateIp"
 
   @visibility("read", "create")
   @doc("The chamber workload zone.")
@@ -59,5 +59,5 @@ model Workload is TrackedResource<WorkloadProperties> {
 
 @armResourceOperations
 interface Workloads
-  extends NestedResource<Workload, WorkloadProperties>,
+  extends NestedResourceOperations<Workload, WorkloadProperties>,
     Restartable<Workload> {}

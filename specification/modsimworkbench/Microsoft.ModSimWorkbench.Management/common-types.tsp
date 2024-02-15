@@ -58,7 +58,7 @@ enum ProvisioningState {
 model ProvisioningStateProperty {
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState: ProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("The power state of a resource.")
@@ -118,13 +118,13 @@ model ResultProperty {
 }
 
 @doc("Common interface for all tracked resources")
-interface ChamberProxyResource<T extends ProxyResourceBase> {
+interface ProxyResourceOperations<T extends ProxyResourceBase> {
   get is ArmResourceRead<T>;
   list is ArmResourceListByParent<T>;
 }
 
 @doc("Common interface for all tracked resources")
-interface BaseResource<
+interface BaseResourceOperations<
   T extends TrackedResourceBase,
   P extends TypeSpec.Reflection.Model
 > {
@@ -135,10 +135,10 @@ interface BaseResource<
 }
 
 @doc("Common interface of all nested resources")
-interface NestedResource<
+interface NestedResourceOperations<
   T extends TrackedResourceBase,
   P extends TypeSpec.Reflection.Model
-> extends BaseResource<T, P> {
+> extends BaseResourceOperations<T, P> {
   list is ArmResourceListByParent<T>;
 }
 

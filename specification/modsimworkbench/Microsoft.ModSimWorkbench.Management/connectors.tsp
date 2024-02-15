@@ -46,10 +46,10 @@ model AccessConfiguration {
 
   @visibility("read")
   @doc("Access URL.")
-  accessUrl: string;
+  accessUrl?: string;
 
   @visibility("read") // TODO: Remove from RP code then delete from spec
-  @doc("IP address.")
+  @doc("Load balancer IP address.")
   ipAddress?: string;
 
   @visibility("read", "create", "update") // TODO: Determine how RP handles patch connectorSubnetId which is not yet implemented.
@@ -79,19 +79,19 @@ enum CopyPastePermission {
 model Etx {
   @visibility("read")
   @doc("Connection node count")
-  connectionNodeCount: int32;
+  connectionNodeCount?: int32;
 
   @visibility("read")
   @doc("License activated")
-  licenseActivated: LicenseActivated;
+  licenseActivated?: LicenseActivated;
 
   @visibility("read")
   @doc("URL of ETX Server for Azure AD app.")
-  replyUrlEtx: string;
+  replyUrlEtx?: string;
 
   @visibility("read")
   @doc("URL of OTDS for Azure AD app.")
-  replyUrlOtds: string;
+  replyUrlOtds?: string;
 
   @visibility("read", "create")
   @doc("License key URI.")
@@ -102,7 +102,7 @@ model Etx {
 model RemoteDesktop {
   @visibility("read", "create")
   @doc("ETX configuration")
-  etx: Etx;
+  etx?: Etx;
 }
 
 @doc("Access configuration properties.")
@@ -140,7 +140,7 @@ model ConnectorProperties {
 
   @visibility("read", "create")
   @doc("Remote desktop configuration.")
-  remoteDesktop: RemoteDesktop;
+  remoteDesktop?: RemoteDesktop;
 
   @visibility("read", "create", "update")
   @doc("Access configuration properties.")
@@ -160,7 +160,7 @@ model Connector is TrackedResource<ConnectorProperties> {
 
 @armResourceOperations
 interface Connectors
-  extends NestedResource<Connector, ConnectorProperties>,
+  extends NestedResourceOperations<Connector, ConnectorProperties>,
     Restartable<Connector> {
   @doc("Add license key to connector")
   licenseAdd is ArmResourceActionAsync<Connector, LicenseKeyParameters, never>;

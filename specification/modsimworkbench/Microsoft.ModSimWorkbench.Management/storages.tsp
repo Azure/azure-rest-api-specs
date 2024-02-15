@@ -36,7 +36,7 @@ model StorageProperties {
 
   @visibility("read")
   @doc("Directory where the chamber storage volume mounted.")
-  localMountPath: string;
+  localMountPath?: string;
 
   @visibility("read", "create", "update")
   @doc("Performance tier of the chamber storage.")
@@ -55,4 +55,5 @@ model Storage is TrackedResource<StorageProperties> {
 }
 
 @armResourceOperations
-interface Storages extends NestedResource<Storage, StorageProperties> {}
+interface Storages
+  extends NestedResourceOperations<Storage, StorageProperties> {}

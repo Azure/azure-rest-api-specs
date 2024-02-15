@@ -130,15 +130,15 @@ model ChamberProperties {
 
   @visibility("read")
   @doc("License service settings.")
-  licenseServices: LicenseServices;
+  licenseServices?: LicenseServices;
 
   @visibility("read")
   @doc("Directory for the chamber data pipeline inbound. E.g. /mount/datapipeline/datain")
-  dataPipelineInboundPath: string;
+  dataPipelineInboundPath?: string;
 
   @visibility("read")
   @doc("Directory for the chamber data pipeline inbound. E.g. /mount/datapipeline/dataout")
-  dataPipelineOutboundPath: string;
+  dataPipelineOutboundPath?: string;
 
   @visibility("read", "create")
   @doc("SKU name.")
@@ -170,7 +170,7 @@ model GetUploadUri {
 
 @armResourceOperations
 interface Chambers
-  extends NestedResource<Chamber, ChamberProperties>,
+  extends NestedResourceOperations<Chamber, ChamberProperties>,
     Restartable<Chamber> {
   @doc("Restart license service ")
   licenseRestart is ArmResourceActionAsync<

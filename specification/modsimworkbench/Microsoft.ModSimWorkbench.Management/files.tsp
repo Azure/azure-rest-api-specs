@@ -72,7 +72,7 @@ model FileProperties {
 
   @visibility("read")
   @doc("The resource ID of the chamber data pipeline request. Populated only if requested.")
-  requestId: string;
+  requestId?: string;
 
   @visibility("read")
   @doc("The Linux File System path for the chamber data pipeline file.")
@@ -99,7 +99,7 @@ model File is ProxyResource<FileProperties> {
 }
 
 @armResourceOperations
-interface Files extends ChamberProxyResource<File> {
+interface Files extends ProxyResourceOperations<File> {
   @doc("Manage a chamber data pipeline file.")
   manage is ArmResourceActionAsync<File, FileManageParameters, ResultProperty>; // TODO: Document meaning of result.
 

@@ -102,15 +102,15 @@ model FileRequestProperties {
 
   @visibility("read")
   @doc("Details of file request approval.")
-  approve: FileRequestApproval;
+  approve?: FileRequestApproval;
 
   @visibility("read")
   @doc("Details of file request download.")
-  download: FileRequestDownload;
+  download?: FileRequestDownload;
 
   @visibility("read")
   @doc("Internal meta-data associated with file request download.")
-  internalMetadata: FileRequestInternalMetadata;
+  internalMetadata?: FileRequestInternalMetadata;
 }
 
 @doc("FileRequest resource.")
@@ -131,7 +131,7 @@ model DownloadUriResponse {
 }
 
 @armResourceOperations
-interface FileRequests extends ChamberProxyResource<FileRequest> {
+interface FileRequests extends ProxyResourceOperations<FileRequest> {
   @doc("Manage a chamber data pipeline file request.")
   manage is ArmResourceActionAsync<
     FileRequest,
