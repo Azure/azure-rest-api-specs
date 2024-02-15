@@ -18346,6 +18346,7 @@
     },
     "FttAndRaidLevel": {
       "type": "string",
+      "description": "FTT and RAID Level.",
       "enum": [
         "Unknown",
         "Ftt1Raid1",
@@ -18356,7 +18357,39 @@
       ],
       "x-ms-enum": {
         "name": "FttAndRaidLevel",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown FTT and RAID Level."
+          },
+          {
+            "name": "Ftt1Raid1",
+            "value": "Ftt1Raid1",
+            "description": "FTT 1 and RAID Level 1."
+          },
+          {
+            "name": "Ftt1Raid5",
+            "value": "Ftt1Raid5",
+            "description": "FTT 1 and RAID Level 5."
+          },
+          {
+            "name": "Ftt2Raid1",
+            "value": "Ftt2Raid1",
+            "description": "FTT 2 and RAID Level 1."
+          },
+          {
+            "name": "Ftt2Raid6",
+            "value": "Ftt2Raid6",
+            "description": "FTT 2 and RAID Level 6."
+          },
+          {
+            "name": "Ftt3Raid1",
+            "value": "Ftt3Raid1",
+            "description": "FTT 3 and RAID Level 1."
+          }
+        ]
       }
     },
     "Group": {
@@ -21040,6 +21073,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of nodes.",
+          "readOnly": true
+        },
+        "failuresToTolerateAndRaidLevel": {
+          "$ref": "#/definitions/FttAndRaidLevel",
+          "description": "Failures to tolerate and RAID level for the Node.",
           "readOnly": true
         }
       }
