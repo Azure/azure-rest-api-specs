@@ -22,42 +22,104 @@
             },
             "properties": {
               "deviceType": "HCI",
-              "deviceConfiguration": {
-                "nicDetails": [
-                  {
-                    "adapterName": "vmanagement",
-                    "interfaceDescription": "Hyper-V Virtual Ethernet Adapter",
-                    "componentId": "vms_mp",
-                    "driverVersion": "10.0.25398.1",
-                    "ip4Address": "192.168.200.92",
-                    "subnetMask": "255.255.255.0",
-                    "defaultGateway": "192.168.200.1",
-                    "dnsServers": [
-                      "192.168.200.222"
+              "deviceMetadata": null,
+              "reportedProperties": {
+                "networkProfile": {
+                  "nicDetails": [
+                    {
+                      "adapterName": "vmanagement",
+                      "interfaceDescription": "Hyper-V Virtual Ethernet Adapter",
+                      "componentId": "vms_mp",
+                      "driverVersion": "10.0.25398.1",
+                      "ip4Address": "192.168.200.92",
+                      "subnetMask": "255.255.255.0",
+                      "defaultGateway": "192.168.200.1",
+                      "dnsServers": [
+                        "192.168.200.222"
+                      ],
+                      "defaultIsolationId": "0",
+                      "slot": "0",
+                      "macAddress": "000000000041",
+                      "switchName": null,
+                      "nicType": "Virtual",
+                      "vlanId": "0"
+                    }
+                  ],
+                  "switchDetails": [
+                    {
+                      "switchName": "vmanagement",
+                      "switchType": "External"
+                    }
+                  ],
+                  "hostNetwork": {
+                    "intents": [
+                      {
+                        "intentName": "managementcomputestorage",
+                        "scope": 0,
+                        "intentType": 14,
+                        "isComputeIntentSet": true,
+                        "isStorageIntentSet": true,
+                        "isOnlyStorage": false,
+                        "isManagementIntentSet": true,
+                        "isStretchIntentSet": false,
+                        "isOnlyStretch": false,
+                        "isNetworkIntentType": true,
+                        "trafficType": [
+                          "Compute",
+                          "Storage",
+                          "Management"
+                        ],
+                        "intentAdapters": [
+                          "ethernet",
+                          "ethernet2"
+                        ],
+                        "overrideVirtualSwitchConfiguration": true,
+                        "virtualSwitchConfigurationOverrides": {
+                          "enableIov": true,
+                          "loadBalancingAlgorithm": null
+                        },
+                        "overrideQosPolicy": true,
+                        "qosPolicyOverrides": {
+                          "priorityValue8021Action_Cluster": null,
+                          "priorityValue8021Action_SMB": null,
+                          "bandwidthPercentage_SMB": null
+                        },
+                        "overrideAdapterProperty": true,
+                        "adapterPropertyOverrides": {
+                          "jumboPacket": null,
+                          "networkDirect": "0",
+                          "networkDirectTechnology": null
+                        }
+                      }
                     ],
-                    "defaultIsolationId": "0",
-                    "slot": "0",
-                    "macAddress": "000000000041",
-                    "switchName": null,
-                    "nicType": "Virtual",
-                    "vlanId": "0"
+                    "storageNetworks": [
+                      {
+                        "name": "StorageIntent1",
+                        "networkAdapterName": "ethernet",
+                        "storageVlanId": "8",
+                        "storageAdapterIPInfo": [
+                          {
+                            "physicalNode": "v-host1",
+                            "ipv4Address": "192.168.120.192",
+                            "subnetMask": "255.255.244.0"
+                          }
+                        ]
+                      }
+                    ],
+                    "storageConnectivitySwitchless": false,
+                    "enableStorageAutoIp": false
                   }
-                ],
-                "deviceMetadata": null,
-                "systemInfo": {
-                  "bootType": "UEFI"
+                },
+                "osProfile": {
+                  "systemInfo": {
+                    "bootType": "UEFI"
+                  }
                 },
                 "sbeDeploymentPackageInfo": {
                   "code": "NewerThanLatestPublished",
                   "message": "The SBE package at path 'C:\\SBE' with version 4.1.2312.10 is published later than the latest SBE manifest published for online discovery. ",
                   "sbeManifest": "PEFwcGxpY2Fi"
-                },
-                "switchDetails": [
-                  {
-                    "switchName": "vmanagement",
-                    "switchType": "External"
-                  }
-                ]
+                }
               }
             }
           }
