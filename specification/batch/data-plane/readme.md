@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2023-11.18.0-preview` is specified
 
 ```yaml $(tag) == 'package-2023-11.18.0-preview'
 input-file:
-  - Microsoft.Batch/preview/2023-11-01.18.0/BatchService.json
+  - Azure.Batch/preview/2023-11-01.18.0/BatchService.json
 ```
 
 ### Tag: package-2023-11
@@ -468,5 +468,5 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
-  - $(this-folder)/Microsoft.Batch/preview/2023-11-01.18.0/BatchService.json
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
