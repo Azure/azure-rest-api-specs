@@ -51,7 +51,7 @@ operations returns various properties of each Azure LargeStorage instance.
   listBySubscription is ArmListBySubscription<AzureLargeStorageInstance>;
 }
 
-@@projectedName(AzureLargeStorageInstances.update::parameters.properties,
-  "json",
+@@encodedName(AzureLargeStorageInstances.update::parameters.properties,
+  "application/json",
   "tagsParameter"
 );

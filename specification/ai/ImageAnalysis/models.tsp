@@ -82,7 +82,7 @@ The first caption always applies to the whole image.
 model DenseCaptionsResult {
   @doc("The list of image captions.")
   @minItems(1)
-  @projectedName("python", "list")
+  @clientName("list", "python")
   values: Array<DenseCaption>;
 }
 
@@ -221,7 +221,7 @@ model ImageMetadata {
 model ObjectsResult {
   @doc("A list of physical object detected in an image and their location.")
   @minItems(0)
-  @projectedName("python", "list")
+  @clientName("list", "python")
   values: Array<DetectedObject>;
 }
 
@@ -229,7 +229,7 @@ model ObjectsResult {
 model PeopleResult {
   @doc("A list of people detected in an image and their location.")
   @minItems(0)
-  @projectedName("python", "list")
+  @clientName("list", "python")
   values: Array<DetectedPerson>;
 }
 
@@ -248,7 +248,7 @@ These regions preserve as much content as possible from the analyzed image, with
 model SmartCropsResult {
   @doc("A list of crop regions.")
   @minItems(1)
-  @projectedName("python", "list")
+  @clientName("list", "python")
   values: Array<CropRegion>;
 }
 
@@ -277,7 +277,7 @@ that appear in the image.
 model TagsResult {
   @doc("A list of tags.")
   @minItems(0)
-  @projectedName("python", "list")
+  @clientName("list", "python")
   values: Array<DetectedTag>;
 }
 

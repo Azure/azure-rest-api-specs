@@ -38,93 +38,84 @@ enum Versions {
   v2024_03_01: "2024-03-01",
 }
 
-@@projectedName(Apis.createOrUpdate::parameters.resource, "json", "payload");
+@@encodedName(Apis.createOrUpdate::parameters.resource, "application/json", "payload")
 @@clientName(Apis.createOrUpdate::parameters.resource, "payload");
 
-@@projectedName(ApiDefinitions.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ApiDefinitions.createOrUpdate::parameters.resource,
+  "application/json",
   "payload"
 );
-@@projectedName(ApiDefinitions.createOrUpdate::parameters.resource,
-  "client",
-  "payload"
-);
-
-@@projectedName(ApiVersions.createOrUpdate::parameters.resource,
-  "json",
-  "payload"
-);
-@@projectedName(ApiVersions.createOrUpdate::parameters.resource,
-  "client",
+@@clientName(ApiDefinitions.createOrUpdate::parameters.resource,
   "payload"
 );
 
-@@projectedName(Deployments.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ApiVersions.createOrUpdate::parameters.resource,
+  "application/json",
   "payload"
 );
-@@projectedName(Deployments.createOrUpdate::parameters.resource,
-  "client",
-  "payload"
-);
-
-@@projectedName(Environments.createOrUpdate::parameters.resource,
-  "json",
-  "payload"
-);
-@@projectedName(Environments.createOrUpdate::parameters.resource,
-  "client",
+@@clientName(ApiVersions.createOrUpdate::parameters.resource,
   "payload"
 );
 
-@@projectedName(MetadataSchemas.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(Deployments.createOrUpdate::parameters.resource,
+  "application/json",
   "payload"
 );
-@@projectedName(MetadataSchemas.createOrUpdate::parameters.resource,
-  "client",
+@@clientName(Deployments.createOrUpdate::parameters.resource,
   "payload"
 );
 
-@@projectedName(Services.update::parameters.properties, "json", "payload");
+@@encodedName(Environments.createOrUpdate::parameters.resource,
+  "application/json",
+  "payload"
+);
+@@clientName(Environments.createOrUpdate::parameters.resource,
+  "payload"
+);
+
+@@encodedName(MetadataSchemas.createOrUpdate::parameters.resource,
+  "application/json",
+  "payload"
+);
+@@clientName(MetadataSchemas.createOrUpdate::parameters.resource,
+  "payload"
+);
+
+@@encodedName(Services.update::parameters.properties, "application/json", "payload");
 @@clientName(Services.update::parameters.properties, "payload");
 
-@@projectedName(Workspaces.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(Workspaces.createOrUpdate::parameters.resource,
+  "application/json",
   "payload"
 );
-@@projectedName(Workspaces.createOrUpdate::parameters.resource,
-  "client",
-  "payload"
-);
-
-@@projectedName(ApiDefinitions.importSpecification::parameters.body,
-  "json",
+@@clientName(Workspaces.createOrUpdate::parameters.resource,
   "payload"
 );
 
-@@projectedName(ApiDefinitions.importSpecification::parameters.body,
-  "client",
+@@encodedName(ApiDefinitions.importSpecification::parameters.body,
+  "application/json",
   "payload"
 );
 
-@@projectedName(ApiDefinitions.exportSpecification::parameters.body,
-  "json",
+@@clientName(ApiDefinitions.importSpecification::parameters.body,
   "payload"
 );
 
-@@projectedName(ApiDefinitions.exportSpecification::parameters.body,
-  "client",
+@@encodedName(ApiDefinitions.exportSpecification::parameters.body,
+  "application/json",
   "payload"
 );
 
-@@projectedName(Services.exportMetadataSchema::parameters.body,
-  "json",
+@@clientName(ApiDefinitions.exportSpecification::parameters.body,
   "payload"
 );
 
-@@projectedName(Services.exportMetadataSchema::parameters.body,
-  "client",
+@@encodedName(Services.exportMetadataSchema::parameters.body,
+  "application/json",
+  "payload"
+);
+
+@@clientName(Services.exportMetadataSchema::parameters.body,
   "payload"
 );
 

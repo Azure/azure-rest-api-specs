@@ -66,21 +66,21 @@ interface CancerProfilingClient {
 @@clientName(Fhir.R4.ConditionStage, "Fhir_R4_ConditionStage", "csharp");
 @@clientName(Fhir.R4.Observation, "Fhir_R4_Observation", "java");
 @@clientName(Fhir.R4.Observation, "Fhir_R4_Observation", "csharp");
-@@projectedName(Fhir.R4.ObservationReferenceRange,
-  "java",
-  "Fhir_R4_ObservationReferenceRange"
+@@clientName(Fhir.R4.ObservationReferenceRange,
+  "Fhir_R4_ObservationReferenceRange",
+  "java"
 );
-@@projectedName(Fhir.R4.ObservationReferenceRange,
+@@clientName(Fhir.R4.ObservationReferenceRange,
+  "Fhir_R4_ObservationReferenceRange",
+  "csharp"
+);
+@@encodedName(Fhir.R4.ObservationComponent,
+  "Fhir_R4_ObservationComponent",
+  "java"
+);
+@@encodedName(Fhir.R4.ObservationComponent,
+  "Fhir_R4_ObservationComponent",
   "csharp",
-  "Fhir_R4_ObservationReferenceRange"
-);
-@@projectedName(Fhir.R4.ObservationComponent,
-  "java",
-  "Fhir_R4_ObservationComponent"
-);
-@@projectedName(Fhir.R4.ObservationComponent,
-  "csharp",
-  "Fhir_R4_ObservationComponent"
 );
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "java");
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "csharp");

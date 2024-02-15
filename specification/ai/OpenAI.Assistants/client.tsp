@@ -10,16 +10,16 @@ namespace Azure.AI.OpenAI.Assistants;
 
 // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
 // operation that exposes the underlying data directly.
-@@projectedName(AssistantDeletionStatus,
-  "csharp",
-  "InternalAssistantDeletionStatus"
+@@clientName(AssistantDeletionStatus,
+  "InternalAssistantDeletionStatus",
+  "csharp"
 );
 @@access(deleteAssistant, Access.internal, "csharp");
 @@clientName(deleteAssistant, "InternalDeleteAssistant", "csharp");
 @@access(AssistantFileDeletionStatus, Access.internal, "csharp");
-@@projectedName(AssistantFileDeletionStatus,
-  "csharp",
-  "InternalAssistantFileDeletionStatus"
+@@clientName(AssistantFileDeletionStatus,
+  "InternalAssistantFileDeletionStatus",
+  "csharp"
 );
 @@access(deleteAssistantFile, Access.internal, "csharp");
 @@clientName(deleteAssistantFile, "InternalUnlinkAssistantFile", "csharp");
@@ -60,40 +60,40 @@ namespace Azure.AI.OpenAI.Assistants;
 // SubmitToolOutputsAction: include .tool_calls directly rather than via an intermediate .details.
 
 @@access(SubmitToolOutputsDetails, Access.internal);
-@@projectedName(SubmitToolOutputsDetails,
-  "csharp",
-  "InternalSubmitToolOutputsDetails"
+@@clientName(SubmitToolOutputsDetails,
+  "InternalSubmitToolOutputsDetails",
+  "csharp"
 );
-@@projectedName(SubmitToolOutputsAction.submitToolOutputs,
-  "csharp",
-  "InternalDetails"
+@@clientName(SubmitToolOutputsAction.submitToolOutputs,
+  "InternalDetails",
+  "csharp"
 );
 
 // RequiredFunctionToolCall, RunStepFunctionToolCall: include name/arguments/output directly
 
 @@access(RunStepFunctionToolCallDetails, Access.internal);
-@@projectedName(RunStepFunctionToolCallDetails,
-  "csharp",
-  "InternalRunStepFunctionToolCallDetails"
+@@clientName(RunStepFunctionToolCallDetails,
+  "InternalRunStepFunctionToolCallDetails",
+  "csharp"
 );
 @@clientName(RequiredFunctionToolCall.function, "InternalDetails", "csharp");
 @@access(RequiredFunctionToolCallDetails, Access.internal);
-@@projectedName(RequiredFunctionToolCallDetails,
-  "csharp",
-  "InternalRequiredFunctionToolCallDetails"
+@@clientName(RequiredFunctionToolCallDetails,
+  "InternalRequiredFunctionToolCallDetails",
+  "csharp"
 );
 @@clientName(RunStepFunctionToolCall.function, "InternalDetails", "csharp");
 
 // RunStepCodeInterpreterToolCall: include input/outputs directly
 
 @@access(RunStepCodeInterpreterToolCallDetails, Access.internal);
-@@projectedName(RunStepCodeInterpreterToolCallDetails,
-  "csharp",
-  "InternalCodeInterpreterToolCallDetails"
+@@clientName(RunStepCodeInterpreterToolCallDetails,
+  "InternalCodeInterpreterToolCallDetails",
+  "csharp"
 );
-@@projectedName(RunStepCodeInterpreterToolCall.codeInterpreter,
-  "csharp",
-  "InternalDetails"
+@@clientName(RunStepCodeInterpreterToolCall.codeInterpreter,
+  "InternalDetails",
+  "csharp"
 );
 
 // MessageTextContent: text/annotations can also merge
@@ -105,25 +105,25 @@ namespace Azure.AI.OpenAI.Assistants;
 // MessageTextFileCitationAnnotation: file_id/quote don't need another type
 
 @@access(MessageTextFileCitationDetails, Access.internal);
-@@projectedName(MessageTextFileCitationDetails,
-  "csharp",
-  "InternalMessageTextFileCitationDetails"
+@@clientName(MessageTextFileCitationDetails,
+  "InternalMessageTextFileCitationDetails",
+  "csharp"
 );
-@@projectedName(MessageTextFileCitationAnnotation.fileCitation,
-  "csharp",
-  "InternalDetails"
+@@clientName(MessageTextFileCitationAnnotation.fileCitation,
+  "InternalDetails",
+  "csharp"
 );
 
 // MessageTextFilePathAnnotation: file_id doesn't need a separate details client type
 
 @@access(MessageTextFilePathDetails, Access.internal);
-@@projectedName(MessageTextFilePathDetails,
-  "csharp",
-  "InternalMessageTextFilePathDetails"
+@@clientName(MessageTextFilePathDetails,
+  "InternalMessageTextFilePathDetails",
+  "csharp"
 );
-@@projectedName(MessageTextFilePathAnnotation.filePath,
-  "csharp",
-  "InternalDetails"
+@@clientName(MessageTextFilePathAnnotation.filePath,
+  "InternalDetails",
+  "csharp"
 );
 
 // MessageImageFileContent: *two* levels of intermediate structure can be squashed to bring file_id to the parent
@@ -132,14 +132,14 @@ namespace Azure.AI.OpenAI.Assistants;
 
 @@access(MessageImageFileDetails, Access.internal);
 @@access(MessageImageFileIdDetails, Access.internal);
-@@projectedName(MessageImageFileDetails,
-  "csharp",
-  "InternalMessageImageFileDetails"
+@@clientName(MessageImageFileDetails,
+  "InternalMessageImageFileDetails",
+  "csharp"
 );
 @@clientName(MessageImageFileContent.imageFile, "InternalDetails", "csharp");
-@@projectedName(MessageImageFileIdDetails,
-  "csharp",
-  "InternalMessageImageFileIdDetails"
+@@clientName(MessageImageFileIdDetails,
+  "InternalMessageImageFileIdDetails",
+  "csharp"
 );
 @@clientName(MessageImageFileDetails.fileId, "InternalDetails", "csharp");
 
@@ -168,18 +168,18 @@ namespace Azure.AI.OpenAI.Assistants;
 @@clientName(ThreadMessage.content, "ContentItems", "csharp");
 @@clientName(MessageTextDetails.value, "Text", "csharp");
 @@clientName(CreateRunOptions.`model`, "OverrideModelName", "csharp");
-@@projectedName(CreateRunOptions.instructions,
-  "csharp",
-  "OverrideInstructions"
+@@clientName(CreateRunOptions.instructions,
+  "OverrideInstructions",
+  "csharp"
 );
 @@clientName(CreateRunOptions.tools, "OverrideTools", "csharp");
-@@projectedName(CreateAndRunThreadOptions.`model`,
-  "csharp",
-  "OverrideModelName"
+@@clientName(CreateAndRunThreadOptions.`model`,
+  "OverrideModelName",
+  "csharp"
 );
-@@projectedName(CreateAndRunThreadOptions.instructions,
-  "csharp",
-  "OverrideInstructions"
+@@clientName(CreateAndRunThreadOptions.instructions,
+  "OverrideInstructions",
+  "csharp"
 );
 @@clientName(CreateAndRunThreadOptions.tools, "OverrideTools", "csharp");
 // From https://platform.openai.com/docs/assistants/how-it-works

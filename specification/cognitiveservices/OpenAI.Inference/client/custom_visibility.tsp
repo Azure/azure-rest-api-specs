@@ -44,36 +44,36 @@ using Azure.ClientGenerator.Core;
 );
 
 // Remap "model" nomenclature to "DeploymentName" in appropriate containers; comments should clarify the dual use
-@@projectedName(Azure.OpenAI.ImageGenerationOptions.`model`,
-  "csharp",
-  "DeploymentName"
+@@clientName(Azure.OpenAI.ImageGenerationOptions.`model`,
+  "DeploymentName",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.ChatResponseMessage.context,
-  "csharp",
-  "AzureExtensionsContext"
+@@clientName(Azure.OpenAI.ChatResponseMessage.context,
+  "AzureExtensionsContext",
+  "csharp"
 );
 
 @@clientName(Azure.OpenAI.AudioTranscriptionFormat.json, "Simple", "csharp");
 
-@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.verbose_json,
-  "csharp",
-  "Verbose"
+@@clientName(Azure.OpenAI.AudioTranscriptionFormat.verbose_json,
+  "Verbose",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.text,
-  "csharp",
-  "InternalPlainText"
+@@clientName(Azure.OpenAI.AudioTranscriptionFormat.text,
+  "InternalPlainText",
+  "csharp"
 );
 
 @@clientName(Azure.OpenAI.AudioTranslationFormat.json, "Simple", "csharp");
 
-@@projectedName(Azure.OpenAI.AudioTranslationFormat.verbose_json,
-  "csharp",
-  "Verbose"
+@@clientName(Azure.OpenAI.AudioTranslationFormat.verbose_json,
+  "Verbose",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.AudioTranslationFormat.text,
-  "csharp",
-  "InternalPlainText"
+@@clientName(Azure.OpenAI.AudioTranslationFormat.text,
+  "InternalPlainText",
+  "csharp"
 );

@@ -104,7 +104,7 @@ op ArmResourceActionNoBody<
   ...TRequest,
 ): ArmAcceptedLroResponse | TResponse | ErrorResponse;
 
-@@projectedName(AzureLargeInstances.update::parameters.properties,
-  "json",
+@@encodedName(AzureLargeInstances.update::parameters.properties,
+  "application/json",
   "tagsParameter"
 );

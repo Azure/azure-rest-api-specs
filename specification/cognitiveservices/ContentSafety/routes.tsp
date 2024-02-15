@@ -88,8 +88,7 @@ interface BlockOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@@projectedName(Azure.Core.Foundations.ResourceBody.resource,
-  "client",
+@@clientName(Azure.Core.Foundations.ResourceBody.resource,
   "options"
 );
 

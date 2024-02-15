@@ -305,7 +305,7 @@ model ErrorResponse {
 }
 
 @doc("The error object.")
-@projectedName("csharp", "DocumentIntelligenceError")
+@clientName("DocumentIntelligenceError", "csharp")
 model Error {
   @doc("One of a server-defined set of error codes.")
   code: string;
@@ -332,7 +332,7 @@ model InnerError {
   message?: string;
 
   @doc("Inner error.")
-  @projectedName("csharp", "InnerErrorObject")
+  @clientName("InnerErrorObject", "csharp")
   innererror?: InnerError;
 }
 
@@ -860,7 +860,7 @@ model DocumentLanguage {
 }
 
 @doc("An object describing the location and semantic content of a document.")
-@projectedName("csharp", "AnalyzedDocument")
+@clientName("AnalyzedDocument", "csharp")
 model Document {
   @doc("Document type.")
   @minLength(2)
