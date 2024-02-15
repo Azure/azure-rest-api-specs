@@ -2812,7 +2812,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedKey"
+              "$ref": "#/definitions/ConnectionSharedKey"
             },
             "description": "Parameters supplied to the Begin Set vpn site link connection Shared key operation throughNetwork resource provider."
           },
@@ -2908,7 +2908,7 @@
           "200": {
             "description": "Request successful. The operation Reset shared key of VpnLink connection.",
             "schema": {
-              "$ref": "#/definitions/ConnectionResetSharedKey"
+              "$ref": "#/definitions/SharedKey"
             }
           },
           "202": {
@@ -10018,9 +10018,6 @@
       }
     },
     "SharedKey": {
-      "required": [
-        "KeyValue"
-      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -10042,10 +10039,9 @@
     },
     "SharedKeyProperties": {
       "properties": {
-        "value": {
+        "KeyValue": {
           "type": "string",
-          "description": "The VpnLink connection shared key value.",
-          "x-ms-secret": true
+          "description": "The VpnLink connection shared key value."
         },
         "keyLength": {
           "type": "integer",
@@ -10056,21 +10052,6 @@
         }
       },
       "description": "Response for get VpnLink connection shared key value service call."
-    },
-    "ConnectionResetSharedKey": {
-      "properties": {
-        "keyLength": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 128,
-          "description": "The VpnLink connection reset shared key length, should between 1 and 128."
-        }
-      },
-      "required": [
-        "keyLength"
-      ],
-      "description": "The VpnLink connection reset shared key."
     },
     "ListVpnLinkConnectionsSharedKeyResult": {
       "description": "Result of the request to list VpnLink connection shared keys. It contains a list of VpnLink connection shared keys and a URL nextLink to get the next set of results.",
@@ -10087,6 +10068,38 @@
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
+    },
+    "ConnectionSharedKey": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The VpnLink connection shared key value."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "required": [
+        "value"
+      ],
+      "description": "Response for get VpnLink connection shared key value service call."
+    },
+    "ConnectionResetSharedKey": {
+      "properties": {
+        "keyLength": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 128,
+          "description": "The VpnLink connection reset shared key length, should between 1 and 128."
+        }
+      },
+      "required": [
+        "keyLength"
+      ],
+      "description": "The VpnLink connection reset shared key."
     }
   }
 }
