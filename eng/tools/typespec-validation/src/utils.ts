@@ -1,6 +1,7 @@
 import { access, stat } from "fs/promises";
 import { exec } from "child_process";
 import defaultPath, { PlatformPath } from "path";
+import { TsvHost } from "./tsv-host.js";
 
 export async function runCmd(cmd: string, cwd: string) {
   console.log(`run command:${cmd}`);
@@ -32,4 +33,26 @@ export function normalizePath(folder: string, path: PlatformPath = defaultPath) 
     .split(path.sep)
     .join("/")
     .replace(/^([a-z]):/, (_match, driveLetter) => driveLetter.toUpperCase() + ":");
+}
+
+export async function gitDiffTopSpecFolder(host: TsvHost, folder: string) {
+  const git = host.gitOperation(folder);
+  let topSpecFolder = folder.replace(/(^.*specification\/[^\/]*)(.*)/, "$1");
+  let stdOutput = `Running git diff on folder ${topSpecFolder}`;
+  let gitStatus = await git.status(["--porcelain", topSpecFolder]);
+
+  let success = true;
+  let errorOutput: string | undefined;
+
+  if (!gitStatus.isClean()) {
+    success = false;
+    errorOutput = `Files generated: ${gitStatus.not_added}\n`;
+    errorOutput += `Files modified: ${gitStatus.modified}`;
+  }
+
+  return {
+    success: success,
+    stdOutput: stdOutput,
+    errorOutput: errorOutput,
+  };
 }

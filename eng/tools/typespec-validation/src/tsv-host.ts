@@ -9,7 +9,9 @@ export interface TsvHost {
 }
 
 export interface IGitOperation {
-  status(options?: string[]): Promise<{ isClean(): boolean; modified: string[] }>;
+  status(
+    options?: string[],
+  ): Promise<{ isClean(): boolean; modified: string[]; not_added: string[] }>;
   diff(): Promise<string>;
   revparse(option: string): Promise<string>;
 }

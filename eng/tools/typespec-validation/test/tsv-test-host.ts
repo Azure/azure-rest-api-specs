@@ -20,6 +20,7 @@ export class TsvTestHost implements TsvHost {
       status: () => {
         return Promise.resolve({
           modified: [],
+          not_added: [],
           isClean: () => true,
         });
       },

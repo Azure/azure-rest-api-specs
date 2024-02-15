@@ -2,6 +2,7 @@ import path from "path";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
+import { gitDiffTopSpecFolder } from "../utils.js";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -42,6 +43,14 @@ export class CompileRule implements Rule {
       }
       stdOutput += stdout;
       errorOutput += stderr;
+    }
+
+    const gitDiffResult = await gitDiffTopSpecFolder(host, folder);
+    stdOutput += gitDiffResult.stdOutput;
+    if (!gitDiffResult.success) {
+      success = false;
+      errorOutput += gitDiffResult.errorOutput;
+      errorOutput += `\nFiles has been gerenate/changed after tsp compile, please ensure all files are included in the branch.`;
     }
 
     return {

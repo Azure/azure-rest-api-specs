@@ -1,6 +1,7 @@
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
+import { gitDiffTopSpecFolder } from "../utils.js";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
@@ -10,9 +11,17 @@ export class FormatRule implements Rule {
     // Format parent folder to include shared files
 
     let [err, stdOutput, errorOutput] = await host.runCmd(`npx tsp format "../**/*.tsp"`, folder);
+
+    const gitDiffResult = await gitDiffTopSpecFolder(host, folder);
+    stdOutput += gitDiffResult.stdOutput;
+    if (!gitDiffResult.success) {
+      errorOutput += gitDiffResult.errorOutput;
+      errorOutput += `\nFiles has been gerenate/changed after tsp format, please ensure all files are included in the branch.`;
+    }
+
     // Failing on both err and errorOutput because of known bug in tsp format where it returns 0 on failed formatting
     // https://github.com/microsoft/typespec/issues/2323
-    let success = !err && !errorOutput;
+    let success = !err && !errorOutput && gitDiffResult.success;
     return {
       success: success,
       stdOutput: stdOutput,

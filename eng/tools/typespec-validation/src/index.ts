@@ -3,7 +3,6 @@ import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
-import { GitDiffRule } from "./rules/git-diff.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
@@ -38,7 +37,6 @@ export async function main() {
     new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
-    new GitDiffRule(),
   ];
   let success = true;
   for (let i = 0; i < rules.length; i++) {
