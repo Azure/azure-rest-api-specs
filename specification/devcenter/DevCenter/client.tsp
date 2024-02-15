@@ -68,3 +68,6 @@ interface EnvironmentClientOperations {
   getEnvironmentDefinition is DevCenterService.EnvironmentsOperations.getEnvironmentDefinition;
   listEnvironmentTypes is DevCenterService.EnvironmentsOperations.listEnvironmentTypes;
 }
+
+@@access(DevCenterService.DevBox, Access.public);
+@@usage(DevCenterService.DevBox, Usage.input | Usage.output);
