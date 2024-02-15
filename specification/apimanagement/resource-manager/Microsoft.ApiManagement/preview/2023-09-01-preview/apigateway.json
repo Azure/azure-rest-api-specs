@@ -405,6 +405,26 @@
       },
       "description": "Base Properties of an API Management gateway resource description."
     },
+    "ApiManagementGatewayListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiManagementGatewayResource"
+          },
+          "description": "Result of the List API Management gateway operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of API Management services."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The response of the List API Management gateway operation."
+    },
     "ApiVersionConstraint": {
       "type": "object",
       "properties": {
