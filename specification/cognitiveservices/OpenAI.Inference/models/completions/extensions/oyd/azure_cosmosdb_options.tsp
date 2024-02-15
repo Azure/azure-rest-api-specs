@@ -1,4 +1,5 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "./../../azure_chat_extensions.tsp";
 import "./common_options.tsp";
 import "./vector_search.tsp";
@@ -6,6 +7,7 @@ import "./vector_search.tsp";
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @added(ServiceApiVersions.v2023_12_01_Preview)
@@ -35,19 +37,19 @@ model AzureCosmosDBChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
   @doc("The MongoDB vCore database name to use with Azure Cosmos DB.")
-  @projectedName("csharp", "DatabaseName")
+  @clientName("DatabaseName", "csharp")
   databaseName: string;
 
   @doc("The name of the Azure Cosmos DB resource container.")
-  @projectedName("csharp", "ContainerName")
+  @clientName("ContainerName", "csharp")
   containerName: string;
 
   @doc("The MongoDB vCore index name to use with Azure Cosmos DB.")
-  @projectedName("csharp", "IndexName")
+  @clientName("IndexName", "csharp")
   indexName: string;
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
-  @projectedName("csharp", "FieldMappingOptions")
+  @clientName("FieldMappingOptions", "csharp")
   fieldsMapping: AzureCosmosDBFieldMappingOptions;
 
   @doc("The embedding dependency for vector search.")
@@ -59,26 +61,26 @@ model AzureCosmosDBChatExtensionParameters {
 @added(ServiceApiVersions.v2023_12_01_Preview)
 model AzureCosmosDBFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
-  @projectedName("csharp", "TitleFieldName")
+  @clientName("TitleFieldName", "csharp")
   titleField?: string;
 
   @doc("The name of the index field to use as a URL.")
-  @projectedName("csharp", "UrlFieldName")
+  @clientName("UrlFieldName", "csharp")
   urlField?: string;
 
   @doc("The name of the index field to use as a filepath.")
-  @projectedName("csharp", "FilepathFieldName")
+  @clientName("FilepathFieldName", "csharp")
   filepathField?: string;
 
   @doc("The names of index fields that should be treated as content.")
-  @projectedName("csharp", "ContentFieldNames")
+  @clientName("ContentFieldNames", "csharp")
   contentFields: string[];
 
   @doc("The separator pattern that content fields should use.")
-  @projectedName("csharp", "ContentFieldSeparator")
+  @clientName("ContentFieldSeparator", "csharp")
   contentFieldsSeparator?: string;
 
   @doc("The names of fields that represent vector data.")
-  @projectedName("csharp", "VectorFieldNames")
+  @clientName("VectorFieldNames", "csharp")
   vectorFields: string[];
 }

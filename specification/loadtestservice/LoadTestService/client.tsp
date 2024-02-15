@@ -25,7 +25,7 @@ interface AdministrationOperations {
   listTestFiles is LoadTestAdministration.listTestFiles;
   listTests is LoadTestAdministration.listTests;
   #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
-  @projectedName("python", "BeginUploadTestFile")
+  @clientName("BeginUploadTestFile", "python")
   uploadTestFile is LoadTestAdministration.uploadTestFile;
   deleteTestFile is LoadTestAdministration.deleteTestFile;
   deleteTest is LoadTestAdministration.deleteTest;
@@ -37,7 +37,7 @@ interface AdministrationOperations {
   service: Microsoft.LoadTestService,
 })
 interface TestRunOperations {
-  @projectedName("python", "BeginTestRun")
+  @clientName("BeginTestRun", "python")
   createOrUpdateTestRun is LoadTestRun.createOrUpdateTestRun;
   createOrUpdateAppComponents is LoadTestRun.createOrUpdateAppComponents;
   createOrUpdateServerMetricsConfig is LoadTestRun.createOrUpdateServerMetricsConfig;
@@ -47,11 +47,11 @@ interface TestRunOperations {
   getTestRun is LoadTestRun.getTestRun;
   getTestRunFile is LoadTestRun.getTestRunFile;
   listMetricDimensionValues is LoadTestRun.listMetricDimensionValues;
-  @projectedName("python", "get_metric_definitions")
-  @projectedName("java", "getMetricDefinitions")
+  @clientName("get_metric_definitions", "python")
+  @clientName("getMetricDefinitions", "java")
   listMetricDefinitions is LoadTestRun.listMetricDefinitions;
-  @projectedName("python", "get_metric_namespaces")
-  @projectedName("java", "getMetricNamespaces")
+  @clientName("get_metric_namespaces", "python")
+  @clientName("getMetricNamespaces", "java")
   listMetricNamespaces is LoadTestRun.listMetricNamespaces;
   listMetrics is LoadTestRun.listMetrics;
   listTestRuns is LoadTestRun.listTestRuns;

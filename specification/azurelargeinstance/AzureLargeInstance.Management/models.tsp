@@ -1,12 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
 namespace Microsoft.AzureLargeInstance;
+namespace Azure.ClientGenerator.Core;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -386,7 +388,7 @@ model NetworkProfile {
 @doc("Specifies the IP address of the network interface.")
 model IpAddress {
   @doc("Specifies the IP address of the network interface.")
-  @projectedName("csharp", "ipAddressValue")
+  @clientName("ipAddressValue", "csharp")
   ipAddress?: string;
 }
 
@@ -396,13 +398,13 @@ and halt any existing processes that may be running on the server
 """)
 model ForceState {
   @doc("Whether to force restart by shutting all processes.")
-  @projectedName("csharp", "forceStateValue")
+  @clientName("forceStateValue", "csharp")
   forceState?: AzureLargeInstanceForcePowerState;
 }
 
 @doc("Tags field of the AzureLargeInstance instance.")
 model Tags {
-  @projectedName("csharp", "tagsValue")
+  @clientName("tagsValue", "csharp")
   @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
 }

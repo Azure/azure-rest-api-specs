@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "./models.tsp";
 import "./Service.tsp";
@@ -19,6 +20,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 @armProviderNamespace
 @service({
   title: "Azure API Center",
@@ -37,7 +39,7 @@ enum Versions {
 }
 
 @@projectedName(Apis.createOrUpdate::parameters.resource, "json", "payload");
-@@projectedName(Apis.createOrUpdate::parameters.resource, "client", "payload");
+@@clientName(Apis.createOrUpdate::parameters.resource, "payload");
 
 @@projectedName(ApiDefinitions.createOrUpdate::parameters.resource,
   "json",
@@ -85,7 +87,7 @@ enum Versions {
 );
 
 @@projectedName(Services.update::parameters.properties, "json", "payload");
-@@projectedName(Services.update::parameters.properties, "client", "payload");
+@@clientName(Services.update::parameters.properties, "payload");
 
 @@projectedName(Workspaces.createOrUpdate::parameters.resource,
   "json",

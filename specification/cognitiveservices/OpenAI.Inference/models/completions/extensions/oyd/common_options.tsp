@@ -1,10 +1,12 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "./../../azure_chat_extensions.tsp";
 import "./authentication.tsp";
 
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 alias OnYourDataCommonChatExtensionConfiguration = {
   @doc("""
@@ -14,16 +16,16 @@ alias OnYourDataCommonChatExtensionConfiguration = {
   If not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)
   authentication.
   """)
-  @projectedName("csharp", "Authentication")
+  @clientName("Authentication", "csharp")
   authentication?: OnYourDataAuthenticationOptions;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The configured top number of documents to feature for the configured query.")
-  @projectedName("csharp", "DocumentCount")
+  @clientName("DocumentCount", "csharp")
   topNDocuments?: int32;
 
   @doc("Whether queries should be restricted to use of indexed data.")
-  @projectedName("csharp", "ShouldRestrictResultScope")
+  @clientName("ShouldRestrictResultScope", "csharp")
   inScope?: boolean;
 
   @doc("The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.")

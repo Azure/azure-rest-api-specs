@@ -1,11 +1,13 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace Easm;
 
@@ -100,7 +102,7 @@ alias SavedFiltersListTrait = {
 };
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@projectedName("java", "AlexaDetails")
+@clientName("AlexaDetails", "java")
 model AlexaInfo {
   alexaRank?: int64;
   category?: string;
@@ -308,7 +310,7 @@ model AzureDataExplorerDataConnectionProperties
 model Banner {
   port?: int32;
 
-  @projectedName("csharp", "bannerProperty")
+  @clientName("bannerProperty", "csharp")
   banner?: string;
 
   firstSeen?: utcDateTime;
@@ -807,7 +809,7 @@ model IpAddressAsset extends InventoryAsset {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model IpBlock {
-  @projectedName("csharp", "ipBlockProperty")
+  @clientName("ipBlockProperty", "csharp")
   ipBlock?: string;
 
   sources?: Source[];
@@ -1003,7 +1005,7 @@ model PageCause {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Port {
-  @projectedName("csharp", "portProperty")
+  @clientName("portProperty", "csharp")
   port?: int32;
 
   firstSeen?: utcDateTime;
@@ -1197,7 +1199,7 @@ model SoaRecord {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Source {
-  @projectedName("csharp", "sourceProperty")
+  @clientName("sourceProperty", "csharp")
   source?: string;
 
   firstSeen?: utcDateTime;
