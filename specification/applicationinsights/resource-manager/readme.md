@@ -251,7 +251,7 @@ directive:
 
 ### Tag: package-2024-02-01-only
 
-These settings apply only when `--tag=package-2024-01-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2024-02-01-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2024-02-01-only'
 input-file:
@@ -271,7 +271,7 @@ input-file:
   - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
-  - Microsoft.Insights/preview/2023-06-01-preview/deletedWorkbooks_API.json
+  - Microsoft.Insights/preview/2024-02-01-preview/deletedWorkbooks_API.json
 ```
 
 ### Tag: package-2023-10-01-only
