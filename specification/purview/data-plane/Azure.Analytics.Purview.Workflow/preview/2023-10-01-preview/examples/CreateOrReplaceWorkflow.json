@@ -1,0 +1,195 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "workflowId": "4afb5752-e47f-43a1-8ba7-c696bf8d2745",
+    "workflowCreateOrUpdateCommand": {
+      "name": "Create glossary term workflow",
+      "description": "",
+      "triggers": [
+        {
+          "type": "when_term_creation_is_requested",
+          "underGlossaryHierarchy": "/glossaries/20031e20-b4df-4a66-a61d-1b0716f3fa48"
+        }
+      ],
+      "isEnabled": true,
+      "actionDag": {
+        "actions": {
+          "Start and wait for an approval": {
+            "type": "Approval",
+            "inputs": {
+              "parameters": {
+                "approvalType": "PendingOnAll",
+                "title": "Approval Request for Create Glossary Term",
+                "assignedTo": [
+                  "eece94d9-0619-4669-bb8a-d6ecec5220bc"
+                ]
+              }
+            },
+            "runAfter": {}
+          },
+          "Condition": {
+            "type": "If",
+            "expression": {
+              "and": [
+                {
+                  "equals": [
+                    "@{outputs('Start and wait for an approval')['outcome']}",
+                    "Approved"
+                  ]
+                }
+              ]
+            },
+            "actions": {
+              "Create glossary term": {
+                "type": "CreateTerm",
+                "runAfter": {}
+              },
+              "Send email notification": {
+                "type": "EmailNotification",
+                "inputs": {
+                  "parameters": {
+                    "emailSubject": "Glossary Term Create - APPROVED",
+                    "emailMessage": "Your request for Glossary Term @{runInput()['term']['name']} is approved.",
+                    "emailRecipients": [
+                      "@{runInput()['requestor']}"
+                    ]
+                  }
+                },
+                "runAfter": {
+                  "Create glossary term": [
+                    "Succeeded"
+                  ]
+                }
+              }
+            },
+            "else": {
+              "actions": {
+                "Send reject email notification": {
+                  "type": "EmailNotification",
+                  "inputs": {
+                    "parameters": {
+                      "emailSubject": "Glossary Term Create - REJECTED",
+                      "emailMessage": "Your request for Glossary Term @{runInput()['term']['name']} is rejected.",
+                      "emailRecipients": [
+                        "@{runInput()['requestor']}"
+                      ]
+                    }
+                  },
+                  "runAfter": {}
+                }
+              }
+            },
+            "runAfter": {
+              "Start and wait for an approval": [
+                "Succeeded"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "179682a4-917d-11ed-a1eb-0242ac120002",
+        "triggers": [
+          {
+            "type": "when_term_creation_is_requested",
+            "underGlossaryHierarchy": "/glossaries/20031e20-b4df-4a66-a61d-1b0716f3fa48"
+          }
+        ],
+        "createdTime": "2023-01-11T07:05:22.812901453Z",
+        "createdBy": "eece94d9-0619-4669-bb8a-d6ecec5220bc",
+        "lastUpdateTime": "2023-01-11T07:05:22.812901453Z",
+        "updatedBy": "eece94d9-0619-4669-bb8a-d6ecec5220bc",
+        "name": "Create glossary term workflow",
+        "isEnabled": true,
+        "description": "",
+        "actionDag": {
+          "actions": {
+            "Start and wait for an approval": {
+              "type": "Approval",
+              "inputs": {
+                "parameters": {
+                  "approvalType": "PendingOnAll",
+                  "title": "Approval Request for Create Glossary Term",
+                  "assignedTo": [
+                    "eece94d9-0619-4669-bb8a-d6ecec5220bc"
+                  ]
+                }
+              },
+              "runAfter": {}
+            },
+            "Condition": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@{outputs('Start and wait for an approval')['outcome']}",
+                      "Approved"
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Create glossary term": {
+                  "type": "CreateTerm",
+                  "runAfter": {}
+                },
+                "Send email notification": {
+                  "type": "EmailNotification",
+                  "inputs": {
+                    "parameters": {
+                      "emailSubject": "Glossary Term Create - APPROVED",
+                      "emailMessage": "Your request for Glossary Term @{runInput()['term']['name']} is approved.",
+                      "emailRecipients": [
+                        "@{runInput()['requestor']}"
+                      ]
+                    }
+                  },
+                  "runAfter": {
+                    "Create glossary term": [
+                      "Succeeded"
+                    ]
+                  },
+                  "runtimeConfiguration": {
+                    "secureInput": false,
+                    "secureOutput": false
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Send reject email notification": {
+                    "type": "EmailNotification",
+                    "inputs": {
+                      "parameters": {
+                        "emailSubject": "Glossary Term Create - REJECTED",
+                        "emailMessage": "Your request for Glossary Term @{runInput()['term']['name']} is rejected.",
+                        "emailRecipients": [
+                          "@{runInput()['requestor']}"
+                        ]
+                      }
+                    },
+                    "runAfter": {},
+                    "runtimeConfiguration": {
+                      "secureInput": false,
+                      "secureOutput": false
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Start and wait for an approval": [
+                  "Succeeded"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
