@@ -96,3 +96,9 @@ using Azure.ClientGenerator.Core;
   "csharp",
   "Utf8ByteValues"
 );
+
+@@projectedName(Azure.OpenAI.AudioSpeechOptions,
+  "csharp",
+  "SpeechGenerationOptions"
+);
+
