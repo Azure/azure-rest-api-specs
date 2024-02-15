@@ -334,7 +334,11 @@
               "failed",
               "succeeded",
               "all"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "IngestionDetailLevel",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -570,7 +574,11 @@
             "none",
             "managedIdentity"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuthenticationKind",
+            "modelAsString": true
+          }
         },
         "speechTranscriptionLanguage": {
           "description": "Gets or sets the language to be used in speech transcription.",
@@ -680,7 +688,11 @@
             "speech",
             "ocr"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeatureName",
+            "modelAsString": true
+          }
         },
         "modelVersion": {
           "description": "Gets or sets the model version of the feature.",
@@ -694,7 +706,11 @@
             "surveillance",
             "egocentric"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ModelDomain",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -777,7 +793,11 @@
             "update",
             "remove"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IngestionMode",
+            "modelAsString": true
+          }
         },
         "documentId": {
           "description": "Gets or sets the document ID.",
@@ -909,7 +929,11 @@
             "failed",
             "partiallySucceeded"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IngestionState",
+            "modelAsString": true
+          }
         },
         "error": {
           "$ref": "#/definitions/ErrorResponseDetails"
@@ -1035,7 +1059,11 @@
             "string",
             "datetime"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FieldType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1066,7 +1094,11 @@
               "speech",
               "ocr"
             ],
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "FeatureName",
+              "modelAsString": true
+            }
           }
         }
       }
