@@ -13,7 +13,7 @@ The TypeSpec and generated API specification for the Azure Container Storage Res
    ```
 
 2. Install Azure DevOps Auth helper for npm to pull the libraries from the secured feed
-asd
+
    ```console
    npm install -g vsts-npm-auth
    vsts-npm-auth -config .npmrc
