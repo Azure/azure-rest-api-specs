@@ -13,7 +13,7 @@
         ],
         "summary": "Creates an index for the documents to be ingested.",
         "description": "This method creates an index, which can then be used to ingest documents.\r\nAn index needs to be created before ingestion can be performed.",
-        "operationId": "Index_Create",
+        "operationId": "CreateIndex",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -61,7 +61,7 @@
         ],
         "summary": "Retrieves the index.",
         "description": "Retrieves the index with the specified name.",
-        "operationId": "Index_Get",
+        "operationId": "GetIndex",
         "produces": [
           "application/json"
         ],
@@ -103,7 +103,7 @@
         ],
         "summary": "Updates an index.",
         "description": "Updates an index with the specified name.",
-        "operationId": "Index_Update",
+        "operationId": "UpdateIndex",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -157,7 +157,7 @@
         ],
         "summary": "Deletes an index.",
         "description": "Deletes an index and all its associated ingestion documents.",
-        "operationId": "Index_Delete",
+        "operationId": "DeleteIndex",
         "parameters": [
           {
             "in": "path",
@@ -189,7 +189,7 @@
         ],
         "summary": "Retrieves all indexes.",
         "description": "Retrieves a list of all indexes across all ingestions.",
-        "operationId": "Index_List",
+        "operationId": "ListIndexes",
         "produces": [
           "application/json"
         ],
@@ -246,7 +246,7 @@
         ],
         "summary": "Creates an ingestion for a specific index and ingestion name.",
         "description": "It can have one of the three modes (add, update or remove).\r\nAdd mode will create an ingestion and process the document.\r\nUpdate mode will update the metadata only. In order to reprocess the document, the ingestion needs to be deleted and recreated.",
-        "operationId": "Ingestion_Create",
+        "operationId": "CreateIngestion",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -303,7 +303,7 @@
         ],
         "summary": "Gets the ingestion status.",
         "description": "Gets the ingestion status for the specified index and ingestion name.",
-        "operationId": "Ingestion_Get",
+        "operationId": "GetIngestion",
         "produces": [
           "application/json"
         ],
@@ -372,7 +372,7 @@
         ],
         "summary": "Retrieves all ingestions.",
         "description": "Retrieves all ingestions for the specific index.",
-        "operationId": "Ingestion_List",
+        "operationId": "ListIngestions",
         "produces": [
           "application/json"
         ],
@@ -416,7 +416,7 @@
         ],
         "summary": "Retrieves all documents.",
         "description": "Retrieves all documents for the specific index.",
-        "operationId": "Document_List",
+        "operationId": "ListDocuments",
         "produces": [
           "application/json"
         ],
