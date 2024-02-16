@@ -36,10 +36,6 @@ go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
 ```
 
-``` yaml $(package-passivestamp)
-tag: package-passivestamp-2023-01-15
-```
-
 ``` yaml $(package-activestamp)
 tag: package-2024-01
 ```
