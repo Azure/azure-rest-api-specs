@@ -1824,10 +1824,16 @@ interface DataProductOfferVersions {
   listBySubscription is ArmListBySubscription<DataProductOfferVersion>;
 
   @doc("Publish data product offer version.")
-  publish is ArmResourceActionNoResponseContentAsync<DataProductOfferVersion, void>;
+  publish is ArmResourceActionNoResponseContentAsync<
+    DataProductOfferVersion,
+    void
+  >;
 
   @doc("Deprecate data product offer version.")
-  deprecate is ArmResourceActionNoResponseContentAsync<DataProductOfferVersion, void>;
+  deprecate is ArmResourceActionNoResponseContentAsync<
+    DataProductOfferVersion,
+    void
+  >;
 
   @doc("Download data product offer version file.")
   @segment("download")
