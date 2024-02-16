@@ -223,7 +223,7 @@ interface PipelineGroups {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PipelineGroup>;
 
   @doc("Delete a pipeline group instance.")
-  delete is ArmResourceDeleteAsync<PipelineGroup>;
+  delete is ArmResourceDeleteWithoutOkAsync<PipelineGroup>;
 
   @doc("Updates a pipeline group instance")
   update is ArmResourcePatchAsync<PipelineGroup, PipelineGroupProperties>;

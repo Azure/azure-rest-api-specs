@@ -44,7 +44,7 @@ model ExtendedLocation {
 
 @doc("The extended location type.")
 enum ExtendedLocationType {
-  @doc("CustomLocation.")
+  @doc("Custom location.")
   CustomLocation,
 }
 
