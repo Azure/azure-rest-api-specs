@@ -10,9 +10,6 @@ using TypeSpec.Http;
 namespace DevCenterService;
 
 @doc("The operating system type.")
-@projectedName("csharp", "DevBoxOSType")
-@projectedName("java", "DevBoxOsType")
-@projectedName("python", "OSType")
 union OsType {
   @doc("The Windows operating system.") Windows: "Windows",
   string,
@@ -27,9 +24,6 @@ union HibernateSupport {
 }
 
 @doc("Indicates whether owners of Dev Boxes in a pool are local administrators on the Dev Boxes.")
-@projectedName("csharp", "LocalAdministratorStatus")
-@projectedName("java", "LocalAdministratorStatus")
-@projectedName("python", "LocalAdministratorStatus")
 union LocalAdminStatus {
   @doc("Owners of Dev Boxes in the pool are local administrators on the Dev Boxes.")
   Enabled: "Enabled",
@@ -127,9 +121,6 @@ union SkuName {
 }
 
 @doc("Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.")
-@projectedName("csharp", "StopOnDisconnectStatus")
-@projectedName("java", "StopOnDisconnectStatus")
-@projectedName("python", "StopOnDisconnectStatus")
 union StopOnDisconnectEnableStatus {
   @doc("Stop on disconnect is enabled on the Dev Box.") Enabled: "Enabled",
   @doc("Stop on disconnect is not enabled on the Dev Box.") Disabled: "Disabled",
@@ -153,8 +144,6 @@ union ScheduledType {
 }
 
 @doc("The frequency of task execution.")
-@projectedName("csharp", "ScheduleFrequency")
-@projectedName("java", "ScheduleFrequency")
 union ScheduledFrequency {
   @doc("The scheduled task will run every day.") Daily: "Daily",
   string,
@@ -177,8 +166,6 @@ union DevBoxActionType {
 }
 
 @doc("The result of the delay operation on this action.")
-@projectedName("csharp", "DevBoxActionDelayStatus")
-@projectedName("java", "DevBoxActionDelayStatus")
 union DevBoxActionDelayResultStatus {
   @doc("The delay operation succeeded.") Succeeded: "Succeeded",
   @doc("The delay operation failed.") Failed: "Failed",
@@ -188,8 +175,6 @@ union DevBoxActionDelayResultStatus {
 @doc("A pool of Dev Boxes.")
 @resource("pools")
 @parentResource(Project)
-@projectedName("csharp", "DevBoxPool")
-@projectedName("java", "DevBoxPool")
 model Pool {
   @key("poolName")
   @visibility("read")
@@ -200,7 +185,6 @@ model Pool {
   location: string;
 
   @doc("The operating system type of Dev Boxes in this pool")
-  @projectedName("csharp", "OSType")
   osType?: OsType;
 
   @doc("Hardware settings for the Dev Boxes created in this pool")
@@ -219,8 +203,6 @@ model Pool {
 Indicates whether owners of Dev Boxes in this pool are local administrators on
 the Dev Boxes.
 """)
-  @projectedName("csharp", "LocalAdministratorStatus")
-  @projectedName("java", "LocalAdministratorStatus")
   localAdministrator?: LocalAdminStatus;
 
   @doc("Stop on disconnect configuration settings for Dev Boxes created in this pool.")
@@ -235,8 +217,7 @@ available to create Dev Boxes.
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @doc("Hardware specifications for the Dev Box.")
-@projectedName("csharp", "DevBoxHardwareProfile")
-@projectedName("java", "DevBoxHardwareProfile")
+
 model HardwareProfile {
   @doc("The name of the SKU")
   @visibility("read")
@@ -244,40 +225,30 @@ model HardwareProfile {
 
   @doc("The number of vCPUs available for the Dev Box.")
   @visibility("read")
-  @projectedName("java", "vcpus")
-  @projectedName("python", "vcpus")
   vCPUs?: int32;
 
   @doc("The amount of memory available for the Dev Box.")
   @visibility("read")
-  @projectedName("python", "memoryGb")
   memoryGB?: int32;
 }
 
 @doc("Storage settings for the Dev Box's disks")
-@projectedName("csharp", "DevBoxStorageProfile")
-@projectedName("java", "DevBoxStorageProfile")
 model StorageProfile {
   @doc("Settings for the operating system disk.")
-  @projectedName("csharp", "OSDisk")
   osDisk?: OsDisk;
 }
 
 @doc("Settings for the operating system disk.")
-@projectedName("csharp", "OSDisk")
-@projectedName("python", "OSDisk")
-@projectedName("javascript", "OSDisk")
+
 model OsDisk {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The size of the OS Disk in gigabytes.")
   @visibility("read")
-  @projectedName("python", "diskSizeGb")
   diskSizeGB?: int32;
 }
 
 @doc("Specifies information about the image used")
-@projectedName("csharp", "DevBoxImageReference")
-@projectedName("java", "DevBoxImageReference")
+
 model ImageReference {
   @doc("The name of the image used.")
   @visibility("read")
@@ -293,7 +264,6 @@ model ImageReference {
 
   @doc("The operating system build number of the image.")
   @visibility("read")
-  @projectedName("csharp", "OSBuildNumber")
   osBuildNumber?: string;
 
   @doc("The datetime that the backing image version was published.")
@@ -319,8 +289,7 @@ is detected.
 @doc("A Schedule to execute action.")
 @resource("schedules")
 @parentResource(Pool)
-@projectedName("csharp", "DevBoxSchedule")
-@projectedName("java", "DevBoxSchedule")
+
 model Schedule {
   @key("scheduleName")
   @visibility("read")
@@ -328,8 +297,6 @@ model Schedule {
   name: string;
 
   @doc("Supported type this scheduled task represents.")
-  @projectedName("csharp", "scheduledType")
-  @projectedName("java", "scheduledType")
   type: ScheduledType;
 
   @doc("The frequency of this scheduled task.")
@@ -405,13 +372,10 @@ Virtual Network it is attached to.
 
   @doc("The operating system type of this Dev Box.")
   @visibility("read")
-  @projectedName("csharp", "OSType")
   osType?: OsType;
 
   @doc("The AAD object id of the user this Dev Box is assigned to.")
   @visibility("read")
-  @projectedName("csharp", "userId")
-  @projectedName("java", "userId")
   user?: Azure.Core.uuid;
 
   @doc("Information about the Dev Box's hardware resources")
@@ -432,19 +396,15 @@ Virtual Network it is attached to.
 
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
   @visibility("read", "create")
-  @projectedName("csharp", "LocalAdministratorStatus")
-  @projectedName("java", "LocalAdministratorStatus")
   localAdministrator?: LocalAdminStatus;
 }
 
 @doc("Provides remote connection information for a Dev Box.")
 model RemoteConnection {
   @doc("URL to open a browser based RDP session.")
-  @projectedName("csharp", "webUri")
   webUrl?: url;
 
   @doc("Link to open a Remote Desktop session.")
-  @projectedName("csharp", "rdpConnectionUri")
   rdpConnectionUrl?: url;
 }
 
@@ -467,8 +427,6 @@ model DevBoxAction {
   suspendedUntil?: utcDateTime;
 
   @doc("Details about the next run of this action.")
-  @projectedName("csharp", "nextAction")
-  @projectedName("java", "nextAction")
   next?: DevBoxNextAction;
 }
 
@@ -485,7 +443,6 @@ model DevBoxActionsDelayMultipleResult
 @doc("The action delay result")
 model DevBoxActionDelayResult {
   @doc("The name of the action.")
-  @projectedName("csharp", "actionName")
   name: string;
 
   @doc("The result of the delay operation on this action.")

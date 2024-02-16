@@ -10,8 +10,6 @@ using TypeSpec.Http;
 namespace DevCenterService;
 
 @doc("The type of data a parameter accepts.")
-@projectedName("csharp", "EnvironmentDefinitionParameterType")
-@projectedName("java", "EnvironmentDefinitionParameterType")
 union ParameterType {
   @doc("The parameter accepts an array of values.") array: "array",
   @doc("The parameter accepts a boolean value.") boolean: "boolean",
@@ -23,9 +21,6 @@ union ParameterType {
 }
 
 @doc("Indicates whether an environment type is enabled for use in a project.")
-@projectedName("csharp", "EnvironmentTypeStatus")
-@projectedName("java", "EnvironmentTypeStatus")
-@projectedName("python", "EnvironmentTypeStatus")
 union EnvironmentTypeEnableStatus {
   @doc("The environment type is enabled for use in the project.") Enabled: "Enabled",
   @doc("The environment type is not enabled for use in the project.") Disabled: "Disabled",
@@ -81,8 +76,6 @@ model EnvironmentListResult is Azure.Core.Page<Environment>;
 @doc("Properties of an environment.")
 @resource("environments")
 @parentResource(User)
-@projectedName("csharp", "DevCenterEnvironment")
-@projectedName("java", "DevCenterEnvironment")
 model Environment {
   ...EnvironmentUpdateProperties;
 
@@ -93,14 +86,10 @@ model Environment {
 
   @doc("Environment type.")
   @visibility("read", "create")
-  @projectedName("csharp", "environmentTypeName")
-  @projectedName("java", "environmentTypeName")
   environmentType: string;
 
   @doc("The AAD object id of the owner of this Environment.")
   @visibility("read")
-  @projectedName("csharp", "userId")
-  @projectedName("java", "userId")
   user?: Azure.Core.uuid;
 
   @doc("The provisioning state of the environment.")
@@ -136,7 +125,6 @@ model EnvironmentUpdateProperties {
 @doc("A catalog.")
 @resource("catalogs")
 @parentResource(Project)
-@projectedName("csharp", "DevCenterCatalog")
 model Catalog {
   @doc("Name of the catalog.")
   @key("catalogName")
@@ -187,16 +175,13 @@ model EnvironmentDefinitionParameter {
   description?: string;
 
   @doc("Default value of the parameter")
-  @projectedName("csharp", "defaultValue")
-  @projectedName("java", "defaultValue")
+
   default?: string;
 
   @doc("""
 A string of one of the basic JSON types (number, integer, array, object,
 boolean, string)
 """)
-  @projectedName("csharp", "parameterType")
-  @projectedName("java", "parameterType")
   type: ParameterType;
 
   @doc("""
@@ -217,8 +202,6 @@ value.
 model EnvironmentTypeListResult is Azure.Core.Page<EnvironmentType>;
 
 @doc("Properties of an environment type.")
-@projectedName("csharp", "DevCenterEnvironmentType")
-@projectedName("java", "DevCenterEnvironmentType")
 model EnvironmentType {
   @doc("Name of the environment type")
   name: string;
