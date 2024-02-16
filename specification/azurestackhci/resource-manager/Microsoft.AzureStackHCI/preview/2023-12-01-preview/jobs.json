@@ -291,6 +291,31 @@
       "properties": {
         "hostNetwork": {
           "$ref": "./deploymentSettings.json#/definitions/HostNetwork"
+        },
+        "deploymentMode": {
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
+          "description": "Deployment mode to trigger action plan.",
+          "default": "Deploy"
+        },
+        "secrets": {
+          "type": "array",
+          "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
+          "items": {
+            "$ref": "./hciCommon.json#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        },
+        "validationStatus": {
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
+          "description": "validation status of admin action for HCI cluster.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
+          "description": "deployment status of admin action for HCI cluster.",
+          "readOnly": true
         }
       },
       "required": [
