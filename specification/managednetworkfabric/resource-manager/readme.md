@@ -82,6 +82,16 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/RoutePolicies.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/common.json
 ```
+### Tag: package-2024-02-15-preview
+
+These settings apply only when `--tag=package-2024-02-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02-15-preview'
+input-file:
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/InternetGatewayRules.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/common.json
+  
+```
 
 ---
 
@@ -99,7 +109,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
-  - repo: azure-cli-extensions
+  - repo: azure-cli-tensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_managednetworkfabric']
 ```
