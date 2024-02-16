@@ -43,6 +43,7 @@ input-file:
   - Microsoft.Storage/stable/2023-04-01/queue.json
   - Microsoft.Storage/stable/2023-04-01/storage.json
   - Microsoft.Storage/stable/2023-04-01/table.json
+  - Microsoft.Storage/stable/2023-04-01/networkSecurityPerimeter.json
 ```
 ### Tag: package-2023-01
 
