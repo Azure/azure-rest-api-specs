@@ -215,9 +215,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -399,8 +396,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of edgeDevice resource",
-          "readOnly": true
+          "description": "Provisioning state of edgeDevice resource"
         }
       },
       "required": [
@@ -459,6 +455,7 @@
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource.",
+      "readOnly": true,
       "enum": [
         "Succeeded",
         "Failed",

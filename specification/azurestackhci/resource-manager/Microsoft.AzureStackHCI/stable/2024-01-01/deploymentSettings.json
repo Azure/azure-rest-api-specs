@@ -478,8 +478,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "DeploymentSetting provisioning state",
-          "readOnly": true
+          "description": "DeploymentSetting provisioning state"
         },
         "arcNodeResourceIds": {
           "type": "array",
@@ -712,6 +711,7 @@
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource.",
+      "readOnly": true,
       "enum": [
         "Succeeded",
         "Failed",
