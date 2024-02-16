@@ -27,9 +27,12 @@
               "provisioningState": "Succeeded",
               "sku": "Standard",
               "deviceEnrollmentScope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg",
-              "deviceEnrollmentManagedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1",
-              "mqttBrokerEndpoints": [
-                "mybroker-egmqtt-namespace.westus2-1.ts.eventgrid.azure.net"
+              "serviceManagedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1",
+              "mqttBrokers": [
+                {
+                  "type": "EventGrid",
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.EventGrid/namespaces/mybroker"
+                }
               ],
               "locations": [
                 {

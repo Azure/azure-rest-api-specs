@@ -63,7 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -105,7 +105,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResourceListResult"
             }
@@ -150,7 +150,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResourceListResult"
             }
@@ -203,7 +203,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResource"
             }
@@ -334,7 +334,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResource"
             }
@@ -399,7 +399,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -450,7 +450,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaServerlessRuntimeResourceList"
             }
@@ -500,7 +500,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerlessMetadataResponse"
             }
@@ -550,7 +550,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaServerlessRuntimeResourceListResult"
             }
@@ -608,7 +608,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
             }
@@ -755,7 +755,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
             }
@@ -828,7 +828,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -884,7 +884,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CheckDependenciesResponse"
             }
@@ -942,7 +942,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
             }
@@ -1640,6 +1640,10 @@
         "subnetId": {
           "type": "string",
           "description": "Virtual network subnet resource id"
+        },
+        "vnetResourceGuid": {
+          "type": "string",
+          "description": "Virtual network resource guid"
         }
       },
       "required": [
@@ -1658,6 +1662,10 @@
         "subnetId": {
           "type": "string",
           "description": "Virtual network subnet resource id"
+        },
+        "vnetResourceGuid": {
+          "type": "string",
+          "description": "Virtual network resource guid"
         }
       }
     },
