@@ -81,3 +81,13 @@ op getFile(
   @encodedName("application/json", "file_id")
   fileId: string,
 ): OpenAIFile;
+
+@get
+@route("/files/content/{fileId}")
+@doc("Returns information about a specific file. Does not retrieve file content.")
+op getFileContent(
+  @doc("The ID of the file to retrieve.")
+  @path
+  @encodedName("application/json", "file_id")
+  fileId: string,
+): bytes;
