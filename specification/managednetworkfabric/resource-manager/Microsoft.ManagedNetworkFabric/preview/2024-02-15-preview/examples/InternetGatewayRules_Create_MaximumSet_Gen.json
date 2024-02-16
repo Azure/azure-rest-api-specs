@@ -1,24 +1,26 @@
 {
-  "title": "InternetGatewayRules_Create",
+  "title": "InternetGatewayRules_Create_Max",
   "operationId": "InternetGatewayRules_Create",
   "parameters": {
+    "api-version": "2024-02-15-preview",
     "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
-    "resourceGroupName": "example-rg",
-    "api-version": "2023-06-15",
-    "internetGatewayRuleName": "example-internetGatewayRule",
+    "resourceGroupName": "rgInternetGatewayRules",
+    "internetGatewayRuleName": "hwdyxttonjiu",
     "body": {
       "properties": {
         "ruleProperties": {
           "action": "Allow",
           "addressList": [
             "10.10.10.10"
+          ],
+          "condition": "and",
+          "sourceAddressList": [
+            "pkmsibnjglwkxuqbogjabbs"
           ]
         },
         "annotation": "annotationValue"
       },
-      "tags": {
-        "keyID": "keyValue"
-      },
+      "tags": {},
       "location": "eastus"
     }
   },
@@ -30,17 +32,19 @@
             "action": "Allow",
             "addressList": [
               "10.10.10.10"
+            ],
+            "condition": "and",
+            "sourceAddressList": [
+              "pkmsibnjglwkxuqbogjabbs"
             ]
           },
+          "annotation": "annotationValue",
           "provisioningState": "Succeeded",
           "internetGatewayIds": [
             "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGateways/example-internetGateway"
-          ],
-          "annotation": "annotationValue"
+          ]
         },
-        "tags": {
-          "keyID": "keyValue"
-        },
+        "tags": {},
         "location": "eastus",
         "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/example-InternetGatewayRule",
         "name": "example-internetGatewayRule",
@@ -65,17 +69,19 @@
             "action": "Allow",
             "addressList": [
               "10.10.10.10"
+            ],
+            "condition": "and",
+            "sourceAddressList": [
+              "pkmsibnjglwkxuqbogjabbs"
             ]
           },
+          "annotation": "annotationValue",
           "provisioningState": "Succeeded",
           "internetGatewayIds": [
             "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGateways/example-internetGateway"
-          ],
-          "annotation": "annotationValue"
+          ]
         },
-        "tags": {
-          "keyID": "keyValue"
-        },
+        "tags": {},
         "location": "eastus",
         "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/example-InternetGatewayRule",
         "name": "example-internetGatewayRule",
