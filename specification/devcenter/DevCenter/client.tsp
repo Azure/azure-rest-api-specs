@@ -72,10 +72,10 @@ interface EnvironmentClientOperations {
 @@clientName(DevCenterService.LocalAdminStatus, "LocalAdministratorStatus");
 @@clientName(DevCenterService.StopOnDisconnectEnableStatus, "StopOnDisconnectStatus");
 @@clientName(DevCenterService.EnvironmentTypeEnableStatus, "EnvironmentTypeStatus");
+@@clientName(DevCenterService.DevBoxActionDelayResultStatus, "DevBoxActionDelayStatus");
 
 @@clientName(DevCenterService.OsType, "DevBoxOSType", "csharp");
 @@clientName(DevCenterService.ScheduledFrequency, "ScheduleFrequency", "csharp");
-@@clientName(DevCenterService.DevBoxActionDelayResultStatus, "DevBoxActionDelayStatus", "csharp");
 @@clientName(DevCenterService.Pool, "DevBoxPool", "csharp");
 @@clientName(DevCenterService.Pool.osType, "OSType", "csharp");
 @@clientName(DevCenterService.Pool.localAdministrator, "LocalAdministratorStatus", "csharp");
@@ -106,7 +106,6 @@ interface EnvironmentClientOperations {
 
 @@clientName(DevCenterService.OsType, "DevBoxOsType" ,"java");
 @@clientName(DevCenterService.ScheduledFrequency, "ScheduleFrequency", "java");
-@@clientName(DevCenterService.DevBoxActionDelayResultStatus, "DevBoxActionDelayStatus", "java");
 @@clientName(DevCenterService.Pool, "DevBoxPool", "java");
 @@clientName(DevCenterService.Pool.localAdministrator, "LocalAdministratorStatus", "java");
 @@clientName(DevCenterService.HardwareProfile, "DevBoxHardwareProfile", "java");
