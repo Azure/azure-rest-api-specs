@@ -15,6 +15,4 @@ clear-output-folder: true
 ``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/appcontainers/azure-mgmt-appcontainers/azure/mgmt/appcontainers
-modelerfour:
-  lenient-model-deduplication: true # !!temporary!! to solve the duplicate schema issue of ErrorResponse in common-types v2 and v3 introduced in this PR https://github.com/Azure/azure-rest-api-specs/pull/27786
 ```
