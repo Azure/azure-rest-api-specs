@@ -83,11 +83,11 @@ model LicenseServices {
 
   @visibility("read")
   @doc("Siemens settings")
-  synopsys?: Siemens;
+  synopsys?: Synopsys;
 
   @visibility("read")
   @doc("Synopsys settings")
-  siemens?: Synopsys;
+  siemens?: Siemens;
 }
 
 @doc("License service provider")
