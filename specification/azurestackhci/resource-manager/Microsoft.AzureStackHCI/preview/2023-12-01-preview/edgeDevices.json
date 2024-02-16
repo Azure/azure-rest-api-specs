@@ -519,11 +519,6 @@
       },
       "required": [
         "nicDetails"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/NetworkProfile"
-        }
       ]
     },
     "HciNicDetail": {
@@ -617,12 +612,7 @@
           "description": "The boot type of the device. e.g. UEFI, Legacy etc",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/OsProfile"
-        }
-      ]
+      }
     },
     "HciReportedProperties": {
       "type": "object",
@@ -643,12 +633,7 @@
           "description": "Solution builder extension (SBE) deployment package information.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ReportedProperties"
-        }
-      ]
+      }
     },
     "HostNetwork": {
       "type": "object",
@@ -788,9 +773,6 @@
         }
       }
     },
-    "NetworkProfile": {
-      "type": "object"
-    },
     "NicDetail": {
       "type": "object",
       "description": "The NIC Detail of a device.",
@@ -839,13 +821,6 @@
       "required": [
         "adapterName"
       ]
-    },
-    "OsProfile": {
-      "type": "object"
-    },
-    "ReportedProperties": {
-      "type": "object",
-      "description": "Reported properties pushed from edge device."
     },
     "SbeDeploymentPackageInfo": {
       "type": "object",
