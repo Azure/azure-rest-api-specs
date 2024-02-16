@@ -46,6 +46,7 @@ model AccessPolicy {
   applicationId: string;
 
   @doc("Endpoint used for access to the experimentation workspace.")
+  @visibility("read")
   dataPlaneEndpoint?: string;
 }
 
