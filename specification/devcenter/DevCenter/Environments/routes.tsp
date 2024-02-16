@@ -10,8 +10,8 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface EnvironmentsOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "two different operations that returns environment list result"
   @doc("Lists the environments for a project.")
   @route("/projects/{projectName}/environments")
   @get
@@ -24,6 +24,7 @@ interface EnvironmentsOperations {
     EnvironmentListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "two different operations that returns environment list result"
   @doc("Lists the environments for a project and user.")
   @route("/projects/{projectName}/users/{userId}/environments")
   @get
@@ -43,6 +44,7 @@ interface EnvironmentsOperations {
   @doc("Gets an environment")
   getEnvironment is StandardResourceOperations.ResourceRead<Environment>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Creates or updates an environment.")
   @finalOperation(EnvironmentsOperations.getEnvironment)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
@@ -79,6 +81,7 @@ interface EnvironmentsOperations {
   >;
 
   // FIXME
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Deletes an environment and all its associated resources")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
@@ -120,6 +123,7 @@ interface EnvironmentsOperations {
   @doc("Gets the specified catalog within the project")
   getCatalog is StandardResourceOperations.ResourceRead<Catalog>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "two different operations that returns environment definition list result"
   @doc("Lists all environment definitions available for a project.")
   @route("/projects/{projectName}/environmentDefinitions")
   @get
@@ -132,6 +136,7 @@ interface EnvironmentsOperations {
     EnvironmentDefinitionListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "two different operations that returns environment definition list result"
   @doc("Lists all environment definitions available within a catalog.")
   @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions")
   @get
@@ -151,6 +156,7 @@ interface EnvironmentsOperations {
   @doc("Get an environment definition from a catalog.")
   getEnvironmentDefinition is StandardResourceOperations.ResourceRead<EnvironmentDefinition>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Lists all environment types configured for a project.")
   @route("/projects/{projectName}/environmentTypes")
   @get

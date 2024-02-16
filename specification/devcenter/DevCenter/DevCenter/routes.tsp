@@ -8,7 +8,6 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface DevCenterOperations {
   @doc("Lists all projects.")
   listProjects is StandardResourceOperations.ResourceList<Project>;

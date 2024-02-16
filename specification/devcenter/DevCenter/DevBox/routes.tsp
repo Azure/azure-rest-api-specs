@@ -9,7 +9,6 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface DevBoxesOperations {
   @doc("Lists available pools")
   listPools is StandardResourceOperations.ResourceList<Pool>;
@@ -23,6 +22,7 @@ interface DevBoxesOperations {
   @doc("Gets a schedule.")
   getSchedule is StandardResourceOperations.ResourceRead<Schedule>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "three different operations that returns dev box list result"
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
   @get
@@ -42,6 +42,7 @@ interface DevBoxesOperations {
   @doc("Gets a Dev Box")
   getDevBox is StandardResourceOperations.ResourceRead<DevBox>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Creates or replaces a Dev Box.")
   @finalOperation(DevBoxesOperations.getDevBox)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
@@ -79,6 +80,7 @@ interface DevBoxesOperations {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Deletes a Dev Box.")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
@@ -113,6 +115,7 @@ interface DevBoxesOperations {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Starts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start")
@@ -140,6 +143,7 @@ interface DevBoxesOperations {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Stops a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:stop")
@@ -171,6 +175,7 @@ interface DevBoxesOperations {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Restarts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart")
@@ -198,6 +203,7 @@ interface DevBoxesOperations {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Gets RDP Connection info")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection")
   @get
@@ -224,6 +230,7 @@ interface DevBoxesOperations {
   @doc("Gets an action.")
   getDevBoxAction is StandardResourceOperations.ResourceRead<DevBoxAction>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Skips an occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip")
   @post
@@ -248,6 +255,7 @@ interface DevBoxesOperations {
     void
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Delays the occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:delay")
   @post
@@ -276,6 +284,7 @@ interface DevBoxesOperations {
     DevBoxAction
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Delays all actions.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay")
   @post
@@ -301,13 +310,14 @@ interface DevBoxesOperations {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface DevBoxesDevCenterOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
   @route("/devboxes")
   @get
   listAllDevBoxes is Azure.Core.Foundations.Operation<{}, DevBoxListResult>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Lists Dev Boxes in the Dev Center for a particular user.")
   @route("/users/{userId}/devboxes")
   @get

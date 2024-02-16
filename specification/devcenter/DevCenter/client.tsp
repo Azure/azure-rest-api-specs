@@ -12,7 +12,6 @@ using Azure.ClientGenerator.Core;
 @useDependency(APIVersions.v2023_04_01)
 namespace SdkCustomizations;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @client({
   name: "DevCenterClient",
   service: DevCenterService,
@@ -22,7 +21,6 @@ interface DevCenterClientOperations {
   getProject is DevCenterService.DevCenterOperations.getProject;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @client({
   name: "DevBoxesClient",
   service: DevCenterService,
@@ -50,7 +48,6 @@ interface DevBoxesClientOperations {
   delayAllActions is DevCenterService.DevBoxesOperations.delayAllActions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @client({
   name: "DeploymentEnvironmentsClient",
   service: DevCenterService,

@@ -215,18 +215,18 @@ available to create Dev Boxes.
   healthStatus: PoolHealthStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @doc("Hardware specifications for the Dev Box.")
-
 model HardwareProfile {
   @doc("The name of the SKU")
   @visibility("read")
   skuName?: SkuName;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"	
   @doc("The number of vCPUs available for the Dev Box.")
   @visibility("read")
   vCPUs?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"	
   @doc("The amount of memory available for the Dev Box.")
   @visibility("read")
   memoryGB?: int32;
@@ -239,7 +239,6 @@ model StorageProfile {
 }
 
 @doc("Settings for the operating system disk.")
-
 model OsDisk {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The size of the OS Disk in gigabytes.")
@@ -248,7 +247,6 @@ model OsDisk {
 }
 
 @doc("Specifies information about the image used")
-
 model ImageReference {
   @doc("The name of the image used.")
   @visibility("read")
@@ -289,7 +287,6 @@ is detected.
 @doc("A Schedule to execute action.")
 @resource("schedules")
 @parentResource(Pool)
-
 model Schedule {
   @key("scheduleName")
   @visibility("read")
