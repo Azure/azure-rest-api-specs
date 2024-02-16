@@ -29,6 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
+
 tag: package-2024-01
 ```
 
@@ -61,7 +62,7 @@ directive:
       - edgeDevices.json
       - securitySettings.json
       - jobs.json
-      - common.json
+      - hciCommon.json
 
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
@@ -158,7 +159,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/jobs.json
-  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/hciCommon.json
 ```
 
 ### Tag: package-2024-01
