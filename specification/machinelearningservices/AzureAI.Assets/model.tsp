@@ -59,6 +59,7 @@ model Index is AssetVersion {
 model PagedIndex {
   @doc("The list of Indexes.")
   @extension("x-ms-identifiers", [])
+  @items
   value: Index[];
 
   @doc("The link to the next page of items")
