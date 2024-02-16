@@ -27,10 +27,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Versions info.")
 enum Versions {
-  @doc("The 2023-03-01-preview version.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2023_03_01_preview: "2023-03-01-preview",
-
   @doc("The 2023-09-01-preview version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_09_01_preview: "2023-09-01-preview",
@@ -63,51 +59,37 @@ model WatcherProperties {
 
 @doc("The properties of a data store.")
 model Datastore {
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
-  @removed(Versions.v2023_09_01_preview)
-  @doc("The ARM ResourceId of an Azure Data Explorer database.")
-  adxDatabaseResourceId: string;
+  @doc("The Azure ResourceId of an Azure Data Explorer cluster.")
+  adxClusterResourceId?: ResourceIdentifier<[
+    {
+      type: "Microsoft.Kusto/clusters";
+    }
+  ]>;
 
-  @added(Versions.v2023_09_01_preview)
-  @doc("The ARM ResourceId of an Azure Data Explorer cluster.")
-  adxClusterResourceId?: string;
-
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
-  @removed(Versions.v2023_09_01_preview)
-  @doc("The Kusto cluster URI.")
-  adxClusterUri: string;
-
-  @added(Versions.v2023_09_01_preview)
   @doc("The Kusto cluster display name.")
   kustoClusterDisplayName?: string;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
-  @added(Versions.v2023_09_01_preview)
   @doc("The Kusto cluster URI.")
   kustoClusterUri: string;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
-  @added(Versions.v2023_09_01_preview)
   @doc("The Kusto data ingestion URI.")
   kustoDataIngestionUri: string;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
-  @added(Versions.v2023_09_01_preview)
   @doc("The name of a Kusto database.")
   kustoDatabaseName: string;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
-  @added(Versions.v2023_09_01_preview)
   @doc("The Kusto management URL.")
   kustoManagementUrl: string;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
-  @added(Versions.v2023_09_01_preview)
   @doc("The type of a Kusto offering.")
   kustoOfferingType: KustoOfferingType;
 }
 
-@added(Versions.v2023_09_01_preview)
 @doc("The type of Kusto offering.")
 enum KustoOfferingType {
   @doc("The Azure Data Explorer cluster Kusto offering.")
