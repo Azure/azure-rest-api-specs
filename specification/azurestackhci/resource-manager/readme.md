@@ -115,6 +115,11 @@ suppressions:
     from:
       - clusters.json
 
+  - code: DeleteResponseCodes
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - clusters.json
+
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
     from: securitySettings.json
