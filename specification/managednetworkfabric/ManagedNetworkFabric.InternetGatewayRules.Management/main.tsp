@@ -27,9 +27,9 @@ namespace Microsoft.ManagedNetworkFabric;
  */
 enum Versions {
   /**
-   * The 2024-02-15 API version.
+   * The 2024-02-15-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_02_15: "2024-02-15",
+  v2024_02_15: "2024-02-15-preview",
 }

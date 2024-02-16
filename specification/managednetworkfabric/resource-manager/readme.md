@@ -27,7 +27,7 @@ These are the global settings for the Managed Network Fabric.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-02-15
+tag: package-2023-06-15
 ```
 
 
@@ -82,15 +82,15 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/RoutePolicies.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/common.json
 ```
-### Tag: package-2024-02-15
+### Tag: package-2024-02-15-preview
 
-These settings apply only when `--tag=package-2024-02-15` is specified on the command line.
+These settings apply only when `--tag=package-2024-02-15-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-02-15'
+``` yaml $(tag) == 'package-2024-02-15-preview'
 input-file:
-  - Microsoft.ManagedNetworkFabric/stable/2024-02-15/InternetGatewayRules.json
-  - Microsoft.ManagedNetworkFabric/stable/2024-02-15/common.json
-  - Microsoft.ManagedNetworkFabric/stable/2024-02-15/Operations.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/InternetGatewayRules.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/common.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/Operations.json
 ```
 
 ---
