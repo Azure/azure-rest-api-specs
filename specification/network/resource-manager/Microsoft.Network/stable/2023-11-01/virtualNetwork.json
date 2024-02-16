@@ -1684,6 +1684,14 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference to the remote virtual network. The remote virtual network can be in the same or different region (preview). See here to register for the preview and learn more (https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-create-peering)."
         },
+        "localAddressSpace": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "The local address space of the local virtual network that is peered."
+        },
+        "localVirtualNetworkAddressSpace": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "The current local address space of the local virtual network that is peered."
+        },
         "remoteAddressSpace": {
           "$ref": "#/definitions/AddressSpace",
           "description": "The reference to the address space peered with the remote virtual network."
@@ -1743,6 +1751,28 @@
           "readOnly": true,
           "type": "string",
           "description": "The resourceGuid property of the Virtual Network peering resource."
+        },
+        "peerCompleteVnets": {
+          "type": "boolean",
+          "description": "Whether complete virtual network address space is peered."
+        },
+        "enableOnlyIPv6Peering": {
+          "type": "boolean",
+          "description": "Whether only Ipv6 address space is peered for subnet peering."
+        },
+        "localSubnetNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of local subnet names that are subnet peered with remote virtual network."
+        },
+        "remoteSubnetNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of remote subnet names from remote virtual network that are subnet peered."
         }
       },
       "description": "Properties of the virtual network peering."
