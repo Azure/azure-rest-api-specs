@@ -31,7 +31,7 @@ enum AzureChatExtensionType {
   elasticsearch: "elasticsearch",
 
   @doc("Represents the use of Pinecone index as an Azure OpenAI chat extension.")
-  pinecone: "Pinecone",
+  pinecone: "pinecone",
 }
 
 @discriminator("type")
