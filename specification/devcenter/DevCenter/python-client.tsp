@@ -10,12 +10,12 @@ using DevCenterService;
 using Azure.ClientGenerator.Core;
 
 @useDependency(APIVersions.v2023_04_01)
+namespace PythonSdkCustomizations;
+
 @client({
   name: "DevCenterClient",
   service: DevCenterService,
 })
-namespace SdkCustomizations;
-
 interface DevCenterClientOperations {
   //DevCenters
   listProjects is DevCenterService.DevCenterOperations.listProjects;
