@@ -3,13 +3,13 @@ import "./Environments/routes.tsp";
 import "./DevCenter/routes.tsp";
 import "./DevBox/routes.tsp";
 import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/typespec-autorest";
+//import "@azure-tools/typespec-autorest";
 
 using Azure.Core;
 using TypeSpec.Versioning;
 using DevCenterService;
 using Azure.ClientGenerator.Core;
-using Autorest;
+//using Autorest;
 
 @useDependency(APIVersions.v2023_04_01)
 namespace SdkCustomizations;
@@ -70,9 +70,9 @@ interface EnvironmentClientOperations {
 
 @@access(DevCenterService.DevBox, Access.public);
 @@usage(DevCenterService.DevBox, Usage.input | Usage.output);
-@@example(DevCenterService.SharedOperations.getProjectOperationStatus,
+/*@@example(DevCenterService.SharedOperations.getProjectOperationStatus,
     "./examples/SharedOperations_GetProjectOperationStatus.json",
-    "Get the status of an operation.");
+    "Get the status of an operation.");*/
 
 @@clientName(DevCenterService.LocalAdminStatus, "LocalAdministratorStatus");
 @@clientName(DevCenterService.StopOnDisconnectEnableStatus, "StopOnDisconnectStatus");
