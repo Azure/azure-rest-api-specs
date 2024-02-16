@@ -11,7 +11,6 @@
         "arcNodeResourceIds": [
           "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
         ],
-        "serverName": "Node-2",
         "deploymentMode": "Deploy",
         "hostNetwork": {
           "intents": [
@@ -51,7 +50,19 @@
             }
           ],
           "storageConnectivitySwitchless": true
-        }
+        },
+        "secrets": [
+          {
+            "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+            "eceSecretName": "LocalAdminCredential",
+            "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+          },
+          {
+            "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+            "eceSecretName": "AzureStackLCMUserCredential",
+            "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+          }
+        ]
       }
     }
   },
@@ -197,47 +208,59 @@
           "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
         },
         "properties": {
-          "serverName": "Node-2",
           "deploymentMode": "Deploy",
-          "hostNetwork": {
-            "intents": [
-              {
-                "name": "Compute_Management",
-                "trafficType": [
-                  "Compute",
-                  "Management"
-                ],
-                "adapter": [
-                  "Port2"
-                ],
-                "overrideVirtualSwitchConfiguration": false,
-                "virtualSwitchConfigurationOverrides": {
-                  "enableIov": "True",
-                  "loadBalancingAlgorithm": "HyperVPort"
-                },
-                "overrideQosPolicy": false,
-                "qosPolicyOverrides": {
-                  "priorityValue8021Action_Cluster": "7",
-                  "priorityValue8021Action_SMB": "3",
-                  "bandwidthPercentage_SMB": "50"
-                },
-                "overrideAdapterProperty": false,
-                "adapterPropertyOverrides": {
-                  "jumboPacket": "1514",
-                  "networkDirect": "Enabled",
-                  "networkDirectTechnology": "iWARP"
-                }
+        "hostNetwork": {
+          "intents": [
+            {
+              "name": "Compute_Management",
+              "trafficType": [
+                "Compute",
+                "Management"
+              ],
+              "adapter": [
+                "Port2"
+              ],
+              "overrideVirtualSwitchConfiguration": false,
+              "virtualSwitchConfigurationOverrides": {
+                "enableIov": "True",
+                "loadBalancingAlgorithm": "HyperVPort"
+              },
+              "overrideQosPolicy": false,
+              "qosPolicyOverrides": {
+                "priorityValue8021Action_Cluster": "7",
+                "priorityValue8021Action_SMB": "3",
+                "bandwidthPercentage_SMB": "50"
+              },
+              "overrideAdapterProperty": false,
+              "adapterPropertyOverrides": {
+                "jumboPacket": "1514",
+                "networkDirect": "Enabled",
+                "networkDirectTechnology": "iWARP"
               }
-            ],
-            "storageNetworks": [
-              {
-                "name": "Storage1Network",
-                "networkAdapterName": "Port3",
-                "vlanId": "5"
-              }
-            ],
-            "storageConnectivitySwitchless": true
+            }
+          ],
+          "storageNetworks": [
+            {
+              "name": "Storage1Network",
+              "networkAdapterName": "Port3",
+              "vlanId": "5"
+            }
+          ],
+          "storageConnectivitySwitchless": true
+        },
+        "secrets": [
+          {
+            "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+            "eceSecretName": "LocalAdminCredential",
+            "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
           },
+          {
+            "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+            "eceSecretName": "AzureStackLCMUserCredential",
+            "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+          }
+        ]
+      },
           "validationStatus": {
             "status": "Error",
             "steps": [
