@@ -200,7 +200,7 @@
           "CreatePauseServerJob": {
             "$ref": "./examples/CreatePauseServerJob.json"
           },
-	  "CreateAddNetworkIntentJob": {
+          "CreateAddNetworkIntentJob": {
             "$ref": "./examples/AddNetworkIntentJob.json"
           }
         },
@@ -290,7 +290,7 @@
       "type": "object",
       "properties": {
         "hostNetwork": {
-          "$ref": "./hciCommon.json#/definitions/HostNetwork"
+          "$ref": "./deploymentSettings.json#/definitions/HostNetwork"
         }
       },
       "required": [
@@ -367,71 +367,6 @@
         }
       ],
       "x-ms-discriminator-value": "AddServer"
-    },
-    "AddServerJob": {
-      "description": "AddServer job to add node to AzureStackHCI cluster.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AddServerJobProperties"
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Job"
-        }
-      ]
-    },
-    "AddServerJobProperties": {
-      "type": "object",
-      "description": "Properties for AddServerJob of AzureStackHCI cluster.",
-      "properties": {
-        "serverName": {
-          "type": "string",
-          "description": "Name of server to be added to Azure stack HCI Cluster."
-        },
-        "deploymentMode": {
-          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
-          "description": "Deployment mode to trigger action plan.",
-          "default": "Deploy"
-        },
-        "hostIpv4Address": {
-          "type": "string",
-          "description": "Ip address of server to be added to Azure stack HCI Cluster."
-        },
-        "secrets": {
-          "type": "array",
-          "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
-          "items": {
-            "$ref": "./hciCommon.json#/definitions/EceDeploymentSecrets"
-          },
-          "x-ms-identifiers": [
-            "secretName"
-          ]
-        },
-        "validationStatus": {
-          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
-          "description": "validation status of admin action for HCI cluster.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
-          "description": "deployment status of admin action for HCI cluster.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "serverName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobsProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "AddIntent"
     },
     "Job": {
       "type": "object",

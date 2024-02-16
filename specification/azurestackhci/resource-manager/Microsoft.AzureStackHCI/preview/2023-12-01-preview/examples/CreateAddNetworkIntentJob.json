@@ -3,63 +3,36 @@
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "test-rg",
     "clusterName": "myCluster",
-    "jobsName": "addnode",
+    "jobsName": "repairnode",
     "api-version": "2023-12-01-preview",
     "resource": {
       "properties": {
-        "jobType": "AddNetworkIntent",
+        "jobType": "RepairServer",
         "arcNodeResourceIds": [
           "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
         ],
         "serverName": "Node-2",
         "deploymentMode": "Deploy",
-        "hostNetwork": {
-          "intents": [
-            {
-              "name": "Compute_Management",
-              "trafficType": [
-                "Compute",
-                "Management"
-              ],
-              "adapter": [
-                "Port2"
-              ],
-              "overrideVirtualSwitchConfiguration": false,
-              "virtualSwitchConfigurationOverrides": {
-                "enableIov": "True",
-                "loadBalancingAlgorithm": "HyperVPort"
-              },
-              "overrideQosPolicy": false,
-              "qosPolicyOverrides": {
-                "priorityValue8021Action_Cluster": "7",
-                "priorityValue8021Action_SMB": "3",
-                "bandwidthPercentage_SMB": "50"
-              },
-              "overrideAdapterProperty": false,
-              "adapterPropertyOverrides": {
-                "jumboPacket": "1514",
-                "networkDirect": "Enabled",
-                "networkDirectTechnology": "iWARP"
-              }
-            }
-          ],
-          "storageNetworks": [
-            {
-              "name": "Storage1Network",
-              "networkAdapterName": "Port3",
-              "vlanId": "5"
-            }
-          ],
-          "storageConnectivitySwitchless": true
-        }
+        "secrets": [
+          {
+            "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+            "eceSecretName": "LocalAdminCredential",
+            "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+          },
+          {
+            "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+            "eceSecretName": "AzureStackLCMUserCredential",
+            "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+          }
+        ]
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/3ebebf5a-a1ad-46e4-a920-77f05b858001/resourceGroups/bhukumar-pvtrp-rg/providers/Private.AzureStackHCI/clusters/hciclu3/jobs/addnode",
-        "name": "addnode",
+        "id": "/subscriptions/3ebebf5a-a1ad-46e4-a920-77f05b858001/resourceGroups/bhukumar-pvtrp-rg/providers/Private.AzureStackHCI/clusters/hciclu3/jobs/repairnode",
+        "name": "repairnode",
         "type": "private.azurestackhci/clusters/jobs",
         "systemData": {
           "createdBy": "bhukumar@microsoft.com",
@@ -72,52 +45,25 @@
         "properties": {
           "serverName": "Node-2",
           "deploymentMode": "Deploy",
-          "hostNetwork": {
-            "intents": [
-              {
-                "name": "Compute_Management",
-                "trafficType": [
-                  "Compute",
-                  "Management"
-                ],
-                "adapter": [
-                  "Port2"
-                ],
-                "overrideVirtualSwitchConfiguration": false,
-                "virtualSwitchConfigurationOverrides": {
-                  "enableIov": "True",
-                  "loadBalancingAlgorithm": "HyperVPort"
-                },
-                "overrideQosPolicy": false,
-                "qosPolicyOverrides": {
-                  "priorityValue8021Action_Cluster": "7",
-                  "priorityValue8021Action_SMB": "3",
-                  "bandwidthPercentage_SMB": "50"
-                },
-                "overrideAdapterProperty": false,
-                "adapterPropertyOverrides": {
-                  "jumboPacket": "1514",
-                  "networkDirect": "Enabled",
-                  "networkDirectTechnology": "iWARP"
-                }
-              }
-            ],
-            "storageNetworks": [
-              {
-                "name": "Storage1Network",
-                "networkAdapterName": "Port3",
-                "vlanId": "5"
-              }
-            ],
-            "storageConnectivitySwitchless": true
-          },
+          "secrets": [
+            {
+              "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "LocalAdminCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+            },
+            {
+              "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "AzureStackLCMUserCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+            }
+          ],
           "validationStatus": {
             "status": "Error",
             "steps": [
               {
                 "fullStepIndex": "0",
-                "name": "Add Server Deployment",
-                "description": "Add Server.",
+                "name": "Repair Server Deployment",
+                "description": "Repair Server.",
                 "startTimeUtc": "2023-06-09T00:08:19",
                 "endTimeUtc": "2023-06-09T04:01:47",
                 "status": "Error",
@@ -147,8 +93,8 @@
             "steps": [
               {
                 "fullStepIndex": "0",
-                "name": "Add Server Deployment",
-                "description": "Add Server.",
+                "name": "Repair Server Deployment",
+                "description": "Repair Server.",
                 "startTimeUtc": "2023-06-09T00:08:19",
                 "endTimeUtc": "2023-06-09T04:01:47",
                 "status": "Error",
@@ -173,7 +119,7 @@
               }
             ]
           },
-          "jobType": "AddServer",
+          "jobType": "RepairServer",
           "provisioningState": "Succeeded",
           "percentComplete": 0,
           "arcNodeResourceIds": [
@@ -185,8 +131,8 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/3ebebf5a-a1ad-46e4-a920-77f05b858001/resourceGroups/bhukumar-pvtrp-rg/providers/Private.AzureStackHCI/clusters/hciclu3/jobs/addnode",
-        "name": "addnode",
+        "id": "/subscriptions/3ebebf5a-a1ad-46e4-a920-77f05b858001/resourceGroups/bhukumar-pvtrp-rg/providers/Private.AzureStackHCI/clusters/hciclu3/jobs/repairnode",
+        "name": "repairnode",
         "type": "private.azurestackhci/clusters/jobs",
         "systemData": {
           "createdBy": "bhukumar@microsoft.com",
@@ -199,52 +145,25 @@
         "properties": {
           "serverName": "Node-2",
           "deploymentMode": "Deploy",
-          "hostNetwork": {
-            "intents": [
-              {
-                "name": "Compute_Management",
-                "trafficType": [
-                  "Compute",
-                  "Management"
-                ],
-                "adapter": [
-                  "Port2"
-                ],
-                "overrideVirtualSwitchConfiguration": false,
-                "virtualSwitchConfigurationOverrides": {
-                  "enableIov": "True",
-                  "loadBalancingAlgorithm": "HyperVPort"
-                },
-                "overrideQosPolicy": false,
-                "qosPolicyOverrides": {
-                  "priorityValue8021Action_Cluster": "7",
-                  "priorityValue8021Action_SMB": "3",
-                  "bandwidthPercentage_SMB": "50"
-                },
-                "overrideAdapterProperty": false,
-                "adapterPropertyOverrides": {
-                  "jumboPacket": "1514",
-                  "networkDirect": "Enabled",
-                  "networkDirectTechnology": "iWARP"
-                }
-              }
-            ],
-            "storageNetworks": [
-              {
-                "name": "Storage1Network",
-                "networkAdapterName": "Port3",
-                "vlanId": "5"
-              }
-            ],
-            "storageConnectivitySwitchless": true
-          },
+          "secrets": [
+            {
+              "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "LocalAdminCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+            },
+            {
+              "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "AzureStackLCMUserCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+            }
+          ],
           "validationStatus": {
             "status": "Error",
             "steps": [
               {
                 "fullStepIndex": "0",
-                "name": "Add Server Deployment",
-                "description": "Add Server.",
+                "name": "Repair Server Deployment",
+                "description": "Repair Server.",
                 "startTimeUtc": "2023-06-09T00:08:19",
                 "endTimeUtc": "2023-06-09T04:01:47",
                 "status": "Error",
@@ -274,8 +193,8 @@
             "steps": [
               {
                 "fullStepIndex": "0",
-                "name": "Add Server Deployment",
-                "description": "Add Server.",
+                "name": "Repair Server Deployment",
+                "description": "Repair Server.",
                 "startTimeUtc": "2023-06-09T00:08:19",
                 "endTimeUtc": "2023-06-09T04:01:47",
                 "status": "Error",
@@ -300,13 +219,13 @@
               }
             ]
           },
-          "jobType": "AddServer",
+          "jobType": "RepairServer",
           "provisioningState": "Succeeded",
           "percentComplete": 0,
           "arcNodeResourceIds": [
             "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
           ],
-          "status": "Succeeded"
+          "status": "NotSpecified"
         }
       }
     }
