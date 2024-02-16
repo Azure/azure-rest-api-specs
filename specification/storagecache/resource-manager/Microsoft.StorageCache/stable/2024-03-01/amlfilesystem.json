@@ -469,25 +469,22 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AmlFilesystemNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ImportJobNameParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Import job deleted."
-          },
           "202": {
             "description": "Started the import job's transition to Deleted state. Poll the import job to monitor.",
             "headers": {
@@ -507,7 +504,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "storagecache.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
             }
           }
         },
@@ -532,16 +529,16 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AmlFilesystemNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ImportJobNameParameter"
@@ -581,13 +578,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AmlFilesystemNameParameter"
@@ -627,7 +624,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "storagecache.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
             }
           }
         },
@@ -645,6 +642,81 @@
         ],
         "description": "Create or update an import job.",
         "operationId": "importJobs_CreateOrUpdate"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the import job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "importJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportJobUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the import job.",
+            "schema": {
+              "$ref": "#/definitions/ImportJob"
+            }
+          },
+          "202": {
+            "description": "Import job update has been initiated. Poll the import job's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "aImportJobs_Update": {
+            "$ref": "./examples/importJob_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "importJobs"
+        ],
+        "description": "Update an import job instance.",
+        "operationId": "importJobs_Update"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/importJobs": {
@@ -654,13 +726,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AmlFilesystemNameParameter"
@@ -1310,105 +1382,138 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "importPrefixes": {
-            "type": "array",
-            "description": "An array of blob paths/prefixes that get imported into the cluster namespace.",
-            "items": {
-              "type": "string"
-            }
-          },
-          "conflictResolutionMode": {
-            "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
-            "type": "string",
-            "enum": [
-              "Fail",
-              "Skip",
-              "OverwriteIfDirty",
-              "OverwriteAlways"
-            ],
-            "x-ms-enum": {
-              "name": "ConflictResolutionMode",
-              "modelAsString": true
-            }
-          },
-          "maximumErrors": {
-            "description": "Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.",
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "x-ms-client-flatten": true,
-            "description": "The status of the import",
-            "type": "object",
-            "readOnly": true,
-            "properties": {
-              "state": {
-                "readOnly": true,
-                "description": "The state of the import job. InProgress indicates the import is still running. Canceled indicates it has been canceled by the user. Completed indicates import finished, successfully importing all discovered blobs into the Lustre namespace. CompletedPartial indicates the import finished but some blobs either were found to be conflicting and could not be imported or other errors were encountered. Failed means the import was unable to complete due to a fatal error.",
-                "type": "string",
-                "enum": [
-                  "InProgress",
-                  "Cancelling",
-                  "Canceled",
-                  "Completed",
-                  "CompletedPartial",
-                  "Failed"
-                ],
-                "x-ms-enum": {
-                  "name": "ImportStatusType",
-                  "modelAsString": true
+          "description": "Properties of the import job.",
+          "properties": {
+            "provisioningState": {
+              "description": "ARM provisioning state.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Creating",
+                "Deleting",
+                "Updating",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "name": "ImportJobProvisioningStateType",
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "importPrefixes": {
+              "type": "array",
+              "description": "An array of blob paths/prefixes that get imported into the cluster namespace.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "conflictResolutionMode": {
+              "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
+              "type": "string",
+              "enum": [
+                "Fail",
+                "Skip",
+                "OverwriteIfDirty",
+                "OverwriteAlways"
+              ],
+              "x-ms-enum": {
+                "name": "ConflictResolutionMode",
+                "modelAsString": true
+              }
+            },
+            "maximumErrors": {
+              "description": "Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "status": {
+              "x-ms-client-flatten": true,
+              "description": "The status of the import",
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "state": {
+                  "readOnly": true,
+                  "description": "The state of the import job. InProgress indicates the import is still running. Canceled indicates it has been canceled by the user. Completed indicates import finished, successfully importing all discovered blobs into the Lustre namespace. CompletedPartial indicates the import finished but some blobs either were found to be conflicting and could not be imported or other errors were encountered. Failed means the import was unable to complete due to a fatal error.",
+                  "type": "string",
+                  "enum": [
+                    "InProgress",
+                    "Cancelling",
+                    "Canceled",
+                    "Completed",
+                    "CompletedPartial",
+                    "Failed"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ImportStatusType",
+                    "modelAsString": true
+                  }
+                },
+                "totalBlobsWalked": {
+                  "readOnly": true,
+                  "description": "The total blob objects walked.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "blobsWalkedPerSecond": {
+                  "readOnly": true,
+                  "description": "A recent and frequently updated rate of blobs walked per second.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "totalBlobsImported": {
+                  "readOnly": true,
+                  "description": "The total blobs that have been imported since import began.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "blobsImportedPerSecond": {
+                  "readOnly": true,
+                  "description": "A recent and frequently updated rate of total files, directories, and symlinks imported per second.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "lastCompletionTime": {
+                  "readOnly": true,
+                  "description": "The time of the last completed archive operation",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "lastStartedTime": {
+                  "readOnly": true,
+                  "description": "The time the latest archive operation started",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "totalErrors": {
+                  "readOnly": true,
+                  "description": "Number of errors in the import job.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "totalConflicts": {
+                  "readOnly": true,
+                  "description": "Number of conflicts in the import job.",
+                  "type": "integer",
+                  "format": "int32"
                 }
-              },
-              "totalBlobsWalked": {
-                "readOnly": true,
-                "description": "The total blob objects walked.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "blobsWalkedPerSecond": {
-                "readOnly": true,
-                "description": "A recent and frequently updated rate of blobs walked per second.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "totalBlobsImported": {
-                "readOnly": true,
-                "description": "The total blobs that have been imported since import began.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "blobsImportedPerSecond": {
-                "readOnly": true,
-                "description": "A recent and frequently updated rate of total files, directories, and symlinks imported per second.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "lastCompletionTime": {
-                "readOnly": true,
-                "description": "The time of the last completed archive operation",
-                "type": "string",
-                "format": "date-time"
-              },
-              "lastStartedTime": {
-                "readOnly": true,
-                "description": "The time the latest archive operation started",
-                "type": "string",
-                "format": "date-time"
-              },
-              "totalErrors": {
-                "readOnly": true,
-                "description": "Number of errors in the import job.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "totalConflicts": {
-                "readOnly": true,
-                "description": "Number of conflicts in the import job.",
-                "type": "integer",
-                "format": "int32"
               }
             }
           }
+        }
+      }
+    },
+    "ImportJobUpdate": {
+      "description": "An import job update instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
         }
       }
     },
