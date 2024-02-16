@@ -83,7 +83,7 @@ op getFile(
 ): OpenAIFile;
 
 @get
-@route("/files/content/{fileId}")
+@route("/files/{fileId}/content")
 @doc("Returns information about a specific file. Does not retrieve file content.")
 op getFileContent(
   @doc("The ID of the file to retrieve.")
