@@ -9,4 +9,4 @@ using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenter;
+namespace DevCenterService;
