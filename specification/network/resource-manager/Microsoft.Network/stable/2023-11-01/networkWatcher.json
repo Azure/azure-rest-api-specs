@@ -2780,6 +2780,15 @@
             "$ref": "#/definitions/PacketCaptureFilter"
           },
           "description": "A list of packet capture filters."
+        },
+        "continousCapture": {
+          "description": "This continous capture is a nullable boolen, which can hold 'null', 'true' or 'false' value. If we do not pass this parameter, it would be consider as 'null', default value is 'null'.",
+          "type": "boolean"
+        },
+        "captureSettings": {
+          "type": "object",
+          "$ref": "#/definitions/PacketCaptureSettings",
+          "description": "The capture setting holds the 'FileCount', 'FileSizeInBytes', 'SessionTimeLimitInSeconds' values."
         }
       },
       "required": [
@@ -2821,6 +2830,39 @@
         "filePath": {
           "type": "string",
           "description": "A valid local path on the targeting VM. Must include the name of the capture file (*.cap). For linux virtual machine it must start with /var/captures. Required if no storage ID is provided, otherwise optional."
+        },
+        "localPath": {
+          "type": "string",
+          "description": "This path is valid if 'ContinousCapture' is provided and required if no storage ID is provided, otherwise optional. Must include the name of the capture file (*.cap)."
+        }
+      },
+      "description": "The storage location for a packet capture session."
+    },
+    "PacketCaptureSettings": {
+      "properties": {
+        "fileCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 10000,
+          "default": 10,
+          "description": "The object holds the file count number."
+        },
+        "fileSizeInBytes": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 100000,
+          "maximum": 4294967295,
+          "default": 100000000,
+          "description": "Number of bytes captured per packet. Default value in bytes 100000000 (100MB)."
+        },
+        "sessionTimeLimitInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 604800,
+          "default": 86400,
+          "description": "Maximum duration of the capture session in seconds is 604800s (7 days) for a file. Default value in second 86400s (1 day)."
         }
       },
       "description": "The storage location for a packet capture session."
