@@ -92,7 +92,7 @@ interface InternetGatewayRules {
 );
 @@extension(InternetGatewayRules.create::parameters.resource,
   "x-ms-client-name",
-  "body"
+  "Request payload body"
 );
 @@doc(InternetGatewayRules.create::parameters.resource, "Request payload.");
 @@projectedName(InternetGatewayRules.update::parameters.properties,
@@ -101,7 +101,7 @@ interface InternetGatewayRules {
 );
 @@extension(InternetGatewayRules.update::parameters.properties,
   "x-ms-client-name",
-  "body"
+  "Internet Gateway Rule properties to update body"
 );
 @@doc(InternetGatewayRules.update::parameters.properties,
   "Internet Gateway Rule properties to update."
