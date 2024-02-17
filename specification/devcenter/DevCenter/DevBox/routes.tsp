@@ -22,7 +22,10 @@ interface DevBoxesOperations {
   @doc("Gets a schedule.")
   getSchedule is StandardResourceOperations.ResourceRead<Schedule>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "three different operations that returns dev box list result"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need of reuse DevBoxListResult"
+  // This does fit in the ResourceList<DevBox> but since there are three different operations that returns dev box list result,
+  // we can't use the standard operation here - it would not allow the use of DevBoxListResult in the other operations.
+  // error when using it in other operations: duplicate-type-name 'PagedDevBox' (model DevBoxListResult)
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
   @get
@@ -42,45 +45,12 @@ interface DevBoxesOperations {
   @doc("Gets a Dev Box")
   getDevBox is StandardResourceOperations.ResourceRead<DevBox>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Creates or replaces a Dev Box.")
-  @finalOperation(DevBoxesOperations.getDevBox)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
-  @put
-  createDevBox is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute the operation.")
-      @path
-      projectName: string;
+  createDevBox is StandardResourceOperations.LongRunningResourceCreateOrReplace<DevBox>;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-
-      @doc("Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator")
-      @body
-      body: DevBox;
-    },
-    DevBox | {
-      @statusCode statusCode: 201;
-
-      @header("Location")
-      location: ResourceLocation<DevBox>;
-
-      @pollingLocation
-      @header("Operation-Location")
-      operationLocation: string;
-
-      @body body?: DevBox;
-    }
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
+  //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
   @doc("Deletes a Dev Box.")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
@@ -116,6 +86,8 @@ interface DevBoxesOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
+  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'start' - so the path ends with ":start"
+  // But renaming it to 'start' also makes the client method be renamed to "Start" - and we want it to be "StartDevBox". Using projectedName does not solve the problem
   @doc("Starts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start")
@@ -144,6 +116,8 @@ interface DevBoxesOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
+  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'stop' - so the path ends with ":stop"
+  // But renaming it to 'stop' also makes the client method be renamed to "Stop" - and we want it to be "StopDevBox". Using projectedName does not solve the problem
   @doc("Stops a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:stop")
@@ -176,6 +150,8 @@ interface DevBoxesOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
+  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'restart' - so the path ends with ":restart"
+  // But renaming it to 'restart' also makes the client method be renamed to "Restart" - and we want it to be "RestartDevBox". Using projectedName does not solve the problem
   @doc("Restarts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart")
@@ -204,6 +180,7 @@ interface DevBoxesOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
+  //There is no @key for RemoteConnection model
   @doc("Gets RDP Connection info")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection")
   @get
@@ -231,6 +208,8 @@ interface DevBoxesOperations {
   getDevBoxAction is StandardResourceOperations.ResourceRead<DevBoxAction>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
+  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'skip' - so the path ends with ":skip"
+  // But renaming it to 'skip' also makes the client method be renamed to "Skip" - and we want it to be "SkipAction". Using projectedName does not solve the problem
   @doc("Skips an occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip")
   @post
@@ -256,6 +235,8 @@ interface DevBoxesOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
+  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'delay' - so the path ends with ":delay"
+  // But renaming it to 'delay' also makes the client method be renamed to "Delay" - and we want it to be "DelayAction". Using projectedName does not solve the problem
   @doc("Delays the occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:delay")
   @post
@@ -285,6 +266,8 @@ interface DevBoxesOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
+  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'delay' - so the path ends with ":delay"
+  // But renaming it to 'delay' also makes the client method be renamed to "Delay" - and we want it to be "DelayAllAction". Using projectedName does not solve the problem
   @doc("Delays all actions.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay")
   @post
@@ -311,13 +294,13 @@ interface DevBoxesOperations {
 }
 
 interface DevBoxesDevCenterOperations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
   @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
   @route("/devboxes")
   @get
   listAllDevBoxes is Azure.Core.Foundations.Operation<{}, DevBoxListResult>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
   @doc("Lists Dev Boxes in the Dev Center for a particular user.")
   @route("/users/{userId}/devboxes")
   @get
