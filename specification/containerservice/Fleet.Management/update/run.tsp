@@ -38,9 +38,6 @@ model UpdateRun is ProxyResource<UpdateRunProperties> {
 union UpdateRunProvisioningState {
   string,
   ResourceProvisioningState,
-union UpdateRunProvisioningState {
-  string,
-  ResourceProvisioningState,
 }
 
 scalar FleetUpdateStrategyResourceId
@@ -139,11 +136,9 @@ union ManagedClusterUpgradeType {
 
   @doc("NodeImageOnly upgrades only the node images of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to NOT be set.")
   "NodeImageOnly",
-  "NodeImageOnly",
 
   @doc("ControlPlaneOnly upgrades only targets the KubernetesVersion of the ManagedClusters and will not be applied to the AgentPool. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set.")
   @added(Versions.v2024_02_02_preview)
-  "ControlPlaneOnly",
   "ControlPlaneOnly",
 }
 
