@@ -24,7 +24,7 @@ model AzureMachineLearningIndexChatExtensionConfiguration
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("Parameters for the Azure Machine Learning vector index chat extension.")
+@doc("Parameters for the Azure Machine Learning vector index chat extension. The supported authentication types are AccessToken, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.")
 model AzureMachineLearningIndexChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
