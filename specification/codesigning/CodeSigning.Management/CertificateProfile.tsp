@@ -34,10 +34,10 @@ interface CertificateProfiles {
   @doc("Delete a certificate profile.")
   delete is ArmResourceDeleteWithoutOkAsync<CertificateProfile>;
 
-  @doc("List certificate profiles within a code signing account.")
+  @doc("List certificate profiles under a trusted signing account.")
   listByCodeSigningAccount is ArmResourceListByParent<CertificateProfile>;
 
-  @doc("Revoke certificate.")
+  @doc("Revoke a certificate under a certificate profile.")
   revokeCertificate is ArmResourceActionNoContentSync<
     CertificateProfile,
     RevokeCertificate
