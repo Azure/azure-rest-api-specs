@@ -1,5 +1,10 @@
 [CmdletBinding()]
 param (
+  [Parameter(Position = 0)]
+  [string] $BaseCommitish = "HEAD^",
+  [Parameter(Position = 1)]
+  [string] $TargetCommitish = "HEAD"
+
 )
 Set-StrictMode -Version 3
 
@@ -9,9 +14,9 @@ Set-StrictMode -Version 3
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
-$filesToCheck = @(Get-ChangedSwaggerFiles).Where({
+$filesToCheck = (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish)).Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
-  ($_ -match "specification/(?<relSpecPath>[^/]+/(data-plane|resource-manager).*?/(preview|stable)/([^/]+))/[^/]+\.json$")
+  ($_ -match "specification/[^/]+/(data-plane|resource-manager).*?/(preview|stable)/[^/]+/[^/]+\.json$")
 })
 
 if (!$filesToCheck) {
@@ -21,28 +26,48 @@ else {
   # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
   $responseCache = @{}
 
-  # Example: specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
   # - Forward slashes on both Linux and Windows
+  # - May be nested 4 or 5 levels deep, perhaps even deeper
+  # - Examples
+  #   - specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json
+  #   - specification/foo/data-plane/Foo/bar/stable/2023-01-01/Foo.json
+  #   - specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
-    $jsonContent = Get-Content (Join-Path $repoPath $file) | ConvertFrom-Json -AsHashtable
+    try {
+      $jsonContent = Get-Content (Join-Path $repoPath $file) | ConvertFrom-Json -AsHashtable
 
-    if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
-      LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
-      # Skip further checks, since spec is already using TypeSpec
-      continue
+      if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
+        LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
+        # Skip further checks, since spec is already using TypeSpec
+        continue
+      }
+      else {
+        LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
+      }
+    }
+    catch {
+      LogWarning "  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec"
+      LogWarning "    $_"
+    }
+
+    # Extract path between "specification/" and "/(preview|stable)"
+    if ($file -match "specification/(?<servicePath>[^/]+/(data-plane|resource-manager).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
+      $servicePath = $Matches["servicePath"]
     }
     else {
-      LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
+      LogError "  Path to OpenAPI did not match expected regex.  Unable to extract service path."
+      LogJobFailure
+      exit 1
     }
 
-    # Example: specification/foo/resource-manager/Microsoft.Foo
-    $pathToServiceName = ($file -split '/')[0..3] -join '/'
+    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable"
 
-    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/$pathToServiceName/stable"
+    # Avoid conflict with pipeline secret
+    $logUrlToStableFolder = $urlToStableFolder -replace '^https://',''
 
-    LogInfo "  Checking $urlToStableFolder"
+    LogInfo "  Checking $logUrlToStableFolder"
 
     $responseStatus = $responseCache[$urlToStableFolder];
     if ($null -ne $responseStatus) {
@@ -56,7 +81,7 @@ else {
         $responseCache[$urlToStableFolder] = $responseStatus
       }
       catch {
-        LogError "  Exception making web request to ${urlToStableFolder}: $_"
+        LogError "  Exception making web request to ${logUrlToStableFolder}: $_"
         LogJobFailure
         exit 1
       }
@@ -65,14 +90,14 @@ else {
     LogInfo "    Status: $responseStatus"
 
     if ($responseStatus -eq 200) {
-      LogInfo "  Branch 'main' contains path '$pathToServiceName/stable', so spec already exists and is not required to use TypeSpec"
+      LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
     }
     elseif ($response.StatusCode -eq 404) {
-      LogInfo "  Branch 'main' does not contain path '$pathToServiceName/stable', so spec is new and must use TypeSpec"
+      LogInfo "  Branch 'main' does not contain path '$servicePath/stable', so spec is new and must use TypeSpec"
       $pathsWithErrors += $file
     }
     else {
-      LogError "Unexpected response from ${urlToStableFolder}: ${response.StatusCode}"
+      LogError "Unexpected response from ${logUrlToStableFolder}: ${response.StatusCode}"
       LogJobFailure
       exit 1
     }

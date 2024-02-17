@@ -7452,6 +7452,106 @@
         "connectionString"
       ]
     },
+    "SnowflakeV2LinkedService": {
+      "x-ms-discriminator-value": "SnowflakeV2",
+      "description": "Snowflake linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeLinkedV2ServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SnowflakeLinkedV2ServiceTypeProperties": {
+      "description": "Snowflake linked service properties.",
+      "type": "object",
+      "properties": {
+        "accountIdentifier": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The account identifier of your Snowflake account, e.g. xy12345.east-us-2.azure"
+        },
+        "user": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the Snowflake user."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the Snowflake database."
+        },
+        "warehouse": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the Snowflake warehouse."
+        },
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "SnowflakeAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Basic",
+            "KeyPair",
+            "AADServicePrincipal"
+          ],
+          "type": "string",
+          "default": "Basic",
+          "description": "The type used for authentication. Type: string."
+        },
+        "clientId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The client ID of the application registered in Azure Active Directory for AADServicePrincipal authentication."
+        },
+        "clientSecret": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The Azure key vault secret reference of client secret for AADServicePrincipal authentication."
+        },
+        "tenantId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The tenant ID of the application registered in Azure Active Directory for AADServicePrincipal authentication."
+        },
+        "scope": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The scope of the application registered in Azure Active Directory for AADServicePrincipal authentication."
+        },
+        "privateKey": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The Azure key vault secret reference of privateKey for KeyPair auth."
+        },
+        "privateKeyPassphrase": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The Azure key vault secret reference of private key password for KeyPair auth with encrypted private key."
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        }
+      },
+      "required": [
+        "accountIdentifier",
+        "database",
+        "warehouse"
+      ]
+    },
     "SharePointOnlineListLinkedService": {
       "x-ms-discriminator-value": "SharePointOnlineList",
       "description": "SharePoint Online List linked service.",
@@ -7643,6 +7743,11 @@
           "x-ms-format": "dfe-string",
           "description": "The URL of Salesforce instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string)."
         },
+        "authenticationType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The authentication type to be used to connect to the Salesforce. Currently, we only support OAuth2ClientCredentials, it is also the default value"
+        },
         "clientId": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -7691,6 +7796,11 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The URL of Salesforce Service Cloud instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The authentication type to be used to connect to the Salesforce. Currently, we only support OAuth2ClientCredentials, it is also the default value"
         },
         "clientId": {
           "type": "object",
