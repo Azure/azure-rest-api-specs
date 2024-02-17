@@ -18,10 +18,10 @@ namespace Microsoft.MachineLearningServices;
 @doc("AssetVersion Definition")
 @resource("versions")
 model AssetVersion {
-  @key("indexVersion")
-  @doc("Version of the index.")
-  @visibility("external")
-  indexVersionNum: string;
+  // @key("indexVersion")
+  // @doc("Version of the index.")
+  // @visibility("external")
+  // indexVersionNum: string;
 
   @doc("Name of the index.")
   @visibility("read")
@@ -29,6 +29,7 @@ model AssetVersion {
 
   @doc("Version of the index.")
   @visibility("read")
+  @key("version")
   version: string;
 
   @doc("Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.")
