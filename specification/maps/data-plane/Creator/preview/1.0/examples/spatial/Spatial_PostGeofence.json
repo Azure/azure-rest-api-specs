@@ -1,0 +1,133 @@
+{
+  "parameters": {
+    "geography": "us",
+    "format": "json",
+    "api-version": "1.0",
+    "deviceId": "unique_device_name_under_account",
+    "lat": 48.36,
+    "lon": -124.63,
+    "searchBuffer": 50,
+    "usertime": "2017-07-21T17:32:28Z",
+    "isAsync": true,
+    "mode": "EnterAndExit",
+    "searchGeofenceRequestBody": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -122.13241226662022,
+                  47.61701140091722
+                ],
+                [
+                  -122.12810106940353,
+                  47.6169969269402
+                ],
+                [
+                  -122.12824948956276,
+                  47.61907683751349
+                ],
+                [
+                  -122.12833297981392,
+                  47.621929787055336
+                ],
+                [
+                  -122.12971398040168,
+                  47.62184100705295
+                ],
+                [
+                  -122.1318413862121,
+                  47.62195364373008
+                ],
+                [
+                  -122.13231034769727,
+                  47.61716332618121
+                ],
+                [
+                  -122.13241226662022,
+                  47.61701140091722
+                ]
+              ]
+            ]
+          },
+          "properties": {
+            "geometryId": "2",
+            "name": "Crossroad Mall"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -122.1534220563239,
+                  47.60981818546625
+                ],
+                [
+                  -122.153451623509,
+                  47.60628733146004
+                ],
+                [
+                  -122.14971782206638,
+                  47.606250040787046
+                ],
+                [
+                  -122.14817354810637,
+                  47.606391046012305
+                ],
+                [
+                  -122.1482735128807,
+                  47.60983316796356
+                ],
+                [
+                  -122.15225500989803,
+                  47.60982613678752
+                ],
+                [
+                  -122.1534220563239,
+                  47.60981818546625
+                ]
+              ]
+            ]
+          },
+          "properties": {
+            "geometryId": "1",
+            "name": "Sammamish High school"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "geometries": [
+          {
+            "deviceId": "unique_device_name_under_account",
+            "geometryId": "2",
+            "distance": -999,
+            "nearestLat": 47.621954,
+            "nearestLon": -122.131841
+          },
+          {
+            "deviceId": "unique_device_name_under_account",
+            "geometryId": "1",
+            "distance": 999,
+            "nearestLat": 47.609833,
+            "nearestLon": -122.148274
+          }
+        ],
+        "expiredGeofenceGeometryId": [],
+        "invalidPeriodGeofenceGeometryId": [],
+        "isEventPublished": true
+      }
+    }
+  }
+}

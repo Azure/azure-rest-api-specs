@@ -16,6 +16,7 @@ model EmbeddingsOptions {
     An identifier for the caller or end user of the operation. This may be used for tracking
     or rate-limiting purposes.
     """)
+  @projectedName("json", "user")
   user?: string;
 
   @doc("""
@@ -23,6 +24,7 @@ model EmbeddingsOptions {
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
+  @projectedName("json", "model")
   @projectedName("csharp", "DeploymentName")
   `model`?: string;
 
@@ -65,10 +67,10 @@ model EmbeddingItem {
 @doc("Measurement of the amount of tokens used in this request and response.")
 model EmbeddingsUsage {
   @doc("Number of tokens sent in the original request.")
-  @encodedName("application/json", "prompt_tokens")
+  @projectedName("json", "prompt_tokens")
   promptTokens: int32;
 
   @doc("Total number of tokens transacted in this request/response.")
-  @encodedName("application/json", "total_tokens")
+  @projectedName("json", "total_tokens")
   totalTokens: int32;
 }

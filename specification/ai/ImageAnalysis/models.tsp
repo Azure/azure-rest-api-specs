@@ -15,12 +15,12 @@ model ImageBoundingBox {
 
   @doc("Width of the area, in pixels.")
   @minValue(0)
-  @encodedName("application/json", "w")
+  @projectedName("json", "w")
   width: int32;
 
   @doc("Height of the area, in pixels.")
   @minValue(0)
-  @encodedName("application/json", "h")
+  @projectedName("json", "h")
   height: int32;
 }
 
@@ -82,7 +82,6 @@ The first caption always applies to the whole image.
 model DenseCaptionsResult {
   @doc("The list of image captions.")
   @minItems(1)
-  @projectedName("python", "list")
   values: Array<DenseCaption>;
 }
 
@@ -166,14 +165,14 @@ model DetectedTextBlock {
 @doc("Represents the outcome of an Image Analysis operation.")
 model ImageAnalysisResult {
   @doc("The generated phrase that describes the content of the analyzed image.")
-  @encodedName("application/json", "captionResult")
+  @projectedName("json", "captionResult")
   caption?: CaptionResult;
 
   @doc("""
   The up to 10 generated phrases, the first describing the content of the whole image,
   and the others describing the content of different regions of the image.
   """)
-  @encodedName("application/json", "denseCaptionsResult")
+  @projectedName("json", "denseCaptionsResult")
   denseCaptions?: DenseCaptionsResult;
 
   @doc("Metadata associated with the analyzed image.")
@@ -183,26 +182,26 @@ model ImageAnalysisResult {
   modelVersion: string;
 
   @doc("A list of detected physical objects in the analyzed image, and their location.")
-  @encodedName("application/json", "objectsResult")
+  @projectedName("json", "objectsResult")
   objects?: ObjectsResult;
 
   @doc("A list of detected people in the analyzed image, and their location.")
-  @encodedName("application/json", "peopleResult")
+  @projectedName("json", "peopleResult")
   people?: PeopleResult;
 
   @doc("The extracted printed and hand-written text in the analyze image. Also knows as OCR.")
-  @encodedName("application/json", "readResult")
+  @projectedName("json", "readResult")
   read?: ReadResult;
 
   @doc("""
   A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
   These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
   """)
-  @encodedName("application/json", "smartCropsResult")
+  @projectedName("json", "smartCropsResult")
   smartCrops?: SmartCropsResult;
 
   @doc("A list of content tags in the analyzed image.")
-  @encodedName("application/json", "tagsResult")
+  @projectedName("json", "tagsResult")
   tags?: TagsResult;
 }
 
@@ -221,7 +220,6 @@ model ImageMetadata {
 model ObjectsResult {
   @doc("A list of physical object detected in an image and their location.")
   @minItems(0)
-  @projectedName("python", "list")
   values: Array<DetectedObject>;
 }
 
@@ -229,7 +227,6 @@ model ObjectsResult {
 model PeopleResult {
   @doc("A list of people detected in an image and their location.")
   @minItems(0)
-  @projectedName("python", "list")
   values: Array<DetectedPerson>;
 }
 
@@ -248,7 +245,6 @@ These regions preserve as much content as possible from the analyzed image, with
 model SmartCropsResult {
   @doc("A list of crop regions.")
   @minItems(1)
-  @projectedName("python", "list")
   values: Array<CropRegion>;
 }
 
@@ -277,7 +273,6 @@ that appear in the image.
 model TagsResult {
   @doc("A list of tags.")
   @minItems(0)
-  @projectedName("python", "list")
   values: Array<DetectedTag>;
 }
 

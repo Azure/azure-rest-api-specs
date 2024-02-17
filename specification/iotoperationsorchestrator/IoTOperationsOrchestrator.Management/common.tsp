@@ -24,18 +24,17 @@ model ExtendedLocation {
 
 @lroStatus
 @doc("The provisioning status of the resource.")
-union ProvisioningState {
-  string,
-  ResourceProvisioningState,
+enum ProvisioningState {
+  ...ResourceProvisioningState,
 
   @doc("The resource is being updated.")
-  Reconciling: "Reconciling",
+  Reconciling,
 
   @doc("The resource is being deleted.")
-  Deleting: "Deleting",
+  Deleting,
 
   @doc("The resource was accepted by the server.")
-  Accepted: "Accepted",
+  Accepted,
 }
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "properties field is loosely defined and are dependent on customer scenarios"
@@ -65,9 +64,7 @@ model ReconciliationPolicy {
 }
 
 @doc("Policies to control how the resource should reconcile.")
-union ReconciliationPolicies {
-  string,
-
+enum ReconciliationPolicies {
   @doc("Allows resource to reconcile periodically.")
   periodic: "periodic",
 }

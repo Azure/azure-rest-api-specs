@@ -37,8 +37,7 @@ resources:
         - main
 
 jobs:
-- job:
-  displayName: Validate All Specs
+- job: Validate_All_Specs
 
   strategy:
     matrix:
@@ -60,3 +59,4 @@ jobs:
       $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 -CheckAll -GitClean -Verbose
     displayName: Validate All Specs
     ignoreLASTEXITCODE: true
+    condition: succeededOrFailed()
