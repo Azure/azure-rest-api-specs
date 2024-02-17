@@ -106,17 +106,15 @@ model AzureDevOpsPermissionProfile {
   groups?: string[];
 }
 @doc("Determines who has admin permissions to the Azure DevOps pool.")
-union AzureDevOpsPermissionType {
-  string,
-
+enum AzureDevOpsPermissionType {
   @doc("Pool will inherit permissions from the project or organization.")
-  "Inherit",
+  Inherit,
 
   @doc("Only the pool creator will be an admin of the pool.")
-  "CreatorOnly",
+  CreatorOnly,
 
   @doc("Only the specified accounts will be admins of the pool.")
-  "SpecificAccounts",
+  SpecificAccounts,
 }
 
 @doc("Defines the type of fabric the agent will run on.")
@@ -156,17 +154,15 @@ model StorageProfile {
 }
 
 @doc("The storage account type of the OS disk.")
-union OsDiskStorageAccountType {
-  string,
-
+enum OsDiskStorageAccountType {
   @doc("Standard OS disk type.")
-  "Standard",
+  Standard,
 
   @doc("Premium OS disk type.")
-  "Premium",
+  Premium,
 
   @doc("Standard SSD OS disk type.")
-  "StandardSSD",
+  StandardSSD,
 }
 
 @doc("The VM image of the machines in the pool.")
@@ -200,14 +196,12 @@ model SecretsManagementSettings {
   keyExportable: boolean;
 }
 @doc("Determines how the service should be run.")
-union LogonType {
-  string,
-
+enum LogonType {
   @doc("Run as a service.")
-  "Service",
+  Service,
 
   @doc("Run in interactive mode.")
-  "Interactive",
+  Interactive,
 }
 
 @doc("The network profile of the machines in the pool.")
@@ -239,29 +233,27 @@ model Stateful extends AgentProfile {
 model ResourcePredictions {}
 
 @doc("The status of the current operation.")
-union ProvisioningState {
-  string,
-
+enum ProvisioningState {
   /** Represents a succeeded operation. */
-  Succeeded: "Succeeded",
+  Succeeded,
 
   /** Represents a failed operation. */
-  Failed: "Failed",
+  Failed,
 
   /** Represents a canceled operation. */
-  Canceled: "Canceled",
+  Canceled,
 
   /** Represents a pending operation. */
-  Provisioning: "Provisioning",
+  Provisioning,
 
   /** Represents a pending operation. */
-  Updating: "Updating",
+  Updating,
 
   /** Represents an operation under deletion. */
-  Deleting: "Deleting",
+  Deleting,
 
   /** Represents an accepted operation. */
-  Accepted: "Accepted",
+  Accepted,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

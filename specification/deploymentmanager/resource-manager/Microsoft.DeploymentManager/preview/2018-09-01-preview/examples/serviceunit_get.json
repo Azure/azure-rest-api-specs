@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "subscriptionId": "caac1590-e859-444f-a9e0-62091c0f5929",
+    "resourceGroupName": "myResourceGroup",
+    "serviceTopologyName": "myTopology",
+    "serviceName": "myService",
+    "serviceUnitName": "myServiceUnit",
+    "api-version": "2018-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myServiceUnit",
+        "type": "Microsoft.DeploymentManager/servicetopologies/services/serviceunits",
+        "location": "centralus",
+        "tags": {},
+        "properties": {
+          "targetResourceGroup": "myDeploymentResourceGroup",
+          "deploymentMode": "Incremental",
+          "artifacts": {
+            "templateArtifactSourceRelativePath": "templates/myTopologyUnit.template.json",
+            "parametersArtifactSourceRelativePath": "parameter/myTopologyUnit.parameters.json"
+          }
+        }
+      }
+    }
+  }
+}

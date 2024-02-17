@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "geography": "us",
+    "format": "json",
+    "api-version": "1.0",
+    "lat": 47.622942,
+    "lon": -122.316456,
+    "closestPointRequestBody": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "geometryId": 1001
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -105.02860293715861,
+              40.516153406773952
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "geometryId": 1002
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -105.02860381672178,
+              40.515990990037309
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "geometryId": 1003
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -105.02812292879467,
+              40.516058678088562
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "sourcePoint": {
+            "lat": 47.622942,
+            "lon": -122.316456
+          },
+          "udid": null,
+          "information": "3 points processed in user data"
+        },
+        "result": [
+          {
+            "distanceInMeters": 1587492.66,
+            "position": {
+              "lat": 40.516153406773952,
+              "lon": -105.02860293715861
+            },
+            "geometryId": "1001"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -66,9 +66,7 @@ model PoolProperties {
 }
 
 @doc("Availability Zones")
-union Zone {
-  string,
-
+enum Zone {
   @doc("First availability zone.")
   Zone1: "1",
 
@@ -106,14 +104,12 @@ model PoolType {
 }
 
 @doc("Reclaim policy")
-union ReclaimPolicy {
-  string,
-
+enum ReclaimPolicy {
   @doc("Delete resource")
-  "Delete",
+  Delete,
 
   @doc("Retain resource")
-  "Retain",
+  Retain,
 }
 
 @doc("Model for disk for that pool is using")
@@ -153,29 +149,27 @@ model AzureDisk {
 }
 
 @doc("SKU of the underlying managed disk")
-union AzureDiskSkuName {
-  string,
-
+enum AzureDiskSkuName {
   @doc("Premium_LRS SKU")
-  "Premium_LRS",
+  Premium_LRS,
 
   @doc("Standard_LRS SKU")
-  "Standard_LRS",
+  Standard_LRS,
 
   @doc("StandardSSD_LRS SKU")
-  "StandardSSD_LRS",
+  StandardSSD_LRS,
 
   @doc("UltraSSD_LRS SKU")
-  "UltraSSD_LRS",
+  UltraSSD_LRS,
 
   @doc("Premium_ZRS SKU")
-  "Premium_ZRS",
+  Premium_ZRS,
 
   @doc("PremiumV2_LRS SKU")
-  "PremiumV2_LRS",
+  PremiumV2_LRS,
 
   @doc("StandardSSD_ZRS SKU")
-  "StandardSSD_ZRS",
+  StandardSSD_ZRS,
 }
 
 @doc("Encryption key properties for the pool.")
@@ -196,14 +190,12 @@ model ElasticSan {
 
 /** Sku Name enum type */
 @doc("ElasticSAN SKUs")
-union ElasticSanSkuName {
-  string,
-
+enum ElasticSanSkuName {
   @doc("Premium_LRS SKU")
-  "Premium_LRS",
+  Premium_LRS,
 
   @doc("Premium_ZRS SKU")
-  "Premium_ZRS",
+  Premium_ZRS,
 }
 
 @doc("Ephemeral Disk Pool Properties")
@@ -218,21 +210,20 @@ model EphemeralDisk {
 
 @doc("Provisioning state of the resource.")
 @Azure.Core.lroStatus
-union ProvisioningState {
-  string,
-  ResourceProvisioningState,
+enum ProvisioningState {
+  ...ResourceProvisioningState,
 
   @doc("The resource is being provisioned")
-  Provisioning: "Provisioning",
+  Provisioning,
 
   @doc("The resource is updating")
-  Updating: "Updating",
+  Updating,
 
   @doc("The resource is being deleted")
-  Deleting: "Deleting",
+  Deleting,
 
   @doc("The resource create request has been accepted")
-  Accepted: "Accepted",
+  Accepted,
 }
 
 @doc("Status of the resource")
@@ -245,17 +236,15 @@ model ResourceOperationalStatus {
 }
 
 @doc("State of the resource.")
-union ResourceOperationStatusState {
-  string,
-
+enum ResourceOperationStatusState {
   @doc("The resource is pending.")
-  "Pending",
+  Pending,
 
   @doc("The resource is available.")
-  "Available",
+  Available,
 
   @doc("The resource is unavailable.")
-  "Unavailable",
+  Unavailable,
 }
 
 // END POOL
@@ -364,20 +353,18 @@ model AssignmentStatus {
 }
 
 @doc("Status of the assignment resource")
-union AssignmentStatusState {
-  string,
-
+enum AssignmentStatusState {
   @doc("The assignment of the pool to the resource is in progress")
-  "Assigning",
+  Assigning,
 
   @doc("The assignment to the pool was successful.")
-  "Assigned",
+  Assigned,
 
   @doc("The pool is being unassigned.")
-  "Unassigning",
+  Unassigning,
 
   @doc("The operation of assigning or unassigning the pool failed.")
-  "Failed",
+  Failed,
 }
 
 scalar AssignmentId

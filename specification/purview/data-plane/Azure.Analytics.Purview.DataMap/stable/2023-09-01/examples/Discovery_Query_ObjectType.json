@@ -1,35 +1,37 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "body": {
+    "searchRequest": {
       "keywords": null,
       "limit": 10,
       "filter": {
         "or": [
-          {
-            "objectType": "Dashboards"
-          },
-          {
-            "objectType": "Data pipelines"
-          },
-          {
-            "objectType": "Files"
-          },
-          {
-            "objectType": "Folders"
-          },
-          {
-            "objectType": "Glossary terms"
-          },
-          {
-            "objectType": "Reports"
-          },
-          {
-            "objectType": "Stored procedures"
-          },
-          {
-            "objectType": "Tables"
-          }
+          [
+            {
+              "objectType": "Dashboards"
+            },
+            {
+              "objectType": "Data pipelines"
+            },
+            {
+              "objectType": "Files"
+            },
+            {
+              "objectType": "Folders"
+            },
+            {
+              "objectType": "Glossary terms"
+            },
+            {
+              "objectType": "Reports"
+            },
+            {
+              "objectType": "Stored procedures"
+            },
+            {
+              "objectType": "Tables"
+            }
+          ]
         ]
       }
     },
@@ -69,7 +71,5 @@
         ]
       }
     }
-  },
-  "title": "Discovery_Query_ObjectType",
-  "operationId": "Discovery_Query"
+  }
 }
