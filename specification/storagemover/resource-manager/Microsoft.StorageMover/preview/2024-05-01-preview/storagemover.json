@@ -1739,7 +1739,7 @@
       "type": "object",
       "properties": {
         "weeklyRecurrences": {
-          "description": "The list of weekly repeating recurrences of the WAN-link upload limit schedule.",
+          "description": "The set of weekly repeating recurrences of the WAN-link upload limit schedule.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/UploadLimitWeeklyRecurrence"
@@ -1757,7 +1757,7 @@
           "$ref": "#/definitions/Time"
         },
         "endTime": {
-          "description": "The end time of the schedule recurrence. It may not extend beyond the selected day and must be later in the day than the start time. Full hour and 30-minute intervals are supported.",
+          "description": "The end time of the schedule recurrence. Full hour and 30-minute intervals are supported.",
           "$ref": "#/definitions/Time"
         }
       },
@@ -1771,7 +1771,7 @@
       "description": "The weekly recurrence of the schedule.",
       "properties": {
         "days": {
-          "description": "The days of week of the schedule recurrence. A day must not be listed more than once in a recurrence.",
+          "description": "The set of days of week for the schedule recurrence. A day must not be specified more than once in a recurrence.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DayOfWeek"
