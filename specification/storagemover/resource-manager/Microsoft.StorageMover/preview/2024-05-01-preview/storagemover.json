@@ -1735,11 +1735,11 @@
       }
     },
     "UploadLimitSchedule": {
-      "description": "The WAN-link upload limit schedule.",
+      "description": "The WAN-link upload limit schedule. Overlapping recurrences are not allowed.",
       "type": "object",
       "properties": {
         "weeklyRecurrences": {
-          "description": "The list of recurrences for the WAN-link upload limit schedule. Only weekly repeating schedule is supported.",
+          "description": "The list of weekly repeating recurrences of the WAN-link upload limit schedule.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/UploadLimitWeeklyRecurrence"
@@ -1749,15 +1749,15 @@
       }
     },
     "Recurrence": {
-      "description": "The recurrence for the WAN-link upload limit schedule.",
+      "description": "The schedule recurrence.",
       "type": "object",
       "properties": {
         "startTime": {
-          "description": "The start time of the schedule recurrence. Full hour and 30-minute intervals are supported",
+          "description": "The start time of the schedule recurrence. Full hour and 30-minute intervals are supported.",
           "$ref": "#/definitions/Time"
         },
         "endTime": {
-          "description": "The end time may not extend beyond the selected day and must be later in the day than the start time. Full hour and 30-minute intervals are supported.",
+          "description": "The end time of the schedule recurrence. It may not extend beyond the selected day and must be later in the day than the start time. Full hour and 30-minute intervals are supported.",
           "$ref": "#/definitions/Time"
         }
       },
@@ -1768,10 +1768,10 @@
     },
     "WeeklyRecurrence": {
       "type": "object",
-      "description": "The schedule weekly recurrence.",
+      "description": "The weekly recurrence of the schedule.",
       "properties": {
         "days": {
-          "description": "The days of week for the schedule recurrence.",
+          "description": "The days of week of the schedule recurrence. A day must not be listed more than once in a recurrence.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DayOfWeek"
@@ -1805,11 +1805,11 @@
       }
     },
     "UploadLimit": {
-      "description": "The schedule recurrence for the WAN-link upload limit.",
+      "description": "The WAN-link upload limit.",
       "type": "object",
       "properties": {
         "limitInMbps": {
-          "description": "The WAN-link upload bandwidth (maximum data transfer rate) in megabits per second. Value of 0 indicates no throughput is allowed and any migration job is effectively paused for the duration of this recurrence. Only data plane operations are governed by this limit. Control plane operations ensure seamless functionality. The agent may exceed this limit with control messages, if necessary.",
+          "description": "The WAN-link upload bandwidth (maximum data transfer rate) in megabits per second. Value of 0 indicates no throughput is allowed and any running migration job is effectively paused for the duration of this recurrence. Only data plane operations are governed by this limit. Control plane operations ensure seamless functionality. The agent may exceed this limit with control messages, if necessary.",
           "type": "integer",
           "format": "int32",
           "minimum": 0,
@@ -1821,7 +1821,7 @@
       ]
     },
     "UploadLimitWeeklyRecurrence": {
-      "description": "The recurrence for the WAN-link upload limit schedule.",
+      "description": "The weekly recurrence of the WAN-link upload limit schedule. The start time must be earlier in the day than the end time. The recurrence must not span across multiple days.",
       "type": "object",
       "allOf": [
         {
