@@ -1638,12 +1638,12 @@
           "readOnly": true
         },
         "timeZone": {
-          "description": "The agent's VM local time zone represented in Windows format.",
+          "description": "The agent's local time zone represented in Windows format.",
           "type": "string",
           "readOnly": true
         },
         "uploadLimitSchedule": {
-          "description": "The WAN-link upload limit schedule that should apply to the Agent's Job Runs according to its VM local time.",
+          "description": "The WAN-link upload limit schedule that applies to any Job Run the agent executes. Data plane operations (migrating files) are affected. Control plane operations ensure seamless migration functionality and are not limited by this schedule. The schedule is interpreted with the agent's local time.",
           "$ref": "#/definitions/UploadLimitSchedule"
         },
         "errorDetails": {
@@ -1701,7 +1701,7 @@
           "description": "A description for the Agent."
         },
         "uploadLimitSchedule": {
-          "description": "The WAN-link upload limit schedule that should apply to the Agent's Job Runs according to its VM local time.",
+          "description": "The WAN-link upload limit schedule that applies to any Job Run the agent executes. Data plane operations (migrating files) are affected. Control plane operations ensure seamless migration functionality and are not limited by this schedule. The schedule is interpreted with the agent's local time.",
           "$ref": "#/definitions/UploadLimitSchedule"
         }
       }
@@ -1739,7 +1739,7 @@
       "type": "object",
       "properties": {
         "weeklyRecurrences": {
-          "description": "The list of recurrences for the WAN-link upload limit schedule.",
+          "description": "The list of recurrences for the WAN-link upload limit schedule. Only weekly repeating schedule is supported.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/UploadLimitWeeklyRecurrence"
@@ -1753,11 +1753,11 @@
       "type": "object",
       "properties": {
         "startTime": {
-          "description": "The start time of the schedule recurrence.",
+          "description": "The start time of the schedule recurrence. Full hour and 30-minute intervals are supported",
           "$ref": "#/definitions/Time"
         },
         "endTime": {
-          "description": "The end time of the schedule recurrence.",
+          "description": "The end time may not extend beyond the selected day and must be later in the day than the start time. Full hour and 30-minute intervals are supported.",
           "$ref": "#/definitions/Time"
         }
       },
@@ -1771,7 +1771,7 @@
       "description": "The schedule weekly recurrence.",
       "properties": {
         "days": {
-          "description": "The days of week of the schedule recurrence.",
+          "description": "The days of week for the schedule recurrence.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DayOfWeek"
@@ -1809,7 +1809,7 @@
       "type": "object",
       "properties": {
         "limitInMbps": {
-          "description": "The WAN-link upload bandwidth (maximum data transfer rate) in megabits per second. Limit of 0 indicates no throughput is allowed.",
+          "description": "The WAN-link upload bandwidth (maximum data transfer rate) in megabits per second. Value of 0 indicates no throughput is allowed and any migration job is effectively paused for the duration of this recurrence. Only data plane operations are governed by this limit. Control plane operations ensure seamless functionality. The agent may exceed this limit with control messages, if necessary.",
           "type": "integer",
           "format": "int32",
           "minimum": 0,
@@ -1837,14 +1837,14 @@
       "type": "object",
       "properties": {
         "hour": {
-          "description": "The hour element of the time.",
+          "description": "The hour element of the time. Allowed values range from 0 (start of the selected day) to 24 (end of the selected day). Hour value 24 cannot be combined with any other minute value but 0.",
           "type": "integer",
           "format": "int32",
           "minimum": 0,
           "maximum": 24
         },
         "minute": {
-          "description": "The minute element of the time.",
+          "description": "The minute element of the time. Allowed values are 0 and 30.",
           "type": "integer",
           "format": "int32",
           "enum": [
