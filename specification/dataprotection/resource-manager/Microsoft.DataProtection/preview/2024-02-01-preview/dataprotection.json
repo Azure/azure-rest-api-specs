@@ -4945,8 +4945,6 @@
       "description": "Generic parameters to be used during configuration of backup",
       "required": [
         "resourceSelectors",
-        "matchPattern",
-        "selectionType",
         "objectType"
       ],
       "type": "object",
@@ -4962,20 +4960,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "matchPattern": {
-          "description": "Match pattern to be used during configuration of backup",
-          "type": "string",
-          "enum": [
-            "Exact"
-          ]
-        },
-        "selectionType": {
-          "description": "Selection type to be used during configuration of backup",
-          "type": "string",
-          "enum": [
-            "Include"
-          ]
         }
       },
       "x-ms-discriminator-value": "GenericBackupDatasourceParameters"
