@@ -79,7 +79,7 @@
         "tags": [
           "Template"
         ],
-        "description": "List all templates for given ACS channel",
+        "description": "List all templates for given Azure Communication Services channel",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -89,7 +89,8 @@
             "in": "path",
             "description": "The registration ID of the channel.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "maxpagesize",
@@ -287,7 +288,7 @@
           }
         },
         "x-ms-examples": {
-          "Download a media": {
+          "Download media": {
             "$ref": "./examples/Stream_GetMedia.json"
           }
         }
