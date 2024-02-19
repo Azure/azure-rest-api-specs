@@ -70,7 +70,7 @@ interface InternetGatewayRules {
   delete is ArmResourceDeleteWithoutOkAsync<
     InternetGatewayRule,
     BaseParameters<InternetGatewayRule>,
-    ArmLroLocationHeader
+    ArmAsyncOperationHeader
   >;
 
   /**
