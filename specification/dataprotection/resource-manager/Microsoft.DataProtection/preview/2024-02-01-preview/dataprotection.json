@@ -6525,8 +6525,6 @@
       "description": "Generic criteria to be used during restore",
       "required": [
         "resourceSelectors",
-        "matchPattern",
-        "selectionType",
         "objectType"
       ],
       "type": "object",
@@ -6537,25 +6535,11 @@
       ],
       "properties": {
         "resourceSelectors": {
-          "description": "List of resource selectors to be backed up during configuration of backup",
+          "description": "List of resource selectors to be backed up during restore",
           "type": "array",
           "items": {
             "type": "string"
           }
-        },
-        "matchPattern": {
-          "description": "Match pattern to be used during configuration of backup",
-          "type": "string",
-          "enum": [
-            "Exact"
-          ]
-        },
-        "selectionType": {
-          "description": "Selection type to be used during configuration of backup",
-          "type": "string",
-          "enum": [
-            "Include"
-          ]
         }
       },
       "x-ms-discriminator-value": "GenericRestoreDatasourceCriteria"
