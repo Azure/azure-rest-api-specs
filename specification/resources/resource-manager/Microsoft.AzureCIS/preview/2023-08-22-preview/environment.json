@@ -3,7 +3,7 @@
   "info": {
     "title": "Foundational ARM Client",
     "version": "2023-08-22-preview",
-    "description": "https://eng.ms/docs/products/azcis-resource-provisioning/template-user-guide/resources/aad-application",
+    "description": "Autopilot Environment Provider",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "AadApplication"
+      "name": "Environment"
     }
   ],
   "paths": {
@@ -74,8 +74,8 @@
           }
         },
         "x-ms-examples": {
-          "List Operations AadApplication": {
-            "$ref": "./examples/AadApplication_Operations.json"
+          "List Operations Environment": {
+            "$ref": "./examples/Environment_Operations.json"
           }
         },
         "x-ms-pageable": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCIS/aadApplications": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCIS/autopilotEnvironments": {
       "get": {
-        "operationId": "AadApplication_ListBySubscription",
+        "operationId": "Environment_ListBySubscription",
         "tags": [
-          "AadApplication"
+          "Environment"
         ],
-        "description": "List AadApplicationResource resources by subscription ID",
+        "description": "List EnvironmentResource resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -102,7 +102,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AadApplicationResourceListResult"
+              "$ref": "#/definitions/EnvironmentResourceListResult"
             }
           },
           "default": {
@@ -113,8 +113,8 @@
           }
         },
         "x-ms-examples": {
-          "ListBySubscription AadApplication": {
-            "$ref": "./examples/AadApplication_ListBySubscription.json"
+          "ListBySubscription Environment": {
+            "$ref": "./examples/Environment_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -122,13 +122,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/aadApplications": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/autopilotEnvironments": {
       "get": {
-        "operationId": "AadApplication_ListByResourceGroup",
+        "operationId": "Environment_ListByResourceGroup",
         "tags": [
-          "AadApplication"
+          "Environment"
         ],
-        "description": "List AadApplicationResource resources by resource group",
+        "description": "List EnvironmentResource resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AadApplicationResourceListResult"
+              "$ref": "#/definitions/EnvironmentResourceListResult"
             }
           },
           "default": {
@@ -155,8 +155,8 @@
           }
         },
         "x-ms-examples": {
-          "ListByResourceGroup AadApplication": {
-            "$ref": "./examples/AadApplication_ListByResourceGroup.json"
+          "ListByResourceGroup Environment": {
+            "$ref": "./examples/Environment_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -164,13 +164,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/aadApplications/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/autopilotEnvironments/{resourceName}": {
       "get": {
-        "operationId": "AadApplication_Get",
+        "operationId": "Environment_Get",
         "tags": [
-          "AadApplication"
+          "Environment"
         ],
-        "description": "Get a AadApplicationResource",
+        "description": "Get a EnvironmentResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -194,7 +194,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AadApplicationResource"
+              "$ref": "#/definitions/EnvironmentResource"
             }
           },
           "default": {
@@ -205,17 +205,17 @@
           }
         },
         "x-ms-examples": {
-          "Get AadApplication": {
-            "$ref": "./examples/AadApplication_Get.json"
+          "Get Environment": {
+            "$ref": "./examples/Environment_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "AadApplication_CreateOrUpdate",
+        "operationId": "Environment_CreateOrUpdate",
         "tags": [
-          "AadApplication"
+          "Environment"
         ],
-        "description": "Create a AadApplicationResource",
+        "description": "Create a EnvironmentResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -240,21 +240,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AadApplicationResource"
+              "$ref": "#/definitions/EnvironmentResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AadApplicationResource' update operation succeeded",
+            "description": "Resource 'EnvironmentResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AadApplicationResource"
+              "$ref": "#/definitions/EnvironmentResource"
             }
           },
           "201": {
-            "description": "Resource 'AadApplicationResource' create operation succeeded",
+            "description": "Resource 'EnvironmentResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AadApplicationResource"
+              "$ref": "#/definitions/EnvironmentResource"
             },
             "headers": {
               "Retry-After": {
@@ -272,8 +272,8 @@
           }
         },
         "x-ms-examples": {
-          "Create AadApplication": {
-            "$ref": "./examples/AadApplication_CreateOrUpdate.json"
+          "Create Environment": {
+            "$ref": "./examples/Environment_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -284,7 +284,31 @@
     }
   },
   "definitions": {
-    "AadApplicationProvisioningState": {
+    "EnvironmentMode": {
+      "type": "string",
+      "description": "The EnvironmentMode indicates which files will be cloned to the new environment.",
+      "enum": [
+        "Basic",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "On the Basic mode only the environment basic files will be cloned to the new environment. The environment basic files are deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "On the All mode all the files including customer files will be copied to the new environment."
+          }
+        ]
+      }
+    },
+    "EnvironmentProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
       "enum": [
@@ -294,7 +318,7 @@
         "Accepted"
       ],
       "x-ms-enum": {
-        "name": "AadApplicationProvisioningState",
+        "name": "EnvironmentProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -315,18 +339,18 @@
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "Accepted State"
+            "description": "The resource create request has been accepted"
           }
         ]
       },
       "readOnly": true
     },
-    "AadApplicationResource": {
+    "EnvironmentResource": {
       "type": "object",
-      "description": "AadApplication Resource",
+      "description": "Environment Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AadApplicationResourceProperties",
+          "$ref": "#/definitions/EnvironmentResourceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -341,15 +365,15 @@
         }
       ]
     },
-    "AadApplicationResourceListResult": {
+    "EnvironmentResourceListResult": {
       "type": "object",
-      "description": "The response of a AadApplicationResource list operation.",
+      "description": "The response of a EnvironmentResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AadApplicationResource items on this page",
+          "description": "The EnvironmentResource items on this page",
           "items": {
-            "$ref": "#/definitions/AadApplicationResource"
+            "$ref": "#/definitions/EnvironmentResource"
           }
         },
         "nextLink": {
@@ -362,64 +386,33 @@
         "value"
       ]
     },
-    "AadApplicationResourceProperties": {
+    "EnvironmentResourceProperties": {
       "type": "object",
-      "description": "AadApplication properties",
+      "description": "environment properties",
       "properties": {
-        "applicationName": {
+        "modelEnvironment": {
           "type": "string",
-          "description": "Display name of the AAD Application resource. Also used as a key to make the resource idempotent. Must be unique in the tenant. Case-insensitive."
+          "description": "The source environment and the source cluster from which you want to clone the environment."
         },
-        "tenantId": {
+        "environmentName": {
           "type": "string",
-          "description": "Tenant Id of the AAD Application resource."
+          "description": "The name of the target environment to be created."
         },
-        "availableToOtherTenants": {
+        "clusterName": {
           "type": "string",
-          "description": "The value defines if the AAD Application resource is available to other tenants. False by default."
+          "description": "The name of the target cluster where the new environment is supposed to be created."
         },
-        "appIdUri": {
-          "type": "string",
-          "description": "App ID Uri of a multiple-tenant AAD Application resource. Must be globally unique."
-        },
-        "snIssuerConfig": {
-          "type": "array",
-          "description": "SN Issuer config of an AAD Application resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "owners": {
-          "type": "array",
-          "description": "List of the owners of an AAD Application resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "adGroupsToJoin": {
-          "type": "array",
-          "description": "List of the AD groups to join for an AAD Application resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "certificates": {
-          "type": "array",
-          "description": "List of the certificates paths for an AAD Application resource.",
-          "items": {
-            "type": "string"
-          }
+        "mode": {
+          "$ref": "#/definitions/EnvironmentMode",
+          "description": "The mode property indicates which files will be cloned to the new environment. There are two options. All: Will clone all the files including customer files to the new environment. Basic: Will clone only the environment basic files which is deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt.",
+          "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/AadApplicationProvisioningState",
+          "$ref": "#/definitions/EnvironmentProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
         }
-      },
-      "required": [
-        "applicationName",
-        "tenantId"
-      ]
+      }
     }
   },
   "parameters": {}
