@@ -24,8 +24,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2024-02-05-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.codesigning.v2023_04_30_preview
-  output-folder: $(azure-libraries-for-java-folder)/codesigning/resource-manager/v2023_04_30_preview
+  namespace: com.microsoft.azure.management.codesigning.v2024_02_05_preview
+  output-folder: $(azure-libraries-for-java-folder)/codesigning/resource-manager/v2024_02_05_preview
 regenerate-manager: true
 generate-interface: true
 ```
