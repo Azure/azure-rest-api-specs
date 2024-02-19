@@ -430,9 +430,414 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/addNewFabric": {
+      "post": {
+        "operationId": "ExtensionManagers_AddNewFabric",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Add new fabric/infra/scenario on the extension manager resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddFabricRequestDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_AddNewFabric_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionManagers_AddNewFabric_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/disableExtensions": {
+      "post": {
+        "operationId": "ExtensionManagers_DisableExtensions",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Disable extensions on the extension manager resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DisableExtensionsRequestDetails"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_DisableExtensions_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionManagers_DisableExtensions_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/enableExtensions": {
+      "post": {
+        "operationId": "ExtensionManagers_EnableExtensions",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Enable extensions on the extension manager resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EnableExtensionsRequestDetails"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_EnableExtensions_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionManagers_EnableExtensions_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/removeFabric": {
+      "post": {
+        "operationId": "ExtensionManagers_RemoveFabric",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Remove a fabric/infra/scenario on the extension manager resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveFabricRequestDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_RemoveFabric_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionManagers_RemoveFabric_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AddFabricRequestDetails": {
+      "type": "object",
+      "description": "Request body for adding new fabric/scenario/infra POST action",
+      "properties": {
+        "infrastructure": {
+          "type": "string",
+          "description": "Infra of new fabric."
+        },
+        "scenario": {
+          "type": "string",
+          "description": "Azure scenario enabled. Ex: Migrate"
+        }
+      },
+      "required": [
+        "infrastructure",
+        "scenario"
+      ]
+    },
+    "DisableExtensionsRequestDetails": {
+      "type": "object",
+      "description": "Request body details for disabling extensions POST action",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the extension"
+        },
+        "infrastructure": {
+          "type": "string",
+          "description": "Infra on which the extension will be disabled."
+        },
+        "scenario": {
+          "type": "string",
+          "description": "Azure scenario enabled. Ex: Migrate"
+        }
+      },
+      "required": [
+        "name",
+        "infrastructure",
+        "scenario"
+      ]
+    },
+    "EnableExtensionsRequestDetails": {
+      "type": "object",
+      "description": "Request body details for enabling extensions POST action",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the extension"
+        },
+        "infrastructure": {
+          "type": "string",
+          "description": "Infra on which the extension will be enabled."
+        },
+        "scenario": {
+          "type": "string",
+          "description": "Azure scenario enabled. Ex: Migrate"
+        },
+        "additionalCustomLocationCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of additional custome locations required for the extension"
+        }
+      },
+      "required": [
+        "name",
+        "infrastructure",
+        "scenario",
+        "additionalCustomLocationCount"
+      ]
+    },
+    "ExtensionDetails": {
+      "type": "object",
+      "description": "Extension details of an extension in extension profile.",
+      "properties": {
+        "customLocation": {
+          "type": "string",
+          "description": "Custom Location of the extension",
+          "readOnly": true
+        },
+        "infrastructure": {
+          "type": "string",
+          "description": "Infra on which extension is deployed."
+        },
+        "scenario": {
+          "type": "string",
+          "description": "Azure scenario enabled. Ex: Migrate"
+        }
+      },
+      "required": [
+        "infrastructure",
+        "scenario"
+      ]
+    },
     "ExtensionManager": {
       "type": "object",
       "description": "Extension Manager Resource",
@@ -484,28 +889,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/ExtensionManagerPatchProperties",
-          "description": "Patch properties of Extension Manager Resource"
-        }
-      }
-    },
-    "ExtensionManagerPatchProperties": {
-      "type": "object",
-      "description": "Patch properties of Extension Manager Resource",
-      "properties": {
-        "fabricId": {
-          "type": "string",
-          "description": "Fabric Id of the vCenter on which extension manager is deployed."
-        },
-        "extensionProfile": {
-          "type": "array",
-          "description": "Extension profile of the extension manager resource",
-          "items": {
-            "$ref": "#/definitions/ExtensionObject"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -518,24 +901,9 @@
           "description": "Provisioning state of Extension Manager resource.",
           "readOnly": true
         },
-        "fabricId": {
-          "type": "string",
-          "description": "Fabric Id of the vCenter on which extension manager is deployed."
-        },
         "extendedLocation": {
           "type": "string",
           "description": "ARM ID of the custom location resource deployed on the Onboarding Appliance"
-        },
-        "infrastructure": {
-          "type": "string",
-          "description": "Infra on which the onboarding appliance is deployed."
-        },
-        "scenarioList": {
-          "type": "array",
-          "description": "Azure scenario enabled. Ex: Migrate",
-          "items": {
-            "type": "string"
-          }
         },
         "extensionProfile": {
           "type": "array",
@@ -543,11 +911,16 @@
           "items": {
             "$ref": "#/definitions/ExtensionObject"
           },
-          "x-ms-identifiers": [],
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "scenarioProfile": {
+          "type": "array",
+          "description": "Scenario profile of the extension manager resource",
+          "items": {
+            "$ref": "#/definitions/ScenarioObject"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -562,10 +935,13 @@
           "type": "string",
           "description": "Name of the extension"
         },
-        "customLocation": {
-          "type": "string",
-          "description": "Custom Location of the extension",
-          "readOnly": true
+        "extensionDetails": {
+          "type": "array",
+          "description": "Extension details of an extension in extension profile.",
+          "items": {
+            "$ref": "#/definitions/ExtensionDetails"
+          },
+          "x-ms-identifiers": []
         },
         "enabled": {
           "type": "boolean",
@@ -574,6 +950,7 @@
       },
       "required": [
         "name",
+        "extensionDetails",
         "enabled"
       ]
     },
@@ -631,6 +1008,42 @@
         ]
       },
       "readOnly": true
+    },
+    "RemoveFabricRequestDetails": {
+      "type": "object",
+      "description": "Request body for removing a fabric/scenario/infra POST action",
+      "properties": {
+        "infrastructure": {
+          "type": "string",
+          "description": "Infra of fabric to be removed."
+        },
+        "scenario": {
+          "type": "string",
+          "description": "Azure scenario enabled. Ex: Migrate"
+        }
+      },
+      "required": [
+        "infrastructure",
+        "scenario"
+      ]
+    },
+    "ScenarioObject": {
+      "type": "object",
+      "description": "Scenario object inside the scenario profile.",
+      "properties": {
+        "infrastructure": {
+          "type": "string",
+          "description": "Infra on which extension is deployed."
+        },
+        "scenario": {
+          "type": "string",
+          "description": "Azure scenario enabled. Ex: Migrate"
+        }
+      },
+      "required": [
+        "infrastructure",
+        "scenario"
+      ]
     },
     "Versions": {
       "type": "string",
