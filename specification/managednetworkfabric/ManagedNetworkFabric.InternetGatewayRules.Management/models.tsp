@@ -59,7 +59,12 @@ enum ProvisioningState {
 /**
  * Internet Gateway Rule Properties defines the resource properties.
  */
-model InternetGatewayRuleProperties is AnnotationResource {
+model InternetGatewayRuleProperties {
+  /**
+   * Common properties for annotated type.
+   */
+  annotationResource?: AnnotationResource;
+
   /**
    * Rules for the InternetGateways
    */
