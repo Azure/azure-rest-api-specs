@@ -83,14 +83,18 @@ model ExtensionManagerPatch {
 @lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState, //standard terminal values
-  @doc("creating")
+
+  @doc("creating provisioning state")
   Creating,
-  @doc("updating")
+
+  @doc("updating provisioning state")
   Updating,
-  @doc("deleting")
+
+  @doc("deleting provisioning state")
   Deleting,
-  @doc("accepted")
-  Accepted
+
+  @doc("accepted provisioning state")
+  Accepted,
 }
 
 @doc("Request body details for enabling extensions POST action")
@@ -104,7 +108,7 @@ model EnableExtensionsRequestDetails {
   @doc("Azure scenario enabled. Ex: Migrate")
   scenario: string;
 
-  @doc("Number of additional custome locations required for the extension")
+  @doc("Number of additional custom locations required for the extension")
   additionalCustomLocationCount: int64;
 }
 
@@ -143,18 +147,33 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface ExtensionManagers {
   get is ArmResourceRead<ExtensionManager>;
-  //create is ArmResourceCreateOrUpdateAsync<ExtensionManager>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ExtensionManager>;
   update is ArmCustomPatchAsync<ExtensionManager, ExtensionManagerPatch>;
   delete is ArmResourceDeleteAsync<ExtensionManager>;
   listByResourceGroup is ArmResourceListByParent<ExtensionManager>;
   listBySubscription is ArmListBySubscription<ExtensionManager>;
   @doc("Enable extensions on the extension manager resource")
-  enableExtensions is ArmResourceActionAsync<ExtensionManager, EnableExtensionsRequestDetails[], ExtensionManager>;
+  enableExtensions is ArmResourceActionAsync<
+    ExtensionManager,
+    EnableExtensionsRequestDetails[],
+    ExtensionManager
+  >;
   @doc("Disable extensions on the extension manager resource")
-  disableExtensions is ArmResourceActionAsync<ExtensionManager, DisableExtensionsRequestDetails[], ExtensionManager>;
+  disableExtensions is ArmResourceActionAsync<
+    ExtensionManager,
+    DisableExtensionsRequestDetails[],
+    ExtensionManager
+  >;
   @doc("Add new fabric/infra/scenario on the extension manager resource")
-  addNewFabric is ArmResourceActionAsync<ExtensionManager, AddFabricRequestDetails, ExtensionManager>;
+  addNewFabric is ArmResourceActionAsync<
+    ExtensionManager,
+    AddFabricRequestDetails,
+    ExtensionManager
+  >;
   @doc("Remove a fabric/infra/scenario on the extension manager resource")
-  removeFabric is ArmResourceActionAsync<ExtensionManager, RemoveFabricRequestDetails, ExtensionManager>;
+  removeFabric is ArmResourceActionAsync<
+    ExtensionManager,
+    RemoveFabricRequestDetails,
+    ExtensionManager
+  >;
 }
