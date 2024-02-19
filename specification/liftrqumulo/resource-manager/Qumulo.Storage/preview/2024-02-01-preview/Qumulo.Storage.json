@@ -539,6 +539,14 @@
           "type": "string",
           "description": "File system Id of the resource"
         },
+        "privateIPs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Private IPs of the resource"
+        },
         "fsGBpsProvisioned": {
           "type": "integer",
           "format": "int32",
@@ -704,6 +712,7 @@
       "enum": [
         "Standard",
         "Performance",
+        "Active",
         "Hot",
         "Cold"
       ],
@@ -720,6 +729,11 @@
             "name": "Performance",
             "value": "Performance",
             "description": "Performance Storage Sku"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active Storage Sku"
           },
           {
             "name": "Hot",

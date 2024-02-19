@@ -710,7 +710,45 @@
     },
     "StorageSku": {
       "type": "string",
-      "description": "Storage Sku"
+      "description": "Storage Sku",
+      "enum": [
+        "Standard",
+        "Performance",
+        "Active",
+        "Hot",
+        "Cold"
+      ],
+      "x-ms-enum": {
+        "name": "StorageSku",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard Storage Sku"
+          },
+          {
+            "name": "Performance",
+            "value": "Performance",
+            "description": "Performance Storage Sku"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active Storage Sku"
+          },
+          {
+            "name": "Hot",
+            "value": "Hot",
+            "description": "Hot Storage Sku"
+          },
+          {
+            "name": "Cold",
+            "value": "Cold",
+            "description": "Cold Storage Sku"
+          }
+        ]
+      }
     },
     "HighAvailability": {
       "type": "string",
