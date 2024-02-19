@@ -2,6 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Marketplace Discovery API Keys Management",
+    "description": "This API is designed to streamline the process of generating designated keys for accessing all Marketplace Catalog APIs. By utilizing a simple POST operation, users can effortlessly generate a unique API key, granting  access to Marketplace Catalog APIs from version 2023-01-01 and beyond.",
     "version": "2023-01-01-preview"
   },
   "host": "management.azure.com",
@@ -17,6 +18,7 @@
         "tags": [
           "CreateApiKey"
         ],
+        "summary": "Generates an API key, granting access to the full range of Marketplace Catalog APIs. Please note that a valid subscription is required to utilize this functionality.",
         "operationId": "CreateApiKey_Post",
         "x-ms-examples": {
           "Create_Key": {
@@ -35,7 +37,7 @@
             "type": "string",
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
-            "description": "The tenant that the subscription is in",
+            "description": "The tenant associated with the subscription",
             "in": "header",
             "required": true,
             "x-nullable": true
@@ -69,6 +71,7 @@
         "tags": [
           "RevokeApiKey"
         ],
+        "summary": "Revokes an active API key",
         "operationId": "RevokeApiKey_Post",
         "x-ms-examples": {
           "Revoke_Key": {
@@ -87,6 +90,7 @@
             "type": "string",
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
+            "description": "The tenant associated with the subscription",
             "in": "header",
             "required": true,
             "x-nullable": true
@@ -116,6 +120,7 @@
         "tags": [
           "GetApiKeys"
         ],
+        "summary": "Retrieves a list of API keys associated with a selected subscription",
         "operationId": "GetApiKeys_List",
         "x-ms-examples": {
           "Get_Key": {
@@ -127,6 +132,7 @@
             "type": "string",
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
+            "description": "The tenant associated with the subscription",
             "in": "header",
             "required": true,
             "x-nullable": true
