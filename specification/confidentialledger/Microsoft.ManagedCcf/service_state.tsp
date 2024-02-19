@@ -39,6 +39,9 @@ model Member {
 
   @doc("x509 certificate used as this member's identity.")
   certificate: pem;
+
+  @doc("x509 key used to encrypt this member's key shares, if they are a recovery member.")
+  publicEncryptionKey?: pem;
 }
 
 /// Node types
@@ -207,17 +210,23 @@ model JoinPolicy {
   measurements: bytes[];
 }
 
+@doc("Collection of claims regarding a specific feed.")
+model FeedInfo {
+  @doc("Security version number claimed by this endorser.")
+  svn: string;
+}
+
+alias UVMEndorsementFeeds = Record<FeedInfo>;
+
 @doc("Join policy fields specific to nodes running on AMD SEV-SNP hardware.")
 model SnpJoinPolicy {
   ...JoinPolicy;
 
-  // TODO: Work out what the actual types of these are
-
   @doc("Collection of acceptable host data values.")
   hostData: Record<bytes>;
 
-  @doc("Collection of acceptable UVM endorsements.")
-  uvmEndorsements: Record<bytes>;
+  @doc("Collection of acceptable UVM endorsements. Keyed by endorser's did, then feed name.")
+  uvmEndorsements: Record<UVMEndorsementFeeds>;
 }
 
 @TypeSpec.Rest.resource("service")
@@ -260,6 +269,15 @@ model JwtIssuer {
   caCertBundleName?: string;
 }
 
+@doc("Describes a single JWK.")
+model Jwk {
+  @doc("x509 cert used to validate claims made by this key.")
+  certificate: pem;
+
+  @doc("Issuer ID of entity who issued this key.")
+  issuer?: string;
+}
+
 @doc("Chain of endorsed certificates (PEM format) leading to a CA.")
 scalar caCertBundle extends string;
 
@@ -276,6 +294,9 @@ model JwkInfo {
 
   @doc("Collection of CAs used to authenticate connections with issuers. Keyed by governance-controlled bundle names.")
   caCertBundles: Record<caCertBundle>;
+
+  @doc("Collection of retrieved JWKs. Keyed by kid.")
+  keys: Record<Jwk>;
 }
 
 /// Service info types
@@ -315,7 +336,7 @@ model ServiceInfo {
   creationTransactionId: transactionId;
 
   @doc("Transaction ID at which the predecessor service was created, if this service is a recovery. If this is an original service rather than a recovery, this will be omitted.")
-  previousServiceCreationTransactionId?: pem;
+  previousServiceCreationTransactionId?: transactionId;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "This is arbitrary JSON"
   @doc("Arbitrary service-defined metadata about this service. May be used by constitution or application code, but will not affect any core framework decisions.")
