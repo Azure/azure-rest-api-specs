@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "resourceGroupName": "YourResourceGroupName",
+    "jobName": "TestJobName1",
+    "api-version": "2024-02-01-preview",
+    "$expand": "details",
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "transferType": "ExportFromAzure",
+          "isCancellable": false,
+          "isDeletable": true,
+          "isShippingAddressEditable": false,
+          "isPrepareToShipEnabled": true,
+          "status": "Cancelled",
+          "startTime": "2020-08-07T10:49:08.7195419+05:30",
+          "details": {
+            "copyProgress": [
+              {
+                "storageAccountName": "YourStorageAccountName",
+                "transferType": "ExportFromAzure",
+                "dataAccountType": "StorageAccount",
+                "accountId": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName",
+                "bytesProcessed": 0,
+                "totalBytesToProcess": 0,
+                "isEnumerationInProgress": false
+              }
+            ],
+            "jobStages": [
+              {
+                "stageName": "DeviceOrdered",
+                "displayName": "Ordered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-07T10:49:12.7675644+05:30"
+              },
+              {
+                "stageName": "Cancelled",
+                "displayName": "Canceled",
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-07T10:49:57.2572438+05:30"
+              }
+            ],
+            "contactDetails": {
+              "contactName": " ",
+              "emailList": [],
+              "phone": "0000000000",
+              "phoneExtension": "",
+              "notificationPreference": []
+            },
+            "shippingAddress": {
+              "streetAddress1": "XXXX XXXX",
+              "streetAddress2": "XXXX XXXX",
+              "city": "XXXX XXXX",
+              "stateOrProvince": "XX",
+              "country": "XX",
+              "postalCode": "00000",
+              "companyName": "XXXX XXXX",
+              "addressType": "Commercial"
+            },
+            "deliveryPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "returnPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "dataImportDetails": [],
+            "dataExportDetails": [
+              {
+                "transferConfiguration": {
+                  "transferConfigurationType": "TransferAll",
+                  "transferFilterDetails": {},
+                  "transferAllDetails": {
+                    "include": {
+                      "dataAccountType": "StorageAccount",
+                      "transferAllBlobs": true,
+                      "transferAllFiles": true
+                    }
+                  }
+                },
+                "logCollectionLevel": "Error",
+                "accountDetails": {
+                  "storageAccountId": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName",
+                  "dataAccountType": "StorageAccount"
+                }
+              }
+            ],
+            "jobDetailsType": "DataBox",
+            "copyLogDetails": [],
+            "reverseShipmentLabelSasKey": "https://xxx.xxx.xx",
+            "chainOfCustodySasKey": "https://xxx.xxx.xx",
+            "keyEncryptionKey": {
+              "kekType": "MicrosoftManaged"
+            }
+          },
+          "cancellationReason": "CancelTest",
+          "deliveryType": "NonScheduled",
+          "deliveryInfo": {
+            "scheduledDateTime": "0001-01-01T05:30:00+05:30"
+          },
+          "isCancellableWithoutFee": false
+        },
+        "location": "westus",
+        "tags": {},
+        "sku": {
+          "name": "DataBox"
+        },
+        "identity": {
+          "type": "None"
+        },
+        "name": "TestJobName1",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
+        "type": "Microsoft.DataBox/jobs"
+      }
+    }
+  }
+}
