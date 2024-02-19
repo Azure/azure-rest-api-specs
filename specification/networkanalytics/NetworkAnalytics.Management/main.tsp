@@ -1427,7 +1427,8 @@ model DataProductOffer is TrackedResource<DataProductOfferProperties> {
   @doc("The data product offer resource name")
   @key("dataProductOfferName")
   @segment("dataProductOffers")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9()_.-]+[a-zA-Z0-9()_-]$")
+  @minLength(3)
   @path
   name: string;
 }
@@ -1624,6 +1625,20 @@ model DataProductOfferVersionProperties {
   versionState: DataProductOfferVersionState = DataProductOfferVersionState.Preview;
 }
 
+@doc("The data product capacity at a region level.")
+@added(Versions.v2024_04_01_preview)
+model DataProductsRegionalCapacity {
+  @doc("An array representing the data product capacity at the region level.")
+  regionalCapacity: Record<int32>[];
+}
+
+@doc("The data product offer version file.")
+@added(Versions.v2024_04_01_preview)
+model DataProductOfferVersionFile {
+  @doc("The data product offer version file data.")
+  data: bytes;
+}
+
 @armResourceOperations
 @removed(Versions.v2023_11_15)
 interface Storage
@@ -1771,14 +1786,14 @@ interface DataProducts {
   listBySubscription is ArmListBySubscription<DataProduct>;
 
   @added(Versions.v2024_04_01_preview)
-  @doc("Get per region capacity for DataProduct resource type.")
-  @segment("providers/Microsoft.NetworkAnalytics/dataProducts/getDataProductRegionalCapacity")
-  @get
-  @armResourceRead(DataProduct)
-  getDataProductRegionalCapacity(
+  @doc("Fetch per region capacity for the data product resource type.")
+  @segment("providers/Microsoft.NetworkAnalytics/dataProducts/getRegionalCapacity")
+  @post
+  @armResourceCollectionAction
+  getRegionalCapacity(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-  ): ArmResponse<Record<int32>> | ErrorResponse;
+  ): DataProductsRegionalCapacity | ErrorResponse;
 }
 
 @doc("Operations on data product offer resource.")
@@ -1836,10 +1851,9 @@ interface DataProductOfferVersions {
   >;
 
   @doc("Download data product offer version file.")
-  @segment("download")
-  @get
-  @armResourceRead(DataProductOfferVersion)
-  download(
-    ...ResourceInstanceParameters<DataProductOfferVersion>,
-  ): ArmNoContentResponse | ErrorResponse;
+  download is ArmResourceActionSync<
+    DataProductOfferVersion,
+    void,
+    DataProductOfferVersionFile
+  >;
 }
