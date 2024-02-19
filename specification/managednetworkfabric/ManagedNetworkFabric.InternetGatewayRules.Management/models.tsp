@@ -88,14 +88,14 @@ model RuleProperties {
   action: action;
 
   /**
-   * List of Addresses to be allowed or denied.
-   */
-  addressList: string[];
-
-  /**
    * Specify condition.
    */
-  condition?: Condition;
+  condition: Condition;
+
+  /**
+   * List of Addresses to be allowed or denied.
+   */
+  destinationAddressList?: string[];
 
   /**
    * List of source remote ip to be allowed or denied.
