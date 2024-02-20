@@ -23,6 +23,7 @@ interface DevCenterClientOperations {
   getProject is DevCenterService.DevCenterOperations.getProject;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "detailed suppress description for each operation can be found in routes.tsp"
 @client({
   name: "DevBoxesClient",
   service: DevCenterService,
@@ -50,6 +51,7 @@ interface DevBoxesClientOperations {
   delayAllActions is DevCenterService.DevBoxesOperations.delayAllActions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "detailed suppress description for each operation can be found in routes.tsp"
 @client({
   name: "DeploymentEnvironmentsClient",
   service: DevCenterService,
