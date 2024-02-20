@@ -44,7 +44,6 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 ```yaml $(tag) == 'package-2024-01'
 input-file:
   - stable/2024-01-01/managedClusters.json
-tag: package-preview-2024-01
 ```
 
 ### Tag: package-preview-2024-01
