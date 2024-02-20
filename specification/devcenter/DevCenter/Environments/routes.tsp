@@ -91,35 +91,35 @@ interface EnvironmentsOperations {
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @delete
   deleteEnvironment is Azure.Core.Foundations.Operation<
-   {
-     @doc("The DevCenter Project upon which to execute operations.")
-     @path
-     projectName: string,
-     
-     @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-     @path
-     userId: string,
-     
-     @doc("The name of the environment.")
-     @path
-     environmentName: string,
-   },
-   {
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @path
+      environmentName: string;
+    },
+    {
       @statusCode
       statusCode: 202;
-  
+
       @body body: OperationStatus;
-  
+
       @header("Location")
       location: string;
-  
+
       @pollingLocation
       @header("Operation-Location")
       operationLocation: string;
     } | {
       @statusCode
       statusCode: 204;
-    } 
+    }
   >;
 
   @doc("Lists all of the catalogs available for a project.")

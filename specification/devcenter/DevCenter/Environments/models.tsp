@@ -172,7 +172,6 @@ model EnvironmentDefinitionParameter {
   description?: string;
 
   @doc("Default value of the parameter")
-
   default?: string;
 
   @doc("""

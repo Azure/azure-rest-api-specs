@@ -8,7 +8,6 @@ namespace DevCenterService;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface SharedOperations {
-  
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   @doc("Get the status of an operation.")
   @route("/projects/{projectName}/operationstatuses/{operationId}")

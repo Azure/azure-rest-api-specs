@@ -210,12 +210,12 @@ model HardwareProfile {
   @visibility("read")
   skuName?: SkuName;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"	
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The number of vCPUs available for the Dev Box.")
   @visibility("read")
   vCPUs?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"	
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The amount of memory available for the Dev Box.")
   @visibility("read")
   memoryGB?: int32;
