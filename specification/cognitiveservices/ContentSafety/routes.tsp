@@ -64,7 +64,6 @@ interface TextOperations {
     AnalyzeTextProtectedMaterialResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Operation types must use camelCase"
   @added(ContentSafety.Versions.v2024_02_15_Preview)
   @summary("Analyze text prompt injection attacks")
   @doc("A synchronous API for the analysis of text prompt injection attacks.")

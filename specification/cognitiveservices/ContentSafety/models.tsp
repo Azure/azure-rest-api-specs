@@ -254,15 +254,27 @@ enum Task {
   QnA,
 }
 
+@added(ContentSafety.Versions.v2024_02_15_Preview)
+@doc("LLM resource type.")
+enum LLMResourceType {
+  @doc("Azure OpenAI resource type.")
+  AzureOpenAI
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
 @added(Versions.v2024_02_15_Preview)
-@doc("Connection details for the GPT resource.")
-model GptResource {
+@doc("Connection details for the LLM resource.")
+model LLMResource {
+  @doc("LLM resource type. The default value is AzureOpenAI.")
+  resourceType?: LLMResourceType = LLMResourceType.AzureOpenAI;
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Endpoint for Azure OpenAI resource.")
   azureOpenAIEndpoint: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Deployment model name.")
-  deploymentName: string;
+  azureOpenAIDeploymentName: string;
 }
 
 @added(Versions.v2024_02_15_Preview)
@@ -272,13 +284,13 @@ model DetectUngroundednessOptions {
   The domain of the text for analysis. Allowed values: Medical, Generic.
   This field is optional, with a default value of Generic.
   """)
-  domain?: Domain;
+  domain?: Domain = Domain.Generic;
 
   @doc("""
   The task type for the text analysis. Type of task: QnA, Summarization.
   This field is optional, with a default value of Summarization.
   """)
-  task?: Task;
+  task?: Task = Task.Summarization;
 
   @doc("""
   The user's question input in a QnA scenario.
@@ -304,10 +316,10 @@ model DetectUngroundednessOptions {
   reasoning?: boolean;
 
   @doc("""
-  Connection details for the GPT resource. 
+  Connection details for the LLM resource. 
   This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
   """)
-  gptResource?: GptResource;
+  llmResource?: LLMResource;
 }
 
 @added(Versions.v2024_02_15_Preview)
@@ -353,7 +365,6 @@ model AnalyzeTextPromptInjectionOptions {
   documents?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("The text injection attacks analysis response.")
 model AnalyzeTextPromptInjectionResult {
