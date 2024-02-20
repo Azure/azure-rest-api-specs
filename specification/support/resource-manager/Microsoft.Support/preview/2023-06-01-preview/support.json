@@ -3324,15 +3324,18 @@
         },
         "chunkSize": {
           "description": "Size of each chunk",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "fileSize": {
           "description": "Size of the file to be uploaded",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "numberOfChunks": {
           "description": "Number of chunks to be uploaded",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -3346,7 +3349,8 @@
         },
         "chunkIndex": {
           "description": "Index of the uploaded chunk (Index starts at 0)",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -3364,7 +3368,7 @@
             "Microsoft.Support/supportTickets"
           ],
           "x-ms-enum": {
-            "name": "Type",
+            "name": "ResourceType",
             "modelAsString": false
           },
           "description": "The type of resource."
