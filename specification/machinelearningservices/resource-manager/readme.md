@@ -26,15 +26,26 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-01
+tag: package-2024-04
 ```
 
 
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2024-04-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/workspaceFeatures.json
+```
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-01'
+``` yaml $(tag) == 'package-preview-2024-01'
 input-file:
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/mfe.json
@@ -86,6 +97,7 @@ suppressions:
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
 ```
+
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
