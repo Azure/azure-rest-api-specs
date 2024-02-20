@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-stable-1.0` is specified on the co
 ```yaml $(tag) == 'package-stable-1.0'
 input-file:
   - Microsoft.Maps/Data/preview/1.0/data.json
-  - Microsoft.Maps/Render/preview/1.0/render.json
+  - Render/preview/1.0/render.json
   - Search/preview/1.0/search.json
 ```
 
