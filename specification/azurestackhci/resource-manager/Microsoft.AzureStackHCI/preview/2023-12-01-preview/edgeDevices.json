@@ -366,6 +366,66 @@
         "nicDetails"
       ]
     },
+    "DeviceState": {
+      "type": "string",
+      "description": "The edge device state.",
+      "enum": [
+        "NotSpecified",
+        "Connected",
+        "Disconnected",
+        "Repairing",
+        "Draining",
+        "InMaintenance",
+        "Resuming",
+        "Processing"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The edge device state is not specified."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The edge device state is in connected state."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The edge device state is in disconnected state."
+          },
+          {
+            "name": "Repairing",
+            "value": "Repairing",
+            "description": "The edge device state is in repairing state."
+          },
+          {
+            "name": "Draining",
+            "value": "Draining",
+            "description": "The edge device state is in draining state."
+          },
+          {
+            "name": "InMaintenance",
+            "value": "InMaintenance",
+            "description": "The edge device state is in maintenance state."
+          },
+          {
+            "name": "Resuming",
+            "value": "Resuming",
+            "description": "The edge device state is in resuming state."
+          },
+          {
+            "name": "Processing",
+            "value": "Processing",
+            "description": "The edge device state is in processing state."
+          }
+        ]
+      }
+    },
     "DeviceType": {
       "type": "string",
       "description": "Edge device type based on host OS installed.",
@@ -612,6 +672,9 @@
       "type": "object",
       "description": "The device Configuration for HCI device.",
       "properties": {
+        "deviceState": {
+          "$ref": "#/definitions/DeviceState"
+        },
         "networkProfile": {
           "$ref": "#/definitions/HciNetworkProfile",
           "description": "HCI device network information.",
@@ -902,6 +965,36 @@
         "switchType": {
           "type": "string",
           "description": "The type of the switch. e.g. external, internal.",
+          "readOnly": true
+        },
+        "extensions": {
+          "type": "array",
+          "description": "This represents extensions installed on virtualSwitch.",
+          "items": {
+            "$ref": "#/definitions/SwitchExtension"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SwitchExtension": {
+      "type": "object",
+      "description": "This represents extensions installed on virtualSwitch.",
+      "properties": {
+        "switchId": {
+          "type": "string",
+          "description": "Unique identifier for virtualSwitch.",
+          "readOnly": true
+        },
+        "extensionName": {
+          "type": "string",
+          "description": "This will show extension name for virtualSwitch.",
+          "readOnly": true
+        },
+        "extensionEnabled": {
+          "type": "boolean",
+          "description": "This represents whether extension is enabled on virtualSwitch.",
           "readOnly": true
         }
       }
