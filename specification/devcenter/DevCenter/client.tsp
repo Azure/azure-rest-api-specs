@@ -38,7 +38,7 @@ interface DevBoxesClientOperations {
   @convenientAPI(false)
   createDevBox is DevCenterService.DevBoxesOperations.createDevBox;
   deleteDevBox is DevCenterService.DevBoxesOperations.deleteDevBox;
-  startDevBox is DevCenterService.DevBoxesOperations.startDevBox;
+  startDevBox is DevCenterService.DevBoxesOperations.start;
   stopDevBox is DevCenterService.DevBoxesOperations.stopDevBox;
   restartDevBox is DevCenterService.DevBoxesOperations.restartDevBox;
   getRemoteConnection is DevCenterService.DevBoxesOperations.getRemoteConnection;

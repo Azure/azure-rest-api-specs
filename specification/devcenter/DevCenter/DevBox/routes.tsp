@@ -85,34 +85,12 @@ interface DevBoxesOperations {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
-  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'start' - so the path ends with ":start"
-  // But renaming it to 'start' also makes the client method be renamed to "Start" - and we want it to be "StartDevBox". Using projectedName does not solve the problem
   @doc("Starts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start")
-  @post
-  startDevBox is Foundations.LongRunningOperation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-    },
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+  start is StandardResourceOperations.LongRunningResourceAction<
+    DevBox,
+    RequestActionParameter,
+    ResponseAction
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"

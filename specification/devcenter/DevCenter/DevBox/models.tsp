@@ -439,3 +439,17 @@ model DevBoxActionDelayResult {
   @doc("Information about the error that occurred. Only populated on error.")
   error?: Azure.Core.Foundations.Error;
 }
+
+@doc("Empty action parameter")
+model RequestActionParameter {}
+
+@doc("Response for the action")
+model ResponseAction {
+  @doc("The status code")
+  @statusCode
+  statusCode: 202;
+
+  @doc("The operation status")
+  @body
+  body: OperationStatus;
+}
