@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-workloads-sapdiscoverysite"
-  output-folder: "$(typescript-sdks-folder)/sdk/workloads/arm-sapdiscoverysite"
+  package-name: "@azure/arm-migrationdiscoverysap"
+  output-folder: "$(typescript-sdks-folder)/sdk/migrationdiscovery/arm-migrationdiscoverysap"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true

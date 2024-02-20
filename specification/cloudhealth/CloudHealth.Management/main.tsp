@@ -426,7 +426,7 @@ model IconDefinition {
   @doc("Name of the built-in icon, or 'Custom' to use customData")
   @minLength(1)
   @maxLength(100)
-  icon: string;
+  iconName: string;
 
   @doc("Custom data. Base64-encoded SVG data. If set, this overrides the built-in icon.")
   @minLength(1)
@@ -608,6 +608,10 @@ model DiscoveryRuleProperties {
   // Will be added later
   //  @doc("Whether to add all suggested signals to the discovered entities.")
   //  addAllSuggestedSignals?: boolean;
+
+  @visibility("read")
+  @doc("Date when the discovery rule was (soft-)deleted")
+  deletionDate?: utcDateTime;
 }
 
 @doc("Discovery rule show entity behavior")

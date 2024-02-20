@@ -424,7 +424,12 @@
       "properties": {
         "tier": {
           "$ref": "#/definitions/CatalogTier",
-          "description": "Tier of the catalog. This cannot be changed after the catalog is created."
+          "description": "Tier of the catalog. This cannot be changed after the catalog is created. If not provided, defaults to Basic.",
+          "default": "Basic",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "catalogUri": {
           "type": "string",
@@ -448,20 +453,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/GeoCatalogUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "GeoCatalogUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the GeoCatalog.",
-      "properties": {
-        "tier": {
-          "$ref": "#/definitions/CatalogTier",
-          "description": "Tier of the catalog. This cannot be changed after the catalog is created."
         }
       }
     },

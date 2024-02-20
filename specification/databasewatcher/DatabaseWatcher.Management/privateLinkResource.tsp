@@ -10,20 +10,17 @@ using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-@added(Versions.v2023_09_01_preview)
 @armResourceOperations
 interface PrivateLinkResources
   extends ResourceListByParent<PrivateLinkResource> {}
 
 #suppress "@azure-tools/typespec-providerhub-controller/no-resource-operations" "Expected for private links"
-@added(Versions.v2023_09_01_preview)
 @parentResource(Watcher)
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   ...PrivateLinkResourceParameter;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Matches current common code"
-@added(Versions.v2023_09_01_preview)
 @doc("Properties of a private link resource.")
 model PrivateLinkResourceProperties {
   @doc("The private link resource group id.")
@@ -44,7 +41,6 @@ model PrivateLinkResourceProperties {
   shareablePrivateLinkResourceTypes?: ShareablePrivateLinkResourceType[];
 }
 
-@added(Versions.v2023_09_01_preview)
 @doc("The resources that that support Azure Private Link, and are supported by database watcher.")
 model ShareablePrivateLinkResourceType {
   @visibility("read")
@@ -56,7 +52,6 @@ model ShareablePrivateLinkResourceType {
   properties: ShareablePrivateLinkResourceProperties;
 }
 
-@added(Versions.v2023_09_01_preview)
 @doc("The properties of a resource type that supports Azure Private Link, supported by database watcher.")
 model ShareablePrivateLinkResourceProperties {
   @visibility("read")

@@ -540,6 +540,9 @@ model NetworkInterfaceConfiguration {
 
   @doc("Virtual network subnet resource id")
   subnetId: string;
+
+  @doc("Virtual network resource guid")
+  vnetResourceGuid?: string;
 }
 
 @doc("Informatica Serverless Runtime Network Profile.")
