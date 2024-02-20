@@ -488,7 +488,7 @@
           "x-ms-identifiers": []
         },
         "reportedProperties": {
-          "$ref": "#/definitions/ReportedProperties",
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
           "description": "Deployment Status reported from cluster.",
           "readOnly": true
         }
@@ -711,22 +711,6 @@
         "bandwidthPercentage_SMB": {
           "type": "string",
           "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        }
-      }
-    },
-    "ReportedProperties": {
-      "type": "object",
-      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
-      "properties": {
-        "validationStatus": {
-          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
-          "description": "validation status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
-          "description": "Deployment status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
         }
       }
     },

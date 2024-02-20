@@ -60,6 +60,22 @@
         ]
       }
     },
+    "EceReportedProperties": {
+      "type": "object",
+      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
+      "properties": {
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "validation status of AzureStackHCI Cluster Deployment.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of AzureStackHCI Cluster Deployment.",
+          "readOnly": true
+        }
+      }
+    },
     "EceActionStatus": {
       "type": "object",
       "description": "The ECE action plan deployment status for AzureStackHCI Cluster.",
