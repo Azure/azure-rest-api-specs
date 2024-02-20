@@ -74,7 +74,7 @@ interface DataConnections {
 @doc("Provides access to discovery resources.")
 interface DiscoveryGroups {
   @doc("Retrieve a list of discovery group for the provided search parameters.")
-  @projectedName( "csharp", "GetDiscoveryGroups")
+  @projectedName("csharp", "GetDiscoveryGroups")
   listDiscoGroup is Operations.ResourceList<DiscoGroup, DiscoGroupsListTrait>;
 
   @doc("Validate a discovery group with a given groupName.")
