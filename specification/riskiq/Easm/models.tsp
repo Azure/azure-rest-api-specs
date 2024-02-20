@@ -11,33 +11,6 @@ using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 namespace Easm;
 
-// Client Names
-@@clientName(AlexaInfo, "AlexaDetails", "java");
-@@clientName(Attribute, "AttributeDetails", "csharp");
-@@clientName(Banner, "BannerDetails", "csharp");
-@@clientName(Banner.banner, "bannerName", "csharp");
-@@clientName(Cookie, "CookieDetails", "csharp");
-@@clientName(Cve, "CveDetails", "csharp");
-@@clientName(DiscoGroupData, "DiscoveryGroupData", "csharp");
-@@clientName(DiscoGroup, "DiscoveryGroup", "csharp");
-@@clientName(DiscoRunPageResult, "DiscoveryGroupRunPageResult", "csharp");
-@@clientName(DiscoRunResult, "DiscoveryRunResult", "csharp");
-@@clientName(DiscoSource, "DiscoverySource", "csharp");
-@@clientName(DiscoTemplate, "DiscoveryTemplate", "csharp");
-@@clientName(IpBlock.ipBlock, "ipBlockName", "csharp");
-@@clientName(Location, "ObservedLocationDetails", "csharp");
-@@clientName(Port, "PortDetails", "csharp");
-@@clientName(Port.port, "portName", "csharp");
-@@clientName(Reputation, "ReputationDetails", "csharp");
-@@clientName(ResourceUrl, "ResourceUri", "csharp");
-@@clientName(Service, "AssetService", "csharp");
-@@clientName(Source, "SourceDetails", "csharp");
-@@clientName(Source.source, "sourceProperty", "csharp");
-@@clientName(Task, "TaskResource", "csharp");
-@@clientName(TaskState, "TaskResourceState", "csharp");
-@@clientName(TaskPhase, "TaskResourcePhase", "csharp");
-@@clientName(DiscoSourceKind, "DiscoverySourceKind", "csharp");
-@@clientName(DiscoGroupNameParameter, "DiscoveryGroupNameParameter", "csharp");
 // Traits
 @trait
 model PageResultBodyFields<TResultFields, Context = TraitContext.List> {
@@ -131,6 +104,7 @@ alias SavedFiltersListTrait = {
 
 // Models
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "AlexaDetails")
 model AlexaInfo {
   alexaRank?: int64;
   category?: string;
@@ -293,6 +267,7 @@ model AssetUpdateData {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "AttributeDetails")
 model Attribute {
   attributeType?: string;
   attributeValue?: string;
@@ -336,8 +311,10 @@ model AzureDataExplorerDataConnectionProperties
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+@projectedName("csharp", "BannerDetails")
 model Banner {
   port?: int32;
+  @projectedName("csharp", "bannerName")
   banner?: string;
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
@@ -383,6 +360,7 @@ model ContactAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "CookieDetails")
 model Cookie {
   cookieName?: string;
   cookieDomain?: string;
@@ -394,6 +372,7 @@ model Cookie {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "CveDetails")
 model Cve {
   name?: string;
   cweId?: string;
@@ -493,6 +472,7 @@ model DependentResource {
 }
 
 @doc("A request body used to create a discovery group.")
+@projectedName("csharp", "DiscoveryGroupData")
 model DiscoGroupData {
   @doc("The name for a disco group.")
   name?: string;
@@ -521,6 +501,7 @@ model DiscoGroupData {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("discoGroups")
+@projectedName("csharp", "DiscoveryGroup")
 model DiscoGroup {
   @doc("The system generated unique id for the resource.")
   id?: string;
@@ -563,6 +544,7 @@ model DiscoGroup {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @pagedResult
+@projectedName("csharp", "DiscoveryRunPageResult")
 model DiscoRunPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -577,6 +559,7 @@ model DiscoRunPageResult {
 }
 
 @doc("The latest run of this disco group with some limited information, null if the group has never been run.")
+@projectedName("csharp", "DiscoveryRunResult")
 model DiscoRunResult {
   @doc("The date for when the disco run was created in the system.")
   submittedDate?: utcDateTime;
@@ -607,6 +590,7 @@ model DiscoRunResult {
 }
 
 @doc("Source entity used to drive discovery.")
+@projectedName("csharp", "DiscoverySource")
 model DiscoSource {
   @doc("The kind of disco source.")
   kind?: DiscoSourceKind;
@@ -616,6 +600,7 @@ model DiscoSource {
 }
 
 @doc("The items in the current page of results.")
+@projectedName("csharp", "DiscoveryTemplate")
 @resource("discoTemplates")
 model DiscoTemplate {
   @doc("The system generated unique id for the resource.")
@@ -833,6 +818,7 @@ model IpAddressAsset {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
 model IpBlock {
+  @projectedName("csharp", "ipBlockName")
   ipBlock?: string;
   sources?: Source[];
   firstSeen?: utcDateTime;
@@ -877,6 +863,7 @@ model IpBlockAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "ObservedLocationDetails")
 model Location {
   countryCode?: string;
   countryName?: string;
@@ -1027,7 +1014,9 @@ model PageCause {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+@projectedName("csharp", "PortDetails")
 model Port {
+  @projectedName("csharp", "portName")
   port?: int32;
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
@@ -1136,6 +1125,7 @@ model ReportBillableAssetSummaryResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "ReputationDetails")
 model Reputation {
   listName?: string;
   threatType?: string;
@@ -1148,6 +1138,7 @@ model Reputation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "ResourceUri")
 model ResourceUrl {
   url?: url;
   resources?: DependentResource[];
@@ -1193,6 +1184,7 @@ model ScanMetadata {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "AssetService")
 model Service {
   scheme?: string;
   port?: int32;
@@ -1220,7 +1212,9 @@ model SoaRecord {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+@projectedName("csharp", "SourceDetails")
 model Source {
+  @projectedName("csharp", "sourceName")
   source?: string;
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
@@ -1290,6 +1284,7 @@ model SubResourceIntegrityCheck {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("tasks")
+@projectedName("csharp", "TaskResource")
 model Task {
   @doc("The unique identifier of the task.")
   @key("taskId")
@@ -1373,6 +1368,7 @@ enum ReportBillableAssetBreakdownKind {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state the task is in.")
+@projectedName("csharp", "TaskResourceState")
 enum TaskState {
   pending,
   running,
@@ -1385,6 +1381,7 @@ enum TaskState {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The phase the task is in.")
+@projectedName("csharp", "TaskResourcePhase")
 enum TaskPhase {
   running,
   polling,
@@ -1437,6 +1434,7 @@ enum DataConnectionContent {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of disco source.")
+@projectedName("csharp", "DiscoverySourceKind")
 enum DiscoSourceKind {
   as,
   attribute,
@@ -1607,6 +1605,7 @@ model AzureDataExplorerDataConnection extends DataConnection {
 }
 
 @doc("The unique identifier for the discovery group.")
+@projectedName("csharp", "DiscoveryGroupNameParameter")
 model DiscoGroupNameParameter {
   @doc("The unique identifier for the discovery group.")
   @path("groupName")
