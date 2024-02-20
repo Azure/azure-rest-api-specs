@@ -99,7 +99,7 @@ enum SkuName {
   Premium,
 }
 
-@doc("The reason that a code signing account name could not be used. The Reason element is only returned if nameAvailable is false.")
+@doc("The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.")
 enum NameUnavailabilityReason {
   @doc("Account name is invalid")
   AccountNameInvalid,
@@ -108,39 +108,39 @@ enum NameUnavailabilityReason {
   AlreadyExists,
 }
 
-@doc("Properties of the code signing account.")
+@doc("Properties of the trusted signing account.")
 model CodeSigningAccountProperties {
-  @doc("The URI of the code signing account for performing operations on certificate profiles.")
+  @doc("The URI of the trusted signing account which is used during signing files.")
   @visibility("read")
   accountUri?: string;
 
-  @doc("SKU of the code signing account.")
+  @doc("SKU of the trusted signing account.")
   sku?: AccountSku;
 
-  @doc("Status of the current operation on code signing account.")
+  @doc("Status of the current operation on trusted signing account.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("SKU of the code signing account.")
+@doc("SKU of the trusted signing account.")
 model AccountSku {
   @doc("Name of the SKU.")
   name: SkuName;
 }
 
-@doc("Parameters for creating or updating a code signing account.")
+@doc("Parameters for creating or updating a trusted signing account.")
 model CodeSigningAccountPatch {
   @doc("Resource tags.")
   tags?: Record<string>;
 
-  @doc("Properties of the code signing account.")
+  @doc("Properties of the trusted signing account.")
   @extension("x-ms-client-flatten", true)
   properties?: CodeSigningAccountPatchProperties;
 }
 
-@doc("Properties of the code signing account.")
+@doc("Properties of the trusted signing account.")
 model CodeSigningAccountPatchProperties {
-  @doc("SKU of the code signing account.")
+  @doc("SKU of the trusted signing account.")
   sku?: AccountSku;
 }
 
@@ -282,9 +282,9 @@ model RevokeCertificate {
   remarks?: string;
 }
 
-@doc("The parameters used to check the availability of the code signing account name..")
+@doc("The parameters used to check the availability of the trusted signing account name.")
 model CheckNameAvailability {
-  @doc("Code signing account name.")
+  @doc("Trusted signing account name.")
   name: string;
 }
 
@@ -294,7 +294,7 @@ model CheckNameAvailabilityResult {
   @visibility("read")
   nameAvailable?: boolean;
 
-  @doc("The reason that a code signing account name could not be used. The Reason element is only returned if nameAvailable is false.")
+  @doc("The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.")
   @visibility("read")
   reason?: NameUnavailabilityReason;
 

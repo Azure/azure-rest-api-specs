@@ -10,7 +10,6 @@ using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-@added(Versions.v2023_09_01_preview)
 @armResourceOperations
 interface SharedPrivateLinkResources {
   get is ArmResourceRead<SharedPrivateLinkResource>;
@@ -19,7 +18,6 @@ interface SharedPrivateLinkResources {
   listByParent is ArmResourceListByParent<SharedPrivateLinkResource>;
 }
 
-@added(Versions.v2023_09_01_preview)
 @parentResource(Watcher)
 model SharedPrivateLinkResource
   is ProxyResource<SharedPrivateLinkResourceProperties> {
@@ -31,7 +29,6 @@ model SharedPrivateLinkResource
   name: string;
 }
 
-@added(Versions.v2023_09_01_preview)
 @doc("The generic properties of a Shared Private Link resource.")
 model SharedPrivateLinkResourceProperties {
   @doc("The resource id of the resource the shared private link resource is for.")
@@ -55,7 +52,6 @@ model SharedPrivateLinkResourceProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@added(Versions.v2023_09_01_preview)
 @doc("Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected.")
 enum SharedPrivateLinkResourceStatus {
   @doc("The shared private link connection request was not yet authorized by the resource owner.")

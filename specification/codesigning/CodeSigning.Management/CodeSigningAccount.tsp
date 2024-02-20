@@ -11,9 +11,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.CodeSigning;
-@doc("Code signing account resource.")
+@doc("Trusted signing account resource.")
 model CodeSigningAccount is TrackedResource<CodeSigningAccountProperties> {
-  @doc("Code Signing account name.")
+  @doc("Trusted Signing account name.")
   @pattern("^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
   @path
   @key("accountName")
@@ -23,26 +23,26 @@ model CodeSigningAccount is TrackedResource<CodeSigningAccountProperties> {
 
 @armResourceOperations
 interface CodeSigningAccounts {
-  @doc("Get a Code Signing Account.")
+  @doc("Get a trusted Signing Account.")
   get is ArmResourceRead<CodeSigningAccount>;
 
-  @doc("Create a Code Signing Account.")
+  @doc("Create a trusted Signing Account.")
   create is ArmResourceCreateOrReplaceAsync<CodeSigningAccount>;
 
-  @doc("Update a code signing account.")
+  @doc("Update a trusted signing account.")
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<CodeSigningAccount, CodeSigningAccountPatch>;
 
-  @doc("Delete a code signing account.")
+  @doc("Delete a trusted signing account.")
   delete is ArmResourceDeleteWithoutOkAsync<CodeSigningAccount>;
 
-  @doc("Lists code signing accounts within a resource group.")
+  @doc("Lists trusted signing accounts within a resource group.")
   listByResourceGroup is ArmResourceListByParent<CodeSigningAccount>;
 
-  @doc("Lists code signing accounts within a subscription.")
+  @doc("Lists trusted signing accounts within a subscription.")
   listBySubscription is ArmListBySubscription<CodeSigningAccount>;
 
-  @doc("Checks that the code signing account name is valid and is not already in use.")
+  @doc("Checks that the trusted signing account name is valid and is not already in use.")
   checkNameAvailability is checkGlobalNameAvailability<
     CheckNameAvailability,
     CheckNameAvailabilityResult
@@ -50,8 +50,8 @@ interface CodeSigningAccounts {
 }
 
 @@doc(CodeSigningAccounts.create::parameters.resource,
-  "Parameters to create the code signing account"
+  "Parameters to create the trusted signing account"
 );
 @@doc(CodeSigningAccounts.update::parameters.properties,
-  "Parameters supplied to update code signing account"
+  "Parameters supplied to update the trusted signing account"
 );

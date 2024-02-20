@@ -28,7 +28,6 @@ model Target is ProxyResource<TargetProperties> {
 @discriminator("targetType")
 model TargetProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
-  @added(Versions.v2023_09_01_preview)
   @doc("The type of authentication to use when connecting to a target.")
   targetAuthenticationType: TargetAuthenticationType;
 
@@ -50,8 +49,12 @@ model TargetProperties {
 
 @doc("The vault specific details required if using SQL authentication to connect to a target.")
 model VaultSecret {
-  @doc("The ARM ResourceId of the Key Vault instance storing database authentication secrets.")
-  akvResourceId?: string;
+  @doc("The Azure ResourceId of the Key Vault instance storing database authentication secrets.")
+  akvResourceId?: ResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
 
   @doc("The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target.")
   akvTargetUser?: string;
@@ -69,7 +72,6 @@ enum TargetCollectionStatus {
   Disabled,
 }
 
-@added(Versions.v2023_09_01_preview)
 @doc("The type of authentication to use when connecting to a target.")
 enum TargetAuthenticationType {
   @doc("The Azure Active Directory authentication.")

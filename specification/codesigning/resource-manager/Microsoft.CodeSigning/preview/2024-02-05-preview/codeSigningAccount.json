@@ -64,7 +64,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
@@ -77,7 +77,7 @@
           }
         },
         "x-ms-examples": {
-          "List Code Signing Account operations": {
+          "List trusted signing account operations.": {
             "$ref": "./examples/Operations_List.json"
           }
         },
@@ -92,7 +92,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Checks that the code signing account name is valid and is not already in use.",
+        "description": "Checks that the trusted signing account name is valid and is not already in use.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -125,7 +125,7 @@
           }
         },
         "x-ms-examples": {
-          "Validate a code signing account name": {
+          "Checks that the trusted signing account name is available.": {
             "$ref": "./examples/CodeSigningAccounts_CheckNameAvailability.json"
           }
         }
@@ -137,7 +137,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Lists code signing accounts within a subscription.",
+        "description": "Lists trusted signing accounts within a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -148,7 +148,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CodeSigningAccountListResult"
             }
@@ -161,7 +161,7 @@
           }
         },
         "x-ms-examples": {
-          "List Code Signing Accounts by Subscription": {
+          "Lists trusted signing accounts within a subscription.": {
             "$ref": "./examples/CodeSigningAccounts_ListBySubscription.json"
           }
         },
@@ -176,7 +176,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Lists code signing accounts within a resource group.",
+        "description": "Lists trusted signing accounts within a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -190,7 +190,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CodeSigningAccountListResult"
             }
@@ -203,7 +203,7 @@
           }
         },
         "x-ms-examples": {
-          "List Code Signing Accounts by Resource Group": {
+          "Lists trusted signing accounts within a resource group.": {
             "$ref": "./examples/CodeSigningAccounts_ListByResourceGroup.json"
           }
         },
@@ -218,7 +218,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Get a Code Signing Account.",
+        "description": "Get a trusted Signing Account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -232,7 +232,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Code Signing account name.",
+            "description": "Trusted Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -240,7 +240,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CodeSigningAccount"
             }
@@ -253,7 +253,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Code Signing Account": {
+          "Get a Trusted Signing Account": {
             "$ref": "./examples/CodeSigningAccounts_Get.json"
           }
         }
@@ -263,7 +263,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Create a Code Signing Account.",
+        "description": "Create a trusted Signing Account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -277,7 +277,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Code Signing account name.",
+            "description": "Trusted Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -285,7 +285,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Parameters to create the code signing account",
+            "description": "Parameters to create the trusted signing account",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CodeSigningAccount"
@@ -320,7 +320,7 @@
           }
         },
         "x-ms-examples": {
-          "Create Code Signing Account": {
+          "Create a trusted Signing Account.": {
             "$ref": "./examples/CodeSigningAccounts_Create.json"
           }
         },
@@ -334,7 +334,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Update a code signing account.",
+        "description": "Update a trusted signing account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -348,7 +348,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Code Signing account name.",
+            "description": "Trusted Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -356,7 +356,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "Parameters supplied to update code signing account",
+            "description": "Parameters supplied to update the trusted signing account",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CodeSigningAccountPatch"
@@ -365,7 +365,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CodeSigningAccount"
             }
@@ -392,7 +392,7 @@
           }
         },
         "x-ms-examples": {
-          "Update Code Signing Account": {
+          "Update a trusted signing account.": {
             "$ref": "./examples/CodeSigningAccounts_Update.json"
           }
         },
@@ -406,7 +406,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Delete a code signing account.",
+        "description": "Delete a trusted signing account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -420,7 +420,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Code Signing account name.",
+            "description": "Trusted Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -442,7 +442,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -452,7 +452,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Code Signing Account": {
+          "Delete a trusted signing account.": {
             "$ref": "./examples/CodeSigningAccounts_Delete.json"
           }
         },
@@ -468,7 +468,7 @@
         "tags": [
           "CertificateProfiles"
         ],
-        "description": "List certificate profiles within a code signing account.",
+        "description": "List certificate profiles under a trusted signing account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -482,7 +482,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Code Signing account name.",
+            "description": "Trusted Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -490,7 +490,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CertificateProfileListResult"
             }
@@ -503,7 +503,7 @@
           }
         },
         "x-ms-examples": {
-          "List Certificate Profiles": {
+          "List certificate profiles under a trusted signing account.": {
             "$ref": "./examples/CertificateProfiles_ListByCodeSigningAccount.json"
           }
         },
@@ -532,7 +532,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Code Signing account name.",
+            "description": "Trusted Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -548,7 +548,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CertificateProfile"
             }
@@ -561,7 +561,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Certificate Profile": {
+          "Get details of a certificate profile.": {
             "$ref": "./examples/CertificateProfiles_Get.json"
           }
         }
@@ -585,7 +585,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Code Signing account name.",
+            "description": "Trusted Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -636,7 +636,7 @@
           }
         },
         "x-ms-examples": {
-          "Create Certificate Profile": {
+          "Create a certificate profile.": {
             "$ref": "./examples/CertificateProfiles_Create.json"
           }
         },
@@ -664,7 +664,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Code Signing account name.",
+            "description": "Trusted Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -694,7 +694,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -704,7 +704,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Certificate Profile": {
+          "Delete a certificate profile.": {
             "$ref": "./examples/CertificateProfiles_Delete.json"
           }
         },
@@ -720,7 +720,7 @@
         "tags": [
           "CertificateProfiles"
         ],
-        "description": "Revoke certificate.",
+        "description": "Revoke a certificate under a certificate profile.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -734,7 +734,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Code Signing account name.",
+            "description": "Trusted Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -769,7 +769,7 @@
           }
         },
         "x-ms-examples": {
-          "Revoke Certificate": {
+          "Revoke a certificate under a certificate profile.": {
             "$ref": "./examples/CertificateProfiles_RevokeCertificate.json"
           }
         }
@@ -779,7 +779,7 @@
   "definitions": {
     "AccountSku": {
       "type": "object",
-      "description": "SKU of the code signing account.",
+      "description": "SKU of the trusted signing account.",
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
@@ -1035,11 +1035,11 @@
     },
     "CheckNameAvailability": {
       "type": "object",
-      "description": "The parameters used to check the availability of the code signing account name..",
+      "description": "The parameters used to check the availability of the trusted signing account name.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Code signing account name."
+          "description": "Trusted signing account name."
         }
       },
       "required": [
@@ -1057,7 +1057,7 @@
         },
         "reason": {
           "$ref": "#/definitions/NameUnavailabilityReason",
-          "description": "The reason that a code signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
+          "description": "The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
           "readOnly": true
         },
         "message": {
@@ -1069,7 +1069,7 @@
     },
     "CodeSigningAccount": {
       "type": "object",
-      "description": "Code signing account resource.",
+      "description": "Trusted signing account resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CodeSigningAccountProperties",
@@ -1110,7 +1110,7 @@
     },
     "CodeSigningAccountPatch": {
       "type": "object",
-      "description": "Parameters for creating or updating a code signing account.",
+      "description": "Parameters for creating or updating a trusted signing account.",
       "properties": {
         "tags": {
           "type": "object",
@@ -1121,44 +1121,44 @@
         },
         "properties": {
           "$ref": "#/definitions/CodeSigningAccountPatchProperties",
-          "description": "Properties of the code signing account.",
+          "description": "Properties of the trusted signing account.",
           "x-ms-client-flatten": true
         }
       }
     },
     "CodeSigningAccountPatchProperties": {
       "type": "object",
-      "description": "Properties of the code signing account.",
+      "description": "Properties of the trusted signing account.",
       "properties": {
         "sku": {
           "$ref": "#/definitions/AccountSku",
-          "description": "SKU of the code signing account."
+          "description": "SKU of the trusted signing account."
         }
       }
     },
     "CodeSigningAccountProperties": {
       "type": "object",
-      "description": "Properties of the code signing account.",
+      "description": "Properties of the trusted signing account.",
       "properties": {
         "accountUri": {
           "type": "string",
-          "description": "The URI of the code signing account for performing operations on certificate profiles.",
+          "description": "The URI of the trusted signing account which is used during signing files.",
           "readOnly": true
         },
         "sku": {
           "$ref": "#/definitions/AccountSku",
-          "description": "SKU of the code signing account."
+          "description": "SKU of the trusted signing account."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Status of the current operation on code signing account.",
+          "description": "Status of the current operation on trusted signing account.",
           "readOnly": true
         }
       }
     },
     "NameUnavailabilityReason": {
       "type": "string",
-      "description": "The reason that a code signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
+      "description": "The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
       "enum": [
         "AccountNameInvalid",
         "AlreadyExists"
