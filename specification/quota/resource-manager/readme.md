@@ -59,7 +59,7 @@ These settings apply only when `--tag=package-2021-03-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-02-01'
 input-file:
-  - Microsoft.Quota/preview/package-2021-03-15-preview/quota.json
+  - Microsoft.Quota/preview/2021-03-15-preview/quota.json
 ```
 
 ### Supressions
