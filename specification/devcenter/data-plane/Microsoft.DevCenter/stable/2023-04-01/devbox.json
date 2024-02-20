@@ -132,11 +132,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get the status of an operation.": {
-            "$ref": "./examples/SharedOperations_GetProjectOperationStatus.json"
-          }
         }
       }
     },
@@ -465,28 +460,28 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute the operation.",
+            "description": "Name of the project",
             "required": true,
             "type": "string"
           },
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "description": "The AAD object id of the user",
             "required": true,
             "type": "string"
           },
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "The name of a Dev Box.",
+            "description": "Display name for the Dev Box",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
-            "description": "Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DevBox"
@@ -498,6 +493,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DevBox"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "201": {
@@ -506,13 +508,10 @@
               "$ref": "#/definitions/DevBox"
             },
             "headers": {
-              "Location": {
+              "Operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of DevBox"
-              },
-              "Operation-Location": {
-                "type": "string"
+                "description": "The location for monitoring the operation state."
               }
             }
           },
@@ -1363,9 +1362,47 @@
           "readOnly": true
         },
         "powerState": {
-          "$ref": "#/definitions/PowerState",
+          "type": "string",
           "description": "The current power state of the Dev Box.",
           "default": "Unknown",
+          "enum": [
+            "Unknown",
+            "Running",
+            "Deallocated",
+            "PoweredOff",
+            "Hibernated"
+          ],
+          "x-ms-enum": {
+            "name": "PowerState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "The Dev Box power state is not known."
+              },
+              {
+                "name": "Running",
+                "value": "Running",
+                "description": "The Dev Box is running."
+              },
+              {
+                "name": "Deallocated",
+                "value": "Deallocated",
+                "description": "The Dev Box is deallocated."
+              },
+              {
+                "name": "PoweredOff",
+                "value": "PoweredOff",
+                "description": "The Dev Box is powered off."
+              },
+              {
+                "name": "Hibernated",
+                "value": "Hibernated",
+                "description": "The Dev Box is hibernated."
+              }
+            ]
+          },
           "readOnly": true
         },
         "uniqueId": {
