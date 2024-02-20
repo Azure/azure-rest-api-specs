@@ -863,1160 +863,1159 @@
             "description": "An individual property updated in the Router Worker"
           }
         },
-        "x-ms-examples": {
-          "snapshotCreatedCloudEventsSchema": {
-            "$ref": "./examples/cloud-events-schema/router_worker_updated.json"
-          },
-          "snapshotCreatedEventGridSchema": {
-            "$ref": "./examples/event-grid-schema/router_worker_updated.json"
-          }
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_worker_updated.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_worker_updated.json"
         }
-      },
-      "AcsChatMessageReceivedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "messageBody": {
-            "description": "The body of the chat message",
-            "type": "string"
-          },
-          "metadata": {
-            "description": "The chat message metadata",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
+      }
+    },
+    "AcsChatMessageReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
         }
-      },
-      "AcsChatMessageReceivedInThreadEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "messageBody": {
-            "description": "The body of the chat message",
-            "type": "string"
-          },
-          "metadata": {
-            "description": "The chat message metadata",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "AcsChatMessageEditedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "messageBody": {
-            "description": "The body of the chat message",
-            "type": "string"
-          },
-          "metadata": {
-            "description": "The chat message metadata",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "editTime": {
-            "description": "The time at which the message was edited",
-            "format": "date-time",
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         }
-      },
-      "AcsChatMessageEditedInThreadEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "messageBody": {
-            "description": "The body of the chat message",
-            "type": "string"
-          },
-          "metadata": {
-            "description": "The chat message metadata",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "editTime": {
-            "description": "The time at which the message was edited",
-            "format": "date-time",
+      }
+    },
+    "AcsChatMessageReceivedInThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         }
-      },
-      "AcsChatMessageDeletedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "deleteTime": {
-            "description": "The time at which the message was deleted",
-            "format": "date-time",
-            "type": "string"
-          }
+      }
+    },
+    "AcsChatMessageEditedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
         }
-      },
-      "AcsChatMessageDeletedInThreadEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "deleteTime": {
-            "description": "The time at which the message was deleted",
-            "format": "date-time",
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
+        },
+        "editTime": {
+          "description": "The time at which the message was edited",
+          "format": "date-time",
+          "type": "string"
         }
-      },
-      "AcsChatThreadCreatedWithUserEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "createdByCommunicationIdentifier": {
-            "description": "The communication identifier of the user who created the thread",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "properties": {
-            "description": "The thread properties",
-            "type": "object",
-            "additionalProperties": {
-              "type": "object"
-            }
-          },
-          "metadata": {
-            "description": "The thread metadata",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "participants": {
-            "description": "The list of properties of participants who are part of the thread",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AcsChatThreadParticipantProperties"
-            }
-          }
+      }
+    },
+    "AcsChatMessageEditedInThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
         }
-      },
-      "AcsChatThreadCreatedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
-        ],
-        "type": "object",
-        "properties": {
-          "createdByCommunicationIdentifier": {
-            "description": "The communication identifier of the user who created the thread",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "properties": {
-            "description": "The thread properties",
-            "type": "object",
-            "additionalProperties": {
-              "type": "object"
-            }
-          },
-          "metadata": {
-            "description": "The chat thread created metadata",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "participants": {
-            "description": "The list of properties of participants who are part of the thread",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AcsChatThreadParticipantProperties"
-            }
-          }
+        },
+        "editTime": {
+          "description": "The time at which the message was edited",
+          "format": "date-time",
+          "type": "string"
         }
-      },
-      "AcsChatThreadWithUserDeletedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "deletedByCommunicationIdentifier": {
-            "description": "The communication identifier of the user who deleted the thread",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "deleteTime": {
-            "description": "The deletion time of the thread",
-            "format": "date-time",
-            "type": "string"
-          }
+      }
+    },
+    "AcsChatMessageDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
         }
-      },
-      "AcsChatThreadDeletedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "deletedByCommunicationIdentifier": {
-            "description": "The communication identifier of the user who deleted the thread",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "deleteTime": {
-            "description": "The deletion time of the thread",
-            "format": "date-time",
-            "type": "string"
-          }
+      ],
+      "type": "object",
+      "properties": {
+        "deleteTime": {
+          "description": "The time at which the message was deleted",
+          "format": "date-time",
+          "type": "string"
         }
-      },
-      "AcsChatThreadPropertiesUpdatedPerUserEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "editedByCommunicationIdentifier": {
-            "description": "The communication identifier of the user who updated the thread properties",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "editTime": {
-            "description": "The time at which the properties of the thread were updated",
-            "format": "date-time",
-            "type": "string"
-          },
-          "metadata": {
-            "description": "The thread metadata",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "properties": {
-            "description": "The updated thread properties",
-            "type": "object",
-            "additionalProperties": {
-              "type": "object"
-            }
-          }
+      }
+    },
+    "AcsChatMessageDeletedInThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
         }
-      },
-      "AcsChatThreadPropertiesUpdatedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "editedByCommunicationIdentifier": {
-            "description": "The communication identifier of the user who updated the thread properties",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "editTime": {
-            "description": "The time at which the properties of the thread were updated",
-            "format": "date-time",
-            "type": "string"
-          },
-          "properties": {
-            "description": "The updated thread properties",
-            "type": "object",
-            "additionalProperties": {
-              "type": "object"
-            }
-          },
-          "metadata": {
-            "description": "The thread metadata",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
+      ],
+      "type": "object",
+      "properties": {
+        "deleteTime": {
+          "description": "The time at which the message was deleted",
+          "format": "date-time",
+          "type": "string"
         }
-      },
-      "AcsChatParticipantAddedToThreadWithUserEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "time": {
-            "description": "The time at which the user was added to the thread",
-            "format": "date-time",
-            "type": "string"
-          },
-          "addedByCommunicationIdentifier": {
-            "description": "The communication identifier of the user who added the user",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "participantAdded": {
-            "description": "The details of the user who was added",
-            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
-          }
+      }
+    },
+    "AcsChatThreadCreatedWithUserEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
-      },
-      "AcsChatParticipantRemovedFromThreadWithUserEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
-          }
-        ],
-        "type": "object",
+      ],
+      "type": "object",
+      "properties": {
+        "createdByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who created the thread",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
         "properties": {
-          "time": {
-            "description": "The time at which the user was removed to the thread",
-            "format": "date-time",
-            "type": "string"
-          },
-          "removedByCommunicationIdentifier": {
-            "description": "The communication identifier of the user who removed the user",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "participantRemoved": {
-            "description": "The details of the user who was removed",
-            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
-          }
-        }
-      },
-      "AcsChatParticipantAddedToThreadEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "time": {
-            "description": "The time at which the user was added to the thread",
-            "format": "date-time",
-            "type": "string"
-          },
-          "addedByCommunicationIdentifier": {
-            "description": "The communication identifier of the user who added the user",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "participantAdded": {
-            "description": "The details of the user who was added",
-            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
-          },
-          "version": {
-            "description": "The version of the thread",
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "AcsChatParticipantRemovedFromThreadEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "time": {
-            "description": "The time at which the user was removed to the thread",
-            "format": "date-time",
-            "type": "string"
-          },
-          "removedByCommunicationIdentifier": {
-            "description": "The communication identifier of the user who removed the user",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "participantRemoved": {
-            "description": "The details of the user who was removed",
-            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
-          },
-          "version": {
-            "description": "The version of the thread",
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "AcsSmsDeliveryReportReceivedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsSmsEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "deliveryStatus": {
-            "description": "Status of Delivery",
-            "type": "string"
-          },
-          "deliveryStatusDetails": {
-            "description": "Details about Delivery Status",
-            "type": "string"
-          },
-          "deliveryAttempts": {
-            "description": "List of details of delivery attempts made",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
-            }
-          },
-          "receivedTimestamp": {
-            "description": "The time at which the SMS delivery report was received",
-            "format": "date-time",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Customer Content",
-            "type": "string"
-          }
-        }
-      },
-      "AcsSmsReceivedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsSmsEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "message": {
-            "description": "The SMS content",
-            "type": "string"
-          },
-          "receivedTimestamp": {
-            "description": "The time at which the SMS was received",
-            "format": "date-time",
-            "type": "string"
-          }
-        }
-      },
-      "AcsRecordingFileStatusUpdatedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
-        "type": "object",
-        "properties": {
-          "recordingStorageInfo": {
-            "description": "The details of recording storage information",
-            "$ref": "#/definitions/AcsRecordingStorageInfoProperties",
+          "description": "The thread properties",
+          "type": "object",
+          "additionalProperties": {
             "type": "object"
-          },
-          "recordingStartTime": {
-            "description": "The time at which the recording started",
-            "format": "date-time",
+          }
+        },
+        "metadata": {
+          "description": "The thread metadata",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
-          },
-          "recordingDurationMs": {
-            "description": "The recording duration in milliseconds",
-            "format": "int64",
-            "type": "integer"
-          },
-          "recordingContentType": {
-            "type": "string",
-            "description": "The recording content type- AudioVideo, or Audio",
-            "enum": [
-              "AudioVideo",
-              "Audio"
-            ],
-            "x-ms-enum": {
-              "name": "recordingContentType",
-              "modelAsString": true
-            }
-          },
-          "recordingChannelType": {
-            "type": "string",
-            "description": "The recording  channel type - Mixed, Unmixed",
-            "enum": [
-              "Mixed",
-              "Unmixed"
-            ],
-            "x-ms-enum": {
-              "name": "recordingChannelType",
-              "modelAsString": true
-            }
-          },
-          "recordingFormatType": {
-            "type": "string",
-            "description": "The recording format type - Mp4, Mp3, Wav",
-            "enum": [
-              "Wav",
-              "Mp3",
-              "Mp4"
-            ],
-            "x-ms-enum": {
-              "name": "recordingFormatType",
-              "modelAsString": true
-            }
-          },
-          "sessionEndReason": {
-            "description": "The reason for ending recording session",
+          }
+        },
+        "participants": {
+          "description": "The list of properties of participants who are part of the thread",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
+          }
+        }
+      }
+    },
+    "AcsChatThreadCreatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "createdByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who created the thread",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "properties": {
+          "description": "The thread properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "metadata": {
+          "description": "The chat thread created metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "participants": {
+          "description": "The list of properties of participants who are part of the thread",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
+          }
+        }
+      }
+    },
+    "AcsChatThreadWithUserDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "deletedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who deleted the thread",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "deleteTime": {
+          "description": "The deletion time of the thread",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "AcsChatThreadDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "deletedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who deleted the thread",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "deleteTime": {
+          "description": "The deletion time of the thread",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "AcsChatThreadPropertiesUpdatedPerUserEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "editedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who updated the thread properties",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "editTime": {
+          "description": "The time at which the properties of the thread were updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The thread metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The updated thread properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "AcsChatThreadPropertiesUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "editedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who updated the thread properties",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "editTime": {
+          "description": "The time at which the properties of the thread were updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The updated thread properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "metadata": {
+          "description": "The thread metadata",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         }
-      },
-      "AcsEmailDeliveryReportReceivedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
-        "type": "object",
-        "properties": {
-          "sender": {
-            "description": "The Sender Email Address",
-            "type": "string"
-          },
-          "recipient": {
-            "description": "The recipient Email Address",
-            "type": "string"
-          },
-          "messageId": {
-            "description": "The Id of the email been sent",
-            "type": "string"
-          },
-          "status": {
-            "description": "The status of the email. Any value other than Delivered is considered failed.",
-            "type": "string",
-            "enum": [
-              "Bounced",
-              "Delivered",
-              "Failed",
-              "FilteredSpam",
-              "Quarantined",
-              "Suppressed"
-            ],
-            "x-ms-enum": {
-              "name": "AcsEmailDeliveryReportStatus",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Bounced",
-                  "description": "Hard bounce detected while sending the email"
-                },
-                {
-                  "value": "Delivered",
-                  "description": "The email was delivered"
-                },
-                {
-                  "value": "Failed",
-                  "description": "The email failed to be delivered"
-                },
-                {
-                  "value": "FilteredSpam",
-                  "description": "The message was identified spam and was rejected or blocked (not quarantined)."
-                },
-                {
-                  "value": "Quarantined",
-                  "description": "The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION)."
-                },
-                {
-                  "value": "Suppressed",
-                  "description": "The email was suppressed"
-                }
-              ]
-            }
-          },
-          "deliveryStatusDetails": {
-            "description": "Detailed information about the status if any",
-            "$ref": "#/definitions/AcsEmailDeliveryReportStatusDetails"
-          },
-          "deliveryAttemptTimeStamp": {
-            "description": "The time at which the email delivery report received timestamp",
-            "format": "date-time",
-            "type": "string",
-            "x-ms-client-name": "deliveryAttemptTimestamp"
+      }
+    },
+    "AcsChatParticipantAddedToThreadWithUserEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "time": {
+          "description": "The time at which the user was added to the thread",
+          "format": "date-time",
+          "type": "string"
+        },
+        "addedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who added the user",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "participantAdded": {
+          "description": "The details of the user who was added",
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties"
+        }
+      }
+    },
+    "AcsChatParticipantRemovedFromThreadWithUserEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "time": {
+          "description": "The time at which the user was removed to the thread",
+          "format": "date-time",
+          "type": "string"
+        },
+        "removedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who removed the user",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "participantRemoved": {
+          "description": "The details of the user who was removed",
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties"
+        }
+      }
+    },
+    "AcsChatParticipantAddedToThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "time": {
+          "description": "The time at which the user was added to the thread",
+          "format": "date-time",
+          "type": "string"
+        },
+        "addedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who added the user",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "participantAdded": {
+          "description": "The details of the user who was added",
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties"
+        },
+        "version": {
+          "description": "The version of the thread",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "AcsChatParticipantRemovedFromThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "time": {
+          "description": "The time at which the user was removed to the thread",
+          "format": "date-time",
+          "type": "string"
+        },
+        "removedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who removed the user",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "participantRemoved": {
+          "description": "The details of the user who was removed",
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties"
+        },
+        "version": {
+          "description": "The version of the thread",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "AcsSmsDeliveryReportReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsSmsEventBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "deliveryStatus": {
+          "description": "Status of Delivery",
+          "type": "string"
+        },
+        "deliveryStatusDetails": {
+          "description": "Details about Delivery Status",
+          "type": "string"
+        },
+        "deliveryAttempts": {
+          "description": "List of details of delivery attempts made",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
+          }
+        },
+        "receivedTimestamp": {
+          "description": "The time at which the SMS delivery report was received",
+          "format": "date-time",
+          "type": "string"
+        },
+        "tag": {
+          "description": "Customer Content",
+          "type": "string"
+        }
+      }
+    },
+    "AcsSmsReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsSmsEventBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "The SMS content",
+          "type": "string"
+        },
+        "receivedTimestamp": {
+          "description": "The time at which the SMS was received",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRecordingFileStatusUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
+      "type": "object",
+      "properties": {
+        "recordingStorageInfo": {
+          "description": "The details of recording storage information",
+          "$ref": "#/definitions/AcsRecordingStorageInfoProperties",
+          "type": "object"
+        },
+        "recordingStartTime": {
+          "description": "The time at which the recording started",
+          "format": "date-time",
+          "type": "string"
+        },
+        "recordingDurationMs": {
+          "description": "The recording duration in milliseconds",
+          "format": "int64",
+          "type": "integer"
+        },
+        "recordingContentType": {
+          "type": "string",
+          "description": "The recording content type- AudioVideo, or Audio",
+          "enum": [
+            "AudioVideo",
+            "Audio"
+          ],
+          "x-ms-enum": {
+            "name": "recordingContentType",
+            "modelAsString": true
+          }
+        },
+        "recordingChannelType": {
+          "type": "string",
+          "description": "The recording  channel type - Mixed, Unmixed",
+          "enum": [
+            "Mixed",
+            "Unmixed"
+          ],
+          "x-ms-enum": {
+            "name": "recordingChannelType",
+            "modelAsString": true
+          }
+        },
+        "recordingFormatType": {
+          "type": "string",
+          "description": "The recording format type - Mp4, Mp3, Wav",
+          "enum": [
+            "Wav",
+            "Mp3",
+            "Mp4"
+          ],
+          "x-ms-enum": {
+            "name": "recordingFormatType",
+            "modelAsString": true
+          }
+        },
+        "sessionEndReason": {
+          "description": "The reason for ending recording session",
+          "type": "string"
+        }
+      }
+    },
+    "AcsEmailDeliveryReportReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
+      "type": "object",
+      "properties": {
+        "sender": {
+          "description": "The Sender Email Address",
+          "type": "string"
+        },
+        "recipient": {
+          "description": "The recipient Email Address",
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The Id of the email been sent",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the email. Any value other than Delivered is considered failed.",
+          "type": "string",
+          "enum": [
+            "Bounced",
+            "Delivered",
+            "Failed",
+            "FilteredSpam",
+            "Quarantined",
+            "Suppressed"
+          ],
+          "x-ms-enum": {
+            "name": "AcsEmailDeliveryReportStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Bounced",
+                "description": "Hard bounce detected while sending the email"
+              },
+              {
+                "value": "Delivered",
+                "description": "The email was delivered"
+              },
+              {
+                "value": "Failed",
+                "description": "The email failed to be delivered"
+              },
+              {
+                "value": "FilteredSpam",
+                "description": "The message was identified spam and was rejected or blocked (not quarantined)."
+              },
+              {
+                "value": "Quarantined",
+                "description": "The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION)."
+              },
+              {
+                "value": "Suppressed",
+                "description": "The email was suppressed"
+              }
+            ]
+          }
+        },
+        "deliveryStatusDetails": {
+          "description": "Detailed information about the status if any",
+          "$ref": "#/definitions/AcsEmailDeliveryReportStatusDetails"
+        },
+        "deliveryAttemptTimeStamp": {
+          "description": "The time at which the email delivery report received timestamp",
+          "format": "date-time",
+          "type": "string",
+          "x-ms-client-name": "deliveryAttemptTimestamp"
+        }
+      }
+    },
+    "AcsEmailEngagementTrackingReportReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
+      "type": "object",
+      "properties": {
+        "sender": {
+          "description": "The Sender Email Address",
+          "type": "string"
+        },
+        "recipient": {
+          "description": "The Recipient Email Address",
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The Id of the email that has been sent",
+          "type": "string"
+        },
+        "userActionTimeStamp": {
+          "description": "The time at which the user interacted with the email",
+          "format": "date-time",
+          "type": "string",
+          "x-ms-client-name": "userActionTimestamp"
+        },
+        "engagementContext": {
+          "description": "The context of the type of engagement user had with email",
+          "type": "string"
+        },
+        "userAgent": {
+          "description": "The user agent interacting with the email",
+          "type": "string"
+        },
+        "engagementType": {
+          "description": "The type of engagement user have with email",
+          "type": "string",
+          "x-ms-client-name": "engagement",
+          "enum": [
+            "view",
+            "click"
+          ],
+          "x-ms-enum": {
+            "name": "AcsUserEngagement",
+            "modelAsString": true
           }
         }
-      },
-      "AcsEmailEngagementTrackingReportReceivedEventData": {
-        "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
-        "type": "object",
-        "properties": {
-          "sender": {
-            "description": "The Sender Email Address",
-            "type": "string"
-          },
-          "recipient": {
-            "description": "The Recipient Email Address",
-            "type": "string"
-          },
-          "messageId": {
-            "description": "The Id of the email that has been sent",
-            "type": "string"
-          },
-          "userActionTimeStamp": {
-            "description": "The time at which the user interacted with the email",
-            "format": "date-time",
-            "type": "string",
-            "x-ms-client-name": "userActionTimestamp"
-          },
-          "engagementContext": {
-            "description": "The context of the type of engagement user had with email",
-            "type": "string"
-          },
-          "userAgent": {
-            "description": "The user agent interacting with the email",
-            "type": "string"
-          },
-          "engagementType": {
-            "description": "The type of engagement user have with email",
-            "type": "string",
-            "x-ms-client-name": "engagement",
-            "enum": [
-              "view",
-              "click"
-            ],
-            "x-ms-enum": {
-              "name": "AcsUserEngagement",
-              "modelAsString": true
-            }
-          }
+      }
+    },
+    "AcsChatThreadEventBaseProperties": {
+      "description": "Schema of common properties of all chat thread events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventBaseProperties"
         }
-      },
-      "AcsChatThreadEventBaseProperties": {
-        "description": "Schema of common properties of all chat thread events",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "createTime": {
-            "description": "The original creation time of the thread",
-            "format": "date-time",
-            "type": "string"
-          },
-          "version": {
-            "description": "The version of the thread",
-            "type": "integer",
-            "format": "int64"
-          }
+      ],
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "description": "The original creation time of the thread",
+          "format": "date-time",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the thread",
+          "type": "integer",
+          "format": "int64"
         }
-      },
-      "AcsChatThreadEventInThreadBaseProperties": {
-        "description": "Schema of common properties of all chat thread events",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "createTime": {
-            "description": "The original creation time of the thread",
-            "format": "date-time",
-            "type": "string"
-          },
-          "version": {
-            "description": "The version of the thread",
-            "type": "integer",
-            "format": "int64"
-          }
+      }
+    },
+    "AcsChatThreadEventInThreadBaseProperties": {
+      "description": "Schema of common properties of all chat thread events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
         }
-      },
-      "AcsChatMessageEventBaseProperties": {
-        "description": "Schema of common properties of all chat message events",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatEventBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "messageId": {
-            "description": "The chat message id",
-            "type": "string"
-          },
-          "senderCommunicationIdentifier": {
-            "description": "The communication identifier of the sender",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "senderDisplayName": {
-            "description": "The display name of the sender",
-            "type": "string"
-          },
-          "composeTime": {
-            "description": "The original compose time of the message",
-            "format": "date-time",
-            "type": "string"
-          },
-          "type": {
-            "description": "The type of the message",
-            "type": "string"
-          },
-          "version": {
-            "description": "The version of the message",
-            "type": "integer",
-            "format": "int64"
-          }
+      ],
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "description": "The original creation time of the thread",
+          "format": "date-time",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the thread",
+          "type": "integer",
+          "format": "int64"
         }
-      },
-      "AcsChatMessageEventInThreadBaseProperties": {
-        "description": "Schema of common properties of all thread-level chat message events",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "messageId": {
-            "description": "The chat message id",
-            "type": "string"
-          },
-          "senderCommunicationIdentifier": {
-            "description": "The communication identifier of the sender",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "senderDisplayName": {
-            "description": "The display name of the sender",
-            "type": "string"
-          },
-          "composeTime": {
-            "description": "The original compose time of the message",
-            "format": "date-time",
-            "type": "string"
-          },
-          "type": {
-            "description": "The type of the message",
-            "type": "string"
-          },
-          "version": {
-            "description": "The version of the message",
-            "type": "integer",
-            "format": "int64"
-          }
+      }
+    },
+    "AcsChatMessageEventBaseProperties": {
+      "description": "Schema of common properties of all chat message events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventBaseProperties"
         }
-      },
-      "AcsChatEventInThreadBaseProperties": {
-        "description": "Schema of common properties of all thread-level chat events",
-        "type": "object",
-        "properties": {
-          "transactionId": {
-            "description": "The transaction id will be used as co-relation vector",
+      ],
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "description": "The chat message id",
+          "type": "string"
+        },
+        "senderCommunicationIdentifier": {
+          "description": "The communication identifier of the sender",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "senderDisplayName": {
+          "description": "The display name of the sender",
+          "type": "string"
+        },
+        "composeTime": {
+          "description": "The original compose time of the message",
+          "format": "date-time",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the message",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the message",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "AcsChatMessageEventInThreadBaseProperties": {
+      "description": "Schema of common properties of all thread-level chat message events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "description": "The chat message id",
+          "type": "string"
+        },
+        "senderCommunicationIdentifier": {
+          "description": "The communication identifier of the sender",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "senderDisplayName": {
+          "description": "The display name of the sender",
+          "type": "string"
+        },
+        "composeTime": {
+          "description": "The original compose time of the message",
+          "format": "date-time",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the message",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the message",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "AcsChatEventInThreadBaseProperties": {
+      "description": "Schema of common properties of all thread-level chat events",
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "description": "The transaction id will be used as co-relation vector",
+          "type": "string"
+        },
+        "threadId": {
+          "description": "The chat thread id",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRouterJobEventData": {
+      "description": "Schema of common properties of all Router Job events",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterEventData"
+        }
+      ],
+      "properties": {
+        "queueId": {
+          "description": "Router Job events Queue Id",
+          "type": "string"
+        },
+        "labels": {
+          "description": "Router Job events Labels",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
-          },
-          "threadId": {
-            "description": "The chat thread id",
+          }
+        },
+        "tags": {
+          "description": "Router Jobs events Tags",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         }
-      },
-      "AcsRouterJobEventData": {
-        "description": "Schema of common properties of all Router Job events",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsRouterEventData"
-          }
-        ],
-        "properties": {
-          "queueId": {
-            "description": "Router Job events Queue Id",
-            "type": "string"
-          },
-          "labels": {
-            "description": "Router Job events Labels",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "tags": {
-            "description": "Router Jobs events Tags",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
+      }
+    },
+    "AcsRouterWorkerEventData": {
+      "description": "Schema of common properties of all Router Worker events",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterEventData"
         }
-      },
-      "AcsRouterWorkerEventData": {
-        "description": "Schema of common properties of all Router Worker events",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AcsRouterEventData"
-          }
-        ],
-        "properties": {
-          "workerId": {
-            "description": "Router Worker events Worker Id",
-            "type": "string"
-          }
+      ],
+      "properties": {
+        "workerId": {
+          "description": "Router Worker events Worker Id",
+          "type": "string"
         }
-      },
-      "AcsRouterEventData": {
-        "description": "Schema of common properties of all Router events",
-        "type": "object",
-        "properties": {
-          "jobId": {
-            "description": "Router Event Job ID",
-            "type": "string"
-          },
-          "channelReference": {
-            "description": "Router Event Channel Reference",
-            "type": "string"
-          },
-          "channelId": {
-            "description": "Router Event Channel ID",
-            "type": "string"
-          }
+      }
+    },
+    "AcsRouterEventData": {
+      "description": "Schema of common properties of all Router events",
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Router Event Job ID",
+          "type": "string"
+        },
+        "channelReference": {
+          "description": "Router Event Channel Reference",
+          "type": "string"
+        },
+        "channelId": {
+          "description": "Router Event Channel ID",
+          "type": "string"
         }
-      },
-      "AcsChatEventBaseProperties": {
-        "description": "Schema of common properties of all chat events",
-        "type": "object",
-        "properties": {
-          "recipientCommunicationIdentifier": {
-            "description": "The communication identifier of the target user",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "transactionId": {
-            "description": "The transaction id will be used as co-relation vector",
-            "type": "string"
-          },
-          "threadId": {
-            "description": "The chat thread id",
+      }
+    },
+    "AcsChatEventBaseProperties": {
+      "description": "Schema of common properties of all chat events",
+      "type": "object",
+      "properties": {
+        "recipientCommunicationIdentifier": {
+          "description": "The communication identifier of the target user",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "transactionId": {
+          "description": "The transaction id will be used as co-relation vector",
+          "type": "string"
+        },
+        "threadId": {
+          "description": "The chat thread id",
+          "type": "string"
+        }
+      }
+    },
+    "AcsChatThreadParticipantProperties": {
+      "description": "Schema of the chat thread participant",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The name of the user",
+          "type": "string"
+        },
+        "participantCommunicationIdentifier": {
+          "description": "The communication identifier of the user",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "metadata": {
+          "description": "The metadata of the user",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         }
-      },
-      "AcsChatThreadParticipantProperties": {
-        "description": "Schema of the chat thread participant",
-        "type": "object",
-        "properties": {
-          "displayName": {
-            "description": "The name of the user",
-            "type": "string"
-          },
-          "participantCommunicationIdentifier": {
-            "description": "The communication identifier of the user",
-            "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
-          },
-          "metadata": {
-            "description": "The metadata of the user",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
+      }
+    },
+    "AcsSmsEventBaseProperties": {
+      "description": "Schema of common properties of all SMS events",
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "description": "The identity of the SMS message",
+          "type": "string"
+        },
+        "from": {
+          "description": "The identity of SMS message sender",
+          "type": "string"
+        },
+        "to": {
+          "description": "The identity of SMS message receiver",
+          "type": "string"
+        }
+      }
+    },
+    "AcsSmsDeliveryAttemptProperties": {
+      "description": "Schema for details of a delivery attempt",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "TimeStamp when delivery was attempted",
+          "format": "date-time",
+          "type": "string"
+        },
+        "segmentsSucceeded": {
+          "description": "Number of segments that were successfully delivered",
+          "type": "integer"
+        },
+        "segmentsFailed": {
+          "description": "Number of segments whose delivery failed",
+          "type": "integer"
+        }
+      }
+    },
+    "AcsRecordingStorageInfoProperties": {
+      "description": "Schema for all properties of Recording Storage Information.",
+      "type": "object",
+      "properties": {
+        "recordingChunks": {
+          "description": "List of details of recording chunks information",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
           }
         }
-      },
-      "AcsSmsEventBaseProperties": {
-        "description": "Schema of common properties of all SMS events",
-        "type": "object",
-        "properties": {
-          "messageId": {
-            "description": "The identity of the SMS message",
+      }
+    },
+    "AcsRecordingChunkInfoProperties": {
+      "description": "Schema for all properties of  Recording Chunk Information.",
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "description": "The documentId of the recording chunk",
+          "type": "string"
+        },
+        "index": {
+          "description": "The index of the recording chunk",
+          "type": "integer",
+          "format": "int64"
+        },
+        "endReason": {
+          "description": "The reason for ending the recording chunk",
+          "type": "string"
+        },
+        "metadataLocation": {
+          "description": "The location of the metadata for this chunk",
+          "type": "string"
+        },
+        "contentLocation": {
+          "description": "The location of the content for this chunk",
+          "type": "string"
+        },
+        "deleteLocation": {
+          "description": "The location to delete all chunk storage",
+          "type": "string"
+        }
+      }
+    },
+    "AcsEmailDeliveryReportStatusDetails": {
+      "description": "Detailed information about the status if any",
+      "type": "object",
+      "properties": {
+        "statusMessage": {
+          "description": "Detailed status message",
+          "type": "string"
+        }
+      }
+    },
+    "AcsIncomingCallCustomContext": {
+      "description": "Custom Context of Incoming Call",
+      "type": "object",
+      "properties": {
+        "sipHeaders": {
+          "type": "object",
+          "description": "Sip Headers for incoming call",
+          "additionalProperties": {
             "type": "string"
-          },
-          "from": {
-            "description": "The identity of SMS message sender",
-            "type": "string"
-          },
-          "to": {
-            "description": "The identity of SMS message receiver",
+          }
+        },
+        "voipHeaders": {
+          "type": "object",
+          "description": "Voip Headers for incoming call",
+          "additionalProperties": {
             "type": "string"
           }
         }
-      },
-      "AcsSmsDeliveryAttemptProperties": {
-        "description": "Schema for details of a delivery attempt",
-        "type": "object",
-        "properties": {
-          "timestamp": {
-            "description": "TimeStamp when delivery was attempted",
-            "format": "date-time",
-            "type": "string"
-          },
-          "segmentsSucceeded": {
-            "description": "Number of segments that were successfully delivered",
-            "type": "integer"
-          },
-          "segmentsFailed": {
-            "description": "Number of segments whose delivery failed",
-            "type": "integer"
-          }
+      }
+    },
+    "AcsRouterChannelConfiguration": {
+      "description": "Router Channel Configuration",
+      "type": "object",
+      "properties": {
+        "channelId": {
+          "description": "Channel ID for Router Job",
+          "type": "string"
+        },
+        "capacityCostPerJob": {
+          "description": "Capacity Cost Per Job for Router Job",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxNumberOfJobs": {
+          "description": "Max Number of Jobs for Router Job",
+          "type": "integer",
+          "format": "int32"
         }
-      },
-      "AcsRecordingStorageInfoProperties": {
-        "description": "Schema for all properties of Recording Storage Information.",
-        "type": "object",
-        "properties": {
-          "recordingChunks": {
-            "description": "List of details of recording chunks information",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
-            }
-          }
-        }
-      },
-      "AcsRecordingChunkInfoProperties": {
-        "description": "Schema for all properties of  Recording Chunk Information.",
-        "type": "object",
-        "properties": {
-          "documentId": {
-            "description": "The documentId of the recording chunk",
-            "type": "string"
-          },
-          "index": {
-            "description": "The index of the recording chunk",
-            "type": "integer",
-            "format": "int64"
-          },
-          "endReason": {
-            "description": "The reason for ending the recording chunk",
-            "type": "string"
-          },
-          "metadataLocation": {
-            "description": "The location of the metadata for this chunk",
-            "type": "string"
-          },
-          "contentLocation": {
-            "description": "The location of the content for this chunk",
-            "type": "string"
-          },
-          "deleteLocation": {
-            "description": "The location to delete all chunk storage",
+      }
+    },
+    "AcsRouterQueueDetails": {
+      "description": "Router Queue Details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Router Queue Id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Router Queue Name",
+          "type": "string"
+        },
+        "labels": {
+          "description": "Router Queue Labels",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         }
-      },
-      "AcsEmailDeliveryReportStatusDetails": {
-        "description": "Detailed information about the status if any",
-        "type": "object",
-        "properties": {
-          "statusMessage": {
-            "description": "Detailed status message",
-            "type": "string"
-          }
-        }
-      },
-      "AcsIncomingCallCustomContext": {
-        "description": "Custom Context of Incoming Call",
-        "type": "object",
-        "properties": {
-          "sipHeaders": {
-            "type": "object",
-            "description": "Sip Headers for incoming call",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "voipHeaders": {
-            "type": "object",
-            "description": "Voip Headers for incoming call",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "AcsRouterChannelConfiguration": {
-        "description": "Router Channel Configuration",
-        "type": "object",
-        "properties": {
-          "channelId": {
-            "description": "Channel ID for Router Job",
-            "type": "string"
-          },
-          "capacityCostPerJob": {
-            "description": "Capacity Cost Per Job for Router Job",
-            "type": "integer",
-            "format": "int32"
-          },
-          "maxNumberOfJobs": {
-            "description": "Max Number of Jobs for Router Job",
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "AcsRouterQueueDetails": {
-        "description": "Router Queue Details",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Router Queue Id",
-            "type": "string"
-          },
-          "name": {
-            "description": "Router Queue Name",
-            "type": "string"
-          },
-          "labels": {
-            "description": "Router Queue Labels",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "AcsRouterCommunicationError": {
-        "description": "Router Communication Error",
-        "type": "object",
-        "properties": {
-          "code": {
-            "description": "Router Communication Error Code",
-            "type": "string"
-          },
-          "message": {
-            "description": "Router Communication Error Message",
-            "type": "string"
-          },
-          "target": {
-            "description": "Router Communication Error Target",
-            "type": "string"
-          },
-          "innererror": {
-            "description": "Router Communication Inner Error",
+      }
+    },
+    "AcsRouterCommunicationError": {
+      "description": "Router Communication Error",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Router Communication Error Code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Router Communication Error Message",
+          "type": "string"
+        },
+        "target": {
+          "description": "Router Communication Error Target",
+          "type": "string"
+        },
+        "innererror": {
+          "description": "Router Communication Inner Error",
+          "$ref": "#/definitions/AcsRouterCommunicationError"
+        },
+        "details": {
+          "description": "List of Router Communication Errors",
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
-          },
-          "details": {
-            "description": "List of Router Communication Errors",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AcsRouterCommunicationError"
-            }
           }
         }
-      },
-      "AcsRouterWorkerSelector": {
-        "description": "Router Job Worker Selector",
-        "type": "object",
-        "properties": {
-          "key": {
-            "description": "Router Job Worker Selector Key",
-            "type": "string"
-          },
-          "labelOperator": {
-            "description": "Router Job Worker Selector Label Operator",
-            "type": "string",
-            "enum": [
-              "Equal",
-              "NotEqual",
-              "Greater",
-              "Less",
-              "GreaterThanOrEqual",
-              "LessThanOrEqual"
-            ],
-            "x-ms-enum": {
-              "name": "acsRouterLabelOperator",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Equal",
-                  "description": "="
-                },
-                {
-                  "value": "NotEqual",
-                  "description": "!="
-                },
-                {
-                  "value": "Greater",
-                  "description": ">"
-                },
-                {
-                  "value": "Less",
-                  "description": "<"
-                },
-                {
-                  "value": "GreaterThanOrEqual",
-                  "description": ">="
-                },
-                {
-                  "value": "LessThanOrEqual",
-                  "description": "<="
-                }
-              ]
-            }
-          },
-          "labelValue": {
-            "description": "Router Job Worker Selector Value",
-            "type": "object"
-          },
-          "ttlSeconds": {
-            "description": "Router Job Worker Selector Time to Live in Seconds",
-            "type": "number"
-          },
-          "state": {
-            "description": "Router Job Worker Selector State",
-            "type": "string",
-            "enum": [
-              "active",
-              "expired"
-            ],
-            "x-ms-enum": {
-              "name": "AcsRouterWorkerSelectorState",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "active",
-                  "description": "Router Job Worker Selector is Active"
-                },
-                {
-                  "value": "expired",
-                  "description": "Router Job Worker Selector has Expire"
-                }
-              ]
-            }
-          },
-          "expirationTime": {
-            "description": "Router Job Worker Selector Expiration Time",
-            "type": "string",
-            "format": "date-time"
+      }
+    },
+    "AcsRouterWorkerSelector": {
+      "description": "Router Job Worker Selector",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Router Job Worker Selector Key",
+          "type": "string"
+        },
+        "labelOperator": {
+          "description": "Router Job Worker Selector Label Operator",
+          "type": "string",
+          "enum": [
+            "Equal",
+            "NotEqual",
+            "Greater",
+            "Less",
+            "GreaterThanOrEqual",
+            "LessThanOrEqual"
+          ],
+          "x-ms-enum": {
+            "name": "acsRouterLabelOperator",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Equal",
+                "description": "="
+              },
+              {
+                "value": "NotEqual",
+                "description": "!="
+              },
+              {
+                "value": "Greater",
+                "description": ">"
+              },
+              {
+                "value": "Less",
+                "description": "<"
+              },
+              {
+                "value": "GreaterThanOrEqual",
+                "description": ">="
+              },
+              {
+                "value": "LessThanOrEqual",
+                "description": "<="
+              }
+            ]
           }
+        },
+        "labelValue": {
+          "description": "Router Job Worker Selector Value",
+          "type": "object"
+        },
+        "ttlSeconds": {
+          "description": "Router Job Worker Selector Time to Live in Seconds",
+          "type": "number"
+        },
+        "state": {
+          "description": "Router Job Worker Selector State",
+          "type": "string",
+          "enum": [
+            "active",
+            "expired"
+          ],
+          "x-ms-enum": {
+            "name": "AcsRouterWorkerSelectorState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "active",
+                "description": "Router Job Worker Selector is Active"
+              },
+              {
+                "value": "expired",
+                "description": "Router Job Worker Selector has Expire"
+              }
+            ]
+          }
+        },
+        "expirationTime": {
+          "description": "Router Job Worker Selector Expiration Time",
+          "type": "string",
+          "format": "date-time"
         }
       }
     }
