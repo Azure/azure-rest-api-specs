@@ -31,13 +31,13 @@
             "name": "apiKeyAlias",
             "in": "path",
             "required": true,
-            "description": "Alias for new API Key. This alias must be unique and contain only alphanumeric characters separated by dashes"
+            "description": "Alias for new API Key. This alias must be unique and contain only alphanumeric characters separated by dashes."
           },
           {
             "type": "string",
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
-            "description": "The tenant associated with the subscription",
+            "description": "The tenant associated with the subscription.",
             "in": "header",
             "required": true,
             "x-nullable": true
@@ -52,7 +52,7 @@
         "responses": {
           "200": {
             "x-nullable": false,
-            "description": "Returns the newly created API key",
+            "description": "Returns the newly created API key.",
             "schema": {
               "$ref": "#/definitions/ApiKey"
             }
@@ -82,7 +82,7 @@
           {
             "type": "string",
             "name": "apiKeyAlias",
-            "description": "The alias of your API key",
+            "description": "The alias of your API key.",
             "in": "path",
             "required": true
           },
@@ -90,7 +90,7 @@
             "type": "string",
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
-            "description": "The tenant associated with the subscription",
+            "description": "The tenant associated with the subscription.",
             "in": "header",
             "required": true,
             "x-nullable": true
@@ -104,7 +104,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Indicates that the API key was successfully revoked"
+            "description": "Indicates that the API key was successfully revoked."
           },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
@@ -120,7 +120,7 @@
         "tags": [
           "GetApiKeys"
         ],
-        "summary": "Retrieves a list of API keys associated with a selected subscription",
+        "summary": "Retrieves a list of API keys associated with a selected subscription.",
         "operationId": "GetApiKeys_List",
         "x-ms-examples": {
           "Get_Key": {
@@ -132,7 +132,7 @@
             "type": "string",
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
-            "description": "The tenant associated with the subscription",
+            "description": "The tenant associated with the subscription.",
             "in": "header",
             "required": true,
             "x-nullable": true
@@ -147,7 +147,7 @@
         "responses": {
           "200": {
             "x-nullable": false,
-            "description": "List of active keys that belong to the subscription",
+            "description": "List of active keys that belong to the subscription.",
             "schema": {
               "$ref": "#/definitions/ApiKeys"
             }
@@ -204,7 +204,7 @@
   "definitions": {
     "ApiKeys": {
       "type": "object",
-      "description": "Dictionary of API keys and their aliases",
+      "description": "Dictionary of API keys and their aliases.",
       "properties": {
         "value": {
           "type": "array",
@@ -213,21 +213,21 @@
           }
         },
         "nextLink": {
-          "description": "Next page of results",
+          "description": "Next page of results.",
           "type": "string"
         }
       }
     },
     "ApiKey": {
       "type": "object",
-      "description": "ApiKey object containing both the key and its alias",
+      "description": "ApiKey object containing both the key and its alias.",
       "properties": {
         "keyAlias": {
-          "description": "The API key alias",
+          "description": "The API key alias.",
           "type": "string"
         },
         "key": {
-          "description": "The API key to be used when calling relevant Discovery endpoints",
+          "description": "The API key to be used when calling relevant Discovery endpoints.",
           "type": "string"
         }
       }
@@ -259,7 +259,7 @@
     "subscriptionId": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "The subscription Id",
+      "description": "The subscription Id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
