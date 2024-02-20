@@ -52,6 +52,9 @@
       "name": "Storages"
     },
     {
+      "name": "SharedStorages"
+    },
+    {
       "name": "Workloads"
     },
     {
@@ -3507,6 +3510,338 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/sharedStorages": {
+      "get": {
+        "operationId": "SharedStorages_ListByWorkbench",
+        "tags": [
+          "SharedStorages"
+        ],
+        "description": "List SharedStorage resources by Workbench",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the Workbench",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)(?!.*--)[a-zA-Z][A-Za-z0-9-]{0,63}(?<!-)$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedStorageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedStorages_ListByWorkbench": {
+            "$ref": "./examples/SharedStoragesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/sharedStorages/{sharedStorageName}": {
+      "get": {
+        "operationId": "SharedStorages_Get",
+        "tags": [
+          "SharedStorages"
+        ],
+        "description": "Get a SharedStorage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the Workbench",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)(?!.*--)[a-zA-Z][A-Za-z0-9-]{0,63}(?<!-)$"
+          },
+          {
+            "name": "sharedStorageName",
+            "in": "path",
+            "description": "The name of the shared storage",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)(?!.*--)[a-zA-Z][A-Za-z0-9-]{0,63}(?<!-)$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedStorage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedStorages_Get": {
+            "$ref": "./examples/SharedStoragesGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SharedStorages_CreateOrUpdate",
+        "tags": [
+          "SharedStorages"
+        ],
+        "description": "Create a SharedStorage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the Workbench",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)(?!.*--)[a-zA-Z][A-Za-z0-9-]{0,63}(?<!-)$"
+          },
+          {
+            "name": "sharedStorageName",
+            "in": "path",
+            "description": "The name of the shared storage",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)(?!.*--)[a-zA-Z][A-Za-z0-9-]{0,63}(?<!-)$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedStorage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SharedStorage' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SharedStorage"
+            }
+          },
+          "201": {
+            "description": "Resource 'SharedStorage' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SharedStorage"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedStorages_CreateOrUpdate": {
+            "$ref": "./examples/SharedStoragesCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SharedStorages_Update",
+        "tags": [
+          "SharedStorages"
+        ],
+        "description": "Update a SharedStorage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the Workbench",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)(?!.*--)[a-zA-Z][A-Za-z0-9-]{0,63}(?<!-)$"
+          },
+          {
+            "name": "sharedStorageName",
+            "in": "path",
+            "description": "The name of the shared storage",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)(?!.*--)[a-zA-Z][A-Za-z0-9-]{0,63}(?<!-)$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedStorageUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedStorage"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedStorages_Update": {
+            "$ref": "./examples/SharedStoragesPatch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SharedStorages_Delete",
+        "tags": [
+          "SharedStorages"
+        ],
+        "description": "Delete a SharedStorage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the Workbench",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)(?!.*--)[a-zA-Z][A-Za-z0-9-]{0,63}(?<!-)$"
+          },
+          {
+            "name": "sharedStorageName",
+            "in": "path",
+            "description": "The name of the shared storage",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)(?!.*--)[a-zA-Z][A-Za-z0-9-]{0,63}(?<!-)$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedStorages_Delete": {
+            "$ref": "./examples/SharedStoragesDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -3794,6 +4129,20 @@
           }
         }
       }
+    },
+    "ConnectedChamber": {
+      "type": "object",
+      "description": "List of chambers connected to a shared storage.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the chamber resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "Connector": {
       "type": "object",
@@ -4665,12 +5014,12 @@
         },
         "synopsys": {
           "$ref": "#/definitions/Synopsys",
-          "description": "Siemens settings",
+          "description": "Synopsys settings",
           "readOnly": true
         },
         "siemens": {
           "$ref": "#/definitions/Siemens",
-          "description": "Synopsys settings",
+          "description": "Siemens settings",
           "readOnly": true
         }
       }
@@ -4843,6 +5192,201 @@
       "required": [
         "result"
       ]
+    },
+    "SharedStorage": {
+      "type": "object",
+      "description": "Shared storage tracked resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedStorageProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SharedStorageListResult": {
+      "type": "object",
+      "description": "The response of a SharedStorage list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SharedStorage items on this page",
+          "items": {
+            "$ref": "#/definitions/SharedStorage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SharedStorageProperties": {
+      "type": "object",
+      "description": "Shared storage properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "capacityAllocated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Provisioned size: Capacity allocated to the storage volume in terabytes.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "capacityUsed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Capacity used in the storage volume in gigabytes.",
+          "readOnly": true
+        },
+        "localMountPath": {
+          "type": "string",
+          "description": "Directory where the shared storage volume mounted.",
+          "readOnly": true
+        },
+        "performanceTier": {
+          "type": "string",
+          "description": "Performance tier of the shared storage.",
+          "default": "Standard",
+          "enum": [
+            "Standard",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "SharedStoragePerformanceTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Standard",
+                "value": "Standard",
+                "description": "Standard tier."
+              },
+              {
+                "name": "Ultra",
+                "value": "Ultra",
+                "description": "Ultra tier."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "chambers": {
+          "type": "array",
+          "description": "List of Chambers connected to the shared storage.",
+          "items": {
+            "$ref": "#/definitions/ConnectedChamber"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "capacityAllocated",
+        "performanceTier",
+        "chambers"
+      ]
+    },
+    "SharedStorageUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the SharedStorage.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SharedStorageUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SharedStorageUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the SharedStorage.",
+      "properties": {
+        "capacityAllocated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Provisioned size: Capacity allocated to the storage volume in terabytes.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "performanceTier": {
+          "type": "string",
+          "description": "Performance tier of the shared storage.",
+          "default": "Standard",
+          "enum": [
+            "Standard",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "SharedStoragePerformanceTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Standard",
+                "value": "Standard",
+                "description": "Standard tier."
+              },
+              {
+                "name": "Ultra",
+                "value": "Ultra",
+                "description": "Ultra tier."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "chambers": {
+          "type": "array",
+          "description": "List of Chambers connected to the shared storage.",
+          "items": {
+            "$ref": "#/definitions/ConnectedChamber"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     },
     "Siemens": {
       "type": "object",
