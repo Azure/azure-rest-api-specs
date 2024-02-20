@@ -56,8 +56,7 @@ model SentimentResponse is AnalyzeTextPreBuiltResult {
 }
 
 @doc("Sentiment analysis per document.")
-model SentimentResponseWithDocumentDetectedLanguage
-  is SentimentDocumentResult {
+model SentimentResponseWithDocumentDetectedLanguage is SentimentDocumentResult {
   ...DocumentDetectedLanguage;
 }
 
