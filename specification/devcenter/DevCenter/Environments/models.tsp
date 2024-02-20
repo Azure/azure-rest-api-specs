@@ -10,64 +10,61 @@ using TypeSpec.Http;
 namespace DevCenterService;
 
 @doc("The type of data a parameter accepts.")
-union ParameterType {
-  @doc("The parameter accepts an array of values.") array: "array",
-  @doc("The parameter accepts a boolean value.") boolean: "boolean",
-  @doc("The parameter accepts an integer value.") integer: "integer",
-  @doc("The parameter accepts a number value.") number: "number",
-  @doc("The parameter accepts an object value.") object: "object",
-  @doc("The parameter accepts a string value.") string: "string",
-  string,
+enum ParameterType {
+  @doc("The parameter accepts an array of values.") array,
+  @doc("The parameter accepts a boolean value.") boolean,
+  @doc("The parameter accepts an integer value.") integer,
+  @doc("The parameter accepts a number value.") number,
+  @doc("The parameter accepts an object value.") object,
+  @doc("The parameter accepts a string value.") string,
 }
 
 @doc("Indicates whether an environment type is enabled for use in a project.")
-union EnvironmentTypeEnableStatus {
-  @doc("The environment type is enabled for use in the project.") Enabled: "Enabled",
-  @doc("The environment type is not enabled for use in the project.") Disabled: "Disabled",
-  string,
+enum EnvironmentTypeEnableStatus {
+  @doc("The environment type is enabled for use in the project.") Enabled,
+  @doc("The environment type is not enabled for use in the project.") Disabled,
 }
 
 @doc("The provisioning state of the environment.")
-union EnvironmentProvisioningState {
+enum EnvironmentProvisioningState {
   @doc("The environment was successfully provisioned.")
-  Succeeded: "Succeeded",
+  Succeeded,
 
   @doc("The environment failed to provision.")
-  Failed: "Failed",
+  Failed,
 
   @doc("The environment provisioning was canceled.")
-  Canceled: "Canceled",
+  Canceled,
 
   @doc("The environment is creating.")
-  Creating: "Creating",
+  Creating,
 
   @doc("The environment was accepted.")
-  Accepted: "Accepted",
+  Accepted,
 
   @doc("The environment is deleting.")
-  Deleting: "Deleting",
+  Deleting,
 
   @doc("The environment is updating.")
-  Updating: "Updating",
+  Updating,
 
   @doc("The environment is preparing.")
-  Preparing: "Preparing",
+  Preparing,
 
   @doc("The environment is running.")
-  Running: "Running",
+  Running,
 
   @doc("The environment is Syncing.")
-  Syncing: "Syncing",
+  Syncing,
 
   @doc("The environment is moving resources.")
-  MovingResources: "MovingResources",
+  MovingResources,
 
   @doc("The environment has a transient failure.")
-  TransientFailure: "TransientFailure",
+  TransientFailure,
 
   @doc("The environment storage provisioning failed.")
-  StorageProvisioningFailed: "StorageProvisioningFailed",
-  string,
+  StorageProvisioningFailed,
 }
 
 @doc("Results of the environment list operation.")
