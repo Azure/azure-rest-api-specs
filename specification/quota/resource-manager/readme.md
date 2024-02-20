@@ -53,6 +53,15 @@ input-file:
   - Microsoft.Quota/stable/2023-02-01/quota.json
 ```
 
+### Tag: package-2021-03-15-preview
+
+These settings apply only when `--tag=package-2021-03-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-02-01'
+input-file:
+  - Microsoft.Quota/preview/package-2021-03-15-preview/quota.json
+```
+
 ### Supressions
 
 ``` yaml
