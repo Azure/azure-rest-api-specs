@@ -640,7 +640,7 @@
         "tags": [
           "importJobs"
         ],
-        "description": "Create or update an import job.",
+        "description": "Create or update an import job. Import jobs are automatically deleted 72 hours after completetion.",
         "operationId": "importJobs_CreateOrUpdate"
       },
       "patch": {
@@ -1190,13 +1190,13 @@
           "$ref": "storagecache.json#/definitions/URLString"
         },
         "importPrefix": {
-          "description": "Only blobs in the non-logging container that start with this path/prefix get imported into the cluster namespace. This is only used during initial creation of the AML file system.",
+          "description": "Only blobs in the non-logging container that start with this path/prefix get imported into the cluster namespace. This is only used during initial creation of the AML file system. It automatically creates an import job resource that can be deleted.",
           "type": "string",
           "default": "/"
         },
         "importPrefixesInitial": {
           "type": "array",
-          "description": "Only blobs in the non-logging container that start with one of the paths/prefixes in this array get imported into the cluster namespace. This is only used during initial creation of the AML file system and has '/' as the default value.",
+          "description": "Only blobs in the non-logging container that start with one of the paths/prefixes in this array get imported into the cluster namespace. This is only used during initial creation of the AML file system and has '/' as the default value. It automatically creates an import job resource that can be deleted.",
           "items": {
             "type": "string"
           }
@@ -1376,7 +1376,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
