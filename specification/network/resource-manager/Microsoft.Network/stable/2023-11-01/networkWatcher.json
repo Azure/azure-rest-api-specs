@@ -2821,19 +2821,19 @@
       "properties": {
         "storageId": {
           "type": "string",
-          "description": "The ID of the storage account to save the packet capture session. Required if no local file path is provided."
+          "description": "The ID of the storage account to save the packet capture session. Required if no local file path or local path is provided."
         },
         "storagePath": {
           "type": "string",
-          "description": "The URI of the storage path to save the packet capture. Must be a well-formed URI describing the location to save the packet capture."
+          "description": "This path is invalid if 'Continuous Capture' is provided with 'true' or 'false'. The URI of the storage path to save the packet capture. Must be a well-formed URI describing the location to save the packet capture."
         },
         "filePath": {
           "type": "string",
-          "description": "A valid local path on the targeting VM. Must include the name of the capture file (*.cap). For linux virtual machine it must start with /var/captures. Required if no storage ID is provided, otherwise optional."
+          "description": "This path is invalid if 'Continuous Capture' is provided with 'true' or 'false'. A valid local path on the targeting VM. Must include the name of the capture file (*.cap). For linux virtual machine it must start with /var/captures. Required if no storage ID is provided, otherwise optional."
         },
         "localPath": {
           "type": "string",
-          "description": "This path is valid if 'Continuous Capture' is provided and required if no storage ID is provided, otherwise optional. Must include the name of the capture file (*.cap)."
+          "description": "This path is valid if 'Continuous Capture' is provided with 'true' or 'false' and required if no storage ID is provided, otherwise optional. Must include the name of the capture file (*.cap). For linux virtual machine it must start with /var/captures."
         }
       },
       "description": "The storage location for a packet capture session."
@@ -2851,10 +2851,10 @@
         "fileSizeInBytes": {
           "type": "integer",
           "format": "int64",
-          "minimum": 100000,
-          "maximum": 4000000000,
-          "default": 100000000,
-          "description": "Number of bytes captured per packet. Default value in bytes 100000000 (100MB) and maximum in bytes 4000000000 (4GB)."
+          "minimum": 0,
+          "maximum": 4294967295,
+          "default": 104857600,
+          "description": "Number of bytes captured per packet. Default value in bytes 104857600 (100MB) and maximum in bytes 4294967295 (4GB)."
         },
         "sessionTimeLimitInSeconds": {
           "type": "integer",
