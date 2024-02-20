@@ -939,6 +939,9 @@ directive:
     reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were instructed to supress this by Swagger reviewr.'
   - suppress: GuidUsage
     reason: 'Tenent Id should be a Guid'
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
 ```
 
 ---
