@@ -125,6 +125,60 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "DeploymentBuilds"
+        ],
+        "operationId": "DeploymentBuilds_Delete",
+        "description": "Delete a DeploymentBuild resource by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./Deployments.json#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
