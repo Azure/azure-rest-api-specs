@@ -13,12 +13,12 @@
       "properties": {
         "to": {
           "description": "The communication identifier of the target user.",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel",
           "x-ms-client-name": "toCommunicationIdentifier"
         },
         "from": {
           "description": "The communication identifier of the user who initiated the call.",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel",
           "x-ms-client-name": "fromCommunicationIdentifier"
         },
         "serverCallId": {
@@ -49,7 +49,7 @@
       "properties": {
         "userCommunicationIdentifier": {
           "description": "The communication identifier of the user who was disconnected",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         }
       }
     },
@@ -814,6 +814,64 @@
         }
       }
     },
+    "AcsRouterWorkerUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerUpdated event",
+      "type": "object",
+      "properties": {
+        "workerId": {
+          "description": "Router Worker Updated Worker Id",
+          "type": "string"
+        },
+        "queueAssignments": {
+          "description": "Router Worker Updated Queue Info",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterQueueDetails"
+          }
+        },
+        "channelConfigurations": {
+          "description": "Router Worker Updated Channel Configuration",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterChannelConfiguration"
+          }
+        },
+        "totalCapacity": {
+          "description": "Router Worker Updated Total Capacity",
+          "type": "integer",
+          "format": "int32"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Router Worker Updated Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Router Worker Updated Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "propertiesUpdated": {
+          "description": "Router Worker Updated Properties Updated",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "An individual property updated in the Router Worker"
+          }
+        },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_worker_updated.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_worker_updated.json"
+        }
+      }
+    },
     "AcsChatMessageReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
       "allOf": [
@@ -955,7 +1013,7 @@
       "properties": {
         "createdByCommunicationIdentifier": {
           "description": "The communication identifier of the user who created the thread",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "properties": {
           "description": "The thread properties",
@@ -991,7 +1049,7 @@
       "properties": {
         "createdByCommunicationIdentifier": {
           "description": "The communication identifier of the user who created the thread",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "properties": {
           "description": "The thread properties",
@@ -1027,7 +1085,7 @@
       "properties": {
         "deletedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who deleted the thread",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "deleteTime": {
           "description": "The deletion time of the thread",
@@ -1047,7 +1105,7 @@
       "properties": {
         "deletedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who deleted the thread",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "deleteTime": {
           "description": "The deletion time of the thread",
@@ -1067,7 +1125,7 @@
       "properties": {
         "editedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who updated the thread properties",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "editTime": {
           "description": "The time at which the properties of the thread were updated",
@@ -1101,7 +1159,7 @@
       "properties": {
         "editedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who updated the thread properties",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "editTime": {
           "description": "The time at which the properties of the thread were updated",
@@ -1140,7 +1198,7 @@
         },
         "addedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who added the user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "participantAdded": {
           "description": "The details of the user who was added",
@@ -1164,7 +1222,7 @@
         },
         "removedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who removed the user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "participantRemoved": {
           "description": "The details of the user who was removed",
@@ -1188,7 +1246,7 @@
         },
         "addedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who added the user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "participantAdded": {
           "description": "The details of the user who was added",
@@ -1217,7 +1275,7 @@
         },
         "removedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who removed the user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "participantRemoved": {
           "description": "The details of the user who was removed",
@@ -1519,7 +1577,7 @@
         },
         "senderCommunicationIdentifier": {
           "description": "The communication identifier of the sender",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "senderDisplayName": {
           "description": "The display name of the sender",
@@ -1556,7 +1614,7 @@
         },
         "senderCommunicationIdentifier": {
           "description": "The communication identifier of the sender",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "senderDisplayName": {
           "description": "The display name of the sender",
@@ -1660,7 +1718,7 @@
       "properties": {
         "recipientCommunicationIdentifier": {
           "description": "The communication identifier of the target user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "transactionId": {
           "description": "The transaction id will be used as co-relation vector",
@@ -1682,7 +1740,7 @@
         },
         "participantCommunicationIdentifier": {
           "description": "The communication identifier of the user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "metadata": {
           "description": "The metadata of the user",
