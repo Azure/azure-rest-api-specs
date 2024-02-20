@@ -1011,11 +1011,13 @@
       "properties": {
         "domain": {
           "$ref": "#/definitions/Domain",
-          "description": "The domain of the text for analysis. Allowed values: Medical, Generic.\nThis field is optional, with a default value of Generic."
+          "description": "The domain of the text for analysis. Allowed values: Medical, Generic.\nThis field is optional, with a default value of Generic.",
+          "default": "Generic"
         },
         "task": {
           "$ref": "#/definitions/Task",
-          "description": "The task type for the text analysis. Type of task: QnA, Summarization.\nThis field is optional, with a default value of Summarization."
+          "description": "The task type for the text analysis. Type of task: QnA, Summarization.\nThis field is optional, with a default value of Summarization.",
+          "default": "Summarization"
         },
         "query": {
           "type": "string",
@@ -1038,9 +1040,9 @@
           "type": "boolean",
           "description": "A value indicating if the output includes an explanation for the identified ungroundedness.\nThis field is optional, with a default value of false."
         },
-        "gptResource": {
-          "$ref": "#/definitions/GptResource",
-          "description": "Connection details for the GPT resource. \nThis field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored."
+        "llmResource": {
+          "$ref": "#/definitions/LLMResource",
+          "description": "Connection details for the LLM resource. \nThis field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored."
         }
       },
       "required": [
@@ -1093,24 +1095,6 @@
         "name": "Domain",
         "modelAsString": true
       }
-    },
-    "GptResource": {
-      "type": "object",
-      "description": "Connection details for the GPT resource.",
-      "properties": {
-        "azureOpenAIEndpoint": {
-          "type": "string",
-          "description": "Endpoint for Azure OpenAI resource."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "Deployment model name."
-        }
-      },
-      "required": [
-        "azureOpenAIEndpoint",
-        "deploymentName"
-      ]
     },
     "ImageCategoriesAnalysis": {
       "type": "object",
@@ -1172,6 +1156,47 @@
       "required": [
         "detected"
       ]
+    },
+    "LLMResource": {
+      "type": "object",
+      "description": "Connection details for the LLM resource.",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/LLMResourceType",
+          "description": "LLM resource type. The default value is AzureOpenAI.",
+          "default": "AzureOpenAI"
+        },
+        "azureOpenAIEndpoint": {
+          "type": "string",
+          "description": "Endpoint for Azure OpenAI resource."
+        },
+        "azureOpenAIDeploymentName": {
+          "type": "string",
+          "description": "Deployment model name."
+        }
+      },
+      "required": [
+        "azureOpenAIEndpoint",
+        "azureOpenAIDeploymentName"
+      ]
+    },
+    "LLMResourceType": {
+      "type": "string",
+      "description": "LLM resource type.",
+      "enum": [
+        "AzureOpenAI"
+      ],
+      "x-ms-enum": {
+        "name": "LLMResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureOpenAI",
+            "value": "AzureOpenAI",
+            "description": "Azure OpenAI resource type."
+          }
+        ]
+      }
     },
     "PagedTextBlocklist": {
       "type": "object",
