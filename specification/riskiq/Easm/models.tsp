@@ -104,7 +104,7 @@ alias SavedFiltersListTrait = {
 
 // Models
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@projectedName("csharp", "AlexaDetails")
+@projectedName("java", "AlexaDetails")
 model AlexaInfo {
   alexaRank?: int64;
   category?: string;
@@ -115,7 +115,7 @@ model AlexaInfo {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model AsAsset {
+model AsAsset extends InventoryAsset {
   asn?: int64;
   asNames?: ObservedString[];
   orgNames?: ObservedString[];
@@ -351,7 +351,7 @@ model Cvss3Summary {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model ContactAsset {
+model ContactAsset extends InventoryAsset {
   email?: string;
   names?: ObservedString[];
   organizations?: ObservedString[];
@@ -700,7 +700,7 @@ model GuidPair {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model HostAsset {
+model HostAsset extends InventoryAsset {
   host?: string;
   domain?: string;
   ipAddresses?: ObservedString[];
@@ -788,8 +788,11 @@ model InnerError {
   value?: unknown;
 }
 
+@doc("A inventory base model created for swagger documentation purpose")
+model InventoryAsset {}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model IpAddressAsset {
+model IpAddressAsset extends InventoryAsset {
   ipAddress?: string;
   asns?: ObservedLong[];
   reputations?: Reputation[];
@@ -831,7 +834,7 @@ model IpBlock {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model IpBlockAsset {
+model IpBlockAsset extends InventoryAsset {
   ipBlock?: string;
   asns?: ObservedLong[];
   bgpPrefixes?: ObservedString[];
@@ -939,7 +942,7 @@ model ObservedString extends ObservedValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model PageAsset {
+model PageAsset extends InventoryAsset {
   url?: url;
   httpMethod?: string;
   service?: string;
@@ -1168,7 +1171,7 @@ model SavedFilter {
   id?: string;
 
   @doc("The caller provided unique name for the resource.")
-  @key("savedFilterName")
+  @key("filterName")
   @visibility("read")
   name: string;
 
@@ -1228,7 +1231,7 @@ model Source {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model SslCertAsset {
+model SslCertAsset extends InventoryAsset {
   sha1?: string;
   subjectCommonNames?: string[];
   organizations?: string[];

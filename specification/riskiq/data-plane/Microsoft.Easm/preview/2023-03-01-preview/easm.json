@@ -1032,7 +1032,7 @@
         }
       }
     },
-    "/savedFilters/{savedFilterName}": {
+    "/savedFilters/{filterName}": {
       "get": {
         "operationId": "SavedFilters_GetSavedFilter",
         "tags": [
@@ -1044,7 +1044,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "savedFilterName",
+            "name": "filterName",
             "in": "path",
             "description": "The caller provided unique name for the resource.",
             "required": true,
@@ -1088,7 +1088,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "savedFilterName",
+            "name": "filterName",
             "in": "path",
             "description": "The caller provided unique name for the resource.",
             "required": true,
@@ -1140,7 +1140,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "savedFilterName",
+            "name": "filterName",
             "in": "path",
             "description": "The caller provided unique name for the resource.",
             "required": true,
@@ -1509,7 +1509,12 @@
           "type": "string",
           "format": "date-time"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryAsset"
+        }
+      ]
     },
     "AsAssetResource": {
       "type": "object",
@@ -2093,7 +2098,12 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryAsset"
+        }
+      ]
     },
     "ContactAssetResource": {
       "type": "object",
@@ -3232,7 +3242,12 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryAsset"
+        }
+      ]
     },
     "HostAssetResource": {
       "type": "object",
@@ -3419,6 +3434,10 @@
         }
       }
     },
+    "InventoryAsset": {
+      "type": "object",
+      "description": "A inventory base model created for swagger documentation purpose"
+    },
     "IpAddressAsset": {
       "type": "object",
       "properties": {
@@ -3576,7 +3595,12 @@
         "ipv6": {
           "type": "boolean"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryAsset"
+        }
+      ]
     },
     "IpAddressAssetResource": {
       "type": "object",
@@ -3814,7 +3838,12 @@
         "ipv6": {
           "type": "boolean"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryAsset"
+        }
+      ]
     },
     "IpBlockAssetResource": {
       "type": "object",
@@ -4497,7 +4526,12 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryAsset"
+        }
+      ]
     },
     "PageAssetRedirectType": {
       "type": "string",
@@ -5335,7 +5369,12 @@
         "validationType": {
           "$ref": "#/definitions/SslCertAssetValidationType"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryAsset"
+        }
+      ]
     },
     "SslCertAssetResource": {
       "type": "object",
