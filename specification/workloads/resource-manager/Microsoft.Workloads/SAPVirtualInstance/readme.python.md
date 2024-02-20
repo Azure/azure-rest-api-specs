@@ -8,7 +8,7 @@ title: WorkloadsSapVirtualInstanceMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-workloadssapvirtualinstance
-namespace: azure.mgmt.workloads.sapvirtualinstance
+namespace: azure.mgmt.workloadssapvirtualinstance
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
