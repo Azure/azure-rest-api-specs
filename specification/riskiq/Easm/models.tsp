@@ -314,8 +314,10 @@ model AzureDataExplorerDataConnectionProperties
 @projectedName("csharp", "BannerDetails")
 model Banner {
   port?: int32;
+
   @projectedName("csharp", "bannerName")
   banner?: string;
+
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
@@ -820,6 +822,7 @@ model IpAddressAsset {
 model IpBlock {
   @projectedName("csharp", "ipBlockName")
   ipBlock?: string;
+
   sources?: Source[];
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
@@ -1018,6 +1021,7 @@ model PageCause {
 model Port {
   @projectedName("csharp", "portName")
   port?: int32;
+
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
@@ -1216,6 +1220,7 @@ model SoaRecord {
 model Source {
   @projectedName("csharp", "sourceName")
   source?: string;
+
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
