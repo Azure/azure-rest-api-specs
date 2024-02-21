@@ -82,6 +82,8 @@ op getFile(
   fileId: string,
 ): OpenAIFile;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/files/{fileId}/content")
 @doc("Returns information about a specific file. Does not retrieve file content.")
