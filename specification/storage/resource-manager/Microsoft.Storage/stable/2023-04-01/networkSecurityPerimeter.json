@@ -52,7 +52,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -100,7 +100,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -147,7 +147,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -187,6 +187,10 @@
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
           }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
         }
       }
     },
@@ -201,7 +205,8 @@
             "Accepted",
             "Succeeded",
             "Failed",
-            "Deleting"
+            "Deleting",
+            "Canceled"
           ],
           "type": "string",
           "readOnly": true,
