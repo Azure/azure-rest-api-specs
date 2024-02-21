@@ -212,6 +212,9 @@
           },
           "ConfigurationStores_Create_With_Data_Plane_Proxy": {
             "$ref": "./examples/ConfigurationStoresCreateWithDataPlaneProxy.json"
+          },
+          "ConfigurationStores_Create_With_Telemetry_And_Experimentation": {
+            "$ref": "./examples/ConfigurationStoresCreateWithTelemetryAndExperimentation.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1629,6 +1632,14 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "telemetry": {
+          "$ref": "#/definitions/TelemetryProperties",
+          "description": "Property specifying the configuration of telemetry for this configuration store"
+        },
+        "experimentation": {
+          "$ref": "#/definitions/ExperimentationProperties",
+          "description": "Property specifying the configuration of experimentation for this configuration store"
         }
       }
     },
@@ -1789,6 +1800,14 @@
         "dataPlaneProxy": {
           "$ref": "#/definitions/DataPlaneProxyProperties",
           "description": "Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM)."
+        },
+        "telemetry": {
+          "$ref": "#/definitions/TelemetryProperties",
+          "description": "Property specifying the configuration of telemetry to update for this configuration store"
+        },
+        "experimentation": {
+          "$ref": "#/definitions/ExperimentationProperties",
+          "description": "Property specifying the configuration of experimentation to update for this configuration store"
         }
       }
     },
@@ -2813,6 +2832,33 @@
         "label": {
           "description": "Filters key-values by their label field.",
           "type": "string"
+        }
+      }
+    },
+    "TelemetryProperties": {
+      "description": "Telemetry settings",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource ID of a resource enabling telemetry collection",
+          "type": "string",
+          "format": "arm-id"
+        }
+      }
+    },
+    "ExperimentationProperties": {
+      "description": "Experimentation settings",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource ID of a resource enabling experimentation",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "dataPlaneEndpoint": {
+          "description": "The data plane endpoint of the Split experimentation workspace resource where experimentation data can be retrieved",
+          "type": "string",
+          "format": "uri"
         }
       }
     }
