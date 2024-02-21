@@ -4764,6 +4764,74 @@
         "authenticationType"
       ]
     },
+    "GoogleBigQueryV2LinkedService": {
+      "x-ms-discriminator-value": "GoogleBigQueryV2",
+      "description": "Google BigQuery service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Google BigQuery service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleBigQueryV2LinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "GoogleBigQueryV2LinkedServiceTypeProperties": {
+      "description": "Google BigQuery service linked service properties.",
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "description": "The default BigQuery project id to query against. Type: string (or Expression with resultType string).",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "authenticationType": {
+          "description": "The OAuth 2.0 authentication mechanism used for authentication.",
+          "type": "string",
+          "enum": [
+            "ServiceAuthentication",
+            "UserAuthentication"
+          ],
+          "x-ms-enum": {
+            "name": "GoogleBigQueryV2AuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "clientId": {
+          "x-ms-format": "dfe-string",
+          "description": "The client id of the google application used to acquire the refresh token. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "clientSecret": {
+          "description": "The client secret of the google application used to acquire the refresh token.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "refreshToken": {
+          "description": "The refresh token obtained from Google for authorizing access to BigQuery for UserAuthentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "keyFileContent": {
+          "description": "The content of the .json key file that is used to authenticate the service account. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        }
+      },
+      "required": [
+        "projectId",
+        "authenticationType"
+      ]
+    },
     "GreenplumLinkedService": {
       "x-ms-discriminator-value": "Greenplum",
       "description": "Greenplum Database linked service.",
@@ -7743,6 +7811,11 @@
           "x-ms-format": "dfe-string",
           "description": "The URL of Salesforce instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string)."
         },
+        "authenticationType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The authentication type to be used to connect to the Salesforce. Currently, we only support OAuth2ClientCredentials, it is also the default value"
+        },
         "clientId": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -7791,6 +7864,11 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The URL of Salesforce Service Cloud instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The authentication type to be used to connect to the Salesforce. Currently, we only support OAuth2ClientCredentials, it is also the default value"
         },
         "clientId": {
           "type": "object",
@@ -7882,6 +7960,80 @@
       "required": [
         "artifactId",
         "endpoint"
+      ]
+    },
+    "ServiceNowV2LinkedService": {
+      "x-ms-discriminator-value": "ServiceNowV2",
+      "description": "ServiceNowV2 server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "ServiceNowV2 server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceNowV2LinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ServiceNowV2LinkedServiceTypeProperties": {
+      "description": "ServiceNowV2 server linked service properties.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint of the ServiceNowV2 server. (i.e. <instance>.service-now.com)",
+          "type": "object",
+          "x-ms-format": "dfe-string"
+        },
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "OAuth2"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceNowV2AuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "username": {
+          "description": "The user name used to connect to the ServiceNowV2 server for Basic and OAuth2 authentication.",
+          "type": "object",
+          "x-ms-format": "dfe-string"
+        },
+        "password": {
+          "description": "The password corresponding to the user name for Basic and OAuth2 authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "clientId": {
+          "description": "The client id for OAuth2 authentication.",
+          "type": "object",
+          "x-ms-format": "dfe-string"
+        },
+        "clientSecret": {
+          "description": "The client secret for OAuth2 authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "grantType": {
+          "description": "GrantType for OAuth2 authentication. Default value is password.",
+          "type": "object",
+          "x-ms-format": "dfe-string"
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        }
+      },
+      "required": [
+        "endpoint",
+        "authenticationType"
       ]
     }
   }
