@@ -1,12 +1,15 @@
 {
-  "operationId": "DbNodes_get",
-  "title": "DbNodes_get",
+  "operationId": "DbNodes_Action",
+  "title": "DbNodes_Action",
   "parameters": {
     "api-version": "2023-09-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg000",
     "cloudvmclustername": "cluster1",
-    "dbnodeocid": "ocid1....aaaaaa"
+    "dbnodeocid": "ocid1....aaaaaa",
+    "body": {
+      "action": "Start"
+    }
   },
   "responses": {
     "200": {
@@ -25,7 +28,7 @@
           "faultDomain": "domain1",
           "hostIpId": "10.0.0.0",
           "hostname": "host1",
-          "lifecycleState": "Available",
+          "provisioningState": "Succeeded",
           "maintenanceType": "VmdbRebootMigration",
           "memorySizeInGbs": 100,
           "softwareStorageSizeInGb": 1000,
@@ -35,6 +38,12 @@
           "vnic2Id": "ocid.vnic.id2",
           "vnicId": "ocid.vnic.id1"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 10000000,
+        "Location": "eastus"
       }
     }
   }
