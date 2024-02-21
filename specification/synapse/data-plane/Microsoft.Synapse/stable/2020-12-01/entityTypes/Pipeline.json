@@ -3276,6 +3276,21 @@
         }
       }
     },
+    "GoogleBigQueryV2Source": {
+      "description": "A copy activity Google BigQuery service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "GreenplumSource": {
       "description": "A copy activity Greenplum Database source.",
       "type": "object",

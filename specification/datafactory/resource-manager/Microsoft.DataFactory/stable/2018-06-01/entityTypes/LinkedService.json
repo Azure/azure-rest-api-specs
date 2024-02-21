@@ -4764,6 +4764,74 @@
         "authenticationType"
       ]
     },
+    "GoogleBigQueryV2LinkedService": {
+      "x-ms-discriminator-value": "GoogleBigQueryV2",
+      "description": "Google BigQuery service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Google BigQuery service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleBigQueryV2LinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "GoogleBigQueryV2LinkedServiceTypeProperties": {
+      "description": "Google BigQuery service linked service properties.",
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "description": "The default BigQuery project id to query against. Type: string (or Expression with resultType string).",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "authenticationType": {
+          "description": "The OAuth 2.0 authentication mechanism used for authentication.",
+          "type": "string",
+          "enum": [
+            "ServiceAuthentication",
+            "UserAuthentication"
+          ],
+          "x-ms-enum": {
+            "name": "GoogleBigQueryV2AuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "clientId": {
+          "x-ms-format": "dfe-string",
+          "description": "The client id of the google application used to acquire the refresh token. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "clientSecret": {
+          "description": "The client secret of the google application used to acquire the refresh token.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "refreshToken": {
+          "description": "The refresh token obtained from Google for authorizing access to BigQuery for UserAuthentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "keyFileContent": {
+          "description": "The content of the .json key file that is used to authenticate the service account. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        }
+      },
+      "required": [
+        "projectId",
+        "authenticationType"
+      ]
+    },
     "GreenplumLinkedService": {
       "x-ms-discriminator-value": "Greenplum",
       "description": "Greenplum Database linked service.",

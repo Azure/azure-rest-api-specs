@@ -2692,6 +2692,36 @@
         }
       }
     },
+    "GoogleBigQueryV2ObjectDataset": {
+      "x-ms-discriminator-value": "GoogleBigQueryV2Object",
+      "description": "Google BigQuery service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleBigQueryV2DatasetTypeProperties"
+        }
+      }
+    },
+    "GoogleBigQueryV2DatasetTypeProperties": {
+      "description": "Google BigQuery Dataset Properties",
+      "properties": {
+        "table": {
+          "type": "object",
+          "description": "The table name of the Google BigQuery. Type: string (or Expression with resultType string)."
+        },
+        "dataset": {
+          "type": "object",
+          "description": "The database name of the Google BigQuery. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "GreenplumTableDataset": {
       "x-ms-discriminator-value": "GreenplumTable",
       "description": "Greenplum Database dataset.",
