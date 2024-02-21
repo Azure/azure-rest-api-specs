@@ -3,24 +3,32 @@
   "parameters": {
     "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
-    "location": "eastus",
+    "resourceProvider": "Microsoft.Compute",
     "api-version": "2023-06-01-preview",
     "enforcementProperties": {
-      "properties": {
-        "provider": "Microsoft.Compute"
-      }
+      "value": [
+        {
+          "properties": {
+            "location": "eastus"
+          }
+        }
+      ]
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/locations/eastus/enforcementProperties",
-        "type": "Microsoft.Quota/groupQuotas/groupQuotasEnforcement",
-        "name": "eastus",
-        "properties": {
-          "provider": "Microsoft.Compute",
-          "provisioningState": "Succeeded"
-        }
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProvider/Microsoft.Compute",
+            "type": "Microsoft.Quota/groupQuotas/groupQuotasEnforcement",
+            "name": "Microsoft.Compute",
+            "properties": {
+              "location": "eastus",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
       }
     },
     "202": {
