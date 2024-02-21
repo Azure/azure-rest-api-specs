@@ -443,6 +443,9 @@
           },
           "Agents_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/Agents_CreateOrUpdate_MaximumSet.json"
+          },
+          "Agents_CreateOrUpdate_WithOvernightUploadLimitSchedule": {
+            "$ref": "./examples/Agents_CreateOrUpdate_UploadLimitSchedule_Overnight.json"
           }
         },
         "parameters": [
@@ -1844,7 +1847,7 @@
           "maximum": 24
         },
         "minute": {
-          "description": "The minute element of the time. Allowed values are 0 and 30.",
+          "description": "The minute element of the time. Allowed values are 0 and 30. If not specified, its value defaults to 0.",
           "type": "integer",
           "format": "int32",
           "enum": [
