@@ -27,7 +27,7 @@ These are the global settings for the hybridconnectivity.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-12-01-preview
+tag: package-2024-08-01-preview
 ```
 
 ### Tag: package-2023-03
@@ -83,6 +83,31 @@ These settings apply only when `--tag=package-2023-12-01-preview` is specified o
 input-file:
   - Microsoft.HybridConnectivity/preview/2023-12-01-preview/publicCloud.json
   - Microsoft.HybridConnectivity/stable/2023-03-15/hybridconnectivity.json
+```
+
+### Tag: package-2024-08-01-preview
+
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-08-01-preview'
+input-file:
+  - Microsoft.HybridConnectivity/PublicCloud/preview/2024-08-01-preview/publicCloud.json
+  - Microsoft.HybridConnectivity/stable/2023-03-15/hybridconnectivity.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: Property solutionSettings for Solution Configurations settings previously defined like this
+    from: publicCloud.json
+    where:
+      - $.definitions.SolutionConfigurationUpdateProperties.properties.solutionSettings
+      - $.definitions.SolutionConfigurationUpdate.properties.properties.properties.solutionSettings
+      - $.definitions.SolutionConfiguration.properties.properties.properties.solutionSettings
+      - $.definitions.SolutionConfigurationProperties.properties.solutionSettings
+      - $.definitions.SolutionTypeSettings.properties.solutionSettings
 ```
 
 ---

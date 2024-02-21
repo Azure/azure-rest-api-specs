@@ -52,9 +52,6 @@ model HealthModel is TrackedResource<HealthModelProperties> {
 
 @doc("HealthModel properties")
 model HealthModelProperties {
-  @doc("Enabled state of the health model. When disabled, no health data is collected and no health state is propagated.")
-  enabledState: EnabledState;
-
   @visibility("read")
   @doc("The data plane endpoint for interacting with health data")
   dataplaneEndpoint?: string;
@@ -62,13 +59,6 @@ model HealthModelProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
-@doc("Enabled state of the health model")
-enum EnabledState {
-  Enabled,
-  Disabled,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
@@ -381,7 +371,7 @@ model ManagedIdentityAuthenticationSettingProperties
   managedIdentityName: string;
 }
 
-@doc("An entity (aka node) a health model")
+@doc("An entity (aka node) of a health model")
 @parentResource(HealthModel)
 model Entity is ProxyResource<EntityProperties> {
   @doc("Name of the entity. Must be unique within a health model.")
@@ -423,8 +413,8 @@ model EntityProperties {
   signals?: SignalGroup;
 
   @visibility("read")
-  @doc("Indicates whether this entity was dynamically discovered. If true, the entity cannot be deleted manually.")
-  isDynamicallyDiscovered?: boolean;
+  @doc("Discovered by which discovery rule. If set, the entity cannot be deleted manually.")
+  discoveredBy?: stringResourceName;
 
   @visibility("read")
   @doc("Date when the entity was (soft-)deleted")
@@ -436,7 +426,7 @@ model IconDefinition {
   @doc("Name of the built-in icon, or 'Custom' to use customData")
   @minLength(1)
   @maxLength(100)
-  icon: string;
+  iconName: string;
 
   @doc("Custom data. Base64-encoded SVG data. If set, this overrides the built-in icon.")
   @minLength(1)
@@ -572,12 +562,74 @@ model RelationshipProperties {
   labels?: Record<string4096>;
 
   @visibility("read")
-  @doc("Indicates whether this relationship was dynamically discovered. If true, the relationship cannot be deleted manually.")
-  isDynamicallyDiscovered?: boolean;
+  @doc("Discovered by which discovery rule. If set, the relationship cannot be deleted manually.")
+  discoveredBy?: stringResourceName;
 
   @visibility("read")
   @doc("Date when the relationship was (soft-)deleted")
   deletionDate?: utcDateTime;
+}
+
+@doc("A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query")
+@parentResource(HealthModel)
+model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
+  @doc("Name of the discovery rule. Must be unique within a health model.")
+  @key("discoveryRuleName")
+  @segment("discoveryrules")
+  @path
+  name: stringResourceName;
+}
+
+@doc("Discovery rule properties")
+model DiscoveryRuleProperties {
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: HealthModelProvisioningState;
+
+  @doc("Display name")
+  @minLength(1)
+  @maxLength(100)
+  displayName?: string;
+
+  @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
+  @minLength(1)
+  @maxLength(5000)
+  resourceGraphQuery: string;
+
+  @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
+  authenticationSetting: stringResourceName;
+
+  @doc("Whether to create an entity for the discovery rule itself. If set, all discovered entities will be children of this entity.")
+  showEntity: DiscoveryRuleShowEntityBehavior;
+
+  @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
+  discoverRelationships: DiscoveryRuleRelationshipDiscoveryBehavior;
+
+  // Will be added later
+  //  @doc("Whether to add all suggested signals to the discovered entities.")
+  //  addAllSuggestedSignals?: boolean;
+
+  @visibility("read")
+  @doc("Date when the discovery rule was (soft-)deleted")
+  deletionDate?: utcDateTime;
+}
+
+@doc("Discovery rule show entity behavior")
+enum DiscoveryRuleShowEntityBehavior {
+  @doc("Create an entity for the discovery rule itself")
+  Enabled,
+
+  @doc("Do not create entity for discovery rule")
+  Disabled,
+}
+
+@doc("Discovery rule relationship discovery behavior")
+enum DiscoveryRuleRelationshipDiscoveryBehavior {
+  @doc("Automatically attempt to discover relationships")
+  Enabled,
+
+  @doc("Do not automatically attempt to discover relationships")
+  Disabled,
 }
 
 alias TimestampQueryParam = {
@@ -638,5 +690,17 @@ interface Relationships {
   listByParent is ArmResourceListByParent<
     Relationship,
     BaseParameters<Relationship> & TimestampQueryParam
+  >;
+}
+
+@armResourceOperations
+interface DiscoveryRules {
+  get is ArmResourceRead<DiscoveryRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<DiscoveryRule>;
+  delete is ArmResourceDeleteSync<DiscoveryRule>;
+
+  listByParent is ArmResourceListByParent<
+    DiscoveryRule,
+    BaseParameters<DiscoveryRule> & TimestampQueryParam
   >;
 }

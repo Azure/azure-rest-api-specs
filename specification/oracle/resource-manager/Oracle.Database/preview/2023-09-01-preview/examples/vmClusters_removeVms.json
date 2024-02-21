@@ -1,4 +1,6 @@
 {
+  "operationId": "CloudVmClusters_removeVms",
+  "title": "CloudVmClusters_removeVms",
   "parameters": {
     "api-version": "2023-09-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -31,7 +33,7 @@
           "lifecycleDetails": "success",
           "timeZone": "UTC",
           "zoneId": "ocid1..aaaa",
-          "hostname": "hosname1",
+          "hostname": "hostname1",
           "domain": "domain1",
           "cpuCoreCount": 10,
           "ocpuCount": 100,
@@ -49,13 +51,14 @@
           "vnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1",
           "giVersion": "19.0.0.0",
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "backupSubnetCidr": "172.17.5.0/24",
           "systemVersion": "v1",
           "diskRedundancy": "High",
           "scanIpIds": [
-            "ocid1..aaaa"
+            "10.0.0.1"
           ],
           "vipIds": [
-            "ocid1..aaaa"
+            "10.0.1.3"
           ],
           "scanDnsName": "dbdns1",
           "scanDnsRecordId": "scandns1",
@@ -76,8 +79,8 @@
                 "share": 32
               }
             ],
-            "lifecycleDetails": "success",
-            "provisioningState": "Succeeded",
+            "lifecycleDetails": "Disabled",
+            "lifecycleState": "Disabled",
             "objective": "LowLatency"
           },
           "lastUpdateHistoryEntryId": "none",
