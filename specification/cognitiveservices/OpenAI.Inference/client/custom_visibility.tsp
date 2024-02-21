@@ -96,3 +96,4 @@ using Azure.ClientGenerator.Core;
   "csharp",
   "Utf8ByteValues"
 );
+

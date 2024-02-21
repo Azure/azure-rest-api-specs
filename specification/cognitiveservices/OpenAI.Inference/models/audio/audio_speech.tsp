@@ -8,7 +8,7 @@ namespace Azure.OpenAI;
 
 @doc("The available voices for text-to-speech.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum AudioSpeechVoice {
+enum SpeechVoice {
   @doc("The Alloy voice.")
   alloy: "alloy",
 
@@ -30,7 +30,7 @@ enum AudioSpeechVoice {
 
 @doc("The supported audio output formats for text-to-speech.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum AudioSpeechOutputFormat {
+enum SpeechGenerationResponseFormat {
   @doc("Use MP3 as the audio output format. MP3 is the default, general-purpose format.")
   mp3: "mp3",
 
@@ -46,17 +46,17 @@ enum AudioSpeechOutputFormat {
 
 @doc("A representation of the request options that control the behavior of a text-to-speech operation.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-model AudioSpeechOptions {
+model SpeechGenerationOptions {
   @doc("The text to generate audio for. The maximum length is 4096 characters.")
   @maxLength(4096)
   input: string;
 
   @doc("The voice to use for text-to-speech.")
-  voice: AudioSpeechVoice;
+  voice: SpeechVoice;
 
   @doc("The audio output format for the spoken text. By default, the MP3 format will be used.")
   @projectedName("json", "response_format")
-  responseFormat?: AudioSpeechOutputFormat = AudioSpeechOutputFormat.mp3;
+  responseFormat?: SpeechGenerationResponseFormat = SpeechGenerationResponseFormat.mp3;
 
   @doc("The speed of speech for generated audio. Values are valid in the range from 0.25 to 4.0, with 1.0 the default and higher values corresponding to faster speech.")
   @minValue(0.25)
@@ -66,7 +66,7 @@ model AudioSpeechOptions {
 
 @doc("A representation of a response for a text-to-speech operation.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-model AudioSpeechResponse {
+model SpeechGenerationResponse {
   @doc("The content type of the response. Always application/octet-stream for audio/speech responses.")
   @header
   contentType: "application/octet-stream";

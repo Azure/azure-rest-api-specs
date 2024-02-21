@@ -61,7 +61,7 @@
   "paths": {
     "/deployments/{deploymentId}/audio/speech": {
       "post": {
-        "operationId": "GetAudioSpeech",
+        "operationId": "GenerateSpeechFromText",
         "description": "Generates text-to-speech audio from the input text.",
         "produces": [
           "application/octet-stream",
@@ -83,7 +83,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AudioSpeechOptions"
+              "$ref": "#/definitions/SpeechGenerationOptions"
             }
           }
         ],
@@ -108,7 +108,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets synthesized audio from the input text.": {
+          "Generates text-to-speech audio from the input text.": {
             "$ref": "./examples/audio_speech.json"
           }
         }
@@ -571,123 +571,6 @@
     }
   },
   "definitions": {
-    "AudioSpeechOptions": {
-      "type": "object",
-      "description": "A representation of the request options that control the behavior of a text-to-speech operation.",
-      "properties": {
-        "input": {
-          "type": "string",
-          "description": "The text to generate audio for. The maximum length is 4096 characters.",
-          "maxLength": 4096
-        },
-        "voice": {
-          "$ref": "#/definitions/AudioSpeechVoice",
-          "description": "The voice to use for text-to-speech."
-        },
-        "response_format": {
-          "$ref": "#/definitions/AudioSpeechOutputFormat",
-          "description": "The audio output format for the spoken text. By default, the MP3 format will be used.",
-          "default": "mp3",
-          "x-ms-client-name": "responseFormat"
-        },
-        "speed": {
-          "type": "number",
-          "format": "float",
-          "description": "The speed of speech for generated audio. Values are valid in the range from 0.25 to 4.0, with 1.0 the default and higher values corresponding to faster speech.",
-          "default": 1,
-          "minimum": 0.25,
-          "maximum": 4
-        }
-      },
-      "required": [
-        "input",
-        "voice"
-      ]
-    },
-    "AudioSpeechOutputFormat": {
-      "type": "string",
-      "description": "The supported audio output formats for text-to-speech.",
-      "enum": [
-        "mp3",
-        "opus",
-        "aac",
-        "flac"
-      ],
-      "x-ms-enum": {
-        "name": "AudioSpeechOutputFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "mp3",
-            "value": "mp3",
-            "description": "Use MP3 as the audio output format. MP3 is the default, general-purpose format."
-          },
-          {
-            "name": "opus",
-            "value": "opus",
-            "description": "Use Opus as the audio output format. Opus is optimized for internet streaming and low latency."
-          },
-          {
-            "name": "aac",
-            "value": "aac",
-            "description": "Use AAC as the audio output format. AAC is optimized for digital audio compression and is preferred by YouTube, Android, and iOS."
-          },
-          {
-            "name": "flac",
-            "value": "flac",
-            "description": "Use FLAC as the audio output format. FLAC is a fully lossless format optimized for maximum quality at the expense of size."
-          }
-        ]
-      }
-    },
-    "AudioSpeechVoice": {
-      "type": "string",
-      "description": "The available voices for text-to-speech.",
-      "enum": [
-        "alloy",
-        "echo",
-        "fable",
-        "onyx",
-        "nova",
-        "shimmer"
-      ],
-      "x-ms-enum": {
-        "name": "AudioSpeechVoice",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "alloy",
-            "value": "alloy",
-            "description": "The Alloy voice."
-          },
-          {
-            "name": "echo",
-            "value": "echo",
-            "description": "The Echo voice."
-          },
-          {
-            "name": "fable",
-            "value": "fable",
-            "description": "The Fable voice."
-          },
-          {
-            "name": "onyx",
-            "value": "onyx",
-            "description": "The Onyx voice."
-          },
-          {
-            "name": "nova",
-            "value": "nova",
-            "description": "The Nova voice."
-          },
-          {
-            "name": "shimmer",
-            "value": "shimmer",
-            "description": "The Shimmer voice."
-          }
-        ]
-      }
-    },
     "AudioTaskLabel": {
       "type": "string",
       "description": "Defines the possible descriptors for available audio operation responses.",
@@ -3899,6 +3782,123 @@
       "required": [
         "content_fields"
       ]
+    },
+    "SpeechGenerationOptions": {
+      "type": "object",
+      "description": "A representation of the request options that control the behavior of a text-to-speech operation.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The text to generate audio for. The maximum length is 4096 characters.",
+          "maxLength": 4096
+        },
+        "voice": {
+          "$ref": "#/definitions/SpeechVoice",
+          "description": "The voice to use for text-to-speech."
+        },
+        "response_format": {
+          "$ref": "#/definitions/SpeechGenerationResponseFormat",
+          "description": "The audio output format for the spoken text. By default, the MP3 format will be used.",
+          "default": "mp3",
+          "x-ms-client-name": "responseFormat"
+        },
+        "speed": {
+          "type": "number",
+          "format": "float",
+          "description": "The speed of speech for generated audio. Values are valid in the range from 0.25 to 4.0, with 1.0 the default and higher values corresponding to faster speech.",
+          "default": 1,
+          "minimum": 0.25,
+          "maximum": 4
+        }
+      },
+      "required": [
+        "input",
+        "voice"
+      ]
+    },
+    "SpeechGenerationResponseFormat": {
+      "type": "string",
+      "description": "The supported audio output formats for text-to-speech.",
+      "enum": [
+        "mp3",
+        "opus",
+        "aac",
+        "flac"
+      ],
+      "x-ms-enum": {
+        "name": "SpeechGenerationResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "mp3",
+            "value": "mp3",
+            "description": "Use MP3 as the audio output format. MP3 is the default, general-purpose format."
+          },
+          {
+            "name": "opus",
+            "value": "opus",
+            "description": "Use Opus as the audio output format. Opus is optimized for internet streaming and low latency."
+          },
+          {
+            "name": "aac",
+            "value": "aac",
+            "description": "Use AAC as the audio output format. AAC is optimized for digital audio compression and is preferred by YouTube, Android, and iOS."
+          },
+          {
+            "name": "flac",
+            "value": "flac",
+            "description": "Use FLAC as the audio output format. FLAC is a fully lossless format optimized for maximum quality at the expense of size."
+          }
+        ]
+      }
+    },
+    "SpeechVoice": {
+      "type": "string",
+      "description": "The available voices for text-to-speech.",
+      "enum": [
+        "alloy",
+        "echo",
+        "fable",
+        "onyx",
+        "nova",
+        "shimmer"
+      ],
+      "x-ms-enum": {
+        "name": "SpeechVoice",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "alloy",
+            "value": "alloy",
+            "description": "The Alloy voice."
+          },
+          {
+            "name": "echo",
+            "value": "echo",
+            "description": "The Echo voice."
+          },
+          {
+            "name": "fable",
+            "value": "fable",
+            "description": "The Fable voice."
+          },
+          {
+            "name": "onyx",
+            "value": "onyx",
+            "description": "The Onyx voice."
+          },
+          {
+            "name": "nova",
+            "value": "nova",
+            "description": "The Nova voice."
+          },
+          {
+            "name": "shimmer",
+            "value": "shimmer",
+            "description": "The Shimmer voice."
+          }
+        ]
+      }
     },
     "StopFinishDetails": {
       "type": "object",
