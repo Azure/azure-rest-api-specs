@@ -1308,7 +1308,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaEnforcements/{location}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/locations/{location}/enforcementProperties": {
       "put": {
         "tags": [
           "GroupQuotasEnforcement"
@@ -1333,13 +1333,19 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "#/parameters/ResourceProviderName"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "enforcementProperties",
+            "in": "body",
+            "description": "GroupQuota enforcement properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+            }
           }
         ],
         "responses": {
@@ -1399,13 +1405,19 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "#/parameters/ResourceProviderName"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "enforcementProperties",
+            "in": "body",
+            "description": "GroupQuota enforcement properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+            }
           }
         ],
         "responses": {
@@ -1475,52 +1487,6 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/GroupQuotasEnforcementResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaEnforcements": {
-      "get": {
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "tags": [
-          "GroupQuotasEnforcement"
-        ],
-        "summary": "Returns a list of the Azure regions where the GroupQuotas enforcement is enabled.",
-        "description": "Returns only the list of the Azure regions where the GroupQuotas enforcement is enabled. The locations not included in GroupQuota Enforcement will not be listed, the regions in failed status with listed as status Failed.",
-        "operationId": "GroupQuotaEnforcement_List",
-        "x-ms-examples": {
-          "GroupQuotaEnforcement_List": {
-            "$ref": "./examples/GroupQuotasEnforcement/ListGroupQuotaEnforcement.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/GroupQuotaName"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementListResponse"
             }
           },
           "default": {
@@ -2194,9 +2160,10 @@
         "properties": {
           "type": "object",
           "properties": {
-            "location": {
+            "provider": {
               "type": "string",
-              "description": "The name of the Azure region."
+              "description": "The name of the Azure resource provider.",
+              "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
             },
             "provisioningState": {
               "$ref": "#/definitions/RequestState",
@@ -2275,6 +2242,7 @@
       "in": "query",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "| Field                    | Supported operators  \r\n|---------------------|------------------------\n\r\n|provider  eq {resourceProvider}  and location eq {location}\n Example: $filter= provider eq Microsoft.Compute and location eq eastus",
       "minLength": 24
     }
