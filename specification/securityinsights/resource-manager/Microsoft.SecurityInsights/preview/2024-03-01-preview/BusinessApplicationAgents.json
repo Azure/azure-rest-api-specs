@@ -1,0 +1,440 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2024-03-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/BusinessApplicationAgents/{agentResourceName}": {
+      "put": {
+        "tags": [
+          "businessApplicationAgents"
+        ],
+        "description": "Creates or updates the Business Application Agent.",
+        "operationId": "BusinessApplicationAgents_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-workspace-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-object-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "agentToUpsert",
+            "schema": {
+              "$ref": "#/definitions/AgentArmModelArmObjectWrapper"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/AgentArmModelArmObjectWrapper"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AgentArmModelArmObjectWrapper"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessApplicationAgents_CreateOrUpdate": {
+            "$ref": "./examples/businessApplicationAgents/BusinessApplicationAgents_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "businessApplicationAgents"
+        ],
+        "description": "Gets Business Application Agent.",
+        "operationId": "BusinessApplicationAgent_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-workspace-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/AgentArmModelArmObjectWrapper"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessApplicationAgent_Get": {
+            "$ref": "./examples/businessApplicationAgents/BusinessApplicationAgent_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "businessApplicationAgents"
+        ],
+        "description": "Delete the Business Application Agent.",
+        "operationId": "BusinessApplicationAgents_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-workspace-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessApplicationAgents_Delete": {
+            "$ref": "./examples/businessApplicationAgents/BusinessApplicationAgents_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/BusinessApplicationAgents": {
+      "get": {
+        "tags": [
+          "businessApplicationAgents"
+        ],
+        "description": "Gets all Business Application Agents under the workspace.",
+        "operationId": "BusinessApplicationAgents_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-workspace-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/AgentArmModelArmCollectionWrapper"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessApplicationAgents_List": {
+            "$ref": "./examples/businessApplicationAgents/BusinessApplicationAgents_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AgentArmModel": {
+      "type": "object",
+      "properties": {
+        "agentContainerName": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "type": "string"
+        },
+        "sdkPath": {
+          "pattern": "^/(([^/]+/)*nwrfc75.*\\.zip$)|^((?:[a-zA-Z]:)?(?:\\\\|\\\\\\\\)(?:[^\\\\/:*?\"<>|\\r\\n]+\\\\)*nwrfc75.*\\.zip)$",
+          "type": "string"
+        },
+        "sncPath": {
+          "pattern": "^\\/(?:[^/]+\\/)*[^/]+$|^(?:[a-zA-Z]:)?(?:\\\\|\\\\\\\\)(?:[^\\\\/:*?\"<>|\\r\\n]+\\\\)*[^\\\\/:*?\"<>|\\r\\n]*$",
+          "type": "string"
+        },
+        "vaultId": {
+          "pattern": "^\\/?subscriptions\\/([^\\/]+)\\/resourceGroups\\/([^\\/]+)\\/providers\\/Microsoft\\.KeyVault\\/vaults\\/([^\\/]+)$",
+          "type": "string"
+        },
+        "keyMode": {
+          "$ref": "#/definitions/KeyModeType"
+        },
+        "secretSource": {
+          "$ref": "#/definitions/SecretSourceType"
+        },
+        "agentsSystems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentsSystemArmModel"
+          },
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AgentArmModelArmCollectionWrapper": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentArmModelArmObjectWrapper"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "AgentArmModelArmObjectWrapper": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/AgentArmModel",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AgentsSystemArmModel": {
+      "type": "object",
+      "properties": {
+        "agentsSystemName": {
+          "type": "string"
+        },
+        "sapSystemId": {
+          "type": "string"
+        },
+        "sapClientId": {
+          "type": "string"
+        }
+      }
+    },
+    "KeyModeType": {
+      "enum": [
+        "Kvmi",
+        "Kvsi"
+      ],
+      "type": "string",
+      "example": "Kvmi",
+      "x-ms-enum": {
+        "name": "KeyModeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Kvmi"
+          },
+          {
+            "value": "Kvsi"
+          }
+        ]
+      }
+    },
+    "SecretSourceType": {
+      "enum": [
+        "AzureKeyVault",
+        "EnvironmentVariable"
+      ],
+      "type": "string",
+      "example": "AzureKeyVault",
+      "x-ms-enum": {
+        "name": "SecretSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AzureKeyVault"
+          },
+          {
+            "value": "EnvironmentVariable"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Agent": {
+      "name": "agent",
+      "description": "The agent",
+      "required": true,
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/Agent"
+      }
+    },
+    "AgentId": {
+      "in": "path",
+      "name": "agentId",
+      "description": "Agent ID",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ]
+}
