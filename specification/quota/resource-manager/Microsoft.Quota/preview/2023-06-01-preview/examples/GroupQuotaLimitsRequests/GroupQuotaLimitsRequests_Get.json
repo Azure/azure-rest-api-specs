@@ -1,21 +1,28 @@
 {
-  "operationId": "GroupQuotaLimitsRequests_List",
+  "operationId": "GroupQuotaLimitsRequests_Get",
   "parameters": {
-    "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
-    "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
     "requestId": "someId",
-    "api-version": "2023-06-01-preview"
+    "api-version": "2023-06-01-preview",
+    "$filter": "provider eq Microsoft.Compute & location eq westus"
   },
   "responses": {
     "200": {
       "body": {
         "requestedResource": {
-          "resourceName": "cores",
-          "limits": 110,
-          "unit": "vCPUs"
+          "properties": {
+            "limit": 100,
+            "name": {
+              "value": "cores",
+              "localizedValue": "Total Regional vCPUs"
+            },
+            "resourceProviderScope": "/providers/Microsoft.Compute/locations/westus"
+          }
         },
-        "status": "Accepted"
+        "requestSubmitTime": "2023-11-18T00:12:34.004Z",
+        "provisioningState": "Failed",
+        "faultCode": "ResourceNotAvailableForOffer"
       }
     }
   }

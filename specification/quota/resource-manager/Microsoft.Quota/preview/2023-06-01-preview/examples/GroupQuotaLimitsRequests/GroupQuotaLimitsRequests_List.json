@@ -1,10 +1,10 @@
 {
   "operationId": "GroupQuotaLimitsRequests_List",
   "parameters": {
-    "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
-    "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
-    "api-version": "2023-06-01-preview"
+    "api-version": "2023-06-01-preview",
+    "$filter": "provider eq Microsoft.Compute & location eq westus"
   },
   "responses": {
     "200": {
@@ -12,11 +12,33 @@
         "value": [
           {
             "requestedResource": {
-              "resourceName": "cores",
-              "limits": 110,
-              "unit": "vCPUs"
+              "properties": {
+                "limit": 100,
+                "name": {
+                  "value": "cores",
+                  "localizedValue": "Total Regional vCPUs"
+                },
+                "resourceProviderScope": "/providers/Microsoft.Compute/locations/westus"
+              }
             },
-            "status": "Accepted"
+            "requestSubmitTime": "2023-11-18T00:12:34.004Z",
+            "provisioningState": "Failed",
+            "faultCode": "ResourceNotAvailableForOffer"
+          },
+          {
+            "requestedResource": {
+              "properties": {
+                "resourceProviderScope": "/providers/Microsoft.Compute/locations/westus",
+                "name": {
+                  "value": "standardav2family",
+                  "localizedValue": "standardav2family"
+                },
+                "limit": 150
+              }
+            },
+            "requestSubmitTime": "2023-11-17T00:57:43.410Z",
+            "provisioningState": "Succeeded",
+            "faultCode": ""
           }
         ],
         "nextLink": "https://yourLinkHere.com"
