@@ -440,16 +440,10 @@ model DevBoxActionDelayResult {
   error?: Azure.Core.Foundations.Error;
 }
 
-@doc("Empty action parameter")
-model RequestActionParameter {}
-
-@doc("Response for the action")
-model ResponseAction {
-  @doc("The status code")
+alias ResponseAction = {
   @statusCode
   statusCode: 202;
 
-  @doc("The operation status")
   @body
   body: OperationStatus;
-}
+};

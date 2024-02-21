@@ -89,7 +89,7 @@ interface DevBoxesOperations {
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   start is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
-    RequestActionParameter,
+    {},
     ResponseAction
   >;
 
