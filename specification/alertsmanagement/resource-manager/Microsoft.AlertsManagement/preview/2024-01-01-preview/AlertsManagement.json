@@ -1012,9 +1012,14 @@
           "readOnly": true
         },
         "correlationDateTime": {
-          "description": "The alert's correlation date time in ISO-8601 format. This is an optional field, it will not be presented for a parent alert.",
+          "description": "The alert's correlation date time in ISO-8601 format.",
           "type": "string",
           "format": "date-time",
+          "readOnly": true
+        },
+        "alertProcessingRule": {
+          "type": "string",
+          "description": "The alert processing rule that was used to correlate this alert. This is an optional field, it will be presented only for a parent alert.",
           "readOnly": true
         }
       }
