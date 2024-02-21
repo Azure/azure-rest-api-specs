@@ -405,9 +405,6 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ProviderTypeParameter"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -415,6 +412,9 @@
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderTypeParameter"
           }
         ],
         "responses": {
@@ -436,7 +436,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alertTemplates/{alertTemplateId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alertTemplates/{alertTemplateName}": {
       "get": {
         "tags": [
           "AlertTemplates"
@@ -466,7 +466,7 @@
             "$ref": "#/parameters/monitorNameParameter"
           },
           {
-            "$ref": "#/parameters/AlertTemplateIdParameter"
+            "$ref": "#/parameters/AlertTemplateNameParameter"
           }
         ],
         "responses": {
@@ -1675,6 +1675,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of alert instances."
         }
       },
@@ -1685,7 +1686,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AlertInstanceProperties",
+          "$ref": "#/definitions/AlertProperties",
           "description": "Alert Instance properties"
         }
       },
@@ -1696,7 +1697,7 @@
       ],
       "description": "A alert associated with SAP monitor."
     },
-    "AlertInstanceProperties": {
+    "AlertProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -1723,9 +1724,9 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "readOnly": true
         },
-        "templateId": {
+        "templateName": {
           "type": "string",
-          "description": "ID of the alert template from which it was created."
+          "description": "Name of the alert template from which it was created."
         },
         "alertRuleResourceId": {
           "type": "string",
@@ -1741,15 +1742,15 @@
           "type": "string",
           "description": "Name of provider instances associated with the alert."
         },
-        "alertProperties": {
+        "alertRuleProperties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AlertProperties",
+          "$ref": "#/definitions/AlertRuleProperties",
           "description": "Alert properties"
         }
       },
       "description": "Describes the properties of a alert instance."
     },
-    "AlertProperties": {
+    "AlertRuleProperties": {
       "type": "object",
       "properties": {
         "isEnabled": {
@@ -1760,17 +1761,8 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "enum": [
-            0,
-            1,
-            2,
-            3,
-            4
-          ],
-          "default": 0,
-          "x-ms-enum": {
-            "name": "alertSeverity"
-          },
+          "minimum": 0,
+          "maximum": 4,
           "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest."
         },
         "actionGroups": {
@@ -1853,7 +1845,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AlertQueryParameter"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         }
       },
       "description": "Describes the properties of a alert."
@@ -1884,6 +1877,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of alert templates."
         }
       },
@@ -1908,9 +1902,29 @@
     "AlertTemplateInstanceProperties": {
       "type": "object",
       "properties": {
-        "templateId": {
+        "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "ID of the alert template."
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating",
+            "Canceled"
+          ],
+          "default": "Succeeded",
+          "x-ms-enum": {
+            "name": "AlertTemplateProvisioningState",
+            "modelAsString": true
+          },
+          "description": "Provisioning state of the alert template"
+        },
+        "templateDisplayName": {
+          "type": "string",
+          "description": "Display name of the alert template."
         },
         "providerType": {
           "type": "string",
@@ -1934,18 +1948,9 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "enum": [
-            0,
-            1,
-            2,
-            3,
-            4
-          ],
-          "default": 0,
-          "x-ms-enum": {
-            "name": "alertTemplateSeverity"
-          },
-          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest."
+          "minimum": 0,
+          "maximum": 4,
+          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is most severe and value of 4 is least severe."
         },
         "query": {
           "type": "string",
@@ -1999,7 +2004,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AlertTemplateQueryInputParameter"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         }
       },
       "description": "Describes the properties of a alert template."
@@ -2744,13 +2750,13 @@
       "description": "Name of the SAP monitor alert resource.",
       "x-ms-parameter-location": "method"
     },
-    "AlertTemplateIdParameter": {
-      "name": "alertTemplateId",
+    "AlertTemplateNameParameter": {
+      "name": "alertTemplateName",
       "in": "path",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9-_]+$",
-      "description": "Id of the SAP monitor alert template resource.",
+      "description": "SAP monitor alert template resource name.",
       "x-ms-parameter-location": "method"
     },
     "ProviderInstanceNameParameter": {
