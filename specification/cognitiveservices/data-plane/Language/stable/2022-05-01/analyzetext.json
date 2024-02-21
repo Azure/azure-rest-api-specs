@@ -2334,8 +2334,28 @@
           "default": "latest"
         },
         "domain": {
-          "$ref": "#/definitions/PiiDomain",
-          "default": "none"
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "phi",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "PiiDomain",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "phi",
+                "value": "phi",
+                "description": "Indicates that entities in the Personal Health Information domain should be redacted."
+              },
+              {
+                "name": "none",
+                "value": "none",
+                "description": "Indicates that no domain is specified."
+              }
+            ]
+          }
         },
         "piiCategories": {
           "type": "array",
@@ -2546,29 +2566,6 @@
       "x-ms-enum": {
         "name": "PiiCategories",
         "modelAsString": true
-      }
-    },
-    "PiiDomain": {
-      "type": "string",
-      "enum": [
-        "phi",
-        "none"
-      ],
-      "x-ms-enum": {
-        "name": "PiiDomain",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "phi",
-            "value": "phi",
-            "description": "Indicates that entities in the Personal Health Information domain should be redacted."
-          },
-          {
-            "name": "none",
-            "value": "none",
-            "description": "Indicates that no domain is specified."
-          }
-        ]
       }
     },
     "RequestStatistics": {

@@ -1735,30 +1735,6 @@
         "documents"
       ]
     },
-    "ExtractiveSummarizationSortingCriteria": {
-      "type": "string",
-      "description": "The sorting criteria to use for the results of Extractive Summarization.",
-      "enum": [
-        "Offset",
-        "Rank"
-      ],
-      "x-ms-enum": {
-        "name": "ExtractiveSummarizationSortingCriteria",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Offset",
-            "value": "Offset",
-            "description": "Indicates that results should be sorted in order of appearance in the text."
-          },
-          {
-            "name": "Rank",
-            "value": "Rank",
-            "description": "Indicates that results should be sorted in order of importance (i.e. rank score) according to the model."
-          }
-        ]
-      }
-    },
     "ExtractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Extractive Summarization task.",
@@ -1779,8 +1755,29 @@
           "default": 3
         },
         "sortBy": {
-          "$ref": "#/definitions/ExtractiveSummarizationSortingCriteria",
-          "default": "Offset"
+          "type": "string",
+          "description": "The sorting criteria to use for the results of Extractive Summarization.",
+          "default": "Offset",
+          "enum": [
+            "Offset",
+            "Rank"
+          ],
+          "x-ms-enum": {
+            "name": "ExtractiveSummarizationSortingCriteria",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Offset",
+                "value": "Offset",
+                "description": "Indicates that results should be sorted in order of appearance in the text."
+              },
+              {
+                "name": "Rank",
+                "value": "Rank",
+                "description": "Indicates that results should be sorted in order of importance (i.e. rank score) according to the model."
+              }
+            ]
+          }
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
@@ -2701,8 +2698,28 @@
           "default": "latest"
         },
         "domain": {
-          "$ref": "#/definitions/PiiDomain",
-          "default": "none"
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "phi",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "PiiDomain",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "phi",
+                "value": "phi",
+                "description": "Indicates that entities in the Personal Health Information domain should be redacted."
+              },
+              {
+                "name": "none",
+                "value": "none",
+                "description": "Indicates that no domain is specified."
+              }
+            ]
+          }
         },
         "piiCategories": {
           "type": "array",
@@ -2913,29 +2930,6 @@
       "x-ms-enum": {
         "name": "PiiCategories",
         "modelAsString": true
-      }
-    },
-    "PiiDomain": {
-      "type": "string",
-      "enum": [
-        "phi",
-        "none"
-      ],
-      "x-ms-enum": {
-        "name": "PiiDomain",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "phi",
-            "value": "phi",
-            "description": "Indicates that entities in the Personal Health Information domain should be redacted."
-          },
-          {
-            "name": "none",
-            "value": "none",
-            "description": "Indicates that no domain is specified."
-          }
-        ]
       }
     },
     "RequestStatistics": {

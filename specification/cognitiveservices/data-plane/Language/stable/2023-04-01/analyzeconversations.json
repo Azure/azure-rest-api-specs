@@ -1786,18 +1786,6 @@
       ],
       "x-ms-discriminator-value": "ListKey"
     },
-    "LogicalOperationKind": {
-      "type": "string",
-      "description": "Set to 'OR' or 'AND' for using corresponding logical operation.",
-      "enum": [
-        "AND",
-        "OR"
-      ],
-      "x-ms-enum": {
-        "name": "LogicalOperationKind",
-        "modelAsString": true
-      }
-    },
     "LuisCallingOptions": {
       "type": "object",
       "description": "This customizes how the service calls LUIS Generally Available projects.",
@@ -1880,9 +1868,17 @@
           "x-ms-identifiers": []
         },
         "logicalOperation": {
-          "$ref": "#/definitions/LogicalOperationKind",
+          "type": "string",
           "description": "Operation used to join metadata filters.",
-          "default": "AND"
+          "default": "AND",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "x-ms-enum": {
+            "name": "LogicalOperationKind",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2084,9 +2080,17 @@
           "description": "filters over knowledge base."
         },
         "logicalOperation": {
-          "$ref": "#/definitions/LogicalOperationKind",
+          "type": "string",
           "description": "Logical operation used to join metadata filter with source filter.",
-          "default": "AND"
+          "default": "AND",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "x-ms-enum": {
+            "name": "LogicalOperationKind",
+            "modelAsString": true
+          }
         }
       }
     },
