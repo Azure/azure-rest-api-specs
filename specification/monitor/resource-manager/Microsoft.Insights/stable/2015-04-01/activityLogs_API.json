@@ -91,22 +91,6 @@
     }
   },
   "definitions": {
-    "LocalizableString": {
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "the invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "the locale specific value."
-        }
-      },
-      "description": "The localizable string class."
-    },
     "SenderAuthorization": {
       "properties": {
         "action": {
@@ -187,12 +171,12 @@
         },
         "eventName": {
           "readOnly": true,
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "the event name. This value should not be confused with OperationName. For practical purposes, OperationName might be more appealing to end users."
         },
         "category": {
           "readOnly": true,
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "the event category."
         },
         "httpRequest": {
@@ -226,7 +210,7 @@
         },
         "resourceProviderName": {
           "readOnly": true,
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790572.aspx"
           },
@@ -242,7 +226,7 @@
         },
         "resourceType": {
           "readOnly": true,
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
           },
@@ -255,7 +239,7 @@
         },
         "operationName": {
           "readOnly": true,
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "the operation name."
         },
         "properties": {
@@ -268,12 +252,12 @@
         },
         "status": {
           "readOnly": true,
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "a string describing the status of the operation. Some typical values are: Started, In progress, Succeeded, Failed, Resolved."
         },
         "subStatus": {
           "readOnly": true,
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "the event sub status. Most of the time, when included, this captures the HTTP status code of the REST call. Common values are: OK (HTTP Status Code: 200), Created (HTTP Status Code: 201), Accepted (HTTP Status Code: 202), No Content (HTTP Status Code: 204), Bad Request(HTTP Status Code: 400), Not Found (HTTP Status Code: 404), Conflict (HTTP Status Code: 409), Internal Server Error (HTTP Status Code: 500), Service Unavailable (HTTP Status Code:503), Gateway Timeout (HTTP Status Code: 504)"
         },
         "eventTimestamp": {

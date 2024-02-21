@@ -74,28 +74,12 @@
     }
   },
   "definitions": {
-    "LocalizableString": {
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "the invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "the locale specific value."
-        }
-      },
-      "description": "The localizable string class."
-    },
     "EventCategoryCollection": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LocalizableString"
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString"
           },
           "x-ms-identifiers": [
             "value"
