@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "assetName": "my-asset",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "my-asset",
+        "type": "Microsoft.DeviceRegistry/assets",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assets/my-asset",
+        "location": "West Europe",
+        "properties": {
+          "description": "This is a sample Asset",
+          "assetEndpointProfileUri": "https://www.example.com/myConnectivityProfile",
+          "assetType": "MyAssetType",
+          "dataPoints": [
+            {
+              "capabilityId": "dtmi:com:example:Thermostat:__temperature;1",
+              "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
+              "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt1",
+              "observabilityMode": "counter"
+            },
+            {
+              "capabilityId": "dtmi:com:example:Thermostat:__pressure;1",
+              "dataPointConfiguration": "{\"publishingInterval\":4,\"samplingInterval\":4,\"queueSize\":7}",
+              "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt2",
+              "observabilityMode": "none"
+            }
+          ],
+          "defaultDataPointsConfiguration": "{\"publishingInterval\":10,\"samplingInterval\":15,\"queueSize\":20}",
+          "defaultEventsConfiguration": "{\"publishingInterval\":10,\"samplingInterval\":15,\"queueSize\":20}",
+          "displayName": "AssetDisplayName",
+          "documentationUri": "https://www.example.com/manual",
+          "enabled": true,
+          "events": [
+            {
+              "capabilityId": "dtmi:com:example:Thermostat:__temperature;1",
+              "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
+              "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
+              "observabilityMode": "none"
+            },
+            {
+              "capabilityId": "dtmi:com:example:Thermostat:__pressure;1",
+              "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":8,\"queueSize\":4}",
+              "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
+              "observabilityMode": "log"
+            }
+          ],
+          "externalAssetId": "8ZBA6LRHU0A458969",
+          "hardwareRevision": "1.0",
+          "manufacturer": "Contoso",
+          "manufacturerUri": "https://www.contoso.com/manufacturerUri",
+          "model": "ContosoModel",
+          "productCode": "SA34VDG",
+          "provisioningState": "Succeeded",
+          "serialNumber": "64-103816-519918-8",
+          "softwareRevision": "2.0",
+          "uuid": "0796f7c1-f2c8-44d7-9f5b-9a6f9522a85d",
+          "version": 73766
+        },
+        "systemData": {
+          "createdAt": "2022-11-16T00:36:43.2516899Z",
+          "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "createdByType": "Application",
+          "lastModifiedAt": "2022-11-16T01:37:16.0922793Z",
+          "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "site": "building-1"
+        }
+      }
+    }
+  },
+  "operationId": "Assets_Get",
+  "title": "Get an Asset"
+}
