@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-01
+tag: package-preview-2024-05
 ```
 
 ### Suppression
@@ -59,11 +59,20 @@ suppressions:
     reason: start,stop,flushDNSsetting api do not have return body in async operation
 ```
 
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.AppPlatform/preview/2024-05-01-preview/appplatform.json
+```
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-01'
+``` yaml $(tag) == 'package-preview-2024-01'
 input-file:
   - Microsoft.AppPlatform/preview/2024-01-01-preview/appplatform.json
 ```
