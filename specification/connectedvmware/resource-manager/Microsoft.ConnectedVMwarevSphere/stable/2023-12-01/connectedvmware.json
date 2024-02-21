@@ -3888,6 +3888,58 @@
           "description": "Gets or sets the current version of VMware Tools.",
           "type": "string",
           "readOnly": true
+        },
+        "windowsConfiguration": {
+          "description": "Windows Configuration.",
+          "$ref": "#/definitions/WindowsConfiguration"
+        }
+      }
+    },
+    "WindowsConfiguration": {
+      "description": "Specifies the Windows Configuration settings for the virtual machine.",
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "description": "Sets full name of the owner of the vm.",
+          "type": "string"
+        },
+        "orgName": {
+          "description": "Sets org name to which the owner of the vm belongs.",
+          "type": "string"
+        },
+        "domainName": {
+          "description": "Sets domain name that vm should join.",
+          "type": "string"
+        },
+        "domainUsername": {
+          "description": "Sets domain username.",
+          "type": "string"
+        },
+        "domainUserPassword": {
+          "description": "Sets domain user password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        },
+        "workGroupName": {
+          "description": "Sets work group name that vm should join.",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Sets product id of the vm.",
+          "type": "string"
+        },
+        "autoLogon": {
+          "description": "Sets a value indicating whether auto logon is enabled.",
+          "type": "boolean"
+        },
+        "autoLogonCount": {
+          "format": "int32",
+          "description": "Sets auto logon count.",
+          "type": "integer"
         }
       }
     },
