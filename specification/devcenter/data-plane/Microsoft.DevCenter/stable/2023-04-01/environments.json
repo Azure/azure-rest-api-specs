@@ -797,9 +797,11 @@
       "description": "Properties of an environment.",
       "properties": {
         "parameters": {
-          "type": "string",
-          "format": "byte",
-          "description": "Parameters object for the environment."
+          "type": "object",
+          "description": "Parameters object for the environment.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "name": {
           "type": "string",
@@ -1091,9 +1093,11 @@
       "description": "Properties of an environment. These properties can be updated after the\nresource has been created.",
       "properties": {
         "parameters": {
-          "type": "string",
-          "format": "byte",
-          "description": "Parameters object for the environment."
+          "type": "object",
+          "description": "Parameters object for the environment.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },

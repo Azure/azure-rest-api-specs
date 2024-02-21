@@ -116,7 +116,7 @@ resource has been created.
 """)
 model EnvironmentUpdateProperties {
   @doc("Parameters object for the environment.")
-  parameters?: bytes;
+  parameters?: Record<string>;
 }
 
 @doc("A catalog.")
