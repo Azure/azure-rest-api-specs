@@ -154,10 +154,9 @@ enum DevBoxActionType {
 }
 
 @doc("The result of the delay operation on this action.")
-union DevBoxActionDelayResultStatus {
-  @doc("The delay operation succeeded.") Succeeded: "Succeeded",
-  @doc("The delay operation failed.") Failed: "Failed",
-  string,
+enum DevBoxActionDelayResultStatus {
+  @doc("The delay operation succeeded.") Succeeded,
+  @doc("The delay operation failed.") Failed,
 }
 
 @doc("A pool of Dev Boxes.")

@@ -103,7 +103,6 @@ interface EnvironmentClientOperations {
   "csharp",
   "DevBoxHardwareProfile"
 );
-@@projectedName(DevCenterService.HardwareProfile.vCPUs, "csharp", "vcpus");
 @@projectedName(DevCenterService.StorageProfile,
   "csharp",
   "DevBoxStorageProfile"
@@ -132,9 +131,9 @@ interface EnvironmentClientOperations {
   "rdpConnectionUri"
 );
 @@projectedName(DevCenterService.DevBoxAction.next, "csharp", "nextAction");
-@@projectedName(DevCenterService.DevBoxActionDelayResult.action,
+@@projectedName(DevCenterService.DevBoxActionDelayResult.name,
   "csharp",
-  "nextAction"
+  "actionName"
 );
 @@projectedName(DevCenterService.ParameterType,
   "csharp",
@@ -213,6 +212,7 @@ interface EnvironmentClientOperations {
   "java",
   "DevCenterEnvironmentType"
 );
+@@projectedName(DevCenterService.HardwareProfile.vCPUs, "java", "vcpus");
 
 @@projectedName(DevCenterService.OsType, "python", "OSType");
 @@projectedName(DevCenterService.HardwareProfile.vCPUs, "python", "vcpus");
@@ -235,7 +235,6 @@ interface EnvironmentClientOperations {
 @@clientName(DevCenterService.Pool.osType, "OSType", "csharp");
 @@clientName(DevCenterService.Pool.localAdministrator, "LocalAdministratorStatus", "csharp");
 @@clientName(DevCenterService.HardwareProfile, "DevBoxHardwareProfile", "csharp");
-@@clientName(DevCenterService.HardwareProfile.vCPUs, "vcpus", "csharp");
 @@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "csharp");
 @@clientName(DevCenterService.StorageProfile.osDisk , "OSDisk", "csharp");
 @@clientName(DevCenterService.OsDisk, "OSDisk", "csharp");
@@ -249,7 +248,7 @@ interface EnvironmentClientOperations {
 @@clientName(DevCenterService.RemoteConnection.webUrl , "webUri", "csharp");
 @@clientName(DevCenterService.RemoteConnection.rdpConnectionUrl , "rdpConnectionUri", "csharp");
 @@clientName(DevCenterService.DevBoxAction.next, "nextAction", "csharp");
-@@clientName(DevCenterService.DevBoxActionDelayResult.action, "nextAction", "csharp");
+@@clientName(DevCenterService.DevBoxActionDelayResult.name, "actionName", "csharp");
 @@clientName(DevCenterService.ParameterType, "EnvironmentDefinitionParameterType", "csharp");
 @@clientName(DevCenterService.Environment, "DevCenterEnvironment", "csharp");
 @@clientName(DevCenterService.Environment.environmentType, "environmentTypeName","csharp");
@@ -264,6 +263,7 @@ interface EnvironmentClientOperations {
 @@clientName(DevCenterService.Pool, "DevBoxPool", "java");
 @@clientName(DevCenterService.Pool.localAdministrator, "LocalAdministratorStatus", "java");
 @@clientName(DevCenterService.HardwareProfile, "DevBoxHardwareProfile", "java");
+@@clientName(DevCenterService.HardwareProfile.vCPUs, "vcpus", "java");
 @@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "java");
 @@clientName(DevCenterService.ImageReference, "DevBoxImageReference", "java");
 @@clientName(DevCenterService.Schedule, "DevBoxSchedule", "java");
