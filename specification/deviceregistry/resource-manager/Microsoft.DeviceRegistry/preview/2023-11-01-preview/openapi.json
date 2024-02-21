@@ -161,7 +161,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/operationStatuses/{operationId}": {
       "get": {
-        "operationId": "OperationStatus_Get",
+        "operationId": "OperationStatusOperations_List",
         "description": "Returns the current status of an async operation.",
         "parameters": [
           {
@@ -313,14 +313,13 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "name": "assetEndpointProfile",
+            "name": "resource",
             "in": "body",
             "description": "Resource create or replace parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssetEndpointProfile"
-            },
-            "x-ms-client-name": "assetEndpointProfile"
+            }
           }
         ],
         "responses": {
@@ -347,9 +346,6 @@
           "Create an Asset Endpoint Profile": {
             "$ref": "./examples/AssetEndpointProfiles_CreateOrReplace.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -380,14 +376,13 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "name": "assetEndpointProfile",
+            "name": "properties",
             "in": "body",
-            "description": "Resource Update parameters.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssetEndpointProfilePatchPayload"
-            },
-            "x-ms-client-name": "assetEndpointProfile"
+            }
           }
         ],
         "responses": {
@@ -611,14 +606,13 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "name": "asset",
+            "name": "resource",
             "in": "body",
-            "description": "Resource create or replace parameters.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Asset"
-            },
-            "x-ms-client-name": "asset"
+            }
           }
         ],
         "responses": {
@@ -632,13 +626,6 @@
             "description": "Resource 'Asset' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Asset"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -658,11 +645,7 @@
           "Create an Asset Without External Asset Id": {
             "$ref": "./examples/Assets_CreateOrReplace_Create_An_Asset_Without_External_Asset_Id.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "Assets_Update",
@@ -691,14 +674,13 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "name": "asset",
+            "name": "properties",
             "in": "body",
-            "description": "Resource Update parameters.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssetPatchPayload"
-            },
-            "x-ms-client-name": "asset"
+            }
           }
         ],
         "responses": {

@@ -43,7 +43,7 @@ interface Assets {
   /**
    * Create a new asset or replace an existing asset.
    */
-  createOrReplace is ArmResourceCreateOrReplaceAsync<Asset>;
+  createOrReplace is ArmResourceCreateOrReplaceSync<Asset>;
 
   /**
    * Update specific asset properties.
@@ -59,8 +59,6 @@ interface Assets {
   /**
    * List all assets in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Assets_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Asset>;
 
   /**
@@ -68,15 +66,3 @@ interface Assets {
    */
   listBySubscription is ArmListBySubscription<Asset>;
 }
-
-@@projectedName(Assets.createOrReplace::parameters.resource, "json", "asset");
-@@extension(Assets.createOrReplace::parameters.resource,
-  "x-ms-client-name",
-  "asset"
-);
-@@doc(Assets.createOrReplace::parameters.resource,
-  "Resource create or replace parameters."
-);
-@@projectedName(Assets.update::parameters.properties, "json", "asset");
-@@extension(Assets.update::parameters.properties, "x-ms-client-name", "asset");
-@@doc(Assets.update::parameters.properties, "Resource Update parameters.");

@@ -45,12 +45,6 @@ interface AssetEndpointProfiles {
    */
   @armResourceCreateOrUpdate(AssetEndpointProfile)
   @extension("x-ms-long-running-operation",true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   @put
   createOrReplace(
     ...ResourceInstanceParameters<AssetEndpointProfile>,
@@ -79,8 +73,6 @@ interface AssetEndpointProfiles {
   /**
    * List all Asset Endpoint Profiles in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AssetEndpointProfiles_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<AssetEndpointProfile>;
 
   /**
@@ -88,26 +80,3 @@ interface AssetEndpointProfiles {
    */
   listBySubscription is ArmListBySubscription<AssetEndpointProfile>;
 }
-
-@@projectedName(AssetEndpointProfiles.createOrReplace::parameters.resource,
-  "json",
-  "assetEndpointProfile"
-);
-@@extension(AssetEndpointProfiles.createOrReplace::parameters.resource,
-  "x-ms-client-name",
-  "assetEndpointProfile"
-);
-@@doc(AssetEndpointProfiles.createOrReplace::parameters.resource,
-  "Resource create or replace parameters."
-);
-@@projectedName(AssetEndpointProfiles.update::parameters.properties,
-  "json",
-  "assetEndpointProfile"
-);
-@@extension(AssetEndpointProfiles.update::parameters.properties,
-  "x-ms-client-name",
-  "assetEndpointProfile"
-);
-@@doc(AssetEndpointProfiles.update::parameters.properties,
-  "Resource Update parameters."
-);
