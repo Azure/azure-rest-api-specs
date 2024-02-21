@@ -465,28 +465,28 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "The DevCenter Project upon which to execute the operation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string"
           },
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "Display name for the Dev Box",
+            "description": "The name of a Dev Box.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
+            "description": "Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DevBox"
@@ -498,13 +498,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DevBox"
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
             }
           },
           "201": {
@@ -513,10 +506,13 @@
               "$ref": "#/definitions/DevBox"
             },
             "headers": {
-              "Operation-Location": {
+              "Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location for monitoring the operation state."
+                "description": "The location of an instance of DevBox"
+              },
+              "Operation-Location": {
+                "type": "string"
               }
             }
           },

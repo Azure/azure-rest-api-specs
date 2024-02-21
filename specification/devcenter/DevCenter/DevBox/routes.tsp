@@ -45,9 +45,53 @@ interface DevBoxesOperations {
   @doc("Gets a Dev Box")
   getDevBox is StandardResourceOperations.ResourceRead<DevBox>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  // The standard operation names the body as resource, so the generated swagger has parameter
+  //  {
+  //     "name": "resource",
+  //     "in": "body",
+  //  },
+  // instead of the desired
+  //  {
+  //     "name": "body",
+  //     "in": "body",
+  //  }
   @doc("Creates or replaces a Dev Box.")
+  @finalOperation(DevBoxesOperations.getDevBox)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  createDevBox is StandardResourceOperations.LongRunningResourceCreateOrReplace<DevBox>;
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
+  @put
+  createDevBox is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute the operation.")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @path
+      userId: string;
+
+      @doc("The name of a Dev Box.")
+      @path
+      devBoxName: string;
+
+      @doc("Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator")
+      @body
+      body: DevBox;
+    },
+    DevBox | {
+      @statusCode statusCode: 201;
+
+      @header("Location")
+      location: ResourceLocation<DevBox>;
+
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+
+      @body body?: DevBox;
+    }
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
   //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
