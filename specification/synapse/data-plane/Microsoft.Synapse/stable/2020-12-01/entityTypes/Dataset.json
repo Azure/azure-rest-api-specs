@@ -3572,6 +3572,23 @@
           "description": "The table name of the Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "ServiceNowV2ObjectDataset": {
+      "x-ms-discriminator-value": "ServiceNowV2Object",
+      "description": "ServiceNowV2 server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GenericDatasetTypeProperties"
+        }
+      }
     }
   }
 }
