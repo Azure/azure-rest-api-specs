@@ -30,7 +30,7 @@
         "description": "Gets list of effective NetworkSecurityPerimeterConfiguration for storage account",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -39,7 +39,7 @@
             "$ref": "./storage.json#/parameters/StorageAccountName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -75,7 +75,7 @@
         "description": "Gets effective NetworkSecurityPerimeterConfiguration for association",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -87,7 +87,7 @@
             "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -120,7 +120,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -132,7 +132,7 @@
             "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -165,7 +165,7 @@
       "readOnly": true,
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -424,7 +424,8 @@
         },
         "location": {
           "description": "Location of the resource",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [ "create", "read" ]
         }
       }
     }
