@@ -34,6 +34,10 @@ model EnclaveVirtualNetwork {
 
   @doc("Custom CIDR Range.")
   customCidrRange?: string;
+
+  @added(Microsoft.Mission.Versions.v2024_01_01_preview)
+  @doc("Connect to Azure Services (True or False).")
+  connectToAzureServices?: boolean;
 }
 
 @doc("Virtual Enclave Default Settings")
