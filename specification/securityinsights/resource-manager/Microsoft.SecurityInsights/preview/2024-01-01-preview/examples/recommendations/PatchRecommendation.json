@@ -5,51 +5,35 @@
     "resourceGroupName": "myRg",
     "workspaceName": "myWorkspace",
     "recommendationId": "6d4b54eb-8684-4aa3-a156-3aa37b8014bc",
-    "recommendationPatch": [
-      {
-        "state": "Active"
-      }
-    ]
+    "recommendationPatch": {
+      "state": "Active"
+    }
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.SecurityInsights/recommendations/6d4b54eb-8684-4aa3-a156-3aa37b8014bc?api-version=2024-01-01-preview"
-      },
+    "200": {
       "body": {
         "recommendationTypeId": "ThreatIntelligence_Example",
-        "id": "6d4b54eb-8684-4aa3-a156-3aa37b8014bc",
-        "priority": "Medium",
-        "category": "Onboarding",
-        "context": "None",
-        "content": {
-          "title": "someText",
-          "description": "someText"
-        },
-        "resourceId": "someId",
-        "recommendationTypeTitle": "someText",
-        "recommendationTypeDescription": "someText",
-        "instructions": {
-          "actionsToBePerformed": "someText",
-          "recommendationImportance": "someText"
-        },
-        "additionalProperties": {
-          "someKey": "someValue"
-        },
+        "state": "CompletedByUser",
         "title": "someText",
         "description": "someText",
-        "workspaceId": "9a7711dc-40de-43b5-bf7e-ba25ec4592f3",
-        "actions": [
+        "creationTimeUtc": "2022-02-19T03:09:03.4888396+00:00",
+        "lastEvaluatedTimeUtc": "2022-02-19T03:09:03.4888396+00:00",
+        "lastModifiedTimeUtc": "2022-02-19T03:57:31.7964447+00:00",
+        "suggestions": [
           {
-            "linkText": "someText",
-            "linkUrl": "https://www.someuri.com",
-            "state": "Active"
+            "suggestionTypeId": "ThreatIntelligence_Example_Suggestion_Example",
+            "title": "someText",
+            "description": "someText",
+            "action": "someText",
+            "additionalProperties": {
+              "someKey": "someValue"
+            }
           }
         ],
-        "state": "CompletedByUser",
-        "hideUntilTimeUtc": "2022-02-19T03:09:03.4888396+00:00",
-        "displayUntilTimeUtc": "2022-02-19T03:57:31.7964447+00:00",
-        "lastEvaluatedTimeUtc": "2022-02-19T03:09:03.4888396+00:00"
+        "resourceId": "someId",
+        "additionalProperties": {
+          "someKey": "someValue"
+        }
       }
     }
   }
