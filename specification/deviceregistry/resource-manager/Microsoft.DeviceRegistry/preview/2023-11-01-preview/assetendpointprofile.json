@@ -61,7 +61,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssetEndpointProfileListResult"
             }
@@ -103,7 +103,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssetEndpointProfileListResult"
             }
@@ -155,7 +155,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssetEndpointProfile"
             }
@@ -284,7 +284,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssetEndpointProfile"
             }
@@ -363,7 +363,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -622,9 +622,35 @@
       "description": "Definition of the client authentication mechanism to the server.",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/UserAuthenticationMode",
+          "type": "string",
           "description": "Defines the mode to authenticate the user of the client at the server.",
-          "default": "Certificate"
+          "default": "Certificate",
+          "enum": [
+            "Anonymous",
+            "Certificate",
+            "UsernamePassword"
+          ],
+          "x-ms-enum": {
+            "name": "UserAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Anonymous",
+                "value": "Anonymous",
+                "description": "The user authentication mode is anonymous"
+              },
+              {
+                "name": "Certificate",
+                "value": "Certificate",
+                "description": "The user authentication mode is an x509 certificate."
+              },
+              {
+                "name": "UsernamePassword",
+                "value": "UsernamePassword",
+                "description": "The user authentication mode is a username and password."
+              }
+            ]
+          }
         },
         "usernamePasswordCredentials": {
           "$ref": "#/definitions/UsernamePasswordCredentials",
@@ -674,9 +700,35 @@
       "description": "Definition of the client authentication mechanism to the server.",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/UserAuthenticationMode",
+          "type": "string",
           "description": "Defines the mode to authenticate the user of the client at the server.",
-          "default": "Certificate"
+          "default": "Certificate",
+          "enum": [
+            "Anonymous",
+            "Certificate",
+            "UsernamePassword"
+          ],
+          "x-ms-enum": {
+            "name": "UserAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Anonymous",
+                "value": "Anonymous",
+                "description": "The user authentication mode is anonymous"
+              },
+              {
+                "name": "Certificate",
+                "value": "Certificate",
+                "description": "The user authentication mode is an x509 certificate."
+              },
+              {
+                "name": "UsernamePassword",
+                "value": "UsernamePassword",
+                "description": "The user authentication mode is a username and password."
+              }
+            ]
+          }
         },
         "usernamePasswordCredentials": {
           "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",

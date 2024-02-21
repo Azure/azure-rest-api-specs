@@ -61,7 +61,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssetListResult"
             }
@@ -103,7 +103,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssetListResult"
             }
@@ -155,7 +155,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Asset"
             }
@@ -293,7 +293,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Asset"
             }
@@ -372,7 +372,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -720,9 +720,47 @@
           "description": "The path to the type definition of the capability (e.g. DTMI, OPC UA information model node id, etc.), for example dtmi:com:example:Robot:_contents:__prop1;1."
         },
         "observabilityMode": {
-          "$ref": "#/definitions/DataPointsObservabilityMode",
+          "type": "string",
           "description": "An indication of how the data point should be mapped to OpenTelemetry.",
-          "default": "none"
+          "default": "none",
+          "enum": [
+            "none",
+            "counter",
+            "gauge",
+            "histogram",
+            "log"
+          ],
+          "x-ms-enum": {
+            "name": "DataPointsObservabilityMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "none",
+                "description": "No mapping to OpenTelemetry."
+              },
+              {
+                "name": "Counter",
+                "value": "counter",
+                "description": "Map as counter to OpenTelemetry."
+              },
+              {
+                "name": "Gauge",
+                "value": "gauge",
+                "description": "Map as gauge to OpenTelemetry."
+              },
+              {
+                "name": "Histogram",
+                "value": "histogram",
+                "description": "Map as histogram to OpenTelemetry."
+              },
+              {
+                "name": "Log",
+                "value": "log",
+                "description": "Map as log to OpenTelemetry."
+              }
+            ]
+          }
         },
         "dataPointConfiguration": {
           "type": "string",
@@ -792,9 +830,29 @@
           "description": "The path to the type definition of the capability (e.g. DTMI, OPC UA information model node id, etc.), for example dtmi:com:example:Robot:_contents:__prop1;1."
         },
         "observabilityMode": {
-          "$ref": "#/definitions/EventObservabilityMode",
+          "type": "string",
           "description": "An indication of how the event should be mapped to OpenTelemetry.",
-          "default": "none"
+          "default": "none",
+          "enum": [
+            "none",
+            "log"
+          ],
+          "x-ms-enum": {
+            "name": "EventsObservabilityMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "none",
+                "description": "No mapping to OpenTelemetry."
+              },
+              {
+                "name": "Log",
+                "value": "log",
+                "description": "Map as log to OpenTelemetry."
+              }
+            ]
+          }
         },
         "eventConfiguration": {
           "type": "string",
@@ -805,7 +863,7 @@
         "eventNotifier"
       ]
     },
-    "EventObservabilityMode": {
+    "EventsObservabilityMode": {
       "type": "string",
       "description": "Defines the event observability mode.",
       "enum": [
@@ -813,7 +871,7 @@
         "log"
       ],
       "x-ms-enum": {
-        "name": "EventObservabilityMode",
+        "name": "EventsObservabilityMode",
         "modelAsString": true,
         "values": [
           {
