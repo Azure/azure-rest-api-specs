@@ -25,9 +25,12 @@
           "templateName": "saphana-cpu-memory-health",
           "alertRuleResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/scheduledqueryrules/myAlert",
           "providerType": "SapHana",
-          "providerNames": "hana-provider",
+          "providerNames": [
+            "hana-provider-1",
+            "hana-provider-2"
+          ],
           "alertRuleProperties": {
-            "isEnabled": true,
+            "isEnabled": "Enabled",
             "severity": 3,
             "actionGroups": [
               "actiongroupid1",
@@ -40,7 +43,7 @@
             "failingPeriodsToAlert": 3,
             "failingPeriodsOperator": "GreaterThan",
             "muteActionsDuration": 0,
-            "autoMitigate": false,
+            "autoMitigate": "Disable",
             "dimension": "cpu",
             "alertQueryParameters": [
               {

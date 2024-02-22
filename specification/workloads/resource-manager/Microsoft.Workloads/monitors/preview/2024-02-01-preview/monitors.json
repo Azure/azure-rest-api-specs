@@ -1739,7 +1739,10 @@
           "description": "The provider type for alert. For example, the value can be SapHana."
         },
         "providerNames": {
-          "type": "string",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "description": "Name of provider instances associated with the alert."
         },
         "alertRuleProperties": {
@@ -1754,9 +1757,17 @@
       "type": "object",
       "properties": {
         "isEnabled": {
-          "type": "boolean",
-          "default": true,
-          "description": "The flag which indicates whether this scheduled query rule is enabled. Value should be true or false"
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "alertIsEnabled",
+            "modelAsString": true
+          },
+          "default": "Enabled",
+          "description": "The value which indicates whether this scheduled query rule is enabled. Value should be enabled or disabled"
         },
         "severity": {
           "type": "integer",
@@ -1831,9 +1842,17 @@
           "description": "Mute actions for the chosen period of time after the alert is fired"
         },
         "autoMitigate": {
-          "type": "boolean",
-          "default": false,
-          "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is false."
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "alertAutoMitigate",
+            "modelAsString": true
+          },
+          "default": "Disable",
+          "description": "The value that indicates whether the alert should be automatically resolved or not. The default is Disable."
         },
         "dimension": {
           "type": "string",
@@ -1888,7 +1907,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AlertTemplateInstanceProperties",
+          "$ref": "#/definitions/AlertTemplateProperties",
           "description": "Alert Template Instance properties"
         }
       },
@@ -1899,7 +1918,7 @@
       ],
       "description": "A alert template associated with SAP monitor."
     },
-    "AlertTemplateInstanceProperties": {
+    "AlertTemplateProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -1934,17 +1953,6 @@
           "type": "string",
           "description": "Short Description of the alert template."
         },
-        "alertTemplateProperties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AlertTemplateProperties",
-          "description": "Alert Template properties"
-        }
-      },
-      "description": "Describes the properties of a alert template instance."
-    },
-    "AlertTemplateProperties": {
-      "type": "object",
-      "properties": {
         "severity": {
           "type": "integer",
           "format": "int32",
@@ -1988,7 +1996,15 @@
           "description": "Maximum possible Default Threshold Value Associated with the Alert Template"
         },
         "isThresholdInputRequired": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "x-ms-enum": {
+            "name": "alertTemplateThresholdInputRequired",
+            "modelAsString": true
+          },
           "description": "Is input required for Default Threshold Value Associated with the Alert Template"
         },
         "alertUnit": {
