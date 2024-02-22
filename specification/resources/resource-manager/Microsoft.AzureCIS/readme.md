@@ -1,5 +1,7 @@
 # Readme
+
 > see https://aka.ms/autorest
+
 ```yaml
 title: RPaaSClient
 openapi-type: arm
@@ -13,6 +15,7 @@ openapi-subtype: rpaas
 input-file:
   - preview/2023-08-22-preview/aad.json
   - preview/2023-08-22-preview/dscm.json
+  - preview/2023-08-22-preview/plannedQuota.json
 ```
 
 ```yaml $(tag) == '2021-08-10-privatepreview'
@@ -24,6 +27,7 @@ input-file:
   - preview/2021-08-10-privatepreview/dsmsAllowlist.json
   - preview/2021-08-10-privatepreview/dstsApplication.json
 ```
+
 ```yaml $(tag) == '2021-02-01'
 input-file:
   - stable/2021-02-01/environment.json
@@ -34,6 +38,7 @@ input-file:
 input-file:
   - preview/2023-08-22-preview/genevaActions.json
   - preview/2023-08-22-preview/dscm.json
+  - preview/2023-08-22-preview/plannedQuota.json
 ```
 
 ```yaml
