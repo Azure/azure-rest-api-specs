@@ -930,7 +930,6 @@ model ObservedLong extends ObservedValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@doc("value of observed port state")
 model ObservedPortState extends ObservedValue {
   value?: ObservedPortStateValue;
   port?: int32;
@@ -1454,6 +1453,7 @@ enum DiscoSourceKind {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("state of observed port")
 enum ObservedPortStateValue {
   open,
   closed,
