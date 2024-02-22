@@ -252,6 +252,7 @@ model AssetSummaryResult {
 }
 
 @doc("A request body used to update an asset.")
+@projectedName("csharp", "AssetUpdatePayload")
 model AssetUpdateData {
   @doc("The state to update the asset to.")
   state?: AssetUpdateState;
@@ -387,6 +388,7 @@ model DataConnectionProperties {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @discriminator("kind")
+@projectedName("csharp", "DataConnectionPayload")
 model DataConnectionData {
   @doc("The name of data connection")
   name?: string;
@@ -474,7 +476,7 @@ model DependentResource {
 }
 
 @doc("A request body used to create a discovery group.")
-@projectedName("csharp", "DiscoveryGroupData")
+@projectedName("csharp", "DiscoveryGroupPayload")
 model DiscoGroupData {
   @doc("The name for a disco group.")
   name?: string;
@@ -1156,6 +1158,7 @@ model ResourceUrl {
 }
 
 @doc("A request body used to create a saved filter.")
+@projectedName("csharp", "SavedFilterPayload")
 model SavedFilterData {
   @doc("An expression on the resource type that selects the resources to be returned.")
   filter: string;
@@ -1509,6 +1512,7 @@ enum SslCertAssetValidationType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "LogAnalyticsDataConnectionPayload")
 model LogAnalyticsDataConnectionData extends DataConnectionData {
   @doc("The kind of DataConnectionData")
   kind: "logAnalytics";
@@ -1518,6 +1522,7 @@ model LogAnalyticsDataConnectionData extends DataConnectionData {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "AzureDataExplorerDataConnectionPayload")
 model AzureDataExplorerDataConnectionData extends DataConnectionData {
   @doc("The kind of DataConnectionData")
   kind: "azureDataExplorer";
