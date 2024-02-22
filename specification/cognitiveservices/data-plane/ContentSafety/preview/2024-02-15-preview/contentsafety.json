@@ -603,7 +603,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The ungroundedness detection request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DetectUngroundednessOptions"
@@ -1019,10 +1018,9 @@
           "description": "The task type for the text analysis. Type of task: QnA, Summarization.\nThis field is optional, with a default value of Summarization.",
           "default": "Summarization"
         },
-        "query": {
-          "type": "string",
-          "description": "The user's question input in a QnA scenario.\nThis field is optional, but if the task type is set to QnA, it becomes required.",
-          "maxLength": 7500
+        "qna": {
+          "$ref": "#/definitions/QnAOptions",
+          "description": "The user's question input in a QnA scenario.\nThis field is optional, but if the task type is set to QnA, it becomes required."
         },
         "text": {
           "type": "string",
@@ -1253,6 +1251,20 @@
       },
       "required": [
         "detected"
+      ]
+    },
+    "QnAOptions": {
+      "type": "object",
+      "description": "The request of QnA options.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The user's question input in a QnA scenario.",
+          "maxLength": 7500
+        }
+      },
+      "required": [
+        "query"
       ]
     },
     "RemoveTextBlocklistItemsOptions": {

@@ -254,6 +254,15 @@ enum Task {
   QnA,
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
+@added(ContentSafety.Versions.v2024_02_15_Preview)
+@doc("The request of QnA options.")
+model QnAOptions {
+  @doc("The user's question input in a QnA scenario.")
+  @maxLength(7500)
+  query: string;
+}
+
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("LLM resource type.")
 enum LLMResourceType {
@@ -296,8 +305,7 @@ model DetectUngroundednessOptions {
   The user's question input in a QnA scenario.
   This field is optional, but if the task type is set to QnA, it becomes required.
   """)
-  @maxLength(7500)
-  query?: string;
+  qna?: QnAOptions;
 
   @doc("The specific text that needs to be checked.")
   @maxLength(7500)
