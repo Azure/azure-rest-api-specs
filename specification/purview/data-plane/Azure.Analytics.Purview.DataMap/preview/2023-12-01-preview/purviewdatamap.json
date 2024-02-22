@@ -1657,55 +1657,10 @@
         }
       }
     },
-    "/entity/guid/{guid}/updateOperations": {
-      "put": {
-        "tags": [
-          "Entity"
-        ],
-        "description": "Edit a group of sub assets and/or its main asset. The edit operations may include 'assign/delete sensitivity label', 'add/remove contact' etc. Only sub assets owned by one main asset can be included in one request",
-        "operationId": "Entity_BulkEditAssetSubAssets",
-        "x-ms-examples": {
-          "Entity_BulkEditAssetSubAssets": {
-            "$ref": "./examples/Entity_BulkEditAssetSubAssets.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/guid"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          },
-          {
-            "in": "body",
-            "name": "updateOperations",
-            "description": "Updated operations.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AssetBulkUpdateOperation"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The bulk update is successful. 'failureOperations' in response will be an empty map.",
-            "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/types/icon": {
       "post": {
         "tags": [
-          "icon"
+          "Icon"
         ],
         "description": "Upload icon.",
         "operationId": "Type_UploadIcon",
@@ -1757,7 +1712,7 @@
     "/types/icon/{name}": {
       "put": {
         "tags": [
-          "icon"
+          "Icon"
         ],
         "description": "Replace icon.",
         "operationId": "Type_ReplaceIcon",
@@ -1888,7 +1843,7 @@
     "/types/icons": {
       "get": {
         "tags": [
-          "icon"
+          "Icon"
         ],
         "description": "List icons and their usages.",
         "operationId": "Type_ListIcons",
@@ -4371,6 +4326,78 @@
             "description": "OK. On successful lookup of the the term template definition by its name.",
             "schema": {
               "$ref": "#/definitions/TermTemplateDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/types/typeswithsettings": {
+      "post": {
+        "tags": [
+          "Type"
+        ],
+        "description": "Create types of same service type with settings.",
+        "operationId": "Type_ApplySettings",
+        "x-ms-examples": {
+          "Type_ApplySettings": {
+            "$ref": "./examples/Type_ApplySettings.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/definitions/TypesWithSettings"
+          },
+          {
+            "$ref": "#/parameters/atlasAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Types and type settings created.",
+            "schema": {
+              "$ref": "#/definitions/TypesWithSettings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "types/typeswithsettings/{serviceTypeName}": {
+      "get": {
+        "tags": [
+          "Type"
+        ],
+        "description": "Get type settings by service type name.",
+        "operationId": "Type_GetSettings",
+        "x-ms-examples": {
+          "Type_GetSettings": {
+            "$ref": "./examples/Type_GetSettings.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/serviceTypeName"
+          },
+          {
+            "$ref": "#/parameters/atlasAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Type settings retrieved.",
+            "schema": {
+              "$ref": "#/definitions/TypeSettings"
             }
           },
           "default": {
@@ -7499,24 +7526,6 @@
         }
       }
     },
-    "AssetBulkUpdateOperation": {
-      "type": "object",
-      "description": "This object represents operations that can be performed to modify one asset and/or its sub-assets. The key represents the name of the operation, and the value is a map where the key is the guid of the entity and the value is the content of the operation.",
-      "properties": {
-        "AssignSensitivityLabel": {
-          "type": "object",
-          "description": "This operation assigns a sensitivity label to an asset."
-        },
-        "DeleteSensitivityLabel": {
-          "type": "object",
-          "description": "This operation removes a sensitivity label from an asset."
-        },
-        "AddContact": {
-          "type": "object",
-          "description": "This operation adds a contact to an asset."
-        }
-      }
-    },
     "IconUploadResponse": {
       "type": "object",
       "description": "This object represents the response received after an icon upload operation.",
@@ -7552,6 +7561,45 @@
               }
             }
           }
+        }
+      }
+    },
+    "TypesWithSettings": {
+      "type": "object",
+      "description": "Types and type settings.",
+      "properties": {
+        "settings": {
+          "$ref": "#/definitions/TypeSettings"
+        },
+        "typesDef": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AtlasTypesDef"
+          }
+        }
+      }
+    },
+    "TypeSettings": {
+      "type": "object",
+      "description": "Type Settings.",
+      "properties": {
+        "serviceType": {
+          "type": "string",
+          "description": "Service type name."
+        },
+        "rootEntityType": {
+          "type": "string",
+          "description": "Root entity type serving as browsing entry point."
+        },
+        "taxonomies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "purviewAssetEntityDefs": {
+          "type": "object",
+          "description": "Specific settings of each entity type."
         }
       }
     }

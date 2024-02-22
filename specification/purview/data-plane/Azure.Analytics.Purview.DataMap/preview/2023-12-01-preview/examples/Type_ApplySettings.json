@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "typesWithSettings": {
+      "settings": [
+        {
+          "serviceType": "Databricks",
+          "rootEntityType": "databricks_metastore",
+          "taxonomies": ["Metastore", "Catalog", "Schema"],
+          "purviewAssetEntityDefs": {
+            "databricks_table": {
+              "qualifiedNamePattern": "databricks://{dbSchema.catalog.metastore.metastoreId}/catalogs/{dbSchema.catalog.name}/schemas/{dbSchema.name}/tables/{name}",
+              "taxonomy": {
+                "uniqueValue": "{name}"
+              },
+              "subAssets": {
+                "databricks_table_column": {
+                  "qualifiedNamePattern": "databricks://{table.dbSchema.catalog.metastore.metastoreId}/catalogs/{table.dbSchema.catalog.name}/schemas/{table.dbSchema.name}/tables/{table.name}/columns/{name}",
+                  "compactToAsset": true
+                }
+              }
+            }
+          }
+        }
+      ]
+      ,
+      "typesDef": {
+        "enumDefs": [],
+        "structDefs": [],
+        "classificationDefs": [],
+        "entityDefs": [
+          {
+            "name": "databricks_table",
+            "serviceType": "Databricks",
+            "superTypes": [
+              "DataSet",
+              "Purview_Table"
+            ],
+            "category": "ENTITY",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+              {
+                "name": "metastoreName",
+                "typeName": "string",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "isUnique": false,
+                "isIndexable": false
+              },
+              {
+                "name": "catalogName",
+                "typeName": "string",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "isUnique": false,
+                "isIndexable": false
+              }
+            ],
+            "options": {
+              "schemaElementsAttribute": "columns",
+              "purviewEntityExtDef": "{\"qualifiedNamePattern\":\"databricks://(?<MetastoreId>[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12})/catalogs/(?<Catalog>[^/]+)/schemas/(?<Schema>[^/]+)/tables/(?<Table>[^/]+)$\",\"qualifiedNameSample\":\"databricks://f27d9d14-8edd-4964-a5fb-2f9f5d113c6e/catalogs/main/schemas/default/tables/department\",\"compact\":{\"isHostForCompact\":true,\"relationshipsToCompact\":[\"databricks_table_columns\"]},\"isContainer\":false,\"friendlyName\":\"Databricks Table\",\"search\":{\"searchBehavior\":\"StandardSearch\",\"standardSearch\":{\"taxonomy\":{\"source\":\"Attributes\",\"attributes\":[\"metastoreName\",\"catalogName\",\"schemaName\"],\"assetTaxonomy\":[\"Metastore\",\"Catalog\",\"Schema\"],\"customizeTaxonomyMapping\":{\"Metastore\":\"metastoreName\",\"Catalog\":\"catalogName\",\"Schema\":\"schemaName\"}},\"browse\":{\"source\":\"QualifiedName\",\"browseHierarchy\":[{\"entityTypeName\":\"databricks_metastore\",\"isPath\":false,\"isRequired\":true,\"componentName\":\"MetastoreId\"},{\"entityTypeName\":\"databricks_catalog\",\"isPath\":false,\"isRequired\":true,\"componentName\":\"Catalog\"},{\"entityTypeName\":\"databricks_schema\",\"isPath\":false,\"isRequired\":true,\"componentName\":\"Schema\"},{\"entityTypeName\":\"databricks_table\",\"isPath\":false,\"isRequired\":true,\"componentName\":\"Table\"}]}}}}"
+            }
+          },
+          {
+            "serviceType": "Databricks",
+            "name": "databricks_table_columns",
+            "relationshipCategory": "COMPOSITION",
+            "endDef1": {
+              "type": "databricks_table",
+              "name": "columns",
+              "isContainer": true,
+              "cardinality": "SET"
+            },
+            "endDef2": {
+              "type": "databricks_table_column",
+              "name": "table",
+              "isContainer": false,
+              "cardinality": "SINGLE"
+            },
+            "propagateTags": "NONE"
+          }
+        ],
+        "relationshipDefs": [],
+        "businessMetadataDefs": []
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body":   {
+        "serviceType": "Databricks",
+        "rootEntityType": "databricks_metastore",
+        "taxonomies": ["Metastore", "Catalog", "Schema"],
+        "purviewAssetEntityDefs": {
+          "databricks_table": {
+            "qualifiedNamePattern": "databricks://{dbSchema.catalog.metastore.metastoreId}/catalogs/{dbSchema.catalog.name}/schemas/{dbSchema.name}/tables/{name}",
+            "taxonomy": {
+              "uniqueValue": "{name}"
+            },
+            "subAssets": {
+              "databricks_table_column": {
+                "qualifiedNamePattern": "databricks://{table.dbSchema.catalog.metastore.metastoreId}/catalogs/{table.dbSchema.catalog.name}/schemas/{table.dbSchema.name}/tables/{table.name}/columns/{name}",
+                "compactToAsset": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

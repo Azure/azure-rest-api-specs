@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "serviceTypeName": "DataBricks"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "serviceType": "Databricks",
+        "rootEntityType": "databricks_metastore",
+        "taxonomies": ["Metastore", "Catalog", "Schema"],
+        "purviewAssetEntityDefs": {
+          "databricks_table": {
+            "qualifiedNamePattern": "databricks://{dbSchema.catalog.metastore.metastoreId}/catalogs/{dbSchema.catalog.name}/schemas/{dbSchema.name}/tables/{name}",
+            "taxonomy": {
+              "uniqueValue": "{name}"
+            },
+            "subAssets": {
+              "databricks_table_column": {
+                "qualifiedNamePattern": "databricks://{table.dbSchema.catalog.metastore.metastoreId}/catalogs/{table.dbSchema.catalog.name}/schemas/{table.dbSchema.name}/tables/{table.name}/columns/{name}",
+                "compactToAsset": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
