@@ -61,22 +61,51 @@
             }
           },
           {
-            "serviceType": "Databricks",
-            "name": "databricks_table_columns",
-            "relationshipCategory": "COMPOSITION",
-            "endDef1": {
-              "type": "databricks_table",
-              "name": "columns",
-              "isContainer": true,
-              "cardinality": "SET"
-            },
-            "endDef2": {
-              "type": "databricks_table_column",
-              "name": "table",
-              "isContainer": false,
-              "cardinality": "SINGLE"
-            },
-            "propagateTags": "NONE"
+            "name": "databricks_table_column",
+            "serviceType": "Databricks UC",
+            "superTypes": [
+              "DataSet"
+            ],
+            "category": "ENTITY",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+              {
+                "name": "dataType",
+                "typeName": "string",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "isUnique": false,
+                "isIndexable": false
+              },
+              {
+                "name": "isNullable",
+                "typeName": "boolean",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "isUnique": false,
+                "isIndexable": false
+              },
+              {
+                "name": "ordinalPosition",
+                "typeName": "short",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "isUnique": false,
+                "isIndexable": false
+              },
+              {
+                "name": "comment",
+                "typeName": "string",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "isUnique": false,
+                "isIndexable": false
+              }
+            ],
+            "options": {
+              "schemaAttributes": "[\"dataType\"]",
+              "purviewEntityExtDef": "{\"qualifiedNamePattern\":\"databricks://(?<MetastoreId>[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12})/catalogs/(?<Catalog>[^/]+)/schemas/(?<Schema>[^/]+)/tables/(?<Table>[^/]+)/columns/(?<Column>[^/]+)$\",\"qualifiedNameSample\":\"databricks://f27d9d14-8edd-4964-a5fb-2f9f5d113c6e/catalogs/main/schemas/default/tables/department/columns/name\",\"isContainer\":false,\"friendlyName\":\"Databricks Table Column\",\"search\":{\"searchBehavior\":\"RelevantSearch\",\"relevantSearch\":{\"relevantRelationships\":[\"databricks_table_columns\"],\"relevantAttributes\":[\"dataType\"]}}}"
+            }
           }
         ],
         "relationshipDefs": [],
@@ -146,22 +175,51 @@
               }
             },
             {
+              "name": "databricks_table_column",
               "serviceType": "Databricks",
-              "name": "databricks_table_columns",
-              "relationshipCategory": "COMPOSITION",
-              "endDef1": {
-                "type": "databricks_table",
-                "name": "columns",
-                "isContainer": true,
-                "cardinality": "SET"
-              },
-              "endDef2": {
-                "type": "databricks_table_column",
-                "name": "table",
-                "isContainer": false,
-                "cardinality": "SINGLE"
-              },
-              "propagateTags": "NONE"
+              "superTypes": [
+                "DataSet"
+              ],
+              "category": "ENTITY",
+              "typeVersion": "1.0",
+              "attributeDefs": [
+                {
+                  "name": "dataType",
+                  "typeName": "string",
+                  "isOptional": true,
+                  "cardinality": "SINGLE",
+                  "isUnique": false,
+                  "isIndexable": false
+                },
+                {
+                  "name": "isNullable",
+                  "typeName": "boolean",
+                  "isOptional": true,
+                  "cardinality": "SINGLE",
+                  "isUnique": false,
+                  "isIndexable": false
+                },
+                {
+                  "name": "ordinalPosition",
+                  "typeName": "short",
+                  "isOptional": true,
+                  "cardinality": "SINGLE",
+                  "isUnique": false,
+                  "isIndexable": false
+                },
+                {
+                  "name": "comment",
+                  "typeName": "string",
+                  "isOptional": true,
+                  "cardinality": "SINGLE",
+                  "isUnique": false,
+                  "isIndexable": false
+                }
+              ],
+              "options": {
+                "schemaAttributes": "[\"dataType\"]",
+                "purviewEntityExtDef": "{\"qualifiedNamePattern\":\"databricks://(?<MetastoreId>[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12})/catalogs/(?<Catalog>[^/]+)/schemas/(?<Schema>[^/]+)/tables/(?<Table>[^/]+)/columns/(?<Column>[^/]+)$\",\"qualifiedNameSample\":\"databricks://f27d9d14-8edd-4964-a5fb-2f9f5d113c6e/catalogs/main/schemas/default/tables/department/columns/name\",\"isContainer\":false,\"friendlyName\":\"Databricks Table Column\",\"search\":{\"searchBehavior\":\"RelevantSearch\",\"relevantSearch\":{\"relevantRelationships\":[\"databricks_table_columns\"],\"relevantAttributes\":[\"dataType\"]}}}"
+              }
             }
           ],
           "relationshipDefs": [],
