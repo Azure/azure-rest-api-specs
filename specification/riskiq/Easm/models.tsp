@@ -1033,6 +1033,7 @@ model Port {
 }
 
 @doc("A request body used for an asset report snapshot export.")
+@projectedName("csharp", "ReportAssetSnapshotExportPayload")
 model ReportAssetSnapshotExportRequest {
   @doc("The metric to retrieve a snapshot for.")
   metric?: string;
