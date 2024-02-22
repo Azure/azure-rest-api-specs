@@ -877,11 +877,11 @@
       "type": "object",
       "description": "The text injection attacks analysis response.",
       "properties": {
-        "userPromptAnalysisResult": {
+        "userPromptAnalysis": {
           "$ref": "#/definitions/TextPromptInjectionResult",
           "description": "Direct injection analysis result for user prompt input."
         },
-        "documentsAnalysisResults": {
+        "documentsAnalysis": {
           "type": "array",
           "description": "Direct and indirect injection attacks analysis result for documents input.",
           "items": {
@@ -1428,13 +1428,13 @@
       "type": "object",
       "description": "The text injection attacks analysis response.",
       "properties": {
-        "detected": {
+        "attackDetected": {
           "type": "boolean",
           "description": "Analysis result for whether the prompt is classified as an injection attack."
         }
       },
       "required": [
-        "detected"
+        "attackDetected"
       ]
     },
     "UngroundedDetails": {
