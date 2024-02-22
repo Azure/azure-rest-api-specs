@@ -59,6 +59,10 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - Microsoft.AlertsManagement/preview/2024-03-01-preview/AlertProcessingRules.json
+  suppressions:
+  - code: OperationsAPIImplementation
+    from: AlertProcessingRules.json
+    reason: Aleady implemented in AlertsManagement.json.
 ```
 ### Tag: package-preview-2023-08
 
