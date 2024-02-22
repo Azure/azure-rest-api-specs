@@ -134,7 +134,7 @@ model AddFabricRequestDetails {
 }
 
 @doc("Request body for removing a fabric/scenario/infra POST action")
-model RemoveFabricRequestDetails {
+model RemoveInfraAndScenarioDetails {
   @doc("Infra of fabric to be removed.")
   infrastructure: string;
 
@@ -171,9 +171,9 @@ interface ExtensionManagers {
     ExtensionManager
   >;
   @doc("Remove a fabric/infra/scenario on the extension manager resource")
-  removeFabric is ArmResourceActionAsync<
+  removeInfraAndScenario is ArmResourceActionAsync<
     ExtensionManager,
-    RemoveFabricRequestDetails,
+    RemoveInfraAndScenarioDetails,
     ExtensionManager
   >;
 }
