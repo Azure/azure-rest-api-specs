@@ -18,12 +18,11 @@ provided prompt data.
 """)
 model CompletionsOptions {
   @doc("The prompts to generate completions from.")
-  @projectedName("json", "prompt")
   @projectedName("csharp", "Prompts")
   prompt: string[];
 
   @doc("The maximum number of tokens to generate.")
-  @projectedName("json", "max_tokens")
+  @encodedName("application/json", "max_tokens")
   maxTokens?: int32;
 
   @doc("""
@@ -33,7 +32,6 @@ model CompletionsOptions {
     It is not recommended to modify temperature and top_p for the same completions request as the
     interaction of these two settings is difficult to predict.
     """)
-  @projectedName("json", "temperature")
   temperature?: float32;
 
   @doc("""
@@ -44,7 +42,7 @@ model CompletionsOptions {
     It is not recommended to modify temperature and top_p for the same completions request as the
     interaction of these two settings is difficult to predict.
     """)
-  @projectedName("json", "top_p")
+  @encodedName("application/json", "top_p")
   @projectedName("csharp", "NucleusSamplingFactor")
   topP?: float32;
 
@@ -55,7 +53,7 @@ model CompletionsOptions {
     a full ban or exclusive selection of a token, respectively. The exact behavior of a given bias
     score varies by model.
     """)
-  @projectedName("json", "logit_bias")
+  @encodedName("application/json", "logit_bias")
   @projectedName("csharp", "TokenSelectionBiases")
   logitBias?: Record<int32>;
 
@@ -63,7 +61,6 @@ model CompletionsOptions {
     An identifier for the caller or end user of the operation. This may be used for tracking
     or rate-limiting purposes.
     """)
-  @projectedName("json", "user")
   user?: string;
 
   @doc("""
@@ -72,7 +69,6 @@ model CompletionsOptions {
     Because this setting can generate many completions, it may quickly consume your token quota.
     Use carefully and ensure reasonable settings for max_tokens and stop.
     """)
-  @projectedName("json", "n")
   @projectedName("csharp", "ChoicesPerPrompt")
   n?: int32;
 
@@ -80,7 +76,6 @@ model CompletionsOptions {
     A value that controls the emission of log probabilities for the provided number of most likely
     tokens within a completions response.
     """)
-  @projectedName("json", "logprobs")
   @projectedName("csharp", "LogProbabilityCount")
   logprobs?: int32;
 
@@ -88,13 +83,11 @@ model CompletionsOptions {
     A value specifying whether completions responses should include input prompts as prefixes to
     their generated output.
     """)
-  @projectedName("json", "echo")
   echo?: boolean;
 
   @doc("""
     A collection of textual sequences that will end completions generation.
     """)
-  @projectedName("json", "stop")
   @projectedName("csharp", "StopSequences")
   stop?: string[];
 
@@ -104,7 +97,7 @@ model CompletionsOptions {
     Positive values will make tokens less likely to appear when they already exist and increase the
     model's likelihood to output new topics.
     """)
-  @projectedName("json", "presence_penalty")
+  @encodedName("application/json", "presence_penalty")
   presencePenalty?: float32;
 
   @doc("""
@@ -113,7 +106,7 @@ model CompletionsOptions {
     Positive values will make tokens less likely to appear as their frequency increases and
     decrease the likelihood of the model repeating the same statements verbatim.
     """)
-  @projectedName("json", "frequency_penalty")
+  @encodedName("application/json", "frequency_penalty")
   frequencyPenalty?: float32;
 
   @doc("""
@@ -124,14 +117,13 @@ model CompletionsOptions {
     Because this setting can generate many completions, it may quickly consume your token quota.
     Use carefully and ensure reasonable settings for max_tokens and stop.
     """)
-  @projectedName("json", "best_of")
+  @encodedName("application/json", "best_of")
   @projectedName("csharp", "GenerationSampleCount")
   bestOf?: int32;
 
   @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)
-  @projectedName("json", "stream")
   @projectedName("csharp", "InternalShouldStreamResponse")
   stream?: boolean;
 
@@ -140,7 +132,6 @@ model CompletionsOptions {
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
-  @projectedName("json", "model")
   @projectedName("csharp", "DeploymentName")
   `model`?: string;
 }
@@ -152,14 +143,12 @@ provided prompt data.
 """)
 model Completions {
   @doc("A unique identifier associated with this completions response.")
-  @projectedName("json", "id")
   id: string;
 
   @doc("""
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
-  @projectedName("json", "created")
   @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
@@ -169,7 +158,7 @@ model Completions {
   results for different prompts may arrive at different times or in different orders.
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
-  @projectedName("json", "prompt_filter_results")
+  @encodedName("application/json", "prompt_filter_results")
   promptFilterResults?: ContentFilterResultsForPrompt[];
 
   @doc("""
@@ -177,13 +166,11 @@ model Completions {
     Generally, `n` choices are generated per provided prompt with a default value of 1.
     Token limits and other settings may limit the number of choices generated.
     """)
-  @projectedName("json", "choices")
   choices: Choice[];
 
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
     """)
-  @projectedName("json", "usage")
   usage: CompletionsUsage;
 }
 
@@ -194,11 +181,9 @@ Token limits and other settings may limit the number of choices generated.
 """)
 model Choice {
   @doc("The generated text for a given completions prompt.")
-  @projectedName("json", "text")
   text: string;
 
   @doc("The ordered index associated with this completions choice.")
-  @projectedName("json", "index")
   index: int32;
 
   @doc("""
@@ -207,19 +192,18 @@ model Choice {
   determines the intensity and risk level of harmful content) and if it has been filtered or not.
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
-  @projectedName("json", "content_filter_results")
+  @encodedName("application/json", "content_filter_results")
   contentFilterResults?: ContentFilterResultsForChoice;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   @doc("The log probabilities model for tokens associated with this completions choice.")
-  @projectedName("json", "logprobs")
   @projectedName("csharp", "LogProbabilityModel")
   logprobs: CompletionsLogProbabilityModel | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("Reason for finishing")
-  @projectedName("json", "finish_reason")
+  @encodedName("application/json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 }
 
@@ -230,23 +214,22 @@ Representation of a log probabilities model for a completions generation.
 """)
 model CompletionsLogProbabilityModel {
   @doc("The textual forms of tokens evaluated in this probability model.")
-  @projectedName("json", "tokens")
   tokens: string[];
 
   @doc("A collection of log probability values for the tokens in this completions data.")
-  @projectedName("json", "token_logprobs")
+  @encodedName("application/json", "token_logprobs")
   @projectedName("csharp", "TokenLogProbabilities")
   @projectedName("java", "tokenLogProbabilities")
   tokenLogprobs: NullableFloat[];
 
   @doc("A mapping of tokens to maximum log probability values in this completions data.")
-  @projectedName("json", "top_logprobs")
+  @encodedName("application/json", "top_logprobs")
   @projectedName("csharp", "TopLogProbabilities")
   @projectedName("java", "topLogProbabilities")
   topLogprobs: Record<NullableFloat>[];
 
   @doc("The text offsets associated with tokens in this completions data.")
-  @projectedName("json", "text_offset")
+  @encodedName("application/json", "text_offset")
   @projectedName("csharp", "TextOffsets")
   @projectedName("java", "textOffsets")
   textOffset: int32[];
