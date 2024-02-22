@@ -52,6 +52,9 @@ model TargetProperties {
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  @doc("Defines the target property constraints.")
+  constraints?: string;
 }
 
 @doc("Defines a desired runtime component.")

@@ -42,6 +42,9 @@ model SolutionProperties {
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
+
+  @doc("Defines the solution component property constraints.")
+  constraints?: string;
 }
 
 @armResourceOperations

@@ -50,6 +50,9 @@ model InstanceProperties {
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  @doc("Parameters.")
+  parameters?: Record<string>;
 }
 
 @doc("Properties of the reference target.")
