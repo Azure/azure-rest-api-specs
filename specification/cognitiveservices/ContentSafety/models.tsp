@@ -377,9 +377,9 @@ model AnalyzeTextPromptInjectionOptions {
 @doc("The text injection attacks analysis response.")
 model AnalyzeTextPromptInjectionResult {
   @doc("Direct injection analysis result for user prompt input.")
-  userPromptAnalysisResult?: TextPromptInjectionResult;
+  userPromptAnalysis?: TextPromptInjectionResult;
   @doc("Direct and indirect injection attacks analysis result for documents input.")
-  documentsAnalysisResults?: TextPromptInjectionResult[];
+  documentsAnalysis?: TextPromptInjectionResult[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
@@ -387,5 +387,5 @@ model AnalyzeTextPromptInjectionResult {
 @doc("The text injection attacks analysis response.")
 model TextPromptInjectionResult {
   @doc("Analysis result for whether the prompt is classified as an injection attack.")
-  detected: boolean;
+  attackDetected: boolean;
 }
