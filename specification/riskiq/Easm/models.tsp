@@ -930,6 +930,7 @@ model ObservedLong extends ObservedValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("value of observed port state")
 model ObservedPortState extends ObservedValue {
   value?: ObservedPortStateValue;
   port?: int32;
@@ -1471,6 +1472,7 @@ enum AssetUpdateState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("The state of assets")
 enum AssetState {
   ...AssetUpdateState,
   archived,
@@ -1490,6 +1492,7 @@ enum AuditTrailItemKind {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("The redirect type of a page")
 enum PageAssetRedirectType {
   httpHeader,
   metaRefresh,
@@ -1498,6 +1501,7 @@ enum PageAssetRedirectType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("The validation type of a Ssl certificate")
 enum SslCertAssetValidationType {
   domainValidation,
   organizationValidation,
