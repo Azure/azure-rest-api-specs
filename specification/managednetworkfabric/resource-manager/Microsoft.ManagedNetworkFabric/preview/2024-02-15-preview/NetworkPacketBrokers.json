@@ -1,0 +1,461 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2024-02-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkPacketBrokers/{networkPacketBrokerName}": {
+      "put": {
+        "tags": [
+          "NetworkPacketBrokers"
+        ],
+        "operationId": "NetworkPacketBrokers_Create",
+        "summary": "Create Network Packet Broker.",
+        "description": "Creates a Network Packet Broker.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkPacketBrokerNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/NetworkPacketBroker"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkPacketBroker"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkPacketBroker"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NetworkPacketBrokers_Create_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkPacketBrokers_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkPacketBrokers"
+        ],
+        "operationId": "NetworkPacketBrokers_Get",
+        "summary": "Gets a Network Packet Broker.",
+        "description": "Retrieves details of this Network Packet Broker.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkPacketBrokerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkPacketBroker"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkPacketBrokers_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkPacketBrokers_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkPacketBrokers"
+        ],
+        "operationId": "NetworkPacketBrokers_Update",
+        "summary": "Updates the Network Packet Broker.",
+        "description": "API to update certain properties of the Network Packet Broker resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkPacketBrokerNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Network Packet Broker properties to update.",
+            "schema": {
+              "$ref": "#/definitions/NetworkPacketBrokerPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkPacketBroker"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkPacketBrokers_Update_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkPacketBrokers_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkPacketBrokers"
+        ],
+        "operationId": "NetworkPacketBrokers_Delete",
+        "summary": "Deletes a Network Packet Broker.",
+        "description": "Deletes Network Packet Broker.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkPacketBrokerNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkPacketBrokers_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkPacketBrokers_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkPacketBrokers": {
+      "get": {
+        "operationId": "NetworkPacketBrokers_ListByResourceGroup",
+        "summary": "List all Network Packet Brokers under resource group.",
+        "description": "Displays NetworkPacketBrokers list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all Network Packet Brokers under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkPacketBrokersListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkPacketBrokers_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkPacketBrokers_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkPacketBrokers": {
+      "get": {
+        "operationId": "NetworkPacketBrokers_ListBySubscription",
+        "summary": "List Network Packet Brokers by subscription.",
+        "description": "Displays Network Packet Brokers list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkPacketBrokers under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NetworkPacketBrokersListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkPacketBrokers_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkPacketBrokers_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkPacketBroker": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkPacketBrokerProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The NetworkPacketBroker resource definition."
+    },
+    "NetworkPacketBrokerProperties": {
+      "type": "object",
+      "description": "Network Packet Broker Properties defines the properties of the resource.",
+      "required": [
+        "networkFabricId"
+      ],
+      "properties": {
+        "networkFabricId": {
+          "description": "ARM resource ID of the Network Fabric.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/NetworkFabricIdProperty"
+        },
+        "networkDeviceIds": {
+          "type": "array",
+          "description": "List of ARM resource IDs of Network Devices [NPB].",
+          "readOnly": true,
+          "items": {
+            "description": "ARM resource ID of the Network Device.",
+            "$ref": "./common.json#/definitions/NetworkDeviceIdProperty"
+          }
+        },
+        "sourceInterfaceIds": {
+          "type": "array",
+          "description": "List of network interfaces across NPB devices that are used to mirror source traffic.",
+          "readOnly": true,
+          "items": {
+            "description": "ARM resource ID of the Network Interface.",
+            "$ref": "./common.json#/definitions/NetworkInterfaceIdProperty"
+          }
+        },
+        "networkTapIds": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of network Tap IDs configured on NPB.",
+          "items": {
+            "description": "ARM resource ID of the Network Tap.",
+            "$ref": "./common.json#/definitions/NetworkTapIdProperty"
+          }
+        },
+        "neighborGroupIds": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of neighbor group IDs configured on NPB.",
+          "items": {
+            "description": "ARM resource ID of the Neighbor Group.",
+            "$ref": "./common.json#/definitions/NetworkTapIdProperty"
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkPacketBrokerPatch": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/TagsUpdate"
+        }
+      ],
+      "description": "The NetworkPacketBroker patch resource definition."
+    },
+    "NetworkPacketBrokersListResult": {
+      "type": "object",
+      "description": "List of NetworkPacketBrokers.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of NetworkPacketBroker resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkPacketBroker"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "NetworkPacketBrokerNameParameter": {
+      "type": "string",
+      "description": "Name of the Network Packet Broker.",
+      "in": "path",
+      "name": "networkPacketBrokerName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

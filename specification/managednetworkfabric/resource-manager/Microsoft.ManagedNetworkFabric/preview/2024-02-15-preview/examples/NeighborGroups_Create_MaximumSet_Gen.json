@@ -1,0 +1,128 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "api-version": "2024-02-15-preview",
+    "neighborGroupName": "example-neighborGroup",
+    "body": {
+      "properties": {
+        "destination": {
+          "ipv4Addresses": [
+            "10.10.10.10",
+            "20.10.10.10",
+            "30.10.10.10",
+            "40.10.10.10",
+            "50.10.10.10",
+            "60.10.10.10",
+            "70.10.10.10",
+            "80.10.10.10",
+            "90.10.10.10"
+          ],
+          "ipv6Addresses": [
+            "2F::/100"
+          ]
+        },
+        "annotation": "annotation"
+      },
+      "tags": {
+        "key8107": "1234"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "networkTapIds": [
+            "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTaps/example-networkTap"
+          ],
+          "networkTapRuleIds": [
+            "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-networkTapRule"
+          ],
+          "destination": {
+            "ipv4Addresses": [
+              "10.10.10.10",
+              "20.10.10.10",
+              "30.10.10.10",
+              "40.10.10.10",
+              "50.10.10.10",
+              "60.10.10.10",
+              "70.10.10.10",
+              "80.10.10.10",
+              "90.10.10.10"
+            ],
+            "ipv6Addresses": [
+              "2F::/100"
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "annotation": "annotation"
+        },
+        "tags": {
+          "keyID": "KeyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/subscriptionId/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/neighborGroups/example-neighborGroup",
+        "name": "example-neighborGroup",
+        "type": "microsoft.managednetworkfabric/neighborGroups",
+        "systemData": {
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "createdAt": "2023-05-23T05:49:59.193Z",
+          "lastModifiedBy": "email@address.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-23T05:49:59.194Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "networkTapIds": [
+            "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTaps/example-networkTap"
+          ],
+          "networkTapRuleIds": [
+            "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-networkTapRule"
+          ],
+          "destination": {
+            "ipv4Addresses": [
+              "10.10.10.10",
+              "20.10.10.10",
+              "30.10.10.10",
+              "40.10.10.10",
+              "50.10.10.10",
+              "60.10.10.10",
+              "70.10.10.10",
+              "80.10.10.10",
+              "90.10.10.10"
+            ],
+            "ipv6Addresses": [
+              "2F::/100"
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "annotation": "annotation"
+        },
+        "tags": {
+          "keyID": "KeyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/subscriptionId/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/neighborGroups/example-neighborGroup",
+        "name": "example-neighborGroup",
+        "type": "microsoft.managednetworkfabric/neighborGroups",
+        "systemData": {
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "createdAt": "2023-05-23T05:49:59.193Z",
+          "lastModifiedBy": "email@address.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-23T05:49:59.194Z"
+        }
+      }
+    }
+  }
+}
