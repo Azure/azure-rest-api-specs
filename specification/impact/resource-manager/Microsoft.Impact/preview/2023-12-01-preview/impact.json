@@ -684,7 +684,7 @@
         "tags": [
           "Insights"
         ],
-        "description": "Create Insight resource, this is Admin only operation",
+        "description": "Create Insight resource, This is Admin only operation",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -749,7 +749,7 @@
         "tags": [
           "Insights"
         ],
-        "description": "Delete Insight resource,, this is Admin only operation",
+        "description": "Delete Insight resource, This is Admin only operation",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1204,42 +1204,6 @@
         }
       }
     },
-    "InsightLevel": {
-      "type": "string",
-      "description": "Enum for insight level",
-      "enum": [
-        "Informational",
-        "Warning",
-        "Error",
-        "Critical"
-      ],
-      "x-ms-enum": {
-        "name": "InsightLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Informational",
-            "value": "Informational",
-            "description": "Informational insight"
-          },
-          {
-            "name": "Warning",
-            "value": "Warning",
-            "description": "Warning insight"
-          },
-          {
-            "name": "Error",
-            "value": "Error",
-            "description": "Error insight"
-          },
-          {
-            "name": "Critical",
-            "value": "Critical",
-            "description": "Critical insight"
-          }
-        ]
-      }
-    },
     "InsightListResult": {
       "type": "object",
       "description": "The response of a Insight list operation.",
@@ -1280,7 +1244,7 @@
         },
         "eventId": {
           "type": "string",
-          "description": "Identifier of the event that has been correlated with this insight. applies for service health scenarios."
+          "description": "Identifier of the event that has been correlated with this insight. This can be used to aggregate insights for the same event."
         },
         "content": {
           "$ref": "#/definitions/Content",
@@ -1289,7 +1253,7 @@
         "eventTime": {
           "type": "string",
           "format": "date-time",
-          "description": "attribution time of the insight."
+          "description": "Time of the event, which has been correlated the impact."
         },
         "insightUniqueId": {
           "type": "string",

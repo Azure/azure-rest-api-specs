@@ -43,13 +43,13 @@ model InsightProperties is ResourceProperties {
   @doc("status of the insight. example resolved, repaired, other.")
   status?: string;
 
-  @doc("Identifier of the event that has been correlated with this insight. applies for service health scenarios.")
+  @doc("Identifier of the event that has been correlated with this insight. This can be used to aggregate insights for the same event.")
   eventId?: string;
 
   @doc("Contains title & description for the insight")
   content: Content;
 
-  @doc("attribution time of the insight.")
+  @doc("Time of the event, which has been correlated the impact.")
   eventTime?: utcDateTime;
 
   @doc("unique id of the insight.")
@@ -120,20 +120,6 @@ model InsightDetails {
   azureResourceId?: string;
 }
 
-@doc("Enum for insight level")
-enum InsightLevel {
-  @doc("Informational insight")
-  Informational: "Informational",
-
-  @doc("Warning insight")
-  Warning: "Warning",
-
-  @doc("Error insight")
-  Error: "Error",
-
-  @doc("Critical insight")
-  Critical: "Critical",
-}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
@@ -144,9 +130,9 @@ interface Insights {
   @doc("List Insight resources by workloadImpactName")
   listBySubscription is ArmListBySubscription<Insight>;
 
-  @doc("Create Insight resource, this is Admin only operation")
+  @doc("Create Insight resource, This is Admin only operation")
   create is ArmResourceCreateOrReplaceSync<Insight>;
 
-  @doc("Delete Insight resource,, this is Admin only operation")
+  @doc("Delete Insight resource, This is Admin only operation")
   delete is ArmResourceDeleteSync<Insight>;
 }
