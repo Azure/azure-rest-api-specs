@@ -1,0 +1,897 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2024-02-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/routePolicies/{routePolicyName}": {
+      "put": {
+        "tags": [
+          "RoutePolicies"
+        ],
+        "operationId": "RoutePolicies_Create",
+        "summary": "Create Route Policy.",
+        "description": "Implements Route Policy PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoutePolicyNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/RoutePolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RoutePolicy"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RoutePolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RoutePolicies_Create_MaximumSet_Gen": {
+            "$ref": "./examples/RoutePolicies_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RoutePolicies"
+        ],
+        "operationId": "RoutePolicies_Get",
+        "summary": "Gets a Route Policy.",
+        "description": "Implements Route Policy GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoutePolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RoutePolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RoutePolicies_Get_MaximumSet_Gen": {
+            "$ref": "./examples/RoutePolicies_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "RoutePolicies"
+        ],
+        "operationId": "RoutePolicies_Update",
+        "summary": "Updates a Route Policy.",
+        "description": "API to update certain properties of the Route Policy resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoutePolicyNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Route Policy properties to update.",
+            "schema": {
+              "$ref": "#/definitions/RoutePolicyPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RoutePolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "RoutePolicies_Update_MaximumSet_Gen": {
+            "$ref": "./examples/RoutePolicies_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RoutePolicies"
+        ],
+        "operationId": "RoutePolicies_Delete",
+        "summary": "Deletes a Route Policy.",
+        "description": "Implements Route Policy DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoutePolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "RoutePolicies_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/RoutePolicies_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/routePolicies": {
+      "get": {
+        "operationId": "RoutePolicies_ListByResourceGroup",
+        "summary": "List RoutePolicies by resource group.",
+        "description": "Implements RoutePolicies list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all RoutePolicies under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/RoutePoliciesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RoutePolicies_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/RoutePolicies_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/routePolicies": {
+      "get": {
+        "operationId": "RoutePolicies_ListBySubscription",
+        "summary": "List RoutePolicies by subscription.",
+        "description": "Implements RoutePolicies list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all RoutePolicies under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/RoutePoliciesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RoutePolicies_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/RoutePolicies_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/routePolicies/{routePolicyName}/updateAdministrativeState": {
+      "post": {
+        "tags": [
+          "RoutePolicies"
+        ],
+        "operationId": "RoutePolicies_UpdateAdministrativeState",
+        "description": "Updated the admin state for this Route Policy.",
+        "summary": "Executes enable operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoutePolicyNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForDeviceUpdate"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForDeviceUpdate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "RoutePolicies_UpdateAdministrativeState_MaximumSet_Gen": {
+            "$ref": "./examples/RoutePolicies_UpdateAdministrativeState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/routePolicies/{routePolicyName}/validateConfiguration": {
+      "post": {
+        "tags": [
+          "RoutePolicies"
+        ],
+        "operationId": "RoutePolicies_ValidateConfiguration",
+        "description": "Validates the configuration of the resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoutePolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "./common.json#/definitions/ValidateConfigurationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./common.json#/definitions/ValidateConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "RoutePolicies_ValidateConfiguration_MaximumSet_Gen": {
+            "$ref": "./examples/RoutePolicies_ValidateConfiguration_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/routePolicies/{routePolicyName}/commitConfiguration": {
+      "post": {
+        "tags": [
+          "RoutePolicies"
+        ],
+        "operationId": "RoutePolicies_CommitConfiguration",
+        "description": "Commits the configuration of the given resources.",
+        "summary": "Execute the commit on the resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoutePolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForStateUpdate"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForStateUpdate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "RoutePolicies_CommitConfiguration_MaximumSet_Gen": {
+            "$ref": "./examples/RoutePolicies_CommitConfiguration_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RoutePolicyProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        },
+        {
+          "description": "Route Policy patchable properties.",
+          "$ref": "#/definitions/RoutePolicyPatchableProperties"
+        }
+      ],
+      "properties": {
+        "networkFabricId": {
+          "description": "Arm Resource ID of Network Fabric.",
+          "$ref": "./common.json#/definitions/NetworkFabricIdProperty"
+        },
+        "addressFamilyType": {
+          "type": "string",
+          "description": "AddressFamilyType. This parameter decides whether the given ipv4 or ipv6 route policy.",
+          "default": "IPv4",
+          "minLength": 1,
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AddressFamilyType"
+          }
+        },
+        "configurationState": {
+          "description": "Configuration state of the resource.",
+          "$ref": "./common.json#/definitions/ConfigurationState"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState"
+        },
+        "administrativeState": {
+          "description": "Administrative state of the resource.",
+          "$ref": "./common.json#/definitions/AdministrativeState"
+        }
+      },
+      "required": [
+        "statements",
+        "networkFabricId"
+      ],
+      "description": "RoutePolicyProperties defines the resource properties."
+    },
+    "RoutePolicy": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/RoutePolicyProperties"
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "description": "The RoutePolicy resource definition."
+    },
+    "RoutePolicyPatch": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The RoutePolicy patchable properties.",
+          "$ref": "#/definitions/RoutePolicyPatchableProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/TagsUpdate"
+        }
+      ],
+      "description": "The Route Policy patch resource definition."
+    },
+    "RoutePolicyPatchableProperties": {
+      "type": "object",
+      "description": "Route Policy patchable properties.",
+      "properties": {
+        "defaultAction": {
+          "type": "string",
+          "description": "Default action that needs to be applied when no condition is matched. Example: Permit | Deny.",
+          "default": "Deny",
+          "$ref": "./common.json#/definitions/CommunityActionTypes"
+        },
+        "statements": {
+          "type": "array",
+          "description": "Route Policy statements.",
+          "x-ms-identifiers": [
+            "sequenceNumber"
+          ],
+          "items": {
+            "description": "Route Policy condition model.",
+            "$ref": "#/definitions/RoutePolicyStatementProperties"
+          }
+        }
+      }
+    },
+    "RoutePoliciesListResult": {
+      "type": "object",
+      "description": "List of RoutePolicies.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of RoutePolicy resources.",
+          "items": {
+            "$ref": "#/definitions/RoutePolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "RoutePolicyStatementProperties": {
+      "description": "Route Policy Statement properties.",
+      "type": "object",
+      "required": [
+        "sequenceNumber",
+        "condition",
+        "action"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 4294967295,
+          "description": "Sequence to insert to/delete from existing route."
+        },
+        "condition": {
+          "description": "Route policy condition properties.",
+          "$ref": "#/definitions/StatementConditionProperties"
+        },
+        "action": {
+          "description": "Route policy action properties.",
+          "$ref": "#/definitions/StatementActionProperties"
+        }
+      }
+    },
+    "StatementConditionProperties": {
+      "type": "object",
+      "description": "Route policy statement condition properties.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the condition used.",
+          "default": "Or",
+          "minLength": 1,
+          "enum": [
+            "Or",
+            "And"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RoutePolicyConditionType"
+          }
+        },
+        "ipPrefixId": {
+          "type": "string",
+          "description": "Arm Resource Id of IpPrefix."
+        }
+      },
+      "allOf": [
+        {
+          "description": "List of IP Community resource IDs.",
+          "$ref": "#/definitions/IpCommunityIdList"
+        },
+        {
+          "description": "List of IP Extended Community resource IDs.",
+          "$ref": "#/definitions/IpExtendedCommunityIdList"
+        }
+      ]
+    },
+    "StatementActionProperties": {
+      "type": "object",
+      "description": "Route policy action properties.",
+      "properties": {
+        "localPreference": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "Local Preference of the route policy."
+        },
+        "actionType": {
+          "type": "string",
+          "description": "Action type. Example: Permit | Deny | Continue.",
+          "minLength": 1,
+          "enum": [
+            "Permit",
+            "Deny",
+            "Continue"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RoutePolicyActionType"
+          }
+        },
+        "ipCommunityProperties": {
+          "description": "IP Community Properties.",
+          "$ref": "#/definitions/ActionIpCommunityProperties"
+        },
+        "ipExtendedCommunityProperties": {
+          "description": "IP Extended Community Properties.",
+          "$ref": "#/definitions/ActionIpExtendedCommunityProperties"
+        }
+      },
+      "required": [
+        "actionType"
+      ]
+    },
+    "ActionIpCommunityProperties": {
+      "type": "object",
+      "description": "IP Community Properties.",
+      "allOf": [
+        {
+          "description": "IP Community add operation properties.",
+          "$ref": "#/definitions/IpCommunityAddOperationProperties"
+        },
+        {
+          "description": "IP Community delete operation properties.",
+          "$ref": "#/definitions/IpCommunityDeleteOperationProperties"
+        },
+        {
+          "description": "IP Community set operation properties.",
+          "$ref": "#/definitions/IpCommunitySetOperationProperties"
+        }
+      ]
+    },
+    "IpCommunityAddOperationProperties": {
+      "type": "object",
+      "description": "IP Community add operation properties.",
+      "properties": {
+        "add": {
+          "description": "List of IP Community IDs.",
+          "$ref": "#/definitions/IpCommunityIdList"
+        }
+      }
+    },
+    "IpCommunitySetOperationProperties": {
+      "type": "object",
+      "description": "IP Community set operation properties.",
+      "properties": {
+        "set": {
+          "description": "List of IP Community IDs.",
+          "$ref": "#/definitions/IpCommunityIdList"
+        }
+      }
+    },
+    "IpCommunityDeleteOperationProperties": {
+      "type": "object",
+      "description": "IP Community delete operation properties.",
+      "properties": {
+        "delete": {
+          "description": "List of IP Community IDs.",
+          "$ref": "#/definitions/IpCommunityIdList"
+        }
+      }
+    },
+    "ActionIpExtendedCommunityProperties": {
+      "type": "object",
+      "description": "IP Extended Community Properties.",
+      "allOf": [
+        {
+          "description": "IP Extended Community add operation properties.",
+          "$ref": "#/definitions/IpExtendedCommunityAddOperationProperties"
+        },
+        {
+          "description": "IP Extended Community delete operation properties.",
+          "$ref": "#/definitions/IpExtendedCommunityDeleteOperationProperties"
+        },
+        {
+          "description": "IP Extended Community set operation properties.",
+          "$ref": "#/definitions/IpExtendedCommunitySetOperationProperties"
+        }
+      ]
+    },
+    "IpExtendedCommunityAddOperationProperties": {
+      "type": "object",
+      "description": "IP Extended Community add operation properties.",
+      "properties": {
+        "add": {
+          "description": "List of IP Extended Community IDs.",
+          "$ref": "#/definitions/IpExtendedCommunityIdList"
+        }
+      }
+    },
+    "IpExtendedCommunitySetOperationProperties": {
+      "type": "object",
+      "description": "IP Extended Community set operation properties.",
+      "properties": {
+        "set": {
+          "description": "List of IP Extended Community IDs.",
+          "$ref": "#/definitions/IpExtendedCommunityIdList"
+        }
+      }
+    },
+    "IpExtendedCommunityDeleteOperationProperties": {
+      "type": "object",
+      "description": "IP Extended Community delete operation properties.",
+      "properties": {
+        "delete": {
+          "description": "List of IP Extended Community IDs.",
+          "$ref": "#/definitions/IpExtendedCommunityIdList"
+        }
+      }
+    },
+    "IpCommunityIdList": {
+      "description": "IP Community ID list properties.",
+      "type": "object",
+      "properties": {
+        "ipCommunityIds": {
+          "type": "array",
+          "description": "List of IP Community resource IDs.",
+          "items": {
+            "type": "string",
+            "description": "ARM Resource ID of IPCommunity."
+          }
+        }
+      }
+    },
+    "IpExtendedCommunityIdList": {
+      "description": "IP Extended Community Id list properties.",
+      "type": "object",
+      "properties": {
+        "ipExtendedCommunityIds": {
+          "type": "array",
+          "description": "List of IP Extended Community resource IDs.",
+          "items": {
+            "type": "string",
+            "description": "ARM Resource ID of IP Extended Community."
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "RoutePolicyNameParameter": {
+      "type": "string",
+      "description": "Name of the Route Policy.",
+      "in": "path",
+      "name": "routePolicyName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

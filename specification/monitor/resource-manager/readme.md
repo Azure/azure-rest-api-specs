@@ -39,9 +39,9 @@ tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line
 
-``` yaml $(tag) == 'package-2023-2023-10-01-preview'
+``` yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
-- Microsoft.Monitor\stable\2023-10-01-preview\azuremonitor.json
+- Microsoft.Monitor\preview\2023-10-01-preview\azuremonitor.json
 ```
 
 ### Tag: package-2023-05-01-preview-only

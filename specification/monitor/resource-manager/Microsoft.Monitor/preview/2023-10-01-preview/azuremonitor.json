@@ -64,7 +64,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -103,7 +103,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceListResult"
             }
@@ -142,7 +142,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineGroupListResult"
             }
@@ -184,7 +184,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceListResult"
             }
@@ -234,7 +234,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspace"
             }
@@ -359,7 +359,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspace"
             }
@@ -403,9 +403,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -421,7 +418,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -461,7 +458,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineGroupListResult"
             }
@@ -511,7 +508,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineGroup"
             }
@@ -645,7 +642,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineGroup"
             }
@@ -707,9 +704,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -725,7 +719,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1058,7 +1052,7 @@
           {
             "name": "CustomLocation",
             "value": "CustomLocation",
-            "description": "CustomLocation."
+            "description": "Custom location."
           }
         ]
       }
@@ -1480,7 +1474,8 @@
             "description": "The resource is being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "PublicNetworkAccess": {
       "type": "string",
@@ -1769,12 +1764,12 @@
           {
             "name": "rfc3164",
             "value": "rfc3164",
-            "description": "rfc3164."
+            "description": "rfc3164 protocol."
           },
           {
             "name": "rfc5424",
             "value": "rfc5424",
-            "description": "rfc5424."
+            "description": "rfc5424 protocol."
           }
         ]
       }
@@ -1789,9 +1784,29 @@
           "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         },
         "protocol": {
-          "$ref": "#/definitions/SyslogProtocol",
+          "type": "string",
           "description": "Protocol to parse syslog messages. Default rfc3164",
-          "default": "rfc3164"
+          "default": "rfc3164",
+          "enum": [
+            "rfc3164",
+            "rfc5424"
+          ],
+          "x-ms-enum": {
+            "name": "SyslogProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "rfc3164",
+                "value": "rfc3164",
+                "description": "rfc3164 protocol."
+              },
+              {
+                "name": "rfc5424",
+                "value": "rfc5424",
+                "description": "rfc5424 protocol."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -1836,9 +1851,53 @@
           "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         },
         "encoding": {
-          "$ref": "#/definitions/StreamEncodingType",
+          "type": "string",
           "description": "The encoding of the stream being received.",
-          "default": "nop"
+          "default": "nop",
+          "enum": [
+            "nop",
+            "utf-8",
+            "utf-16le",
+            "utf-16be",
+            "ascii",
+            "big5"
+          ],
+          "x-ms-enum": {
+            "name": "StreamEncodingType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "nop",
+                "value": "nop",
+                "description": "No encoding validation. Treats the file as a stream of raw bytes."
+              },
+              {
+                "name": "utf_8",
+                "value": "utf-8",
+                "description": "UTF-8 encoding."
+              },
+              {
+                "name": "utf_16le",
+                "value": "utf-16le",
+                "description": "UTF-16 encoding with little-endian byte order."
+              },
+              {
+                "name": "utf_16be",
+                "value": "utf-16be",
+                "description": "UTF-16 encoding with little-endian byte order."
+              },
+              {
+                "name": "ascii",
+                "value": "ascii",
+                "description": "ASCII encoding."
+              },
+              {
+                "name": "big5",
+                "value": "big5",
+                "description": "The Big5 Chinese character encoding."
+              }
+            ]
+          }
         },
         "readQueueLength": {
           "type": "integer",

@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "accountName": "MyAccount",
+    "api-version": "2024-02-05-preview",
+    "resource": {
+      "properties": {
+        "profileType": "PublicTrust",
+        "identityValidationId": "00000000-1234-5678-3333-444444444444",
+        "includePostalCode": true,
+        "includeStreetAddress": false
+      }
+    },
+    "profileName": "profileA",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "profileA",
+        "type": "Microsoft.CodeSigning/codeSigningAccounts/certificateProfiles",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/MyAccount/certificateProfiles/profileA",
+        "properties": {
+          "certificates": [
+            {
+              "createdDate": "3/14/2023 5:27:49 PM",
+              "expiryDate": "3/17/2023 5:27:49 PM",
+              "serialNumber": "xxxxxxxxxxxxxxxxxx",
+              "status": "Active",
+              "subjectName": "CN=Contoso Inc, O=Contoso Inc, L=New York, S=New York, C=US",
+              "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            }
+          ],
+          "city": "Dallas",
+          "commonName": "Contoso Inc",
+          "country": "US",
+          "enhancedKeyUsage": "1.3.6.1.4.1.311.yy.xxxxxxxx.xxxxxxxx.xxxxxxxxx.xxxxxxxx",
+          "identityValidationId": "00000000-1234-5678-3333-444444444444",
+          "includeCity": false,
+          "includeCountry": false,
+          "includePostalCode": true,
+          "includeState": false,
+          "includeStreetAddress": false,
+          "organization": "Contoso Inc",
+          "postalCode": "560090",
+          "profileType": "PublicTrust",
+          "provisioningState": "Succeeded",
+          "state": "Texas",
+          "status": "Active",
+          "streetAddress": "123 Bluebonnet"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "profileA",
+        "type": "Microsoft.CodeSigning/codeSigningAccounts/certificateProfiles",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/MyAccount/certificateProfiles/profileA",
+        "properties": {
+          "certificates": [],
+          "city": "Dallas",
+          "commonName": "Contoso Inc",
+          "country": "US",
+          "enhancedKeyUsage": "1.3.6.1.4.1.311.yy.xxxxxxxx.xxxxxxxx.xxxxxxxxx.xxxxxxxx",
+          "identityValidationId": "00000000-1234-5678-3333-444444444444",
+          "includeCity": false,
+          "includeCountry": false,
+          "includePostalCode": true,
+          "includeState": false,
+          "includeStreetAddress": false,
+          "organization": "Contoso Inc",
+          "postalCode": "560090",
+          "profileType": "PublicTrust",
+          "provisioningState": "Succeeded",
+          "state": "Texas",
+          "streetAddress": "123 Bluebonnet"
+        }
+      }
+    }
+  },
+  "operationId": "CertificateProfiles_Create",
+  "title": "Create a certificate profile."
+}

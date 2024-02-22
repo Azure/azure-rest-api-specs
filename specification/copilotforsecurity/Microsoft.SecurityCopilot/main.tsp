@@ -37,9 +37,25 @@ model CapacityProperties {
   @maxValue(999)
   numberOfUnits: int64;
 
+  @doc("Is cross geo compute allowed")
+  crossGeoCompute: IsAllowed;
+
+  @doc("Geo location of the capacity unit")
+  @visibility("read", "create")
+  geo: string;
+
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+}
+
+@doc("Enum to represent Allowed or NotAllowed")
+enum IsAllowed {
+  @doc("Allowed to do")
+  Allowed,
+
+  @doc("Not allowed to do")
+  NotAllowed,
 }
 
 @doc("The provisioning state of a resource.")

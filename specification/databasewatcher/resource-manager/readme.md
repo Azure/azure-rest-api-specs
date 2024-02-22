@@ -30,15 +30,6 @@ openapi-subtype: rpaas
 tag: package-2023-09-01-preview
 ```
 
-### Tag: package-2023-03-01-preview
-
-These settings apply only when `--tag=package-2023-03-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-03-01-preview'
-input-file:
-  - Microsoft.DatabaseWatcher/preview/2023-03-01-preview/Watcher.json
-```
-
 ### Tag: package-2023-09-01-preview
 
 These settings apply only when `--tag=package-2023-09-01-preview` is specified on the command line.
@@ -46,10 +37,6 @@ These settings apply only when `--tag=package-2023-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-09-01-preview'
 input-file:
   - Microsoft.DatabaseWatcher/preview/2023-09-01-preview/Watcher.json
-
-suppressions:
-  - code: ImplementPrivateEndpointAPIs
-    reason: We are not onboarding to the private endpoints feature as a target resource, so the other endpoints are not applicable for us. `GET privateLinkResources` is required to implement discoverability for the Shared Private Endpoints feature.
 ```
 
 ---
