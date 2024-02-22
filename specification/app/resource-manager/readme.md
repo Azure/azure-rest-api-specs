@@ -26,15 +26,48 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-11
+tag: package-preview-2024-02
 ```
 
 
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - Microsoft.App/preview/2024-02-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2024-02-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2024-02-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2024-02-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2024-02-02-preview/Builders.json
+  - Microsoft.App/preview/2024-02-02-preview/Builds.json
+  - Microsoft.App/preview/2024-02-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2024-02-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2024-02-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/Global.json
+  - Microsoft.App/preview/2024-02-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/Jobs.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-02-02-preview/SourceControls.json
+  - Microsoft.App/preview/2024-02-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2024-02-02-preview/Usages.json
+```
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-11'
+``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.App/preview/2023-11-02-preview/AppResiliency.json
   - Microsoft.App/preview/2023-11-02-preview/AuthConfigs.json
@@ -63,6 +96,7 @@ input-file:
   - Microsoft.App/preview/2023-11-02-preview/JavaComponents.json
   - Microsoft.App/preview/2023-11-02-preview/DotNetComponents.json
 ```
+
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
