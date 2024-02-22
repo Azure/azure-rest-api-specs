@@ -1448,6 +1448,14 @@
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "promoteRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PromoteRequest"
+            },
+            "description": "The parameter for enabling geo-redundant backup while promoting read replica."
           }
         ],
         "responses": {
@@ -2920,6 +2928,16 @@
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
+      }
+    },
+    "PromoteRequest": {
+      "description": "Request from client to promote geo-redundant replica",
+      "type": "object",
+      "properties": {
+        "enableGeoBackup": {
+          "type": "boolean",
+          "description": "Cluster name to verify."
+        }
       }
     }
   },
