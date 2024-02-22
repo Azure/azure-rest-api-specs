@@ -11,8 +11,8 @@ namespace DevCenterService;
 
 @doc("Indicates whether operation status is running, completed, canceled or failed.")
 @lroStatus
-@projectedName("csharp", "DevCenterOperationStatus")
-@projectedName("java", "DevCenterOperationStatus")
+@projectedName("csharp", "DevCentertatus")
+@projectedName("java", "DevCentertatus")
 @projectedName("python", "OperationStatus")
 enum OperationStatusValue {
   @doc("Operation is in progress")

@@ -9,7 +9,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-interface DevBoxesOperations {
+interface DevBoxes {
   @doc("Lists available pools")
   listPools is StandardResourceOperations.ResourceList<Pool>;
 
@@ -57,7 +57,7 @@ interface DevBoxesOperations {
   //     "in": "body",
   //  }
   @doc("Creates or replaces a Dev Box.")
-  @finalOperation(DevBoxesOperations.getDevBox)
+  @finalOperation(DevBoxes.getDevBox)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @put
@@ -337,7 +337,7 @@ interface DevBoxesOperations {
   >;
 }
 
-interface DevBoxesDevCenterOperations {
+interface DevBoxesDevCenter {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
   @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
   @route("/devboxes")
