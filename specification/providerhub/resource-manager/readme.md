@@ -24,21 +24,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the providerhub.
 
-``` yaml
+```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-02
+tag: package-2020-11-20
 ```
 
+### Tag: package-2024-02-01-preview
 
-### Tag: package-preview-2024-02
+These settings apply only when `--tag=package-2024-02-01-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-02'
+```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
   - Microsoft.ProviderHub/preview/2024-02-01-preview/providerhub.json
+directive:
+  - suppress: R4009
+    from: providerhub.json
+    reason: This version doesn't support systemData.
 ```
+
 ### Tag: package-2021-09-01-preview
 
 These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
