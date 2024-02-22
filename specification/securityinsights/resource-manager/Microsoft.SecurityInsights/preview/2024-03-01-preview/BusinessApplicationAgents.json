@@ -6,7 +6,7 @@
     "version": "2024-03-01-preview"
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/BusinessApplicationAgents/{agentResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}": {
       "put": {
         "tags": [
           "businessApplicationAgents"
@@ -33,7 +33,10 @@
             "in": "path",
             "name": "agentResourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "in": "header",
@@ -54,7 +57,7 @@
             "in": "body",
             "name": "agentToUpsert",
             "schema": {
-              "$ref": "#/definitions/AgentArmModelArmObjectWrapper"
+              "$ref": "#/definitions/Agent"
             }
           }
         ],
@@ -62,13 +65,13 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/AgentArmModelArmObjectWrapper"
+              "$ref": "#/definitions/Agent"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/AgentArmModelArmObjectWrapper"
+              "$ref": "#/definitions/Agent"
             }
           },
           "default": {
@@ -107,7 +110,10 @@
             "in": "path",
             "name": "agentResourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "in": "header",
@@ -123,7 +129,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/AgentArmModelArmObjectWrapper"
+              "$ref": "#/definitions/Agent"
             }
           },
           "default": {
@@ -162,7 +168,10 @@
             "in": "path",
             "name": "agentResourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "in": "header",
@@ -195,7 +204,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/BusinessApplicationAgents": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents": {
       "get": {
         "tags": [
           "businessApplicationAgents"
@@ -241,7 +250,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/AgentArmModelArmCollectionWrapper"
+              "$ref": "#/definitions/AgentsList"
             }
           },
           "default": {
@@ -250,6 +259,9 @@
               "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "BusinessApplicationAgents_List": {
@@ -260,6 +272,24 @@
     }
   },
   "definitions": {
+    "Agent": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/AgentArmModel",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "AgentArmModel": {
       "type": "object",
       "properties": {
@@ -279,8 +309,8 @@
           "pattern": "^\\/?subscriptions\\/([^\\/]+)\\/resourceGroups\\/([^\\/]+)\\/providers\\/Microsoft\\.KeyVault\\/vaults\\/([^\\/]+)$",
           "type": "string"
         },
-        "keyMode": {
-          "$ref": "#/definitions/KeyModeType"
+        "KeyVaultAuth": {
+          "$ref": "#/definitions/KeyVaultAuthType"
         },
         "secretSource": {
           "$ref": "#/definitions/SecretSourceType"
@@ -302,35 +332,17 @@
         }
       }
     },
-    "AgentArmModelArmCollectionWrapper": {
+    "AgentsList": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentArmModelArmObjectWrapper"
+            "$ref": "#/definitions/Agent"
           }
         },
         "nextLink": {
           "type": "string"
-        }
-      }
-    },
-    "AgentArmModelArmObjectWrapper": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "type": "object",
-          "$ref": "#/definitions/AgentArmModel",
-          "x-ms-client-flatten": true
         }
       }
     },
@@ -348,22 +360,22 @@
         }
       }
     },
-    "KeyModeType": {
+    "KeyVaultAuthType": {
       "enum": [
-        "Kvmi",
-        "Kvsi"
+        "ManagedIdentity",
+        "ApplicationIdentity"
       ],
       "type": "string",
-      "example": "Kvmi",
+      "example": "ManagedIdentity",
       "x-ms-enum": {
-        "name": "KeyModeType",
+        "name": "KeyVaultAuthType",
         "modelAsString": true,
         "values": [
           {
-            "value": "Kvmi"
+            "value": "ManagedIdentity"
           },
           {
-            "value": "Kvsi"
+            "value": "ApplicationIdentity"
           }
         ]
       }
@@ -392,7 +404,7 @@
   "parameters": {
     "Agent": {
       "name": "agent",
-      "description": "The agent",
+      "description": "The business application agent",
       "required": true,
       "in": "body",
       "x-ms-parameter-location": "method",
