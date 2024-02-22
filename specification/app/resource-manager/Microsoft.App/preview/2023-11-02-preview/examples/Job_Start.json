@@ -11,7 +11,19 @@
           "resources": {
             "cpu": 0.2,
             "memory": "100Mi"
-          }
+          },
+          "volumeMounts": [
+            {
+              "volumeName": "azurefile",
+              "mountPath": "/mnt/path1",
+              "subPath": "subPath1"
+            },
+            {
+              "volumeName": "nfsazurefile",
+              "mountPath": "/mnt/path2",
+              "subPath": "subPath2"
+            }
+          ]
         }
       ],
       "initContainers": [

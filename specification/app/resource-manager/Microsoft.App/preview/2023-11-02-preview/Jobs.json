@@ -1126,7 +1126,7 @@
           "description": "List of container definitions for the Container Apps Job.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobExecutionContainer"
+            "$ref": "./CommonDefinitions.json#/definitions/Container"
           },
           "x-ms-identifiers": [
             "name"
@@ -1136,53 +1136,11 @@
           "description": "List of specialized containers that run before job containers.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobExecutionContainer"
+            "$ref": "./CommonDefinitions.json#/definitions/InitContainer"
           },
           "x-ms-identifiers": [
             "name"
           ]
-        }
-      }
-    },
-    "JobExecutionContainer": {
-      "description": "Container Apps Jobs execution container definition.",
-      "type": "object",
-      "properties": {
-        "image": {
-          "description": "Container image tag.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Custom container name.",
-          "type": "string"
-        },
-        "command": {
-          "description": "Container start command.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "args": {
-          "description": "Container start command arguments.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "env": {
-          "description": "Container environment variables.",
-          "type": "array",
-          "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVar"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "resources": {
-          "$ref": "./CommonDefinitions.json#/definitions/ContainerResources",
-          "description": "Container resource requirements."
         }
       }
     }
