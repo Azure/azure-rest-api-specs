@@ -3141,6 +3141,9 @@
           "Discovery_Query_EntityType": {
             "$ref": "./examples/Discovery_Query_Type.json"
           },
+          "Discovery_Query_SensitiveInfoType": {
+            "$ref": "./examples/Discovery_Query_SensitiveInfoType.json"
+          },
           "Discovery_Query_AssetType": {
             "$ref": "./examples/Discovery_Query_AssetType.json"
           },
@@ -4822,6 +4825,13 @@
               "$ref": "#/definitions/ContactBasic"
             }
           }
+        },
+        "sensitiveInfoTypes":{
+          "type": "array",
+          "description": "An array of sensitive info types to apply on entity.",
+          "items": {
+            "$ref": "#/definitions/SensitiveInfoType"
+          }
         }
       },
       "allOf": [
@@ -5365,6 +5375,16 @@
         }
       ],
       "description": "The glossary term."
+    },
+    "SensitiveInfoType":{
+      "type": "object",
+      "title": "SensitiveInfoType",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of sensitive info type."
+        }
+      }
     },
     "ResourceLink": {
       "title": "ResourceLink",
@@ -6967,6 +6987,13 @@
         "longDescription": {
           "type": "string",
           "description": "The definition of the term."
+        },
+        "sensitiveInfoType": {
+          "type": "array",
+          "description": "The id list of sensitive info types.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "title": "SearchResultValue",
