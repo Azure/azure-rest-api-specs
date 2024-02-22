@@ -2131,6 +2131,11 @@
     "GroupQuotasEnforcementListResponse": {
       "type": "object",
       "description": "List of Azure regions, where the group quotas is enabled for enforcement. An empty list means all Azure Regions and any future Azure Region(s) added will be enabled automatically.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
