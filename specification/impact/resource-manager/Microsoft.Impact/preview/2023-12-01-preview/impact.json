@@ -91,48 +91,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/getAllInsights": {
-      "get": {
-        "operationId": "Insights_GetAll",
-        "tags": [
-          "Insights"
-        ],
-        "description": "get all insights under subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/InsightCustomResourceCommonParameters.azureResourceId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/InsightListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Insights list by subscription": {
-            "$ref": "./examples/Insights_GetAll.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/impactCategories": {
       "get": {
         "operationId": "ImpactCategories_ListBySubscription",
@@ -710,8 +668,14 @@
           }
         },
         "x-ms-examples": {
-          "Get Insight resources by workloadImpactName and insightName": {
-            "$ref": "./examples/Insights_Get.json"
+          "Get Insight sample for Diagnostics category": {
+            "$ref": "./examples/Insights_Get_diagnostics.json"
+          },
+          "Get Insight sample for MitigationAction category": {
+            "$ref": "./examples/Insights_Get_mitigationAction.json"
+          },
+          "Get Insight sample for service health category": {
+            "$ref": "./examples/Insights_Get_servicehealth.json"
           }
         }
       },
@@ -720,7 +684,7 @@
         "tags": [
           "Insights"
         ],
-        "description": "Create Insight resource",
+        "description": "Create Insight resource, this is Admin only operation",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -785,7 +749,7 @@
         "tags": [
           "Insights"
         ],
-        "description": "Delete Insight resource",
+        "description": "Delete Insight resource,, this is Admin only operation",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -849,24 +813,6 @@
       "required": [
         "name",
         "value"
-      ]
-    },
-    "Article": {
-      "type": "object",
-      "description": "Article details of the insight like title, content etc",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "Title of the insight article"
-        },
-        "content": {
-          "type": "string",
-          "description": "Content of the insight article"
-        }
-      },
-      "required": [
-        "title",
-        "content"
       ]
     },
     "ClientIncidentDetails": {
@@ -935,6 +881,24 @@
           "description": "target which connection was attempted"
         }
       }
+    },
+    "Content": {
+      "type": "object",
+      "description": "Article details of the insight like title, description etc",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the insight"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the insight"
+        }
+      },
+      "required": [
+        "title",
+        "description"
+      ]
     },
     "ErrorDetailProperties": {
       "type": "object",
@@ -1098,17 +1062,12 @@
         "impactId": {
           "type": "string",
           "description": "Azure Id of the impact."
-        },
-        "impactUniqueId": {
-          "type": "string",
-          "description": "unique (guid) id of the impact generated during impact creation."
         }
       },
       "required": [
         "impactedResourceId",
         "startTime",
-        "impactId",
-        "impactUniqueId"
+        "impactId"
       ]
     },
     "ImpactedResource": {
@@ -1199,6 +1158,42 @@
         }
       ]
     },
+    "InsightCustomResourceCommonParameters": {
+      "type": "object",
+      "description": "context of post call for insight",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The ID of the target subscription.",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "string",
+          "description": "The provider namespace for the resource.",
+          "enum": [
+            "Microsoft.Impact"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "azureResourceId": {
+          "type": "string",
+          "description": "Filter by resource type",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "apiVersion",
+        "subscriptionId",
+        "provider"
+      ]
+    },
     "InsightDetails": {
       "type": "object",
       "description": "Body of the get all insights",
@@ -1283,20 +1278,15 @@
           "type": "string",
           "description": "status of the insight. example resolved, repaired, other."
         },
-        "article": {
-          "$ref": "#/definitions/Article",
-          "description": "Contains title & content for the insight"
+        "eventId": {
+          "type": "string",
+          "description": "Identifier of the event that has been correlated with this insight. applies for service health scenarios."
         },
-        "level": {
-          "$ref": "#/definitions/InsightLevel",
-          "description": "level of the insight. Informational, Warning, Error, Critical."
+        "content": {
+          "$ref": "#/definitions/Content",
+          "description": "Contains title & description for the insight"
         },
-        "priority": {
-          "type": "integer",
-          "format": "int64",
-          "description": "priority of the insight relative to other insights."
-        },
-        "attributionTime": {
+        "eventTime": {
           "type": "string",
           "format": "date-time",
           "description": "attribution time of the insight."
@@ -1316,10 +1306,7 @@
       },
       "required": [
         "category",
-        "article",
-        "level",
-        "priority",
-        "attributionTime",
+        "content",
         "insightUniqueId",
         "impact"
       ]
@@ -1950,15 +1937,6 @@
     },
     "CustomParameters.resourceType": {
       "name": "resourceType",
-      "in": "query",
-      "description": "Filter by resource type",
-      "required": false,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method"
-    },
-    "InsightCustomResourceCommonParameters.azureResourceId": {
-      "name": "azureResourceId",
       "in": "query",
       "description": "Filter by resource type",
       "required": false,

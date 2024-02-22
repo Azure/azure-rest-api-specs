@@ -43,17 +43,14 @@ model InsightProperties is ResourceProperties {
   @doc("status of the insight. example resolved, repaired, other.")
   status?: string;
 
-  @doc("Contains title & content for the insight")
-  article: Article;
+  @doc("Identifier of the event that has been correlated with this insight. applies for service health scenarios.")
+  eventId?: string;
 
-  @doc("level of the insight. Informational, Warning, Error, Critical.")
-  level: InsightLevel;
-
-  @doc("priority of the insight relative to other insights.")
-  priority: int64;
+  @doc("Contains title & description for the insight")
+  content: Content;
 
   @doc("attribution time of the insight.")
-  attributionTime: utcDateTime;
+  eventTime?: utcDateTime;
 
   @doc("unique id of the insight.")
   insightUniqueId: string;
@@ -78,18 +75,15 @@ model ImpactDetails {
 
   @doc("Azure Id of the impact.")
   impactId: string;
-
-  @doc("unique (guid) id of the impact generated during impact creation.")
-  impactUniqueId: string;
 }
 
-@doc("Article details of the insight like title, content etc")
-model Article {
-  @doc("Title of the insight article")
+@doc("Article details of the insight like title, description etc")
+model Content {
+  @doc("Title of the insight")
   title: string;
 
-  @doc("Content of the insight article")
-  content: string;
+  @doc("Description of the insight")
+  description: string;
 }
 
 @doc("impacted azure resource id.")
@@ -150,22 +144,9 @@ interface Insights {
   @doc("List Insight resources by workloadImpactName")
   listBySubscription is ArmListBySubscription<Insight>;
 
-  @doc("Create Insight resource")
+  @doc("Create Insight resource, this is Admin only operation")
   create is ArmResourceCreateOrReplaceSync<Insight>;
 
-  @doc("Delete Insight resource")
+  @doc("Delete Insight resource,, this is Admin only operation")
   delete is ArmResourceDeleteSync<Insight>;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Using subscription level action"
-  @get
-  @doc("get all insights under subscription")
-  @segment("getAllInsights")
-  getAll(
-    ...InsightCustomResourceCommonParameters,
-  ): ArmResponse<ResourceListResult<Insight>> | ErrorResponse;
-
-  /* @doc("get all insights under subscription")
-  @segment("getAllInsights")
-  getAll2 is ResourceAct<InsightUnderSubscription,insightDetails,ResourceListResult<Insight>>;
-  */
 }
