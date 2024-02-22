@@ -1254,7 +1254,10 @@ interface MetricsIngestionEndpoints {
   >;
 
   @doc("Initiate key rotation on Metrics Ingestion Endpoint.")
-  rotateKey is ArmResourceActionNoContentSync<MetricsIngestionEndpointResources, void>;
+  rotateKey is ArmResourceActionNoContentSync<
+    MetricsIngestionEndpointResources,
+    void
+  >;
 
   @doc("Delete Metrics Ingestion Endpoint.")
   delete is ArmResourceDeleteWithoutOkAsync<MetricsIngestionEndpointResources>;
