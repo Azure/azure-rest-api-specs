@@ -59,18 +59,17 @@ model FleetMemberProperties {
 
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
-union FleetMemberProvisioningState {
-  string,
-  ResourceProvisioningState,
+enum FleetMemberProvisioningState {
+  ...ResourceProvisioningState,
 
   @doc("The provisioning state of a member joining a fleet.")
-  Joining: "Joining",
+  Joining,
 
   @doc("The provisioning state of a member leaving a fleet.")
-  Leaving: "Leaving",
+  Leaving,
 
   @doc("The provisioning state of a member being updated.")
-  Updating: "Updating",
+  Updating,
 }
 
 @armResourceOperations
@@ -98,6 +97,12 @@ interface FleetMembers {
   @sharedRoute
   @added(Versions.v2023_06_15_preview)
   @operationId("FleetMembers_Update")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "original-uri",
+    }
+  )
   updateAsync is ArmResourcePatchAsync<
     FleetMember,
     FleetMemberProperties,
