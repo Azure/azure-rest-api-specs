@@ -4340,7 +4340,7 @@
         }
       }
     },
-    "/types/typeswithsettings": {
+    "/types/with-settings": {
       "post": {
         "tags": [
           "Type"
@@ -4376,7 +4376,7 @@
         }
       }
     },
-    "types/typeswithsettings/{serviceTypeName}": {
+    "types/with-settings/{serviceTypeName}": {
       "get": {
         "tags": [
           "Type"
@@ -7665,6 +7665,16 @@
     "typeName": {
       "name": "typeName",
       "description": "The name of the type.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "serviceTypeName": {
+      "name": "serviceTypeName",
+      "description": "The name of the service type.",
       "in": "path",
       "required": true,
       "type": "string",
