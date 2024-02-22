@@ -4354,7 +4354,11 @@
         },
         "parameters": [
           {
-            "$ref": "#/definitions/TypesWithSettings"
+            "in": "body",
+            "name": "typesWithSettings",
+            "schama": {
+              "$ref": "#/definitions/TypesWithSettings"
+            }
           },
           {
             "$ref": "#/parameters/atlasAPIVersion"
@@ -4376,7 +4380,7 @@
         }
       }
     },
-    "types/with-settings/{serviceTypeName}": {
+    "/types/with-settings/{serviceTypeName}": {
       "get": {
         "tags": [
           "Type"
