@@ -62,12 +62,13 @@ input-file:
   - Microsoft.App/preview/2024-02-02-preview/SourceControls.json
   - Microsoft.App/preview/2024-02-02-preview/Subscriptions.json
   - Microsoft.App/preview/2024-02-02-preview/Usages.json
+  - Microsoft.App/preview/2023-11-02-preview/FunctionsExtension.json
 ```
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-11'
+```yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.App/preview/2023-11-02-preview/AppResiliency.json
   - Microsoft.App/preview/2023-11-02-preview/AuthConfigs.json
