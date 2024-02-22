@@ -68,7 +68,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-11'
+``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.App/preview/2023-11-02-preview/AppResiliency.json
   - Microsoft.App/preview/2023-11-02-preview/AuthConfigs.json
