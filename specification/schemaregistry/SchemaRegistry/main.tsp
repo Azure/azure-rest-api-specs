@@ -97,7 +97,7 @@ op getSchemaById is Azure.Core.Foundations.Operation<
     @path
     id: string;
   },
-  Schema
+  OkResponse & Schema
 >;
 
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}?api-version={apiVersion}
@@ -120,7 +120,7 @@ op getSchemaByVersion is Azure.Core.Foundations.Operation<
     @path
     schemaVersion: int32;
   },
-  Schema
+  OkResponse & Schema
 >;
 
 //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}:get-id?api-version={apiVersion}
@@ -224,7 +224,6 @@ model Schema {
   ...SchemaProperties;
   ...SchemaContent;
   ...SchemaContentType;
-  ...OkResponse;
 }
 
 /**
