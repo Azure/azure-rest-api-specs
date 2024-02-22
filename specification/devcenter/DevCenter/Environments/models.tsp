@@ -153,8 +153,10 @@ model EnvironmentDefinition {
   @doc("Input parameters passed to an environment.")
   parameters?: EnvironmentDefinitionParameter[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "there is no build in type to describe json"
+  //using unkown here is better than string since it generates BinaryData in the SDK
   @doc("JSON schema defining the parameters object passed to an environment.")
-  parametersSchema?: bytes;
+  parametersSchema?: unknown;
 
   @doc("Path to the Environment Definition entrypoint file.")
   templatePath?: string;
