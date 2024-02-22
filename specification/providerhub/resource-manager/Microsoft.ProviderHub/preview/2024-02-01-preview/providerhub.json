@@ -21,26 +21,18 @@
   },
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/customRollouts/{rolloutName}": {
       "get": {
-        "tags": [
-          "CustomRollouts"
-        ],
+        "tags": ["CustomRollouts"],
         "description": "Gets the custom rollout details.",
         "operationId": "CustomRollouts_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -65,7 +57,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -75,15 +67,50 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "CustomRollouts"
+      "delete": {
+        "tags": ["CustomRollouts"],
+        "description": "Deletes the custom rollout resource. Custom rollout must be in terminal state.",
+        "operationId": "CustomRollouts_Delete",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
         ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the custom rollout resource."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "providerReleases_Delete": {
+            "$ref": "./examples/CustomRollouts_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "tags": ["CustomRollouts"],
         "description": "Creates or updates the rollout details.",
         "operationId": "CustomRollouts_CreateOrUpdate",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -114,10 +141,16 @@
               "$ref": "#/definitions/CustomRollout"
             }
           },
+          "201": {
+            "description": "Rollout created successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomRollout"
+            }
+          },
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -125,19 +158,19 @@
           "CustomRollouts_CreateOrUpdate": {
             "$ref": "./examples/CustomRollouts_CreateOrUpdate.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/customRollouts": {
       "get": {
-        "tags": [
-          "CustomRollouts"
-        ],
+        "tags": ["CustomRollouts"],
         "description": "Gets the list of the custom rollouts for the given provider.",
         "operationId": "CustomRollouts_ListByProviderRegistration",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -159,7 +192,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -173,16 +206,50 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/customRollouts/{rolloutName}/stop": {
+      "post": {
+        "tags": ["CustomRollouts"],
+        "description": "Stops or cancels the custom rollout, if in progress.",
+        "operationId": "CustomRollouts_Stop",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully cancelled the custom rollout."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomRollouts_Stop": {
+            "$ref": "./examples/CustomRollouts_Stop.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/defaultRollouts/{rolloutName}": {
       "get": {
-        "tags": [
-          "DefaultRollouts"
-        ],
+        "tags": ["DefaultRollouts"],
         "description": "Gets the default rollout details.",
         "operationId": "DefaultRollouts_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -207,7 +274,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -218,14 +285,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "DefaultRollouts"
-        ],
+        "tags": ["DefaultRollouts"],
         "description": "Deletes the rollout resource. Rollout must be in terminal state.",
         "operationId": "DefaultRollouts_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -250,7 +313,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -261,14 +324,10 @@
         }
       },
       "put": {
-        "tags": [
-          "DefaultRollouts"
-        ],
+        "tags": ["DefaultRollouts"],
         "description": "Creates or updates the rollout details.",
         "operationId": "DefaultRollouts_CreateOrUpdate",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -308,7 +367,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -325,14 +384,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/defaultRollouts": {
       "get": {
-        "tags": [
-          "DefaultRollouts"
-        ],
+        "tags": ["DefaultRollouts"],
         "description": "Gets the list of the rollouts for the given provider.",
         "operationId": "DefaultRollouts_ListByProviderRegistration",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -354,7 +409,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -370,14 +425,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/defaultRollouts/{rolloutName}/stop": {
       "post": {
-        "tags": [
-          "DefaultRollouts"
-        ],
+        "tags": ["DefaultRollouts"],
         "description": "Stops or cancels the rollout, if in progress.",
         "operationId": "DefaultRollouts_Stop",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -399,7 +450,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -412,14 +463,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/generateManifest": {
       "post": {
-        "tags": [
-          "Manifest"
-        ],
+        "tags": ["Manifest"],
         "description": "Generates the manifest for the given provider.",
         "operationId": "GenerateManifest",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -446,7 +493,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -454,14 +501,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/checkinManifest": {
       "post": {
-        "tags": [
-          "Manifest"
-        ],
+        "tags": ["Manifest"],
         "description": "Checkin the manifest.",
         "operationId": "CheckinManifest",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -497,7 +540,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -505,14 +548,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/notificationRegistrations/{notificationRegistrationName}": {
       "get": {
-        "tags": [
-          "NotificationRegistration"
-        ],
+        "tags": ["NotificationRegistration"],
         "description": "Gets the notification registration details.",
         "operationId": "NotificationRegistrations_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -542,20 +581,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "NotificationRegistration"
-        ],
+        "tags": ["NotificationRegistration"],
         "description": "Creates or updates a notification registration.",
         "operationId": "NotificationRegistrations_CreateOrUpdate",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -594,20 +629,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "NotificationRegistration"
-        ],
+        "tags": ["NotificationRegistration"],
         "description": "Deletes a notification registration.",
         "operationId": "NotificationRegistrations_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -637,7 +668,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -645,14 +676,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/notificationRegistrations": {
       "get": {
-        "tags": [
-          "NotificationRegistration"
-        ],
+        "tags": ["NotificationRegistration"],
         "description": "Gets the list of the notification registrations for the given provider.",
         "operationId": "NotificationRegistrations_ListByProviderRegistration",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -679,7 +706,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -690,14 +717,10 @@
     },
     "/providers/Microsoft.ProviderHub/operations": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "description": "Lists all the operations supported by Microsoft.ProviderHub.",
         "operationId": "Operations_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "Successfully retrieved the list of supported operations.",
@@ -708,7 +731,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -724,14 +747,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "description": "Gets the operations supported by the given provider.",
         "operationId": "Operations_ListByProviderRegistration",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -761,20 +780,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "description": "Creates or updates the operation supported by the given provider.",
         "operationId": "Operations_CreateOrUpdate",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -810,20 +825,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "description": "Deletes an operation.",
         "operationId": "Operations_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -850,7 +861,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -858,14 +869,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}": {
       "get": {
-        "tags": [
-          "ProviderRegistration"
-        ],
+        "tags": ["ProviderRegistration"],
         "description": "Gets the provider registration details.",
         "operationId": "ProviderRegistrations_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -892,20 +899,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "ProviderRegistration"
-        ],
+        "tags": ["ProviderRegistration"],
         "description": "Creates or updates the provider registration.",
         "operationId": "ProviderRegistrations_CreateOrUpdate",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -929,6 +932,9 @@
         "x-ms-examples": {
           "ProviderRegistrations_CreateOrUpdate": {
             "$ref": "./examples/ProviderRegistrations_CreateOrUpdate.json"
+          },
+          "DirectProviderRegistrations_CreateOrUpdate": {
+            "$ref": "./examples/DirectProviderRegistrations_CreateOrUpdate.json"
           }
         },
         "responses": {
@@ -944,7 +950,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -954,14 +960,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "ProviderRegistration"
-        ],
+        "tags": ["ProviderRegistration"],
         "description": "Deletes a provider registration.",
         "operationId": "ProviderRegistrations_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -988,7 +990,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -996,14 +998,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations": {
       "get": {
-        "tags": [
-          "ProviderRegistration"
-        ],
+        "tags": ["ProviderRegistration"],
         "description": "Gets the list of the provider registrations in the subscription.",
         "operationId": "ProviderRegistrations_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1027,7 +1025,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1038,14 +1036,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/generateOperations": {
       "post": {
-        "tags": [
-          "ProviderRegistration"
-        ],
+        "tags": ["ProviderRegistration"],
         "description": "Generates the operations api for the given provider.",
         "operationId": "ProviderRegistrations_GenerateOperations",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1075,7 +1069,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1083,14 +1077,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}": {
       "get": {
-        "tags": [
-          "ResourceTypeRegistration"
-        ],
+        "tags": ["ResourceTypeRegistration"],
         "description": "Gets a resource type details in the given subscription and provider.",
         "operationId": "ResourceTypeRegistrations_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1120,20 +1110,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "ResourceTypeRegistration"
-        ],
+        "tags": ["ResourceTypeRegistration"],
         "description": "Creates or updates a resource type.",
         "operationId": "ResourceTypeRegistrations_CreateOrUpdate",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1160,6 +1146,9 @@
         "x-ms-examples": {
           "ResourceTypeRegistrations_CreateOrUpdate": {
             "$ref": "./examples/ResourceTypeRegistrations_CreateOrUpdate.json"
+          },
+          "DirectResourceTypeRegistrations_CreateOrUpdate.json": {
+            "$ref": "./examples/DirectResourceTypeRegistrations_CreateOrUpdate.json"
           }
         },
         "responses": {
@@ -1178,7 +1167,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1188,14 +1177,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "ResourceTypeRegistration"
-        ],
+        "tags": ["ResourceTypeRegistration"],
         "description": "Deletes a resource type",
         "operationId": "ResourceTypeRegistrations_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1216,8 +1201,13 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successfully deleted the resource type."
+          "202": {
+            "description": "Delete request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -1225,22 +1215,22 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations": {
       "get": {
-        "tags": [
-          "ResourceTypeRegistration"
-        ],
+        "tags": ["ResourceTypeRegistration"],
         "description": "Gets the list of the resource types for the given provider.",
         "operationId": "ResourceTypeRegistrations_ListByProviderRegistration",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1267,7 +1257,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1278,14 +1268,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus/{sku}": {
       "get": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Gets the sku details for the given resource type and sku name.",
         "operationId": "Skus_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1318,20 +1304,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Creates or updates the resource type skus in the given resource type.",
         "operationId": "Skus_CreateOrUpdate",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1373,20 +1355,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Deletes a resource type sku.",
         "operationId": "Skus_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1419,7 +1397,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1427,14 +1405,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus/{sku}": {
       "get": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Gets the sku details for the given resource type and sku name.",
         "operationId": "Skus_GetNestedResourceTypeFirst",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1470,20 +1444,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Creates or updates the resource type skus in the given resource type.",
         "operationId": "Skus_CreateOrUpdateNestedResourceTypeFirst",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1528,20 +1498,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Deletes a resource type sku.",
         "operationId": "Skus_DeleteNestedResourceTypeFirst",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1577,7 +1543,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1585,14 +1551,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus/{sku}": {
       "get": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Gets the sku details for the given resource type and sku name.",
         "operationId": "Skus_GetNestedResourceTypeSecond",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1631,20 +1593,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Creates or updates the resource type skus in the given resource type.",
         "operationId": "Skus_CreateOrUpdateNestedResourceTypeSecond",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1692,20 +1650,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Deletes a resource type sku.",
         "operationId": "Skus_DeleteNestedResourceTypeSecond",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1744,7 +1698,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1752,14 +1706,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/resourcetypeRegistrations/{nestedResourceTypeThird}/skus/{sku}": {
       "get": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Gets the sku details for the given resource type and sku name.",
         "operationId": "Skus_GetNestedResourceTypeThird",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1801,20 +1751,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Creates or updates the resource type skus in the given resource type.",
         "operationId": "Skus_CreateOrUpdateNestedResourceTypeThird",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1865,20 +1811,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Deletes a resource type sku.",
         "operationId": "Skus_DeleteNestedResourceTypeThird",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1920,7 +1862,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1928,14 +1870,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus": {
       "get": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Gets the list of skus for the given resource type.",
         "operationId": "Skus_ListByResourceTypeRegistrations",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1965,7 +1903,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1976,14 +1914,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus": {
       "get": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Gets the list of skus for the given resource type.",
         "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -2016,7 +1950,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2027,14 +1961,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus": {
       "get": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Gets the list of skus for the given resource type.",
         "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -2070,7 +2000,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2081,14 +2011,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/resourcetypeRegistrations/{nestedResourceTypeThird}/skus": {
       "get": {
-        "tags": [
-          "ResourceTypeSku"
-        ],
+        "tags": ["ResourceTypeSku"],
         "description": "Gets the list of skus for the given resource type.",
         "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeThird",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -2127,7 +2053,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2138,14 +2064,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourceActions/{resourceActionName}/deleteResources": {
       "post": {
-        "tags": [
-          "ResourceActions"
-        ],
+        "tags": ["ResourceActions"],
         "description": "Deletes resources.",
         "operationId": "ResourceActions_DeleteResources",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -2172,14 +2094,16 @@
         "responses": {
           "202": {
             "description": "Resource management action started.",
-            "schema": {
-              "$ref": "#/definitions/ResourceManagementAction"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2191,6 +2115,441 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/authorizedApplications/{applicationId}": {
+      "get": {
+        "tags": ["AuthorizedApplication"],
+        "description": "Gets the authorized application details.",
+        "operationId": "AuthorizedApplications_Get",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationIdParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "AuthorizedApplications_Get": {
+            "$ref": "./examples/AuthorizedApplications_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the authorized application details.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizedApplication"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["AuthorizedApplication"],
+        "description": "Creates or updates the authorized application.",
+        "operationId": "AuthorizedApplications_CreateOrUpdate",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationIdParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizedApplication"
+            },
+            "description": "The authorized application properties supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "AuthorizedApplications_CreateOrUpdate": {
+            "$ref": "./examples/AuthorizedApplications_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the authorized application.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizedApplication"
+            }
+          },
+          "201": {
+            "description": "Successfully created the authorized application.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizedApplication"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["AuthorizedApplication"],
+        "description": "Deletes an authorized application.",
+        "operationId": "AuthorizedApplications_Delete",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationIdParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "AuthorizedApplications_Delete": {
+            "$ref": "./examples/AuthorizedApplications_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the authorized application."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/authorizedApplications": {
+      "get": {
+        "tags": ["AuthorizedApplication"],
+        "description": "Gets the list of the authorized applications in the provider namespace.",
+        "operationId": "AuthorizedApplications_List",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "AuthorizedApplications_List": {
+            "$ref": "./examples/AuthorizedApplications_List.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the authorized applications.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizedApplicationArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProviderHub/providerMonitorSettings/{providerMonitorSettingName}": {
+      "get": {
+        "tags": ["ProviderMonitorSetting"],
+        "description": "Gets the provider monitor setting details.",
+        "operationId": "ProviderMonitorSettings_Get",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderMonitorSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderMonitorSettings_Get": {
+            "$ref": "./examples/ProviderMonitorSettings_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the provider monitor setting.",
+            "schema": {
+              "$ref": "#/definitions/ProviderMonitorSetting"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["ProviderMonitorSetting"],
+        "description": "Creates the provider monitor setting.",
+        "operationId": "ProviderMonitorSettings_Create",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderMonitorSettingNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderMonitorSetting"
+            },
+            "description": "The provider monitor setting properties supplied to the create operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderMonitorSettings_Create": {
+            "$ref": "./examples/ProviderMonitorSettings_Create.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the provider monitor setting.",
+            "schema": {
+              "$ref": "#/definitions/ProviderMonitorSetting"
+            }
+          },
+          "201": {
+            "description": "Successfully created the provider monitor setting.",
+            "schema": {
+              "$ref": "#/definitions/ProviderMonitorSetting"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [ "ProviderMonitorSetting" ],
+        "description": "Updates the provider monitor setting properties as specified in the request body. Update fails if the specified provider monitor setting does not already exist.",
+        "operationId": "ProviderMonitorSettings_Update",
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderMonitorSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderMonitorSettings_Update": {
+            "$ref": "./examples/ProviderMonitorSettings_Update.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the provider monitor setting.",
+            "schema": {
+              "$ref": "#/definitions/ProviderMonitorSetting"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["ProviderMonitorSetting"],
+        "description": "Deletes a provider monitor setting.",
+        "operationId": "ProviderMonitorSettings_Delete",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderMonitorSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderMonitorSettings_Delete": {
+            "$ref": "./examples/ProviderMonitorSettings_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the provider monitor setting."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProviderHub/providerMonitorSettings": {
+      "get": {
+        "tags": ["ProviderMonitorSetting"],
+        "description": "Gets the list of the provider monitor settings in the resource group.",
+        "operationId": "ProviderMonitorSettings_ListByResourceGroup",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderMonitorSettings_ListByResourceGroup": {
+            "$ref": "./examples/ProviderMonitorSettings_ListByResourceGroup.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the provider monitor settings.",
+            "schema": {
+              "$ref": "#/definitions/ProviderMonitorSettingArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerMonitorSettings": {
+      "get": {
+        "tags": ["ProviderMonitorSetting"],
+        "description": "Gets the list of the provider monitor settings in the subscription.",
+        "operationId": "ProviderMonitorSettings_ListBySubscription",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderMonitorSettings_ListBySubscription": {
+            "$ref": "./examples/ProviderMonitorSettings_ListBySubscription.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the provider monitor settings.",
+            "schema": {
+              "$ref": "#/definitions/ProviderMonitorSettingArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -2213,10 +2572,20 @@
         "RolloutInProgress"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
       }
+    },
+    "QuotaPolicy": {
+      "enum": ["Default", "None", "Restricted"],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "QuotaPolicy",
+        "modelAsString": true
+      },
+      "description": "Quota policy."
     },
     "TrafficRegions": {
       "type": "object",
@@ -2230,17 +2599,37 @@
       }
     },
     "CustomRolloutSpecification": {
-      "required": [
-        "canary"
-      ],
       "type": "object",
       "properties": {
+        "autoProvisionConfig": {
+          "type": "object",
+          "properties": {
+            "storage": {
+              "type": "boolean"
+            },
+            "resourceGraph": {
+              "type": "boolean"
+            }
+          }
+        },
         "canary": {
           "allOf": [
             {
               "$ref": "#/definitions/TrafficRegions"
             }
           ]
+        },
+        "releaseScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "refreshSubscriptionRegistration": {
+          "type": "boolean"
+        },
+        "skipReleaseScopeValidation": {
+          "type": "boolean"
         },
         "providerRegistration": {
           "allOf": [
@@ -2254,47 +2643,63 @@
           "items": {
             "$ref": "#/definitions/ResourceTypeRegistration"
           }
+        },
+        "manifestCheckinSpecification": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManifestCheckinSpecification"
+            }
+          ]
         }
       }
     },
     "TypedErrorInfo": {
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object",
+      "description": "Error information.",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "The type of the error."
         },
         "info": {
           "type": "object",
+          "description": "The error information.",
           "readOnly": true
         }
       }
     },
     "ExtendedErrorInfo": {
       "type": "object",
+      "description": "Error information.",
       "properties": {
         "code": {
+          "description": "The error code.",
           "type": "string"
         },
         "target": {
+          "description": "The target of the error.",
           "type": "string"
         },
         "message": {
+          "description": "The error message.",
           "type": "string"
         },
         "details": {
+          "description": "The error details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExtendedErrorInfo"
-          }
+          },
+          "x-ms-identifiers": ["code"]
         },
         "additionalInfo": {
+          "description": "The additional error information.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TypedErrorInfo"
-          }
+          },
+          "x-ms-identifiers": ["type"]
         }
       }
     },
@@ -2310,10 +2715,7 @@
           "description": "The baseline ARM manifest location supplied to the checkin manifest operation."
         }
       },
-      "required": [
-        "baselineArmManifestLocation",
-        "environment"
-      ]
+      "required": ["baselineArmManifestLocation", "environment"]
     },
     "RolloutStatusBase": {
       "type": "object",
@@ -2334,9 +2736,7 @@
     },
     "CustomRolloutProperties": {
       "type": "object",
-      "required": [
-        "specification"
-      ],
+      "required": ["specification"],
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -2361,9 +2761,7 @@
     "CustomRollout": {
       "description": "Rollout details.",
       "type": "object",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -2371,11 +2769,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CustomRolloutProperties"
-            }
-          ],
+          "$ref": "#/definitions/CustomRolloutProperties",
           "description": "Properties of the rollout."
         },
         "systemData": {
@@ -2384,77 +2778,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "InnerError": {
-      "description": "Inner error containing list of errors.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Specific error code than was provided by the containing error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "innerError": {
-          "description": "Object containing more specific information than the current object about the error.",
-          "type": "object",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
-    "Error": {
-      "description": "Standard error object.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Server-defined set of error codes.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Human-readable representation of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "Target of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Array of details about specific errors that led to this reported error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "readOnly": true
-        },
-        "innerError": {
-          "description": "Object containing more specific information than  the current object about the error.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/InnerError"
-            }
-          ],
-          "readOnly": true
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Standard error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Standard error object.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Error"
-            }
-          ]
-        }
-      }
     },
     "CustomRolloutArrayResponseWithContinuation": {
       "type": "object",
@@ -2492,6 +2815,30 @@
         "enabled": {
           "description": "Indicates whether expedited rollout is enabled/disabled",
           "type": "boolean"
+        }
+      }
+    },
+    "ManifestCheckinSpecification": {
+      "type": "object",
+      "properties": {
+        "manifestCheckinOption": {
+          "enum": [
+            "AttemptAutomaticManifestCheckin",
+            "DoNotAttemptAutomaticManifestCheckin"
+          ],
+          "type": "string",
+          "default": "DoNotAttemptAutomaticManifestCheckin",
+          "x-ms-enum": {
+            "name": "ManifestCheckinOption",
+            "modelAsString": true
+          }
+        },
+        "manifestCheckinParams": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CheckinManifestParams"
+            }
+          ]
         }
       }
     },
@@ -2559,6 +2906,24 @@
           "items": {
             "$ref": "#/definitions/ResourceTypeRegistration"
           }
+        },
+        "autoProvisionConfig": {
+          "type": "object",
+          "properties": {
+            "storage": {
+              "type": "boolean"
+            },
+            "resourceGraph": {
+              "type": "boolean"
+            }
+          }
+        },
+        "manifestCheckinSpecification": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManifestCheckinSpecification"
+            }
+          ]
         }
       }
     },
@@ -2603,6 +2968,13 @@
             "name": "SubscriptionReregistrationResult",
             "modelAsString": true
           }
+        },
+        "manifestCheckinStatus": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CheckinManifestInfo"
+            }
+          ]
         }
       }
     },
@@ -2639,11 +3011,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DefaultRolloutProperties"
-            }
-          ],
+          "$ref": "#/definitions/DefaultRolloutProperties",
           "description": "Properties of the rollout."
         },
         "systemData": {
@@ -2669,9 +3037,7 @@
       }
     },
     "ResourceProviderAuthentication": {
-      "required": [
-        "allowedAudiences"
-      ],
+      "required": ["allowedAudiences"],
       "type": "object",
       "properties": {
         "allowedAudiences": {
@@ -2693,20 +3059,97 @@
         },
         "managedByRoleDefinitionId": {
           "type": "string"
+        },
+        "managedByAuthorization": {
+          "type": "object",
+          "description": "Managed by authorization.",
+          "properties": {
+            "additionalAuthorizations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AdditionalAuthorization"
+              },
+              "x-ms-identifiers": ["applicationId", "roleDefinitionId"]
+            },
+            "managedByResourceRoleDefinitionId": {
+              "type": "string",
+              "description": "The managed by resource role definition ID for the application."
+            },
+            "allowManagedByInheritance": {
+              "type": "boolean",
+              "description": "Indicates whether the managed by resource role definition ID should be inherited."
+            }
+          }
+        },
+        "allowedThirdPartyExtensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThirdPartyExtension"
+          },
+          "x-ms-identifiers": ["name"]
+        },
+        "groupingTag": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationProviderAuthorization": {
+      "type": "object",
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID for the application."
+        },
+        "managedByRoleDefinitionId": {
+          "type": "string",
+          "description": "The managed by role definition ID for the application."
+        }
+      }
+    },
+    "ResourceProviderService": {
+      "type": "object",
+      "properties": {
+        "serviceName": {
+          "type": "string"
+        },
+        "status": {
+          "enum": ["Active", "Inactive"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ApplicationDataAuthorization": {
+      "required": ["role"],
+      "type": "object",
+      "properties": {
+        "role": {
+          "enum": ["ServiceOwner", "LimitedOwner"],
+          "type": "string",
+          "description": "The ownership role the application has on the resource types. The service owner role gives the application owner permissions. The limited owner role gives elevated permissions but does not allow all the permissions of a service owner, such as read/write on internal metadata.",
+          "x-ms-enum": {
+            "name": "Role",
+            "modelAsString": true
+          }
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "The resource types from the defined resource types in the provider namespace that the application can access. If no resource types are specified and the role is service owner, the default is * which is all resource types",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
     "FeaturesRule": {
-      "required": [
-        "requiredFeaturesPolicy"
-      ],
+      "required": ["requiredFeaturesPolicy"],
       "type": "object",
       "properties": {
         "requiredFeaturesPolicy": {
-          "enum": [
-            "Any",
-            "All"
-          ],
+          "enum": ["Any", "All"],
           "type": "string",
           "x-ms-enum": {
             "name": "FeaturesPolicy",
@@ -2724,13 +3167,40 @@
             "SignedUserToken",
             "ClientGroupMembership",
             "SignedAuxiliaryTokens",
-            "UnboundedClientGroupMembership"
+            "UnboundedClientGroupMembership",
+            "PrivateLinkId",
+            "PrivateLinkResourceId",
+            "ManagementGroupAncestorsEncoded",
+            "PrivateLinkVnetTrafficTag",
+            "ResourceGroupLocation",
+            "ClientPrincipalNameEncoded",
+            "MSIResourceIdEncoded"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "OptInHeaderType",
             "modelAsString": true
           }
+        },
+        "optOutHeaders": {
+          "enum": ["NotSpecified", "SystemDataCreatedByLastModifiedBy"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OptOutHeaderType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateResourceProviderConfiguration": {
+      "type": "object",
+      "properties": {
+        "allowedSubscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2783,22 +3253,14 @@
       }
     },
     "LoggingRule": {
-      "required": [
-        "action",
-        "detailLevel",
-        "direction"
-      ],
+      "required": ["action", "detailLevel", "direction"],
       "type": "object",
       "properties": {
         "action": {
           "type": "string"
         },
         "direction": {
-          "enum": [
-            "None",
-            "Request",
-            "Response"
-          ],
+          "enum": ["None", "Request", "Response"],
           "type": "string",
           "x-ms-enum": {
             "name": "LoggingDirections",
@@ -2806,10 +3268,7 @@
           }
         },
         "detailLevel": {
-          "enum": [
-            "None",
-            "Body"
-          ],
+          "enum": ["None", "Body"],
           "type": "string",
           "x-ms-enum": {
             "name": "LoggingDetails",
@@ -2826,18 +3285,11 @@
       }
     },
     "ThrottlingMetric": {
-      "required": [
-        "limit",
-        "type"
-      ],
+      "required": ["limit", "type"],
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "NotSpecified",
-            "NumberOfRequests",
-            "NumberOfResources"
-          ],
+          "enum": ["NotSpecified", "NumberOfRequests", "NumberOfResources"],
           "type": "string",
           "x-ms-enum": {
             "name": "ThrottlingMetricType",
@@ -2855,10 +3307,7 @@
       }
     },
     "ThrottlingRule": {
-      "required": [
-        "action",
-        "metrics"
-      ],
+      "required": ["action", "metrics"],
       "type": "object",
       "properties": {
         "action": {
@@ -2868,12 +3317,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThrottlingMetric"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "requiredFeatures": {
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "applicationId": {
+            "type": "array",
+            "items": {
+              "type": "string"
           }
         }
       }
@@ -2917,17 +3373,15 @@
           "type": "string"
         },
         "endpointType": {
-          "enum": [
-            "NotSpecified",
-            "Canary",
-            "Production",
-            "TestInProduction"
-          ],
+          "enum": ["NotSpecified", "Canary", "Production", "TestInProduction"],
           "type": "string",
           "x-ms-enum": {
             "name": "EndpointType",
             "modelAsString": true
           }
+        },
+        "skuLink": {
+          "type": "string"
         }
       }
     },
@@ -2950,6 +3404,20 @@
         },
         "applicationId": {
           "type": "string"
+        },
+        "applicationIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "delegationAppIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3012,6 +3480,13 @@
           "additionalProperties": {
             "$ref": "#/definitions/ExtendedErrorInfo"
           }
+        },
+        "manifestCheckinStatus": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CheckinManifestInfo"
+            }
+          ]
         }
       }
     },
@@ -3062,17 +3537,11 @@
       }
     },
     "TemplateDeploymentPolicy": {
-      "required": [
-        "capabilities",
-        "preflightOptions"
-      ],
+      "required": ["capabilities", "preflightOptions"],
       "type": "object",
       "properties": {
         "capabilities": {
-          "enum": [
-            "Default",
-            "Preflight"
-          ],
+          "enum": ["Default", "Preflight"],
           "type": "string",
           "x-ms-enum": {
             "name": "TemplateDeploymentCapabilities",
@@ -3092,6 +3561,14 @@
             "name": "TemplateDeploymentPreflightOptions",
             "modelAsString": true
           }
+        },
+        "preflightNotifications": {
+          "type": "string",
+          "enum": ["None", "UnregisteredSubscriptions"],
+          "x-ms-enum": {
+            "name": "TemplateDeploymentPreflightNotifications",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3107,10 +3584,7 @@
       }
     },
     "LinkedOperationRule": {
-      "required": [
-        "linkedAction",
-        "linkedOperation"
-      ],
+      "required": ["linkedAction", "linkedOperation"],
       "type": "object",
       "properties": {
         "linkedOperation": {
@@ -3126,16 +3600,18 @@
           }
         },
         "linkedAction": {
-          "enum": [
-            "NotSpecified",
-            "Blocked",
-            "Validate",
-            "Enabled"
-          ],
+          "enum": ["NotSpecified", "Blocked", "Validate", "Enabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "LinkedAction",
             "modelAsString": true
+          }
+        },
+        "dependsOnTypes": {
+          "description": "Depends on types.",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -3164,12 +3640,27 @@
             "modelAsString": true
           }
         },
-        "resourceValidation": {
+        "additionalOptions": {
           "enum": [
-            "NotSpecified",
-            "ReservedWords",
-            "ProfaneWords"
+            "ProtectedAsyncOperationPolling",
+            "ProtectedAsyncOperationPollingAuditOnly"
           ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AdditionalOptions",
+            "modelAsString": true
+          }
+        },
+        "crossTenantTokenValidation": {
+          "enum": ["EnsureSecureValidation", "PassthroughInsecureToken"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CrossTenantTokenValidation",
+            "modelAsString": true
+          }
+        },
+        "resourceValidation": {
+          "enum": ["NotSpecified", "ReservedWords", "ProfaneWords"],
           "type": "string",
           "x-ms-enum": {
             "name": "ResourceValidation",
@@ -3186,13 +3677,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AuthorizationActionMapping"
-          }
+          },
+          "x-ms-identifiers": ["original"]
         },
         "linkedAccessChecks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedAccessCheck"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defaultApiVersion": {
           "type": "string"
@@ -3201,28 +3694,29 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoggingRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "throttlingRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThrottlingRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "endpoints": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "marketplaceType": {
-          "enum": [
-            "NotSpecified",
-            "AddOn",
-            "Bypass",
-            "Store"
-          ],
-          "type": "string"
+          "enum": ["NotSpecified", "AddOn", "Bypass", "Store"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MarketplaceType"
+          }
         },
         "identityManagement": {
           "allOf": [
@@ -3249,13 +3743,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubscriptionStateRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "serviceTreeInfos": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceTreeInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "requestHeaderOptions": {
           "allOf": [
@@ -3284,25 +3780,36 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExtendedLocationOptions"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "linkedOperationRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedOperationRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "resourceDeletionPolicy": {
-          "enum": [
-            "NotSpecified",
-            "Cascade",
-            "Force"
-          ],
+          "enum": ["NotSpecified", "Cascade", "Force"],
           "type": "string",
           "x-ms-enum": {
             "name": "ManifestResourceDeletionPolicy",
             "modelAsString": true
           }
+        },
+        "quotaRule": {
+          "$ref": "#/definitions/QuotaRule"
+        },
+        "linkedNotificationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedNotificationRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceProviderAuthorizationRules": {
+          "$ref": "#/definitions/ResourceProviderAuthorizationRules"
         }
       }
     },
@@ -3321,6 +3828,12 @@
             "type": "string"
           }
         },
+        "authorizationOwners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "incidentRoutingService": {
           "type": "string"
         },
@@ -3334,38 +3847,82 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceTreeInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "resourceAccessPolicy": {
-          "enum": [
-            "NotSpecified",
-            "AcisReadAllowed",
-            "AcisActionAllowed"
-          ],
-          "type": "string"
+          "enum": ["NotSpecified", "AcisReadAllowed", "AcisActionAllowed"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceAccessPolicy"
+          }
         },
         "resourceAccessRoles": {
           "type": "array",
-          "items": {}
+          "items": {},
+          "x-ms-identifiers": []
+        },
+        "expeditedRolloutSubmitters": {
+          "type": "array",
+          "description": "List of expedited rollout submitters.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorResponseMessageOptions": {
+          "type": "object",
+          "description": "Options for error response messages.",
+          "properties": {
+            "serverFailureResponseMessageType": {
+              "type": "string",
+              "enum": ["NotSpecified", "OutageReporting"],
+              "description": "Type of server failure response message.",
+              "x-ms-enum": {
+                "name": "ServerFailureResponseMessageType",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "expeditedRolloutMetadata": {
+          "type": "object",
+          "description": "Metadata for expedited rollout.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Expedited rollout enabled?"
+            },
+            "expeditedRolloutIntent": {
+              "type": "string",
+              "enum": ["NotSpecified", "Hotfix"],
+              "description": "Expedited rollout intent.",
+              "x-ms-enum": {
+                "name": "ExpeditedRolloutIntent",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "canaryManifestOwners": {
+          "type": "array",
+          "description": "List of manifest owners for canary.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "ResourceProviderCapabilities": {
-      "required": [
-        "effect",
-        "quotaId"
-      ],
+      "required": ["effect", "quotaId"],
       "type": "object",
       "properties": {
         "quotaId": {
           "type": "string"
         },
         "effect": {
-          "enum": [
-            "NotSpecified",
-            "Allow",
-            "Disallow"
-          ],
+          "enum": ["NotSpecified", "Allow", "Disallow"],
           "type": "string",
           "x-ms-enum": {
             "name": "ResourceProviderCapabilitiesEffect",
@@ -3381,9 +3938,7 @@
       }
     },
     "ReRegisterSubscriptionMetadata": {
-      "required": [
-        "enabled"
-      ],
+      "required": ["enabled"],
       "type": "object",
       "properties": {
         "enabled": {
@@ -3409,9 +3964,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderAuthorization"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "namespace": {
+          "type": "string"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderService"
+          },
+          "x-ms-identifiers": []
+        },
+        "serviceName": {
           "type": "string"
         },
         "providerVersion": {
@@ -3458,7 +4024,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceType"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         },
         "management": {
           "allOf": [
@@ -3471,6 +4038,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderCapabilities"
+          },
+          "x-ms-identifiers": ["quotaId"]
+        },
+        "crossTenantTokenValidation": {
+          "enum": ["EnsureSecureValidation", "PassthroughInsecureToken"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CrossTenantTokenValidation",
+            "modelAsString": true
           }
         },
         "metadata": {},
@@ -3478,7 +4054,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "reRegisterSubscriptionMetadata": {
           "allOf": [
@@ -3486,14 +4063,25 @@
               "$ref": "#/definitions/ReRegisterSubscriptionMetadata"
             }
           ]
+        },
+        "enableTenantLinkedNotification": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "linkedNotificationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FanoutLinkedNotificationRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceProviderAuthorizationRules": {
+          "$ref": "#/definitions/ResourceProviderAuthorizationRules"
         }
       }
     },
     "CheckinManifestInfo": {
-      "required": [
-        "isCheckedIn",
-        "statusMessage"
-      ],
+      "required": ["isCheckedIn", "statusMessage"],
       "type": "object",
       "properties": {
         "isCheckedIn": {
@@ -3528,11 +4116,7 @@
       "type": "object",
       "properties": {
         "notificationMode": {
-          "enum": [
-            "NotSpecified",
-            "EventHub",
-            "WebHook"
-          ],
+          "enum": ["NotSpecified", "EventHub", "WebHook"],
           "type": "string",
           "x-ms-enum": {
             "name": "NotificationMode",
@@ -3540,10 +4124,7 @@
           }
         },
         "messageScope": {
-          "enum": [
-            "NotSpecified",
-            "RegisteredSubscriptions"
-          ],
+          "enum": ["NotSpecified", "RegisteredSubscriptions"],
           "type": "string",
           "x-ms-enum": {
             "name": "MessageScope",
@@ -3560,7 +4141,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NotificationEndpoint"
-          }
+          },
+          "x-ms-identifiers": ["notificationDestination"]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3578,11 +4160,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/NotificationRegistrationProperties"
-            }
-          ]
+          "$ref": "#/definitions/NotificationRegistrationProperties"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
@@ -3607,12 +4185,7 @@
       }
     },
     "OperationsDisplayDefinition": {
-      "required": [
-        "description",
-        "operation",
-        "provider",
-        "resource"
-      ],
+      "required": ["description", "operation", "provider", "resource"],
       "type": "object",
       "properties": {
         "provider": {
@@ -3630,10 +4203,7 @@
       }
     },
     "OperationsDefinition": {
-      "required": [
-        "display",
-        "name"
-      ],
+      "required": ["display", "name"],
       "type": "object",
       "properties": {
         "name": {
@@ -3645,12 +4215,11 @@
           "description": "Indicates whether the operation applies to data-plane."
         },
         "origin": {
-          "enum": [
-            "NotSpecified",
-            "User",
-            "System"
-          ],
-          "type": "string"
+          "enum": ["NotSpecified", "User", "System"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationOrigins"
+          }
         },
         "display": {
           "description": "Display information of the operation.",
@@ -3661,11 +4230,11 @@
           ]
         },
         "actionType": {
-          "enum": [
-            "NotSpecified",
-            "Internal"
-          ],
-          "type": "string"
+          "enum": ["NotSpecified", "Internal"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationActionType"
+          }
         },
         "properties": {}
       },
@@ -3688,9 +4257,7 @@
       "x-ms-azure-resource": true
     },
     "LocalizedOperationDisplayDefinition": {
-      "required": [
-        "default"
-      ],
+      "required": ["default"],
       "type": "object",
       "properties": {
         "default": {
@@ -3840,10 +4407,7 @@
       }
     },
     "LocalizedOperationDefinition": {
-      "required": [
-        "display",
-        "name"
-      ],
+      "required": ["display", "name"],
       "type": "object",
       "properties": {
         "name": {
@@ -3855,12 +4419,11 @@
           "description": "Indicates whether the operation applies to data-plane."
         },
         "origin": {
-          "enum": [
-            "NotSpecified",
-            "User",
-            "System"
-          ],
-          "type": "string"
+          "enum": ["NotSpecified", "User", "System"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationOrigins"
+          }
         },
         "display": {
           "description": "Display information of the operation.",
@@ -3871,11 +4434,11 @@
           ]
         },
         "actionType": {
-          "enum": [
-            "NotSpecified",
-            "Internal"
-          ],
-          "type": "string"
+          "enum": ["NotSpecified", "Internal"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationActionType"
+          }
         },
         "properties": {}
       }
@@ -3889,17 +4452,18 @@
           "x-ms-client-flatten": true,
           "items": {
             "$ref": "#/definitions/LocalizedOperationDefinition"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         }
       }
     },
     "OperationsPutContent": {
+      "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "type": "object",
       "properties": {
         "properties": {
           "type": "object",
@@ -3908,6 +4472,10 @@
               "$ref": "#/definitions/OperationsContentProperties"
             }
           ]
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -3919,7 +4487,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationsDefinition"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         },
         "nextLink": {
           "description": "The URL to get to the next set of results, if there are any.",
@@ -3928,10 +4497,7 @@
       }
     },
     "LightHouseAuthorization": {
-      "required": [
-        "principalId",
-        "roleDefinitionId"
-      ],
+      "required": ["principalId", "roleDefinitionId"],
       "type": "object",
       "properties": {
         "principalId": {
@@ -3949,7 +4515,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LightHouseAuthorization"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "managedByTenantId": {
           "type": "string"
@@ -3963,7 +4530,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderAuthorization"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "providerAuthentication": {
           "allOf": [
@@ -3978,14 +4546,20 @@
               "$ref": "#/definitions/ThirdPartyProviderAuthorization"
             }
           ]
+        },
+        "directRpRoleDefinitionId": {
+          "type": "string"
+        },
+        "regionalAsyncOperationResourceTypeName": {
+          "type": "string"
+        },
+        "globalAsyncOperationResourceTypeName": {
+          "type": "string"
         }
       }
     },
     "SubscriptionStateOverrideAction": {
-      "required": [
-        "action",
-        "state"
-      ],
+      "required": ["action", "state"],
       "type": "object",
       "properties": {
         "state": {
@@ -4034,7 +4608,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubscriptionStateOverrideAction"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "softDeleteTTL": {
           "format": "duration",
@@ -4079,9 +4654,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderAuthorization"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "namespace": {
+          "type": "string"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderService"
+          },
+          "x-ms-identifiers": []
+        },
+        "serviceName": {
           "type": "string"
         },
         "providerVersion": {
@@ -4135,6 +4721,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderCapabilities"
+          },
+          "x-ms-identifiers": ["quotaId"]
+        },
+        "crossTenantTokenValidation": {
+          "enum": ["EnsureSecureValidation", "PassthroughInsecureToken"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CrossTenantTokenValidation",
+            "modelAsString": true
           }
         },
         "metadata": {},
@@ -4144,8 +4739,148 @@
               "$ref": "#/definitions/TemplateDeploymentOptions"
             }
           ]
+        },
+        "globalNotificationEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderEndpoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "enableTenantLinkedNotification": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "linkedNotificationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FanoutLinkedNotificationRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceProviderAuthorizationRules": {
+          "$ref": "#/definitions/ResourceProviderAuthorizationRules"
+        },
+        "dstsConfiguration": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DstsConfiguration"
+            }
+          ]
+        },
+        "notificationOptions": {
+          "description": "Notification options.",
+          "type": "string",
+          "enum": ["NotSpecified", "None", "EmitSpendingLimit"],
+          "x-ms-enum": {
+            "name": "NotificationOptions",
+            "modelAsString": true
+          }
+        },
+        "resourceHydrationAccounts": {
+          "type": "array",
+          "description": "resource hydration accounts",
+          "items": {
+            "$ref": "#/definitions/ResourceHydrationAccount"
+          },
+          "x-ms-identifiers": []
+        },
+        "notificationSettings": {
+          "type": "object",
+          "description": "Notification settings.",
+          "properties": {
+            "subscriberSettings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SubscriberSetting"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        },
+        "managementGroupGlobalNotificationEndpoints": {
+          "type": "array",
+          "description": "Management groups global notification endpoints.",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderEndpoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "optionalFeatures": {
+          "description": "Optional features.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceGroupLockOptionDuringMove": {
+          "type": "object",
+          "description": "Resource group lock option during move.",
+          "properties": {
+            "blockActionVerb": {
+              "type": "string",
+              "description": "The action verb that will be blocked when the resource group is locked during move.",
+              "enum": [
+                "NotSpecified",
+                "Read",
+                "Write",
+                "Action",
+                "Delete",
+                "Unrecognized"
+              ],
+              "x-ms-enum": {
+                "name": "BlockActionVerb",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "responseOptions": {
+          "type": "object",
+          "description": "Response options.",
+          "properties": {
+            "serviceClientOptionsType": {
+              "type": "string",
+              "enum": ["NotSpecified", "DisableAutomaticDecompression"],
+              "x-ms-enum": {
+                "name": "ServiceClientOptionsType",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "legacyNamespace": {
+          "description": "Legacy namespace.",
+          "type": "string"
+        },
+        "legacyRegistrations": {
+          "type": "array",
+          "description": "Legacy registrations.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "customManifestVersion": {
+          "description": "Custom manifest version.",
+          "type": "string"
         }
       }
+    },
+    "AuthorizedApplication": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AuthorizedApplicationProperties"
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "ProviderRegistrationProperties": {
       "type": "object",
@@ -4163,8 +4898,7 @@
           ]
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource."
+          "$ref": "#/definitions/ProvisioningState"
         },
         "subscriptionLifecycleNotificationSpecifications": {
           "allOf": [
@@ -4172,6 +4906,16 @@
               "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
             }
           ]
+        },
+        "privateResourceProviderConfiguration": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PrivateResourceProviderConfiguration"
+            }
+          ]
+        },
+        "tokenAuthConfiguration": {
+          "$ref": "#/definitions/TokenAuthConfiguration"
         }
       }
     },
@@ -4184,18 +4928,57 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProviderRegistrationProperties"
-            }
-          ]
+          "$ref": "#/definitions/ProviderRegistrationProperties"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "readOnly": true
+        },
+        "kind": {
+          "enum": ["Managed", "Hybrid", "Direct"],
+          "type": "string",
+          "default": "Managed",
+          "x-ms-enum": {
+            "name": "ProviderRegistrationKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Managed",
+                "description": "Resource Provider with all the resource types 'managed' by the ProviderHub service."
+              },
+              {
+                "value": "Hybrid",
+                "description": "Resource Provider with a mix of 'managed' and 'direct' resource types."
+              },
+              {
+                "value": "Direct",
+                "description": "Resource Provider with all the resource types 'managed' on by itself."
+              }
+            ]
+          },
+          "description": "Provider registration kind. This Metadata is also used by portal/tooling/etc to render different UX experiences for resources of the same type."
         }
       },
       "x-ms-azure-resource": true
+    },
+    "AuthorizedApplicationProperties": {
+      "type": "object",
+      "properties": {
+        "providerAuthorization": {
+          "$ref": "#/definitions/ApplicationProviderAuthorization"
+        },
+        "dataAuthorizations": {
+          "type": "array",
+          "description": "The authorizations that determine the level of data access permissions on the specified resource types.",
+          "items": {
+            "$ref": "#/definitions/ApplicationDataAuthorization"
+          },
+          "x-ms-identifiers": ["role"]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
     },
     "ProviderRegistrationArrayResponseWithContinuation": {
       "type": "object",
@@ -4204,6 +4987,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProviderRegistration"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get to the next set of results, if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "AuthorizedApplicationArrayResponseWithContinuation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizedApplication"
           }
         },
         "nextLink": {
@@ -4255,6 +5053,26 @@
     "ResourceTypeEndpoint": {
       "type": "object",
       "properties": {
+        "kind": {
+          "enum": ["Managed", "Direct"],
+          "type": "string",
+          "default": "Managed",
+          "x-ms-enum": {
+            "name": "ResourceTypeEndpointKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Managed",
+                "description": "Endpoint served by ProviderHub service"
+              },
+              {
+                "value": "Direct",
+                "description": "Endpoint served by the onboarded Resource Provider Service."
+              }
+            ]
+          },
+          "description": "Resource type endpoint kind. This Metadata is also used by portal/tooling/etc to render different UX experiences for resources of the same type."
+        },
         "enabled": {
           "type": "boolean"
         },
@@ -4287,24 +5105,71 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceTypeExtension"
-          }
+          },
+          "x-ms-identifiers": ["endpointUri"]
         },
         "timeout": {
           "format": "duration",
           "type": "string"
         },
         "endpointType": {
-          "enum": [
-            "NotSpecified",
-            "Canary",
-            "Production",
-            "TestInProduction"
-          ],
+          "enum": ["NotSpecified", "Canary", "Production", "TestInProduction"],
           "type": "string",
           "x-ms-enum": {
-            "name": "EndpointType",
+            "name": "EndpointTypeResourceType",
             "modelAsString": true
           }
+        },
+        "tokenAuthConfiguration": {
+          "$ref": "#/definitions/TokenAuthConfiguration"
+        },
+        "skuLink": {
+          "type": "string"
+        },
+        "endpointUri": {
+          "type": "string"
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "Api version."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of zones."
+        },
+        "dstsConfiguration": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DstsConfiguration"
+            }
+          ]
+        }
+      }
+    },
+    "TokenAuthConfiguration": {
+      "type": "object",
+      "properties": {
+        "authenticationScheme": {
+          "enum": ["PoP", "Bearer"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuthenticationScheme",
+            "modelAsString": true
+          }
+        },
+        "signedRequestScope": {
+          "enum": ["ResourceUri", "Endpoint"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SignedRequestScope",
+            "modelAsString": true
+          }
+        },
+        "disableCertificateAuthenticationFallback": {
+          "type": "boolean"
         }
       }
     },
@@ -4401,10 +5266,7 @@
       "type": "object",
       "properties": {
         "policy": {
-          "enum": [
-            "NotSpecified",
-            "SynchronizeBeginExtension"
-          ],
+          "enum": ["NotSpecified", "SynchronizeBeginExtension"],
           "type": "string",
           "x-ms-enum": {
             "name": "Policy",
@@ -4445,12 +5307,27 @@
             "modelAsString": true
           }
         },
-        "regionality": {
+        "additionalOptions": {
           "enum": [
-            "NotSpecified",
-            "Global",
-            "Regional"
+            "ProtectedAsyncOperationPolling",
+            "ProtectedAsyncOperationPollingAuditOnly"
           ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AdditionalOptionsResourceTypeRegistration",
+            "modelAsString": true
+          }
+        },
+        "crossTenantTokenValidation": {
+          "enum": ["EnsureSecureValidation", "PassthroughInsecureToken"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CrossTenantTokenValidation",
+            "modelAsString": true
+          }
+        },
+        "regionality": {
+          "enum": ["NotSpecified", "Global", "Regional"],
           "type": "string",
           "x-ms-enum": {
             "name": "Regionality",
@@ -4461,7 +5338,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceTypeEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "extensionOptions": {
           "allOf": [
@@ -4471,19 +5349,18 @@
           ]
         },
         "marketplaceType": {
-          "enum": [
-            "NotSpecified",
-            "AddOn",
-            "Bypass",
-            "Store"
-          ],
-          "type": "string"
+          "enum": ["NotSpecified", "AddOn", "Bypass", "Store"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MarketplaceType"
+          }
         },
         "swaggerSpecifications": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SwaggerSpecification"
-          }
+          },
+          "x-ms-identifiers": ["swaggerSpecFolderUri"]
         },
         "allowedUnauthorizedActions": {
           "type": "array",
@@ -4495,13 +5372,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AuthorizationActionMapping"
-          }
+          },
+          "x-ms-identifiers": ["original"]
         },
         "linkedAccessChecks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedAccessCheck"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defaultApiVersion": {
           "type": "string"
@@ -4510,13 +5389,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoggingRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "throttlingRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThrottlingRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "requiredFeatures": {
           "type": "array",
@@ -4535,8 +5416,7 @@
           "type": "boolean"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource."
+          "$ref": "#/definitions/ProvisioningState"
         },
         "enableThirdPartyS2S": {
           "type": "boolean"
@@ -4575,7 +5455,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceTreeInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "requestHeaderOptions": {
           "allOf": [
@@ -4588,7 +5469,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubscriptionStateRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "templateDeploymentOptions": {
           "allOf": [
@@ -4601,7 +5483,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExtendedLocationOptions"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "resourceMovePolicy": {
           "allOf": [
@@ -4644,6 +5527,556 @@
         },
         "openApiConfiguration": {
           "$ref": "#/definitions/OpenApiConfiguration"
+        },
+        "onBehalfOfTokens": {
+          "$ref": "#/definitions/ResourceTypeOnBehalfOfToken"
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ResourceTypeManagedResourceGroupConfiguration"
+        },
+        "category": {
+          "enum": ["None", "FreeForm", "Internal", "PureProxy"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceTypeCategory",
+            "modelAsString": true
+          }
+        },
+        "resourceValidation": {
+          "enum": ["NotSpecified", "ReservedWords", "ProfaneWords"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceValidation",
+            "modelAsString": true
+          }
+        },
+        "disallowedEndUserOperations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "skuLink": {
+          "type": "string"
+        },
+        "quotaRule": {
+          "$ref": "#/definitions/QuotaRule"
+        },
+        "linkedNotificationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedNotificationRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceProviderAuthorizationRules": {
+          "$ref": "#/definitions/ResourceProviderAuthorizationRules"
+        },
+        "tokenAuthConfiguration": {
+          "$ref": "#/definitions/TokenAuthConfiguration"
+        },
+        "privateEndpointConfiguration": {
+          "$ref": "#/definitions/PrivateEndpointConfiguration"
+        },
+        "templateDeploymentPolicy": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TemplateDeploymentPolicy"
+            }
+          ]
+        },
+        "allowEmptyRoleAssignments": {
+          "type": "boolean"
+        },
+        "policyExecutionType": {
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "ExecutePolicies",
+            "BypassPolicies",
+            "ExpectPartialPutRequests"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyExecutionType",
+            "modelAsString": true
+          }
+        },
+        "availabilityZoneRule": {
+          "type": "object",
+          "properties": {
+            "availabilityZonePolicy": {
+              "type": "string",
+              "enum": ["NotSpecified", "SingleZoned", "MultiZoned"],
+              "x-ms-enum": {
+                "name": "AvailabilityZonePolicy",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "dstsConfiguration": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DstsConfiguration"
+            }
+          ]
+        },
+        "asyncTimeoutRules": {
+          "type": "array",
+          "description": "Async timeout rules",
+          "items": {
+            "$ref": "#/definitions/AsyncTimeoutRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "commonApiVersions": {
+          "type": "array",
+          "description": "Common API versions for the resource type.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "apiProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiProfile"
+          },
+          "x-ms-identifiers": ["profileVersion", "apiVersion"]
+        },
+        "linkedOperationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedOperationRule"
+          },
+          "x-ms-identifiers": ["linkedOperation", "linkedAction"]
+        },
+        "legacyName": {
+          "type": "string"
+        },
+        "legacyNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedTemplateDeploymentReferenceActions": {
+          "type": "array",
+          "description": "Allowed template deployment reference actions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "legacyPolicy": {
+          "type": "object",
+          "properties": {
+            "disallowedLegacyOperations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LegacyOperation"
+              },
+              "x-ms-identifiers": []
+            },
+            "disallowedConditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LegacyDisallowedCondition"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        },
+        "manifestLink": {
+          "description": "Manifest link.",
+          "type": "string"
+        },
+        "capacityRule": {
+          "type": "object",
+          "description": "Capacity rule.",
+          "properties": {
+            "capacityPolicy": {
+              "type": "string",
+              "description": "Capacity policy.",
+              "enum": ["Default", "Restricted"],
+              "x-ms-enum": {
+                "name": "CapacityPolicy",
+                "modelAsString": true
+              }
+            },
+            "skuAlias": {
+              "description": "Sku alias",
+              "type": "string"
+            }
+          }
+        },
+        "marketplaceOptions": {
+          "type": "object",
+          "description": "Marketplace options.",
+          "properties": {
+            "addOnPlanConversionAllowed": {
+              "type": "boolean",
+              "description": "Add-on plan conversion allowed."
+            }
+          }
+        },
+        "allowedResourceNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AllowedResourceName"
+          },
+          "x-ms-identifiers": ["name", "getActionVerb"]
+        },
+        "resourceCache": {
+          "type": "object",
+          "description": "Resource cache options.",
+          "properties": {
+            "enableResourceCache": {
+              "type": "boolean",
+              "description": "Enable resource cache."
+            },
+            "resourceCacheExpirationTimespan": {
+              "type": "string",
+              "description": "Resource cache expiration timespan."
+            }
+          }
+        },
+        "resourceQueryManagement": {
+          "type": "object",
+          "description": "Resource query management options.",
+          "properties": {
+            "filterOption": {
+              "type": "string",
+              "description": "Filter option.",
+              "enum": ["NotSpecified", "EnableSubscriptionFilterOnTenant"],
+              "x-ms-enum": {
+                "name": "FilterOption",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "supportsTags": {
+          "type": "boolean"
+        },
+        "resourceManagementOptions": {
+          "type": "object",
+          "description": "Resource management options.",
+          "properties": {
+            "batchProvisioningSupport": {
+              "type": "object",
+              "description": "Batch provisioning support.",
+              "properties": {
+                "supportedOperations": {
+                  "type": "string",
+                  "description": "Supported operations.",
+                  "enum": ["NotSpecified", "Get", "Delete"],
+                  "x-ms-enum": {
+                    "name": "SupportedOperations",
+                    "modelAsString": true
+                  }
+                }
+              }
+            },
+            "deleteDependencies": {
+              "type": "array",
+              "description": "Delete dependencies.",
+              "items": {
+                "$ref": "#/definitions/DeleteDependency"
+              },
+              "x-ms-identifiers": [
+                "linkedType",
+                "linkedProperty",
+                "requiredFeatures"
+              ]
+            },
+            "nestedProvisioningSupport": {
+              "type": "object",
+              "description": "Nested provisioning support.",
+              "properties": {
+                "minimumApiVersion": {
+                  "type": "string",
+                  "description": "Minimum API version."
+                }
+              }
+            }
+          }
+        },
+        "groupingTag": {
+          "type": "string",
+          "description": "Grouping tag."
+        },
+        "addResourceListTargetLocations": {
+          "type": "boolean",
+          "description": "Add resource list target locations?"
+        },
+        "resourceTypeCommonAttributeManagement": {
+          "type": "object",
+          "description": "Resource type common attribute management.",
+          "properties": {
+            "commonApiVersionsMergeMode": {
+              "type": "string",
+              "description": "Common api versions merge mode.",
+              "enum": ["Merge", "Overwrite"],
+              "x-ms-enum": {
+                "name": "CommonApiVersionsMergeMode",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "routingRule": {
+          "type": "object",
+          "description": "Routing rule.",
+          "properties": {
+            "hostResourceType": {
+              "description": "Hosted resource type.",
+              "type": "string"
+            }
+          }
+        },
+        "frontdoorRequestMode": {
+          "enum": ["NotSpecified", "UseManifest"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FrontdoorRequestMode",
+            "modelAsString": true
+          }
+        },
+        "resourceSubType": {
+          "enum": ["NotSpecified", "AsyncOperation"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceSubType",
+            "modelAsString": true
+          }
+        },
+        "asyncOperationResourceTypeName": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConfiguration": {
+      "type": "object",
+      "properties": {
+        "minApiVersion": {
+          "description": "The first api version that support private endpoint.",
+          "type": "string"
+        },
+        "groupConnectivityInformation": {
+          "type": "array",
+          "description": "The list of group connectivity information.",
+          "items": {
+            "$ref": "#/definitions/GroupConnectivityInformation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": ["minApiVersion", "groupConnectivityInformation"]
+    },
+    "GroupConnectivityInformation": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The group id.",
+          "type": "string"
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "List of required members for the group id.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "List of required zone names for the group id.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "redirectMapId": {
+          "description": "The redirect map id.",
+          "type": "string"
+        }
+      },
+      "required": ["groupId", "requiredMembers", "requiredZoneNames"]
+    },
+    "QuotaRule": {
+      "type": "object",
+      "properties": {
+        "quotaPolicy": {
+          "$ref": "#/definitions/QuotaPolicy"
+        },
+        "locationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationQuotaRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LocationQuotaRule": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "$ref": "#/definitions/QuotaPolicy"
+        },
+        "quotaId": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "LinkedNotificationRule": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actionsOnFailedOperation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fastPathActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fastPathActionsOnFailedOperation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "linkedNotificationTimeout": {
+          "format": "duration",
+          "type": "string"
+        }
+      }
+    },
+    "FanoutLinkedNotificationRule": {
+      "type": "object",
+      "properties": {
+        "tokenAuthConfiguration": {
+          "$ref": "#/definitions/TokenAuthConfiguration"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderEndpoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "dstsConfiguration": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DstsConfiguration"
+            }
+          ]
+        }
+      }
+    },
+    "ResourceProviderAuthorizationRules": {
+      "type": "object",
+      "properties": {
+        "asyncOperationPollingRules": {
+          "$ref": "#/definitions/AsyncOperationPollingRules"
+        }
+      }
+    },
+    "AsyncOperationPollingRules": {
+      "type": "object",
+      "properties": {
+        "authorizationActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalOptions": {
+          "enum": [
+            "ProtectedAsyncOperationPolling",
+            "ProtectedAsyncOperationPollingAuditOnly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AdditionalOptionsAsyncOperation",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ResourceTypeManagedResourceGroupConfiguration": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "resourceGroupLocationOverride": {
+          "type": "string"
+        },
+        "applicationIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "denyAssignmentConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupDenyAssignmentConfiguration"
+        }
+      }
+    },
+    "ManagedResourceGroupDenyAssignmentConfiguration": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "notActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ResourceTypeOnBehalfOfToken": {
+      "type": "object",
+      "properties": {
+        "actionName": {
+          "type": "string"
+        },
+        "lifeTime": {
+          "type": "string"
         }
       }
     },
@@ -4656,15 +6089,35 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceTypeRegistrationProperties"
-            }
-          ]
+          "$ref": "#/definitions/ResourceTypeRegistrationProperties"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "readOnly": true
+        },
+        "kind": {
+          "enum": ["Managed", "Hybrid", "Direct"],
+          "type": "string",
+          "default": "Managed",
+          "x-ms-enum": {
+            "name": "ResourceTypeRegistrationKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Managed",
+                "description": "Resource type served by the ProviderHub service."
+              },
+              {
+                "value": "Hybrid",
+                "description": "Resource type served by both the ProviderHub & the onboarded Resource Provider Services (i.e. The type has a mix of managed and direct endpoints)."
+              },
+              {
+                "value": "Direct",
+                "description": "Resource type served by the onboarded Resource Provider Service."
+              }
+            ]
+          },
+          "description": "Resource type registration kind. This Metadata is also used by portal/tooling/etc to render different UX experiences for resources of the same type."
         }
       },
       "x-ms-azure-resource": true
@@ -4685,10 +6138,7 @@
       }
     },
     "SkuCapability": {
-      "required": [
-        "name",
-        "value"
-      ],
+      "required": ["name", "value"],
       "type": "object",
       "properties": {
         "name": {
@@ -4712,14 +6162,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuCapability"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         }
       }
     },
     "SkuLocationInfo": {
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "type": "object",
       "properties": {
         "location": {
@@ -4735,7 +6184,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuZoneDetail"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "extendedLocations": {
           "type": "array",
@@ -4744,19 +6194,16 @@
           }
         },
         "type": {
-          "enum": [
-            "NotSpecified",
-            "EdgeZone",
-            "ArcZone"
-          ],
-          "type": "string"
+          "enum": ["NotSpecified", "EdgeZone", "ArcZone"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExtendedLocationType"
+          }
         }
       }
     },
     "SkuCapacity": {
-      "required": [
-        "minimum"
-      ],
+      "required": ["minimum"],
       "type": "object",
       "properties": {
         "minimum": {
@@ -4772,11 +6219,7 @@
           "type": "integer"
         },
         "scaleType": {
-          "enum": [
-            "None",
-            "Manual",
-            "Automatic"
-          ],
+          "enum": ["None", "Manual", "Automatic"],
           "type": "string",
           "x-ms-enum": {
             "name": "SkuScaleType",
@@ -4786,9 +6229,7 @@
       }
     },
     "SkuCost": {
-      "required": [
-        "meterId"
-      ],
+      "required": ["meterId"],
       "type": "object",
       "properties": {
         "meterId": {
@@ -4804,9 +6245,7 @@
       }
     },
     "SkuSetting": {
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "type": "object",
       "properties": {
         "name": {
@@ -4834,7 +6273,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuLocationInfo"
-          }
+          },
+          "x-ms-identifiers": ["location"]
         },
         "requiredQuotaIds": {
           "type": "array",
@@ -4859,31 +6299,31 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuCost"
-          }
+          },
+          "x-ms-identifiers": ["meterId"]
         },
         "capabilities": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuCapability"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "ResourceTypeSku": {
-      "required": [
-        "skuSettings"
-      ],
+      "required": ["skuSettings"],
       "type": "object",
       "properties": {
         "skuSettings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuSetting"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource."
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
@@ -4942,9 +6382,7 @@
       }
     },
     "ResourceManagementEntity": {
-      "required": [
-        "resourceId"
-      ],
+      "required": ["resourceId"],
       "type": "object",
       "properties": {
         "resourceId": {
@@ -4975,7 +6413,249 @@
           "x-ms-client-flatten": true,
           "items": {
             "$ref": "#/definitions/ResourceManagementEntity"
+          },
+          "x-ms-identifiers": ["resourceId"]
+        }
+      }
+    },
+    "ResourceHydrationAccount": {
+      "type": "object",
+      "description": "Resource hydration account.",
+      "properties": {
+        "maxChildResourceConsistencyJobLimit": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "encryptedKey": {
+          "type": "string"
+        },
+        "accountName": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        }
+      }
+    },
+    "SubscriberSetting": {
+      "type": "object",
+      "description": "Subscriber setting.",
+      "properties": {
+        "filterRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FilterRule": {
+      "type": "object",
+      "description": "Filter rule.",
+      "properties": {
+        "filterQuery": {
+          "type": "string"
+        },
+        "endpointInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointInformation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "EndpointInformation": {
+      "type": "object",
+      "description": "Endpoint information.",
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        },
+        "endpointType": {
+          "type": "string",
+          "enum": ["Webhook", "Eventhub"],
+          "x-ms-enum": {
+            "name": "NotificationEndpointType",
+            "modelAsString": true
           }
+        },
+        "schemaVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "DstsConfiguration": {
+      "type": "object",
+      "description": "Dsts configuration.",
+      "required": ["serviceName"],
+      "properties": {
+        "serviceName": {
+          "type": "string"
+        },
+        "serviceDnsName": {
+          "type": "string"
+        }
+      }
+    },
+    "AllowedResourceName": {
+      "type": "object",
+      "description": "Allowed resource name.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "getActionVerb": {
+          "type": "string",
+          "description": "Get action verb."
+        }
+      }
+    },
+    "DeleteDependency": {
+      "type": "object",
+      "description": "Delete dependency.",
+      "properties": {
+        "requiredFeatures": {
+          "type": "array",
+          "description": "Required features.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "linkedProperty": {
+          "type": "string",
+          "description": "Linked property."
+        },
+        "linkedType": {
+          "type": "string",
+          "description": "Linked type."
+        }
+      }
+    },
+    "LegacyOperation": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Create",
+        "Delete",
+        "Waiting",
+        "AzureAsyncOperationWaiting",
+        "ResourceCacheWaiting",
+        "Action",
+        "Read",
+        "EvaluateDeploymentOutput",
+        "DeploymentCleanup"
+      ],
+      "x-ms-enum": {
+        "name": "LegacyOperation",
+        "modelAsString": true
+      }
+    },
+    "LegacyDisallowedCondition": {
+      "type": "object",
+      "description": "Legacy disallowed condition",
+      "properties": {
+        "disallowedLegacyOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LegacyOperation"
+          },
+          "x-ms-identifiers": []
+        },
+        "feature": {
+          "type": "string",
+          "description": "Feature string."
+        }
+      }
+    },
+    "ApiProfile": {
+      "type": "object",
+      "description": "Api profile",
+      "properties": {
+        "profileVersion": {
+          "type": "string",
+          "description": "Profile version."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "Api version."
+        }
+      }
+    },
+    "AsyncTimeoutRule": {
+      "type": "object",
+      "description": "Async timeout rule.",
+      "properties": {
+        "actionName": {
+          "type": "string"
+        },
+        "timeout": {
+          "type": "string"
+        }
+      }
+    },
+    "AdditionalAuthorization": {
+      "type": "object",
+      "description": "Resource provider additional authorization.",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "roleDefinitionId": {
+          "type": "string"
+        }
+      }
+    },
+    "ThirdPartyExtension": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of third party extension."
+        }
+      }
+    },
+    "ProviderMonitorSettingProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "ProviderMonitorSetting": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProviderMonitorSettingProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProviderMonitorSettingArrayResponseWithContinuation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderMonitorSetting"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get to the next set of results, if there are any.",
+          "type": "string"
         }
       }
     }
@@ -5039,6 +6719,8 @@
       "description": "The rollout name.",
       "required": true,
       "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "maxLength": 260,
       "x-ms-parameter-location": "method"
     },
     "EnvironmentParameter": {
@@ -5103,6 +6785,35 @@
       "description": "The resource action name.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "ApplicationIdParameter": {
+      "in": "path",
+      "name": "applicationId",
+      "description": "The application ID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "The name of the resource group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ProviderMonitorSettingNameParameter": {
+      "in": "path",
+      "name": "providerMonitorSettingName",
+      "description": "The name of the provider monitor setting.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "x-ms-parameter-location": "method"
     }
   }
