@@ -1,8 +1,7 @@
 trigger: none
 
 jobs:
-- job:
-  displayName: Validated Impacted Specs
+- job: Validate_Impacted_Specs
   pool:
     name: azsdk-pool-mms-ubuntu-2204-general
     vmImage: ubuntu-22.04
@@ -14,3 +13,4 @@ jobs:
       $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 -GitClean -Verbose
     displayName: Validate Impacted Specs
     ignoreLASTEXITCODE: true
+    condition: succeededOrFailed()

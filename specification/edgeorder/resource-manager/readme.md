@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for EdgeOrder.
 
+
+
 ---
-
 ## Getting Started
-
 To build the SDK for EdgeOrder, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,31 +15,22 @@ To build the SDK for EdgeOrder, simply [Install AutoRest](https://aka.ms/autores
 To see additional help and options, run:
 
 > `autorest --help`
-
 ---
 
 ## Configuration
 
-### Basic Information
 
+
+### Basic Information
 These are the global settings for the EdgeOrder API.
 
 ``` yaml
 title: EdgeOrderManagementClient
 description: Edge Order API's
 openapi-type: arm
-tag: package-2024-02
+tag: package-2022-05-preview
 ```
 
-
-### Tag: package-2024-02
-
-These settings apply only when `--tag=package-2024-02` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-02'
-input-file:
-  - Microsoft.EdgeOrder/stable/2024-02-01/edgeorder.json
-```
 ### Tag: package-2022-05-preview
 
 These settings apply only when `--tag=package-2022-05-preview` is specified on the command line.
@@ -48,7 +39,6 @@ These settings apply only when `--tag=package-2022-05-preview` is specified on t
 input-file:
 - Microsoft.EdgeOrder/preview/2022-05-01-preview/edgeorder.json
 ```
-
 ---
 
 ### Tag: package-2021-12
@@ -59,7 +49,6 @@ These settings apply only when `--tag=package-2021-12` is specified on the comma
 input-file:
 - Microsoft.EdgeOrder/stable/2021-12-01/edgeorder.json
 ```
-
 ---
 
 ### Tag: package-2020-12-preview
@@ -70,10 +59,10 @@ These settings apply only when `--tag=package-2020-12-preview` is specified on t
 input-file:
 - Microsoft.EdgeOrder/preview/2020-12-01-preview/edgeorder.json
 ```
-
 ---
 
 # Code Generation
+
 
 ## Swagger to SDK
 

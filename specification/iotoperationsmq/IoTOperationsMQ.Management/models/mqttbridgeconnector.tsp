@@ -83,14 +83,12 @@ model MqttBridgeRemoteBrokerConnectionSpec {
 }
 
 @doc("Protocol for remote connection.")
-union MqttBridgeRemoteBrokerProtocol {
-  string,
-
+enum MqttBridgeRemoteBrokerProtocol {
   @doc("MQTT protocol.")
-  mqtt: "mqtt",
+  mqtt,
 
   @doc("MQTT over WebSocket protocol.")
-  webSocket: "webSocket",
+  webSocket,
 }
 
 // GENERATION FIX TEMP - add "minProperties": 1 and "maxProperties": 1 to this property after creation.
@@ -181,9 +179,7 @@ model MqttBridgeRoutes {
 }
 
 @doc("MqttBridgeRoute direction properties")
-union MqttBridgeRouteDirection {
-  string,
-
+enum MqttBridgeRouteDirection {
   @doc("Remote to Local Broker.")
   RemoteToLocal: "remote-to-local",
 

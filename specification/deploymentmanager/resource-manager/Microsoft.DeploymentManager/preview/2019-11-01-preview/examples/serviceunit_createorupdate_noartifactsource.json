@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "caac1590-e859-444f-a9e0-62091c0f5929",
+    "resourceGroupName": "myResourceGroup",
+    "serviceTopologyName": "myTopology",
+    "serviceName": "myService",
+    "serviceUnitName": "myServiceUnit",
+    "api-version": "2019-11-01-preview",
+    "serviceUnitInfo": {
+      "location": "centralus",
+      "tags": {},
+      "properties": {
+        "targetResourceGroup": "myDeploymentResourceGroup",
+        "deploymentMode": "Incremental",
+        "artifacts": {
+          "templateUri": "https://mystorageaccount.blob.core.windows.net/myartifactsource/templates/myTopologyUnit.template.json?st=2018-07-07T14%3A10%3A00Z&se=2019-12-31T15%3A10%3A00Z&sp=rl&sv=2017-04-17&sr=c&sig=Yh2SoJ1NhhLRwCLln7de%2Fkabcdefghijklmno5sWEIk%3D",
+          "parametersUri": "https://mystorageaccount.blob.core.windows.net/myartifactsource/parameter/myTopologyUnit.parameters.json?st=2018-07-07T14%3A10%3A00Z&se=2019-12-31T15%3A10%3A00Z&sp=rl&sv=2017-04-17&sr=c&sig=Yh2SoJ1NhhLRwCLln7de%2Fkabcdefghijklmno5sWEIk%3D"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "myServiceUnit",
+        "type": "Microsoft.DeploymentManager/serviceTopologies/services/serviceUnits",
+        "location": "centralus",
+        "tags": {},
+        "properties": {
+          "targetResourceGroup": "myDeploymentResourceGroup",
+          "deploymentMode": "Incremental",
+          "artifacts": {
+            "templateUri": "https://mystorageaccount.blob.core.windows.net/myartifactsource/templates/myTopologyUnit.template.json?st=2018-07-07T14%3A10%3A00Z&se=2019-12-31T15%3A10%3A00Z&sp=rl&sv=2017-04-17&sr=c&sig=Yh2SoJ1NhhLRwCLln7de%2Fkabcdefghijklmno5sWEIk%3D",
+            "parametersUri": "https://mystorageaccount.blob.core.windows.net/myartifactsource/parameter/myTopologyUnit.parameters.json?st=2018-07-07T14%3A10%3A00Z&se=2019-12-31T15%3A10%3A00Z&sp=rl&sv=2017-04-17&sr=c&sig=Yh2SoJ1NhhLRwCLln7de%2Fkabcdefghijklmno5sWEIk%3D"
+          }
+        }
+      }
+    }
+  }
+}
