@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "assetEndpointProfileName": "my-assetendpointprofile",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "my-assetendpointprofile",
+        "type": "Microsoft.DeviceRegistry/assetEndpointProfiles",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assetEndpointProfiles/my-assetendpointprofile",
+        "location": "West Europe",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "targetAddress": "https://www.example.com/myTargetAddress",
+          "transportAuthentication": {
+            "ownCertificates": [
+              {
+                "certPasswordReference": "passwordRef",
+                "certSecretReference": "secretRef",
+                "certThumbprint": "myThumbprint"
+              }
+            ]
+          },
+          "userAuthentication": {
+            "mode": "UsernamePassword",
+            "usernamePasswordCredentials": {
+              "passwordReference": "passwordRef",
+              "usernameReference": "usernameRef"
+            }
+          },
+          "uuid": "1824a74f-21e1-4458-ae07-604d3a241d2e"
+        },
+        "systemData": {
+          "createdAt": "2022-11-16T00:36:43.2516899Z",
+          "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "createdByType": "Application",
+          "lastModifiedAt": "2022-11-16T01:37:16.0922793Z",
+          "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "site": "building-1"
+        }
+      }
+    }
+  },
+  "operationId": "AssetEndpointProfiles_Get",
+  "title": "Get an Asset Endpoint Profile"
+}
