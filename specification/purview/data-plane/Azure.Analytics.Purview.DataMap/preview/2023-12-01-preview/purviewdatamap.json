@@ -59,6 +59,9 @@
           },
           "Entity_AddCustomAttribute": {
             "$ref": "./examples/Entity_AddCustomAttribute.json"
+          },
+          "Entity_CreateWithFullName": {
+            "$ref": "./examples/Entity_Create_With_FullName.json"
           }
         },
         "parameters": [
@@ -233,6 +236,9 @@
             "x-ms-client-name": "guids"
           },
           {
+            "$ref": "#/parameters/usingTypeNamespace"
+          },
+          {
             "$ref": "#/parameters/showFullTypeName"
           }
         ],
@@ -303,6 +309,9 @@
         "x-ms-examples": {
           "Entity_Get": {
             "$ref": "./examples/Entity_Get.json"
+          },
+          "Entity_GetWithFullName": {
+            "$ref": "./examples/Entity_Get_With_FullName.json"
           }
         },
         "description": "Get complete definition of an entity given its GUID.",
@@ -4033,6 +4042,9 @@
         "x-ms-examples": {
           "Type_GetEntityDefByName": {
             "$ref": "./examples/Type_GetEntityDefByName.json"
+          },
+          "Type_GetEntityDefByName_WithUsing": {
+            "$ref": "./examples/Type_GetEntityDefByName_WithUsing.json"
           }
         },
         "parameters": [
@@ -4412,6 +4424,9 @@
           },
           "Type_ListTermTemplateDefs": {
             "$ref": "./examples/Type_ListTermTemplateDefs.json"
+          },
+          "Type_ListWithFullName": {
+            "$ref": "Type_List_With_FullName.json"
           }
         },
         "parameters": [
@@ -7226,6 +7241,10 @@
           "type": "string",
           "description": "The type name of the asset."
         },
+        "entityFullTypeName": {
+          "type": "string",
+          "description": "The full type name of the asset."
+        },
         "description": {
           "type": "string",
           "description": "The description of the asset."
@@ -7295,6 +7314,13 @@
         "longDescription": {
           "type": "string",
           "description": "The definition of the term."
+        },
+        "sensitiveInfoType": {
+          "type": "array",
+          "description": "The id list of sensitive info types.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "title": "SearchResultValue",
