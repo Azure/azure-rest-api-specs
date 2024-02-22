@@ -120,7 +120,6 @@ model InsightDetails {
   azureResourceId?: string;
 }
 
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
 interface Insights {
