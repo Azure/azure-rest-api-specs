@@ -72,9 +72,8 @@ model AssociationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-union AssociationType {
-  string,
-  "subnets",
+enum AssociationType {
+  subnets,
 }
 
 @doc("Association Subnet.")
@@ -115,15 +114,14 @@ model TrafficControllerProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @lroStatus
-union ProvisioningState {
-  string,
-  Provisioning: "Provisioning",
-  Updating: "Updating",
-  Deleting: "Deleting",
-  Accepted: "Accepted",
-  Succeeded: "Succeeded",
-  Failed: "Failed",
-  Canceled: "Canceled",
+enum ProvisioningState {
+  Provisioning,
+  Updating,
+  Deleting,
+  Accepted,
+  Succeeded,
+  Failed,
+  Canceled,
 }
 
 @doc("Resource ID definition used by parent to reference child resources.")

@@ -129,18 +129,17 @@ model AgentProfile {
 
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
-union FleetProvisioningState {
-  string,
-  ResourceProvisioningState,
+enum FleetProvisioningState {
+  ...ResourceProvisioningState,
 
   @doc("The provisioning state of a fleet being created.")
-  Creating: "Creating",
+  Creating,
 
   @doc("The provisioning state of a fleet being updated.")
-  Updating: "Updating",
+  Updating,
 
   @doc("The provisioning state of a fleet being deleted.")
-  Deleting: "Deleting",
+  Deleting,
 }
 
 @doc("Properties of a Fleet that can be patched.")

@@ -2524,7 +2524,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/raiContentFilters": {
-      "get": {
+      "post": {
         "tags": [
           "RaiContentFilters"
         ],
@@ -2559,9 +2559,6 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5541,7 +5538,7 @@
             "$ref": "#/definitions/RaiPolicyContentFilter"
           },
           "x-ms-identifiers": [
-            "name"
+            "policyName"
           ],
           "description": "The list of Content Filters."
         }
@@ -5563,7 +5560,7 @@
       "description": "Azure OpenAI Content Filter.",
       "type": "object",
       "properties": {
-        "name": {
+        "policyName": {
           "type": "string",
           "description": "Name of ContentFilter."
         },

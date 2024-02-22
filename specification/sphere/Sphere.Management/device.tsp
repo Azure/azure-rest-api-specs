@@ -47,31 +47,6 @@ interface ProxyResourceOperationsDevice<
 @armResourceOperations
 interface Devices extends ProxyResourceOperationsDevice<Device> {
   @autoRoute
-  @removed(Versions.v2024_04_01)
-  @renamedFrom(Versions.v2024_04_01, "generateCapabilityImage")
-  @armResourceAction(Device)
-  @action("generateCapabilityImage")
-  @post
-  @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
-  )
-  deprecatedGenerateCapabilityImage(
-    ...ResourceInstanceParameters<Device>,
-
-    @doc("Generate capability image request body.")
-    @body
-    generateDeviceCapabilityRequest: GenerateCapabilityImageRequest,
-  ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
-  @autoRoute
-  @sharedRoute
-  @added(Versions.v2024_04_01)
   @armResourceAction(Device)
   @post
   @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")
@@ -88,7 +63,7 @@ interface Devices extends ProxyResourceOperationsDevice<Device> {
     @doc("Generate capability image request body.")
     @body
     generateDeviceCapabilityRequest: GenerateCapabilityImageRequest,
-  ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
 }
 
 @doc("The properties of device")
@@ -137,14 +112,12 @@ model SignedCapabilityImageResponse {
 }
 
 @doc("Capability image type")
-union CapabilityType {
-  string,
-
+enum CapabilityType {
   /** Application development capability */
-  "ApplicationDevelopment",
+  ApplicationDevelopment,
 
   /** Field servicing capability */
-  "FieldServicing",
+  FieldServicing,
 }
 
 @doc("The properties of device patch")

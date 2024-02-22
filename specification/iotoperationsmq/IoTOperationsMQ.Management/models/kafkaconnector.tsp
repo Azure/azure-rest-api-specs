@@ -110,17 +110,15 @@ model SaslRemoteBrokerBasicAuthentication {
 
 // Add KafkaSaslType properties.
 @doc("Kafka Sasl Authentication types")
-union KafkaSaslType {
-  string,
-
+enum KafkaSaslType {
   @doc("Sasl Plain authentication.")
-  "plain",
+  plain,
 
   @doc("Sasl ScramSha256 authentication.")
-  "scramSha256",
+  scramSha256,
 
   @doc("Sasl ScramSha512 authentication.")
-  "scramSha512",
+  scramSha512,
 }
 
 // Add SaslRemoteBrokerBasicAuthenticationToken properties.
@@ -239,38 +237,34 @@ model KafkaTopicMapBatching {
 
 // Add Kafka Message compression
 @doc("Kafka Message compression enum properties")
-union KafkaMessageCompressionType {
-  string,
-
+enum KafkaMessageCompressionType {
   @doc("No Kafka message compression.")
-  none: "none",
+  none,
 
   @doc("Gzip Kafka message compression.")
-  gzip: "gzip",
+  gzip,
 
   @doc("Snappy Kafka message compression.")
-  snappy: "snappy",
+  snappy,
 
   @doc("Lz4 Kafka message compression.")
-  lz4: "lz4",
+  lz4,
 }
 
 // Add Kafka Partition Strategy
 @doc("Kafka Partition Strategy enum properties")
-union KafkaPartitionStrategy {
-  string,
-
+enum KafkaPartitionStrategy {
   @doc("Default partition strategy.")
-  default: "default",
+  default,
 
   @doc("Static partition strategy.")
-  static: "static",
+  static,
 
   @doc("Topic partition strategy.")
-  topic: "topic",
+  topic,
 
   @doc("Property partition strategy.")
-  property: "property",
+  property,
 }
 
 // Add Kafka Routes properties.
@@ -330,17 +324,15 @@ model MqttToKafkaRoutes {
 
 // Add KafkaAcks properties.
 @doc("Kafka Acks enum properties")
-union KafkaAcks {
-  string,
-
+enum KafkaAcks {
   @doc("Kafka acks zero.")
-  "zero",
+  zero,
 
   @doc("Kafka acks one.")
-  "one",
+  one,
 
   @doc("Kafka acks all.")
-  "all",
+  all,
 }
 
 // Add SharedSubscriptionProperties properties.
