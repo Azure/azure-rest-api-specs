@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
-    "api-version": "2021-06-01-preview"
+    "api-version": "2024-02-01-preview"
   },
   "responses": {
     "200": {
@@ -14,26 +14,35 @@
             "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
           }
         ],
+        "resourceProviderAuthorizationRules": {
+          "asyncOperationPollingRules": {
+            "authorizationActions": [
+              "Microsoft.Contoso/classicAdministrators/operationStatuses/read"
+            ]
+          }
+        },
         "namespace": "microsoft.contoso",
+        "serviceName": "root",
+        "services": [
+          {
+            "serviceName": "tags",
+            "status": "Inactive"
+          }
+        ],
         "providerVersion": "2.0",
         "providerType": "Internal, Hidden",
+        "crossTenantTokenValidation": "EnsureSecureValidation",
         "resourceTypes": [
           {
             "name": "Operations",
             "routingType": "ProxyOnly, Tenant",
             "resourceValidation": "ReservedWords, ProfaneWords",
-            "allowedUnauthorizedActions": [
-              "microsoft.contoso/operations/read"
-            ],
+            "allowedUnauthorizedActions": ["microsoft.contoso/operations/read"],
             "endpoints": [
               {
-                "apiVersions": [
-                  "2020-01-01-preview"
-                ],
+                "apiVersions": ["2020-01-01-preview"],
                 "endpointUri": "https://resource-endpoint.com/",
-                "locations": [
-                  ""
-                ],
+                "locations": [""],
                 "timeout": "PT20S"
               }
             ],
@@ -45,13 +54,24 @@
             "resourceValidation": "ReservedWords, ProfaneWords",
             "endpoints": [
               {
-                "apiVersions": [
-                  "2020-01-01-preview"
-                ],
+                "apiVersions": ["2020-01-01-preview"],
                 "endpointUri": "https://resource-endpoint.com/",
-                "locations": [
-                  ""
-                ],
+                "locations": [""],
+                "timeout": "PT20S"
+              }
+            ],
+            "linkedOperationRules": []
+          },
+          {
+            "name": "Locations/OperationStatuses",
+            "routingType": "ProxyOnly, LocationBased",
+            "resourceValidation": "ReservedWords, ProfaneWords",
+            "additionalOptions": "ProtectedAsyncOperationPolling",
+            "endpoints": [
+              {
+                "apiVersions": ["2020-01-01-preview"],
+                "endpointUri": "https://resource-endpoint.com/",
+                "locations": [""],
                 "timeout": "PT20S"
               }
             ],
@@ -59,9 +79,8 @@
           }
         ],
         "management": {
-          "manifestOwners": [
-            "manifestOwners-group"
-          ],
+          "manifestOwners": ["manifestOwners-group"],
+          "authorizationOwners": ["authorizationOwners-group"],
           "incidentRoutingService": "",
           "incidentRoutingTeam": "",
           "incidentContactEmail": "helpme@contoso.com",

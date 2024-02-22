@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
-    "api-version": "2021-06-01-preview"
+    "api-version": "2024-02-01-preview"
   },
   "responses": {
     "200": {
@@ -28,30 +28,18 @@
                   "enabled": true
                 },
                 "canary": {
-                  "regions": [
-                    "brazilus",
-                    "eastus2euap",
-                    "centraluseuap"
-                  ]
+                  "regions": ["brazilus", "eastus2euap", "centraluseuap"]
                 },
                 "lowTraffic": {
-                  "regions": [
-                    "southeastasia"
-                  ],
+                  "regions": ["southeastasia"],
                   "waitDuration": "PT24H"
                 },
                 "mediumTraffic": {
-                  "regions": [
-                    "uksouth",
-                    "indiawest"
-                  ],
+                  "regions": ["uksouth", "indiawest"],
                   "waitDuration": "PT24H"
                 },
                 "highTraffic": {
-                  "regions": [
-                    "australiasoutheast",
-                    "otherhightraficregions"
-                  ],
+                  "regions": ["australiasoutheast", "otherhightraficregions"],
                   "waitDuration": "PT24H"
                 },
                 "restOfTheWorldGroupOne": {
@@ -65,12 +53,15 @@
                   "waitDuration": "PT4H"
                 },
                 "restOfTheWorldGroupTwo": {
-                  "regions": [
-                    "germanynorth",
-                    "norwayeast",
-                    "allotherregions"
-                  ],
+                  "regions": ["germanynorth", "norwayeast", "allotherregions"],
                   "waitDuration": "PT4H"
+                },
+                "manifestCheckinSpecification": {
+                  "manifestCheckinOption": "AttemptAutomaticManifestCheckin",
+                  "manifestCheckinParams": {
+                    "baselineArmManifestLocation": "EastUS2EUAP",
+                    "environment": "Prod"
+                  }
                 }
               },
               "status": {
@@ -79,7 +70,12 @@
                   "eastus2euap",
                   "centraluseuap",
                   "allcompletedregions"
-                ]
+                ],
+                "manifestCheckinStatus": {
+                  "isCheckedIn": true,
+                  "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
+                  "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
+                }
               }
             }
           },
@@ -99,30 +95,18 @@
               "provisioningState": "Cancelled",
               "specification": {
                 "canary": {
-                  "regions": [
-                    "brazilus",
-                    "eastus2euap",
-                    "centraluseuap"
-                  ]
+                  "regions": ["brazilus", "eastus2euap", "centraluseuap"]
                 },
                 "lowTraffic": {
-                  "regions": [
-                    "southeastasia"
-                  ],
+                  "regions": ["southeastasia"],
                   "waitDuration": "PT24H"
                 },
                 "mediumTraffic": {
-                  "regions": [
-                    "uksouth",
-                    "indiawest"
-                  ],
+                  "regions": ["uksouth", "indiawest"],
                   "waitDuration": "PT24H"
                 },
                 "highTraffic": {
-                  "regions": [
-                    "australiasoutheast",
-                    "otherhightraficregions"
-                  ],
+                  "regions": ["australiasoutheast", "otherhightraficregions"],
                   "waitDuration": "PT24H"
                 },
                 "restOfTheWorldGroupOne": {
@@ -136,12 +120,15 @@
                   "waitDuration": "PT4H"
                 },
                 "restOfTheWorldGroupTwo": {
-                  "regions": [
-                    "germanynorth",
-                    "norwayeast",
-                    "allotherregions"
-                  ],
+                  "regions": ["germanynorth", "norwayeast", "allotherregions"],
                   "waitDuration": "PT4H"
+                },
+                "manifestCheckinSpecification": {
+                  "manifestCheckinOption": "AttemptAutomaticManifestCheckin",
+                  "manifestCheckinParams": {
+                    "baselineArmManifestLocation": "EastUS2EUAP",
+                    "environment": "Prod"
+                  }
                 }
               },
               "status": {
@@ -156,6 +143,11 @@
                     "code": "RolloutStoppedByUser",
                     "message": "Rollout was explicitly stopped by the user."
                   }
+                },
+                "manifestCheckinStatus": {
+                  "isCheckedIn": true,
+                  "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
+                  "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
                 }
               }
             }

@@ -3,7 +3,7 @@
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
     "rolloutName": "2020week10",
-    "api-version": "2021-06-01-preview",
+    "api-version": "2024-02-01-preview",
     "properties": {
       "properties": {
         "specification": {
@@ -11,12 +11,17 @@
             "enabled": true
           },
           "canary": {
-            "skipRegions": [
-              "eastus2euap"
-            ]
+            "skipRegions": ["eastus2euap"]
           },
           "restOfTheWorldGroupTwo": {
             "waitDuration": "PT4H"
+          },
+          "manifestCheckinSpecification": {
+            "manifestCheckinOption": "AttemptAutomaticManifestCheckin",
+            "manifestCheckinParams": {
+              "baselineArmManifestLocation": "EastUS2EUAP",
+              "environment": "Prod"
+            }
           }
         }
       }
@@ -45,33 +50,19 @@
           "provisioningState": "RolloutInProgress",
           "specification": {
             "canary": {
-              "regions": [
-                "brazilus",
-                "eastus2euap",
-                "centraluseuap"
-              ],
-              "skipRegions": [
-                "brazilus"
-              ]
+              "regions": ["brazilus", "eastus2euap", "centraluseuap"],
+              "skipRegions": ["brazilus"]
             },
             "lowTraffic": {
-              "regions": [
-                "southeastasia"
-              ],
+              "regions": ["southeastasia"],
               "waitDuration": "PT24H"
             },
             "mediumTraffic": {
-              "regions": [
-                "uksouth",
-                "indiawest"
-              ],
+              "regions": ["uksouth", "indiawest"],
               "waitDuration": "PT24H"
             },
             "highTraffic": {
-              "regions": [
-                "australiasoutheast",
-                "otherhightraficregions"
-              ],
+              "regions": ["australiasoutheast", "otherhightraficregions"],
               "waitDuration": "PT24H"
             },
             "restOfTheWorldGroupOne": {
@@ -85,22 +76,26 @@
               "waitDuration": "PT4H"
             },
             "restOfTheWorldGroupTwo": {
-              "regions": [
-                "germanynorth",
-                "norwayeast",
-                "allotherregions"
-              ],
+              "regions": ["germanynorth", "norwayeast", "allotherregions"],
               "waitDuration": "PT4H"
+            },
+            "manifestCheckinSpecification": {
+              "manifestCheckinOption": "AttemptAutomaticManifestCheckin",
+              "manifestCheckinParams": {
+                "baselineArmManifestLocation": "EastUS2EUAP",
+                "environment": "Prod"
+              }
             }
           },
           "status": {
-            "completedRegions": [
-              "brazilus",
-              "eastus2euap",
-              "centraluseuap"
-            ],
+            "completedRegions": ["brazilus", "eastus2euap", "centraluseuap"],
             "nextTrafficRegion": "LowTraffic",
-            "nextTrafficRegionScheduledTime": "2020-03-03T22:00:00Z"
+            "nextTrafficRegionScheduledTime": "2020-03-03T22:00:00Z",
+            "manifestCheckinStatus": {
+              "isCheckedIn": true,
+              "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
+              "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
+            }
           }
         }
       }
@@ -123,30 +118,18 @@
           "provisioningState": "RolloutInProgress",
           "specification": {
             "canary": {
-              "regions": [
-                "brazilus",
-                "eastus2euap",
-                "centraluseuap"
-              ]
+              "regions": ["brazilus", "eastus2euap", "centraluseuap"]
             },
             "lowTraffic": {
-              "regions": [
-                "southeastasia"
-              ],
+              "regions": ["southeastasia"],
               "waitDuration": "PT24H"
             },
             "mediumTraffic": {
-              "regions": [
-                "uksouth",
-                "indiawest"
-              ],
+              "regions": ["uksouth", "indiawest"],
               "waitDuration": "PT24H"
             },
             "highTraffic": {
-              "regions": [
-                "australiasoutheast",
-                "otherhightraficregions"
-              ],
+              "regions": ["australiasoutheast", "otherhightraficregions"],
               "waitDuration": "PT24H"
             },
             "restOfTheWorldGroupOne": {
@@ -160,12 +143,15 @@
               "waitDuration": "PT4H"
             },
             "restOfTheWorldGroupTwo": {
-              "regions": [
-                "germanynorth",
-                "norwayeast",
-                "allotherregions"
-              ],
+              "regions": ["germanynorth", "norwayeast", "allotherregions"],
               "waitDuration": "PT4H"
+            },
+            "manifestCheckinSpecification": {
+              "manifestCheckinOption": "AttemptAutomaticManifestCheckin",
+              "manifestCheckinParams": {
+                "baselineArmManifestLocation": "EastUS2EUAP",
+                "environment": "Prod"
+              }
             }
           },
           "status": {
@@ -174,7 +160,12 @@
               "eastus2euap",
               "centraluseuap",
               "allcompletedregions"
-            ]
+            ],
+            "manifestCheckinStatus": {
+              "isCheckedIn": true,
+              "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
+              "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
+            }
           }
         }
       }

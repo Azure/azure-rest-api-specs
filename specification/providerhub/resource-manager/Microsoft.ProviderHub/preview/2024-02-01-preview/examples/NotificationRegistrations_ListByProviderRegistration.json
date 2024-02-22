@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
-    "api-version": "2021-06-01-preview"
+    "api-version": "2024-02-01-preview"
   },
   "responses": {
     "200": {
@@ -10,6 +10,8 @@
       "body": {
         "value": [
           {
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/notificationRegistration/2020week01",
+            "type": "Microsoft.ProviderHub/providerRegistrations/notificationRegistration",
             "name": "fooNotificationRegistration",
             "systemData": {
               "createdBy": "string",
@@ -29,21 +31,18 @@
               "notificationEndpoints": [
                 {
                   "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-eastus/providers/Microsoft.EventHub/namespaces/unitedstates-mgmtexpint/eventhubs/armlinkednotifications",
-                  "locations": [
-                    "",
-                    "East US"
-                  ]
+                  "locations": ["", "East US"]
                 },
                 {
                   "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-northeurope/providers/Microsoft.EventHub/namespaces/europe-mgmtexpint/eventhubs/armlinkednotifications",
-                  "locations": [
-                    "North Europe"
-                  ]
+                  "locations": ["North Europe"]
                 }
               ]
             }
           },
           {
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/notificationRegistration/2020week01",
+            "type": "Microsoft.ProviderHub/providerRegistrations/notificationRegistration",
             "name": "barNotificationRegistration",
             "systemData": {
               "createdBy": "string",
@@ -56,15 +55,11 @@
             "properties": {
               "notificationMode": "EventHub",
               "messageScope": "RegisteredSubscriptions",
-              "includedEvents": [
-                "*/delete"
-              ],
+              "includedEvents": ["*/delete"],
               "notificationEndpoints": [
                 {
                   "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-eastus/providers/Microsoft.EventHub/namespaces/unitedstates-mgmtexpint/eventhubs/armlinkednotifications",
-                  "locations": [
-                    ""
-                  ]
+                  "locations": [""]
                 }
               ]
             }
