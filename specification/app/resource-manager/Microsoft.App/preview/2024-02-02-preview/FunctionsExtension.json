@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/providers/Microsoft.App/Functions/{functionAppName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/providers/Microsoft.App/functions/{functionAppName}": {
       "post": {
         "tags": [
           "FunctionsExtension"
@@ -35,21 +35,24 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "revisionName",
             "in": "path",
             "description": "Name of the Container App Revision, the parent resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "functionAppName",
             "in": "path",
             "description": "Name of the Function App, the extension resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
