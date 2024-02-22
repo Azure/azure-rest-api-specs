@@ -857,6 +857,100 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:hold": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Hold participant from the call using identifier.",
+        "description": "Hold participant from the call using identifier.",
+        "operationId": "CallMedia_Hold",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "holdRequest",
+            "in": "body",
+            "description": "The participants to be hold from the call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HoldRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the hold participant response"
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_Hold": {
+            "$ref": "./examples/CallMedia_Hold.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:unhold": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Unhold participants from the call using identifier.",
+        "description": "Unhold participants from the call using identifier.",
+        "operationId": "CallMedia_Unhold",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "unholdRequest",
+            "in": "body",
+            "description": "The participants to be hold from the call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnholdRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the unhold participant response"
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_Unhold": {
+            "$ref": "./examples/CallMedia_Unhold.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}:startHoldMusic": {
       "post": {
         "tags": [
