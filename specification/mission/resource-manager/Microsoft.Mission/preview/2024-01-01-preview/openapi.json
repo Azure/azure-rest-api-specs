@@ -4323,6 +4323,13 @@
           },
           "x-ms-identifiers": []
         },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by community endpoint.",
+          "items": {
+            "type": "string"
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
@@ -4462,6 +4469,13 @@
             "$ref": "#/definitions/CommunityEndpointDestinationRule"
           },
           "x-ms-identifiers": []
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by community endpoint.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4968,6 +4982,13 @@
           },
           "x-ms-identifiers": []
         },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by enclave endpoint.",
+          "items": {
+            "type": "string"
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
@@ -5095,6 +5116,13 @@
             "$ref": "#/definitions/EnclaveEndpointDestinationRule"
           },
           "x-ms-identifiers": []
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by enclave endpoint.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5196,6 +5224,10 @@
         "customCidrRange": {
           "type": "string",
           "description": "Custom CIDR Range."
+        },
+        "connectToAzureServices": {
+          "type": "boolean",
+          "description": "Connect to Azure Services (True or False)."
         }
       },
       "required": [
@@ -5213,6 +5245,10 @@
         "customCidrRange": {
           "type": "string",
           "description": "Custom CIDR Range."
+        },
+        "connectToAzureServices": {
+          "type": "boolean",
+          "description": "Connect to Azure Services (True or False)."
         }
       }
     },

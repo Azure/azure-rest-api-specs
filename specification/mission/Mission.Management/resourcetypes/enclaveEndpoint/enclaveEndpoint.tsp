@@ -73,6 +73,10 @@ model EnclaveEndpointProperties {
   @doc("Endpoint Rule Collection.")
   endpointRuleCollection?: EnclaveEndpointRule[];
 
+  @added(Microsoft.Mission.Versions.v2024_01_01_preview)
+  @doc("List of resource ids created by enclave endpoint.")
+  resourceCollection?: string[];
+
   @doc("Provisioning State.")
   @visibility("read")
   provisioningState?: ProvisioningState;
