@@ -173,11 +173,7 @@ interface TextUngroundednessDetectionOperations {
   @route("/text:detectUngroundedness")
   @post
   detectUngroundedness is Azure.Core.RpcOperation<
-    {
-      @body
-      @doc("The ungroundedness detection request.")
-      body: DetectUngroundednessOptions;
-    },
+    DetectUngroundednessOptions,
     DetectUngroundednessResult
   >;
 }
