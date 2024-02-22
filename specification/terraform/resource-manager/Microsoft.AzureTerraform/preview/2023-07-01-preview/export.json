@@ -196,6 +196,15 @@
           "$ref": "#/definitions/Type",
           "description": "The parameter type"
         },
+        "targetProvider": {
+          "description": "The target Azure Terraform Provider",
+          "type": "string",
+          "enum": [
+            "azurerm",
+            "azapi"
+          ],
+          "default": "azurerm"
+        },
         "fullProperties": {
           "description": "Whether to output all non-computed properties in the generated Terraform configuration? This probably needs manual modifications to make it valid",
           "type": "boolean",
