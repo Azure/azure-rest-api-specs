@@ -559,7 +559,7 @@
             }
           },
           "202": {
-            "description": "The service has accepted the stop transcription request and will begin processing it. You will receive either TrannscriptionStopped event at your specified callback URI to update you on the status of the request."
+            "description": "The service has accepted the stop transcription request and will begin processing it. You will receive either TranscriptionStopped event at your specified callback URI to update you on the status of the request."
           }
         },
         "x-ms-examples": {
@@ -1126,7 +1126,7 @@
           {
             "name": "operationCallbackUri",
             "in": "query",
-            "description": "Opeation callback URI.",
+            "description": "Operation callback URI.",
             "required": false,
             "type": "string"
           },
@@ -1878,7 +1878,6 @@
     },
     "AzureOpenAIDialog": {
       "description": "Azure Open AI Dialog",
-      "required": [],
       "type": "object",
       "allOf": [
         {
@@ -1886,16 +1885,16 @@
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "AzureOpenAI"
+      "x-ms-discriminator-value": "azureOpenAI"
     },
     "CommunicationIdentifierModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
     },
     "PhoneNumberIdentifierModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/PhoneNumberIdentifierModel"
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/PhoneNumberIdentifierModel"
     },
     "CommunicationUserIdentifierModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationUserIdentifierModel"
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationUserIdentifierModel"
     },
     "MediaStreamingTransportType": {
       "description": "The type of transport to be used for media streaming, eg. Websocket",
@@ -2023,7 +2022,6 @@
     },
     "AzureOpenAIDialogUpdate": {
       "description": "Azure Open AI Dialog for UpdateDialog API Call",
-      "required": [],
       "type": "object",
       "allOf": [
         {
@@ -2031,10 +2029,16 @@
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "AzureOpenAI"
+      "x-ms-discriminator-value": "azureOpenAI"
+    },
+    "MicrosoftTeamsUserIdentifierModel": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
+    },
+    "MicrosoftTeamsAppIdentifierModel": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
     },
     "CommunicationErrorResponse": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
     },
     "PowerVirtualAgentsDialog": {
       "description": "Power Virtual Agents Dialog",
@@ -2057,7 +2061,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "PowerVirtualAgents"
+      "x-ms-discriminator-value": "powerVirtualAgents"
     },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
@@ -2748,6 +2752,10 @@
         "playSourceInfo": {
           "$ref": "#/definitions/PlaySource",
           "description": "Prompt to play while in hold."
+        },
+        "loop": {
+          "description": "If the prompt will be looped or not.",
+          "type": "boolean"
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
