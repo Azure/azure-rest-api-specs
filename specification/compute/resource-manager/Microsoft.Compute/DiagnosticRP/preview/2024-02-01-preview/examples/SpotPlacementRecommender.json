@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "location": "eastus",
+    "api-version": "2024-02-01-preview",
+    "spotPlacementRecommenderInput": {
+      "desiredLocations": [
+        "eastus",
+        "eastus2"
+      ],
+      "desiredSizes": [
+        {
+          "sku": "Standard_D2_v2"         
+        }
+      ],
+      "desiredCount": 1,
+      "availabilityZones": true
+    }
+  },
+  "responses": {
+    "200": {
+      "body": "DiskInspection Operation with operation-id '57b891ab-1fb7-4f5a-b002-71eb6854961f' has been successfully queued.",
+      "headers": {
+        "x-ms-request-id": "57b891ab-1fb7-4f5a-b002-71eb6854961f",
+        "location": "https://westcentralus.diagnostic.compute.azure.com/subscriptions/88fd8cb2-8248-499e-9a2d-4929a4b0133c/providers/Microsoft.Compute/locations/southcentralus/diagnosticOperations/57b891ab-1fb7-4f5a-b002-71eb6854961f"
+      }
+    }
+  }
+}
