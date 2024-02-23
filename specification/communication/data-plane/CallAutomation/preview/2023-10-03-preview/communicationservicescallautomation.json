@@ -2741,8 +2741,7 @@
     "StartHoldMusicRequest": {
       "description": "The request payload for holding participant from the call.",
       "required": [
-        "targetParticipant",
-        "playSourceInfo"
+        "targetParticipant"
       ],
       "type": "object",
       "properties": {
@@ -2760,6 +2759,10 @@
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
