@@ -64,14 +64,14 @@ model UpdateRunProperties {
     Setting both "updateStrategyId" and "strategy" is invalid.
 
     UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field. 
-    Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate. 
+    Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate.
     UpdateRunStrategy changes can be made directly on the "strategy" field before launching the UpdateRun.
     """)
   @added(Versions.v2023_08_15_preview)
   updateStrategyId?: FleetUpdateStrategyResourceId;
 
   @doc("""
-The strategy defines the order in which the clusters will be updated. 
+The strategy defines the order in which the clusters will be updated.
 If not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.
 The strategy of the UpdateRun can be modified until the run is started.
 """)
@@ -295,18 +295,20 @@ model MemberUpdateStatus {
 
 @doc("The target type of a skip request.")
 @added(Versions.v2024_02_02_preview)
-enum TargetType {
+union TargetType {
+  string,
+
   @doc("Skip the update of a member.")
-  Member,
+  Member: "Member",
 
   @doc("Skip the update of a group.")
-  Group,
+  Group: "Group",
 
   @doc("Skip the update of an entire stage including the after stage wait.")
-  Stage,
+  Stage: "Stage",
 
   @doc("Skip the update of the after stage wait of a certain stage.")
-  AfterStageWait,
+  AfterStageWait: "AfterStageWait",
 }
 
 @doc("The definition of a single skip request.")
