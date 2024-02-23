@@ -157,6 +157,8 @@ model VmmServerProperties {
   fqdn: string;
 
   /** Port is the port on which the vmmServer is listening. */
+  @minValue(1)
+  @maxValue(65535)
   port?: int32;
 
   /** Gets the connection status to the vmmServer. */
@@ -350,10 +352,12 @@ model VirtualMachineTemplateProperties {
 
   /** Gets the network interfaces of the template. */
   @visibility("read")
+  @extension("x-ms-identifiers", ["name", "nicId"])
   networkInterfaces?: NetworkInterface[];
 
   /** Gets the disks of the template. */
   @visibility("read")
+  @extension("x-ms-identifiers", ["diskId", "name"])
   disks?: VirtualDisk[];
 
   /** Provisioning state of the resource. */
@@ -639,6 +643,7 @@ model InfrastructureProfile {
 
   /** Checkpoints in the vm. */
   @visibility("read")
+  @extension("x-ms-identifiers", ["checkpointID"])
   checkpoints?: Checkpoint[];
 
   /** Type of checkpoint supported for the vm. */
@@ -827,7 +832,7 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
 
   /** Gets the tracked resource id corresponding to the inventory resource. */
   @visibility("read")
-  managedMachineResourceId?: string;
+  managedMachineResourceId?: ResourceIdentifier<[]>;
 
   /** They inventory type. */
   inventoryType: "VirtualMachine";
