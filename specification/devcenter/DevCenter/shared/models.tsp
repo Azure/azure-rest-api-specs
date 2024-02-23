@@ -55,10 +55,11 @@ model OperationStatus {
   @doc("Percent of the operation that is complete")
   @minValue(0.0)
   @maxValue(100.0)
-  percentComplete?: float32;
+  percentComplete?: float64;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "there is no build in type to describe object"
   @doc("Custom operation properties, populated only for a successful operation.")
-  properties?: bytes;
+  properties?: unknown;
 
   @doc("Operation Error message")
   error?: Azure.Core.Foundations.Error;
