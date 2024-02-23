@@ -235,14 +235,14 @@ model CloudProperties {
 /** Cloud Capacity model */
 model CloudCapacity {
   /** CPUCount specifies the maximum number of CPUs that can be allocated in the cloud. */
-  cpuCount?: int64;
+  @visibility("read") cpuCount?: int64;
 
   /** MemoryMB specifies a memory usage limit in megabytes. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
-  memoryMB?: int64;
+  @visibility("read") memoryMB?: int64;
 
   /** VMCount gives the max number of VMs that can be deployed in the cloud. */
-  vmCount?: int64;
+  @visibility("read") vmCount?: int64;
 }
 
 /** The StorageQoSPolicy definition. */
