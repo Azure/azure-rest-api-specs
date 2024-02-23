@@ -167,13 +167,13 @@ interface TextBlocklists {
 }
 
 @added(Versions.v2024_02_15_Preview)
-interface TextUngroundednessDetectionOperations {
-  @summary("Detect Ungrounded Information")
+interface TextMissingSourceDetectionOperations {
+  @summary("Detect Missing Source")
   @doc("A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.")
-  @route("/text:detectUngroundedness")
+  @route("/text:detectMissingSource")
   @post
-  detectUngroundedness is Azure.Core.RpcOperation<
-    DetectUngroundednessOptions,
-    DetectUngroundednessResult
+  detectMissingSource is Azure.Core.RpcOperation<
+    DetectMissingSourceOptions,
+    DetectMissingSourceResult
   >;
 }

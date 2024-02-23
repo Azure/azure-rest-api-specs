@@ -287,8 +287,8 @@ model LLMResource {
 }
 
 @added(Versions.v2024_02_15_Preview)
-@doc("The request of ungroundedness detection.")
-model DetectUngroundednessOptions {
+@doc("The request of missing source detection.")
+model DetectMissingSourceOptions {
   @doc("""
   The domain of the text for analysis. Allowed values: Medical, Generic.
   This field is optional, with a default value of Generic.
@@ -318,7 +318,7 @@ model DetectUngroundednessOptions {
   groundingSources: string[];
 
   @doc("""
-  A value indicating if the output includes an explanation for the identified ungroundedness.
+  A value indicating if the output includes an explanation for the identified missing source.
   This field is optional, with a default value of false.
   """)
   reasoning?: boolean;
@@ -337,16 +337,16 @@ model UngroundedDetails {
   text: string;
 
   @doc("""
-  The explanation for detected ungroundedness, enhancing understanding.
+  The explanation for detected missing source, enhancing understanding.
   Only when the 'reasoning' field in the input is set to true 'reason' field will be returned.
   """)
   reason?: string;
 }
 
 @added(Versions.v2024_02_15_Preview)
-@doc("The response of ungroundedness detection.")
-model DetectUngroundednessResult {
-  @doc("Indicates whether the text exhibits ungroundedness.")
+@doc("The response of missing source detection.")
+model DetectMissingSourceResult {
+  @doc("Indicates whether the text exhibits missing source.")
   ungrounded: boolean;
 
   @doc("Assesses the likelihood of ungrounded content with a numerical score.The score will range from 0 to 1.")
