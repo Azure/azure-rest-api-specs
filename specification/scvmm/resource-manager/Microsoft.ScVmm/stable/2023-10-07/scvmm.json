@@ -3166,7 +3166,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -3333,7 +3333,7 @@
           "x-ms-client-name": "storageQosPolicies"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -3487,7 +3487,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -3656,7 +3656,9 @@
             "$ref": "#/definitions/Checkpoint"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "checkpointID"
+          ]
         },
         "checkpointType": {
           "type": "string",
@@ -3742,8 +3744,8 @@
       "description": "Defines the resource properties.",
       "properties": {
         "inventoryType": {
-          "type": "string",
-          "description": "Discriminator property for InventoryItemProperties."
+          "$ref": "#/definitions/InventoryType",
+          "description": "They inventory type."
         },
         "managedResourceId": {
           "type": "string",
@@ -3761,7 +3763,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -3770,6 +3772,42 @@
       "required": [
         "inventoryType"
       ]
+    },
+    "InventoryType": {
+      "type": "string",
+      "description": "The inventory type",
+      "enum": [
+        "Cloud",
+        "VirtualNetwork",
+        "VirtualMachine",
+        "VirtualMachineTemplate"
+      ],
+      "x-ms-enum": {
+        "name": "InventoryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cloud",
+            "value": "Cloud",
+            "description": "Cloud inventory type"
+          },
+          {
+            "name": "VirtualNetwork",
+            "value": "VirtualNetwork",
+            "description": "VirtualNetwork inventory type"
+          },
+          {
+            "name": "VirtualMachine",
+            "value": "VirtualMachine",
+            "description": "VirtualMachine inventory type"
+          },
+          {
+            "name": "VirtualMachineTemplate",
+            "value": "VirtualMachineTemplate",
+            "description": "VirtualMachineTemplate inventory type"
+          }
+        ]
+      }
     },
     "IsCustomizable": {
       "type": "string",
@@ -4023,7 +4061,7 @@
         ]
       }
     },
-    "ProvisioningState": {
+    "ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the resource.",
       "enum": [
@@ -4037,7 +4075,7 @@
         "Created"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "ResourceProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -4379,7 +4417,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -4474,8 +4512,12 @@
         },
         "managedMachineResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets the tracked resource id corresponding to the inventory resource.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         }
       },
       "allOf": [
@@ -4674,7 +4716,10 @@
             "$ref": "#/definitions/NetworkInterface"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name",
+            "nicId"
+          ]
         },
         "disks": {
           "type": "array",
@@ -4683,10 +4728,13 @@
             "$ref": "#/definitions/VirtualDisk"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "diskId",
+            "name"
+          ]
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -4794,7 +4842,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -4867,7 +4915,7 @@
           "description": "Gets or sets the Public Key."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -4957,7 +5005,9 @@
         "port": {
           "type": "integer",
           "format": "int32",
-          "description": "Port is the port on which the vmmServer is listening."
+          "description": "Port is the port on which the vmmServer is listening.",
+          "minimum": 1,
+          "maximum": 65535
         },
         "connectionStatus": {
           "type": "string",
@@ -4980,7 +5030,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }

@@ -106,7 +106,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -259,7 +259,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -429,7 +429,7 @@
           "description": "Gets or sets the guest agent provisioning action."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -557,7 +557,9 @@
           },
           "readOnly": true,
           "type": "array",
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "checkpointID"
+          ]
         },
         "checkpointType": {
           "description": "Type of checkpoint supported for the vm.",
@@ -700,8 +702,8 @@
           "type": "string"
         },
         "inventoryType": {
-          "description": "Discriminator property for InventoryItemProperties.",
-          "type": "string"
+          "$ref": "#/definitions/InventoryType",
+          "description": "They inventory type."
         },
         "managedResourceId": {
           "description": "Gets the tracked resource id corresponding to the inventory resource.",
@@ -709,7 +711,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -723,6 +725,42 @@
         "inventoryType"
       ],
       "type": "object"
+    },
+    "InventoryType": {
+      "description": "The inventory type",
+      "enum": [
+        "Cloud",
+        "VirtualMachine",
+        "VirtualMachineTemplate",
+        "VirtualNetwork"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "InventoryType",
+        "values": [
+          {
+            "name": "Cloud",
+            "value": "Cloud",
+            "description": "Cloud inventory type"
+          },
+          {
+            "name": "VirtualNetwork",
+            "value": "VirtualNetwork",
+            "description": "VirtualNetwork inventory type"
+          },
+          {
+            "name": "VirtualMachine",
+            "value": "VirtualMachine",
+            "description": "VirtualMachine inventory type"
+          },
+          {
+            "name": "VirtualMachineTemplate",
+            "value": "VirtualMachineTemplate",
+            "description": "VirtualMachineTemplate inventory type"
+          }
+        ]
+      }
     },
     "IsCustomizable": {
       "description": "Customizable.",
@@ -976,7 +1014,7 @@
         ]
       }
     },
-    "ProvisioningState": {
+    "ResourceProvisioningState": {
       "description": "The provisioning state of the resource.",
       "enum": [
         "Accepted",
@@ -991,7 +1029,7 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "ProvisioningState",
+        "name": "ResourceProvisioningState",
         "values": [
           {
             "name": "Succeeded",
@@ -1327,7 +1365,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -1411,8 +1449,12 @@
         },
         "managedMachineResourceId": {
           "description": "Gets the tracked resource id corresponding to the inventory resource.",
+          "format": "arm-id",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "osName": {
           "description": "Gets os name.",
@@ -1551,7 +1593,10 @@
           },
           "readOnly": true,
           "type": "array",
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "diskId",
+            "name"
+          ]
         },
         "dynamicMemoryEnabled": {
           "$ref": "#/definitions/DynamicMemoryEnabled",
@@ -1608,7 +1653,10 @@
           },
           "readOnly": true,
           "type": "array",
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name",
+            "nicId"
+          ]
         },
         "osName": {
           "description": "Gets os name.",
@@ -1621,7 +1669,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -1729,7 +1777,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -1811,7 +1859,7 @@
       "description": "Describes the properties of Hybrid Identity Metadata for a Virtual Machine.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -1919,10 +1967,12 @@
         "port": {
           "description": "Port is the port on which the vmmServer is listening.",
           "format": "int32",
+          "maximum": 65535,
+          "minimum": 1,
           "type": "integer"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
