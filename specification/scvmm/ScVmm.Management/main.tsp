@@ -12,6 +12,7 @@ import "./InventoryItem.tsp";
 import "./VirtualMachineInstance.tsp";
 import "./VmInstanceHybridIdentityMetadata.tsp";
 import "./GuestAgent.tsp";
+import "./BackCompat.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

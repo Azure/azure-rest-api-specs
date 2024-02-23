@@ -82,6 +82,7 @@
         "nextLink": {
           "description": "The link to the next page of items",
           "format": "uri",
+          "readOnly": true,
           "type": "string"
         },
         "value": {
@@ -195,16 +196,19 @@
         "cpuCount": {
           "description": "CPUCount specifies the maximum number of CPUs that can be allocated in the cloud.",
           "format": "int64",
+          "readOnly": true,
           "type": "integer"
         },
         "memoryMB": {
           "description": "MemoryMB specifies a memory usage limit in megabytes.",
           "format": "int64",
+          "readOnly": true,
           "type": "integer"
         },
         "vmCount": {
           "description": "VMCount gives the max number of VMs that can be deployed in the cloud.",
           "format": "int64",
+          "readOnly": true,
           "type": "integer"
         }
       },
@@ -226,6 +230,7 @@
         "nextLink": {
           "description": "The link to the next page of items",
           "format": "uri",
+          "readOnly": true,
           "type": "string"
         },
         "value": {
@@ -393,6 +398,7 @@
         "nextLink": {
           "description": "The link to the next page of items",
           "format": "uri",
+          "readOnly": true,
           "type": "string"
         },
         "value": {
@@ -518,30 +524,6 @@
         }
       },
       "type": "object"
-    },
-    "IdentityType": {
-      "description": "Type of managed service identity.",
-      "enum": [
-        "None",
-        "SystemAssigned"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "IdentityType",
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed service identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System-assigned managed service identity."
-          }
-        ]
-      }
     },
     "InfrastructureProfile": {
       "description": "Specifies the vmmServer infrastructure specific settings for the virtual machine instance.",
@@ -677,6 +659,7 @@
         "nextLink": {
           "description": "The link to the next page of items",
           "format": "uri",
+          "readOnly": true,
           "type": "string"
         },
         "value": {
@@ -1295,7 +1278,8 @@
       "properties": {
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
-          "description": "Gets or sets the extended location."
+          "description": "Gets or sets the extended location.",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/VirtualMachineInstanceProperties",
@@ -1318,6 +1302,7 @@
         "nextLink": {
           "description": "The link to the next page of items",
           "format": "uri",
+          "readOnly": true,
           "type": "string"
         },
         "value": {
@@ -1379,10 +1364,6 @@
     "VirtualMachineInstanceUpdate": {
       "description": "The type used for update operations of the VirtualMachineInstance.",
       "properties": {
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "Gets or sets the extended location."
-        },
         "properties": {
           "$ref": "#/definitions/VirtualMachineInstanceUpdateProperties",
           "x-ms-client-flatten": true
@@ -1557,6 +1538,7 @@
         "nextLink": {
           "description": "The link to the next page of items",
           "format": "uri",
+          "readOnly": true,
           "type": "string"
         },
         "value": {
@@ -1749,6 +1731,7 @@
         "nextLink": {
           "description": "The link to the next page of items",
           "format": "uri",
+          "readOnly": true,
           "type": "string"
         },
         "value": {
@@ -1840,6 +1823,7 @@
         "nextLink": {
           "description": "The link to the next page of items",
           "format": "uri",
+          "readOnly": true,
           "type": "string"
         },
         "value": {
@@ -1927,6 +1911,7 @@
         "nextLink": {
           "description": "The link to the next page of items",
           "format": "uri",
+          "readOnly": true,
           "type": "string"
         },
         "value": {

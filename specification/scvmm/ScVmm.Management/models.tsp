@@ -84,15 +84,6 @@ enum ProvisioningAction {
   repair,
 }
 
-/** Type of managed service identity. */
-enum IdentityType {
-  /** No managed service identity. */
-  None,
-
-  /** System-assigned managed service identity. */
-  SystemAssigned,
-}
-
 /** Limit CPU for migration. */
 enum LimitCpuForMigration {
   /** Enable limit CPU for migration. */
