@@ -69,8 +69,11 @@ model OperationStatus {
 @projectedName("csharp", "DevCenterProject")
 model Project {
   @key("projectName")
-  @visibility("read")
   @doc("Name of the project")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility("read")
   name: string;
 
   @doc("Description of the project.")
@@ -89,7 +92,10 @@ create across all pools in the project.
 @parentResource(Project)
 model User {
   @key("userId")
+  @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context")
+  @minLength(2)
+  @maxLength(36)
+  @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
   @visibility("read")
-  @doc("The AAD object id of the user")
   userId: string;
 }

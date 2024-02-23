@@ -303,6 +303,9 @@ model DevBoxListResult is Azure.Core.Page<DevBox>;
 model DevBox {
   @key("devBoxName")
   @doc("Display name for the Dev Box")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   @visibility("read")
   name: string;
 
@@ -397,8 +400,11 @@ model RemoteConnection {
 @parentResource(DevBox)
 model DevBoxAction {
   @key("actionName")
-  @visibility("read")
   @doc("The name of the action.")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility("read")
   name: string;
 
   @doc("The action that will be taken.")

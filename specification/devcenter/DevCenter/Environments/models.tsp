@@ -77,8 +77,11 @@ model Environment {
   ...EnvironmentUpdateProperties;
 
   @doc("Environment name.")
-  @visibility("read")
   @key("environmentName")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility("read")
   name: string;
 
   @doc("Environment type.")
@@ -125,6 +128,9 @@ model EnvironmentUpdateProperties {
 model Catalog {
   @doc("Name of the catalog.")
   @key("catalogName")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   @visibility("read")
   name: string;
 }
@@ -141,6 +147,9 @@ model EnvironmentDefinition {
 
   @doc("Name of the environment definition.")
   @key("definitionName")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   @visibility("read")
   name: string;
 

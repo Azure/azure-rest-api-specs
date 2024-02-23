@@ -103,7 +103,10 @@
             "in": "path",
             "description": "Name of the project",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -330,6 +333,9 @@
         "name": {
           "type": "string",
           "description": "Name of the project",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
           "readOnly": true
         },
         "description": {
@@ -353,7 +359,10 @@
       "properties": {
         "userId": {
           "type": "string",
-          "description": "The AAD object id of the user",
+          "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+          "minLength": 2,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$",
           "readOnly": true
         }
       },
