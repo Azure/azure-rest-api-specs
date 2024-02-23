@@ -881,7 +881,7 @@
           "$ref": "#/definitions/TextPromptInjectionResult",
           "description": "Direct injection analysis result for user prompt input."
         },
-        "documentsAnalyses": {
+        "documentsAnalysis": {
           "type": "array",
           "description": "Direct and indirect injection attacks analysis result for documents input.",
           "items": {
@@ -1052,34 +1052,34 @@
       "type": "object",
       "description": "The response of missing source detection.",
       "properties": {
-        "ungrounded": {
+        "missingSourceDetected": {
           "type": "boolean",
           "description": "Indicates whether the text exhibits missing source."
         },
         "confidenceScore": {
           "type": "number",
           "format": "float",
-          "description": "Assesses the likelihood of ungrounded content with a numerical score.The score will range from 0 to 1."
+          "description": "Assesses the likelihood of missing source content with a numerical score.The score will range from 0 to 1."
         },
-        "ungroundedPercentage": {
+        "missingSourcePercentage": {
           "type": "number",
           "format": "float",
-          "description": "Specifies the proportion of the text identified as ungrounded, \nexpressed as a decimal between 0 and 1,\nwhere 0 indicates no ungrounded content and 1 indicates entirely ungrounded content.."
+          "description": "Specifies the proportion of the text identified as missing source, \nexpressed as a decimal between 0 and 1,\nwhere 0 indicates no missing source content and 1 indicates entirely missing source content.."
         },
-        "ungroundedDetails": {
+        "missingSourceDetails": {
           "type": "array",
-          "description": "Provides insights into ungrounded content with specific examples and percentages.",
+          "description": "Provides insights into missing source content with specific examples and percentages.",
           "items": {
-            "$ref": "#/definitions/UngroundedDetails"
+            "$ref": "#/definitions/MissingSourceDetails"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
-        "ungrounded",
+        "missingSourceDetected",
         "confidenceScore",
-        "ungroundedPercentage",
-        "ungroundedDetails"
+        "missingSourcePercentage",
+        "missingSourceDetails"
       ]
     },
     "Domain": {
@@ -1195,6 +1195,23 @@
           }
         ]
       }
+    },
+    "MissingSourceDetails": {
+      "type": "object",
+      "description": "The detailed information about a text identified as missing source.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The missing source text."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The explanation for detected missing source, enhancing understanding.\nOnly when the 'reasoning' field in the input is set to true 'reason' field will be returned."
+        }
+      },
+      "required": [
+        "text"
+      ]
     },
     "PagedTextBlocklist": {
       "type": "object",
@@ -1435,23 +1452,6 @@
       },
       "required": [
         "attackDetected"
-      ]
-    },
-    "UngroundedDetails": {
-      "type": "object",
-      "description": "The detailed information about a text identified as ungrounded.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The ungrounded text."
-        },
-        "reason": {
-          "type": "string",
-          "description": "The explanation for detected missing source, enhancing understanding.\nOnly when the 'reasoning' field in the input is set to true 'reason' field will be returned."
-        }
-      },
-      "required": [
-        "text"
       ]
     }
   },

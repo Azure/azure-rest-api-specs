@@ -331,9 +331,9 @@ model DetectMissingSourceOptions {
 }
 
 @added(Versions.v2024_02_15_Preview)
-@doc("The detailed information about a text identified as ungrounded.")
-model UngroundedDetails {
-  @doc("The ungrounded text.")
+@doc("The detailed information about a text identified as missing source.")
+model MissingSourceDetails {
+  @doc("The missing source text.")
   text: string;
 
   @doc("""
@@ -347,20 +347,20 @@ model UngroundedDetails {
 @doc("The response of missing source detection.")
 model DetectMissingSourceResult {
   @doc("Indicates whether the text exhibits missing source.")
-  ungrounded: boolean;
+  missingSourceDetected: boolean;
 
-  @doc("Assesses the likelihood of ungrounded content with a numerical score.The score will range from 0 to 1.")
+  @doc("Assesses the likelihood of missing source content with a numerical score.The score will range from 0 to 1.")
   confidenceScore: float32;
 
   @doc("""
-  Specifies the proportion of the text identified as ungrounded, 
+  Specifies the proportion of the text identified as missing source, 
   expressed as a decimal between 0 and 1,
-  where 0 indicates no ungrounded content and 1 indicates entirely ungrounded content..
+  where 0 indicates no missing source content and 1 indicates entirely missing source content..
   """)
-  ungroundedPercentage: float32;
+  missingSourcePercentage: float32;
 
-  @doc("Provides insights into ungrounded content with specific examples and percentages.")
-  ungroundedDetails: UngroundedDetails[];
+  @doc("Provides insights into missing source content with specific examples and percentages.")
+  missingSourceDetails: MissingSourceDetails[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
@@ -379,7 +379,7 @@ model AnalyzeTextPromptInjectionResult {
   @doc("Direct injection analysis result for user prompt input.")
   userPromptAnalysis?: TextPromptInjectionResult;
   @doc("Direct and indirect injection attacks analysis result for documents input.")
-  documentsAnalyses?: TextPromptInjectionResult[];
+  documentsAnalysis?: TextPromptInjectionResult[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
