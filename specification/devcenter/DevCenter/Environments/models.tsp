@@ -118,8 +118,9 @@ Properties of an environment. These properties can be updated after the
 resource has been created.
 """)
 model EnvironmentUpdateProperties {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
   @doc("Parameters object for the environment.")
-  parameters?: Record<string>;
+  parameters?: Record<unknown>;
 }
 
 @doc("A catalog.")
