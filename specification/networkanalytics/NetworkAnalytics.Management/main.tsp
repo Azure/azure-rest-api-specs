@@ -921,13 +921,28 @@ model DataProductProperties {
   provisioningState?: ProvisioningState;
 
   @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Data product publisher name.")
   @visibility("create", "read")
+  @renamedFrom(Versions.v2024_04_01_preview, "publisher")
+  oldPublisher: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Data product publisher name.")
+  @visibility("read")
   publisher: string;
 
   @added(Versions.v2023_11_15)
+  @removed(Versions.v2024_04_01_preview)
   @doc("Product name of data product.")
   @visibility("create", "read")
+  @renamedFrom(Versions.v2024_04_01_preview, "product")
+  oldProduct: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("Product name of data product.")
+  @visibility("read")
+  @renamedFrom(Versions.v2024_04_01_preview, "product")
   product: string;
 
   @doc("Major version of data product.")
