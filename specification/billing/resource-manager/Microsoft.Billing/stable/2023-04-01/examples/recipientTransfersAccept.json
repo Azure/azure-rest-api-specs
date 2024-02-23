@@ -1,16 +1,27 @@
 {
   "parameters": {
     "api-version": "2023-04-01",
-    "billingAccountName": "{billingAccountName}",
-    "billingProfileName": "{billingProfileName}",
-    "invoiceSectionName": "{invoiceSectionName}",
-    "transferName": "{transferName}"
+    "transferName": "aabb123",
+    "parameters": {
+      "properties": {
+        "productDetails": [
+          {
+            "productType": "AzureSubscription",
+            "productId": "subscriptionId"
+          },
+          {
+            "productType": "AzureReservation",
+            "productId": "reservedInstanceId"
+          }
+        ]
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}",
-        "name": "{transferName}",
+        "id": "/providers/Microsoft.Billing/transfers/aabb123",
+        "name": "aabb123",
         "type": "Microsoft.Billing/transfers",
         "properties": {
           "expirationTime": "2018-11-05T17:32:28Z",

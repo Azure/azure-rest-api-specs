@@ -43,7 +43,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -89,6 +89,10 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -96,7 +100,7 @@
             "description": "The request has succeeded with no response body."
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -143,7 +147,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -201,11 +205,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -276,7 +284,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -494,13 +502,6 @@
           "description": "The system generated unique identifier for a billing profile.",
           "type": "string",
           "readOnly": true
-        },
-        "tags": {
-          "description": "Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "targetClouds": {
           "description": "Identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.",

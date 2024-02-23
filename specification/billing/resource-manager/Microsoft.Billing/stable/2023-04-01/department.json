@@ -6,11 +6,56 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}": {
+      "get": {
+        "tags": [
+          "Department"
+        ],
+        "description": "Gets a department by ID. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Departments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/departmentName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DepartmentGet": {
+            "$ref": "./examples/departmentGet.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments": {
       "get": {
         "tags": [
@@ -55,7 +100,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -68,51 +113,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}": {
-      "get": {
-        "tags": [
-          "Department"
-        ],
-        "description": "Gets a department by ID. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Departments_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/departmentName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Department"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DepartmentGet": {
-            "$ref": "./examples/departmentGet.json"
-          }
         }
       }
     }

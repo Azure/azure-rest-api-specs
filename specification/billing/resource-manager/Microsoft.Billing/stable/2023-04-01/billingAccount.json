@@ -40,7 +40,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -82,7 +82,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -152,11 +152,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -253,7 +257,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -311,7 +315,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -571,10 +575,12 @@
       "type": "object",
       "properties": {
         "startDate": {
+          "format": "date-time",
           "description": "The start date of the enrollment.",
           "type": "string"
         },
         "endDate": {
+          "format": "date-time",
           "description": "The end date of the enrollment.",
           "type": "string"
         },
