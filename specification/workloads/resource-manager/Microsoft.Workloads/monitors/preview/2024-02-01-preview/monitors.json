@@ -1756,14 +1756,14 @@
     "AlertRuleProperties": {
       "type": "object",
       "properties": {
-        "isEnabled": {
+        "status": {
           "type": "string",
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "alertIsEnabled",
+            "name": "alertRuleStatus",
             "modelAsString": true
           },
           "default": "Enabled",
@@ -1779,7 +1779,8 @@
         "actionGroups": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id"
           },
           "description": "Action Group resource Ids to invoke when the alert fires"
         },
@@ -1908,7 +1909,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AlertTemplateProperties",
-          "description": "Alert Template Instance properties"
+          "description": "Alert Template properties"
         }
       },
       "allOf": [
@@ -1995,14 +1996,15 @@
           "format": "int32",
           "description": "Maximum possible Default Threshold Value Associated with the Alert Template"
         },
-        "isThresholdInputRequired": {
+        "defaultThresholdInputOption": {
           "type": "string",
           "enum": [
-            "Yes",
-            "No"
+            "Required",
+            "NotRequired",
+            "Optional"
           ],
           "x-ms-enum": {
-            "name": "alertTemplateThresholdInputRequired",
+            "name": "defaultThresholdInputOption",
             "modelAsString": true
           },
           "description": "Is input required for Default Threshold Value Associated with the Alert Template"
@@ -2490,6 +2492,7 @@
           "description": "State of provisioning of the provider instance"
         },
         "health": {
+          "readOnly": true,
           "description": "Resource health details",
           "$ref": "#/definitions/Health"
         },
