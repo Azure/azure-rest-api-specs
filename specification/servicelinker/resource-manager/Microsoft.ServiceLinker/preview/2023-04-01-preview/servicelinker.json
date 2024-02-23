@@ -1584,7 +1584,8 @@
         "servicePrincipalCertificate",
         "secret",
         "accessKey",
-        "userAccount"
+        "userAccount",
+        "easyAuthMicrosoftEntraID"
       ],
       "x-ms-enum": {
         "name": "AuthType",
@@ -1939,6 +1940,31 @@
           },
           "description": "Optional, this value specifies the Azure roles to be assigned. Automatically "
         }
+      }
+    },
+    "EasyAuthMicrosoftEntraIDAuthInfo": {
+      "x-ms-discriminator-value": "easyAuthMicrosoftEntraID",
+      "type": "object",
+      "description": "The authentication info when authType is EasyAuth Microsoft Entra ID",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "properties": {
+        "clientId": {
+          "description": "Application clientId for EasyAuth Microsoft Entra ID.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Application Secret for EasyAuth Microsoft Entra ID.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "deleteOrUpdateBehavior": {
+          "description": "Indicates whether to clean up previous operation when Linker is updating or deleting",
+          "$ref": "#/definitions/DeleteOrUpdateBehavior"
+        },
       }
     },
     "LinkerResource": {
