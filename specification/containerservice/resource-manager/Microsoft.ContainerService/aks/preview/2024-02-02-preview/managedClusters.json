@@ -4191,6 +4191,10 @@
         },
         "virtualMachineNodesStatus": {
           "$ref": "#/definitions/VirtualMachineNodesStatus"
+        },
+        "gatewayProfile": {
+          "$ref": "#/definitions/AgentPoolGatewayProfile",
+          "description": "Profile specific to a managed agent pool in Gateway mode. This field cannot be set if agent pool mode is not Gateway."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -4343,7 +4347,8 @@
       "type": "string",
       "enum": [
         "System",
-        "User"
+        "User",
+        "Gateway"
       ],
       "x-ms-enum": {
         "name": "AgentPoolMode",
@@ -4356,6 +4361,10 @@
           {
             "value": "User",
             "description": "User agent pools are primarily for hosting your application pods."
+          },
+          {
+            "value": "Gateway",
+            "description": "Gateway agent pools are dedicated to providing static egress IPs to pods. For more details, see https://aka.ms/aks/static-egress-gateway."
           }
         ]
       },
@@ -4740,6 +4749,10 @@
         "natGatewayProfile": {
           "$ref": "#/definitions/ManagedClusterNATGatewayProfile",
           "description": "Profile of the cluster NAT gateway."
+        },
+        "staticEgressGatewayProfile": {
+          "$ref": "#/definitions/ManagedClusterStaticEgressGatewayProfile",
+          "description": "The profile for Static Egress Gateway addon. For more details about Static Egress Gateway, see https://aka.ms/aks/static-egress-gateway."
         },
         "podCidrs": {
           "type": "array",
@@ -5398,6 +5411,17 @@
         }
       },
       "description": "Profile of the managed cluster load balancer."
+    },
+    "ManagedClusterStaticEgressGatewayProfile": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Enable Static Egress Gateway addon",
+          "description": "Indicates if Static Egress Gateway addon is enabled or not."
+        }
+      },
+      "description": "The Static Egress Gateway addon configuration for the cluster."
     },
     "ResourceReference": {
       "type": "object",
@@ -7318,6 +7342,20 @@
         ]
       },
       "description": "SSH access method of an agent pool."
+    },
+    "AgentPoolGatewayProfile": {
+      "description": "Profile of the managed cluster gateway agent pool.",
+      "type": "object",
+      "properties": {
+        "publicIPPrefixSize": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 31,
+          "minimum": 28,
+          "description": "The Gateway agent pool associates one public IPPrefix for each static egress gateway to provide public egress. The size of Public IPPrefix should be selected by the user. Each node in the agent pool is assigned with one IP from the IPPrefix. The IPPrefix size thus serves as a cap on the size of the Gateway agent pool. Due to Azure public IPPrefix size limitation, the valid value range is [28, 31] (/31 = 2 nodes/IPs, /30 = 4 nodes/IPs, /29 = 8 nodes/IPs, /28 = 16 nodes/IPs). The default value is 31.",
+          "default": 31
+        }
+      }
     },
     "SysctlConfig": {
       "description": "Sysctl settings for Linux agent nodes.",
