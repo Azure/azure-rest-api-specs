@@ -32,8 +32,8 @@ model QueryForceDelete {
 }
 
 /** The provisioning state of the resource. */
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+enum ResourceProvisioningState {
+  ...Azure.ResourceManager.ResourceProvisioningState,
 
   /** The resource is provisioning. */
   Provisioning,
@@ -179,7 +179,7 @@ model VmmServerProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Credentials to connect to VmmServer. */
@@ -229,7 +229,7 @@ model CloudProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Cloud Capacity model */
@@ -284,7 +284,7 @@ model VirtualNetworkProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Defines the resource properties. */
@@ -362,7 +362,7 @@ model VirtualMachineTemplateProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Network Interface model */
@@ -477,12 +477,30 @@ model AvailabilitySetProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+}
+
+/** The inventory type */
+enum InventoryType {
+  /** Cloud inventory type */
+  Cloud: "Cloud",
+
+  /** VirtualNetwork inventory type */
+  VirtualNetwork: "VirtualNetwork",
+
+  /** VirtualMachine inventory type */
+  VirtualMachine: "VirtualMachine",
+
+  /** VirtualMachineTemplate inventory type */
+  VirtualMachineTemplate: "VirtualMachineTemplate",
 }
 
 /** Defines the resource properties. */
 @discriminator("inventoryType")
 model InventoryItemProperties {
+  /** They inventory type. */
+  inventoryType: InventoryType;
+
   /** Gets the tracked resource id corresponding to the inventory resource. */
   @visibility("read")
   managedResourceId?: string;
@@ -497,7 +515,7 @@ model InventoryItemProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Defines the resource properties. */
@@ -526,7 +544,7 @@ model VirtualMachineInstanceProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Availability Set model */
@@ -689,7 +707,7 @@ model VmInstanceHybridIdentityMetadataProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Defines the create checkpoint action properties. */
@@ -738,7 +756,7 @@ model GuestAgentProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Username / Password Credentials to connect to guest. */
@@ -770,13 +788,13 @@ model InventoryItemDetails {
 /** The Cloud inventory item. */
 model CloudInventoryItem extends InventoryItemProperties {
   /** They inventory type. */
-  inventoryType: "Cloud";
+  inventoryType: InventoryType.Cloud;
 }
 
 /** The Virtual network inventory item. */
 model VirtualNetworkInventoryItem extends InventoryItemProperties {
   /** They inventory type. */
-  inventoryType: "VirtualNetwork";
+  inventoryType: InventoryType.VirtualNetwork;
 }
 
 /** The Virtual machine template inventory item. */
@@ -799,7 +817,7 @@ model VirtualMachineTemplateInventoryItem extends InventoryItemProperties {
   osName?: string;
 
   /** They inventory type. */
-  inventoryType: "VirtualMachineTemplate";
+  inventoryType: InventoryType.VirtualMachineTemplate;
 }
 
 /** The Virtual machine inventory item. */
@@ -835,5 +853,5 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
   managedMachineResourceId?: ResourceIdentifier<[]>;
 
   /** They inventory type. */
-  inventoryType: "VirtualMachine";
+  inventoryType: InventoryType.VirtualMachine;
 }
