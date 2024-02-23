@@ -1175,6 +1175,9 @@
           "Create Agent Pool with Windows OSSKU": {
             "$ref": "./examples/AgentPoolsCreate_WindowsOSSKU.json"
           },
+          "Create Windows Agent Pool with disabling OutboundNAT": {
+            "$ref": "./examples/AgentPoolsCreate_WindowsDisableOutboundNAT.json"
+          },
           "Create Agent Pool with GPUMIG": {
             "$ref": "./examples/AgentPoolsCreate_GPUMIG.json"
           },
@@ -3310,6 +3313,10 @@
         "networkProfile": {
           "$ref": "#/definitions/AgentPoolNetworkProfile",
           "description": "Network-related settings of an agent pool."
+        },
+        "windowsProfile": {
+          "$ref": "#/definitions/AgentPoolWindowsProfile",
+          "description": "The Windows agent pool's specific profile."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -6137,6 +6144,17 @@
           "type": "integer",
           "format": "int32",
           "description": "The size in MB of a swap file that will be created on each node."
+        }
+      }
+    },
+    "AgentPoolWindowsProfile": {
+      "type": "object",
+      "description": "The Windows agent pool's specific profile.",
+      "properties": {
+        "disableOutboundNat": {
+          "type": "boolean",
+          "title": "Whether to disable OutboundNAT in windows nodes",
+          "description": "The default value is false. Outbound NAT can only be disabled if the cluster outboundType is NAT Gateway and the Windows agent pool does not have node public IP enabled."
         }
       }
     },
