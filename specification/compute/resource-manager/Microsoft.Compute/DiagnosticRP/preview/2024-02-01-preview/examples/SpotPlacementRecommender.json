@@ -10,7 +10,7 @@
       ],
       "desiredSizes": [
         {
-          "sku": "Standard_D2_v2"         
+          "sku": "Standard_D2_v2"
         }
       ],
       "desiredCount": 1,
@@ -19,10 +19,66 @@
   },
   "responses": {
     "200": {
-      "body": "DiskInspection Operation with operation-id '57b891ab-1fb7-4f5a-b002-71eb6854961f' has been successfully queued.",
+      "body": {
+        "desiredLocations": [
+          "eastus",
+          "eastus2"
+        ],
+        "desiredSizes": [
+          {
+            "sku": "Standard_D2_v2"
+          }
+        ],
+        "desiredCount": 1,
+        "availabilityZones": true,
+        "placementScores": [
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus",
+            "availabilityZone": "1",
+            "score": "High",
+            "isQuotaAvailable": true
+          },
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus",
+            "availabilityZone": "2",
+            "score": "High",
+            "isQuotaAvailable": true
+          },
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus",
+            "availabilityZone": "3",
+            "score": "High",
+            "isQuotaAvailable": true
+          },
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus2",
+            "availabilityZone": "1",
+            "score": "DataNotFoundOrStale",
+            "isQuotaAvailable": true
+          },
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus2",
+            "availabilityZone": "2",
+            "score": "High",
+            "isQuotaAvailable": true
+          },
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus2",
+            "availabilityZone": "3",
+            "score": "High",
+            "isQuotaAvailable": true
+          }
+        ]
+      },
       "headers": {
         "x-ms-request-id": "57b891ab-1fb7-4f5a-b002-71eb6854961f",
-        "location": "https://westcentralus.diagnostic.compute.azure.com/subscriptions/88fd8cb2-8248-499e-9a2d-4929a4b0133c/providers/Microsoft.Compute/locations/southcentralus/diagnosticOperations/57b891ab-1fb7-4f5a-b002-71eb6854961f"
+        "location": "https://management.azure.com/subscriptions/be23ca13-8eb4-4d0e-be10-b00451817956/providers/Microsoft.Compute/locations/eastus/diagnostics/spotplacementrecommender/generate?api-version=2024-02-01-preview"
       }
     }
   }
