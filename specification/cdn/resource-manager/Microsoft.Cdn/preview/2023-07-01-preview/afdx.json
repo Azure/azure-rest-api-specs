@@ -4740,6 +4740,17 @@
           "readOnly": true,
           "type": "object",
           "$ref": "#/definitions/DomainValidationProperties"
+        },
+        "referencedRoutePaths": {
+          "description": "The JSON object list that contains the overall picture of how routes are used for the shared custom domain across different profiles.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AFDDomainReferencedRoutePath"
+          },
+          "x-ms-identifiers": [
+            "/routeId/id"
+          ]
         }
       }
     },
@@ -4828,6 +4839,24 @@
           "description": "Resource reference to the secret. ie. subs/rg/profile/secret",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
+        }
+      }
+    },
+    "AFDDomainReferencedRoutePath": {
+      "description": "route configuration of the shared custom domain.",
+      "type": "object",
+      "properties": {
+        "routeId": {
+          "description": "Resource reference to the route.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "paths": {
+          "description": "List of paths of the route.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 
@@ -36,8 +36,9 @@ model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
 }
 
 @doc("The provisioning state of the UpdateStrategy resource.")
-enum FleetUpdateStrategyProvisioningState {
-  ...ResourceProvisioningState,
+union FleetUpdateStrategyProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("The properties of the UpdateStrategy.")

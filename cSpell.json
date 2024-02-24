@@ -23,7 +23,8 @@
     ],
     "ignorePaths": [
         "node_modules/**",
-        "**/examples/**"
+        "**/examples/**",
+        "**/package-lock.json"
     ],
     "ignoreRegExpList": [
         "v\\d",
@@ -177,6 +178,13 @@
             ]
         },
         {
+            "filename": "**/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/**/*json",
+            "words": [
+                "vtpm",
+                "trustedlaunch"
+            ]
+        },
+        {
             "filename": "**/specification/containerregistry/data-plane/Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json",
             "words": [
                 "WGXM",
@@ -219,6 +227,12 @@
             "filename": "**/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json",
             "words": [
                 "Resouce"
+            ]
+        },
+        {
+            "filename": "**/specification/app/resource-manager/Microsoft.App/preview/2023-11-02-preview/ManagedEnvironments.json",
+            "words": [
+                "otlp"
             ]
         },
         {
@@ -402,9 +416,22 @@
             ]
         },
         {
-            "filename": "**/specification/migrate/resource-manager/Microsoft.Migrate/stable/2018-02-02/migrate.json",
+            "filename": "**/specification/migrate/resource-manager/**/*.json",
             "words": [
-                "Occured"
+                "Occured",
+                "Assessible",
+                "sqlcollectors",
+                "Reasonings",
+                "Overcommit",
+                "overcommit",
+                "SSDE",
+                "Recieved",
+                "Ebds",
+                "idms",
+                "Idms",
+                "Cluter",
+                "Mfamily",
+				"Datacentre"
             ]
         },
         {
@@ -590,12 +617,6 @@
             "filename": "**/specification/storageimportexport/resource-manager/Microsoft.ImportExport/stable/2016-11-01/storageimportexport.json",
             "words": [
                 "Listblob"
-            ]
-        },
-        {
-            "filename": "**/specification/migrate/resource-manager/Microsoft.Migrate/preview/2017-11-11-preview/migrate.json",
-            "words": [
-                "Occured"
             ]
         },
         {
@@ -788,6 +809,28 @@
             ]
         },
         {
+            "filename": "**/specification/maps/data-plane/Spatial/stable/2022-08-01/spatial.json",
+            "words": [
+                "postbuffer",
+                "getbuffer",
+                "postclosestpoint",
+                "getclosestpoint"
+            ]
+        },
+        {
+            "filename": "**/specification/maps/data-plane/Search/stable/2023-06-01/search.json",
+            "words": [
+                "geocodingresponse"
+            ]
+        },
+        {
+            "filename": "**/specification/maps/data-plane/Search/preview/1.0/search.json",
+            "words": [
+                "searchaddressresult",
+                "searchaddressreverseresponse"
+            ]
+        },
+        {
             "filename": "**/specification/communication/data-plane/Chat/preview/2020-09-21-preview2/communicationserviceschat.json",
             "words": [
                 "readreceipts"
@@ -878,6 +921,20 @@
             ]
         },
         {
+            "filename": "**/specification/ai/data-plane/DocumentIntelligence/**/DocumentIntelligence.json",
+            "words": [
+                "documentintelligence",
+                "heif",
+                "spreadsheetml",
+                "presentationml",
+                "barcodes",
+                "UPCA",
+                "UPCE",
+                "Codabar",
+                "rrggbb"
+            ]
+        },
+        {
             "filename": "**/specification/machinelearningservices/data-plane/Microsoft.MachineLearningServices/preview/2019-*/modelManagement.json",
             "words": [
                 "UNKNOWON"
@@ -899,7 +956,7 @@
             ]
         },
         {
-            "filename": "**/specification/purview/data-plane/Azure.Analytics.Purview.Workflow/preview/2022-05-01-preview/purviewWorkflow.json",
+            "filename": "**/specification/purview/data-plane/Azure.Analytics.Purview.Workflow/preview/**/purviewWorkflow.json",
             "words": [
                 "userrequests",
                 "DSAR",
@@ -919,12 +976,86 @@
             ]
         },
         {
-            "filename": "**/specification/fist/resource-manager/Microsoft.IoTFirmwareDefense/preview/**/*.json",
+            "filename": "**/specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/**/*.json",
+            "words": [
+                "datareferences",
+                "Groundedness",
+                "AOAI",
+                "testconnection",
+                "aoai"
+            ]
+        },
+        {
+            "filename": "**/specification/fist/resource-manager/Microsoft.IoTFirmwareDefense/**/*.json",
             "words": [
                 "RELRO",
                 "relro",
                 "rpath",
-                "runpath"
+                "runpath",
+                "SBOM",
+                "Sbom",
+                "sbom"
+            ]
+        },
+        {
+            "filename": "**/specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/**/*.json",
+            "words": [
+                "Criterias"
+            ]
+        },
+        {
+            "filename": "**/specification/cognitiveservices/data-plane/AzureOpenAI/inference/preview/**/*.json",
+            "words": [
+                "flac",
+                "mpga"
+            ]
+        },
+        {
+            "filename": "**/specification/appplatform/resource-manager/Microsoft.AppPlatform/preview/2024-01-01-preview/appplatform.json",
+            "words": [
+                "springboot"
+            ]
+        },
+        {
+            "filename": "**/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/**/*.json",
+            "words": [
+                "throughputpool"
+            ]
+        },
+        {
+            "filename": "**/specification/purview/data-plane/Azure.Analytics.Purview.DataMap/**/*.json",
+            "words": [
+                "timerange"
+            ]
+        },
+        {
+            "filename": "**/specification/search/data-plane/Azure.Search/**/*.json",
+            "words": [
+                "rerank",
+                "discretizing"
+            ]
+        },
+        {
+            "filename": "**/specification/nginx/resource-manager/NGINX.NGINXPLUS/**/*.json",
+            "words": [
+                "nginx",
+                "nginxaas",
+                "NCUs",
+                "autoscaled",
+                "Autoupgrade",
+                "autoupgrade"
+            ]
+        },
+        {
+            "filename": "**/specification/mobilenetwork/resource-manager/Microsoft.MobileNetwork/stable/**/*.json",
+            "words": [
+                "suci"
+            ]
+        },
+        {
+            "filename": "**/specification/containerservice/resource-manager/Microsoft.ContainerService/**/*.json",
+            "words": [
+                 "containerd"
             ]
         }
     ],

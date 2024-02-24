@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 
@@ -48,7 +48,9 @@ model FleetProperties {
   @doc("The status of the last operation.")
   provisioningState?: FleetProvisioningState;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "https://github.com/Azure/typespec-azure/issues/3558"
   @doc("The FleetHubProfile configures the Fleet's hub.")
+  @removed(Versions.v2023_10_15)
   hubProfile?: FleetHubProfile;
 }
 
@@ -122,17 +124,18 @@ model AgentProfile {
 
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
-enum FleetProvisioningState {
-  ...ResourceProvisioningState,
+union FleetProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("The provisioning state of a fleet being created.")
-  Creating,
+  Creating: "Creating",
 
   @doc("The provisioning state of a fleet being updated.")
-  Updating,
+  Updating: "Updating",
 
   @doc("The provisioning state of a fleet being deleted.")
-  Deleting,
+  Deleting: "Deleting",
 }
 
 @doc("Properties of a Fleet that can be patched.")
