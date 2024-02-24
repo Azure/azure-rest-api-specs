@@ -1319,6 +1319,18 @@
           "type": "integer",
           "format": "int32",
           "description": "Capacity (instance count) of an application gateway."
+        },
+        "family": {
+          "type": "string",
+          "description": "Family of an application gateway SKU.",
+          "enum": [
+            "Generation_1",
+            "Generation_2"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySkuFamily",
+            "modelAsString": true
+          }
         }
       },
       "description": "SKU of an application gateway."
