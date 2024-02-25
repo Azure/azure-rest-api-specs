@@ -28,19 +28,28 @@ These are the global settings for HealthcareApis service.
 title: HealthcareApisManagementClient
 description: Azure Healthcare APIs Client
 openapi-type: arm
-tag: package-2023-12
+tag: package-2024-03
 azure-arm: true
 ```
 
 
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03'
+input-file:
+  - Microsoft.HealthcareApis/stable/2024-03-01/healthcare-apis.json
+```
 ### Tag: package-2023-12
 
 These settings apply only when `--tag=package-2023-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-12'
+``` yaml $(tag) == 'package-2023-12'
 input-file:
   - Microsoft.HealthcareApis/stable/2023-12-01/healthcare-apis.json
 ```
+
 ### Tag: package-2023-11
 
 These settings apply only when `--tag=package-2023-11` is specified on the command line.
