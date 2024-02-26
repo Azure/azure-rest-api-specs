@@ -8975,12 +8975,12 @@
             "$ref": "#/parameters/JobNameParameter"
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
             "description": "Properties used to start a job execution.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/JobExecutionResource"
+              "$ref": "#/definitions/JobExecutionProperties"
             }
           }
         ],
@@ -15796,7 +15796,7 @@
         }
       }
     },
-    "JobExecutionResource": {
+    "JobExecutionProperties": {
       "description": "Job's execution template, containing configuration for an execution",
       "type": "object",
       "properties": {
@@ -15891,9 +15891,9 @@
           "format": "date-time",
           "type": "string"
         },
-        "template": {
-          "description": "Job's execution template.",
-          "$ref": "#/definitions/JobExecutionTemplate"
+        "properties": {
+          "description": "Job's execution properties.",
+          "$ref": "#/definitions/JobExecutionProperties"
         }
       }
     },
