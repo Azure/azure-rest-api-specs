@@ -255,13 +255,13 @@ model CtsConfiguration {
 @doc("Configuration of CCF authentication.")
 model CtsConfigurationAuthentication {
   allow_unauthenticated: boolean;
-  jwt?: CtsConfigurationAuthentication_JWT;
+  jwt?: CtsConfigurationAuthenticationJwt;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Configuration of JWT claims")
-model CtsConfigurationAuthentication_JWT {
+model CtsConfigurationAuthenticationJwt {
   required_claims: Record<string>;
 }
 
