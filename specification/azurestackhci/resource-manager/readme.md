@@ -87,6 +87,8 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/deploymentSettings.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/edgeDevices.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/common.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/galleryImages.json
@@ -96,6 +98,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/offers.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/operations.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/securitySettings.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/skus.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/storageContainers.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/updateRuns.json
