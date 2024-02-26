@@ -26,7 +26,7 @@ import "./ResourceNotifications.tsp";
 
 import "./swagger.tsp";
 
-/** Azure Messaging EventGrid SystemEvents */
+/** Azure Messaging EventGrid Models */
 @service({
   title: "Azure.Messaging.Models",
 })
