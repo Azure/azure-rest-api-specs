@@ -109,7 +109,7 @@ These are the global settings for the EventGrid API.
 title: EventGridClient
 description: EventGrid Client
 openapi-type: data-plane
-tag: package-2018-01
+tag: package-2024-01-01
 ```
 
 ### Tag: package-2018-01
@@ -251,6 +251,7 @@ These settings apply only when `--tag=package-2024-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-01-01'
 input-file:
+- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.EventGrid/stable/2024-01-01/SystemEvents.json
 ```
 
