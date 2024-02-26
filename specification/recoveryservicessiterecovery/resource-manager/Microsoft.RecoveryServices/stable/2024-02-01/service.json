@@ -4576,20 +4576,10 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           }
         ],
         "responses": {
@@ -4602,7 +4592,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4647,28 +4637,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric unique name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "Replication protection cluster name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           }
         ],
         "responses": {
@@ -4681,7 +4656,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4718,28 +4693,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Name of the fabric.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "A name for the replication protection cluster.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           },
           {
             "name": "replicationProtectionCluster",
@@ -4767,7 +4727,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4799,28 +4759,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "Replication protection cluster name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           }
         ],
         "responses": {
@@ -4844,11 +4789,14 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Purge the replication protection cluster.": {
             "$ref": "./examples/ReplicationProtectionClusters_Purge.json"
@@ -4890,28 +4838,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Unique fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "Replication protection cluster name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           },
           {
             "name": "applyClusterRecoveryPointInput",
@@ -4947,11 +4880,14 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Execute the change recovery point operation for cluster.": {
             "$ref": "./examples/ReplicationProtectionClusters_ApplyRecoveryPoint.json"
@@ -4990,28 +4926,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Unique fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "Replication protection cluster name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           }
         ],
         "responses": {
@@ -5038,11 +4959,14 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Execute commit failover for cluster.": {
             "$ref": "./examples/ReplicationProtectionClusters_FailoverCommit.json"
@@ -5081,28 +5005,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "Replication protection cluster name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           },
           {
             "name": "jobId",
@@ -5123,7 +5032,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5165,28 +5074,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "The fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "The protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "The replication protected item name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           }
         ],
         "responses": {
@@ -5199,7 +5093,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5244,28 +5138,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "The fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "The protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "The replication protection cluster name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           },
           {
             "name": "recoveryPointName",
@@ -5286,7 +5165,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5328,28 +5207,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "Replication protection cluster name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           }
         ],
         "responses": {
@@ -5370,11 +5234,14 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Resynchronize or repair replication of protection cluster.": {
             "$ref": "./examples/ReplicationProtectionClusters_RepairReplication.json"
@@ -5416,28 +5283,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Unique fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "Replication protection cluster name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           },
           {
             "name": "failoverInput",
@@ -5473,11 +5325,14 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Execute test failover for cluster.": {
             "$ref": "./examples/ReplicationProtectionClusters_TestFailover.json"
@@ -5519,28 +5374,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Unique fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "Replication protected cluster name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           },
           {
             "name": "cleanupInput",
@@ -5576,11 +5416,14 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Execute test failover cleanup for cluster.": {
             "$ref": "./examples/ReplicationProtectionClusters_TestFailoverCleanup.json"
@@ -5622,28 +5465,13 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Unique fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
-            "name": "replicationProtectionClusterName",
-            "in": "path",
-            "description": "Replication protection cluster name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ReplicationProtectionClusterName"
           },
           {
             "name": "failoverInput",
@@ -5679,11 +5507,14 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Execute unplanned cluster failover.": {
             "$ref": "./examples/ReplicationProtectionClusters_UnplannedFailover.json"
@@ -6121,20 +5952,10 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Unique fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/FabricName"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "$ref": "#/parameters/ProtectionContainerName"
           },
           {
             "name": "switchInput",
@@ -6170,11 +5991,14 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Switches protection from one container to another or one replication provider to another.": {
             "$ref": "./examples/ReplicationProtectionContainers_SwitchClusterProtection.json"
@@ -9477,9 +9301,6 @@
     },
     "A2AApplyClusterRecoveryPointInput": {
       "description": "A2A provider specific input for apply cluster recovery point.",
-      "required": [
-        "instanceType"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -11236,7 +11057,9 @@
           "items": {
             "$ref": "#/definitions/A2AUnprotectedDiskDetails"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "diskLunId"
+          ]
         },
         "protectedManagedDisks": {
           "description": "The list of protected managed disks.",
@@ -11244,7 +11067,9 @@
           "items": {
             "$ref": "#/definitions/A2AProtectedManagedDiskDetails"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "primaryFabricLocation": {
           "description": "Primary fabric location.",
@@ -11283,7 +11108,9 @@
           "items": {
             "$ref": "#/definitions/A2ASharedDiskIRErrorDetails"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -11309,7 +11136,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AProtectedItemDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "replicationProtectedItemName"
+          ]
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -12409,7 +12239,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FailoverReplicationProtectedItemDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "x-ms-discriminator-value": "ClusterFailoverJobDetails"
@@ -12563,7 +12396,15 @@
         },
         "networkId": {
           "description": "The id of the network to be used for test failover.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks"
+              }
+            ]
+          }
         },
         "providerSpecificDetails": {
           "$ref": "#/definitions/ClusterTestFailoverProviderSpecificInput",
@@ -23815,7 +23656,15 @@
         },
         "recoveryFabricId": {
           "description": "The Arm Id of recovery fabric.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationFabrics"
+              }
+            ]
+          }
         },
         "primaryProtectionContainerFriendlyName": {
           "description": "The name of primary protection container friendly name.",
@@ -23923,7 +23772,9 @@
           "items": {
             "$ref": "#/definitions/RegisteredClusterNodes"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "clusterNodeFqdn"
+          ]
         },
         "providerSpecificDetails": {
           "$ref": "#/definitions/ReplicationClusterProviderSpecificSettings",
@@ -24146,6 +23997,9 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
+          "x-ms-identifier": [
+            "errorCode"
+          ],
           "readOnly": true
         },
         "protectedItemCount": {
@@ -24597,7 +24451,9 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         },
         "currentScenario": {
           "$ref": "#/definitions/CurrentScenarioDetails",
@@ -27713,6 +27569,30 @@
       "description": "Client Api Version.",
       "required": true,
       "type": "string"
+    },
+    "FabricName": {
+      "name": "fabricName",
+      "in": "path",
+      "description": "Fabric name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+    },
+    "ProtectionContainerName": {
+      "name": "protectionContainerName",
+      "in": "path",
+      "description": "Protection container name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+    },
+    "ReplicationProtectionClusterName": {
+      "name": "replicationProtectionClusterName",
+      "in": "path",
+      "description": "Replication protection cluster name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
     }
   },
   "securityDefinitions": {
