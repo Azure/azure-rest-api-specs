@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure.Messaging.SystemEvents",
+    "title": "Azure.Messaging.Models",
     "version": "2024-01-01",
     "description": "Azure Messaging EventGrid SystemEvents",
     "x-typespec-generated": [
@@ -375,9 +375,7 @@
         "properties": {
           "type": "object",
           "description": "The thread properties",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "metadata": {
           "type": "object",
@@ -412,9 +410,7 @@
         "properties": {
           "type": "object",
           "description": "The thread properties",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "metadata": {
           "type": "object",
@@ -511,6 +507,13 @@
         "participantCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata of the user",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },

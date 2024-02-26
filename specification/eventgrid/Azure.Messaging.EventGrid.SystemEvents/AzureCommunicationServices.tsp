@@ -111,14 +111,14 @@ model AcsChatThreadDeletedEventData
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadPropertiesUpdatedPerUserEventData
   extends AcsChatThreadEventBaseProperties {
-  ...AcsChatThredPropertiesBaseEventData;
+  ...AcsChatThreadPropertiesBaseEventData;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadPropertiesUpdatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
-  ...AcsChatThredPropertiesBaseEventData;
+  ...AcsChatThreadPropertiesBaseEventData;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event. */
@@ -710,7 +710,7 @@ alias AcsChatThreadBaseEventData = {
 
   /** The thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
-  properties?: Record<string>;
+  properties?: Record<unknown>;
 
   /** The chat thread created metadata */
   metadata?: Record<string>;
@@ -727,7 +727,7 @@ alias AcsChatThreadDeletedBaseEventData = {
   deleteTime?: utcDateTime;
 };
 
-alias AcsChatThredPropertiesBaseEventData = {
+alias AcsChatThreadPropertiesBaseEventData = {
   /** The communication identifier of the user who updated the thread properties */
   editedByCommunicationIdentifier?: CommunicationIdentifierModel;
 
@@ -926,6 +926,9 @@ model AcsChatThreadParticipantProperties {
 
   /** The communication identifier of the user */
   participantCommunicationIdentifier?: CommunicationIdentifierModel;
+
+  /** The metadata of the user */
+  metadata?: Record<string>;
 }
 
 /** Schema of common properties of all SMS events */

@@ -28,7 +28,7 @@ import "./swagger.tsp";
 
 /** Azure Messaging EventGrid SystemEvents */
 @service({
-  title: "Azure.Messaging.SystemEvents",
+  title: "Azure.Messaging.Models",
 })
 @versioned(ServiceApiVersions)
 namespace Microsoft.EventGrid.SystemEvents {

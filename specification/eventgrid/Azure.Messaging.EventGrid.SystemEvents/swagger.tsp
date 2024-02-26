@@ -8,6 +8,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
+
 @@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to, "toCommunicationIdentifier");
 @@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.from, "fromCommunicationIdentifier");
 
