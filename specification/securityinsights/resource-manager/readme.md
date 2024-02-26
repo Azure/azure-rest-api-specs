@@ -73,10 +73,6 @@ input-file:
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/dataConnectorDefinitions.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/operations.json
-
-  suppressions:
-  - code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
 ```
 ### Tag: package-preview-2023-12
 
@@ -946,9 +942,10 @@ directive:
   - suppress: AvoidAdditionalProperties
     code: AvoidAdditionalProperties
     from: Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
+    - suppress: AvoidAdditionalProperties
+    from: Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
 ```
-
-
+---
 
 # Code Generation
 
