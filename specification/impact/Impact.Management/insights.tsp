@@ -37,43 +37,29 @@ model InsightUnderSubscription is ProxyResource<InsightProperties> {
 
 @doc("Impact category properties.")
 model InsightProperties is ResourceProperties {
-  @doc("summary of the insight.")
-  summary: string;
-
   @doc("category of the insight.")
   category: string;
 
   @doc("status of the insight. example resolved, repaired, other.")
-  status: string;
+  status?: string;
 
-  @doc("level of the insight. Informational, Warning, Error, Critical.")
-  level: InsightLevel;
+  @doc("Identifier of the event that has been correlated with this insight. This can be used to aggregate insights for the same event.")
+  eventId?: string;
 
-  @doc("priority of the insight relative to other insights.")
-  priority: int64;
+  @doc("Contains title & description for the insight")
+  content: Content;
 
-  @doc("attribution time of the insight.")
-  attributionTime: utcDateTime;
-
-  @doc("failure signature level 1.")
-  failureSignatureLevel1?: string;
-
-  @doc("failure signature level 2.")
-  failureSignatureLevel2?: string;
-
-  @doc("failure signature level 3.")
-  failureSignatureLevel3?: string;
+  @doc("Time of the event, which has been correlated the impact.")
+  eventTime?: utcDateTime;
 
   @doc("unique id of the insight.")
   insightUniqueId: string;
 
   @doc("details of of the impact for which insight has been generated.")
-  @extension("x-ms-identifiers", ["impactId"])
-  impacts: ImpactDetails[];
+  impact: ImpactDetails;
 
-  @extension("x-ms-identifiers", ["name"])
   @doc("additional details of the insight.")
-  additionalDetails?: AdditionalField[];
+  additionalDetails?: {};
 }
 
 @doc("details of of the impact for which insight has been generated.")
@@ -89,9 +75,15 @@ model ImpactDetails {
 
   @doc("Azure Id of the impact.")
   impactId: string;
+}
 
-  @doc("unique (guid) id of the impact generated during impact creation.")
-  impactUniqueId: string;
+@doc("Article details of the insight like title, description etc")
+model Content {
+  @doc("Title of the insight")
+  title: string;
+
+  @doc("Description of the insight")
+  description: string;
 }
 
 @doc("impacted azure resource id.")
@@ -128,21 +120,6 @@ model InsightDetails {
   azureResourceId?: string;
 }
 
-@doc("Enum for insight level")
-enum InsightLevel {
-  @doc("Informational insight")
-  Informational: "Informational",
-
-  @doc("Warning insight")
-  Warning: "Warning",
-
-  @doc("Error insight")
-  Error: "Error",
-
-  @doc("Critical insight")
-  Critical: "Critical",
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
 interface Insights {
@@ -152,22 +129,9 @@ interface Insights {
   @doc("List Insight resources by workloadImpactName")
   listBySubscription is ArmListBySubscription<Insight>;
 
-  @doc("Create Insight resource")
+  @doc("Create Insight resource, This is Admin only operation")
   create is ArmResourceCreateOrReplaceSync<Insight>;
 
-  @doc("Delete Insight resource")
+  @doc("Delete Insight resource, This is Admin only operation")
   delete is ArmResourceDeleteSync<Insight>;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Using subscription level action"
-  @get
-  @doc("get all insights under subscription")
-  @segment("getAllInsights")
-  getAll(
-    ...InsightCustomResourceCommonParameters,
-  ): ArmResponse<ResourceListResult<Insight>> | ErrorResponse;
-
-  /* @doc("get all insights under subscription")
-  @segment("getAllInsights")
-  getAll2 is ResourceAct<InsightUnderSubscription,insightDetails,ResourceListResult<Insight>>;
-  */
 }
