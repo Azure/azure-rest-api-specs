@@ -24,11 +24,11 @@ import "./Web.tsp";
 import "./EventGrid.tsp";
 import "./ResourceNotifications.tsp";
 
-import "./swagger.tsp";
+import "./propertyNameOverride.tsp";
 
-/** Azure Messaging EventGrid Models */
+/** Azure Messaging EventGrid SystemEvents */
 @service({
-  title: "Azure.Messaging.Models",
+  title: "Azure.Messaging.SystemEvents",
 })
 @versioned(ServiceApiVersions)
 namespace Microsoft.EventGrid.SystemEvents {

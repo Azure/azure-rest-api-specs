@@ -578,5 +578,5 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Type of HL7 FHIR resource. */
     resourceType?: HealthcareFhirResourceType;
-  };
+  }
 }
