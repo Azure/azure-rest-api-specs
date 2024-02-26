@@ -3298,13 +3298,13 @@ model ExitConditions {
   exitCodeRanges?: ExitCodeRangeMapping[];
 
   @doc("How the Batch service should respond if the Task fails to start due to an error.")
-  preProcessingError?: ExitConfig;
+  preProcessingError?: ExitOptions;
 
   @doc("How the Batch service should respond if a file upload error occurs. If the Task exited with an exit code that was specified via exitCodes or exitCodeRanges, and then encountered a file upload error, then the action specified by the exit code takes precedence.")
-  fileUploadError?: ExitConfig;
+  fileUploadError?: ExitOptions;
 
   @doc("How the Batch service should respond if the Task fails with an exit condition not covered by any of the other properties. This value is used if the Task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behavior on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection.")
-  default?: ExitConfig;
+  default?: ExitOptions;
 }
 
 @doc("""
@@ -3316,12 +3316,12 @@ model ExitCodeMapping {
   code: int32;
 
   @doc("How the Batch service should respond if the Task exits with this exit code.")
-  exitOptions: ExitConfig;
+  exitOptions: ExitOptions;
 }
 
 @doc("Specifies how the Batch service responds to a particular exit condition.")
-model ExitConfig {
-  @doc("An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitConfigJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+model ExitOptions {
+  @doc("An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitOptionsJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   jobAction?: BatchJobAction;
 
   @doc("An action that the Batch service performs on Tasks that depend on this Task. Possible values are 'satisfy' (allowing dependent tasks to progress) and 'block' (dependent tasks continue to wait). Batch does not yet support cancellation of dependent tasks.")
@@ -3340,7 +3340,7 @@ model ExitCodeRangeMapping {
   end: int32;
 
   @doc("How the Batch service should respond if the Task exits with an exit code in the range start to end (inclusive).")
-  exitOptions: ExitConfig;
+  exitOptions: ExitOptions;
 }
 
 @doc("""
