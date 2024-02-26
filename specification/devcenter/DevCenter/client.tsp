@@ -158,14 +158,6 @@ interface EnvironmentClientOperations {
   "csharp",
   "DevCenterEnvironmentType"
 );
-@@projectedName(DevCenterService.OperationStatusValue,
-  "csharp",
-  "DevCenterStatus"
-);
-@@projectedName(DevCenterService.OperationStatus,
-  "csharp",
-  "DevCenterOperationDetails"
-);
 @@projectedName(DevCenterService.Project, "csharp", "DevCenterProject");
 
 @@projectedName(DevCenterService.OsType, "java", "DevBoxOsType");
@@ -222,14 +214,6 @@ interface EnvironmentClientOperations {
   "DevCenterEnvironmentType"
 );
 @@projectedName(DevCenterService.HardwareProfile.vCPUs, "java", "vcpus");
-@@projectedName(DevCenterService.OperationStatusValue,
-  "java",
-  "DevCenterStatus"
-);
-@@projectedName(DevCenterService.OperationStatus,
-  "java",
-  "DevCenterOperationDetails"
-);
 @@projectedName(DevCenterService.Project, "java", "DevCenterProject");
 
 @@projectedName(DevCenterService.OsType, "python", "OSType");
@@ -240,8 +224,3 @@ interface EnvironmentClientOperations {
 );
 @@projectedName(DevCenterService.OsDisk, "python", "OSDisk");
 @@projectedName(DevCenterService.OsDisk.diskSizeGB, "python", "diskSizeGb");
-@@projectedName(DevCenterService.OperationStatus, "python", "OperationDetails");
-@@projectedName(DevCenterService.OperationStatusValue,
-  "python",
-  "OperationStatus"
-);

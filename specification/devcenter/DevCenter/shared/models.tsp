@@ -9,59 +9,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-@doc("Indicates whether operation status is running, completed, canceled or failed.")
-@lroStatus
-enum OperationStatusValue {
-  @doc("Operation is in progress")
-  Running,
 
-  @doc("Operation is completed with success")
-  @lroSucceeded
-  Completed,
-
-  @doc("Operation was canceled")
-  Canceled,
-
-  @doc("Operation failed")
-  Failed,
-}
-
-@doc("The current status of an async operation")
-@resource("operationstatuses")
-@parentResource(Project)
-model OperationStatus {
-  @doc("Fully qualified ID for the operation status.")
-  @key("operationId")
-  @visibility("read")
-  id: string;
-
-  @doc("The operation id name")
-  name?: string;
-
-  @doc("Provisioning state of the resource.")
-  status: OperationStatusValue;
-
-  @doc("The id of the resource.")
-  resourceId?: string;
-
-  @doc("The start time of the operation")
-  startTime?: utcDateTime;
-
-  @doc("The end time of the operation")
-  endTime?: utcDateTime;
-
-  @doc("Percent of the operation that is complete")
-  @minValue(0.0)
-  @maxValue(100.0)
-  percentComplete?: float64;
-
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "there is no build in type to describe object"
-  @doc("Custom operation properties, populated only for a successful operation.")
-  properties?: unknown;
-
-  @doc("Operation Error message")
-  error?: Azure.Core.Foundations.Error;
-}
 
 @doc("Project details.")
 @resource("projects")

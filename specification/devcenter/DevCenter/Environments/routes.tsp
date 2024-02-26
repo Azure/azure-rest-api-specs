@@ -108,7 +108,7 @@ interface Environments {
       @statusCode
       statusCode: 202;
 
-      @body body: OperationStatus;
+      @body body: Foundations.OperationStatus;
 
       @header("Location")
       location: string;

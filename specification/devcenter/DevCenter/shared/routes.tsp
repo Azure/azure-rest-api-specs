@@ -10,5 +10,5 @@ namespace DevCenterService;
 
 interface SharedOperations {
   @doc("Get the status of an operation.")
-  getProjectOperationStatus is StandardResourceOperations.ResourceRead<OperationStatus>;
+  getProjectOperationStatus is StandardResourceOperations.GetResourceOperationStatus<Project>;
 }
