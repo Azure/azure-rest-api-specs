@@ -940,9 +940,6 @@ directive:
   - suppress: GuidUsage
     reason: 'Tenent Id should be a Guid'
   - suppress: AvoidAdditionalProperties
-    code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
-    - suppress: AvoidAdditionalProperties
     from: Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
 ```
 ---
