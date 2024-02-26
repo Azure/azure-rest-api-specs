@@ -6,34 +6,36 @@ import "./ResourceNotifications.tsp";
 import "./Storage.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-@@projectedName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to, "client", "toCommunicationIdentifier");
-@@projectedName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.from, "client", "fromCommunicationIdentifier");
+using Azure.ClientGenerator.Core;
 
-@@projectedName(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp, "client", "deliveryAttemptTimestamp");
-@@projectedName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp, "client", "userActionTimestamp");
-@@projectedName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.engagementType, "client", "engagement");
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to, "toCommunicationIdentifier");
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.from, "fromCommunicationIdentifier");
 
-
-@@projectedName(Microsoft.EventGrid.SystemEvents.EventHubCaptureFileCreatedEventData.fileUrl, "client", "fileurl");
-
-
-@@projectedName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceBaseEventData.resourceFhirAccount, "client", "FhirServiceHostName");
-@@projectedName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceBaseEventData.resourceFhirId, "client", "FhirResourceId");
-@@projectedName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceBaseEventData.resourceVersionId, "client", "FhirResourceVersionId");
-@@projectedName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceBaseEventData.resourceType, "client", "FhirResourceType");
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp, "deliveryAttemptTimestamp");
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp, "userActionTimestamp");
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.engagementType, "engagement");
 
 
-@@projectedName(Microsoft.EventGrid.SystemEvents.DeviceTwinMetadata.lastUpdated, "client", "$lastUpdated");
-@@projectedName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.metadata, "client", "$metadata");
-@@projectedName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.version, "client", "$version");
+@@clientName(Microsoft.EventGrid.SystemEvents.EventHubCaptureFileCreatedEventData.fileUrl, "fileurl");
 
 
-@@projectedName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.resourceInfo, "client", "resourceDetails");
-@@projectedName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.operationalInfo, "client", "operationalDetails");
-@@projectedName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.resourceInfo, "client", "resourceDetails");
-@@projectedName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.operationalInfo, "client", "operationalDetails");
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceBaseEventData.resourceFhirAccount, "FhirServiceHostName");
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceBaseEventData.resourceFhirId, "FhirResourceId");
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceBaseEventData.resourceVersionId, "FhirResourceVersionId");
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceBaseEventData.resourceType, "FhirResourceType");
 
 
-@@projectedName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData.queuedDateTime, "client", "queuedOn");
-@@projectedName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.completedDateTime, "client", "completedOn");
-@@projectedName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl, "client", "summaryReportBlobUri");
+@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinMetadata.lastUpdated, "$lastUpdated");
+@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.metadata, "$metadata");
+@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.version, "$version");
+
+
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.resourceInfo, "resourceDetails");
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.operationalInfo, "operationalDetails");
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.resourceInfo, "resourceDetails");
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.operationalInfo, "operationalDetails");
+
+
+@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData.queuedDateTime, "queuedOn");
+@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.completedDateTime, "completedOn");
+@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl, "summaryReportBlobUri");
