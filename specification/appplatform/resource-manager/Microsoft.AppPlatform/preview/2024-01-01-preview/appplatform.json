@@ -8975,12 +8975,12 @@
             "$ref": "#/parameters/JobNameParameter"
           },
           {
-            "name": "template",
+            "name": "resource",
             "in": "body",
             "description": "Properties used to start a job execution.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/JobExecutionTemplate"
+              "$ref": "#/definitions/JobExecutionResource"
             }
           }
         ],
@@ -9014,6 +9014,51 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/listEnvSecrets": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List sensitive environment variables of Job.",
+        "operationId": "Job_ListEnvSecrets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the sensitive environment variables of the Job.",
+            "schema": {
+              "$ref": "#/definitions/EnvSecrets"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Job_ListEnvSecrets": {
+            "$ref": "./examples/Job_ListEnvSecrets.json"
+          }
         }
       }
     },
@@ -9166,6 +9211,54 @@
         "x-ms-examples": {
           "JobExecution_Get": {
             "$ref": "./examples/JobExecution_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/executions/{jobExecutionName}/listEnvSecrets": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List sensitive environment variables of Job execution.",
+        "operationId": "JobExecution_ListEnvSecrets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobExecutionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the sensitive environment variables of the Job execution.",
+            "schema": {
+              "$ref": "#/definitions/EnvSecrets"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobExecution_ListEnvSecrets": {
+            "$ref": "./examples/JobExecution_ListEnvSecrets.json"
           }
         }
       }
@@ -13286,7 +13379,7 @@
       }
     },
     "ResourceRequests": {
-      "description": "Deployment resource request payload",
+      "description": "Deployment/Job resource request payload",
       "type": "object",
       "properties": {
         "cpu": {
@@ -15703,6 +15796,20 @@
         }
       }
     },
+    "JobExecutionResource": {
+      "description": "Job's execution template, containing configuration for an execution",
+      "type": "object",
+      "properties": {
+        "template": {
+          "$ref": "#/definitions/JobExecutionTemplate",
+          "description": "The template which is applied for the execution of the Job."
+        },
+        "resourceRequests": {
+          "$ref": "#/definitions/ResourceRequests",
+          "description": "The requested resource quantity for required CPU and Memory."
+        }
+      }
+    },
     "JobExecutionTemplate": {
       "description": "Job's execution template, containing configuration for an execution",
       "type": "object",
@@ -15747,10 +15854,6 @@
           "format": "int32",
           "description": "Number of parallel replicas of a job that can run at a given time.",
           "type": "integer"
-        },
-        "resourceRequests": {
-          "$ref": "#/definitions/ResourceRequests",
-          "description": "The requested resource quantity for required CPU and Memory."
         }
       }
     },
@@ -15813,6 +15916,14 @@
       "required": [
         "value"
       ]
+    },
+    "EnvSecrets": {
+      "description": "Sensitive properties for environment variables",
+      "type": "object",
+      "x-ms-secret": true,
+      "additionalProperties": {
+        "type": "string"
+      }
     }
   },
   "parameters": {
