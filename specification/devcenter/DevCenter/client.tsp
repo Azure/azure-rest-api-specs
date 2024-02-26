@@ -158,6 +158,15 @@ interface EnvironmentClientOperations {
   "csharp",
   "DevCenterEnvironmentType"
 );
+@@projectedName(DevCenterService.OperationStatusValue,
+  "csharp",
+  "DevCenterStatus"
+);
+@@projectedName(DevCenterService.OperationStatus,
+  "csharp",
+  "DevCenterOperationDetails"
+);
+@@projectedName(DevCenterService.Project, "csharp", "DevCenterProject");
 
 @@projectedName(DevCenterService.OsType, "java", "DevBoxOsType");
 @@projectedName(DevCenterService.ScheduledFrequency,
@@ -213,6 +222,15 @@ interface EnvironmentClientOperations {
   "DevCenterEnvironmentType"
 );
 @@projectedName(DevCenterService.HardwareProfile.vCPUs, "java", "vcpus");
+@@projectedName(DevCenterService.OperationStatusValue,
+  "java",
+  "DevCenterStatus"
+);
+@@projectedName(DevCenterService.OperationStatus,
+  "java",
+  "DevCenterOperationDetails"
+);
+@@projectedName(DevCenterService.Project, "java", "DevCenterProject");
 
 @@projectedName(DevCenterService.OsType, "python", "OSType");
 @@projectedName(DevCenterService.HardwareProfile.vCPUs, "python", "vcpus");
@@ -222,66 +240,8 @@ interface EnvironmentClientOperations {
 );
 @@projectedName(DevCenterService.OsDisk, "python", "OSDisk");
 @@projectedName(DevCenterService.OsDisk.diskSizeGB, "python", "diskSizeGb");
-
-/*
-@@clientName(DevCenterService.LocalAdminStatus, "LocalAdministratorStatus");
-@@clientName(DevCenterService.StopOnDisconnectEnableStatus, "StopOnDisconnectStatus");
-@@clientName(DevCenterService.EnvironmentTypeEnableStatus, "EnvironmentTypeStatus");
-@@clientName(DevCenterService.DevBoxActionDelayResultStatus, "DevBoxActionDelayStatus");
-
-@@clientName(DevCenterService.OsType, "DevBoxOSType", "csharp");
-@@clientName(DevCenterService.ScheduledFrequency, "ScheduleFrequency", "csharp");
-@@clientName(DevCenterService.Pool, "DevBoxPool", "csharp");
-@@clientName(DevCenterService.Pool.osType, "OSType", "csharp");
-@@clientName(DevCenterService.Pool.localAdministrator, "LocalAdministratorStatus", "csharp");
-@@clientName(DevCenterService.HardwareProfile, "DevBoxHardwareProfile", "csharp");
-@@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "csharp");
-@@clientName(DevCenterService.StorageProfile.osDisk , "OSDisk", "csharp");
-@@clientName(DevCenterService.OsDisk, "OSDisk", "csharp");
-@@clientName(DevCenterService.ImageReference, "DevBoxImageReference", "csharp");
-@@clientName(DevCenterService.ImageReference.osBuildNumber , "OSBuildNumber", "csharp");
-@@clientName(DevCenterService.Schedule, "DevBoxSchedule", "csharp");
-@@clientName(DevCenterService.Schedule.type, "scheduledType", "csharp");
-@@clientName(DevCenterService.DevBox.osType , "OSType", "csharp");
-@@clientName(DevCenterService.DevBox.user , "userId", "csharp");
-@@clientName(DevCenterService.DevBox.localAdministrator , "LocalAdministratorStatus", "csharp");
-@@clientName(DevCenterService.RemoteConnection.webUrl , "webUri", "csharp");
-@@clientName(DevCenterService.RemoteConnection.rdpConnectionUrl , "rdpConnectionUri", "csharp");
-@@clientName(DevCenterService.DevBoxAction.next, "nextAction", "csharp");
-@@clientName(DevCenterService.DevBoxActionDelayResult.name, "actionName", "csharp");
-@@clientName(DevCenterService.ParameterType, "EnvironmentDefinitionParameterType", "csharp");
-@@clientName(DevCenterService.Environment, "DevCenterEnvironment", "csharp");
-@@clientName(DevCenterService.Environment.environmentType, "environmentTypeName","csharp");
-@@clientName(DevCenterService.Environment.user, "userId","csharp");
-@@clientName(DevCenterService.Catalog, "DevCenterCatalog", "csharp");
-@@clientName(DevCenterService.EnvironmentDefinitionParameter.default, "defaultValue", "csharp");
-@@clientName(DevCenterService.EnvironmentDefinitionParameter.type, "parameterType", "csharp");
-@@clientName(DevCenterService.EnvironmentType, "DevCenterEnvironmentType", "csharp");
-
-@@clientName(DevCenterService.OsType, "DevBoxOsType" ,"java");
-@@clientName(DevCenterService.ScheduledFrequency, "ScheduleFrequency", "java");
-@@clientName(DevCenterService.Pool, "DevBoxPool", "java");
-@@clientName(DevCenterService.Pool.localAdministrator, "LocalAdministratorStatus", "java");
-@@clientName(DevCenterService.HardwareProfile, "DevBoxHardwareProfile", "java");
-@@clientName(DevCenterService.HardwareProfile.vCPUs, "vcpus", "java");
-@@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "java");
-@@clientName(DevCenterService.ImageReference, "DevBoxImageReference", "java");
-@@clientName(DevCenterService.Schedule, "DevBoxSchedule", "java");
-@@clientName(DevCenterService.Schedule.type, "scheduledType", "java");
-@@clientName(DevCenterService.DevBox.user , "userId", "java");
-@@clientName(DevCenterService.DevBox.localAdministrator , "LocalAdministratorStatus", "java");
-@@clientName(DevCenterService.DevBoxAction.next, "nextAction", "java");
-@@clientName(DevCenterService.ParameterType, "EnvironmentDefinitionParameterType", "java");
-@@clientName(DevCenterService.Environment, "DevCenterEnvironment", "java");
-@@clientName(DevCenterService.Environment.environmentType, "environmentTypeName", "java");
-@@clientName(DevCenterService.Environment.user, "userId", "java");
-@@clientName(DevCenterService.Catalog, "DevCenterCatalog", "java");
-@@clientName(DevCenterService.EnvironmentDefinitionParameter.default, "defaultValue", "java");
-@@clientName(DevCenterService.EnvironmentDefinitionParameter.type, "parameterType", "java");
-@@clientName(DevCenterService.EnvironmentType, "DevCenterEnvironmentType", "java");
-
-@@clientName(DevCenterService.OsType, "OSType", "python");
-@@clientName(DevCenterService.HardwareProfile.vCPUs, "vcpus", "python");
-@@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryGb", "python");
-@@clientName(DevCenterService.OsDisk, "OSDisk", "python");
-@@clientName(DevCenterService.OsDisk.diskSizeGB ,"diskSizeGb", "python");*/
+@@projectedName(DevCenterService.OperationStatus, "python", "OperationDetails");
+@@projectedName(DevCenterService.OperationStatusValue,
+  "python",
+  "OperationStatus"
+);

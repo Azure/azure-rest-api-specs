@@ -11,9 +11,6 @@ namespace DevCenterService;
 
 @doc("Indicates whether operation status is running, completed, canceled or failed.")
 @lroStatus
-@projectedName("csharp", "DevCentertatus")
-@projectedName("java", "DevCentertatus")
-@projectedName("python", "OperationStatus")
 enum OperationStatusValue {
   @doc("Operation is in progress")
   Running,
@@ -30,9 +27,6 @@ enum OperationStatusValue {
 }
 
 @doc("The current status of an async operation")
-@projectedName("csharp", "DevCenterOperationDetails")
-@projectedName("java", "DevCenterOperationDetails")
-@projectedName("python", "OperationDetails")
 model OperationStatus {
   @doc("Fully qualified ID for the operation status.")
   id?: string;
@@ -67,7 +61,6 @@ model OperationStatus {
 
 @doc("Project details.")
 @resource("projects")
-@projectedName("csharp", "DevCenterProject")
 model Project {
   @key("projectName")
   @doc("Name of the project")
