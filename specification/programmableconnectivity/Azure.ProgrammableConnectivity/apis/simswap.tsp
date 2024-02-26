@@ -65,7 +65,7 @@ model SimSwapVerificationContent {
 @doc("Response with SimSwap date")
 model SimSwapRetrievalResult {
   @doc("Datetime of most recent swap for SIM")
-  date: utcDateTime;
+  date?: utcDateTime;
 }
 
 @doc("Response verifying SimSwap in period")
