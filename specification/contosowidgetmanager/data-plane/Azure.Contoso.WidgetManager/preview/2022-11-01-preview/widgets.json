@@ -403,8 +403,7 @@
       "type": "string",
       "description": "Enum describing allowed operation states.",
       "enum": [
-        "NotStarted",
-        "Running",
+        "InProgress",
         "Succeeded",
         "Failed",
         "Canceled"
@@ -414,13 +413,8 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "The operation has not started."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
+            "name": "InProgress",
+            "value": "InProgress",
             "description": "The operation is in progress."
           },
           {
@@ -517,7 +511,6 @@
     },
     "WidgetSuite": {
       "type": "object",
-      "description": "A widget.",
       "properties": {
         "name": {
           "type": "string",
@@ -540,7 +533,6 @@
     },
     "WidgetSuiteCreateOrUpdate": {
       "type": "object",
-      "description": "A widget.",
       "properties": {
         "manufacturerId": {
           "type": "string",
