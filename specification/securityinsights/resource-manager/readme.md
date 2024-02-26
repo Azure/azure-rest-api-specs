@@ -942,8 +942,11 @@ directive:
   - suppress: AvoidAdditionalProperties
     code: AvoidAdditionalProperties
     from: Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
-```
 
+    suppressions:
+  - code: AvoidAdditionalProperties
+    from: Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
+```
 ---
 
 # Code Generation
