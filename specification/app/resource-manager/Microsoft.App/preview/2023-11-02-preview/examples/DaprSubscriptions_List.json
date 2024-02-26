@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "myenvironment",
+    "api-version": "2023-11-02-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mybulksubscription",
+            "name": "mybulksubscription",
+            "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+            "properties": {
+              "pubsubName": "mypubsubcomponent",
+              "topic": "inventory",
+              "routes": {
+                "rules": [],
+                "default": "/products"
+              },
+              "bulkSubscribe": {
+                "enabled": true,
+                "maxMessagesCount": 123,
+                "maxAwaitDurationMs": 500
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mydefaultsubscription",
+            "name": "mydefaultsubscription",
+            "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+            "properties": {
+              "pubsubName": "mypubsubcomponent",
+              "topic": "inventory",
+              "routes": {
+                "rules": [],
+                "default": "/products"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/myroutingsubscription",
+            "name": "myroutingsubscription",
+            "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+            "properties": {
+              "pubsubName": "mypubsubcomponent",
+              "topic": "inventory",
+              "routes": {
+                "rules": [
+                  {
+                    "match": "event.type == 'widget'",
+                    "path": "/widgets"
+                  },
+                  {
+                    "match": "event.type == 'gadget'",
+                    "path": "/gadgets"
+                  }
+                ],
+                "default": "/products"
+              },
+              "metadata": {
+                "foo": "bar",
+                "hello": "world"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

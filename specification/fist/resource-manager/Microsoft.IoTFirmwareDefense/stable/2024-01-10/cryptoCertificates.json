@@ -1,0 +1,274 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-10",
+    "title": "IoT Firmware Defense",
+    "description": "Firmware & IoT Security REST API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoCertificates": {
+      "get": {
+        "tags": [
+          "CryptoCertificates"
+        ],
+        "operationId": "CryptoCertificates_ListByFirmware",
+        "description": "Lists cryptographic certificate analysis results found in a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CryptoCertificateListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CryptoCertificates_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/CryptoCertificates_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "CryptoCertificates_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/CryptoCertificates_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CryptoCertificateEntity": {
+      "type": "object",
+      "description": "Information on an entity (distinguished name) in a cryptographic certificate.",
+      "properties": {
+        "commonName": {
+          "description": "Common name of the certificate entity.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "organization": {
+          "description": "Organization of the certificate entity.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "organizationalUnit": {
+          "description": "The organizational unit of the certificate entity.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "state": {
+          "description": "Geographical state or province of the certificate entity.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "country": {
+          "description": "Country code of the certificate entity.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "CryptoCertificate": {
+      "type": "object",
+      "properties": {
+        "cryptoCertId": {
+          "description": "ID for the certificate result.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Name of the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "subject": {
+          "description": "Subject information of the certificate.",
+          "$ref": "#/definitions/CryptoCertificateEntity",
+          "x-nullable": true
+        },
+        "issuer": {
+          "description": "Issuer information of the certificate.",
+          "$ref": "#/definitions/CryptoCertificateEntity",
+          "x-nullable": true
+        },
+        "issuedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Issue date for the certificate.",
+          "x-nullable": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration date for the certificate.",
+          "x-nullable": true
+        },
+        "role": {
+          "description": "Role of the certificate (Root CA, etc)",
+          "type": "string",
+          "x-nullable": true
+        },
+        "signatureAlgorithm": {
+          "description": "The signature algorithm used in the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "keySize": {
+          "description": "Size of the certificate's key in bits",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "keyAlgorithm": {
+          "description": "Key algorithm used in the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "encoding": {
+          "description": "Encoding used for the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "serialNumber": {
+          "description": "Serial number of the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "fingerprint": {
+          "description": "Fingerprint of the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "usage": {
+          "description": "List of functions the certificate can fulfill.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "filePaths": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of files where this certificate was found.",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "pairedKey": {
+          "description": "A matching paired private key.",
+          "$ref": "./common.json#/definitions/PairedKey",
+          "x-nullable": true
+        },
+        "isExpired": {
+          "description": "Indicates if the certificate is expired.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "isSelfSigned": {
+          "description": "Indicates if the certificate is self-signed.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "isWeakSignature": {
+          "description": "Indicates the signature algorithm used is insecure.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "isShortKeySize": {
+          "description": "Indicates the certificate's key size is considered too small to be secure for the key algorithm.",
+          "type": "boolean",
+          "x-nullable": true
+        }
+      },
+      "description": "Crypto certificate properties"
+    },
+    "CryptoCertificateResource": {
+      "type": "object",
+      "description": "Crypto certificate resource",
+      "properties": {
+        "properties": {
+          "title": "Crypto certificate properties",
+          "description": "The properties of a crypto certificate found within a firmware image",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CryptoCertificate"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CryptoCertificateListResult": {
+      "type": "object",
+      "description": "List of crypto certificates.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CryptoCertificateResource"
+          },
+          "description": "The list of crypto certificate results."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
