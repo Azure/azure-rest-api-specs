@@ -102,7 +102,7 @@ interface FirmwareOperationGroup {
   @operationId("BinaryHardening_ListByFirmware")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/binaryHardeningResults")
   @get
-  listByFirmware is Azure.Core.Foundations.Operation<
+  listBinaryHardeningResults is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -142,7 +142,7 @@ interface FirmwareOperationGroup {
   @operationId("CryptoCertificates_ListByFirmware")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoCertificates")
   @get
-  listByFirmware is Azure.Core.Foundations.Operation<
+  listCryptoCertificates is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -182,7 +182,7 @@ interface FirmwareOperationGroup {
   @operationId("CryptoKeys_ListByFirmware")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoKeys")
   @get
-  listByFirmware is Azure.Core.Foundations.Operation<
+  listCryptoKeys is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -222,7 +222,7 @@ interface FirmwareOperationGroup {
   @operationId("Cves_ListByFirmware")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cves")
   @get
-  listByFirmware is Azure.Core.Foundations.Operation<
+  listCves is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -262,7 +262,7 @@ interface FirmwareOperationGroup {
   @operationId("PasswordHashes_ListByFirmware")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/passwordHashes")
   @get
-  listByFirmware is Azure.Core.Foundations.Operation<
+  listPasswordHashes is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -302,7 +302,7 @@ interface FirmwareOperationGroup {
   @operationId("SbomComponents_ListByFirmware")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/sbomComponents")
   @get
-  listByFirmware is Azure.Core.Foundations.Operation<
+  listSbomComponents is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
