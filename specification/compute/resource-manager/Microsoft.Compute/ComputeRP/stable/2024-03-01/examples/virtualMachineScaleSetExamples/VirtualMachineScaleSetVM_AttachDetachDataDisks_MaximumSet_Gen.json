@@ -9,11 +9,21 @@
       "dataDisksToAttach": [
         {
           "lun": 1,
-          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d"
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+          "diskEncryptionSet": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+          },
+          "caching": "ReadOnly",
+          "writeAcceleratorEnabled": true
         },
         {
           "lun": 2,
-          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e"
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
+          "diskEncryptionSet": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+          },
+          "caching": "ReadWrite",
+          "writeAcceleratorEnabled": false
         }
       ],
       "dataDisksToDetach": [
@@ -53,12 +63,16 @@
             "lun": 1,
             "name": "vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
             "createOption": "Attach",
-            "caching": "ReadWrite",
+            "caching": "ReadOnly",
             "managedDisk": {
               "storageAccountType": "Premium_LRS",
-              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d"
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+              "diskEncryptionSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+              }
             },
-            "diskSizeGB": 30
+            "diskSizeGB": 30,
+            "writeAcceleratorEnabled": true
           },
           {
             "lun": 2,
@@ -67,9 +81,13 @@
             "caching": "ReadWrite",
             "managedDisk": {
               "storageAccountType": "Premium_LRS",
-              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e"
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
+              "diskEncryptionSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+              }
             },
-            "diskSizeGB": 100
+            "diskSizeGB": 100,
+            "writeAcceleratorEnabled": false
           }
         ]
       },
