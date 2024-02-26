@@ -1678,7 +1678,7 @@
         "readBufferSize": {
           "type": "object",
           "x-ms-format": "dfe-int",
-          "description": "Determines the size of the internal buffer Npgsql uses when reading. Increasing may improve performance if transferring large values from the database."
+          "description": "Determines the size of the internal buffer uses when reading. Increasing may improve performance if transferring large values from the database."
         },
         "logParameters": {
           "type": "object",
@@ -1705,7 +1705,10 @@
         }
       },
       "required": [
-        "connectionString"
+        "server",
+        "username",
+        "database",
+        "sslMode"
       ]
     },
     "SybaseLinkedService": {
