@@ -120,7 +120,7 @@ model ImageGenerationOptions {
   size?: ImageSize = ImageSize.size1024x1024;
 
   @doc("The format in which image generation response items should be presented.")
-  @projectedName("json", "response_format")
+  @encodedName("application/json", "response_format")
   responseFormat?: ImageGenerationResponseFormat = ImageGenerationResponseFormat.url;
 
   @doc("""
@@ -151,7 +151,7 @@ model ImageGenerationData {
   url?: url;
 
   @doc("The complete data for an image, represented as a base64-encoded string.")
-  @projectedName("json", "b64_json")
+  @encodedName("application/json", "b64_json")
   base64Data?: string;
 
   @doc("""
@@ -159,7 +159,7 @@ model ImageGenerationData {
   Only provided with dall-3-models and only when revisions were made to the prompt.
   """)
   @added(ServiceApiVersions.v2023_12_01_Preview)
-  @projectedName("json", "revised_prompt")
+  @encodedName("application/json", "revised_prompt")
   revisedPrompt?: string;
 }
 
@@ -170,7 +170,6 @@ model ImageGenerations {
   A timestamp representing when this operation was started.
   Expressed in seconds since the Unix epoch of 1970-01-01T00:00:00+0000.
   """)
-  @projectedName("json", "created")
   @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
@@ -197,7 +196,6 @@ model BatchImageGenerationOperationResponse {
   id: string;
 
   @doc("A timestamp when this job or item was created (in unix epochs).")
-  @projectedName("json", "created")
   @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
