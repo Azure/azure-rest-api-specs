@@ -1,5 +1,5 @@
 {
-  "swagger": "2.0",
+  // "swagger": "2.0",
   "info": {
     "version": "2018-01-01",
     "title": "Schema of Azure API Center service events published to Azure Event Grid",
@@ -22,6 +22,14 @@
         "specification": {
           "$ref": "#/definitions/ApiSpecificationDetails"
         }
+      },
+      "x-ms-examples": {
+        "userCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/api_definition_added.json"
+        },
+        "userCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/api_definition_added.json"
+        }
       }
     },
     "ApiDefinitionUpdatedEventData": {
@@ -38,6 +46,14 @@
         },
         "specification": {
           "$ref": "#/definitions/ApiSpecificationDetails"
+        }
+      },
+      "x-ms-examples": {
+        "userCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/api_definition_updated.json"
+        },
+        "userCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/api_definition_updated.json"
         }
       }
     },
