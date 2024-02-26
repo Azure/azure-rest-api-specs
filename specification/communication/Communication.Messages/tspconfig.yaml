@@ -46,7 +46,10 @@ options:
     namespace: com.azure.communication.messages
     partial-update: true
     service-name: Messages
-    custom-types-subpackage: "implementation.models"
+    custom-types-subpackage: "models.channels"
+    custom-types: "WhatsAppMessageButtonSubType,WhatsAppMessageTemplateBindings,WhatsAppMessageTemplateBindingsButton,WhatsAppMessageTemplateBindingsComponent,WhatsAppMessageTemplateItem"
+    #commented since it creates typespec validation issues. Uncomment below when running typespec java emitter
+    #customization-class: customization/src/main/java/MessagesSdkCustomization.java
   "@azure-tools/typespec-ts":
     package-dir: "communication-messages-rest"
     packageDetails:
