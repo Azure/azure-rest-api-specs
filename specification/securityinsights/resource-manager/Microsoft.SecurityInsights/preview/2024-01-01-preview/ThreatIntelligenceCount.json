@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/count": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{TiType}/count": {
       "post": {
         "x-ms-examples": {
           "Get TI object count": {
@@ -58,6 +58,9 @@
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/TiType"
           },
           {
             "$ref": "#/parameters/Query"
@@ -318,6 +321,26 @@
       "name": "query",
       "schema": {
         "$ref": "#/definitions/Query"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TiType": {
+      "description": "TI type",
+      "in": "path",
+      "name": "tiType",
+      "required": true,
+      "enum": [
+        "main"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TiType",
+        "values": [
+          {
+            "value": "main"
+          }
+        ]
       },
       "x-ms-parameter-location": "method"
     }
