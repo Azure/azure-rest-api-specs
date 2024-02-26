@@ -10,7 +10,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.Chaos;
 @doc("Model that represents a Target Type resource.")
-@locationResource
+@parentResource(ArmLocationResource<"Subscription">)
 model TargetType is ProxyResource<TargetTypeProperties> {
   @doc("String that represents a Target Type resource name.")
   @pattern("^[a-zA-Z0-9_\\-\\.]+$")

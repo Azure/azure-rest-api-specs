@@ -37,13 +37,7 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-01'
 input-file:
-  - Microsoft.Chaos/stable/2024-01-01/capabilities.json
-  - Microsoft.Chaos/stable/2024-01-01/capabilityTypes.json
-  - Microsoft.Chaos/stable/2024-01-01/experiments.json
-  - Microsoft.Chaos/stable/2024-01-01/operationStatuses.json
-  - Microsoft.Chaos/stable/2024-01-01/operations.json
-  - Microsoft.Chaos/stable/2024-01-01/targetTypes.json
-  - Microsoft.Chaos/stable/2024-01-01/targets.json
+  - Microsoft.Chaos/stable/2024-01-01/openapi.json
 directive:
   - from: swagger-document
     where: "$.definitions.action"

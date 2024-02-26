@@ -9,7 +9,9 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.Chaos;
+
 @doc("Model that represents a Target resource.")
+@parentResource(ArmLocationResource<"Subscription">)
 model Target is ProxyResource<Record<unknown>> {
   @doc("String that represents a Target resource name.")
   @pattern("^[a-zA-Z0-9_\\-\\.]+$")
@@ -19,7 +21,7 @@ model Target is ProxyResource<Record<unknown>> {
   name: string;
 }
 
-alias ParentedResourceParameters = BaseParameters<Target> & {
+alias ParentResourceParameters = {
   @doc("The parent resource provider namespace.")
   @path
   @segment("providers")
@@ -34,25 +36,27 @@ alias ParentedResourceParameters = BaseParameters<Target> & {
   parentResourceName: string;
 };
 
+alias TargetParentResourceParameters = BaseParameters<Target> & ParentResourceParameters;
+
 @armResourceOperations
 interface Targets {
   @doc("Get a Target resource that extends a tracked regional resource.")
-  get is ArmResourceRead<Target, ParentedResourceParameters>;
+  get is ArmResourceRead<Target, TargetParentResourceParameters>;
 
   @doc("Create or update a Target resource that extends a tracked regional resource.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Target,
-    ParentedResourceParameters
+    TargetParentResourceParameters
   >;
 
   @doc("Delete a Target resource that extends a tracked regional resource.")
-  delete is ArmResourceDeleteSync<Target, ParentedResourceParameters>;
+  delete is ArmResourceDeleteSync<Target, TargetParentResourceParameters>;
 
   @doc("Get a list of Target resources that extend a tracked regional resource.")
   list is ArmResourceListByParent<
     Target,
     {
-      ...ParentedResourceParameters;
+      ...TargetParentResourceParameters;
 
       @doc("String that sets the continuation token.")
       @query("continuationToken")

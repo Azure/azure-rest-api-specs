@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.Chaos;
@@ -74,12 +76,6 @@ enum Origin {
   `user,system`,
 }
 
-@doc("The type of the action.")
-enum ActionType {
-  @doc("The action is internal.")
-  Internal,
-}
-
 @doc("The type of the target.")
 enum TargetReferenceType {
   @doc("The target is a resource group.")
@@ -115,13 +111,11 @@ model CapabilityProperties {
 
   @doc("URL to retrieve JSON schema of the Capability parameters.")
   @visibility("read")
-  @maxLength(2048)
-  parametersSchema?: string;
+  parametersSchema?: Url;
 
   @doc("String of the URN for this Capability Type.")
   @visibility("read")
-  @maxLength(2048)
-  urn?: string;
+  urn?: Urn;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The original resource does not have a provisioningState property."
@@ -145,13 +139,11 @@ model CapabilityTypeProperties {
 
   @doc("URL to retrieve JSON schema of the Capability Type parameters.")
   @visibility("read")
-  @maxLength(2048)
-  parametersSchema?: string;
+  parametersSchema?: Url;
 
   @doc("String of the URN for this Capability Type.")
   @visibility("read")
-  @maxLength(2048)
-  urn?: string;
+  urn?: Urn;
 
   @doc("String of the kind of this Capability Type.")
   @visibility("read")
@@ -167,12 +159,11 @@ model CapabilityTypeProperties {
   runtimeProperties?: CapabilityTypePropertiesRuntimeProperties;
 }
 
-@doc("Runtime properties of this Capability Type.")
-model CapabilityTypePropertiesRuntimeProperties {
+alias CapabilityTypePropertiesRuntimeProperties = {
   @doc("String of the kind of the resource's action type (continuous or discrete).")
   @visibility("read")
   kind?: string;
-}
+};
 
 @doc("The identity of a resource.")
 model ResourceIdentity {
@@ -227,7 +218,9 @@ model ChaosExperimentStep {
   branches: ChaosExperimentBranch[];
 }
 
+@friendlyName("Branch")
 @doc("Model that represents a branch in the step. 9 total per experiment.")
+@extension("x-ms-identifiers", ["name"])
 model ChaosExperimentBranch {
   @doc("String of the branch name.")
   @minLength(1)
@@ -237,12 +230,20 @@ model ChaosExperimentBranch {
   actions: ChaosExperimentAction[];
 }
 
+@doc("String that represents a Capability URN.")
+@maxLength(2048)
+scalar Urn extends string;
+
+@doc("String that represents a URL.")
+@maxLength(2048)
+scalar Url extends string;
+
+@friendlyName("Action")
 @doc("Model that represents the base action model. 9 total per experiment.")
 @discriminator("type")
 model ChaosExperimentAction {
   @doc("String that represents a Capability URN.")
-  @maxLength(2048)
-  name: string;
+  name: Urn;
 }
 
 @doc("Model that represents a selector in the Experiment resource.")
@@ -258,6 +259,7 @@ model ChaosTargetSelector {
   filter?: ChaosTargetFilter;
 }
 
+@friendlyName("Filter")
 @doc("Model that represents available filter types that can be applied to a targets list.")
 @discriminator("type")
 model ChaosTargetFilter {}
@@ -371,6 +373,7 @@ model BranchStatus {
 }
 
 @doc("Model that represents the an action and its status.")
+@extension("x-ms-identifiers", ["actionId"])
 model ActionStatus {
   @doc("The name of the action status.")
   @visibility("read")
@@ -468,8 +471,7 @@ model TargetTypeProperties {
 
   @doc("URL to retrieve JSON schema of the Target Type properties.")
   @visibility("read")
-  @maxLength(2048)
-  propertiesSchema?: string;
+  propertiesSchema?: Url;
 
   @doc("List of resource types this Target Type can extend.")
   @visibility("read")
@@ -499,6 +501,7 @@ model DiscreteAction extends ChaosExperimentAction {
 }
 
 @doc("A map to describe the settings of an action.")
+@extension("x-ms-identifiers", ["key"])
 model KeyValuePair {
   @doc("The name of the setting for the action.")
   @minLength(1)

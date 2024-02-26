@@ -27,8 +27,8 @@ namespace Microsoft.Chaos;
 
 @doc("The available API versions.")
 enum Versions {
-  @doc("The 2023-11-01 version of the Chaos service.")
+  @doc("The 2024-01-01 version of the Chaos service.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_11_01: "2023-11-01",
+  v2024_01_01: "2024-01-01",
 }
