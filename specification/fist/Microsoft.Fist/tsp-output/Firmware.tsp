@@ -100,39 +100,12 @@ interface FirmwareOperationGroup {
   // FIXME: BinaryHardening_ListByFirmware could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("BinaryHardening_ListByFirmware")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/binaryHardeningResults")
+  @segment("binaryHardeningResults")
   @get
-  listBinaryHardeningResults is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
-      @path
-      subscriptionId: string;
+  listBinaryHardeningResults (
+    ...ResourceInstanceParameters<Firmware, BaseParameters<Firmware>>,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      /**
-       * The name of the firmware analysis workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-      @path
-      workspaceName: string;
-
-      /**
-       * The id of the firmware.
-       */
-      @path
-      firmwareId: string;
-    },
-    BinaryHardeningListResult
-  >;
+  ): ArmResponse<BinaryHardeningListResult> | ErrorResponse;
 
   /**
    * Lists cryptographic certificate analysis results found in a firmware.
@@ -140,39 +113,12 @@ interface FirmwareOperationGroup {
   // FIXME: CryptoCertificates_ListByFirmware could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("CryptoCertificates_ListByFirmware")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoCertificates")
+  @segment("cryptoCertificates")
   @get
-  listCryptoCertificates is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
-      @path
-      subscriptionId: string;
+  listCryptoCertificates (
+    ...ResourceInstanceParameters<Firmware, BaseParameters<Firmware>>,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      /**
-       * The name of the firmware analysis workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-      @path
-      workspaceName: string;
-
-      /**
-       * The id of the firmware.
-       */
-      @path
-      firmwareId: string;
-    },
-    CryptoCertificateListResult
-  >;
+  ): ArmResponse<CryptoCertificateListResult> | ErrorResponse;
 
   /**
    * Lists cryptographic key analysis results found in a firmware.
@@ -180,39 +126,12 @@ interface FirmwareOperationGroup {
   // FIXME: CryptoKeys_ListByFirmware could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("CryptoKeys_ListByFirmware")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoKeys")
+  @segment("cryptoKeys")
   @get
-  listCryptoKeys is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
-      @path
-      subscriptionId: string;
+  listCryptoKeys (
+    ...ResourceInstanceParameters<Firmware, BaseParameters<Firmware>>,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      /**
-       * The name of the firmware analysis workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-      @path
-      workspaceName: string;
-
-      /**
-       * The id of the firmware.
-       */
-      @path
-      firmwareId: string;
-    },
-    CryptoKeyListResult
-  >;
+  ): ArmResponse<CryptoKeyListResult> | ErrorResponse;
 
   /**
    * Lists CVE analysis results of a firmware.
@@ -220,39 +139,12 @@ interface FirmwareOperationGroup {
   // FIXME: Cves_ListByFirmware could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Cves_ListByFirmware")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cves")
+  @segment("cves")
   @get
-  listCves is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
-      @path
-      subscriptionId: string;
+  listCves (
+    ...ResourceInstanceParameters<Firmware, BaseParameters<Firmware>>,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      /**
-       * The name of the firmware analysis workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-      @path
-      workspaceName: string;
-
-      /**
-       * The id of the firmware.
-       */
-      @path
-      firmwareId: string;
-    },
-    CveListResult
-  >;
+  ): ArmResponse<CveListResult> | ErrorResponse;
 
   /**
    * Lists password hash analysis results of a firmware.
@@ -260,39 +152,12 @@ interface FirmwareOperationGroup {
   // FIXME: PasswordHashes_ListByFirmware could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("PasswordHashes_ListByFirmware")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/passwordHashes")
+  @segment("passwordHashes")
   @get
-  listPasswordHashes is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
-      @path
-      subscriptionId: string;
+  listPasswordHashes (
+    ...ResourceInstanceParameters<Firmware, BaseParameters<Firmware>>,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      /**
-       * The name of the firmware analysis workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-      @path
-      workspaceName: string;
-
-      /**
-       * The id of the firmware.
-       */
-      @path
-      firmwareId: string;
-    },
-    PasswordHashListResult
-  >;
+  ): ArmResponse<PasswordHashListResult> | ErrorResponse;
 
   /**
    * Lists SBOM analysis results of a firmware.

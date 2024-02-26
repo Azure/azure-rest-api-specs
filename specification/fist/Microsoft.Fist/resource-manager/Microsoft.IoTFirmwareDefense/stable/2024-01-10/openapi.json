@@ -693,7 +693,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/binaryHardeningResults/{subscriptionId}/{resourceGroupName}/{workspaceName}/{firmwareId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/binaryHardeningResults": {
       "get": {
         "operationId": "BinaryHardening_ListByFirmware",
         "tags": [
@@ -702,23 +702,13 @@
         "description": "Lists binary hardening analysis results of a firmware.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -738,7 +728,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PagedBinaryHardeningResource"
             }
@@ -746,13 +736,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -769,7 +753,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoCertificates/{subscriptionId}/{resourceGroupName}/{workspaceName}/{firmwareId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoCertificates": {
       "get": {
         "operationId": "CryptoCertificates_ListByFirmware",
         "tags": [
@@ -778,23 +762,13 @@
         "description": "Lists cryptographic certificate analysis results found in a firmware.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -814,7 +788,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PagedCryptoCertificateResource"
             }
@@ -822,13 +796,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -845,7 +813,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoKeys/{subscriptionId}/{resourceGroupName}/{workspaceName}/{firmwareId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoKeys": {
       "get": {
         "operationId": "CryptoKeys_ListByFirmware",
         "tags": [
@@ -854,23 +822,13 @@
         "description": "Lists cryptographic key analysis results found in a firmware.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -890,7 +848,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PagedCryptoKeyResource"
             }
@@ -898,13 +856,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -921,7 +873,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cves/{subscriptionId}/{resourceGroupName}/{workspaceName}/{firmwareId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cves": {
       "get": {
         "operationId": "Cves_ListByFirmware",
         "tags": [
@@ -930,23 +882,13 @@
         "description": "Lists CVE analysis results of a firmware.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -966,7 +908,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PagedCveResource"
             }
@@ -974,13 +916,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1111,7 +1047,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/passwordHashes/{subscriptionId}/{resourceGroupName}/{workspaceName}/{firmwareId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/passwordHashes": {
       "get": {
         "operationId": "PasswordHashes_ListByFirmware",
         "tags": [
@@ -1120,23 +1056,13 @@
         "description": "Lists password hash analysis results of a firmware.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1156,7 +1082,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PagedPasswordHashResource"
             }
@@ -1164,13 +1090,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
