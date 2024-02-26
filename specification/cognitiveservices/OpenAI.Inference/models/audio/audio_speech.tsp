@@ -62,6 +62,15 @@ model SpeechGenerationOptions {
   @minValue(0.25)
   @maxValue(4.0)
   speed?: float32 = 1.0;
+
+  @doc("""
+  The model to use for this text-to-speech request.
+  """)
+  // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
+  // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
+  // clients if operation parameters are used and populated into the request body on an as-needed basis.
+  @projectedName("csharp", "DeploymentName")
+  `model`?: string;
 }
 
 @doc("A representation of a response for a text-to-speech operation.")

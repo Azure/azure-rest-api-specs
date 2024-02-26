@@ -5,7 +5,9 @@
     "endpoint": "{endpoint}",
     "api-version": "2024-02-15-preview",
     "deploymentId": "<deployment-id>",
-    "body": "---multipart-boundary\nContent-Disposition: form-data; name=\"file\"; filename=\"file.wav\"\nContent-Type: application/octet-stream\n\nRIFF..audio.data.omitted\n---multipart-boundary--"
+    "body": {
+      "file": "---multipart-boundary\nContent-Disposition: form-data; name=\"file\"; filename=\"file.wav\"\nContent-Type: application/octet-stream\n\nRIFF..audio.data.omitted\n---multipart-boundary--"
+    }
   },
   "responses": {
     "200": {
