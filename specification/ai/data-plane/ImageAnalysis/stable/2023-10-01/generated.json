@@ -49,7 +49,7 @@
   "paths": {
     "/imageanalysis:analyze": {
       "post": {
-        "operationId": "AnalyzeFromBuffer",
+        "operationId": "AnalyzeFromImageData",
         "description": "Performs a single Image Analysis operation",
         "consumes": [
           "application/octet-stream"
@@ -124,7 +124,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "The desired language for result generation (a two-letter language code).\nIf this option is not specified, the default value 'en' is used (English).\nSee https://aka.ms/cv-languages for a list of supported languages.\nAt the moment, only tags can be generated in none-English languages.",
+            "description": "The desired language for result generation (a two-letter language code).\nIf this option is not specified, the default value 'en' is used (English).\nSee https://aka.ms/cv-languages for a list of supported languages.",
             "required": false,
             "type": "string",
             "default": "en",
@@ -196,8 +196,8 @@
           }
         },
         "x-ms-examples": {
-          "AnalyzeFromBuffer": {
-            "$ref": "./examples/AnalyzeFromBuffer_MaximumSet.json"
+          "AnalyzeFromImageData": {
+            "$ref": "./examples/AnalyzeFromImageData_MaximumSet.json"
           }
         }
       }
@@ -278,7 +278,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "The desired language for result generation (a two-letter language code).\nIf this option is not specified, the default value 'en' is used (English).\nSee https://aka.ms/cv-languages for a list of supported languages.\nAt the moment, only tags can be generated in none-English languages.",
+            "description": "The desired language for result generation (a two-letter language code).\nIf this option is not specified, the default value 'en' is used (English).\nSee https://aka.ms/cv-languages for a list of supported languages.",
             "required": false,
             "type": "string",
             "default": "en",
