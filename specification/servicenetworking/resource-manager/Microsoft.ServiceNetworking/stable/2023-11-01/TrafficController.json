@@ -67,7 +67,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -106,7 +106,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficControllerListResult"
             }
@@ -148,7 +148,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficControllerListResult"
             }
@@ -198,7 +198,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficController"
             }
@@ -323,7 +323,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficController"
             }
@@ -385,7 +385,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -433,7 +433,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssociationListResult"
             }
@@ -491,7 +491,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Association"
             }
@@ -632,7 +632,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Association"
             }
@@ -702,7 +702,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -750,7 +750,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FrontendListResult"
             }
@@ -808,7 +808,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Frontend"
             }
@@ -949,7 +949,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Frontend"
             }
@@ -1019,7 +1019,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1251,7 +1251,37 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          }
+        ]
       }
     },
     "ResourceId": {
