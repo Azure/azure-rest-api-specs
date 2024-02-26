@@ -42,7 +42,7 @@ interface SAPDiscoverySites {
   get is ArmResourceRead<SAPDiscoverySite>;
 
   /**
-   * Creates a discovery site for SAP Migration.
+   * Creates a discovery site resource for SAP Migration. This resource will be used to run system discovery and assessment with Azure Migrate.
    */
   create is ArmResourceCreateOrReplaceAsync<SAPDiscoverySite>;
 
@@ -68,7 +68,7 @@ interface SAPDiscoverySites {
   listBySubscription is ArmListBySubscription<SAPDiscoverySite>;
 
   /**
-   * Import a SAP Migration discovery site resource and it's child resources, that is the SAP instances and Server instances.
+   * Import your SAP systems' inventory using the [Discovery template](https://go.microsoft.com/fwlink/?linkid=2249111) into your SAP Migration discovery site resource and it's child resources, the SAP instances and Server instances.
    */
   importEntities is ArmResourceActionAsync<
     SAPDiscoverySite,
