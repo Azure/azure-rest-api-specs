@@ -3580,6 +3580,33 @@
         }
       }
     },
+    "HealthcareFhirResourceBaseEventData": {
+      "type": "object",
+      "description": "Base Event for Healthcare Fhir Resource",
+      "properties": {
+        "resourceFhirAccount": {
+          "type": "string",
+          "description": "Domain name of FHIR account for this resource.",
+          "x-ms-client-name": "FhirServiceHostName"
+        },
+        "resourceFhirId": {
+          "type": "string",
+          "description": "Id of HL7 FHIR resource.",
+          "x-ms-client-name": "FhirResourceId"
+        },
+        "resourceVersionId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
+          "x-ms-client-name": "FhirResourceVersionId"
+        },
+        "resourceType": {
+          "$ref": "#/definitions/HealthcareFhirResourceType",
+          "description": "Type of HL7 FHIR resource.",
+          "x-ms-client-name": "FhirResourceType"
+        }
+      }
+    },
     "HealthcareFhirResourceCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.",

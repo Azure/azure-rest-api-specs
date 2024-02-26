@@ -16,12 +16,10 @@ model ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData
 /** Describes the schema of the common properties across all ARN system topic events */
 model ResourceNotificationsResourceUpdatedEventData {
   /** resourceInfo details for update event */
-  @encodedName("application/json", "resourceInfo")
-  resourceDetails?: ResourceNotificationsResourceUpdatedDetails;
+  resourceInfo?: ResourceNotificationsResourceUpdatedDetails;
 
   /** details about operational info */
-  @encodedName("application/json", "operationalInfo")
-  operationalDetails?: ResourceNotificationsOperationalDetails;
+  operationalInfo?: ResourceNotificationsOperationalDetails;
 
   /** api version of the resource properties bag */
   apiVersion?: string;
@@ -91,12 +89,10 @@ delete events
 */
 model ResourceNotificationsResourceDeletedEventData {
   /** resourceInfo details for delete event */
-  @encodedName("application/json", "resourceInfo")
-  resourceDetails?: ResourceNotificationsResourceDeletedDetails;
+  resourceInfo?: ResourceNotificationsResourceDeletedDetails;
 
   /** details about operational info */
-  @encodedName("application/json", "operationalInfo")
-  operationalDetails?: ResourceNotificationsOperationalDetails;
+  operationalInfo?: ResourceNotificationsOperationalDetails;
 }
 
 /**

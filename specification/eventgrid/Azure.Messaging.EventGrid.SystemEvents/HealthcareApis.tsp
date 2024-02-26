@@ -565,25 +565,18 @@ namespace Microsoft.EventGrid.SystemEvents {
     "VisionPrescription",
   }
 
-  alias HealthcareFhirResourceBaseEventData = {
+  /** Base Event for Healthcare Fhir Resource */
+  model HealthcareFhirResourceBaseEventData {
     /** Domain name of FHIR account for this resource. */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after swagger"
-    @encodedName("application/json", "resourceFhirAccount")
-    FhirServiceHostName?: string;
+    resourceFhirAccount?: string;
 
     /** Id of HL7 FHIR resource. */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after swagger"
-    @encodedName("application/json", "resourceFhirId")
-    FhirResourceId?: string;
+    resourceFhirId?: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after swagger"
-    @encodedName("application/json", "resourceVersionId")
-    FhirResourceVersionId?: int64;
+    resourceVersionId?: int64;
 
     /** Type of HL7 FHIR resource. */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after swagger"
-    @encodedName("application/json", "resourceType")
-    FhirResourceType?: HealthcareFhirResourceType;
+    resourceType?: HealthcareFhirResourceType;
   };
 }
