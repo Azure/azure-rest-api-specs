@@ -22,29 +22,20 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the orbital.
+These are the global settings for the orbital digital ground.
 
 ```yaml
 openapi-type: arm
-tag: package-2022-11-01
+tag: package-2024-03-01
 ```
 
-### Tag: package-2022-11-01
+### Tag: package-2024-03-01
 
-These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-03-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11-01'
+```yaml $(tag) == 'package-2024-03-01'
 input-file:
-  - Microsoft.Orbital/stable/2022-11-01/orbital.json
-```
-
-### Tag: package-2022-03-01
-
-These settings apply only when `--tag=package-2022-03-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-03-01'
-input-file:
-  - Microsoft.Orbital/stable/2022-03-01/orbital.json
+  - Microsoft.Orbital/aodg/preview/2024-03-01/aodg.json
 ```
 
 ---
@@ -66,22 +57,3 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
-## Az
-
-See configuration in [readme.az.md](./readme.az.md)
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)
