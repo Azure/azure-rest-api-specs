@@ -30,7 +30,7 @@ model AzureMachineLearningIndexChatExtensionParameters {
 
   @doc("The resource ID of the Azure Machine Learning project.")
   @projectedName("csharp", "ProjectResourceId")
-  @projectedName("json", "project_resource_id")
+  @encodedName("application/json", "project_resource_id")
   projectResourceId: string;
 
   @doc("The Azure Machine Learning vector index name.")

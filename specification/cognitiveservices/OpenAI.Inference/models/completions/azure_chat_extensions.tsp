@@ -1,7 +1,7 @@
 import "@typespec/versioning";
 import "./chat_completions.tsp";
 import "./chat_messages.tsp";
-import "./extensions/oyd/azure_cognitive_search_options.tsp";
+import "./extensions/oyd/azure_search_options.tsp";
 import "./extensions/oyd/azure_machinelearning_index_options.tsp";
 import "./extensions/oyd/azure_cosmosdb_options.tsp";
 import "./extensions/oyd/elasticsearch_options.tsp";
@@ -18,7 +18,7 @@ using TypeSpec.Versioning;
   The use of this configuration is compatible only with Azure OpenAI.
 """)
 enum AzureChatExtensionType {
-  @doc("Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension.")
+  @doc("Represents the use of Azure AI Search as an Azure OpenAI chat extension.")
   azureSearch: "azure_search",
 
   @doc("Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension.")

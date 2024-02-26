@@ -39,7 +39,7 @@ model EmbeddingsOptions {
 
   @doc("When using Azure OpenAI, specifies the input type to use for embedding search.")
   @added(ServiceApiVersions.v2024_02_15_Preview)
-  @projectedName("json", "input_type")
+  @encodedName("application/json", "input_type")
   inputType?: string;
 }
 

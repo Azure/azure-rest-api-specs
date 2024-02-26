@@ -32,20 +32,20 @@ model ElasticsearchChatExtensionParameters {
   endpoint: url;
 
   @doc("The index name of Elasticsearch®.")
-  @projectedName("json", "index_name")
+  @encodedName("application/json", "index_name")
   indexName: string;
 
   @doc("The index field mapping options of Elasticsearch®.")
   @projectedName("csharp", "FieldMappingOptions")
-  @projectedName("json", "fields_mapping")
+  @encodedName("application/json", "fields_mapping")
   fieldsMapping?: ElasticsearchIndexFieldMappingOptions;
 
   @doc("The query type of Elasticsearch®.")
-  @projectedName("json", "query_type")
+  @encodedName("application/json", "query_type")
   queryType?: ElasticsearchQueryType;
 
   @doc("The embedding dependency for vector search.")
-  @projectedName("json", "embedding_dependency")
+  @encodedName("application/json", "embedding_dependency")
   embeddingDependency?: OnYourDataVectorizationSource;
 }
 
@@ -54,32 +54,32 @@ model ElasticsearchChatExtensionParameters {
 model ElasticsearchIndexFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
   @projectedName("csharp", "TitleFieldName")
-  @projectedName("json", "title_field")
+  @encodedName("application/json", "title_field")
   titleField?: string;
 
   @doc("The name of the index field to use as a URL.")
   @projectedName("csharp", "UrlFieldName")
-  @projectedName("json", "url_field")
+  @encodedName("application/json", "url_field")
   urlField?: string;
 
   @doc("The name of the index field to use as a filepath.")
   @projectedName("csharp", "FilepathFieldName")
-  @projectedName("json", "filepath_field")
+  @encodedName("application/json", "filepath_field")
   filepathField?: string;
 
   @doc("The names of index fields that should be treated as content.")
   @projectedName("csharp", "ContentFieldNames")
-  @projectedName("json", "content_fields")
+  @encodedName("application/json", "content_fields")
   contentFields?: string[];
 
   @doc("The separator pattern that content fields should use.")
   @projectedName("csharp", "ContentFieldSeparator")
-  @projectedName("json", "content_fields_separator")
+  @encodedName("application/json", "content_fields_separator")
   contentFieldsSeparator?: string;
 
   @doc("The names of fields that represent vector data.")
   @projectedName("csharp", "VectorFieldNames")
-  @projectedName("json", "vector_fields")
+  @encodedName("application/json", "vector_fields")
   vectorFields?: string[];
 }
 

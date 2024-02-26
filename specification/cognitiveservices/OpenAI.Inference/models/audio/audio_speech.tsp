@@ -55,7 +55,7 @@ model SpeechGenerationOptions {
   voice: SpeechVoice;
 
   @doc("The audio output format for the spoken text. By default, the MP3 format will be used.")
-  @projectedName("json", "response_format")
+  @encodedName("application/json", "response_format")
   responseFormat?: SpeechGenerationResponseFormat = SpeechGenerationResponseFormat.mp3;
 
   @doc("The speed of speech for generated audio. Values are valid in the range from 0.25 to 4.0, with 1.0 the default and higher values corresponding to faster speech.")

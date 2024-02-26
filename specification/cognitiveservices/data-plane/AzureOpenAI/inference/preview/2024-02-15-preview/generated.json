@@ -1112,7 +1112,7 @@
           {
             "name": "azureSearch",
             "value": "azure_search",
-            "description": "Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension."
+            "description": "Represents the use of Azure AI Search as an Azure OpenAI chat extension."
           },
           {
             "name": "azureMachineLearningIndex",
@@ -2558,6 +2558,10 @@
           "format": "int32",
           "description": "A value that controls the emission of log probabilities for the provided number of most likely\ntokens within a completions response."
         },
+        "suffix": {
+          "type": "string",
+          "description": "The suffix that comes after a completion of inserted text"
+        },
         "echo": {
           "type": "boolean",
           "description": "A value specifying whether completions responses should include input prompts as prefixes to\ntheir generated output."
@@ -3142,6 +3146,29 @@
         "name"
       ]
     },
+    "ImageGenerationContentFilterResults": {
+      "type": "object",
+      "description": "Describes the content filtering result for the image generation request.",
+      "properties": {
+        "sexual": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including\n those portrayed as an assault or a forced sexual violent act against one’s will,\n prostitution, pornography, and abuse."
+        },
+        "violence": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or\nkill someone or something; describes weapons, etc."
+        },
+        "hate": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language\nwith reference to a person or identity group on the basis of certain differentiating\nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+        },
+        "self_harm": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
+          "x-ms-client-name": "selfHarm"
+        }
+      }
+    },
     "ImageGenerationData": {
       "type": "object",
       "description": "A representation of a single generated image, provided as either base64-encoded data or as a URL from which the image\nmay be retrieved.",
@@ -3156,10 +3183,20 @@
           "description": "The complete data for an image, represented as a base64-encoded string.",
           "x-ms-client-name": "base64Data"
         },
+        "content_filter_results": {
+          "$ref": "#/definitions/ImageGenerationContentFilterResults",
+          "description": "Information about the content filtering results.",
+          "x-ms-client-name": "contentFilterResults"
+        },
         "revised_prompt": {
           "type": "string",
           "description": "The final prompt used by the model to generate the image.\nOnly provided with dall-3-models and only when revisions were made to the prompt.",
           "x-ms-client-name": "revisedPrompt"
+        },
+        "prompt_filter_results": {
+          "$ref": "#/definitions/ImageGenerationPromptFilterResult",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if\nit has been detected, as well as the severity level (very_low, low, medium, high-scale\nthat determines the intensity and risk level of harmful content) and if it has been\nfiltered or not. Information about jailbreak content and profanity, if it has been detected,\nand if it has been filtered or not. And information about customer block list, if it has\nbeen filtered and its id.",
+          "x-ms-client-name": "promptFilterResults"
         }
       }
     },
@@ -3210,6 +3247,37 @@
       "required": [
         "prompt"
       ]
+    },
+    "ImageGenerationPromptFilterResult": {
+      "type": "object",
+      "description": "Describes the content filtering results for the prompt of a image generation request.",
+      "properties": {
+        "sexual": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including\n those portrayed as an assault or a forced sexual violent act against one’s will,\n prostitution, pornography, and abuse."
+        },
+        "violence": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or\nkill someone or something; describes weapons, etc."
+        },
+        "hate": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language\nwith reference to a person or identity group on the basis of certain differentiating\nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+        },
+        "self_harm": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
+          "x-ms-client-name": "selfHarm"
+        },
+        "profanity": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Describes whether profanity was detected."
+        },
+        "jailbreak": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Whether a jailbreak attempt was detected in the prompt."
+        }
+      }
     },
     "ImageGenerationQuality": {
       "type": "string",
