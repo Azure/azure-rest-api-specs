@@ -1400,7 +1400,7 @@
         "port": {
           "type": "object",
           "x-ms-format": "dfe-int",
-          "description": "The port for the connection. Type: integer."
+          "description": "The port for the connection. Type: int."
         },
         "username": {
           "type": "object",
@@ -1425,17 +1425,17 @@
         "pooling": {
           "type": "object",
           "x-ms-format": "dfe-bool",
-          "description": "Whether connection pooling should be used. Type: string."
+          "description": "Whether connection pooling should be used. Type: bool."
         },
         "connectionTimeout": {
           "type": "object",
           "x-ms-format": "dfe-int",
-          "description": "The time to wait (in seconds) while trying to establish a connection before terminating the attempt and generating an error. Type: string."
+          "description": "The time to wait (in seconds) while trying to establish a connection before terminating the attempt and generating an error. Type: int."
         },
         "commandTimeout": {
           "type": "object",
           "x-ms-format": "dfe-int",
-          "description": "The time to wait (in seconds) while trying to execute a command before terminating the attempt and generating an error. Set to zero for infinity. Type: string."
+          "description": "The time to wait (in seconds) while trying to execute a command before terminating the attempt and generating an error. Set to zero for infinity. Type: int."
         },
         "trustServerCertificate": {
           "type": "object",
@@ -1449,12 +1449,12 @@
         },
         "sslKey": {
           "type": "object",
-          "x-ms-format": "dfe-bool",
+          "x-ms-format": "dfe-string",
           "description": "Location of a client key for a client certificate to be sent to the server."
         },
         "sslPassword": {
           "type": "object",
-          "x-ms-format": "dfe-bool",
+          "x-ms-format": "dfe-string",
           "description": "Password for a key for a client certificate."
         },
         "readBufferSize": {
