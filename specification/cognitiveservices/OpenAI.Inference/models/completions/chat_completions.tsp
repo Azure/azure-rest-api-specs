@@ -58,7 +58,6 @@ model ChatCompletionsOptions {
     the behavior of the assistant, followed by alternating messages between the User and
     Assistant roles.
     """)
-  @projectedName("json", "messages")
   messages: ChatRequestMessage[];
 
   @doc("A list of functions the model may generate JSON inputs for.")
@@ -72,13 +71,13 @@ model ChatCompletionsOptions {
      Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.
      "none" is the default when no functions are present. "auto" is the default if functions are present.
     """)
-  @projectedName("json", "function_call")
+  @encodedName("application/json", "function_call")
   @added(ServiceApiVersions.v2023_07_01_Preview)
   @removed(ServiceApiVersions.v2023_12_01_Preview)
   functionCall?: FunctionCallConfig;
 
   @doc("The maximum number of tokens to generate.")
-  @projectedName("json", "max_tokens")
+  @encodedName("application/json", "max_tokens")
   maxTokens?: int32;
 
   @doc("""
@@ -88,7 +87,6 @@ model ChatCompletionsOptions {
     It is not recommended to modify temperature and top_p for the same completions request as the
     interaction of these two settings is difficult to predict.
     """)
-  @projectedName("json", "temperature")
   temperature?: float32;
 
   @doc("""
@@ -99,7 +97,7 @@ model ChatCompletionsOptions {
     It is not recommended to modify temperature and top_p for the same completions request as the
     interaction of these two settings is difficult to predict.
     """)
-  @projectedName("json", "top_p")
+  @encodedName("application/json", "top_p")
   @projectedName("csharp", "NucleusSamplingFactor")
   topP?: float32;
 
@@ -110,7 +108,7 @@ model ChatCompletionsOptions {
     a full ban or exclusive selection of a token, respectively. The exact behavior of a given bias
     score varies by model.
     """)
-  @projectedName("json", "logit_bias")
+  @encodedName("application/json", "logit_bias")
   @projectedName("csharp", "TokenSelectionBiases")
   logitBias?: Record<int32>;
 
@@ -118,7 +116,6 @@ model ChatCompletionsOptions {
     An identifier for the caller or end user of the operation. This may be used for tracking
     or rate-limiting purposes.
     """)
-  @projectedName("json", "user")
   user?: string;
 
   @doc("""
@@ -127,14 +124,12 @@ model ChatCompletionsOptions {
     Because this setting can generate many completions, it may quickly consume your token quota.
     Use carefully and ensure reasonable settings for max_tokens and stop.
     """)
-  @projectedName("json", "n")
   @projectedName("csharp", "ChoiceCount")
   n?: int32;
 
   @doc("""
     A collection of textual sequences that will end completions generation.
     """)
-  @projectedName("json", "stop")
   @projectedName("csharp", "StopSequences")
   stop?: string[];
 
@@ -144,7 +139,7 @@ model ChatCompletionsOptions {
     Positive values will make tokens less likely to appear when they already exist and increase the
     model's likelihood to output new topics.
     """)
-  @projectedName("json", "presence_penalty")
+  @encodedName("application/json", "presence_penalty")
   presencePenalty?: float32;
 
   @doc("""
@@ -153,13 +148,12 @@ model ChatCompletionsOptions {
     Positive values will make tokens less likely to appear as their frequency increases and
     decrease the likelihood of the model repeating the same statements verbatim.
     """)
-  @projectedName("json", "frequency_penalty")
+  @encodedName("application/json", "frequency_penalty")
   frequencyPenalty?: float32;
 
   @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)
-  @projectedName("json", "stream")
   @projectedName("csharp", "InternalShouldStreamResponse")
   stream?: boolean;
 
@@ -168,7 +162,6 @@ model ChatCompletionsOptions {
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
-  @projectedName("json", "model")
   @projectedName("csharp", "DeploymentName")
   `model`?: string;
 
@@ -182,7 +175,6 @@ model ChatCompletionsOptions {
   //        "extensions" instead of "data sources" for representing the additional configuration information. A future
   //        service API version will absorb these proposed changes and allow us to retire the extra complexity.
   @added(ServiceApiVersions.v2023_08_01_Preview)
-  @projectedName("json", "dataSources")
   @projectedName("csharp", "InternalAzureExtensionsDataSources")
   dataSources?: AzureChatExtensionConfiguration[];
 
@@ -198,7 +190,7 @@ model ChatCompletionsOptions {
   """)
   seed?: int64;
 
-  @projectedName("json", "response_format")
+  @encodedName("application/json", "response_format")
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
   responseFormat?: ChatCompletionsResponseFormat;
@@ -207,7 +199,7 @@ model ChatCompletionsOptions {
   @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
   tools?: ChatCompletionsToolDefinition[];
 
-  @projectedName("json", "tool_choice")
+  @encodedName("application/json", "tool_choice")
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("""
   If specified, the model will configure which of the provided tools it can use for the chat completions response.
@@ -223,17 +215,15 @@ Token limits and other settings may limit the number of choices generated.
 @added(ServiceApiVersions.v2023_05_15)
 model ChatChoice {
   @doc("The chat message for a given chat completions prompt.")
-  @projectedName("json", "message")
   message?: ChatResponseMessage;
 
   @doc("The ordered index associated with this chat completions choice.")
-  @projectedName("json", "index")
   index: int32;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The reason that this chat completions choice completed its generated.")
-  @projectedName("json", "finish_reason")
+  @encodedName("application/json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 
   // Note: this property is currently speculative via observation and not yet documented anywhere.
@@ -242,11 +232,10 @@ model ChatChoice {
   This structured representation replaces 'finish_reason' for some models.
   """)
   @added(ServiceApiVersions.v2023_12_01_Preview)
-  @projectedName("json", "finish_details")
+  @encodedName("application/json", "finish_details")
   finishDetails?: ChatFinishDetails;
 
   @doc("The delta message content for a streaming response.")
-  @projectedName("json", "delta")
   @projectedName("csharp", "InternalStreamingDeltaMessage")
   delta?: ChatResponseMessage;
 
@@ -256,7 +245,7 @@ model ChatChoice {
     determines the intensity and risk level of harmful content) and if it has been filtered or not.
     """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
-  @projectedName("json", "content_filter_results")
+  @encodedName("application/json", "content_filter_results")
   contentFilterResults?: ContentFilterResultsForChoice;
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
@@ -276,14 +265,12 @@ provided prompt data.
 @added(ServiceApiVersions.v2023_05_15)
 model ChatCompletions {
   @doc("A unique identifier associated with this chat completions response.")
-  @projectedName("json", "id")
   id: string;
 
   @doc("""
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
-  @projectedName("json", "created")
   @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
@@ -293,7 +280,6 @@ model ChatCompletions {
     Generally, `n` choices are generated per provided prompt with a default value of 1.
     Token limits and other settings may limit the number of choices generated.
     """)
-  @projectedName("json", "choices")
   choices: ChatChoice[];
 
   @doc("""
@@ -301,11 +287,11 @@ model ChatCompletions {
   results for different prompts may arrive at different times or in different orders.
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
-  @projectedName("json", "prompt_filter_results")
+  @encodedName("application/json", "prompt_filter_results")
   promptFilterResults?: ContentFilterResultsForPrompt[];
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
-  @projectedName("json", "system_fingerprint")
+  @encodedName("application/json", "system_fingerprint")
   @doc("""
   Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that
   might impact determinism.
@@ -315,7 +301,6 @@ model ChatCompletions {
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
     """)
-  @projectedName("json", "usage")
   usage: CompletionsUsage;
 }
 

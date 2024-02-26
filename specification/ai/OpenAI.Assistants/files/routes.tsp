@@ -63,7 +63,7 @@ op uploadFile(
 @route("/files/{fileId}")
 op deleteFile(
   @doc("The ID of the file to delete.")
-  @projectedName("json", "file_id")
+  @encodedName("application/json", "file_id")
   @path
   fileId: string,
 ): FileDeletionStatus;
@@ -78,6 +78,6 @@ op deleteFile(
 op getFile(
   @doc("The ID of the file to retrieve.")
   @path
-  @projectedName("json", "file_id")
+  @encodedName("application/json", "file_id")
   fileId: string,
 ): OpenAIFile;

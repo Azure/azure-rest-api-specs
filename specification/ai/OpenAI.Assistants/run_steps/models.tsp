@@ -17,55 +17,55 @@ model RunStep {
   @doc("The type of run step, which can be either message_creation or tool_calls.")
   type: RunStepType;
 
-  @projectedName("json", "assistant_id")
+  @encodedName("application/json", "assistant_id")
   @doc("The ID of the assistant associated with the run step.")
   assistantId: string;
 
-  @projectedName("json", "thread_id")
+  @encodedName("application/json", "thread_id")
   @doc("The ID of the thread that was run.")
   threadId: string;
 
-  @projectedName("json", "run_id")
+  @encodedName("application/json", "run_id")
   @doc("The ID of the run that this run step is a part of.")
   runId: string;
 
   @doc("The status of this run step.")
   status: RunStepStatus;
 
-  @projectedName("json", "step_details")
+  @encodedName("application/json", "step_details")
   @doc("The details for this run step.")
   stepDetails: RunStepDetails;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "last_error")
+  @encodedName("application/json", "last_error")
   @doc("If applicable, information about the last error encountered by this run step.")
   lastError: RunStepError | null;
 
-  @projectedName("json", "created_at")
+  @encodedName("application/json", "created_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "expired_at")
+  @encodedName("application/json", "expired_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this item expired.")
   expiredAt: utcDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "completed_at")
+  @encodedName("application/json", "completed_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this completed.")
   completedAt: utcDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "cancelled_at")
+  @encodedName("application/json", "cancelled_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this was cancelled.")
   cancelledAt: utcDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "failed_at")
+  @encodedName("application/json", "failed_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this failed.")
   failedAt: utcDateTime | null;
@@ -97,7 +97,7 @@ model RunStepMessageCreationDetails extends RunStepDetails {
   @doc("The object type, which is always 'message_creation'.")
   type: RunStepType.messageCreation;
 
-  @projectedName("json", "message_creation")
+  @encodedName("application/json", "message_creation")
   @doc("Information about the message creation associated with this run step.")
   messageCreation: RunStepMessageCreationReference;
 }
@@ -108,7 +108,7 @@ model RunStepToolCallDetails extends RunStepDetails {
   @doc("The object type, which is always 'tool_calls'.")
   type: RunStepType.toolCalls;
 
-  @projectedName("json", "tool_calls")
+  @encodedName("application/json", "tool_calls")
   @doc("A list of tool call details for this run step.")
   toolCalls: RunStepToolCall[];
 }
@@ -116,7 +116,7 @@ model RunStepToolCallDetails extends RunStepDetails {
 @doc("The details of a message created as a part of a run step.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepMessageCreationReference {
-  @projectedName("json", "message_id")
+  @encodedName("application/json", "message_id")
   @doc("The ID of the message created by this run step.")
   messageId: string;
 }
