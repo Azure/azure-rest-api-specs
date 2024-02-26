@@ -1,0 +1,48 @@
+{
+  "operationId": "SbomComponents_ListByFirmware",
+  "parameters": {
+    "api-version": "2024-01-10",
+    "firmwareId": "109a9886-50bf-85a8-9d75-000000000000",
+    "resourceGroupName": "FirmwareAnalysisRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceName": "default"
+  },
+  "title": "SbomComponents_ListByFirmware_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "",
+        "value": [
+          {
+            "name": "cd31ca40-6772-44f8-9180-000000000000",
+            "type": "Microsoft.IoTFirmwareDefense/workspaces/firmwares/sbomComponents",
+            "id": "/subscriptions/07aed47b-60ad-4d6e-a07a-000000000000/resourceGroups/FirmwareAnalysisRG/providers/Microsoft.IoTFirmwareDefense/workspaces/default/firmwares/109a9886-50bf-85a8-9d75-000000000000/sbomComponents/cd31ca40-6772-44f8-9180-000000000000",
+            "properties": {
+              "componentId": "busybox:1.30.1",
+              "componentName": "busybox",
+              "filePaths": [
+                "/path/to/bin/busybox"
+              ],
+              "license": "GPL-2.0-only",
+              "version": "1.30.1"
+            }
+          },
+          {
+            "name": "5924e71d-5f38-444e-8b08-000000000000",
+            "type": "Microsoft.IoTFirmwareDefense/workspaces/firmwares/sbomComponents",
+            "id": "/subscriptions/07aed47b-60ad-4d6e-a07a-000000000000/resourceGroups/FirmwareAnalysisRG/providers/Microsoft.IoTFirmwareDefense/workspaces/default/firmwares/109a9886-50bf-85a8-9d75-000000000000/sbomComponents/5924e71d-5f38-444e-8b08-000000000000",
+            "properties": {
+              "componentId": "openvpn:2.4.6",
+              "componentName": "openvpn",
+              "filePaths": [
+                "/path/to/squashfs-root/bin/openvpn"
+              ],
+              "license": "GPL-2.0",
+              "version": "2.4.6"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
