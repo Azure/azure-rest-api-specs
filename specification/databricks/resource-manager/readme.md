@@ -191,7 +191,7 @@ input-file:
 
 ### Tag: package-2023-09-15-preview
 
-These settings apply only when `--tag=package-2023-05-01` is specified on the command line.
+These settings apply only when `--tag=package-2023-09-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2023-09-15-preview'
 input-file:
