@@ -101,14 +101,17 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "operationId",
             "in": "path",
-            "description": "Operation Id",
+            "description": "Fully qualified ID for the operation status.",
             "required": true,
             "type": "string"
           }
@@ -1999,7 +2002,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Fully qualified ID for the operation status."
+          "description": "Fully qualified ID for the operation status.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -2039,6 +2043,7 @@
         }
       },
       "required": [
+        "id",
         "status"
       ]
     },
