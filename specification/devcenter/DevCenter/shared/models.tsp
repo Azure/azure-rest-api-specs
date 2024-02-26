@@ -27,9 +27,13 @@ enum OperationStatusValue {
 }
 
 @doc("The current status of an async operation")
+@resource("operationstatuses")
+@parentResource(Project)
 model OperationStatus {
   @doc("Fully qualified ID for the operation status.")
-  id?: string;
+  @key("operationId")
+  @visibility("read")
+  id: string;
 
   @doc("The operation id name")
   name?: string;
