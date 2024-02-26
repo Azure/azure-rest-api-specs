@@ -129,98 +129,35 @@ interface DevBoxes {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
-  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'start' - so the path ends with ":start"
-  // But renaming it to 'start' also makes the client method be renamed to "Start" - and we want it to be "StartDevBox". Using projectedName does not solve the problem
   @doc("Starts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start")
-  @post
-  startDevBox is Foundations.LongRunningOperation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-    },
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+  @action("start")
+  startDevBox is StandardResourceOperations.LongRunningResourceAction<
+    DevBox,
+    {},
+    OperationStatus & AcceptedResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
-  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'stop' - so the path ends with ":stop"
-  // But renaming it to 'stop' also makes the client method be renamed to "Stop" - and we want it to be "StopDevBox". Using projectedName does not solve the problem
   @doc("Stops a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:stop")
-  @post
-  stopDevBox is Foundations.LongRunningOperation<
+  @action("stop")
+  stopDevBox is StandardResourceOperations.LongRunningResourceAction<
+    DevBox,
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-
       @doc("Optional parameter to hibernate the dev box.")
       @query
       hibernate?: boolean;
     },
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+    OperationStatus & AcceptedResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
-  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'restart' - so the path ends with ":restart"
-  // But renaming it to 'restart' also makes the client method be renamed to "Restart" - and we want it to be "RestartDevBox". Using projectedName does not solve the problem
   @doc("Restarts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart")
-  @post
-  restartDevBox is Foundations.LongRunningOperation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-    },
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+  @action("restart")
+  restartDevBox is StandardResourceOperations.LongRunningResourceAction<
+    DevBox,
+    {},
+    OperationStatus & AcceptedResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
@@ -251,57 +188,19 @@ interface DevBoxes {
   @doc("Gets an action.")
   getDevBoxAction is StandardResourceOperations.ResourceRead<DevBoxAction>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
-  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'skip' - so the path ends with ":skip"
-  // But renaming it to 'skip' also makes the client method be renamed to "Skip" - and we want it to be "SkipAction". Using projectedName does not solve the problem
   @doc("Skips an occurrence of an action.")
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip")
-  @post
-  skipAction is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-
-      @doc("The name of an action that will take place on a Dev Box.")
-      @path
-      actionName: string;
-    },
-    void
+  @action("skip")
+  skipAction is StandardResourceOperations.ResourceAction<
+    DevBoxAction,
+    {},
+    NoContentResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
-  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'delay' - so the path ends with ":delay"
-  // But renaming it to 'delay' also makes the client method be renamed to "Delay" - and we want it to be "DelayAction". Using projectedName does not solve the problem
   @doc("Delays the occurrence of an action.")
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:delay")
-  @post
-  delayAction is Azure.Core.Foundations.Operation<
+  @action("delay")
+  delayAction is StandardResourceOperations.ResourceAction<
+    DevBoxAction,
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-
-      @doc("The name of an action that will take place on a Dev Box.")
-      @path
-      actionName: string;
-
       @doc("The time to delay the Dev Box action or actions until.")
       @query("until")
       delayUntil: utcDateTime;
@@ -309,26 +208,11 @@ interface DevBoxes {
     DevBoxAction
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
-  // It fits in the LongRunningResourceAction pattern, however we would have to rename the operation to 'delay' - so the path ends with ":delay"
-  // But renaming it to 'delay' also makes the client method be renamed to "Delay" - and we want it to be "DelayAllAction". Using projectedName does not solve the problem
   @doc("Delays all actions.")
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay")
-  @post
-  delayAllActions is Azure.Core.Foundations.Operation<
+  @action("delay")
+  delayAllActions is StandardResourceOperations.ResourceCollectionAction<
+    DevBoxAction,
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-
       @doc("The time to delay the Dev Box action or actions until.")
       @query("until")
       delayUntil: utcDateTime;
