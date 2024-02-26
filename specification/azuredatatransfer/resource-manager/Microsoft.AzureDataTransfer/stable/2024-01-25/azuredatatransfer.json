@@ -1653,6 +1653,10 @@
         "schema": {
           "$ref": "#/definitions/schema",
           "description": "The selected schema for this flow"
+        },
+        "messagingOptions": {
+          "$ref": "#/definitions/messagingOptions",
+          "description": "The messaging options for this flow"
         }
       },
       "description": "Properties of flow"
@@ -2321,6 +2325,25 @@
         "id"
       ],
       "description": "The resource to reference."
+    },
+    "messagingOptions": {
+      "type": "object",
+      "properties": {
+        "billingTier": {
+          "enum": [
+            "BlobTransport",
+            "Standard",
+            "Premium"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "flowBillingTier",
+            "modelAsString": true
+          },
+          "description": "Billing tier for this messaging flow"
+        }
+      },
+      "description": "The option associated with messaging flows."
     }
   },
   "parameters": {
