@@ -2033,6 +2033,9 @@
           },
           "Trigger Restore With Rehydration": {
             "$ref": "./examples/BackupInstanceOperations/TriggerRestoreWithRehydration.json"
+          },
+          "Trigger Restore With GenericRestoreDatasourceCriteria": {
+            "$ref": "./examples/BackupInstanceOperations/TriggerRestoreWithGenericParameters.json"
           }
         }
       }
@@ -6535,14 +6538,36 @@
       ],
       "properties": {
         "resourceSelectors": {
-          "description": "List of resource selectors to be backed up during restore",
+          "description": "List of resource identifiers that need to be restored",
+          "$ref": "#/definitions/ResourceListSelectionCriteria"
+        }
+      },
+      "x-ms-discriminator-value": "GenericRestoreDatasourceCriteria"
+    },
+    "ResourceListSelectionCriteria": {
+      "description": "Specifies the list of resources to be restored",
+      "type": "object",
+      "required": [
+        "objectType",
+        "resourceIdentifiers"
+      ],
+      "properties": {
+        "resourceIdentifiers": {
+          "description": "List of resource identifiers to restore from",
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "resourceNameOverrides": {
+          "description": "This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
-      "x-ms-discriminator-value": "GenericRestoreDatasourceCriteria"
+      "x-ms-discriminator-value": "ResourceListSelectionCriteria"
     },
     "JobExtendedInfo": {
       "description": "Extended Information about the job",
