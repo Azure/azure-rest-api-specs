@@ -1142,6 +1142,32 @@
         }
       }
     },
+    "IndexDetails": {
+      "type": "object",
+      "description": "The index details.",
+      "properties": {
+        "utf8": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Indicate the index when encoding is UTF-8."
+        },
+        "utf16": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Indicate the index when encoding is UTF-16."
+        },
+        "codePoint": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Indicate the index with code point format."
+        }
+      },
+      "required": [
+        "utf8",
+        "utf16",
+        "codePoint"
+      ]
+    },
     "JailbreakAnalysisResult": {
       "type": "object",
       "description": "The text jailbreak analysis response.",
@@ -1204,13 +1230,23 @@
           "type": "string",
           "description": "The missing source text."
         },
+        "offset": {
+          "$ref": "#/definitions/IndexDetails",
+          "description": "The offset when missing source text starts."
+        },
+        "length": {
+          "$ref": "#/definitions/IndexDetails",
+          "description": "The length of the missing source text."
+        },
         "reason": {
           "type": "string",
           "description": "The explanation for detected missing source, enhancing understanding.\nOnly when the 'reasoning' field in the input is set to true 'reason' field will be returned."
         }
       },
       "required": [
-        "text"
+        "text",
+        "offset",
+        "length"
       ]
     },
     "PagedTextBlocklist": {
