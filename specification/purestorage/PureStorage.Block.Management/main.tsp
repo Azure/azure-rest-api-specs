@@ -622,7 +622,7 @@ model SoftDeletion {
 @doc("Consistency Group the Volume belongs to.")
 model VolumeConsistencyGroup {
   @doc("ID for the Consistency Group the Volume belongs to.")
-  consistencyGrouplId: string;
+  consistencyGroupId: string;
 }
 
 @doc("Enum of possible Volume types.")
@@ -743,7 +743,7 @@ model Space {
   @doc("The physical space occupied by data unique to one or more snapshots. Measured in bytes.")
   snapshots: int64;
 
-  @doc("The physical space occupied by deduplicated data, meaning that the space is shared with other volumes and snapshots as a result of data deduplication. Measured in bytes.")
+  @doc("The physical space occupied by duplicated data, meaning that the space is shared with other volumes and snapshots as a result of data deduplication. Measured in bytes.")
   shared: int64;
 }
 
