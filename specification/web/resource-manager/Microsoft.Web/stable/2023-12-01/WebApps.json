@@ -8716,7 +8716,8 @@
             "in": "path",
             "description": "Site Container Name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]*$"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -8762,7 +8763,8 @@
             "in": "path",
             "description": "Site Container Name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]*$"
           },
           {
             "name": "request",
@@ -8781,8 +8783,14 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Site container was created.",
+            "schema": {
+              "$ref": "#/definitions/SiteContainer"
+            }
+          },
           "200": {
-            "description": "OK",
+            "description": "Site container was updated.",
             "schema": {
               "$ref": "#/definitions/SiteContainer"
             }
@@ -8817,7 +8825,8 @@
             "in": "path",
             "description": "Site Container Name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]*$"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -8827,8 +8836,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted site conatiner."
+          },
           "204": {
-            "description": "Site container does not exist or is deleted."
+            "description": "Site container does not exist."
           },
           "default": {
             "description": "App Service error response.",
@@ -18332,7 +18344,8 @@
             "in": "path",
             "description": "Site Container Name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]*$"
           },
           {
             "name": "slot",
@@ -18385,7 +18398,8 @@
             "in": "path",
             "description": "Site Container Name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]*$"
           },
           {
             "name": "request",
@@ -18411,8 +18425,14 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Site container was created.",
+            "schema": {
+              "$ref": "#/definitions/SiteContainer"
+            }
+          },
           "200": {
-            "description": "OK",
+            "description": "Site container was updated.",
             "schema": {
               "$ref": "#/definitions/SiteContainer"
             }
@@ -18447,7 +18467,8 @@
             "in": "path",
             "description": "Site Container Name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]*$"
           },
           {
             "name": "slot",
@@ -18464,8 +18485,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted site conatiner."
+          },
           "204": {
-            "description": "Site container does not exist or is deleted."
+            "description": "Site container does not exist."
           },
           "default": {
             "description": "App Service error response.",
@@ -28777,7 +28801,7 @@
               "type": "string"
             },
             "userName": {
-              "description": "UserName",
+              "description": "User Name",
               "type": "string"
             },
             "passwordSecret": {
