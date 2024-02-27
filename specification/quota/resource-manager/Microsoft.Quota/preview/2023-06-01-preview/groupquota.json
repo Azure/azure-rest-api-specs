@@ -137,7 +137,7 @@
             "in": "body",
             "description": "The  GroupQuotas Patch Request.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEntity"
+              "$ref": "#/definitions/GroupQuotasEntityBasePatch"
             }
           }
         ],
@@ -1841,6 +1841,41 @@
         }
       }
     },
+    "GroupQuotasEntityBasePatch": {
+      "type": "object",
+      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the GroupQuota entity.",
+          "type": "string"
+        },
+        "additionalAttributes": {
+          "description": "Additional attributes to filter/restrict the subscriptions, which can be added to the subscriptionIds.",
+          "$ref": "#/definitions/AdditionalAttributesPatch"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the operation.",
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotasEntityPatch": {
+      "type": "object",
+      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "title": "Properties",
+          "type": "object",
+          "$ref": "#/definitions/GroupQuotasEntityBasePatch"
+        }
+      }
+    },
     "GroupQuotasEntity": {
       "type": "object",
       "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
@@ -1921,6 +1956,18 @@
       "required": [
         "groupId"
       ]
+    },
+    "AdditionalAttributesPatch": {
+      "description": "Additional attribute or filter to allow subscriptions meeting the requirements to be part of the GroupQuota.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "$ref": "#/definitions/GroupingId"
+        },
+        "environment": {
+          "$ref": "#/definitions/Environment"
+        }
+      }
     },
     "GroupQuotaList": {
       "type": "object",
