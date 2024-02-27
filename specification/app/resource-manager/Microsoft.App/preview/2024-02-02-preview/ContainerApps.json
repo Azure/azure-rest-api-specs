@@ -864,6 +864,15 @@
       "description": "Container App Runtime configuration.",
       "type": "object",
       "properties": {
+        "kind": {
+          "description": "Container App language runtime kind",
+          "enum": [
+            "generic",
+            "java"
+          ],
+          "type": "string",
+          "default": "generic"
+        },
         "java": {
           "description": "Java app configuration",
           "type": "object",
