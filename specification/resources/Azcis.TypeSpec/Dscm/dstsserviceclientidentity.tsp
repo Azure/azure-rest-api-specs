@@ -83,7 +83,7 @@ model RequiredIpRange {
 model DstsServiceClientIdentityResource
   is ProxyResource<DstsServiceClientIdentityResourceProperties> {
   @doc("The name of resource.")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("dstsServiceClientIdentities") // Start with lower case. Should be plural
   @visibility("read")
