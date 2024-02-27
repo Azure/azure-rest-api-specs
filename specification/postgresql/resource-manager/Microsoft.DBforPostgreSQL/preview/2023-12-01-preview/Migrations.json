@@ -211,49 +211,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "Migrations"
-        ],
-        "operationId": "Migrations_Delete",
-        "x-ms-examples": {
-          "Migrations_Delete": {
-            "$ref": "./examples/Migrations_Delete.json"
-          }
-        },
-        "description": "Deletes a migration.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/TargetDbServerResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TargetDbServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MigrationNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "NoContent"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDbServerName}/migrations": {
@@ -388,6 +345,11 @@
           "readOnly": true,
           "description": "Current status of migration"
         },
+        "migrationInstanceResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ResourceId of the migration instance"
+        },
         "migrationMode": {
           "$ref": "#/definitions/MigrationMode",
           "description": "There are two types of migration modes Online and Offline"
@@ -398,7 +360,7 @@
         },
         "sourceType": {
           "$ref": "#/definitions/SourceType",
-          "description": "migration source server type : OnPremises, AWS, GCP, AzureVM or PostgreSQLSingleServer"
+          "description": "migration source server type : OnPremises, AWS, GCP, AzureVM, PostgreSQLSingleServer, AWS_RDS, AWS_AURORA, AWS_EC2, GCP_CloudSQL, GCP_AlloyDB, GCP_Compute, or EDB"
         },
         "sslMode": {
           "$ref": "#/definitions/SslMode",
@@ -1105,10 +1067,17 @@
         "AWS",
         "GCP",
         "AzureVM",
-        "PostgreSQLSingleServer"
+        "PostgreSQLSingleServer",
+        "AWS_RDS",
+        "AWS_AURORA",
+        "AWS_EC2",
+        "GCP_CloudSQL",
+        "GCP_AlloyDB",
+        "GCP_Compute",
+        "EDB"
       ],
       "type": "string",
-      "description": "Migration source server type : OnPremises, AWS, GCP, AzureVM or PostgreSQLSingleServer",
+      "description": "Migration source server type : OnPremises, AWS, GCP, AzureVM, PostgreSQLSingleServer, AWS_RDS, AWS_AURORA, AWS_EC2, GCP_CloudSQL, GCP_AlloyDB, GCP_Compute, or EDB",
       "x-ms-enum": {
         "name": "SourceType",
         "modelAsString": true
