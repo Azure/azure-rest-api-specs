@@ -77,44 +77,44 @@ model BinaryHardeningResult {
   /**
    * ID for the binary hardening result.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   binaryHardeningId?: string;
 
   /**
    * Binary hardening features.
    */
   @extension("x-ms-client-flatten", true)
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   features?: BinaryHardeningFeatures;
 
   /**
    * The architecture of the uploaded firmware.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   architecture?: string;
 
   /**
    * The executable path.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   filePath?: string;
 
   /**
    * The executable class to indicate 32 or 64 bit.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   class?: string;
 
   /**
    * The runpath of the uploaded firmware.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   runpath?: string;
 
   /**
    * The rpath of the uploaded firmware.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   rpath?: string;
 }
 
@@ -200,124 +200,124 @@ model CryptoCertificate {
   /**
    * ID for the certificate result.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   cryptoCertId?: string;
 
   /**
    * Name of the certificate.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   name?: string;
 
   /**
    * Subject information of the certificate.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   subject?: CryptoCertificateEntity;
 
   /**
    * Issuer information of the certificate.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   issuer?: CryptoCertificateEntity;
 
   /**
    * Issue date for the certificate.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   issuedDate?: utcDateTime;
 
   /**
    * Expiration date for the certificate.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   expirationDate?: utcDateTime;
 
   /**
    * Role of the certificate (Root CA, etc)
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   role?: string;
 
   /**
    * The signature algorithm used in the certificate.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   signatureAlgorithm?: string;
 
   /**
    * Size of the certificate's key in bits
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   keySize?: int64;
 
   /**
    * Key algorithm used in the certificate.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   keyAlgorithm?: string;
 
   /**
    * Encoding used for the certificate.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   encoding?: string;
 
   /**
    * Serial number of the certificate.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   serialNumber?: string;
 
   /**
    * Fingerprint of the certificate.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   fingerprint?: string;
 
   /**
    * List of functions the certificate can fulfill.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   usage?: string[];
 
   /**
    * List of files where this certificate was found.
    */
   @visibility("read")
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   filePaths?: string[];
 
   /**
    * A matching paired private key.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   pairedKey?: PairedKey;
 
   /**
    * Indicates if the certificate is expired.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   isExpired?: boolean;
 
   /**
    * Indicates if the certificate is self-signed.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   isSelfSigned?: boolean;
 
   /**
    * Indicates the signature algorithm used is insecure.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   isWeakSignature?: boolean;
 
   /**
    * Indicates the certificate's key size is considered too small to be secure for the key algorithm.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   isShortKeySize?: boolean;
 }
 
@@ -328,31 +328,31 @@ model CryptoCertificateEntity {
   /**
    * Common name of the certificate entity.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   commonName?: string;
 
   /**
    * Organization of the certificate entity.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   organization?: string;
 
   /**
    * The organizational unit of the certificate entity.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   organizationalUnit?: string;
 
   /**
    * Geographical state or province of the certificate entity.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   state?: string;
 
   /**
    * Country code of the certificate entity.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   country?: string;
 }
 
@@ -394,50 +394,50 @@ model CryptoKey {
   /**
    * ID for the key result.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   cryptoKeyId?: string;
 
   /**
    * Type of the key (public or private).
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   keyType?: string;
 
   /**
    * Size of the key in bits.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   keySize?: int64;
 
   /**
    * Key algorithm name.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   keyAlgorithm?: string;
 
   /**
    * Functions the key can fulfill.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   usage?: string[];
 
   /**
    * List of files where this key was found.
    */
   @visibility("read")
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   filePaths?: string[];
 
   /**
    * A matching paired key or certificate.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   pairedKey?: PairedKey;
 
   /**
    * Indicates the key size is considered too small to be secure for the algorithm.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   isShortKeySize?: boolean;
 }
 
@@ -464,19 +464,19 @@ model CveResult {
   /**
    * ID of the CVE result.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   cveId?: string;
 
   /**
    * The SBOM component for the CVE.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   component?: CveComponent;
 
   /**
    * Severity of the CVE.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   severity?: string;
 
   /**
@@ -487,25 +487,25 @@ model CveResult {
   /**
    * A single CVSS score to represent the CVE. If a V3 score is specified, then it will use the V3 score. Otherwise if the V2 score is specified it will be the V2 score.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   cvssScore?: string;
 
   /**
    * CVSS version of the CVE.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   cvssVersion?: string;
 
   /**
    * CVSS V2 score of the CVE.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   cvssV2Score?: string;
 
   /**
    * CVSS V3 score of the CVE.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   cvssV3Score?: string;
 
   /**
@@ -517,7 +517,7 @@ model CveResult {
   /**
    * The CVE description.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   description?: string;
 }
 
@@ -548,13 +548,13 @@ model CveLink {
   /**
    * The destination of the reference link.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   href?: url;
 
   /**
    * The label of the reference link.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   label?: string;
 }
 
@@ -590,7 +590,7 @@ model FirmwareProperties {
   /**
    * File size of the uploaded firmware image.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   fileSize?: int64;
 
   /**
@@ -670,43 +670,43 @@ model PasswordHash {
   /**
    * ID for password hash
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   passwordHashId?: string;
 
   /**
    * File path of the password hash
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   filePath?: string;
 
   /**
    * Salt of the password hash
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   salt?: string;
 
   /**
    * Hash of the password
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   hash?: string;
 
   /**
    * Context of password hash
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   context?: string;
 
   /**
    * User name of password hash
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   username?: string;
 
   /**
    * Algorithm of the password hash
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   algorithm?: string;
 }
 
@@ -733,7 +733,7 @@ model SbomComponent {
   /**
    * ID for the component.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   componentId?: string;
 
   /**
@@ -749,7 +749,7 @@ model SbomComponent {
   /**
    * License for the component.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   license?: string;
 
   /**
@@ -803,43 +803,43 @@ model FirmwareSummary extends SummaryResourceProperties {
   /**
    * Total extracted size of the firmware in bytes.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   extractedSize?: int64;
 
   /**
    * Firmware file size in bytes.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   fileSize?: int64;
 
   /**
    * Extracted file count.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   extractedFileCount?: int64;
 
   /**
    * Components count.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   componentCount?: int64;
 
   /**
    * Binary count
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   binaryCount?: int64;
 
   /**
    * Time used for analysis
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   analysisTimeSeconds?: int64;
 
   /**
    * The number of root file systems found.
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   rootFileSystems?: int64;
 
   /**
@@ -855,31 +855,31 @@ model CveSummary extends SummaryResourceProperties {
   /**
    * The total number of critical severity CVEs detected
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   critical?: int64;
 
   /**
    * The total number of high severity CVEs detected
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   high?: int64;
 
   /**
    * The total number of medium severity CVEs detected
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   medium?: int64;
 
   /**
    * The total number of low severity CVEs detected
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   low?: int64;
 
   /**
    * The total number of unknown severity CVEs detected
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   `unknown`?: int64;
 
   /**
@@ -900,31 +900,31 @@ model BinaryHardeningSummaryResource extends SummaryResourceProperties {
   /**
    * NX summary percentage
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   nx?: int32;
 
   /**
    * PIE summary percentage
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   pie?: int32;
 
   /**
    * RELRO summary percentage
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   relro?: int32;
 
   /**
    * Canary summary percentage
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   canary?: int32;
 
   /**
    * Stripped summary percentage
    */
-  @extension("x-ms-nullable", true)
+  @extension("x-nullable", true)
   stripped?: int32;
 
   /**

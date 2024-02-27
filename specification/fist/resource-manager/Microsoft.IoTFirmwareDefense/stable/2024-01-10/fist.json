@@ -1413,38 +1413,38 @@
         "binaryHardeningId": {
           "type": "string",
           "description": "ID for the binary hardening result.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "features": {
           "$ref": "#/definitions/BinaryHardeningFeatures",
           "description": "Binary hardening features.",
-          "x-ms-client-flatten": true,
-          "x-ms-nullable": true
+          "x-nullable": true,
+          "x-ms-client-flatten": true
         },
         "architecture": {
           "type": "string",
           "description": "The architecture of the uploaded firmware.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "filePath": {
           "type": "string",
           "description": "The executable path.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "class": {
           "type": "string",
           "description": "The executable class to indicate 32 or 64 bit.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "runpath": {
           "type": "string",
           "description": "The runpath of the uploaded firmware.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "rpath": {
           "type": "string",
           "description": "The rpath of the uploaded firmware.",
-          "x-ms-nullable": true
+          "x-nullable": true
         }
       }
     },
@@ -1461,31 +1461,31 @@
           "type": "integer",
           "format": "int32",
           "description": "NX summary percentage",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "pie": {
           "type": "integer",
           "format": "int32",
           "description": "PIE summary percentage",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "relro": {
           "type": "integer",
           "format": "int32",
           "description": "RELRO summary percentage",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "canary": {
           "type": "integer",
           "format": "int32",
           "description": "Canary summary percentage",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "stripped": {
           "type": "integer",
           "format": "int32",
           "description": "Stripped summary percentage",
-          "x-ms-nullable": true
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -1502,112 +1502,112 @@
         "cryptoCertId": {
           "type": "string",
           "description": "ID for the certificate result.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "name": {
           "type": "string",
           "description": "Name of the certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "subject": {
           "$ref": "#/definitions/CryptoCertificateEntity",
           "description": "Subject information of the certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "issuer": {
           "$ref": "#/definitions/CryptoCertificateEntity",
           "description": "Issuer information of the certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "issuedDate": {
           "type": "string",
           "format": "date-time",
           "description": "Issue date for the certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "expirationDate": {
           "type": "string",
           "format": "date-time",
           "description": "Expiration date for the certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "role": {
           "type": "string",
           "description": "Role of the certificate (Root CA, etc)",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "signatureAlgorithm": {
           "type": "string",
           "description": "The signature algorithm used in the certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "keySize": {
           "type": "integer",
           "format": "int64",
           "description": "Size of the certificate's key in bits",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "keyAlgorithm": {
           "type": "string",
           "description": "Key algorithm used in the certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "encoding": {
           "type": "string",
           "description": "Encoding used for the certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "serialNumber": {
           "type": "string",
           "description": "Serial number of the certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "fingerprint": {
           "type": "string",
           "description": "Fingerprint of the certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "usage": {
           "type": "array",
           "description": "List of functions the certificate can fulfill.",
+          "x-nullable": true,
           "items": {
             "type": "string"
-          },
-          "x-ms-nullable": true
+          }
         },
         "filePaths": {
           "type": "array",
           "description": "List of files where this certificate was found.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-nullable": true
+          "readOnly": true
         },
         "pairedKey": {
           "$ref": "#/definitions/PairedKey",
           "description": "A matching paired private key.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "isExpired": {
           "type": "boolean",
           "description": "Indicates if the certificate is expired.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "isSelfSigned": {
           "type": "boolean",
           "description": "Indicates if the certificate is self-signed.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "isWeakSignature": {
           "type": "boolean",
           "description": "Indicates the signature algorithm used is insecure.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "isShortKeySize": {
           "type": "boolean",
           "description": "Indicates the certificate's key size is considered too small to be secure for the key algorithm.",
-          "x-ms-nullable": true
+          "x-nullable": true
         }
       }
     },
@@ -1618,27 +1618,27 @@
         "commonName": {
           "type": "string",
           "description": "Common name of the certificate entity.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "organization": {
           "type": "string",
           "description": "Organization of the certificate entity.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "organizationalUnit": {
           "type": "string",
           "description": "The organizational unit of the certificate entity.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "state": {
           "type": "string",
           "description": "Geographical state or province of the certificate entity.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "country": {
           "type": "string",
           "description": "Country code of the certificate entity.",
-          "x-ms-nullable": true
+          "x-nullable": true
         }
       }
     },
@@ -1712,50 +1712,50 @@
         "cryptoKeyId": {
           "type": "string",
           "description": "ID for the key result.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "keyType": {
           "type": "string",
           "description": "Type of the key (public or private).",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "keySize": {
           "type": "integer",
           "format": "int64",
           "description": "Size of the key in bits.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "keyAlgorithm": {
           "type": "string",
           "description": "Key algorithm name.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "usage": {
           "type": "array",
           "description": "Functions the key can fulfill.",
+          "x-nullable": true,
           "items": {
             "type": "string"
-          },
-          "x-ms-nullable": true
+          }
         },
         "filePaths": {
           "type": "array",
           "description": "List of files where this key was found.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-nullable": true
+          "readOnly": true
         },
         "pairedKey": {
           "$ref": "#/definitions/PairedKey",
           "description": "A matching paired key or certificate.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "isShortKeySize": {
           "type": "boolean",
           "description": "Indicates the key size is considered too small to be secure for the algorithm.",
-          "x-ms-nullable": true
+          "x-nullable": true
         }
       }
     },
@@ -1838,12 +1838,12 @@
           "type": "string",
           "format": "uri",
           "description": "The destination of the reference link.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "label": {
           "type": "string",
           "description": "The label of the reference link.",
-          "x-ms-nullable": true
+          "x-nullable": true
         }
       }
     },
@@ -1870,17 +1870,17 @@
         "cveId": {
           "type": "string",
           "description": "ID of the CVE result.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "component": {
           "$ref": "#/definitions/CveComponent",
           "description": "The SBOM component for the CVE.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "severity": {
           "type": "string",
           "description": "Severity of the CVE.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "name": {
           "type": "string",
@@ -1889,22 +1889,22 @@
         "cvssScore": {
           "type": "string",
           "description": "A single CVSS score to represent the CVE. If a V3 score is specified, then it will use the V3 score. Otherwise if the V2 score is specified it will be the V2 score.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "cvssVersion": {
           "type": "string",
           "description": "CVSS version of the CVE.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "cvssV2Score": {
           "type": "string",
           "description": "CVSS V2 score of the CVE.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "cvssV3Score": {
           "type": "string",
           "description": "CVSS V3 score of the CVE.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "links": {
           "type": "array",
@@ -1918,7 +1918,7 @@
         "description": {
           "type": "string",
           "description": "The CVE description.",
-          "x-ms-nullable": true
+          "x-nullable": true
         }
       }
     },
@@ -1930,31 +1930,31 @@
           "type": "integer",
           "format": "int64",
           "description": "The total number of critical severity CVEs detected",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "high": {
           "type": "integer",
           "format": "int64",
           "description": "The total number of high severity CVEs detected",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "medium": {
           "type": "integer",
           "format": "int64",
           "description": "The total number of medium severity CVEs detected",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "low": {
           "type": "integer",
           "format": "int64",
           "description": "The total number of low severity CVEs detected",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "unknown": {
           "type": "integer",
           "format": "int64",
           "description": "The total number of unknown severity CVEs detected",
-          "x-ms-nullable": true
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -2029,7 +2029,7 @@
           "type": "integer",
           "format": "int64",
           "description": "File size of the uploaded firmware image.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "status": {
           "$ref": "#/definitions/Status",
@@ -2059,43 +2059,43 @@
           "type": "integer",
           "format": "int64",
           "description": "Total extracted size of the firmware in bytes.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "fileSize": {
           "type": "integer",
           "format": "int64",
           "description": "Firmware file size in bytes.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "extractedFileCount": {
           "type": "integer",
           "format": "int64",
           "description": "Extracted file count.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "componentCount": {
           "type": "integer",
           "format": "int64",
           "description": "Components count.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "binaryCount": {
           "type": "integer",
           "format": "int64",
           "description": "Binary count",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "analysisTimeSeconds": {
           "type": "integer",
           "format": "int64",
           "description": "Time used for analysis",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "rootFileSystems": {
           "type": "integer",
           "format": "int64",
           "description": "The number of root file systems found.",
-          "x-ms-nullable": true
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -2273,37 +2273,37 @@
         "passwordHashId": {
           "type": "string",
           "description": "ID for password hash",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "filePath": {
           "type": "string",
           "description": "File path of the password hash",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "salt": {
           "type": "string",
           "description": "Salt of the password hash",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "hash": {
           "type": "string",
           "description": "Hash of the password",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "context": {
           "type": "string",
           "description": "Context of password hash",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "username": {
           "type": "string",
           "description": "User name of password hash",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "algorithm": {
           "type": "string",
           "description": "Algorithm of the password hash",
-          "x-ms-nullable": true
+          "x-nullable": true
         }
       }
     },
@@ -2375,7 +2375,7 @@
         "componentId": {
           "type": "string",
           "description": "ID for the component.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "componentName": {
           "type": "string",
@@ -2388,7 +2388,7 @@
         "license": {
           "type": "string",
           "description": "License for the component.",
-          "x-ms-nullable": true
+          "x-nullable": true
         },
         "filePaths": {
           "type": "array",
