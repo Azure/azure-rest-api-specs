@@ -31,6 +31,15 @@ openapi-subtype: rpaas
 tag: package-2023-09-01
 ```
 
+### Tag: package-2024-01-01-preview
+
+These settings apply only when `--tag=package-2024-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01-01-preview'
+input-file:
+- NGINX.NGINXPLUS/preview/2024-01-01-preview/swagger.json
+```
+
 ### Tag: package-2023-09-01
 
 These settings apply only when `--tag=package-2023-09-01` is specified on the command line.

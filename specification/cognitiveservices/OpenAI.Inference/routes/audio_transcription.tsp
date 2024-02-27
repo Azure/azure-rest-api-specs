@@ -26,11 +26,11 @@ written language corresponding to the language it was spoken in.
 @actionSeparator("/")
 @action("audio/transcriptions")
 @sharedRoute
-op getAudioTranscriptionAsPlainText is Azure.Core.Foundations.ResourceOperation<
+op getAudioTranscriptionAsPlainText is Azure.Core.ResourceAction<
   Deployment,
   AudioTranscriptionOptions,  // response_format must be one of: text, srt, vtt
-  string,
-  MultipartFormDataRequestHeadersTraits
+  AudioTextResponse,
+  MultipartFormDataRequestHeadersTraits & TextPlainResponseHeadersTraits
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
