@@ -28743,6 +28743,97 @@
         }
       }
     },
+    "SiteContainer": {
+      "description": "Container of a site",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SiteContainer resource specific properties",
+          "type": "object",
+          "properties": {
+            "image": {
+              "description": "Image Name",
+              "type": "string"
+            },
+            "targetPort": {
+              "description": "Target Port",
+              "type": "string"
+            },
+            "isMain": {
+              "description": "IsMain \nSpecifies the entrypoint container of\nthe application",
+              "type": "boolean"
+            },
+            "startUpCommand": {
+              "description": "StartUp Command",
+              "type": "string"
+            },
+            "authType": {
+              "description": "Auth Type",
+              "type": "string"
+            },
+            "userName": {
+              "description": "UserName",
+              "type": "string"
+            },
+            "passwordSecret": {
+              "description": "Password Secret",
+              "type": "string"
+            },
+            "userManagedIdentityClientId": {
+              "description": "UserManagedIdentity ClientId",
+              "type": "string"
+            },
+            "type": {
+              "description": "Container Type",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "Container Metadata",
+              "type": "string"
+            },
+            "createdTime": {
+              "format": "date-time",
+              "description": "Created Time",
+              "type": "string",
+              "readOnly": true
+            },
+            "lastModifiedTime": {
+              "format": "date-time",
+              "description": "Last Modified Time",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SiteContainerCollection": {
+      "description": "Collection of site containers",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteContainer"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SiteExtensionInfo": {
       "description": "Site Extension Information.",
       "type": "object",
