@@ -109,7 +109,6 @@ npm install -g oav
 oav validate-example <openapi-spec-path>
 ```
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default).
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md) for example automatic generation.
 
@@ -121,7 +120,6 @@ npm install -g oav
 oav validate-spec <openapi-spec-path>
 ```
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default)
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
 ## `Swagger BreakingChange` and `BreakingChange(Cross-Version)`
@@ -145,7 +143,7 @@ npm install -g @azure/oad
 oad compare <old-spec-path> <new-spec-path>
 ```
 Please see [readme](https://github.com/Azure/openapi-diff/blob/main/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
+Or you can run it in [OpenAPI Hub](https://openapihub.azure-devex-tools.com/tools/diff).
 Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/main/docs) for detailed description of all oad rules.
 
 ## `Swagger LintDiff` and `Swagger Lint(RPaaS)`
