@@ -191,7 +191,12 @@ tag: pkg-2016-02-Az-pol
 ### 1) pkg-2016-02-AzStk-res
 ``` yaml $(tag) == 'pkg-2016-02-Az-res'
 input-file:
+- Microsoft.Resources/stable/2016-02-01/deployments.json
 - Microsoft.Resources/stable/2016-02-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2016-02-AzStk-lnk
@@ -253,7 +258,12 @@ tag: pkg-2018-02-Az-polD
 ### 1) pkg-2018-02-AzStk-res
 ``` yaml $(tag) == 'pkg-2018-02-Az-res'
 input-file:
+- Microsoft.Resources/stable/2018-02-01/deployments.json
 - Microsoft.Resources/stable/2018-02-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2018-02-AzStk-lnk
@@ -319,7 +329,12 @@ tag: pkg-2020-06-Az-polD
 ### 1) pkg-2020-06-AzStk-res
 ``` yaml $(tag) == 'pkg-2020-06-Az-res'
 input-file:
+- Microsoft.Resources/stable/2019-05-01/deployments.json
 - Microsoft.Resources/stable/2019-05-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2020-06-AzStk-lnk
@@ -385,7 +400,12 @@ tag: pkg-2020-10-Az-polD
 ### 1) pkg-2020-10-AzStk-res
 ``` yaml $(tag) == 'pkg-2020-10-Az-res'
 input-file:
+- Microsoft.Resources/stable/2019-05-01/deployments.json
 - Microsoft.Resources/stable/2019-05-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2020-10-AzStk-lnk
@@ -453,7 +473,12 @@ tag: pkg-2018-05-Az-polD
 ### 1) pkg-2018-05-AzStk-res
 ``` yaml $(tag) == 'pkg-2018-05-Az-res'
 input-file:
+- Microsoft.Resources/stable/2018-05-01/deployments.json
 - Microsoft.Resources/stable/2018-05-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2018-05-AzStk-lnk
@@ -521,7 +546,12 @@ tag: pkg-2019-05-Az-polD
 ### 1) pkg-2019-05-AzStk-res
 ``` yaml $(tag) == 'pkg-2019-05-Az-res'
 input-file:
+- Microsoft.Resources/stable/2019-05-01/deployments.json
 - Microsoft.Resources/stable/2019-05-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2019-05-AzStk-lnk
@@ -589,7 +619,12 @@ tag: pkg-2019-0510-Az-polD
 ### 1) pkg-2019-0510-AzStk-res
 ``` yaml $(tag) == 'pkg-2019-0510-Az-res'
 input-file:
+- Microsoft.Resources/stable/2019-05-10/deployments.json
 - Microsoft.Resources/stable/2019-05-10/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2019-0510-AzStk-lnk
@@ -657,7 +692,12 @@ tag: pkg-2019-07-Az-polD
 ### 1) pkg-2019-07-AzStk-res
 ``` yaml $(tag) == 'pkg-2019-07-Az-res'
 input-file:
+- Microsoft.Resources/stable/2019-07-01/deployments.json
 - Microsoft.Resources/stable/2019-07-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2019-07-AzStk-lnk
@@ -725,7 +765,12 @@ tag: pkg-2019-08-Az-polD
 ### 1) pkg-2019-08-AzStk-res
 ``` yaml $(tag) == 'pkg-2019-08-Az-res'
 input-file:
+- Microsoft.Resources/stable/2019-08-01/deployments.json
 - Microsoft.Resources/stable/2019-08-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2019-08-AzStk-lnk
@@ -793,7 +838,12 @@ tag: pkg-2019-10-Az-polD
 ### 1) pkg-2019-10-AzStk-res
 ``` yaml $(tag) == 'pkg-2019-10-Az-res'
 input-file:
+- Microsoft.Resources/stable/2019-10-01/deployments.json
 - Microsoft.Resources/stable/2019-10-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2019-10-AzStk-lnk
