@@ -27,7 +27,6 @@ using Azure.Core;
     endpoint: url,
   }
 )
-@versioned(Azure.Storage.Blob.Versions)
 namespace Azure.Storage.Blob;
 
 @doc("The Azure.Storage.Blob service versions.")

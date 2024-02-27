@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.BlobStorage;
 
@@ -21,10 +23,10 @@ model KeyInfo {
 @doc("A user delegation key.")
 model UserDelegationKey {
   @doc("The Azure Active Directory object ID in GUID format.")
-  SignedOid: string;
+  SignedOid: uuid;
 
   @doc("The Azure Active Directory tenant ID in GUID format.")
-  SignedTid: string;
+  SignedTid: uuid;
 
   @doc("The date-time the key is active.")
   SignedStart: string;
@@ -95,10 +97,10 @@ enum LeaseStatus {
 @doc("Represents an access policy.")
 model AccessPolicy {
   @doc("The date-time the policy is active.")
-  Start: string;
+  Start: utcDateTime;
   
   @doc("The date-time the policy expires.")
-  Expiry: string;
+  Expiry: utcDateTime;
   
   @doc("The permissions for acl the policy.")
   Permission: string;
@@ -170,10 +172,10 @@ model BlobItem {
   Properties: BlobProperties;
 
   @doc("The metadata of the blob.")
-  Metadata?: BlogMetadata;
+  Metadata?: BlobMetadata;
 
   @doc("The tags of the blob.")
-  Tags?: BlobTags;
+  Tags?: BlobTag[];
 
   @doc("The object replication metadata of the blob.")
   ObjectReplicationMetadata?: ObjectReplicationMetadata;
@@ -185,10 +187,12 @@ model BlobItem {
 @doc("The properties of a blob.")
 model BlobProperties {
   @doc("The date-time the blob was created in RFC1123 format.")
-  `Creation-Time`?: DateTimeKnownEncoding.rfc7231;
+  @encode("date-time-rfc1123")
+  `Creation-Time`?: utcDateTime;
 
   @doc("The date-time the blob was last modified in RFC1123 format.")
-  `Last-Modified`: DateTimeKnownEncoding.rfc7231;
+  @encode("date-time-rfc1123")
+  `Last-Modified`: utcDateTime;
 
   @doc("The blog ETag.")
   ETag: string;
@@ -218,7 +222,7 @@ model BlobProperties {
   `x-ms-blob-sequence-number`?: int64;
 
   @doc("The blob type.")
-  `Blob-Type`: "BlockBlob" | "PageBlob" | "AppendBlob";
+  BlobType?: BlobType;
 
   @doc("The lease status of the blob.")
   LeaseStatus?: LeaseStatus;
@@ -242,7 +246,8 @@ model BlobProperties {
   CopyProgress?: string;
 
   @doc("The copy completion time of the blob.")
-  CopyCompletionTime?: DateTimeKnownEncoding.rfc7231;
+  @encode("date-time-rfc1123")
+  CopyCompletionTime?: utcDateTime;
 
   @doc("The copy status description of the blob.")
   CopyStatusDescription?: string;
@@ -257,7 +262,7 @@ model BlobProperties {
   DestinationSnapshot?: string;
 
   @doc("The time the blob was deleted.")
-  DeletedTime?: DateTimeKnownEncoding.rfc7231;
+  DeletedTime?: utcDateTime;
 
   @doc("The remaining retention days of the blob.")
   RemainingRetentionDays?: int32;
@@ -275,23 +280,81 @@ model BlobProperties {
   EncryptionScope?: string;
 
   @doc("The access tier change time of the blob.")
-  AccessTierChangeTime?: DateTimeKnownEncoding.rfc7231;
+  @encode("date-time-rfc1123")
+  AccessTierChangeTime?: utcDateTime;
 
   @doc("The number of tags for the blob.")
   TagCount?: int32;
 
+  @clientName("ExpiresOn")
   @doc("The expire time of the blob.")
-  `Expiry-Time`?: DateTimeKnownEncoding.rfc7231;
+  @encode("date-time-rfc1123")
+  `Expiry-Time`?: utcDateTime;
+
+  @clientName("IsSealed")
+  @doc("Whether the blob is sealed.")
+  Sealed?: boolean;
+
+  @doc("The rehydrate priority of the blob.")
+  RehydratePriority?: RehydratePriority;
+
+  @doc("The last access time of the blob.")
+  @encode("date-time-rfc1123")
+  LastAccessTime?: utcDateTime;
+
+  @clientName("ImmutabilityPolicyExpiresOn")
+  @doc("The immutability policy until time of the blob.")
+  @encode("date-time-rfc1123")
+  ImmutabilityPolicyUntilDate?: utcDateTime;
+
+  @doc("The immutability policy mode of the blob.")
+  ImmutabilityPolicyMode?: BlobImmutabilityPolicyMode;
+
+  @doc("Whether the blob is under legal hold.")
+  LegalHold?: boolean;
 }
 
-model BlogMetadata {
-
+@doc("The immutability policy mode.")
+enum BlobImmutabilityPolicyMode {
+  @doc("The immutability policy is mutable.")
+  Mutable,
+  @doc("The immutability policy is locked.")
+  Locked,
+  @doc("The immutability policy is unlocked.")
+  Unlocked
 }
 
-model BlobTags {
-
+@doc("The blob type.")
+enum BlobType {
+  @doc("The blob is a block blob.")
+  BlockBlob,
+  @doc("The blob is a page blob.")
+  PageBlob,
+  @doc("The blob is an append blob.")
+  AppendBlob
 }
 
-model ObjectReplicationMetadata {
-
+@doc("The rehydrate priority.")
+enum RehydratePriority {
+  @doc("The rehydrate priority is high.")
+  High,
+  @doc("The rehydrate priority is standard.")
+  Standard
 }
+
+@doc("The blob metadata.")
+model BlobMetadata is Record<string> {
+  // @xml.attribute(true)
+  Encrypted: string;
+}
+
+@doc("The blob tags.")
+model BlobTag {
+  @doc("The key of the tag.")
+  Key: string;
+  @doc("The value of the tag.")
+  Value: string;
+}
+
+@doc("The object replication metadata.")
+model ObjectReplicationMetadata is Record<string>;
