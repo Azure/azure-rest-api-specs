@@ -921,28 +921,13 @@ model DataProductProperties {
   provisioningState?: ProvisioningState;
 
   @added(Versions.v2023_11_15)
-  @removed(Versions.v2024_04_01_preview)
   @doc("Data product publisher name.")
   @visibility("create", "read")
-  @renamedFrom(Versions.v2024_04_01_preview, "publisher")
-  oldPublisher: string;
-
-  @added(Versions.v2024_04_01_preview)
-  @doc("Data product publisher name.")
-  @visibility("read")
   publisher: string;
 
   @added(Versions.v2023_11_15)
-  @removed(Versions.v2024_04_01_preview)
   @doc("Product name of data product.")
   @visibility("create", "read")
-  @renamedFrom(Versions.v2024_04_01_preview, "product")
-  oldProduct: string;
-
-  @added(Versions.v2024_04_01_preview)
-  @doc("Product name of data product.")
-  @visibility("read")
-  @renamedFrom(Versions.v2024_04_01_preview, "product")
   product: string;
 
   @doc("Major version of data product.")
@@ -1063,6 +1048,7 @@ model DataProductProperties {
   @removed(Versions.v2024_04_01_preview)
   currentMinorVersion?: string;
 
+  // change to previous thing 
   @added(Versions.v2023_11_15)
   @doc("Documentation link for the data product based on definition file.")
   @visibility("read")
@@ -1076,16 +1062,6 @@ model DataProductProperties {
   @doc("Key vault url.")
   @visibility("read")
   keyVaultUrl?: string;
-
-  @added(Versions.v2024_04_01_preview)
-  @doc("Provide uniqueId of data product offer to be associated with the data product resource.")
-  @visibility("create", "read")
-  dataProductOfferId: string;
-
-  @added(Versions.v2024_04_01_preview)
-  @doc("Absolute version of the data product.")
-  @visibility("create", "read")
-  version?: string;
 }
 
 @doc("Encryption key details.")
@@ -1376,14 +1352,6 @@ model DataProductInformation {
   @doc("Description about data product.")
   description: string;
 
-  @added(Versions.v2024_04_01_preview)
-  @doc("DataProduct Offer Id for a data product.")
-  dataProductOfferId: string;
-
-  @added(Versions.v2024_04_01_preview)
-  @doc("Documentation for data product.")
-  documentation: string;
-
   @doc("Version information of data product.")
   dataProductVersions: DataProductVersion[];
 }
@@ -1391,238 +1359,8 @@ model DataProductInformation {
 @doc("Data Product Version.")
 @added(Versions.v2023_11_15)
 model DataProductVersion {
-  @added(Versions.v2023_11_15)
-  @removed(Versions.v2024_04_01_preview)
   @doc("Version of data product")
   version: string;
-
-  @added(Versions.v2024_04_01_preview)
-  @doc("Major version of data product")
-  majorVersion: string;
-
-  @added(Versions.v2024_04_01_preview)
-  @doc("Major version state of data product")
-  majorVersionState: MajorVersionState;
-
-  @added(Versions.v2024_04_01_preview)
-  @doc("Available versions of data product")
-  versions: VersionInformation[];
-}
-
-@doc("The data product offer resource.")
-@added(Versions.v2024_04_01_preview)
-model VersionInformation {
-  @added(Versions.v2024_04_01_preview)
-  @doc("Version of data product")
-  version: string;
-
-  @added(Versions.v2024_04_01_preview)
-  @doc("Status of the version of the data product.")
-  state: State;
-}
-
-@doc("The data product offer resource.")
-@added(Versions.v2024_04_01_preview)
-model DataProductOffer is TrackedResource<DataProductOfferProperties> {
-  @doc("The data product offer resource name")
-  @key("dataProductOfferName")
-  @segment("dataProductOffers")
-  @pattern("^[a-zA-Z0-9()_.-]+[a-zA-Z0-9()_-]$")
-  @minLength(3)
-  @path
-  name: string;
-}
-
-@doc("State of the data product major version.")
-@added(Versions.v2024_04_01_preview)
-enum MajorVersionState {
-  @doc("The development state.")
-  Development,
-
-  @doc("The active state.")
-  Active,
-
-  @doc("The deprecated state.")
-  Deprecated,
-
-  @doc("The deleted state.")
-  Deleted,
-}
-
-@doc("State of the data product's version.")
-@added(Versions.v2024_04_01_preview)
-enum State {
-  @doc("The preview state.")
-  Preview,
-
-  @doc("The resource is waiting for approval to become live.")
-  BecomingLive,
-
-  @doc("The live state.")
-  Live,
-
-  @doc("The previous state.")
-  Previous,
-
-  @doc("The deleted state.")
-  Deleted,
-}
-
-@doc("Target Audience Type for data product offer resource.")
-@added(Versions.v2024_04_01_preview)
-enum TargetAudienceType {
-  @doc("Field to specify Publisher Tenant Audience Type.")
-  PublisherTenant,
-
-  @doc("Field to specify specific Subscription Audience Type.")
-  SpecificSubscriptions,
-
-  @doc("Field to specify All Audience Type.")
-  Everyone,
-}
-
-@doc("Charging Mode for metering details.")
-@added(Versions.v2024_04_01_preview)
-enum chargingMode {
-  @doc("Field to specify free mode.")
-  Free,
-
-  @doc("Field to specify metered mode.")
-  Metered,
-}
-
-@doc("Parameters for metering details.")
-@added(Versions.v2024_04_01_preview)
-model MeteringDetailsParameters {
-  @doc("Field to specify charging mode for meter.")
-  mode: chargingMode = chargingMode.Free;
-
-  @doc("Field to specify price for meter.")
-  price?: string;
-}
-
-@doc("Publishing Status for data product offer.")
-@added(Versions.v2024_04_01_preview)
-enum DataProductOfferPublishedStatus {
-  @doc("Field to specify status as Published.")
-  Published,
-
-  @doc("Field to specify status as Unpublished.")
-  Unpublished,
-
-  @doc("Field to specify status as WaitingForApproval.")
-  WaitingForApproval,
-}
-
-@doc("The data product offer properties.")
-@added(Versions.v2024_04_01_preview)
-model DataProductOfferProperties {
-  @doc("Latest provisioning state of data product offer resource.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-
-  @doc("External name of data product offer resource.")
-  @visibility("create", "read")
-  externalName: string;
-
-  @doc("Description of data product offer resource.")
-  @visibility("create", "read")
-  description: string;
-
-  @doc("Publisher name of data product offer resource.")
-  @visibility("create", "read")
-  publisherName: string;
-
-  @doc("Documentation URL of data product offer resource.")
-  @visibility("create", "read")
-  documentation?: string;
-
-  @doc("Unique Id of data product offer resource.")
-  @visibility("read")
-  dataProductOfferId: string;
-
-  @doc("Target Audience of data product offer resource.")
-  @visibility("create", "read")
-  targetAudience?: TargetAudienceType = TargetAudienceType.PublisherTenant;
-
-  @doc("Allowed subscription for data product offer resource.")
-  @visibility("create", "update", "read")
-  allowedSubscriptions?: string[];
-
-  @doc("Metering Details for data product offer resource.")
-  @visibility("create", "read")
-  meteringDetails?: MeteringDetailsParameters;
-
-  @doc("Live Versions of data product offer resource.")
-  @visibility("read")
-  liveVersions: string[];
-
-  @doc("Published status of data product offer resource.")
-  @visibility("read")
-  publishedStatus: DataProductOfferPublishedStatus = DataProductOfferPublishedStatus.Unpublished;
-}
-
-@doc("The data product offer version resource.")
-@added(Versions.v2024_04_01_preview)
-@parentResource(DataProductOffer)
-model DataProductOfferVersion
-  is ProxyResource<DataProductOfferVersionProperties> {
-  @doc("The data product offer version resource name")
-  @key("versionName")
-  @segment("versions")
-  @path
-  @pattern("^(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)$")
-  name: string;
-}
-
-@doc("Types of major state of data product offer resource.")
-@added(Versions.v2024_04_01_preview)
-enum DataProductOfferMajorState {
-  @doc("Field to specify development state of data product offer major state.")
-  Development,
-
-  @doc("Field to specify active state of data product offer major state.")
-  Active,
-
-  @doc("Field to specify deprecated state of data product offer major state.")
-  Deprecated,
-}
-
-@doc("The data product offer version state.")
-@added(Versions.v2024_04_01_preview)
-enum DataProductOfferVersionState {
-  @doc("Field to specify Preview as version of data product offer.")
-  Preview,
-
-  @doc("Field to specify BecomingLive as version of data product offer.")
-  BecomingLive,
-
-  @doc("Field to specify Live as version of data product offer.")
-  Live,
-
-  @doc("Field to specify Previous as version of data product offer.")
-  Previous,
-}
-
-@doc("The data product offer version properties.")
-@added(Versions.v2024_04_01_preview)
-model DataProductOfferVersionProperties {
-  @doc("Latest provisioning state of data product offer version resource.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-
-  @doc("Field to specify storage account SAS URL.")
-  @secret
-  @visibility("create")
-  sasUrl: string;
-
-  @doc("Field to specify major state of data product offer resource.")
-  @visibility("read")
-  majorState: DataProductOfferMajorState = DataProductOfferMajorState.Development;
-
-  @doc("Field to specify version state of data product offer resource.")
-  @visibility("read")
-  versionState: DataProductOfferVersionState = DataProductOfferVersionState.Preview;
 }
 
 @doc("The data product capacity at a region level.")
@@ -1630,13 +1368,6 @@ model DataProductOfferVersionProperties {
 model DataProductsRegionalCapacity {
   @doc("An array representing the data product capacity at the region level.")
   regionalCapacity: Record<int32>[];
-}
-
-@doc("The data product offer version file.")
-@added(Versions.v2024_04_01_preview)
-model DataProductOfferVersionFile {
-  @doc("The data product offer version file data.")
-  data: bytes;
 }
 
 @armResourceOperations
@@ -1794,66 +1525,4 @@ interface DataProducts {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
   ): DataProductsRegionalCapacity | ErrorResponse;
-}
-
-@doc("Operations on data product offer resource.")
-@added(Versions.v2024_04_01_preview)
-@armResourceOperations
-interface DataProductOffers {
-  @doc("Create data product offer resource.")
-  create is ArmResourceCreateOrUpdateAsync<DataProductOffer>;
-
-  @doc("Retrieve data product offer resource.")
-  get is ArmResourceRead<DataProductOffer>;
-
-  @doc("Update data product offer resource.")
-  update is ArmResourcePatchAsync<DataProductOffer, DataProductOfferProperties>;
-
-  @doc("Delete data product offer resource.")
-  delete is ArmResourceDeleteWithoutOkAsync<DataProductOffer>;
-
-  @doc("List data product offers by resource group.")
-  listByResourceGroup is ArmResourceListByParent<DataProductOffer>;
-
-  @doc("List data product offers by subscription.")
-  listBySubscription is ArmListBySubscription<DataProductOffer>;
-}
-
-@doc("Operations on data product offer version resource.")
-@added(Versions.v2024_04_01_preview)
-@armResourceOperations
-interface DataProductOfferVersions {
-  @doc("Create data product offer version resource.")
-  create is ArmResourceCreateOrUpdateAsync<DataProductOfferVersion>;
-
-  @doc("Retrieve data product offer version resource.")
-  get is ArmResourceRead<DataProductOfferVersion>;
-
-  @doc("Delete data product offer version resource.")
-  delete is ArmResourceDeleteWithoutOkAsync<DataProductOfferVersion>;
-
-  @doc("List data product offers version by resource group.")
-  listByResourceGroup is ArmResourceListByParent<DataProductOfferVersion>;
-
-  @doc("List data product offers version by subscription.")
-  listBySubscription is ArmListBySubscription<DataProductOfferVersion>;
-
-  @doc("Publish data product offer version.")
-  publish is ArmResourceActionNoResponseContentAsync<
-    DataProductOfferVersion,
-    void
-  >;
-
-  @doc("Deprecate data product offer version.")
-  deprecate is ArmResourceActionNoResponseContentAsync<
-    DataProductOfferVersion,
-    void
-  >;
-
-  @doc("Download data product offer version file.")
-  download is ArmResourceActionSync<
-    DataProductOfferVersion,
-    void,
-    DataProductOfferVersionFile
-  >;
 }
