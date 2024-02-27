@@ -27,7 +27,7 @@ These are the global settings for Creator Client.
 ``` yaml
 title: CreatorClient
 openapi-type: data-plane
-tag: package-stable-V2
+tag: package-preview-2024-01
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
@@ -45,11 +45,29 @@ directive:
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
 ```
 
+
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - preview/2024-01-01-preview/alias.json
+  - preview/2024-01-01-preview/dataset.json
+  - preview/2024-01-01-preview/dwgconversion.json
+  - preview/2024-01-01-preview/features.json
+  - preview/2024-01-01-preview/featurestate.json
+  - preview/2024-01-01-preview/mapconfiguration.json
+  - preview/2024-01-01-preview/routeset.json
+  - preview/2024-01-01-preview/style.json
+  - preview/2024-01-01-preview/tileset.json
+  - preview/2024-01-01-preview/wayfind.json
+```
 ### Tag: package-stable-V2
 
 These settings apply only when `--tag=package-stable-V2` is specified on the command line.
 
-```yaml $(tag) == 'package-stable-V2'
+``` yaml $(tag) == 'package-stable-V2'
 input-file:
   - preview/2.0/alias.json
   - preview/2.0/dataset.json
