@@ -113,6 +113,8 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The job has failed to complete. */
     "Failed",
+
+    string,
   }
 
   /** Kind of environment where app service plan is. */
@@ -125,12 +127,16 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** App Service Plan is running on an App Service Environment V2. */
     "AseV2",
+
+    string,
   }
 
   /** Type of action on the app service plan. */
   union AppServicePlanAction {
     /** App Service plan is being updated. */
     "Updated",
+
+    string,
   }
 
   /** Detail of action on the app service plan. */
@@ -155,6 +161,8 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Async operation failed to complete. */
     "Failed",
+    
+    string,
   }
 
   alias WebAppBaseEventData = {

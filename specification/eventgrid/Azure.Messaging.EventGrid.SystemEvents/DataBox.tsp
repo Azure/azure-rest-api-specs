@@ -36,5 +36,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Order has been completed */
     "OrderCompleted",
+
+    string,
   }
 }

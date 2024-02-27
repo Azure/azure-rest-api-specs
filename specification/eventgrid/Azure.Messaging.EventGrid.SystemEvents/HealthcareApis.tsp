@@ -563,6 +563,8 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The FHIR resource type defined in STU3 and R4. */
     "VisionPrescription",
+
+    string,
   }
 
   /** Base Event for Healthcare Fhir Resource */

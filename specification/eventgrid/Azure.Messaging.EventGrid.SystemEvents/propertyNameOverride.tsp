@@ -8,27 +8,8 @@ import "./DataBox.tsp";
 import "./EventGrid.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/openapi";
 
 using Azure.ClientGenerator.Core;
-using OpenAPI;
-
-@@extension(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceType, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatus, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.AcsRouterLabelOperator, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelectorState, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.AcsUserEngagement, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.AsyncStatus, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.DataBoxStageName, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceType, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.recordingChannelType, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.recordingContentType, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.recordingFormatType, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedStatus, "x-ms-enum.modelAsString", true);
-@@extension(Microsoft.EventGrid.SystemEvents.StorageTaskCompletedStatus, "x-ms-enum.modelAsString", true);
 
 @@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to,
   "toCommunicationIdentifier",

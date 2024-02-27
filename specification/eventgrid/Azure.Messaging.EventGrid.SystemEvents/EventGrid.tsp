@@ -44,6 +44,8 @@ union EventGridMQTTClientDisconnectionReason {
 
   /** The client reconnected with the same authentication name, which resulted in the termination of the previous connection. */
   "SessionTakenOver",
+
+  string,
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SystemEvents.SubscriptionValidationEvent event. */

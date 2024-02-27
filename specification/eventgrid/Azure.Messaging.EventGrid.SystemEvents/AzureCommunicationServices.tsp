@@ -413,6 +413,8 @@ union AcsRouterJobStatus {
 
   /** Router Job Status Waiting For Activation */
   "WaitingForActivation",
+
+  string,
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobSchedulingFailed event */
@@ -759,6 +761,8 @@ union recordingContentType {
 
   /** Audio content type */
   "Audio",
+
+  string,
 }
 
 /** Recording channel type */
@@ -768,6 +772,8 @@ union recordingChannelType {
 
   /** Unmixed channel type */
   "Unmixed",
+
+  string,
 }
 
 /** Recording format type */
@@ -780,6 +786,8 @@ union recordingFormatType {
 
   /** MP4 format */
   "Mp4",
+
+  string,
 }
 
 /** Router Job Worker Selector Label Operator */
@@ -801,6 +809,8 @@ union AcsRouterLabelOperator {
 
   /** Router Label Operator Less than or equal */
   "LessThanOrEqual",
+
+  string,
 }
 
 /** Router Worker Selector State */
@@ -810,6 +820,8 @@ union AcsRouterWorkerSelectorState {
 
   /** Router Worker Selector State Expired */
   Expired: "expired",
+
+  string,
 }
 
 /** The status of the email. Any value other than Delivered is considered failed. */
@@ -831,6 +843,8 @@ union AcsEmailDeliveryReportStatus {
 
   /** The email was suppressed */
   "Suppressed",
+
+  string,
 }
 
 /** Detailed information about the status if any */
@@ -1001,6 +1015,8 @@ union AcsUserEngagement {
 
   /** Click */
   "click",
+
+  string,
 }
 
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
@@ -1052,4 +1068,6 @@ union CommunicationCloudEnvironmentModel {
 
   /** Gcch */
   "gcch",
+
+  string,
 }

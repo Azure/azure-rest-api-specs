@@ -222,6 +222,8 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Failed */
     "Failed",
+
+    string,
   }
 
   /** The status for a storage task. */
@@ -231,6 +233,8 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Failed */
     "Failed",
+
+    string,
   }
 
   alias StorageBaseEventData = {

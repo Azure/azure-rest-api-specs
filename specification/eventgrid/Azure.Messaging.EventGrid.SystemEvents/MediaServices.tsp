@@ -22,6 +22,8 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states. */
     "Scheduled",
+
+    string,
   }
 
   /** Media Job Error Codes. */
@@ -55,6 +57,8 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** There is an error verifying to the account identity. Check and fix the identity configurations and retry. If unsuccessful, please contact support. */
     "IdentityUnsupported",
+
+    string,
   }
 
   /** Error categories for Media Job Errors. */
@@ -76,6 +80,8 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The error is related to account information. */
     "Account",
+
+    string,
   }
 
   /** Media Job Retry Options. */
@@ -85,6 +91,8 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Issue may be resolved after waiting for a period of time and resubmitting the same Job. */
     "MayRetry",
+
+    string,
   }
 
   /**

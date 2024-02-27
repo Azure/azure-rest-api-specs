@@ -650,7 +650,7 @@
       ],
       "x-ms-enum": {
         "name": "AcsEmailDeliveryReportStatus",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Bounced",
@@ -683,8 +683,7 @@
             "description": "The email was suppressed"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "AcsEmailDeliveryReportStatusDetails": {
       "type": "object",
@@ -1247,7 +1246,7 @@
       ],
       "x-ms-enum": {
         "name": "AcsRouterJobStatus",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "PendingClassification",
@@ -1310,8 +1309,7 @@
             "description": "Router Job Status Waiting For Activation"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "AcsRouterJobUnassignedEventData": {
       "type": "object",
@@ -1416,7 +1414,7 @@
       ],
       "x-ms-enum": {
         "name": "AcsRouterLabelOperator",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Equal",
@@ -1449,8 +1447,7 @@
             "description": "Router Label Operator Less than or equal"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "AcsRouterQueueDetails": {
       "type": "object",
@@ -1766,7 +1763,7 @@
       ],
       "x-ms-enum": {
         "name": "AcsRouterWorkerSelectorState",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Active",
@@ -1779,8 +1776,7 @@
             "description": "Router Worker Selector State Expired"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "AcsSmsDeliveryAttemptProperties": {
       "type": "object",
@@ -1896,7 +1892,7 @@
       ],
       "x-ms-enum": {
         "name": "AcsUserEngagement",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "view",
@@ -1909,8 +1905,7 @@
             "description": "Click"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "ApiManagementApiCreatedEventData": {
       "type": "object",
@@ -2185,7 +2180,7 @@
       ],
       "x-ms-enum": {
         "name": "AppAction",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Restarted",
@@ -2312,13 +2307,21 @@
     },
     "AppServicePlanAction": {
       "type": "string",
+      "description": "Type of action on the app service plan.",
       "enum": [
         "Updated"
       ],
       "x-ms-enum": {
-        "modelAsString": false
-      },
-      "x-nullable": false
+        "name": "AppServicePlanAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Updated",
+            "value": "Updated",
+            "description": "App Service plan is being updated."
+          }
+        ]
+      }
     },
     "AppServicePlanEventTypeDetail": {
       "type": "object",
@@ -2348,7 +2351,7 @@
       ],
       "x-ms-enum": {
         "name": "AsyncStatus",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Started",
@@ -2366,8 +2369,7 @@
             "description": "Async operation failed to complete."
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "AvsClusterCreatedEventData": {
       "type": "object",
@@ -2567,7 +2569,7 @@
       ],
       "x-ms-enum": {
         "name": "CommunicationCloudEnvironmentModel",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "public",
@@ -2585,8 +2587,7 @@
             "description": "Gcch"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "CommunicationIdentifierModel": {
       "type": "object",
@@ -3018,7 +3019,7 @@
       ],
       "x-ms-enum": {
         "name": "DataBoxStageName",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "CopyStarted",
@@ -3036,8 +3037,7 @@
             "description": "Order has been completed"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "DeviceConnectionStateEventInfo": {
       "type": "object",
@@ -3295,7 +3295,7 @@
       ],
       "x-ms-enum": {
         "name": "EventGridMQTTClientDisconnectionReason",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "ClientAuthenticationError",
@@ -3453,8 +3453,7 @@
             "description": "Disabled"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "EventHubCaptureFileCreatedEventData": {
       "type": "object",
@@ -3847,7 +3846,7 @@
       ],
       "x-ms-enum": {
         "name": "HealthcareFhirResourceType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Account",
@@ -4655,8 +4654,7 @@
             "description": "The FHIR resource type defined in STU3 and R4."
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "HealthcareFhirResourceUpdatedEventData": {
       "type": "object",
@@ -5403,7 +5401,7 @@
       ],
       "x-ms-enum": {
         "name": "MediaJobErrorCategory",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Service",
@@ -5455,7 +5453,7 @@
       ],
       "x-ms-enum": {
         "name": "MediaJobErrorCode",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "ServiceError",
@@ -5729,7 +5727,7 @@
       ],
       "x-ms-enum": {
         "name": "MediaJobRetry",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "DoNotRetry",
@@ -5767,7 +5765,7 @@
       ],
       "x-ms-enum": {
         "name": "MediaJobState",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Canceled",
@@ -7287,7 +7285,7 @@
       ],
       "x-ms-enum": {
         "name": "StampKind",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Public",
@@ -7759,7 +7757,7 @@
       ],
       "x-ms-enum": {
         "name": "StorageTaskAssignmentCompletedStatus",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Succeeded",
@@ -7772,8 +7770,7 @@
             "description": "Failed"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "StorageTaskAssignmentQueuedEventData": {
       "type": "object",
@@ -7828,7 +7825,7 @@
       ],
       "x-ms-enum": {
         "name": "StorageTaskCompletedStatus",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Succeeded",
@@ -7841,8 +7838,7 @@
             "description": "Failed"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "StorageTaskQueuedEventData": {
       "type": "object",
@@ -8377,7 +8373,7 @@
       ],
       "x-ms-enum": {
         "name": "recordingChannelType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Mixed",
@@ -8390,8 +8386,7 @@
             "description": "Unmixed channel type"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "recordingContentType": {
       "type": "string",
@@ -8402,7 +8397,7 @@
       ],
       "x-ms-enum": {
         "name": "recordingContentType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "AudioVideo",
@@ -8415,8 +8410,7 @@
             "description": "Audio content type"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     },
     "recordingFormatType": {
       "type": "string",
@@ -8428,7 +8422,7 @@
       ],
       "x-ms-enum": {
         "name": "recordingFormatType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Wav",
@@ -8446,8 +8440,7 @@
             "description": "MP4 format"
           }
         ]
-      },
-      "x-ms-enum.modelAsString": true
+      }
     }
   },
   "parameters": {}
