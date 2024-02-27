@@ -26,10 +26,17 @@ These are the global settings for the DataBox Edge API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-07
+tag: package-2023-12-01
 ```
 
+### Tag: package-2023-12-01
 
+These settings apply only when `--tag=package-2023-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12-01'
+input-file:
+  - Microsoft.DataBoxEdge/stable/2023-12-01/databoxedge.json
+```
 ### Tag: package-2023-07
 
 These settings apply only when `--tag=package-2023-07` is specified on the command line.

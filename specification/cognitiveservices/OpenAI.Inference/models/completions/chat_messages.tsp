@@ -60,7 +60,7 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
   type: "image_url";
 
   @doc("An internet location, which must be accessible to the model,from which the image may be retrieved.")
-  @projectedName("json", "image_url")
+  @encodedName("application/json", "image_url")
   imageUrl: ChatMessageImageUrl;
 }
 
@@ -127,7 +127,7 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   @doc("An optional name for the participant.")
   name?: string;
 
-  @projectedName("json", "tool_calls")
+  @encodedName("application/json", "tool_calls")
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("""
   The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
@@ -137,7 +137,7 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
 
   @added(ServiceApiVersions.v2023_07_01_Preview)
   @removed(ServiceApiVersions.v2023_12_01_Preview)
-  @projectedName("json", "function_call")
+  @encodedName("application/json", "function_call")
   @doc("""
   The function call that must be resolved and have its output appended to subsequent input messages for the chat
   completions request to resolve as configured.
@@ -155,7 +155,7 @@ model ChatRequestToolMessage extends ChatRequestMessage {
   @doc("The content of the message.")
   content: string | null;
 
-  @projectedName("json", "tool_call_id")
+  @encodedName("application/json", "tool_call_id")
   @doc("The ID of the tool call resolved by the provided content.")
   toolCallId: string;
 }
@@ -186,7 +186,7 @@ model ChatResponseMessage {
   content: string | null;
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
-  @projectedName("json", "tool_calls")
+  @encodedName("application/json", "tool_calls")
   @doc("""
   The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
   completions request to resolve as configured.
@@ -194,7 +194,7 @@ model ChatResponseMessage {
   toolCalls?: ChatCompletionsToolCall[];
 
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @projectedName("json", "function_call")
+  @encodedName("application/json", "function_call")
   @doc("""
   The function call that must be resolved and have its output appended to subsequent input messages for the chat
   completions request to resolve as configured.
