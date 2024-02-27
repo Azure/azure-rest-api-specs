@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2023-11.18.0-preview` is specified
 
 ```yaml $(tag) == 'package-2023-11.18.0-preview'
 input-file:
-  - Microsoft.Batch/preview/2023-11-01.18.0/BatchService.json
+  - Microsoft.Batch/preview/2024-02-01.19.0/BatchService.json
 ```
 
 ### Tag: package-2023-11

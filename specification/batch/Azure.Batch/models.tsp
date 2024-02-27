@@ -502,6 +502,21 @@ enum BatchNodeState {
 
   @doc("The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.")
   Preempted: "preempted",
+
+  @doc("The Compute Node is undergoing an OS upgrade operation.")
+  UpgradingOS: "upgradingos",
+}
+
+@doc("UpgradeMode enums")
+enum UpgradeMode {
+  @doc("TAll virtual machines in the scale set are automatically updated at the same time.")
+  Automatic: "automatic",
+
+  @doc("You control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.")
+  Manual: "manual",
+
+  @doc("The existing instances in a scale set are brought down in batches to be upgraded. Once the upgraded batch is complete, the instances will begin taking traffic again and the next batch will begin. This continues until all instances brought up-to-date.")
+  Rolling: "rolling",
 }
 
 @doc("SchedulingState enums")
@@ -802,6 +817,10 @@ model BatchNodeCounts {
 
   @doc("The total number of Compute Nodes.")
   total: int32;
+
+  @doc("The number of Compute Nodes in the upgradingOS state.")
+  @projectedName("client", "upgradingOS")
+  upgradingOs: int32;
 }
 
 @doc("Contains utilization and resource usage statistics for the lifetime of a Pool.")
@@ -1727,6 +1746,9 @@ Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batc
 
   @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
   targetNodeCommunicationMode?: BatchNodeCommunicationMode;
+
+  @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.")
+  upgradePolicy?: UpgradePolicy;
 }
 
 @doc("""
@@ -2870,6 +2892,9 @@ Warning: This property is deprecated and will be removed after February, 2024. P
   @doc("The current state of the pool communication mode.")
   @visibility("read")
   currentNodeCommunicationMode?: BatchNodeCommunicationMode;
+
+  @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.")
+  upgradePolicy?: UpgradePolicy;
 }
 
 @doc("Parameters for creating an Azure Batch Pool.")
@@ -2950,6 +2975,9 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 
   @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
   targetNodeCommunicationMode?: BatchNodeCommunicationMode;
+
+  @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.")
+  upgradePolicy?: UpgradePolicy;
 }
 
 @doc("Parameters for replacing properties on an Azure Batch Pool.")
@@ -3583,6 +3611,59 @@ model BatchSubtask {
 
   @doc("The result of the Task execution. If the value is 'failed', then the details of the failure can be found in the failureInfo property.")
   result?: BatchTaskExecutionResult;
+}
+
+@doc("Describes an upgrade policy - automatic, manual, or rolling.")
+model UpgradePolicy {
+  @doc("Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.")
+  mode: UpgradeMode;
+
+  @doc("Configuration parameters used for performing automatic OS Upgrade. The configuration parameters used for performing automatic OS upgrade.")
+  @projectedName("client", "automaticOSUpgradePolicy")
+  automaticOsUpgradePolicy?: AutomaticOsUpgradePolicy;
+
+  @doc("The configuration parameters used while performing a rolling upgrade. This property is only supported on Pools with the virtualMachineConfiguration property.")
+  rollingUpgradePolicy?: RollingUpgradePolicy;
+}
+
+@doc("The configuration parameters used for performing automatic OS upgrade.")
+model AutomaticOsUpgradePolicy {
+  @doc("Whether OS image rollback feature should be disabled.")
+  disableAutomaticRollback?: boolean;
+
+  @doc("Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/en-us/rest/api/batchservice/pool/add?tabs=HTTP#windowsconfiguration) cannot be set to true.")
+  @projectedName("client", "enableAutomaticOSUpgrade")
+  enableAutomaticOsUpgrade?: boolean;
+
+  @doc("Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS.")
+  useRollingUpgradePolicy?: boolean;
+
+  @doc("Defer OS upgrades on the TVMs if they are running tasks.")
+  osRollingUpgradeDeferral?: boolean;
+}
+
+@doc("The configuration parameters used while performing a rolling upgrade.")
+model RollingUpgradePolicy {
+  @doc("Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal.")
+  enableCrossZoneUpgrade?: boolean;
+
+  @doc("The maximum percent of total virtual machine instances that will be upgraded simultaneously by the rolling upgrade in one batch. As this is a maximum, unhealthy instances in previous or future batches can cause the percentage of instances in a batch to decrease to ensure higher reliability. The value of this field should be between 5 and 100, inclusive. If both maxBatchInstancePercent and maxUnhealthyInstancePercent are assigned with value, the value of maxBatchInstancePercent should not be more than maxUnhealthyInstancePercent.")
+  maxBatchInstancePercent?: int32;
+
+  @doc("The maximum percentage of the total virtual machine instances in the scale set that can be simultaneously unhealthy, either as a result of being upgraded, or by being found in an unhealthy state by the virtual machine health checks before the rolling upgrade aborts. This constraint will be checked prior to starting any batch. The value of this field should be between 5 and 100, inclusive. If both maxBatchInstancePercent and maxUnhealthyInstancePercent are assigned with value, the value of maxBatchInstancePercent should not be more than maxUnhealthyInstancePercent.")
+  maxUnhealthyInstancePercent?: int32;
+
+  @doc("The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts. The value of this field should be between 0 and 100, inclusive.")
+  maxUnhealthyUpgradedInstancePercent?: int32;
+
+  @doc("The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format..")
+  pauseTimeBetweenBatches?: duration;
+
+  @doc("Upgrade all unhealthy instances in a scale set before any healthy instances.")
+  prioritizeUnhealthyInstances?: boolean;
+
+  @doc("Rollback failed instances to previous model if the Rolling Upgrade policy is violated.")
+  rollbackFailedInstancesOnPolicyBreach?: boolean;
 }
 
 @doc("Parameters for creating a user account for RDP or SSH access on an Azure Batch Compute Node.")

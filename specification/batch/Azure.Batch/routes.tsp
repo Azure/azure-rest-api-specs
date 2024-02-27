@@ -2134,8 +2134,7 @@ alias BatchTaskFileClientPathContent = {
 
 alias BatchClientRequestHeaders = {
   @doc("""
-Sets the maximum time that the server can spend processing the request,
-in seconds. The default is 30 seconds.
+The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
 """)
   @query
   @projectedName("client", "timeOutInSeconds")
