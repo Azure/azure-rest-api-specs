@@ -68,19 +68,26 @@ model ContainerRegistryArtifactEventData {
 
 /** The target of the event. */
 model ContainerRegistryEventTarget {
-  ...ContainerRegistryBaseEventTarget<
-    "The MIME type of the referenced object.",
-    "The number of bytes of the content. Same as Length field.",
-    "The digest of the content, as defined by the Registry V2 HTTP API Specification.",
-    "The repository name.",
-    "The tag name."
-  >;
+  /** The MIME type of the referenced object. */
+  mediaType?: string;
+
+  /** The number of bytes of the content. Same as Length field. */
+  size?: int64;
+
+  /** The digest of the content, as defined by the Registry V2 HTTP API Specification. */
+  digest?: string;
 
   /** The number of bytes of the content. Same as Size field. */
   length?: int64;
 
+  /** The repository name. */
+  repository?: string;
+
   /** The direct URL to the content. */
   url?: string;
+
+  /** The tag name. */
+  tag?: string;
 }
 
 /** The target of the event. */

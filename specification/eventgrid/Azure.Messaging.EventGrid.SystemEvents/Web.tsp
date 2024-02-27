@@ -72,6 +72,9 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** Detail of action on the app service plan. */
     appServicePlanEventTypeDetail?: AppServicePlanEventTypeDetail;
 
+    /** sku of app service plan. */
+    sku?: WebAppServicePlanUpdatedEventDataSku;
+
     /** name of the app service plan that had this event. */
     name?: string;
 
@@ -89,9 +92,6 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** HTTP verb of this operation. */
     verb?: string;
-
-    /** sku of app service plan. */
-    sku?: WebAppServicePlanUpdatedEventDataSku;
   }
 
   /** Type of action of the operation */
