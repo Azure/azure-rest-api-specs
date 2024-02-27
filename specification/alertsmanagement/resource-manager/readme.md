@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.AlertsManagement/preview/2023-09-01-preview/PrometheusRuleGroups.json
-
+```
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
