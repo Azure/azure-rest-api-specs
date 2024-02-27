@@ -165,39 +165,12 @@ interface FirmwareOperationGroup {
   // FIXME: SbomComponents_ListByFirmware could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("SbomComponents_ListByFirmware")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/sbomComponents")
+  @segment("sbomComponents")
   @get
-  listSbomComponents is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
-      @path
-      subscriptionId: string;
+  listSbomComponents (
+    ...ResourceInstanceParameters<Firmware, BaseParameters<Firmware>>,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      /**
-       * The name of the firmware analysis workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-      @path
-      workspaceName: string;
-
-      /**
-       * The id of the firmware.
-       */
-      @path
-      firmwareId: string;
-    },
-    SbomComponentListResult
-  >;
+  ): ArmResponse<SbomComponentListResult> | ErrorResponse;
 }
 
 @@projectedName(FirmwareOperationGroup.create::parameters.resource,
