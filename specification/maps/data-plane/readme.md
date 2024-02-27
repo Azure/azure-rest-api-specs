@@ -43,9 +43,6 @@ directive:
     where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get
     reason: The reason for this suppression is the API is already released and introducing new LRO properties will not function and are not supported today and will only be developed for the next version of this API.
 
-  - suppress: INVALID_TYPE
-    reason: false positive from oav is breaking our example validation. See azure/oav#1020.
-
   - suppress: RESPONSE_SCHEMA_NOT_IN_SPEC
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
 
@@ -77,8 +74,17 @@ These settings apply only when `--tag=package-stable-1.0` is specified on the co
 ```yaml $(tag) == 'package-stable-1.0'
 input-file:
   - Microsoft.Maps/Data/preview/1.0/data.json
-  - Microsoft.Maps/Render/preview/1.0/render.json
+  - Render/preview/1.0/render.json
   - Search/preview/1.0/search.json
+```
+
+### Tag: package-2023-10-01-preview
+
+These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-01-preview'
+input-file:
+  - Route/preview/2023-10-01-preview/route.json
 ```
 
 ### Tag: package-deprecated
