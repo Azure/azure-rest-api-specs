@@ -180,7 +180,7 @@ model ConnectorProperties {
 
   @doc("State of the MessagingConnector")
   @visibility("read")
-  connectorState: ConnectorState;
+  connectorState?: ConnectorState;
 }
 
 @doc("Configuration for BitCoinSourceConnector")
