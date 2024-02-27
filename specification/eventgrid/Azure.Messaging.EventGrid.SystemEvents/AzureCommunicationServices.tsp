@@ -695,8 +695,8 @@ model AcsRouterWorkerSelector {
   operator?: AcsRouterLabelOperator;
 
   /** Router Job Worker Selector Value */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of labelValue is object"
-  labelValue?: unknown;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of labelValue is object"
+  labelValue?: Record<unknown>;
 
   /** Router Job Worker Selector Time to Live in Seconds */
   @encode("ISO8601") // TODO verify this is timespan in C#
