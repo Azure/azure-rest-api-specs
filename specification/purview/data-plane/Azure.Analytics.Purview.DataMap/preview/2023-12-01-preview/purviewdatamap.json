@@ -1807,7 +1807,7 @@
         }
       }
     },
-    "/types/icon": {
+    "/types/icons": {
       "post": {
         "tags": [
           "Icon"
@@ -1857,9 +1857,52 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Icon"
+        ],
+        "description": "List icons and their usages.",
+        "operationId": "Type_ListIcons",
+        "x-ms-examples": {
+          "Icon_List": {
+            "$ref": "./examples/Type_ListIcons.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/atlasAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of icons owned and their references (usage).",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconWithReferences"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
-    "/types/icon/{name}": {
+    "/types/icons/{name}": {
       "put": {
         "tags": [
           "Icon"
@@ -1980,51 +2023,6 @@
         "responses": {
           "204": {
             "description": "OK. The deletion is successful."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/types/icons": {
-      "get": {
-        "tags": [
-          "Icon"
-        ],
-        "description": "List icons and their usages.",
-        "operationId": "Type_ListIcons",
-        "x-ms-examples": {
-          "Icon_List": {
-            "$ref": "./examples/Type_ListIcons.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/limit"
-          },
-          {
-            "$ref": "#/parameters/offset"
-          },
-          {
-            "$ref": "#/parameters/sort"
-          },
-          {
-            "$ref": "#/parameters/atlasAPIVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of icons owned and their references (usage).",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/IconWithReferences"
-              }
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
