@@ -180,7 +180,7 @@ model ImageGenerationContentFilterResults {
 
 @doc("Describes the content filtering results for the prompt of a image generation request.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-model ImageGenerationPromptFilterResult {
+model ImageGenerationPromptFilterResults {
   ...ImageGenerationContentFilterResults;
 
   @doc("Describes whether profanity was detected.")
@@ -230,7 +230,7 @@ model ImageGenerationData {
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "prompt_filter_results")
   @projectedName("json", "prompt_filter_results")
-  promptFilterResults?: ImageGenerationPromptFilterResult;
+  promptFilterResults?: ImageGenerationPromptFilterResults;
 }
 
 @doc("The result of a successful image generation operation.")
