@@ -13,14 +13,17 @@ other consumers.
 model CompletionsUsage {
   @doc("The number of tokens generated across all completions emissions.")
   @encodedName("application/json", "completion_tokens")
+  @projectedName("json", "completion_tokens")
   completionTokens: int32;
 
   @doc("The number of tokens in the provided prompts for the completions request.")
   @encodedName("application/json", "prompt_tokens")
+  @projectedName("json", "prompt_tokens")
   promptTokens: int32;
 
   @doc("The total number of tokens processed for the completions request and response.")
   @encodedName("application/json", "total_tokens")
+  @projectedName("json", "total_tokens")
   totalTokens: int32;
 }
 

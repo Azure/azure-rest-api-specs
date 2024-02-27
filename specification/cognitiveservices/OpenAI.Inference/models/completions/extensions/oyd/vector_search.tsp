@@ -67,6 +67,7 @@ model OnYourDataDeploymentNameVectorizationSource
 
   @doc("The embedding model deployment name within the same Azure OpenAI resource. This enables you to use vector search without Azure OpenAI api-key and without Azure OpenAI public network access.")
   @encodedName("application/json", "deployment_name")
+  @projectedName("json", "deployment_name")
   deploymentName: string;
 }
 
@@ -82,5 +83,6 @@ model OnYourDataModelIdVectorizationSource
 
   @doc("The embedding model ID build inside the search service. Currently only supported by Elasticsearch®.")
   @encodedName("application/json", "model_id")
+  @projectedName("json", "model_id")
   modelId: string;
 }

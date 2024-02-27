@@ -81,6 +81,7 @@ alias ContentFilterResultsBase = {
   or damage one’s body, or kill oneself.
   """)
   @encodedName("application/json", "self_harm")
+  @projectedName("json", "self_harm")
   selfHarm?: ContentFilterResult;
 
   @added(ServiceApiVersions.v2024_02_15_Preview)
@@ -89,6 +90,7 @@ alias ContentFilterResultsBase = {
 
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "custom_blocklists")
+  @projectedName("json", "custom_blocklists")
   @doc("Describes detection results against configured custom blocklists.")
   customBlocklists?: ContentFilterBlocklistIdResult[];
 
@@ -116,11 +118,13 @@ model ContentFilterResultsForChoice {
 
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "protected_material_text")
+  @projectedName("json", "protected_material_text")
   @doc("Information about detection of protected text material.")
   protectedMaterialText?: ContentFilterDetectionResult;
 
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "protected_material_code")
+  @projectedName("json", "protected_material_code")
   @doc("Information about detection of protected code material.")
   protectedMaterialCode?: ContentFilterCitedDetectionResult;
 }
@@ -132,10 +136,12 @@ Content filtering results for a single prompt in the request.
 model ContentFilterResultsForPrompt {
   @doc("The index of this prompt in the set of prompt results")
   @encodedName("application/json", "prompt_index")
+  @projectedName("json", "prompt_index")
   promptIndex: int32;
 
   @doc("Content filtering results for this prompt")
   @encodedName("application/json", "content_filter_results")
+  @projectedName("json", "content_filter_results")
   contentFilterResults: ContentFilterResultDetailsForPrompt;
 }
 
@@ -155,6 +161,7 @@ model ContentFilterCitedDetectionResult {
   ...ContentFilterDetectionResult;
 
   @encodedName("application/json", "URL")
+  @projectedName("json", "URL")
   @doc("The internet location associated with the detection.")
   url?: url;
 

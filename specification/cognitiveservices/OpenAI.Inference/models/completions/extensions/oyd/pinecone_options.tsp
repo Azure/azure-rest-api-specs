@@ -36,15 +36,18 @@ model PineconeChatExtensionParameters {
 
   @doc("The name of the Pinecone database index.")
   @encodedName("application/json", "index_name")
+  @projectedName("json", "index_name")
   indexName: string;
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
   @projectedName("csharp", "FieldMappingOptions")
   @encodedName("application/json", "fields_mapping")
+  @projectedName("json", "fields_mapping")
   fieldsMapping: PineconeFieldMappingOptions;
 
   @doc("The embedding dependency for vector search.")
   @encodedName("application/json", "embedding_dependency")
+  @projectedName("json", "embedding_dependency")
   embeddingDependency: OnYourDataVectorizationSource;
 }
 
@@ -54,25 +57,30 @@ model PineconeFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
   @projectedName("csharp", "TitleFieldName")
   @encodedName("application/json", "title_field")
+  @projectedName("json", "title_field")
   titleField?: string;
 
   @doc("The name of the index field to use as a URL.")
   @projectedName("csharp", "UrlFieldName")
   @encodedName("application/json", "url_field")
+  @projectedName("json", "url_field")
   urlField?: string;
 
   @doc("The name of the index field to use as a filepath.")
   @projectedName("csharp", "FilepathFieldName")
   @encodedName("application/json", "filepath_field")
+  @projectedName("json", "filepath_field")
   filepathField?: string;
 
   @doc("The names of index fields that should be treated as content.")
   @projectedName("csharp", "ContentFieldNames")
   @encodedName("application/json", "content_fields")
+  @projectedName("json", "content_fields")
   contentFields: string[];
 
   @doc("The separator pattern that content fields should use.")
   @projectedName("csharp", "ContentFieldSeparator")
   @encodedName("application/json", "content_fields_separator")
+  @projectedName("json", "content_fields_separator")
   contentFieldsSeparator?: string;
 }

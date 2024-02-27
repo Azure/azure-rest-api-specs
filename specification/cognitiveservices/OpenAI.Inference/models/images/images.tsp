@@ -122,6 +122,7 @@ model ImageGenerationOptions {
 
   @doc("The format in which image generation response items should be presented.")
   @encodedName("application/json", "response_format")
+  @projectedName("json", "response_format")
   responseFormat?: ImageGenerationResponseFormat = ImageGenerationResponseFormat.url;
 
   @doc("""
@@ -173,6 +174,7 @@ model ImageGenerationContentFilterResults {
   or damage one’s body, or kill oneself.
   """)
   @encodedName("application/json", "self_harm")
+  @projectedName("json", "self_harm")
   selfHarm?: ContentFilterResult;
 }
 
@@ -199,11 +201,13 @@ model ImageGenerationData {
 
   @doc("The complete data for an image, represented as a base64-encoded string.")
   @encodedName("application/json", "b64_json")
+  @projectedName("json", "b64_json")
   base64Data?: string;
 
   @doc("Information about the content filtering results.")
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "content_filter_results")
+  @projectedName("json", "content_filter_results")
   contentFilterResults?: ImageGenerationContentFilterResults;
 
   @doc("""
@@ -212,6 +216,7 @@ model ImageGenerationData {
   """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "revised_prompt")
+  @projectedName("json", "revised_prompt")
   revisedPrompt?: string;
 
   @doc("""
@@ -224,8 +229,8 @@ model ImageGenerationData {
   """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "prompt_filter_results")
+  @projectedName("json", "prompt_filter_results")
   promptFilterResults?: ImageGenerationPromptFilterResult;
-
 }
 
 @doc("The result of a successful image generation operation.")

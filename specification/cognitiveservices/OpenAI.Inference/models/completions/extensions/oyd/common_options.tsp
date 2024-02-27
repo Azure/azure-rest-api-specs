@@ -21,11 +21,13 @@ alias OnYourDataCommonChatExtensionConfiguration = {
   @doc("The configured top number of documents to feature for the configured query.")
   @projectedName("csharp", "DocumentCount")
   @encodedName("application/json", "top_n_documents")
+  @projectedName("json", "top_n_documents")
   topNDocuments?: int32;
 
   @doc("Whether queries should be restricted to use of indexed data.")
   @projectedName("csharp", "ShouldRestrictResultScope")
   @encodedName("application/json", "in_scope")
+  @projectedName("json", "in_scope")
   inScope?: boolean;
 
   @doc("The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.")
@@ -35,5 +37,6 @@ alias OnYourDataCommonChatExtensionConfiguration = {
 
   @doc("Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.")
   @encodedName("application/json", "role_information")
+  @projectedName("json", "role_information")
   roleInformation?: string;
 };
