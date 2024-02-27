@@ -18340,19 +18340,19 @@
             "type": "string"
           },
           {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get the Site Container for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "Site Container Name",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]*$"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will get the Site Container for the production slot.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -18394,6 +18394,13 @@
             "type": "string"
           },
           {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will create the container for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "Site Container Name",
@@ -18409,13 +18416,6 @@
             "schema": {
               "$ref": "#/definitions/SiteContainer"
             }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will create the container for the production slot.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -18463,19 +18463,19 @@
             "type": "string"
           },
           {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will delete the container for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "Site Container Name",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]*$"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will delete the container for the production slot.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
