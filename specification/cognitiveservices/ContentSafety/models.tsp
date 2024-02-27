@@ -331,10 +331,29 @@ model DetectMissingSourceOptions {
 }
 
 @added(Versions.v2024_02_15_Preview)
+@doc("The index details.")
+model IndexDetails {
+  @doc("Indicate the index when encoding is UTF-8.")
+  utf8: int64;
+
+  @doc("Indicate the index when encoding is UTF-16.")
+  utf16: int64;
+
+  @doc("Indicate the index with code point format.")
+  codePoint: int64;
+}
+
+@added(Versions.v2024_02_15_Preview)
 @doc("The detailed information about a text identified as missing source.")
 model MissingSourceDetails {
   @doc("The missing source text.")
   text: string;
+
+  @doc("The offset when missing source text starts.")
+  offset: IndexDetails;
+
+  @doc("The length of the missing source text.")
+  length: IndexDetails;
 
   @doc("""
   The explanation for detected missing source, enhancing understanding.
