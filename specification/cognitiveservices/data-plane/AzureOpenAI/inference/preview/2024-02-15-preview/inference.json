@@ -26,14 +26,14 @@
     }
   ],
   "paths": {
-    "/deployments/{deploymentId}/completions": {
+    "/deployments/{deployment-id}/completions": {
       "post": {
         "summary": "Creates a completion for the provided prompt, parameters and chosen model.",
         "operationId": "Completions_Create",
         "parameters": [
           {
             "in": "path",
-            "name": "deploymentId",
+            "name": "deployment-id",
             "required": true,
             "schema": {
               "type": "string",
@@ -346,14 +346,14 @@
         }
       }
     },
-    "/deployments/{deploymentId}/embeddings": {
+    "/deployments/{deployment-id}/embeddings": {
       "post": {
         "summary": "Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.",
         "operationId": "embeddings_create",
         "parameters": [
           {
             "in": "path",
-            "name": "deploymentId",
+            "name": "deployment-id",
             "required": true,
             "schema": {
               "type": "string",
@@ -493,14 +493,14 @@
         }
       }
     },
-    "/deployments/{deploymentId}/chat/completions": {
+    "/deployments/{deployment-id}/chat/completions": {
       "post": {
         "summary": "Creates a completion for the chat message",
         "operationId": "ChatCompletions_Create",
         "parameters": [
           {
             "in": "path",
-            "name": "deploymentId",
+            "name": "deployment-id",
             "required": true,
             "schema": {
               "type": "string",
@@ -594,14 +594,14 @@
         }
       }
     },
-    "/deployments/{deploymentId}/audio/transcriptions": {
+    "/deployments/{deployment-id}/audio/transcriptions": {
       "post": {
         "summary": "Transcribes audio into the input language.",
         "operationId": "Transcriptions_Create",
         "parameters": [
           {
             "in": "path",
-            "name": "deploymentId",
+            "name": "deployment-id",
             "required": true,
             "schema": {
               "type": "string",
@@ -665,14 +665,14 @@
         }
       }
     },
-    "/deployments/{deploymentId}/audio/translations": {
+    "/deployments/{deployment-id}/audio/translations": {
       "post": {
         "summary": "Transcribes and translates input audio into English text.",
         "operationId": "Translations_Create",
         "parameters": [
           {
             "in": "path",
-            "name": "deploymentId",
+            "name": "deployment-id",
             "required": true,
             "schema": {
               "type": "string",
@@ -736,14 +736,14 @@
         }
       }
     },
-    "/deployments/{deploymentId}/audio/speech": {
+    "/deployments/{deployment-id}/audio/speech": {
       "post": {
         "summary": "Generates audio from the input text.",
         "operationId": "Speech_Create",
         "parameters": [
           {
             "in": "path",
-            "name": "deploymentId",
+            "name": "deployment-id",
             "required": true,
             "schema": {
               "type": "string",
@@ -792,7 +792,7 @@
         }
       }
     },
-    "/deployments/{deploymentId}/images/generations": {
+    "/deployments/{deployment-id}/images/generations": {
       "post": {
         "summary": "Generates a batch of images from a text caption on a given DALLE model deployment",
         "operationId": "ImageGenerations_Create",
@@ -809,7 +809,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "deploymentId",
+            "name": "deployment-id",
             "required": true,
             "schema": {
               "type": "string",
