@@ -105,6 +105,10 @@ model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
 @doc("Supported parameters for the pre-build Abstractive Summarization task.")
 model AbstractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   ...AbstractiveSummarizationTaskParametersBase;
+
+  @added(Versions.v2023_11_15_preview)
+  @doc("(Optional) If provided, the query will be used to generate the summary.")
+  query?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
