@@ -1048,7 +1048,6 @@ model DataProductProperties {
   @removed(Versions.v2024_04_01_preview)
   currentMinorVersion?: string;
 
-  // change to previous thing
   @added(Versions.v2023_11_15)
   @doc("Documentation link for the data product based on definition file.")
   @visibility("read")
