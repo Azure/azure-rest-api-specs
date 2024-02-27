@@ -122,13 +122,14 @@
     },
     "RasterTileFormat": {
       "name": "format",
-      "description": "Desired format of the response. Possible value: png.",
+      "description": "Desired format of the response. Possible value: png, jpeg",
       "type": "string",
       "in": "path",
       "required": true,
       "x-ms-client-default": "png",
       "enum": [
-        "png"
+        "png",
+        "jpeg"
       ],
       "x-ms-enum": {
         "name": "RasterTileFormat",
@@ -137,6 +138,10 @@
           {
             "value": "png",
             "description": "An image in the png format. Supports zoom levels 0 through 18."
+          },
+          {
+            "value": "jpeg",
+            "description": "An image in the jpeg format. Supports zoom levels 0 through 18."
           }
         ]
       },
@@ -530,7 +535,7 @@
     },
     "/map/static/{format}": {
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe static image service renders a user-defined, rectangular image containing a map section using a zoom level from 0 to 20. The supported resolution range for the map image is from 1x1 to 8192x8192. If you are deciding when to use the static image service over the map tile service, you may want to consider how you would like to interact with the rendered map. If the map contents will be relatively unchanging, a static map is a good choice. If you want to support a lot of zooming, panning and changing of the map content, the map tile service would be a better choice. \n\nService also provides Image Composition functionality to get a static image back with additional data like; pushpins and geometry overlays with following capabilities. \n\n- Specify multiple pushpin styles\n- Render circle, polyline and polygon geometry types.\n\nPlease see [How-to-Guide](https://aka.ms/AzureMapsHowToGuideImageCompositor) for detailed examples.\n\n_Note_ : Either **center** or **bbox** parameter must be supplied to the\nAPI.\n<br><br>\nThe supported Lat and Lon ranges when using the **bbox** parameter, are as follows:\n<br><br>\n\n  |Zoom Level | Max Lon Range   | Max Lat Range|\n  |:----------|:----------------|:-------------|\n  |0          | 360.0           | 170.0        | \n  |1          | 360.0           | 170.0        |\n  |2          | 360.0           | 170.0        |\n  |3          | 360.0           | 170.0        |\n  |4          | 360.0           | 170.0        |\n  |5          | 180.0           | 85.0         |\n  |6          | 90.0            | 42.5         |\n  |7          | 45.0            | 21.25        |\n  |8          | 22.5            | 10.625       |\n  |9          | 11.25           | 5.3125       |\n  |10         | 5.625           | 2.62625      |\n  |11         | 2.8125          | 1.328125     |\n  |12         | 1.40625         | 0.6640625    |\n  |13         | 0.703125        | 0.33203125   |\n  |14         | 0.3515625       | 0.166015625  |\n  |15         | 0.17578125      | 0.0830078125 |  \n  |16         | 0.087890625     | 0.0415039063 | \n  |17         | 0.0439453125    | 0.0207519531 |\n  |18         | 0.0219726563    | 0.0103759766 |\n  |19         | 0.0109863281    | 0.0051879883 |\n  |20         | 0.0054931641    | 0.0025939941 |",
+        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe static image service renders a user-defined, rectangular image containing a map section using a zoom level from 0 to 20. The supported resolution range for the map image is from 80x80 to 2000x1500. If you are deciding when to use the static image service over the map tile service, you may want to consider how you would like to interact with the rendered map. If the map contents will be relatively unchanging, a static map is a good choice. If you want to support a lot of zooming, panning and changing of the map content, the map tile service would be a better choice. \n\nService also provides Image Composition functionality to get a static image back with additional data like; pushpins and geometry overlays with following capabilities. \n\n- Specify multiple pushpin styles\n- Render circle, polyline and polygon geometry types.\n\nPlease see [How-to-Guide](https://aka.ms/AzureMapsHowToGuideImageCompositor) for detailed examples.\n\n_Note_ : Either **center** or **bbox** parameter must be supplied to the\nAPI.\n<br><br>\nThe supported Lat and Lon ranges when using the **bbox** parameter, are as follows:\n<br><br>\n\n  |Zoom Level | Max Lon Range   | Max Lat Range|\n  |:----------|:----------------|:-------------|\n  |0          | 360.0           | 170.0        | \n  |1          | 360.0           | 170.0        |\n  |2          | 360.0           | 170.0        |\n  |3          | 360.0           | 170.0        |\n  |4          | 360.0           | 170.0        |\n  |5          | 180.0           | 85.0         |\n  |6          | 90.0            | 42.5         |\n  |7          | 45.0            | 21.25        |\n  |8          | 22.5            | 10.625       |\n  |9          | 11.25           | 5.3125       |\n  |10         | 5.625           | 2.62625      |\n  |11         | 2.8125          | 1.328125     |\n  |12         | 1.40625         | 0.6640625    |\n  |13         | 0.703125        | 0.33203125   |\n  |14         | 0.3515625       | 0.166015625  |\n  |15         | 0.17578125      | 0.0830078125 |  \n  |16         | 0.087890625     | 0.0415039063 | \n  |17         | 0.0439453125    | 0.0207519531 |\n  |18         | 0.0219726563    | 0.0103759766 |\n  |19         | 0.0109863281    | 0.0051879883 |\n  |20         | 0.0054931641    | 0.0025939941 |",
         "operationId": "Render_GetMapStaticImage",
         "x-ms-examples": {
           "Successful Static Image Request": {
@@ -548,56 +553,29 @@
             "$ref": "#/parameters/RasterTileFormat"
           },
           {
-            "name": "layer",
-            "in": "query",
-            "description": "Map layer requested. If layer is set to labels or hybrid, the format should be png.",
-            "type": "string",
-            "enum": [
-              "basic",
-              "hybrid",
-              "labels"
-            ],
-            "x-ms-enum": {
-              "name": "StaticMapLayer",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "basic",
-                  "description": "Returns an image containing all map features including polygons, borders, roads and labels."
-                },
-                {
-                  "value": "hybrid",
-                  "description": "Returns an image containing borders, roads, and labels, and can be overlaid on other tiles (such as satellite imagery) to produce hybrid tiles."
-                },
-                {
-                  "value": "labels",
-                  "description": "Returns an image of just the map's label information."
-                }
-              ]
-            }
-          },
-          {
-            "name": "style",
+            "name": "TilesetId",
             "in": "query",
             "description": "Map style to be returned. Possible values are main and dark.",
             "type": "string",
             "enum": [
-              "main",
-              "dark"
+              "microsoft.base.darkgrey",
+              "microsoft.base.road",
+              "microsoft.imagery"
             ],
             "x-ms-enum": {
-              "name": "MapImageStyle",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "main",
-                  "description": "Azure Maps main style"
-                },
-                {
-                  "value": "dark",
-                  "description": "Dark grey version of the Azure Maps main style"
-                }
-              ]
+              "$ref": "#/parameters/RasterTileFormat"
+            }
+          },
+          {
+            "name": "TrafficLayer",
+            "in": "query",
+            "description": "Optional Value. If TrafficLayer is set, will return map image with traffic flow layer; Otherwise, return basemap image.",
+            "type": "string",
+            "enum": [
+              "microsoft.traffic.relative.main"
+            ],
+            "x-ms-enum": {
+              "$ref": "#/parameters/RasterTileFormat"
             }
           },
           {
@@ -635,20 +613,20 @@
           {
             "name": "height",
             "in": "query",
-            "description": "Height of the resulting image in pixels. Range is 1 to 8192. Default\nis 512. It shouldn’t be used with bbox.",
+            "description": "Height of the resulting image in pixels. Range is 80 to 1500. Default\nis 512. It shouldn’t be used with bbox.",
             "type": "integer",
             "format": "int32",
-            "minimum": 1,
-            "maximum": 8192
+            "minimum": 80,
+            "maximum": 1500
           },
           {
             "name": "width",
             "in": "query",
-            "description": "Width of the resulting image in pixels. Range is 1 to 8192. Default is 512. It shouldn’t be used with bbox.",
+            "description": "Width of the resulting image in pixels. Range is 80 to 2000. Default is 512. It shouldn’t be used with bbox.",
             "type": "integer",
             "format": "int32",
-            "minimum": 1,
-            "maximum": 8192
+            "minimum": 80,
+            "maximum": 2000
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
