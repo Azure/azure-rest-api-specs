@@ -6859,8 +6859,11 @@
           "description": "the location of the resource for which the event is being emitted"
         },
         "tags": {
-          "type": "string",
-          "description": "the tags on the resource for which the event is being emitted"
+          "type": "object",
+          "description": "the tags on the resource for which the event is being emitted",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
           "type": "object",
