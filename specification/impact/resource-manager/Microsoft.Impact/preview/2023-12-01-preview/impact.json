@@ -69,7 +69,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -84,48 +84,6 @@
         "x-ms-examples": {
           "OperationsList": {
             "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/getAllInsights": {
-      "get": {
-        "operationId": "Insights_GetAll",
-        "tags": [
-          "Insights"
-        ],
-        "description": "get all insights under subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/InsightCustomResourceCommonParameters.azureResourceId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/InsightListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Insights list by subscription": {
-            "$ref": "./examples/Insights_GetAll.json"
           }
         },
         "x-ms-pageable": {
@@ -156,7 +114,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ImpactCategoryListResult"
             }
@@ -203,7 +161,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ImpactCategory"
             }
@@ -239,7 +197,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TopologyImpactListResult"
             }
@@ -286,7 +244,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TopologyImpact"
             }
@@ -399,7 +357,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -432,7 +390,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WorkloadImpactListResult"
             }
@@ -479,7 +437,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WorkloadImpact"
             }
@@ -601,7 +559,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -642,7 +600,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InsightListResult"
             }
@@ -697,7 +655,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Insight"
             }
@@ -710,28 +668,152 @@
           }
         },
         "x-ms-examples": {
-          "Get Insight resources by workloadImpactName and insightName": {
-            "$ref": "./examples/Insights_Get.json"
+          "Get Insight sample for Diagnostics category": {
+            "$ref": "./examples/Insights_Get_diagnostics.json"
+          },
+          "Get Insight sample for MitigationAction category": {
+            "$ref": "./examples/Insights_Get_mitigationAction.json"
+          },
+          "Get Insight sample for service health category": {
+            "$ref": "./examples/Insights_Get_servicehealth.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Insights_Create",
+        "tags": [
+          "Insights"
+        ],
+        "description": "Create Insight resource, This is Admin only operation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workloadImpactName",
+            "in": "path",
+            "description": "workloadImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          },
+          {
+            "name": "insightName",
+            "in": "path",
+            "description": "Name of the insight",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Insight"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Insight' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Insight"
+            }
+          },
+          "201": {
+            "description": "Resource 'Insight' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Insight"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creating an insight": {
+            "$ref": "./examples/Insights_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Insights_Delete",
+        "tags": [
+          "Insights"
+        ],
+        "description": "Delete Insight resource, This is Admin only operation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workloadImpactName",
+            "in": "path",
+            "description": "workloadImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          },
+          {
+            "name": "insightName",
+            "in": "path",
+            "description": "Name of the insight",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an Insight": {
+            "$ref": "./examples/Insights_Delete.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Action": {
+    "AdditionalField": {
       "type": "object",
-      "description": "details of the action performed to or for the azure resource.",
+      "description": "additional user defined field.",
       "properties": {
-        "summary": {
+        "name": {
           "type": "string",
-          "description": "summary of the action performed to or for the resource."
+          "description": "name of the field."
         },
-        "time": {
+        "value": {
           "type": "string",
-          "format": "date-time",
-          "description": "time at which action was performed."
+          "description": "value of the field."
         }
-      }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
     },
     "ClientIncidentDetails": {
       "type": "object",
@@ -799,6 +881,24 @@
           "description": "target which connection was attempted"
         }
       }
+    },
+    "Content": {
+      "type": "object",
+      "description": "Article details of the insight like title, description etc",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the insight"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the insight"
+        }
+      },
+      "required": [
+        "title",
+        "description"
+      ]
     },
     "ErrorDetailProperties": {
       "type": "object",
@@ -945,33 +1045,29 @@
       "type": "object",
       "description": "details of of the impact for which insight has been generated.",
       "properties": {
-        "impactedResources": {
-          "type": "array",
-          "description": "List of impacted Azure resources.",
-          "items": {
-            "$ref": "#/definitions/ImpactedResource"
-          },
-          "x-ms-identifiers": []
+        "impactedResourceId": {
+          "type": "string",
+          "description": "List of impacted Azure resources."
         },
-        "impactStartTime": {
+        "startTime": {
           "type": "string",
           "format": "date-time",
           "description": "Time at which impact was started according to reported impact."
         },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which impact was ended according to reported impact."
+        },
         "impactId": {
           "type": "string",
-          "description": "azure Id of the impact."
-        },
-        "impactUniqueId": {
-          "type": "string",
-          "description": "unique (guid) id of the impact generated during impact creation."
+          "description": "Azure Id of the impact."
         }
       },
       "required": [
-        "impactedResources",
-        "impactStartTime",
-        "impactId",
-        "impactUniqueId"
+        "impactedResourceId",
+        "startTime",
+        "impactId"
       ]
     },
     "ImpactedResource": {
@@ -1062,6 +1158,42 @@
         }
       ]
     },
+    "InsightCustomResourceCommonParameters": {
+      "type": "object",
+      "description": "context of post call for insight",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The ID of the target subscription.",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "string",
+          "description": "The provider namespace for the resource.",
+          "enum": [
+            "Microsoft.Impact"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "azureResourceId": {
+          "type": "string",
+          "description": "Filter by resource type",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "apiVersion",
+        "subscriptionId",
+        "provider"
+      ]
+    },
     "InsightDetails": {
       "type": "object",
       "description": "Body of the get all insights",
@@ -1102,46 +1234,45 @@
           "description": "Resource provisioning state.",
           "readOnly": true
         },
-        "summary": {
-          "type": "string",
-          "description": "summary of the insight."
-        },
         "category": {
           "type": "string",
           "description": "category of the insight."
         },
         "status": {
           "type": "string",
-          "description": "status of the impact. example resolved, repaired, other."
+          "description": "status of the insight. example resolved, repaired, other."
         },
-        "createdTime": {
+        "eventId": {
+          "type": "string",
+          "description": "Identifier of the event that has been correlated with this insight. This can be used to aggregate insights for the same event."
+        },
+        "content": {
+          "$ref": "#/definitions/Content",
+          "description": "Contains title & description for the insight"
+        },
+        "eventTime": {
           "type": "string",
           "format": "date-time",
-          "description": "time at which insight has been generated."
+          "description": "Time of the event, which has been correlated the impact."
         },
-        "updatedTime": {
+        "insightUniqueId": {
           "type": "string",
-          "format": "date-time",
-          "description": "time at which insight has been updated."
+          "description": "unique id of the insight."
         },
-        "actions": {
-          "type": "array",
-          "description": "list of actions performed to or for the azure resource.",
-          "items": {
-            "$ref": "#/definitions/Action"
-          },
-          "x-ms-identifiers": []
-        },
-        "impactDetails": {
+        "impact": {
           "$ref": "#/definitions/ImpactDetails",
           "description": "details of of the impact for which insight has been generated."
+        },
+        "additionalDetails": {
+          "type": "object",
+          "description": "additional details of the insight."
         }
       },
       "required": [
-        "createdTime",
-        "updatedTime",
-        "actions",
-        "impactDetails"
+        "category",
+        "content",
+        "insightUniqueId",
+        "impact"
       ]
     },
     "InsightUnderSubscription": {
@@ -1770,15 +1901,6 @@
     },
     "CustomParameters.resourceType": {
       "name": "resourceType",
-      "in": "query",
-      "description": "Filter by resource type",
-      "required": false,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method"
-    },
-    "InsightCustomResourceCommonParameters.azureResourceId": {
-      "name": "azureResourceId",
       "in": "query",
       "description": "Filter by resource type",
       "required": false,

@@ -66,7 +66,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
@@ -108,7 +108,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyContainerGroupPoolResourceListResult"
             }
@@ -150,7 +150,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachinePoolResourceListResult"
             }
@@ -195,7 +195,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyContainerGroupPoolResourceListResult"
             }
@@ -248,7 +248,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyContainerGroupPoolResource"
             }
@@ -379,7 +379,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyContainerGroupPoolResource"
             }
@@ -441,7 +441,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -484,7 +484,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachinePoolResourceListResult"
             }
@@ -537,7 +537,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
             }
@@ -668,7 +668,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
             }
@@ -730,7 +730,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -781,7 +781,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachineResourceListResult"
             }
@@ -842,7 +842,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachineResource"
             }
@@ -872,7 +872,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Specifies container group profile id of standby container groups."
+          "format": "arm-id",
+          "description": "Specifies container group profile id of standby container groups.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerInstance/containerGroupProfiles"
+              }
+            ]
+          }
         },
         "revision": {
           "type": "integer",
@@ -890,7 +898,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Specifies container group profile id of standby container groups."
+          "format": "arm-id",
+          "description": "Specifies container group profile id of standby container groups.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerInstance/containerGroupProfiles"
+              }
+            ]
+          }
         },
         "revision": {
           "type": "integer",
@@ -936,43 +952,6 @@
         }
       }
     },
-    "ElasticityProfile": {
-      "type": "object",
-      "description": "Details of the ElasticityProfile.",
-      "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of standby container groups.",
-          "minimum": 0,
-          "maximum": 2000
-        },
-        "refillPolicy": {
-          "$ref": "#/definitions/RefillPolicy",
-          "description": "Specifies refill policy of the pool."
-        }
-      },
-      "required": [
-        "maxReadyCapacity"
-      ]
-    },
-    "ElasticityProfileUpdate": {
-      "type": "object",
-      "description": "Details of the ElasticityProfile.",
-      "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of standby container groups.",
-          "minimum": 0,
-          "maximum": 2000
-        },
-        "refillPolicy": {
-          "$ref": "#/definitions/RefillPolicy",
-          "description": "Specifies refill policy of the pool."
-        }
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning state",
@@ -1004,10 +983,11 @@
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Virtual machine is being deleted."
+            "description": "Resource is being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "RefillPolicy": {
       "type": "string",
@@ -1025,6 +1005,43 @@
             "description": "A refill policy that standby pool is automatically refilled to maintain maxReadyCapacity."
           }
         ]
+      }
+    },
+    "StandbyContainerGroupPoolElasticityProfile": {
+      "type": "object",
+      "description": "Specifies the elasticity profile of the standby container group pools.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of standby container groups in the standby pool.",
+          "minimum": 0,
+          "maximum": 2000
+        },
+        "refillPolicy": {
+          "$ref": "#/definitions/RefillPolicy",
+          "description": "Specifies refill policy of the pool."
+        }
+      },
+      "required": [
+        "maxReadyCapacity"
+      ]
+    },
+    "StandbyContainerGroupPoolElasticityProfileUpdate": {
+      "type": "object",
+      "description": "Specifies the elasticity profile of the standby container group pools.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of standby container groups in the standby pool.",
+          "minimum": 0,
+          "maximum": 2000
+        },
+        "refillPolicy": {
+          "$ref": "#/definitions/RefillPolicy",
+          "description": "Specifies refill policy of the pool."
+        }
       }
     },
     "StandbyContainerGroupPoolResource": {
@@ -1073,7 +1090,7 @@
       "description": "Details of the StandbyContainerGroupPool.",
       "properties": {
         "elasticityProfile": {
-          "$ref": "#/definitions/ElasticityProfile",
+          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfile",
           "description": "Specifies elasticity profile of standby container group pools."
         },
         "containerGroupProperties": {
@@ -1113,12 +1130,41 @@
       "description": "The updatable properties of the StandbyContainerGroupPoolResource.",
       "properties": {
         "elasticityProfile": {
-          "$ref": "#/definitions/ElasticityProfileUpdate",
+          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfileUpdate",
           "description": "Specifies elasticity profile of standby container group pools."
         },
         "containerGroupProperties": {
           "$ref": "#/definitions/ContainerGroupPropertiesUpdate",
           "description": "Specifies container group properties of standby container group pools."
+        }
+      }
+    },
+    "StandbyVirtualMachinePoolElasticityProfile": {
+      "type": "object",
+      "description": "Details of the elasticity profile.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of virtual machines in the standby virtual machine pool.",
+          "minimum": 0,
+          "maximum": 2000
+        }
+      },
+      "required": [
+        "maxReadyCapacity"
+      ]
+    },
+    "StandbyVirtualMachinePoolElasticityProfileUpdate": {
+      "type": "object",
+      "description": "Details of the elasticity profile.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of virtual machines in the standby virtual machine pool.",
+          "minimum": 0,
+          "maximum": 2000
         }
       }
     },
@@ -1167,24 +1213,27 @@
       "type": "object",
       "description": "Details of the StandbyVirtualMachinePool.",
       "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of standby VMs. When the pool is attached to VMScaleSets, the limit applies to each VMScaleSet.",
-          "maximum": 2000
+        "elasticityProfile": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfile",
+          "description": "Specifies the elasticity profile of the standby virtual machine pools."
         },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of Virtual Machines in the pool.",
+          "description": "Specifies the desired state of virtual machines in the pool.",
           "x-ms-identifiers": [
             "vmState"
           ]
         },
-        "attachedVirtualMachineScaleSetIds": {
-          "type": "array",
-          "description": "Specifies list of VMScaleSets' fully qualified resource IDs the pool is attached to. When multiple VMScaleSets are specified, standby VMs are created for each VMScaleSet independently.",
-          "items": {
-            "type": "string"
+        "attachedVirtualMachineScaleSetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachineScaleSet"
+              }
+            ]
           }
         },
         "provisioningState": {
@@ -1194,7 +1243,6 @@
         }
       },
       "required": [
-        "maxReadyCapacity",
         "virtualMachineState"
       ]
     },
@@ -1219,24 +1267,27 @@
       "type": "object",
       "description": "The updatable properties of the StandbyVirtualMachinePoolResource.",
       "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of standby VMs. When the pool is attached to VMScaleSets, the limit applies to each VMScaleSet.",
-          "maximum": 2000
+        "elasticityProfile": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfileUpdate",
+          "description": "Specifies the elasticity profile of the standby virtual machine pools."
         },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of Virtual Machines in the pool.",
+          "description": "Specifies the desired state of virtual machines in the pool.",
           "x-ms-identifiers": [
             "vmState"
           ]
         },
-        "attachedVirtualMachineScaleSetIds": {
-          "type": "array",
-          "description": "Specifies list of VMScaleSets' fully qualified resource IDs the pool is attached to. When multiple VMScaleSets are specified, standby VMs are created for each VMScaleSet independently.",
-          "items": {
-            "type": "string"
+        "attachedVirtualMachineScaleSetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachineScaleSet"
+              }
+            ]
           }
         }
       }
@@ -1306,7 +1357,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Specifies ARM resource id of the subnet."
+          "format": "arm-id",
+          "description": "Specifies ARM resource id of the subnet.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -1327,7 +1386,7 @@
           {
             "name": "Running",
             "value": "Running",
-            "description": "Virtual machine is up and running."
+            "description": "The virtual machine is up and running."
           },
           {
             "name": "Deallocated",

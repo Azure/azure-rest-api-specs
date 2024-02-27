@@ -27,47 +27,16 @@ These are the global settings for the mobileCore.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-04-15-preview
+tag: package-2023-10-15-preview
 ```
+### Tag: package-2023-10-15-preview
 
-### Tag: package-2023-04-15-preview
+These settings apply only when `--tag=package-2023-10-15-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-2023-04-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-04-15-preview'
+```yaml $(tag) == 'package-2023-10-15-preview'
 input-file:
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/operation.json 
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/common.json 
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/routing.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/servicearea.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/trackingarea.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/amfdeployment.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/amfprofile.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/cluster.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/deploymentarea.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/datanetwork.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/deeppacketinspection.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/mobilepacketcore.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/networkslice.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/nfvi.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/nrfdeployment.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/nrfprofile.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/nssfdeployment.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/nssfprofile.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/packetdetectionrule.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/packetflowdescription.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/pccrule.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/pccrulebase.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/plmn.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/smfdeployment.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/smfprofile.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/subscriberanalyzer.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/upfdeployment.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/upfprofile.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/configsnapshot.json
-  - Microsoft.MobilePacketCore/preview/2023-04-15-preview/activationstatus.json
+  - Microsoft.MobilePacketCore/preview/2023-10-15-preview/mobilepacketcore.json
 ```
-
 
 # Code Generation
 

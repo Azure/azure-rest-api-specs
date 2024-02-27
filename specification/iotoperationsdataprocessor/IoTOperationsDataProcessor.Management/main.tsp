@@ -13,14 +13,14 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @armProviderNamespace
 @service({
   title: "Microsoft.IoTOperationsDataProcessor management service.",
-  version: "2023-10-04-preview",
 })
 @doc("Microsoft.IoTOperationsDataProcessor Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.IoTOperationsDataProcessor;
 
 interface Operations extends Azure.ResourceManager.Operations {}

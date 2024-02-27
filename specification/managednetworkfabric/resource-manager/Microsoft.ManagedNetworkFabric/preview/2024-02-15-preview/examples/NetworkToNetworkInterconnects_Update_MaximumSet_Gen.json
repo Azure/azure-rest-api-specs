@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "api-version": "2024-02-15-preview",
+    "networkFabricName": "example-fabric",
+    "networkToNetworkInterconnectName": "example-nni",
+    "body": {
+      "properties": {
+        "layer2Configuration": {
+          "mtu": 1500,
+          "interfaces": [
+            "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-networkDevice/networkInterfaces/example-networkInterface"
+          ]
+        },
+        "optionBLayer3Configuration": {
+          "peerASN": 2345,
+          "vlanId": 1235,
+          "primaryIpv4Prefix": "20.0.0.12/29",
+          "primaryIpv6Prefix": "4FFE:FFFF:0:CD30::a8/127",
+          "secondaryIpv4Prefix": "20.0.0.14/29",
+          "secondaryIpv6Prefix": "6FFE:FFFF:0:CD30::ac/127"
+        },
+        "npbStaticRouteConfiguration": {
+          "bfdConfiguration": {
+            "intervalInMilliSeconds": 310,
+            "multiplier": 15
+          },
+          "ipv4Routes": [
+            {
+              "prefix": "20.0.0.11/30",
+              "nextHop": [
+                "21.20.20.10"
+              ]
+            }
+          ],
+          "ipv6Routes": [
+            {
+              "prefix": "4FFE:FFFF:0:CD30::ac/127",
+              "nextHop": [
+                "5FFE:FFFF:0:CD30::ac"
+              ]
+            }
+          ]
+        },
+        "importRoutePolicy": {
+          "importIpv4RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy1",
+          "importIpv6RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy1"
+        },
+        "exportRoutePolicy": {
+          "exportIpv4RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy1",
+          "exportIpv6RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy1"
+        },
+        "ingressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
+        "egressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "nniType": "CE",
+          "isManagementType": "True",
+          "useOptionB": "True",
+          "layer2Configuration": {
+            "mtu": 1500,
+            "interfaces": [
+              "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-networkDevice/networkInterfaces/example-networkInterface"
+            ]
+          },
+          "optionBLayer3Configuration": {
+            "peerASN": 61234,
+            "vlanId": 1234,
+            "fabricASN": 17,
+            "primaryIpv4Prefix": "10.0.0.12/30",
+            "primaryIpv6Prefix": "4FFE:FFFF:0:CD30::a8/127",
+            "secondaryIpv4Prefix": "40.0.0.14/30",
+            "secondaryIpv6Prefix": "6FFE:FFFF:0:CD30::ac/127"
+          },
+          "npbStaticRouteConfiguration": {
+            "bfdConfiguration": {
+              "administrativeState": "Enabled",
+              "intervalInMilliSeconds": 300,
+              "multiplier": 25
+            },
+            "ipv4Routes": [
+              {
+                "prefix": "20.0.0.12/30",
+                "nextHop": [
+                  "21.20.20.20"
+                ]
+              }
+            ],
+            "ipv6Routes": [
+              {
+                "prefix": "3FFE:FFFF:0:CD30::ac/127",
+                "nextHop": [
+                  "4FFE:FFFF:0:CD30::ac"
+                ]
+              }
+            ]
+          },
+          "importRoutePolicy": {
+            "importIpv4RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy",
+            "importIpv6RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy"
+          },
+          "exportRoutePolicy": {
+            "exportIpv4RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy",
+            "exportIpv6RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy"
+          },
+          "ingressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
+          "egressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
+          "configurationState": "Succeeded",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled"
+        },
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric/networkToNetworkInterconnects/example-nni",
+        "name": "example-nni",
+        "type": "microsoft.managedNetworkFabric/networkFabrics/networkToNetworkInterconnects",
+        "systemData": {
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-07T09:53:31.314Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-07T09:53:31.314Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

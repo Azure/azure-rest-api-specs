@@ -2391,6 +2391,22 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "configurationStore": {
+          "x-nullable": true,
+          "description": "An option to store configuration into different place",
+          "$ref": "#/definitions/ConfigurationStore"
+        }
+      }
+    },
+    "ConfigurationStore": {
+      "type": "object",
+      "description": "An option to store configuration into different place",
+      "properties": {
+        "appConfigurationId": {
+          "x-nullable": true,
+          "type": "string",
+          "description": "The app configuration id to store configuration"
         }
       }
     },

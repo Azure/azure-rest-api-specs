@@ -166,6 +166,7 @@ enum StringSizeNumberOperatorVariable {
 
   @doc("Request body")
   RequestBody,
+
   ...WithSelectorOperatorVariable,
 }
 

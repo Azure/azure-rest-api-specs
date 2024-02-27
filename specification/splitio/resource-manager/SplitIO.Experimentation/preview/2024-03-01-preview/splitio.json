@@ -186,7 +186,7 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
-            "maxLength": 260,
+            "maxLength": 50,
             "pattern": "^[^<>%&:\\?/#]*$"
           }
         ],
@@ -232,7 +232,7 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
-            "maxLength": 260,
+            "maxLength": 50,
             "pattern": "^[^<>%&:\\?/#]*$"
           },
           {
@@ -304,7 +304,7 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
-            "maxLength": 260,
+            "maxLength": 50,
             "pattern": "^[^<>%&:\\?/#]*$"
           },
           {
@@ -377,7 +377,7 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
-            "maxLength": 260,
+            "maxLength": 50,
             "pattern": "^[^<>%&:\\?/#]*$"
           }
         ],
@@ -422,6 +422,29 @@
     }
   },
   "definitions": {
+    "AccessPolicy": {
+      "type": "object",
+      "description": "Access policy for an experimentation workspace.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application id used for access to the experimentation workspace."
+        }
+      },
+      "required": [
+        "applicationId"
+      ]
+    },
+    "AccessPolicyUpdate": {
+      "type": "object",
+      "description": "Access policy for an experimentation workspace.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application id used for access to the experimentation workspace."
+        }
+      }
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -452,6 +475,26 @@
         ]
       }
     },
+    "DataSource": {
+      "type": "object",
+      "description": "Data source that telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "logAnalytics": {
+          "$ref": "#/definitions/LogAnalytics",
+          "description": "Log Analytics data source."
+        }
+      }
+    },
+    "DataSourceUpdate": {
+      "type": "object",
+      "description": "Data source that telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "logAnalytics": {
+          "$ref": "#/definitions/LogAnalyticsUpdate",
+          "description": "Log Analytics data source."
+        }
+      }
+    },
     "ExperimentationWorkspace": {
       "type": "object",
       "description": "A ExperimentationWorkspace Resource by Split.IO",
@@ -464,6 +507,10 @@
             "read",
             "create"
           ]
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -499,19 +546,34 @@
     },
     "ExperimentationWorkspaceProperties": {
       "type": "object",
-      "description": "The properties of ExperimentationWorkspace",
+      "description": "Properties of the experimentation workspace",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
+        },
+        "accessPolicy": {
+          "$ref": "#/definitions/AccessPolicy",
+          "description": "Access policy for an experimentation workspace."
+        },
+        "dataSource": {
+          "$ref": "#/definitions/DataSource",
+          "description": "Data source that telemetry data required for experimentation will be retrieved from."
         }
-      }
+      },
+      "required": [
+        "accessPolicy"
+      ]
     },
     "ExperimentationWorkspaceUpdate": {
       "type": "object",
       "description": "The type used for update operations of the ExperimentationWorkspace.",
       "properties": {
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
@@ -522,7 +584,90 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/ExperimentationWorkspaceUpdateProperties",
+          "x-ms-client-flatten": true
         }
+      }
+    },
+    "ExperimentationWorkspaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ExperimentationWorkspace.",
+      "properties": {
+        "accessPolicy": {
+          "$ref": "#/definitions/AccessPolicyUpdate",
+          "description": "Access policy for an experimentation workspace."
+        },
+        "dataSource": {
+          "$ref": "#/definitions/DataSourceUpdate",
+          "description": "Data source that telemetry data required for experimentation will be retrieved from."
+        }
+      }
+    },
+    "LogAnalytics": {
+      "type": "object",
+      "description": "The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/LogAnalyticsWorkspaceResourceId",
+          "description": "Resource id of the Log Analytics workspace."
+        },
+        "storageAccountResourceId": {
+          "$ref": "#/definitions/StorageAccountResourceId",
+          "description": "Resource id of the storage account associated with the Log Analytics workspace."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Controls whether data flow from the configured Log Analytics workspace into the experimentation workspace is enabled."
+        }
+      },
+      "required": [
+        "resourceId",
+        "storageAccountResourceId",
+        "enabled"
+      ]
+    },
+    "LogAnalyticsUpdate": {
+      "type": "object",
+      "description": "The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/LogAnalyticsWorkspaceResourceId",
+          "description": "Resource id of the Log Analytics workspace."
+        },
+        "storageAccountResourceId": {
+          "$ref": "#/definitions/StorageAccountResourceId",
+          "description": "Resource id of the storage account associated with the Log Analytics workspace."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Controls whether data flow from the configured Log Analytics workspace into the experimentation workspace is enabled."
+        }
+      }
+    },
+    "LogAnalyticsWorkspaceResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.OperationalInsights/workspaces"
+          }
+        ]
+      }
+    },
+    "StorageAccountResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Storage/storageAccounts"
+          }
+        ]
       }
     },
     "Versions": {

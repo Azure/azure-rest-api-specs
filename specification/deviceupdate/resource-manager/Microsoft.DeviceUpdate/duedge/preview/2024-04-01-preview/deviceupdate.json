@@ -465,7 +465,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ImportUpdateInput"
+              "$ref": "#/definitions/ImportUpdateRequest"
             },
             "description": "The update to be imported (see schema https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for details)."
           }
@@ -1838,11 +1838,12 @@
                 "$ref": "#/definitions/Location"
               }
             },
-            "mqttBrokerEndpoints": {
-              "description": "MQTT Broker endpoints used for device communication.",
+            "mqttBrokers": {
+              "description": "MQTT Brokers used for device communication.",
+              "x-ms-identifiers": [],
               "type": "array",
               "items": {
-                "type": "string"
+                "$ref": "#/definitions/MqttBroker"
               }
             },
             "deviceEnrollmentScope": {
@@ -1853,15 +1854,15 @@
                 "read"
               ]
             },
-            "deviceEnrollmentManagedIdentityResourceId": {
-              "description": "User assigned managed identity used for device enrollment.",
+            "serviceManagedIdentityResourceId": {
+              "description": "User assigned managed identity used for device enrollment and broker communication.",
               "type": "string"
             }
           },
           "required": [
-            "mqttBrokerEndpoints",
+            "mqttBrokers",
             "deviceEnrollmentScope",
-            "deviceEnrollmentManagedIdentityResourceId"
+            "serviceManagedIdentityResourceId"
           ]
         },
         "identity": {
@@ -1883,6 +1884,36 @@
         }
       },
       "description": "The CMK encryption settings on the Device Update account."
+    },
+    "MqttBroker": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The full resourceId of the Event Grid Namespace. Required if using Azure EventGrid broker",
+          "type": "string"
+        },
+        "mqttHostName": {
+          "description": "MQTT Broker endpoint. Required if not using Azure EventGrid broker",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of a MQTT Broker",
+          "type": "string",
+          "enum": [
+            "EventGrid",
+            "Generic"
+          ],
+          "default": "EventGrid",
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "The MQTT Broker"
     },
     "Location": {
       "type": "object",
@@ -2832,6 +2863,18 @@
         }
       }
     },
+    "ImportUpdateRequest": {
+      "description": "Import Update API request body.",
+      "type": "object",
+      "properties": {
+        "importUpdateInput": {
+          "$ref": "#/definitions/ImportUpdateInput"
+        }
+      },
+      "required": [
+        "importUpdateInput"
+      ]
+    },
     "ImportUpdateInput": {
       "type": "array",
       "x-ms-identifiers": [],
@@ -3357,7 +3400,7 @@
       "x-ms-parameter-location": "method",
       "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
       "minLength": 3,
-      "maxLength": 24
+      "maxLength": 36
     },
     "AgentNameParameter": {
       "name": "agentName",
@@ -3412,7 +3455,7 @@
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9.-_]+$",
       "minLength": 7,
-      "maximum": 173
+      "maxLength": 173
     },
     "DeviceClassIdParameter": {
       "name": "deviceClassId",

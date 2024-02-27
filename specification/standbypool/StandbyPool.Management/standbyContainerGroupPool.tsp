@@ -37,7 +37,7 @@ model StandbyContainerGroupPoolResource
 @doc("Details of the StandbyContainerGroupPool.")
 model StandbyContainerGroupPoolResourceProperties {
   @doc("Specifies elasticity profile of standby container group pools.")
-  elasticityProfile: ElasticityProfile;
+  elasticityProfile: StandbyContainerGroupPoolElasticityProfile;
 
   @doc("Specifies container group properties of standby container group pools.")
   containerGroupProperties: ContainerGroupProperties;
@@ -48,9 +48,9 @@ model StandbyContainerGroupPoolResourceProperties {
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
-@doc("Details of the ElasticityProfile.")
-model ElasticityProfile {
-  @doc("Specifies maximum number of standby container groups.")
+@doc("Specifies the elasticity profile of the standby container group pools.")
+model StandbyContainerGroupPoolElasticityProfile {
+  @doc("Specifies maximum number of standby container groups in the standby pool.")
   @maxValue(2000)
   @minValue(0)
   maxReadyCapacity: int64;
@@ -73,7 +73,11 @@ model ContainerGroupProperties {
 @doc("Details of the ContainerGroupProfile.")
 model ContainerGroupProfile {
   @doc("Specifies container group profile id of standby container groups.")
-  id: string;
+  id: ResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerInstance/containerGroupProfiles";
+    }
+  ]>;
 
   @doc("Specifies revision of container group profile.")
   revision?: int64;
@@ -90,7 +94,11 @@ enum RefillPolicy {
 @doc("Subnet of container group")
 model Subnet {
   @doc("Specifies ARM resource id of the subnet.")
-  id: string;
+  id: ResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)

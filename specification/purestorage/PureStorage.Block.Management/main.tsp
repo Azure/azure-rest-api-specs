@@ -64,14 +64,11 @@ model StoragePoolProperties {
 
   @doc("Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in.")
   @visibility("read", "create")
-  delegatedSubnetId: string;
+  vnetInjection: VnetInjection;
 
   @doc("How long a deleted object is kept before eradication (time in seconds).")
   @visibility("read")
   dataRetentionPeriod?: int64;
-
-  @doc("if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost).")
-  avsEnabled: boolean;
 
   @doc("Total bandwidth provisioned for the pool (in MB/s).")
   provisionedBandwidthMbPerSec: int64;
@@ -81,6 +78,7 @@ model StoragePoolProperties {
   provisionedIops?: int64;
 
   @doc("Presented if avsEnabled is true.")
+  @visibility("read")
   avs?: AzureVmwareService;
 
   @doc("Provisioning state of the resource.")
@@ -92,18 +90,25 @@ model StoragePoolProperties {
   reservationResourceId: string;
 }
 
+@doc("Describes Virtual Network Subnet the Pool is visible in.")
+model VnetInjection {
+  @doc("Full Azure Resource ID of the Virtual Network subnet to inject pool in.")
+  subnetId: string;
+
+  @doc("Full Azure Resource ID of the Virtual Network to inject pool in.")
+  vnetId: string;
+}
+
 @doc("Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.")
 model AzureVmwareService {
-  @doc("Internal VMware id identifying this StoragePool as a storage provider.")
-  storageProviderId: string;
+  @doc("if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost).")
+  avsEnabled: boolean;
 
-  @doc("Resource id pointing at the AVS SDDC the pool is configured with (used by AVS Resource Provider to keep track of attached pools).")
-  sddc?: string;
+  @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
+  sddcResourceId?: string;
 
-  @doc("Password for VASA service login, disabled if omitted or set to null.")
-  @visibility("create", "update")
-  @secret
-  vasaProviderPassword?: string;
+  @doc("Immutable identifier for the vSpherePlugin provided by Pure Storage. The value is available if the vSpherePlugin has been enabled for the storage pool.")
+  vSpherePluginKey?: string;
 }
 
 @armResourceOperations
@@ -130,10 +135,180 @@ interface StoragePools {
   getAvsParameters(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<AvsDetails> | ErrorResponse;
+
+  @doc("Enable AVS on storage pool")
+  @armResourceAction(StoragePool)
+  @action("enableAvs")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  enableAvs(
+    ...ResourceInstanceParameters<StoragePool>,
+
+    @doc("Storage pool enable Avs properties")
+    @body
+    properties: StoragePoolEnableAvs,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
+
+  @doc("Disable AVS on storage pool")
+  @armResourceAction(StoragePool)
+  @action("disableAvs")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  disableAvs(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
+
+  @doc("Finalize AVS on storage pool")
+  @armResourceAction(StoragePool)
+  @action("finalizeAvs")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  finalizeAvs(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
+
+  @doc("Enable VSphere plugin on storage pool")
+  @armResourceAction(StoragePool)
+  @action("enableVspherePlugin")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  enableVspherePlugin(
+    ...ResourceInstanceParameters<StoragePool>,
+
+    @doc("VSphere plugin properties")
+    @body
+    properties: StoragePoolEnableVspherePlugin,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
+
+  @doc("Disable VSphere plugin on storage pool")
+  @armResourceAction(StoragePool)
+  @action("disableVspherePlugin")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  disableVspherePlugin(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
+
+  @doc("Upgrade VSphere plugin on storage pool")
+  @armResourceAction(StoragePool)
+  @action("upgradeVspherePlugin")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  upgradeVspherePlugin(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
 }
 
 @doc("AVS (Azure VMware Solution) related properties.")
 model AvsDetails {
+  @doc("Flag which tells if the AVS support is enabled.")
+  avsEnabled: boolean;
+
+  @doc("AVS configuration properties")
+  avs?: Avs;
+
+  @doc("vSphere configuration properties")
+  vSphere?: Vsphere;
+
+  @doc("tells if the plugin has been enabled or not")
+  vSpherePluginEnabled: boolean;
+
+  @doc("vSpherePluginKey associated with the plugin")
+  vSpherePluginKey?: string;
+
+  @doc("vSphere plugin configuration properties")
+  vSpherePlugin?: VspherePlugin;
+}
+
+@doc("vSphere plugin configuration properties")
+model VspherePlugin {
+  @doc("URL for registration of vSphere plugin")
+  registrationUrl: string;
+
+  @doc("Company name for vSphere plugin")
+  companyName: string;
+
+  @doc("Description of vSphere plugin")
+  description: string;
+
+  @doc("Protocol used by vSphere plugin")
+  protocol: string;
+
+  @doc("Admin email for vSphere plugin")
+  adminEmail: string;
+
+  @doc("Version of vSphere plugin")
+  version: string;
+
+  @doc("Certificate for vSphere plugin")
+  certificate: string;
+}
+
+@doc("vSphere configuration properties")
+model Vsphere {
+  @doc("Resource id pointing at the AVS SDDC the pool is configured with")
+  sddcResourceId: string;
+
+  @doc("IP address of the vSphere software installed in the SDDC")
+  vSphereIp: string;
+}
+
+@doc("AVS (Azure VMware Solution) related properties.")
+model Avs {
   @doc("Username for VMware VASA service login.")
   vasaProviderUsername: string;
 
@@ -173,10 +348,31 @@ model HealthDetails {
   usedCapacityPercentage: float64;
 
   @doc("Bandwidth usage metrics reported for a given resource.")
-  bandwidthUsage: string;
+  bandwidthUsage: BandwidthUsage;
 
   @doc("IOPS usage metrics reported for a given resource.")
-  iopsUsage: string;
+  iopsUsage: IopsUsage;
+
+  @doc("Contains properties related to used Flash space.")
+  space: Space;
+}
+
+@doc("Contains properties related to used Flash space.")
+model Space {
+  @doc("The total space used by customer data. Measured in bytes.")
+  totalUsed: int64;
+
+  @doc("The unique physical space occupied by customer data. Unique physical space does not include shared space or snapshots. Measured in bytes.")
+  unique: int64;
+
+  @doc("The physical space occupied by data unique to one or more snapshots. Measured in bytes.")
+  snapshots: int64;
+
+  @doc("The physical space occupied by de-duplicated data, meaning that the space is shared with other volumes and snapshots as a result of data deduplication. Measured in bytes.")
+  shared: int64;
+
+  @doc("Data reduction ratio achieved on this pool, used to set price per TB for billing.")
+  dataReductionRatio: float64;
 }
 
 @doc("Bandwidth usage metrics reported for a given resource.")
@@ -224,6 +420,25 @@ enum AlertLevel {
   Error: "error",
 }
 
+@doc("Storage Pool enable AVS")
+model StoragePoolEnableAvs {
+  @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
+  sddcResourceId: string;
+
+  @doc("Password for VASA service login.")
+  @secret
+  vasaProviderPassword: string;
+}
+
+@doc("Storage Pool enable VSphere plugins")
+model StoragePoolEnableVspherePlugin {
+  @doc("Storage Pool Vsphere id")
+  vSphereIp: string;
+
+  @doc("Storage Pool Vsphere cert thumb print")
+  vSphereCertThumbprint?: string;
+}
+
 @doc("The AVS Storage Container resource type.")
 @parentResource(StoragePool)
 model AvsStorageContainer is ProxyResource<AvsStorageContainerProperties> {
@@ -241,6 +456,10 @@ model AvsStorageContainerProperties {
   @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
+
+  @doc("Maximum amount of bytes that can be provisioned in this storage container. It must be a multiple of 512. Each time a volume is provisioned in this container, its provisionedSize will be counted against the provisionLimit and the provisioning will fail if it goes over (minimum: 1048576 (1Mi), maximum: 4503599627370496 (4Pi)). By default it is unrestricted.")
+  @visibility("create", "update")
+  provisionedLimit?: int64;
 }
 
 @armResourceOperations
@@ -248,6 +467,10 @@ interface AvsStorageContainers {
   create is ArmResourceCreateOrUpdateAsync<AvsStorageContainer>;
   get is ArmResourceRead<AvsStorageContainer>;
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainer>;
+  update is ArmResourcePatchAsync<
+    AvsStorageContainer,
+    AvsStorageContainerProperties
+  >;
   listByParent is ArmResourceListByParent<AvsStorageContainer>;
 }
 

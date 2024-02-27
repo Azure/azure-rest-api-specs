@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.edgemarketplace
   package-name: azure-mgmt-edgemarketplace
-  package-version: 2023-04-01-preview
+  package-version: 2024-01-01
   clear-output-folder: true
 ```
 
@@ -20,41 +20,16 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
-  - tag: package-2023-04-01-preview
-  - tag: package-2023-06-01-preview
-  - tag: package-2023-08-01
+  - tag: package-2024-01-01
 ```
 
-### Tag: package-2023-08-01 and python
+### Tag: package-2024-01-01 and python
 
-These settings apply only when `--tag=package-2023-08-01 --python` is specified on the command line.
+These settings apply only when `--tag=package-2024-01-01 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2023-08-01' && $(python)
+``` yaml $(tag) == 'package-2024-01-01' && $(python)
 python:
-  namespace: azure.mgmt.edgemarketplace.v2023_04_01_preview
-  output-folder: $(python-sdks-folder)/edgemarketplace/azure-mgmt-edgemarketplace/azure/mgmt/edgemarketplace/v2023_08_01
-```
-
-### Tag: package-2023-04-01-preview and python
-
-These settings apply only when `--tag=package-2023-04-01-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2023-04-01-preview' && $(python)
-python:
-  namespace: azure.mgmt.edgemarketplace.v2023_04_01_preview
-  output-folder: $(python-sdks-folder)/edgemarketplace/azure-mgmt-edgemarketplace/azure/mgmt/edgemarketplace/v2023_04_01_preview
-```
-
-
-### Tag: package-2023-06-01-preview and python
-
-These settings apply only when `--tag=package-2023-06-01-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2023-06-01-preview' && $(python)
-python:
-  namespace: azure.mgmt.edgemarketplace.v2023_06_01_preview
-  output-folder: $(python-sdks-folder)/edgemarketplace/azure-mgmt-edgemarketplace/azure/mgmt/edgemarketplace/v2023_06_01_preview
+  namespace: azure.mgmt.edgemarketplace.v2024_01_01_preview
+  output-folder: $(python-sdks-folder)/edgemarketplace/azure-mgmt-edgemarketplace/azure/mgmt/edgemarketplace/v2024_01_01
 ```

@@ -715,6 +715,7 @@
         "aksAdminGroupId": {
           "type": "string",
           "description": "AKS Admin Group Id.",
+          "default": "00000000-0000-0000-0000-000000000000",
           "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$",
           "x-ms-mutability": [
             "read",
@@ -755,11 +756,6 @@
           "description": "Profile of Adx Created.",
           "readOnly": true
         },
-        "adtProfile": {
-          "$ref": "#/definitions/AdtProfile",
-          "description": "Profile of Adt Created.",
-          "readOnly": true
-        },
         "akvProfile": {
           "$ref": "#/definitions/AkvProfile",
           "description": "Profile of Akv Created.",
@@ -768,6 +764,11 @@
         "redisProfile": {
           "$ref": "#/definitions/RedisProfile",
           "description": "Profile of Azure Redis Created.",
+          "readOnly": true
+        },
+        "adtProfile": {
+          "$ref": "#/definitions/AdtProfile",
+          "description": "Profile of Adt Created.",
           "readOnly": true
         },
         "synapseProfile": {
@@ -973,6 +974,30 @@
           "description": "Synapse Development Endpoint",
           "readOnly": true
         }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Supported API versions for the Microsoft.ManufacturingPlatform resource provider.",
+      "enum": [
+        "2023-02-01-preview",
+        "2024-02-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_02_01_preview",
+            "value": "2023-02-01-preview",
+            "description": "The 2023-02-01-preview version."
+          },
+          {
+            "name": "v2024_02_01_preview",
+            "value": "2024-02-01-preview",
+            "description": "The 2024-02-01-preview version."
+          }
+        ]
       }
     }
   },
