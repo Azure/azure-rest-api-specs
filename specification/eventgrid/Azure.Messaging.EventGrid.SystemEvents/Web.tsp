@@ -161,7 +161,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Async operation failed to complete. */
     "Failed",
-    
+
     string,
   }
 

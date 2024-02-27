@@ -714,7 +714,7 @@ alias AcsChatThreadBaseEventData = {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
   properties?: Record<unknown>;
 
-  /** The chat thread created metadata */
+  /** The thread metadata */
   metadata?: Record<string>;
 
   /** The list of properties of participants who are part of the thread */
@@ -737,7 +737,8 @@ alias AcsChatThreadPropertiesBaseEventData = {
   editTime?: utcDateTime;
 
   /** The updated thread properties */
-  properties?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
+  properties?: Record<unknown>;
 
   /** The thread metadata */
   metadata?: Record<string>;

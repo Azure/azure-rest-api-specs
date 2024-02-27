@@ -8,6 +8,8 @@ union EventGridMQTTClientState {
 
   /** Disabled */
   "Disabled",
+
+  string,
 }
 
 /** EventGrid MQTT Client Disconnection Reason */
@@ -85,10 +87,10 @@ model SubscriptionDeletedEventData {
 }
 
 /** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-model EventGridMQTTClientCreatedOrUpdatedEventData {
-  ...EventGridMQTTClientEventData;
-
+model EventGridMQTTClientCreatedOrUpdatedEventData
+  extends EventGridMQTTClientEventData {
   /** Configured state of the client. The value could be Enabled or Disabled */
   state?: EventGridMQTTClientState;
 
@@ -125,16 +127,16 @@ long, and supports UTF-8 characters.
 }
 
 /** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-model EventGridMQTTClientDeletedEventData {
-  ...EventGridMQTTClientEventData;
-}
+model EventGridMQTTClientDeletedEventData
+  extends EventGridMQTTClientEventData {}
 
 /** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-model EventGridMQTTClientSessionConnectedEventData {
-  ...EventGridMQTTClientEventData;
-
+model EventGridMQTTClientSessionConnectedEventData
+  extends EventGridMQTTClientEventData {
   /** 
 Unique identifier for the MQTT client's session. This case-sensitive string can
 be up to 128 characters long, and supports UTF-8 characters.
@@ -150,10 +152,10 @@ than the previous event.
 }
 
 /** Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-model EventGridMQTTClientSessionDisconnectedEventData {
-  ...EventGridMQTTClientEventData;
-
+model EventGridMQTTClientSessionDisconnectedEventData
+  extends EventGridMQTTClientEventData {
   /**
 Unique identifier for the MQTT client's session. This case-sensitive string can
 be up to 128 characters long, and supports UTF-8 characters.

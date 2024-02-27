@@ -379,7 +379,7 @@
         },
         "metadata": {
           "type": "object",
-          "description": "The chat thread created metadata",
+          "description": "The thread metadata",
           "additionalProperties": {
             "type": "string"
           }
@@ -414,7 +414,7 @@
         },
         "metadata": {
           "type": "object",
-          "description": "The chat thread created metadata",
+          "description": "The thread metadata",
           "additionalProperties": {
             "type": "string"
           }
@@ -533,9 +533,7 @@
         "properties": {
           "type": "object",
           "description": "The updated thread properties",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "metadata": {
           "type": "object",
@@ -567,9 +565,7 @@
         "properties": {
           "type": "object",
           "description": "The updated thread properties",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "metadata": {
           "type": "object",
@@ -3224,18 +3220,6 @@
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event.",
       "properties": {
-        "clientAuthenticationName": {
-          "type": "string",
-          "description": "Unique identifier for the MQTT client that the client presents to the service\nfor authentication. This case-sensitive string can be up to 128 characters\nlong, and supports UTF-8 characters."
-        },
-        "clientName": {
-          "type": "string",
-          "description": "Name of the client resource in the Event Grid namespace."
-        },
-        "namespaceName": {
-          "type": "string",
-          "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
-        },
         "state": {
           "$ref": "#/definitions/EventGridMQTTClientState",
           "description": "Configured state of the client. The value could be Enabled or Disabled"
@@ -3257,25 +3241,21 @@
             "type": "string"
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventGridMQTTClientEventData"
+        }
+      ]
     },
     "EventGridMQTTClientDeletedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event.",
-      "properties": {
-        "clientAuthenticationName": {
-          "type": "string",
-          "description": "Unique identifier for the MQTT client that the client presents to the service\nfor authentication. This case-sensitive string can be up to 128 characters\nlong, and supports UTF-8 characters."
-        },
-        "clientName": {
-          "type": "string",
-          "description": "Name of the client resource in the Event Grid namespace."
-        },
-        "namespaceName": {
-          "type": "string",
-          "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventGridMQTTClientEventData"
         }
-      }
+      ]
     },
     "EventGridMQTTClientDisconnectionReason": {
       "type": "string",
@@ -3377,18 +3357,6 @@
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event.",
       "properties": {
-        "clientAuthenticationName": {
-          "type": "string",
-          "description": "Unique identifier for the MQTT client that the client presents to the service\nfor authentication. This case-sensitive string can be up to 128 characters\nlong, and supports UTF-8 characters."
-        },
-        "clientName": {
-          "type": "string",
-          "description": "Name of the client resource in the Event Grid namespace."
-        },
-        "namespaceName": {
-          "type": "string",
-          "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
-        },
         "clientSessionName": {
           "type": "string",
           "description": "Unique identifier for the MQTT client's session. This case-sensitive string can\nbe up to 128 characters long, and supports UTF-8 characters."
@@ -3398,24 +3366,17 @@
           "format": "int64",
           "description": "A number that helps indicate order of MQTT client session connected or\ndisconnected events. Latest event will have a sequence number that is higher\nthan the previous event."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventGridMQTTClientEventData"
+        }
+      ]
     },
     "EventGridMQTTClientSessionDisconnectedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event.",
       "properties": {
-        "clientAuthenticationName": {
-          "type": "string",
-          "description": "Unique identifier for the MQTT client that the client presents to the service\nfor authentication. This case-sensitive string can be up to 128 characters\nlong, and supports UTF-8 characters."
-        },
-        "clientName": {
-          "type": "string",
-          "description": "Name of the client resource in the Event Grid namespace."
-        },
-        "namespaceName": {
-          "type": "string",
-          "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
-        },
         "clientSessionName": {
           "type": "string",
           "description": "Unique identifier for the MQTT client's session. This case-sensitive string can\nbe up to 128 characters long, and supports UTF-8 characters."
@@ -3429,7 +3390,12 @@
           "$ref": "#/definitions/EventGridMQTTClientDisconnectionReason",
           "description": "Reason for the disconnection of the MQTT client's session. The value could be\none of the values in the disconnection reasons table."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventGridMQTTClientEventData"
+        }
+      ]
     },
     "EventGridMQTTClientState": {
       "type": "string",
@@ -3440,7 +3406,7 @@
       ],
       "x-ms-enum": {
         "name": "EventGridMQTTClientState",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Enabled",
@@ -3594,33 +3560,6 @@
           "type": "integer",
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service."
-        }
-      }
-    },
-    "HealthcareFhirResourceBaseEventData": {
-      "type": "object",
-      "description": "Base Event for Healthcare Fhir Resource",
-      "properties": {
-        "resourceFhirAccount": {
-          "type": "string",
-          "description": "Domain name of FHIR account for this resource.",
-          "x-ms-client-name": "FhirServiceHostName"
-        },
-        "resourceFhirId": {
-          "type": "string",
-          "description": "Id of HL7 FHIR resource.",
-          "x-ms-client-name": "FhirResourceId"
-        },
-        "resourceVersionId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
-          "x-ms-client-name": "FhirResourceVersionId"
-        },
-        "resourceType": {
-          "$ref": "#/definitions/HealthcareFhirResourceType",
-          "description": "Type of HL7 FHIR resource.",
-          "x-ms-client-name": "FhirResourceType"
         }
       }
     },
