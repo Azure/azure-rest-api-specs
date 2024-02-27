@@ -727,7 +727,7 @@ model AvsVmProperties {
 
 @doc("Protection policy for the AVS VM.")
 model AvsVmProtectionPolicy {
-  @doc("Name of the Protection Policy applied to the AVSVM.")
+  @doc("Name of the Protection Policy applied to the AVS VM.")
   @pattern("^[a-zA-Z\\d\\-_]{1,48}$")
   protectionPolicyName: string;
 }
