@@ -30,7 +30,7 @@ using Azure.Core;
 //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/:get-id?api-version={apiVersion}
 //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}?api-version={apiVersion}
 @server(
-  "{fullyQualifiedNamespace}",
+  "https://{fullyQualifiedNamespace}",
   "The Schema Registry service endpoint.",
   {
     @doc("The Schema Registry service endpoint, for example 'https://my-namespace.servicebus.windows.net'.")
