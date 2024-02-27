@@ -122,7 +122,7 @@
     },
     "RasterTileFormat": {
       "name": "format",
-      "description": "Desired format of the response. Possible value: png, jpeg",
+      "description": "Desired format of the response. Possible values are png and jpeg",
       "type": "string",
       "in": "path",
       "required": true,
@@ -137,11 +137,11 @@
         "values": [
           {
             "value": "png",
-            "description": "An image in the png format. Supports zoom levels 0 through 18."
+            "description": "An image in the png format. Supports zoom levels 0 through 20."
           },
           {
             "value": "jpeg",
-            "description": "An image in the jpeg format. Supports zoom levels 0 through 18."
+            "description": "An image in the jpeg format. Supports zoom levels 0 through 20."
           }
         ]
       },
@@ -555,7 +555,7 @@
           {
             "name": "tilesetId",
             "in": "query",
-            "description": "Map style to be returned. Possible values are main and dark.",
+            "description": "Map style to be returned. Possible values are microsoft.base.darkgrey, microsoft.base.road and microsoft.imagery.<br><br>Please see [TilesetId]($ref: '#/parameters/TilesetId') for details.",
             "type": "string",
             "enum": [
               "microsoft.base.darkgrey",
@@ -563,19 +563,20 @@
               "microsoft.imagery"
             ],
             "x-ms-enum": {
-              "$ref": "#/parameters/RasterTileFormat"
+              "$ref": "#/parameters/TilesetId"
             }
           },
           {
             "name": "trafficLayer",
             "in": "query",
-            "description": "Optional Value. If TrafficLayer is set, will return map image with traffic flow layer; Otherwise, return basemap image.",
+            "description": "Optional Value. If TrafficLayer is set, will return map image with traffic flow layer; Otherwise, return basemap image.<br><br>Please see [TilesetId]($ref: '#/parameters/TilesetId') for details.",
             "type": "string",
             "enum": [
-              "microsoft.traffic.relative.main"
+              "microsoft.traffic.relative.main",
+              ""
             ],
             "x-ms-enum": {
-              "$ref": "#/parameters/RasterTileFormat"
+              "$ref": "#/parameters/TilesetId"
             }
           },
           {
