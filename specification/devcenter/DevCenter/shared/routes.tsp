@@ -9,6 +9,12 @@ using TypeSpec.Http;
 namespace DevCenterService;
 
 interface SharedOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @doc("Get the status of an operation.")
-  getProjectOperationStatus is StandardResourceOperations.GetResourceOperationStatus<Project>;
+  @route("/projects/{projectName}/operationstatuses/{operationId}")
+  getProjectOperationStatus is Foundations.GetOperationStatus<{
+    @doc("The DevCenter Project upon which to execute operations.")
+    @path
+    projectName: string;
+  }>;
 }
