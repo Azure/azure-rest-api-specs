@@ -1,0 +1,2409 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-10",
+    "title": "IoT Firmware Defense",
+    "description": "Firmware & IoT Security REST API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.IoTFirmwareDefense/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists the operations for this resource provider",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTFirmwareDefense/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListBySubscription",
+        "description": "Lists all of the firmware analysis workspaces in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workspaces_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Workspaces_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Workspaces_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListByResourceGroup",
+        "description": "Lists all of the firmware analysis workspaces in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workspaces_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Workspaces_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Workspaces_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Get",
+        "description": "Get firmware analysis workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_Get_MaximumSet_Gen.json"
+          },
+          "Workspaces_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Workspaces_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Create",
+        "description": "The operation to create or update a firmware analysis workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceCreateBodyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_Create_MaximumSet_Gen.json"
+          },
+          "Workspaces_Create_MinimumSet_Gen": {
+            "$ref": "./examples/Workspaces_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Update",
+        "description": "The operation to update a firmware analysis workspaces.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceUpdateBodyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_Update_MaximumSet_Gen.json"
+          },
+          "Workspaces_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Workspaces_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Delete",
+        "description": "The operation to delete a firmware analysis workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_Delete_MaximumSet_Gen.json"
+          },
+          "Workspaces_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Workspaces_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares": {
+      "get": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_ListByWorkspace",
+        "description": "Lists all of firmwares inside a workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirmwareList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Firmwares_ListByWorkspace_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_ListByWorkspace_MaximumSet_Gen.json"
+          },
+          "Firmwares_ListByWorkspace_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_ListByWorkspace_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}": {
+      "get": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_Get",
+        "description": "Get firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Firmware"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_Get_MaximumSet_Gen.json"
+          },
+          "Firmwares_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_Create",
+        "description": "The operation to create a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FirmwareCreateBodyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Firmware"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Firmware"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_Create_MaximumSet_Gen.json"
+          },
+          "Firmwares_Create_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_Update",
+        "description": "The operation to update firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FirmwareUpdateBodyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Firmware"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_Update_MaximumSet_Gen.json"
+          },
+          "Firmwares_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_Delete",
+        "description": "The operation to delete a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_Delete_MaximumSet_Gen.json"
+          },
+          "Firmwares_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/binaryHardeningResults": {
+      "get": {
+        "tags": [
+          "BinaryHardening"
+        ],
+        "operationId": "BinaryHardening_ListByFirmware",
+        "description": "Lists binary hardening analysis results of a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BinaryHardeningListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BinaryHardening_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/BinaryHardening_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "BinaryHardening_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/BinaryHardening_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoCertificates": {
+      "get": {
+        "tags": [
+          "CryptoCertificates"
+        ],
+        "operationId": "CryptoCertificates_ListByFirmware",
+        "description": "Lists cryptographic certificate analysis results found in a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CryptoCertificateListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CryptoCertificates_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/CryptoCertificates_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "CryptoCertificates_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/CryptoCertificates_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoKeys": {
+      "get": {
+        "tags": [
+          "CryptoKeys"
+        ],
+        "operationId": "CryptoKeys_ListByFirmware",
+        "description": "Lists cryptographic key analysis results found in a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CryptoKeyListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CryptoKeys_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/CryptoKeys_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "CryptoKeys_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/CryptoKeys_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cves": {
+      "get": {
+        "tags": [
+          "CVEs"
+        ],
+        "operationId": "Cves_ListByFirmware",
+        "description": "Lists CVE analysis results of a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CveListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Cves_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/Cves_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "Cves_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/Cves_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/generateDownloadUrl": {
+      "post": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_GenerateDownloadUrl",
+        "description": "The operation to a url for file download.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common.json#/definitions/UrlToken"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_GenerateDownloadUrl_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_GenerateDownloadUrl_MaximumSet_Gen.json"
+          },
+          "Firmwares_GenerateDownloadUrl_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_GenerateDownloadUrl_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/generateFilesystemDownloadUrl": {
+      "post": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_GenerateFilesystemDownloadUrl",
+        "description": "The operation to a url for tar file download.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common.json#/definitions/UrlToken"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_GenerateFilesystemDownloadUrl_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_GenerateFilesystemDownloadUrl_MaximumSet_Gen.json"
+          },
+          "Firmwares_GenerateFilesystemDownloadUrl_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_GenerateFilesystemDownloadUrl_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/passwordHashes": {
+      "get": {
+        "tags": [
+          "PasswordHashes"
+        ],
+        "operationId": "PasswordHashes_ListByFirmware",
+        "description": "Lists password hash analysis results of a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PasswordHashListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PasswordHashes_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/PasswordHashes_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "PasswordHashes_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/PasswordHashes_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/sbomComponents": {
+      "get": {
+        "tags": [
+          "SBOM"
+        ],
+        "operationId": "SbomComponents_ListByFirmware",
+        "description": "Lists SBOM analysis results of a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SbomComponentListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SbomComponents_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/SbomComponents_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "SbomComponents_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/SbomComponents_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/summaries": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_ListByFirmware",
+        "description": "Lists analysis result summary names of a firmware. To fetch the full summary data, get that summary by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SummaryListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Summaries_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "Summaries_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/summaries/{summaryName}": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_Get",
+        "description": "Get an analysis result summary of a firmware by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SummaryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SummaryResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Summaries_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MaximumSet_Gen.json"
+          },
+          "Summaries_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/generateUploadUrl": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_GenerateUploadUrl",
+        "description": "The operation to get a url for file upload.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GenerateUploadUrlBodyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common.json#/definitions/UrlToken"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_GenerateUploadUrl_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_GenerateUploadUrl_MaximumSet_Gen.json"
+          },
+          "Workspaces_GenerateUploadUrl_MinimumSet_Gen": {
+            "$ref": "./examples/Workspaces_GenerateUploadUrl_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BinaryHardeningFeatures": {
+      "type": "object",
+      "properties": {
+        "nx": {
+          "description": "NX (no-execute) flag.",
+          "type": "boolean"
+        },
+        "pie": {
+          "description": "PIE (position independent executable) flag.",
+          "type": "boolean"
+        },
+        "relro": {
+          "description": "RELRO (relocation read-only) flag.",
+          "type": "boolean"
+        },
+        "canary": {
+          "description": "Canary (stack canaries) flag.",
+          "type": "boolean"
+        },
+        "stripped": {
+          "description": "Stripped flag.",
+          "type": "boolean"
+        }
+      },
+      "description": "Binary hardening features."
+    },
+    "BinaryHardeningListResult": {
+      "type": "object",
+      "description": "List of binary hardening results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BinaryHardeningResource"
+          },
+          "description": "The list of binary hardening results."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "BinaryHardeningResource": {
+      "type": "object",
+      "description": "binary hardening analysis result resource",
+      "properties": {
+        "properties": {
+          "title": "binary hardening result properties",
+          "description": "The properties of a binary hardening result found within a firmware image",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BinaryHardeningResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "BinaryHardeningResult": {
+      "type": "object",
+      "properties": {
+        "binaryHardeningId": {
+          "description": "ID for the binary hardening result.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "features": {
+          "title": "BinaryHardeningFeatures",
+          "description": "Binary hardening features.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BinaryHardeningFeatures"
+        },
+        "architecture": {
+          "description": "The architecture of the uploaded firmware.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "filePath": {
+          "description": "The executable path.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "class": {
+          "description": "The executable class to indicate 32 or 64 bit.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "runpath": {
+          "description": "The runpath of the uploaded firmware.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "rpath": {
+          "description": "The rpath of the uploaded firmware.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "description": "Binary hardening of a firmware."
+    },
+    "BinaryHardeningSummaryResource": {
+      "description": "Properties for a binary hardening analysis summary.",
+      "type": "object",
+      "x-ms-discriminator-value": "BinaryHardening",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      ],
+      "properties": {
+        "totalFiles": {
+          "description": "Total number of binaries that were analyzed",
+          "type": "integer",
+          "format": "int64"
+        },
+        "nx": {
+          "description": "NX summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "pie": {
+          "description": "PIE summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "relro": {
+          "description": "RELRO summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "canary": {
+          "description": "Canary summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "stripped": {
+          "description": "Stripped summary percentage",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        }
+      }
+    },
+    "CryptoCertificate": {
+      "type": "object",
+      "properties": {
+        "cryptoCertId": {
+          "description": "ID for the certificate result.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Name of the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "subject": {
+          "description": "Subject information of the certificate.",
+          "$ref": "#/definitions/CryptoCertificateEntity",
+          "x-nullable": true
+        },
+        "issuer": {
+          "description": "Issuer information of the certificate.",
+          "$ref": "#/definitions/CryptoCertificateEntity",
+          "x-nullable": true
+        },
+        "issuedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Issue date for the certificate.",
+          "x-nullable": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration date for the certificate.",
+          "x-nullable": true
+        },
+        "role": {
+          "description": "Role of the certificate (Root CA, etc)",
+          "type": "string",
+          "x-nullable": true
+        },
+        "signatureAlgorithm": {
+          "description": "The signature algorithm used in the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "keySize": {
+          "description": "Size of the certificate's key in bits",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "keyAlgorithm": {
+          "description": "Key algorithm used in the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "encoding": {
+          "description": "Encoding used for the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "serialNumber": {
+          "description": "Serial number of the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "fingerprint": {
+          "description": "Fingerprint of the certificate.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "usage": {
+          "description": "List of functions the certificate can fulfill.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "filePaths": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of files where this certificate was found.",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "pairedKey": {
+          "description": "A matching paired private key.",
+          "$ref": "./common.json#/definitions/PairedKey",
+          "x-nullable": true
+        },
+        "isExpired": {
+          "description": "Indicates if the certificate is expired.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "isSelfSigned": {
+          "description": "Indicates if the certificate is self-signed.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "isWeakSignature": {
+          "description": "Indicates the signature algorithm used is insecure.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "isShortKeySize": {
+          "description": "Indicates the certificate's key size is considered too small to be secure for the key algorithm.",
+          "type": "boolean",
+          "x-nullable": true
+        }
+      },
+      "description": "Crypto certificate properties"
+    },
+    "CryptoCertificateEntity": {
+      "type": "object",
+      "description": "Information on an entity (distinguished name) in a cryptographic certificate.",
+      "properties": {
+        "commonName": {
+          "description": "Common name of the certificate entity.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "organization": {
+          "description": "Organization of the certificate entity.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "organizationalUnit": {
+          "description": "The organizational unit of the certificate entity.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "state": {
+          "description": "Geographical state or province of the certificate entity.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "country": {
+          "description": "Country code of the certificate entity.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "CryptoCertificateListResult": {
+      "type": "object",
+      "description": "List of crypto certificates.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CryptoCertificateResource"
+          },
+          "description": "The list of crypto certificate results."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "CryptoCertificateResource": {
+      "type": "object",
+      "description": "Crypto certificate resource",
+      "properties": {
+        "properties": {
+          "title": "Crypto certificate properties",
+          "description": "The properties of a crypto certificate found within a firmware image",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CryptoCertificate"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CryptoCertificateSummaryResource": {
+      "description": "Properties for cryptographic certificate summary.",
+      "type": "object",
+      "x-ms-discriminator-value": "CryptoCertificate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      ],
+      "properties": {
+        "totalCertificates": {
+          "description": "Total number of certificates found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "pairedKeys": {
+          "description": "Total number of paired private keys found for the certificates.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "expired": {
+          "description": "Total number of expired certificates found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "expiringSoon": {
+          "description": "Total number of nearly expired certificates found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "weakSignature": {
+          "description": "Total number of certificates found using a weak signature algorithm.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "selfSigned": {
+          "description": "Total number of certificates found that are self-signed.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "shortKeySize": {
+          "description": "Total number of certificates found that have an insecure key size for the key algorithm.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CryptoKey": {
+      "type": "object",
+      "properties": {
+        "cryptoKeyId": {
+          "description": "ID for the key result.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "keyType": {
+          "description": "Type of the key (public or private).",
+          "type": "string",
+          "x-nullable": true
+        },
+        "keySize": {
+          "description": "Size of the key in bits.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "keyAlgorithm": {
+          "description": "Key algorithm name.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "usage": {
+          "description": "Functions the key can fulfill.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "filePaths": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of files where this key was found.",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "pairedKey": {
+          "description": "A matching paired key or certificate.",
+          "$ref": "./common.json#/definitions/PairedKey",
+          "x-nullable": true
+        },
+        "isShortKeySize": {
+          "description": "Indicates the key size is considered too small to be secure for the algorithm.",
+          "type": "boolean",
+          "x-nullable": true
+        }
+      },
+      "description": "Crypto key properties"
+    },
+    "CryptoKeyListResult": {
+      "type": "object",
+      "description": "List of crypto keys.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CryptoKeyResource"
+          },
+          "description": "The list of crypto key results."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "CryptoKeyResource": {
+      "type": "object",
+      "description": "Crypto key resource",
+      "properties": {
+        "properties": {
+          "title": "Crypto key properties",
+          "description": "The properties of a crypto key found within a firmware image",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CryptoKey"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CryptoKeySummaryResource": {
+      "description": "Properties for cryptographic key summary.",
+      "type": "object",
+      "x-ms-discriminator-value": "CryptoKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      ],
+      "properties": {
+        "totalKeys": {
+          "description": "Total number of cryptographic keys found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "publicKeys": {
+          "description": "Total number of (non-certificate) public keys found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "privateKeys": {
+          "description": "Total number of private keys found.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "pairedKeys": {
+          "description": "Total number of keys found that have a matching paired key or certificate.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "shortKeySize": {
+          "description": "Total number of keys found that have an insecure key size for the algorithm.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CveComponent": {
+      "type": "object",
+      "description": "Properties of the SBOM component for a CVE.",
+      "properties": {
+        "componentId": {
+          "description": "ID of the SBOM component",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the SBOM component",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the SBOM component.",
+          "type": "string"
+        }
+      }
+    },
+    "CveLink": {
+      "type": "object",
+      "description": "Properties of a reference link for a CVE.",
+      "properties": {
+        "href": {
+          "description": "The destination of the reference link.",
+          "type": "string",
+          "format": "uri",
+          "x-nullable": true
+        },
+        "label": {
+          "description": "The label of the reference link.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "CveListResult": {
+      "type": "object",
+      "description": "List of CVE results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CveResource"
+          },
+          "description": "The list of CVE results."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "CveResource": {
+      "type": "object",
+      "description": "CVE analysis result resource",
+      "properties": {
+        "properties": {
+          "title": "CVE result properties",
+          "description": "The properties of a CVE result found within a firmware image",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CveResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CveResult": {
+      "type": "object",
+      "properties": {
+        "cveId": {
+          "description": "ID of the CVE result.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "component": {
+          "description": "The SBOM component for the CVE.",
+          "$ref": "#/definitions/CveComponent",
+          "x-nullable": true
+        },
+        "severity": {
+          "description": "Severity of the CVE.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Name of the CVE.",
+          "type": "string"
+        },
+        "cvssScore": {
+          "description": "A single CVSS score to represent the CVE. If a V3 score is specified, then it will use the V3 score. Otherwise if the V2 score is specified it will be the V2 score.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "cvssVersion": {
+          "description": "CVSS version of the CVE.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "cvssV2Score": {
+          "description": "CVSS V2 score of the CVE.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "cvssV3Score": {
+          "description": "CVSS V3 score of the CVE.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "links": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CveLink"
+          },
+          "description": "The list of reference links for the CVE.",
+          "x-ms-identifiers": []
+        },
+        "description": {
+          "description": "The CVE description.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "description": "Details of a CVE detected in firmware."
+    },
+    "CveSummary": {
+      "description": "Properties for a CVE analysis summary.",
+      "type": "object",
+      "x-ms-discriminator-value": "CVE",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      ],
+      "properties": {
+        "critical": {
+          "description": "The total number of critical severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "high": {
+          "description": "The total number of high severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "medium": {
+          "description": "The total number of medium severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "low": {
+          "description": "The total number of low severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "unknown": {
+          "description": "The total number of unknown severity CVEs detected",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        }
+      }
+    },
+    "Firmware": {
+      "type": "object",
+      "description": "Firmware definition",
+      "properties": {
+        "properties": {
+          "title": "Firmware properties",
+          "description": "The properties of a firmware",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirmwareProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "FirmwareList": {
+      "type": "object",
+      "description": "List of firmwares",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Firmware"
+          },
+          "description": "The list of firmwares."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of asset."
+        }
+      }
+    },
+    "FirmwareProperties": {
+      "type": "object",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "File name for a firmware that user uploaded."
+        },
+        "vendor": {
+          "type": "string",
+          "description": "Firmware vendor."
+        },
+        "model": {
+          "type": "string",
+          "description": "Firmware model."
+        },
+        "version": {
+          "type": "string",
+          "description": "Firmware version."
+        },
+        "description": {
+          "type": "string",
+          "description": "User-specified description of the firmware."
+        },
+        "fileSize": {
+          "description": "File size of the uploaded firmware image.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of firmware scan.",
+          "enum": [
+            "Pending",
+            "Extracting",
+            "Analyzing",
+            "Ready",
+            "Error"
+          ],
+          "default": "Pending",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "statusMessages": {
+          "type": "array",
+          "description": "A list of errors or other messages generated during firmware analysis",
+          "items": {
+            "$ref": "#/definitions/StatusMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Firmware properties."
+    },
+    "FirmwareSummary": {
+      "description": "Properties for high level summary of firmware analysis results.",
+      "type": "object",
+      "x-ms-discriminator-value": "Firmware",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      ],
+      "properties": {
+        "extractedSize": {
+          "description": "Total extracted size of the firmware in bytes.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "fileSize": {
+          "description": "Firmware file size in bytes.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "extractedFileCount": {
+          "description": "Extracted file count.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "componentCount": {
+          "description": "Components count.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "binaryCount": {
+          "description": "Binary count",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "analysisTimeSeconds": {
+          "description": "Time used for analysis",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "rootFileSystems": {
+          "description": "The number of root file systems found.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        }
+      }
+    },
+    "FirmwareUpdateDefinition": {
+      "type": "object",
+      "description": "Firmware definition",
+      "properties": {
+        "properties": {
+          "title": "Firmware properties",
+          "description": "The editable properties of a firmware",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirmwareProperties"
+        }
+      }
+    },
+    "GenerateUploadUrlRequest": {
+      "type": "object",
+      "description": "Properties for generating an upload URL",
+      "properties": {
+        "firmwareId": {
+          "type": "string",
+          "description": "A unique ID for the firmware to be uploaded."
+        }
+      }
+    },
+    "PairedKey": {
+      "type": "object",
+      "description": "Details of a matching paired key or certificate.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the paired key or certificate."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type indicating whether the paired object is a key or certificate."
+        }
+      }
+    },
+    "PasswordHash": {
+      "type": "object",
+      "properties": {
+        "passwordHashId": {
+          "description": "ID for password hash",
+          "type": "string",
+          "x-nullable": true
+        },
+        "filePath": {
+          "description": "File path of the password hash",
+          "type": "string",
+          "x-nullable": true
+        },
+        "salt": {
+          "description": "Salt of the password hash",
+          "type": "string",
+          "x-nullable": true
+        },
+        "hash": {
+          "description": "Hash of the password",
+          "type": "string",
+          "x-nullable": true
+        },
+        "context": {
+          "description": "Context of password hash",
+          "type": "string",
+          "x-nullable": true
+        },
+        "username": {
+          "description": "User name of password hash",
+          "type": "string",
+          "x-nullable": true
+        },
+        "algorithm": {
+          "description": "Algorithm of the password hash",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "description": "Password hash properties"
+    },
+    "PasswordHashListResult": {
+      "type": "object",
+      "description": "List of password hash results",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PasswordHashResource"
+          },
+          "description": "The list of password hash results."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "PasswordHashResource": {
+      "type": "object",
+      "description": "Password hash resource",
+      "properties": {
+        "properties": {
+          "title": "Password hash properties",
+          "description": "The properties of a password hash found within a firmware image",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PasswordHash"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SbomComponent": {
+      "type": "object",
+      "properties": {
+        "componentId": {
+          "description": "ID for the component.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "componentName": {
+          "description": "Name for the component.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version for the component.",
+          "type": "string"
+        },
+        "license": {
+          "description": "License for the component.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "filePaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "File paths related to the component."
+        }
+      },
+      "description": "SBOM component of a firmware."
+    },
+    "SbomComponentListResult": {
+      "type": "object",
+      "description": "List of SBOM results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SbomComponentResource"
+          },
+          "description": "The list of SBOM components."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "SbomComponentResource": {
+      "type": "object",
+      "description": "SBOM analysis result resource",
+      "properties": {
+        "properties": {
+          "title": "SBOM result properties",
+          "description": "The properties of an SBOM component found within a firmware image",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SbomComponent"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "StatusMessage": {
+      "type": "object",
+      "description": "Error and status message",
+      "properties": {
+        "errorCode": {
+          "description": "The error code",
+          "type": "integer",
+          "format": "int64"
+        },
+        "message": {
+          "description": "The error or status message",
+          "type": "string"
+        }
+      }
+    },
+    "SummaryListResult": {
+      "type": "object",
+      "description": "List of analysis summaries.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SummaryResource"
+          },
+          "description": "The list of summaries."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    },
+    "SummaryResource": {
+      "description": "The object representing a firmware analysis summary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/SummaryResourceProperties"
+        }
+      }
+    },
+    "SummaryResourceProperties": {
+      "description": "Properties of an analysis summary.",
+      "type": "object",
+      "discriminator": "summaryType",
+      "properties": {
+        "summaryType": {
+          "$ref": "#/definitions/SummaryType"
+        }
+      },
+      "readOnly": true,
+      "required": [
+        "summaryType"
+      ]
+    },
+    "SummaryType": {
+      "type": "string",
+      "enum": [
+        "Firmware",
+        "CVE",
+        "BinaryHardening",
+        "CryptoCertificate",
+        "CryptoKey"
+      ],
+      "description": "Describes the type of summary.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SummaryType"
+      }
+    },
+    "UrlToken": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "SAS URL for creating or accessing a blob file.",
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "description": "Url data for creating or accessing a blob file."
+    },
+    "Workspace": {
+      "type": "object",
+      "description": "Firmware analysis workspace.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WorkspaceList": {
+      "type": "object",
+      "description": "Return a list of firmware analysis workspaces.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          },
+          "description": "The list of firmware analysis workspaces."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of asset."
+        }
+      }
+    },
+    "WorkspaceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Workspace properties."
+    },
+    "WorkspaceUpdateDefinition": {
+      "type": "object",
+      "description": "Firmware analysis workspace.",
+      "properties": {
+        "properties": {
+          "description": "The editable workspace properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceProperties"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "FirmwareCreateBodyParameter": {
+      "name": "firmware",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Firmware"
+      },
+      "description": "Details of the firmware being created or updated.",
+      "x-ms-parameter-location": "method"
+    },
+    "FirmwareIdParameter": {
+      "name": "firmwareId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of the firmware.",
+      "x-ms-parameter-location": "method"
+    },
+    "FirmwareUpdateBodyParameter": {
+      "name": "firmware",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/FirmwareUpdateDefinition"
+      },
+      "description": "Details of the firmware being created or updated.",
+      "x-ms-parameter-location": "method"
+    },
+    "GenerateUploadUrlBodyParameter": {
+      "name": "generateUploadUrl",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/GenerateUploadUrlRequest"
+      },
+      "description": "Parameters when requesting a URL to upload firmware.",
+      "x-ms-parameter-location": "method"
+    },
+    "SummaryNameParameter": {
+      "name": "summaryName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "enum": [
+        "Firmware",
+        "CVE",
+        "BinaryHardening",
+        "CryptoCertificate",
+        "CryptoKey"
+      ],
+      "x-ms-parameter-location": "method",
+      "description": "The Firmware analysis summary name describing the type of summary.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "summaryName"
+      }
+    },
+    "WorkspaceCreateBodyParameter": {
+      "name": "workspace",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Workspace"
+      },
+      "description": "Parameters when creating a firmware analysis workspace.",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the firmware analysis workspace.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceUpdateBodyParameter": {
+      "name": "workspace",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WorkspaceUpdateDefinition"
+      },
+      "description": "Parameters when updating a firmware analysis workspace.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
