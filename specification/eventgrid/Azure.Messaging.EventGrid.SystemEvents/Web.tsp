@@ -94,7 +94,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     sku?: WebAppServicePlanUpdatedEventDataSku;
   }
 
-  /** App Action Type */
+  /** Type of action of the operation */
   union AppAction {
     /** Web app was restarted. */
     "Restarted",

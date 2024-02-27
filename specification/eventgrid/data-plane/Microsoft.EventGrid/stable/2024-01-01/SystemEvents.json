@@ -536,6 +536,13 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The thread metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -560,6 +567,13 @@
         "properties": {
           "type": "object",
           "description": "The updated thread properties",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The thread metadata",
           "additionalProperties": {
             "type": "string"
           }
@@ -669,7 +683,8 @@
             "description": "The email was suppressed"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "AcsEmailDeliveryReportStatusDetails": {
       "type": "object",
@@ -1295,7 +1310,8 @@
             "description": "Router Job Status Waiting For Activation"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "AcsRouterJobUnassignedEventData": {
       "type": "object",
@@ -1433,7 +1449,8 @@
             "description": "Router Label Operator Less than or equal"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "AcsRouterQueueDetails": {
       "type": "object",
@@ -1724,7 +1741,7 @@
         "labelValue": {
           "description": "Router Job Worker Selector Value"
         },
-        "timeToLive": {
+        "ttlSeconds": {
           "type": "string",
           "format": "duration",
           "description": "Router Job Worker Selector Time to Live in Seconds"
@@ -1762,7 +1779,8 @@
             "description": "Router Worker Selector State Expired"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "AcsSmsDeliveryAttemptProperties": {
       "type": "object",
@@ -1891,7 +1909,8 @@
             "description": "Click"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "ApiManagementApiCreatedEventData": {
       "type": "object",
@@ -2155,7 +2174,7 @@
     },
     "AppAction": {
       "type": "string",
-      "description": "App Action Type",
+      "description": "Type of action of the operation",
       "enum": [
         "Restarted",
         "Stopped",
@@ -2347,7 +2366,8 @@
             "description": "Async operation failed to complete."
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "AvsClusterCreatedEventData": {
       "type": "object",
@@ -2396,12 +2416,7 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "addedHostNames",
-        "removedHostNames",
-        "inMaintenanceHostNames"
-      ]
+      }
     },
     "AvsClusterFailedEventData": {
       "type": "object",
@@ -2536,9 +2551,6 @@
           }
         }
       },
-      "required": [
-        "namedOutputs"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AvsScriptExecutionEventData"
@@ -2573,7 +2585,8 @@
             "description": "Gcch"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "CommunicationIdentifierModel": {
       "type": "object",
@@ -3023,7 +3036,8 @@
             "description": "Order has been completed"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "DeviceConnectionStateEventInfo": {
       "type": "object",
@@ -3439,7 +3453,8 @@
             "description": "Disabled"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "EventHubCaptureFileCreatedEventData": {
       "type": "object",
@@ -4640,7 +4655,8 @@
             "description": "The FHIR resource type defined in STU3 and R4."
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "HealthcareFhirResourceUpdatedEventData": {
       "type": "object",
@@ -5152,18 +5168,10 @@
           "description": "The version of the model that was registered."
         },
         "modelTags": {
-          "type": "object",
-          "description": "The tags of the model that was registered.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "The tags of the model that was registered."
         },
         "modelProperties": {
-          "type": "object",
-          "description": "The properties of the model that was registered.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "The properties of the model that was registered."
         }
       }
     },
@@ -5216,18 +5224,10 @@
           "description": "The Run Type of the Machine Learning Run."
         },
         "runTags": {
-          "type": "object",
-          "description": "The tags of the Machine Learning Run.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "The tags of the Machine Learning Run."
         },
         "runProperties": {
-          "type": "object",
-          "description": "The properties of the Machine Learning Run.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "The properties of the Machine Learning Run."
         },
         "runStatus": {
           "type": "string",
@@ -5568,10 +5568,6 @@
       "type": "object",
       "description": "The event data for a Job output.",
       "properties": {
-        "oDataType": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobOutput."
-        },
         "error": {
           "$ref": "#/definitions/MediaJobError",
           "description": "Gets the Job output error."
@@ -5588,13 +5584,17 @@
         "state": {
           "$ref": "#/definitions/MediaJobState",
           "description": "Gets the Job output state."
+        },
+        "@odataType": {
+          "type": "string",
+          "description": "The discriminator for derived types."
         }
       },
-      "discriminator": "oDataType",
+      "discriminator": "@odataType",
       "required": [
-        "oDataType",
         "progress",
-        "state"
+        "state",
+        "@odataType"
       ]
     },
     "MediaJobOutputAsset": {
@@ -7772,7 +7772,8 @@
             "description": "Failed"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "StorageTaskAssignmentQueuedEventData": {
       "type": "object",
@@ -7840,7 +7841,8 @@
             "description": "Failed"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "StorageTaskQueuedEventData": {
       "type": "object",
@@ -8388,7 +8390,8 @@
             "description": "Unmixed channel type"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "recordingContentType": {
       "type": "string",
@@ -8412,7 +8415,8 @@
             "description": "Audio content type"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     },
     "recordingFormatType": {
       "type": "string",
@@ -8442,7 +8446,8 @@
             "description": "MP4 format"
           }
         ]
-      }
+      },
+      "x-ms-enum.modelAsString": true
     }
   },
   "parameters": {}

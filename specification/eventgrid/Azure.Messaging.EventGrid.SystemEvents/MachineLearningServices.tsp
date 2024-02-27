@@ -10,10 +10,12 @@ model MachineLearningServicesModelRegisteredEventData {
   modelVersion?: string;
 
   /** The tags of the model that was registered. */
-  modelTags?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Model tags is type object"
+  modelTags?: unknown;
 
   /** The properties of the model that was registered. */
-  modelProperties?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Model tags is type object"
+  modelProperties?: unknown;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event. */
@@ -101,10 +103,12 @@ model MachineLearningServicesRunStatusChangedEventData {
   runType?: string;
 
   /** The tags of the Machine Learning Run. */
-  runTags?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Run tags is type object"
+  runTags?: unknown;
 
   /** The properties of the Machine Learning Run. */
-  runProperties?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Run properties is type object"
+  runProperties?: unknown;
 
   /** The status of the Machine Learning Run. */
   runStatus?: string;

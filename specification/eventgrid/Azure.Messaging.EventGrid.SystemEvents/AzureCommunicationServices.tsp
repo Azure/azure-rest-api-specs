@@ -687,7 +687,7 @@ model AcsRouterWorkerSelector {
 
   /** Router Job Worker Selector Time to Live in Seconds */
   @encode("ISO8601") // TODO verify this is timespan in C#
-  timeToLive?: duration;
+  ttlSeconds?: duration;
 
   /** Router Job Worker Selector State */
   selectorState?: AcsRouterWorkerSelectorState;
@@ -736,6 +736,9 @@ alias AcsChatThreadPropertiesBaseEventData = {
 
   /** The updated thread properties */
   properties?: Record<string>;
+
+  /** The thread metadata */
+  metadata?: Record<string>;
 };
 
 alias AcsChatParticipantBaseEventData = {
