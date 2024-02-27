@@ -6,21 +6,17 @@ linter:
    - "@azure-tools/typespec-azure-core/all"
 options:
   "@azure-tools/typespec-csharp":
-    namespace : "Azure.Developer.DevCenter"
+    package-dir: "Azure.Developer.DevCenter"
+    namespace: "{package-dir}"
     clear-output-folder : true
-    # new-project : false
-    # model-namespace : false
   "@azure-tools/typespec-python":
     package-dir: "azure-developer-devcenter"
     package-name: "{package-dir}"
     package-mode: "azure-dataplane"
-    #models-mode: none
   "@azure-tools/typespec-ts":
     title: "Azure Developer DevCenter"
     package-dir: "developer-devcenter-rest"
     generateMetadata: true
-    #generateTest: true
-    #"emitter-output-dir": "{output-dir}"
     packageDetails:
       name: "@azure-rest/developer-devcenter"
       description: "Azure Developer DevCenter Client"
