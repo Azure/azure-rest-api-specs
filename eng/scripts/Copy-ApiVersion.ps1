@@ -36,7 +36,7 @@ param (
     [string] $Provider,
 
     [Parameter(Mandatory)]
-    [ArgumentCompleter({"preview/", "stable/"})]
+    [ArgumentCompleter({ "preview/", "stable/" })]
     [ValidateScript({ 
             function script:Get-Version([string] $version) {
                 if ($version -match '^(?<status>stable|preview)/(?<version>(\d{4}-\d{2}-\d{2}|\d+\.\d+)(-preview(\.\d+)?)?)$') {
@@ -114,3 +114,33 @@ Write-Host 'When complete, commit those changes as shown below, push to the upst
 Write-Host ''
 Write-Host '    git commit -am"Updated readme files"'
 Write-Host ''
+
+# Update readme file in the service type directory
+$jsonFile = Get-ChildItem $newDirectory -Filter '*.json' | Select-Object -First 1 -ExpandProperty Name
+$readmeFile = Get-ChildItem $readmeDirectory -Filter 'readme.md'
+
+$readmeContentBlock = @"
+### Tag: package-$newApiVersion
+
+These settings apply only when ``--tag=package-$newApiVersion`` is specified on the command line.
+
+```````yaml `$(tag) == 'package-$newApiVersion'
+input-file:
+  - $Provider/$newApiVersionStatus/$newApiVersion/$jsonFile
+```````
+
+"@
+
+if ($readmeFile) {
+    $readmeContent = $readmeFile | Get-Content -Raw
+    $readmeContent -replace '(?s)(### tag: package.*)', "$readmeContentBlock`n`$1" | Set-Content $readmeFile.FullName
+}
+
+# Only update the main tag when the new version is stable or there is no stable version yet.
+if ( (-not (Test-Path "$PSScriptRoot/../../specification/$ServiceDirectory/$ServiceType/$Provider/stable")) -or ($newApiVersionStatus -eq 'stable')) {    
+    Write-Host "Updating the first tag in the first yaml code block in $readmeFile"
+    if ($readmeFile) {
+        $providerReadmeContent = $readmeFile | Get-Content -Raw
+        $providerReadmeContent -replace '(tag:\s*)(package-.*\n)((.|\n)*```)', "`$1package-$newApiVersion`$3" | Set-Content $readmeFile.FullName
+    }
+}
