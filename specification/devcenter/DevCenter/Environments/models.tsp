@@ -120,7 +120,7 @@ resource has been created.
 model EnvironmentUpdateProperties {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
   @doc("Parameters object for the environment.")
-  parameters?: Record<unknown>;
+  parameters?: {};
 }
 
 @doc("A catalog.")
