@@ -8,7 +8,6 @@ import "@typespec/openapi";
 using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Autorest;
 using OpenAPI;
