@@ -148,6 +148,16 @@ model EventHubConfig {
   connectionString: string;
 }
 
+@doc("Properties of one arm resource")
+model ResourceProperties {
+  @doc("Properties of one Connector")
+  connectorProperties: ConnectorProperties;
+
+  @doc("State of provisioning of the MessagingConnector ARM Resource")
+  @visibility("read")
+  provisioningState?: ConnectorProvisioningState;
+}
+
 @doc("Basic info for Connector")
 @discriminator("connectorType")
 model ConnectorProperties {
@@ -171,10 +181,6 @@ model ConnectorProperties {
   @doc("State of the MessagingConnector")
   @visibility("read")
   connectorState: ConnectorState;
-
-  @doc("State of provisioning of the MessagingConnector ARM Resource")
-  @visibility("read")
-  provisioningState?: ConnectorProvisioningState;
 }
 
 @doc("Configuration for BitCoinSourceConnector")
