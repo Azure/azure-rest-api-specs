@@ -183,23 +183,7 @@
                 "enum": [
                   "accepted",
                   "rejected"
-                ],
-                "x-ms-enum": {
-                  "name": "RepeatabilityResult",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "accepted",
-                      "value": "accepted",
-                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
-                    },
-                    {
-                      "name": "rejected",
-                      "value": "rejected",
-                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
-                    }
-                  ]
-                }
+                ]
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -715,7 +699,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the Template value"
+          "description": "Template binding reference name"
         },
         "kind": {
           "$ref": "#/definitions/MessageTemplateValueKind",
