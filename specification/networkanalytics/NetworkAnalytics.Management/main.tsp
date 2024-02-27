@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 
 using TypeSpec.Versioning;
 using TypeSpec.Http;
@@ -474,6 +475,7 @@ model DataProductsCatalogProperties {
   provisioningState?: ProvisioningState;
 
   @doc("The data product publisher information.")
+  @extension("x-ms-identifiers", [])
   publishers: PublisherInformation[];
 }
 
@@ -484,6 +486,7 @@ model PublisherInformation {
   publisherName: string;
 
   @doc("Data product information.")
+  @extension("x-ms-identifiers", [])
   dataProducts: DataProductInformation[];
 }
 
@@ -497,6 +500,7 @@ model DataProductInformation {
   description: string;
 
   @doc("Version information of data product.")
+  @extension("x-ms-identifiers", [])
   dataProductVersions: DataProductVersion[];
 }
 

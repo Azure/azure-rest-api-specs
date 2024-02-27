@@ -1,9 +1,11 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
@@ -61,6 +63,7 @@ model GitHubOrganizationProfile extends OrganizationProfile {
   kind: "GitHub";
 
   @doc("The list of GitHub organizations/repositories the pool should be present in.")
+  @extension("x-ms-identifiers", [])
   organizations: GitHubOrganization[];
 }
 @doc("Defines a GitHub organization")
@@ -78,6 +81,7 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   kind: "AzureDevOps";
 
   @doc("The list of Azure DevOps organizations the pool should be present in.")
+  @extension("x-ms-identifiers", [])
   organizations: Organization[];
 
   @doc("The type of permission which determines which accounts are admins on the Azure DevOps pool.")
@@ -131,6 +135,7 @@ model VmssFabricProfile extends FabricProfile {
   sku: DevOpsAzureSku;
 
   @doc("The VM images of the machines in the pool.")
+  @extension("x-ms-identifiers", [])
   images: PoolImage[];
 
   @doc("The OS profile of the machines in the pool.")
