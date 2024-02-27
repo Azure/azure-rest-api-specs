@@ -5408,6 +5408,29 @@
           ],
           "description": "The type of the managed inbound Load Balancer BackendPool.",
           "default": "NodeIPConfiguration"
+        },
+        "clusterServiceLoadBalancerHealthProbeMode": {
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClusterServiceLoadBalancerHealthProbeMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ServiceNodePort",
+                "description": "Each External Traffic Policy Cluster service will have its own health probe targeting service nodePort."
+              },
+              {
+                "value": "Shared",
+                "description": "All External Traffic Policy Cluster services in a Standard Load Balancer will have a dedicated health probe targeting the backend nodes' kube-proxy health check port 10256."
+              }
+            ]
+          },
+          "enum": [
+            "ServiceNodePort",
+            "Shared"
+          ],
+          "description": "The health probing behavior for External Traffic Policy Cluster services.",
+          "default": "ServiceNodePort"
         }
       },
       "description": "Profile of the managed cluster load balancer."
