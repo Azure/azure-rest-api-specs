@@ -226,13 +226,14 @@
           }
         },
         "inputBlobUrl": {
+          "description": "The URL to the input blob containing the batch of queries. This should be a valid URL pointing to a blob of an Azure Storage Account",
           "type": "string",
-          "format": "uri",
-          "description": "URL to the input blob containing the batch data."
+          "format": "uri"
         },
-        "linkedResource": {
+        "outputStorageUrl": {
+          "description": "The URL that points to a blob storage where the batch results will be stored.",
           "type": "string",
-          "description": "The destination where the batch results will be stored. This should be a preconfigured resource in the control plane designated to receive and store the output of the batch processing."
+          "format": "uri"
         },
         "msiClientId": {
           "type": "string",
@@ -306,7 +307,7 @@
         "operationId",
         "operationType",
         "inputBlobUrl",
-        "linkedResource",
+        "outputStorageUrl",
         "createdDateTime",
         "lastActionDateTime",
         "percentComplete",
