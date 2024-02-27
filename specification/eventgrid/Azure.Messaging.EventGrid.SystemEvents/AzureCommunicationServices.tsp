@@ -111,7 +111,18 @@ model AcsChatThreadDeletedEventData
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadPropertiesUpdatedPerUserEventData
   extends AcsChatThreadEventBaseProperties {
-  ...AcsChatThreadPropertiesBaseEventData;
+  /** The communication identifier of the user who updated the thread properties */
+  editedByCommunicationIdentifier?: CommunicationIdentifierModel;
+
+  /** The time at which the properties of the thread were updated */
+  editTime?: utcDateTime;
+
+  /** The thread metadata */
+  metadata?: Record<string>;
+
+  /** The updated thread properties */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
+  properties?: Record<unknown>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event. */

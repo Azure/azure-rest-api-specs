@@ -55,10 +55,10 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** The path to the blob. */
     url?: string;
 
-    ...StorageBaseEventData;
-
     /** An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name. */
     sequencer?: string;
+
+    ...StorageBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryCreated event. */

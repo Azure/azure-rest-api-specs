@@ -562,17 +562,17 @@
           "format": "date-time",
           "description": "The time at which the properties of the thread were updated"
         },
-        "properties": {
-          "type": "object",
-          "description": "The updated thread properties",
-          "additionalProperties": {}
-        },
         "metadata": {
           "type": "object",
           "description": "The thread metadata",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "type": "object",
+          "description": "The updated thread properties",
+          "additionalProperties": {}
         }
       },
       "allOf": [
@@ -7373,16 +7373,16 @@
           "type": "string",
           "description": "The path to the blob."
         },
+        "sequencer": {
+          "type": "string",
+          "description": "An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name."
+        },
         "identity": {
           "type": "string",
           "description": "The identity of the requester that triggered this event."
         },
         "storageDiagnostics": {
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers."
-        },
-        "sequencer": {
-          "type": "string",
-          "description": "An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name."
         }
       }
     },
