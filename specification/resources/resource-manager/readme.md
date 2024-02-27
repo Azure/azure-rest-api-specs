@@ -197,6 +197,7 @@ These settings apply only when `--tag=package-resources-2023-07` is specified on
 
 ``` yaml $(tag) == 'package-resources-2023-07'
 input-file:
+  - Microsoft.Resources/stable/2023-07-01/deployments.json
   - Microsoft.Resources/stable/2023-07-01/resources.json
 ```
 
@@ -371,6 +372,7 @@ These settings apply only when `--tag=package-resources-2022-09` is specified on
 
 ``` yaml $(tag) == 'package-resources-2022-09'
 input-file:
+- Microsoft.Resources/stable/2022-09-01/deployments.json
 - Microsoft.Resources/stable/2022-09-01/resources.json
 ```
 
@@ -732,6 +734,7 @@ These settings apply only when `--tag=package-resources-2021-04` is specified on
 
 ``` yaml $(tag) == 'package-resources-2021-04'
 input-file:
+- Microsoft.Resources/stable/2021-04-01/deployments.json
 - Microsoft.Resources/stable/2021-04-01/resources.json
 ```
 
@@ -741,6 +744,7 @@ These settings apply only when `--tag=package-resources-2021-01` is specified on
 
 ``` yaml $(tag) == 'package-resources-2021-01'
 input-file:
+- Microsoft.Resources/stable/2021-01-01/deployments.json
 - Microsoft.Resources/stable/2021-01-01/resources.json
 ```
 
@@ -750,6 +754,7 @@ These settings apply only when `--tag=package-resources-2020-10` is specified on
 
 ``` yaml $(tag) == 'package-resources-2020-10'
 input-file:
+  - Microsoft.Resources/stable/2020-10-01/deployments.json
   - Microsoft.Resources/stable/2020-10-01/resources.json
 ```
 
@@ -759,6 +764,7 @@ These settings apply only when `--tag=package-resources-2020-08` is specified on
 
 ``` yaml $(tag) == 'package-resources-2020-08'
 input-file:
+  - Microsoft.Resources/stable/2020-08-01/deployments.json
   - Microsoft.Resources/stable/2020-08-01/resources.json
 ```
 
@@ -768,6 +774,7 @@ These settings apply only when `--tag=package-resources-2020-06` is specified on
 
 ``` yaml $(tag) == 'package-resources-2020-06'
 input-file:
+- Microsoft.Resources/stable/2020-06-01/deployments.json
 - Microsoft.Resources/stable/2020-06-01/resources.json
 ```
 
@@ -777,6 +784,7 @@ These settings apply only when `--tag=package-resources-2019-10` is specified on
 
 ``` yaml $(tag) == 'package-resources-2019-10'
 input-file:
+- Microsoft.Resources/stable/2019-10-01/deployments.json
 - Microsoft.Resources/stable/2019-10-01/resources.json
 ```
 
@@ -786,6 +794,7 @@ These settings apply only when `--tag=package-resources-2019-08` is specified on
 
 ``` yaml $(tag) == 'package-resources-2019-08'
 input-file:
+- Microsoft.Resources/stable/2019-08-01/deployments.json
 - Microsoft.Resources/stable/2019-08-01/resources.json
 ```
 
@@ -795,6 +804,7 @@ These settings apply only when `--tag=package-resources-2019-07` is specified on
 
 ``` yaml $(tag) == 'package-resources-2019-07'
 input-file:
+- Microsoft.Resources/stable/2019-07-01/deployments.json
 - Microsoft.Resources/stable/2019-07-01/resources.json
 ```
 
@@ -804,6 +814,7 @@ These settings apply only when `--tag=package-resources-2019-0510` is specified 
 
 ``` yaml $(tag) == 'package-resources-2019-0510'
 input-file:
+- Microsoft.Resources/stable/2019-05-10/deployments.json
 - Microsoft.Resources/stable/2019-05-10/resources.json
 ```
 
@@ -813,6 +824,7 @@ These settings apply only when `--tag=package-resources-2019-05` is specified on
 
 ``` yaml $(tag) == 'package-resources-2019-05'
 input-file:
+- Microsoft.Resources/stable/2019-05-01/deployments.json
 - Microsoft.Resources/stable/2019-05-01/resources.json
 ```
 
@@ -822,6 +834,7 @@ These settings apply only when `--tag=package-resources-2019-03` is specified on
 
 ``` yaml $(tag) == 'package-resources-2019-03'
 input-file:
+- Microsoft.Resources/stable/2019-03-01/deployments.json
 - Microsoft.Resources/stable/2019-03-01/resources.json
 ```
 
@@ -831,6 +844,7 @@ These settings apply only when `--tag=package-resources-2018-05` is specified on
 
 ``` yaml $(tag) == 'package-resources-2018-05'
 input-file:
+- Microsoft.Resources/stable/2018-05-01/deployments.json
 - Microsoft.Resources/stable/2018-05-01/resources.json
 ```
 
@@ -840,6 +854,7 @@ These settings apply only when `--tag=package-resources-2018-02` is specified on
 
 ``` yaml $(tag) == 'package-resources-2018-02'
 input-file:
+- Microsoft.Resources/stable/2018-02-01/deployments.json
 - Microsoft.Resources/stable/2018-02-01/resources.json
 ```
 
@@ -849,6 +864,7 @@ These settings apply only when `--tag=package-resources-2017-05` is specified on
 
 ``` yaml $(tag) == 'package-resources-2017-05'
 input-file:
+- Microsoft.Resources/stable/2017-05-10/deployments.json
 - Microsoft.Resources/stable/2017-05-10/resources.json
 ```
 
@@ -858,6 +874,7 @@ These settings apply only when `--tag=package-resources-2016-09` is specified on
 
 ``` yaml $(tag) == 'package-resources-2016-09'
 input-file:
+- Microsoft.Resources/stable/2016-09-01/deployments.json
 - Microsoft.Resources/stable/2016-09-01/resources.json
 ```
 
@@ -867,6 +884,7 @@ These settings apply only when `--tag=package-resources-2016-07` is specified on
 
 ``` yaml $(tag) == 'package-resources-2016-07'
 input-file:
+- Microsoft.Resources/stable/2016-07-01/deployments.json
 - Microsoft.Resources/stable/2016-07-01/resources.json
 ```
 
@@ -876,6 +894,7 @@ These settings apply only when `--tag=package-resources-2016-02` is specified on
 
 ``` yaml $(tag) == 'package-resources-2016-02'
 input-file:
+- Microsoft.Resources/stable/2016-02-01/deployments.json
 - Microsoft.Resources/stable/2016-02-01/resources.json
 ```
 
@@ -885,6 +904,7 @@ These settings apply only when `--tag=package-resources-2015-11` is specified on
 
 ``` yaml $(tag) == 'package-resources-2015-11'
 input-file:
+- Microsoft.Resources/stable/2015-11-01/deployments.json
 - Microsoft.Resources/stable/2015-11-01/resources.json
 ```
 
@@ -1350,6 +1370,105 @@ directive:
   - suppress: XmsParameterLocation
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    where: $.paths
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LRO_RESPONSE_HEADER
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationsApiResponseSchema
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationsApiSchemaUsesCommonTypes
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroLocationHeader
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroErrorContent
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: NoErrorCodeResponses
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PutRequestResponseSchemeArm
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PutResponseSchemaDescription
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PostOperationAsyncResponseValidation
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: MissingXmsErrorResponse
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForPutOperation
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathResourceProviderMatchNamespace
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ParametersOrder
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SyncPostReturn
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathContainsResourceType
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationIdNounVerb
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForResourceAction
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: UnSupportedPatchProperties
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroPostReturn
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPatch
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SubscriptionsAndResourceGroupCasing
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ResourceNameRestriction
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ConsistentPatchProperties
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: MissingTypeObject
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: TrackedResourcePatchOperation
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: IntegerTypeMustHaveFormat
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: BodyTopLevelProperties
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: TopLevelResourcesListBySubscription
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: XmsParameterLocation
+    from: deployments.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
 ```
 
 ---
@@ -1417,6 +1536,7 @@ input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
 - Microsoft.Resources/stable/2016-06-01/subscriptions.json
+- Microsoft.Resources/stable/2018-05-01/deployments.json
 - Microsoft.Resources/stable/2018-05-01/resources.json
 
 override-info:
