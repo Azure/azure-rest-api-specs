@@ -144,3 +144,6 @@ if ( (-not (Test-Path "$PSScriptRoot/../../specification/$ServiceDirectory/$Serv
         $providerReadmeContent -replace '(tag:\s*)(package-.*\n)((.|\n)*```)', "`$1package-$newApiVersion`$3" | Set-Content $readmeFile.FullName
     }
 }
+
+git add $readmeDirectory
+git commit -am"Updated readme files"
