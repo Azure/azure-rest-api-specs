@@ -109,7 +109,7 @@ These are the global settings for the EventGrid API.
 title: EventGridClient
 description: EventGrid Client
 openapi-type: data-plane
-tag: package-2024-01-01
+tag: package-2018-01
 ```
 
 ### Tag: package-2018-01
