@@ -15731,21 +15731,9 @@
           "$ref": "#/definitions/UserSourceInfo",
           "description": "Uploaded source information of the Job."
         },
-        "configuration": {
-          "$ref": "#/definitions/JobConfiguration",
-          "description": "The Job specific configuration."
-        }
-      }
-    },
-    "JobConfiguration": {
-      "description": "Non versioned Azure Spring Apps Job configuration",
-      "type": "object",
-      "required": [
-        "triggerType"
-      ],
-      "properties": {
         "triggerConfig": {
-          "$ref": "#/definitions/JobTriggerConfig"
+          "$ref": "#/definitions/JobTriggerConfig",
+          "description": "The Job trigger related configuration."
         }
       }
     },
