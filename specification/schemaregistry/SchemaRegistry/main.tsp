@@ -33,7 +33,7 @@ using Azure.Core;
   "https://{fullyQualifiedNamespace}",
   "The Schema Registry service endpoint.",
   {
-    @doc("The Schema Registry service endpoint, for example 'https://my-namespace.servicebus.windows.net'.")
+    @doc("The Schema Registry service endpoint, for example 'my-namespace.servicebus.windows.net'.")
     fullyQualifiedNamespace: url,
   }
 )
