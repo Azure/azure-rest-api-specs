@@ -23,7 +23,16 @@ These are the global settings for the orbital digital ground.
 
 ```yaml
 openapi-type: arm
-tag: package-2024-03-01-preview
+tag: package-2024-03-01
+```
+
+### Tag: package-2024-03-01
+
+These settings apply only when `--tag=package-2024-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01'
+input-file:
+  - stable/2024-03-01/aodg.json
 ```
 
 ### Tag: package-2024-03-01-preview
