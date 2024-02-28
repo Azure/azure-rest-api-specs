@@ -421,7 +421,8 @@
       "enum": [
         "GitRepository",
         "Bucket",
-        "AzureBlob"
+        "AzureBlob",
+        "OCIRepository"
       ],
       "x-ms-enum": {
         "name": "SourceKindType",
@@ -858,6 +859,270 @@
         }
       }
     },
+    "OCIRepositoryDefinition": {
+      "description": "Parameters to reconcile to the OCIRepository source kind type.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "url": {
+          "description": "The URL to sync for the flux configuration OCI repository.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "timeoutInSeconds": {
+          "description": "The maximum time to attempt to reconcile the cluster OCI repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "default": 600,
+          "x-nullable": true
+        },
+        "syncIntervalInSeconds": {
+          "description": "The interval at which to re-reconcile the cluster OCI repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "default": 600,
+          "x-nullable": true
+        },
+        "repositoryRef": {
+          "description": "The source reference for the OCIRepository object.",
+          "$ref": "#/definitions/OCIRepositoryRefDefinition"
+        },
+        "layerSelector": {
+          "description": "The layer to be pulled from the OCI artifact.",
+          "$ref": "#/definitions/OCIRepositoryLayerSelectorDefinition"
+        },
+        "verify": {
+          "description": "Verification of the authenticity of an OCI Artifact.",
+          "$ref": "#/definitions/OCIRepositoryVerifyDefinition"
+        },
+        "serviceAccountName": {
+          "description": "The service account name to authenticate with the OCI repository.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "certSecretRef": {
+          "description": "The name of the Secret containing client certificate and private key or CA certificate for connecting to the registry.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "localAuthRef": {
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "OCIRepositoryPatchDefinition": {
+      "description": "Parameters to reconcile to the OCIRepository source kind type.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "url": {
+          "description": "The URL to sync for the flux configuration OCI repository.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "timeoutInSeconds": {
+          "description": "The maximum time to attempt to reconcile the cluster OCI repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "syncIntervalInSeconds": {
+          "description": "The interval at which to re-reconcile the cluster OCI repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "repositoryRef": {
+          "description": "The source reference for the OCIRepository object.",
+          "$ref": "#/definitions/OCIRepositoryRefPatchDefinition"
+        },
+        "layerSelector": {
+          "description": "The layer to be pulled from the OCI artifact.",
+          "$ref": "#/definitions/OCIRepositoryLayerSelectorPatchDefinition"
+        },
+        "verify": {
+          "description": "Verification of the authenticity of an OCI Artifact.",
+          "$ref": "#/definitions/OCIRepositoryVerifyPatchDefinition"
+        },
+        "serviceAccountName": {
+          "description": "The service account name to authenticate with the OCI repository.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "certSecretRef": {
+          "description": "The name of the Secret containing client certificate and private key or CA certificate for connecting to the registry.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "localAuthRef": {
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "OCIRepositoryRefDefinition": {
+      "description": "The source reference for the OCIRepository object.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "tag": {
+          "description": "The OCI repository image tag name to pull. This defaults to 'latest'.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "semver": {
+          "description": "The semver range used to match against OCI repository tags. This takes precedence over tag.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "digest": {
+          "description": "The image digest to pull from OCI repository, the value should be in the format ‘sha256:’. This takes precedence over semver.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "OCIRepositoryRefPatchDefinition": {
+      "description": "The source reference for the OCIRepository object.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "tag": {
+          "description": "The OCI repository image tag name to pull. This defaults to 'latest'.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "semver": {
+          "description": "The semver range used to match against OCI repository tags. This takes precedence over tag.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "digest": {
+          "description": "The image digest to pull from OCI repository, the value should be in the format ‘sha256:’. This takes precedence over semver.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "OCIRepositoryLayerSelectorDefinition": {
+      "description": "Parameters to specify which layer to pull from the OCI artifact. By default, the first layer in the artifact is pulled.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "mediaType": {
+          "description": "The first layer matching the specified media type will be used.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "operation": {
+          "description": "The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "OCIRepositoryLayerSelectorPatchDefinition": {
+      "description": "Parameters to specify which layer to pull from the OCI artifact. By default, the first layer in the artifact is pulled.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "mediaType": {
+          "description": "The first layer matching the specified media type will be used.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "operation": {
+          "description": "The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "OCIRepositoryVerifyDefinition": {
+      "description": "Parameters to verify the authenticity of an OCI Artifact.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "provider": {
+          "description": "Verification provider name.",
+          "type": "string"
+        },
+        "secretRef": {
+          "description": "Kubernetes Secret that contains the trusted public keys of trusted authors.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "matchOIDCIdentity": {
+          "description": "Array defining the criteria for matching the identity while verifying an OCI artifact.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MatchOIDCIdentityDefinition"
+          },
+          "x-ms-identifiers": [],
+          "x-nullable": true
+        }
+      }
+    },
+    "OCIRepositoryVerifyPatchDefinition": {
+      "description": "Parameters to verify the authenticity of an OCI Artifact.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "provider": {
+          "description": "Verification provider name.",
+          "type": "string"
+        },
+        "secretRef": {
+          "description": "Kubernetes Secret that contains the trusted public keys of trusted authors.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "matchOIDCIdentity": {
+          "description": "Array defining the criteria for matching the identity while verifying an OCI artifact.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MatchOIDCIdentityPatchDefinition"
+          },
+          "x-ms-identifiers": [],
+          "x-nullable": true
+        }
+      }
+    },
+    "MatchOIDCIdentityDefinition": {
+      "description": "MatchOIDCIdentity defines the criteria for matching the identity while verifying an OCI artifact.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "issuer": {
+          "description": "The regex pattern to match against to verify the OIDC issuer.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "The regex pattern to match against to verify the identity subject.",
+          "type": "string"
+        }
+      }
+    },
+    "MatchOIDCIdentityPatchDefinition": {
+      "description": "MatchOIDCIdentity defines the criteria for matching the identity while verifying an OCI artifact.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "issuer": {
+          "description": "The regex pattern to match against to verify the OIDC issuer.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "The regex pattern to match against to verify the identity subject.",
+          "type": "string"
+        }
+      }
+    },
     "PostBuildDefinition": {
       "description": "The postBuild definitions defining variable substitutions for this Kustomization after kustomize build.",
       "type": "object",
@@ -1237,6 +1502,11 @@
               "type": "object",
               "$ref": "#/definitions/AzureBlobDefinition"
             },
+            "ociRepository": {
+              "description": "Parameters to reconcile to the OCIRepository source kind type.",
+              "type": "object",
+              "$ref": "#/definitions/OCIRepositoryDefinition"
+            },
             "kustomizations": {
               "description": "Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.",
               "type": "object",
@@ -1370,6 +1640,11 @@
               "description": "Parameters to reconcile to the AzureBlob source kind type.",
               "type": "object",
               "$ref": "#/definitions/AzureBlobPatchDefinition"
+            },
+            "ociRepository": {
+              "description": "Parameters to reconcile to the OCIRepository source kind type.",
+              "type": "object",
+              "$ref": "#/definitions/OCIRepositoryPatchDefinition"
             },
             "kustomizations": {
               "description": "Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.",
