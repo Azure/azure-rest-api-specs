@@ -1,5 +1,4 @@
 import "./LiftrBase.Storage/main.tsp";
-
 import "@typespec/openapi";
 
 @armProviderNamespace
