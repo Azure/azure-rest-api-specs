@@ -180,6 +180,10 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create or Update Session Pool": {
             "$ref": "./examples/SessionPools_CreateOrUpdate.json"
@@ -219,7 +223,12 @@
             "description": "Session Pool deleted successfully."
           },
           "202": {
-            "description": "Session Pool delete has been started.."
+            "description": "Session Pool delete has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Session Pool does not exist."
@@ -230,6 +239,10 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete Session Pool": {
