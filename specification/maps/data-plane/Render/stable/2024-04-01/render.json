@@ -555,28 +555,51 @@
           {
             "name": "tilesetId",
             "in": "query",
-            "description": "Map style to be returned. Possible values are microsoft.base.darkgrey, microsoft.base.road and microsoft.imagery.<br><br>Please see [TilesetId]($ref: '#/parameters/TilesetId') for details.",
+            "required": true,
+            "description": "Map style to be returned. Possible values are microsoft.base.road, microsoft.base.darkgrey, and microsoft.imagery. Please refer to [Render TilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid) for more details",
             "type": "string",
             "enum": [
-              "microsoft.base.darkgrey",
               "microsoft.base.road",
+              "microsoft.base.darkgrey",
               "microsoft.imagery"
             ],
             "x-ms-enum": {
-              "$ref": "#/parameters/TilesetId"
+              "name": "StaticImageSupportedTilesetId",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "microsoft.base.road",
+                  "description": "All layers with our main style."
+                },
+                {
+                  "value": "microsoft.base.darkgrey",
+                  "description": "All layers with our dark grey style."
+                },
+                {
+                  "value": "microsoft.imagery",
+                  "description": "A combination of satellite and aerial imagery."
+                }
+              ]
             }
           },
           {
             "name": "trafficLayer",
             "in": "query",
-            "description": "Optional Value. If TrafficLayer is set, will return map image with traffic flow layer; Otherwise, return basemap image.<br><br>Please see [TilesetId]($ref: '#/parameters/TilesetId') for details.",
+            "description": "Optional Value. Default value set to none. If TrafficLayer is set, will return map image with traffic flow layer; Otherwise, return basemap image.<br><br>Please refer to [Render TilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid) for more details",
             "type": "string",
             "enum": [
               "microsoft.traffic.relative.main",
               ""
             ],
             "x-ms-enum": {
-              "$ref": "#/parameters/TilesetId"
+              "name": "StaticImageSupportedTrafficTilesetId",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "microsoft.traffic.relative.main",
+                  "description": "Relative traffic tiles in raster in our main style."
+                }
+              ]
             }
           },
           {
@@ -660,7 +683,6 @@
           "application/json",
           "image/jpeg",
           "image/png",
-          "image/pbf",
           "application/vnd.mapbox-vector-tile"
         ],
         "responses": {
