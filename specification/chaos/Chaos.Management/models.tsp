@@ -208,6 +208,7 @@ model ExperimentProperties {
   selectors: ChaosTargetSelector[];
 }
 
+@friendlyName("Step")
 @doc("Model that represents a step in the Experiment resource.")
 model ChaosExperimentStep {
   @doc("String of the step name.")

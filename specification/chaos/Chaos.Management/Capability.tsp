@@ -21,7 +21,8 @@ model Capability is ProxyResource<CapabilityProperties> {
   name: string;
 }
 
-alias CapabilityParentResourceParameters = BaseParameters<Capability> & ParentResourceParameters;
+alias CapabilityParentResourceParameters = BaseParameters<Capability> &
+  ParentResourceParameters;
 
 @armResourceOperations
 interface Capabilities {
@@ -29,10 +30,16 @@ interface Capabilities {
   get is ArmResourceRead<Capability, CapabilityParentResourceParameters>;
 
   @doc("Create or update a Capability resource that extends a Target resource.")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Capability, CapabilityParentResourceParameters>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Capability,
+    CapabilityParentResourceParameters
+  >;
 
   @doc("Delete a Capability that extends a Target resource.")
-  delete is ArmResourceDeleteSync<Capability, CapabilityParentResourceParameters>;
+  delete is ArmResourceDeleteSync<
+    Capability,
+    CapabilityParentResourceParameters
+  >;
 
   @doc("Get a list of Capability resources that extend a Target resource..")
   list is ArmResourceListByParent<

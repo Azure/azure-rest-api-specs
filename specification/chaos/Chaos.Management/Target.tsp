@@ -36,7 +36,8 @@ alias ParentResourceParameters = {
   parentResourceName: string;
 };
 
-alias TargetParentResourceParameters = BaseParameters<Target> & ParentResourceParameters;
+alias TargetParentResourceParameters = BaseParameters<Target> &
+  ParentResourceParameters;
 
 @armResourceOperations
 interface Targets {
