@@ -47,6 +47,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/ContentProductTemplates.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/ContentTemplates.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/EnrichmentWithWorkspace.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/Entities.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/EntityQueries.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/EntityQueryTemplates.json
@@ -61,6 +62,8 @@ input-file:
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/Settings.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/SourceControls.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceCount.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/TriggeredAnalyticsRuleRuns.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/Watchlists.json
   - Microsoft.SecurityInsights/preview/2024-01-01-preview/WorkspaceManagerAssignments.json
@@ -936,8 +939,9 @@ directive:
     reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were instructed to supress this by Swagger reviewr.'
   - suppress: GuidUsage
     reason: 'Tenent Id should be a Guid'
+  - suppress: AvoidAdditionalProperties
+    from: Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
 ```
-
 ---
 
 # Code Generation

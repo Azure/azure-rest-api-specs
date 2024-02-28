@@ -419,7 +419,6 @@
         "instructionSteps",
         "permissions",
         "publisher",
-        "sampleQueries",
         "title",
         "connectivityCriteria"
       ],
@@ -441,23 +440,11 @@
           "description": "Gets or sets the connector description in markdown format.",
           "type": "string"
         },
-        "graphQueriesTableName": {
-          "description": "Gets or sets the name of the table the connector will insert the data to.\r\nThis name can be used in other queries by specifying {{graphQueriesTableName}} placeholder\r\n in Query and LastDataReceivedQuery values.",
-          "type": "string"
-        },
         "graphQueries": {
           "description": "Gets or sets the graph queries to show the current data volume over time.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/GraphQuery"
-          },
-          "x-ms-identifiers": []
-        },
-        "sampleQueries": {
-          "description": "Gets or sets the sample queries for the connector.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SampleQuery"
           },
           "x-ms-identifiers": []
         },
@@ -701,24 +688,6 @@
         "action": {
           "description": "Gets or sets a value indicating whether the permission is custom actions (POST).",
           "type": "boolean"
-        }
-      }
-    },
-    "SampleQuery": {
-      "description": "The sample queries for the connector.",
-      "required": [
-        "description",
-        "query"
-      ],
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Gets or sets the  sample query description.",
-          "type": "string"
-        },
-        "query": {
-          "description": "Gets or sets the KQL sample query.",
-          "type": "string"
         }
       }
     }
