@@ -133,10 +133,7 @@ op getSchemaPropertiesByContent is resourceOperations.ResourceAction<
   SchemasName,
   {
     ...SchemaContentType;
-
-    @doc("String representation (UTF-8) of the registered schema.")
-    @body
-    schemaContent: bytes;
+    ...SchemaContent;
   },
   SchemaProperties
 >;
