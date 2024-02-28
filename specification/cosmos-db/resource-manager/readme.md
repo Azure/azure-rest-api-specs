@@ -87,6 +87,23 @@ input-file:
   - Microsoft.DocumentDB/stable/2023-11-15/services.json
 ```
 
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.DocumentDB/stable/2024-02-08/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2024-02-08/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2024-02-08/mongorbac.json
+  - Microsoft.DocumentDB/stable/2024-02-08/notebook.json
+  - Microsoft.DocumentDB/stable/2024-02-08/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2024-02-08/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2024-02-08/rbac.json
+  - Microsoft.DocumentDB/stable/2024-02-08/restorable.json
+  - Microsoft.DocumentDB/stable/2024-02-08/services.json
+```
+
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
