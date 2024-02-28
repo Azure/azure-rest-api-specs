@@ -10982,10 +10982,17 @@
           "type": "boolean",
           "default": false
         },
-        "enablePrivateLinks": {
+        "privateLinkState": {
           "description": "Indicates whether the vnet injection service enables private links for backend storage account and container registry.",
-          "type": "boolean",
-          "default": false
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkState",
+            "modelAsString": true
+          }
         }
       }
     },
