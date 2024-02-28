@@ -32,8 +32,12 @@
           {
             "in": "path",
             "name": "agentResourceName",
+            "description": "Business Application Agent Name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "in": "header",
@@ -53,6 +57,7 @@
           {
             "in": "body",
             "name": "agentToUpsert",
+            "description": "The Business Application Agent",
             "schema": {
               "$ref": "#/definitions/Agent"
             }
@@ -106,8 +111,12 @@
           {
             "in": "path",
             "name": "agentResourceName",
+            "description": "Business Application Agent Name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "in": "header",
@@ -161,8 +170,12 @@
           {
             "in": "path",
             "name": "agentResourceName",
+            "description": "Business Application Agent Name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "in": "header",
@@ -260,6 +273,274 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/Systems/{systemResourceName}": {
+      "put": {
+        "tags": [
+          "systems"
+        ],
+        "description": "Creates or updates the system.",
+        "operationId": "Systems_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-workspace-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-object-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "systemToUpsert",
+            "description": "The system to upsert.",
+            "schema": {
+              "$ref": "#/definitions/System"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/System"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/System"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Systems_CreateOrUpdate": {
+            "$ref": "./examples/systems/Systems_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "systems"
+        ],
+        "description": "Gets the system.",
+        "operationId": "Systems_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-workspace-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/System"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Systems_Get": {
+            "$ref": "./examples/systems/Systems_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "systems"
+        ],
+        "description": "Deletes the system.",
+        "operationId": "Systems_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-workspace-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Systems_Delete": {
+            "$ref": "./examples/systems/Systems_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/Systems": {
+      "get": {
+        "tags": [
+          "systems"
+        ],
+        "description": "Gets the systems.",
+        "operationId": "Systems_GetAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-workspace-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/SystemsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Systems_GetAll": {
+            "$ref": "./examples/systems/Systems_GetAll.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -285,22 +566,27 @@
       "type": "object",
       "properties": {
         "agentContainerName": {
+          "description": "The name of the agent.\r\nonly letters with numbers, underscores and hyphens are allowed\r\nexample: \"my-agent\"",
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
           "type": "string"
         },
         "sdkPath": {
+          "description": "The SDK path (a file not a folder) on the agent machine.\r\nexample: \"/path/to/nwrfc750P_8-70002755.zip\"",
           "pattern": "^/(([^/]+/)*nwrfc75.*\\.zip$)|^((?:[a-zA-Z]:)?(?:\\\\|\\\\\\\\)(?:[^\\\\/:*?\"<>|\\r\\n]+\\\\)*nwrfc75.*\\.zip)$",
           "type": "string"
         },
         "sncPath": {
+          "description": "The SNC path (a folder not a file) on the agent machine.\r\nexample: \"/path/to/snc\"",
           "pattern": "^\\/(?:[^/]+\\/)*[^/]+$|^(?:[a-zA-Z]:)?(?:\\\\|\\\\\\\\)(?:[^\\\\/:*?\"<>|\\r\\n]+\\\\)*[^\\\\/:*?\"<>|\\r\\n]*$",
           "type": "string"
         },
         "keyVaultResourceId": {
+          "description": "The key vault resource id to access the key vault.\r\nexample: \"/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.KeyVault/vaults/myVault\"",
           "pattern": "^\\/?subscriptions\\/([^\\/]+)\\/resourceGroups\\/([^\\/]+)\\/providers\\/Microsoft\\.KeyVault\\/vaults\\/([^\\/]+)$",
           "type": "string"
         },
         "keyVaultUri": {
+          "description": "Key vault uri to access the key vault.",
           "type": "string"
         },
         "keyVaultAuth": {
@@ -310,6 +596,7 @@
           "$ref": "#/definitions/SecretSourceType"
         },
         "agentsSystems": {
+          "description": "The systems that installed in the agent.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AgentsSystemArmModel"
@@ -344,12 +631,15 @@
       "type": "object",
       "properties": {
         "agentsSystemName": {
+          "description": "The system instance ID inside the agent.\r\nExample: \"0a16301c-5686-42f9-8575-4fe7b64598ba\"",
           "type": "string"
         },
         "sapSystemId": {
+          "description": "The SAP system ID.\r\nExample: \"A4H\"",
           "type": "string"
         },
         "sapClientId": {
+          "description": "The SAP client ID.\r\nExample: \"001\"",
           "type": "string"
         }
       }
@@ -393,6 +683,612 @@
           }
         ]
       }
+    },
+    "AbapOsConnector": {
+      "description": "Describes the AbapOs connector configuration.",
+      "required": [
+        "sapSystemType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemsConfigurationConnector"
+        }
+      ],
+      "properties": {
+        "server": {
+          "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-zA-Z]{2,}$|^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$",
+          "type": "string"
+        },
+        "instance": {
+          "pattern": "^\\d{2}$",
+          "type": "string"
+        },
+        "severity": {
+          "format": "int32",
+          "pattern": "^[0-2]$",
+          "type": "integer"
+        },
+        "timezone": {
+          "pattern": "^GMT[+-]\\d+$",
+          "type": "string"
+        },
+        "suffix": {
+          "pattern": "^\\d{2}$",
+          "type": "string"
+        },
+        "httpsConfiguration": {
+          "$ref": "#/definitions/HttpsConfigurationArmType"
+        },
+        "sapSystemType": {
+          "$ref": "#/definitions/SapSystemArmType"
+        }
+      },
+      "x-ms-discriminator-value": "SapControlOs"
+    },
+    "AuthenticationArmType": {
+      "description": "Types of authentication.",
+      "enum": [
+        "UsernamePassword",
+        "Snc",
+        "SncWithUsernamePassword"
+      ],
+      "type": "string",
+      "example": "UsernamePassword",
+      "x-ms-enum": {
+        "name": "AuthenticationArmType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "UsernamePassword"
+          },
+          {
+            "value": "Snc"
+          },
+          {
+            "value": "SncWithUsernamePassword"
+          }
+        ]
+      }
+    },
+    "ConfigurationArmType": {
+      "description": "Represents the types of configuration for a system.",
+      "enum": [
+        "Sap"
+      ],
+      "type": "string",
+      "example": "Sap",
+      "x-ms-enum": {
+        "name": "ConfigurationArmType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Sap"
+          }
+        ]
+      }
+    },
+    "HttpsConfigurationArmType": {
+      "description": "Represents the types of HTTPS configuration to connect to the JavaOs or SapControlOs system.",
+      "enum": [
+        "HttpOnly",
+        "HttpsWithSslVerification",
+        "HttpsWithoutSslVerification"
+      ],
+      "type": "string",
+      "example": "HttpOnly",
+      "x-ms-enum": {
+        "name": "HttpsConfigurationArmType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "HttpOnly"
+          },
+          {
+            "value": "HttpsWithSslVerification"
+          },
+          {
+            "value": "HttpsWithoutSslVerification"
+          }
+        ]
+      }
+    },
+    "IngestionArmType": {
+      "description": "Types of ingestion.",
+      "enum": [
+        "Full",
+        "Incremental"
+      ],
+      "type": "string",
+      "example": "Full",
+      "x-ms-enum": {
+        "name": "IngestionArmType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Full"
+          },
+          {
+            "value": "Incremental"
+          }
+        ]
+      }
+    },
+    "JavaOsConnector": {
+      "description": "Describes the JavaOs connector configuration.",
+      "required": [
+        "sapSystemType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemsConfigurationConnector"
+        }
+      ],
+      "properties": {
+        "server": {
+          "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-zA-Z]{2,}$|^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$",
+          "type": "string"
+        },
+        "instance": {
+          "pattern": "^\\d{2}$",
+          "type": "string"
+        },
+        "severity": {
+          "format": "int32",
+          "pattern": "^[0-2]$",
+          "type": "integer"
+        },
+        "timezone": {
+          "pattern": "^GMT[+-]\\d+$",
+          "type": "string"
+        },
+        "suffix": {
+          "pattern": "^\\d{2}$",
+          "type": "string"
+        },
+        "httpsConfiguration": {
+          "$ref": "#/definitions/HttpsConfigurationArmType"
+        },
+        "sapSystemType": {
+          "$ref": "#/definitions/SapSystemArmType"
+        }
+      },
+      "x-ms-discriminator-value": "JavaOs"
+    },
+    "LogArmModel": {
+      "description": "Describes a log.",
+      "type": "object",
+      "properties": {
+        "logType": {
+          "$ref": "#/definitions/LogArmType"
+        },
+        "ingestionType": {
+          "$ref": "#/definitions/IngestionArmType"
+        },
+        "status": {
+          "$ref": "#/definitions/LogStatusArmType"
+        },
+        "scheduleInterval": {
+          "format": "int32",
+          "description": "The schedule interval in seconds.",
+          "type": "integer"
+        },
+        "bulkSize": {
+          "format": "int32",
+          "description": "The bulk size for the log.",
+          "type": "integer"
+        },
+        "filters": {
+          "description": "The filters for the log.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LogArmType": {
+      "description": "Types of logs and tables.",
+      "enum": [
+        "AbapAuditLog",
+        "AbapJobLog",
+        "AbapSpoolLog",
+        "AbapSpoolOutputLog",
+        "AbapChangeDocsLog",
+        "AbapAppLog",
+        "AbapWorkflowLog",
+        "AbapCrLog",
+        "AbapTableDataLog",
+        "AbapFilesLogs",
+        "SysLog",
+        "ICM",
+        "WorkProcess",
+        "Gateway",
+        "JavaFilesLogs",
+        "AGRTCODES",
+        "USR01",
+        "USR02",
+        "AGR1251",
+        "AGRUSERS",
+        "AGRPROF",
+        "UST04",
+        "USR21",
+        "ADR6",
+        "ADCP",
+        "USR05",
+        "USGRPUSER",
+        "USERADDR",
+        "DEVACCESS",
+        "AGRDEFINE",
+        "PAHI",
+        "AGRAGRS",
+        "USRSTAMP",
+        "AGRFLAGS",
+        "SNCSYSACL",
+        "USRACL"
+      ],
+      "type": "string",
+      "example": "AbapAuditLog",
+      "x-ms-enum": {
+        "name": "LogArmType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AbapAuditLog"
+          },
+          {
+            "value": "AbapJobLog"
+          },
+          {
+            "value": "AbapSpoolLog"
+          },
+          {
+            "value": "AbapSpoolOutputLog"
+          },
+          {
+            "value": "AbapChangeDocsLog"
+          },
+          {
+            "value": "AbapAppLog"
+          },
+          {
+            "value": "AbapWorkflowLog"
+          },
+          {
+            "value": "AbapCrLog"
+          },
+          {
+            "value": "AbapTableDataLog"
+          },
+          {
+            "value": "AbapFilesLogs"
+          },
+          {
+            "value": "SysLog"
+          },
+          {
+            "value": "ICM"
+          },
+          {
+            "value": "WorkProcess"
+          },
+          {
+            "value": "Gateway"
+          },
+          {
+            "value": "JavaFilesLogs"
+          },
+          {
+            "value": "AGRTCODES"
+          },
+          {
+            "value": "USR01"
+          },
+          {
+            "value": "USR02"
+          },
+          {
+            "value": "AGR1251"
+          },
+          {
+            "value": "AGRUSERS"
+          },
+          {
+            "value": "AGRPROF"
+          },
+          {
+            "value": "UST04"
+          },
+          {
+            "value": "USR21"
+          },
+          {
+            "value": "ADR6"
+          },
+          {
+            "value": "ADCP"
+          },
+          {
+            "value": "USR05"
+          },
+          {
+            "value": "USGRPUSER"
+          },
+          {
+            "value": "USERADDR"
+          },
+          {
+            "value": "DEVACCESS"
+          },
+          {
+            "value": "AGRDEFINE"
+          },
+          {
+            "value": "PAHI"
+          },
+          {
+            "value": "AGRAGRS"
+          },
+          {
+            "value": "USRSTAMP"
+          },
+          {
+            "value": "AGRFLAGS"
+          },
+          {
+            "value": "SNCSYSACL"
+          },
+          {
+            "value": "USRACL"
+          }
+        ]
+      }
+    },
+    "LogStatusArmType": {
+      "description": "Types of log status.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "example": "Enabled",
+      "x-ms-enum": {
+        "name": "LogStatusArmType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled"
+          },
+          {
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
+    "NetWeaverConnector": {
+      "description": "Describes the NetWeaver connector.",
+      "required": [
+        "client",
+        "sapSystemType",
+        "systemId",
+        "systemNumber"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemsConfigurationConnector"
+        }
+      ],
+      "properties": {
+        "abapServerHost": {
+          "description": "FQDN, hostname, or IP address of the ABAP server.",
+          "type": "string"
+        },
+        "messageServerHost": {
+          "description": "FQDN, hostname, or IP address of the Message server.",
+          "type": "string"
+        },
+        "group": {
+          "description": "Logon group of the message server.",
+          "type": "string"
+        },
+        "messageServerService": {
+          "description": "Port number, or service name (from /etc/services) of the message server.",
+          "type": "string"
+        },
+        "sncQop": {
+          "description": "SNC QOP.\r\nOptions are 1, 2, 3, 8, 9.",
+          "pattern": "^[1,2,3,8,9]$",
+          "type": "string"
+        },
+        "codePage": {
+          "description": "The SAP code page used for character encoding.\r\nExample - 1100",
+          "pattern": "^(?:[a-zA-Z0-9]{4}|UTF-8)$",
+          "type": "string"
+        },
+        "systemNumber": {
+          "description": "System number of the ABAP server.",
+          "minLength": 1,
+          "pattern": "^\\d{1,3}$",
+          "type": "string"
+        },
+        "systemId": {
+          "description": "System ID of the ABAP server.\r\nExample - A4H",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9]{3}$",
+          "type": "string"
+        },
+        "client": {
+          "description": "Client number of the ABAP server.\r\nExample - 001",
+          "minLength": 1,
+          "pattern": "^[0-9]{3}$",
+          "type": "string"
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/AuthenticationArmType"
+        },
+        "sapSystemType": {
+          "$ref": "#/definitions/SapSystemArmType"
+        }
+      },
+      "x-ms-discriminator-value": "NetWeaver"
+    },
+    "SapSystemArmType": {
+      "description": "Represents the types of SAP systems.",
+      "enum": [
+        "NetWeaver",
+        "JavaOs",
+        "SapControlOs"
+      ],
+      "type": "string",
+      "example": "NetWeaver",
+      "x-ms-enum": {
+        "name": "SapSystemArmType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NetWeaver"
+          },
+          {
+            "value": "JavaOs"
+          },
+          {
+            "value": "SapControlOs"
+          }
+        ]
+      }
+    },
+    "SapSystemsConfiguration": {
+      "description": "Describes the SAP configuration.",
+      "required": [
+        "configurationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemsConfiguration"
+        }
+      ],
+      "properties": {
+        "azureResourceId": {
+          "description": "azure resource id\r\nexample: \"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM\"",
+          "pattern": "^\\/?subscriptions\\/([^\\/]+)\\/resourceGroups\\/([^\\/]+)\\/providers\\/([^\\/]+)\\/([^\\/]+)\\/([^\\/]+)$",
+          "type": "string"
+        },
+        "connector": {
+          "$ref": "#/definitions/SystemsConfigurationConnector"
+        },
+        "logs": {
+          "description": "The connector configuration.\r\nOptions are NetWeaver, JavaOs and AbapOs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogArmModel"
+          }
+        },
+        "configurationType": {
+          "$ref": "#/definitions/ConfigurationArmType"
+        }
+      },
+      "x-ms-discriminator-value": "Sap"
+    },
+    "System": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/SystemArmModel",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SystemArmModel": {
+      "type": "object",
+      "properties": {
+        "SystemStatus": {
+          "$ref": "#/definitions/SystemStatusType"
+        },
+        "Configuration": {
+          "$ref": "#/definitions/SystemsConfiguration"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SystemStatusType": {
+      "description": "The status of the system.",
+      "enum": [
+        "Running",
+        "Stopped"
+      ],
+      "type": "string",
+      "example": "Running",
+      "x-ms-enum": {
+        "name": "SystemStatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Running"
+          },
+          {
+            "value": "Stopped"
+          }
+        ]
+      }
+    },
+    "SystemsConfiguration": {
+      "description": "The configuration of the system.",
+      "required": [
+        "configurationType"
+      ],
+      "type": "object",
+      "properties": {
+        "configurationType": {
+          "$ref": "#/definitions/ConfigurationArmType"
+        }
+      },
+      "discriminator": "configurationType"
+    },
+    "SystemsConfigurationConnector": {
+      "description": "Base Model for API authentication - support kinds: Microsoft.Azure.Sentinel.BizApps.SystemsApiService.Controllers.Preview.Version_2024_03_01.Models.Systems.SubModel.Enums.AuthenticationArmType values.",
+      "required": [
+        "sapSystemType"
+      ],
+      "type": "object",
+      "properties": {
+        "sapSystemType": {
+          "$ref": "#/definitions/SapSystemArmType"
+        }
+      },
+      "discriminator": "sapSystemType"
+    },
+    "SystemsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/System"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -410,6 +1306,24 @@
       "in": "path",
       "name": "agentId",
       "description": "Agent ID",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "System": {
+      "name": "system",
+      "description": "The system",
+      "required": true,
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/System"
+      }
+    },
+    "SystemId": {
+      "in": "path",
+      "name": "systemId",
+      "description": "System ID",
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
@@ -431,6 +1345,16 @@
       "azure_auth": [
         "user_impersonation"
       ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "BusinessApplicationAgents",
+      "description": "Controller that handles requests forwarded from ASI RP for agents resources CRUD ARM APIs."
+    },
+    {
+      "name": "Systems",
+      "description": "Controller that handles requests forwarded from ASI RP for systems resources CRUD ARM APIs."
     }
   ],
   "host": "management.azure.com",
