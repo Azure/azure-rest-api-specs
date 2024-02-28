@@ -859,10 +859,11 @@
     },
     "DiffDiskPlacement": {
       "type": "string",
-      "description": "Specifies the ephemeral disk placement for operating system disk. This property can be used by user in the request to choose the location i.e, cache disk or resource disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer Ephemeral OS disk size requirements for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements",
+      "description": "Specifies the ephemeral disk placement for operating system disk. This property can be used by user in the request to choose the location i.e, cache disk, resource disk or nvme disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer Ephemeral OS disk size requirements for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements. Minimum api-version for NvmeDisk: 2024-03-01.",
       "enum": [
         "CacheDisk",
-        "ResourceDisk"
+        "ResourceDisk",
+        "NvmeDisk"
       ],
       "x-ms-enum": {
         "name": "DiffDiskPlacement",
@@ -877,7 +878,7 @@
         },
         "placement": {
           "$ref": "#/definitions/DiffDiskPlacement",
-          "description": "Specifies the ephemeral disk placement for operating system disk. Possible values are: **CacheDisk,** **ResourceDisk.** The defaulting behavior is: **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk** is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk."
+          "description": "Specifies the ephemeral disk placement for operating system disk. Possible values are: **CacheDisk,** **ResourceDisk,** **NvmeDisk.** The defaulting behavior is: **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk** or **NvmeDisk** is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Minimum api-version for NvmeDisk: 2024-03-01."
         }
       },
       "description": "Describes the parameters of ephemeral disk settings that can be specified for operating system disk. **Note:** The ephemeral disk settings can only be specified for managed disk."
@@ -1999,6 +2000,22 @@
           "type": "integer",
           "format": "int32",
           "description": "The logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. If not specified, lun would be auto assigned."
+        },
+        "caching": {
+          "$ref": "#/definitions/Caching",
+          "description": "Specifies the caching requirements. Possible values are: **None,** **ReadOnly,** **ReadWrite.** The defaulting behavior is: **None for Standard storage. ReadOnly for Premium storage.**"
+        },
+        "deleteOption": {
+          "$ref": "#/definitions/DeleteOption",
+          "description": "Specifies whether data disk should be deleted or detached upon VM deletion. Possible values are: **Delete.** If this value is used, the data disk is deleted when VM is deleted. **Detach.** If this value is used, the data disk is retained after VM is deleted. The default value is set to **Detach**."
+        },
+        "diskEncryptionSet": {
+          "$ref": "#/definitions/DiskEncryptionSetParameters",
+          "description": "Specifies the customer managed disk encryption set resource id for the managed disk."
+        },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
         }
       },
       "required": [
