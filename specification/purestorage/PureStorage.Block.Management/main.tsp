@@ -651,8 +651,8 @@ model AvsDiskDetails {
   @doc("Resource id of the avs vm.")
   avsVmResourceId: string;
 
-  @doc("AVS storage container resource id that contains exact volume.")
-  avsStorageContainerResourceId: string;
+  @doc("AVS storage container name that contains exact volume.")
+  avsStorageContainerName: string;
 }
 
 @doc("Azure Volume Group assigned to the volume.")
