@@ -200,7 +200,7 @@
           "HanaOnAzure"
         ],
         "operationId": "HanaInstances_Create",
-        "x-ms-long-running-operation": false,
+        "x-ms-long-running-operation": true,
         "summary": "Creates a SAP HANA instance.",
         "description": "Creates a SAP HANA instance for the specified subscription, resource group, and instance name.",
         "x-ms-examples": {
@@ -238,6 +238,15 @@
               "$ref": "#/definitions/HanaInstance"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -247,6 +256,7 @@
         }
       },
       "delete": {
+        "deprecated": true,
         "tags": [
           "HanaOnAzure"
         ],
@@ -278,7 +288,13 @@
             "description": "Deleted HanaInstance"
           },
           "202": {
-            "description": "Deleting HanaInstance"
+            "description": "Deleting HanaInstance",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "No HanaInstance to delete"
@@ -377,7 +393,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -426,7 +448,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -475,7 +503,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
