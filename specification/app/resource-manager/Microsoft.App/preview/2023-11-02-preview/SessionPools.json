@@ -33,6 +33,45 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/sessionPools": {
+      "get": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Get the Session Pools in a given subscription.",
+        "operationId": "ContainerAppsSessionPools_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SessionPoolCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Session Pools by subscription": {
+            "$ref": "./examples/SessionPools_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionpools": {
       "get": {
         "tags": [
@@ -190,6 +229,73 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Update properties of a Session Pool",
+        "description": "Patches a Session Pool using JSON Merge Patch",
+        "operationId": "ContainerAppsSessionPools_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sessionPoolName",
+            "in": "path",
+            "description": "Name of the Session Pool.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "sessionPoolEnvelope",
+            "in": "body",
+            "description": "Properties used to create a session pool",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded",
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          "202": {
+            "description": "Session Pool update has been started.",
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or Update Session Pool": {
+            "$ref": "./examples/SessionPools_CreateOrUpdate.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "ContainerAppsSessionPools"
@@ -219,9 +325,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Session Pool deleted successfully."
-          },
           "202": {
             "description": "Session Pool delete has been started.",
             "headers": {
@@ -429,11 +532,6 @@
                 "create",
                 "read"
               ]
-            },
-            "name": {
-              "description": "The name of the Session Pool.",
-              "type": "string",
-              "readOnly": true
             },
             "maxConcurrentSessions": {
               "description": "The max count of Sessions at the same time.",
