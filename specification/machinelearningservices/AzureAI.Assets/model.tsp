@@ -16,21 +16,10 @@ using Azure.Core.Traits;
 namespace Microsoft.MachineLearningServices;
 
 @doc("AssetVersion Definition")
-@resource("versions")
 model AssetVersion {
-  // @key("indexVersion")
-  // @doc("Version of the index.")
-  // @visibility("external")
-  // indexVersionNum: string;
-
-  @doc("Name of the index.")
+  @doc("Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.")
   @visibility("read")
-  name: string;
-
-  @doc("Version of the index.")
-  @visibility("read")
-  @key("version")
-  version: string;
+  id: string;
 
   @doc("Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.")
   stage: string = "Development";
