@@ -259,7 +259,7 @@
             "description": "Properties used to create a session pool",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SessionPool"
+              "$ref": "#/definitions/SessionPoolPatchProperties"
             }
           },
           {
@@ -275,6 +275,11 @@
           },
           "202": {
             "description": "Session Pool update has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/SessionPool"
             }
@@ -598,6 +603,39 @@
                 "name": "SessionPoolProvisioningState",
                 "modelAsString": true
               }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SessionPoolPatchProperties": {
+      "description": "Container App SessionPool patchable properties.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "SessionPool resource specific patchable properties.",
+          "type": "object",
+          "properties": {
+            "maxConcurrentSessions": {
+              "description": "The max count of Sessions at the same time.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "secrets": {
+              "description": "The secrets of the Session Pool.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Secret"
+              }
+            },
+            "dynamicPoolConfiguration": {
+              "description": "The pool configuration if the poolManagementType is dynamic.",
+              "$ref": "#/definitions/DynamicPoolConfiguration"
+            },
+            "customContainerConfiguration": {
+              "description": "The custom container configuration if the containerType is CustomContainer.",
+              "$ref": "#/definitions/CustomContainerConfiguration"
             }
           },
           "x-ms-client-flatten": true
