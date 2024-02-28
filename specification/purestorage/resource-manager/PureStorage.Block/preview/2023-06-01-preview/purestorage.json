@@ -252,7 +252,9 @@
             "description": "The name of the reservation.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           }
         ],
         "responses": {
@@ -300,7 +302,9 @@
             "description": "The name of the reservation.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           },
           {
             "name": "resource",
@@ -374,7 +378,9 @@
             "description": "The name of the reservation.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           },
           {
             "name": "properties",
@@ -449,7 +455,9 @@
             "description": "The name of the reservation.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           }
         ],
         "responses": {
@@ -517,7 +525,9 @@
             "description": "The name of the reservation.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           }
         ],
         "responses": {
@@ -3238,13 +3248,19 @@
         "space": {
           "$ref": "#/definitions/Space",
           "description": "Contains properties related to used Flash space."
+        },
+        "dataReductionRatio": {
+          "type": "number",
+          "format": "double",
+          "description": "Data reduction ratio achieved on this pool"
         }
       },
       "required": [
         "usedCapacityPercentage",
         "bandwidthUsage",
         "iopsUsage",
-        "space"
+        "space",
+        "dataReductionRatio"
       ]
     },
     "HealthResponse": {

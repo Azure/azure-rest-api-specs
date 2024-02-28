@@ -418,6 +418,9 @@ model HealthDetails {
 
   @doc("Contains properties related to used Flash space.")
   space: Space;
+
+  @doc("Data reduction ratio achieved on this pool")
+  dataReductionRatio: float64;
 }
 
 @doc("Bandwidth usage metrics reported for a given resource.")
