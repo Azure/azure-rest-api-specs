@@ -1075,9 +1075,57 @@
             "template": {
               "description": "Job's execution container.",
               "$ref": "#/definitions/JobExecutionTemplate"
+            },
+            "detailedStatus": {
+              "description": "Detailed status of the job execution.",
+              "$ref": "#/definitions/ExecutionJobStatus"
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExecutionJobStatus": {
+      "description": "Container Apps Job execution.",
+      "type": "object",
+      "properties": {
+        "pods": {
+          "description": "Job execution Name.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExecutionPodStatus"
+          }
+        }
+      }
+    },
+    "ExecutionPodStatus": {
+      "description": "Container Apps Job execution.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Job execution Name.",
+          "type": "string"
+        },
+        "containers": {
+          "description": "Job execution Name.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExecutionContainerStatus"
+          }
+        }
+      }
+    },
+    "ExecutionContainerStatus": {
+      "description": "Container Apps Job execution.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Job execution Name.",
+          "type": "string"
+        },
+        "code": {
+          "description": "Job execution Name.",
+          "type": "integer"
         }
       }
     },
