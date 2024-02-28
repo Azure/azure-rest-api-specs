@@ -8804,7 +8804,7 @@
           "AppPlatform"
         ],
         "description": "Get an Job and its properties.",
-        "operationId": "Jobs_Get",
+        "operationId": "Job_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -8837,8 +8837,8 @@
           }
         },
         "x-ms-examples": {
-          "Jobs_Get": {
-            "$ref": "./examples/Jobs_Get.json"
+          "Job_Get": {
+            "$ref": "./examples/Job_Get.json"
           }
         }
       },
@@ -8847,7 +8847,7 @@
           "AppPlatform"
         ],
         "description": "Create a new Job or update an exiting Job.",
-        "operationId": "Jobs_CreateOrUpdate",
+        "operationId": "Job_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -8896,8 +8896,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Jobs_CreateOrUpdate": {
-            "$ref": "./examples/Jobs_CreateOrUpdate.json"
+          "Job_CreateOrUpdate": {
+            "$ref": "./examples/Job_CreateOrUpdate.json"
           }
         }
       },
@@ -8906,7 +8906,7 @@
           "AppPlatform"
         ],
         "description": "Operation to delete a Job.",
-        "operationId": "Jobs_Delete",
+        "operationId": "Job_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -8945,8 +8945,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Jobs_Delete": {
-            "$ref": "./examples/Jobs_Delete.json"
+          "Job_Delete": {
+            "$ref": "./examples/Job_Delete.json"
           }
         }
       }
@@ -8957,7 +8957,7 @@
           "AppPlatform"
         ],
         "summary": "Start a Azure Spring Apps Job",
-        "operationId": "Jobs_Start",
+        "operationId": "Job_Start",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -15842,6 +15842,14 @@
           "format": "int32",
           "description": "Number of parallel replicas of a job that can run at a given time.",
           "type": "integer"
+        },
+        "args": {
+          "description": "Arguments for the Job executioin.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
