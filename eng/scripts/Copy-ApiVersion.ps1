@@ -104,17 +104,6 @@ Update version to $NewVersion
 Updated the API version from $BaseVersion to $NewVersion.
 "@ | git commit --file=-
 
-Write-Host ''
-Write-Host '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' -ForegroundColor 'Yellow'
-Write-Host '!!! IMPORTANT: Action Required !!!' -ForegroundColor 'Yellow'
-Write-Host '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' -ForegroundColor 'Yellow'
-Write-Host ''
-Write-Host "You must manually update the default version and copy $BaseVersion sections from any markdown files in $readmeDirectory."
-Write-Host 'When complete, commit those changes as shown below, push to the upstream repo, and submit a pull request.'
-Write-Host ''
-Write-Host '    git commit -am"Updated readme files"'
-Write-Host ''
-
 # Update readme file in the service type directory
 $jsonFile = Get-ChildItem $newDirectory -Filter '*.json' | Select-Object -First 1 -ExpandProperty Name
 $readmeFile = Get-ChildItem $readmeDirectory -Filter 'readme.md'
@@ -133,7 +122,7 @@ input-file:
 
 if ($readmeFile) {
     $readmeContent = $readmeFile | Get-Content -Raw
-    $readmeContent -replace '(?s)(### tag: package.*)', "$readmeContentBlock`n`$1" | Set-Content $readmeFile.FullName
+    $readmeContent -replace '(?s)(### tag: package.*)', "$readmeContentBlock`n`$1" | Set-Content $readmeFile.FullName -NoNewline
 }
 
 # Only update the main tag when the new version is stable or there is no stable version yet.
@@ -141,7 +130,7 @@ if ( (-not (Test-Path "$PSScriptRoot/../../specification/$ServiceDirectory/$Serv
     Write-Host "Updating the first tag in the first yaml code block in $readmeFile"
     if ($readmeFile) {
         $providerReadmeContent = $readmeFile | Get-Content -Raw
-        $providerReadmeContent -replace '(tag:\s*)(package-.*\n)((.|\n)*```)', "`$1package-$newApiVersion`$3" | Set-Content $readmeFile.FullName
+        $providerReadmeContent -replace '(openapi-type:.*\n+tag:\s*)(package-.*)', "`$1package-$newApiVersion" | Set-Content $readmeFile.FullName -NoNewline
     }
 }
 
