@@ -62,7 +62,7 @@ model BinaryHardeningListResult is Azure.Core.Page<BinaryHardeningResource>;
 /**
  * binary hardening analysis result resource
  */
-model BinaryHardeningResource extends Resource {
+model BinaryHardeningResource extends ProxyResourceBase {
   /**
    * The properties of a binary hardening result found within a firmware image
    */
@@ -84,7 +84,6 @@ model BinaryHardeningResult {
    * Binary hardening features.
    */
   @extension("x-ms-client-flatten", true)
-  @extension("x-nullable", true)
   features?: BinaryHardeningFeatures;
 
   /**
