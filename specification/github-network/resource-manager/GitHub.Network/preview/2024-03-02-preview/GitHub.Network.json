@@ -1,47 +1,60 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-03-02-preview",
     "title": "GitHub.Network client",
-    "description": "GitHub.Network Resource Provider REST API version 2024-03-02-preview"
+    "version": "2024-03-02-preview",
+    "description": "GitHub.Network Resource Provider REST API version 2024-03-02-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
   ],
   "consumes": [
     "application/json"
   ],
-  "produces": [
-    "application/json"
-  ],
   "security": [
     {
-      "azure_auth": [
+      "AadOauth2Auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "azure_auth": {
+    "AadOauth2Auth": {
       "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "NetworkSettingsResources"
+    }
+  ],
   "paths": {
     "/providers/GitHub.Network/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
-        "description": "Retrieves a list of available API operations",
-        "summary": "Retrieves a list of available API operations under this Resource Provider.",
+        "description": "List the operations for the provider",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -49,21 +62,97 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains the list of operations under GitHub.Network resource provider.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound.",
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/GitHub.Network/networkSettings": {
+      "get": {
+        "operationId": "networkSettings_ListBySubscription",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Retrieves the properties of all GitHub.Network networkSettings resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "OperationsGet": {
-            "$ref": "./examples/networkSettings_Operations_Get.json"
+          "networkSettingsListBySub": {
+            "$ref": "./examples/networkSettings_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/GitHub.Network/networkSettings": {
+      "get": {
+        "operationId": "networkSettings_ListByResourceGroup",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Retrieves the properties of all GitHub.Network networkSettings resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "networkSettingsListGet": {
+            "$ref": "./examples/networkSettings_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -73,12 +162,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/GitHub.Network/networkSettings/{networkSettingsName}": {
       "get": {
-        "tags": [
-          "networkSettings"
-        ],
-        "summary": "Retrieves information about a GitHub.Network networkSettings resource.",
-        "description": "Retrieves the properties of a GitHub.Network networkSettings resource.",
         "operationId": "networkSettings_Get",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Retrieves the properties of a GitHub.Network networkSettings resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -90,18 +178,23 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NetworkSettingsNameParameter"
+            "name": "networkSettingsName",
+            "in": "path",
+            "description": "Name of the GitHub.Network resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains the GitHub.Network resource",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NetworkSettingsResource"
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (GitHub.Network resource does not exist.)",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -113,54 +206,12 @@
           }
         }
       },
-      "delete": {
-        "tags": [
-          "networkSettings"
-        ],
-        "summary": "Deletes a GitHub.Network networkSettings resource.",
-        "description": "Deletes an existing GitHub.Network networkSettings resource.",
-        "operationId": "networkSettings_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NetworkSettingsNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the GitHub.Network networkSettings resource is deleted."
-          },
-          "204": {
-            "description": "The request was successful; GitHub.Network networkSettings resource does not exist."
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure. 409 - Conflict(GitHub.Network networkSettings resource is in a non-terminal state due to an ongoing operation.)",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "networkSettingsDelete": {
-            "$ref": "./examples/networkSettings_Delete.json"
-          }
-        }
-      },
       "put": {
-        "tags": [
-          "networkSettings"
-        ],
-        "summary": "Creates a GitHub.Network networkSettings resource.",
-        "description": "Creates a GitHub.Network networkSettings resource with the specified create parameters.",
         "operationId": "networkSettings_Create",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Creates a GitHub.Network networkSettings resource with the specified create parameters.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -172,7 +223,12 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NetworkSettingsNameParameter"
+            "name": "networkSettingsName",
+            "in": "path",
+            "description": "Name of the GitHub.Network resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
           },
           {
             "name": "networkSettings",
@@ -181,19 +237,25 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkSettingsResource"
-            }
+            },
+            "x-ms-client-name": "networkSettings"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains the GitHub.Network resource",
+            "description": "Resource 'NetworkSettingsResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NetworkSettingsResource",
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/NetworkSettingsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkSettingsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResource"
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 409 - NotFound (GitHub.Network networkSettings resource could not be created)",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -206,12 +268,11 @@
         }
       },
       "patch": {
-        "tags": [
-          "networkSettings"
-        ],
-        "summary": "Updates a GitHub.Network networkSettings resource.",
-        "description": "Updates the properties of an existing GitHub.Network networkSettings resource with the specified update parameters.",
         "operationId": "networkSettings_Update",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Updates the properties of an existing GitHub.Network networkSettings resource with the specified update parameters.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -223,28 +284,33 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NetworkSettingsNameParameter"
+            "name": "networkSettingsName",
+            "in": "path",
+            "description": "Name of the GitHub.Network resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
           },
           {
             "name": "networkSettings",
             "in": "body",
             "description": "Parameters for updating the GitHub.Network resource.",
-            "required": false,
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkSettingsResourcePatch"
-            }
+              "$ref": "#/definitions/NetworkSettingsResourceTagsUpdate"
+            },
+            "x-ms-client-name": "networkSettings"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains the updated GitHub.Network networkSettings resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NetworkSettingsResource",
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/NetworkSettingsResource"
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (GitHub.Network networkSettings resource does not exist.)",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -255,16 +321,13 @@
             "$ref": "./examples/networkSettings_Update.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/GitHub.Network/networkSettings": {
-      "get": {
+      },
+      "delete": {
+        "operationId": "networkSettings_Delete",
         "tags": [
-          "networkSettings"
+          "NetworkSettingsResources"
         ],
-        "summary": "Retrieves information about all GitHub.Network networkSettings resources under the given subscription and resource group",
-        "description": "Retrieves the properties of all GitHub.Network networkSettings resources.",
-        "operationId": "networkSettings_ListByResourceGroup",
+        "description": "Deletes an existing GitHub.Network networkSettings resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -274,191 +337,167 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkSettingsName",
+            "in": "path",
+            "description": "Name of the GitHub.Network resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains the GitHub.Network networkSettings resource",
-            "schema": {
-              "$ref": "#/definitions/NetworkSettingsResourceList"
-            }
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (GitHub.Network networkSettings resource does not exist.)",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "networkSettingsListGet": {
-            "$ref": "./examples/networkSettings_ListByResourceGroup.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/GitHub.Network/networkSettings": {
-      "get": {
-        "tags": [
-          "networkSettings"
-        ],
-        "summary": "Retrieves information about all GitHub.Network networkSettings resources under the given subscription",
-        "description": "Retrieves the properties of all GitHub.Network networkSettings resources.",
-        "operationId": "networkSettings_ListBySubscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/PropertyQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; response contains the list of GitHub.Network networkSettings resources",
-            "schema": {
-              "$ref": "#/definitions/NetworkSettingsResourceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (GitHub.Network networkSettings resource does not exist.)",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "networkSettingsListBySub": {
-            "$ref": "./examples/networkSettings_ListBySubscription.json"
+          "networkSettingsDelete": {
+            "$ref": "./examples/networkSettings_Delete.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "NetworkSettingsResource": {
+      "type": "object",
+      "description": "GitHub.Network networkSettings resource. Represents the network settings needed for vnet injection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSettingsResourceProperties",
+          "description": "NetworkSettings resource-specific properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NetworkSettingsResourceListResult": {
+      "type": "object",
+      "description": "The response of a NetworkSettingsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkSettingsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkSettingsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkSettingsResourceProperties": {
+      "type": "object",
+      "description": "NetworkSettings resource-specific properties.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Specifies a subnet ID for vnet-injection."
+        },
+        "businessId": {
+          "type": "string",
+          "description": "Specifies the GitHub business (enerprise/organization) ID associated to the Azure subscription."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The managed application provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSettingsResourceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in NetworkSettingsResource resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ProvisioningState": {
+      "type": "string",
       "description": "Provisioning status of the managed application.",
-      "readOnly": true,
       "enum": [
         "Failed",
         "Succeeded",
         "Canceled",
         "Accepted"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "NetworkSettingsResourceProperties": {
-      "description": "NetworkSettings resource-specific properties.",
-      "type": "object",
-      "properties": {
-        "subnetId": {
-          "description": "Specifies a subnet ID for vnet-injection.",
-          "type": "string"
-        },
-        "organizationId": {
-          "description": "Specifies the organization ID to be linked to the Azure subscription.",
-          "type": "string"
-        },
-        "targetServices": {
-          "description": "Specifies a comma-separated list of service names the resource is associated with.",
-          "type": "array",
-          "items": {
-            "type": "string"
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The provisioning of the resource failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource was provisioned successfully."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The provisioning of the resource was cancelled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning is in progress."
           }
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The managed application provisioning state."
-        }
-      }
+        ]
+      },
+      "readOnly": true
     },
-    "NetworkSettingsResource": {
-      "description": "GitHub.Network networkSettings resource. Represents the network settings needed for vnet injection.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-03-02-preview"
       ],
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Identity",
-          "description": "The managed identity associated with the resource."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NetworkSettingsResourceProperties"
-        }
-      }
-    },
-    "NetworkSettingsResourcePatch": {
-      "description": "GitHub.Network networkSettings patch resource. Represents a patch version of the networkSettings resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Identity",
-          "description": "The managed identity associated with the resource."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NetworkSettingsResourceProperties"
-        }
-      }
-    },
-    "NetworkSettingsResourceList": {
-      "description": "Object that includes an array of GitHub.Network resources and a possible link for next set.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of GitHub.Network resources",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkSettingsResource"
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-03-02-preview",
+            "value": "2024-03-02-preview",
+            "description": "The 2024-03-02-preview API version."
           }
-        },
-        "nextLink": {
-          "description": "The URL the client should use to fetch the next page (per server side paging).",
-          "type": "string"
-        }
+        ]
       }
     }
   },
-  "parameters": {
-    "NetworkSettingsNameParameter": {
-      "name": "networkSettingsName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the GitHub.Network resource",
-      "pattern": "^[a-zA-Z0-9]",
-      "x-ms-parameter-location": "method"
-    },
-    "PropertyQueryParameter": {
-      "name": "propertyQuery",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The organization ID to filter resources for.",
-      "x-ms-parameter-location": "client"
-    }
-  }
+  "parameters": {}
 }
