@@ -1,4 +1,3 @@
-import "./service.tsp";
 import "./environments/routes.tsp";
 import "./devcenter/routes.tsp";
 import "./devbox/routes.tsp";

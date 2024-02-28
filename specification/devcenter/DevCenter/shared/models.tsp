@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "../service.tsp";
+import "../main.tsp";
 
 using Azure.Core;
 using TypeSpec.Rest;
