@@ -922,6 +922,15 @@
           "description": "Enable IO Auto Scaling or not.",
           "$ref": "#/definitions/EnableStatusEnum",
           "default": "Enabled"
+        },
+        "storageRedundancy": {
+          "description": "The redundant type of the server storage. The parameter is used for server creation.",
+          "$ref": "#/definitions/StorageRedundancyEnum",
+          "default": "LocalRedundancy",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "description": "Storage Profile properties of a server"
@@ -1415,6 +1424,18 @@
         }
       },
       "description": "Metadata of user assigned identity."
+    },
+    "StorageRedundancyEnum": {
+      "type": "string",
+      "description": "Enum to indicate whether storage sku value is 'ZoneRedundancy' or 'LocalRedundancy'",
+      "enum": [
+        "LocalRedundancy",
+        "ZoneRedundancy"
+      ],
+      "x-ms-enum": {
+        "name": "StorageRedundancyEnum",
+        "modelAsString": true
+      }
     }
   }
 }
