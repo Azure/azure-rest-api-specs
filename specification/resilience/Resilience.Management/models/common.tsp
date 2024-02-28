@@ -44,7 +44,7 @@ scalar ParentResourceId
     }
   ]>;
 
-@doc("Availability Zone Resilience state enum")
+@doc("Availability Zones Resilience state enum")
 enum ZoneResilienceState {
   @doc("The resource is zone-aligned.")
   ZoneAligned,
@@ -55,12 +55,9 @@ enum ZoneResilienceState {
   @doc("The resource is always-available.")
   AlwaysAvailable,
 
-  @doc("The zone resilience state of the resource is not available.")
-  None,
-}
+  @doc("The zone resilience state is not-applicable.")
+  NotApplicable,
 
-@doc("Resilience type enum")
-enum ResilienceType {
-  @doc("Availability Zones Resilience.")
-  AvailabilityZonesResilience,
+  @doc("The resource is non-resilient.")
+  NonResilient,
 }

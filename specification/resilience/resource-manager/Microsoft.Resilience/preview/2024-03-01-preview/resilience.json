@@ -256,11 +256,6 @@
       "type": "object",
       "description": "Resilience Properties",
       "properties": {
-        "resilienceType": {
-          "$ref": "#/definitions/ResilienceType",
-          "description": "Resilience Type",
-          "readOnly": true
-        },
         "parentResourceId": {
           "$ref": "#/definitions/ParentResourceId",
           "description": "The parent resource id",
@@ -285,8 +280,7 @@
           "type": "array",
           "description": "Zones where the resource is deployed",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           "readOnly": true
         },
@@ -294,8 +288,7 @@
           "type": "array",
           "description": "Findings of the zone resilience evaluation",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           "readOnly": true
         },
@@ -306,7 +299,6 @@
         }
       },
       "required": [
-        "resilienceType",
         "parentResourceId",
         "parentResourceType",
         "parentResourceLocation",
@@ -354,24 +346,6 @@
         "value"
       ]
     },
-    "ResilienceType": {
-      "type": "string",
-      "description": "Resilience type enum",
-      "enum": [
-        "AvailabilityZonesResilience"
-      ],
-      "x-ms-enum": {
-        "name": "ResilienceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AvailabilityZonesResilience",
-            "value": "AvailabilityZonesResilience",
-            "description": "Availability Zones Resilience."
-          }
-        ]
-      }
-    },
     "Versions": {
       "type": "string",
       "description": "The available API versions.",
@@ -392,12 +366,13 @@
     },
     "ZoneResilienceState": {
       "type": "string",
-      "description": "Availability Zone Resilience state enum",
+      "description": "Availability Zones Resilience state enum",
       "enum": [
         "ZoneAligned",
         "ZoneRedundant",
         "AlwaysAvailable",
-        "None"
+        "NotApplicable",
+        "NonResilient"
       ],
       "x-ms-enum": {
         "name": "ZoneResilienceState",
@@ -419,9 +394,14 @@
             "description": "The resource is always-available."
           },
           {
-            "name": "None",
-            "value": "None",
-            "description": "The zone resilience state of the resource is not available."
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The zone resilience state is not-applicable."
+          },
+          {
+            "name": "NonResilient",
+            "value": "NonResilient",
+            "description": "The resource is non-resilient."
           }
         ]
       }

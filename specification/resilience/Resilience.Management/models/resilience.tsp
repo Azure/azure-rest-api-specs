@@ -22,10 +22,6 @@ model ResilienceResource is ExtensionResource<ResilienceProperties> {
 
 @doc("Resilience Properties")
 model ResilienceProperties {
-  @doc("Resilience Type")
-  @visibility("read")
-  resilienceType: ResilienceType;
-
   @doc("The parent resource id")
   @visibility("read")
   parentResourceId: ParentResourceId;
@@ -44,11 +40,11 @@ model ResilienceProperties {
 
   @doc("Zones where the resource is deployed")
   @visibility("read")
-  zonesDeployed?: int32[];
+  zonesDeployed?: string[];
 
   @doc("Findings of the zone resilience evaluation")
   @visibility("read")
-  findings: int32[];
+  findings: string[];
 
   @doc("The status of the last operation.")
   @visibility("read")
