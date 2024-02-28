@@ -1,7 +1,5 @@
 import "./service.tsp";
-import "./environments/routes.tsp";
-import "./devcenter/routes.tsp";
-import "./devbox/routes.tsp";
+import "./routes.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
