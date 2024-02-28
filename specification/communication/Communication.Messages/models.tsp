@@ -111,6 +111,7 @@ model MediaNotificationContent extends NotificationContent {
   @doc("Optional text content.")
   content?: string;
 
+  @projectedName("java", "mediaUrl")
   @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
 }
@@ -142,7 +143,8 @@ model MessageTemplate {
 @discriminator("kind")
 @doc("The class describes a parameter of a template.")
 model MessageTemplateValue {
-  @doc("Name of the Template value")
+  @doc("Template binding reference name")
+  @projectedName("java", "refValue")
   name: string;
 
   @doc("The type discriminator describing a template parameter type.")
@@ -314,6 +316,7 @@ model MessageDataStream {
   @key
   @visibility("read")
   @doc("The stream ID.")
+  @projectedName("java", "mediaId")
   id: string;
 
   @body
