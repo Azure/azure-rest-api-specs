@@ -90,7 +90,7 @@ directive:
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
 ```
 
-### Tag: 2023-04-01
+### Tag: package-2023-04-01
 
 These settings apply only when `--tag=package-2023-04-01` is specified on the command line.
 
