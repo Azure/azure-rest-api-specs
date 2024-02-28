@@ -270,6 +270,17 @@ model SAPInstanceProperties {
   application?: string;
 
   /**
+   * Server count for various SAP Instance type servers ('ASCS', 'DB', 'APP', 'SCS', 'WEBDISP') in this SAP Instance.
+   */
+  serverCount?: Record<int32>;
+
+  /**
+   * List of issues blocking this Sap system to be assessment ready.
+   */
+  @visibility("read")
+  assessmentReadinessIssues?: string[];
+
+  /**
    * Defines the provisioning states.
    */
   @visibility("read")
