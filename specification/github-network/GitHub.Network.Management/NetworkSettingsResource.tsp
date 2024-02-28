@@ -69,25 +69,17 @@ interface NetworkSettingsResources {
   listBySubscription is ArmListBySubscription<NetworkSettingsResource>;
 }
 
+@@doc(NetworkSettingsResources.create::parameters.resource,
+  "GitHub.Network networkSettings resource create parameters."
+);
 @@projectedName(NetworkSettingsResources.create::parameters.resource,
   "json",
   "networkSettings"
 );
-@@extension(NetworkSettingsResources.create::parameters.resource,
-  "x-ms-client-name",
-  "networkSettings"
-);
-@@doc(NetworkSettingsResources.create::parameters.resource,
-  "GitHub.Network networkSettings resource create parameters."
+@@doc(NetworkSettingsResources.update::parameters.properties,
+  "Parameters for updating the properties of the GitHub.Network resource."
 );
 @@projectedName(NetworkSettingsResources.update::parameters.properties,
   "json",
   "networkSettings"
-);
-@@extension(NetworkSettingsResources.update::parameters.properties,
-  "x-ms-client-name",
-  "networkSettings"
-);
-@@doc(NetworkSettingsResources.update::parameters.properties,
-  "Parameters for updating the GitHub.Network resource."
 );

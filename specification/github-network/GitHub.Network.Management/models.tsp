@@ -37,13 +37,13 @@ model NetworkSettingsResourceProperties {
   @doc("Specifies a subnet ID for vnet-injection.")
   subnetId?: string;
 
+  @doc("Specifies the GitHub business (enterprise/organization) ID associated to the Azure subscription.")
+  @added(Versions.`2024-03-02-preview`)
+  businessId?: string;
+
   @doc("Specifies the GitHub organization (enterprise) ID associated to the Azure subscription.")
   @removed(Versions.`2024-03-02-preview`)
   organizationId?: string;
-
-  @doc("Specifies the GitHub business (enerprise/organization) ID associated to the Azure subscription.")
-  @added(Versions.`2024-03-02-preview`)
-  businessId?: string;
 
   @doc("Specifies a comma-separated list of service names the resource is associated with.")
   @removed(Versions.`2024-03-02-preview`)
