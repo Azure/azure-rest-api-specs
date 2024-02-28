@@ -36,6 +36,11 @@ function mergeObjects(obj1, obj2) {
   return obj1;
 }
 
+function formatKey(key) {
+  // This is necessary to deal with nonstandard casing in the original specs
+  return key.charAt(0).toLowerCase() + key.slice(1);
+}
+
 // Function to sort components of the OpenAPI specification
 function sortObjectByKeys(obj) {
   if (Array.isArray(obj)) {
@@ -49,7 +54,7 @@ function sortObjectByKeys(obj) {
         return a.toLowerCase().localeCompare(b.toLowerCase());
       })
       .forEach((key) => {
-        sortedObj[key] = sortObjectByKeys(obj[key]);
+        sortedObj[formatKey(key)] = sortObjectByKeys(obj[key]);
       });
 
     return sortedObj;
@@ -58,7 +63,7 @@ function sortObjectByKeys(obj) {
   return obj;
 }
 
-const basePath = "./resource-manager/Microsoft.Chaos/stable/2023-11-01";
+const basePath = "./resource-manager/Microsoft.Chaos/stable/2024-01-01";
 
 // Example usage
 let mergedSpec = mergeOpenAPISpecs(
