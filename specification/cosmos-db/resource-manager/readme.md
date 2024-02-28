@@ -30,6 +30,25 @@ openapi-type: arm
 tag: package-preview-2024-02
 ```
 
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/mongoCluster.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/services.json
+  - Microsoft.DocumentDB/preview/2024-02-08-preview/throughputpool.json
+```
 
 ### Tag: package-preview-2024-02
 
