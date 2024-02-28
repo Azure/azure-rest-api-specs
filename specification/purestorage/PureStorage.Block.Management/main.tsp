@@ -52,8 +52,8 @@ model StoragePool is TrackedResource<StoragePoolProperties> {
   @key("storagePoolName")
   @visibility("read")
   @path
-  @minLength(4)
-  @maxLength(20)
+  @minLength(1)
+  @maxLength(127)
   @pattern("^[a-zA-Z0-9\\-_]{1,127}$")
   name: string;
 
@@ -532,9 +532,8 @@ model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
   @key("volumeId")
   @visibility("read")
   @path
-  @minLength(4)
-  @maxLength(20)
-  @pattern("^[a-zA-Z0-9_]*$")
+  @minLength(1)
+  @maxLength(2048)
   name: string;
 }
 
@@ -676,9 +675,8 @@ model AvsVm is ProxyResource<AvsVmProperties> {
   @key("avsVmInternalId")
   @visibility("read")
   @path
-  @minLength(4)
-  @maxLength(20)
-  @pattern("^[a-zA-Z0-9_]*$")
+  @minLength(1)
+  @maxLength(127)
   name: string;
 }
 
@@ -793,9 +791,8 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
   @key("volumeId")
   @visibility("read")
   @path
-  @minLength(4)
-  @maxLength(20)
-  @pattern("^[a-zA-Z0-9_]*$")
+  @minLength(1)
+  @maxLength(2048)
   name: string;
 }
 
