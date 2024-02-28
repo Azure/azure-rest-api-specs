@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "sessionPoolName": "testsessionpool0",
+    "api-version": "2023-08-01-preview",
+    "sessionPoolNameEnvelope": {
+      "location": "East US",
+      "properties": {
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+        "poolManagementType": "dynamic",
+        "containerType": "CustomContainer",
+        "maxConcurrentSessions": 500,
+        "dynamicPoolConfiguration": {
+          "executionType": "Timed",
+          "coolDownPeriodInSecond": "600"
+        },
+        "customContainerConfiguration": {
+          "containers": [
+            {
+              "image": "repo/testcontainer:v4",
+              "name": "testinitcontainer",
+              "resources": {
+                "cpu": 0.2,
+                "memory": "100Mi"
+              },
+              "command": [
+                "/bin/sh"
+              ],
+              "args": [
+                "-c",
+                "while true; do echo hello; sleep 10;done"
+              ]
+            }
+          ],
+          "ingress": {
+            "targetPort": 80
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool",
+        "name": "testsessionpool",
+        "type": "Microsoft.App/sessionpools",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "poolManagementType": "dynamic",
+          "containerType": "CustomContainer",
+          "maxConcurrentSessions": 500,
+          "dynamicPoolConfiguration": {
+            "executionType": "Timed",
+            "coolDownPeriodInSecond": "600"
+          },
+          "customContainerConfiguration": {
+            "containers": [
+              {
+                "image": "repo/testcontainer:v4",
+                "name": "testinitcontainer",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ],
+            "ingress": {
+              "targetPort": 80
+            }
+          },
+          "poolManagementEndpoint": "https://testsessionpool.agreeableriver-3d30edf1.eastus.azurecontainerapps.io"
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool",
+        "name": "testsessionpool",
+        "type": "Microsoft.App/sessionpools",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "InProgress",
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "poolManagementType": "dynamic",
+          "containerType": "CustomContainer",
+          "maxConcurrentSessions": 500,
+          "dynamicPoolConfiguration": {
+            "executionType": "Timed",
+            "coolDownPeriodInSecond": "600"
+          },
+          "customContainerConfiguration": {
+            "containers": [
+              {
+                "image": "repo/testcontainer:v4",
+                "name": "testinitcontainer",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ],
+            "ingress": {
+              "targetPort": 80
+            }
+          },
+          "poolManagementEndpoint": "https://testsessionpool.agreeableriver-3d30edf1.eastus.azurecontainerapps.io"
+        }
+      }
+    }
+  }
+}
