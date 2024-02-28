@@ -215,6 +215,21 @@
   },
   "definitions": {
     "Recommendation": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/RecommendationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecommendationProperties": {
       "description": "Recommendation object.",
       "properties": {
         "recommendationTypeId": {
