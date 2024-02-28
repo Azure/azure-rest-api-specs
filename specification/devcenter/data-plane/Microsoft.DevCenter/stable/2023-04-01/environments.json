@@ -829,7 +829,9 @@
         "parameters": {
           "type": "object",
           "description": "Parameters object for the environment.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "name": {
           "type": "string",
@@ -923,6 +925,7 @@
           }
         },
         "parametersSchema": {
+          "type": "string",
           "description": "JSON schema defining the parameters object passed to an environment."
         },
         "templatePath": {
@@ -1127,7 +1130,9 @@
         "parameters": {
           "type": "object",
           "description": "Parameters object for the environment.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1169,6 +1174,7 @@
           "maximum": 100
         },
         "properties": {
+          "type": "string",
           "description": "Custom operation properties, populated only for a successful operation."
         },
         "error": {

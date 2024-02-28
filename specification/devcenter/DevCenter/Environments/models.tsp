@@ -120,7 +120,7 @@ resource has been created.
 model EnvironmentUpdateProperties {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
   @doc("Parameters object for the environment.")
-  parameters?: Record<unknown>;
+  parameters?: Record<string>;
 }
 
 @doc("A catalog.")
@@ -166,7 +166,7 @@ model EnvironmentDefinition {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "there is no build in type to describe json"
   //using unkown here is better than string since it generates BinaryData in the SDK
   @doc("JSON schema defining the parameters object passed to an environment.")
-  parametersSchema?: unknown;
+  parametersSchema?: string;
 
   @doc("Path to the Environment Definition entrypoint file.")
   templatePath?: string;

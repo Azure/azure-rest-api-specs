@@ -53,7 +53,7 @@ model OperationStatus {
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "there is no build in type to describe object"
   @doc("Custom operation properties, populated only for a successful operation.")
-  properties?: unknown;
+  properties?: string;
 
   @doc("Operation Error message")
   error?: Azure.Core.Foundations.Error;
