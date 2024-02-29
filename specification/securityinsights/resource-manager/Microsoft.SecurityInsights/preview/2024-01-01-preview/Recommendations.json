@@ -215,7 +215,23 @@
   },
   "definitions": {
     "Recommendation": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
       "description": "Recommendation object.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/RecommendationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecommendationProperties": {
+      "description": "Recommendation properties object.",
       "properties": {
         "recommendationTypeId": {
           "description": "Id of the recommendation type.",
@@ -334,6 +350,15 @@
     "RecommendationPatch": {
       "description": "Recommendation Fields to update.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendationPatchProperties"
+        }
+      },
+      "type": "object"
+    },
+    "RecommendationPatchProperties": {
+      "description": "Recommendation Fields Properties to update.",
+      "properties": {
         "state": {
           "description": "State of the recommendation.",
           "$ref": "#/definitions/RecommendationState"
@@ -387,9 +412,6 @@
           "format": "date-time"
         }
       },
-      "required": [
-        "lastEvaluatedTimeUtc"
-      ],
       "type": "object"
     }
   },
