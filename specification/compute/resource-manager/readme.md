@@ -1274,6 +1274,7 @@ input-file:
   - Microsoft.Compute/GalleryRP/stable/2021-07-01/communityGallery.json
   - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
   - Microsoft.Compute/DiagnosticRP/preview/2021-06-01-preview/diagnostic.json
+  - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2021-06-01-preview-only
