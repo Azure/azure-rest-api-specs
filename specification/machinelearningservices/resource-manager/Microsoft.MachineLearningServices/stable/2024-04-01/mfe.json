@@ -12339,17 +12339,6 @@
       },
       "additionalProperties": false
     },
-    "BayesianSamplingAlgorithm": {
-      "description": "Defines a Sampling Algorithm that generates values based on previous values",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SamplingAlgorithm"
-        }
-      ],
-      "x-ms-discriminator-value": "Bayesian",
-      "additionalProperties": false
-    },
     "BlobReferenceForConsumptionDto": {
       "type": "object",
       "properties": {
@@ -13208,17 +13197,6 @@
           ]
         }
       },
-      "x-ms-discriminator-value": "Command",
-      "additionalProperties": false
-    },
-    "CommandJobLimits": {
-      "description": "Command Job limit class.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobLimits"
-        }
-      ],
       "x-ms-discriminator-value": "Command",
       "additionalProperties": false
     },
@@ -14430,49 +14408,6 @@
           "type": "string",
           "x-nullable": true
         }
-      },
-      "additionalProperties": false
-    },
-    "DistributionConfiguration": {
-      "description": "Base definition for job distribution configuration.",
-      "required": [
-        "distributionType"
-      ],
-      "type": "object",
-      "properties": {
-        "distributionType": {
-          "description": "[Required] Specifies the type of distribution framework.",
-          "$ref": "#/definitions/DistributionType",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "discriminator": "distributionType"
-    },
-    "DistributionType": {
-      "description": "Enum to determine the job distribution type.",
-      "enum": [
-        "PyTorch",
-        "TensorFlow",
-        "Mpi"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "DistributionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "PyTorch"
-          },
-          {
-            "value": "TensorFlow"
-          },
-          {
-            "value": "Mpi"
-          }
-        ]
       },
       "additionalProperties": false
     },
@@ -16205,17 +16140,6 @@
       },
       "additionalProperties": false
     },
-    "GridSamplingAlgorithm": {
-      "description": "Defines a Sampling Algorithm that exhaustively generates every value combination in the space",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SamplingAlgorithm"
-        }
-      ],
-      "x-ms-discriminator-value": "Grid",
-      "additionalProperties": false
-    },
     "IdAssetReference": {
       "description": "Reference to an asset via its ARM resource ID.",
       "required": [
@@ -17461,45 +17385,6 @@
       },
       "additionalProperties": false
     },
-    "JobLimits": {
-      "required": [
-        "jobLimitsType"
-      ],
-      "type": "object",
-      "properties": {
-        "jobLimitsType": {
-          "description": "[Required] JobLimit type.",
-          "$ref": "#/definitions/JobLimitsType"
-        },
-        "timeout": {
-          "format": "duration",
-          "description": "The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "discriminator": "jobLimitsType"
-    },
-    "JobLimitsType": {
-      "enum": [
-        "Command",
-        "Sweep"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "JobLimitsType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Command"
-          },
-          {
-            "value": "Sweep"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
     "JobOutput": {
       "description": "Job output definition container information on where to find job output/logs.",
       "required": [
@@ -18245,17 +18130,6 @@
           }
         ]
       },
-      "additionalProperties": false
-    },
-    "MedianStoppingPolicy": {
-      "description": "Defines an early termination policy based on running averages of the primary metric of all runs",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EarlyTerminationPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "MedianStopping",
       "additionalProperties": false
     },
     "ModelConfiguration": {
@@ -20605,25 +20479,6 @@
       },
       "additionalProperties": false
     },
-    "PyTorch": {
-      "description": "PyTorch distribution configuration.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DistributionConfiguration"
-        }
-      ],
-      "properties": {
-        "processCountPerInstance": {
-          "format": "int32",
-          "description": "Number of processes per node.",
-          "type": "integer",
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "PyTorch",
-      "additionalProperties": false
-    },
     "QueueSettings": {
       "type": "object",
       "properties": {
@@ -21172,30 +21027,6 @@
         }
       },
       "discriminator": "samplingAlgorithmType"
-    },
-    "SamplingAlgorithmType": {
-      "enum": [
-        "Grid",
-        "Random",
-        "Bayesian"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "SamplingAlgorithmType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Grid"
-          },
-          {
-            "value": "Random"
-          },
-          {
-            "value": "Bayesian"
-          }
-        ]
-      },
-      "additionalProperties": false
     },
     "SasDatastoreCredentials": {
       "description": "SAS datastore credentials configuration.",
@@ -22419,39 +22250,6 @@
       },
       "additionalProperties": false
     },
-    "TensorFlow": {
-      "description": "TensorFlow distribution configuration.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DistributionConfiguration"
-        }
-      ],
-      "properties": {
-        "parameterServerCount": {
-          "format": "int32",
-          "description": "Number of parameter server tasks.",
-          "default": 0,
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "workerCount": {
-          "format": "int32",
-          "description": "Number of workers. If not specified, will default to the instance count.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "TensorFlow",
-      "additionalProperties": false
-    },
     "TextClassification": {
       "description": "Text Classification task in AutoML NLP vertical.\r\nNLP - Natural Language Processing.",
       "type": "object",
@@ -22745,25 +22543,6 @@
         }
       ],
       "x-ms-discriminator-value": "triton_model",
-      "additionalProperties": false
-    },
-    "TruncationSelectionPolicy": {
-      "description": "Defines an early termination policy that cancels a given percentage of runs at each evaluation interval.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EarlyTerminationPolicy"
-        }
-      ],
-      "properties": {
-        "truncationPercentage": {
-          "format": "int32",
-          "description": "The percentage of runs to cancel at each evaluation interval.",
-          "default": 0,
-          "type": "integer"
-        }
-      },
-      "x-ms-discriminator-value": "TruncationSelection",
       "additionalProperties": false
     },
     "UriFileDataVersion": {
