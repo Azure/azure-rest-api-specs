@@ -552,6 +552,12 @@ model BulkImportResult {
   successImportInfoList?: ImportInfo[];
 }
 
+@doc("Business metadata to send to the service")
+model BusinessMetadataFile {
+  @doc("InputStream of file")
+  file: bytes;
+}
+
 @doc("ImportInfo")
 model ImportInfo {
   @doc("childObjectName")
