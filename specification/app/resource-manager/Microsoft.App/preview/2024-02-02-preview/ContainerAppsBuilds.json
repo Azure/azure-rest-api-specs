@@ -51,11 +51,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App for which Revisions are needed.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ContainerAppsNameParameter"
           }
         ],
         "responses": {
@@ -76,8 +72,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ContainerAppsBuilds_ListByContianerApp_0": {
-            "$ref": "./examples/ContainerAppsBuilds_ListByContianerApp.json"
+          "ContainerAppsBuilds_ListByContainerApp_0": {
+            "$ref": "./examples/ContainerAppsBuilds_ListByContainerApp.json"
           }
         }
       }
@@ -100,11 +96,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App for which Revisions are needed.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ContainerAppsNameParameter"
           },
           {
             "$ref": "#/parameters/ContainerAppsBuildNameParameter"
@@ -147,11 +139,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App for which Revisions are needed.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ContainerAppsNameParameter"
           },
           {
             "$ref": "#/parameters/ContainerAppsBuildNameParameter"
@@ -402,6 +390,14 @@
       "type": "string",
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "x-ms-parameter-location": "method"
+    },
+    "ContainerAppsNameParameter": {
+      "name": "containerAppName",
+      "in": "path",
+      "description": "Name of the Container App the Build is associated.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
     }
   }
 }
