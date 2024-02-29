@@ -61,7 +61,8 @@
             "name": "count",
             "in": "query",
             "description": "How many Sessions to generate.",
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "sessionEnvelope",
@@ -251,13 +252,7 @@
             "description": "Environment variables to update",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVar"
-                }
-              }
+              "$ref": "#/definitions/EnvironmentVariableCollection"
             }
           },
           {
@@ -279,9 +274,6 @@
           "Update Session environment variables": {
             "$ref": "./examples/Sessions_UpdateEnvironmentVariables.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -437,7 +429,7 @@
       }
     },
     "Session": {
-      "description": "Session.",
+      "description": "Session resource.",
       "type": "object",
       "allOf": [
         {
@@ -538,6 +530,19 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "EnvironmentVariableCollection": {
+      "description": "Session collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVar"
         }
       }
     }
