@@ -46,6 +46,7 @@ model DatasetProperties {
   @doc("Time to live for individual records.")
   ttl?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("List of keys that can be used for joining on enrich.")
   keys?: Record<DatasetPropertyKey>;
 

@@ -40,11 +40,10 @@ model PipelineProperties {
   @doc("Flag indicating whether the pipeline should be running or not.")
   enabled: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Information about where to pull input data from.")
   input: PipelineInput;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Map of stage ids to stage configurations for all pipeline processing and output stages.")
   stages: Record<PipelineStage>;
 
@@ -53,7 +52,7 @@ model PipelineProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
 @doc("Stage configuration for Pipeline input stage.")
 model PipelineInput is Record<unknown> {
   @doc("ARM resource type.")
@@ -66,7 +65,7 @@ model PipelineInput is Record<unknown> {
   next: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
 @doc("Stage configurations for all Pipeline processing and output stages.")
 model PipelineStage is Record<unknown> {
   @doc("ARM resource type.")
@@ -87,5 +86,3 @@ interface Pipelines {
   delete is ArmResourceDeleteWithoutOkAsync<Pipeline>;
   listByInstance is ArmResourceListByParent<Pipeline>;
 }
-
-// PipelineStages should not use 'is Record<unknown>'. Use 'is Record<string>' instead.TypeSpec(@azure-tools/typespec-azure-core/bad-record-type)
