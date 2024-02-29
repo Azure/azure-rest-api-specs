@@ -28,9 +28,9 @@ namespace Microsoft.IoTOperationsMQ;
 
 /** Api versions */
 enum Versions {
-  /** 2023-12-13-preview preview version */
+  /** 2023-10-04-preview preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2023-12-13-preview`,
+  `2023-10-04-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
