@@ -447,11 +447,13 @@
             },
             "requestedDurationInSeconds": {
               "description": "The requested duration of the Session in seconds.",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "timeElapsedInSeconds": {
               "description": "The time elapsed in seconds since the Session was created.",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "expiryTime": {
               "description": "The time when the Session will expire.",
@@ -535,9 +537,6 @@
     },
     "EnvironmentVariableCollection": {
       "description": "Session collection ARM resource.",
-      "required": [
-        "value"
-      ],
       "type": "object",
       "additionalProperties": {
         "type": "array",
