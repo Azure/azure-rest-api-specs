@@ -41,6 +41,7 @@ model AmfDeploymentResourceProperties {
 
   @doc("Azure for Operators 5G Core AMF secrets parameters")
   @secret
+  @visibility("create", "update")
   secretsParameters?: ComponentDeploymentSecrets;
 
   @doc("Reference to cluster where the Network Function is deployed")
@@ -62,6 +63,8 @@ interface AmfDeployments {
   createOrUpdate is ArmResourceCreateOrUpdate2Async<AmfDeploymentResource>;
   updateTags is ArmTagsPatchSync<AmfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AmfDeploymentResource>;
+  @doc("List all Access and Mobility Function Deployments by Resource Group.")
   listByResourceGroup is ArmResourceListByParent<AmfDeploymentResource>;
+  @doc("List all Access and Mobility Function Deployments by Subscription ID.")
   listBySubscription is ArmListBySubscription<AmfDeploymentResource>;
 }

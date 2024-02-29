@@ -12,4 +12,3 @@ csharp:
   client-side-validation: false
   namespace: Microsoft.ModSimWorkbench
   output-folder: $(csharp-sdks-folder)/modsimworkbench/management/Microsoft.ModSimWorkbench/GeneratedProtocol
-```

@@ -41,26 +41,24 @@
             "enableLogs": true,
             "enableMetrics": true,
             "enableAgents": true,
-            "monitoringTags": {
-              "resourceTypeTags": [
-                {
-                  "name": "ruleSet1",
-                  "monitoringType": [
-                    "agent"
-                  ],
-                  "filteringAction": "Include",
-                  "azureResourceType": [
-                    "virtualMachines"
-                  ],
-                  "filteringTags": [
-                    {
-                      "name": "Environment",
-                      "value": "Prod"
-                    }
-                  ]
-                }
-              ]
-            }
+            "monitoringTags": [
+              {
+                "name": "ruleSet1",
+                "monitoringType": [
+                  "agent"
+                ],
+                "filteringAction": "Include",
+                "azureResourceType": [
+                  "virtualMachines"
+                ],
+                "filteringTags": [
+                  {
+                    "name": "Environment",
+                    "value": "Prod"
+                  }
+                ]
+              }
+            ]
           }
         }
       }

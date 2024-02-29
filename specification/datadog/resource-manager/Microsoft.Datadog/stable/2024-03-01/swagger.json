@@ -2481,7 +2481,7 @@
         "name": "AzureResourceType"
       }
     },
-    "ResourceTypeTags": {
+    "MonitoringTags": {
       "description": "Tag rules for based on resource types for the monitor resource.",
       "type": "object",
       "properties": {
@@ -2524,19 +2524,6 @@
         }
       }
     },
-    "MonitoringTags": {
-      "description": "Set of rules for the monitor resource.",
-      "type": "object",
-      "properties": {
-        "resourceTypeTags": {
-          "description": "List of filtering tags to be used for logs, metrics and agent monitoring based on resource types for both compute and non-compute resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceTypeTags"
-          }
-        }
-      }
-    },
     "TagRulesSet": {
       "description": "Set of rules for sending logs or metrics and installing agents for the monitor resource.",
       "type": "object",
@@ -2562,7 +2549,11 @@
           "type": "boolean"
         },
         "monitoringTags": {
-          "$ref": "#/definitions/MonitoringTags"
+          "description": "List of filtering tags to be used for logs, metrics and agent monitoring based on resource types for both compute and non-compute resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringTags"
+          }
         }
       }
     },
