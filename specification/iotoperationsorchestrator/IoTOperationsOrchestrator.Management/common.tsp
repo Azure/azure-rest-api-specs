@@ -38,7 +38,6 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "properties field is loosely defined and are dependent on customer scenarios"
 @doc("Defines a desired runtime component.")
 model ComponentProperties {
   @doc("Component dependencies.")
@@ -48,6 +47,7 @@ model ComponentProperties {
   name: string;
 
   @doc("Properties of the component.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "properties field is loosely defined and are dependent on customer scenarios"
   properties?: Record<unknown>;
 
   @doc("Component type.")

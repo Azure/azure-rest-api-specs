@@ -306,9 +306,11 @@ model VolumeClaimDataSourceRef {
 @doc("VolumeClaimResourceRequirements properties")
 model VolumeClaimResourceRequirements {
   @doc("Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
   limits?: Record<string>;
 
   @doc("Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
   requests?: Record<string>;
 }
 
@@ -320,6 +322,7 @@ model VolumeClaimSpecSelector {
   matchExpressions?: VolumeClaimSpecSelectorMatchExpressions[];
 
   @doc("MatchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
   matchLabels?: Record<string>;
 }
 
@@ -548,6 +551,7 @@ model BrokerAuthenticatorMethodCustom {
   endpoint: string;
 
   @doc("Configuration Headers to use.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
   headers?: Record<string>;
 }
 
@@ -675,6 +679,7 @@ model AuthorizationBasicRule {
 model PrincipalDefinition {
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
   @OpenAPI.extension("x-ms-identifiers", [])
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
   attributes?: Record<string>[] = [];
 
   @doc("A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection.")

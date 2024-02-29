@@ -89,6 +89,7 @@ model AssetProperties {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "attributes property field is custom defined by customer"
   @doc("A set of key-value pairs that contain custom attributes set by the customer.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
   attributes?: Record<unknown>;
 
   @doc("Protocol-specific default configuration for all data points. Each data point can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol.")

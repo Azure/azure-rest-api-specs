@@ -140,8 +140,7 @@ union FleetProvisioningState {
 
 @doc("Properties of a Fleet that can be patched.")
 model FleetPatch {
-  @doc("Resource tags.")
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   // adding a response header in the model currently impacts the model used in the List result model.
   // omitting it for now as response headers do not impact SDK generation.

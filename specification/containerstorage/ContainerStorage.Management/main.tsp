@@ -285,6 +285,7 @@ model VolumeProperties {
   status?: ResourceOperationalStatus;
 
   @doc("String KV pairs indicating labels")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
   labels: Record<string>;
 
   @doc("Requested capacity in GiB")

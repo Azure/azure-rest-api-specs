@@ -47,6 +47,7 @@ model DatasetProperties {
   ttl?: string;
 
   @doc("List of keys that can be used for joining on enrich.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
   keys?: Record<DatasetPropertyKey>;
 
   @doc("The status of the last operation.")
