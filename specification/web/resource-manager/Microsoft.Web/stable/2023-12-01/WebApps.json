@@ -8654,7 +8654,7 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Lists all the site containers of a site",
+        "summary": "Lists all the site containers of a site, or a deployment slot.",
         "operationId": "WebApps_ListSiteContainers",
         "parameters": [
           {
@@ -8698,7 +8698,7 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Gets a site container of a site",
+        "summary": "Gets a site container of a site, or a deployment slot.",
         "operationId": "WebApps_GetSiteContainer",
         "parameters": [
           {
@@ -8745,7 +8745,7 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Creates or Updates a site container for a site",
+        "summary": "Creates or Updates a site container for a site, or a deployment slot.",
         "operationId": "WebApps_CreateOrUpdateSiteContainer",
         "parameters": [
           {
@@ -8807,7 +8807,7 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Deletes a site container for a site",
+        "summary": "Deletes a site container for a site, or a deployment slot.",
         "operationId": "WebApps_DeleteSiteContainer",
         "parameters": [
           {
@@ -18275,7 +18275,7 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Lists all the site containers of a site",
+        "summary": "Lists all the site containers of a site, or a deployment slot.",
         "operationId": "WebApps_ListSiteContainersSlot",
         "parameters": [
           {
@@ -18326,7 +18326,7 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Gets a site container of a site",
+        "summary": "Gets a site container of a site, or a deployment slot.",
         "operationId": "WebApps_GetSiteContainerSlot",
         "parameters": [
           {
@@ -18380,7 +18380,7 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Creates or Updates a site container for a site",
+        "summary": "Creates or Updates a site container for a site, or a deployment slot.",
         "operationId": "WebApps_CreateOrUpdateSiteContainerSlot",
         "parameters": [
           {
@@ -18449,7 +18449,7 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Deletes a site container for a site",
+        "summary": "Deletes a site container for a site, or a deployment slot.",
         "operationId": "WebApps_DeleteSiteContainerSlot",
         "parameters": [
           {
@@ -28789,7 +28789,7 @@
               "type": "string"
             },
             "isMain": {
-              "description": "IsMain \nSpecifies the entrypoint container of\nthe application",
+              "description": "<code>true</code> if the container is the main site container; <code>false</code> otherwise.",
               "type": "boolean"
             },
             "startUpCommand": {
@@ -28798,7 +28798,13 @@
             },
             "authType": {
               "description": "Auth Type",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Annonymous",
+                "UserCredentials",
+                "SystemIdentity",
+                "UserAssigned"
+              ]
             },
             "userName": {
               "description": "User Name",
@@ -28806,7 +28812,8 @@
             },
             "passwordSecret": {
               "description": "Password Secret",
-              "type": "string"
+              "type": "string",
+              "x-ms-secret": true
             },
             "userManagedIdentityClientId": {
               "description": "UserManagedIdentity ClientId",
