@@ -408,6 +408,7 @@ model ForceState {
 model Tags {
   @projectedName("csharp", "tagsValue")
   @doc("Tags field of the AzureLargeInstance instance.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "Tags is an acceptable use."
   tags?: Record<string>;
 }
 
