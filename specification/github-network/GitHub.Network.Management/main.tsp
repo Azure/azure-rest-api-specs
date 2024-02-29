@@ -25,11 +25,11 @@ namespace GitHub.Network;
 
 @doc("The available API versions.")
 enum Versions {
-  @doc("The 2024-03-02-preview API version for staging environment.")
+  @doc("The 2024-03-01-preview API version for staging environment.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  `2024-03-02-preview`,
+  `2024-03-01-preview`,
 
   @doc("The 2024-04-01 API version for staff US environment.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
