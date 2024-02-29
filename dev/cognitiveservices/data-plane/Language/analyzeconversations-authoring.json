@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations Authoring",
-    "version": "2023-04-01",
+    "version": "2023-11-15-preview",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>."
   },
   "securityDefinitions": {
@@ -214,6 +214,106 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
+      "post": {
+        "description": "Generates a copy project operation authorization to the current target Azure resource.",
+        "operationId": "ConversationalAnalysisAuthoring_CopyProjectAuthorization",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The copy project authorization info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyAuthorizationOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payload to send to source resource to initiate project copying.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Copy Project Authorization": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCopyProjectAuthorization.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:copy": {
+      "post": {
+        "description": "Copies an existing project to another Azure resource.",
+        "operationId": "ConversationalAnalysisAuthoring_CopyProject",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The copy project info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Copy Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCopyProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/authoring/analyze-conversations/projects/{projectName}/:export": {
       "post": {
         "description": "Triggers a job to export a project's data.",
@@ -379,6 +479,45 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status of an existing copy project job.",
+        "operationId": "ConversationalAnalysisAuthoring_GetCopyProjectStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the long running operation.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Copy Project Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetCopyProjectStatus.json"
+          }
+        }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments": {
@@ -613,6 +752,103 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
+      "post": {
+        "description": "Deletes a project deployment from the specified assigned resources.",
+        "operationId": "ConversationalAnalysisAuthoring_DeleteDeploymentFromResources",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The options for deleting the deployment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeleteDeploymentOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Deployment": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteDeploymentFromResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status of an existing delete deployment from specific resources job.",
+        "operationId": "ConversationalAnalysisAuthoring_GetDeploymentDeleteFromResourcesStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployment job result.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Delete Deployment From Resources Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeploymentStatus.json"
+          }
+        }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
@@ -896,6 +1132,61 @@
         }
       }
     },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
+      "post": {
+        "description": "Triggers evaluation operation on a trained model.",
+        "operationId": "ConversationalAnalysisAuthoring_EvaluateModel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringTrainedModelLabelPathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The training input parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluation": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulEvaluationProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
         "description": "Restores the snapshot of this trained model to be the current working directory of the project.",
@@ -937,6 +1228,48 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status for an evaluation job.",
+        "operationId": "ConversationalAnalysisAuthoring_GetEvaluationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringTrainedModelLabelPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The evaluation job result.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Evaluation Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetEvaluationStatus.json"
+          }
+        }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
@@ -1071,6 +1404,237 @@
         "x-ms-examples": {
           "Successful Get Load Snapshot Status": {
             "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetLoadSnapshotStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources": {
+      "get": {
+        "description": "Lists the deployments resources assigned to the project.",
+        "operationId": "ConversationalAnalysisAuthoring_ListDeploymentResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The assigned deployment resources.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedDeploymentResources"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Deployment Resources": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListDeploymentResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/:assign": {
+      "post": {
+        "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
+        "operationId": "ConversationalAnalysisAuthoring_AssignDeploymentResources",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The new project resources info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Assign Deployment Resources": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulAssignDeploymentResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/:unassign": {
+      "post": {
+        "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
+        "operationId": "ConversationalAnalysisAuthoring_UnassignDeploymentResources",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The info for the deployment resources to be deleted.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Unassign Deployment Resources": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulUnassignDeploymentResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status of an existing assign deployment resources job.",
+        "operationId": "ConversationalAnalysisAuthoring_GetAssignDeploymentResourcesStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The assign deployment resources job result.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentResourcesJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Assign Deployment Resources Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetAssignDeploymentResourcesStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status of an existing unassign deployment resources job.",
+        "operationId": "ConversationalAnalysisAuthoring_GetUnassignDeploymentResourcesStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The unassign deployment resources job result.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentResourcesJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Unassign Deployment Resources Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetUnassignDeploymentResourcesStatus.json"
           }
         }
       }
@@ -1242,6 +1806,52 @@
         }
       }
     },
+    "/authoring/analyze-conversations/projects/global/deployments/resources": {
+      "get": {
+        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
+        "operationId": "ConversationalAnalysisAuthoring_ListAssignedResourceDeployments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The assigned deployments metadata for the resource.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Assigned Resource Deployments": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListAssignedResourceDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
     "/authoring/analyze-conversations/projects/global/languages": {
       "get": {
         "description": "Lists the supported languages for the given project type.",
@@ -1402,6 +2012,136 @@
     }
   },
   "definitions": {
+    "ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions": {
+      "description": "Represents the options for assigning Azure resources to a project.",
+      "required": [
+        "resourcesMetadata"
+      ],
+      "type": "object",
+      "properties": {
+        "resourcesMetadata": {
+          "description": "Represents the metadata for the resources to be assigned.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringResourceMetadata"
+          }
+        }
+      },
+      "x-ms-client-name": "AssignDeploymentResourcesOptions"
+    },
+    "ConversationalAnalysisAuthoringAssignedDeploymentResource": {
+      "description": "Represents the assigned deployment resource.",
+      "required": [
+        "azureResourceId",
+        "region"
+      ],
+      "type": "object",
+      "properties": {
+        "azureResourceId": {
+          "description": "The resource ID.",
+          "type": "string"
+        },
+        "region": {
+          "description": "The resource region.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "AssignedDeploymentResource"
+    },
+    "ConversationalAnalysisAuthoringAssignedDeploymentResources": {
+      "description": "Represents the assigned deployment resources.",
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of assigned deployment resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedDeploymentResource"
+          }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "AssignedDeploymentResources"
+    },
+    "ConversationalAnalysisAuthoringAssignedProjectDeploymentMetadata": {
+      "description": "Represents the metadata for an assigned deployment",
+      "required": [
+        "deploymentName",
+        "lastDeployedDateTime",
+        "deploymentExpirationDate"
+      ],
+      "type": "object",
+      "properties": {
+        "deploymentName": {
+          "description": "Represents the deployment name.",
+          "type": "string"
+        },
+        "lastDeployedDateTime": {
+          "format": "date-time",
+          "description": "Represents deployment last deployed time.",
+          "type": "string"
+        },
+        "deploymentExpirationDate": {
+          "format": "date",
+          "description": "Represents deployment expiration date in the runtime.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "AssignedProjectDeploymentMetadata"
+    },
+    "ConversationalAnalysisAuthoringAssignedProjectDeploymentsMetadata": {
+      "description": "Represents the metadata for assigned deployments for a project.",
+      "required": [
+        "projectName",
+        "deploymentsMetadata"
+      ],
+      "type": "object",
+      "properties": {
+        "projectName": {
+          "description": "Represents the project name.",
+          "type": "string"
+        },
+        "deploymentsMetadata": {
+          "description": "Represents the resource region.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedProjectDeploymentMetadata"
+          }
+        }
+      },
+      "x-ms-client-name": "AssignedProjectDeploymentsMetadata"
+    },
+    "ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata": {
+      "description": "Represents the metadata for deployments assigned to a resource.",
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of retrieved assigned project deployments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedProjectDeploymentsMetadata"
+          }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "AssignedResourceDeploymentsMetadata"
+    },
     "ConversationalAnalysisAuthoringCompositionSetting": {
       "enum": [
         "returnLongestOverlap",
@@ -1591,6 +2331,91 @@
       },
       "x-ms-client-name": "ConversationExportedUtterance"
     },
+    "ConversationalAnalysisAuthoringConversationSummarizationExportedProjectAssets": {
+      "type": "object",
+      "properties": {
+        "conversations": {
+          "description": "Represents the conversations of the project.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringCustomConversationSummarizationConversation"
+          }
+        }
+      },
+      "x-ms-client-name": "ConversationSummarizationExportedProjectAssets"
+    },
+    "ConversationalAnalysisAuthoringCopyAuthorizationOptions": {
+      "description": "Represents the options for authorizing a project copy to the current Azure resource.",
+      "required": [
+        "projectKind"
+      ],
+      "type": "object",
+      "properties": {
+        "projectKind": {
+          "description": "Represents the project kind.",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
+        },
+        "storageInputContainerName": {
+          "description": "The name of the storage container.",
+          "type": "string"
+        },
+        "allowOverwrite": {
+          "description": "Whether to allow an existing project to be overwritten using the resulting copy authorization.",
+          "type": "boolean"
+        }
+      },
+      "x-ms-client-name": "CopyAuthorizationOptions"
+    },
+    "ConversationalAnalysisAuthoringCopyProjectJobState": {
+      "description": "Represents the state of a copy job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobState"
+        }
+      ],
+      "x-ms-client-name": "CopyProjectJobState"
+    },
+    "ConversationalAnalysisAuthoringCopyProjectOptions": {
+      "description": "Represents the options for copying an existing project to another Azure resource.",
+      "required": [
+        "projectKind",
+        "targetProjectName",
+        "accessToken",
+        "expiresAt",
+        "targetResourceId",
+        "targetResourceRegion"
+      ],
+      "type": "object",
+      "properties": {
+        "projectKind": {
+          "description": "Represents the project kind.",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
+        },
+        "targetProjectName": {
+          "description": "The project name to be copied-into.",
+          "type": "string"
+        },
+        "accessToken": {
+          "description": "The access token.",
+          "type": "string"
+        },
+        "expiresAt": {
+          "format": "date-time",
+          "description": "The expiration of the access token.",
+          "type": "string"
+        },
+        "targetResourceId": {
+          "description": "Represents the target Azure resource ID.",
+          "type": "string"
+        },
+        "targetResourceRegion": {
+          "description": "Represents the target Azure resource region.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "CopyProjectOptions"
+    },
     "ConversationalAnalysisAuthoringCreateDeploymentOptions": {
       "description": "Represents the options for creating or updating a project deployment.",
       "required": [
@@ -1601,6 +2426,13 @@
         "trainedModelLabel": {
           "description": "Represents the trained model label.",
           "type": "string"
+        },
+        "assignedResourceIds": {
+          "description": "Represents the resource IDs to be assigned to the deployment.\n            If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "x-ms-client-name": "CreateDeploymentOptions"
@@ -1622,6 +2454,10 @@
           "description": "The project settings.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings"
         },
+        "storageInputContainerName": {
+          "description": "The storage container name in case of conversation summarization.",
+          "type": "string"
+        },
         "projectName": {
           "description": "The new project name.",
           "type": "string"
@@ -1641,6 +2477,45 @@
       },
       "x-ms-client-name": "CreateProjectOptions"
     },
+    "ConversationalAnalysisAuthoringCustomConversationSummarizationConversation": {
+      "description": "Represents an exported conversation for a custom conversation summarization.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "summaryLocation": {
+          "type": "string"
+        },
+        "location": {
+          "description": "Represents the conversation file location in the blob store container associated with the project.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Represents the language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "type": "string"
+        },
+        "dataset": {
+          "description": "The dataset for this conversation. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "CustomConversationSummarizationConversation"
+    },
+    "ConversationalAnalysisAuthoringDeleteDeploymentOptions": {
+      "description": "Represents the options for deleting a project deployment.",
+      "type": "object",
+      "properties": {
+        "assignedResourceIds": {
+          "description": "Represents the resource IDs to delete the deployment from.\n            If not provided, the deployment will be rolled out from all the resources it is deployed to.\n            If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-client-name": "DeleteDeploymentOptions"
+    },
     "ConversationalAnalysisAuthoringDeploymentJobState": {
       "description": "Represents the state of a deployment job.",
       "type": "object",
@@ -1650,6 +2525,35 @@
         }
       ],
       "x-ms-client-name": "DeploymentJobState"
+    },
+    "ConversationalAnalysisAuthoringDeploymentResource": {
+      "description": "Represents an Azure resource assigned to a deployment.",
+      "required": [
+        "resourceId",
+        "region"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Represents the Azure resource Id.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Represents the resource region.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "DeploymentResource"
+    },
+    "ConversationalAnalysisAuthoringDeploymentResourcesJobState": {
+      "description": "Represents the state of a deployment resources job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobState"
+        }
+      ],
+      "x-ms-client-name": "DeploymentResourcesJobState"
     },
     "ConversationalAnalysisAuthoringEntitiesEvaluationSummary": {
       "description": "Represents the evaluation result summary for the project's entities.",
@@ -1678,32 +2582,32 @@
         },
         "microF1": {
           "format": "float",
-          "description": "Represents the micro F1",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microPrecision": {
           "format": "float",
-          "description": "Represents the micro precision",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microRecall": {
           "format": "float",
-          "description": "Represents the micro recall",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroF1": {
           "format": "float",
-          "description": "Represents the macro F1",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroPrecision": {
           "format": "float",
-          "description": "Represents the macro precision",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroRecall": {
           "format": "float",
-          "description": "Represents the macro recall",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         }
       },
@@ -1759,6 +2663,54 @@
         }
       },
       "x-ms-client-name": "EntityEvaluationSummary"
+    },
+    "ConversationalAnalysisAuthoringEvaluationJobResult": {
+      "required": [
+        "evaluationOptions",
+        "modelLabel",
+        "trainingConfigVersion",
+        "percentComplete"
+      ],
+      "type": "object",
+      "properties": {
+        "evaluationOptions": {
+          "description": "Represents the options used running the evaluation.",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
+        },
+        "modelLabel": {
+          "description": "Represents trained model label.",
+          "type": "string"
+        },
+        "trainingConfigVersion": {
+          "description": "Represents training config version.",
+          "type": "string"
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "Represents progress percentage.",
+          "type": "integer"
+        }
+      },
+      "x-ms-client-name": "EvaluationJobResult"
+    },
+    "ConversationalAnalysisAuthoringEvaluationJobState": {
+      "description": "Represents the state of a evaluation job.",
+      "required": [
+        "result"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobState"
+        }
+      ],
+      "properties": {
+        "result": {
+          "description": "Represents evaluation task detailed result.",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationJobResult"
+        }
+      },
+      "x-ms-client-name": "EvaluationJobState"
     },
     "ConversationalAnalysisAuthoringEvaluationKind": {
       "enum": [
@@ -2273,32 +3225,32 @@
         },
         "microF1": {
           "format": "float",
-          "description": "Represents the micro F1",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microPrecision": {
           "format": "float",
-          "description": "Represents the micro precision",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microRecall": {
           "format": "float",
-          "description": "Represents the micro recall",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroF1": {
           "format": "float",
-          "description": "Represents the macro F1",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroPrecision": {
           "format": "float",
-          "description": "Represents the macro precision",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroRecall": {
           "format": "float",
-          "description": "Represents the macro recall",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         }
       },
@@ -2531,7 +3483,8 @@
         "lastTrainedDateTime",
         "lastDeployedDateTime",
         "deploymentExpirationDate",
-        "modelTrainingConfigVersion"
+        "modelTrainingConfigVersion",
+        "assignedResources"
       ],
       "type": "object",
       "properties": {
@@ -2561,6 +3514,13 @@
         "modelTrainingConfigVersion": {
           "description": "Represents model training config version.",
           "type": "string"
+        },
+        "assignedResources": {
+          "description": "Represents the metadata of the assigned Azure resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentResource"
+          }
         }
       },
       "x-ms-client-name": "ProjectDeployment"
@@ -2591,7 +3551,8 @@
     "ConversationalAnalysisAuthoringProjectKind": {
       "enum": [
         "Conversation",
-        "Orchestration"
+        "Orchestration",
+        "CustomConversationSummarization"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2605,6 +3566,10 @@
           {
             "value": "Orchestration",
             "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
+          },
+          {
+            "value": "CustomConversationSummarization",
+            "description": "A project to build conversation summarization models which are able to summarize long conversations."
           }
         ]
       },
@@ -2648,6 +3613,10 @@
         "settings": {
           "description": "The project settings.",
           "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings"
+        },
+        "storageInputContainerName": {
+          "description": "The storage container name in case of conversation summarization.",
+          "type": "string"
         },
         "projectName": {
           "description": "The new project name.",
@@ -2762,7 +3731,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of retrieved jobs.",
+          "description": "The list of trained models.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
@@ -2775,6 +3744,30 @@
         }
       },
       "x-ms-client-name": "ProjectTrainedModels"
+    },
+    "ConversationalAnalysisAuthoringResourceMetadata": {
+      "description": "Represents metadata for the Azure resource..",
+      "required": [
+        "azureResourceId",
+        "customDomain",
+        "region"
+      ],
+      "type": "object",
+      "properties": {
+        "azureResourceId": {
+          "description": "Represents the Azure resource ID.",
+          "type": "string"
+        },
+        "customDomain": {
+          "description": "Represents the Azure resource custom domain.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Represents the Azure resource region.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ResourceMetadata"
     },
     "ConversationalAnalysisAuthoringStringIndexType": {
       "enum": [
@@ -3055,6 +4048,23 @@
       },
       "x-ms-client-name": "TrainingMode"
     },
+    "ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions": {
+      "description": "Represents the options to unassign Azure resources from a project.",
+      "required": [
+        "assignedResourceIds"
+      ],
+      "type": "object",
+      "properties": {
+        "assignedResourceIds": {
+          "description": "Represents the assigned resource IDs to be unassigned.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-client-name": "UnassignDeploymentResourcesOptions"
+    },
     "ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult": {
       "description": "Represents the comparison between the expected and predicted entities for an utterance.",
       "required": [
@@ -3245,7 +4255,8 @@
       "type": "string",
       "enum": [
         "Conversation",
-        "Orchestration"
+        "Orchestration",
+        "CustomConversationSummarization"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
@@ -3258,6 +4269,10 @@
           {
             "value": "Orchestration",
             "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
+          },
+          {
+            "value": "CustomConversationSummarization",
+            "description": "A project to build conversation summarization models which are able to summarize long conversations."
           }
         ]
       },

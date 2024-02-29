@@ -1,7 +1,7 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2023-04-01",
+    "api-version": "2023-11-15-preview",
     "Endpoint": "{Endpoint}",
     "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18"
   },
@@ -32,26 +32,53 @@
                     "entities": [
                       {
                         "category": "Event",
+                        "type": "Event",
                         "confidenceScore": 0.61,
                         "length": 4,
                         "offset": 18,
-                        "text": "trip"
+                        "text": "trip",
+                        "tags": [
+                          {
+                            "name": "Event",
+                            "confidenceScore": 0.61
+                          }
+                        ]
                       },
                       {
                         "category": "Location",
+                        "type": "GPE",
                         "confidenceScore": 0.82,
                         "length": 7,
                         "offset": 26,
-                        "subcategory": "GPE",
+                        "tags": [
+                          {
+                            "name": "Location",
+                            "confidenceScore": 0.82
+                          },
+                          {
+                            "name": "GPE",
+                            "confidenceScore": 0.82
+                          }
+                        ],
                         "text": "Seattle"
                       },
                       {
-                        "category": "DateTime",
+                        "category": "Temporal",
+                        "type": "DateRange",
                         "confidenceScore": 0.8,
                         "length": 9,
                         "offset": 34,
-                        "subcategory": "DateRange",
-                        "text": "last week"
+                        "text": "last week",
+                        "tags": [
+                          {
+                            "name": "DateRange",
+                            "confidenceScore": 0.8
+                          },
+                          {
+                            "name": "Temporal",
+                            "confidenceScore": 0.8
+                          }
+                        ]
                       }
                     ],
                     "id": "1",
@@ -61,19 +88,39 @@
                     "entities": [
                       {
                         "category": "Location",
+                        "type": "GPE",
                         "confidenceScore": 0.52,
                         "length": 3,
                         "offset": 14,
-                        "subcategory": "GPE",
-                        "text": "NYC"
+                        "text": "NYC",
+                        "tags": [
+                          {
+                            "name": "Location",
+                            "confidenceScore": 0.82
+                          },
+                          {
+                            "name": "GPE",
+                            "confidenceScore": 0.82
+                          }
+                        ]
                       },
                       {
-                        "category": "DateTime",
+                        "category": "Temporal",
+                        "type": "Date",
                         "confidenceScore": 0.8,
                         "length": 8,
                         "offset": 18,
-                        "subcategory": "Date",
-                        "text": "tomorrow"
+                        "text": "tomorrow",
+                        "tags": [
+                          {
+                            "name": "Date",
+                            "confidenceScore": 0.8
+                          },
+                          {
+                            "name": "Temporal",
+                            "confidenceScore": 0.8
+                          }
+                        ]
                       }
                     ],
                     "id": "2",
