@@ -80,21 +80,21 @@
 - rule:
     type: label
     label: Approved-BreakingChange
-    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
+    booleanFilterExpression: "!(ARMSignedOff||WaitForARMFeedback||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit||)&&ARMReview"
     onLabeledAddLabels:
         - WaitForARMFeedback
 
 - rule:
     type: label
     label: BreakingChange-Approved-*
-    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
+    booleanFilterExpression: "!(ARMSignedOff||WaitForARMFeedback||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
     onLabeledAddLabels:
         - WaitForARMFeedback
 
 - rule:
     type: label
     label: Versioning-Approved-*
-    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
+    booleanFilterExpression: "!(ARMSignedOff||WaitForARMFeedback||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
     onLabeledAddLabels:
         - WaitForARMFeedback
 
