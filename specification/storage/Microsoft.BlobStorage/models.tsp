@@ -19,6 +19,28 @@ model StorageError {
   Message: string;
 }
 
+@doc("Stats for the storage service.")
+model StorageServiceStats {
+  @doc("The geo replication stats.")
+  GeoReplication: GeoReplication;
+}
+
+@doc("The geo replication status.")
+model GeoReplication {
+  Status: GeoReplicationStatus;
+  LastSyncTime: string;
+}
+
+@doc("The geo replication status.")
+enum GeoReplicationStatus {
+  @doc("The geo replication is live.")
+  live,
+  @doc("The geo replication is bootstrap.")
+  bootstrap,
+  @doc("The geo replication is unavailable.")
+  unavailable
+}
+
 @doc("Key information")
 model KeyInfo {
   @doc("The date-time the key is active.")
