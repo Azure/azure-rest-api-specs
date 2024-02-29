@@ -67,7 +67,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StringsList"
+              "$ref": "#/definitions/SchemaGroups"
             }
           },
           "default": {
@@ -89,7 +89,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "NextLink"
         }
       }
     },
@@ -303,7 +303,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Int32sList"
+              "$ref": "#/definitions/SchemaVersions"
             }
           },
           "default": {
@@ -325,7 +325,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "NextLink"
         }
       }
     },
@@ -615,27 +615,6 @@
         }
       }
     },
-    "Int32sList": {
-      "type": "object",
-      "description": "The list of int32s with server paging support.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The collection of pageable items.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "Schema": {
       "type": "object",
       "description": "The schema, including its metadata and content.",
@@ -690,9 +669,50 @@
         "groupName"
       ]
     },
+    "SchemaGroups": {
+      "type": "object",
+      "description": "The list of schema group names with server paging support.",
+      "properties": {
+        "Value": {
+          "type": "array",
+          "description": "The collection of pageable schema group name items.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "NextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "Value"
+      ]
+    },
     "SchemaProperties": {
       "type": "object",
       "description": "Metadata of a schema."
+    },
+    "SchemaVersions": {
+      "type": "object",
+      "description": "The list of schema versions with server paging support.",
+      "properties": {
+        "Value": {
+          "type": "array",
+          "description": "The collection of schema version pageable items.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "NextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "Value"
+      ]
     },
     "SchemasName": {
       "type": "object",
@@ -739,26 +759,6 @@
           }
         ]
       }
-    },
-    "StringsList": {
-      "type": "object",
-      "description": "The list of strings with server paging support.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The collection of pageable items.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     }
   },
   "parameters": {

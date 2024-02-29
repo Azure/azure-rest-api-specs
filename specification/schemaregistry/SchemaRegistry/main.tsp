@@ -64,7 +64,7 @@ alias resourceOperations = Azure.Core.StandardResourceOperations;
 @summary("Get list of schema groups.")
 @doc("Gets the list of schema groups user is authorized to access.")
 @route("/$schemaGroups")
-op listSchemaGroups is Azure.Core.Foundations.Operation<{}, StringsList, {}>;
+op listSchemaGroups is Azure.Core.Foundations.Operation<{}, SchemaGroups, {}>;
 
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions?api-version={apiVersion}
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
@@ -81,7 +81,7 @@ op listSchemaVersions is Azure.Core.Foundations.Operation<
     @path
     schemaName: string;
   },
-  Int32sList,
+  SchemaVersions,
   {}
 >;
 
@@ -224,31 +224,35 @@ model Schema {
 }
 
 /**
- * The list of strings with server paging support.
+ * The list of schema group names with server paging support.
  */
 @Azure.Core.pagedResult
-model StringsList {
-  /** The collection of pageable items. */
+model SchemaGroups {
+  /** The collection of pageable schema group name items. */
   @Azure.Core.items
-  value: string[];
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
+  Value: string[];
 
   /** The link to the next page of items */
   @Azure.Core.nextLink
-  nextLink?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
+  NextLink?: string;
 }
 
 /**
- * The list of int32s with server paging support.
+ * The list of schema versions with server paging support.
  */
 @Azure.Core.pagedResult
-model Int32sList {
-  /** The collection of pageable items. */
+model SchemaVersions {
+  /** The collection of schema version pageable items. */
   @Azure.Core.items
-  value: int32[];
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
+  Value: int32[];
 
   /** The link to the next page of items */
   @Azure.Core.nextLink
-  nextLink?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
+  NextLink?: string;
 }
 
 // Resource Models
