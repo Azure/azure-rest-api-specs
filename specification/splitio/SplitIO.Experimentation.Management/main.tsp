@@ -130,13 +130,17 @@ model ExchangeTokenResponse {
   token: string;
 }
 
+@tag("ExchangeToken")
 interface ExchangeToken {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get access token for Split.IO data plane authentication.")
-  @route("/exchangeToken")
+  @route("/subscription/{subscriptionId}/providers/SplitIO.Experimentation/exchangeToken")
   @post
   action is Azure.Core.Foundations.Operation<
-    ExchangeTokenRequest,
+    {
+      @doc("The collection where entities will be moved to.")
+      @path
+      subscriptionId: string;
+    } & ExchangeTokenRequest,
     ExchangeTokenResponse
   >;
 }
