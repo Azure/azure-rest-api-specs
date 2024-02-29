@@ -284,7 +284,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AddNetworkIntent"
     },
     "AddNetworkIntentJobProperties": {
       "type": "object",
@@ -769,25 +770,25 @@
           "$ref": "#/definitions/JobsProperties"
         }
       ]
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
     },
-    "parameters": {
-      "ClusterNameParameter": {
-        "name": "clusterName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the cluster.",
-        "x-ms-parameter-location": "method"
-      },
-      "JobNameParameter": {
-        "name": "jobsName",
-        "in": "path",
-        "description": "Name of Job",
-        "required": true,
-        "type": "string",
-        "default": "default",
-        "pattern": "^[a-zA-Z0-9-]{3,24}$"
-      }
+    "JobNameParameter": {
+      "name": "jobsName",
+      "in": "path",
+      "description": "Name of Job",
+      "required": true,
+      "type": "string",
+      "default": "default",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     }
   }
 }
