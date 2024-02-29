@@ -125,7 +125,7 @@
       "put": {
         "operationId": "EdgeDevices_CreateOrUpdate",
         "tags": [
-          "EdgeDevices"
+          "HCI"
         ],
         "description": "Create a EdgeDevice",
         "parameters": [
@@ -155,8 +155,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDevice"
+            }
+          },
           "201": {
-            "description": "Resource 'EdgeDevice' create operation succeeded",
+            "description": "EdgeDevice Resource created.",
             "schema": {
               "$ref": "#/definitions/EdgeDevice"
             },
