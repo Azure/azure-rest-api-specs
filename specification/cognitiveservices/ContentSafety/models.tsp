@@ -287,8 +287,8 @@ model LLMResource {
 }
 
 @added(Versions.v2024_02_15_Preview)
-@doc("The request of missing source detection.")
-model DetectMissingSourceOptions {
+@doc("The request of groundedness detection.")
+model DetectGroundednessOptions {
   @doc("""
   The domain of the text for analysis. Allowed values: Medical, Generic.
   This field is optional, with a default value of Generic.
@@ -318,7 +318,7 @@ model DetectMissingSourceOptions {
   groundingSources: string[];
 
   @doc("""
-  A value indicating if the output includes an explanation for the identified missing source.
+  A value indicating if the output includes an explanation for the identified groundedness.
   This field is optional, with a default value of false.
   """)
   reasoning?: boolean;
@@ -344,42 +344,42 @@ model IndexDetails {
 }
 
 @added(Versions.v2024_02_15_Preview)
-@doc("The detailed information about a text identified as missing source.")
-model MissingSourceDetails {
-  @doc("The missing source text.")
+@doc("The detailed information about a text identified as ungroundedness.")
+model UngroundednessDetails {
+  @doc("The grounded text.")
   text: string;
 
-  @doc("The offset when missing source text starts.")
+  @doc("The offset when grounded text starts.")
   offset: IndexDetails;
 
-  @doc("The length of the missing source text.")
+  @doc("The length of the grounded text.")
   length: IndexDetails;
 
   @doc("""
-  The explanation for detected missing source, enhancing understanding.
+  The explanation for detected ungroundedness, enhancing understanding.
   Only when the 'reasoning' field in the input is set to true 'reason' field will be returned.
   """)
   reason?: string;
 }
 
 @added(Versions.v2024_02_15_Preview)
-@doc("The response of missing source detection.")
-model DetectMissingSourceResult {
-  @doc("Indicates whether the text exhibits missing source.")
-  missingSourceDetected: boolean;
+@doc("The response of groundedness detection.")
+model DetectGroundednessResult {
+  @doc("Indicates whether the text exhibits ungroundedness.")
+  ungroundedDetected: boolean;
 
-  @doc("Assesses the likelihood of missing source content with a numerical score.The score will range from 0 to 1.")
+  @doc("Assesses the likelihood of grounded content with a numerical score.The score will range from 0 to 1.")
   confidenceScore: float32;
 
   @doc("""
-  Specifies the proportion of the text identified as missing source, 
+  Specifies the proportion of the text identified as ungrounded, 
   expressed as a decimal between 0 and 1,
-  where 0 indicates no missing source content and 1 indicates entirely missing source content..
+  where 0 indicates no grounded content and 1 indicates entirely grounded content..
   """)
-  missingSourcePercentage: float32;
+  ungroundedPercentage: float32;
 
-  @doc("Provides insights into missing source content with specific examples and percentages.")
-  missingSourceDetails: MissingSourceDetails[];
+  @doc("Provides insights into ungrounded content with specific examples and percentages.")
+  ungroundedDetails: UngroundednessDetails[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
