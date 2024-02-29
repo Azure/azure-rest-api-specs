@@ -132,10 +132,10 @@
         "operationId": "Jobs_CreateOrUpdate",
         "tags": [
           "AddServer",
-        "RepairServer",
-        "ResumeServer",
-        "PauseServer",
-        "AddNetworkIntent"
+          "RepairServer",
+          "ResumeServer",
+          "PauseServer",
+          "AddNetworkIntent"
         ],
         "description": "Create a Job",
         "parameters": [
@@ -388,6 +388,15 @@
       "type": "object",
       "description": "Jobs resource",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "kind": {
           "$ref": "#/definitions/JobKind",
           "description": "Job kind to support polymorphic resource.",
@@ -407,7 +416,6 @@
         }
       ]
     },
-    
     "JobListResult": {
       "type": "object",
       "description": "The response of a Job list operation.",

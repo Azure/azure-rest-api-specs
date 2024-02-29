@@ -472,8 +472,14 @@
       "type": "object",
       "description": "Edge device resource.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/DeviceKind"
+        "properties": {
+          "$ref": "#/definitions/EdgeDeviceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "discriminator": "kind",
