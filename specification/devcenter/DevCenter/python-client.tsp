@@ -42,15 +42,15 @@ interface DevCenterClientOperations {
   delayAllActions is DevCenterService.DevBoxesOperations.delayAllActions;
 
   //Environments
-  listAllEnvironments is DevCenterService.Environments.listAllEnvironments;
-  listEnvironments is DevCenterService.Environments.listEnvironments;
-  getEnvironment is DevCenterService.Environments.getEnvironment;
-  createOrUpdateEnvironment is DevCenterService.Environments.createOrUpdateEnvironment;
-  deleteEnvironment is DevCenterService.Environments.deleteEnvironment;
-  listCatalogs is DevCenterService.Environments.listCatalogs;
-  getCatalog is DevCenterService.Environments.getCatalog;
-  listEnvironmentDefinitions is DevCenterService.Environments.listEnvironmentDefinitions;
-  listEnvironmentDefinitionsByCatalog is DevCenterService.Environments.listEnvironmentDefinitionsByCatalog;
-  getEnvironmentDefinition is DevCenterService.Environments.getEnvironmentDefinition;
-  listEnvironmentTypes is DevCenterService.Environments.listEnvironmentTypes;
+  listAllEnvironments is DevCenterService.EnvironmentsOperations.listAllEnvironments;
+  listEnvironments is DevCenterService.EnvironmentsOperations.listEnvironments;
+  getEnvironment is DevCenterService.EnvironmentsOperations.getEnvironment;
+  createOrUpdateEnvironment is DevCenterService.EnvironmentsOperations.createOrUpdateEnvironment;
+  deleteEnvironment is DevCenterService.EnvironmentsOperations.deleteEnvironment;
+  listCatalogs is DevCenterService.EnvironmentsOperations.listCatalogs;
+  getCatalog is DevCenterService.EnvironmentsOperations.getCatalog;
+  listEnvironmentDefinitions is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitions;
+  listEnvironmentDefinitionsByCatalog is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitionsByCatalog;
+  getEnvironmentDefinition is DevCenterService.EnvironmentsOperations.getEnvironmentDefinition;
+  listEnvironmentTypes is DevCenterService.EnvironmentsOperations.listEnvironmentTypes;
 }

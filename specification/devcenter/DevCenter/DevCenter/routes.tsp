@@ -8,7 +8,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-interface DevCenter {
+interface DevCenterOperations {
   @doc("Lists all projects.")
   listProjects is StandardResourceOperations.ResourceList<Project>;
 
