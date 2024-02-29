@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContainerApps API Client",
-    "version": "2023-08-01-preview"
+    "version": "2023-11-02-preview"
   },
   "schemes": [
     "https"
@@ -297,98 +297,6 @@
         }
       }
     },
-    "SessionRegistryCredentials": {
-      "description": "Session Private Registry Credentials.",
-      "type": "object",
-      "properties": {
-        "server": {
-          "description": "Container registry server.",
-          "type": "string"
-        },
-        "username": {
-          "description": "Container registry username.",
-          "type": "string"
-        },
-        "passwordSecretRef": {
-          "description": "The name of the Secret that contains the registry login password",
-          "type": "string"
-        }
-      }
-    },
-    "SessionContainerResources": {
-      "description": "Container resource requirements of the Session.",
-      "type": "object",
-      "properties": {
-        "cpu": {
-          "format": "double",
-          "description": "Required CPU in cores, e.g. 0.5",
-          "type": "number"
-        },
-        "memory": {
-          "description": "Required memory, e.g. \"250Mb\"",
-          "type": "string"
-        }
-      }
-    },
-    "SessionContainer": {
-      "description": "Container definitions of the Session.",
-      "type": "object",
-      "properties": {
-        "image": {
-          "description": "Container image tag.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Custom container name.",
-          "type": "string"
-        },
-        "command": {
-          "description": "Container start command.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "args": {
-          "description": "Container start command arguments.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "env": {
-          "description": "Container environment variables.",
-          "type": "array",
-          "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVar"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "resources": {
-          "$ref": "#/definitions/SessionContainerResources",
-          "description": "Container resource requirements."
-        }
-      }
-    },
-    "CustomContainerConfiguration": {
-      "description": "Custom container configuration of the Session.",
-      "type": "object",
-      "properties": {
-        "registryCredentials": {
-          "description": "Private container registry credentials for containers used by the Sessions of the Session Pool.",
-          "$ref": "#/definitions/SessionRegistryCredentials"
-        },
-        "containers": {
-          "description": "List of container definitions for the Sessions of the Session Pool.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SessionContainer"
-          }
-        }
-      }
-    },
     "CodeExecutionConfiguration": {
       "description": "Code execution configuration of the Session.",
       "type": "object",
@@ -400,17 +308,6 @@
         "environment": {
           "description": "The environment used for code execution.",
           "type": "string"
-        }
-      }
-    },
-    "SessionIngress": {
-      "description": "Session ingress configuration.",
-      "type": "object",
-      "properties": {
-        "targetPort": {
-          "description": "Target Port in containers for traffic from ingress",
-          "type": "integer",
-          "format": "int32"
         }
       }
     },
@@ -493,17 +390,9 @@
               "description": "SSH configuration of the Session.",
               "$ref": "#/definitions/SSHConfiguration"
             },
-            "customContainerConfiguration": {
-              "description": "Custom container configuration of the Session.",
-              "$ref": "#/definitions/CustomContainerConfiguration"
-            },
             "codeExecutionConfiguration": {
               "description": "Code execution configuration of the Session.",
               "$ref": "#/definitions/CodeExecutionConfiguration"
-            },
-            "sessionIngress": {
-              "description": "Session ingress configuration.",
-              "$ref": "#/definitions/SessionIngress"
             },
             "sessionAuthConfiguration": {
               "description": "Session auth configuration.",
