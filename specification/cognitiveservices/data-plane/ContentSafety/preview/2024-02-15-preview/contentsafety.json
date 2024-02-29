@@ -509,6 +509,46 @@
         }
       }
     },
+    "/text:detectGroundedness": {
+      "post": {
+        "operationId": "TextGroundednessDetectionOperations_DetectGroundedness",
+        "summary": "Detect Missing Source",
+        "description": "A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectGroundednessOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectGroundednessResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/text:detectJailbreak": {
       "post": {
         "operationId": "TextOperations_DetectTextJailbreak",
@@ -533,46 +573,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AnalyzeTextJailbreakResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/text:detectMissingSource": {
-      "post": {
-        "operationId": "TextMissingSourceDetectionOperations_DetectMissingSource",
-        "summary": "Detect Missing Source",
-        "description": "A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DetectMissingSourceOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DetectMissingSourceResult"
             }
           },
           "default": {
@@ -1004,9 +1004,9 @@
         }
       }
     },
-    "DetectMissingSourceOptions": {
+    "DetectGroundednessOptions": {
       "type": "object",
-      "description": "The request of missing source detection.",
+      "description": "The request of groundedness detection.",
       "properties": {
         "domain": {
           "$ref": "#/definitions/Domain",
@@ -1036,7 +1036,7 @@
         },
         "reasoning": {
           "type": "boolean",
-          "description": "A value indicating if the output includes an explanation for the identified missing source.\nThis field is optional, with a default value of false."
+          "description": "A value indicating if the output includes an explanation for the identified groundedness.\nThis field is optional, with a default value of false."
         },
         "llmResource": {
           "$ref": "#/definitions/LLMResource",
@@ -1048,38 +1048,38 @@
         "groundingSources"
       ]
     },
-    "DetectMissingSourceResult": {
+    "DetectGroundednessResult": {
       "type": "object",
-      "description": "The response of missing source detection.",
+      "description": "The response of groundedness detection.",
       "properties": {
-        "missingSourceDetected": {
+        "ungroundedDetected": {
           "type": "boolean",
-          "description": "Indicates whether the text exhibits missing source."
+          "description": "Indicates whether the text exhibits ungroundedness."
         },
         "confidenceScore": {
           "type": "number",
           "format": "float",
-          "description": "Assesses the likelihood of missing source content with a numerical score.The score will range from 0 to 1."
+          "description": "Assesses the likelihood of grounded content with a numerical score.The score will range from 0 to 1."
         },
-        "missingSourcePercentage": {
+        "ungroundedPercentage": {
           "type": "number",
           "format": "float",
-          "description": "Specifies the proportion of the text identified as missing source, \nexpressed as a decimal between 0 and 1,\nwhere 0 indicates no missing source content and 1 indicates entirely missing source content.."
+          "description": "Specifies the proportion of the text identified as ungrounded, \nexpressed as a decimal between 0 and 1,\nwhere 0 indicates no grounded content and 1 indicates entirely grounded content.."
         },
-        "missingSourceDetails": {
+        "ungroundedDetails": {
           "type": "array",
-          "description": "Provides insights into missing source content with specific examples and percentages.",
+          "description": "Provides insights into ungrounded content with specific examples and percentages.",
           "items": {
-            "$ref": "#/definitions/MissingSourceDetails"
+            "$ref": "#/definitions/UngroundednessDetails"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
-        "missingSourceDetected",
+        "ungroundedDetected",
         "confidenceScore",
-        "missingSourcePercentage",
-        "missingSourceDetails"
+        "ungroundedPercentage",
+        "ungroundedDetails"
       ]
     },
     "Domain": {
@@ -1221,33 +1221,6 @@
           }
         ]
       }
-    },
-    "MissingSourceDetails": {
-      "type": "object",
-      "description": "The detailed information about a text identified as missing source.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The missing source text."
-        },
-        "offset": {
-          "$ref": "#/definitions/IndexDetails",
-          "description": "The offset when missing source text starts."
-        },
-        "length": {
-          "$ref": "#/definitions/IndexDetails",
-          "description": "The length of the missing source text."
-        },
-        "reason": {
-          "type": "string",
-          "description": "The explanation for detected missing source, enhancing understanding.\nOnly when the 'reasoning' field in the input is set to true 'reason' field will be returned."
-        }
-      },
-      "required": [
-        "text",
-        "offset",
-        "length"
-      ]
     },
     "PagedTextBlocklist": {
       "type": "object",
@@ -1488,6 +1461,33 @@
       },
       "required": [
         "attackDetected"
+      ]
+    },
+    "UngroundednessDetails": {
+      "type": "object",
+      "description": "The detailed information about a text identified as ungroundedness.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The grounded text."
+        },
+        "offset": {
+          "$ref": "#/definitions/IndexDetails",
+          "description": "The offset when grounded text starts."
+        },
+        "length": {
+          "$ref": "#/definitions/IndexDetails",
+          "description": "The length of the grounded text."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The explanation for detected ungroundedness, enhancing understanding.\nOnly when the 'reasoning' field in the input is set to true 'reason' field will be returned."
+        }
+      },
+      "required": [
+        "text",
+        "offset",
+        "length"
       ]
     }
   },
