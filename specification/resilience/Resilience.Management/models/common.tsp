@@ -37,7 +37,7 @@ enum ProvisioningState {
   NotSpecified,
 }
 
-scalar ParentResourceId
+scalar ARMResourceId
   extends Azure.ResourceManager.ResourceIdentifier<[
     {
       type: "string",

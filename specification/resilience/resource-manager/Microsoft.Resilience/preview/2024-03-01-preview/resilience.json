@@ -167,7 +167,7 @@
     }
   },
   "definitions": {
-    "ParentResourceId": {
+    "ARMResourceId": {
       "type": "string",
       "format": "arm-id",
       "description": "A type definition that refers the id to an Azure Resource Manager resource.",
@@ -257,7 +257,7 @@
       "description": "Resilience Properties",
       "properties": {
         "parentResourceId": {
-          "$ref": "#/definitions/ParentResourceId",
+          "$ref": "#/definitions/ARMResourceId",
           "description": "The parent resource id",
           "readOnly": true
         },
@@ -292,6 +292,14 @@
           },
           "readOnly": true
         },
+        "relatedResources": {
+          "type": "array",
+          "description": "List of related resource Ids",
+          "items": {
+            "$ref": "#/definitions/ARMResourceId"
+          },
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -302,7 +310,8 @@
         "parentResourceId",
         "parentResourceType",
         "parentResourceLocation",
-        "findings"
+        "findings",
+        "relatedResources"
       ]
     },
     "ResilienceResource": {
