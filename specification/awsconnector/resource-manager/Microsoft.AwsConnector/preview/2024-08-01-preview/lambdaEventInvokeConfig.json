@@ -1,0 +1,599 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LambdaEventInvokeConfigs"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/lambdaEventInvokeConfigs": {
+      "get": {
+        "operationId": "LambdaEventInvokeConfigs_ListBySubscription",
+        "tags": [
+          "LambdaEventInvokeConfigs"
+        ],
+        "description": "List LambdaEventInvokeConfig resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaEventInvokeConfigListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaEventInvokeConfigs_ListBySubscription": {
+            "$ref": "./examples/LambdaEventInvokeConfigs_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/lambdaEventInvokeConfigs": {
+      "get": {
+        "operationId": "LambdaEventInvokeConfigs_ListByResourceGroup",
+        "tags": [
+          "LambdaEventInvokeConfigs"
+        ],
+        "description": "List LambdaEventInvokeConfig resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaEventInvokeConfigListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaEventInvokeConfigs_ListByResourceGroup": {
+            "$ref": "./examples/LambdaEventInvokeConfigs_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/lambdaEventInvokeConfigs/{name}": {
+      "get": {
+        "operationId": "LambdaEventInvokeConfigs_Get",
+        "tags": [
+          "LambdaEventInvokeConfigs"
+        ],
+        "description": "Get a LambdaEventInvokeConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaEventInvokeConfig",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaEventInvokeConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaEventInvokeConfigs_Get": {
+            "$ref": "./examples/LambdaEventInvokeConfigs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LambdaEventInvokeConfigs_CreateOrUpdate",
+        "tags": [
+          "LambdaEventInvokeConfigs"
+        ],
+        "description": "Create a LambdaEventInvokeConfig. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaEventInvokeConfig",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LambdaEventInvokeConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LambdaEventInvokeConfig' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LambdaEventInvokeConfig"
+            }
+          },
+          "201": {
+            "description": "Resource 'LambdaEventInvokeConfig' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LambdaEventInvokeConfig"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaEventInvokeConfigs_CreateOrUpdate": {
+            "$ref": "./examples/LambdaEventInvokeConfigs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LambdaEventInvokeConfigs_Update",
+        "tags": [
+          "LambdaEventInvokeConfigs"
+        ],
+        "description": "Update a LambdaEventInvokeConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaEventInvokeConfig",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LambdaEventInvokeConfigTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaEventInvokeConfig"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaEventInvokeConfigs_Update": {
+            "$ref": "./examples/LambdaEventInvokeConfigs_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LambdaEventInvokeConfigs_Delete",
+        "tags": [
+          "LambdaEventInvokeConfigs"
+        ],
+        "description": "Delete a LambdaEventInvokeConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaEventInvokeConfig",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaEventInvokeConfigs_Delete": {
+            "$ref": "./examples/LambdaEventInvokeConfigs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsLambdaEventInvokeConfigProperties": {
+      "type": "object",
+      "description": "Definition of awsLambdaEventInvokeConfig",
+      "properties": {
+        "destinationConfig": {
+          "$ref": "#/definitions/DestinationConfig",
+          "description": "Gets and sets the property destinationConfig. A destination for events after they have been sent to a function for processing."
+        },
+        "functionName": {
+          "type": "string",
+          "description": "Gets and sets the property functionName. The name of the Lambda function."
+        },
+        "maximumEventAgeInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property maximumEventAgeInSeconds. The maximum age of a request that Lambda sends to a function for processing."
+        },
+        "maximumRetryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property maximumRetryAttempts. The maximum number of times to retry when the function returns an error."
+        },
+        "qualifier": {
+          "type": "string",
+          "description": "Gets and sets the property qualifier. The identifier of a version or alias."
+        }
+      }
+    },
+    "DestinationConfig": {
+      "type": "object",
+      "description": "Definition of DestinationConfig",
+      "properties": {
+        "onFailure": {
+          "$ref": "#/definitions/OnFailure",
+          "description": "Gets and sets the property onFailure. The destination configuration for failed invocations."
+        },
+        "onSuccess": {
+          "$ref": "#/definitions/OnSuccess",
+          "description": "Gets and sets the property onSuccess. The destination configuration for successful invocations."
+        }
+      }
+    },
+    "LambdaEventInvokeConfig": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LambdaEventInvokeConfigProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LambdaEventInvokeConfigListResult": {
+      "type": "object",
+      "description": "The response of a LambdaEventInvokeConfig list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LambdaEventInvokeConfig items on this page",
+          "items": {
+            "$ref": "#/definitions/LambdaEventInvokeConfig"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LambdaEventInvokeConfigProperties": {
+      "type": "object",
+      "description": "Definition of LambdaEventInvokeConfig",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsLambdaEventInvokeConfigProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "LambdaEventInvokeConfigTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in LambdaEventInvokeConfig resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OnFailure": {
+      "type": "object",
+      "description": "Definition of OnFailure",
+      "properties": {
+        "destination": {
+          "type": "string",
+          "description": "Gets and sets the property destination. The Amazon Resource Name (ARN) of the destination resource."
+        }
+      }
+    },
+    "OnSuccess": {
+      "type": "object",
+      "description": "Definition of OnSuccess",
+      "properties": {
+        "destination": {
+          "type": "string",
+          "description": "Gets and sets the property destination. The Amazon Resource Name (ARN) of the destination resource."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

@@ -126,6 +126,7 @@ model Tag {
 @doc("Definition of RuleVariables")
 model RuleVariablesModel {
   @doc("Gets and sets the property ruleVariables.")
+  @projectedName("csharp", "ruleVariablescsharp")
   ruleVariables?: Record<IPSet>;
 }
 

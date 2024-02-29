@@ -1,0 +1,640 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "NetworkFirewallLoggingConfigurations"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/networkFirewallLoggingConfigurations": {
+      "get": {
+        "operationId": "NetworkFirewallLoggingConfigurations_ListBySubscription",
+        "tags": [
+          "NetworkFirewallLoggingConfigurations"
+        ],
+        "description": "List NetworkFirewallLoggingConfiguration resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallLoggingConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallLoggingConfigurations_ListBySubscription": {
+            "$ref": "./examples/NetworkFirewallLoggingConfigurations_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/networkFirewallLoggingConfigurations": {
+      "get": {
+        "operationId": "NetworkFirewallLoggingConfigurations_ListByResourceGroup",
+        "tags": [
+          "NetworkFirewallLoggingConfigurations"
+        ],
+        "description": "List NetworkFirewallLoggingConfiguration resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallLoggingConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallLoggingConfigurations_ListByResourceGroup": {
+            "$ref": "./examples/NetworkFirewallLoggingConfigurations_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/networkFirewallLoggingConfigurations/{name}": {
+      "get": {
+        "operationId": "NetworkFirewallLoggingConfigurations_Get",
+        "tags": [
+          "NetworkFirewallLoggingConfigurations"
+        ],
+        "description": "Get a NetworkFirewallLoggingConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallLoggingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallLoggingConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallLoggingConfigurations_Get": {
+            "$ref": "./examples/NetworkFirewallLoggingConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkFirewallLoggingConfigurations_CreateOrUpdate",
+        "tags": [
+          "NetworkFirewallLoggingConfigurations"
+        ],
+        "description": "Create a NetworkFirewallLoggingConfiguration. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallLoggingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallLoggingConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkFirewallLoggingConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallLoggingConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkFirewallLoggingConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallLoggingConfiguration"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallLoggingConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/NetworkFirewallLoggingConfigurations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NetworkFirewallLoggingConfigurations_Update",
+        "tags": [
+          "NetworkFirewallLoggingConfigurations"
+        ],
+        "description": "Update a NetworkFirewallLoggingConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallLoggingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallLoggingConfigurationTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallLoggingConfiguration"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallLoggingConfigurations_Update": {
+            "$ref": "./examples/NetworkFirewallLoggingConfigurations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NetworkFirewallLoggingConfigurations_Delete",
+        "tags": [
+          "NetworkFirewallLoggingConfigurations"
+        ],
+        "description": "Delete a NetworkFirewallLoggingConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallLoggingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallLoggingConfigurations_Delete": {
+            "$ref": "./examples/NetworkFirewallLoggingConfigurations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsNetworkFirewallLoggingConfigurationProperties": {
+      "type": "object",
+      "description": "Definition of awsNetworkFirewallLoggingConfiguration",
+      "properties": {
+        "firewallArn": {
+          "type": "string",
+          "description": "Gets and sets the property firewallArn. A resource ARN."
+        },
+        "firewallName": {
+          "type": "string",
+          "description": "Gets and sets the property firewallName."
+        },
+        "loggingConfiguration": {
+          "$ref": "#/definitions/LoggingConfiguration",
+          "description": "Gets and sets the property loggingConfiguration."
+        }
+      }
+    },
+    "LogDestinationConfig": {
+      "type": "object",
+      "description": "Definition of LogDestinationConfig",
+      "properties": {
+        "logDestination": {
+          "description": "Gets and sets the property logDestination. A key-value pair to configure the logDestinations."
+        },
+        "logDestinationType": {
+          "$ref": "#/definitions/LogDestinationConfigLogDestinationType",
+          "description": "Gets and sets the property logDestinationType."
+        },
+        "logType": {
+          "$ref": "#/definitions/LogDestinationConfigLogType",
+          "description": "Gets and sets the property logType."
+        }
+      }
+    },
+    "LogDestinationConfigLogDestinationType": {
+      "type": "string",
+      "description": "LogDestinationConfigLogDestinationType enum",
+      "enum": [
+        "CloudWatchLogs",
+        "KinesisDataFirehose",
+        "S3"
+      ],
+      "x-ms-enum": {
+        "name": "LogDestinationConfigLogDestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CloudWatchLogs",
+            "value": "CloudWatchLogs",
+            "description": "LogDestinationConfigLogDestinationType enum CloudWatchLogs"
+          },
+          {
+            "name": "KinesisDataFirehose",
+            "value": "KinesisDataFirehose",
+            "description": "LogDestinationConfigLogDestinationType enum KinesisDataFirehose"
+          },
+          {
+            "name": "S3",
+            "value": "S3",
+            "description": "LogDestinationConfigLogDestinationType enum S3"
+          }
+        ]
+      }
+    },
+    "LogDestinationConfigLogType": {
+      "type": "string",
+      "description": "LogDestinationConfigLogType enum",
+      "enum": [
+        "ALERT",
+        "FLOW"
+      ],
+      "x-ms-enum": {
+        "name": "LogDestinationConfigLogType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALERT",
+            "value": "ALERT",
+            "description": "LogDestinationConfigLogType enum ALERT"
+          },
+          {
+            "name": "FLOW",
+            "value": "FLOW",
+            "description": "LogDestinationConfigLogType enum FLOW"
+          }
+        ]
+      }
+    },
+    "LoggingConfiguration": {
+      "type": "object",
+      "description": "Definition of LoggingConfiguration",
+      "properties": {
+        "logDestinationConfigs": {
+          "type": "array",
+          "description": "Gets and sets the property logDestinationConfigs.",
+          "items": {
+            "$ref": "#/definitions/LogDestinationConfig"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NetworkFirewallLoggingConfiguration": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkFirewallLoggingConfigurationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NetworkFirewallLoggingConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a NetworkFirewallLoggingConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkFirewallLoggingConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkFirewallLoggingConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkFirewallLoggingConfigurationProperties": {
+      "type": "object",
+      "description": "Definition of NetworkFirewallLoggingConfiguration",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsNetworkFirewallLoggingConfigurationProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkFirewallLoggingConfigurationTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in NetworkFirewallLoggingConfiguration resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

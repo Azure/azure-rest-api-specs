@@ -55,21 +55,32 @@ input-file:
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2NetworkAcl.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2NetworkInterface.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2RouteTable.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2SecurityGroup.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Subnet.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2TransitGatewayMulticastDomainAssociation.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Volume.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Vpc.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2VPCDHCPOptionsAssociation.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2VPCEndpoint.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2VPCGatewayAttachment.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2VPCPeeringConnection.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/eksCluster.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/eksNodegroup.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/elasticLoadBalancingV2Listener.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/elasticLoadBalancingV2ListenerRule.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/elasticLoadBalancingV2LoadBalancer.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/lambdaEventInvokeConfig.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/lambdaFunction.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/lambdaPermission.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/licenseManagerLicense.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/lightsailBucket.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/lightsailInstance.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/logsLogGroup.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/logsLogStream.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/logsSubscriptionFilter.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallFirewall.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallFirewallPolicy.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallLoggingConfiguration.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallRuleGroup.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/operations.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/organizationsAccount.json
