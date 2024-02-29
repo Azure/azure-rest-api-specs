@@ -3159,6 +3159,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "identity": {
+          "description": "FlowLog resource Managed Identity",
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity"
         }
       },
       "allOf": [
@@ -3305,6 +3309,10 @@
         "flowAnalyticsConfiguration": {
           "$ref": "#/definitions/TrafficAnalyticsProperties",
           "description": "Parameters that define the configuration of traffic analytics."
+        },
+        "identity": {
+          "description": "FlowLog resource Managed Identity",
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
