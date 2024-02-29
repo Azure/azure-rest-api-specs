@@ -20,7 +20,7 @@ using Azure.ResourceManager;
   title: "Microsoft.IoTOperationsOrchestrator management service.",
 })
 @doc("Microsoft.IoTOperationsOrchestrator Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.IoTOperationsOrchestrator;
 
 /** Api versions */
