@@ -184,7 +184,7 @@ model CryptoCertificateListResult is Azure.Core.Page<CryptoCertificateResource>;
 /**
  * Crypto certificate resource
  */
-model CryptoCertificateResource extends Resource {
+model CryptoCertificateResource extends ProxyResourceBase {
   /**
    * The properties of a crypto certificate found within a firmware image
    */
@@ -378,7 +378,7 @@ model CryptoKeyListResult is Azure.Core.Page<CryptoKeyResource>;
 /**
  * Crypto key resource
  */
-model CryptoKeyResource extends Resource {
+model CryptoKeyResource extends ProxyResourceBase {
   /**
    * The properties of a crypto key found within a firmware image
    */
@@ -448,7 +448,7 @@ model CveListResult is Azure.Core.Page<CveResource>;
 /**
  * CVE analysis result resource
  */
-model CveResource extends Resource {
+model CveResource extends ProxyResourceBase {
   /**
    * The properties of a CVE result found within a firmware image
    */
@@ -654,7 +654,7 @@ model PasswordHashListResult is Azure.Core.Page<PasswordHashResource>;
 /**
  * Password hash resource
  */
-model PasswordHashResource extends Resource {
+model PasswordHashResource extends ProxyResourceBase {
   /**
    * The properties of a password hash found within a firmware image
    */
@@ -717,7 +717,7 @@ model SbomComponentListResult is Azure.Core.Page<SbomComponentResource>;
 /**
  * SBOM analysis result resource
  */
-model SbomComponentResource extends Resource {
+model SbomComponentResource extends ProxyResourceBase {
   /**
    * The properties of an SBOM component found within a firmware image
    */
