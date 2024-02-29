@@ -124,5 +124,9 @@ interface ExperimentationWorkspaces {
   delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
   listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
   listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
-  exchangeToken is ArmResourceActionSync<ExperimentationWorkspace, ExchangeTokenRequest, ExchangeTokenResponse>;
+  exchangeToken is ArmResourceActionSync<
+    ExperimentationWorkspace,
+    ExchangeTokenRequest,
+    ExchangeTokenResponse
+  >;
 }
