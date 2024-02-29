@@ -16,5 +16,5 @@ add-credentials: true
 These settings apply only when `--tag=2024-03-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == '2024-03-01-preview'
-input-file: preview/2024-03-01-preview/UnifiedVision-Search.json
+input-file: preview/2024-03-01-preview/UnifiedVisionRetrieval.json
 ```
