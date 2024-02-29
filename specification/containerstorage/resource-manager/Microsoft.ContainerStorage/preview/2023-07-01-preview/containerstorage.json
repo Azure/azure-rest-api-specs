@@ -1282,6 +1282,19 @@
         "reference"
       ]
     },
+    "DiskPoolProperties": {
+      "type": "object",
+      "description": "Properties shared between the azureDisk and ephemeralDisk",
+      "properties": {
+        "disks": {
+          "type": "array",
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          }
+        }
+      }
+    },
     "ElasticSan": {
       "type": "object",
       "description": "Elastic San Pool Properties",
@@ -1792,6 +1805,24 @@
       "required": [
         "source"
       ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2023-07-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2023-07-01-preview",
+            "value": "2023-07-01-preview",
+            "description": "2023-07-01-preview preview version"
+          }
+        ]
+      }
     },
     "Volume": {
       "type": "object",
