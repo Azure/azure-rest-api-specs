@@ -16,7 +16,7 @@ export class FormatRule implements Rule {
     stdOutput += gitDiffResult.stdOutput;
     if (!gitDiffResult.success) {
       errorOutput += gitDiffResult.errorOutput;
-      errorOutput += `\nFiles has been gerenate/changed after tsp format, please ensure all files are included in the branch.`;
+      errorOutput += `\nFiles has been gerenate/changed after tsp format, please run \`tsp format\` and ensure all files are included in the branch.`;
     }
 
     // Failing on both err and errorOutput because of known bug in tsp format where it returns 0 on failed formatting
