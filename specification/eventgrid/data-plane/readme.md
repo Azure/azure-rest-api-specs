@@ -245,6 +245,16 @@ input-file:
 
 ```
 
+### Tag: package-2024-01-01
+
+These settings apply only when `--tag=package-2024-01-01` is specified on the command line. Will generate EventGrid SystemEvents from TypeSpec.
+
+``` yaml $(tag) == 'package-2024-01-01'
+input-file:
+- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.EventGrid/stable/2024-01-01/SystemEvents.json
+```
+
 ### Suppression
 ``` yaml
 directive:
