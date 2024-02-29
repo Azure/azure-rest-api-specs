@@ -92,7 +92,7 @@
     },
     "/projects": {
       "get": {
-        "operationId": "DevCenter_ListProjects",
+        "operationId": "DevCenterOperations_ListProjects",
         "description": "Lists all projects.",
         "parameters": [
           {
@@ -131,7 +131,7 @@
     },
     "/projects/{projectName}": {
       "get": {
-        "operationId": "DevCenter_GetProject",
+        "operationId": "DevCenterOperations_GetProject",
         "description": "Gets a project.",
         "parameters": [
           {
@@ -177,7 +177,7 @@
     },
     "/projects/{projectName}/catalogs": {
       "get": {
-        "operationId": "Environments_ListCatalogs",
+        "operationId": "EnvironmentsOperations_ListCatalogs",
         "description": "Lists all of the catalogs available for a project.",
         "parameters": [
           {
@@ -226,7 +226,7 @@
     },
     "/projects/{projectName}/catalogs/{catalogName}": {
       "get": {
-        "operationId": "Environments_GetCatalog",
+        "operationId": "EnvironmentsOperations_GetCatalog",
         "description": "Gets the specified catalog within the project",
         "parameters": [
           {
@@ -282,7 +282,7 @@
     },
     "/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions": {
       "get": {
-        "operationId": "Environments_ListEnvironmentDefinitionsByCatalog",
+        "operationId": "EnvironmentsOperations_ListEnvironmentDefinitionsByCatalog",
         "description": "Lists all environment definitions available within a catalog.",
         "parameters": [
           {
@@ -335,7 +335,7 @@
     },
     "/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{definitionName}": {
       "get": {
-        "operationId": "Environments_GetEnvironmentDefinition",
+        "operationId": "EnvironmentsOperations_GetEnvironmentDefinition",
         "description": "Get an environment definition from a catalog.",
         "parameters": [
           {
@@ -401,7 +401,7 @@
     },
     "/projects/{projectName}/environmentDefinitions": {
       "get": {
-        "operationId": "Environments_ListEnvironmentDefinitions",
+        "operationId": "EnvironmentsOperations_ListEnvironmentDefinitions",
         "description": "Lists all environment definitions available for a project.",
         "parameters": [
           {
@@ -447,7 +447,7 @@
     },
     "/projects/{projectName}/environmentTypes": {
       "get": {
-        "operationId": "Environments_ListEnvironmentTypes",
+        "operationId": "EnvironmentsOperations_ListEnvironmentTypes",
         "description": "Lists all environment types configured for a project.",
         "parameters": [
           {
@@ -493,7 +493,7 @@
     },
     "/projects/{projectName}/environments": {
       "get": {
-        "operationId": "Environments_ListAllEnvironments",
+        "operationId": "EnvironmentsOperations_ListAllEnvironments",
         "description": "Lists the environments for a project.",
         "parameters": [
           {
@@ -592,7 +592,7 @@
     },
     "/projects/{projectName}/pools": {
       "get": {
-        "operationId": "DevBoxes_ListPools",
+        "operationId": "DevBoxesOperations_ListPools",
         "description": "Lists available pools",
         "parameters": [
           {
@@ -641,7 +641,7 @@
     },
     "/projects/{projectName}/pools/{poolName}": {
       "get": {
-        "operationId": "DevBoxes_GetPool",
+        "operationId": "DevBoxesOperations_GetPool",
         "description": "Gets a pool",
         "parameters": [
           {
@@ -694,7 +694,7 @@
     },
     "/projects/{projectName}/pools/{poolName}/schedules": {
       "get": {
-        "operationId": "DevBoxes_ListSchedules",
+        "operationId": "DevBoxesOperations_ListSchedules",
         "description": "Lists available schedules for a pool.",
         "parameters": [
           {
@@ -750,7 +750,7 @@
     },
     "/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}": {
       "get": {
-        "operationId": "DevBoxes_GetSchedule",
+        "operationId": "DevBoxesOperations_GetSchedule",
         "description": "Gets a schedule.",
         "parameters": [
           {
@@ -810,7 +810,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes": {
       "get": {
-        "operationId": "DevBoxes_ListDevBoxes",
+        "operationId": "DevBoxesOperations_ListDevBoxes",
         "description": "Lists Dev Boxes in the project for a particular user.",
         "parameters": [
           {
@@ -863,7 +863,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}": {
       "get": {
-        "operationId": "DevBoxes_GetDevBox",
+        "operationId": "DevBoxesOperations_GetDevBox",
         "description": "Gets a Dev Box",
         "parameters": [
           {
@@ -927,7 +927,7 @@
         }
       },
       "put": {
-        "operationId": "DevBoxes_CreateDevBox",
+        "operationId": "DevBoxesOperations_CreateDevBox",
         "description": "Creates or replaces a Dev Box.",
         "parameters": [
           {
@@ -1008,7 +1008,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "DevBoxes_DeleteDevBox",
+        "operationId": "DevBoxesOperations_DeleteDevBox",
         "description": "Deletes a Dev Box.",
         "parameters": [
           {
@@ -1077,7 +1077,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start": {
       "post": {
-        "operationId": "DevBoxes_StartDevBox",
+        "operationId": "DevBoxesOperations_StartDevBox",
         "description": "Starts a Dev Box",
         "parameters": [
           {
@@ -1151,7 +1151,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:stop": {
       "post": {
-        "operationId": "DevBoxes_StopDevBox",
+        "operationId": "DevBoxesOperations_StopDevBox",
         "description": "Stops a Dev Box",
         "parameters": [
           {
@@ -1232,7 +1232,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart": {
       "post": {
-        "operationId": "DevBoxes_RestartDevBox",
+        "operationId": "DevBoxesOperations_RestartDevBox",
         "description": "Restarts a Dev Box",
         "parameters": [
           {
@@ -1306,7 +1306,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions": {
       "get": {
-        "operationId": "DevBoxes_ListDevBoxActions",
+        "operationId": "DevBoxesOperations_ListDevBoxActions",
         "description": "Lists actions on a Dev Box.",
         "parameters": [
           {
@@ -1375,7 +1375,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}": {
       "get": {
-        "operationId": "DevBoxes_GetDevBoxAction",
+        "operationId": "DevBoxesOperations_GetDevBoxAction",
         "description": "Gets an action.",
         "parameters": [
           {
@@ -1451,7 +1451,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip": {
       "post": {
-        "operationId": "DevBoxes_SkipAction",
+        "operationId": "DevBoxesOperations_SkipAction",
         "description": "Skips an occurrence of an action.",
         "parameters": [
           {
@@ -1524,7 +1524,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:delay": {
       "post": {
-        "operationId": "DevBoxes_DelayAction",
+        "operationId": "DevBoxesOperations_DelayAction",
         "description": "Delays the occurrence of an action.",
         "parameters": [
           {
@@ -1609,7 +1609,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay": {
       "post": {
-        "operationId": "DevBoxes_DelayAllActions",
+        "operationId": "DevBoxesOperations_DelayAllActions",
         "description": "Delays all actions.",
         "parameters": [
           {
@@ -1687,7 +1687,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection": {
       "get": {
-        "operationId": "DevBoxes_GetRemoteConnection",
+        "operationId": "DevBoxesOperations_GetRemoteConnection",
         "description": "Gets RDP Connection info",
         "parameters": [
           {
@@ -1744,7 +1744,7 @@
     },
     "/projects/{projectName}/users/{userId}/environments": {
       "get": {
-        "operationId": "Environments_ListEnvironments",
+        "operationId": "EnvironmentsOperations_ListEnvironments",
         "description": "Lists the environments for a project and user.",
         "parameters": [
           {
@@ -1797,7 +1797,7 @@
     },
     "/projects/{projectName}/users/{userId}/environments/{environmentName}": {
       "get": {
-        "operationId": "Environments_GetEnvironment",
+        "operationId": "EnvironmentsOperations_GetEnvironment",
         "description": "Gets an environment",
         "parameters": [
           {
@@ -1861,7 +1861,7 @@
         }
       },
       "put": {
-        "operationId": "Environments_CreateOrUpdateEnvironment",
+        "operationId": "EnvironmentsOperations_CreateOrUpdateEnvironment",
         "description": "Creates or updates an environment.",
         "parameters": [
           {
@@ -1931,7 +1931,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Environments_DeleteEnvironment",
+        "operationId": "EnvironmentsOperations_DeleteEnvironment",
         "description": "Deletes an environment and all its associated resources",
         "parameters": [
           {
