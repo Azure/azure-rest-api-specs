@@ -28798,13 +28798,17 @@
             },
             "authType": {
               "description": "Auth Type",
-              "type": "string",
               "enum": [
-                "Annonymous",
+                "Anonymous",
                 "UserCredentials",
                 "SystemIdentity",
                 "UserAssigned"
-              ]
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "AuthType",
+                "modelAsString": false
+              }
             },
             "userName": {
               "description": "User Name",
