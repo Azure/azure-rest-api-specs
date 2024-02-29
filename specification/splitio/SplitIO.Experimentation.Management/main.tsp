@@ -23,7 +23,7 @@ namespace SplitIO.Experimentation;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v1_preview: "2024-03-01-preview",
 }
 
@@ -130,8 +130,10 @@ model ExchangeTokenResponse {
   token: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 @tag("ExchangeToken")
 interface ExchangeToken {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @doc("Get access token for Split.IO data plane authentication.")
   @route("/subscription/{subscriptionId}/providers/SplitIO.Experimentation/exchangeToken")
   @post
