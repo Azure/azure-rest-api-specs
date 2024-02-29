@@ -11,7 +11,7 @@ export class FormatRule implements Rule {
     // Format parent folder to include shared files
 
     let [err, stdOutput, errorOutput] = await host.runCmd(`npx tsp format "../**/*.tsp"`, folder);
-    let success = !err;
+    let success = !err && !errorOutput;
     if (success) {
       const gitDiffResult = await gitDiffTopSpecFolder(host, folder);
       stdOutput += gitDiffResult.stdOutput;
