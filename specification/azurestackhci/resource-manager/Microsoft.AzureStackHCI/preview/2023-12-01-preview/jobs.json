@@ -317,7 +317,12 @@
           "description": "Reported Properties for admin action triggered from cloud.",
           "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
+      ]
     },
     "AddServerJob": {
       "description": "AddServer job to add node to AzureStackHCI cluster.",
@@ -372,6 +377,11 @@
       },
       "required": [
         "serverName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
       ]
     },
     "Job": {
@@ -379,13 +389,11 @@
       "description": "Jobs resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/JobsProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "provisioningState": {
+            "$ref": "./hciCommon.json#/definitions/ProvisioningState",
+            "description": "Job provisioning state",
+            "readOnly": true
+          }
         },
         "kind": {
           "$ref": "#/definitions/JobKind",
@@ -479,11 +487,6 @@
       "type": "object",
       "description": "Job properties",
       "properties": {
-        "provisioningState": {
-          "$ref": "./hciCommon.json#/definitions/ProvisioningState",
-          "description": "Job provisioning state",
-          "readOnly": true
-        },
         "jobId": {
           "type": "string",
           "description": "Unique, immutable job id.",
@@ -584,6 +587,11 @@
       },
       "required": [
         "serverName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
       ]
     },
     "RepairServerJob": {
@@ -635,6 +643,11 @@
       },
       "required": [
         "serverName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
       ]
     },
     "ResumeServerJob": {
@@ -676,6 +689,11 @@
       },
       "required": [
         "serverName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
       ]
     },
     "SetInformationJob": {
@@ -750,7 +768,12 @@
           "description": "Reported Properties for admin action triggered from cloud.",
           "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
+      ]
     }
   },
   "parameters": {

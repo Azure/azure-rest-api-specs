@@ -473,12 +473,18 @@
       "description": "Edge device resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EdgeDeviceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
+          "provisioningState": {
+            "$ref": "./hciCommon.json#/definitions/ProvisioningState",
+            "description": "Job provisioning state",
+            "readOnly": true
+          }
+        },
+        "kind": {
+          "$ref": "#/definitions/DeviceKind",
+          "description": "Device kind to support polymorphic resource.",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         }
       },
