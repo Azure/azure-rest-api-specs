@@ -3,7 +3,7 @@
   "info": {
     "title": "ComputeDiagnosticResourceProviderClient",
     "description": "The Compute Diagnostic Resource Provider Client",
-    "version": "2021-06-01-preview"
+    "version": "2024-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -43,10 +43,10 @@
         "description": "Gets status of a Diagnostic operation issued for Disk Inspection.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "in": "path",
@@ -58,7 +58,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComputeDiagnosticsOperationResult"
+            }
           },
           "202": {
             "description": "Accepted"
@@ -93,13 +96,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "runDiskInspectionInput",
@@ -144,10 +147,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -180,10 +183,10 @@
         "description": "Gets a specific Compute diagnostic for a subscription in a location.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -220,13 +223,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "storageConfigurationInput",
@@ -269,13 +272,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -308,13 +311,13 @@
         "description": "Generates placement scores for Spot VM skus.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "spotPlacementRecommenderInput",
@@ -393,7 +396,7 @@
       "type": "object",
       "properties": {
         "resourceId": {
-          "description": "Qualified name of the resource.",
+          "description": "Qualified ID of the resource.",
           "type": "string"
         },
         "manifest": {
