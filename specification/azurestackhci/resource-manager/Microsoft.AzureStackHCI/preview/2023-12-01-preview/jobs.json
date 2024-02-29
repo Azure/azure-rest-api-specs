@@ -388,13 +388,6 @@
       "type": "object",
       "description": "Jobs resource",
       "properties": {
-        "properties": {
-          "provisioningState": {
-            "$ref": "./hciCommon.json#/definitions/ProvisioningState",
-            "description": "Job provisioning state",
-            "readOnly": true
-          }
-        },
         "kind": {
           "$ref": "#/definitions/JobKind",
           "description": "Job kind to support polymorphic resource.",
@@ -411,6 +404,9 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        },
+        {
+          "$ref": "#/definitions/JobsProperties"
         }
       ]
     },
@@ -487,6 +483,11 @@
       "type": "object",
       "description": "Job properties",
       "properties": {
+        "provisioningState": {
+          "$ref": "./hciCommon.json#/definitions/ProvisioningState",
+          "description": "Job provisioning state",
+          "readOnly": true
+        },
         "jobId": {
           "type": "string",
           "description": "Unique, immutable job id.",
