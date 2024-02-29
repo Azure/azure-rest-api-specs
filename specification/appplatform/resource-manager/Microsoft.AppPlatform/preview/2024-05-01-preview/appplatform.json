@@ -10981,6 +10981,18 @@
           "description": "Indicates whether the data plane components(log stream, app connect, remote debugging) in vnet injection instance could be accessed from internet.",
           "type": "boolean",
           "default": false
+        },
+        "privateLinkState": {
+          "description": "Indicates whether the vnet injection service enables private links for backend storage account and container registry.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkState",
+            "modelAsString": true
+          }
         }
       }
     },
