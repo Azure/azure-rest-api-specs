@@ -11,11 +11,11 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+  OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://ml.azure.com/"],
+      scopes: ["https://ml.azure.com/.default"],
     }
   ]>
 )
