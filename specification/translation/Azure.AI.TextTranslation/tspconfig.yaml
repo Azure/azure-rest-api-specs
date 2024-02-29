@@ -16,20 +16,16 @@ options:
     output-file: "{azure-resource-provider-folder}/Azure.AI.TextTranslation/stable/v3.0/openapi.json"
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
-    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
     model-namespace: false
     namespace: Azure.AI.Translation.Text
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     package-name: "azure-ai-translation-text"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-translation-text"
     namespace: com.azure.ai.translation.text
     partial-update: true
     generate-tests: false
     customization-class: src/main/java/TextTranslationClientBuilderCustomization.java
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/ai-translation-text-rest"
     generateMetadata: false
     generateTest: false
     packageDetails:
