@@ -45,14 +45,15 @@ export class CompileRule implements Rule {
       errorOutput += stderr;
     }
 
-    const gitDiffResult = await gitDiffTopSpecFolder(host, folder);
-    stdOutput += gitDiffResult.stdOutput;
-    if (!gitDiffResult.success) {
-      success = false;
-      errorOutput += gitDiffResult.errorOutput;
-      errorOutput += `\nFiles has been gerenate/changed after tsp compile, please run \`tsp compile\` and ensure all files are included in the branch.`;
+    if (success) {
+      const gitDiffResult = await gitDiffTopSpecFolder(host, folder);
+      stdOutput += gitDiffResult.stdOutput;
+      if (!gitDiffResult.success) {
+        success = false;
+        errorOutput += gitDiffResult.errorOutput;
+        errorOutput += `\nFiles has been gerenate/changed after tsp compile, please run \`tsp compile\` and ensure all files are included in the branch.`;
+      }
     }
-
     return {
       success: success,
       stdOutput: stdOutput,
