@@ -8769,6 +8769,10 @@
           "description": "Properties of the Service resource",
           "x-ms-client-flatten": false
         },
+        "identity": {
+          "$ref": "#/definitions/SystemAssignedManagedIdentityProperties",
+          "description": "Managed Identity of the Service resource"
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Sku of the Service resource"
@@ -8993,6 +8997,32 @@
         "userAssignedIdentities": {
           "$ref": "#/definitions/UserAssignedManagedIdentities",
           "description": "Properties of user-assigned managed identities"
+        }
+      }
+    },
+    "SystemAssignedManagedIdentityProperties": {
+      "description": "System assigned managed identity properties retrieved from ARM request headers.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the managed identity",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedIdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "description": "Principal Id of system-assigned managed identity.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Tenant Id of system-assigned managed identity.",
+          "type": "string"
         }
       }
     },
