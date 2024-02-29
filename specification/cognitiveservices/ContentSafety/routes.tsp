@@ -167,13 +167,13 @@ interface TextBlocklists {
 }
 
 @added(Versions.v2024_02_15_Preview)
-interface TextMissingSourceDetectionOperations {
+interface TextGroundednessDetectionOperations {
   @summary("Detect Missing Source")
   @doc("A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.")
-  @route("/text:detectMissingSource")
+  @route("/text:detectGroundedness")
   @post
-  detectMissingSource is Azure.Core.RpcOperation<
-    DetectMissingSourceOptions,
-    DetectMissingSourceResult
+  detectGroundedness is Azure.Core.RpcOperation<
+    DetectGroundednessOptions,
+    DetectGroundednessResult
   >;
 }
