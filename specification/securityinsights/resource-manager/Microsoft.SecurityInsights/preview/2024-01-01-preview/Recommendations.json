@@ -221,6 +221,7 @@
           "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
+      "description": "Recommendation object.",
       "properties": {
         "properties": {
           "type": "object",
@@ -230,7 +231,7 @@
       }
     },
     "RecommendationProperties": {
-      "description": "Recommendation object.",
+      "description": "Recommendation properties object.",
       "properties": {
         "recommendationTypeId": {
           "description": "Id of the recommendation type.",
@@ -398,16 +399,14 @@
     "ReevaluateResponse": {
       "description": "Reevaluate response object.",
       "properties": {
-        "properties": {
-          "lastEvaluatedTimeUtc": {
-            "description": "The time stamp (UTC) when the recommendation was last evaluated.",
-            "type": "string",
-            "format": "date-time"
-          },
-          "required": [
-            "lastEvaluatedTimeUtc"
-          ]
-        }
+        "lastEvaluatedTimeUtc": {
+          "description": "The time stamp (UTC) when the recommendation was last evaluated.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "required": [
+          "lastEvaluatedTimeUtc"
+        ]
       },
       "type": "object"
     }
