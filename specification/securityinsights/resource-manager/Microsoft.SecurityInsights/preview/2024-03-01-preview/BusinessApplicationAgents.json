@@ -541,6 +541,170 @@
           }
         }
       }
+    },   
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/systems/{systemResourceName}/listActions": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+        },
+        {
+          "in": "path",
+          "name": "systemResourceName",
+          "description": "The name of the system.",
+          "required": true,
+          "type": "string",
+          "pattern": "^[a-z0-9,-]*$",
+          "minLength": 3,
+          "maxLength": 63
+        }
+      ],
+      "post": {
+        "tags": [
+          "SystemsActions"
+        ],
+        "operationId": "Systems_ListActions",
+        "description": "List of actions for a business application system.",
+        "responses": {
+          "200": {
+            "description": "List actions for a business application system",
+            "schema": {
+              "$ref": "#/definitions/ListActionsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListActions": {
+            "$ref": "./examples/businessApplicationAgents/actions/ListActions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/systems/{systemResourceName}/performAction": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+        },
+        {
+          "in": "path",
+          "name": "systemResourceName",
+          "description": "The name of the system.",
+          "required": true,
+          "type": "string",
+          "pattern": "^[a-z0-9,-]*$",
+          "minLength": 3,
+          "maxLength": 63
+        },
+        {
+          "in": "body",
+          "name": "payload",
+          "schema": {
+            "$ref": "#/definitions/PerformActionPayload"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "SystemsActions"
+        ],
+        "operationId": "Systems_PerformAction",
+        "description": "Perform the last operation on the system.",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PerformAction": {
+            "$ref": "./examples/businessApplicationAgents/actions/PerformAction.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/systems/{systemResourceName}/reportActionStatus": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+        },
+        {
+          "in": "path",
+          "name": "systemResourceName",
+          "description": "The name of the system.",
+          "required": true,
+          "type": "string",
+          "pattern": "^[a-z0-9,-]*$",
+          "minLength": 3,
+          "maxLength": 63
+        },
+        {
+          "in": "body",
+          "name": "payload",
+          "schema": {
+            "$ref": "#/definitions/ReportActionStatusPayload"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "SystemsActions"
+        ],
+        "operationId": "Systems_ReportActionStatus",
+        "description": "Report the status of the action.",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReportActionStatus": {
+            "$ref": "./examples/businessApplicationAgents/actions/ReportActionStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1288,6 +1452,184 @@
         "nextLink": {
           "type": "string"
         }
+      }
+    },
+    "ListActionsResponse": {
+      "description": "List all pending actions for a system to perform.",
+      "properties": {
+        "value": {
+          "description": "Array of actions.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "Action": {
+      "description": "Represents an action to perform on a specific system.",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ListActionKind",
+          "description": "The actions kind"
+        }
+      },
+      "type": "object"
+    },
+    "ListActionKind": {
+      "description": "The kind of the action",
+      "enum": [
+        "LockUser",
+        "UnlockUser"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ListActionKind",
+        "values": [
+          {
+            "value": "LockUser"
+          },
+          {
+            "value": "UnlockUser"
+          }
+        ]
+      }
+    },
+    "LockUserAction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "description": "Represents lock user action.",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "The user to lock"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "LockUser"
+    },
+    "UnlockUserAction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "description": "Represents an unlock user action.",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "The user to unlock"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "UnlockUser"
+    },
+    "PerformActionPayload":{
+      "description": "Represents an action to perform on a specific system.",
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/PerformActionKind",
+          "description": "The actions kind"
+        },
+        "actionId": {
+          "type": "string",
+          "description": "The action ID"
+        },
+        "actionStatus": {
+          "$ref": "#/definitions/ActionStatus",
+          "description": "The status of the action that was performed by the agent",
+          "type": "string"
+        }
+      }
+    },
+    "PerformActionKind":{
+      "description": "The details of the action to perform",
+      "enum": [
+        "Undo"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "PerformActionKind",
+        "values": [
+          {
+            "value": "Undo"
+          }
+        ]
+      }
+    },
+    "UndoPerformAction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PerformActionPayload"
+        }
+      ],
+      "description": "Represents the undo action.",
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "description": "The action ID of the original action that was performed and now we want to undo"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Undo"
+    },
+    "ReportActionStatusPayload": {
+      "description": "Report the status of a specific action that was performed by the agent",
+      "type": "object",
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "description": "The action ID to perform"
+        },
+        "actionStatus": {
+          "description": "The status of the action that was performed by the agent",
+          "type": "string"
+        }
+      }
+    },
+    "ActionStatus": {
+      "description": "The status of the action that was performed by the agent",
+      "enum": [
+        "Pending",
+        "Completed",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ActionStatus",
+        "values": [
+          {
+            "value": "Pending",
+            "description": "Actions is pending"
+          },
+          {
+            "value": "Completed",
+            "description": "The action is completed successfully."
+          },
+          {
+            "value": "Failed",
+            "description": "The action failed."
+          }
+        ]
       }
     }
   },
