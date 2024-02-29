@@ -100,6 +100,7 @@ model ExperimentationWorkspace
 @doc("The request body for exchanging Split.IO data plane authentication token.")
 model ExchangeTokenRequest {
   @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
+  @secret
   token: string;
 
   @doc("The resource of Split.IO data plane authentication token.")
@@ -110,6 +111,7 @@ model ExchangeTokenRequest {
 model ExchangeTokenResponse {
   @doc("The bearer token that is used for Split.IO data plane authentication.")
   @visibility("read")
+  @secret
   token: string;
 }
 

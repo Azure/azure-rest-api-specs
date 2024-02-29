@@ -563,7 +563,9 @@
       "properties": {
         "token": {
           "type": "string",
-          "description": "The bearer token that is used for exchanging Split.IO data plane authentication token."
+          "format": "password",
+          "description": "The bearer token that is used for exchanging Split.IO data plane authentication token.",
+          "x-ms-secret": true
         },
         "resource": {
           "type": "string",
@@ -581,8 +583,10 @@
       "properties": {
         "token": {
           "type": "string",
+          "format": "password",
           "description": "The bearer token that is used for Split.IO data plane authentication.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       },
       "required": [
