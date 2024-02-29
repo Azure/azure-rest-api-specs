@@ -53,6 +53,38 @@ interface DocumentIntelligenceAdministrationClient {
   deleteClassifier is DocumentClassifiers.deleteClassifier;
 }
 
+@@projectedName(AnalyzeDocumentRequest, "csharp", "AnalyzeDocumentContent");
+@@projectedName(AuthorizeCopyRequest, "csharp", "AuthorizeCopyContent");
+@@projectedName(BuildDocumentClassifierRequest, "csharp", "BuildDocumentClassifierContent");
+@@projectedName(BuildDocumentModelRequest, "csharp", "BuildDocumentModelContent");
+@@projectedName(ClassifyDocumentRequest, "csharp", "ClassifyDocumentContent");
+@@projectedName(ComposeDocumentModelRequest, "csharp", "ComposeDocumentModelContent");
+@@projectedName(DocumentBarcodeKind.EAN13, "csharp", "Ean13");
+@@projectedName(DocumentBarcodeKind.EAN8, "csharp", "Ean8");
+@@projectedName(DocumentBarcodeKind.ITF, "csharp", "Itf");
+@@projectedName(DocumentBarcodeKind.MicroQRCode, "csharp", "MicroQrCode");
+@@projectedName(DocumentBarcodeKind.PDF417, "csharp", "Pdf417");
+@@projectedName(DocumentBarcodeKind.QRCode, "csharp", "QrCode");
+@@projectedName(DocumentBarcodeKind.UPCA, "csharp", "Upca");
+@@projectedName(DocumentBarcodeKind.UPCE, "csharp", "Upce");
+@@projectedName(DocumentClassifierDetails.createdDateTime, "csharp", "CreatedOn");
+@@projectedName(DocumentClassifierDetails.expirationDateTime, "csharp", "ExpiresOn");
+@@projectedName(DocumentField.valueArray, "csharp", "ValueList");
+@@projectedName(DocumentField.valueInteger, "csharp", "ValueLong");
+@@projectedName(DocumentField.valueNumber, "csharp", "ValueDouble");
+@@projectedName(DocumentField.valueObject, "csharp", "ValueDictionary");
+@@projectedName(DocumentFieldType.array, "csharp", "List");
+@@projectedName(DocumentFieldType.integer, "csharp", "Long");
+@@projectedName(DocumentFieldType.number, "csharp", "Double");
+@@projectedName(DocumentFieldType.object, "csharp", "Dictionary");
+@@projectedName(DocumentModelDetails.createdDateTime, "csharp", "CreatedOn");
+@@projectedName(DocumentModelDetails.expirationDateTime, "csharp", "ExpiresOn");
+@@projectedName(FontStyle, "csharp", "DocumentFontStyle");
+@@projectedName(FontWeight, "csharp", "DocumentFontWeight");
+@@projectedName(OperationDetails.createdDateTime, "csharp", "CreatedOn");
+@@projectedName(OperationDetails.lastUpdatedDateTime, "csharp", "LastUpdatedOn");
+@@projectedName(QuotaDetails.quotaResetDateTime, "csharp", "QuotaResetsOn");
+
 @@usage(DocumentAnalysisFeature, Usage.output, "csharp");
 @@usage(LengthUnit, Usage.output, "csharp");
 @@usage(DocumentSelectionMarkState, Usage.output, "csharp");
