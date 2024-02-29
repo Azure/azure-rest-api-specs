@@ -419,6 +419,63 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/exchangeToken": {
+      "post": {
+        "operationId": "ExperimentationWorkspaces_ExchangeToken",
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the ExperimentationWorkspace resource",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "^[^<>%&:\\?/#]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExchangeTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExchangeTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspacesExchangeToken": {
+            "$ref": "./examples/ExperimentationWorkspacesExchangeToken.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -499,6 +556,38 @@
           "description": "Log Analytics data source."
         }
       }
+    },
+    "ExchangeTokenRequest": {
+      "type": "object",
+      "description": "The request body for exchanging Split.IO data plane authentication token.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The bearer token that is used for exchanging Split.IO data plane authentication token."
+        },
+        "applicationIdUri": {
+          "type": "string",
+          "description": "The application ID URI of the enterprise application for Split.IO data plane authentication."
+        }
+      },
+      "required": [
+        "token",
+        "applicationIdUri"
+      ]
+    },
+    "ExchangeTokenResponse": {
+      "type": "object",
+      "description": "The response body that contains the bearer token which is used for Split.IO data plane authentication.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The bearer token that is used for Split.IO data plane authentication.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "token"
+      ]
     },
     "ExperimentationWorkspace": {
       "type": "object",

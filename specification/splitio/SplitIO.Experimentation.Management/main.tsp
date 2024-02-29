@@ -97,6 +97,22 @@ model ExperimentationWorkspace
   ...ManagedServiceIdentity;
 }
 
+@doc("The request body for exchanging Split.IO data plane authentication token.")
+model ExchangeTokenRequest {
+  @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
+  token: string;
+
+  @doc("The application ID URI of the enterprise application for Split.IO data plane authentication.")
+  applicationIdUri: string;
+}
+
+@doc("The response body that contains the bearer token which is used for Split.IO data plane authentication.")
+model ExchangeTokenResponse {
+  @doc("The bearer token that is used for Split.IO data plane authentication.")
+  @visibility("read")
+  token: string;
+}
+
 @armResourceOperations
 interface ExperimentationWorkspaces {
   get is ArmResourceRead<ExperimentationWorkspace>;
@@ -108,4 +124,5 @@ interface ExperimentationWorkspaces {
   delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
   listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
   listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
+  exchangeToken is ArmResourceActionSync<ExperimentationWorkspace, ExchangeTokenRequest, ExchangeTokenResponse>;
 }
