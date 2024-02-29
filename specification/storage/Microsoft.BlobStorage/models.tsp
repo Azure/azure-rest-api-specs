@@ -19,6 +19,70 @@ model StorageError {
   Message: string;
 }
 
+model ListContainersSegmentResponse {
+  @doc("The service endpoint.")
+  ServiceEndpoint: string; // TODO: XML Attribute
+
+  @doc("The prefix of the containers.")
+  Prefix?: string;
+
+  @doc("The marker of the containers.")
+  Marker?: string;
+
+  @doc("The max results of the containers.")
+  MaxResults?: int32;
+
+  @doc("The container segment.")
+  Segment: ContainerItem[]; // TODO: XML Serialization
+
+  @doc("The next marker of the containers.")
+  NextMarker?: string;
+}
+
+@doc("An Azure Storage container.")
+model ContainerItem {
+  @doc("The name of the container.")
+  Name: string;
+
+  @doc("The properties of the container.")
+  Properties: ContainerProperties;
+
+  @doc("The metadata of the container.")
+  Metadata?: ContainerMetadata;
+}
+
+@doc("The properties of a container.")
+model ContainerProperties {
+  @doc("The date-time the container was created in RFC1123 format.")
+  @encode("date-time-rfc1123")
+  `Creation-Time`?: utcDateTime;
+
+  @doc("The date-time the container was last modified in RFC1123 format.")
+  @encode("date-time-rfc1123")
+  `Last-Modified`: utcDateTime;
+
+  @doc("The ETag of the container.")
+  ETag: string;
+
+  @doc("The lease status of the container.")
+  LeaseStatus?: LeaseStatus;
+
+  @doc("The lease state of the container.")
+  LeaseState?: LeaseState;
+
+  @doc("The lease duration of the container.")
+  LeaseDuration?: LeaseDuration;
+
+  @doc("The public access type of the container.")
+  PublicAccess?: PublicAccessType;
+}
+
+@doc("The metadata of a container.")
+model ContainerMetadata is Record<string> {
+  // @xml.attribute(true)
+  Encrypted: string;
+}
+
 @doc("Stats for the storage service.")
 model StorageServiceStats {
   @doc("The geo replication stats.")
