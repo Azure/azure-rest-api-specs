@@ -472,6 +472,14 @@
       "type": "object",
       "description": "Edge device resource.",
       "properties": {
+        "kind": {
+          "$ref": "#/definitions/DeviceKind",
+          "description": "Job kind to support polymorphic resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "properties": {
           "$ref": "#/definitions/EdgeDeviceProperties",
           "description": "The resource-specific properties for this resource.",
