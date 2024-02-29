@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Computer Vision Client",
-    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to extract text using Read OCR, caption an image using descriptive natural language, detect objects, people, and more.",
+    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the people in an image.  It also has other features like categorizing the content of images, and describing an image with complete English sentences.",
     "version": "2024-03-01-preview"
   },
   "paths": {
@@ -51,7 +51,10 @@
         },
         "x-ms-examples": {
           "CreateIndex_MaximumSet_Gen": {
-            "$ref": "./examples/CreateIndex.json"
+            "$ref": "./examples/CreateIndex_MaximumSet_Gen.json"
+          },
+          "CreateIndex_MinimumSet_Gen": {
+            "$ref": "./examples/CreateIndex_MinimumSet_Gen.json"
           }
         }
       },
@@ -93,7 +96,10 @@
         },
         "x-ms-examples": {
           "GetIndex_MaximumSet_Gen": {
-            "$ref": "./examples/GetIndex.json"
+            "$ref": "./examples/GetIndex_MaximumSet_Gen.json"
+          },
+          "GetIndex_MinimumSet_Gen": {
+            "$ref": "./examples/GetIndex_MinimumSet_Gen.json"
           }
         }
       },
@@ -147,7 +153,10 @@
         },
         "x-ms-examples": {
           "UpdateIndex_MaximumSet_Gen": {
-            "$ref": "./examples/UpdateIndex.json"
+            "$ref": "./examples/UpdateIndex_MaximumSet_Gen.json"
+          },
+          "UpdateIndex_MinimumSet_Gen": {
+            "$ref": "./examples/UpdateIndex_MinimumSet_Gen.json"
           }
         }
       },
@@ -177,7 +186,10 @@
         },
         "x-ms-examples": {
           "DeleteIndex_MaximumSet_Gen": {
-            "$ref": "./examples/DeleteIndex.json"
+            "$ref": "./examples/DeleteIndex_MaximumSet_Gen.json"
+          },
+          "DeleteIndex_MinimumSet_Gen": {
+            "$ref": "./examples/DeleteIndex_MinimumSet_Gen.json"
           }
         }
       }
@@ -196,7 +208,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "$skip",
+            "name": "skip",
             "description": "Number of datasets to be skipped.",
             "type": "integer",
             "format": "int32",
@@ -206,7 +218,7 @@
           },
           {
             "in": "query",
-            "name": "$top",
+            "name": "top",
             "description": "Number of datasets to be returned after skipping.",
             "type": "integer",
             "format": "int32",
@@ -234,7 +246,10 @@
         },
         "x-ms-examples": {
           "ListIndexes_MaximumSet_Gen": {
-            "$ref": "./examples/ListIndexes.json"
+            "$ref": "./examples/ListIndexes_MaximumSet_Gen.json"
+          },
+          "ListIndexes_MinimumSet_Gen": {
+            "$ref": "./examples/ListIndexes_MinimumSet_Gen.json"
           }
         }
       }
@@ -293,7 +308,10 @@
         },
         "x-ms-examples": {
           "CreateIngestion_MaximumSet_Gen": {
-            "$ref": "./examples/CreateIngestion.json"
+            "$ref": "./examples/CreateIngestion_MaximumSet_Gen.json"
+          },
+          "CreateIngestion_MinimumSet_Gen": {
+            "$ref": "./examples/CreateIngestion_MinimumSet_Gen.json"
           }
         }
       },
@@ -360,7 +378,10 @@
         },
         "x-ms-examples": {
           "GetIngestion_MaximumSet_Gen": {
-            "$ref": "./examples/GetIngestion.json"
+            "$ref": "./examples/GetIngestion_MaximumSet_Gen.json"
+          },
+          "GetIngestion_MinimumSet_Gen": {
+            "$ref": "./examples/GetIngestion_MinimumSet_Gen.json"
           }
         }
       }
@@ -404,7 +425,10 @@
         },
         "x-ms-examples": {
           "ListIngestions_MaximumSet_Gen": {
-            "$ref": "./examples/ListIngestions.json"
+            "$ref": "./examples/ListIngestions_MaximumSet_Gen.json"
+          },
+          "ListIngestions_MinimumSet_Gen": {
+            "$ref": "./examples/ListIngestions_MinimumSet_Gen.json"
           }
         }
       }
@@ -430,7 +454,7 @@
           },
           {
             "in": "query",
-            "name": "$skip",
+            "name": "skip",
             "description": "Number of datasets to be skipped.",
             "type": "integer",
             "format": "int32",
@@ -440,7 +464,7 @@
           },
           {
             "in": "query",
-            "name": "$top",
+            "name": "top",
             "description": "Number of datasets to be returned after skipping.",
             "type": "integer",
             "format": "int32",
@@ -468,7 +492,10 @@
         },
         "x-ms-examples": {
           "ListDocuments_MaximumSet_Gen": {
-            "$ref": "./examples/ListDocuments.json"
+            "$ref": "./examples/ListDocuments_MaximumSet_Gen.json"
+          },
+          "ListDocuments_MinimumSet_Gen": {
+            "$ref": "./examples/ListDocuments_MinimumSet_Gen.json"
           }
         }
       }
@@ -524,7 +551,10 @@
         },
         "x-ms-examples": {
           "SearchByText_MaximumSet_Gen": {
-            "$ref": "./examples/SearchByText.json"
+            "$ref": "./examples/SearchByText_MaximumSet_Gen.json"
+          },
+          "SearchByText_MinimumSet_Gen": {
+            "$ref": "./examples/SearchByText_MinimumSet_Gen.json"
           }
         }
       }
@@ -717,9 +747,9 @@
     "GetIngestionIndexResponse": {
       "description": "Represents the get ingestion index response model for the JSON document.",
       "required": [
-        "createdDateTime",
+        "createdAt",
         "eTag",
-        "lastModifiedDateTime"
+        "lastModifiedAt"
       ],
       "type": "object",
       "properties": {
@@ -746,12 +776,12 @@
           "description": "Gets or sets the etag.",
           "type": "string"
         },
-        "createdDateTime": {
+        "createdAt": {
           "format": "date-time",
           "description": "Gets or sets the created date and time property.",
           "type": "string"
         },
-        "lastModifiedDateTime": {
+        "lastModifiedAt": {
           "format": "date-time",
           "description": "Gets or sets the last modified date and time property.",
           "type": "string"
@@ -841,12 +871,12 @@
         "error": {
           "$ref": "#/definitions/ErrorResponseDetails"
         },
-        "createdDateTime": {
+        "createdAt": {
           "format": "date-time",
           "description": "Gets or sets the created date and time of the document.",
           "type": "string"
         },
-        "lastModifiedDateTime": {
+        "lastModifiedAt": {
           "format": "date-time",
           "description": "Gets or sets the last modified date and time of the document.",
           "type": "string"
@@ -920,8 +950,8 @@
           "description": "Gets or sets the name of the ingestion.",
           "type": "string"
         },
-        "state": {
-          "description": "Gets or sets the state of the ingestion.",
+        "status": {
+          "description": "Gets or sets the status of the ingestion.",
           "enum": [
             "notStarted",
             "running",
@@ -931,7 +961,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "IngestionState",
+            "name": "IngestionStatus",
             "modelAsString": true
           }
         },
@@ -942,12 +972,12 @@
           "description": "The name of the batch associated with this ingestion.",
           "type": "string"
         },
-        "createdDateTime": {
+        "createdAt": {
           "format": "date-time",
           "description": "Gets or sets the created date and time of the ingestion.",
           "type": "string"
         },
-        "lastModifiedDateTime": {
+        "lastModifiedAt": {
           "format": "date-time",
           "description": "Gets or sets the last modified date and time of the ingestion.",
           "type": "string"
