@@ -313,15 +313,11 @@
           "readOnly": true
         }
       },
-      "required": [
-        "hostNetwork"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ],
-      "x-ms-discriminator-value": "AddNetworkIntent"
+      ]
     },
     "AddServerJob": {
       "description": "AddServer job to add node to AzureStackHCI cluster.",
@@ -338,7 +334,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AddServer"
     },
     "AddServerJobProperties": {
       "type": "object",
@@ -387,21 +384,73 @@
       "type": "object",
       "description": "Jobs resource",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/JobsProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
+        "kind": {
+          "$ref": "#/definitions/JobKind",
+          "description": "Job kind to support polymorphic resource.",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         }
       },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "JobKind": {
+      "type": "string",
+      "description": "Job Type supported.",
+      "enum": [
+        "AddServer",
+        "RepairServer",
+        "ResumeServer",
+        "PauseServer",
+        "AddNetworkIntent",
+        "SetInformation"
+      ],
+      "x-ms-enum": {
+        "name": "JobKind",
+        "modelAsString": true,
+        "readOnly": true,
+        "values": [
+          {
+            "name": "AddServer",
+            "value": "AddServer",
+            "description": "AddServer"
+          },
+          {
+            "name": "RepairServer",
+            "value": "RepairServer",
+            "description": "RepairServer"
+          },
+          {
+            "name": "ResumeServer",
+            "value": "ResumeServer",
+            "description": "ResumeServer"
+          },
+          {
+            "name": "PauseServer",
+            "value": "PauseServer",
+            "description": "PauseServer"
+          },
+          {
+            "name": "AddNetworkIntent",
+            "value": "AddNetworkIntent",
+            "description": "AddNetworkIntent"
+          },
+          {
+            "name": "SetInformation",
+            "value": "SetInformation",
+            "description": "SetInformation"
+          }
+        ]
+      }
     },
     "JobListResult": {
       "type": "object",
@@ -424,66 +473,10 @@
         "value"
       ]
     },
-    "JobType": {
-      "type": "string",
-      "description": "Job Type supported.",
-      "enum": [
-        "AddServer",
-        "RepairServer",
-        "ResumeServer",
-        "PauseServer",
-        "AddNetworkIntent",
-        "SetInformation"
-      ],
-      "x-ms-enum": {
-        "name": "JobType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AddServer",
-            "value": "AddServer",
-            "description": "AddServer job type to add node to AzureStackHCI cluster."
-          },
-          {
-            "name": "RepairServer",
-            "value": "RepairServer",
-            "description": "RepairServer job type to repair given node in AzureStackHCI cluster."
-          },
-          {
-            "name": "ResumeServer",
-            "value": "ResumeServer",
-            "description": "ResumeServer job type to resume given node in AzureStackHCI cluster."
-          },
-          {
-            "name": "PauseServer",
-            "value": "PauseServer",
-            "description": "PauseServer job type to pause given node in AzureStackHCI cluster."
-          },
-          {
-            "name": "AddNetworkIntent",
-            "value": "AddNetworkIntent",
-            "description": "AddNetworkIntent job type to update storage, network, management intent for AzureStackHCI cluster."
-          },
-          {
-            "name": "SetInformation",
-            "value": "SetInformation",
-            "description": "SetInformation job type to set deployment information of AzureStackHCI cluster."
-          }
-        ]
-      }
-    },
     "JobsProperties": {
       "type": "object",
       "description": "Job properties",
       "properties": {
-        "jobType": {
-          "$ref": "#/definitions/JobType",
-          "description": "Job Type to support polymorphic resource.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "provisioningState": {
           "$ref": "./hciCommon.json#/definitions/ProvisioningState",
           "description": "Job provisioning state",
@@ -534,11 +527,7 @@
           "description": "Status of AzureStackHCI Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
           "readOnly": true
         }
-      },
-      "discriminator": "jobType",
-      "required": [
-        "jobType"
-      ]
+      }
     },
     "Parameters": {
       "type": "object",
@@ -569,7 +558,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "PauseServer"
     },
     "PauseServerJobProperties": {
       "type": "object",
@@ -597,8 +587,7 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ],
-      "x-ms-discriminator-value": "PauseServer"
+      ]
     },
     "RepairServerJob": {
       "type": "object",
@@ -615,7 +604,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "RepairServer"
     },
     "RepairServerJobProperties": {
       "type": "object",
@@ -653,8 +643,7 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ],
-      "x-ms-discriminator-value": "RepairServer"
+      ]
     },
     "ResumeServerJob": {
       "description": "ResumeServer job to resume given node in AzureStackHCI cluster.",
@@ -671,7 +660,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ResumeServer"
     },
     "ResumeServerJobProperties": {
       "type": "object",
@@ -699,8 +689,7 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ],
-      "x-ms-discriminator-value": "ResumeServer"
+      ]
     },
     "SetInformationJob": {
       "type": "object",
@@ -717,7 +706,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "SetInformation"
     },
     "SetInformationJobProperties": {
       "type": "object",
@@ -778,27 +768,26 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ],
-      "x-ms-discriminator-value": "SetInformation"
-    }
-  },
-  "parameters": {
-    "ClusterNameParameter": {
-      "name": "clusterName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the cluster.",
-      "x-ms-parameter-location": "method"
+      ]
     },
-    "JobNameParameter": {
-      "name": "jobsName",
-      "in": "path",
-      "description": "Name of Job",
-      "required": true,
-      "type": "string",
-      "default": "default",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$"
+    "parameters": {
+      "ClusterNameParameter": {
+        "name": "clusterName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the cluster.",
+        "x-ms-parameter-location": "method"
+      },
+      "JobNameParameter": {
+        "name": "jobsName",
+        "in": "path",
+        "description": "Name of Job",
+        "required": true,
+        "type": "string",
+        "default": "default",
+        "pattern": "^[a-zA-Z0-9-]{3,24}$"
+      }
     }
   }
 }
