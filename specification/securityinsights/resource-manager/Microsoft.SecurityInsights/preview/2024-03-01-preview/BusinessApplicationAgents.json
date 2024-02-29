@@ -274,7 +274,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/systems/{systemResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}": {
       "put": {
         "tags": [
           "systems"
@@ -296,6 +296,16 @@
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "in": "path",
@@ -378,6 +388,16 @@
           },
           {
             "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
             "name": "systemResourceName",
             "description": "The name of the system.",
             "required": true,
@@ -437,6 +457,16 @@
           },
           {
             "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
             "name": "systemResourceName",
             "description": "The name of the system.",
             "required": true,
@@ -476,7 +506,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/systems": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems": {
       "get": {
         "tags": [
           "systems"
@@ -501,6 +531,16 @@
             "name": "x-ms-client-workspace-id",
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -541,8 +581,8 @@
           }
         }
       }
-    },   
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/systems/{systemResourceName}/listActions": {
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}/listActions": {
       "parameters": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -555,6 +595,16 @@
         },
         {
           "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+        },
+        {
+          "in": "path",
+          "name": "agentResourceName",
+          "description": "Business Application Agent Name",
+          "required": true,
+          "type": "string",
+          "pattern": "^[a-z0-9,-]*$",
+          "minLength": 3,
+          "maxLength": 63
         },
         {
           "in": "path",
@@ -594,7 +644,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/systems/{systemResourceName}/performAction": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}/performAction": {
       "parameters": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -607,6 +657,16 @@
         },
         {
           "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+        },
+        {
+          "in": "path",
+          "name": "agentResourceName",
+          "description": "Business Application Agent Name",
+          "required": true,
+          "type": "string",
+          "pattern": "^[a-z0-9,-]*$",
+          "minLength": 3,
+          "maxLength": 63
         },
         {
           "in": "path",
@@ -650,7 +710,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/systems/{systemResourceName}/reportActionStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}/reportActionStatus": {
       "parameters": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -663,6 +723,16 @@
         },
         {
           "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+        },
+        {
+          "in": "path",
+          "name": "agentResourceName",
+          "description": "Business Application Agent Name",
+          "required": true,
+          "type": "string",
+          "pattern": "^[a-z0-9,-]*$",
+          "minLength": 3,
+          "maxLength": 63
         },
         {
           "in": "path",
@@ -1380,7 +1450,7 @@
         "systemStatus": {
           "$ref": "#/definitions/SystemStatusType"
         },
-        "sonfiguration": {
+        "configuration": {
           "$ref": "#/definitions/SystemsConfiguration"
         },
         "displayName": {
@@ -1536,7 +1606,7 @@
       "type": "object",
       "x-ms-discriminator-value": "UnlockUser"
     },
-    "PerformActionPayload":{
+    "PerformActionPayload": {
       "description": "Represents an action to perform on a specific system.",
       "discriminator": "kind",
       "type": "object",
@@ -1559,7 +1629,7 @@
         }
       }
     },
-    "PerformActionKind":{
+    "PerformActionKind": {
       "description": "The details of the action to perform",
       "enum": [
         "Undo"
