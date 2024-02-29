@@ -25702,6 +25702,21 @@
         }
       }
     },
+    "EnvironmentVariable": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Environment variable name",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Environment variable value",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ErrorInfo": {
       "type": "object",
       "description": "The error info.",
@@ -28842,6 +28857,22 @@
               "description": "Last Modified Time",
               "type": "string",
               "readOnly": true
+            },
+            "volumeMounts": {
+              "description": "List of volume mounts",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VolumeMount"
+              },
+              "readOnly": true
+            },
+            "environmentVariables": {
+              "description": "List of environment variables",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EnvironmentVariable"
+              },
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
@@ -29965,6 +29996,31 @@
         "consumerSecretSettingName": {
           "description": "The app setting name that contains the OAuth 1.0a consumer secret of the Twitter\napplication used for sign-in.",
           "type": "string"
+        }
+      }
+    },
+    "VolumeMount": {
+      "type": "object",
+      "properties": {
+        "volumeSubPath": {
+          "description": "Sub path in the volume where volume is mounted from.",
+          "type": "string",
+          "readOnly": true
+        },
+        "containerMountPath": {
+          "description": "Target path on the container where volume is mounted on",
+          "type": "string",
+          "readOnly": true
+        },
+        "data": {
+          "description": "Config Data to be mounted on the volume",
+          "type": "string",
+          "readOnly": true
+        },
+        "readOnly": {
+          "description": "Boolean to specify if the mount is read only on the container",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
