@@ -95,6 +95,7 @@ input-file:
   - Microsoft.App/preview/2023-08-01-preview/Subscriptions.json
   - Microsoft.App/preview/2023-08-01-preview/Usages.json
   - Microsoft.App/preview/2023-08-01-preview/SessionPools.json
+  - Microsoft.App/preview/2023-08-01-preview/Sessions.json
 directive:
   - suppress: OperationIdNounVerb
     from: Builds.json
