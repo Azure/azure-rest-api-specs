@@ -1825,10 +1825,25 @@
           "$ref": "#/definitions/DiscoveryRuleRelationshipDiscoveryBehavior",
           "description": "Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted."
         },
+        "addRecommendedSignals": {
+          "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
+          "description": "Whether to add all recommended signals to the discovered entities."
+        },
         "deletionDate": {
           "type": "string",
           "format": "date-time",
           "description": "Date when the discovery rule was (soft-)deleted",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the last discovery operation failed.",
+          "readOnly": true
+        },
+        "numberOfDiscoveredEntities": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of discovered entities in the last discovery operation.",
           "readOnly": true
         }
       },
@@ -1836,8 +1851,33 @@
         "resourceGraphQuery",
         "authenticationSetting",
         "showEntity",
-        "discoverRelationships"
+        "discoverRelationships",
+        "addRecommendedSignals"
       ]
+    },
+    "DiscoveryRuleRecommendedSignalsBehavior": {
+      "type": "string",
+      "description": "Discovery rule recommended signal behavior",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryRuleRecommendedSignalsBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Automatically add recommended signals"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Do not automatically add recommended signals"
+          }
+        ]
+      }
     },
     "DiscoveryRuleRelationshipDiscoveryBehavior": {
       "type": "string",
@@ -2080,10 +2120,10 @@
           "$ref": "#/definitions/IconDefinition",
           "description": "Visual icon definition. If not set, a default icon is used."
         },
-        "serviceLevelObjective": {
+        "healthObjective": {
           "type": "number",
           "format": "float",
-          "description": "Service level objective",
+          "description": "Health objective as a percentage of time the entity should be healthy.",
           "minimum": 0,
           "maximum": 100
         },
@@ -2138,6 +2178,11 @@
           "type": "string",
           "format": "date-time",
           "description": "Date when the entity was (soft-)deleted",
+          "readOnly": true
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of this entity",
           "readOnly": true
         }
       }
@@ -2285,6 +2330,36 @@
             "type": "string"
           }
         }
+      }
+    },
+    "HealthState": {
+      "type": "string",
+      "description": "Health state of an entity",
+      "enum": [
+        "Healthy",
+        "Degraded",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Healthy status"
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Degraded status"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error status (Unhealthy)"
+          }
+        ]
       }
     },
     "IconDefinition": {
