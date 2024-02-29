@@ -119,16 +119,16 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ReferenceSets")
 model ReferenceSets {
-  @doc("Gets and sets the property ipSetReferences.")
-  ipSetReferences?: Record<IPSetReference>;
+  @doc("Gets and sets the property iPSetReferences.")
+  iPSetReferences?: Record<IPSetReference>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of RuleVariables")
 model RuleVariables {
-  @doc("Gets and sets the property ipSets.")
-  ipSets?: Record<IPSet>;
+  @doc("Gets and sets the property iPSets.")
+  iPSets?: Record<IPSet>;
 
   @doc("Gets and sets the property portSets.")
   portSets?: Record<PortSet>;
@@ -424,9 +424,9 @@ model MatchAttributes {
   @extension("x-ms-identifiers", [])
   sources?: Address[];
 
-  @doc("Gets and sets the property tcpFlags.")
+  @doc("Gets and sets the property tCPFlags.")
   @extension("x-ms-identifiers", [])
-  tcpFlags?: TCPFlagField[];
+  tCPFlags?: TCPFlagField[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
