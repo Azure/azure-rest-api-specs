@@ -895,6 +895,11 @@
           "description": "Verification of the authenticity of an OCI Artifact.",
           "$ref": "#/definitions/VerifyDefinition"
         },
+        "insecure": {
+          "description": "Specify whether to allow connecting to a non-TLS HTTP container registry.",
+          "type": "boolean",
+          "default": false
+        },
         "useWorkloadIdentity": {
           "description": "Specifies whether to use Workload Identity to authenticate with the OCI repository.",
           "type": "boolean",
@@ -950,6 +955,11 @@
         "verify": {
           "description": "Verification of the authenticity of an OCI Artifact.",
           "$ref": "#/definitions/VerifyPatchDefinition"
+        },
+        "insecure": {
+          "description": "Specify whether to allow connecting to a non-TLS HTTP container registry.",
+          "type": "boolean",
+          "default": false
         },
         "useWorkloadIdentity": {
           "description": "Specifies whether to use Workload Identity to authenticate with the OCI repository.",
