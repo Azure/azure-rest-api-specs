@@ -14,10 +14,16 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Managed DevOps Infrastructure",
-  version: "2023-12-13-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.DevOpsInfrastructure;
+
+/** Api versions */
+enum Versions {
+  /** 2023-12-13-preview preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-12-13-preview`,
+}
 
 model Pool is TrackedResource<PoolProperties> {
   @key("poolName")
