@@ -47,6 +47,7 @@ interface ProxyResourceOperationsDevice<
 @armResourceOperations
 interface Devices extends ProxyResourceOperationsDevice<Device> {
   @autoRoute
+  @sharedRoute
   @removed(Versions.v2024_04_01)
   @renamedFrom(Versions.v2024_04_01, "generateCapabilityImage")
   @armResourceAction(Device)
