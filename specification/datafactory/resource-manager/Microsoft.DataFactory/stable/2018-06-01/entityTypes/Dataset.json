@@ -2074,6 +2074,38 @@
         }
       }
     },
+    "PostgreSqlV2TableDataset": {
+      "x-ms-discriminator-value": "PostgreSqlV2Table",
+      "description": "The PostgreSQLV2 table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "PostgreSQLV2 table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PostgreSqlV2TableDatasetTypeProperties"
+        }
+      }
+    },
+    "PostgreSqlV2TableDatasetTypeProperties": {
+      "description": "PostgreSQLV2 table dataset properties.",
+      "properties": {
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The PostgreSQL schema name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "MicrosoftAccessTableDataset": {
       "x-ms-discriminator-value": "MicrosoftAccessTable",
       "description": "The Microsoft Access table dataset.",
