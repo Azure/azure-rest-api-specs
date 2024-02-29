@@ -1090,7 +1090,7 @@
       "type": "object",
       "properties": {
         "pods": {
-          "description": "Job execution Name.",
+          "description": "Pods in the execution.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExecutionPodStatus"
@@ -1103,11 +1103,11 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Job execution Name.",
+          "description": "Pod Name.",
           "type": "string"
         },
         "containers": {
-          "description": "Job execution Name.",
+          "description": "Containers in the execution",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExecutionContainerStatus"
@@ -1120,12 +1120,20 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Job execution Name.",
+          "description": "Container Name.",
           "type": "string"
         },
         "code": {
-          "description": "Job execution Name.",
+          "description": "Exit code",
           "type": "integer"
+        },
+        "reason": {
+          "description": "Container reason",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the container",
+          "type": "string"
         }
       }
     },
