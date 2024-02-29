@@ -102,8 +102,8 @@ model ExchangeTokenRequest {
   @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
   token: string;
 
-  @doc("The application ID URI of the enterprise application for Split.IO data plane authentication.")
-  applicationIdUri: string;
+  @doc("The resource of Split.IO data plane authentication token.")
+  resource: string;
 }
 
 @doc("The response body that contains the bearer token which is used for Split.IO data plane authentication.")
