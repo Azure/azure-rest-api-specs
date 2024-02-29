@@ -122,7 +122,7 @@
             "pattern": "^[A-Za-z0-9][^\\\\/$:]*$"
           },
           {
-            "name": "content",
+            "name": "schemaContent",
             "in": "body",
             "description": "String representation (UTF-8) of the schema.",
             "required": true,
@@ -210,7 +210,7 @@
             "type": "string"
           },
           {
-            "name": "content",
+            "name": "schemaContent",
             "in": "body",
             "description": "String representation (UTF-8) of the schema.",
             "required": true,
@@ -579,14 +579,14 @@
       "type": "object",
       "description": "The schema, including its metadata and content.",
       "properties": {
-        "content": {
+        "schemaContent": {
           "type": "string",
           "format": "byte",
           "description": "String representation (UTF-8) of the schema."
         }
       },
       "required": [
-        "content"
+        "schemaContent"
       ]
     },
     "SchemaContentTypeValues": {

@@ -133,7 +133,7 @@ op getSchemaPropertiesByContent is resourceOperations.ResourceAction<
   SchemasName,
   {
     ...SchemaContentType;
-    ...SchemaContent;
+    ...SchemasContent;
   },
   SchemaProperties
 >;
@@ -155,7 +155,7 @@ op registerSchema is Azure.Core.Foundations.Operation<
     @path
     schemaName: string;
 
-    ...SchemaContent;
+    ...SchemasContent;
     ...SchemaContentType;
   },
   NoContentResponse<SchemaProperties>
@@ -183,10 +183,10 @@ alias SchemaContentType = {
   contentType: SchemaContentTypeValues;
 };
 
-alias SchemaContent = {
+alias SchemasContent = {
   @body
   @doc("String representation (UTF-8) of the schema.")
-  content: bytes;
+  schemaContent: bytes;
 };
 
 @doc("Metadata of a schema.")
@@ -219,7 +219,7 @@ model SchemaProperties {
 @doc("The schema, including its metadata and content.")
 model Schema {
   ...SchemaProperties;
-  ...SchemaContent;
+  ...SchemasContent;
   ...SchemaContentType;
 }
 
