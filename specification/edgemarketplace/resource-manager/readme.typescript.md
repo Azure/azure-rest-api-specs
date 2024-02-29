@@ -7,7 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-edgemarketplace"
-  output-folder: "$(typescript-sdks-folder)/edgemarketplace/arm-edgemarketplace"
+  output-folder: "$(typescript-sdks-folder)/sdk/edgemarketplace/arm-edgemarketplace"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
