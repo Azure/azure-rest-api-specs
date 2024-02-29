@@ -37,4 +37,22 @@ describe("compile", function () {
 
     assert(!result.success);
   });
+
+  it("should skip git diff check if compile fails", async function () {
+    let host = new TsvTestHost();
+    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
+      if (cmd.includes("tsp compile")) {
+        return [
+          { name: "compilation_error", message: "compilation error" },
+          "running tsp compile",
+          "compilation failure",
+        ];
+      }
+      return [null, "", ""];
+    };
+
+    const result = await new CompileRule().execute(host, TsvTestHost.folder);
+    assert(result.stdOutput);
+    assert(!result.stdOutput.includes("Running git diff"));
+  });
 });
