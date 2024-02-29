@@ -9,7 +9,15 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace Microsoft.BlobStorage;
+
+@error
+@doc("The error response.")
+model StorageError {
+  @doc("The error message.")
+  Message: string;
+}
 
 @doc("Key information")
 model KeyInfo {
@@ -358,3 +366,127 @@ model BlobTag {
 
 @doc("The object replication metadata.")
 model ObjectReplicationMetadata is Record<string>;
+
+/// Service Properties
+
+@doc("The service properties.")
+model StorageServiceProperties {
+  @doc("The logging properties.")
+  Logging?: Logging;
+  @doc("The hour metrics properties.")
+  HourMetrics?: Metrics;
+  @doc("The minute metrics properties.")
+  MinuteMetrics?: Metrics;
+  @doc("The CORS properties.")
+  Cors?: CorsRule[];
+  @doc("The default service version.")
+  DefaultServiceVersion?: string;
+  @doc("The delete retention policy.")
+  DeleteRetentionPolicy?: RetentionPolicy;
+  @doc("The static website properties.")
+  StaticWebsite?: StaticWebsite;
+}
+
+@doc("The static website properties.")
+model StaticWebsite {
+  @doc("The index document.")
+  IndexDocument?: string;
+  @doc("The error document.")
+  ErrorDocument?: string;
+}
+
+@doc("The CORS rule.")
+model CorsRule {
+  @doc("The allowed origins.")
+  AllowedOrigins: string;
+  @doc("The allowed methods.")
+  AllowedMethods: string;
+  @doc("The allowed headers.")
+  AllowedHeaders: string;
+  @doc("The exposed headers.")
+  ExposedHeaders: string;
+  @doc("The maximum age in seconds.")
+  MaxAgeInSeconds: int32;
+}
+
+@doc("The metrics properties.")
+model Metrics {
+  @doc("The version of the metrics properties.")
+  Version?: string;
+  @doc("Whether it is enabled.")
+  Enabled: boolean;
+  @doc("Whether to include API in the metrics.")
+  IncludeAPIs?: boolean;
+  @doc("The retention policy of the metrics.")
+  RetentionPolicy?: RetentionPolicy;
+  @doc("The service properties of the metrics.")
+  ServiceProperties?: MetricsServiceProperties;
+}
+
+@doc("The metrics service properties.")
+model MetricsServiceProperties {
+  @doc("The hour metrics properties.")
+  HourMetrics: MetricsProperties;
+  @doc("The minute metrics properties.")
+  MinuteMetrics: MetricsProperties;
+}
+
+@doc("The metrics properties.")
+model MetricsProperties {
+  @doc("Whether to include API in the metrics.")
+  Enabled: boolean;
+  @doc("The version of the metrics properties.")
+  Version: string;
+  @doc("The retention policy of the metrics.")
+  RetentionPolicy: RetentionPolicy;
+}
+
+@doc("The logging properties.")
+model Logging {
+  @doc("The version of the logging properties.")
+  Version: string;
+  @doc("Whether delete operation is logged.")
+  Delete: boolean;
+  @doc("Whether read operation is logged.")
+  Read: boolean;
+  @doc("Whether write operation is logged.")
+  Write: boolean;
+  @doc("The retention policy of the logs.")
+  RetentionPolicy: RetentionPolicy;
+}
+
+@doc("The retention policy.")
+model RetentionPolicy {
+  @doc("Whether to enable the retention policy.")
+  Enabled: boolean;
+  @doc("The number of days to retain the logs.")
+  Days: int32;
+  @doc("Whether to allow permanent delete.")
+  AllowPermanentDelete: boolean;
+}
+
+// List Blobs
+
+@doc("An enumeration of blobs.")
+model ListBlobsFlatSegmentResponse {
+  @doc("The service endpoint.")
+  ServiceEndpoint: string; // TODO: XML Attribute
+
+  @doc("The container name.")
+  ContainerName: string; // TODO: XML Attribute
+
+  @doc("The prefix of the blobs.")
+  Prefix?: string;
+
+  @doc("The marker of the blobs.")
+  Marker?: string;
+
+  @doc("The max results of the blobs.")
+  MaxResults?: int32;
+
+  @doc("The blob segment.")
+  Segment: BlobItem[]; // TODO: XML Serialization
+
+  @doc("The next marker of the blobs.")
+  NextMarker?: string;
+}
