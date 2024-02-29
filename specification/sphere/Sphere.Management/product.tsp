@@ -54,6 +54,7 @@ interface Products extends ProxyResourceOperationsProducts<Product> {
 
   @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   @removed(Versions.v2024_04_01)
+  @sharedRoute
   @autoRoute
   @renamedFrom(Versions.v2024_04_01, "countDevices")
   @armResourceAction(Product)

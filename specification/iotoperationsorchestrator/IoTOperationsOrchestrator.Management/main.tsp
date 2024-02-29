@@ -18,10 +18,16 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft.IoTOperationsOrchestrator management service.",
-  version: "2023-10-04-preview",
 })
 @doc("Microsoft.IoTOperationsOrchestrator Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.IoTOperationsOrchestrator;
+
+/** Api versions */
+enum Versions {
+  /** 2023-10-04-preview preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-10-04-preview`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
