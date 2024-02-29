@@ -43,7 +43,7 @@ model PipelineProperties {
   @doc("Information about where to pull input data from.")
   input: PipelineInput;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Map of stage ids to stage configurations for all pipeline processing and output stages.")
   stages: Record<PipelineStage>;
 
@@ -52,7 +52,7 @@ model PipelineProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
 @doc("Stage configuration for Pipeline input stage.")
 model PipelineInput is Record<unknown> {
   @doc("ARM resource type.")
@@ -65,7 +65,7 @@ model PipelineInput is Record<unknown> {
   next: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-record" "existing API"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
 @doc("Stage configurations for all Pipeline processing and output stages.")
 model PipelineStage is Record<unknown> {
   @doc("ARM resource type.")

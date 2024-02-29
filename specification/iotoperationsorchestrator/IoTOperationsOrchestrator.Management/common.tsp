@@ -46,8 +46,8 @@ model ComponentProperties {
   @doc("Name of the component.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "properties field is loosely defined and are dependent on customer scenarios"
   @doc("Properties of the component.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-record" "properties field is loosely defined and are dependent on customer scenarios"
   properties?: Record<unknown>;
 
   @doc("Component type.")
