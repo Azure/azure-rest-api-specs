@@ -1,10 +1,22 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
+
+@doc("The format used to represent embeddings.")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+enum EmbeddingsEncodingFormat {
+  @doc("A vector of floating-point numbers.")
+  float: "float",
+
+  @doc("A Base64-encoded string.")
+  base64: "base64",
+}
 
 @doc("""
 The configuration information for an embeddings request.
@@ -34,6 +46,11 @@ model EmbeddingsOptions {
     as we have observed inferior results when newlines are present.
     """)
   input: string[];
+
+  @doc("The format in which the embeddings should be returned.")
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @projectedName("json", "encoding_format")
+  encodingFormat?: EmbeddingsEncodingFormat = EmbeddingsEncodingFormat.float;
 }
 
 @doc("""
@@ -51,11 +68,13 @@ model Embeddings {
 
 @doc("Representation of a single embeddings relatedness comparison.")
 model EmbeddingItem {
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("""
     List of embeddings value for the input prompt. These represent a measurement of the
     vector-based relatedness of the provided input.
     """)
-  embedding: float32[];
+  @typeChangedFrom(ServiceApiVersions.v2023_12_01_Preview, float32[])
+  embedding: float32[] | string;
 
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
   @projectedName("java", "promptIndex")
