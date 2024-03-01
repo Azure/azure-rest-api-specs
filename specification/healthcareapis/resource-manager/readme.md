@@ -39,15 +39,16 @@ These settings apply only when `--tag=package-2024-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-03'
 input-file:
-  - Microsoft.HealthcareApis/stable/2024-03-31/healthcare-apis.json
-```
-### Tag: package-2024-03
-
-These settings apply only when `--tag=package-2024-03` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-03'
-input-file:
   - Microsoft.HealthcareApis/stable/2024-03-01/healthcare-apis.json
+```
+
+### Tag: package-2024-03-31
+
+These settings apply only when `--tag=package-2024-03-31` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-31'
+input-file:
+  - Microsoft.HealthcareApis/stable/2024-03-31/healthcare-apis.json
 ```
 
 ### Tag: package-2023-12
