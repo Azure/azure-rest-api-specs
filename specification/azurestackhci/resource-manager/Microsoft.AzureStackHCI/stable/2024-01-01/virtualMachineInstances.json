@@ -1,0 +1,1561 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureStackHCI",
+    "description": "The Microsoft.AzureStackHCI Rest API spec.",
+    "version": "2024-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default": {
+      "get": {
+        "operationId": "VirtualMachineInstances_Get",
+        "description": "Gets a virtual machine instance",
+        "x-ms-examples": {
+          "GetVirtualMachineInstance": {
+            "$ref": "./examples/GetVirtualMachineInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualMachineInstances_CreateOrUpdate",
+        "description": "The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation.",
+        "x-ms-examples": {
+          "PutVirtualMachineInstanceWithGalleryImage": {
+            "$ref": "./examples/PutVirtualMachineInstanceWithGalleryImage.json"
+          },
+          "PutVirtualMachineInstanceWithMarketplaceGalleryImage": {
+            "$ref": "./examples/PutVirtualMachineInstanceWithMarketplaceGalleryImage.json"
+          },
+          "PutVirtualMachineInstanceWithOsDisk": {
+            "$ref": "./examples/PutVirtualMachineInstanceWithOsDisk.json"
+          },
+          "PutVirtualMachineInstanceWithVMConfigAgent": {
+            "$ref": "./examples/PutVirtualMachineInstanceWithVMConfigAgent.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualMachineInstance",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VirtualMachineInstances_Delete",
+        "description": "The operation to delete a virtual machine instance.",
+        "x-ms-examples": {
+          "DeleteVirtualMachine": {
+            "$ref": "./examples/DeleteVirtualMachineInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "VirtualMachineInstances_Update",
+        "description": "The operation to update a virtual machine instance.",
+        "x-ms-examples": {
+          "UpdateVirtualMachine": {
+            "$ref": "./examples/UpdateVirtualMachineInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualMachineInstance",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstanceUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/start": {
+      "post": {
+        "operationId": "VirtualMachineInstances_Start",
+        "description": "The operation to start a virtual machine instance.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "StartVirtualMachine": {
+            "$ref": "./examples/StartVirtualMachineInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/stop": {
+      "post": {
+        "operationId": "VirtualMachineInstances_Stop",
+        "description": "The operation to stop a virtual machine instance.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "StopVirtualMachine": {
+            "$ref": "./examples/StopVirtualMachineInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/restart": {
+      "post": {
+        "operationId": "VirtualMachineInstances_Restart",
+        "description": "The operation to restart a virtual machine instance.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "RestartVirtualMachine": {
+            "$ref": "./examples/RestartVirtualMachineInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances": {
+      "get": {
+        "operationId": "VirtualMachineInstances_List",
+        "description": "Lists all of the virtual machine instances within the specified parent resource.",
+        "x-ms-examples": {
+          "ListVirtualMachineInstances": {
+            "$ref": "./examples/ListVirtualMachineInstances.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstanceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/hybridIdentityMetadata/default": {
+      "get": {
+        "tags": [
+          "HybridIdentityMetadata"
+        ],
+        "operationId": "HybridIdentityMetadata_Get",
+        "summary": "Gets HybridIdentityMetadata.",
+        "description": "Implements HybridIdentityMetadata GET method.",
+        "x-ms-examples": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/GetHybridIdentityMetadata.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/hybridIdentityMetadata": {
+      "get": {
+        "tags": [
+          "HybridIdentityMetadata"
+        ],
+        "operationId": "HybridIdentityMetadata_List",
+        "summary": "Implements GET HybridIdentityMetadata in a vm.",
+        "description": "Returns the list of HybridIdentityMetadata of the given vm.",
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByVirtualMachineInstances": {
+            "$ref": "./examples/HybridIdentityMetadata_List.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/guestAgents/default": {
+      "put": {
+        "tags": [
+          "GuestAgents"
+        ],
+        "operationId": "GuestAgent_Create",
+        "description": "Create Or Update GuestAgent.",
+        "summary": "Implements GuestAgent PUT method.",
+        "x-ms-examples": {
+          "CreateGuestAgent": {
+            "$ref": "./examples/CreateGuestAgent.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "GuestAgents"
+        ],
+        "operationId": "GuestAgent_Get",
+        "summary": "Gets GuestAgent.",
+        "description": "Implements GuestAgent GET method.",
+        "x-ms-examples": {
+          "GetGuestAgent": {
+            "$ref": "./examples/GetGuestAgent.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GuestAgents"
+        ],
+        "operationId": "GuestAgent_Delete",
+        "summary": "Deleted an GuestAgent.",
+        "description": "Implements GuestAgent DELETE method.",
+        "x-ms-examples": {
+          "DeleteGuestAgent": {
+            "$ref": "./examples/DeleteGuestAgent.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/guestAgents": {
+      "get": {
+        "tags": [
+          "GuestAgents"
+        ],
+        "operationId": "GuestAgents_List",
+        "summary": "Implements GET GuestAgent in a vm.",
+        "description": "Returns the list of GuestAgent of the given vm.",
+        "x-ms-examples": {
+          "GuestAgentListByVirtualMachineInstances": {
+            "$ref": "./examples/GuestAgent_List.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestAgentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VirtualMachineInstanceProperties": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "hardwareProfile": {
+          "type": "object",
+          "properties": {
+            "vmSize": {
+              "type": "string",
+              "enum": [
+                "Default",
+                "Standard_A2_v2",
+                "Standard_A4_v2",
+                "Standard_D2s_v3",
+                "Standard_D4s_v3",
+                "Standard_D8s_v3",
+                "Standard_D16s_v3",
+                "Standard_D32s_v3",
+                "Standard_DS2_v2",
+                "Standard_DS3_v2",
+                "Standard_DS4_v2",
+                "Standard_DS5_v2",
+                "Standard_DS13_v2",
+                "Standard_K8S_v1",
+                "Standard_K8S2_v1",
+                "Standard_K8S3_v1",
+                "Standard_K8S4_v1",
+                "Standard_NK6",
+                "Standard_NK12",
+                "Standard_NV6",
+                "Standard_NV12",
+                "Standard_K8S5_v1",
+                "Custom"
+              ],
+              "default": "Default",
+              "x-ms-enum": {
+                "name": "VmSizeEnum",
+                "modelAsString": true
+              }
+            },
+            "processors": {
+              "type": "integer",
+              "format": "int32",
+              "description": "number of processors for the virtual machine instance"
+            },
+            "memoryMB": {
+              "type": "integer",
+              "format": "int64",
+              "description": "RAM in MB for the virtual machine instance"
+            },
+            "dynamicMemoryConfig": {
+              "type": "object",
+              "properties": {
+                "maximumMemoryMB": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "minimumMemoryMB": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "targetMemoryBuffer": {
+                  "type": "integer",
+                  "description": "Defines the amount of extra memory that should be reserved for a virtual machine instance at runtime, as a percentage of the total memory that the virtual machine instance is thought to need. This only applies to virtual systems with dynamic memory enabled. This property can be in the range of 5 to 2000.",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "description": "HardwareProfile - Specifies the hardware settings for the virtual machine instance."
+        },
+        "networkProfile": {
+          "type": "object",
+          "properties": {
+            "networkInterfaces": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID - Resource Id of the network interface"
+                  }
+                }
+              },
+              "description": "NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance"
+            }
+          },
+          "description": "NetworkProfile - describes the network configuration the virtual machine instance"
+        },
+        "osProfile": {
+          "type": "object",
+          "properties": {
+            "adminPassword": {
+              "type": "string",
+              "x-ms-secret": true,
+              "description": "AdminPassword - admin password",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "adminUsername": {
+              "type": "string",
+              "description": "AdminUsername - admin username"
+            },
+            "computerName": {
+              "type": "string",
+              "description": "ComputerName - name of the compute"
+            },
+            "linuxConfiguration": {
+              "type": "object",
+              "properties": {
+                "disablePasswordAuthentication": {
+                  "type": "boolean",
+                  "description": "DisablePasswordAuthentication - whether password authentication should be disabled"
+                },
+                "ssh": {
+                  "$ref": "#/definitions/SshConfiguration",
+                  "description": "Specifies the ssh key configuration for a Linux OS."
+                },
+                "provisionVMAgent": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process."
+                },
+                "provisionVMConfigAgent": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process."
+                }
+              },
+              "description": "LinuxConfiguration - linux specific configuration values for the virtual machine instance"
+            },
+            "windowsConfiguration": {
+              "type": "object",
+              "properties": {
+                "enableAutomaticUpdates": {
+                  "type": "boolean",
+                  "description": "Whether to EnableAutomaticUpdates on the machine"
+                },
+                "ssh": {
+                  "$ref": "#/definitions/SshConfiguration",
+                  "description": "Specifies the ssh key configuration for Windows OS."
+                },
+                "timeZone": {
+                  "type": "string",
+                  "description": "TimeZone for the virtual machine instance"
+                },
+                "provisionVMAgent": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process."
+                },
+                "provisionVMConfigAgent": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process."
+                }
+              },
+              "description": "Windows Configuration for the virtual machine instance "
+            }
+          },
+          "description": "OsProfile - describes the configuration of the operating system and sets login data"
+        },
+        "securityProfile": {
+          "type": "object",
+          "properties": {
+            "enableTPM": {
+              "type": "boolean",
+              "default": false
+            },
+            "uefiSettings": {
+              "type": "object",
+              "properties": {
+                "secureBootEnabled": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Specifies whether secure boot should be enabled on the virtual machine instance."
+                }
+              }
+            },
+            "securityType": {
+              "type": "string",
+              "description": "Specifies the SecurityType of the virtual machine. EnableTPM and SecureBootEnabled must be set to true for SecurityType to function.",
+              "enum": [
+                "TrustedLaunch",
+                "ConfidentialVM"
+              ],
+              "x-ms-enum": {
+                "name": "SecurityTypes",
+                "modelAsString": true
+              }
+            }
+          },
+          "description": "SecurityProfile - Specifies the security settings for the virtual machine instance."
+        },
+        "storageProfile": {
+          "type": "object",
+          "properties": {
+            "dataDisks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Resource ID of the data disk"
+                  }
+                }
+              },
+              "description": "adds data disks to the virtual machine instance"
+            },
+            "imageReference": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "x-ms-mutability": [
+                    "create",
+                    "read"
+                  ],
+                  "description": "Resource ID of the image"
+                }
+              },
+              "description": "Which Image to use for the virtual machine instance"
+            },
+            "osDisk": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Resource ID of the OS disk"
+                },
+                "osType": {
+                  "type": "string",
+                  "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**",
+                  "enum": [
+                    "Linux",
+                    "Windows"
+                  ],
+                  "x-ms-enum": {
+                    "name": "OperatingSystemTypes",
+                    "modelAsString": false
+                  }
+                }
+              },
+              "description": "VHD to attach as OS disk"
+            },
+            "vmConfigStoragePathId": {
+              "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.AzureStackHCI/storageContainers"
+                  }
+                ]
+              },
+              "description": "Id of the storage container that hosts the VM configuration file"
+            }
+          },
+          "description": "StorageProfile - contains information about the disks and storage information for the virtual machine instance"
+        },
+        "httpProxyConfig": {
+          "description": "HTTP Proxy configuration for the VM.",
+          "$ref": "#/definitions/HttpProxyConfiguration"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the virtual machine instance.",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress",
+            "Accepted",
+            "Deleting",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
+        },
+        "instanceView": {
+          "$ref": "#/definitions/VirtualMachineInstanceView",
+          "readOnly": true,
+          "description": "The virtual machine instance view."
+        },
+        "status": {
+          "$ref": "#/definitions/VirtualMachineInstanceStatus"
+        },
+        "guestAgentInstallStatus": {
+          "description": "Guest agent install status.",
+          "$ref": "#/definitions/GuestAgentInstallStatus"
+        },
+        "vmId": {
+          "description": "Unique identifier for the vm resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceUid": {
+          "description": "Unique identifier defined by ARC to identify the guest of the VM.",
+          "type": "string"
+        }
+      },
+      "description": "Properties under the virtual machine instance resource"
+    },
+    "SshPublicKey": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys"
+        },
+        "keyData": {
+          "type": "string",
+          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed)."
+        }
+      },
+      "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
+    },
+    "SshConfiguration": {
+      "type": "object",
+      "properties": {
+        "publicKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SshPublicKey"
+          },
+          "x-ms-identifiers": [
+            "path"
+          ],
+          "description": "The list of SSH public keys used to authenticate with linux based VMs."
+        }
+      },
+      "description": "SSH configuration for Linux based VMs running on Azure"
+    },
+    "VirtualMachineInstanceStatus": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "readOnly": true,
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "VirtualMachine provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        },
+        "powerState": {
+          "type": "string",
+          "description": "The power state of the virtual machine instance",
+          "enum": [
+            "Deallocated",
+            "Deallocating",
+            "Running",
+            "Starting",
+            "Stopped",
+            "Stopping",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "PowerStateEnum",
+            "modelAsString": true
+          }
+        },
+        "provisioningStatus": {
+          "type": "object",
+          "properties": {
+            "operationId": {
+              "type": "string",
+              "description": "The ID of the operation performed on the virtual machine instance"
+            },
+            "status": {
+              "type": "string",
+              "description": "The status of the operation performed on the virtual machine instance [Succeeded, Failed, InProgress]",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "InProgress"
+              ],
+              "x-ms-enum": {
+                "name": "Status",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      },
+      "description": "The observed state of virtual machine instances"
+    },
+    "VirtualMachineInstance": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineInstanceProperties"
+        },
+        "extendedLocation": {
+          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The virtual machine instance resource definition."
+    },
+    "VirtualMachineInstanceView": {
+      "type": "object",
+      "properties": {
+        "vmAgent": {
+          "$ref": "#/definitions/VirtualMachineConfigAgentInstanceView",
+          "description": "The VM Config Agent running on the virtual machine."
+        }
+      },
+      "description": "The instance view of a virtual machine."
+    },
+    "VirtualMachineConfigAgentInstanceView": {
+      "type": "object",
+      "properties": {
+        "vmConfigAgentVersion": {
+          "type": "string",
+          "description": "The VM Config Agent full version."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "x-ms-identifiers": [],
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of the VM Config Agent running on the virtual machine."
+    },
+    "InstanceViewStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The status code."
+        },
+        "level": {
+          "type": "string",
+          "description": "The level code.",
+          "enum": [
+            "Info",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "StatusLevelTypes",
+            "modelAsString": true
+          }
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "The short localizable label for the status."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed status message, including for alerts and error messages."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the status."
+        }
+      },
+      "description": "Instance view status."
+    },
+    "HardwareProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Standard_A2_v2",
+            "Standard_A4_v2",
+            "Standard_D2s_v3",
+            "Standard_D4s_v3",
+            "Standard_D8s_v3",
+            "Standard_D16s_v3",
+            "Standard_D32s_v3",
+            "Standard_DS2_v2",
+            "Standard_DS3_v2",
+            "Standard_DS4_v2",
+            "Standard_DS5_v2",
+            "Standard_DS13_v2",
+            "Standard_K8S_v1",
+            "Standard_K8S2_v1",
+            "Standard_K8S3_v1",
+            "Standard_K8S4_v1",
+            "Standard_NK6",
+            "Standard_NK12",
+            "Standard_NV6",
+            "Standard_NV12",
+            "Standard_K8S5_v1",
+            "Custom"
+          ],
+          "default": "Default",
+          "x-ms-enum": {
+            "name": "VmSizeEnum",
+            "modelAsString": true
+          }
+        },
+        "processors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "number of processors for the virtual machine instance"
+        },
+        "memoryMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "RAM in MB for the virtual machine instance"
+        }
+      },
+      "description": "HardwareProfile - Specifies the hardware settings for the virtual machine instance."
+    },
+    "NetworkProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "ID - Resource ID of the network interface"
+              }
+            }
+          },
+          "description": "NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance"
+        }
+      },
+      "description": "NetworkProfile - describes the network update configuration the virtual machine instance"
+    },
+    "StorageProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "adds data disks to the virtual machine instance for the update call"
+        }
+      }
+    },
+    "OsProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "computerName": {
+          "type": "string",
+          "description": "ComputerName - name of the computer"
+        },
+        "linuxConfiguration": {
+          "type": "object",
+          "properties": {
+            "provisionVMAgent": {
+              "type": "boolean",
+              "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process."
+            },
+            "provisionVMConfigAgent": {
+              "type": "boolean",
+              "description": "Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process."
+            }
+          }
+        },
+        "windowsConfiguration": {
+          "type": "object",
+          "properties": {
+            "provisionVMAgent": {
+              "type": "boolean",
+              "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process."
+            },
+            "provisionVMConfigAgent": {
+              "type": "boolean",
+              "description": "Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process."
+            }
+          }
+        }
+      },
+      "description": "OsProfile - describes the update configuration of the operating system"
+    },
+    "VirtualMachineInstanceUpdateProperties": {
+      "description": "Defines the resource properties for the update.",
+      "type": "object",
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfileUpdate"
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfileUpdate"
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfileUpdate"
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OsProfileUpdate"
+        }
+      }
+    },
+    "VirtualMachineInstanceUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineInstanceUpdateProperties"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
+        }
+      },
+      "description": "The virtual machine instance resource patch definition."
+    },
+    "VirtualMachineInstanceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "GuestAgentInstallStatus": {
+      "description": "Defines the status of a guest agent installation.",
+      "type": "object",
+      "properties": {
+        "vmUuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the VM's unique SMBIOS ID."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The installation status of the hybrid machine agent installation.",
+          "enum": [
+            "Succeeded",
+            "InProgress",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "StatusTypes",
+            "modelAsString": true
+          }
+        },
+        "lastStatusChange": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the last status change."
+        },
+        "agentVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The hybrid machine agent full version."
+        },
+        "errorDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": [],
+          "description": "Details about the error state."
+        }
+      }
+    },
+    "HybridIdentityMetadataList": {
+      "description": "List of HybridIdentityMetadata.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of HybridIdentityMetadata.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of HybridIdentityMetadata",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HybridIdentityMetadata"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HybridIdentityMetadata": {
+      "description": "Defines the HybridIdentityMetadata.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/HybridIdentityMetadataProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "HybridIdentityMetadataProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "resourceUid": {
+          "description": "The unique identifier for the resource.",
+          "type": "string"
+        },
+        "publicKey": {
+          "description": "The Public Key.",
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GuestAgentList": {
+      "type": "object",
+      "description": "List of GuestAgent.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of GuestAgent.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of GuestAgent",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GuestAgent"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GuestAgent": {
+      "description": "Defines the GuestAgent.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/GuestAgentProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProvisioningAction": {
+      "description": "Defines the different types of operations for guest agent.",
+      "enum": [
+        "install",
+        "uninstall",
+        "repair"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningAction"
+      }
+    },
+    "GuestCredential": {
+      "description": "Username / Password Credentials to connect to guest.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username to connect with the guest.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password to connect with the guest.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "GuestAgentProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "credentials": {
+          "description": "Username / Password Credentials to provision guest agent.",
+          "$ref": "#/definitions/GuestCredential"
+        },
+        "provisioningAction": {
+          "description": "The guest agent provisioning action.",
+          "$ref": "#/definitions/ProvisioningAction",
+          "type": "string"
+        },
+        "status": {
+          "description": "The guest agent status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HttpProxyConfiguration": {
+      "description": "HTTP Proxy configuration for the VM.",
+      "type": "object",
+      "properties": {
+        "httpProxy": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "The HTTP proxy server endpoint to use."
+        },
+        "httpsProxy": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "The HTTPS proxy server endpoint to use."
+        },
+        "noProxy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The endpoints that should not go through proxy."
+        },
+        "trustedCa": {
+          "type": "string",
+          "description": "Alternative CA cert to use for connecting to proxy servers."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "in": "path",
+      "name": "resourceUri",
+      "description": "The fully qualified Azure Resource manager identifier of the Hybrid Compute machine resource to be extended.",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
