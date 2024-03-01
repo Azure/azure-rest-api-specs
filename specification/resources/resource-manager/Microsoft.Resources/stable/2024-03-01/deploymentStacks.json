@@ -962,7 +962,6 @@
           ]
         },
         "templateLink": {
-          "type": "object",
           "$ref": "#/definitions/DeploymentStacksTemplateLink",
           "description": "The URI of the template. Use either the templateLink property or the template property, but not both.",
           "x-ms-mutability": [
@@ -978,7 +977,6 @@
           "description": "Name and value pairs that define the deployment parameters for the template. Use this element when providing the parameter values directly in the request, rather than linking to an existing parameter file. Use either the parametersLink property or the parameters property, but not both."
         },
         "parametersLink": {
-          "type": "object",
           "$ref": "#/definitions/DeploymentStacksParametersLink",
           "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
         },
@@ -990,21 +988,17 @@
           ],
           "properties": {
             "resources": {
-              "type": "string",
               "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum"
             },
             "resourceGroups": {
-              "type": "string",
               "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum"
             },
             "managementGroups": {
-              "type": "string",
               "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum"
             }
           }
         },
         "debugSetting": {
-          "type": "object",
           "$ref": "#/definitions/DeploymentStacksDebugSetting",
           "description": "The debug setting of the deployment."
         },
@@ -1018,7 +1012,6 @@
           "description": "Deployment stack description. Max length of 4096 characters."
         },
         "denySettings": {
-          "type": "object",
           "description": "Defines how resources deployed by the stack are locked.",
           "$ref": "#/definitions/DenySettings"
         },
@@ -1297,7 +1290,6 @@
         },
         "systemData": {
           "readOnly": true,
-          "type": "object",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
