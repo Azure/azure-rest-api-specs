@@ -1878,6 +1878,7 @@
     },
     "AzureOpenAIDialog": {
       "description": "Azure Open AI Dialog",
+      "required": [],
       "type": "object",
       "allOf": [
         {
@@ -1885,7 +1886,7 @@
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "azureOpenAI"
+      "x-ms-discriminator-value": "AzureOpenAI"
     },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
@@ -2022,6 +2023,7 @@
     },
     "AzureOpenAIDialogUpdate": {
       "description": "Azure Open AI Dialog for UpdateDialog API Call",
+      "required": [],
       "type": "object",
       "allOf": [
         {
@@ -2029,7 +2031,7 @@
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "azureOpenAI"
+      "x-ms-discriminator-value": "AzureOpenAI"
     },
     "MicrosoftTeamsUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
@@ -2061,7 +2063,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "powerVirtualAgents"
+      "x-ms-discriminator-value": "PowerVirtualAgents"
     },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
@@ -2134,9 +2136,9 @@
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "Identity of the answering entity. Only populated when identity is provided in the request."
         },
-        "originalPstnTarget": {
+        "answeredFor": {
           "$ref": "#/definitions/PhoneNumberIdentifierModel",
-          "description": "The original PSTN target of the incoming Call."
+          "description": "Identity of the original Pstn target of an incoming Call. Only populated when the original target is a Pstn number."
         }
       }
     },
@@ -2753,10 +2755,6 @@
           "$ref": "#/definitions/PlaySource",
           "description": "Prompt to play while in hold."
         },
-        "loop": {
-          "description": "If the prompt will be looped or not.",
-          "type": "boolean"
-        },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
@@ -2922,6 +2920,10 @@
         },
         "isMuted": {
           "description": "Is participant muted",
+          "type": "boolean"
+        },
+        "isOnHold": {
+          "description": "Is participant on hold.",
           "type": "boolean"
         }
       }
@@ -4866,6 +4868,36 @@
         "transcriptionUpdate": {
           "$ref": "#/definitions/TranscriptionUpdate",
           "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HoldFailed": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         },
         "callConnectionId": {
