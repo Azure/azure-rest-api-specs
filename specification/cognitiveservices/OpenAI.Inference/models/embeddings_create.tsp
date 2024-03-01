@@ -40,7 +40,6 @@ model EmbeddingsOptions {
   @doc("When using Azure OpenAI, specifies the input type to use for embedding search.")
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "input_type")
-  @projectedName("json", "input_type")
   inputType?: string;
 }
 
@@ -74,11 +73,9 @@ model EmbeddingItem {
 model EmbeddingsUsage {
   @doc("Number of tokens sent in the original request.")
   @encodedName("application/json", "prompt_tokens")
-  @projectedName("json", "prompt_tokens")
   promptTokens: int32;
 
   @doc("Total number of tokens transacted in this request/response.")
   @encodedName("application/json", "total_tokens")
-  @projectedName("json", "total_tokens")
   totalTokens: int32;
 }

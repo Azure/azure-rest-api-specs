@@ -71,13 +71,11 @@ model ChatCompletionsOptions {
      "none" is the default when no functions are present. "auto" is the default if functions are present.
     """)
   @encodedName("application/json", "function_call")
-  @projectedName("json", "function_call")
   @added(ServiceApiVersions.v2023_07_01_Preview)
   functionCall?: FunctionCallConfig;
 
   @doc("The maximum number of tokens to generate.")
   @encodedName("application/json", "max_tokens")
-  @projectedName("json", "max_tokens")
   maxTokens?: int32;
 
   @doc("""
@@ -98,7 +96,6 @@ model ChatCompletionsOptions {
     interaction of these two settings is difficult to predict.
     """)
   @encodedName("application/json", "top_p")
-  @projectedName("json", "top_p")
   @projectedName("csharp", "NucleusSamplingFactor")
   topP?: float32;
 
@@ -110,7 +107,6 @@ model ChatCompletionsOptions {
     score varies by model.
     """)
   @encodedName("application/json", "logit_bias")
-  @projectedName("json", "logit_bias")
   @projectedName("csharp", "TokenSelectionBiases")
   logitBias?: Record<int32>;
 
@@ -142,7 +138,6 @@ model ChatCompletionsOptions {
     model's likelihood to output new topics.
     """)
   @encodedName("application/json", "presence_penalty")
-  @projectedName("json", "presence_penalty")
   presencePenalty?: float32;
 
   @doc("""
@@ -152,7 +147,6 @@ model ChatCompletionsOptions {
     decrease the likelihood of the model repeating the same statements verbatim.
     """)
   @encodedName("application/json", "frequency_penalty")
-  @projectedName("json", "frequency_penalty")
   frequencyPenalty?: float32;
 
   @doc("""
@@ -180,7 +174,6 @@ model ChatCompletionsOptions {
   //        service API version will absorb these proposed changes and allow us to retire the extra complexity.
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "data_sources")
-  @projectedName("json", "data_sources")
   @projectedName("csharp", "InternalAzureExtensionsDataSources")
   dataSources?: AzureChatExtensionConfiguration[];
 
@@ -212,7 +205,6 @@ model ChatCompletionsOptions {
   top_logprobs?: int32 | null;
 
   @encodedName("application/json", "response_format")
-  @projectedName("json", "response_format")
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
   responseFormat?: ChatCompletionsResponseFormat;
@@ -222,7 +214,6 @@ model ChatCompletionsOptions {
   tools?: ChatCompletionsToolDefinition[];
 
   @encodedName("application/json", "tool_choice")
-  @projectedName("json", "tool_choice")
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
   If specified, the model will configure which of the provided tools it can use for the chat completions response.
@@ -252,7 +243,6 @@ model ChatChoice {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The reason that this chat completions choice completed its generated.")
   @encodedName("application/json", "finish_reason")
-  @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 
   // Note: this property is currently speculative via observation and not yet documented anywhere.
@@ -262,7 +252,6 @@ model ChatChoice {
   """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "finish_details")
-  @projectedName("json", "finish_details")
   finishDetails?: ChatFinishDetails;
 
   @doc("The delta message content for a streaming response.")
@@ -276,7 +265,6 @@ model ChatChoice {
     """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @encodedName("application/json", "content_filter_results")
-  @projectedName("json", "content_filter_results")
   contentFilterResults?: ContentFilterResultsForChoice;
 
   @added(ServiceApiVersions.v2024_02_15_Preview)
@@ -319,12 +307,10 @@ model ChatCompletions {
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @encodedName("application/json", "prompt_filter_results")
-  @projectedName("json", "prompt_filter_results")
   promptFilterResults?: ContentFilterResultsForPrompt[];
 
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "system_fingerprint")
-  @projectedName("json", "system_fingerprint")
   @doc("""
   Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that
   might impact determinism.

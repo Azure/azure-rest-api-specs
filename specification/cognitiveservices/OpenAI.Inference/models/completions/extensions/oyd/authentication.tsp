@@ -63,7 +63,6 @@ model OnYourDataConnectionStringAuthenticationOptions
 
   @doc("The connection string to use for authentication.")
   @encodedName("application/json", "connection_string")
-  @projectedName("json", "connection_string")
   connectionString: string;
 }
 
@@ -81,7 +80,6 @@ model OnYourDataKeyAndKeyIdAuthenticationOptions
 
   @doc("The key ID to use for authentication.")
   @encodedName("application/json", "key_id")
-  @projectedName("json", "key_id")
   keyId: string;
 }
 
@@ -96,7 +94,6 @@ model OnYourDataEncodedApiKeyAuthenticationOptions
 
   @doc("The encoded API key to use for authentication.")
   @encodedName("application/json", "encoded_api_key")
-  @projectedName("json", "encoded_api_key")
   encodedApiKey: string;
 }
 
@@ -111,7 +108,6 @@ model OnYourDataAccessTokenAuthenticationOptions
 
   @doc("The access token to use for authentication.")
   @encodedName("application/json", "access_token")
-  @projectedName("json", "access_token")
   accessToken: string;
 }
 
@@ -136,6 +132,5 @@ model OnYourDataUserAssignedManagedIdentityAuthenticationOptions
 
   @doc("The resource ID of the user-assigned managed identity to use for authentication.")
   @encodedName("application/json", "managed_identity_resource_id")
-  @projectedName("json", "managed_identity_resource_id")
   managedIdentityResourceId: string;
 }

@@ -23,7 +23,6 @@ model CompletionsOptions {
 
   @doc("The maximum number of tokens to generate.")
   @encodedName("application/json", "max_tokens")
-  @projectedName("json", "max_tokens")
   maxTokens?: int32;
 
   @doc("""
@@ -44,7 +43,6 @@ model CompletionsOptions {
     interaction of these two settings is difficult to predict.
     """)
   @encodedName("application/json", "top_p")
-  @projectedName("json", "top_p")
   @projectedName("csharp", "NucleusSamplingFactor")
   topP?: float32;
 
@@ -56,7 +54,6 @@ model CompletionsOptions {
     score varies by model.
     """)
   @encodedName("application/json", "logit_bias")
-  @projectedName("json", "logit_bias")
   @projectedName("csharp", "TokenSelectionBiases")
   logitBias?: Record<int32>;
 
@@ -104,7 +101,6 @@ model CompletionsOptions {
     model's likelihood to output new topics.
     """)
   @encodedName("application/json", "presence_penalty")
-  @projectedName("json", "presence_penalty")
   presencePenalty?: float32;
 
   @doc("""
@@ -114,7 +110,6 @@ model CompletionsOptions {
     decrease the likelihood of the model repeating the same statements verbatim.
     """)
   @encodedName("application/json", "frequency_penalty")
-  @projectedName("json", "frequency_penalty")
   frequencyPenalty?: float32;
 
   @doc("""
@@ -126,7 +121,6 @@ model CompletionsOptions {
     Use carefully and ensure reasonable settings for max_tokens and stop.
     """)
   @encodedName("application/json", "best_of")
-  @projectedName("json", "best_of")
   @projectedName("csharp", "GenerationSampleCount")
   bestOf?: int32;
 
@@ -168,7 +162,6 @@ model Completions {
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @encodedName("application/json", "prompt_filter_results")
-  @projectedName("json", "prompt_filter_results")
   promptFilterResults?: ContentFilterResultsForPrompt[];
 
   @doc("""
@@ -203,7 +196,6 @@ model Choice {
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @encodedName("application/json", "content_filter_results")
-  @projectedName("json", "content_filter_results")
   contentFilterResults?: ContentFilterResultsForChoice;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
@@ -215,7 +207,6 @@ model Choice {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("Reason for finishing")
   @encodedName("application/json", "finish_reason")
-  @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 }
 
@@ -230,21 +221,18 @@ model CompletionsLogProbabilityModel {
 
   @doc("A collection of log probability values for the tokens in this completions data.")
   @encodedName("application/json", "token_logprobs")
-  @projectedName("json", "token_logprobs")
   @projectedName("csharp", "TokenLogProbabilities")
   @projectedName("java", "tokenLogProbabilities")
   tokenLogprobs: NullableFloat[];
 
   @doc("A mapping of tokens to maximum log probability values in this completions data.")
   @encodedName("application/json", "top_logprobs")
-  @projectedName("json", "top_logprobs")
   @projectedName("csharp", "TopLogProbabilities")
   @projectedName("java", "topLogProbabilities")
   topLogprobs: Record<NullableFloat>[];
 
   @doc("The text offsets associated with tokens in this completions data.")
   @encodedName("application/json", "text_offset")
-  @projectedName("json", "text_offset")
   @projectedName("csharp", "TextOffsets")
   @projectedName("java", "textOffsets")
   textOffset: int32[];
