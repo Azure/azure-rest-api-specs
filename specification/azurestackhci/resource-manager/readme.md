@@ -143,7 +143,6 @@ suppressions:
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
 ```
 
-
 ### Tag: package-preview-2024-03
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
@@ -164,7 +163,33 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateRuns.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/logicalNetworks.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/virtualMachineInstances.json
 ```
+
+### Tag: package-preview-2024-01-15
+
+These settings apply only when `--tag=package-preview-2024-01-15` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-01-15'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/logicalNetworks.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/virtualMachineInstances.json
+```
+
 ### Tag: package-preview-2024-02
 
 These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
