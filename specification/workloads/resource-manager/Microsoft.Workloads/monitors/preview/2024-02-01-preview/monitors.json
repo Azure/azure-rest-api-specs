@@ -1766,7 +1766,6 @@
             "name": "alertRuleStatus",
             "modelAsString": true
           },
-          "default": "Enabled",
           "description": "The value which indicates whether this scheduled query rule is enabled. Value should be enabled or disabled"
         },
         "severity": {
@@ -1790,20 +1789,7 @@
           "description": "the criteria threshold value that activates the alert"
         },
         "thresholdOperator": {
-          "type": "string",
-          "enum": [
-            "LessThan",
-            "GreaterThan",
-            "Equal",
-            "GreaterThanOrEqual",
-            "LessThanOrEqual"
-          ],
-          "default": "GreaterThanOrEqual",
-          "x-ms-enum": {
-            "name": "alertThresholdOperator",
-            "modelAsString": true
-          },
-          "description": "Threshold Operator for the alert"
+          "$ref": "#/definitions/AlertRulePropertiesOperator"
         },
         "windowSize": {
           "type": "integer",
@@ -1818,23 +1804,10 @@
         "failingPeriodsToAlert": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of violations to trigger an alert."
+          "description": "The number of failing periods to trigger an alert."
         },
         "failingPeriodsOperator": {
-          "type": "string",
-          "enum": [
-            "LessThan",
-            "GreaterThan",
-            "Equal",
-            "GreaterThanOrEqual",
-            "LessThanOrEqual"
-          ],
-          "default": "GreaterThanOrEqual",
-          "x-ms-enum": {
-            "name": "alertFailingPeriodsOperator",
-            "modelAsString": true
-          },
-          "description": "Evaluation of metric on a particular column"
+          "$ref": "#/definitions/AlertRulePropertiesOperator"
         },
         "muteActionsDuration": {
           "type": "integer",
@@ -1870,6 +1843,21 @@
         }
       },
       "description": "Describes the properties of a alert."
+    },
+    "AlertRulePropertiesOperator": {
+      "type": "string",
+      "enum": [
+        "LessThan",
+        "GreaterThan",
+        "Equal",
+        "GreaterThanOrEqual",
+        "LessThanOrEqual"
+      ],
+      "x-ms-enum": {
+        "name": "alertRulePropertiesOperator",
+        "modelAsString": true
+      },
+      "description": "Evaluation of metric on a particular column"
     },
     "AlertQueryParameter": {
       "type": "object",
@@ -1935,7 +1923,6 @@
             "Migrating",
             "Canceled"
           ],
-          "default": "Succeeded",
           "x-ms-enum": {
             "name": "AlertTemplateProvisioningState",
             "modelAsString": true
@@ -1974,7 +1961,6 @@
             "GreaterThanOrEqual",
             "LessThanOrEqual"
           ],
-          "default": "GreaterThanOrEqual",
           "x-ms-enum": {
             "name": "alertTemplateThresholdOperator",
             "modelAsString": true
@@ -2040,7 +2026,6 @@
             "GreaterThanOrEqual",
             "LessThanOrEqual"
           ],
-          "default": "GreaterThanOrEqual",
           "x-ms-enum": {
             "name": "alertTemplateThresholdOperatorMetricMeasurement",
             "modelAsString": true
@@ -2058,7 +2043,6 @@
             "Consecutive",
             "Total"
           ],
-          "default": "Consecutive",
           "x-ms-enum": {
             "name": "alertTemplateMetricTriggerType",
             "modelAsString": true
