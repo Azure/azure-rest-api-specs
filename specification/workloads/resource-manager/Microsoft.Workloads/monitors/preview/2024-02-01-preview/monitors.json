@@ -1789,7 +1789,8 @@
           "description": "the criteria threshold value that activates the alert"
         },
         "thresholdOperator": {
-          "$ref": "#/definitions/AlertRulePropertiesOperator"
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "Evaluation Operator for Threshold."
         },
         "windowSize": {
           "type": "integer",
@@ -1807,7 +1808,8 @@
           "description": "The number of failing periods to trigger an alert."
         },
         "failingPeriodsOperator": {
-          "$ref": "#/definitions/AlertRulePropertiesOperator"
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "Evaluation Operator for Failing Periods."
         },
         "muteActionsDuration": {
           "type": "integer",
@@ -1844,7 +1846,7 @@
       },
       "description": "Describes the properties of a alert."
     },
-    "AlertRulePropertiesOperator": {
+    "ConditionalOperator": {
       "type": "string",
       "enum": [
         "LessThan",
@@ -1854,10 +1856,10 @@
         "LessThanOrEqual"
       ],
       "x-ms-enum": {
-        "name": "alertRulePropertiesOperator",
+        "name": "conditionalOperator",
         "modelAsString": true
       },
-      "description": "Evaluation of metric on a particular column"
+      "description": "Result Condition Evaluation Criteria"
     },
     "AlertQueryParameter": {
       "type": "object",
@@ -1953,19 +1955,8 @@
           "description": "Query Associated with the Alert Template"
         },
         "thresholdOperator": {
-          "type": "string",
-          "enum": [
-            "LessThan",
-            "GreaterThan",
-            "Equal",
-            "GreaterThanOrEqual",
-            "LessThanOrEqual"
-          ],
-          "x-ms-enum": {
-            "name": "alertTemplateThresholdOperator",
-            "modelAsString": true
-          },
-          "description": "Threshold Operator for the alert template"
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "Evaluation Operator for Alert Template Threshold."
         },
         "defaultThreshold": {
           "type": "integer",
