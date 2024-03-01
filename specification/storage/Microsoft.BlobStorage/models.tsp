@@ -19,6 +19,34 @@ model StorageError {
   Message: string;
 }
 
+@doc("The account kind.")
+enum AccountKind {
+  @doc("The storage account is a general-purpose account.")
+  Storage,
+  @doc("The storage account is a blob storage account.")
+  BlobStorage,
+  @doc("The storage account is a storage V2 account.")
+  StorageV2,
+  @doc("The storage account is a file storage account.")
+  FileStorage,
+  @doc("The storage account is a block blob storage account.")
+  BlockBlobStorage
+}
+
+@doc("The SKU types")
+enum SkuName {
+  @doc("The standard LRS SKU.")
+  Standard_LRS,
+  @doc("The standard GRS SKU.")
+  Standard_GRS,
+  @doc("The standard RAGRS SKU.")
+  Standard_RAGRS,
+  @doc("The standard ZRS SKU.")
+  Standard_ZRS,
+  @doc("The premium LRS SKU.")
+  Premium_LRS
+}
+
 model ListContainersSegmentResponse {
   @doc("The service endpoint.")
   ServiceEndpoint: string; // TODO: XML Attribute
