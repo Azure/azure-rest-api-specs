@@ -19,6 +19,7 @@
               "leastPrivilegeMode": "Enabled",
               "enableAutomaticUpgrade": true,
               "additionalVmPatch": "WU",
+              "osType": "Windows",
               "virtualMachineIdentitySettings": {
                 "type": "SystemAssigned"
               }
@@ -39,6 +40,7 @@
               "leastPrivilegeMode": "Enabled",
               "enableAutomaticUpgrade": true,
               "additionalVmPatch": "WU",
+              "osType": "Windows",
               "virtualMachineIdentitySettings": {
                 "type": "None"
               }
@@ -46,6 +48,23 @@
             "location": "northeurope",
             "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm1",
             "name": "testvm1",
+            "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
+          },
+          {
+            "properties": {
+              "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm2",
+              "provisioningState": "Succeeded",
+              "sqlServerLicenseType": "PAYG",
+              "sqlImageSku": "Developer",
+              "sqlImageOffer": "SQL2019-Ubuntu20",
+              "sqlManagement": "LightWeight",
+              "leastPrivilegeMode": "NotSet",
+              "enableAutomaticUpgrade": true,
+              "osType": "Linux"
+            },
+            "location": "northeurope",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
+            "name": "testvm2",
             "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
           }
         ]
