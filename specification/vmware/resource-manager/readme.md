@@ -21,7 +21,7 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-03-01
+tag: package-2023-09-01
 ```
 
 ### Tag: package-2023-09-01
