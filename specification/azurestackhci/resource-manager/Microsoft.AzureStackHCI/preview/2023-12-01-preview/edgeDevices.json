@@ -473,23 +473,13 @@
       "description": "Edge device resource.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/Dev",
+          "$ref": "#/definitions/DeviceKind",
           "description": "Job kind to support polymorphic resource.",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
-        "properties": {
-          "$ref": "#/definitions/EdgeDevicePropertiesArm",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
       "discriminator": "kind",
       "required": [
         "kind"
@@ -521,17 +511,6 @@
         "value"
       ]
     },
-    "EdgeDevicePropertiesArm": {
-      "type": "object",
-      "description": "Edge Device properties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "./hciCommon.json#/definitions/ProvisioningState",
-          "description": "Provisioning state of edgeDevice resource",
-          "readOnly": true
-        }
-      }
-    },
     "EdgeDeviceProperties": {
       "type": "object",
       "description": "Edge Device properties",
@@ -539,6 +518,11 @@
         "deviceConfiguration": {
           "$ref": "#/definitions/DeviceConfiguration",
           "description": "Device Configuration"
+        },
+        "provisioningState": {
+          "$ref": "./hciCommon.json#/definitions/ProvisioningState",
+          "description": "Provisioning state of edgeDevice resource",
+          "readOnly": true
         }
       }
     },
