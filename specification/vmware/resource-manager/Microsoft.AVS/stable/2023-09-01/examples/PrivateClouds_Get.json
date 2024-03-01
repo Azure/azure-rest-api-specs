@@ -1,6 +1,8 @@
 {
+  "title": "PrivateClouds_Get",
+  "operationId": "PrivateClouds_Get",
   "parameters": {
-    "api-version": "2023-03-01",
+    "api-version": "2023-09-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "group1",
     "privateCloudName": "cloud1"
@@ -24,6 +26,7 @@
             "strategy": "SingleZone",
             "zone": 1
           },
+          "displayName": "datacenter1",
           "networkBlock": "192.168.48.0/22",
           "circuit": {
             "expressRouteID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2/providers/Microsoft.Network/expressroutecircuits/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2-xconnect",
@@ -33,7 +36,9 @@
           },
           "managementCluster": {
             "clusterId": 1,
+            "displayName": "nameCluster1",
             "clusterSize": 4,
+            "vsanDatastoreName": "vsanDatastore1",
             "hosts": [
               "fakehost18.nyc1.kubernetes.center",
               "fakehost19.nyc1.kubernetes.center",
@@ -52,9 +57,12 @@
             }
           },
           "endpoints": {
-            "nsxtManager": "https://192.168.50.3/",
-            "vcsa": "https://192.168.50.2/",
-            "hcxCloudManager": "https://192.168.50.4/"
+            "nsxtManager": "https://nsx.290351365f5b41a19b77af.eastus.avslab.azure.com/",
+            "vcsa": "https://vc.290351365f5b41a19b77af.eastus.avslab.azure.com/",
+            "hcxCloudManager": "https://hcx.290351365f5b41a19b77af.eastus.avslab.azure.com/",
+            "nsxtManagerIp": "192.168.50.3",
+            "vcenterIp": "192.168.50.2",
+            "hcxCloudManagerIp": "192.168.50.4"
           },
           "externalCloudLinks": [
             "/subscriptions/12341234-1234-1234-1234-123412341234/resourceGroups/mygroup/providers/Microsoft.AVS/privateClouds/cloud2"
