@@ -114,20 +114,20 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-12'
 input-file:
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/deploymentSettings.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/edgeDevices.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/extensions.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/offers.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/operations.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/publishers.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/securitySettings.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/skus.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateRuns.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateSummaries.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updates.json
-- Microsoft.AzureStackHCI/preview/2023-11-01-preview/hciCommon.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
+- Microsoft.AzureStackHCI/preview/2023-12-01-preview/hciCommon.json
 ```
 
 ### Tag: package-preview-2023-11
