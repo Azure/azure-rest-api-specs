@@ -164,6 +164,8 @@ op registerSchema is Azure.Core.Foundations.Operation<
 // Models
 alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
+// TODO: Leaving as closed set of values for now, as we're blocked by https://github.com/microsoft/typespec/issues/2853.
+// Need to update once issue is fixed.
 union SchemaContentTypeValues {
   avro: "application/json; serialization=Avro",
 
