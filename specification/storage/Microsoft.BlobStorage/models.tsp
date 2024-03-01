@@ -21,6 +21,13 @@ model StorageError {
 
 /// Parameters
 
+@doc("The lease ID parameter.")
+model LeaseIdOptional {
+  @doc("If specified, the operation only succeeds if the resource's lease is active and matches this ID.")
+  @header
+  `x-ms-lease-id`?: string;
+}
+
 @doc("The deny encryption scope override parameter.")
 model DenyEncryptionScopeOverride {
   @doc("Optional.  Version 2019-07-07 and later.  Specifies that the request will fail if the target container does not have the same encryption scope as the source container.")
