@@ -458,6 +458,15 @@
         },
         "parameters": [
           {
+            "name": "stopJobParameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StopStreamingJobParameters"
+            },
+            "description": "Parameters applicable to a stop streaming job operation."
+          },
+          {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
@@ -719,6 +728,17 @@
           "type": "string",
           "format": "date-time",
           "description": "Value is either an ISO-8601 formatted time stamp that indicates the starting point of the output event stream, or null to indicate that the output event stream will start whenever the streaming job is started. This property must have a value if outputStartMode is set to CustomTime."
+        }
+      }
+    },
+    "StopStreamingJobParameters": {
+      "type": "object",
+      "description": "Parameters supplied to the Stop Streaming Job operation.",
+      "properties": {
+        "outputStopTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Value is either an ISO-8601 formatted time stamp that indicates the scheduled stopping point of the output event stream, or null to indicate that the output event stream will stop immediately."
         }
       }
     },
