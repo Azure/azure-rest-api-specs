@@ -6,7 +6,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-providerhub";
 
 using Azure.ResourceManager;
-using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -23,7 +22,6 @@ namespace SplitIO.Experimentation;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v1_preview: "2024-03-01-preview",
 }
 
@@ -99,19 +97,6 @@ model ExperimentationWorkspace
   ...ManagedServiceIdentity;
 }
 
-@armResourceOperations
-interface ExperimentationWorkspaces {
-  get is ArmResourceRead<ExperimentationWorkspace>;
-  create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
-  update is ArmResourcePatchAsync<
-    ExperimentationWorkspace,
-    ExperimentationWorkspaceProperties
-  >;
-  delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
-  listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
-  listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
-}
-
 @doc("The request body for exchanging Split.IO data plane authentication token.")
 model ExchangeTokenRequest {
   @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
@@ -130,12 +115,19 @@ model ExchangeTokenResponse {
   token: string;
 }
 
-interface ExchangeToken {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get access token for Split.IO data plane authentication.")
-  @route("/exchangeToken")
-  @post
-  action is Azure.Core.Foundations.Operation<
+@armResourceOperations
+interface ExperimentationWorkspaces {
+  get is ArmResourceRead<ExperimentationWorkspace>;
+  create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
+  update is ArmResourcePatchAsync<
+    ExperimentationWorkspace,
+    ExperimentationWorkspaceProperties
+  >;
+  delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
+  listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
+  listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
+  exchangeToken is ArmResourceActionSync<
+    ExperimentationWorkspace,
     ExchangeTokenRequest,
     ExchangeTokenResponse
   >;
