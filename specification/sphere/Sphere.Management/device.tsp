@@ -40,7 +40,7 @@ interface ProxyResourceOperationsDevice<
     TListParameters & BaseParameters<TResource>
   >;
   #suppress "deprecated" "Existing API"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"  
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   delete is ArmResourceDeleteAsync<Device>;
   @doc("Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.")
   update is CustomArmResourcePatchAsync<Device, DevicePatchProperties>;

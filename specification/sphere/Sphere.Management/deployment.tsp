@@ -36,9 +36,9 @@ interface ProxyResourceOperationsDeployments<
   >;
   @doc("Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Deployment>;
-  @doc("Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   #suppress "deprecated" "Existing API"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
+  @doc("Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   delete is ArmResourceDeleteAsync<Deployment>;
 }
 

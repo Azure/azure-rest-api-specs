@@ -134,9 +134,9 @@ model CommunityTrainingProperties {
   provisioningState?: ProvisioningState;
 }
 
-@armResourceOperations
 #suppress "deprecated" "Existing API"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
+@armResourceOperations
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;
   create is ArmResourceCreateOrUpdateAsync<CommunityTraining>;

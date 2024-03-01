@@ -36,9 +36,9 @@ interface ProxyResourceOperationsProducts<
   get is ArmResourceRead<Product>;
   @doc("Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Product>;
-  @doc("Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'")
   #suppress "deprecated" "Existing API"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"  
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
+  @doc("Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'")
   delete is ArmResourceDeleteAsync<Product>;
   @doc("Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   update is ArmResourcePatchAsync<Product, ProductProperties>;
