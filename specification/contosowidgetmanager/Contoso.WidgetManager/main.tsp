@@ -27,7 +27,7 @@ enum Versions {
 @resource("widgets")
 model WidgetSuite {
   @key("widgetName")
-  @doc("The widget name.")
+  @doc("The widget name TEST.")
   @visibility("read")
   name: string;
 
