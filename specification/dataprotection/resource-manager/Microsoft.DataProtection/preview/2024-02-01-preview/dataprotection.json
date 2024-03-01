@@ -369,6 +369,9 @@
           },
           "Get BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/GetBackupVaultWithMSI.json"
+          },
+          "Get BackupVault With CMK": {
+            "$ref": "./examples/VaultCRUD/GetBackupVaultWithCMK.json"
           }
         }
       },
@@ -433,6 +436,9 @@
           },
           "Create BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/PutBackupVaultWithMSI.json"
+          },
+          "Create BackupVault With CMK": {
+            "$ref": "./examples/VaultCRUD/PutBackupVaultWithCMK.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -537,6 +543,9 @@
         "x-ms-examples": {
           "Patch BackupVault": {
             "$ref": "./examples/VaultCRUD/PatchBackupVault.json"
+          },
+          "Patch BackupVault with CMK": {
+            "$ref": "./examples/VaultCRUD/PatchBackupVaultWithCMK.json"
           }
         }
       }
@@ -1360,6 +1369,79 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/validateForModifyBackup": {
+      "post": {
+        "tags": [
+          "BackupInstances"
+        ],
+        "description": "Validate whether update for backup instance will be successful or not",
+        "operationId": "BackupInstances_ValidateForModifyBackup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestrictedVaultName"
+          },
+          {
+            "$ref": "#/parameters/BackupInstanceName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateForModifyBackupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate For Modify Backup": {
+            "$ref": "./examples/BackupInstanceOperations/ValidateForModifyBackup.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/operationResults/{operationId}": {
       "get": {
         "tags": [
@@ -1875,6 +1957,48 @@
         "x-ms-examples": {
           "List Cross Region Restore Jobs": {
             "$ref": "./examples/CrossRegionRestore/FetchCrossRegionRestoreJobs.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.DataProtection/backupInstances": {
+      "get": {
+        "tags": [
+          "BackupInstancesExtensionRouting"
+        ],
+        "description": "Gets a list of backup instances associated with a tracked resource",
+        "operationId": "BackupInstancesExtensionRouting_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupInstanceResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List BackupInstances associated with an azure resource": {
+            "$ref": "./examples/BackupInstanceOperations/ListBackupInstancesExtensionRouting.json"
           }
         }
       }
@@ -2600,6 +2724,122 @@
         "x-ms-examples": {
           "Get Job": {
             "$ref": "./examples/JobCRUD/GetJob.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupJobs/{jobId}/triggerCancel": {
+      "post": {
+        "tags": [
+          "AzureBackupJob"
+        ],
+        "description": "Triggers cancellation of Job and returns an OperationID to track.",
+        "operationId": "Jobs_TriggerCancel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestrictedVaultName"
+          },
+          {
+            "name": "jobId",
+            "description": "The Job ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Trigger Cancel": {
+            "$ref": "./examples/JobCRUD/TriggerCancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupJobs/{jobId}/generateProgressUrl": {
+      "post": {
+        "tags": [
+          "AzureBackupJob"
+        ],
+        "description": "Generates read SAS URL for a blob from which current job progress can be read.",
+        "operationId": "Jobs_GenerateProgressUrl",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestrictedVaultName"
+          },
+          {
+            "name": "jobId",
+            "description": "The Job ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupJobProgressUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate Progress URL": {
+            "$ref": "./examples/JobCRUD/GenerateProgressURL.json"
           }
         }
       }
@@ -4445,6 +4685,11 @@
           "readOnly": true,
           "type": "string"
         },
+        "sourceDataStoreType": {
+          "description": "The type of the source data store.",
+          "readOnly": true,
+          "type": "string"
+        },
         "sourceResourceGroup": {
           "description": "Resource Group Name of the Datasource",
           "type": "string"
@@ -4543,6 +4788,17 @@
           "type": "string"
         }
       }
+    },
+    "AzureBackupJobProgressUrl": {
+      "description": "Job Progress URL class.",
+      "properties": {
+        "progressUrl": {
+          "description": "Read SAS URI for a blob from which current job progress can be read.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      },
+      "type": "object"
     },
     "AzureBackupJobResource": {
       "allOf": [
@@ -5599,6 +5855,38 @@
       "title": "CloudError",
       "x-ms-external": true
     },
+    "CmkKeyVaultProperties": {
+      "type": "object",
+      "description": "The properties of the Key Vault which hosts CMK",
+      "properties": {
+        "keyUri": {
+          "description": "The key uri of the Customer Managed Key",
+          "type": "string"
+        }
+      }
+    },
+    "CmkKekIdentity": {
+      "type": "object",
+      "description": "The details of the managed identity used for CMK",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "description": "The identity type. 'SystemAssigned' and 'UserAssigned' are mutually exclusive. 'SystemAssigned' will use implicitly created managed identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "identityId": {
+          "type": "string",
+          "description": "The managed identity to be used which has access permissions to the Key Vault. Provide a value here in case identity types: 'UserAssigned' only."
+        }
+      }
+    },
     "CopyOnExpiryOption": {
       "allOf": [
         {
@@ -6220,6 +6508,57 @@
         },
         "httpMethod": {
           "type": "string"
+        }
+      }
+    },
+    "encryptionSettings": {
+      "description": "Customer Managed Key details of the resource.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Encryption state of the Backup Vault.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "Inconsistent"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionState",
+            "modelAsString": true,
+            "values": [
+              {
+                "description": "CMK encryption is enabled on the Backup Vault",
+                "value": "Enabled"
+              },
+              {
+                "description": "CMK encryption is disabled on the Backup Vault. User can not set this state once Encryption State is 'Enabled'.",
+                "value": "Disabled"
+              },
+              {
+                "description": "CMK encryption is in inconsistent state on the Backup Vault. This state indicates that user needs to retry the encryption settings operation immediately to correct the state.",
+                "value": "Inconsistent"
+              }
+            ]
+          }
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/CmkKeyVaultProperties"
+        },
+        "kekIdentity": {
+          "$ref": "#/definitions/CmkKekIdentity"
+        },
+        "infrastructureEncryption": {
+          "description": "Enabling/Disabling the Double Encryption state",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InfrastructureEncryptionState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -7631,6 +7970,9 @@
         },
         "immutabilitySettings": {
           "$ref": "#/definitions/ImmutabilitySettings"
+        },
+        "encryptionSettings": {
+          "$ref": "#/definitions/encryptionSettings"
         }
       }
     },
@@ -7978,6 +8320,19 @@
       "title": "ValidateForBackupRequest",
       "type": "object"
     },
+    "ValidateForModifyBackupRequest": {
+      "description": "Validate for modify backup request",
+      "properties": {
+        "backupInstance": {
+          "$ref": "#/definitions/BackupInstance"
+        }
+      },
+      "required": [
+        "backupInstance"
+      ],
+      "title": "ValidateForModifyBackupRequest",
+      "type": "object"
+    },
     "ValidateRestoreRequestObject": {
       "description": "Validate restore request object",
       "properties": {
@@ -8196,6 +8551,26 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "ResourceId": {
+      "name": "resourceId",
+      "in": "path",
+      "description": "ARM path of the resource to be protected using Microsoft.DataProtection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "RestrictedVaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the backup vault.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$",
+      "minLength": 2,
+      "maxLength": 50
     }
   },
   "securityDefinitions": {
