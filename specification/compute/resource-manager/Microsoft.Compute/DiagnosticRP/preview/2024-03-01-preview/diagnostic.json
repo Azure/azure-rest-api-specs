@@ -420,7 +420,8 @@
       "type": "object",
       "properties": {
         "result": {
-          "type": "string"
+          "type": "string",
+          "description": "The result of the disk inspection operation."
         },
         "resultStatus": {
           "type": "string",
@@ -431,7 +432,8 @@
           "x-ms-enum": {
             "name": "resultStatus",
             "modelAsString": true
-          }
+          },
+          "description": "Result status of the async operation."
         },
         "errorDetail": {
           "$ref": "#/definitions/ErrorDetail"
@@ -517,6 +519,105 @@
         }
       },
       "description": "Inner error details."
+    },
+    "SpotPlacementRecommenderInput": {
+      "type": "object",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The desired regions"
+        },
+        "desiredSizes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          },
+          "description": "The desired resource SKUs."
+        },
+        "desiredCount": {
+          "type": "integer",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        }
+      },
+      "description": "SpotPlacementRecommender API Input."
+    },
+    "SpotPlacementRecommenderResponse": {
+      "type": "object",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The desired regions"
+        },
+        "desiredSizes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          },
+          "description": "The desired resource SKUs."
+        },
+        "desiredCount": {
+          "type": "integer",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        },
+        "placementScores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlacementScore"
+          },
+          "description": "The spot placement scores."
+        },
+      },
+      "description": "SpotPlacementRecommender API response."
+    },
+    "ResourceSize": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The resource SKU size."
+        }
+      },
+      "description": "SpotPlacementRecommender API response."
+    },
+    "PlacementScore": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The resource SKU size."
+        },
+        "region": {
+          "type": "string",
+          "description": "The region."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availability region."
+        },
+        "score": {
+          "type": "string",
+          "description": "The placement score."
+        },
+        "isQuotaAvailable": {
+          "type": "boolean",
+          "description": "Whether the desired quota is available."
+        }
+      },
+      "description": "The spot placement score for sku/region/zone combination."
     }
   },
   "parameters": {
