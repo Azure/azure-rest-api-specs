@@ -79,6 +79,8 @@ op listSchemaVersions is Azure.Core.Foundations.Operation<
 
     @doc("Name of schema.")
     @path
+    @maxLength(50)
+    @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
     schemaName: string;
   },
   SchemaVersions,
@@ -114,6 +116,8 @@ op getSchemaByVersion is Azure.Core.Foundations.Operation<
 
     @doc("Name of schema.")
     @path
+    @maxLength(50)
+    @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
     schemaName: string;
 
     @doc("Version number of specific schema.")
@@ -153,6 +157,8 @@ op registerSchema is Azure.Core.Foundations.Operation<
 
     @doc("Name of schema.")
     @path
+    @maxLength(50)
+    @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
     schemaName: string;
 
     ...SchemasContent;
