@@ -583,7 +583,7 @@ model PrivateCloudUpdateProperties {
   managementCluster?: ManagementCluster;
 
   @doc("Connectivity to internet is enabled or disabled")
-  internet?: InternetEnum = InternetEnum.Disabled;
+  internet?: InternetEnum;
 
   @doc("vCenter Single Sign On Identity Sources")
   identitySources?: IdentitySource[];

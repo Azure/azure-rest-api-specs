@@ -8518,6 +8518,30 @@
         }
       }
     },
+    "InternetEnum": {
+      "type": "string",
+      "description": "Whether internet is enabled or disabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "InternetEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "is disabled"
+          }
+        ]
+      }
+    },
     "IscsiPath": {
       "type": "object",
       "description": "An iSCSI path resource",
@@ -9663,29 +9687,8 @@
           "description": "The default cluster used for management"
         },
         "internet": {
-          "type": "string",
-          "description": "Connectivity to internet is enabled or disabled",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "InternetEnum",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "is enabled"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "is disabled"
-              }
-            ]
-          }
+          "$ref": "#/definitions/InternetEnum",
+          "description": "Connectivity to internet is enabled or disabled"
         },
         "identitySources": {
           "type": "array",
