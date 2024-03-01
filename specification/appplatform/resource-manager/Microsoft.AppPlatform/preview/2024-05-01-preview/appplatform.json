@@ -2623,8 +2623,8 @@
         "tags": [
           "AppPlatform"
         ],
-        "description": "Get the APM by name.",
-        "operationId": "Apms_Get",
+        "description": "Get the artifact repository by name.",
+        "operationId": "ArtifactRepos_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2658,7 +2658,7 @@
         },
         "x-ms-examples": {
           "Apms_Get": {
-            "$ref": "./examples/Apms_Get.json"
+            "$ref": "./examples/ArtifactRepos_Get.json"
           }
         }
       },
@@ -2666,8 +2666,8 @@
         "tags": [
           "AppPlatform"
         ],
-        "description": "Create or update an APM.",
-        "operationId": "Apms_CreateOrUpdate",
+        "description": "Create or update an artifact repositories.",
+        "operationId": "ArtifactRepos_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2685,7 +2685,7 @@
             "$ref": "#/parameters/ApmNameParameter"
           },
           {
-            "name": "apmResource",
+            "name": "artifactRepoResource",
             "in": "body",
             "description": "Parameters for the create or update operation",
             "required": true,
@@ -2696,7 +2696,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the APM updated.",
+            "description": "Success. The response describes the artifact repository updated.",
             "schema": {
               "$ref": "#/definitions/ApmResource"
             }
@@ -2717,7 +2717,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Apms_CreateOrUpdate": {
-            "$ref": "./examples/Apms_CreateOrUpdate.json"
+            "$ref": "./examples/ArtifactRepos_CreateOrUpdate.json"
           }
         }
       },
@@ -2725,8 +2725,8 @@
         "tags": [
           "AppPlatform"
         ],
-        "description": "Operation to delete an APM",
-        "operationId": "Apms_Delete",
+        "description": "Operation to delete an artifact repository",
+        "operationId": "ArtifactRepos_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2769,7 +2769,7 @@
         },
         "x-ms-examples": {
           "Apms_Delete": {
-            "$ref": "./examples/Apms_Delete.json"
+            "$ref": "./examples/ArtifactRepos_Delete.json"
           }
         }
       }
