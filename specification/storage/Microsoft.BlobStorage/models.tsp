@@ -19,6 +19,124 @@ model StorageError {
   Message: string;
 }
 
+/// Parameters
+
+@doc("The deny encryption scope override parameter.")
+model DenyEncryptionScopeOverride {
+  @doc("Optional.  Version 2019-07-07 and later.  Specifies that the request will fail if the target container does not have the same encryption scope as the source container.")
+  @header `x-ms-deny-encryption-scope-override`?: boolean;
+}
+
+@doc("The default encryption scope parameter.")
+model DefaultEncryptionScope {
+  @doc("Optional.  Version 2019-07-07 and later.  Specifies the default encryption scope to set on the container and use for all future writes.")
+  @header `x-ms-default-encryption-scope`?: string;
+}
+
+@doc("The blob public access parameter.")
+model BlobPublicAccess {
+  @doc("Specifies whether data in the container may be accessed publicly and the level of access. Possible values include: 'container', 'blob'.")
+  @clientName("access")
+  @header `x-ms-blob-public-access`?: PublicAccessType;
+}
+
+@doc("The metadata parameter.")
+model MetadataParameter is Record<string> {
+  @doc("Optional. Specifies a user-defined name-value pair associated with the blob. If no name-value pairs are specified, the operation will copy the metadata from the source blob or file to the destination blob. If one or more name-value pairs are specified, the destination blob is created with the specified metadata, and metadata is not copied from the source blob or file. Note that beginning with version 2009-09-19, metadata names must adhere to the naming rules for C# identifiers. See Naming and Referencing Containers, Blobs, and Metadata for more information.")
+  @header
+  `x-ms-meta`?: string; // TODO: Figure out how to better represent this
+}
+
+@doc("The filter blobs include parameter.")
+model FilterBlobsInclude {
+  @doc("Include this parameter to specify one or more datasets to include in the response.")
+  @query({ format: "csv" }) include?: FilterBlobsIncludes[];
+}
+
+@doc("The filter blobs where parameter.")
+model FilterBlobsWhere {
+  @doc("Filters the results to return only to return only blobs whose tags match the specified expression.")
+  @query
+  where?: string;
+}
+
+@doc("The Content-Length header.")
+model ContentLengthHeader {
+  @doc("The length of the request.")
+  @header
+  `Content-Length`: int64;
+}
+
+@doc("The Content-Type header for multi-part requests.")
+model MultipartContentType {
+  @doc("Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>")
+  @clientName("multipartContentType")
+  @header
+  `Content-Type`: string;
+}
+
+@doc("The max results parameter.")
+model MaxResultsParameter {
+  @doc("Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.")
+  @query maxresults?: int32;
+}
+
+@doc("The marker parameter.")
+model MarkerParameter {
+  @doc("A string value that identifies the portion of the list of containers to be returned with the next listing operation. The operation returns the NextMarker value within the response body if the listing operation did not return all containers remaining to be listed with the current page. The NextMarker value can be used as the value for the marker parameter in a subsequent call to request the next page of list items. The marker value is opaque to the client.")
+  @query marker?: string;
+}
+
+@doc("The prefix parameter.")
+model PrefixParameter {
+  @doc("Filters the results to return only containers whose name begins with the specified prefix.")
+  @query prefix?: string;
+}
+
+@doc("The client request ID parameter.")
+model ClientRequestIdParameter {
+  @doc("Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.")
+  @clientName("requestId")
+  @header
+  `x-ms-client-request-id`?: string;
+}
+
+@doc("The timeout parameter.")
+model TimeoutParameter {
+  @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>")
+  @query timeout?: int32;
+}
+
+@doc("The API version parameter.")
+model ApiVersionParameter {
+  @doc("Specifies the version of the operation to use for this request.")
+  @header("x-ms-version")
+  version: string;
+}
+
+@doc("The result of a Filter Blobs API call")
+model FilterBlobSegment {
+  @doc("The service endpoint.")
+  ServiceEndpoint: string; // TODO: XML Attribute
+
+  @doc("The filter for the blobs.")
+  Where: string;
+
+  @doc("The blob segment.")
+  Blobs: BlobItem[]; // TODO: XML Serialization
+
+  @doc("The next marker of the blobs.")
+  NextMarker?: string;
+}
+
+@doc("The filter blobs includes.")
+enum FilterBlobsIncludes {
+  @doc("The filter includes no versions.")
+  none,
+  @doc("The filter includes n versions.")
+  versions
+}
+
 @doc("The account kind.")
 enum AccountKind {
   @doc("The storage account is a general-purpose account.")

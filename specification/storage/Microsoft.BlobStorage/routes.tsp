@@ -22,15 +22,12 @@ interface BlobServiceProperties {
   """)
   @put
   @operationId("Service_SetProperties")
-  put(
+  setServiceProperties(
     @doc("The storage service properties that specifies the analytics and CORS rules to set on the Blob service.")
     @body body: StorageServiceProperties;
-    @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>")
-    @query timeout?: int32;
-    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
-    @header `x-ms-version`: string;
-    @doc("Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.")
-    @header `x-ms-client-request-id`?: string;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 202;
     @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
@@ -44,13 +41,10 @@ interface BlobServiceProperties {
   @doc("Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.")
   @operationId("Service_GetProperties")
   @get
-  get(
-    @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>")
-    @query timeout?: int32;
-    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
-    @header `x-ms-version`: string;
-    @doc("Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.")
-    @header `x-ms-client-request-id`?: string;
+  getServiceProperties(
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
     @body body: StorageServiceProperties;
@@ -70,13 +64,10 @@ interface BlobServiceStatistics {
   """)
   @operationId("Service_GetStatistics")
   @get
-  get(
-    @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>")
-    @query timeout?: int32;
-    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
-    @header `x-ms-version`: string;
-    @doc("Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.")
-    @header `x-ms-client-request-id`?: string;
+  getStatistics(
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
     @body body: StorageServiceStats;
@@ -97,19 +88,13 @@ interface ListContainerSegments {
   @doc("The List Containers Segment operation returns a list of the containers under the specified account")
   @get
   @operationId("Service_ListContainersSegment")
-  get(
-    @doc("Filters the results to return only containers whose name begins with the specified prefix.")
-    @query prefix?: string;
-    @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>")
-    @query timeout?: int32;
-    @doc("A string value that identifies the portion of the list of containers to be returned with the next listing operation. The operation returns a non-empty continuation token if the listing operation did not return all containers remaining to be listed with the current segment. The continuation token value is opaque to the client.")
-    @query marker?: string;
-    @doc("Specifies the maximum number of containers to return. If the request does not specify maxresults or specifies a value greater than 5000, the server will return up to 5000 items.")
-    @query maxresults?: int32;
-    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
-    @header `x-ms-version`: string;
-    @doc("Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.")
-    @header `x-ms-client-request-id`?: string;
+  listContainers(
+    ...PrefixParameter;
+    ...TimeoutParameter;
+    ...MarkerParameter;
+    ...MaxResultsParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
     @body body: ListContainersSegmentResponse;
@@ -127,15 +112,12 @@ interface BlobServiceUserDelegationKey {
   @doc("The Get User Delegation Key operation gets the user delegation key for the Blob service. This is only a valid operation when using User Delegation SAS. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas\">Create a user delegation SAS</a>.")
   @post
   @operationId("Service_GetUserDelegationKey") 
-  post(
+  getUserDelegationKey(
     @doc("The user delegation key info.")
     @body body: KeyInfo;
-    @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>")
-    @query timeout?: int32;
-    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
-    @header `x-ms-version`: string;
-    @doc("Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.")
-    @header `x-ms-client-request-id`?: string;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
     @doc("The user delegation key.")
@@ -155,8 +137,7 @@ interface BlobServiceAccountProperties {
   @get
   @operationId("Service_GetAccountInfo")
   get(
-    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
-    @header `x-ms-version`: string;
+    ...ApiVersionParameter;
   ): {
     @statusCode statusCode: 200;
     @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
@@ -188,17 +169,11 @@ interface BlobServiceBatch {
   post(
     @doc("The batch request content")
     @body body: bytes; // TODO: Investigate this type
-    @doc("The batch request content length")
-    @header `Content-Length`: int64;
-    @doc("Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>")
-    @clientName("multipartContentType")
-    @header `Content-Type`: string;
-    @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>")
-    @query timeout?: int32;
-    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
-    @header `x-ms-version`: string;
-    @doc("Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.")
-    @header `x-ms-client-request-id`?: string;
+    ...ContentLengthHeader;
+    ...MultipartContentType;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
     @doc("The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID")
@@ -207,5 +182,67 @@ interface BlobServiceBatch {
     @header `x-ms-request-id`: string;
     @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
     @header `x-ms-version`: string;
+  } | StorageError;
+}
+
+@route("/?comp=blobs")
+interface FilterBlobsService {
+  @doc("The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression.")
+  @get
+  @operationId("Service_FilterBlobs")
+  listBlobs(
+    ...FilterBlobsWhere;
+    ...FilterBlobsInclude;
+    ...TimeoutParameter;
+    ...MarkerParameter;
+    ...MaxResultsParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 200;
+    @body body: FilterBlobSegment;
+    @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
+    @header `x-ms-client-request-id`?: string;
+    @doc("This header uniquely identifies the request that was made and can be used for troubleshooting the request.")
+    @header `x-ms-request-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @encode("date-time-rfc1123")
+    @header Date: utcDateTime;
+  } | StorageError;
+}
+
+@route("/{containerName}?restype=container")
+interface ContainerService {
+  @doc("Creates a new container under the specified account. If the container with the same name already exists, the operation fails.")
+  @put
+  @operationId("Container_Create")
+  createContainer(
+    @doc("The name of the container to create.")
+    @path containerName: string;
+    ...MetadataParameter;
+    ...BlobPublicAccess;
+    ...DefaultEncryptionScope;
+    ...DenyEncryptionScopeOverride;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 201;
+    @doc("The ETag contains a value that you can use to perform operations conditionally.")
+    @header ETag: string;
+    @doc("The date/time that the container was last modified.")
+    @encode("date-time-rfc1123")
+    @header `Last-Modified`: utcDateTime;
+    @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
+    @header `x-ms-client-request-id`?: string;
+    @doc("This header uniquely identifies the request that was made and can be used for troubleshooting the request.")
+    @header `x-ms-request-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @encode("date-time-rfc1123")
+    @header Date: utcDateTime;
   } | StorageError;
 }
