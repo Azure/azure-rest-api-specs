@@ -135,6 +135,7 @@ model CommunityTrainingProperties {
 }
 
 @armResourceOperations
+#suppress "deprecated" "Existing API"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;
