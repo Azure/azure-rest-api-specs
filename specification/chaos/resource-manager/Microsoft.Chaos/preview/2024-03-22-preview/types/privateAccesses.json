@@ -40,7 +40,15 @@
         "publicNetworkAccess": {
           "type": "string",
           "description": "Public Network Access Control for PrivateAccess resource.",
-          "x-nullable": "true"
+          "x-nullable": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum":{
+            "name": "publicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },
