@@ -60,7 +60,6 @@ input-file:
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Volume.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Vpc.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2VPCEndpoint.json
-  - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2VPCGatewayAttachment.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2VPCPeeringConnection.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/eksCluster.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/eksNodegroup.json
@@ -74,7 +73,6 @@ input-file:
   - Microsoft.AwsConnector/preview/2024-08-01-preview/logsSubscriptionFilter.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallFirewall.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallFirewallPolicy.json
-  - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallLoggingConfiguration.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallRuleGroup.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/operations.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/organizationsAccount.json
