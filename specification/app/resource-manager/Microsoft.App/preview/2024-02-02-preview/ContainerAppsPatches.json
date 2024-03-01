@@ -426,7 +426,8 @@
             }
           },
           "description": "New layer update details in the target image.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-flatten": true
         },
         "oldLayer": {
           "type": "object",
@@ -445,7 +446,8 @@
             }
           },
           "description": "The old layer details in the target image.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-flatten": true
         },
         "patchType": {
           "type": "string",
@@ -466,6 +468,7 @@
       "readOnly": true
     },
     "PatchProperties": {
+      "description": "Top level properties that describes current states of the patch resource",
       "type": "object",
       "properties": {
         "targetEnvironmentId": {

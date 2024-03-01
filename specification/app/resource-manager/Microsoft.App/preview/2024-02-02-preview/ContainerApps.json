@@ -733,7 +733,15 @@
             },
             "s2CAutoPatchConfiguration": {
               "description": "Container App auto patch configuration.",
-              "type": "boolean"
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "x-ms-enum": {
+                "name": "s2CAutoPatchConfiguration",
+                "modelAsString": true
+              }
             },
             "latestRevisionName": {
               "description": "Name of the latest revision of the Container App.",
