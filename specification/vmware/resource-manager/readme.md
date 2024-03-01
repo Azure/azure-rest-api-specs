@@ -24,6 +24,15 @@ openapi-type: arm
 tag: package-2023-03-01
 ```
 
+### Tag: package-2023-09-01
+
+These settings apply only when `--tag=package-2023-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09-01'
+input-file:
+- Microsoft.AVS/stable/2023-09-01/vmware.json
+```
+
 ### Tag: package-2023-03-01
 
 These settings apply only when `--tag=package-2023-03-01` is specified on the command line.
@@ -159,6 +168,12 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
 
+  - transform: $["x-ms-client-flatten"] = false
+    from: vmware.json
+    where:
+      - $.definitions.Addon.properties.properties
+      - $.definitions.PlacementPolicy.properties.properties
+      - $.definitions.WorkloadNetworkDhcp.properties.properties
 ```
 
 ### AutoRest v3 Suppressions
@@ -239,10 +254,43 @@ suppressions:
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
     from: vmware.json
 
-  # just warnings
-  # - code: IgnoredPropertyNextToRef
-  # - code: LroLocationHeader
-  #   from: vmware.json
+  - code: XmsClientName
+    reason: false positives
+    from: vmware.json
+
+  - code: XmsClientNameParameter
+    reason: this warning is false postive
+    from: vmware.json
+
+  - code: docLinkLocale
+    reason: false positives
+    from: vmware.json
+
+  - code: PropertiesTypeObjectNoDefinition
+    reason: false positives
+    from: vmware.json
+
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    reason: this warning is TODO
+    from: vmware.json
+
+  - code: AvoidAdditionalProperties
+    reasons: this is how TypeSpec models records
+    from: vmware.json
+
+  - code: XmsPageableForListCalls
+    reasons: This is a TypeSpec @singleton.
+    from: vmware.json
+    # where: WorkloadNetworks_Get
+
+  - code: DeleteResponseCodes
+    reasons: false positives
+    # delete is ArmResourceDeleteAsync<IscsiPath>;
+
+  - code: RequestBodyMustExistForPutPatch
+    reasons: false positives
+    # createOrUpdate is ArmResourceCreateOrUpdateAsync<IscsiPath>;
+
 ```
 
 ## TypeScript
