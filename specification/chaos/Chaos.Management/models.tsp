@@ -219,6 +219,8 @@ model ChaosExperimentStep {
   branches: ChaosExperimentBranch[];
 }
 
+// TODO: This is missing some stuff
+
 @friendlyName("Branch")
 @doc("Model that represents a branch in the step. 9 total per experiment.")
 @extension("x-ms-identifiers", ["name"])
@@ -372,6 +374,8 @@ model BranchStatus {
   @visibility("read")
   actions?: ActionStatus[];
 }
+
+// TODO: x-ms-identifiers is not working
 
 @doc("Model that represents the an action and its status.")
 @extension("x-ms-identifiers", ["actionId"])

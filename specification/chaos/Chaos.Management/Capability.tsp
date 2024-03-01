@@ -10,6 +10,11 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Chaos;
+
+// TODO: Can't $ref directly from "Resource" because there isn't a ref
+// TODO: urlNullable cannot be represented because CapabilityListResult is made by our layer
+// TODO: `value` property is optional in original spec (not valid for design guidelines)
+
 @doc("Model that represents a Capability resource.")
 @parentResource(Target)
 model Capability is ProxyResource<CapabilityProperties> {
