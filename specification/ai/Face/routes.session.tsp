@@ -11,54 +11,51 @@ using Foundations;
 
 namespace Face;
 
-interface BaseSessions<
-  T extends LivenessSessionItem,
-  U extends BaseSessionAuditEntry
-> {
+@get
+@action("audit")
+@actionSeparator("/")
+op FaceLivenessSessionListAuditEntries<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
+  TResource,
+  ListRequestOptions,
+  Body<LivenessSessionAuditEntry[]>,
+  ServiceTraits
+>;
+
+interface LivenessSessions {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceCreateWithServiceProvidedName does not fit, we don't return Location in header."
+  @doc("Creates face liveness detection session.")
+  createLivenessSession is FaceResourceCreateWithServiceProvidedName<
+    LivenessSession,
+    LivenessSessionCreationContent,
+    LivenessSessionCreationResult
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceDelete does not fit, we return 200 instead of 204"
+  @doc("Deletes a session and all of it's audit results.")
+  deleteLivenessSession is FaceResourceDeleteOperation<LivenessSession>;
+
+  @doc("Get session result of detectLiveness.")
+  getLivenessSession is Operations.ResourceRead<LivenessSession>;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceList does not fit, we put object array in response directly"
   @doc("""
 Lists all matching session types.
 List sessions from the last sessionId greater than the \"start\".
 The result should be ordered by sessionId in ascending order.
 """)
-  listSessions is FaceResourceListOperation<T, LivenessSessionItem>;
-
-  @doc("Get session result of detectLiveness.")
-  getSession is Operations.ResourceRead<T>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceDelete does not fit, we return 200 instead of 204"
-  @doc("Deletes a session and all of it's audit results.")
-  @deletesResource(T)
-  deleteSession is FaceResourceDeleteOperation<T>;
+  listLivenessSessions is FaceResourceListOperation<
+    LivenessSession,
+    LivenessSessionItem
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceList does not fit, we put object array in response directly"
   @doc("Get session audit requests/responses for the session.")
-  listSessionAuditEntries is Foundations.NonPagedResourceList<
-    U,
-    ServiceTraits & ListQueryParametersTrait<ListRequestOptions>
-  >;
-}
+  listLivenessSessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessSession>;
 
-interface LivenessSessions
-  extends BaseSessions<LivenessSession, LivenessSessionAuditEntry> {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceCreateWithServiceProvidedName does not fit, we don't return Location in header."
-  @doc("Creates face liveness detection session.")
-  createSession is FaceResourceCreateWithServiceProvidedName<
-    LivenessSession,
-    LivenessSessionCreationContent,
-    LivenessSessionCreationResult
-  >;
-}
-
-interface LivenessWithVerifySessions
-  extends BaseSessions<
-      LivenessWithVerifySession,
-      LivenessWithVerifySessionAuditEntry
-    > {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceCreateWithServiceProvidedName does not fit, we don't return Location in header."
   @doc("Creates face liveness detection session.")
   @sharedRoute
-  createSession is FaceResourceCreateWithServiceProvidedName<
+  createLivenessWithVerifySession is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySession,
     LivenessSessionCreationContent,
     LivenessSessionCreationResult
@@ -68,9 +65,33 @@ interface LivenessWithVerifySessions
   #suppress "@azure-tools/typespec-azure-core/byos" "Representation of existing multipart/form-data operation"
   @doc("Creates face liveness detection session with verify image.")
   @sharedRoute
-  createSessionWithVerifyImage is FaceResourceCreateWithServiceProvidedName<
+  createLivenessWithVerifySessionWithVerifyImage is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySession,
     LivenessSessionWithVerifyImageCreationContent,
     LivenessSessionCreationResult
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceDelete does not fit, we return 200 instead of 204"
+  @doc("Deletes a session and all of it's audit results.")
+  deleteLivenessWithVerifySession is FaceResourceDeleteOperation<LivenessWithVerifySession>;
+
+  @doc("Get session result of detectLiveness.")
+  getLivenessWithVerifySession is Operations.ResourceRead<LivenessWithVerifySession>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceList does not fit, we put object array in response directly"
+  @doc("""
+Lists all matching session types.
+List sessions from the last sessionId greater than the \"start\".
+The result should be ordered by sessionId in ascending order.
+""")
+  @sharedRoute
+  listLivenessWithVerifySessions is FaceResourceListOperation<
+    LivenessWithVerifySession,
+    LivenessSessionItem
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceList does not fit, we put object array in response directly"
+  @doc("Get session audit requests/responses for the session.")
+  // change to action
+  listLivenessWithVerifySessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessWithVerifySession>;
 }

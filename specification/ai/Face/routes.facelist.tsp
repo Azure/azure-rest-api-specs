@@ -11,77 +11,86 @@ using Foundations;
 
 namespace Face;
 
-interface BaseFaceLists<TList extends BaseFaceList, TFace extends BaseFace> {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  createList is FaceResourceCreateOperation<TList>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Create has no response body while standard op requires resource in body"
+op createFaceList is FaceResourceCreateOperation<FaceList>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  deleteList is FaceResourceDeleteOperation<TList>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
+op deleteFaceList is FaceResourceDeleteOperation<FaceList>;
 
-  getList is Operations.ResourceRead<
-    TList,
-    QueryParametersTrait<ReturnRecognitionModelOptions>
-  >;
+op getFaceList is FaceResourceReadOperationWithReturnRecognitionModelOptions<FaceList>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  updateList is FaceResourceUpdateOperation<TList>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
+op updateFaceList is FaceResourceUpdateOperation<FaceList>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @sharedRoute
-  addFaceFromUrl is AddFaceFromUrl<TFace>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
+op listFaceLists is Foundations.ResourceList<
+  FaceList,
+  ReturnRecognitionModelOptions,
+  Body<FaceList[]>,
+  ServiceTraits
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @sharedRoute
-  addFaceFromStream is AddFaceFromStream<TFace>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resorce location in header"
+op addFaceListFaceFromUrl is AddFaceFromUrl<FaceListFace>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  deleteFace is FaceResourceDeleteOperation<TFace>;
-}
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resorce location in header"
+#suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+op addFaceListFaceFromStream is AddFaceFromStream<FaceListFace>;
 
-interface FaceLists extends BaseFaceLists<FaceList, FaceListFace> {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  listList is Foundations.ResourceList<
-    FaceList,
-    ReturnRecognitionModelOptions,
-    Body<FaceList[]>,
-    ServiceTraits
-  >;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
+op deleteFaceListFace is FaceResourceDeleteOperation<FaceListFace>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
-  findSimilarFromFaceList is FindSimilarOperation<{
-    @doc("An existing user-specified unique candidate face list, created in FaceList - Create. Face list contains a set of persistedFaceIds which are persisted and will never expire.")
-    faceListId: string;
-  }>;
-}
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path"
+op findSimilarFromFaceList is FindSimilarOperation<{
+  @doc("An existing user-specified unique candidate face list, created in FaceList - Create. Face list contains a set of persistedFaceIds which are persisted and will never expire.")
+  faceListId: string;
+}>;
 
-interface LargeFaceLists
-  extends BaseFaceLists<LargeFaceList, LargeFaceListFace> {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  listList is FaceResourceListOperation<
-    LargeFaceList,
-    LargeFaceList,
-    ReturnRecognitionModelOptions
-  >;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Create has no response body while standard op requires resource in body"
+op createLargeFaceList is FaceResourceCreateOperation<LargeFaceList>;
 
-  @pollingOperation(LargeFaceLists.getTrainingStatus)
-  trainList is FaceResourceTrain<LargeFaceList>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
+op deleteLargeFaceList is FaceResourceDeleteOperation<LargeFaceList>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getTrainingStatus is FaceResourceGetTrainingStatus<LargeFaceList>;
+op getLargeFaceList is FaceResourceReadOperationWithReturnRecognitionModelOptions<LargeFaceList>;
 
-  getFace is Operations.ResourceRead<LargeFaceListFace>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
+op updateLargeFaceList is FaceResourceUpdateOperation<LargeFaceList>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  updateFace is FaceResourceUpdateOperation<LargeFaceListFace>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
+op listLargeFaceLists is FaceResourceListOperation<
+  LargeFaceList,
+  LargeFaceList,
+  ReturnRecognitionModelOptions
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @sharedRoute
-  listFace is FaceResourceListOperation<LargeFaceListFace>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GET operation on resource with sub-path"
+op getLargeFaceListTrainingStatus is FaceResourceGetTrainingStatus<LargeFaceList>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
-  findSimilarFromLargeFaceList is FindSimilarOperation<{
-    @doc("An existing user-specified unique candidate large face list, created in LargeFaceList - Create. Large face list contains a set of persistedFaceIds which are persisted and will never expire.")
-    largeFaceListId: string;
-  }>;
-}
+@pollingOperation(getLargeFaceListTrainingStatus)
+op trainLargeFaceList is FaceResourceTrain<LargeFaceList>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resorce location in header"
+op addLargeFaceListFaceFromUrl is AddFaceFromUrl<LargeFaceListFace>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resorce location in header"
+#suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+op addLargeFaceListFaceFromStream is AddFaceFromStream<LargeFaceListFace>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
+op deleteLargeFaceListFace is FaceResourceDeleteOperation<LargeFaceListFace>;
+
+op getLargeFaceListFace is Operations.ResourceRead<LargeFaceListFace>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
+op updateLargeFaceListFace is FaceResourceUpdateOperation<LargeFaceListFace>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
+@sharedRoute
+op listLargeFaceListFaces is FaceResourceListOperation<LargeFaceListFace>;
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path"
+op findSimilarFromLargeFaceList is FindSimilarOperation<{
+  @doc("An existing user-specified unique candidate large face list, created in LargeFaceList - Create. Large face list contains a set of persistedFaceIds which are persisted and will never expire.")
+  largeFaceListId: string;
+}>;

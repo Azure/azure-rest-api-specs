@@ -55,26 +55,26 @@ model LivenessSessionItem {
 }
 
 @doc("Session details data.")
-model LivenessSessionDetails<T extends BaseSessionAuditEntry> {
+model LivenessSessionDetails {
   @doc("The session status.")
   @visibility("read")
   status: SessionStatus;
 
   @doc("The last result of session.")
   @visibility("read")
-  result?: T;
+  result?: LivenessSessionAuditEntry;
 }
 
 @doc("Session result of detect liveness.")
 @resource("detectLiveness/singleModal/sessions")
 model LivenessSession is LivenessSessionItem {
-  ...LivenessSessionDetails<LivenessSessionAuditEntry>;
+  ...LivenessSessionDetails;
 }
 
 @doc("Session result of detect liveness with verify.")
 @resource("detectLivenessWithVerify/singleModal/sessions")
 model LivenessWithVerifySession is LivenessSessionItem {
-  ...LivenessSessionDetails<LivenessWithVerifySessionAuditEntry>;
+  ...LivenessSessionDetails;
 }
 
 @doc("Response of liveness session creation.")
@@ -130,11 +130,8 @@ model SessionAuditEntryResponseInfo {
 }
 
 @doc("Audit entry for a request in session.")
-@resource("audit")
-model BaseSessionAuditEntry {
+model LivenessSessionAuditEntry {
   @doc("ID of this audit entry.")
-  @key
-  @visibility("read")
   id: int64;
 
   @doc("Session ID of this audit entry.")
@@ -159,12 +156,6 @@ model BaseSessionAuditEntry {
   digest: string;
 }
 
-@parentResource(LivenessSession)
-model LivenessSessionAuditEntry is BaseSessionAuditEntry;
-
-@parentResource(LivenessWithVerifySession)
-model LivenessWithVerifySessionAuditEntry is BaseSessionAuditEntry;
-
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convienient interface for multipart/form-data in SDK"
 @doc("Dedicated parameter model for multipart/form-data.")
 model LivenessSessionCreationContentForMultipart {
@@ -178,8 +169,8 @@ model LivenessSessionWithVerifyImageCreationContent {
   contentType: "multipart/form-data";
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @doc("The CreationContent for creating session.")
-  CreationContent: LivenessSessionCreationContentForMultipart;
+  @doc("The parameters for creating session.")
+  Parameters: LivenessSessionCreationContentForMultipart;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify.")

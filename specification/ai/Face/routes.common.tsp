@@ -96,6 +96,11 @@ op FaceResourceDeleteOperation<TResource extends TypeSpec.Reflection.Model> is F
   ServiceTraits
 >;
 
+op FaceResourceReadOperationWithReturnRecognitionModelOptions<TResource extends TypeSpec.Reflection.Model> is Operations.ResourceRead<
+  TResource,
+  QueryParametersTrait<ReturnRecognitionModelOptions>
+>;
+
 @action("train")
 @actionSeparator("/")
 op FaceResourceTrain<TResource extends TypeSpec.Reflection.Model> is Operations.ResourceAction<

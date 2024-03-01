@@ -20,10 +20,16 @@ model PersonDirectoryPerson {
   ...NameAndUserData;
 }
 
-@doc("The status of a long running operation.")
-model AsyncOperationStatus {
+@resource("operations")
+@doc("Long running operation resource for person directory.")
+model FaceOperationStatus {
+  @key
+  @visibility("read")
+  @doc("Operation ID of the operation.")
+  operationId: string;
+
   @doc("Current status of the operation.")
-  status: OperationStatus;
+  status: Foundations.OperationState;
 
   @doc("Date and time the operation was created.")
   createdDateTime: utcDateTime;
@@ -33,24 +39,6 @@ model AsyncOperationStatus {
 
   @doc("Message for the operation.")
   message?: string;
-}
-
-@lroStatus
-@doc("The status of the operation.")
-enum OperationStatus {
-  @doc("Operation not started.")
-  notstarted,
-
-  @doc("Operation running.")
-  running,
-
-  @lroSucceeded
-  @doc("Operation succeeded.")
-  succeeded,
-
-  @lroFailed
-  @doc("Operation failed.")
-  failed,
 }
 
 @resource("recognitionModels")

@@ -11,116 +11,138 @@ using Foundations;
 
 namespace Face;
 
-interface BasePersonGroups<
-  TGroup extends BasePersonGroup,
-  TPerson extends BasePersonGroupPerson,
-  TFace extends BaseFace
-> {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  createGroup is FaceResourceCreateOperation<TGroup>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Create has no response body while standard op requires resource in body"
+op createPersonGroup is FaceResourceCreateOperation<PersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  deleteGroup is FaceResourceDeleteOperation<TGroup>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
+op deletePersonGroup is FaceResourceDeleteOperation<PersonGroup>;
 
-  getGroup is Operations.ResourceRead<
-    TGroup,
-    QueryParametersTrait<ReturnRecognitionModelOptions>
-  >;
+op getPersonGroup is FaceResourceReadOperationWithReturnRecognitionModelOptions<PersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  updateGroup is FaceResourceUpdateOperation<TGroup>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
+op updatePersonGroup is FaceResourceUpdateOperation<PersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  listGroup is FaceResourceListOperation<
-    TGroup,
-    TGroup,
-    ReturnRecognitionModelOptions
-  >;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
+op listPersonGroups is FaceResourceListOperation<
+  PersonGroup,
+  PersonGroup,
+  ReturnRecognitionModelOptions
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  createPerson is FaceResourceCreateWithServiceProvidedName<TPerson>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+op getPersonGroupTrainingStatus is FaceResourceGetTrainingStatus<PersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  deletePerson is FaceResourceDeleteOperation<TPerson>;
+@pollingOperation(getPersonGroupTrainingStatus)
+op trainPersonGroup is FaceResourceTrain<PersonGroup>;
 
-  getPerson is Operations.ResourceRead<TPerson>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Create person perform on resource collection but not response created resorce location in header"
+op createPersonGroupPerson is FaceResourceCreateWithServiceProvidedName<PersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  updatePerson is FaceResourceUpdateOperation<TPerson>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
+op deletePersonGroupPerson is FaceResourceDeleteOperation<PersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  listPerson is FaceResourceListOperation<TPerson>;
+op getPersonGroupPerson is Operations.ResourceRead<PersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @sharedRoute
-  addFaceFromUrl is AddFaceFromUrl<TFace>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
+op updatePersonGroupPerson is FaceResourceUpdateOperation<PersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @sharedRoute
-  addFaceFromStream is AddFaceFromStream<TFace>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
+op listPersonGroupPerson is FaceResourceListOperation<PersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  deleteFace is FaceResourceDeleteOperation<TFace>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resorce location in header"
+op addPersonGroupPersonFaceFromUrl is AddFaceFromUrl<PersonGroupPersonFace>;
 
-  getFace is Operations.ResourceRead<TFace>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resorce location in header"
+#suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+op addPersonGroupPersonFaceFromStream is AddFaceFromStream<PersonGroupPersonFace>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  updateFace is FaceResourceUpdateOperation<TFace>;
-}
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
+op deletePersonGroupPersonFace is FaceResourceDeleteOperation<PersonGroupPersonFace>;
 
-interface PersonGroups
-  extends BasePersonGroups<
-      PersonGroup,
-      PersonGroupPerson,
-      PersonGroupPersonFace
-    > {
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
-  identifyFromPersonGroup is IdentifyOperation<{
-    @doc("Id of the target person group, created by PersonGroup - Create.")
-    personGroupId: string;
-  }>;
+op getPersonGroupPersonFace is Operations.ResourceRead<PersonGroupPersonFace>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
-  verifyFromPersonGroup is VerifyOperation<{
-    @doc("Id of the target person group, created by PersonGroup - Create.")
-    personGroupId: string;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
+op updatePersonGroupPersonFace is FaceResourceUpdateOperation<PersonGroupPersonFace>;
 
-    @doc("Specify a certain person in person group.")
-    personId: string;
-  }>;
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
+op identifyFromPersonGroup is IdentifyOperation<{
+  @doc("Id of the target person group, created by PersonGroup - Create.")
+  personGroupId: string;
+}>;
 
-  @pollingOperation(PersonGroups.getTrainingStatus)
-  trainGroup is FaceResourceTrain<PersonGroup>;
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
+op verifyFromPersonGroup is VerifyOperation<{
+  @doc("Id of the target person group, created by PersonGroup - Create.")
+  personGroupId: string;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getTrainingStatus is FaceResourceGetTrainingStatus<PersonGroup>;
-}
+  @doc("Specify a certain person in person group.")
+  personId: string;
+}>;
 
-interface LargePersonGroups
-  extends BasePersonGroups<
-      LargePersonGroup,
-      LargePersonGroupPerson,
-      LargePersonGroupPersonFace
-    > {
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
-  identifyFromLargePersonGroup is IdentifyOperation<{
-    @doc("Id of the target large person group, created by LargePersonGroup - Create.")
-    largePersonGroupId: string;
-  }>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Create has no response body while standard op requires resource in body"
+op createLargePersonGroup is FaceResourceCreateOperation<LargePersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
-  verifyFromLargePersonGroup is VerifyOperation<{
-    @doc("Id of the target large person group, created by LargePersonGroup - Create.")
-    largePersonGroupId: string;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
+op deleteLargePersonGroup is FaceResourceDeleteOperation<LargePersonGroup>;
 
-    @doc("Specify a certain person in large person group.")
-    personId: string;
-  }>;
+op getLargePersonGroup is FaceResourceReadOperationWithReturnRecognitionModelOptions<LargePersonGroup>;
 
-  @pollingOperation(LargePersonGroups.getTrainingStatus)
-  trainGroup is FaceResourceTrain<LargePersonGroup>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
+op updateLargePersonGroup is FaceResourceUpdateOperation<LargePersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getTrainingStatus is FaceResourceGetTrainingStatus<LargePersonGroup>;
-}
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
+op listLargePersonGroups is FaceResourceListOperation<
+  LargePersonGroup,
+  LargePersonGroup,
+  ReturnRecognitionModelOptions
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+op getLargePersonGroupTrainingStatus is FaceResourceGetTrainingStatus<LargePersonGroup>;
+
+@pollingOperation(getLargePersonGroupTrainingStatus)
+op trainLargePersonGroup is FaceResourceTrain<LargePersonGroup>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Create person perform on resource collection but not response created resorce location in header"
+op createLargePersonGroupPerson is FaceResourceCreateWithServiceProvidedName<LargePersonGroupPerson>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
+op deleteLargePersonGroupPerson is FaceResourceDeleteOperation<LargePersonGroupPerson>;
+
+op getLargePersonGroupPerson is Operations.ResourceRead<LargePersonGroupPerson>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
+op updateLargePersonGroupPerson is FaceResourceUpdateOperation<LargePersonGroupPerson>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
+op listLargePersonGroupPerson is FaceResourceListOperation<LargePersonGroupPerson>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resorce location in header"
+op addLargePersonGroupPersonFaceFromUrl is AddFaceFromUrl<LargePersonGroupPersonFace>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resorce location in header"
+#suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+op addLargePersonGroupPersonFaceFromStream is AddFaceFromStream<LargePersonGroupPersonFace>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
+op deleteLargePersonGroupPersonFace is FaceResourceDeleteOperation<LargePersonGroupPersonFace>;
+
+op getLargePersonGroupPersonFace is Operations.ResourceRead<LargePersonGroupPersonFace>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
+op updateLargePersonGroupPersonFace is FaceResourceUpdateOperation<LargePersonGroupPersonFace>;
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
+op identifyFromLargePersonGroup is IdentifyOperation<{
+  @doc("Id of the target person group, created by LargePersonGroup - Create.")
+  largePersonGroupId: string;
+}>;
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
+op verifyFromLargePersonGroup is VerifyOperation<{
+  @doc("Id of the target person group, created by LargePersonGroup - Create.")
+  largePersonGroupId: string;
+
+  @doc("Specify a certain person in person group.")
+  personId: string;
+}>;
