@@ -553,7 +553,7 @@ model BulkImportResult {
 }
 
 @doc("Business metadata to send to the service")
-model BusinessMetadataFile {
+model BusinessMetadataOptions {
   @doc("InputStream of file")
   file: bytes;
 }
