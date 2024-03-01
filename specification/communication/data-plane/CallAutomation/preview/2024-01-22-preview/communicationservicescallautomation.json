@@ -1679,7 +1679,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "powerVirtualAgents"
+      "x-ms-discriminator-value": "PowerVirtualAgents"
     },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
@@ -2520,6 +2520,10 @@
         },
         "isMuted": {
           "description": "Is participant muted",
+          "type": "boolean"
+        },
+        "isOnHold": {
+          "description": "Is participant on hold.",
           "type": "boolean"
         }
       }
@@ -4073,6 +4077,31 @@
           "$ref": "#/definitions/TranscriptionUpdate",
           "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
           "readOnly": true
+        }
+      }
+    },
+    "HoldFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     }
