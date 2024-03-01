@@ -174,5 +174,38 @@ interface BlobServiceAccountProperties {
     @doc("Identifies the account kind.")
     @clientName("AccountKind")
     @header `x-ms-account-kind`: AccountKind;
+    @doc("Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled.")
+    @clientName("IsHierarchicalNamespaceEnabled")
+    @header `x-ms-is-hns-enabled`: boolean;
+  } | StorageError;
+}
+
+@route("/?comp=batch")
+interface BlobServiceBatch {
+  @doc("The Batch operation allows multiple API calls to be embedded into a single HTTP request.")
+  @post
+  @operationId("Service_SubmitBatch")
+  post(
+    @doc("The batch request content")
+    @body body: bytes; // TODO: Investigate this type
+    @doc("The batch request content length")
+    @header `Content-Length`: int64;
+    @doc("Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>")
+    @clientName("multipartContentType")
+    @header `Content-Type`: string;
+    @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>")
+    @query timeout?: int32;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.")
+    @header `x-ms-client-request-id`?: string;
+  ): {
+    @statusCode statusCode: 200;
+    @doc("The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID")
+    @header `Content-Type`: string;
+    @doc("This header uniquely identifies the request that was made and can be used for troubleshooting the request.")
+    @header `x-ms-request-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
   } | StorageError;
 }
