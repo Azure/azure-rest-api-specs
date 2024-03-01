@@ -161,6 +161,20 @@ suppressions:
     reason: Using common types for management group name
 
 ```
+### Tag: package-deploymentscripts-2023-12
+
+These settings apply only when `--tag=package-deploymentscripts-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-deploymentscripts-2023-12'
+input-file:
+  - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
+  - Microsoft.Resources/stable/2023-08-01/edgeDevices.json
+  - Microsoft.Resources/stable/2023-08-01/hciCommon.json
+
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: OperationsAPI will come from Resources
+```
 
 ### Tag: package-deploymentscripts-2023-08
 
