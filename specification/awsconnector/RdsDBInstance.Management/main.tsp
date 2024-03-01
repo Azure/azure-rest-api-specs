@@ -73,8 +73,8 @@ model AwsRdsDBInstanceProperties {
   @doc("Gets and sets the property backupRetentionPeriod. The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.")
   backupRetentionPeriod?: int32;
 
-  @doc("Gets and sets the property cACertificateIdentifier. The identifier of the CA certificate for this DB instance.")
-  cACertificateIdentifier?: string;
+  @doc("Gets and sets the property caCertificateIdentifier. The identifier of the CA certificate for this DB instance.")
+  caCertificateIdentifier?: string;
 
   @doc("Gets and sets the property certificateDetails. Returns the details of the DB instance's server certificate.")
   certificateDetails?: CertificateDetails;
@@ -91,39 +91,39 @@ model AwsRdsDBInstanceProperties {
   @doc("Gets and sets the property customIAMInstanceProfile. The instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance. The instance profile must meet the following requirements: * The profile must exist in your account. * The profile must have an IAM role that Amazon EC2 has permissions to assume. * The instance profile name and the associated IAM role name must start with the prefix AWSRDSCustom .For the list of permissions required for the IAM role, see Configure IAM and your VPC in the Amazon RDS User Guide .This setting is required for RDS Custom.")
   customIAMInstanceProfile?: string;
 
-  @doc("Gets and sets the property dBClusterIdentifier. The identifier of the DB cluster that the instance will belong to.")
-  dBClusterIdentifier?: string;
+  @doc("Gets and sets the property dbClusterIdentifier. The identifier of the DB cluster that the instance will belong to.")
+  dbClusterIdentifier?: string;
 
-  @doc("Gets and sets the property dBClusterSnapshotIdentifier. The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .Constraints: * Must match the identifier of an existing Multi-AZ DB cluster snapshot. * Can't be specified when DBSnapshotIdentifier is specified. * Must be specified when DBSnapshotIdentifier isn't specified. * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot. * Can't be the identifier of an Aurora DB cluster snapshot. * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.")
-  dBClusterSnapshotIdentifier?: string;
+  @doc("Gets and sets the property dbClusterSnapshotIdentifier. The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .Constraints: * Must match the identifier of an existing Multi-AZ DB cluster snapshot. * Can't be specified when DBSnapshotIdentifier is specified. * Must be specified when DBSnapshotIdentifier isn't specified. * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot. * Can't be the identifier of an Aurora DB cluster snapshot. * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.")
+  dbClusterSnapshotIdentifier?: string;
 
-  @doc("Gets and sets the property dBInstanceArn. The Amazon Resource Name (ARN) for the DB instance.")
-  dBInstanceArn?: string;
+  @doc("Gets and sets the property dbInstanceArn. The Amazon Resource Name (ARN) for the DB instance.")
+  dbInstanceArn?: string;
 
-  @doc("Gets and sets the property dBInstanceClass. The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions, or for all database engines.")
-  dBInstanceClass?: string;
+  @doc("Gets and sets the property dbInstanceClass. The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions, or for all database engines.")
+  dbInstanceClass?: string;
 
-  @doc("Gets and sets the property dBInstanceIdentifier. A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance.")
-  dBInstanceIdentifier?: string;
+  @doc("Gets and sets the property dbInstanceIdentifier. A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance.")
+  dbInstanceIdentifier?: string;
 
-  @doc("Gets and sets the property dBName. The meaning of this parameter differs according to the database engine you use.")
-  dBName?: string;
+  @doc("Gets and sets the property dbName. The meaning of this parameter differs according to the database engine you use.")
+  dbName?: string;
 
-  @doc("Gets and sets the property dBParameterGroupName. The name of an existing DB parameter group or a reference to an AWS::RDS::DBParameterGroup resource created in the template.")
-  dBParameterGroupName?: string;
+  @doc("Gets and sets the property dbParameterGroupName. The name of an existing DB parameter group or a reference to an AWS::RDS::DBParameterGroup resource created in the template.")
+  dbParameterGroupName?: string;
 
-  @doc("Gets and sets the property dBSecurityGroups. A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.")
+  @doc("Gets and sets the property dbSecurityGroups. A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.")
   @extension("x-ms-identifiers", [])
-  dBSecurityGroups?: string[];
+  dbSecurityGroups?: string[];
 
-  @doc("Gets and sets the property dBSnapshotIdentifier. The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.")
-  dBSnapshotIdentifier?: string;
+  @doc("Gets and sets the property dbSnapshotIdentifier. The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.")
+  dbSnapshotIdentifier?: string;
 
-  @doc("Gets and sets the property dBSubnetGroupName. A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC.")
-  dBSubnetGroupName?: string;
+  @doc("Gets and sets the property dbSubnetGroupName. A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC.")
+  dbSubnetGroupName?: string;
 
-  @doc("Gets and sets the property dBSystemId. The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only.")
-  dBSystemId?: string;
+  @doc("Gets and sets the property dbSystemId. The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only.")
+  dbSystemId?: string;
 
   @doc("Gets and sets the property dbiResourceId. The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.")
   dbiResourceId?: string;
@@ -291,9 +291,9 @@ model AwsRdsDBInstanceProperties {
   @doc("Gets and sets the property useLatestRestorableTime. A value that indicates whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time.")
   useLatestRestorableTime?: boolean;
 
-  @doc("Gets and sets the property vPCSecurityGroups. A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to AWS::EC2::SecurityGroup resources created in the template.")
+  @doc("Gets and sets the property vpcSecurityGroups. A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to AWS::EC2::SecurityGroup resources created in the template.")
   @extension("x-ms-identifiers", [])
-  vPCSecurityGroups?: string[];
+  vpcSecurityGroups?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -311,8 +311,8 @@ model DBInstanceRole {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of CertificateDetails")
 model CertificateDetails {
-  @doc("Gets and sets the property cAIdentifier. The CA identifier of the CA certificate used for the DB instance's server certificate.")
-  cAIdentifier?: string;
+  @doc("Gets and sets the property caIdentifier. The CA identifier of the CA certificate used for the DB instance's server certificate.")
+  caIdentifier?: string;
 
   @doc("Gets and sets the property validTill. The expiration date of the DB instance’s server certificate.")
   validTill?: string;
