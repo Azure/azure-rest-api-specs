@@ -41,6 +41,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2024-03-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2024-03-01-preview/AutomationRules.json
   - Microsoft.SecurityInsights/preview/2024-03-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2024-03-01-preview/BusinessApplicationAgents.json
   - Microsoft.SecurityInsights/preview/2024-03-01-preview/Bookmarks.json
   - Microsoft.SecurityInsights/preview/2024-03-01-preview/ContentPackages.json
   - Microsoft.SecurityInsights/preview/2024-03-01-preview/ContentProductPackages.json
