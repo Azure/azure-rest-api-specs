@@ -1344,16 +1344,16 @@ directive:
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: PathForTrackedResourceTypes
     from: deploymentStacks.json
-    reason: A deployment stack resource is a proxy location-mapped resource type.
+    reason: "A deployment stack resource is a proxy location-mapped resource type."
   - suppress: TenantLevelAPIsNotAllowed
     from: deploymentStacks.json
-    reason: Working with deployment stacks at the management group scope is supported.
+    reason: "Working with deployment stacks at the management group scope is supported."
   - suppress: TrackedResourcePatchOperation
     from: deploymentStacks.json
-    reason: A deployment stack resource is a proxy location-mapped resource type.
+    reason: "A deployment stack resource is a proxy location-mapped resource type."
   - suppress: AvoidAdditionalProperties
     from: deploymentStacks.json
-    reason: Deployment properties such as 'parameters', 'outputs', and 'template' are dynamic types. For example, properties of the parameters object are defined by the template content.
+    reason: "Deployment properties such as 'parameters', 'outputs', and 'template' are dynamic types. For example, properties of the parameters object are defined by the template content."
 ```
 
 ---
