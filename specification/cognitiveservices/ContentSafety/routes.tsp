@@ -168,7 +168,7 @@ interface TextBlocklists {
 
 @added(Versions.v2024_02_15_Preview)
 interface TextGroundednessDetectionOperations {
-  @summary("Detect Missing Source")
+  @summary("Detect Groundedness")
   @doc("A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.")
   @route("/text:detectGroundedness")
   @post
