@@ -74,29 +74,29 @@ model AwsRdsDBClusterProperties {
   @doc("Gets and sets the property copyTagsToSnapshot. A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.")
   copyTagsToSnapshot?: boolean;
 
-  @doc("Gets and sets the property dBClusterArn. The Amazon Resource Name (ARN) for the DB cluster.")
-  dBClusterArn?: string;
+  @doc("Gets and sets the property dbClusterArn. The Amazon Resource Name (ARN) for the DB cluster.")
+  dbClusterArn?: string;
 
-  @doc("Gets and sets the property dBClusterIdentifier. The DB cluster identifier. This parameter is stored as a lowercase string.")
-  dBClusterIdentifier?: string;
+  @doc("Gets and sets the property dbClusterIdentifier. The DB cluster identifier. This parameter is stored as a lowercase string.")
+  dbClusterIdentifier?: string;
 
-  @doc("Gets and sets the property dBClusterInstanceClass. The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.")
-  dBClusterInstanceClass?: string;
+  @doc("Gets and sets the property dbClusterInstanceClass. The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.")
+  dbClusterInstanceClass?: string;
 
-  @doc("Gets and sets the property dBClusterParameterGroupName. The name of the DB cluster parameter group to associate with this DB cluster.")
-  dBClusterParameterGroupName?: string;
+  @doc("Gets and sets the property dbClusterParameterGroupName. The name of the DB cluster parameter group to associate with this DB cluster.")
+  dbClusterParameterGroupName?: string;
 
-  @doc("Gets and sets the property dBClusterResourceId. The AWS Region-unique, immutable identifier for the DB cluster.")
-  dBClusterResourceId?: string;
+  @doc("Gets and sets the property dbClusterResourceId. The AWS Region-unique, immutable identifier for the DB cluster.")
+  dbClusterResourceId?: string;
 
-  @doc("Gets and sets the property dBInstanceParameterGroupName. The name of the DB parameter group to apply to all instances of the DB cluster.")
-  dBInstanceParameterGroupName?: string;
+  @doc("Gets and sets the property dbInstanceParameterGroupName. The name of the DB parameter group to apply to all instances of the DB cluster.")
+  dbInstanceParameterGroupName?: string;
 
-  @doc("Gets and sets the property dBSubnetGroupName. A DB subnet group that you want to associate with this DB cluster.")
-  dBSubnetGroupName?: string;
+  @doc("Gets and sets the property dbSubnetGroupName. A DB subnet group that you want to associate with this DB cluster.")
+  dbSubnetGroupName?: string;
 
-  @doc("Gets and sets the property dBSystemId. Reserved for future use.")
-  dBSystemId?: string;
+  @doc("Gets and sets the property dbSystemId. Reserved for future use.")
+  dbSystemId?: string;
 
   @doc("Gets and sets the property databaseName. The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see Naming Constraints in the Amazon RDS User Guide.")
   databaseName?: string;

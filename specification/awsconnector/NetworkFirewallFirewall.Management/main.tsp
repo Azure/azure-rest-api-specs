@@ -96,8 +96,8 @@ model AwsNetworkFirewallFirewallProperties {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of SubnetMapping")
 model SubnetMapping {
-  @doc("Gets and sets the property iPAddressType. A IPAddressType")
-  iPAddressType?: string;
+  @doc("Gets and sets the property ipAddressType. A IPAddressType")
+  ipAddressType?: string;
 
   @doc("Gets and sets the property subnetId. A SubnetId.")
   subnetId?: string;
