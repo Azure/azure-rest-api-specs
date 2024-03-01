@@ -1,0 +1,74 @@
+{
+  "title": "Maintenances_List",
+  "operationId": "Maintenances_List",
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/maintenances/maintenance1",
+            "name": "maintenance1",
+            "type": "Microsoft.AVS/privateClouds/maintenances",
+            "properties": {
+              "component": "VCSA",
+              "displayName": "vcsa 7.0 upgrade",
+              "clusterId": 1,
+              "infoLink": "https://vmwarekb/arcticle",
+              "impact": "This upgrade will update your vcsa to 7.0. Control plance performance will be impacted for the duration",
+              "scheduledStartTime": "2023-01-12T11:00:11.830Z",
+              "estimatedDurationInMinutes": 960,
+              "state": {
+                "stage": "PreCheck",
+                "stageStatus": "NotStarted",
+                "message": "CD rom mounted",
+                "startedAt": "2023-01-12T11:00:11.830Z",
+                "endedAt": "2023-01-12T11:00:11.830Z"
+              },
+              "provisioningState": "Succeeded",
+              "rescheduleConstraints": {
+                "deadline": "2023-01-12T11:00:11.830Z",
+                "freezeDays": [
+                  "2023-01-13"
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/maintenances/maintenance2",
+            "name": "maintenance2",
+            "type": "Microsoft.AVS/privateClouds/maintenances",
+            "properties": {
+              "component": "VCSA",
+              "displayName": "vcsa 7.0 upgrade",
+              "clusterId": 1,
+              "infoLink": "https://vmwarekb/arcticle",
+              "impact": "This upgrade will update your vcsa to 7.0. Control plance performance will be impacted for the duration",
+              "scheduledStartTime": "2023-01-12T11:00:11.830Z",
+              "estimatedDurationInMinutes": 960,
+              "state": {
+                "stage": "PreCheck",
+                "stageStatus": "NotStarted",
+                "message": "CD rom mounted",
+                "startedAt": "2023-01-12T11:00:11.830Z",
+                "endedAt": "2023-01-12T11:00:11.830Z"
+              },
+              "provisioningState": "Succeeded",
+              "rescheduleConstraints": {
+                "deadline": "2023-01-12T11:00:11.830Z",
+                "freezeDays": [
+                  "2023-01-13"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
