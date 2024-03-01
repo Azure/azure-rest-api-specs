@@ -13,24 +13,24 @@ options:
     examples-directory: "examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Face.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-face"
+    package-dir: "azure-ai-vision-face"
     package-name: "{package-dir}"
     package-mode: dataplane
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.Face"
+    package-dir: "Azure.AI.Vision.Face"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "ai-face-rest"
+    package-dir: "ai-vision-face-rest"
     generateMetadata: true
     generateTest: true
     packageDetails:
-      name: "@azure-rest/ai-face-rest"
+      name: "@azure-rest/ai-vision-face"
       description: "Face API REST Client"
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-face"
-    namespace: com.azure.ai.face
+    package-dir: "azure-ai-vision-face"
+    namespace: com.azure.ai.vision.face
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
