@@ -56,6 +56,15 @@ input-file:
   - preview/2023-10-15-preview/contentsafety.json
 ```
 
+### Tag: package-2024-02-15-preview
+
+These settings apply only when `--tag=package-2024-02-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-15-preview'
+input-file:
+  - preview/2024-02-15-preview/contentsafety.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
