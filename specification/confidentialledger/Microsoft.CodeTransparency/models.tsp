@@ -138,8 +138,10 @@ model GetOperationResult {
 @lroStatus
 enum OperationStatus {
   running,
+
   @lroFailed
   failed,
+
   @lroSucceeded
   succeeded,
 }
