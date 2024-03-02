@@ -97,6 +97,19 @@ model ExperimentationWorkspace
   ...ManagedServiceIdentity;
 }
 
+@armResourceOperations
+interface ExperimentationWorkspaces {
+  get is ArmResourceRead<ExperimentationWorkspace>;
+  create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
+  update is ArmResourcePatchAsync<
+    ExperimentationWorkspace,
+    ExperimentationWorkspaceProperties
+  >;
+  delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
+  listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
+  listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
+}
+
 @doc("The exchange token parameters for exchanging Split.IO data plane authentication token.")
 model ExchangeTokenParameters {
   @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
@@ -117,19 +130,6 @@ model ExchangeTokenResult {
   @doc("If any, the error message that provides more detail for the reason that the exchange token failed.")
   @visibility("read")
   message: string;
-}
-
-@armResourceOperations
-interface ExperimentationWorkspaces {
-  get is ArmResourceRead<ExperimentationWorkspace>;
-  create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
-  update is ArmResourcePatchAsync<
-    ExperimentationWorkspace,
-    ExperimentationWorkspaceProperties
-  >;
-  delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
-  listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
-  listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
