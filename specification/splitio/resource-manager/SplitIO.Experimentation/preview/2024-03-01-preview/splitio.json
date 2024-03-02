@@ -60,7 +60,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -99,7 +99,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ExperimentationWorkspaceListResult"
             }
@@ -141,7 +141,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ExperimentationWorkspaceListResult"
             }
@@ -192,7 +192,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ExperimentationWorkspace"
             }
@@ -319,7 +319,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ExperimentationWorkspace"
             }
@@ -400,7 +400,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -419,6 +419,63 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/exchangeToken": {
+      "post": {
+        "operationId": "ExperimentationWorkspaces_ExchangeToken",
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the ExperimentationWorkspace resource",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "^[^<>%&:\\?/#]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExchangeTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExchangeTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspacesExchangeToken": {
+            "$ref": "./examples/ExperimentationWorkspacesExchangeToken.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -429,6 +486,11 @@
         "applicationId": {
           "type": "string",
           "description": "Application id used for access to the experimentation workspace."
+        },
+        "dataPlaneEndpoint": {
+          "type": "string",
+          "description": "Endpoint used for access to the experimentation workspace.",
+          "readOnly": true
         }
       },
       "required": [
@@ -494,6 +556,42 @@
           "description": "Log Analytics data source."
         }
       }
+    },
+    "ExchangeTokenRequest": {
+      "type": "object",
+      "description": "The request body for exchanging Split.IO data plane authentication token.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "format": "password",
+          "description": "The bearer token that is used for exchanging Split.IO data plane authentication token.",
+          "x-ms-secret": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource of Split.IO data plane authentication token."
+        }
+      },
+      "required": [
+        "token",
+        "resource"
+      ]
+    },
+    "ExchangeTokenResponse": {
+      "type": "object",
+      "description": "The response body that contains the bearer token which is used for Split.IO data plane authentication.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "format": "password",
+          "description": "The bearer token that is used for Split.IO data plane authentication.",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "token"
+      ]
     },
     "ExperimentationWorkspace": {
       "type": "object",
@@ -649,7 +747,7 @@
     "LogAnalyticsWorkspaceResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -661,7 +759,7 @@
     "StorageAccountResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {

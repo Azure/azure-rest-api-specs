@@ -44,6 +44,10 @@ model ExperimentationWorkspaceProperties {
 model AccessPolicy {
   @doc("Application id used for access to the experimentation workspace.")
   applicationId: string;
+
+  @doc("Endpoint used for access to the experimentation workspace.")
+  @visibility("read")
+  dataPlaneEndpoint?: string;
 }
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
@@ -93,6 +97,24 @@ model ExperimentationWorkspace
   ...ManagedServiceIdentity;
 }
 
+@doc("The request body for exchanging Split.IO data plane authentication token.")
+model ExchangeTokenRequest {
+  @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
+  @secret
+  token: string;
+
+  @doc("The resource of Split.IO data plane authentication token.")
+  resource: string;
+}
+
+@doc("The response body that contains the bearer token which is used for Split.IO data plane authentication.")
+model ExchangeTokenResponse {
+  @doc("The bearer token that is used for Split.IO data plane authentication.")
+  @visibility("read")
+  @secret
+  token: string;
+}
+
 @armResourceOperations
 interface ExperimentationWorkspaces {
   get is ArmResourceRead<ExperimentationWorkspace>;
@@ -104,4 +126,9 @@ interface ExperimentationWorkspaces {
   delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
   listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
   listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
+  exchangeToken is ArmResourceActionSync<
+    ExperimentationWorkspace,
+    ExchangeTokenRequest,
+    ExchangeTokenResponse
+  >;
 }
