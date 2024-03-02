@@ -420,13 +420,10 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/exchangeToken": {
+    "/susbscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/{workspaceName}/exchangeToke": {
       "post": {
-        "operationId": "ExperimentationWorkspaces_ExchangeToken",
-        "tags": [
-          "ExperimentationWorkspaces"
-        ],
-        "description": "A synchronous resource action.",
+        "operationId": "Token_Exchange",
+        "description": "The action to exchange Split.IO data plane authentication token.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -440,16 +437,16 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "The name of the ExperimentationWorkspace resource",
+            "description": "The name of the ExperimentationWorkspace resource.",
             "required": true,
             "type": "string",
             "maxLength": 50,
             "pattern": "^[^<>%&:\\?/#]*$"
           },
           {
-            "name": "body",
+            "name": "exchangeTokenRequest",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The body of exchange token request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExchangeTokenRequest"
@@ -458,7 +455,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ExchangeTokenResponse"
             }
@@ -471,8 +468,8 @@
           }
         },
         "x-ms-examples": {
-          "ExperimentationWorkspacesExchangeToken": {
-            "$ref": "./examples/ExperimentationWorkspacesExchangeToken.json"
+          "TokenExchange": {
+            "$ref": "./examples/TokenExchange.json"
           }
         }
       }
