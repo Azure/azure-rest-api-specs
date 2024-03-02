@@ -132,7 +132,7 @@ model ExchangeTokenResult {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
-@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/")
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/")
 interface DataPlaneAuthentication {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
   @doc("The action to exchange Split.IO data plane authentication token.")
@@ -143,12 +143,6 @@ interface DataPlaneAuthentication {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
-
-    @doc("The name of the ExperimentationWorkspace resource.")
-    @path
-    @pattern("^[^<>%&:\\?/#]*$")
-    @maxLength(50)
-    workspaceName: string,
 
     @doc("The parameter of exchange token action.")
     @body

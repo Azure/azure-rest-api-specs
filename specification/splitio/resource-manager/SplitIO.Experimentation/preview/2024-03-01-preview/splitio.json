@@ -420,7 +420,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/exchangeToken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/exchangeToken": {
       "post": {
         "operationId": "DataPlaneAuthentication_ExchangeToken",
         "description": "The action to exchange Split.IO data plane authentication token.",
@@ -433,15 +433,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the ExperimentationWorkspace resource.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
           },
           {
             "name": "exchangeTokenParameters",
