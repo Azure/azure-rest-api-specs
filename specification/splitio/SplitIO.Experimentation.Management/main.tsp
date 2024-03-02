@@ -97,8 +97,8 @@ model ExperimentationWorkspace
   ...ManagedServiceIdentity;
 }
 
-@doc("The request body for exchanging Split.IO data plane authentication token.")
-model ExchangeTokenRequest {
+@doc("The exchange token parameters for exchanging Split.IO data plane authentication token.")
+model ExchangeTokenParameters {
   @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
   @secret
   token: string;
@@ -107,12 +107,16 @@ model ExchangeTokenRequest {
   resource: string;
 }
 
-@doc("The response body that contains the bearer token which is used for Split.IO data plane authentication.")
-model ExchangeTokenResponse {
+@doc("The exchange token result that contains the bearer token which is used for Split.IO data plane authentication.")
+model ExchangeTokenResult {
   @doc("The bearer token that is used for Split.IO data plane authentication.")
   @visibility("read")
   @secret
   token: string;
+
+  @doc("If any, the error message that provides more detail for the reason that the exchange token failed.")
+  @visibility("read")
+  message: string;
 }
 
 @armResourceOperations
@@ -129,7 +133,7 @@ interface ExperimentationWorkspaces {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
-@route("/susbscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/{workspaceName}/")
+@route("/susbscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/")
 interface Token {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
   @doc("The action to exchange Split.IO data plane authentication token.")
@@ -147,11 +151,8 @@ interface Token {
     @maxLength(50)
     workspaceName: string,
 
-    @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
-    @secret
-    token: string,
-
-    @doc("The resource of Split.IO data plane authentication token.")
-    resource: string,
-  ): ExchangeTokenResponse | ErrorResponse;
+    @doc("The parameter of exchange token action.")
+    @body
+    exchangeTokenParameters: ExchangeTokenParameters,
+  ): ExchangeTokenResult | ErrorResponse;
 }
