@@ -133,7 +133,7 @@ interface ExperimentationWorkspaces {
 interface Token {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
   @doc("The action to exchange Split.IO data plane authentication token.")
-  @route("exchangeToke")
+  @route("ExchangeToken")
   @post
   @action
   exchange(
@@ -147,8 +147,11 @@ interface Token {
     @maxLength(50)
     workspaceName: string,
 
-    @doc("The body of exchange token request.")
-    @body
-    exchangeTokenRequest: ExchangeTokenRequest,
+    @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
+    @secret
+    token: string,
+
+    @doc("The resource of Split.IO data plane authentication token.")
+    resource: string,
   ): ExchangeTokenResponse | ErrorResponse;
 }

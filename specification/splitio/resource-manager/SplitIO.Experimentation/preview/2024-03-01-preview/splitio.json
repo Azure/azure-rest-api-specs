@@ -420,7 +420,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/susbscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/{workspaceName}/exchangeToke": {
+    "/susbscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/{workspaceName}/ExchangeToken": {
       "post": {
         "operationId": "Token_Exchange",
         "description": "The action to exchange Split.IO data plane authentication token.",
@@ -444,12 +444,27 @@
             "pattern": "^[^<>%&:\\?/#]*$"
           },
           {
-            "name": "exchangeTokenRequest",
+            "name": "body",
             "in": "body",
-            "description": "The body of exchange token request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExchangeTokenRequest"
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "format": "password",
+                  "description": "The bearer token that is used for exchanging Split.IO data plane authentication token.",
+                  "x-ms-secret": true
+                },
+                "resource": {
+                  "type": "string",
+                  "description": "The resource of Split.IO data plane authentication token."
+                }
+              },
+              "required": [
+                "token",
+                "resource"
+              ]
             }
           }
         ],
