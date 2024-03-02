@@ -79,6 +79,9 @@ model CompletionsOptions {
   @projectedName("csharp", "LogProbabilityCount")
   logprobs?: int32;
 
+  @doc("The suffix that comes after a completion of inserted text")
+  suffix?: string;
+
   @doc("""
     A value specifying whether completions responses should include input prompts as prefixes to
     their generated output.

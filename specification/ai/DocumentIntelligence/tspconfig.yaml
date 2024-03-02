@@ -15,8 +15,8 @@ options:
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     examples-directory: "examples"
+    omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DocumentIntelligence.json"
-  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   "@azure-tools/typespec-python":
     package-pprint-name: "Azure AI Document Intelligence"
     package-dir: "azure-ai-documentintelligence"
@@ -40,7 +40,6 @@ options:
     package-dir: "Azure.AI.DocumentIntelligence"
     namespace: "Azure.AI.DocumentIntelligence"
     model-namespace: false
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
   "@azure-tools/typespec-ts":
     title: DocumentIntelligence
     package-dir: "ai-document-intelligence-rest"

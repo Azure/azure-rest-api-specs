@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-11
+tag: package-2024-01
 ```
 
 ## Suppression
@@ -79,6 +79,34 @@ suppressions:
 ```
 
 
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2024-01-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/deploymentSettings.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/edgeDevices.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/common.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/galleryImages.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/logicalNetworks.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/networkInterfaces.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/securitySettings.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/storageContainers.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/updates.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/virtualMachineInstances.json
+```
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
