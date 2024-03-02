@@ -22,21 +22,20 @@
   ],
   "security": [
     {
-      "AadOauth2Auth": [
+      "azure_auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "AadOauth2Auth": {
+    "azure_auth": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "flow": "accessCode",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
-      },
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "tags": [
@@ -302,7 +301,7 @@
             "description": "Parameters for updating the properties of the GitHub.Network resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkSettingsResourceTagsUpdate"
+              "$ref": "#/definitions/NetworkSettingsResourceUpdate"
             },
             "x-ms-client-name": "properties"
           }
@@ -379,11 +378,6 @@
       "type": "object",
       "description": "GitHub.Network networkSettings resource. Represents the network settings needed for vnet injection.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkSettingsResourceProperties",
-          "description": "NetworkSettings resource-specific properties.",
-          "x-ms-client-flatten": true
-        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
@@ -391,7 +385,24 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "type": "object",
+          "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/NetworkSettingsResourceProperties",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+            }
+          ]
         }
       ]
     },
@@ -435,16 +446,38 @@
         }
       }
     },
-    "NetworkSettingsResourceTagsUpdate": {
+    "NetworkSettingsResourceUpdate": {
       "type": "object",
-      "description": "The type used for updating tags in NetworkSettingsResource resources.",
+      "description": "The type used for update operations of the NetworkSettingsResource.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkSettingsResourceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSettingsResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the NetworkSettingsResource.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Specifies a subnet ID for vnet-injection."
+        },
+        "businessId": {
+          "type": "string",
+          "description": "Specifies the GitHub business (enterprise/organization) ID associated to the Azure subscription."
         }
       }
     },
