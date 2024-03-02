@@ -126,9 +126,29 @@ interface ExperimentationWorkspaces {
   delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
   listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
   listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
-  exchangeToken is ArmResourceActionSync<
-    ExperimentationWorkspace,
-    ExchangeTokenRequest,
-    ExchangeTokenResponse
-  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
+@route("/susbscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/{workspaceName}/")
+interface Token {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
+  @doc("The action to exchange Split.IO data plane authentication token.")
+  @route("exchangeToke")
+  @post
+  @action
+  exchange(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    @doc("The name of the ExperimentationWorkspace resource.")
+    @path
+    @pattern("^[^<>%&:\\?/#]*$")
+    @maxLength(50)
+    workspaceName: string,
+
+    @doc("The body of exchange token request.")
+    @body
+    exchangeTokenRequest: ExchangeTokenRequest,
+  ): ExchangeTokenResponse | ErrorResponse;
 }
