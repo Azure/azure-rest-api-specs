@@ -16,7 +16,7 @@
         "tags": [
           "BillingProfile"
         ],
-        "description": "Validates if the billing profile can be deleted. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement, and Enterprise Agreement.",
+        "description": "Validates if the billing profile can be deleted. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement and Microsoft Partner Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -120,7 +120,7 @@
         "tags": [
           "BillingProfile"
         ],
-        "description": "Gets a billing profile by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement, and Enterprise Agreement.",
+        "description": "Gets a billing profile by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement and Microsoft Partner Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -163,7 +163,7 @@
         "tags": [
           "BillingProfile"
         ],
-        "description": "Creates or updates a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement, and Enterprise Agreement.",
+        "description": "Creates or updates a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement and Microsoft Partner Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -235,7 +235,7 @@
         "tags": [
           "BillingProfile"
         ],
-        "description": "Lists the billing profiles that a user has access to. The operation is supported for billing accounts with agreement of type Microsoft Customer Agreement, Microsoft Partner Agreement, and Enterprise Agreement.",
+        "description": "Lists the billing profiles that a user has access to. The operation is supported for billing accounts with agreement of type Microsoft Customer Agreement and Microsoft Partner Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -523,6 +523,23 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "currentPaymentTerm": {
+          "description": "The current payment term of the billing profile.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PaymentTerm"
+            }
+          ]
+        },
+        "otherPaymentTerms": {
+          "description": "The other payment terms of the billing profile.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentTerm"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -578,6 +595,31 @@
             "$ref": "#/definitions/DeleteBillingProfileEligibilityDetail"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "PaymentTerm": {
+      "description": "The properties of payment term.",
+      "type": "object",
+      "properties": {
+        "term": {
+          "description": "Represents duration in netXX format. Always in days.",
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "description": "The date on when the defined 'Payment Term' will be effective from and is always in UTC.",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "description": "The date on when the defined 'Payment Term' will end and is always in UTC.",
+          "type": "string"
+        },
+        "isDefault": {
+          "description": "Indicates payment term is the standard payment term.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },

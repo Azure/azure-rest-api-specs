@@ -11,6 +11,149 @@
     "version": "2023-04-01"
   },
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/addPaymentTerms": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Adds payment terms to all the billing profiles under the billing account. Currently, payment terms can be added only on billing accounts that have Agreement Type as 'Microsoft Customer Agreement' and AccountType as 'Enterprise'. This action needs pre-authorization and only Field Sellers are authorized to add the payment terms and is not a self-serve action.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_AddPaymentTerms",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of payment term.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PaymentTerm"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing accounts.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountListResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "PaymentTermsAdd": {
+            "$ref": "./examples/paymentTermsAdd.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/cancelPaymentTerms": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Cancels all the payment terms on billing account that falls after the cancellation date in the request. Currently, cancel payment terms is only served by admin actions and is not a self-serve action.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_CancelPaymentTerms",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Date after which any payment terms that needs to be cancelled.",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing accounts.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountListResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "PaymentTermsCancel": {
+            "$ref": "./examples/paymentTermsCancel.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/confirmTransition": {
       "post": {
         "tags": [
@@ -49,6 +192,66 @@
         "x-ms-examples": {
           "BillingAccountsConfirmTransition": {
             "$ref": "./examples/billingAccountsConfirmTransition.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/validatePaymentTerms": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Validates payment terms on a billing account with agreement type 'Microsoft Customer Agreement' and account type 'Enterprise'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_ValidatePaymentTerms",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of payment term.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PaymentTerm"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of the payment terms eligibility.",
+            "schema": {
+              "$ref": "#/definitions/PaymentTermsEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaymentTermInvalid": {
+            "$ref": "./examples/paymentTermInvalid.json"
+          },
+          "PaymentTermValid": {
+            "$ref": "./examples/paymentTermValid.json"
           }
         }
       }
@@ -212,6 +415,20 @@
             "in": "query",
             "name": "includeDeleted",
             "description": "When true, results will include any billing accounts in a deleted state.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includePendingAgreement",
+            "description": "Includes billing accounts with agreement pending signature that the user has access to.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includeResellee",
+            "description": "Includes the customer's billing account of Microsoft Partner Agreement that the user has access to.",
             "type": "boolean",
             "default": false
           },
@@ -680,6 +897,88 @@
           "description": "The contact who receives invoices of the enrollment.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "PaymentTerm": {
+      "description": "The properties of payment term.",
+      "type": "object",
+      "properties": {
+        "term": {
+          "description": "Represents duration in netXX format. Always in days.",
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "description": "The date on when the defined 'Payment Term' will be effective from and is always in UTC.",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "description": "The date on when the defined 'Payment Term' will end and is always in UTC.",
+          "type": "string"
+        },
+        "isDefault": {
+          "description": "Indicates payment term is the standard payment term.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "PaymentTermsEligibilityDetail": {
+      "description": "Details of the payment terms eligibility.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Indicates the reason for the ineligibility of the payment terms.",
+          "enum": [
+            "Other",
+            "OverlappingPaymentTerms",
+            "InvalidDateFormat",
+            "InvalidDateRange",
+            "InactiveBillingAccount",
+            "InvalidBillingAccountType",
+            "NullOrEmptyPaymentTerms",
+            "BillingAccountNotFound",
+            "IneligibleBillingAccountStatus",
+            "InvalidTerms"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PaymentTermsEligibilityCode",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "Indicates the message for the ineligibility of the payment terms.",
+          "type": "string"
+        }
+      }
+    },
+    "PaymentTermsEligibilityResult": {
+      "description": "Result of the payment terms eligibility.",
+      "type": "object",
+      "properties": {
+        "eligibilityStatus": {
+          "description": "Indicates the eligibility status of the payment terms.",
+          "enum": [
+            "Other",
+            "Valid",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PaymentTermsEligibilityStatus",
+            "modelAsString": true
+          }
+        },
+        "eligibilityDetails": {
+          "description": "Details of the payment terms eligibility.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentTermsEligibilityDetail"
+          },
+          "x-ms-identifiers": []
         }
       }
     },

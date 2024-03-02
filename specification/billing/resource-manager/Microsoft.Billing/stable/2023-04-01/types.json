@@ -210,7 +210,7 @@
           "type": "string"
         },
         "billingProfileName": {
-          "description": "The billing profile name of the partner or the customer for an indirect motion. This field is not populated for Enterprise Agreement billing accounts.",
+          "description": "The billing profile name of the partner or the customer for an indirect motion.",
           "type": "string"
         },
         "displayName": {
@@ -223,6 +223,11 @@
       "description": "Details of the Azure plan.",
       "type": "object",
       "properties": {
+        "productId": {
+          "description": "The ID that uniquely identifies a product.",
+          "type": "string",
+          "readOnly": true
+        },
         "skuId": {
           "description": "The ID that uniquely identifies a sku.",
           "type": "string",

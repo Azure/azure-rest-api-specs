@@ -267,6 +267,24 @@
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
           }
         ],
         "responses": {
@@ -429,7 +447,7 @@
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "TransactionSummary_GetByInvoice",
+        "operationId": "Transactions_GetTransactionSummaryByInvoice",
         "produces": [
           "application/json"
         ],
@@ -444,22 +462,16 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "./types.json#/parameters/filter"
+            "in": "query",
+            "name": "filter",
+            "description": "The filter query option allows clients to filter the line items that are aggregated to create the line item summary.",
+            "type": "string"
           },
           {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
+            "in": "query",
+            "name": "search",
+            "description": "The search query option allows clients to filter the line items that are aggregated to create the line item summary.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -480,83 +492,6 @@
           "TransactionSummaryGetByInvoice": {
             "$ref": "./examples/transactionSummaryGetByInvoice.json"
           }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/transactions": {
-      "get": {
-        "tags": [
-          "Transaction"
-        ],
-        "description": "Lists the billed or unbilled transactions by billing account name for given start and end date. Transactions include purchases, refunds and Azure usage charges. Unbilled transactions are listed under pending invoice Id and do not include tax. Tax is added to the amount once an invoice is generated.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Transactions_ListByBillingAccount",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "in": "query",
-            "name": "periodStartDate",
-            "description": "The start date to fetch the transactions. The date should be specified in MM-DD-YYYY format.",
-            "required": true,
-            "type": "string",
-            "format": "date"
-          },
-          {
-            "in": "query",
-            "name": "periodEndDate",
-            "description": "The end date to fetch the transactions. The date should be specified in MM-DD-YYYY format.",
-            "required": true,
-            "type": "string",
-            "format": "date"
-          },
-          {
-            "in": "query",
-            "name": "type",
-            "description": "The type of transaction.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Other",
-              "Billed",
-              "Unbilled"
-            ],
-            "x-ms-enum": {
-              "name": "TransactionType",
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of transactions.",
-            "schema": {
-              "$ref": "#/definitions/TransactionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TransactionsListByBillingAccount": {
-            "$ref": "./examples/transactionsListByBillingAccount.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }

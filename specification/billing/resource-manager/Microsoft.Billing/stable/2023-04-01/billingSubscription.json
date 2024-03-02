@@ -323,12 +323,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The billing properties of a subscription.",
-            "schema": {
-              "$ref": "#/definitions/BillingSubscription"
-            }
-          },
           "202": {
             "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
             "headers": {
@@ -340,6 +334,9 @@
                 "format": "int32"
               }
             }
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -515,12 +512,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The billing properties of a subscription.",
-            "schema": {
-              "$ref": "#/definitions/BillingSubscription"
-            }
-          },
           "202": {
             "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
             "headers": {
@@ -532,6 +523,9 @@
                 "format": "int32"
               }
             }
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1083,6 +1077,11 @@
               "$ref": "#/definitions/SystemOverrides"
             }
           ]
+        },
+        "resourceUri": {
+          "description": "Unique identifier of the linked resource.",
+          "type": "string",
+          "readOnly": true
         },
         "termDuration": {
           "description": "The duration in ISO8601 format for which you can use the subscription. Example: P1M, P3M, P1Y",

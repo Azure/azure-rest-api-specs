@@ -19,7 +19,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}": {
       "get": {
         "description": "Get a savings plan order by billing account.",
-        "operationId": "SavingsPlanOrder_GetByBillingAccount",
+        "operationId": "SavingsPlanOrders_GetByBillingAccount",
         "tags": [
           "Savings plan order"
         ],
@@ -64,7 +64,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders": {
       "get": {
         "description": "List all Savings plan orders by billing account.",
-        "operationId": "SavingsPlanOrder_ListByBillingAccount",
+        "operationId": "SavingsPlanOrders_ListByBillingAccount",
         "tags": [
           "Savings plan order"
         ],
@@ -112,7 +112,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans": {
       "get": {
         "description": "List savings plans in an order by billing account.",
-        "operationId": "SavingsPlansInOrder_ListByBillingAccount",
+        "operationId": "SavingsPlans_ListBySavingsPlanOrder",
         "tags": [
           "Savings plan"
         ],
@@ -211,7 +211,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}": {
       "get": {
         "description": "Get savings plan by billing account.",
-        "operationId": "SavingsPlan_GetByBillingAccount",
+        "operationId": "SavingsPlans_GetByBillingAccount",
         "tags": [
           "Savings plan"
         ],
@@ -257,7 +257,7 @@
       },
       "patch": {
         "description": "Update savings plan by billing account.",
-        "operationId": "SavingsPlan_UpdateByBillingAccount",
+        "operationId": "SavingsPlans_UpdateByBillingAccount",
         "tags": [
           "Savings plan"
         ],
@@ -324,7 +324,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/validate": {
       "post": {
         "description": "Validate savings plan patch by billing account.",
-        "operationId": "SavingsPlanUpdate_ValidateByBillingAccount",
+        "operationId": "SavingsPlans_ValidateUpdateByBillingAccount",
         "tags": [
           "Savings plan"
         ],
@@ -529,7 +529,7 @@
     },
     "ExpiryDate": {
       "type": "string",
-      "description": "Provisioning state",
+      "description": "Date when the Order is expected to expire",
       "readOnly": true,
       "format": "date"
     },
@@ -797,7 +797,9 @@
           "$ref": "#/definitions/DisplayName"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
+          "description": "The provisioning state of the savings plan, e.g. Succeeded",
+          "readOnly": true,
+          "type": "string"
         },
         "billingScopeId": {
           "$ref": "#/definitions/BillingScopeId"
@@ -820,13 +822,13 @@
         "benefitStartTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the DateTime when the savings plan benefit started.",
+          "description": "DateTime when the savings plan benefit started.",
           "readOnly": true
         },
         "expiryDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the date-time when the savings plan will expire.",
+          "description": "DateTime when the savings plan will expire.",
           "readOnly": true
         },
         "expiryDate": {
@@ -1009,7 +1011,7 @@
         "paymentDate": {
           "type": "string",
           "format": "date",
-          "description": "Date when the transaction is completed. Is null when it is scheduled."
+          "description": "Date when the transaction is completed. Null when it is scheduled."
         },
         "pricingCurrencyTotal": {
           "$ref": "#/definitions/Price",
@@ -1029,13 +1031,14 @@
     },
     "PaymentStatus": {
       "type": "string",
-      "description": "Describes whether the payment is completed, failed, cancelled or scheduled in the future.",
+      "description": "Describes whether the payment is completed, failed, pending, cancelled or scheduled in the future.",
       "enum": [
         "Succeeded",
         "Failed",
         "Scheduled",
         "Cancelled",
-        "Completed"
+        "Completed",
+        "Pending"
       ],
       "x-ms-enum": {
         "name": "PaymentStatus",
