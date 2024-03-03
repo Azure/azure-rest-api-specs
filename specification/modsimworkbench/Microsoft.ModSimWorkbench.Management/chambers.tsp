@@ -187,7 +187,7 @@ interface Chambers
   >;
 
   @doc("Get URI for uploading file to chamber")
-  getUploadUri is ArmResourceActionSync<
+  getUploadUri is ArmResourceActionAsync<
     Chamber,
     FileUploadParameters,
     GetUploadUri

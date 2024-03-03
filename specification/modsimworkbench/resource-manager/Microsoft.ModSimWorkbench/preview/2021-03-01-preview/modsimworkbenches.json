@@ -2172,6 +2172,20 @@
               "$ref": "#/definitions/GetUploadUri"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2183,7 +2197,11 @@
           "Chambers_GetUploadUri": {
             "$ref": "./examples/ChambersGetUploadUri.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/licenseRestart": {
@@ -3865,7 +3883,7 @@
             "create"
           ]
         },
-        "copyPaste": {
+        "copyPasteSetting": {
           "type": "string",
           "description": "Copy and paste permissions.",
           "default": "disabled",
@@ -3874,7 +3892,7 @@
             "disabled"
           ],
           "x-ms-enum": {
-            "name": "CopyPastePermission",
+            "name": "CopyPasteSetting",
             "modelAsString": true,
             "values": [
               {
@@ -3962,16 +3980,16 @@
       "type": "object",
       "description": "Property for copy and paste permission",
       "properties": {
-        "copyPaste": {
-          "$ref": "#/definitions/CopyPastePermission",
+        "copyPasteSetting": {
+          "$ref": "#/definitions/CopyPasteSetting",
           "description": "Copy and paste permissions"
         }
       },
       "required": [
-        "copyPaste"
+        "copyPasteSetting"
       ]
     },
-    "CopyPastePermission": {
+    "CopyPasteSetting": {
       "type": "string",
       "description": "Enumeration for copy and paste permissions",
       "enum": [
@@ -3979,7 +3997,7 @@
         "disabled"
       ],
       "x-ms-enum": {
-        "name": "CopyPastePermission",
+        "name": "CopyPasteSetting",
         "modelAsString": true,
         "values": [
           {

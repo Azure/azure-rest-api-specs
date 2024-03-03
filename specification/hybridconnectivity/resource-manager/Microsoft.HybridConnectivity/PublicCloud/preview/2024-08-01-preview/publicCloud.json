@@ -80,7 +80,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SolutionConfiguration"
             }
@@ -186,7 +186,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SolutionConfiguration"
             }
@@ -230,7 +230,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -270,7 +270,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InventoryResourceListResult"
             }
@@ -323,7 +323,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InventoryResource"
             }
@@ -368,7 +368,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "object"
             }
@@ -404,7 +404,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PublicCloudConnectorListResult"
             }
@@ -443,7 +443,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SolutionTypeResourceListResult"
             }
@@ -485,7 +485,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PublicCloudConnectorListResult"
             }
@@ -534,7 +534,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PublicCloudConnector"
             }
@@ -657,7 +657,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PublicCloudConnector"
             }
@@ -704,7 +704,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -747,7 +747,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TestPermissionResponse"
             }
@@ -804,7 +804,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SolutionTypeResourceListResult"
             }
@@ -826,7 +826,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/solutionTypes/{solutionTypes}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/solutionTypes/{solutionType}": {
       "get": {
         "operationId": "SolutionTypes_Get",
         "tags": [
@@ -844,7 +844,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "solutionTypes",
+            "name": "solutionType",
             "in": "path",
             "description": "Solution Type resource",
             "required": true,
@@ -853,7 +853,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SolutionTypeResource"
             }
@@ -1383,7 +1383,7 @@
     },
     "SolutionTypeProperties": {
       "type": "object",
-      "description": "Represent Solution type resource.",
+      "description": "Definition of Solution type resource.",
       "properties": {
         "solutionType": {
           "type": "string",
@@ -1391,26 +1391,22 @@
         },
         "description": {
           "type": "string",
-          "description": "Short description of solution type"
-        },
-        "awsIamConfigurationTemplateUri": {
-          "type": "string",
-          "description": "The link to AWS CloudFormation template."
-        },
-        "gcpProjectConfigurationTemplateUri": {
-          "type": "string",
-          "description": "The link to GCP script."
+          "description": "Short description of solution type."
         },
         "supportedAzureRegions": {
           "type": "array",
-          "description": "The locations this solution is supported",
+          "description": "The locations this solution is supported in.",
           "items": {
             "type": "string"
           }
         },
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The resource provisioning state."
+        "solutionSettings": {
+          "type": "array",
+          "description": "Array of solution settings and its description.",
+          "items": {
+            "$ref": "#/definitions/SolutionTypeSettingsProperties"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1472,6 +1468,47 @@
         "solutionType"
       ]
     },
+    "SolutionTypeSettingsProperties": {
+      "type": "object",
+      "description": "Represent Solution settings properties description array.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the solution setting property."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The UI friendly name of the solution setting property."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the solution setting property, represented as a string."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of solution setting property."
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Array of allowed values for this solution settings property.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value for this solution settings property."
+        }
+      },
+      "required": [
+        "name",
+        "displayName",
+        "type",
+        "description",
+        "allowedValues",
+        "defaultValue"
+      ]
+    },
     "Status": {
       "type": "string",
       "description": "Connection status.",
@@ -1500,10 +1537,6 @@
       "type": "object",
       "description": "Public connector permissions.",
       "properties": {
-        "overallStatus": {
-          "$ref": "#/definitions/Status",
-          "description": "The name of public cloud connector"
-        },
         "solutionTypes": {
           "type": "array",
           "description": "Solution type permissions.",
@@ -1514,7 +1547,6 @@
         }
       },
       "required": [
-        "overallStatus",
         "solutionTypes"
       ]
     },

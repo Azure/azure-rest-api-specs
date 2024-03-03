@@ -13,11 +13,20 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.KubernetesRuntime")
 @service({
   title: "Microsoft.KubernetesRuntime",
-  version: "2023-10-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Microsoft.KubernetesRuntime.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.KubernetesRuntime;
+
+@doc("Versions of KubernetesRuntime service")
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("2023-10-01-preview")
+  v2023_10_01_preview: "2023-10-01-preview",
+
+  @doc("2024-03-01, added bgpPeers field in LoadBalancer")
+  v2024_03_01: "2024-03-01",
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 

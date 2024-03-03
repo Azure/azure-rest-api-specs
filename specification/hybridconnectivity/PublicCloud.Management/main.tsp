@@ -55,9 +55,6 @@ model SolutionTypeSettings {
 
 @doc("Public connector permissions.")
 model TestPermissionResponse {
-  @doc("The name of public cloud connector")
-  overallStatus: Status;
-
   @doc("Solution type permissions.")
   solutionTypes: Array<SolutionTypePermissions>;
 }
@@ -198,30 +195,46 @@ enum SolutionConfigurationStatus {
 model SolutionTypeResource is ProxyResource<SolutionTypeProperties> {
   @doc("Solution Type resource")
   @segment("solutionTypes")
-  @key("solutionTypes")
+  @key("solutionType")
   @path
   name: string;
 }
 
-@doc("Represent Solution type resource.")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This proxy resource does not have a state"
+@doc("Definition of Solution type resource.")
 model SolutionTypeProperties {
   @doc("The name of the solution type.")
   solutionType?: string;
 
-  @doc("Short description of solution type")
+  @doc("Short description of solution type.")
   description?: string;
 
-  @doc("The link to AWS CloudFormation template.")
-  awsIamConfigurationTemplateUri?: string;
-
-  @doc("The link to GCP script.")
-  gcpProjectConfigurationTemplateUri?: string;
-
-  @doc("The locations this solution is supported")
+  @doc("The locations this solution is supported in.")
   supportedAzureRegions?: string[];
 
-  @doc("The resource provisioning state.")
-  provisioningState?: ResourceProvisioningState;
+  @doc("Array of solution settings and its description.")
+  solutionSettings?: SolutionTypeSettingsProperties[];
+}
+
+@doc("Represent Solution settings properties description array.")
+model SolutionTypeSettingsProperties {
+  @doc("The name of the solution setting property.")
+  name: string;
+
+  @doc("The UI friendly name of the solution setting property.")
+  displayName: string;
+
+  @doc("Type of the solution setting property, represented as a string.")
+  type: string;
+
+  @doc("Description of solution setting property.")
+  description: string;
+
+  @doc("Array of allowed values for this solution settings property.")
+  allowedValues: string[];
+
+  @doc("Default value for this solution settings property.")
+  defaultValue: string;
 }
 
 //------------------- Inventory -------------------

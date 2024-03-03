@@ -67,7 +67,7 @@ enum LicenseActivated {
 }
 
 @doc("Enumeration for copy and paste permissions")
-enum CopyPastePermission {
+enum CopyPasteSetting {
   @doc("Copy and paste enabled.")
   enabled,
 
@@ -115,7 +115,7 @@ model NetworkAcls {
 @doc("Property for copy and paste permission")
 model CopyPasteParameters {
   @doc("Copy and paste permissions")
-  copyPaste: CopyPastePermission;
+  copyPasteSetting: CopyPasteSetting;
 }
 
 @doc("License key parameters")
@@ -136,7 +136,7 @@ model ConnectorProperties {
 
   @visibility("read", "create")
   @doc("Copy and paste permissions.")
-  copyPaste?: CopyPastePermission = CopyPastePermission.disabled;
+  copyPasteSetting?: CopyPasteSetting = CopyPasteSetting.disabled;
 
   @visibility("read", "create")
   @doc("Remote desktop configuration.")
