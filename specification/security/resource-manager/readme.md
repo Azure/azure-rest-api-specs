@@ -574,7 +574,8 @@ input-file:
 - Microsoft.Security/stable/2023-01-01/pricings.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
-
+- Microsoft.Security/stable/2023-07-01-preview/integrations.json
+- 
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
