@@ -11,7 +11,7 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.ImageGenerationOptions, Access.public);
 @@usage(Azure.OpenAI.ImageGenerationOptions, Usage.input | Usage.output);
 @@access(Azure.OpenAI.ImageSize, Access.public);
-@@usage(Azure.OpenAI.ImageGenerations, Usage.input | Usage.output);
+@@usage(Azure.OpenAI.ImageGenerations, Usage.output);
 
 // The purpose of this enum is to identify the type of a given result. In C#, this is redundant because we have
 // strongly-typed classes for each possible result.
