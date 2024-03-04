@@ -144,21 +144,25 @@ model DeviceGroupProperties {
 }
 
 @doc("OS feed type values.")
-enum OSFeedType {
+union OSFeedType {
+  string,
+
   /** Retail OS feed type. */
-  Retail,
+  "Retail",
 
   /** Retail evaluation OS feed type. */
-  RetailEval,
+  "RetailEval",
 }
 
 @doc("Update policy values.")
-enum UpdatePolicy {
+union UpdatePolicy {
+  string,
+
   /** Update all policy. */
-  UpdateAll,
+  "UpdateAll",
 
   /** No update for 3rd party app policy. */
-  No3rdPartyAppUpdates,
+  "No3rdPartyAppUpdates",
 }
 
 // Device group models
