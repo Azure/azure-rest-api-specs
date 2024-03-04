@@ -237,7 +237,6 @@ model JailbreakAnalysisResult {
   detected: boolean;
 }
 
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("Domain.")
@@ -267,7 +266,7 @@ model QnAOptions {
 @doc("LLM resource type.")
 enum LLMResourceType {
   @doc("Azure OpenAI resource type.")
-  AzureOpenAI
+  AzureOpenAI,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
@@ -388,6 +387,7 @@ model DetectGroundednessResult {
 model AnalyzeTextPromptInjectionOptions {
   @doc("The user prompt needs to be analyzed if it attempts to do direct injection attacks.")
   userPrompt?: string;
+
   @doc("The documents needs to be analyzed if they attempt to do direct or indirect injection attacks.")
   documents?: string[];
 }
@@ -397,6 +397,7 @@ model AnalyzeTextPromptInjectionOptions {
 model AnalyzeTextPromptInjectionResult {
   @doc("Direct injection analysis result for user prompt input.")
   userPromptAnalysis?: TextPromptInjectionResult;
+
   @doc("Direct and indirect injection attacks analysis result for documents input.")
   documentsAnalysis?: TextPromptInjectionResult[];
 }
