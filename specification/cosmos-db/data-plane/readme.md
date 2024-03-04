@@ -30,13 +30,22 @@ openapi-type: data-plane
 tag: package-2019-02
 ```
 
+### Tag: package-2019-02-preview
+
+These settings apply only when `--tag=package-2019-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02'
+input-file:
+- Microsoft.Tables/preview/2019-02-02/table.json
+```
+
 ### Tag: package-2019-02
 
 These settings apply only when `--tag=package-2019-02` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2019-02'
 input-file:
-- Microsoft.Tables/preview/2019-02-02/table.json
+- Microsoft.Tables/stable/2019-02-02/table.json
 ```
 
 ---
