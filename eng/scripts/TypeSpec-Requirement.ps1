@@ -41,11 +41,17 @@ function Get-Suppression {
   if ($suppressionsFile) {
     $suppressions = Get-Content -Path $suppressionsFile -Raw | ConvertFrom-Yaml
     foreach ($suppression in $suppressions) {
-      if ($suppression.tool -eq "TypeSpecRequirement") {
-        # Paths in suppressions.yml are relative to the file itself
-        $fullPath = Join-Path -Path (Split-Path -Path $suppressionsFile) -ChildPath $suppression.path
+      # Disable strict mode to handle tool or path not specified
+      Set-StrictMode -Off
+      $tool = $suppression.tool
+      $path = $suppression.path
+      Set-StrictMode -Version Latest
 
-        if ($file -like $fullPath) {
+      if ($tool -eq "TypeSpecRequirement") {
+        # Paths in suppressions.yml are relative to the file itself
+        $fullPath = Join-Path -Path (Split-Path -Path $suppressionsFile) -ChildPath $path
+
+        if (!$path -or ($file -like $fullPath)) {
           return $suppression
         }
       }
@@ -83,7 +89,7 @@ else {
 
     $suppression = Get-Suppression $fullPath
     if ($suppression) {
-      # Disable strict mode to handle case where reason is not specified
+      # Disable strict mode to handle reason not specified
       Set-StrictMode -Off
       $reason = $suppression.reason ?? "<no reason specified>"
       Set-StrictMode -Version Latest
