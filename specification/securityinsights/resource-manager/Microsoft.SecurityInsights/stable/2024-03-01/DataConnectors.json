@@ -88,6 +88,9 @@
           "Get a TI data connector.": {
             "$ref": "./examples/dataConnectors/GetThreatIntelligenceById.json"
           },
+          "Get a TI Taxii data connector.": {
+            "$ref": "./examples/dataConnectors/GetThreatIntelligenceTaxiiById.json"
+          },
           "Get a MCAS data connector.": {
             "$ref": "./examples/dataConnectors/GetMicrosoftCloudAppSecurityById.json"
           },
@@ -151,6 +154,9 @@
           },
           "Creates or updates an Threat Intelligence Platform data connector.": {
             "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a Threat Intelligence Taxii data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceTaxiiDataConnector.json"
           }
         },
         "tags": [
@@ -422,6 +428,7 @@
         "AzureSecurityCenter",
         "MicrosoftCloudAppSecurity",
         "ThreatIntelligence",
+        "ThreatIntelligenceTaxii",
         "Office365",
         "AmazonWebServicesCloudTrail",
         "AzureAdvancedThreatProtection",
@@ -443,6 +450,9 @@
           },
           {
             "value": "ThreatIntelligence"
+          },
+          {
+            "value": "ThreatIntelligenceTaxii"
           },
           {
             "value": "Office365"
@@ -649,6 +659,118 @@
           "description": "The available data types for the connector."
         }
       },
+      "type": "object"
+    },
+    "TiTaxiiDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Data connector to pull Threat intelligence data from TAXII 2.0/2.1 server",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TiTaxiiDataConnectorProperties",
+          "description": "Threat intelligence TAXII data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
+    },
+    "TiTaxiiDataConnectorDataTypes": {
+      "description": "The available data types for Threat Intelligence TAXII data connector.",
+      "properties": {
+        "taxiiClient": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for TAXII connector.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "taxiiClient"
+      ]
+    },
+    "TiTaxiiDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Threat Intelligence TAXII data connector properties.",
+      "properties": {
+        "workspaceId": {
+          "description": "The workspace id.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "The friendly name for the TAXII server.",
+          "type": "string"
+        },
+        "taxiiServer": {
+          "description": "The API root for the TAXII server.",
+          "type": "string"
+        },
+        "collectionId": {
+          "description": "The collection id of the TAXII server.",
+          "type": "string"
+        },
+        "userName": {
+          "description": "The userName for the TAXII server.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password for the TAXII server.",
+          "type": "string"
+        },
+        "taxiiLookbackPeriod": {
+          "description": "The lookback period for the TAXII server.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "pollingFrequency": {
+          "description": "The polling frequency for the TAXII server.",
+          "type": "string",
+          "x-nullable": true,
+          "enum": [
+            "OnceAMinute",
+            "OnceAnHour",
+            "OnceADay"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PollingFrequency",
+            "values": [
+              {
+                "description": "Once a minute",
+                "value": "OnceAMinute"
+              },
+              {
+                "description": "Once an hour",
+                "value": "OnceAnHour"
+              },
+              {
+                "description": "Once a day",
+                "value": "OnceADay"
+              }
+            ]
+          }
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/TiTaxiiDataConnectorDataTypes",
+          "description": "The available data types for Threat Intelligence TAXII data connector."
+        }
+      },
+      "required": [
+        "dataTypes",
+        "pollingFrequency"
+      ],
       "type": "object"
     },
     "OfficeDataConnector": {
