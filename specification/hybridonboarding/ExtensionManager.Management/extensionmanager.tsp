@@ -20,6 +20,8 @@ model ExtensionManager is TrackedResource<ExtensionManagerProperties> {
   @doc("Extension Manager resource")
   @path
   name: string;
+
+  ...ManagedSystemAssignedIdentity;
 }
 
 @doc("The properties of Extension Manager resource")
@@ -81,6 +83,8 @@ model ScenarioObject {
 model ExtensionManagerPatch {
   @doc("Resource tags.")
   tags?: Record<string>;
+
+  ...ManagedSystemAssignedIdentity;
 }
 
 @doc("Provisioning state of the resource")
