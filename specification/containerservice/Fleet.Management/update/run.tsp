@@ -311,6 +311,8 @@ interface UpdateRuns {
       `final-state-via`: "location",
     }
   )
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   delete is FleetArmResourceDeleteAsync<
     UpdateRun,
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
