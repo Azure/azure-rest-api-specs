@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-10-01",
+    "version": "2024-04-04-preview",
     "title": "SubscriptionClient",
     "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
   },
@@ -965,6 +965,15 @@
             "type": "string",
             "example": "00000000-0000-0000-0000-000000000000"
           }
+        },
+        "tenantChangeAllowedTenants": {
+          "description": "List of allowed tenants among which subscriptions can leave or enter without getting blocked.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
@@ -1085,6 +1094,15 @@
         },
         "exemptedPrincipals": {
           "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        "tenantChangeAllowedTenants": {
+          "description": "List of allowed tenants among which subscriptions can leave or enter without getting blocked.",
           "type": "array",
           "items": {
             "format": "uuid",
