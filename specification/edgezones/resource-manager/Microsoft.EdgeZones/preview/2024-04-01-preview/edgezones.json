@@ -186,15 +186,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegisterAzureExtendedZoneRequest"
-            }
           }
         ],
         "responses": {
@@ -422,39 +413,6 @@
         ]
       },
       "readOnly": true
-    },
-    "RegisterAzureExtendedZoneRequest": {
-      "type": "object",
-      "description": "An AzureExtendedZone register request body",
-      "properties": {
-        "organizationName": {
-          "type": "string",
-          "description": "Organization Name for the Azure Extended Zone registration"
-        },
-        "organizationContactName": {
-          "type": "string",
-          "description": "Organization Contact Name for the Azure Extended Zone registration"
-        },
-        "organizationContactEmailAddress": {
-          "type": "string",
-          "description": "Organization Contact Email Address for the Azure Extended Zone registration"
-        },
-        "organizationAzureServicesNeeded": {
-          "type": "string",
-          "description": "Azure services needed by the organization for the Azure Extended Zone registration"
-        },
-        "organizationAzureResourceCapacityNeeded": {
-          "type": "string",
-          "description": "Azure resource capacity needed by the organization for the Azure Extended Zone registration"
-        }
-      },
-      "required": [
-        "organizationName",
-        "organizationContactName",
-        "organizationContactEmailAddress",
-        "organizationAzureServicesNeeded",
-        "organizationAzureResourceCapacityNeeded"
-      ]
     },
     "RegistrationState": {
       "type": "string",
