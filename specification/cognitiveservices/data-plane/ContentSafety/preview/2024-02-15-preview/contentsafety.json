@@ -794,32 +794,28 @@
           }
         },
         "outputType": {
-          "$ref": "#/definitions/AnalyzeImageOutputType",
+          "type": "string",
           "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
-          "default": "FourSeverityLevels"
+          "default": "FourSeverityLevels",
+          "enum": [
+            "FourSeverityLevels"
+          ],
+          "x-ms-enum": {
+            "name": "AnalyzeImageOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FourSeverityLevels",
+                "value": "FourSeverityLevels",
+                "description": "Output severities in four levels, the value could be 0,2,4,6."
+              }
+            ]
+          }
         }
       },
       "required": [
         "image"
       ]
-    },
-    "AnalyzeImageOutputType": {
-      "type": "string",
-      "description": "The type of image analysis output.",
-      "enum": [
-        "FourSeverityLevels"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeImageOutputType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "FourSeverityLevels",
-            "value": "FourSeverityLevels",
-            "description": "Output severities in four levels, the value could be 0,2,4,6."
-          }
-        ]
-      }
     },
     "AnalyzeImageResult": {
       "type": "object",
@@ -893,38 +889,34 @@
           "description": "When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit."
         },
         "outputType": {
-          "$ref": "#/definitions/AnalyzeTextOutputType",
+          "type": "string",
           "description": "This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
-          "default": "FourSeverityLevels"
+          "default": "FourSeverityLevels",
+          "enum": [
+            "FourSeverityLevels",
+            "EightSeverityLevels"
+          ],
+          "x-ms-enum": {
+            "name": "AnalyzeTextOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FourSeverityLevels",
+                "value": "FourSeverityLevels",
+                "description": "Output severities in four levels, the value could be 0,2,4,6."
+              },
+              {
+                "name": "EightSeverityLevels",
+                "value": "EightSeverityLevels",
+                "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
+              }
+            ]
+          }
         }
       },
       "required": [
         "text"
       ]
-    },
-    "AnalyzeTextOutputType": {
-      "type": "string",
-      "description": "The type of text analysis output.",
-      "enum": [
-        "FourSeverityLevels",
-        "EightSeverityLevels"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeTextOutputType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "FourSeverityLevels",
-            "value": "FourSeverityLevels",
-            "description": "Output severities in four levels, the value could be 0,2,4,6."
-          },
-          {
-            "name": "EightSeverityLevels",
-            "value": "EightSeverityLevels",
-            "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
-          }
-        ]
-      }
     },
     "AnalyzeTextPromptInjectionOptions": {
       "type": "object",
@@ -1079,14 +1071,30 @@
       "description": "The request of groundedness detection.",
       "properties": {
         "domain": {
-          "$ref": "#/definitions/Domain",
+          "type": "string",
           "description": "The domain of the text for analysis. Allowed values: Medical, Generic.\nThis field is optional, with a default value of Generic.",
-          "default": "Generic"
+          "default": "Generic",
+          "enum": [
+            "Generic",
+            "Medical"
+          ],
+          "x-ms-enum": {
+            "name": "Domain",
+            "modelAsString": true
+          }
         },
         "task": {
-          "$ref": "#/definitions/Task",
+          "type": "string",
           "description": "The task type for the text analysis. Type of task: QnA, Summarization.\nThis field is optional, with a default value of Summarization.",
-          "default": "Summarization"
+          "default": "Summarization",
+          "enum": [
+            "Summarization",
+            "QnA"
+          ],
+          "x-ms-enum": {
+            "name": "Task",
+            "modelAsString": true
+          }
         },
         "qna": {
           "$ref": "#/definitions/QnAOptions",
@@ -1151,18 +1159,6 @@
         "ungroundedPercentage",
         "ungroundedDetails"
       ]
-    },
-    "Domain": {
-      "type": "string",
-      "description": "Domain.",
-      "enum": [
-        "Generic",
-        "Medical"
-      ],
-      "x-ms-enum": {
-        "name": "Domain",
-        "modelAsString": true
-      }
     },
     "ImageCategoriesAnalysis": {
       "type": "object",
@@ -1256,9 +1252,23 @@
       "description": "Connection details for the LLM resource.",
       "properties": {
         "resourceType": {
-          "$ref": "#/definitions/LLMResourceType",
+          "type": "string",
           "description": "LLM resource type. The default value is AzureOpenAI.",
-          "default": "AzureOpenAI"
+          "default": "AzureOpenAI",
+          "enum": [
+            "AzureOpenAI"
+          ],
+          "x-ms-enum": {
+            "name": "LLMResourceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AzureOpenAI",
+                "value": "AzureOpenAI",
+                "description": "Azure OpenAI resource type."
+              }
+            ]
+          }
         },
         "azureOpenAIEndpoint": {
           "type": "string",
@@ -1273,24 +1283,6 @@
         "azureOpenAIEndpoint",
         "azureOpenAIDeploymentName"
       ]
-    },
-    "LLMResourceType": {
-      "type": "string",
-      "description": "LLM resource type.",
-      "enum": [
-        "AzureOpenAI"
-      ],
-      "x-ms-enum": {
-        "name": "LLMResourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureOpenAI",
-            "value": "AzureOpenAI",
-            "description": "Azure OpenAI resource type."
-          }
-        ]
-      }
     },
     "PagedTextBlocklist": {
       "type": "object",
@@ -1378,18 +1370,6 @@
       "required": [
         "blocklistItemIds"
       ]
-    },
-    "Task": {
-      "type": "string",
-      "description": "Task type.",
-      "enum": [
-        "Summarization",
-        "QnA"
-      ],
-      "x-ms-enum": {
-        "name": "Task",
-        "modelAsString": true
-      }
     },
     "TextBlocklist": {
       "type": "object",
