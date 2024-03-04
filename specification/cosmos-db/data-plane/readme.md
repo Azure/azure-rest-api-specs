@@ -34,7 +34,7 @@ tag: package-2019-02
 
 These settings apply only when `--tag=package-2019-02-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-02'
+``` yaml $(tag) == 'package-2019-02-preview'
 input-file:
 - Microsoft.Tables/preview/2019-02-02/table.json
 ```
