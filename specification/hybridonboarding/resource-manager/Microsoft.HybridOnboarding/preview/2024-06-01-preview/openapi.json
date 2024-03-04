@@ -79,9 +79,6 @@
         "x-ms-examples": {
           "Operations_List_MaximumSet_Gen": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         }
       }
@@ -421,9 +418,6 @@
         "x-ms-examples": {
           "ExtensionManagers_Delete_MaximumSet_Gen": {
             "$ref": "./examples/ExtensionManagers_Delete_MaximumSet_Gen.json"
-          },
-          "ExtensionManagers_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/ExtensionManagers_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -902,6 +896,11 @@
           "type": "string",
           "description": "ARM ID of the custom location resource deployed on the Onboarding Appliance"
         },
+        "hostResourceId": {
+          "type": "string",
+          "description": "ARM ID of the host associated with the extended location",
+          "readOnly": true
+        },
         "extensionProfile": {
           "type": "array",
           "description": "Extension profile of the extension manager resource",
@@ -940,16 +939,40 @@
           },
           "x-ms-identifiers": []
         },
-        "enabled": {
-          "type": "boolean",
+        "state": {
+          "$ref": "#/definitions/ExtensionState",
           "description": "Flag to enable/disable the extension"
         }
       },
       "required": [
         "name",
         "extensionDetails",
-        "enabled"
+        "state"
       ]
+    },
+    "ExtensionState": {
+      "type": "string",
+      "description": "State of the extension",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Extension is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Extension is disabled"
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",

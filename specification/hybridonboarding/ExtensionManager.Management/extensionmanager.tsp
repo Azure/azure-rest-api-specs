@@ -31,6 +31,10 @@ model ExtensionManagerProperties {
   @doc("ARM ID of the custom location resource deployed on the Onboarding Appliance")
   extendedLocation: string;
 
+  @doc("ARM ID of the host associated with the extended location")
+  @visibility("read")
+  hostResourceId?: string;
+
   @doc("Extension profile of the extension manager resource")
   @visibility("read")
   extensionProfile?: ExtensionObject[];
@@ -48,7 +52,7 @@ model ExtensionObject {
   extensionDetails: ExtensionDetails[];
 
   @doc("Flag to enable/disable the extension")
-  enabled: boolean;
+  state: ExtensionState;
 }
 
 @doc("Extension details of an extension in extension profile.")
@@ -95,6 +99,15 @@ enum ProvisioningState {
 
   @doc("accepted provisioning state")
   Accepted,
+}
+
+@doc("State of the extension")
+enum ExtensionState {
+  @doc("Extension is enabled")
+  Enabled,
+
+  @doc("Extension is disabled")
+  Disabled,
 }
 
 @doc("Request body details for enabling extensions POST action")
