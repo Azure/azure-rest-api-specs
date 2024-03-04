@@ -30,6 +30,10 @@ openapi-subtype: rpaas
 tag: package-preview-2023-10
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
 
 ### Tag: package-preview-2023-10
 
