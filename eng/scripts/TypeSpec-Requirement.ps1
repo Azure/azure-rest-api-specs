@@ -79,7 +79,9 @@ else {
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
-    $suppression = Get-Suppression (Join-Path $repoPath $file)
+    $fullPath = (Join-Path $repoPath $file)
+
+    $suppression = Get-Suppression $fullPath
     if ($suppression) {
       LogInfo "  Suppressed: $($suppression.reason)"
       # Skip further checks, to avoid potential errors on files already suppressed
@@ -87,7 +89,7 @@ else {
     }
 
     try {
-      $jsonContent = Get-Content (Join-Path $repoPath $file) | ConvertFrom-Json -AsHashtable
+      $jsonContent = Get-Content $fullPath | ConvertFrom-Json -AsHashtable
 
       if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
         LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
