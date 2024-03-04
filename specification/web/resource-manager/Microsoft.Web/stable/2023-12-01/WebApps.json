@@ -8717,7 +8717,7 @@
             "description": "Site Container Name",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]*$"
+            "pattern": "(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$)"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -8764,7 +8764,7 @@
             "description": "Site Container Name",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]*$"
+            "pattern": "(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$)"
           },
           {
             "name": "request",
@@ -25703,17 +25703,19 @@
       }
     },
     "EnvironmentVariable": {
+      "required": [
+        "name",
+        "value"
+      ],
       "type": "object",
       "properties": {
         "name": {
           "description": "Environment variable name",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "value": {
           "description": "Environment variable value",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -28793,6 +28795,10 @@
       "properties": {
         "properties": {
           "description": "SiteContainer resource specific properties",
+          "required": [
+            "image",
+            "isMain"
+          ],
           "type": "object",
           "properties": {
             "image": {
@@ -28863,16 +28869,14 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VolumeMount"
-              },
-              "readOnly": true
+              }
             },
             "environmentVariables": {
               "description": "List of environment variables",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/EnvironmentVariable"
-              },
-              "readOnly": true
+              }
             }
           },
           "x-ms-client-flatten": true
@@ -30000,27 +30004,27 @@
       }
     },
     "VolumeMount": {
+      "required": [
+        "volumeSubPath",
+        "containerMountPath"
+      ],
       "type": "object",
       "properties": {
         "volumeSubPath": {
           "description": "Sub path in the volume where volume is mounted from.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "containerMountPath": {
           "description": "Target path on the container where volume is mounted on",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "data": {
           "description": "Config Data to be mounted on the volume",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "readOnly": {
           "description": "Boolean to specify if the mount is read only on the container",
-          "type": "boolean",
-          "readOnly": true
+          "type": "boolean"
         }
       }
     },
