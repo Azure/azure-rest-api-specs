@@ -55,19 +55,34 @@ input-file:
 directive:
   - suppress: D5001
     where: $["x-ms-paths"]["/?ServiceProperties"].put
-    reason: The path only supports XML input/outputm which is not supported
+    reason: The path only supports XML input/output which is not supported
+  - suppress: XmsExamplesRequired
+    where: $["x-ms-paths"]["/?ServiceProperties"].put
+    reason: The path only supports XML input/output which is not supported
   - suppress: D5001
     where: $["x-ms-paths"]["/?ServiceProperties"].get
-    reason: The path only supports XML input/outputm which is not supported
+    reason: The path only supports XML input/output which is not supported
+  - suppress: XmsExamplesRequired
+    where: $["x-ms-paths"]["/?ServiceProperties"].get
+    reason: The path only supports XML input/output which is not supported
   - suppress: D5001
     where: $["x-ms-paths"]["/?ServiceStats"].get
-    reason: The path only supports XML input/outputm which is not supported
+    reason: The path only supports XML input/output which is not supported
+  - suppress: XmsExamplesRequired
+    where: $["x-ms-paths"]["/?ServiceStats"].get
+    reason: The path only supports XML input/output which is not supported
   - suppress: D5001
     where: $.paths["/{table}"].get
-    reason: The path only supports XML input/outputm which is not supported
+    reason: The path only supports XML input/output which is not supported
+  - suppress: XmsExamplesRequired
+    where: $.paths["/{table}"].get
+    reason: The path only supports XML input/output which is not supported
   - suppress: D5001
     where: $.paths["/{table}"].put
-    reason: The path only supports XML input/outputm which is not supported
+    reason: The path only supports XML input/output which is not supported
+  - suppress: XmsExamplesRequired
+    where: $.paths["/{table}"].put
+    reason: The path only supports XML input/output which is not supported
   - suppress: R3016
     where: $.definitions.TableServiceError.properties.Message
     reason: Response from service is not camel case
