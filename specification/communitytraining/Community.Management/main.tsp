@@ -135,7 +135,6 @@ model CommunityTrainingProperties {
 }
 
 #suppress "deprecated" "Existing API"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
 @armResourceOperations
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;
@@ -144,6 +143,7 @@ interface CommunityTrainings {
     CommunityTraining,
     CommunityTrainingProperties
   >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   delete is ArmResourceDeleteAsync<CommunityTraining>;
   listByResourceGroup is ArmResourceListByParent<CommunityTraining>;
   listBySubscription is ArmListBySubscription<CommunityTraining>;
