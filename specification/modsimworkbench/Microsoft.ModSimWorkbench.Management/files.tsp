@@ -46,7 +46,7 @@ enum FileActionForce {
 @doc("Parameters for managing a file.")
 model FileManageParameters {
   @doc("The chamber data pipeline direction.")
-  dataPipeline: DataPipelineDirection;
+  dataPipeline?: DataPipelineDirection;
 
   @doc("Action to be performed on data pipeline file.")
   action: FileAction;
