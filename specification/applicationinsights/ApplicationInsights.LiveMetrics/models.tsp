@@ -39,7 +39,7 @@ model PingRequestQueryStrings {
 model PingRequestHeaders {
   @doc("Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.")
   @header("x-ms-qps-transmission-time")
-  transmissionTime?: string;
+  transmissionTime?: int64;
 
   @doc("Computer name where AI SDK lives. QuickPulse uses machine name with instance name as a backup.")
   @header("x-ms-qps-machine-name")
@@ -132,7 +132,7 @@ model PostRequestHeaders {
 
   @doc("Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.")
   @header("x-ms-qps-transmission-time")
-  transmissionTime?: string;
+  transmissionTime?: int64;
 }
 
 /**
@@ -142,7 +142,7 @@ model PostRequestHeaders {
 model PostRequestBody {
   @doc("Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
   @body
-  monitoringDataPoint?: MonitoringDataPoint[];
+  monitoringDataPoints?: MonitoringDataPoint[];
 }
 
 /**

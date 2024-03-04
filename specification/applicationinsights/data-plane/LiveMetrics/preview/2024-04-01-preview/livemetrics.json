@@ -844,7 +844,7 @@
           "type": "string",
           "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead."
         },
-        "monitoringDataPoint": {
+        "monitoringDataPoints": {
           "type": "array",
           "description": "Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
           "items": {
@@ -1117,7 +1117,8 @@
       "in": "header",
       "description": "Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.",
       "required": false,
-      "type": "string",
+      "type": "integer",
+      "format": "int64",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "transmissionTime"
     },
@@ -1138,7 +1139,7 @@
       "x-ms-parameter-location": "method"
     },
     "PostRequestBody": {
-      "name": "monitoringDataPoint",
+      "name": "monitoringDataPoints",
       "in": "body",
       "description": "Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
       "required": false,
@@ -1165,7 +1166,8 @@
       "in": "header",
       "description": "Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.",
       "required": false,
-      "type": "string",
+      "type": "integer",
+      "format": "int64",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "transmissionTime"
     },
