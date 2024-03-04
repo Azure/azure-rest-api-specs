@@ -902,6 +902,28 @@
             "name": "AlertsState",
             "modelAsString": true
           }
+        },
+        "alertsForAllReplicationIssues": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
+        },
+        "alertsForAllFailoverIssues": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1045,6 +1067,17 @@
       "type": "object",
       "properties": {
         "alertsForCriticalOperations": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
+        },
+        "emailNotificationsForSiteRecovery": {
           "enum": [
             "Enabled",
             "Disabled"
