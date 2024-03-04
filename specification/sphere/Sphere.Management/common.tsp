@@ -141,7 +141,7 @@ interface ProxyResourceOperationsReadList<
 
 #suppress "deprecated" "Existing API"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
-  interface ProxyResourceOperationsReadListCreateDelete<
+interface ProxyResourceOperationsReadListCreateDelete<
   TResource extends ArmResource,
   TListParameters extends {} = {}
 >
