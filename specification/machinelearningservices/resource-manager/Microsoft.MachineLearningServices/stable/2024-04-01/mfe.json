@@ -3276,10 +3276,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "registries.json#/parameters/RegistryNameParameter"
@@ -12023,7 +12023,7 @@
       ],
       "properties": {
         "resourceId": {
-          "description": "[Required] Resource id accepting ArmId or AzureMlId.",
+          "description": "[Required] Resource id accepting Azure resource Id or AzureMlId.",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
@@ -19888,6 +19888,7 @@
         "resourceId": {
           "description": "Input resource id.",
           "type": "string",
+          "format": "arm-id",
           "x-nullable": true
         }
       },
@@ -19906,6 +19907,7 @@
         "url": {
           "description": "Input path url.",
           "type": "string",
+          "format": "uri",
           "x-nullable": true
         }
       },
@@ -20043,10 +20045,11 @@
           "x-nullable": true
         },
         "targetEnvironmentId": {
-          "description": "[Required] Arm ID of the target environment to be created by package operation.",
+          "description": "[Required] Azure resource ID of the target environment to be created by package operation.",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create",
             "read"
@@ -20123,6 +20126,7 @@
         "logUrl": {
           "description": "Log url of the image build operation.",
           "type": "string",
+          "format": "uri",
           "readOnly": true,
           "x-ms-mutability": [
             "read"
