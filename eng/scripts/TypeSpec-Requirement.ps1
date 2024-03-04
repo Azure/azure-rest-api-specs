@@ -8,7 +8,7 @@ param (
 )
 Set-StrictMode -Version 3
 
-Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Scope CurrentUser
+Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
