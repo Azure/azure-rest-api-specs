@@ -21,6 +21,42 @@ model StorageError {
 
 /// Parameters
 
+@doc("The source lease ID header parameter.")
+model SourceLeaseId {
+  @doc("A lease ID for the source path. If specified, the source path must have an active lease and the lease ID must match.")
+  @clientName("sourceLeaseId")
+  @header `x-ms-source-lease-id`?: string;
+}
+
+@doc("The source container name header parameter.")
+model SourceContainerName {
+  @doc("Required.  Specifies the name of the container to rename.")
+  @clientName("SourceContainerName")
+  @header `x-ms-source-container-name`: string;
+}
+
+@doc("The deleted container name header.")
+model DeletedContainerName {
+  @doc("Optional.  Version 2019-12-12 and later.  Specifies the name of the deleted container to restore.")
+  @clientName("DeletedContainerName")
+  @header `x-ms-deleted-container-name`?: string;
+}
+
+@doc("The deleted container version header.")
+model DeletedContainerVersion {
+  @doc("Optional.  Version 2019-12-12 and later.  Specifies the version of the deleted container to restore.")
+  @clientName("DeletedContainerVersion")
+  @header `x-ms-deleted-container-version`?: string;
+
+}
+
+@doc("The container ACL parameter.")
+model ContainerAcl {
+  @doc("The access control list for the container.")
+  @body
+  acl: SignedIdentifiers;
+}
+
 @doc("The container name header")
 model ContainerNameParameter {
   @doc("The name of the container.")
