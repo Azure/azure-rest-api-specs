@@ -12,4 +12,7 @@ csharp:
   client-side-validation: true
   namespace: Microsoft.Azure.Management.Quantum
   output-folder: $(csharp-sdks-folder)/quantum/Microsoft.Azure.Management.Quantum/src/Generated
+  models-mode: msrest
+  generate-metadata: false
+  version-tolerant: true
 ```
