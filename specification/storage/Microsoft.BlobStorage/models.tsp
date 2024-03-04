@@ -21,6 +21,32 @@ model StorageError {
 
 /// Parameters
 
+@doc("The container name header")
+model ContainerNameParameter {
+  @doc("The name of the container.")
+  @header
+  @path
+  containerName: string;
+}
+
+@doc("The If-Unmodified-Since header.")
+model IfUnmodifiedSince {
+  @doc("A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.")
+  @header
+  @encode("date-time-rfc1123")
+  @clientName("ifUnmodifiedSince")
+  `If-Unmodified-Since`?: utcDateTime;
+}
+
+@doc("The If-Modified-Since header.")
+model IfModifiedSince {
+  @doc("A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.")
+  @header
+  @encode("date-time-rfc1123")
+  @clientName("ifModifiedSince")
+  `If-Modified-Since`?: utcDateTime;
+}
+
 @doc("The lease ID parameter.")
 model LeaseIdOptional {
   @doc("If specified, the operation only succeeds if the resource's lease is active and matches this ID.")
@@ -119,6 +145,19 @@ model ApiVersionParameter {
   @doc("Specifies the version of the operation to use for this request.")
   @header("x-ms-version")
   version: string;
+}
+
+/// Models
+
+@doc("Represents an array of signed identifiers")
+model SignedIdentifiers is Array<SignedIdentifier>;
+
+@doc("The signed identifier.")
+model SignedIdentifier {
+  @doc("The unique ID for the signed identifier.")
+  Id: string;
+  @doc("The access policy for the signed identifier.")
+  AccessPolicy: AccessPolicy;
 }
 
 @doc("The result of a Filter Blobs API call")
