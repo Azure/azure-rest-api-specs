@@ -1,0 +1,1189 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "QuickPulse REST APIs for client SDKs.",
+    "version": "2024-04-01-preview",
+    "description": "QuickPulse REST APIs.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{url}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "url",
+        "in": "path",
+        "description": "Url",
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "x-ms-qps-auth-api-key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/QuickPulseService.svc/ping": {
+      "post": {
+        "operationId": "Ping",
+        "description": "Client SDK calls QuickPulse /ping API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PingRequestQueryStrings.ikey"
+          },
+          {
+            "$ref": "#/parameters/PingRequestQueryStrings.apiKey"
+          },
+          {
+            "$ref": "#/parameters/PingRequestHeaders.transmissionTime"
+          },
+          {
+            "$ref": "#/parameters/PingRequestHeaders.machineName"
+          },
+          {
+            "$ref": "#/parameters/PingRequestHeaders.instanceName"
+          },
+          {
+            "$ref": "#/parameters/PingRequestHeaders.streamId"
+          },
+          {
+            "$ref": "#/parameters/PingRequestHeaders.roleName"
+          },
+          {
+            "$ref": "#/parameters/PingRequestHeaders.invariantVersion"
+          },
+          {
+            "$ref": "#/parameters/PingRequestHeaders.configurationEtag"
+          },
+          {
+            "$ref": "#/parameters/PingRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CollectionConfigurationInfo"
+            },
+            "headers": {
+              "x-ms-qps-subscribed": {
+                "type": "string",
+                "description": "A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, SDK must start collecting data and posting it to QuickPulse. Otherwise, SDK must keep pinging."
+              },
+              "x-ms-qps-configuration-etag": {
+                "type": "string",
+                "description": "An encoded string that indicates whether the collection configuration is changed."
+              },
+              "x-ms-qps-service-polling-interval-hint": {
+                "type": "string",
+                "description": "Recommended time (in milliseconds) before an SDK should ping the service again. This header exists only when instrumentation key is not watched by UX."
+              },
+              "x-ms-qps-service-endpoint-redirect-v2": {
+                "type": "string",
+                "description": "Contains a URI of the service endpoint that an SDK must permanently use for the particular resource. This header exists only when SDK is talking to QuickPulse's global endpoint."
+              }
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access is unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Access is forbidden",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Live Metrics Ping": {
+            "$ref": "./examples/LiveMetrics_Ping.json"
+          }
+        }
+      }
+    },
+    "/QuickPulseService.svc/post": {
+      "post": {
+        "operationId": "Post",
+        "description": "Client SDK calls QuickPulse /post API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PostRequestQueryStrings.ikey"
+          },
+          {
+            "$ref": "#/parameters/PostRequestQueryStrings.apiKey"
+          },
+          {
+            "$ref": "#/parameters/PostRequestHeaders.configurationEtag"
+          },
+          {
+            "$ref": "#/parameters/PostRequestHeaders.transmissionTime"
+          },
+          {
+            "$ref": "#/parameters/PostRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CollectionConfigurationInfo"
+            },
+            "headers": {
+              "x-ms-qps-subscribed": {
+                "type": "string",
+                "description": "Tells SDK whether the input instrumentation key is subscribed to by UX."
+              },
+              "x-ms-qps-configuration-etag": {
+                "type": "string",
+                "description": "An encoded string that indicates whether the collection configuration is changed."
+              }
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access is unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Access is forbidden",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Live Metrics Post": {
+            "$ref": "./examples/LiveMetrics_Post.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CollectionConfigurationError": {
+      "type": "object",
+      "description": "Represents an error while SDK parses and applies an instance of CollectionConfigurationInfo.",
+      "properties": {
+        "CollectionConfigurationErrorType": {
+          "$ref": "#/definitions/CollectionConfigurationErrorType",
+          "description": "Error type."
+        },
+        "Message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "FullException": {
+          "type": "string",
+          "description": "Exception that leads to the creation of the configuration error."
+        },
+        "Data": {
+          "type": "array",
+          "description": "Custom properties to add more information to the error.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePairStringString"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "CollectionConfigurationErrorType",
+        "Message",
+        "FullException",
+        "Data"
+      ]
+    },
+    "CollectionConfigurationErrorType": {
+      "type": "string",
+      "description": "Collection configuration error type reported by SDK.",
+      "enum": [
+        "Unknown",
+        "PerformanceCounterParsing",
+        "PerformanceCounterUnexpected",
+        "PerformanceCounterDuplicateIds",
+        "DocumentStreamDuplicateIds",
+        "DocumentStreamFailureToCreate",
+        "DocumentStreamFailureToCreateFilterUnexpected",
+        "MetricDuplicateIds",
+        "MetricTelemetryTypeUnsupported",
+        "MetricFailureToCreate",
+        "MetricFailureToCreateFilterUnexpected",
+        "FilterFailureToCreateUnexpected",
+        "CollectionConfigurationFailureToCreateUnexpected"
+      ],
+      "x-ms-enum": {
+        "name": "CollectionConfigurationErrorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown error type."
+          },
+          {
+            "name": "PerformanceCounterParsing",
+            "value": "PerformanceCounterParsing",
+            "description": "Performance counter parsing error."
+          },
+          {
+            "name": "PerformanceCounterUnexpected",
+            "value": "PerformanceCounterUnexpected",
+            "description": "Performance counter unexpected error."
+          },
+          {
+            "name": "PerformanceCounterDuplicateIds",
+            "value": "PerformanceCounterDuplicateIds",
+            "description": "Performance counter duplicate ids."
+          },
+          {
+            "name": "DocumentStreamDuplicateIds",
+            "value": "DocumentStreamDuplicateIds",
+            "description": "Document stream duplication ids."
+          },
+          {
+            "name": "DocumentStreamFailureToCreate",
+            "value": "DocumentStreamFailureToCreate",
+            "description": "Document stream failed to create."
+          },
+          {
+            "name": "DocumentStreamFailureToCreateFilterUnexpected",
+            "value": "DocumentStreamFailureToCreateFilterUnexpected",
+            "description": "Document stream failed to create filter unexpectedly."
+          },
+          {
+            "name": "MetricDuplicateIds",
+            "value": "MetricDuplicateIds",
+            "description": "Metric duplicate ids."
+          },
+          {
+            "name": "MetricTelemetryTypeUnsupported",
+            "value": "MetricTelemetryTypeUnsupported",
+            "description": "Metric telemetry type unsupported."
+          },
+          {
+            "name": "MetricFailureToCreate",
+            "value": "MetricFailureToCreate",
+            "description": "Metric failed to create."
+          },
+          {
+            "name": "MetricFailureToCreateFilterUnexpected",
+            "value": "MetricFailureToCreateFilterUnexpected",
+            "description": "Metric failed to create filter unexpectedly."
+          },
+          {
+            "name": "FilterFailureToCreateUnexpected",
+            "value": "FilterFailureToCreateUnexpected",
+            "description": "Filter failed to create unexpectedly."
+          },
+          {
+            "name": "CollectionConfigurationFailureToCreateUnexpected",
+            "value": "CollectionConfigurationFailureToCreateUnexpected",
+            "description": "Collection configuration failed to create unexpectedly."
+          }
+        ]
+      }
+    },
+    "CollectionConfigurationInfo": {
+      "type": "object",
+      "description": "Represents the collection configuration - a customizable description of performance counters, metrics, and full telemetry documents to be collected by the SDK.",
+      "properties": {
+        "ETag": {
+          "type": "string",
+          "description": "An encoded string that indicates whether the collection configuration is changed."
+        },
+        "Metrics": {
+          "type": "array",
+          "description": "An array of metric configuration info.",
+          "items": {
+            "$ref": "#/definitions/DerivedMetricInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "DocumentStreams": {
+          "type": "array",
+          "description": "An array of document stream configuration info.",
+          "items": {
+            "$ref": "#/definitions/DocumentStreamInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "QuotaInfo": {
+          "$ref": "#/definitions/QuotaConfigurationInfo",
+          "description": "Controls document quotas to be sent to QuickPulse."
+        }
+      },
+      "required": [
+        "ETag",
+        "Metrics",
+        "DocumentStreams"
+      ]
+    },
+    "DerivedMetricInfo": {
+      "type": "object",
+      "description": "A metric configuration set by UX to scope the metrics it's interested in.",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "metric configuration identifier."
+        },
+        "TelemetryType": {
+          "type": "string",
+          "description": "Telemetry type."
+        },
+        "FilterGroups": {
+          "type": "array",
+          "description": "A collection of filters to scope metrics that UX needs.",
+          "items": {
+            "$ref": "#/definitions/FilterConjunctionGroupInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "Projection": {
+          "type": "string",
+          "description": "Telemetry's metric dimension whose value is to be aggregated. Example values: Duration, Count(),..."
+        },
+        "Aggregation": {
+          "type": "string",
+          "description": "Aggregation type. This is the aggregation done from everything within a single server.",
+          "enum": [
+            "Avg",
+            "Sum",
+            "Min",
+            "Max"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "BackEndAggregation": {
+          "type": "string",
+          "description": "Aggregation type. This Aggregation is done across the values for all the servers taken together.",
+          "enum": [
+            "Avg",
+            "Sum",
+            "Min",
+            "Max"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "Id",
+        "TelemetryType",
+        "FilterGroups",
+        "Projection",
+        "Aggregation",
+        "BackEndAggregation"
+      ]
+    },
+    "DocumentFilterConjunctionGroupInfo": {
+      "type": "object",
+      "description": "A collection of filters for a specific telemetry type.",
+      "properties": {
+        "TelemetryType": {
+          "type": "string",
+          "description": "Telemetry type.",
+          "enum": [
+            "Request",
+            "Dependency",
+            "Exception",
+            "Event",
+            "Metric",
+            "PerformanceCounter",
+            "Trace"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "Filters": {
+          "$ref": "#/definitions/FilterConjunctionGroupInfo",
+          "description": "An array of filter groups."
+        }
+      },
+      "required": [
+        "TelemetryType",
+        "Filters"
+      ]
+    },
+    "DocumentIngress": {
+      "type": "object",
+      "description": "Base class of the specific document types.",
+      "properties": {
+        "DocumentType": {
+          "type": "string",
+          "description": "Telemetry type. Types not defined in enum will get replaced with a 'Unknown' type.",
+          "enum": [
+            "Request",
+            "RemoteDependency",
+            "Exception",
+            "Event",
+            "Trace",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "DocumentStreamIds": {
+          "type": "array",
+          "description": "An array of document streaming ids. Each id identifies a flow of documents customized by UX customers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Properties": {
+          "type": "array",
+          "description": "Collection of custom properties.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePairStringString"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "discriminator": "DocumentType",
+      "required": [
+        "DocumentType",
+        "DocumentStreamIds",
+        "Properties"
+      ]
+    },
+    "DocumentStreamInfo": {
+      "type": "object",
+      "description": "Configurations/filters set by UX to scope the document/telemetry it's interested in.",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "Identifier of the document stream initiated by a UX."
+        },
+        "DocumentFilterGroups": {
+          "type": "array",
+          "description": "Gets or sets an OR-connected collection of filter groups.",
+          "items": {
+            "$ref": "#/definitions/DocumentFilterConjunctionGroupInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "Id",
+        "DocumentFilterGroups"
+      ]
+    },
+    "Event": {
+      "type": "object",
+      "description": "Event document type.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Event name.",
+          "maxLength": 512
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentIngress"
+        }
+      ],
+      "x-ms-discriminator-value": "Event"
+    },
+    "Exception": {
+      "type": "object",
+      "description": "Exception document type.",
+      "properties": {
+        "ExceptionType": {
+          "type": "string",
+          "description": "Exception type name.",
+          "maxLength": 1024
+        },
+        "ExceptionMessage": {
+          "type": "string",
+          "description": "Exception message.",
+          "maxLength": 32768
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentIngress"
+        }
+      ],
+      "x-ms-discriminator-value": "Exception"
+    },
+    "FilterConjunctionGroupInfo": {
+      "type": "object",
+      "description": "An AND-connected group of FilterInfo objects.",
+      "properties": {
+        "Filters": {
+          "type": "array",
+          "description": "An array of filters.",
+          "items": {
+            "$ref": "#/definitions/FilterInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "Filters"
+      ]
+    },
+    "FilterInfo": {
+      "type": "object",
+      "description": "A filter set on UX",
+      "properties": {
+        "FieldName": {
+          "type": "string",
+          "description": "dimension name of the filter"
+        },
+        "Predicate": {
+          "type": "string",
+          "description": "Operator of the filter",
+          "enum": [
+            "Equal",
+            "NotEqual",
+            "LessThan",
+            "GreaterThan",
+            "LessThanOrEqual",
+            "GreaterThanOrEqual",
+            "Contains",
+            "DoesNotContain"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "Comparand": {
+          "type": "string",
+          "description": "Comparand of the filter"
+        }
+      },
+      "required": [
+        "FieldName",
+        "Predicate",
+        "Comparand"
+      ]
+    },
+    "KeyValuePairStringString": {
+      "type": "object",
+      "description": "Key-value pair of string and string.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "Key of the key-value pair."
+        },
+        "Value": {
+          "type": "string",
+          "description": "Value of the key-value pair."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "MetricPoint": {
+      "type": "object",
+      "description": "Metric data point.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Metric name."
+        },
+        "Value": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value."
+        },
+        "Weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Metric weight."
+        }
+      },
+      "required": [
+        "Name",
+        "Value",
+        "Weight"
+      ]
+    },
+    "MonitoringDataPoint": {
+      "type": "object",
+      "description": "Monitoring data point coming from SDK, which includes metrics, documents and other metadata info.",
+      "properties": {
+        "Version": {
+          "type": "string",
+          "description": "AI SDK version."
+        },
+        "InvariantVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Version/generation of the data contract (MonitoringDataPoint) between SDK and QuickPulse."
+        },
+        "Instance": {
+          "type": "string",
+          "description": "Service instance name where AI SDK lives."
+        },
+        "RoleName": {
+          "type": "string",
+          "description": "Service role name."
+        },
+        "MachineName": {
+          "type": "string",
+          "description": "Computer name where AI SDK lives."
+        },
+        "StreamId": {
+          "type": "string",
+          "description": "Identifies an AI SDK as a trusted agent to report metrics and documents."
+        },
+        "Timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data point generation timestamp."
+        },
+        "TransmissionTime": {
+          "type": "string",
+          "description": "Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks."
+        },
+        "IsWebApp": {
+          "type": "boolean",
+          "description": "True if the current application is an Azure Web App."
+        },
+        "PerformanceCollectionSupported": {
+          "type": "boolean",
+          "description": "True if performance counters collection is supported."
+        },
+        "Metrics": {
+          "type": "array",
+          "description": "An array of metric data points.",
+          "items": {
+            "$ref": "#/definitions/MetricPoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "Documents": {
+          "type": "array",
+          "description": "An array of documents of a specific type {Request}, {RemoteDependency}, {Exception}, {Event}, or {Trace}",
+          "items": {
+            "$ref": "#/definitions/DocumentIngress"
+          },
+          "x-ms-identifiers": []
+        },
+        "TopCpuProcesses": {
+          "type": "array",
+          "description": "An array of top cpu consumption data point.",
+          "items": {
+            "$ref": "#/definitions/ProcessCpuData"
+          },
+          "x-ms-identifiers": []
+        },
+        "CollectionConfigurationErrors": {
+          "type": "array",
+          "description": "An array of error while SDK parses and applies the {CollectionConfigurationInfo} provided by QuickPulse.",
+          "items": {
+            "$ref": "#/definitions/CollectionConfigurationError"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "Version",
+        "InvariantVersion",
+        "Instance",
+        "RoleName",
+        "MachineName",
+        "StreamId",
+        "IsWebApp",
+        "PerformanceCollectionSupported",
+        "Metrics",
+        "Documents",
+        "TopCpuProcesses",
+        "CollectionConfigurationErrors"
+      ]
+    },
+    "PingRequest": {
+      "type": "object",
+      "description": "QuickPulse /ping request parameters, either in query string, or in request body",
+      "properties": {
+        "ikey": {
+          "type": "string",
+          "description": "The ikey of the target Application Insights component for which client sdk calls /ping."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead."
+        },
+        "monitoringDataPoint": {
+          "$ref": "#/definitions/MonitoringDataPoint",
+          "description": "Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version."
+        }
+      },
+      "required": [
+        "ikey"
+      ]
+    },
+    "PingResponseHeaders": {
+      "type": "object",
+      "description": "QuickPulse ping response headers"
+    },
+    "PostRequest": {
+      "type": "object",
+      "description": "QuickPulse /post request parameters, either in query string, or in request body",
+      "properties": {
+        "ikey": {
+          "type": "string",
+          "description": "The ikey of the target Application Insights component for which client sdk calls /post."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead."
+        },
+        "monitoringDataPoint": {
+          "type": "array",
+          "description": "Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+          "items": {
+            "$ref": "#/definitions/MonitoringDataPoint"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "ikey"
+      ]
+    },
+    "PostResponseHeaders": {
+      "type": "object",
+      "description": "Represents the headers for the QuickPulse service."
+    },
+    "ProcessCpuData": {
+      "type": "object",
+      "description": "CPU consumption datapoint.",
+      "properties": {
+        "ProcessName": {
+          "type": "string",
+          "description": "Process name."
+        },
+        "CpuPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU consumption percentage."
+        }
+      },
+      "required": [
+        "ProcessName",
+        "CpuPercentage"
+      ]
+    },
+    "QuotaConfigurationInfo": {
+      "type": "object",
+      "description": "Controls document quotas to be sent to QuickPulse.",
+      "properties": {
+        "InitialQuota": {
+          "type": "number",
+          "format": "float",
+          "description": "Initial quota"
+        },
+        "MaxQuota": {
+          "type": "number",
+          "format": "float",
+          "description": "Max quota"
+        },
+        "QuotaAccrualRatePerSec": {
+          "type": "number",
+          "format": "float",
+          "description": "Quota accrual rate per second"
+        }
+      },
+      "required": [
+        "MaxQuota",
+        "QuotaAccrualRatePerSec"
+      ]
+    },
+    "RemoteDependency": {
+      "type": "object",
+      "description": "RemoteDependency document type.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Name of the command initiated with this dependency call, e.g., GET /username.",
+          "maxLength": 1024
+        },
+        "CommandName": {
+          "type": "string",
+          "description": "URL of the dependency call to the target, with all query string parameters.",
+          "maxLength": 2048
+        },
+        "ResultCode": {
+          "type": "string",
+          "description": "Result code of a dependency call. Examples are SQL error code and HTTP status code.",
+          "maxLength": 1024
+        },
+        "Duration": {
+          "type": "string",
+          "description": "Request duration in ISO 8601 duration format, i.e., P[n]Y[n]M[n]DT[n]H[n]M[n]S or P[n]W."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentIngress"
+        }
+      ],
+      "x-ms-discriminator-value": "RemoteDependency"
+    },
+    "Request": {
+      "type": "object",
+      "description": "Request document type.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Name of the request, e.g., 'GET /values/{id}'.",
+          "maxLength": 1024
+        },
+        "Url": {
+          "type": "string",
+          "description": "Request URL with all query string parameters.",
+          "maxLength": 2048
+        },
+        "ResponseCode": {
+          "type": "string",
+          "description": "Result of a request execution. For http requests, it could be some HTTP status code.",
+          "maxLength": 1024
+        },
+        "Duration": {
+          "type": "string",
+          "description": "Request duration in ISO 8601 duration format, i.e., P[n]Y[n]M[n]DT[n]H[n]M[n]S or P[n]W."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentIngress"
+        }
+      ],
+      "x-ms-discriminator-value": "Request"
+    },
+    "ServiceError": {
+      "type": "object",
+      "description": "Optional http response body, whose existence carries additional error descriptions.",
+      "properties": {
+        "RequestId": {
+          "type": "string",
+          "description": "A globally unique identifier to identify the diagnostic context. Currently it defaults to the empty GUID.",
+          "default": "00000000-0000-0000-0000-000000000000"
+        },
+        "ResponseDateTime": {
+          "type": "string",
+          "description": "Service error response date time."
+        },
+        "Code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "Message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "Exception": {
+          "type": "string",
+          "description": "Message of the exception that triggers the error response."
+        }
+      },
+      "required": [
+        "RequestId",
+        "ResponseDateTime",
+        "Code",
+        "Message",
+        "Exception"
+      ]
+    },
+    "Trace": {
+      "type": "object",
+      "description": "Trace document type.",
+      "properties": {
+        "Message": {
+          "type": "string",
+          "description": "Trace message.",
+          "maxLength": 32768
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentIngress"
+        }
+      ],
+      "x-ms-discriminator-value": "Trace"
+    },
+    "Versions": {
+      "type": "string",
+      "description": "QuickPulse service versions.",
+      "enum": [
+        "2024-04-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_04_01_preview",
+            "value": "2024-04-01-preview",
+            "description": "The 2024-04-01-preview version of the LiveMetrics service."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "PingRequestBody": {
+      "name": "monitoringDataPoint",
+      "in": "body",
+      "description": "Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/MonitoringDataPoint"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "PingRequestHeaders.configurationEtag": {
+      "name": "x-ms-qps-configuration-etag",
+      "in": "header",
+      "description": "An encoded string that indicates whether the collection configuration is changed.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "configurationEtag"
+    },
+    "PingRequestHeaders.instanceName": {
+      "name": "x-ms-qps-instance-name",
+      "in": "header",
+      "description": "Service instance name where AI SDK lives. QuickPulse uses machine name with instance name as a backup.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "instanceName"
+    },
+    "PingRequestHeaders.invariantVersion": {
+      "name": "x-ms-qps-invariant-version",
+      "in": "header",
+      "description": "Version/generation of the data contract (MonitoringDataPoint) between SDK and QuickPulse.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "invariantVersion"
+    },
+    "PingRequestHeaders.machineName": {
+      "name": "x-ms-qps-machine-name",
+      "in": "header",
+      "description": "Computer name where AI SDK lives. QuickPulse uses machine name with instance name as a backup.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "machineName"
+    },
+    "PingRequestHeaders.roleName": {
+      "name": "x-ms-qps-role-name",
+      "in": "header",
+      "description": "Cloud role name of the service.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "roleName"
+    },
+    "PingRequestHeaders.streamId": {
+      "name": "x-ms-qps-stream-id",
+      "in": "header",
+      "description": "Identifies an AI SDK as trusted agent to report metrics and documents.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "streamId"
+    },
+    "PingRequestHeaders.transmissionTime": {
+      "name": "x-ms-qps-transmission-time",
+      "in": "header",
+      "description": "Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "transmissionTime"
+    },
+    "PingRequestQueryStrings.apiKey": {
+      "name": "apiKey",
+      "in": "query",
+      "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PingRequestQueryStrings.ikey": {
+      "name": "ikey",
+      "in": "query",
+      "description": "The ikey of the target Application Insights component for which client sdk calls /ping.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PostRequestBody": {
+      "name": "monitoringDataPoint",
+      "in": "body",
+      "description": "Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+      "required": false,
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/MonitoringDataPoint"
+        },
+        "x-ms-identifiers": []
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "PostRequestHeaders.configurationEtag": {
+      "name": "x-ms-qps-configuration-etag",
+      "in": "header",
+      "description": "An encoded string that indicates whether the collection configuration is changed.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "configurationEtag"
+    },
+    "PostRequestHeaders.transmissionTime": {
+      "name": "x-ms-qps-transmission-time",
+      "in": "header",
+      "description": "Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "transmissionTime"
+    },
+    "PostRequestQueryStrings.apiKey": {
+      "name": "apiKey",
+      "in": "query",
+      "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PostRequestQueryStrings.ikey": {
+      "name": "ikey",
+      "in": "query",
+      "description": "The ikey of the target Application Insights component for which client sdk calls /post.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
