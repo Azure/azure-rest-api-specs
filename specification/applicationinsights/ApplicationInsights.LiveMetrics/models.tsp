@@ -194,16 +194,16 @@ model MonitoringDataPoint {
   PerformanceCollectionSupported: boolean;
 
   @doc("An array of metric data points.")
-  Metrics: MetricPoint[];
+  Metrics: MetricPoint[] = [];
 
   @doc("An array of documents of a specific type {Request}, {RemoteDependency}, {Exception}, {Event}, or {Trace}")
-  Documents: DocumentIngress[];
+  Documents: DocumentIngress[] = [];
 
   @doc("An array of top cpu consumption data point.")
   TopCpuProcesses: ProcessCpuData[];
 
   @doc("An array of error while SDK parses and applies the {CollectionConfigurationInfo} provided by QuickPulse.")
-  CollectionConfigurationErrors: CollectionConfigurationError[];
+  CollectionConfigurationErrors: CollectionConfigurationError[] = [];
 }
 
 /**
