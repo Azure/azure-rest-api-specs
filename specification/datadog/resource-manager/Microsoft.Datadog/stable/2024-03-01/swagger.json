@@ -2460,8 +2460,6 @@
     "MonitoringType": {
       "description": "The type of monitoring to be enabled. Allowed values: logs, metrics and agents.",
       "enum": [
-        "Logs",
-        "Metrics",
         "Agents"
       ],
       "type": "string",
@@ -2485,27 +2483,11 @@
       "description": "Tag rules for based on resource types for the monitor resource.",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "Name to identify the rules associated to monitor resource type.",
-          "type": "string"
-        },
         "monitoringType": {
           "description": "Logs, metrics or agent monitoring",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MonitoringType"
-          }
-        },
-        "filteringAction": {
-          "description": "Valid actions for allowing given resource type and filtering tag. Exclusion takes priority over inclusion.",
-          "enum": [
-            "Include",
-            "Exclude"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "filteringAction"
           }
         },
         "azureResourceType": {
@@ -2528,27 +2510,18 @@
       "description": "Set of rules for sending logs or metrics and installing agents for the monitor resource.",
       "type": "object",
       "properties": {
-        "enableAadLogs": {
-          "description": "Flag specifying if AAD logs should be sent for the monitor resource.",
-          "type": "boolean"
-        },
-        "enableSubscriptionLogs": {
-          "description": "Flag specifying if Azure subscription logs should be sent for the monitor resource.",
-          "type": "boolean"
-        },
-        "enableLogs": {
-          "description": "Flag specifying if Azure resource logs should be sent for the monitor resource.",
-          "type": "boolean"
-        },
-        "enableMetrics": {
-          "description": "Flag specifying if Azure resource metrics should be sent for the monitor resource.",
-          "type": "boolean"
-        },
         "enableAgents": {
           "description": "Flag specifying if agent be installed on Azure resource for the monitor resource.",
           "type": "boolean"
         },
-        "monitoringTags": {
+        "includeRuleSet": {
+          "description": "List of filtering tags to be used for logs, metrics and agent monitoring based on resource types for both compute and non-compute resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringTags"
+          }
+        },
+        "excludeRuleSet": {
           "description": "List of filtering tags to be used for logs, metrics and agent monitoring based on resource types for both compute and non-compute resources.",
           "type": "array",
           "items": {
