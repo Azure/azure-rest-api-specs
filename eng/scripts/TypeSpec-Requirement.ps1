@@ -51,6 +51,7 @@ function Get-Suppression {
         # Paths in suppressions.yml are relative to the file itself
         $fullPath = Join-Path -Path (Split-Path -Path $suppressionsFile) -ChildPath $path
 
+        # If path is not specified, suppression applies to all files
         if (!$path -or ($file -like $fullPath)) {
           return $suppression
         }
