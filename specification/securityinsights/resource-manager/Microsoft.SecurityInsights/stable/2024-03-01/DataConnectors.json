@@ -106,7 +106,7 @@
           "Get a MDATP data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
           },
-		  "Get a RestApiPoller data connector": {
+          "Get a RestApiPoller data connector": {
             "$ref": "./examples/dataConnectors/GetRestApiPollerById.json"
           }
         },
@@ -148,7 +148,7 @@
         }
       },
       "put": {
-		"x-ms-azure-resource": true,
+        "x-ms-azure-resource": true,
         "x-ms-examples": {
           "Creates or updates an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
@@ -430,7 +430,7 @@
         "AmazonWebServicesCloudTrail",
         "AzureAdvancedThreatProtection",
         "MicrosoftDefenderAdvancedThreatProtection",
-		"RestApiPoller"
+        "RestApiPoller"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -461,7 +461,7 @@
           {
             "value": "MicrosoftDefenderAdvancedThreatProtection"
           },
-		  {
+          {
             "value": "RestApiPoller"
           }
         ]
@@ -723,7 +723,7 @@
       },
       "type": "object"
     },
-	"RestApiPollerDataConnector": {
+    "RestApiPollerDataConnector": {
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
@@ -1096,7 +1096,30 @@
         }
       }
     },
-	 "CcpAuthType": {
+    "DCRConfiguration": {
+      "description": "The configuration of the destination of the data.",
+      "properties": {
+        "dataCollectionEndpoint": {
+          "description": "Represents the data collection ingestion endpoint in log analytics.",
+          "type": "string"
+        },
+        "dataCollectionRuleImmutableId": {
+          "description": "The data collection rule immutable id, the rule defines the transformation and data destination.",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "The stream we are sending the data to.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "dataCollectionEndpoint",
+        "dataCollectionRuleImmutableId",
+        "streamName"
+      ]
+    },
+    "CcpAuthType": {
       "type": "string",
       "enum": [
         "Basic",
