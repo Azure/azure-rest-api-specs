@@ -18,14 +18,14 @@ function Find-Suppressions-Yaml {
     [string]$file
   )
 
-  $currentDirectory = Split-path -Path $file
+  $currentDirectory = Get-Item (Split-Path -Path $file)
 
   while ($currentDirectory) {
-    $suppressionsFile = Join-Path -Path $currentDirectory -ChildPath "suppressions.yml"
+    $suppressionsFile = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yml"
     if (Test-Path $suppressionsFile) {
       return $suppressionsFile
     } else {
-      $currentDirectory = (Get-Item $currentDirectory).Parent.FullName
+      $currentDirectory = $currentDirectory.Parent
     }
   }
 
