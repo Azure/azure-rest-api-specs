@@ -15,9 +15,9 @@ namespace LiveMetrics;
  * QuickPulse /ping request parameters, either in query string, or in request body
  */
 model PingRequest {
-  ...PingRequestQueryStrings,
-  ...PingRequestHeaders,
-  ...PingRequestBody
+  ...PingRequestQueryStrings;
+  ...PingRequestHeaders;
+  ...PingRequestBody;
 }
 
 /**
@@ -96,21 +96,17 @@ model PingResponseHeaders {
   redirectEndpoint?: string;
 
   @doc("Corresponding status code.")
-  @statusCode _: 200;
+  @statusCode
+  _: 200;
 }
-
-
-
-
-
 
 /**
  * QuickPulse /post request parameters, either in query string, or in request body
  */
 model PostRequest {
-  ...PostRequestQueryStrings,
-  ...PostRequestHeaders,
-  ...PostRequestBody
+  ...PostRequestQueryStrings;
+  ...PostRequestHeaders;
+  ...PostRequestBody;
 }
 
 /**
@@ -133,7 +129,7 @@ model PostRequestHeaders {
   @doc("An encoded string that indicates whether the collection configuration is changed.")
   @header("x-ms-qps-configuration-etag")
   configurationEtag?: string;
-  
+
   @doc("Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.")
   @header("x-ms-qps-transmission-time")
   transmissionTime?: string;
@@ -161,11 +157,6 @@ model PostResponseHeaders {
   @header("x-ms-qps-configuration-etag")
   configurationEtag: string;
 }
-
-
-
-
-
 
 /**
  * Monitoring data point coming from SDK, which includes metrics, documents and other metadata info.
@@ -212,7 +203,7 @@ model MonitoringDataPoint {
   TopCpuProcesses: ProcessCpuData[];
 
   @doc("An array of error while SDK parses and applies the {CollectionConfigurationInfo} provided by QuickPulse.")
-  CollectionConfigurationErrors: CollectionConfigurationError[]
+  CollectionConfigurationErrors: CollectionConfigurationError[];
 }
 
 /**
@@ -239,31 +230,43 @@ model CollectionConfigurationError {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 enum CollectionConfigurationErrorType {
   /** Unknown error type. */
-  "Unknown",
+  Unknown,
+
   /** Performance counter parsing error. */
-  "PerformanceCounterParsing",
+  PerformanceCounterParsing,
+
   /** Performance counter unexpected error. */
-  "PerformanceCounterUnexpected",
+  PerformanceCounterUnexpected,
+
   /** Performance counter duplicate ids. */
-  "PerformanceCounterDuplicateIds",
+  PerformanceCounterDuplicateIds,
+
   /** Document stream duplication ids. */
-  "DocumentStreamDuplicateIds",
+  DocumentStreamDuplicateIds,
+
   /** Document stream failed to create. */
-  "DocumentStreamFailureToCreate",
+  DocumentStreamFailureToCreate,
+
   /** Document stream failed to create filter unexpectedly. */
-  "DocumentStreamFailureToCreateFilterUnexpected",
+  DocumentStreamFailureToCreateFilterUnexpected,
+
   /** Metric duplicate ids. */
-  "MetricDuplicateIds",
+  MetricDuplicateIds,
+
   /** Metric telemetry type unsupported. */
-  "MetricTelemetryTypeUnsupported",
+  MetricTelemetryTypeUnsupported,
+
   /** Metric failed to create. */
-  "MetricFailureToCreate",
+  MetricFailureToCreate,
+
   /** Metric failed to create filter unexpectedly. */
-  "MetricFailureToCreateFilterUnexpected",
+  MetricFailureToCreateFilterUnexpected,
+
   /** Filter failed to create unexpectedly. */
-  "FilterFailureToCreateUnexpected",
+  FilterFailureToCreateUnexpected,
+
   /** Collection configuration failed to create unexpectedly. */
-  "CollectionConfigurationFailureToCreateUnexpected"
+  CollectionConfigurationFailureToCreateUnexpected,
 }
 
 /**
@@ -300,7 +303,13 @@ model MetricPoint {
 @discriminator("DocumentType")
 model DocumentIngress {
   @doc("Telemetry type. Types not defined in enum will get replaced with a 'Unknown' type.")
-  DocumentType: "Request" | "RemoteDependency" | "Exception" | "Event" | "Trace" | "Unknown";
+  DocumentType:
+    | "Request"
+    | "RemoteDependency"
+    | "Exception"
+    | "Event"
+    | "Trace"
+    | "Unknown";
 
   @doc("An array of document streaming ids. Each id identifies a flow of documents customized by UX customers.")
   DocumentStreamIds: string[];
@@ -463,7 +472,14 @@ model DocumentStreamInfo {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 model DocumentFilterConjunctionGroupInfo {
   @doc("Telemetry type.")
-  TelemetryType: "Request" | "Dependency" | "Exception" | "Event" | "Metric" | "PerformanceCounter" | "Trace";
+  TelemetryType:
+    | "Request"
+    | "Dependency"
+    | "Exception"
+    | "Event"
+    | "Metric"
+    | "PerformanceCounter"
+    | "Trace";
 
   @doc("An array of filter groups.")
   Filters: FilterConjunctionGroupInfo;
@@ -511,7 +527,15 @@ model FilterInfo {
   FieldName: string;
 
   @doc("Operator of the filter")
-  Predicate: "Equal" | "NotEqual" | "LessThan" | "GreaterThan" | "LessThanOrEqual" | "GreaterThanOrEqual" | "Contains" | "DoesNotContain";
+  Predicate:
+    | "Equal"
+    | "NotEqual"
+    | "LessThan"
+    | "GreaterThan"
+    | "LessThanOrEqual"
+    | "GreaterThanOrEqual"
+    | "Contains"
+    | "DoesNotContain";
 
   @doc("Comparand of the filter")
   Comparand: string;
@@ -524,7 +548,8 @@ model FilterInfo {
 @error
 model ServiceError {
   @doc("Error code.")
-  @statusCode _: 400 | 401 | 403 | 404 | 500 | 503;
+  @statusCode
+  _: 400 | 401 | 403 | 404 | 500 | 503;
 
   @doc("A globally unique identifier to identify the diagnostic context. Currently it defaults to the empty GUID.")
   RequestId: string = "00000000-0000-0000-0000-000000000000";

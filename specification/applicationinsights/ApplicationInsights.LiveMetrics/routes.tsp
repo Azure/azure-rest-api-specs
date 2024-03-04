@@ -20,10 +20,22 @@ op QuickPulseOperation<
 @doc("Client SDK calls QuickPulse /ping API.")
 @route("/QuickPulseService.svc/ping")
 @post
-op ping is QuickPulseOperation<PingRequest, {...PingResponseHeaders, ...CollectionConfigurationInfo}>;
+op ping is QuickPulseOperation<
+  PingRequest,
+  {
+    ...PingResponseHeaders;
+    ...CollectionConfigurationInfo;
+  }
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
 @doc("Client SDK calls QuickPulse /post API.")
 @route("/QuickPulseService.svc/post")
 @post
-op post is QuickPulseOperation<PostRequest, {...PostResponseHeaders, ...CollectionConfigurationInfo}>;
+op post is QuickPulseOperation<
+  PostRequest,
+  {
+    ...PostResponseHeaders;
+    ...CollectionConfigurationInfo;
+  }
+>;

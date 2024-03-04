@@ -17,7 +17,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-THe current release is `2024-04-01-preview`
+The current release is `2024-04-01-preview`
 
 ```yaml
 openapi-type: data-plane
