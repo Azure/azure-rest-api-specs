@@ -60,7 +60,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ComputeDiagnosticsOperationResult"
+              "$ref": "#/definitions/ComputeDiagnosticsOperationResult"
             }
           },
           "202": {
@@ -109,7 +109,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/RunDiskInspectionInput"
+              "$ref": "#/definitions/RunDiskInspectionInput"
             },
             "description": "RunDiskInspection object supplied in the body of the Post run disk inspection operation."
           }
@@ -157,7 +157,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ComputeDiagnosticsList"
+              "$ref": "#/definitions/ComputeDiagnosticsList"
             }
           },
           "default": {
@@ -193,7 +193,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ComputeDiagnosticBase"
+              "$ref": "#/definitions/ComputeDiagnosticBase"
             }
           },
           "default": {
@@ -236,7 +236,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/StorageConfigurationInput"
+              "$ref": "#/definitions/StorageConfigurationInput"
             },
             "description": "Storage Configuration object supplied in the body of the Post to cache storageAccount for a given subscription."
           }
@@ -285,7 +285,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/StorageConfigurationResponse"
+              "$ref": "#/definitions/StorageConfigurationResponse"
             }
           },
           "default": {
@@ -324,7 +324,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/SpotPlacementRecommenderInput"
+              "$ref": "#/definitions/SpotPlacementRecommenderInput"
             },
             "description": "SpotPlacementRecommender object supplied in the body of the Post spot placement recommender operation."
           }
@@ -333,7 +333,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/SpotPlacementRecommenderResponse"
+              "$ref": "#/definitions/SpotPlacementRecommenderResponse"
             }
           }
         }
@@ -348,7 +348,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ComputeDiagnosticBase"
+            "$ref": "#/definitions/ComputeDiagnosticBase"
           },
           "description": "The collection of available Compute diagnostics returned by the listing operation."
         },
@@ -375,7 +375,7 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/DiagnosticProperties"
+          "$ref": "#/definitions/DiagnosticProperties"
         }
       }
     },
@@ -419,11 +419,11 @@
     "ComputeDiagnosticsOperationResult": {
       "type": "object",
       "properties": {
-        "Message": {
+        "message": {
           "type": "string",
           "description": "The result of the disk inspection operation."
         },
-        "ResponseFields": {
+        "responseFields": {
           "type": "string",
           "description": "The response fields of the disk inspection operation."
         },
@@ -506,7 +506,7 @@
           "description": "The Api error details"
         },
         "innerError": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/InnerError",
+          "$ref": "#/definitions/InnerError",
           "description": "The Api inner error"
         }
       },
@@ -539,7 +539,7 @@
         "desiredSizes": {
           "type": "array",
           "items": {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ResourceSize"
+            "$ref": "#/definitions/ResourceSize"
           },
           "description": "The desired resource SKUs."
         },
@@ -582,7 +582,7 @@
         "placementScores": {
           "type": "array",
           "items": {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/PlacementScore"
+            "$ref": "#/definitions/PlacementScore"
           },
           "description": "The spot placement scores."
         },
