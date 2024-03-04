@@ -113,7 +113,7 @@ model ReturnRecognitionModelOptions {
 model TrainingStatus {
   @doc("Training status of the container.")
   @lroStatus
-  status: TrainingStatusType;
+  status: Foundations.OperationState;
 
   @doc("A combined UTC date and time string that describes the created time of the person group, large person group or large face list.")
   createdDateTime: utcDateTime;
@@ -128,34 +128,17 @@ model TrainingStatus {
   message?: string;
 }
 
-@doc("Type of training status.")
-enum TrainingStatusType {
-  @doc("If the training process is waiting to perform, the status is notstarted.")
-  nonstarted,
-
-  @doc("If the training is ongoing, the status is running.")
-  running,
-
-  @lroSucceeded
-  @doc("Status succeed means this person group or large person group is ready for Face - Identify, or this large face list is ready for Face - Find Similar.")
-  succeeded,
-
-  @lroFailed
-  @doc("Status failed is often caused by no person or no persisted face exist in the person group or large person group, or no persisted face exist in the large face list.")
-  failed,
-}
-
 @doc("Identify result.")
-model IdentifyResult {
+model FaceIdentificationResult {
   @doc("Face ID of the query face.")
   faceId: string;
 
   @doc("The top candidate returned from the database.")
-  candidates: IdentifyCandidate[];
+  candidates: FaceIdentificationCandidate[];
 }
 
 @doc("Candidate for identify call.")
-model IdentifyCandidate {
+model FaceIdentificationCandidate {
   @doc("PersonId of the candidate.")
   personId: string;
 
@@ -164,7 +147,7 @@ model IdentifyCandidate {
 }
 
 @doc("Verify result.")
-model VerifyResult {
+model FaceVerificationResult {
   @doc("True if the two faces belong to the same person or the face belongs to the person, otherwise false.")
   isIdentical: boolean;
 
@@ -182,7 +165,7 @@ enum FindSimilarMatchMode {
 }
 
 @doc("Response body for find similar face operation.")
-model FindSimilarResult {
+model FaceFindSimilarResult {
   @doc("Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].")
   confidence: float32;
 
@@ -194,7 +177,7 @@ model FindSimilarResult {
 }
 
 @doc("Response body for group face operation.")
-model GroupResult {
+model FaceGroupingResult {
   @doc("A partition of the original faces based on face similarity. Groups are ranked by number of faces.")
   groups: string[][];
 

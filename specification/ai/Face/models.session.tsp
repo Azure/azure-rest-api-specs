@@ -58,7 +58,7 @@ model LivenessSessionItem {
 model LivenessSessionDetails {
   @doc("The session status.")
   @visibility("read")
-  status: SessionStatus;
+  status: FaceSessionStatus;
 
   @doc("The last result of session.")
   @visibility("read")
@@ -86,8 +86,8 @@ model LivenessSessionCreationResult {
   authToken: string;
 }
 
-@doc("Session status.")
-enum SessionStatus {
+@doc("The current status of the session.")
+enum FaceSessionStatus {
   @doc("Session has not started.")
   NotStarted,
 

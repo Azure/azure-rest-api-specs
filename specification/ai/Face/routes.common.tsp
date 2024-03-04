@@ -135,7 +135,7 @@ op IdentifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOpera
     @doc("Customized identification confidence threshold, in the range of [0, 1]. Advanced user can tweak this value to override default internal threshold for better precision on their scenario data. Note there is no guarantee of this threshold value working on other data and after algorithm updates.")
     confidenceThreshold?: float32;
   },
-  Body<IdentifyResult[]>,
+  Body<FaceIdentificationResult[]>,
   ServiceTraits
 >;
 
@@ -149,7 +149,7 @@ op VerifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperati
 
     ...T;
   },
-  VerifyResult,
+  FaceVerificationResult,
   ServiceTraits
 >;
 
@@ -170,7 +170,7 @@ op FindSimilarOperation<Ttarget extends TypeSpec.Reflection.Model> is Azure.Core
 
     ...Ttarget;
   },
-  Body<FindSimilarResult[]>,
+  Body<FaceFindSimilarResult[]>,
   ServiceTraits
 >;
 
@@ -231,7 +231,7 @@ op verify is Azure.Core.RpcOperation<
     @doc("faceId of the face, comes from Face - Detect.")
     faceId2: string;
   },
-  VerifyResult,
+  FaceVerificationResult,
   ServiceTraits
 >;
 
@@ -244,6 +244,6 @@ op group is Azure.Core.RpcOperation<
     @doc("Array of candidate faceId created by Face - Detect. The maximum is 1000 faces.")
     faceIds: string[];
   },
-  GroupResult,
+  FaceGroupingResult,
   ServiceTraits
 >;
