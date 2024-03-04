@@ -8,7 +8,7 @@ param (
 )
 Set-StrictMode -Version 3
 
-Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
+Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Scope CurrentUser
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
@@ -18,21 +18,21 @@ function Find-Suppressions-Yaml {
     [string]$file
   )
 
-  $currentDirectory = (Get-Item -Path $file).Parent
+  $currentDirectory = Split-path -Path $file
 
   while ($currentDirectory) {
     $suppressionsFile = Join-Path -Path $currentDirectory -ChildPath "suppressions.yml"
     if (Test-Path $suppressionsFile) {
       return $suppressionsFile
     } else {
-      $currentDirectory = (Get-Item $currentDirectory).Parent
+      $currentDirectory = (Get-Item $currentDirectory).Parent.FullName
     }
   }
 
   return $null
 }
 
-function Get-Suppressed {
+function Get-Suppression {
   param (
     [string]$file
   )
@@ -42,12 +42,17 @@ function Get-Suppressed {
     $suppressions = Get-Content -Path $suppressionsFile -Raw | ConvertFrom-Yaml
     foreach ($suppression in $suppressions) {
       if ($suppression.tool -eq "TypeSpecRequirement") {
-        Write-Host $suppression.path
+        # Paths in suppressions.yml are relative to the file itself
+        $fullPath = Join-Path -Path (Split-Path -Path $suppressionsFile) -ChildPath $suppression.path
+
+        if ($file -like $fullPath) {
+          return $suppression
+        }
       }
     }
   }
 
-  return $false
+  return $null
 }
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
@@ -73,6 +78,13 @@ else {
   #   - specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
+
+    $suppression = Get-Suppression (Join-Path $repoPath $file)
+    if ($suppression) {
+      LogInfo "  Suppressed: $($suppression.reason)"
+      # Skip further checks, to avoid potential errors on files already suppressed
+      continue
+    }
 
     try {
       $jsonContent = Get-Content (Join-Path $repoPath $file) | ConvertFrom-Json -AsHashtable
