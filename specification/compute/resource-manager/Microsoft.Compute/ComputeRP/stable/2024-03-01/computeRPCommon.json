@@ -795,11 +795,13 @@
     },
     "CreateOption": {
       "type": "string",
-      "description": "Specifies how the virtual machine should be created. Possible values are: **Attach.** This value is used when you are using a specialized disk to create the virtual machine. **FromImage.** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you also use the plan element previously described.",
+      "description": "Specifies how the virtual machine disk should be created. Possible values are **Attach:** This value is used when you are using a specialized disk to create the virtual machine. **FromImage:** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you should also use the imageReference element described above. If you are using a marketplace image, you should also use the plan element previously described. **Empty:** This value is used when creating an empty data disk. **Copy:** This value is used to create a data disk from a snapshot or another disk. **Restore:** This value is used to create a data disk from a disk restore point.",
       "enum": [
         "FromImage",
         "Empty",
-        "Attach"
+        "Attach",
+        "Copy",
+        "Restore"
       ],
       "x-ms-enum": {
         "name": "DiskCreateOptionTypes",
@@ -949,7 +951,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machine should be created. Possible values are: **Attach.** This value is used when you are using a specialized disk to create the virtual machine. **FromImage.** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you should also use the imageReference element described above. If you are using a marketplace image, you should also use the plan element previously described."
+          "description": "Specifies how the virtual machine disk should be created. Possible values are **Attach:** This value is used when you are using a specialized disk to create the virtual machine. **FromImage:** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you should also use the imageReference element described above. If you are using a marketplace image, you should also use the plan element previously described."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -999,7 +1001,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machine should be created. Possible values are: **Attach.** This value is used when you are using a specialized disk to create the virtual machine. **FromImage.** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you should also use the imageReference element described above. If you are using a marketplace image, you should also use the plan element previously described."
+          "description": "Specifies how the virtual machine disk should be created. Possible values are **Attach:** This value is used when you are using a specialized disk to create the virtual machine. **FromImage:** This value is used when you are using an image to create the virtual machine data disk. If you are using a platform image, you should also use the imageReference element described above. If you are using a marketplace image, you should also use the plan element previously described. **Empty:** This value is used when creating an empty data disk. **Copy:** This value is used to create a data disk from a snapshot or another disk. **Restore:** This value is used to create a data disk from a disk restore point."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -1009,6 +1011,10 @@
         "managedDisk": {
           "description": "The managed disk parameters.",
           "$ref": "#/definitions/ManagedDiskParameters"
+        },
+        "sourceResource": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "The source resource identifier. It can be a snapshot, or disk restore point from which to create a disk."
         },
         "toBeDetached": {
           "type": "boolean",
