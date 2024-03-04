@@ -83,7 +83,11 @@ else {
 
     $suppression = Get-Suppression $fullPath
     if ($suppression) {
-      $reason = ($suppression.PSObject.Properties.Name -contains "reason") ? $suppression.reason : "<no reason specified>"
+      # Disable strict mode to handle case where reason is not specified
+      Set-StrictMode -Off
+      $reason = $suppression.reason ?? "<no reason specified>"
+      Set-StrictMode -Version Latest
+
       LogInfo "  Suppressed: $reason"
       # Skip further checks, to avoid potential errors on files already suppressed
       continue
