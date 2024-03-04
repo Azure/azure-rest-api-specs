@@ -375,7 +375,9 @@
           "items": {
             "$ref": "#/definitions/NicDetail"
           },
-          "x-ms-identifiers": ["adapterName"]
+          "x-ms-identifiers": [
+            "adapterName"
+          ]
         },
         "deviceMetadata": {
           "type": "string",
@@ -603,7 +605,9 @@
             "$ref": "#/definitions/Extension"
           },
           "readOnly": true,
-          "x-ms-identifiers": ["extensionName"]
+          "x-ms-identifiers": [
+            "extensionName"
+          ]
         }
       }
     },
@@ -632,7 +636,12 @@
           "description": "The instance view of all current configurations on HCI device.",
           "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDeviceProperties"
+        }
+      ]
     },
     "HciNetworkProfile": {
       "type": "object",
@@ -793,7 +802,9 @@
             "$ref": "#/definitions/Intents"
           },
           "readOnly": true,
-          "x-ms-identifiers": ["intentName"]
+          "x-ms-identifiers": [
+            "intentName"
+          ]
         },
         "storageNetworks": {
           "type": "array",
@@ -802,7 +813,9 @@
             "$ref": "#/definitions/StorageNetworks"
           },
           "readOnly": true,
-          "x-ms-identifiers": ["networkAdapterName"]
+          "x-ms-identifiers": [
+            "networkAdapterName"
+          ]
         },
         "storageConnectivitySwitchless": {
           "type": "boolean",
@@ -1069,7 +1082,9 @@
             "$ref": "#/definitions/SwitchExtension"
           },
           "readOnly": true,
-          "x-ms-identifiers": ["extensionName"]
+          "x-ms-identifiers": [
+            "extensionName"
+          ]
         }
       }
     },
