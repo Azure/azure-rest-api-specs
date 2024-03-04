@@ -107,6 +107,6 @@ interface Files extends ProxyResourceOperations<File> {
   downloadRequest is ArmResourceActionAsync<
     File,
     FileDownloadRequestParameters,
-    ResultProperty // TODO: Document meaning of result.
+    never
   >;
 }
