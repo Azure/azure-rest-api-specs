@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "jobName": "test-job",
+    "jobExecutionName": "test-job-execution"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-job-execution",
+        "properties": {
+          "resourceRequests": {
+            "cpu": "1",
+            "memory": "2Gi"
+          },
+          "template": {
+            "args": [
+              "arg1"
+            ],
+            "environmentVariables": {
+              "properties": {
+                  "envKey": "envValue"
+              },
+              "secrets": {
+                  "secretEnvKey": "secretEnvValue"
+              }
+            },
+            "parallelism": 1,
+            "replicaCompletionCount": 1,
+            "replicaRetryLimit": 1,
+            "replicaTimeout": 10
+          }
+        },
+        "startTime": "2024-03-01T05:11:58+00:00",
+        "endTime": "2024-03-01T05:13:10+00:00",
+        "status": "Completed"
+      }
+    }
+  }
+}
