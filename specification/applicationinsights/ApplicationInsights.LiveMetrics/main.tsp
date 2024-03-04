@@ -25,23 +25,11 @@ using Azure.Core.Traits;
   title: "QuickPulse REST APIs for client SDKs.",
 })
 @server(
-  "https://rt.services.visualstudio.com",
-  "Existing QuickPulse global endpoint."
-)
-@server(
-  "https://live.monitor.azure.com",
-  "Existing QuickPulse global endpoint."
-)
-@server(
-  "https://live.applicationinsights.azure.com",
-  "Existing QuickPulse global endpoint."
-)
-@server(
-  "https://{region}.diagnostics.monitor.azure.com",
-  "Suggested QuickPulse regional endpoint.",
+  "{endpoint}",
+  "Existing QuickPulse global endpoint.",
   {
-    @doc("The region of the server that hosts the client SDK.")
-    region: "string",
+    @doc("The endpoint of the QuickPulse service.")
+    endpoint: string = "https://rt.services.visualstudio.com",
   }
 )
 namespace LiveMetrics;
