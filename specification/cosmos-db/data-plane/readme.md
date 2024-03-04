@@ -19,13 +19,10 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
 These are the global settings for the Tables API.
 
 ``` yaml
-azure-validator: true
 openapi-type: data-plane
 tag: package-2019-02
 ```
@@ -48,8 +45,7 @@ input-file:
 - Microsoft.Tables/stable/2019-02-02/table.json
 ```
 
----
-# Suppressions
+### Suppression
 
 ``` yaml
 directive:
