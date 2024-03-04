@@ -8,8 +8,47 @@ param (
 )
 Set-StrictMode -Version 3
 
+Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
+
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
+
+function Find-Suppressions-Yaml {
+  param (
+    [string]$file
+  )
+
+  $currentDirectory = (Get-Item -Path $file).Parent
+
+  while ($currentDirectory) {
+    $suppressionsFile = Join-Path -Path $currentDirectory -ChildPath "suppressions.yml"
+    if (Test-Path $suppressionsFile) {
+      return $suppressionsFile
+    } else {
+      $currentDirectory = (Get-Item $currentDirectory).Parent
+    }
+  }
+
+  return $null
+}
+
+function Get-Suppressed {
+  param (
+    [string]$file
+  )
+
+  $suppressionsFile = Find-Suppressions-Yaml $file
+  if ($suppressionsFile) {
+    $suppressions = Get-Content -Path $suppressionsFile -Raw | ConvertFrom-Yaml
+    foreach ($suppression in $suppressions) {
+      if ($suppression.tool -eq "TypeSpecRequirement") {
+        Write-Host $suppression.path
+      }
+    }
+  }
+
+  return $false
+}
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
