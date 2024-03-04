@@ -65,10 +65,18 @@ model DynamicPersonGroup {
   dynamicPersonGroupId: string;
 
   ...NameAndUserData;
+}
 
+@doc("Request of create dynamic person group.")
+model CreateDynamicPersonGroupContent is DynamicPersonGroup {
   @doc("Array of personIds created by PersonDirectory Person - Create to add.")
-  @visibility("create")
   addPersonIds?: string[];
+}
+
+@doc("Request of update dynamic person group.")
+model UpdateDynamicPersonGroupContent is CreateDynamicPersonGroupContent {
+  @doc("Array of personIds created by PersonDirectory Person - Create to remove.")
+  removePersonIds?: string[];
 }
 
 @doc("Response of create person.")

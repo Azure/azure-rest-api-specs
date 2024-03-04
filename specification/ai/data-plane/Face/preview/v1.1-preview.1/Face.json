@@ -623,7 +623,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DynamicPersonGroup"
+              "$ref": "#/definitions/CreateDynamicPersonGroupContent"
             }
           }
         ],
@@ -676,24 +676,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128."
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16KB."
-                },
-                "removePersonIds": {
-                  "type": "array",
-                  "description": "Array of PersonDirectory person ids to remove from the DynamicPersonGroup.",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
+              "$ref": "#/definitions/UpdateDynamicPersonGroupContent"
             }
           }
         ],
@@ -5357,6 +5340,36 @@
         "value"
       ]
     },
+    "CreateDynamicPersonGroupContent": {
+      "type": "object",
+      "description": "Request of create dynamic person group.",
+      "properties": {
+        "dynamicPersonGroupId": {
+          "type": "string",
+          "description": "ID of the dynamic person group.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128."
+        },
+        "userData": {
+          "type": "string",
+          "description": "Optional user defined data. Length should not exceed 16KB."
+        },
+        "addPersonIds": {
+          "type": "array",
+          "description": "Array of personIds created by PersonDirectory Person - Create to add.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "dynamicPersonGroupId",
+        "name"
+      ]
+    },
     "CreatePersonResult": {
       "type": "object",
       "description": "Response of create person.",
@@ -5416,16 +5429,6 @@
         "userData": {
           "type": "string",
           "description": "Optional user defined data. Length should not exceed 16KB."
-        },
-        "addPersonIds": {
-          "type": "array",
-          "description": "Array of personIds created by PersonDirectory Person - Create to add.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "create"
-          ]
         }
       },
       "required": [
@@ -7357,6 +7360,34 @@
             "description": "Status failed is often caused by no person or no persisted face exist in the person group or large person group, or no persisted face exist in the large face list."
           }
         ]
+      }
+    },
+    "UpdateDynamicPersonGroupContent": {
+      "type": "object",
+      "description": "Request of update dynamic person group.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128."
+        },
+        "userData": {
+          "type": "string",
+          "description": "Optional user defined data. Length should not exceed 16KB."
+        },
+        "addPersonIds": {
+          "type": "array",
+          "description": "Array of personIds created by PersonDirectory Person - Create to add.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "removePersonIds": {
+          "type": "array",
+          "description": "Array of personIds created by PersonDirectory Person - Create to remove.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "VerifyResult": {

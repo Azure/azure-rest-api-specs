@@ -149,7 +149,7 @@ op verifyFromPersonDirectory is VerifyOperation<{
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
 @createsOrReplacesResource(DynamicPersonGroup) // We use HTTP PUT but we don't support replace
-op createDynamicPersonGroup is FaceResourceLongRunningOperation<DynamicPersonGroup>;
+op createDynamicPersonGroup is FaceResourceLongRunningOperation<CreateDynamicPersonGroupContent>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
 op deleteDynamicPersonGroup is FaceResourceDeleteLongRunningOperation<DynamicPersonGroup>;
@@ -159,13 +159,7 @@ op getDynamicPersonGroup is Operations.ResourceRead<DynamicPersonGroup>;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "No operation location when ok"
 @updatesResource(DynamicPersonGroup)
-op updateDynamicPersonGroup is FaceResourceLongRunningOperation<
-  DynamicPersonGroup,
-  Foundations.ResourceBody<DynamicPersonGroup & {
-    @doc("Array of PersonDirectory person ids to remove from the DynamicPersonGroup.")
-    removePersonIds?: string[];
-  }>
->;
+op updateDynamicPersonGroup is FaceResourceLongRunningOperation<UpdateDynamicPersonGroupContent>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
 op listDynamicPersonGroups is FaceResourceListOperation<DynamicPersonGroup>;
