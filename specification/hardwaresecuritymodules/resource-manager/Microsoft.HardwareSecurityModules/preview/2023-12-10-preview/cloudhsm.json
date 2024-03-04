@@ -692,8 +692,8 @@
           "description": "Cloud HSM Cluster status message",
           "readOnly": true
         },
-        "securityDomain": {
-          "$ref": "#/definitions/CloudHsmClusterSecurityDomainProperties"
+        "clusterStatus": {
+          "$ref": "#/definitions/CloudHsmClusterStatusProperties"
         },
         "backupProperties": {
           "$ref": "#/definitions/BackupProperties"
@@ -736,7 +736,7 @@
       "description": "Patchable properties of the Cloud HSM Cluster",
       "type": "object"
     },
-    "CloudHsmClusterSecurityDomainProperties": {
+    "CloudHsmClusterStatusProperties": {
       "type": "object",
       "description": "Security domain properties information for Cloud HSM cluster",
       "properties": {
@@ -794,9 +794,9 @@
       "type": "object",
       "description": "Cloud Hsm Cluster backup information",
       "properties": {
-        "azureStorageResourceUri": {
+        "azureStorageContainerUri": {
           "type": "string",
-          "description": "Azure storage Resource Uri"
+          "description": "Azure Blob storage container Uri"
         },
         "lastBackupDateTime": {
           "type": "string",
@@ -815,7 +815,7 @@
       "type": "object",
       "description": "Cloud Hsm Cluster restore information",
       "properties": {
-        "azureStorageResourceUri": {
+        "azureStorageContainerUri": {
           "type": "string",
           "description": "Azure Blob storage container Uri"
         },
