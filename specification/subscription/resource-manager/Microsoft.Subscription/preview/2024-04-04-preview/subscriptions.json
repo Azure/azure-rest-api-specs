@@ -1,0 +1,298 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-04-04-preview",
+    "title": "SubscriptionClient",
+    "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Subscription/policies/default": {
+      "put": {
+        "description": "Create or Update Subscription tenant policy for user's tenant.",
+        "operationId": "SubscriptionPolicy_AddUpdatePolicyForTenant",
+        "x-ms-examples": {
+          "TenantPolicy": {
+            "$ref": "./examples/changeTenantPolicy.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription tenant policy has been successfully created/updated.",
+            "schema": {
+              "$ref": "#/definitions/GetTenantPolicyResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutTenantPolicyRequestProperties"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "get": {
+        "description": "Get the subscription tenant policy for the user's tenant.",
+        "operationId": "SubscriptionPolicy_GetPolicyForTenant",
+        "x-ms-examples": {
+          "getTenantPolicy": {
+            "$ref": "./examples/getTenantPolicy.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription tenant policy details for user's tenant.",
+            "schema": {
+              "$ref": "#/definitions/GetTenantPolicyResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/policies": {
+      "get": {
+        "description": "Get the subscription tenant policy for the user's tenant.",
+        "operationId": "SubscriptionPolicy_ListPolicyForTenant",
+        "x-ms-examples": {
+          "getTenantPolicyList": {
+            "$ref": "./examples/getTenantPolicyList.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription tenant policy details for user's tenant.",
+            "schema": {
+              "$ref": "#/definitions/GetTenantPolicyListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
+        },
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "PutTenantPolicyRequestProperties": {
+      "description": "Put tenant policy request properties.",
+      "type": "object",
+      "properties": {
+        "blockSubscriptionsLeavingTenant": {
+          "description": "Blocks the leaving of subscriptions from user's tenant.",
+          "type": "boolean"
+        },
+        "blockSubscriptionsIntoTenant": {
+          "description": "Blocks the entering of subscriptions into user's tenant.",
+          "type": "boolean"
+        },
+        "exemptedPrincipals": {
+          "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        "tenantChangeAllowedTenants": {
+          "description": "List of allowed tenants among which subscriptions can leave or enter without getting blocked.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+    },
+    "GetTenantPolicyResponse": {
+      "description": "Tenant policy Information.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Policy Id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Policy name.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/TenantPolicy",
+          "description": "Tenant policy properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "GetTenantPolicyListResponse": {
+      "description": "Tenant policy information list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of tenant policies.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GetTenantPolicyResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TenantPolicy": {
+      "description": "Tenant policy.",
+      "type": "object",
+      "properties": {
+        "policyId": {
+          "description": "Policy Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blockSubscriptionsLeavingTenant": {
+          "description": "Blocks the leaving of subscriptions from user's tenant.",
+          "type": "boolean"
+        },
+        "blockSubscriptionsIntoTenant": {
+          "description": "Blocks the entering of subscriptions into user's tenant.",
+          "type": "boolean"
+        },
+        "exemptedPrincipals": {
+          "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        "tenantChangeAllowedTenants": {
+          "description": "List of allowed tenants among which subscriptions can leave or enter without getting blocked.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2021-10-01"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
