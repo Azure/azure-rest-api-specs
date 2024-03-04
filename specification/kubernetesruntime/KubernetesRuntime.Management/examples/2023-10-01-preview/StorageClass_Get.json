@@ -1,0 +1,32 @@
+{
+  "operationId": "StorageClass_Get",
+  "title": "StorageClass_Get_0",
+  "parameters": {
+    "resourceUri": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.Kubernetes/connectedClusters/cluster1",
+    "storageClassName": "testrwx",
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.Kubernetes/connectedClusters/cluster1/providers/Microsoft.KubernetesRuntime/storageclasses/testrwx",
+        "name": "testrwx",
+        "type": "microsoft.kubernetesruntime/storageclass",
+        "properties": {
+          "performance": "Basic",
+          "typeProperties": {
+            "type": "RWX",
+            "backingStorageClassName": "default"
+          },
+          "accessModes": [
+            "ReadWriteOnce",
+            "ReadWriteMany"
+          ],
+          "allowVolumeExpansion": "Allow",
+          "provisioner": "rwx.csi.microsoft.com",
+          "volumeBindingMode": "Immediate"
+        }
+      }
+    }
+  }
+}
