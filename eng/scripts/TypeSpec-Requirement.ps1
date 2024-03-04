@@ -83,7 +83,8 @@ else {
 
     $suppression = Get-Suppression $fullPath
     if ($suppression) {
-      LogInfo "  Suppressed: $($suppression.reason)"
+      $reason = ($suppression.PSObject.Properties.Name -contains "reason") ? $suppression.reason : "<no reason specified>"
+      LogInfo "  Suppressed: $reason"
       # Skip further checks, to avoid potential errors on files already suppressed
       continue
     }
