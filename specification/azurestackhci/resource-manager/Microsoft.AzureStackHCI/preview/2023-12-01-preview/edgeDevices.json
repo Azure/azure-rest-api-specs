@@ -156,13 +156,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeDevice"
             }
           },
           "201": {
-            "description": "EdgeDevice Resource created.",
+            "description": "Resource successfully created.",
             "schema": {
               "$ref": "#/definitions/EdgeDevice"
             },
@@ -285,7 +285,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ValidateResponse"
             }
@@ -382,7 +382,7 @@
           "items": {
             "$ref": "#/definitions/NicDetail"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["adapterName"]
         },
         "deviceMetadata": {
           "type": "string",
@@ -542,7 +542,7 @@
       "type": "object",
       "description": "Arc extension installed on edge device.",
       "properties": {
-        "name": {
+        "extensionName": {
           "type": "string",
           "description": "Arc extension name installed on edge device.",
           "readOnly": true
@@ -610,7 +610,7 @@
             "$ref": "#/definitions/Extension"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["extensionName"]
         }
       }
     },
@@ -800,7 +800,7 @@
             "$ref": "#/definitions/Intents"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["intentName"]
         },
         "storageNetworks": {
           "type": "array",
@@ -809,7 +809,7 @@
             "$ref": "#/definitions/StorageNetworks"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["networkAdapterName"]
         },
         "storageConnectivitySwitchless": {
           "type": "boolean",
@@ -1076,7 +1076,7 @@
             "$ref": "#/definitions/SwitchExtension"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["extensionName"]
         }
       }
     },
