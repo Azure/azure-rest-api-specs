@@ -34,10 +34,10 @@ function Find-Suppressions-Yaml {
 
 function Get-Suppression {
   param (
-    [string]$file
+    [string]$fileInSpecFolder
   )
 
-  $suppressionsFile = Find-Suppressions-Yaml $file
+  $suppressionsFile = Find-Suppressions-Yaml $fileInSpecFolder
   if ($suppressionsFile) {
     $suppressions = Get-Content -Path $suppressionsFile -Raw | ConvertFrom-Yaml
     foreach ($suppression in $suppressions) {
@@ -52,7 +52,7 @@ function Get-Suppression {
         $fullPath = Join-Path -Path (Split-Path -Path $suppressionsFile) -ChildPath $path
 
         # If path is not specified, suppression applies to all files
-        if (!$path -or ($file -like $fullPath)) {
+        if (!$path -or ($fileInSpecFolder -like $fullPath)) {
           return $suppression
         }
       }
