@@ -998,33 +998,38 @@ model DataProductProperties {
 
   @added(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable public access to the ingestion endpoint of data product resource.")
-  @visibility("create", "update", "read")
+  @visibility("create", "read")
   ingestionPublicNetworkAccess?: ControlState = ControlState.Enabled;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Network rule set for ingestion endpoint of data product.")
-  @visibility("create", "update", "read")
+  @visibility("create", "read")
   ingestionNetworkAcls?: DataProductNetworkAcls;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable public access to the insights or the file access endpoint of data product resource.")
-  @visibility("create", "update", "read")
+  @visibility("create", "read")
   insightsStoragePublicNetworkAccess?: ControlState = ControlState.Enabled;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Network rule set for insights or the file access endpoint of data product.")
-  @visibility("create", "update", "read")
+  @visibility("create", "read")
   insightsStorageNetworkAcls?: DataProductNetworkAcls;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable public access to the query endpoint of data product resource.")
   @visibility("create", "update", "read")
-  insightsQueryNetworkAccess?: ControlState = ControlState.Enabled;
+  insightsQueryNetworkAccess?: ControlState;
 
   @added(Versions.v2024_04_01_preview)
   @doc("The list of query IPAddress in the format of Public IPv4 IPAddress or CIDR allowed to connect to query/visualization endpoint.")
   @visibility("create", "update", "read")
   insightsQueryAllowedQueryIpRangeList?: string[];
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("This field indicates the status of the query IPAddress update operation.")
+  @visibility("read")
+  insightQueryUpdateStateReason?: string;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable copilot access for a data product resource.")
@@ -1061,6 +1066,11 @@ model DataProductProperties {
   @doc("Key vault url.")
   @visibility("read")
   keyVaultUrl?: string;
+
+  @added(Versions.v2024_04_01_preview)
+  @doc("This field provides specific data product version.")
+  @visibility("read")
+  currentVersion: string;
 }
 
 @doc("Encryption key details.")
@@ -1516,12 +1526,12 @@ interface DataProducts {
   listBySubscription is ArmListBySubscription<DataProduct>;
 
   @added(Versions.v2024_04_01_preview)
-  @doc("Fetch per region capacity for the data product resource type.")
-  @segment("providers/Microsoft.NetworkAnalytics/dataProducts/getRegionalCapacity")
-  @post
-  @armResourceCollectionAction
+  @doc("Retrieve per region capacity for the data product type.")
+  @segment("providers/Microsoft.NetworkAnalytics/getRegionalDataProductsCapacity")
+  @get
+  @armResourceRead(DataProduct)
   getRegionalCapacity(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-  ): DataProductsRegionalCapacity | ErrorResponse;
+  ): ArmResponse<Record<int32>> | ErrorResponse;
 }
