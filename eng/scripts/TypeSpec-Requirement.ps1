@@ -15,10 +15,10 @@ Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope Curren
 
 function Find-Suppressions-Yaml {
   param (
-    [string]$file
+    [string]$fileInSpecFolder
   )
 
-  $currentDirectory = Get-Item (Split-Path -Path $file)
+  $currentDirectory = Get-Item (Split-Path -Path $fileInSpecFolder)
 
   while ($currentDirectory) {
     $suppressionsFile = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yml"
