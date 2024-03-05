@@ -27,7 +27,6 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 ```yaml $(tag) == 'package-2022-12'
 input-file:
   - Microsoft.SecurityInsights/preview/2022-12-01-preview/ThreatIntelligence.json
-  - Microsoft.SecurityInsights/preview/2024-02-01-preview/ThreatIntelligence.json
 ```
 ### Tag: package-2024-02
 
