@@ -27,7 +27,7 @@ These are the global settings for the computeschedule.
 ```yaml
 openapi-subtype: providerHub
 openapi-type: arm
-tag: package-2023-12-01-preview 
+tag: package-2023-12-01-preview
 ```
 
 ### Tag: package-2023-12-01-preview
