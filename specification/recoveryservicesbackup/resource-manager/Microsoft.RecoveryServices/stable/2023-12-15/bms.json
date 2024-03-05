@@ -255,7 +255,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/AzureRegion"
@@ -281,6 +281,9 @@
                 "type": "string"
               }
             }
+          },
+          "200": {
+            "description": "OK"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2487,7 +2490,8 @@
       "properties": {
         "resourceId": {
           "description": "Entire ARM resource id of the resource",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "jobName": {
           "description": "Job Name of the job to be fetched",
