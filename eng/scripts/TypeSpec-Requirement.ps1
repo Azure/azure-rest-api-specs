@@ -27,7 +27,7 @@ function Find-Suppressions-Yaml {
 
     if (Test-Path $suppressionsFileYaml) {
       return $suppressionsFileYaml
-    } else if (Test-Path $suppressionsFileYml) {
+    } elseif (Test-Path $suppressionsFileYml) {
       return $suppressionsFileYml
     } else {
       $currentDirectory = $currentDirectory.Parent
