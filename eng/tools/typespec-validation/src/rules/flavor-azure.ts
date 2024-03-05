@@ -18,9 +18,9 @@ export class FlavorAzureRule implements Rule {
 
     const options = config?.options;
     for (const emitter in options) {
-      const flavor = options[emitter]?.flavor;
-
       if (this.isClientEmitter(emitter)) {
+        const flavor = options[emitter]?.flavor;
+
         stdOutput += `"${emitter}":\n`;
         stdOutput += `  flavor: ${flavor}\n`;
 
