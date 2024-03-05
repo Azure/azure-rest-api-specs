@@ -31,7 +31,7 @@ export class FlavorAzureRule implements Rule {
             "\n" +
             "options:\n" +
             `  "${emitter}":\n` +
-            "    flavor: azure\n";
+            "    flavor: azure\n\n";
         }
       }
     }
