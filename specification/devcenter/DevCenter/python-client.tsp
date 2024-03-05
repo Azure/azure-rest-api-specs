@@ -1,6 +1,4 @@
-import "./environments/routes.tsp";
-import "./devcenter/routes.tsp";
-import "./devbox/routes.tsp";
+import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
@@ -17,8 +15,8 @@ namespace PythonSdkCustomizations;
 })
 interface DevCenterClientOperations {
   //DevCenters
-  listProjects is DevCenterService.DevCenter.listProjects;
-  getProject is DevCenterService.DevCenter.getProject;
+  listProjects is DevCenterService.DevCenterOperations.listProjects;
+  getProject is DevCenterService.DevCenterOperations.getProject;
 
   //DevBoxes
   listPools is DevCenterService.DevBoxesOperations.listPools;
@@ -54,3 +52,34 @@ interface DevCenterClientOperations {
   getEnvironmentDefinition is DevCenterService.EnvironmentsOperations.getEnvironmentDefinition;
   listEnvironmentTypes is DevCenterService.EnvironmentsOperations.listEnvironmentTypes;
 }
+
+@@projectedName(DevCenterService.LocalAdminStatus,
+  "client",
+  "LocalAdministratorStatus"
+);
+@@projectedName(DevCenterService.StopOnDisconnectEnableStatus,
+  "client",
+  "StopOnDisconnectStatus"
+);
+@@projectedName(DevCenterService.EnvironmentTypeEnableStatus,
+  "client",
+  "EnvironmentTypeStatus"
+);
+@@projectedName(DevCenterService.DevBoxActionDelayResultStatus,
+  "client",
+  "DevBoxActionDelayStatus"
+);
+
+@@projectedName(DevCenterService.OsType, "python", "OSType");
+@@projectedName(DevCenterService.HardwareProfile.vCPUs, "python", "vcpus");
+@@projectedName(DevCenterService.HardwareProfile.memoryGB,
+  "python",
+  "memoryGb"
+);
+@@projectedName(DevCenterService.OsDisk, "python", "OSDisk");
+@@projectedName(DevCenterService.OsDisk.diskSizeGB, "python", "diskSizeGb");
+@@projectedName(DevCenterService.OperationStatus, "python", "OperationDetails");
+@@projectedName(DevCenterService.OperationStatusValue,
+  "python",
+  "OperationStatus"
+);

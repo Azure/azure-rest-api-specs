@@ -1,6 +1,4 @@
-import "./Environments/routes.tsp";
-import "./DevCenter/routes.tsp";
-import "./DevBox/routes.tsp";
+import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
@@ -34,7 +32,7 @@ interface DevBoxesClientOperations {
   listAllDevBoxesByUser is DevCenterService.DevBoxesDevCenter.listAllDevBoxesByUser;
   listDevBoxes is DevCenterService.DevBoxesOperations.listDevBoxes;
   getDevBox is DevCenterService.DevBoxesOperations.getDevBox;
-  @convenientAPI(false)
+  @convenientAPI(false) // https://github.com/Azure/azure-rest-api-specs/issues/28083
   createDevBox is DevCenterService.DevBoxesOperations.createDevBox;
   deleteDevBox is DevCenterService.DevBoxesOperations.deleteDevBox;
   startDevBox is DevCenterService.DevBoxesOperations.startDevBox;
@@ -230,17 +228,3 @@ interface EnvironmentClientOperations {
   "DevCenterOperationDetails"
 );
 @@projectedName(DevCenterService.Project, "java", "DevCenterProject");
-
-@@projectedName(DevCenterService.OsType, "python", "OSType");
-@@projectedName(DevCenterService.HardwareProfile.vCPUs, "python", "vcpus");
-@@projectedName(DevCenterService.HardwareProfile.memoryGB,
-  "python",
-  "memoryGb"
-);
-@@projectedName(DevCenterService.OsDisk, "python", "OSDisk");
-@@projectedName(DevCenterService.OsDisk.diskSizeGB, "python", "diskSizeGb");
-@@projectedName(DevCenterService.OperationStatus, "python", "OperationDetails");
-@@projectedName(DevCenterService.OperationStatusValue,
-  "python",
-  "OperationStatus"
-);
