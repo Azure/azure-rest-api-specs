@@ -2498,7 +2498,7 @@
           }
         },
         "filteringTags": {
-          "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "description": "List of filtering tags to be used for installing agents. If empty, all resources will be captured.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TagRule"
@@ -2507,7 +2507,7 @@
       }
     },
     "TagRulesSet": {
-      "description": "Set of rules for sending logs or metrics and installing agents for the monitor resource.",
+      "description": "Set of rules for installing agents for the monitor resource.",
       "type": "object",
       "properties": {
         "enableAgents": {
@@ -2515,18 +2515,20 @@
           "type": "boolean"
         },
         "includeRuleSet": {
-          "description": "List of filtering tags to be used for logs, metrics and agent monitoring based on resource types for both compute and non-compute resources.",
+          "description": "List of filtering tags to be included for agent monitoring based on resource types provided.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MonitoringTags"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "excludeRuleSet": {
-          "description": "List of filtering tags to be used for logs, metrics and agent monitoring based on resource types for both compute and non-compute resources.",
+          "description": "List of filtering tags to be excluded for agent monitoring based on resource types provided.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MonitoringTags"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
