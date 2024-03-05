@@ -731,16 +731,22 @@
               "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileName",
               "description": "Workload profile name to pin for container app execution."
             },
-            "s2CAutoPatchConfiguration": {
+            "patchingConfiguration": {
               "description": "Container App auto patch configuration.",
-              "type": "string",
-              "enum": [
-                "Enabled",
-                "Disabled"
-              ],
-              "x-ms-enum": {
-                "name": "s2CAutoPatchConfiguration",
-                "modelAsString": true
+              "properties": {
+                "patchingMode": {
+                  "description": "Patching mode for the container app.",
+                  "type": "string",
+                  "enum": [
+                    "Automatic",
+                    "Manual",
+                    "Disabled"
+                  ],
+                  "x-ms-enum": {
+                    "name": "patchingMode",
+                    "modelAsString": true
+                  }
+                }
               }
             },
             "latestRevisionName": {
