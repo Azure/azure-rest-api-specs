@@ -3,24 +3,26 @@
 # Licensed under the MIT License. See License.txt in the project root for license information.
 # --------------------------------------------------------------------------------------------
 
+# Install and use Node v20
+#nvm install 20 2>&1 | Write-Host
+#nvm use 20 2>&1 | Write-Host
+
+# Install AutoRest and some validation tools
+npm install -g autorest@latest 2>&1 | Write-Host
+npm install -g oav@latest 2>&1 | Write-Host
+npm install -g @azure/oad@latest 2>&1 | Write-Host
+npm install -g @azure/avocado@latest 2>&1 | Write-Host
+
+# Install TypeSpec compiler and VS Code extension
+npm install -g @typespec/compiler@latest 2>&1 | Write-Host
+tsp code install 2>&1 | Write-Host
+
+# Install azure-rest-api-specs common dependencies
 try
 {
-    Push-Location (Join-Path $PSScriptRoot "../")
-    nvm install 20
-    nvm use 20
-    npm install -g @typespec/compiler@latest
-    tsp install
-    # from https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md
-    try
-    {
-        npx tsc # emits and error but that's fine
-    }
-    catch {}
-    npm install -g oav@latest
-    npm install -g @azure/oad@latest
-    npm install -g @azure/avocado@latest
-    npm install -g prettier@latest
-    npm install -g autorest@latest
+    # go to the root of the azure-rest-api-specs repo
+    Push-Location (Join-Path $PSScriptRoot "../../../../")
+    npm ci 2>&1 | Write-Host
 }
 finally
 {
