@@ -833,11 +833,15 @@
       "properties": {
         "updateType": {
           "type": "string",
-          "description": "The type of update that needs to be performed."
+          "description": "The type of update that needs to be performed.",
+          "default": "TimeBased",
+          "enum": [
+            "TimeBased"
+          ]
         },
         "updateInterval": {
           "type": "string",
-          "description": "The update interval in ISO8601 format."
+          "description": "The update interval for notification updates in ISO8601 format."
         },
         "actionGroups": {
           "type": "array",
