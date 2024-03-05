@@ -406,12 +406,12 @@
         "managedRuleSets"
       ],
       "properties": {
-        "allowlists": {
+        "exceptions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AllowlistEntry"
+            "$ref": "#/definitions/ExceptionEntry"
           },
-          "description": "The allowlists that are applied on the policy."
+          "description": "The exceptions that are applied on the policy."
         },
         "exclusions": {
           "type": "array",
@@ -955,12 +955,12 @@
         }
       }
     },
-    "AllowlistEntry": {
+    "ExceptionEntry": {
       "required": [
         "matchVariable",
         "valueMatchOperator"
       ],
-      "description": "Allows a request when the condition is satisfied.",
+      "description": "Adds exception to allow a request when the condition is satisfied.",
       "properties": {
         "matchVariable": {
           "type": "string",
@@ -969,9 +969,9 @@
             "RemoteAddr",
             "RequestHeader"
           ],
-          "description": "The variable on which we evaluate the allowlist condition",
+          "description": "The variable on which we evaluate the exception condition",
           "x-ms-enum": {
-            "name": "AllowlistEntryMatchVariable",
+            "name": "ExceptionEntryMatchVariable",
             "modelAsString": true
           }
         },
@@ -992,7 +992,7 @@
             "IPMatch"
           ],
           "x-ms-enum": {
-            "name": "AllowlistEntryValueMatchOperator",
+            "name": "ExceptionEntryValueMatchOperator",
             "modelAsString": true
           },
           "description": "Operates on the allowed values for the matchVariable"
@@ -1005,22 +1005,22 @@
             "StartsWith",
             "EndsWith"
           ],
-          "description": "When matchVariable is a collection (e.g, headers), operate on the selector",
+          "description": "When the matchVariable points to a key-value pair (e.g, RequestHeader), this operates on the selector",
           "x-ms-enum": {
-            "name": "AllowlistEntrySelectorMatchOperator",
+            "name": "ExceptionEntrySelectorMatchOperator",
             "modelAsString": true
           }
         },
         "selector": {
           "type": "string",
-          "description": "When matchVariable is a collection (e.g, headers), this identifies the collection's key."
+          "description": "When the matchVariable points to a key-value pair (e.g, RequestHeader), this identifies the key."
         },
-        "allowlistManagedRuleSets": {
+        "exceptionManagedRuleSets": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExclusionManagedRuleSet"
           },
-          "description": "The managed rule sets that are associated with the allowlist."
+          "description": "The managed rule sets that are associated with the exception."
         }
       }
     },
