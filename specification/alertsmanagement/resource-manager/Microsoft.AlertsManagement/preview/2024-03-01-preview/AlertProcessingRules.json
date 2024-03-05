@@ -837,10 +837,14 @@
         "updateType": {
           "type": "string",
           "description": "The type of update that needs to be performed.",
-          "default": "TimeBased",
+          "default": "timeBased",
           "enum": [
-            "TimeBased"
-          ]
+            "timeBased"
+          ],
+          "x-ms-enum": {
+            "name": "UpdateType",
+            "modelAsString": true
+          }
         },
         "updateInterval": {
           "type": "string",
