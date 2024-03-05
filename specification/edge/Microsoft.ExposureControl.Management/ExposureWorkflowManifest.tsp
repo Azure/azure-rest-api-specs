@@ -21,7 +21,6 @@ namespace Microsoft.Edge;
 
 @doc("Exposure workflow manifest definition Properties")
 model ExposureWorkflowManifestProperties {
-
   @doc("Manifest identifier expression.")
   manifestDiscriminator: string;
 
