@@ -12,18 +12,9 @@ using OpenAPI;
 namespace LiveMetrics;
 
 /**
- * QuickPulse /ping request parameters, either in query string, or in request body
+ * Live Metrics IsSubscribed request query parameters, either query strings or headers
  */
-model PingRequest {
-  ...PingRequestQueryStrings;
-  ...PingRequestHeaders;
-  ...PingRequestBody;
-}
-
-/**
- * QuickPulse ping request query strings
- */
-model PingRequestQueryStrings {
+model IsSubscribedRequestParameters {
   @doc("The ikey of the target Application Insights component for which client sdk calls /ping.")
   @query
   ikey: string;
@@ -31,21 +22,16 @@ model PingRequestQueryStrings {
   @doc("Deprecated. An alternative way to pass api key. Use AAD auth instead.")
   @query
   apiKey?: string;
-}
 
-/**
- * QuickPulse ping request headers
- */
-model PingRequestHeaders {
-  @doc("Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.")
+  @doc("Timestamp when SDK transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.")
   @header("x-ms-qps-transmission-time")
   transmissionTime?: int64;
 
-  @doc("Computer name where AI SDK lives. QuickPulse uses machine name with instance name as a backup.")
+  @doc("Computer name where AI SDK lives. Live Metrics uses machine name with instance name as a backup.")
   @header("x-ms-qps-machine-name")
   machineName?: string;
 
-  @doc("Service instance name where AI SDK lives. QuickPulse uses machine name with instance name as a backup.")
+  @doc("Service instance name where AI SDK lives. Live Metrics uses machine name with instance name as a backup.")
   @header("x-ms-qps-instance-name")
   instanceName?: string;
 
@@ -57,41 +43,32 @@ model PingRequestHeaders {
   @header("x-ms-qps-role-name")
   roleName?: string;
 
-  @doc("Version/generation of the data contract (MonitoringDataPoint) between SDK and QuickPulse.")
+  @doc("Version/generation of the data contract (MonitoringDataPoint) between SDK and Live Metrics.")
   @header("x-ms-qps-invariant-version")
   invariantVersion?: string;
 
   @doc("An encoded string that indicates whether the collection configuration is changed.")
   @header("x-ms-qps-configuration-etag")
-  configurationEtag?: string;
+  configurationEtag?: eTag;
 }
 
 /**
- * QuickPulse ping request body
+ * Live Metrics IsSubscribed response headers
  */
-model PingRequestBody {
-  @doc("Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
-  @body
-  monitoringDataPoint?: MonitoringDataPoint;
-}
-
-/**
- * QuickPulse ping response headers
- */
-model PingResponseHeaders {
-  @doc("A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, SDK must start collecting data and posting it to QuickPulse. Otherwise, SDK must keep pinging.")
+model IsSubscribedResponseHeaders {
+  @doc("A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, SDK must start collecting data and posting it to Live Metrics. Otherwise, SDK must keep pinging.")
   @header("x-ms-qps-subscribed")
   subscribed: string;
 
   @doc("An encoded string that indicates whether the collection configuration is changed.")
   @header("x-ms-qps-configuration-etag")
-  configurationEtag: string;
+  configurationEtag: eTag;
 
   @doc("Recommended time (in milliseconds) before an SDK should ping the service again. This header exists only when instrumentation key is not watched by UX.")
   @header("x-ms-qps-service-polling-interval-hint")
   pollingInterval?: string;
 
-  @doc("Contains a URI of the service endpoint that an SDK must permanently use for the particular resource. This header exists only when SDK is talking to QuickPulse's global endpoint.")
+  @doc("Contains a URI of the service endpoint that an SDK must permanently use for the particular resource. This header exists only when SDK is talking to Live Metrics global endpoint.")
   @header("x-ms-qps-service-endpoint-redirect-v2")
   redirectEndpoint?: string;
 
@@ -101,18 +78,9 @@ model PingResponseHeaders {
 }
 
 /**
- * QuickPulse /post request parameters, either in query string, or in request body
+ * Live Metrics PublishLiveMetrics request query parameters, either query strings or headers
  */
-model PostRequest {
-  ...PostRequestQueryStrings;
-  ...PostRequestHeaders;
-  ...PostRequestBody;
-}
-
-/**
- * QuickPulse post request query strings
- */
-model PostRequestQueryStrings {
+model PublishLiveMetricsRequestParameters {
   @doc("The ikey of the target Application Insights component for which client sdk calls /post.")
   @query
   ikey: string;
@@ -120,42 +88,37 @@ model PostRequestQueryStrings {
   @doc("Deprecated. An alternative way to pass api key. Use AAD auth instead.")
   @query
   apiKey?: string;
-}
 
-/**
- * QuickPulse ping response headers
- */
-model PostRequestHeaders {
   @doc("An encoded string that indicates whether the collection configuration is changed.")
   @header("x-ms-qps-configuration-etag")
-  configurationEtag?: string;
+  configurationEtag?: eTag;
 
-  @doc("Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.")
+  @doc("Timestamp when SDK transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.")
   @header("x-ms-qps-transmission-time")
   transmissionTime?: int64;
 }
 
 /**
- * QuickPulse ping request body
+ * Live Metrics PublishLiveMetrics request body
  */
 #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Need to follow the casing style of the existing SDK contract."
-model PostRequestBody {
-  @doc("Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
+model PublishLiveMetricsRequestBody {
+  @doc("Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
   @body
   monitoringDataPoints?: MonitoringDataPoint[];
 }
 
 /**
- * Represents the headers for the QuickPulse service.
+ * Live Metrics PublishLiveMetrics response headers
  */
-model PostResponseHeaders {
+model PublishLiveMetricsResponseHeaders {
   @doc("Tells SDK whether the input instrumentation key is subscribed to by UX.")
   @header("x-ms-qps-subscribed")
   subscribed: string;
 
   @doc("An encoded string that indicates whether the collection configuration is changed.")
   @header("x-ms-qps-configuration-etag")
-  configurationEtag: string;
+  configurationEtag: eTag;
 }
 
 /**
@@ -166,7 +129,7 @@ model MonitoringDataPoint {
   @doc("AI SDK version.")
   Version: string;
 
-  @doc("Version/generation of the data contract (MonitoringDataPoint) between SDK and QuickPulse.")
+  @doc("Version/generation of the data contract (MonitoringDataPoint) between SDK and Live Metrics.")
   InvariantVersion: int32;
 
   @doc("Service instance name where AI SDK lives.")
@@ -184,8 +147,8 @@ model MonitoringDataPoint {
   @doc("Data point generation timestamp.")
   Timestamp?: utcDateTime;
 
-  @doc("Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.")
-  TransmissionTime?: string;
+  @doc("Timestamp when SDK transmits the metrics and documents to Live Metrics.")
+  TransmissionTime?: utcDateTime;
 
   @doc("True if the current application is an Azure Web App.")
   IsWebApp: boolean;
@@ -202,7 +165,7 @@ model MonitoringDataPoint {
   @doc("An array of top cpu consumption data point.")
   TopCpuProcesses?: ProcessCpuData[];
 
-  @doc("An array of error while SDK parses and applies the {CollectionConfigurationInfo} provided by QuickPulse.")
+  @doc("An array of error while SDK parses and applies the {CollectionConfigurationInfo} provided by Live Metrics.")
   CollectionConfigurationErrors?: CollectionConfigurationError[];
 }
 
@@ -332,7 +295,7 @@ model Request extends DocumentIngress {
 
   @doc("Request URL with all query string parameters.")
   @maxLength(2048)
-  Url?: string;
+  Url?: url;
 
   @doc("Result of a request execution. For http requests, it could be some HTTP status code.")
   @maxLength(1024)
@@ -434,12 +397,12 @@ model CollectionConfigurationInfo {
   @doc("An array of document stream configuration info.")
   DocumentStreams: DocumentStreamInfo[];
 
-  @doc("Controls document quotas to be sent to QuickPulse.")
+  @doc("Controls document quotas to be sent to Live Metrics.")
   QuotaInfo?: QuotaConfigurationInfo;
 }
 
 /**
- * Controls document quotas to be sent to QuickPulse.
+ * Controls document quotas to be sent to Live Metrics.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 model QuotaConfigurationInfo {
@@ -471,17 +434,34 @@ model DocumentStreamInfo {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 model DocumentFilterConjunctionGroupInfo {
   @doc("Telemetry type.")
-  TelemetryType:
-    | "Request"
-    | "Dependency"
-    | "Exception"
-    | "Event"
-    | "Metric"
-    | "PerformanceCounter"
-    | "Trace";
+  TelemetryType: TelemetryType;
 
   @doc("An array of filter groups.")
   Filters: FilterConjunctionGroupInfo;
+}
+
+@doc("Telemetry type.")
+enum TelemetryType {
+  @doc("Represents a request telemetry type.")
+  Request,
+
+  @doc("Represents a dependency telemetry type.")
+  Dependency,
+
+  @doc("Represents an exception telemetry type.")
+  Exception,
+
+  @doc("Represents an event telemetry type.")
+  Event,
+
+  @doc("Represents a metric telemetry type.")
+  Metric,
+
+  @doc("Represents a performance counter telemetry type.")
+  PerformanceCounter,
+
+  @doc("Represents a trace telemetry type.")
+  Trace,
 }
 
 /**
@@ -502,10 +482,25 @@ model DerivedMetricInfo {
   Projection: string;
 
   @doc("Aggregation type. This is the aggregation done from everything within a single server.")
-  Aggregation: "Avg" | "Sum" | "Min" | "Max";
+  Aggregation: AggregationType;
 
   @doc("Aggregation type. This Aggregation is done across the values for all the servers taken together.")
-  BackEndAggregation: "Avg" | "Sum" | "Min" | "Max";
+  BackEndAggregation: AggregationType;
+}
+
+@doc("Aggregation type.")
+enum AggregationType {
+  @doc("Average")
+  Avg,
+
+  @doc("Sum")
+  Sum,
+  
+  @doc("Minimum")
+  Min,
+  
+  @doc("Maximum")
+  Max,
 }
 
 /**
@@ -546,10 +541,6 @@ model FilterInfo {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 @error
 model ServiceError {
-  @doc("Error code.")
-  @statusCode
-  _: 400 | 401 | 403 | 404 | 500 | 503;
-
   @doc("A globally unique identifier to identify the diagnostic context. Currently it defaults to the empty GUID.")
   RequestId: string = "00000000-0000-0000-0000-000000000000";
 

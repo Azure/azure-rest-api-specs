@@ -11,31 +11,31 @@ using TypeSpec.Versioning;
 
 namespace LiveMetrics;
 
-op QuickPulseOperation<
+op LiveMetricsOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model
 > is Foundations.Operation<TParams, TResponse, {}, ServiceError>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-@doc("Client SDK calls QuickPulse /ping API.")
+@doc("Determine whether there is any subscription to the metrics and documents. Meanwhile, the client should periodically call this API as a way to notify its liveness to the Live Metrics service.")
 @route("/QuickPulseService.svc/ping")
 @post
-op ping is QuickPulseOperation<
-  PingRequest,
+op isSubscribed is LiveMetricsOperation<
+  IsSubscribedRequestParameters & MonitoringDataPoint,
   {
-    ...PingResponseHeaders;
+    ...IsSubscribedResponseHeaders;
     ...CollectionConfigurationInfo;
   }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-@doc("Client SDK calls QuickPulse /post API.")
+@doc("Publish live metrics to the Live Metrics service when there is an active subscription to the metrics.")
 @route("/QuickPulseService.svc/post")
 @post
-op post is QuickPulseOperation<
-  PostRequest,
+op publishLiveMetrics is LiveMetricsOperation<
+  PublishLiveMetricsRequestParameters & MonitoringDataPoint,
   {
-    ...PostResponseHeaders;
+    ...PublishLiveMetricsResponseHeaders;
     ...CollectionConfigurationInfo;
   }
 >;

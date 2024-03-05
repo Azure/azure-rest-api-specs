@@ -62,41 +62,46 @@
   "paths": {
     "/QuickPulseService.svc/ping": {
       "post": {
-        "operationId": "Ping",
-        "description": "Client SDK calls QuickPulse /ping API.",
+        "operationId": "IsSubscribed",
+        "description": "Determine whether there is any subscription to the metrics and documents. Meanwhile, the client should periodically call this API as a way to notify its liveness to the Live Metrics service.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PingRequestQueryStrings.ikey"
+            "$ref": "#/parameters/IsSubscribedRequestParameters.ikey"
           },
           {
-            "$ref": "#/parameters/PingRequestQueryStrings.apiKey"
+            "$ref": "#/parameters/IsSubscribedRequestParameters.apiKey"
           },
           {
-            "$ref": "#/parameters/PingRequestHeaders.transmissionTime"
+            "$ref": "#/parameters/IsSubscribedRequestParameters.transmissionTime"
           },
           {
-            "$ref": "#/parameters/PingRequestHeaders.machineName"
+            "$ref": "#/parameters/IsSubscribedRequestParameters.machineName"
           },
           {
-            "$ref": "#/parameters/PingRequestHeaders.instanceName"
+            "$ref": "#/parameters/IsSubscribedRequestParameters.instanceName"
           },
           {
-            "$ref": "#/parameters/PingRequestHeaders.streamId"
+            "$ref": "#/parameters/IsSubscribedRequestParameters.streamId"
           },
           {
-            "$ref": "#/parameters/PingRequestHeaders.roleName"
+            "$ref": "#/parameters/IsSubscribedRequestParameters.roleName"
           },
           {
-            "$ref": "#/parameters/PingRequestHeaders.invariantVersion"
+            "$ref": "#/parameters/IsSubscribedRequestParameters.invariantVersion"
           },
           {
-            "$ref": "#/parameters/PingRequestHeaders.configurationEtag"
+            "$ref": "#/parameters/IsSubscribedRequestParameters.configurationEtag"
           },
           {
-            "$ref": "#/parameters/PingRequestBody"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoringDataPoint"
+            }
           }
         ],
         "responses": {
@@ -108,7 +113,7 @@
             "headers": {
               "x-ms-qps-subscribed": {
                 "type": "string",
-                "description": "A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, SDK must start collecting data and posting it to QuickPulse. Otherwise, SDK must keep pinging."
+                "description": "A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, SDK must start collecting data and posting it to Live Metrics. Otherwise, SDK must keep pinging."
               },
               "x-ms-qps-configuration-etag": {
                 "type": "string",
@@ -120,82 +125,46 @@
               },
               "x-ms-qps-service-endpoint-redirect-v2": {
                 "type": "string",
-                "description": "Contains a URI of the service endpoint that an SDK must permanently use for the particular resource. This header exists only when SDK is talking to QuickPulse's global endpoint."
+                "description": "Contains a URI of the service endpoint that an SDK must permanently use for the particular resource. This header exists only when SDK is talking to Live Metrics global endpoint."
               }
             }
           },
-          "400": {
-            "description": "The server could not understand the request due to invalid syntax.",
+          "default": {
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Access is unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Access is forbidden",
-            "schema": {
-              "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "The server cannot find the requested resource.",
-            "schema": {
-              "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Live Metrics Ping": {
-            "$ref": "./examples/LiveMetrics_Ping.json"
+            }
           }
         }
       }
     },
     "/QuickPulseService.svc/post": {
       "post": {
-        "operationId": "Post",
-        "description": "Client SDK calls QuickPulse /post API.",
+        "operationId": "PublishLiveMetrics",
+        "description": "Publish live metrics to the Live Metrics service when there is an active subscription to the metrics.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PostRequestQueryStrings.ikey"
+            "$ref": "#/parameters/PublishLiveMetricsRequestParameters.ikey"
           },
           {
-            "$ref": "#/parameters/PostRequestQueryStrings.apiKey"
+            "$ref": "#/parameters/PublishLiveMetricsRequestParameters.apiKey"
           },
           {
-            "$ref": "#/parameters/PostRequestHeaders.configurationEtag"
+            "$ref": "#/parameters/PublishLiveMetricsRequestParameters.configurationEtag"
           },
           {
-            "$ref": "#/parameters/PostRequestHeaders.transmissionTime"
+            "$ref": "#/parameters/PublishLiveMetricsRequestParameters.transmissionTime"
           },
           {
-            "$ref": "#/parameters/PostRequestBody"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoringDataPoint"
+            }
           }
         ],
         "responses": {
@@ -215,58 +184,53 @@
               }
             }
           },
-          "400": {
-            "description": "The server could not understand the request due to invalid syntax.",
+          "default": {
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Access is unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Access is forbidden",
-            "schema": {
-              "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "The server cannot find the requested resource.",
-            "schema": {
-              "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/ServiceError"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Live Metrics Post": {
-            "$ref": "./examples/LiveMetrics_Post.json"
+            }
           }
         }
       }
     }
   },
   "definitions": {
+    "AggregationType": {
+      "type": "string",
+      "description": "Aggregation type.",
+      "enum": [
+        "Avg",
+        "Sum",
+        "Min",
+        "Max"
+      ],
+      "x-ms-enum": {
+        "name": "AggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Avg",
+            "value": "Avg",
+            "description": "Average"
+          },
+          {
+            "name": "Sum",
+            "value": "Sum",
+            "description": "Sum"
+          },
+          {
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum"
+          },
+          {
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum"
+          }
+        ]
+      }
+    },
     "CollectionConfigurationError": {
       "type": "object",
       "description": "Represents an error while SDK parses and applies an instance of CollectionConfigurationInfo.",
@@ -415,7 +379,7 @@
         },
         "QuotaInfo": {
           "$ref": "#/definitions/QuotaConfigurationInfo",
-          "description": "Controls document quotas to be sent to QuickPulse."
+          "description": "Controls document quotas to be sent to Live Metrics."
         }
       },
       "required": [
@@ -449,30 +413,12 @@
           "description": "Telemetry's metric dimension whose value is to be aggregated. Example values: Duration, Count(),..."
         },
         "Aggregation": {
-          "type": "string",
-          "description": "Aggregation type. This is the aggregation done from everything within a single server.",
-          "enum": [
-            "Avg",
-            "Sum",
-            "Min",
-            "Max"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/AggregationType",
+          "description": "Aggregation type. This is the aggregation done from everything within a single server."
         },
         "BackEndAggregation": {
-          "type": "string",
-          "description": "Aggregation type. This Aggregation is done across the values for all the servers taken together.",
-          "enum": [
-            "Avg",
-            "Sum",
-            "Min",
-            "Max"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/AggregationType",
+          "description": "Aggregation type. This Aggregation is done across the values for all the servers taken together."
         }
       },
       "required": [
@@ -489,20 +435,8 @@
       "description": "A collection of filters for a specific telemetry type.",
       "properties": {
         "TelemetryType": {
-          "type": "string",
-          "description": "Telemetry type.",
-          "enum": [
-            "Request",
-            "Dependency",
-            "Exception",
-            "Event",
-            "Metric",
-            "PerformanceCounter",
-            "Trace"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/TelemetryType",
+          "description": "Telemetry type."
         },
         "Filters": {
           "$ref": "#/definitions/FilterConjunctionGroupInfo",
@@ -668,6 +602,10 @@
         "Comparand"
       ]
     },
+    "IsSubscribedResponseHeaders": {
+      "type": "object",
+      "description": "Live Metrics IsSubscribed response headers"
+    },
     "KeyValuePairStringString": {
       "type": "object",
       "description": "Key-value pair of string and string.",
@@ -722,7 +660,7 @@
         "InvariantVersion": {
           "type": "integer",
           "format": "int32",
-          "description": "Version/generation of the data contract (MonitoringDataPoint) between SDK and QuickPulse."
+          "description": "Version/generation of the data contract (MonitoringDataPoint) between SDK and Live Metrics."
         },
         "Instance": {
           "type": "string",
@@ -747,7 +685,8 @@
         },
         "TransmissionTime": {
           "type": "string",
-          "description": "Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks."
+          "format": "date-time",
+          "description": "Timestamp when SDK transmits the metrics and documents to Live Metrics."
         },
         "IsWebApp": {
           "type": "boolean",
@@ -783,7 +722,7 @@
         },
         "CollectionConfigurationErrors": {
           "type": "array",
-          "description": "An array of error while SDK parses and applies the {CollectionConfigurationInfo} provided by QuickPulse.",
+          "description": "An array of error while SDK parses and applies the {CollectionConfigurationInfo} provided by Live Metrics.",
           "items": {
             "$ref": "#/definitions/CollectionConfigurationError"
           },
@@ -800,60 +739,6 @@
         "IsWebApp",
         "PerformanceCollectionSupported"
       ]
-    },
-    "PingRequest": {
-      "type": "object",
-      "description": "QuickPulse /ping request parameters, either in query string, or in request body",
-      "properties": {
-        "ikey": {
-          "type": "string",
-          "description": "The ikey of the target Application Insights component for which client sdk calls /ping."
-        },
-        "apiKey": {
-          "type": "string",
-          "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead."
-        },
-        "monitoringDataPoint": {
-          "$ref": "#/definitions/MonitoringDataPoint",
-          "description": "Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version."
-        }
-      },
-      "required": [
-        "ikey"
-      ]
-    },
-    "PingResponseHeaders": {
-      "type": "object",
-      "description": "QuickPulse ping response headers"
-    },
-    "PostRequest": {
-      "type": "object",
-      "description": "QuickPulse /post request parameters, either in query string, or in request body",
-      "properties": {
-        "ikey": {
-          "type": "string",
-          "description": "The ikey of the target Application Insights component for which client sdk calls /post."
-        },
-        "apiKey": {
-          "type": "string",
-          "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead."
-        },
-        "monitoringDataPoints": {
-          "type": "array",
-          "description": "Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
-          "items": {
-            "$ref": "#/definitions/MonitoringDataPoint"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "ikey"
-      ]
-    },
-    "PostResponseHeaders": {
-      "type": "object",
-      "description": "Represents the headers for the QuickPulse service."
     },
     "ProcessCpuData": {
       "type": "object",
@@ -874,9 +759,27 @@
         "CpuPercentage"
       ]
     },
+    "PublishLiveMetricsRequestBody": {
+      "type": "object",
+      "description": "Live Metrics PublishLiveMetrics request body",
+      "properties": {
+        "monitoringDataPoints": {
+          "type": "array",
+          "description": "Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+          "items": {
+            "$ref": "#/definitions/MonitoringDataPoint"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PublishLiveMetricsResponseHeaders": {
+      "type": "object",
+      "description": "Live Metrics PublishLiveMetrics response headers"
+    },
     "QuotaConfigurationInfo": {
       "type": "object",
-      "description": "Controls document quotas to be sent to QuickPulse.",
+      "description": "Controls document quotas to be sent to Live Metrics.",
       "properties": {
         "InitialQuota": {
           "type": "number",
@@ -941,6 +844,7 @@
         },
         "Url": {
           "type": "string",
+          "format": "uri",
           "description": "Request URL with all query string parameters.",
           "maxLength": 2048
         },
@@ -995,6 +899,60 @@
         "Exception"
       ]
     },
+    "TelemetryType": {
+      "type": "string",
+      "description": "Telemetry type.",
+      "enum": [
+        "Request",
+        "Dependency",
+        "Exception",
+        "Event",
+        "Metric",
+        "PerformanceCounter",
+        "Trace"
+      ],
+      "x-ms-enum": {
+        "name": "TelemetryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Request",
+            "value": "Request",
+            "description": "Represents a request telemetry type."
+          },
+          {
+            "name": "Dependency",
+            "value": "Dependency",
+            "description": "Represents a dependency telemetry type."
+          },
+          {
+            "name": "Exception",
+            "value": "Exception",
+            "description": "Represents an exception telemetry type."
+          },
+          {
+            "name": "Event",
+            "value": "Event",
+            "description": "Represents an event telemetry type."
+          },
+          {
+            "name": "Metric",
+            "value": "Metric",
+            "description": "Represents a metric telemetry type."
+          },
+          {
+            "name": "PerformanceCounter",
+            "value": "PerformanceCounter",
+            "description": "Represents a performance counter telemetry type."
+          },
+          {
+            "name": "Trace",
+            "value": "Trace",
+            "description": "Represents a trace telemetry type."
+          }
+        ]
+      }
+    },
     "Trace": {
       "type": "object",
       "description": "Trace document type.",
@@ -1042,17 +1000,15 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "PingRequestBody": {
-      "name": "monitoringDataPoint",
-      "in": "body",
-      "description": "Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+    "IsSubscribedRequestParameters.apiKey": {
+      "name": "apiKey",
+      "in": "query",
+      "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead.",
       "required": false,
-      "schema": {
-        "$ref": "#/definitions/MonitoringDataPoint"
-      },
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "PingRequestHeaders.configurationEtag": {
+    "IsSubscribedRequestParameters.configurationEtag": {
       "name": "x-ms-qps-configuration-etag",
       "in": "header",
       "description": "An encoded string that indicates whether the collection configuration is changed.",
@@ -1061,34 +1017,42 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "configurationEtag"
     },
-    "PingRequestHeaders.instanceName": {
+    "IsSubscribedRequestParameters.ikey": {
+      "name": "ikey",
+      "in": "query",
+      "description": "The ikey of the target Application Insights component for which client sdk calls /ping.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IsSubscribedRequestParameters.instanceName": {
       "name": "x-ms-qps-instance-name",
       "in": "header",
-      "description": "Service instance name where AI SDK lives. QuickPulse uses machine name with instance name as a backup.",
+      "description": "Service instance name where AI SDK lives. Live Metrics uses machine name with instance name as a backup.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "instanceName"
     },
-    "PingRequestHeaders.invariantVersion": {
+    "IsSubscribedRequestParameters.invariantVersion": {
       "name": "x-ms-qps-invariant-version",
       "in": "header",
-      "description": "Version/generation of the data contract (MonitoringDataPoint) between SDK and QuickPulse.",
+      "description": "Version/generation of the data contract (MonitoringDataPoint) between SDK and Live Metrics.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "invariantVersion"
     },
-    "PingRequestHeaders.machineName": {
+    "IsSubscribedRequestParameters.machineName": {
       "name": "x-ms-qps-machine-name",
       "in": "header",
-      "description": "Computer name where AI SDK lives. QuickPulse uses machine name with instance name as a backup.",
+      "description": "Computer name where AI SDK lives. Live Metrics uses machine name with instance name as a backup.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "machineName"
     },
-    "PingRequestHeaders.roleName": {
+    "IsSubscribedRequestParameters.roleName": {
       "name": "x-ms-qps-role-name",
       "in": "header",
       "description": "Cloud role name of the service.",
@@ -1097,7 +1061,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "roleName"
     },
-    "PingRequestHeaders.streamId": {
+    "IsSubscribedRequestParameters.streamId": {
       "name": "x-ms-qps-stream-id",
       "in": "header",
       "description": "Identifies an AI SDK as trusted agent to report metrics and documents.",
@@ -1106,17 +1070,17 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "streamId"
     },
-    "PingRequestHeaders.transmissionTime": {
+    "IsSubscribedRequestParameters.transmissionTime": {
       "name": "x-ms-qps-transmission-time",
       "in": "header",
-      "description": "Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.",
+      "description": "Timestamp when SDK transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.",
       "required": false,
       "type": "integer",
       "format": "int64",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "transmissionTime"
     },
-    "PingRequestQueryStrings.apiKey": {
+    "PublishLiveMetricsRequestParameters.apiKey": {
       "name": "apiKey",
       "in": "query",
       "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead.",
@@ -1124,29 +1088,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "PingRequestQueryStrings.ikey": {
-      "name": "ikey",
-      "in": "query",
-      "description": "The ikey of the target Application Insights component for which client sdk calls /ping.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PostRequestBody": {
-      "name": "monitoringDataPoints",
-      "in": "body",
-      "description": "Data contract between SDK and QuickPulse. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
-      "required": false,
-      "schema": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/MonitoringDataPoint"
-        },
-        "x-ms-identifiers": []
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "PostRequestHeaders.configurationEtag": {
+    "PublishLiveMetricsRequestParameters.configurationEtag": {
       "name": "x-ms-qps-configuration-etag",
       "in": "header",
       "description": "An encoded string that indicates whether the collection configuration is changed.",
@@ -1155,31 +1097,23 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "configurationEtag"
     },
-    "PostRequestHeaders.transmissionTime": {
-      "name": "x-ms-qps-transmission-time",
-      "in": "header",
-      "description": "Timestamp when SDK transmits the metrics and documents to QuickPulse. A 8-byte long type of ticks.",
-      "required": false,
-      "type": "integer",
-      "format": "int64",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "transmissionTime"
-    },
-    "PostRequestQueryStrings.apiKey": {
-      "name": "apiKey",
-      "in": "query",
-      "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PostRequestQueryStrings.ikey": {
+    "PublishLiveMetricsRequestParameters.ikey": {
       "name": "ikey",
       "in": "query",
       "description": "The ikey of the target Application Insights component for which client sdk calls /post.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "PublishLiveMetricsRequestParameters.transmissionTime": {
+      "name": "x-ms-qps-transmission-time",
+      "in": "header",
+      "description": "Timestamp when SDK transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "transmissionTime"
     }
   }
 }
