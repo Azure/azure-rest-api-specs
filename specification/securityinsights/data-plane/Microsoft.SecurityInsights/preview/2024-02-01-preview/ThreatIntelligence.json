@@ -35,7 +35,8 @@
             "name": "workspaceId",
             "description": "The workspace ID for the Stix objects to be uploaded.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "in": "body",
@@ -56,6 +57,12 @@
           },
           "default": {
             "description": "Upload Stix Objects API service error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             },
