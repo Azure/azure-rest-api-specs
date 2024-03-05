@@ -1006,7 +1006,7 @@
           "Communications"
         ],
         "description": "Lists all communications (attachments not included) for a support ticket. <br/></br> You can also filter support ticket communications by _CreatedDate_ or _CommunicationType_ using the $filter parameter. The only type of communication supported today is _Web_. Output will be a paged result with _nextLink_, using which you can retrieve the next set of Communication results. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
-        "operationId": "SupportTicketCommunicationsNoSubscription_List",
+        "operationId": "CommunicationsNoSubscription_List",
         "parameters": [
           {
             "name": "supportTicketName",
@@ -1343,7 +1343,7 @@
           "ChatTranscripts"
         ],
         "description": "Lists all chat transcripts for a support ticket",
-        "operationId": "SupportTicketChatTranscriptsNoSubscription_List",
+        "operationId": "ChatTranscriptsNoSubscription_List",
         "parameters": [
           {
             "name": "supportTicketName",
@@ -1374,7 +1374,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List communications for a no-subscription support ticket": {
+          "List chat transcripts for a no-subscription support ticket": {
             "$ref": "./examples/ListChatTranscriptsForSupportTicket.json"
           }
         }
@@ -2426,7 +2426,8 @@
         "description",
         "problemClassificationId",
         "severity",
-        "contactDetails"
+        "contactDetails",
+        "advancedDiagnosticConsent"
       ],
       "type": "object",
       "properties": {
@@ -2463,8 +2464,7 @@
         },
         "enrollmentId": {
           "description": "Enrollment Id associated with the support ticket.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "require24X7Response": {
           "description": "Indicates if this requires a 24x7 response from Azure.",
@@ -2790,7 +2790,7 @@
       }
     },
     "UpdateSupportTicket": {
-      "description": "Updates severity, ticket status, and contact details in the support ticket.",
+      "description": "Updates severity, ticket status, contact details, advanced diagnostic consent and secondary consent in the support ticket.",
       "type": "object",
       "properties": {
         "severity": {
@@ -3025,15 +3025,18 @@
         },
         "chunkSize": {
           "description": "Size of each chunk",
-          "type": "number"
+          "type": "integer",
+          "format": "int32"
         },
         "fileSize": {
           "description": "Size of the file to be uploaded",
-          "type": "number"
+          "type": "integer",
+          "format": "int32"
         },
         "numberOfChunks": {
           "description": "Number of chunks to be uploaded",
-          "type": "number"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -3047,7 +3050,8 @@
         },
         "chunkIndex": {
           "description": "Index of the uploaded chunk (Index starts at 0)",
-          "type": "number"
+          "type": "integer",
+          "format": "int32"
         }
       }
     }
