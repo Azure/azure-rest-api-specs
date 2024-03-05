@@ -652,6 +652,10 @@
           "$ref": "#/definitions/Dapr",
           "description": "Dapr configuration for the Container App."
         },
+        "runtime": {
+          "$ref": "#/definitions/Runtime",
+          "description": "App runtime configuration for the Container App."
+        },
         "maxInactiveRevisions": {
           "format": "int32",
           "description": "Optional. Max inactive revisions a Container App can have.",
@@ -853,6 +857,22 @@
         "enableApiLogging": {
           "description": "Enables API logging for the Dapr sidecar",
           "type": "boolean"
+        }
+      }
+    },
+    "Runtime": {
+      "description": "Container App Runtime configuration.",
+      "type": "object",
+      "properties": {
+        "java": {
+          "description": "Java app configuration",
+          "type": "object",
+          "properties": {
+            "enableMetrics": {
+              "description": "Enable jmx core metrics for the java app",
+              "type": "boolean"
+            }
+          }
         }
       }
     },
