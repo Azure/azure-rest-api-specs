@@ -726,6 +726,190 @@
         "columns",
         "rows"
       ]
+    },
+    "SqlServerInstanceRunMigrationAssessmentResponse": {
+      "description": "The response for running migration assessment on the SQL Server instance.",
+      "type": "object",
+      "$ref": "#/definitions/SqlServerInstanceJobStatus"
+    },
+    "SqlServerInstanceJobsStatusRequest": {
+      "description": "The request for the status of the jobs running on the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The name of the feature to retrieve the job status for."
+        },
+        "jobType": {
+          "type": "string",
+          "description": "The type of the job to retrieve the status for."
+        }
+      }
+    },
+    "SqlServerInstanceJobsStatusResponse": {
+      "description": "The response for the status of the jobs running on the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "jobsStatus": {
+          "type": "array",
+          "description": "The list of jobs status running on the SQL Server instance.",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceJobStatus"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "SqlServerInstanceJobStatus": {
+      "description": "The status of the job running on the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the job."
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "The name of the SQL Server instance."
+        },
+        "jobStatus": {
+          "type": "string",
+          "description": "The status of the job.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "jobStatus",
+            "modelAsString": true
+          }
+        },
+        "jobException": {
+          "type": "string",
+          "description": "The exception message if the job failed."
+        },
+        "backgroundJob": {
+          "type": "object",
+          "description": "The background job details.",
+          "$ref": "#/definitions/BackgroundJob"
+        },
+        "sequencerActions": {
+          "type": "array",
+          "description": "The list of sequencer actions.",
+          "items": {
+            "$ref": "#/definitions/SequencerAction"
+          }
+        }
+      }
+    },
+    "BackgroundJob": {
+      "description": "The background job details.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the background job.",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "Deleted",
+            "Completed",
+            "Faulted",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        },
+        "executionState": {
+          "type": "string",
+          "description": "The execution state of the background job.",
+          "enum": [
+            "Waiting",
+            "Running"
+          ],
+          "x-ms-enum": {
+            "name": "executionState",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the background job."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the background job."
+        },
+        "lastExecutionStatus": {
+          "type": "string",
+          "description": "The last execution status of the background job.",
+          "enum": [
+            "Succeeded",
+            "Completed",
+            "Failed",
+            "Faulted",
+            "Postponed",
+            "Rescheduled"
+          ],
+          "x-ms-enum": {
+            "name": "lastExecutionStatus",
+            "modelAsString": true
+          }
+        },
+        "lastExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last execution time of the background job."
+        }
+      }
+    },
+    "SequencerAction": {
+      "description": "The sequencer action details.",
+      "type": "object",
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "description": "The unique identifier of the sequencer action."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the sequencer action.",
+          "enum": [
+            "NotStarted",
+            "WaitingPredecessors",
+            "ExecutingAction",
+            "CreatingSuccessors",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "sequencerState",
+            "modelAsString": true
+          }
+        },
+        "result": {
+          "type": "string",
+          "description": "The result of the sequencer action.",
+          "enum": [
+            "NotCompleted",
+            "Succeeded",
+            "Failed",
+            "TimedOut",
+            "Skipped"
+          ],
+          "x-ms-enum": {
+            "name": "result",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {
