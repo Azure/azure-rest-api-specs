@@ -63,7 +63,9 @@ model SessionDetails extends ItemDetails {
 }
 
 @doc("List of workspace sessions.")
-model SessionDetailsList extends CollectionWithNextLink<SessionDetails> {}
+model SessionDetailsList {
+  ...CollectionWithNextLink<SessionDetails>;
+}
 
 @doc("Id of the session.")
 @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
@@ -92,33 +94,28 @@ interface SessionOperations {
   @doc("Open a new session")
   @put
   @createsResource(SessionDetails)
-  @operationId("Sessions_Open")
   open is CreateOperation<SessionDetails, SessionParam>;
 
   @doc("Close an existing session")
   @post
   @action
   @actionSeparator(":")
-  @operationId("Sessions_Close")
   close is ActionOperation<SessionDetails, SessionIdParam>;
 
   @doc("Get Session by its id")
   @get
   @readsResource(SessionDetails)
-  @operationId("Sessions_Get")
   get is GetOperation<SessionDetails, SessionIdParam>;
 
   @doc("List jobs in a session")
   @get
   @readsResource(JobDetails)
-  @operationId("Sessions_JobsList")
   @segment("jobs")
-  jobs is ListOperation<JobDetailsList, SessionIdParam>;
+  jobsList is ListOperation<JobDetailsList, SessionIdParam>;
 
   @doc("List all Sessions")
   @get
   @listsResource(SessionDetails)
-  @operationId("Sessions_List")
   @segment("sessions")
   list is ListOperation<SessionDetailsList>;
 }

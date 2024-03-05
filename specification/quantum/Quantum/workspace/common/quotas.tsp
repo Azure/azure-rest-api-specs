@@ -62,13 +62,14 @@ model Quota {
 }
 
 @doc("List of workspace quotas.")
-model QuotaList extends CollectionWithNextLink<Quota> {}
+model QuotaList {
+  ...CollectionWithNextLink<Quota>;
+}
 
 interface QuotaOperations {
   @doc("List quotas for the given workspace.")
   @get
   @listsResource(Quota)
-  @operationId("Quotas_List")
   @segment("quotas")
-  quotas is ListOperation<QuotaList>;
+  list is ListOperation<QuotaList>;
 }

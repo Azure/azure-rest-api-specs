@@ -78,13 +78,14 @@ model TargetStatus {
 }
 
 @doc("List of provider and target statuses.")
-model ProviderStatusList extends CollectionWithNextLink<ProviderStatus> {}
+model ProviderStatusList {
+  ...CollectionWithNextLink<ProviderStatus>;
+}
 
 interface ProviderOperations {
   @doc("Get provider status.")
   @get
   @listsResource(ProviderStatus)
-  @operationId("Providers_GetStatus")
   @segment("providerStatus")
-  providerStatus is ListOperation<ProviderStatusList>;
+  getStatus is ListOperation<ProviderStatusList>;
 }

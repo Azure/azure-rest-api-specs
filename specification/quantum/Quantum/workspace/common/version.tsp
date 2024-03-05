@@ -4,8 +4,14 @@
 // --------------------------------------------------------------------------------------------
 
 import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 
-@doc("The REST API version.")
-enum APIVersion {
-  v2024_03_01_preview: "2024-03-01-preview",
+using TypeSpec.Versioning;
+
+@doc("The Azure Quantum REST API version.")
+enum QuantumAPIVersion {
+  @doc("2024-03-01-preview")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `2024-03-01-preview`,
 }

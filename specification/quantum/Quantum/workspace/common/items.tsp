@@ -82,13 +82,14 @@ model ItemDetails {
 }
 
 @doc("List of workspace jobs.")
-model ItemDetailsList extends CollectionWithNextLink<ItemDetails> {}
+model ItemDetailsList {
+  ...CollectionWithNextLink<ItemDetails>;
+}
 
-interface WorkspaceOperations {
+interface TopLevelItemsOperations {
   @doc("List top-level items.")
   @get
   @listsResource(ItemDetails)
-  @operationId("TopLevelItems_List")
   @segment("topLevelItems")
-  topLevelItems is ListOperation<ItemDetailsList>;
+  list is ListOperation<ItemDetailsList>;
 }

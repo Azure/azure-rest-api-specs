@@ -114,7 +114,9 @@ model JobDetails extends ItemDetails {
 }
 
 @doc("List of workspace jobs.")
-model JobDetailsList extends CollectionWithNextLink<JobDetails> {}
+model JobDetailsList {
+  ...CollectionWithNextLink<JobDetails>;
+}
 
 @doc("Id of the job.")
 @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
@@ -143,30 +145,25 @@ interface JobOperations {
   @doc("Create a new job")
   @put
   @createsResource(JobDetails)
-  @operationId("Jobs_Create")
   create is CreateOperation<JobDetails, JobParam>;
 
   @doc("Update job properties")
   @patch
   @updatesResource(JobDetails)
-  @operationId("Jobs_Patch")
   patch is PatchOperation<JobDetails, JobIdParam>;
 
   @doc("Request the cancellation of an existing job")
   @delete
-  @operationId("Jobs_Cancel")
   cancel is CancelOperation<JobDetails, JobIdParam>;
 
   @doc("Get job by its id")
   @get
   @readsResource(JobDetails)
-  @operationId("Jobs_Get")
   get is GetOperation<JobDetails, JobIdParam>;
 
   @doc("List all jobs")
   @get
   @listsResource(JobDetails)
-  @operationId("Jobs_List")
   @segment("jobs")
   list is ListOperation<JobDetailsList>;
 }

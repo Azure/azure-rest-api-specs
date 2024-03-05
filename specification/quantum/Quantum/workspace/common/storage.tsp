@@ -39,7 +39,6 @@ alias BlobDetailsParam = {
 interface StorageOperations {
   @doc("Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. The SAS URL can be used to upload job input and/or download job output.")
   @post
-  @operationId("Storage_SasUri")
   @segment("storage/sasUri")
   sasUri is CommonOperation<BlobDetailsParam, SasUriResponse>;
 }

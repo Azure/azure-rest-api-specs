@@ -4,12 +4,16 @@
 // --------------------------------------------------------------------------------------------
 
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+
 import "./errors.tsp";
 import "./patches.tsp";
 
 using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest.Resource;
+using Azure.Core;
+using Azure.Core.Traits;
 
 @error
 @doc("Error information returned by the API")
@@ -24,6 +28,14 @@ model RestError {
   @doc("ErrorCode of the error")
   errorCode: string;
 }
+
+alias StandardServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+alias StandardOperations = Azure.Core.ResourceOperations<
+  StandardServiceTraits,
+  RestError
+>;
 
 alias RestResponseBody<TBody, TStatusCode extends int32 = 200> = {
   @doc("HTTP response status code.")
@@ -60,16 +72,19 @@ union RestResponse2<
   error: TError,
 }
 
+@doc("Operation with common parameters, OK and ERROR responses.")
 op CommonOperation<TParams, TResponse, TError = RestError>(
   ...CommonParams,
   ...TParams,
 ): RestResponse<TResponse, 200, TError>;
 
+@doc("Operation to create a resource.")
 op CreateOperation<TResource, TParams, TError = RestError>(
   ...CommonParams,
   ...TParams,
 ): RestResponse2<TResource, 200, TResource, 201, TError>;
 
+@doc("Operation to patch a resource.")
 op PatchOperation<TResource, TParams, TError = RestError>(
   ...CommonParams,
   ...TParams,
@@ -83,16 +98,19 @@ op PatchOperation<TResource, TParams, TError = RestError>(
   body: PatchRequest,
 ): RestResponse2<TResource, 200, {}, 204, TError>;
 
+@doc("Operation to cancel a resource.")
 op CancelOperation<TResource, TParams, TError = RestError>(
   ...CommonParams,
   ...TParams,
 ): RestResponse<TResource, 204, TError>;
 
+@doc("Operation to get a resource.")
 op GetOperation<TResource, TParams, TError = RestError>(
   ...CommonParams,
   ...TParams,
 ): RestResponse<TResource, 200, TError>;
 
+@doc("Operation to act on a resource.")
 op ActionOperation<TResource, TParams, TError = RestError>(
   ...CommonParams,
   ...TParams,
@@ -104,6 +122,7 @@ op ActionOperation<TResource, TParams, TError = RestError>(
     nextLinkName: "nextLink",
   }
 )
+@doc("Operation to list a resource.")
 op ListOperation<TResourceList, TParams = {}, TError = RestError>(
   ...CommonParams,
   ...TParams,

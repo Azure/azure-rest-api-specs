@@ -28,7 +28,7 @@ using OpenAPI;
   title: "Azure Quantum Workspace Services",
 })
 @useAuth(AzureEntraAuth | AzureApiKeyAuth)
-@versioned(APIVersion)
+@versioned(QuantumAPIVersion)
 @server(
   "https://{region}.{serviceBaseUrl}",
   "Endpoint for the Azure Quantum",
@@ -49,19 +49,19 @@ using OpenAPI;
 namespace Quantum.Workspace.Services;
 
 @autoRoute
-interface JobOperationsRoute extends JobOperations {}
+interface Jobs extends JobOperations {}
 
 @autoRoute
-interface SessionOperationsRoute extends SessionOperations {}
+interface Sessions extends SessionOperations {}
 
 @autoRoute
-interface ProviderOperationsRoute extends ProviderOperations {}
+interface Providers extends ProviderOperations {}
 
 @autoRoute
-interface StorageOperationsRoute extends StorageOperations {}
+interface Storage extends StorageOperations {}
 
 @autoRoute
-interface QuotaOperationsRoute extends QuotaOperations {}
+interface Quotas extends QuotaOperations {}
 
 @autoRoute
-interface WorkspaceOperationsRoute extends WorkspaceOperations {}
+interface TopLevelItems extends TopLevelItemsOperations {}
