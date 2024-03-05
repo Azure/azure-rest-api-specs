@@ -1372,13 +1372,6 @@ model DataProductVersion {
   version: string;
 }
 
-@doc("The data product capacity at a region level.")
-@added(Versions.v2024_04_01_preview)
-model DataProductsRegionalCapacity {
-  @doc("An array representing the data product capacity at the region level.")
-  regionalCapacity: Record<int32>[];
-}
-
 @armResourceOperations
 @removed(Versions.v2023_11_15)
 interface Storage
