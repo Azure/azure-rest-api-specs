@@ -1,0 +1,27 @@
+parameters:
+  "service-name":
+    default: "Microsoft.Quantum"
+  "version-status":
+    default: "preview"
+  "version":
+    default: "2024-03-01-preview"
+  "python-sdk-folder":
+    default: "{project-root}/azure-sdk-for-python/"
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-net/"
+  "service-directory-name":
+    default: "quantum"
+emit: [
+  "@azure-tools/typespec-autorest"
+]
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    examples-directory: examples
+    omit-unreachable-types: true
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/quantum.json"
+    emitter-output-dir: "{project-root}/../"
