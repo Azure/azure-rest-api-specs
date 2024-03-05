@@ -1418,6 +1418,10 @@
           "type": "string",
           "description": "Impacted service name."
         },
+        "impactedServiceGuid": {
+          "type": "string",
+          "description": "Impacted service guid. This is the permanent identifier for the impacted service."
+        },
         "impactedRegions": {
           "type": "array",
           "x-ms-identifiers": [],
@@ -1649,6 +1653,14 @@
       "properties": {
         "id": {
           "description": "The id.",
+          "type": "string"
+        },
+        "previousId": {
+          "description": "The previous id incase the data has changed.",
+          "type": "string"
+        },
+        "serviceGuid": {
+          "description": "The permanent guid for the service. Used when the id is a service name.",
           "type": "string"
         },
         "displayName": {
