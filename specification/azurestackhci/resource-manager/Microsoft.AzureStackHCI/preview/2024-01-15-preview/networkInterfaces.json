@@ -363,7 +363,15 @@
         "vmReferenceId": {
           "type": "string",
           "description": "ID of the attached VM.",
-          "readOnly": true
+          "readOnly": true,
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/virtualMachineInstances"
+              }
+            ]
+          }
         }
       },
       "description": "Properties under the network interface resource"

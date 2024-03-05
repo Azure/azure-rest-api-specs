@@ -345,7 +345,15 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Reference ID of VM which uses this storage container."
+                "description": "Reference ID of VM which uses this storage container.",
+                "format": "arm-id",
+                "x-ms-arm-id-details": {
+                  "allowedResources": [
+                    {
+                      "type": "Microsoft.AzureStackHCI/virtualMachineInstances"
+                    }
+                  ]
+                }
               }
             }
           }
@@ -359,7 +367,15 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Reference ID of VHD which uses this storage container."
+                "description": "Reference ID of VHD which uses this storage container.",
+                "format": "arm-id",
+                "x-ms-arm-id-details": {
+                  "allowedResources": [
+                    {
+                      "type": "Microsoft.AzureStackHCI/virtualHardDisks"
+                    }
+                  ]
+                }
               }
             }
           }
@@ -373,7 +389,18 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Reference ID of Image which uses this storage container."
+                "description": "Reference ID of Image which uses this storage container.",
+                "format": "arm-id",
+                "x-ms-arm-id-details": {
+                  "allowedResources": [
+                    {
+                      "type": "Microsoft.AzureStackHCI/galleryImages"
+                    },
+                    {
+                      "type": "Microsoft.AzureStackHCI/marketplaceGalleryImages"
+                    }
+                  ]
+                }
               }
             }
           }
