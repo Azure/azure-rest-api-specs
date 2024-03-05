@@ -17,6 +17,7 @@ try {
             [Scriptblock] $expression
         )
         Write-Host "Running $name..."
+        $global:LASTEXITCODE = 0
         $errorFile = Join-Path $logDirectory "$name-error.txt"
         $outputFile = Join-Path $logDirectory "$name.txt"
         &$expression 2> $errorFile *> $outputFile
@@ -70,11 +71,25 @@ try {
         tsp compile . --pretty --debug --emit=@azure-tools/typespec-apiview --output-dir (Join-Path $logDirectory "../api-view/")
     }
 
+    RunAndCheck "tsp-validate" \ {
+        # To run the TypeSpec Validation we need to go
+        # to the root of the azure-rest-api-specs repo
+        Push-Location (Join-Path $PSScriptRoot "../../../../")
+        try
+        {
+            npx --no tsv .\specification\quantum\Quantum\        
+        }
+        finally
+        {
+            Pop-Location
+        }     
+    }   
+
     # Rename common parameters to match previous Swagger.
     RunAndCheck "replace-param-names" \ {
         $spec = Get-Content -Path $jsonFile
         $spec = $spec -replace '(?:CommonParams\.)([^"]*)','$1Parameter'
-        Set-Content $jsonFile $spec
+        Set-Content $jsonFile $spec        
     }
 
     # copy to swagger folder to easy upload to https://apiview.dev/
