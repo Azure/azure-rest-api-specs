@@ -25,6 +25,7 @@ batch:
   - tag: package-2023-03-01-preview
   - tag: package-2023-06-01-preview
   - tag: package-2023-08-01-preview
+  - tag: package-2024-01-01-preview
 ```
 
 ### Tag: package-2021-04-01-preview and java
@@ -140,6 +141,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.webpubsub.v2023_08_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/webpubsub/mgmt-v2023_08_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2024-01-01-preview and java
+
+These settings apply only when `--tag=package-2024-01-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2024-01-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.webpubsub.v2024_01_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/webpubsub/mgmt-v2024_01_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
