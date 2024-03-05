@@ -131,16 +131,11 @@ namespace Azure.AI.OpenAI.Assistants;
 // base64) are better accomplished via another approach at the client layer.
 
 @@access(MessageImageFileDetails, Access.internal);
-@@access(MessageImageFileIdDetails, Access.internal);
 @@projectedName(MessageImageFileDetails,
   "csharp",
   "InternalMessageImageFileDetails"
 );
 @@projectedName(MessageImageFileContent.imageFile, "csharp", "InternalDetails");
-@@projectedName(MessageImageFileIdDetails,
-  "csharp",
-  "InternalMessageImageFileIdDetails"
-);
 @@projectedName(MessageImageFileDetails.fileId, "csharp", "InternalDetails");
 
 // Several of the content item types are not intended to be used as input
