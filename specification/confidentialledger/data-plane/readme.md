@@ -101,4 +101,20 @@ These settings apply only when `--tag=package-2024-01-11-preview-codetransparenc
 ```yaml $(tag) == 'package-2024-01-11-preview-codetransparency'
 input-file:
   - Microsoft.CodeTransparency/preview/2024-01-11-preview/cts.json
+suppressions:
+  - code: PageableOperation
+    from: cts.json
+    reason: Not pageable
+  - code:  PaginationResponse
+    from: cts.json
+    reason: Defined as in the RFC but the remaining ones are not pageable
+  - code: PathParameterSchema
+    from: cts.json
+    reason: maxLength parameter is not applicable
+  - code: DefaultResponse
+    from: cts.json
+    reason: TypeSpec did not generate this
+  - code: EnumInsteadOfBoolean
+    from: cts.json
+    reason: Defined as in the RFC
 ```
