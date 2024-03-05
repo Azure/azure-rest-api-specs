@@ -26,15 +26,15 @@ These are the global settings for the quantum.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-2024-03
+tag: package-2024-03-01-preview
 ```
 
 
-### Tag: package-preview-2024-03
+### Tag: package-2024-03-01-preview
 
-These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-03'
+```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
   - Microsoft.Quantum/preview/2024-03-01-preview/quantum.json
 ```
