@@ -1994,6 +1994,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResultProperty"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -4850,10 +4856,7 @@
           "type": "string",
           "description": "Result of the operation."
         }
-      },
-      "required": [
-        "result"
-      ]
+      }
     },
     "Siemens": {
       "type": "object",
