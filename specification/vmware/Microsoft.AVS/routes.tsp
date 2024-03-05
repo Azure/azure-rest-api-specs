@@ -884,38 +884,6 @@ interface ProvisionedNetworks {
   get is ArmResourceRead<ProvisionedNetwork>;
 }
 
-@armResourceOperations
-interface Maintenances {
-  @doc("List {name} resources by subscription ID", Maintenance)
-  @segmentOf(Maintenance)
-  @armResourceList(Maintenance)
-  @get
-  list(
-    ...ResourceParentParameters<Maintenance>,
-
-    @query
-    @doc("Filter active or inactive maintenances")
-    status?: MaintenanceStatusFilter,
-
-    @query
-    @doc("date from which result should be returned. ie. scheduledStartTime >= from")
-    from?: utcDateTime,
-
-    @query
-    @doc("date till which result should be returned. i.e. scheduledStartTime <= to")
-    to?: utcDateTime,
-  ): ArmResponse<ResourceListResult<Maintenance>> | ErrorResponse;
-
-  get is ArmResourceRead<Maintenance>;
-
-  @doc("Reschedule a maintenance")
-  reschedule is ArmResourceActionSync<
-    Maintenance,
-    MaintenanceReschedule,
-    Maintenance
-  >;
-}
-
 @doc("The location envelope.")
 model LocationHeader {
   @doc("The Location header contains the URL where the status of the long running operation can be checked.")
