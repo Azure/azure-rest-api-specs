@@ -48,6 +48,9 @@
           },
           "Create Extension with Plan": {
             "$ref": "./examples/CreateExtensionWithPlan.json"
+          },
+          "Create Extension With Identity": {
+            "$ref": "./examples/CreateExtensionWithIdentity.json"
           }
         },
         "parameters": [
@@ -606,6 +609,12 @@
               "description": "Flag to note if this extension is a system extension",
               "type": "boolean",
               "default": false
+            },
+            "workloadIdentityEnabled":{
+              "readOnly": true,
+              "description": "Whether the provided identity is a workload identity. If an identity is provided by user, this will be set to true. Otherwise will be false.",
+              "type": "boolean",
+              "default": false
             }
           }
         },
@@ -690,6 +699,11 @@
               }
             }
           }
+        },
+        "identity": {
+          "description": "Identity of the Extension resource",
+          "x-nullable": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
         }
       }
     }
