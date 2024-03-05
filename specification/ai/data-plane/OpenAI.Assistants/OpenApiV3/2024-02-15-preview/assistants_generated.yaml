@@ -375,6 +375,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAIFile'
+  /files/{fileId}/content:
+    get:
+      operationId: getFileContent
+      description: Returns information about a specific file. Does not retrieve file content.
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: string
+                format: byte
   /threads:
     post:
       operationId: createThread
@@ -1527,19 +1546,9 @@ components:
         - file_id
       properties:
         file_id:
-          allOf:
-            - $ref: '#/components/schemas/MessageImageFileIdDetails'
+          type: string
           description: The ID for the file associated with this image.
       description: An image reference, as represented in thread message content.
-    MessageImageFileIdDetails:
-      type: object
-      required:
-        - file_id
-      properties:
-        file_id:
-          type: string
-          description: The ID of the specific image file.
-      description: An encapsulation of an image file ID, as used by message image content.
     MessageRole:
       type: string
       enum:
