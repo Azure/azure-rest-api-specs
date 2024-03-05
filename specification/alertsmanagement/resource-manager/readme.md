@@ -46,6 +46,7 @@ description: AlertsManagement Client
 openapi-type: arm
 tag: package-2023-03
 ```
+
 ### Tag: package-preview-2024-03
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
@@ -53,7 +54,7 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - Microsoft.AlertsManagement/preview/2024-03-01-preview/AlertProcessingRules.json
-  suppressions:
+suppressions:
   - code: OperationsAPIImplementation
     from: AlertProcessingRules.json
     reason: Aleady implemented in AlertsManagement.json.
@@ -66,7 +67,6 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 input-file:
   - Microsoft.AlertsManagement/preview/2024-01-01-preview/AlertsManagement.json  
 ```
-
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
@@ -107,8 +107,6 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 input-file:
   - Microsoft.AlertsManagement/preview/2023-01-01-preview/AlertRuleRecommendations.json
 ```
-
-
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
