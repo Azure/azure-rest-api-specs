@@ -105,6 +105,24 @@
           "description": "SQL Server collation.",
           "readOnly": true
         },
+        "dbMasterKeyExists": {
+          "type": "boolean",
+          "description": "Indicates whether database master key exists in SQL Server.",
+          "readOnly": true
+        },
+        "isHadrEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether always On availability groups is enabled in SQL Server.",
+          "readOnly": true
+        },
+        "traceFlags": {
+          "type": "array",
+          "description": "An array of integers representing the enabled trace flags in SQL Server.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "currentVersion": {
           "type": "string",
           "description": "SQL Server current version.",
@@ -325,6 +343,25 @@
         "collation": {
           "type": "string",
           "description": "SQL Server collation.",
+          "readOnly": true
+        },
+        "dbMasterKeyExists": {
+          "type": "boolean",
+          "description": "Indicates whether database master key exists in SQL Server.",
+          "readOnly": true
+        },
+        "isHadrEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether always On availability groups is enabled in SQL Server.",
+          "readOnly": true
+        },
+        "traceFlags": {
+          "type": "array",
+          "description": "An array of integers, where each value represents the enabled trace flags in SQL Server.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
           "readOnly": true
         },
         "currentVersion": {
