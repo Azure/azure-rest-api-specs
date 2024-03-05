@@ -49,11 +49,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "in": "path",
-            "name": "operationId",
-            "required": true,
-            "type": "string",
-            "description": "The identifier pointing to a request for Disk Inspection. This is used for polling result of the request."
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
@@ -143,7 +139,8 @@
         "operationId": "Diagnostics_List",
         "description": "Lists all available Compute diagnostics for a subscription in a location.",
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         },
         "parameters": [
           {
@@ -157,7 +154,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ComputeDiagnosticsList"
+              "$ref": "#/definitions/ComputeDiagnosticsMetadata"
             }
           },
           "default": {
@@ -335,13 +332,19 @@
             "schema": {
               "$ref": "#/definitions/SpotPlacementRecommenderResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
     }
   },
   "definitions": {
-    "ComputeDiagnosticsList": {
+    "ComputeDiagnosticsMetadata": {
       "description": "Lists all available Compute diagnostics for a subscription in a location.",
       "type": "object",
       "properties": {
@@ -585,7 +588,7 @@
             "$ref": "#/definitions/PlacementScore"
           },
           "description": "The spot placement scores."
-        },
+        }
       },
       "description": "SpotPlacementRecommender API response."
     },
