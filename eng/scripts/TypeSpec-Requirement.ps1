@@ -21,9 +21,14 @@ function Find-Suppressions-Yaml {
   $currentDirectory = Get-Item (Split-Path -Path $fileInSpecFolder)
 
   while ($currentDirectory) {
-    $suppressionsFile = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yml"
-    if (Test-Path $suppressionsFile) {
-      return $suppressionsFile
+    # Support both `suppressions.yaml` and `suppressions.yml`, preferring the former
+    $suppressionsFileYaml = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yaml"
+    $suppressionsFileYml = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yml"
+
+    if (Test-Path $suppressionsFileYaml) {
+      return $suppressionsFileYaml
+    else if (Test-Path $suppressionsFileYml) {
+      return $suppressionsFileYml
     } else {
       $currentDirectory = $currentDirectory.Parent
     }
