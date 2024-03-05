@@ -66,6 +66,24 @@ input-file:
   - Qumulo.Storage/preview/2023-08-29-preview/Qumulo.Storage.json
 ```
 
+### Tag: package-2024-01-30-preview
+
+These settings apply only when `--tag=package-2024-01-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01-30-preview'
+input-file:
+  - Qumulo.Storage/preview/2024-01-30-preview/Qumulo.Storage.json
+```
+
+### Tag: package-2024-02-01-preview
+
+These settings apply only when `--tag=package-2024-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02-01-preview'
+input-file:
+  - Qumulo.Storage/preview/2024-02-01-preview/Qumulo.Storage.json
+```
+
 ---
 
 # Code Generation

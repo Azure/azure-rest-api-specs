@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: sapdiscoverysite
-    namespace: azure.mgmt.workloads.sapdiscoverysite
-    package-name: azure-mgmt-workloads-sapdiscoverysite
-az-output-folder: $(azure-cli-extension-folder)/src/workloads/sapdiscoverysite
-python-sdk-output-folder: "$(az-output-folder)/azext_workloads/vendored_sdks/workloads/sapdiscoverysite"
+    extensions: migrationdiscoverysap
+    namespace: azure.mgmt.migrationdiscoverysap
+    package-name: azure-mgmt-migrationdiscoverysap
+az-output-folder: $(azure-cli-extension-folder)/src/migrationdiscovery/migrationdiscoverysap
+python-sdk-output-folder: "$(az-output-folder)/azext_migrationdiscovery/vendored_sdks/migrationdiscovery/migrationdiscoverysap"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```

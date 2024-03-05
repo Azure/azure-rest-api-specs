@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-12
+tag: package-preview-2024-03
 ```
 
 ## Suppression
@@ -60,6 +60,10 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - jobs.json
+      - hciCommon.json
+      - edgeNodePool.json
+
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
@@ -87,38 +91,131 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - jobs.json
+      - common.json
+      - edgeNodePool.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
-    from: clusters.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/addNodes"]
-
-  - code: ResourceNameRestriction
-    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
-    from: deploymentSettings.json
+    from:
+      - deploymentSettings.json
+      - jobs.json
+      - clusters.json
+      - securitySettings.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}/deploy"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs/{jobsName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/uploadCertificate"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/createClusterIdentity"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/extendSoftwareAssuranceBenefit"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/triggerLogCollection"]
 
+  - code: PatchPropertiesCorrespondToPutProperties
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - clusters.json
+
+  - code: DeleteResponseCodes
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - clusters.json
+      
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
-    from: deploymentSettings.json
+    from:
+      - deploymentSettings.json
+      - jobs.json
     where:
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
       - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
+      - $.definitions.SetInformationJobProperties.properties.priorityValue8021Action_Cluster
+      - $.definitions.SetInformationJobProperties.properties.priorityValue8021Action_SMB
+      - $.definitions.SetInformationJobProperties.properties.bandwidthPercentage_SMB
 
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
 ```
 
-### Tag: package-2023-12-01
+### Tag: package-preview-2024-03
 
-These settings apply only when `--tag=package-2023-12-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-12-01'
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/edgeNodePool.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/logicalNetworks.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/virtualMachineInstances.json
+```
+
+### Tag: package-preview-2024-01-15
+
+These settings apply only when `--tag=package-preview-2024-01-15` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-01-15'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/logicalNetworks.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/virtualMachineInstances.json
+```
+
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/securitySettings.json
+```
+
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-12'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/clusters.json
@@ -133,12 +230,15 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/jobs.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/hciCommon.json
+```
 
 ### Tag: package-2024-01
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01'
+``` yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/common.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/galleryImages.json
@@ -150,6 +250,8 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/virtualMachineInstances.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/deploymentSettings.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/edgeDevices.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/offers.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/operations.json
@@ -158,35 +260,14 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/updateRuns.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/updates.json
-```
-
-### Tag: package-preview-2024-01
-
-These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-01'
-input-file:
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/common.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/deploymentSettings.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/edgeDevices.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/extensions.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/offers.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/operations.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/publishers.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/securitySettings.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/skus.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/updateRuns.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/updateSummaries.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/updates.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/securitySettings.json
 ```
 
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-11'
+``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/clusters.json
@@ -261,7 +342,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-07-01'
+``` yaml $(tag) == 'package-preview-2023-07-01'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/marketplaceGalleryImages.json
@@ -276,7 +357,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-06-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2023-06-01/clusters.json

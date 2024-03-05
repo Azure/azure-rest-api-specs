@@ -12,30 +12,26 @@ using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "This is defined in other swagger file - hybridconnectivity.json"
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
+@armCommonTypesVersion(CommonTypes.Versions.v5)
+@versioned(Versions)
 @service({
   title: "Hybrid Connectivity Management API",
-  version: "2023-12-01-preview",
 })
 @doc("REST API for public clouds.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.HybridConnectivity;
+
+@doc("Hybrid Connectivity Management service version.")
+enum Versions {
+  @doc("Version 2024-08-01-preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_08_01: "2024-08-01-preview",
+}
 
 //---------------------------------------------- Models ----------------------------------------------
 
-@doc("The properties of Solution Type")
-model SolutionTypeProperties {
-  @doc("The type of the solution")
-  solutionType: string;
-
-  @doc("Solution settings")
-  solutionSettings?: SolutionSettings;
-}
-
-@doc("Solution settings")
-model SolutionSettings is Record<string>;
+//------------------- Generate Aws Template -------------------
 
 @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
 model GenerateAwsTemplateRequest {
@@ -43,14 +39,22 @@ model GenerateAwsTemplateRequest {
   connectorId: string;
 
   @doc("The list of solution types and their settings")
-  solutionTypes?: Array<SolutionTypeProperties>;
+  solutionTypes?: Array<SolutionTypeSettings>;
 }
+
+@doc("The properties of Solution Type")
+model SolutionTypeSettings {
+  @doc("The type of the solution")
+  solutionType: string;
+
+  @doc("Solution settings")
+  solutionSettings?: SolutionSettings;
+}
+
+//------------------- Test Permissions -------------------
 
 @doc("Public connector permissions.")
 model TestPermissionResponse {
-  @doc("The name of public cloud connector")
-  overallStatus: Status;
-
   @doc("Solution type permissions.")
   solutionTypes: Array<SolutionTypePermissions>;
 }
@@ -58,7 +62,7 @@ model TestPermissionResponse {
 @doc("Solution type permissions.")
 model SolutionTypePermissions {
   @doc("The name of solution Type")
-  solutionType: SolutionType;
+  solutionType: SolutionTypeEnum;
 
   @doc("The status")
   status: Status;
@@ -68,7 +72,7 @@ model SolutionTypePermissions {
 }
 
 @doc("Solution types.")
-enum SolutionType {
+enum SolutionTypeEnum {
   @doc("Asset Management solution type")
   `Microsoft.AssetManagement`,
 
@@ -87,6 +91,195 @@ enum Status {
   @doc("Disconnected status")
   Disconnected,
 }
+
+//------------------- Public Cloud Connector -------------------
+
+@doc("Public Cloud Connector")
+model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
+  @doc("Represent public cloud connectors resource.")
+  @key("publicCloudConnector")
+  @path
+  @segment("publicCloudConnectors")
+  name: string;
+}
+
+@doc("Properties of public cloud connectors.")
+model PublicCloudConnectorProperties {
+  @doc("Cloud profile for AWS.")
+  awsCloudProfile: AwsCloudProfile;
+
+  @doc("Host cloud the public cloud connector.")
+  @visibility("create")
+  hostType: HostType;
+
+  @doc("The resource provisioning state.")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("Enum of host cloud the public cloud connector is referencing.")
+enum HostType {
+  @doc("AWS state")
+  AWS,
+}
+
+@doc("cloud profile for AWS.")
+model AwsCloudProfile {
+  @doc("Account id for the AWS account.")
+  @visibility("create")
+  accountId: string;
+
+  @doc("List of AWS accounts which need to be excluded.")
+  excludedAccounts?: string[];
+
+  @doc("Boolean value that indicates whether the account is organizational or not. True represents organization account, whereas false represents a single account.")
+  @visibility("create")
+  isOrganizationalAccount?: boolean = false;
+}
+
+//------------------- Solution Configuration -------------------
+
+@doc("Solution Configuration")
+model SolutionConfiguration
+  is ExtensionResource<SolutionConfigurationProperties> {
+  @doc("Represent Solution Configuration Resource.")
+  @key("solutionConfiguration")
+  @path
+  @segment("solutionConfigurations")
+  name: string;
+}
+
+@doc("Solution configuration resource.")
+model SolutionConfigurationProperties {
+  @doc("The resource provisioning state.")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+
+  @doc("The type of the solution")
+  solutionType: string;
+
+  @doc("Solution settings")
+  solutionSettings?: SolutionSettings;
+
+  @doc("The status of solution configurations")
+  @visibility("read")
+  @knownValues(SolutionConfigurationStatus)
+  status?: string;
+
+  @doc("The detailed message of status details")
+  @visibility("read")
+  statusDetails?: string;
+
+  @doc("The last time resources were inventoried")
+  @visibility("read")
+  lastSyncTime?: utcDateTime;
+}
+
+@doc("Solution Configuration Status.")
+enum SolutionConfigurationStatus {
+  @doc("New status")
+  New,
+
+  @doc("InProgress status")
+  InProgress,
+
+  @doc("Canceled status")
+  Completed,
+
+  @doc("Failed status")
+  Failed,
+}
+
+//------------------- Solution Type -------------------
+
+model SolutionTypeResource is ProxyResource<SolutionTypeProperties> {
+  @doc("Solution Type resource")
+  @segment("solutionTypes")
+  @key("solutionType")
+  @path
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This proxy resource does not have a state"
+@doc("Definition of Solution type resource.")
+model SolutionTypeProperties {
+  @doc("The name of the solution type.")
+  solutionType?: string;
+
+  @doc("Short description of solution type.")
+  description?: string;
+
+  @doc("The locations this solution is supported in.")
+  supportedAzureRegions?: string[];
+
+  @doc("Array of solution settings and its description.")
+  solutionSettings?: SolutionTypeSettingsProperties[];
+}
+
+@doc("Represent Solution settings properties description array.")
+model SolutionTypeSettingsProperties {
+  @doc("The name of the solution setting property.")
+  name: string;
+
+  @doc("The UI friendly name of the solution setting property.")
+  displayName: string;
+
+  @doc("Type of the solution setting property, represented as a string.")
+  type: string;
+
+  @doc("Description of solution setting property.")
+  description: string;
+
+  @doc("Array of allowed values for this solution settings property.")
+  allowedValues: string[];
+
+  @doc("Default value for this solution settings property.")
+  defaultValue: string;
+}
+
+//------------------- Inventory -------------------
+
+@parentResource(SolutionConfiguration)
+model InventoryResource is ProxyResource<InventoryProperties> {
+  @doc("Inventory resource")
+  @segment("inventory")
+  @key("inventoryId")
+  @visibility("read")
+  @path
+  name: string;
+}
+
+@doc("Definition of inventory.")
+model InventoryProperties {
+  @doc("Gets or sets the cloud native resource type.")
+  cloudNativeType?: CloudNativeType;
+
+  @doc("Gets or sets the cloud native resource name.")
+  cloudNativeResourceId?: string;
+
+  @doc("Gets or sets the mapped azure resource id.")
+  azureResourceId?: string;
+
+  @doc("Gets or sets the status of the inventory.")
+  status?: SolutionConfigurationStatus;
+
+  @doc("Gets or sets the status details.")
+  statusDetails?: string;
+
+  @doc("The resource provisioning state.")
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("Cloud Native Type enum.")
+enum CloudNativeType {
+  @doc("ec2 enum.")
+  ec2,
+}
+
+//------------------- Shared -------------------
+
+@doc("Solution settings")
+model SolutionSettings is Record<string>;
 
 //---------------------------------------------- Operations ----------------------------------------------
 
@@ -109,20 +302,45 @@ interface GenerateAwsTemplate {
   ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnectorId}")
-interface TestPermissions {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
-  @route("testPermissions")
-  @post
-  @action
-  @tag("TestPermissions")
-  @doc("Test permissions of solution configurations of a connector.")
-  post(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
+@armResourceOperations
+interface PublicCloudConnectors {
+  get is ArmResourceRead<PublicCloudConnector>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<PublicCloudConnector>;
+  update is ArmResourcePatchSync<
+    PublicCloudConnector,
+    PublicCloudConnectorProperties
+  >;
+  delete is ArmResourceDeleteSync<PublicCloudConnector>;
+  listByResourceGroup is ArmResourceListByParent<PublicCloudConnector>;
+  listBySubscription is ArmListBySubscription<PublicCloudConnector>;
 
-    @doc("ConnectorId to check permissions of.")
-    publicCloudConnectorId: string,
-  ): Azure.ResourceManager.ArmAcceptedLroResponse<"Asynchronous operation in progress."> | TestPermissionResponse | Azure.ResourceManager.ErrorResponse;
+  testPermissions is ArmResourceActionAsync<
+    PublicCloudConnector,
+    void,
+    TestPermissionResponse
+  >;
+}
+
+@armResourceOperations
+interface SolutionConfigurations {
+  get is ArmResourceRead<SolutionConfiguration>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SolutionConfiguration>;
+  update is ArmResourcePatchSync<
+    SolutionConfiguration,
+    SolutionConfigurationProperties
+  >;
+  delete is ArmResourceDeleteSync<SolutionConfiguration>;
+}
+
+@armResourceOperations
+interface Inventory {
+  get is ArmResourceRead<InventoryResource>;
+  listByWidget is ArmResourceListByParent<InventoryResource>;
+}
+
+@armResourceOperations
+interface SolutionTypes {
+  get is ArmResourceRead<SolutionTypeResource>;
+  listByWidget is ArmResourceListAtScope<SolutionTypeResource>;
+  listBySubscription is ArmListBySubscription<SolutionTypeResource>;
 }

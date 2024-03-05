@@ -398,10 +398,10 @@ model EntityProperties {
   @doc("Visual icon definition. If not set, a default icon is used.")
   icon?: IconDefinition;
 
-  @doc("Service level objective")
+  @doc("Health objective as a percentage of time the entity should be healthy.")
   @minValue(0)
   @maxValue(100)
-  serviceLevelObjective?: float32;
+  healthObjective?: float32;
 
   @doc("Impact of the entity in health state propagation")
   impact?: EntityImpact = EntityImpact.Standard;
@@ -419,6 +419,10 @@ model EntityProperties {
   @visibility("read")
   @doc("Date when the entity was (soft-)deleted")
   deletionDate?: utcDateTime;
+
+  @visibility("read")
+  @doc("Health state of this entity")
+  healthState?: HealthState;
 }
 
 @doc("Visual icon definition of an entity")
@@ -426,7 +430,7 @@ model IconDefinition {
   @doc("Name of the built-in icon, or 'Custom' to use customData")
   @minLength(1)
   @maxLength(100)
-  icon: string;
+  iconName: string;
 
   @doc("Custom data. Base64-encoded SVG data. If set, this overrides the built-in icon.")
   @minLength(1)
@@ -509,6 +513,18 @@ enum EntityImpact {
 
   @doc("Suppressed impact")
   Suppressed,
+}
+
+@doc("Health state of an entity")
+enum HealthState {
+  @doc("Healthy status")
+  Healthy,
+
+  @doc("Degraded status")
+  Degraded,
+
+  @doc("Error status (Unhealthy)")
+  Error,
 }
 
 @doc("Visual position of the entity")
@@ -605,9 +621,20 @@ model DiscoveryRuleProperties {
   @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
   discoverRelationships: DiscoveryRuleRelationshipDiscoveryBehavior;
 
-  // Will be added later
-  //  @doc("Whether to add all suggested signals to the discovered entities.")
-  //  addAllSuggestedSignals?: boolean;
+  @doc("Whether to add all recommended signals to the discovered entities.")
+  addRecommendedSignals: DiscoveryRuleRecommendedSignalsBehavior;
+
+  @visibility("read")
+  @doc("Date when the discovery rule was (soft-)deleted")
+  deletionDate?: utcDateTime;
+
+  @visibility("read")
+  @doc("Error message if the last discovery operation failed.")
+  errorMessage?: string;
+
+  @visibility("read")
+  @doc("Number of discovered entities in the last discovery operation.")
+  numberOfDiscoveredEntities?: int32;
 }
 
 @doc("Discovery rule show entity behavior")
@@ -625,6 +652,15 @@ enum DiscoveryRuleRelationshipDiscoveryBehavior {
   Enabled,
 
   @doc("Do not automatically attempt to discover relationships")
+  Disabled,
+}
+
+@doc("Discovery rule recommended signal behavior")
+enum DiscoveryRuleRecommendedSignalsBehavior {
+  @doc("Automatically add recommended signals")
+  Enabled,
+
+  @doc("Do not automatically add recommended signals")
   Disabled,
 }
 

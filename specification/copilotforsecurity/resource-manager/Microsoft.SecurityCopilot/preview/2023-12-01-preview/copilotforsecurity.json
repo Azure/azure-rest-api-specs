@@ -61,7 +61,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
@@ -103,7 +103,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CapacityListResult"
             }
@@ -122,54 +122,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityCopilot/checkNameAvailability": {
-      "post": {
-        "operationId": "Capacities_CheckGlobalNameAvailability",
-        "tags": [
-          "Capacities"
-        ],
-        "description": "Implements global CheckNameAvailability operations",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The CheckAvailability request",
-            "required": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Capacities_CheckGlobalNameAvailability_MaximumSet_Gen": {
-            "$ref": "./examples/Capacities_CheckGlobalNameAvailability_MaximumSet_Gen.json"
-          },
-          "Capacities_CheckGlobalNameAvailability_MinimumSet_Gen": {
-            "$ref": "./examples/Capacities_CheckGlobalNameAvailability_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -193,7 +145,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CapacityListResult"
             }
@@ -243,7 +195,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Capacity"
             }
@@ -306,13 +258,6 @@
             "description": "Resource 'Capacity' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Capacity"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -326,11 +271,7 @@
           "Capacities_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Capacities_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "Capacities_Update",
@@ -368,7 +309,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Capacity"
             }
@@ -416,7 +357,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -487,21 +428,30 @@
           "format": "int64",
           "description": "No of Units",
           "minimum": 1,
-          "maximum": 999
+          "maximum": 100
+        },
+        "crossGeoCompute": {
+          "$ref": "#/definitions/IsAllowed",
+          "description": "Is cross geo compute allowed"
+        },
+        "geo": {
+          "type": "string",
+          "description": "Geo location of the capacity unit",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
-        },
-        "crossRegionCompute": {
-          "$ref": "#/definitions/IsAllowed",
-          "description": "Is cross region compute allowed"
         }
       },
       "required": [
         "numberOfUnits",
-        "crossRegionCompute"
+        "crossGeoCompute",
+        "geo"
       ]
     },
     "CapacityUpdate": {
@@ -530,11 +480,11 @@
           "format": "int64",
           "description": "No of Units",
           "minimum": 1,
-          "maximum": 999
+          "maximum": 100
         },
-        "crossRegionCompute": {
+        "crossGeoCompute": {
           "$ref": "#/definitions/IsAllowed",
-          "description": "Is cross region compute allowed"
+          "description": "Is cross geo compute allowed"
         }
       }
     },
@@ -569,7 +519,11 @@
         "Succeeded",
         "Failed",
         "Canceled",
-        "Provisioning",
+        "Unknown",
+        "Creating",
+        "Moving",
+        "SoftDeleting",
+        "SoftDeleted",
         "Updating",
         "Deleting",
         "Accepted"
@@ -594,9 +548,29 @@
             "description": "Resource creation was canceled."
           },
           {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The resource is in an unknown state"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is creating"
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "The resource is moving"
+          },
+          {
+            "name": "SoftDeleting",
+            "value": "SoftDeleting",
+            "description": "The resource is soft deleting"
+          },
+          {
+            "name": "SoftDeleted",
+            "value": "SoftDeleted",
+            "description": "The resource is soft deleted"
           },
           {
             "name": "Updating",

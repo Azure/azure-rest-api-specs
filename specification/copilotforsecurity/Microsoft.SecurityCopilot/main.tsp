@@ -34,15 +34,19 @@ model Capacity is TrackedResource<CapacityProperties> {
 model CapacityProperties {
   @doc("No of Units")
   @minValue(1)
-  @maxValue(999)
+  @maxValue(100)
   numberOfUnits: int64;
+
+  @doc("Is cross geo compute allowed")
+  crossGeoCompute: IsAllowed;
+
+  @doc("Geo location of the capacity unit")
+  @visibility("read", "create")
+  geo: string;
 
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
-
-  @doc("Is cross region compute allowed")
-  crossRegionCompute: IsAllowed;
 }
 
 @doc("Enum to represent Allowed or NotAllowed")
@@ -59,8 +63,20 @@ enum IsAllowed {
 enum ProvisioningState {
   ...ResourceProvisioningState,
 
-  @doc("The resource is being provisioned")
-  Provisioning,
+  @doc("The resource is in an unknown state")
+  Unknown,
+
+  @doc("The resource is creating")
+  Creating,
+
+  @doc("The resource is moving")
+  Moving,
+
+  @doc("The resource is soft deleting")
+  SoftDeleting,
+
+  @doc("The resource is soft deleted")
+  SoftDeleted,
 
   @doc("The resource is updating")
   Updating,
@@ -77,10 +93,9 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface Capacities {
   get is ArmResourceRead<Capacity>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Capacity>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Capacity>;
   update is ArmResourcePatchSync<Capacity, CapacityProperties>;
   delete is ArmResourceDeleteSync<Capacity>;
   listByResourceGroup is ArmResourceListByParent<Capacity>;
   listBySubscription is ArmListBySubscription<Capacity>;
-  checkGlobalNameAvailability is checkGlobalNameAvailability;
 }

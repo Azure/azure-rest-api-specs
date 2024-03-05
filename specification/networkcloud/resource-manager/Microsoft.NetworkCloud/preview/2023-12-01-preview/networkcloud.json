@@ -10120,7 +10120,7 @@
       "title": "ClusterCapacity represents various details regarding compute capacity.",
       "properties": {
         "availableApplianceStorageGB": {
-          "description": "The remaining appliance-based storage in GB available for workload use.",
+          "description": "The remaining appliance-based storage in GB available for workload use. Measured in gibibytes.",
           "type": "integer",
           "format": "int64"
         },
@@ -10130,17 +10130,17 @@
           "format": "int64"
         },
         "availableHostStorageGB": {
-          "description": "The remaining machine or host-based storage in GB available for workload use.",
+          "description": "The remaining machine or host-based storage in GB available for workload use. Measured in gibibytes.",
           "type": "integer",
           "format": "int64"
         },
         "availableMemoryGB": {
-          "description": "The remaining memory in GB that are available in this cluster for workload use.",
+          "description": "The remaining memory in GB that are available in this cluster for workload use. Measured in gibibytes.",
           "type": "integer",
           "format": "int64"
         },
         "totalApplianceStorageGB": {
-          "description": "The total appliance-based storage in GB supported by this cluster for workload use.",
+          "description": "The total appliance-based storage in GB supported by this cluster for workload use. Measured in gibibytes.",
           "type": "integer",
           "format": "int64"
         },
@@ -10150,12 +10150,12 @@
           "format": "int64"
         },
         "totalHostStorageGB": {
-          "description": "The total machine or host-based storage in GB supported by this cluster for workload use.",
+          "description": "The total machine or host-based storage in GB supported by this cluster for workload use. Measured in gibibytes.",
           "type": "integer",
           "format": "int64"
         },
         "totalMemoryGB": {
-          "description": "The total memory supported by this cluster for workload use.",
+          "description": "The total memory supported by this cluster for workload use. Measured in gibibytes.",
           "type": "integer",
           "format": "int64"
         }
@@ -11360,7 +11360,7 @@
           "readOnly": true
         },
         "sizeGB": {
-          "description": "The advertised size of a storage device in gigabytes.",
+          "description": "The advertised size of a storage device in gibibytes.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
@@ -11394,7 +11394,7 @@
       "title": "EdgeClusterMachineSkuMemory represents the memory configuration of an edge cluster machine.",
       "properties": {
         "sizeGB": {
-          "description": "The size of the memory in gigabytes.",
+          "description": "The size of the memory in gibibytes.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
@@ -12966,7 +12966,7 @@
           "readOnly": true
         },
         "diskSizeGB": {
-          "description": "The size of the disk configured for this node.",
+          "description": "The size of the disk configured for this node. Allocations are measured in gibibytes.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
@@ -12993,7 +12993,7 @@
           "readOnly": true
         },
         "memorySizeGB": {
-          "description": "The amount of memory configured for this node, derived from the vm SKU specified.",
+          "description": "The amount of memory configured for this node, derived from the vm SKU specified. Allocations are measured in gibibytes.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
@@ -13869,7 +13869,7 @@
       "title": "Disk represents the properties of the disk.",
       "properties": {
         "capacityGB": {
-          "description": "The maximum amount of storage in GB.",
+          "description": "The maximum amount of storage. Measured in gibibytes.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
@@ -13952,7 +13952,7 @@
           "readOnly": true
         },
         "memoryCapacityGB": {
-          "description": "The maximum amount of memory in GB.",
+          "description": "The maximum amount of memory. Measured in gibibytes.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
@@ -14230,7 +14230,7 @@
           "readOnly": true
         },
         "portSpeed": {
-          "description": "The maximum amount of data in GB that the line card transmits through a port at any given second.",
+          "description": "The maximum amount of data in gigabits that the line card transmits through a port at any given second.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
@@ -14311,7 +14311,7 @@
           }
         },
         "diskSizeGB": {
-          "description": "The size of the disk in gigabytes. Required if the createOption is Ephemeral.",
+          "description": "The size of the disk. Required if the createOption is Ephemeral. Allocations are measured in gibibytes.",
           "type": "integer",
           "format": "int64"
         }
@@ -14732,7 +14732,6 @@
         "allowRegistration": {
           "description": "The indicator of whether the image can be used to register machines.",
           "type": "string",
-          "default": "True",
           "enum": [
             "True",
             "False"
@@ -15019,7 +15018,7 @@
           ]
         },
         "sizeGB": {
-          "description": "The reported capacity of a storage device in GB.",
+          "description": "The reported capacity of a storage device. Measured in gibibytes.",
           "type": "integer",
           "format": "int64",
           "x-ms-mutability": [
@@ -15062,7 +15061,7 @@
       ],
       "properties": {
         "sizeGB": {
-          "description": "The size of the memory in GB.",
+          "description": "The size of the memory. Measured in gibibytes.",
           "type": "integer",
           "format": "int64",
           "x-ms-mutability": [
@@ -15797,7 +15796,7 @@
       "title": "StorageApplianceSkuProperties represents the properties of the storage appliance SKU.",
       "properties": {
         "capacityGB": {
-          "description": "The maximum capacity of the storage appliance.",
+          "description": "The maximum capacity of the storage appliance. Measured in gibibytes.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
@@ -16481,7 +16480,7 @@
           ]
         },
         "memorySizeGB": {
-          "description": "The memory size of the virtual machine in GB.",
+          "description": "The memory size of the virtual machine. Allocations are measured in gibibytes.",
           "type": "integer",
           "format": "int64",
           "minimum": 1,

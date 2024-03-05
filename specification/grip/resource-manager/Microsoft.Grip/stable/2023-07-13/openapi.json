@@ -1,0 +1,1058 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GRIP Service",
+    "version": "2023-07-13",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Jobs"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Grip/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Grip/locations/{location}/jobs": {
+      "get": {
+        "operationId": "Jobs_ListBySubscription",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "List JobDefinitionResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobDefinitionResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Jobs_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Jobs_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Grip/locations/{location}/jobs": {
+      "get": {
+        "operationId": "Jobs_ListByResourceGroup",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "List JobDefinitionResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobDefinitionResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Jobs_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Jobs_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Grip/locations/{location}/jobs/{jobName}": {
+      "get": {
+        "operationId": "Jobs_Get",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Get a JobDefinitionResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobDefinitionResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_Get_MaximumSet_Gen.json"
+          },
+          "Jobs_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Jobs_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Jobs_Create",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Create a JobDefinitionResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,50}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobDefinitionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobDefinitionResource"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobDefinitionResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_Create_MaximumSet_Gen.json"
+          },
+          "Jobs_Create_MinimumSet_Gen": {
+            "$ref": "./examples/Jobs_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Jobs_Delete",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Delete a JobDefinitionResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_Delete_MaximumSet_Gen.json"
+          },
+          "Jobs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Jobs_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BondSerializerPath": {
+      "type": "string",
+      "description": "Bond serializer path",
+      "enum": [
+        "ViaJson",
+        "Direct"
+      ],
+      "x-ms-enum": {
+        "name": "BondSerializerPath",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ViaJson",
+            "value": "ViaJson",
+            "description": "json serialization."
+          },
+          {
+            "name": "Direct",
+            "value": "Direct",
+            "description": "Direct path"
+          }
+        ]
+      }
+    },
+    "CosmosChangeFeedSource": {
+      "type": "object",
+      "description": "Cosmos change feed source",
+      "properties": {
+        "inputAlias": {
+          "type": "string",
+          "description": "CosmosDB input alias in the job's SQL query."
+        },
+        "leaseContainer": {
+          "type": "string",
+          "description": "CosmosDB lease container name."
+        },
+        "filter": {
+          "type": "string",
+          "description": "Input filter. This will filter out events consumed from CosmosDB by some predicate."
+        },
+        "database": {
+          "type": "string",
+          "description": "CosmosDB database name."
+        },
+        "container": {
+          "type": "string",
+          "description": "CosmosDB container name."
+        },
+        "connectionScheme": {
+          "$ref": "#/definitions/TypeValue",
+          "description": "CosmosDB connection scheme. This can be a connection string, or managed through Dsms."
+        },
+        "enableBulkMode": {
+          "type": "boolean",
+          "description": "Value indicating if bulk mode is enabled for write operations."
+        },
+        "preferredRegions": {
+          "type": "array",
+          "description": "Preferred CosmosDB regions to write to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultTimeToLive": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default time to live of messages written to CosmosDB."
+        }
+      },
+      "required": [
+        "inputAlias",
+        "leaseContainer",
+        "filter",
+        "database",
+        "container",
+        "connectionScheme",
+        "enableBulkMode",
+        "preferredRegions",
+        "defaultTimeToLive"
+      ]
+    },
+    "CosmosDestination": {
+      "type": "object",
+      "description": "Cosmos destination",
+      "properties": {
+        "outputAlias": {
+          "type": "string",
+          "description": "The alias name of a cosmos output in a GRIP SQL query."
+        },
+        "partitionKey": {
+          "type": "string",
+          "description": "Partition key of a CosmosDB container."
+        },
+        "documentId": {
+          "type": "string",
+          "description": "The document id path that exists in an object being written to CosmosDB"
+        },
+        "producerConfiguration": {
+          "$ref": "#/definitions/ProducerBufferConfiguration",
+          "description": "CosmosDB producer configuration"
+        },
+        "ignoreErrors": {
+          "type": "boolean",
+          "description": "Ignore errors flag. If true, producer errors are ignored a job will not be restarted."
+        },
+        "postProcessFunction": {
+          "type": "string",
+          "description": "post process function that gets executed against messages that have been generated by the query."
+        }
+      },
+      "required": [
+        "outputAlias",
+        "partitionKey",
+        "documentId",
+        "producerConfiguration",
+        "ignoreErrors",
+        "postProcessFunction"
+      ]
+    },
+    "CosmosReferenceSource": {
+      "type": "object",
+      "description": "Cosmos reference source",
+      "properties": {
+        "inputAlias": {
+          "type": "string",
+          "description": "Cosmos input alias, which "
+        },
+        "refreshRate": {
+          "type": "string",
+          "description": "Refresh rate. This determines the frequency of reading data from CosmosDB."
+        },
+        "query": {
+          "type": "string",
+          "description": "CosmosDB SQL query to read reference data."
+        },
+        "database": {
+          "type": "string",
+          "description": "CosmosDB database name."
+        },
+        "container": {
+          "type": "string",
+          "description": "CosmosDB container name."
+        },
+        "connectionScheme": {
+          "$ref": "#/definitions/TypeValue",
+          "description": "CosmosDB connection scheme. Either a connection string or managed by Dsms."
+        },
+        "enableBulkMode": {
+          "type": "boolean",
+          "description": "Value indicating if bulk mode is enabled for write operation."
+        },
+        "preferredRegions": {
+          "type": "array",
+          "description": "Preferred CosmosDB regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultTimeToLive": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default time to live"
+        }
+      },
+      "required": [
+        "inputAlias",
+        "refreshRate",
+        "query",
+        "database",
+        "container",
+        "connectionScheme",
+        "enableBulkMode",
+        "preferredRegions",
+        "defaultTimeToLive"
+      ]
+    },
+    "DiskStorageConfiguration": {
+      "type": "object",
+      "description": "Disk storage configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Flag determining if disk storage is enabled for a job."
+        },
+        "quotaInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Disk quota in megabytes."
+        }
+      },
+      "required": [
+        "enabled",
+        "quotaInMb"
+      ]
+    },
+    "JobDefinitionProperties": {
+      "type": "object",
+      "description": "The properties of UserResource",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The GRIP job Id"
+        },
+        "kafkaSources": {
+          "type": "array",
+          "description": "Kafka input sources",
+          "items": {
+            "$ref": "#/definitions/KafkaSource"
+          },
+          "x-ms-identifiers": []
+        },
+        "cosmosReferenceSources": {
+          "type": "array",
+          "description": "Cosmos reference input sources",
+          "items": {
+            "$ref": "#/definitions/CosmosReferenceSource"
+          },
+          "x-ms-identifiers": []
+        },
+        "cosmosChangeFeedSources": {
+          "type": "array",
+          "description": "Cosmos change feed input sources",
+          "items": {
+            "$ref": "#/definitions/CosmosChangeFeedSource"
+          },
+          "x-ms-identifiers": []
+        },
+        "kafkaOutputs": {
+          "type": "array",
+          "description": "Kafka output sources",
+          "items": {
+            "$ref": "#/definitions/KafkaDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "cosmosOutputs": {
+          "type": "array",
+          "description": "Cosmos output sources",
+          "items": {
+            "$ref": "#/definitions/CosmosDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "outputBufferEnabled": {
+          "type": "boolean",
+          "description": "Flag determining if an output buffer is enabled. If true, messages generated by a query will be buffered before being produced."
+        },
+        "bufferSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Buffer size in bytes of all output sources in a job. This buffer stores messages that will be produced to CosmosDB."
+        },
+        "query": {
+          "type": "string",
+          "description": "SQL Query string."
+        },
+        "streamingUnits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of streaming units. This determines the number of job partitions."
+        },
+        "diskStorageConfiguration": {
+          "$ref": "#/definitions/DiskStorageConfiguration",
+          "description": "Disk storage configuration"
+        },
+        "trillConfiguration": {
+          "$ref": "#/definitions/TrillConfiguration",
+          "description": "Trill configuration"
+        },
+        "injectFaultInMins": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Inject fault interval in minutes. This will produce fault events in a job that will cause a job restart."
+        },
+        "enableIngressEventLogging": {
+          "type": "boolean",
+          "description": "Enable ingress event logging flag"
+        },
+        "enableOutOfOrderEventLogging": {
+          "type": "boolean",
+          "description": "Enable out of order event logging flag. Events that are consumed out of order will be logged."
+        },
+        "dataLossSensitivity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Data loss sensitivity setting. It can either be, 0 - None, 1 - Stateless, or 2 - Stateful."
+        },
+        "checkpointWriteInterval": {
+          "type": "string",
+          "description": "Checkpoint write interval. This is a timespan string of how often checkpoints are taken of a running job."
+        },
+        "checkpointWriteOperationWaitMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Checkpoint write interval in milliseconds"
+        },
+        "logLevel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Log level. Values range from 0-7, where log level 0 will enable the most amount of logs. The higher the log level, the less logs that get generated within GRIP. Log levels should only be set to 0-2 for debugging purposes."
+        },
+        "yieldOutputMessageProcessing": {
+          "type": "boolean",
+          "description": "Yield output message processing flag. If true, this will yield each time a message is produced to Kafka. This is an experimental flag primarily used for performance testing."
+        },
+        "hostedFunctionsRunnerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hosted functions runner count. This determines the amount of user defined functions that will be executed in GRIP when messages are being processed in the query."
+        },
+        "tier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Job tier. This determines memory/CPU limits"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "jobId",
+        "kafkaSources",
+        "cosmosReferenceSources",
+        "cosmosChangeFeedSources",
+        "kafkaOutputs",
+        "cosmosOutputs",
+        "outputBufferEnabled",
+        "bufferSize",
+        "query",
+        "streamingUnits",
+        "diskStorageConfiguration",
+        "trillConfiguration",
+        "injectFaultInMins",
+        "enableIngressEventLogging",
+        "enableOutOfOrderEventLogging",
+        "dataLossSensitivity",
+        "checkpointWriteInterval",
+        "checkpointWriteOperationWaitMs",
+        "logLevel",
+        "yieldOutputMessageProcessing",
+        "hostedFunctionsRunnerCount",
+        "tier"
+      ]
+    },
+    "JobDefinitionResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobDefinitionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobDefinitionResourceListResult": {
+      "type": "object",
+      "description": "The response of a JobDefinitionResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JobDefinitionResource items on this page",
+          "items": {
+            "$ref": "#/definitions/JobDefinitionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KafkaDestination": {
+      "type": "object",
+      "description": "Kafka destination",
+      "properties": {
+        "partitionKeyPath": {
+          "type": "string",
+          "description": "partition key path"
+        },
+        "ignoreErrors": {
+          "type": "boolean",
+          "description": "Ignore errors flag. If true, producer errors are ignored a job will not be restarted."
+        },
+        "useReliableProducer": {
+          "type": "boolean",
+          "description": "Flag indicating if a reliable producer should be used when producing messages to Kafka."
+        },
+        "postProcessFunction": {
+          "type": "string",
+          "description": "Post process function that gets executed against messages generated by the query, just before being produced to Kafka."
+        },
+        "useAsyncProducer": {
+          "type": "boolean",
+          "description": "Flag indicating if an async producer should be used when producing messages to Kafka."
+        },
+        "useRetries": {
+          "type": "boolean",
+          "description": "Flag determining if retries should be enabled for producer requests. If a request fails, it is retried."
+        },
+        "markerWriteIntervalInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "marker write interval in seconds"
+        },
+        "bondSerializerPath": {
+          "$ref": "#/definitions/BondSerializerPath",
+          "description": "bond serializer path"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Kafka  producer endpoint"
+        },
+        "target": {
+          "type": "string",
+          "description": "Kafka connection target string. This can be zonal or regional."
+        },
+        "connectionType": {
+          "type": "string",
+          "description": "connection type"
+        },
+        "topic": {
+          "type": "string",
+          "description": "Kafka topic name."
+        },
+        "schema": {
+          "type": "string",
+          "description": "Message schema. This can be json, proto, or bond."
+        },
+        "useUnsecureConnection": {
+          "type": "boolean",
+          "description": "Use unsecure connection. If true, http is used instead of https."
+        },
+        "enableLogging": {
+          "type": "boolean",
+          "description": "Enable logging flag. Producer events will be logged if set to true."
+        },
+        "format": {
+          "type": "string",
+          "description": "Message format"
+        }
+      },
+      "required": [
+        "partitionKeyPath",
+        "ignoreErrors",
+        "useReliableProducer",
+        "postProcessFunction",
+        "useAsyncProducer",
+        "useRetries",
+        "markerWriteIntervalInSeconds",
+        "bondSerializerPath",
+        "endpoint",
+        "target",
+        "connectionType",
+        "topic",
+        "schema",
+        "useUnsecureConnection",
+        "enableLogging",
+        "format"
+      ]
+    },
+    "KafkaSource": {
+      "type": "object",
+      "description": "Kafka source",
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Kafka offset value a consumer will start from when a job is created."
+        },
+        "enableNestedRecords": {
+          "type": "boolean",
+          "description": "Determines if events consumed from Kafka should have nested IRecord objects as properties before further processing in GRIP."
+        },
+        "enableFlattenRecords": {
+          "type": "boolean",
+          "description": "Determines if events consumed from Kafka should have all nested properties flattened before further processing in GRIP."
+        },
+        "rebalanceFromCommittedOffset": {
+          "type": "boolean",
+          "description": "Flag determining if a Kafka consumer should rebalance from a committed offset when a rebalance event is processed at runtime. This will start the consumer from an intermediate offset if enabled."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Kafka connection endpoint."
+        },
+        "target": {
+          "type": "string",
+          "description": "Kafka connection target. This is either 'AZ' or 'region', which is used to build the connection string to connect to a Kafka topic."
+        },
+        "connectionType": {
+          "type": "string",
+          "description": "Type of connection for a Kafka topic. This can be a PF local, zonal, or regional type."
+        },
+        "topic": {
+          "type": "string",
+          "description": "Kafka topic name."
+        },
+        "schema": {
+          "type": "string",
+          "description": "Message schema type for the events consumed from the Kafka topic. This is a C# class path that points to a proto, json, or bond schema."
+        },
+        "useUnsecureConnection": {
+          "type": "boolean",
+          "description": "Unsecure connection flag. If true, an HTTP connection is established instead of HTTPS."
+        },
+        "enableLogging": {
+          "type": "boolean",
+          "description": "Enable Kafka consumer logging. THis will log all consumer events from Kafka"
+        },
+        "format": {
+          "type": "string",
+          "description": "Kafka message format. This can be json, proto, or bond."
+        }
+      },
+      "required": [
+        "offset",
+        "enableNestedRecords",
+        "enableFlattenRecords",
+        "rebalanceFromCommittedOffset",
+        "endpoint",
+        "target",
+        "connectionType",
+        "topic",
+        "schema",
+        "useUnsecureConnection",
+        "enableLogging",
+        "format"
+      ]
+    },
+    "ProducerBufferConfiguration": {
+      "type": "object",
+      "description": "Producer buffer configuration",
+      "properties": {
+        "batchSizeInBytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Batch size in bytes."
+        },
+        "lingerMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "linger ms. This determines how long a producer will wait before producing an existing buffer of data."
+        },
+        "retries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retry count a producer will perform on a buffer."
+        },
+        "retryBackoffMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retry backoff ms. The amount of time a producer will wait before retrying to produce buffered data."
+        }
+      },
+      "required": [
+        "batchSizeInBytes",
+        "lingerMs",
+        "retries",
+        "retryBackoffMs"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is in the provisioning state."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is in the updating state."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is in the deleting state."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource is in the accepted state."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "TrillConfiguration": {
+      "type": "object",
+      "description": "Trill configuration object",
+      "properties": {
+        "disorderPolicy": {
+          "type": "string",
+          "description": "Trill disorder policy."
+        },
+        "maxOutOfOrderAllowedTicks": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Out of order ticks allowed in Trill. Event's that have timestamps that are out of order by the specified number of ticks will have their timestamp adjusted. Otherwise if the timestamp is out of order more than the specified ticks, the event is dropped."
+        },
+        "onCompletedPolicy": {
+          "type": "string",
+          "description": "This policy determines what Trill will do when a data stream ends. Valid values are either 'Flush', or 'None'."
+        },
+        "punctuationGenerationPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Punctuation period determines how often punctuation events Trill will generate and ingress into the data stream. These events help progress Trill's timeline."
+        },
+        "dataBatchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Trill data batch size. This size determines the number of events Trill will batch before flushing its buffer and outputting a value."
+        },
+        "clearColumnOnReturn": {
+          "type": "boolean",
+          "description": "Flag for determining if columnar mode is enabled in Trill, which will will sort stream data into columns. This is useful when properties on event's infrequently change."
+        },
+        "forceRowBasedExecution": {
+          "type": "boolean",
+          "description": "Flag determining if row execution mode is enabled in Trill."
+        }
+      },
+      "required": [
+        "disorderPolicy",
+        "maxOutOfOrderAllowedTicks",
+        "onCompletedPolicy",
+        "punctuationGenerationPeriod",
+        "dataBatchSize",
+        "clearColumnOnReturn",
+        "forceRowBasedExecution"
+      ]
+    },
+    "TypeValue": {
+      "type": "object",
+      "description": "Represents a CosmosDB connection scheme. This can be a connection string, or managed through Dsms.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of CosmosDB connection scheme."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the connection scheme."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    }
+  },
+  "parameters": {}
+}

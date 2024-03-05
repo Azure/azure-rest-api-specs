@@ -3,7 +3,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-providerhub";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -44,14 +43,41 @@ model ExperimentationWorkspaceProperties {
 model AccessPolicy {
   @doc("Application id used for access to the experimentation workspace.")
   applicationId: string;
+
+  @doc("Endpoint used for access to the experimentation workspace.")
+  @visibility("read")
+  dataPlaneEndpoint?: string;
 }
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
 model DataSource {
-  @doc("Resource id of the data source.")
-  resourceId: string;
+  @doc("Log Analytics data source.")
+  logAnalytics?: LogAnalytics;
+}
 
-  @doc("Controls whether data flow from the configured data source into the experimentation workspace is enabled.")
+scalar LogAnalyticsWorkspaceResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.OperationalInsights/workspaces",
+    }
+  ]>;
+
+scalar StorageAccountResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts",
+    }
+  ]>;
+
+@doc("The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.")
+model LogAnalytics {
+  @doc("Resource id of the Log Analytics workspace.")
+  resourceId: LogAnalyticsWorkspaceResourceId;
+
+  @doc("Resource id of the storage account associated with the Log Analytics workspace.")
+  storageAccountResourceId: StorageAccountResourceId;
+
+  @doc("Controls whether data flow from the configured Log Analytics workspace into the experimentation workspace is enabled.")
   enabled: boolean;
 }
 
@@ -81,4 +107,51 @@ interface ExperimentationWorkspaces {
   delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
   listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
   listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
+}
+
+@doc("The exchange token parameters for exchanging Split.IO data plane authentication token.")
+model ExchangeTokenParameters {
+  @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
+  @secret
+  token: string;
+
+  @doc("The resource of Split.IO data plane authentication token.")
+  resource: string;
+}
+
+@doc("The exchange token result that contains the bearer token which is used for Split.IO data plane authentication.")
+model ExchangeTokenResult {
+  @doc("The bearer token that is used for Split.IO data plane authentication.")
+  @visibility("read")
+  @secret
+  token: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/dataPlaneApplications/{applicationId}")
+interface DataPlaneApplications {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
+  @doc("The action to exchange Split.IO data plane authentication token.")
+  @route("exchangeToken")
+  @post
+  @action
+  exchangeToken(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    @doc("The name of the ExperimentationWorkspace resource.")
+    @path
+    @pattern("^[^<>%&:\\?/#]*$")
+    @maxLength(50)
+    workspaceName: string,
+
+    @doc("The id of the Split.IO data plane authentication application.")
+    @path
+    applicationId: string,
+
+    @doc("The parameter of exchange token action.")
+    @body
+    exchangeTokenParameters: ExchangeTokenParameters,
+  ): ExchangeTokenResult | ErrorResponse;
 }

@@ -247,8 +247,8 @@ model DashboardParameterValuesList {
 
 @doc("The dashboard parameter values.")
 model DashboardParameterValues {
-  @doc("The unique names to serve as placeholders for the parameter values.")
-  parameterNames: string[];
+  @doc("The name of the parameter.")
+  parameterName: string;
 
   @doc("The parameter value(s) that will be selected by default when the parameter is displayed.")
   values: string[];
