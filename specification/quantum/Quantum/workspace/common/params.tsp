@@ -10,6 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using OpenAPI;
 
+@doc("Common URL parameters.")
 model CommonParams {
   @query("api-version")
   @doc("The REST API version.")
@@ -25,7 +26,6 @@ model CommonParams {
   @doc("The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).")
   @minLength(36)
   @maxLength(36)
-  @format("uuid")
   @pattern("^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$")
   @extension("x-ms-parameter-location", "client")
   subscriptionId: string;
@@ -42,6 +42,7 @@ model CommonParams {
 
   @path
   @segment("providers")
+  @doc("The Azure Quantum provider.")
   provider: "Microsoft.Quantum";
 
   @path

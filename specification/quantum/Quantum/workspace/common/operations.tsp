@@ -16,20 +16,30 @@ using TypeSpec.Rest.Resource;
 @defaultResponse
 model RestError {
   @visibility("read")
+  @doc("Details of the error")
   error: ErrorData;
 
   @header("x-ms-error-code")
   @extension("x-ms-client-name", "ErrorCode")
-  ErrorCode: string;
+  @doc("ErrorCode of the error")
+  errorCode: string;
 }
 
 alias RestResponseBody<TBody, TStatusCode extends int32 = 200> = {
-  @statusCode statusCode: TStatusCode;
-  @body result: TBody;
+  @doc("HTTP response status code.")
+  @statusCode
+  statusCode: TStatusCode;
+
+  @doc("HTTP response body.")
+  @body
+  result: TBody;
 };
 
 union RestResponse<TBody, TStatusCode extends int32 = 200, TError = RestError> {
+  @doc("REST API response body.")
   body: RestResponseBody<TBody, TStatusCode>,
+
+  @doc("REST API error details.")
   error: TError,
 }
 
@@ -40,8 +50,13 @@ union RestResponse2<
   TStatusCode2 extends int32,
   TError = RestError
 > {
+  @doc("REST API response body 1.")
   body1: RestResponseBody<TBody1, TStatusCode1>,
+
+  @doc("REST API response body 2.")
   body2: RestResponseBody<TBody2, TStatusCode2>,
+
+  @doc("REST API error details.")
   error: TError,
 }
 
@@ -58,9 +73,12 @@ op CreateOperation<TResource, TParams, TError = RestError>(
 op PatchOperation<TResource, TParams, TError = RestError>(
   ...CommonParams,
   ...TParams,
-  @header contentType: "application/merge-patch+json",
 
-  @doc("A JSONPatch document as defined by RFC 6902")
+  @doc("HTTP body content type.")
+  @header
+  contentType: "application/merge-patch+json",
+
+  @doc("A JSONPatch document as defined by RFC 6902.")
   @body
   body: PatchRequest,
 ): RestResponse2<TResource, 200, {}, 204, TError>;

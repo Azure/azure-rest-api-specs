@@ -14,15 +14,25 @@ using OpenAPI;
 
 @doc("Provider availability.")
 enum ProviderAvailability {
+  @doc("Provider is available.")
   Available,
+
+  @doc("Provider is available with degrated experience.")
   Degraded,
+
+  @doc("Provider is unavailable.")
   Unavailable,
 }
 
 @doc("Target availability.")
 enum TargetAvailability {
+  @doc("Target is available.")
   Available,
+
+  @doc("Target is available with degrated experience.")
   Degraded,
+
+  @doc("Target is unavailable.")
   Unavailable,
 }
 

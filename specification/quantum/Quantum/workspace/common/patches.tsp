@@ -19,15 +19,26 @@ alias PatchRequest = JsonPatchDocument[];
 
 @doc("The operation to be performed.")
 enum JsonPatchOperation {
+  @doc("Add value operation.")
   add,
+
+  @doc("Remove value operation.")
   remove,
+
+  @doc("Replace value operation.")
   replace,
+
+  @doc("Move value operation.")
   move,
+
+  @doc("Copy value operation.")
   copy,
+
+  @doc("Test value operation.")
   test,
 }
 
-@doc("A JSONPatch document as defined by RFC 6902")
+@doc("A JSONPatch document as defined by RFC 6902.")
 model JsonPatchDocument {
   @visibility("create")
   @doc("The operation to be performed.")

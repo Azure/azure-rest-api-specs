@@ -24,11 +24,22 @@ enum SessionJobFailurePolicy {
 
 @doc("The status of the session.")
 enum SessionStatus {
+  @doc("The session is waiting in the queue to be executed.")
   Waiting,
+
+  @doc("The session is being executed.")
   Executing,
+
+  @doc("The session completed with success.")
   Succeeded,
+
+  @doc("The session completed with failure.")
   Failed,
+
+  @doc("The session completed with some failures.")
   `Failure(s)`,
+
+  @doc("The session timed out.")
   TimedOut,
 }
 
@@ -39,6 +50,7 @@ enum SessionStatus {
 @doc("Session, a logical grouping of jobs.")
 model SessionDetails extends ItemDetails {
   @visibility("read", "create")
+  @doc("Type of the Quantum Workspace item is Session.")
   itemType: ItemType.Session;
 
   @doc("Policy controlling the behavior of the Session when a job in the session fails.")
@@ -61,12 +73,14 @@ scalar SessionId extends WorkspaceItemId;
 alias SessionIdParam = {
   @path
   @segment("sessions")
+  @doc("Id of the session.")
   sessionId: SessionId;
 };
 
 alias SessionParam = {
   @path
   @segment("sessions")
+  @doc("Id of the session.")
   sessionId: SessionId;
 
   @body

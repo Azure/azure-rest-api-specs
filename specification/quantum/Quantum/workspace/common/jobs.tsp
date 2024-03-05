@@ -15,17 +15,31 @@ using OpenAPI;
 
 @doc("The type of the job.")
 enum JobType {
+  @doc("Unknown job type.")
   Unknown,
+
+  @doc("Quantum Computing job type.")
   QuantumComputing,
+
+  @doc("Optimization job type.")
   Optimization,
 }
 
 @doc("The status of the job.")
 enum JobStatus {
+  @doc("The job is waiting in the queue to be executed.")
   Waiting,
+
+  @doc("The job is being executed.")
   Executing,
+
+  @doc("The job completed with success.")
   Succeeded,
+
+  @doc("The job completed with failure.")
   Failed,
+
+  @doc("The job was cancelled.")
   Cancelled,
 }
 
@@ -43,6 +57,7 @@ model QuantumComputingData {
 @extension("x-ms-discriminator-value", ItemType.Job)
 model JobDetails extends ItemDetails {
   @visibility("read", "create")
+  @doc("Type of the Quantum Workspace item is Job.")
   itemType: ItemType.Job;
 
   @visibility("read", "create")
@@ -109,12 +124,14 @@ scalar JobId extends WorkspaceItemId;
 alias JobIdParam = {
   @path
   @segment("jobs")
+  @doc("Id of the job.")
   jobId: JobId;
 };
 
 alias JobParam = {
   @path
   @segment("jobs")
+  @doc("Id of the job.")
   jobId: JobId;
 
   @body

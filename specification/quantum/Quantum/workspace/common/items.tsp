@@ -15,7 +15,10 @@ using OpenAPI;
 
 @doc("A key-value pair.")
 model KeyValue<TValue = string> {
+  @doc("Key.")
   key: string;
+
+  @doc("Value.")
   value: TValue;
 }
 
@@ -54,6 +57,7 @@ model ItemDetails {
   target: string;
 
   @visibility("read", "create")
+  @doc("Type of the Quantum Workspace item")
   itemType: ItemType;
 
   @visibility("read")
@@ -81,7 +85,7 @@ model ItemDetails {
 model ItemDetailsList extends CollectionWithNextLink<ItemDetails> {}
 
 interface WorkspaceOperations {
-  @doc("List top-level items")
+  @doc("List top-level items.")
   @get
   @listsResource(ItemDetails)
   @operationId("TopLevelItems_List")

@@ -12,15 +12,21 @@ using TypeSpec.Rest;
 using TypeSpec.Rest.Resource;
 using OpenAPI;
 
-@doc("The scope at which the quota is applied.")
+@doc("The scope at which the quota is applied to.")
 enum DimensionScope {
+  @doc("The quota is applied to the Quantum Workspace.")
   Workspace,
+
+  @doc("The quota is applied to the Azure Subscription.")
   Subscription,
 }
 
 @doc("The time period in which the quota's underlying meter is accumulated. Based on calendar year. 'None' is used for concurrent quotas.")
 enum MeterPeriod {
+  @doc("The meter period is instantaneous. Used for concurrent quotas.")
   None,
+
+  @doc("The meter period is per month.")
   Monthly,
 }
 
