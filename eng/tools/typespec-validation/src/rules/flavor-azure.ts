@@ -6,7 +6,7 @@ import { TsvHost } from "../tsv-host.js";
 export class FlavorAzureRule implements Rule {
   readonly name = "FlavorAzure";
 
-  readonly description = "SDK emitters must set 'flavor:azure'";
+  readonly description = "Client emitters must set 'flavor:azure'";
 
   async execute(host: TsvHost, folder: string): Promise<RuleResult> {
     let success = true;
