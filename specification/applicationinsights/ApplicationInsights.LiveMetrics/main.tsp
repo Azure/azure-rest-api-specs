@@ -32,7 +32,7 @@ using Azure.Core.Traits;
     endpoint: string = "https://rt.services.visualstudio.com",
   }
 )
-namespace LiveMetrics;
+namespace Azure.Monitor.LiveMetrics;
 
 @doc("QuickPulse service versions.")
 enum Versions {

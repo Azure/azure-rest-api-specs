@@ -9,7 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using OpenAPI;
 
-namespace LiveMetrics;
+namespace Azure.Monitor.LiveMetrics;
 
 /**
  * Live Metrics IsSubscribed request query parameters, either query strings or headers

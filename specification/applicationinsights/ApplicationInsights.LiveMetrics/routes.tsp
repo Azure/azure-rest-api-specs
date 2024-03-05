@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace LiveMetrics;
+namespace Azure.Monitor.LiveMetrics;
 
 op LiveMetricsOperation<
   TParams extends TypeSpec.Reflection.Model,
