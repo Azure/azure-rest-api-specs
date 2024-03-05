@@ -14,10 +14,11 @@ options:
     examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/swagger.json"
   "@azure-tools/typespec-csharp":
-    package-dir : "Microsoft.VoiceServices.Provisioning"
+    package-dir: "Microsoft.VoiceServices.Provisioning"
     namespace: "{package-dir}"
-    clear-output-folder : true
-    model-namespace : false
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"

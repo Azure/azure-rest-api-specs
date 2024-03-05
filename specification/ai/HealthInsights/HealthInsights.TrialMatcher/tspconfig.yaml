@@ -31,17 +31,20 @@ options:
     package-dir: "azure-healthinsights-clinicalmatching"
     package-name: "{package-dir}"
     emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-health-insights-clinicalmatching"
     namespace: com.azure.health.insights.clinicalmatching
     partial-update: true
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-health-insights-clinicalmatching"
+    flavor: azure
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true
     package-dir: "Azure.Health.Insights.ClinicalMatching"
     namespace: "{package-dir}"
     model-namespace: false
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "azurehealthinsightsclinicalmatching-rest"
     emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/health-insights-cancerprofiling-rest"
@@ -49,3 +52,4 @@ options:
     generateTest: true
     packageDetails:
       name: "@azure-rest/health-insights-clinicalmatching"
+    flavor: azure
