@@ -117,13 +117,22 @@ model Resources {
   ids: Array<string>;
 }
 
+@doc("The resources needed for the user request")
+model RetryPolicy {
+  @doc("Retry count for user request")
+  retryCount?: int32;
+
+  @doc("Retry window in minutes for user request")
+  retryWindowInMinutes?: int32;
+}
+
 @doc("Extra details needed to run the user's request")
 model ExecutionParameters {
-  @doc("Time to stop retries after in hours")
-  stopRetriesAfter?: int32;
-
   @doc("Details that could optimize the user's request")
   optimizationPreference?: OptimizationPreference;
+
+  @doc("Retry policy the user can pass")
+  retryPolicy?: RetryPolicy;
 }
 
 @doc("These describe errors that occur at the resource level")
