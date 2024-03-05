@@ -105,6 +105,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -162,6 +163,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -229,6 +231,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -271,7 +274,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "A JSONPatch document as defined by RFC 6902",
+            "description": "A JSONPatch document as defined by RFC 6902.",
             "required": true,
             "schema": {
               "type": "array",
@@ -303,6 +306,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -355,6 +359,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -400,6 +405,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -448,6 +454,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -496,6 +503,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -553,6 +561,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -620,6 +629,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -674,6 +684,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -728,6 +739,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -785,6 +797,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -800,7 +813,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/topLevelItems": {
       "get": {
         "operationId": "TopLevelItems_List",
-        "description": "List top-level items",
+        "description": "List top-level items.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -830,6 +843,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
+                "description": "ErrorCode of the error",
                 "x-ms-client-name": "ErrorCode"
               }
             }
@@ -902,14 +916,26 @@
     },
     "DimensionScope": {
       "type": "string",
-      "description": "The scope at which the quota is applied.",
+      "description": "The scope at which the quota is applied to.",
       "enum": [
         "Workspace",
         "Subscription"
       ],
       "x-ms-enum": {
         "name": "DimensionScope",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Workspace",
+            "value": "Workspace",
+            "description": "The quota is applied to the Quantum Workspace."
+          },
+          {
+            "name": "Subscription",
+            "value": "Subscription",
+            "description": "The quota is applied to the Azure Subscription."
+          }
+        ]
       }
     },
     "ErrorData": {
@@ -971,6 +997,7 @@
         },
         "itemType": {
           "$ref": "#/definitions/ItemType",
+          "description": "Type of the Quantum Workspace item",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1208,7 +1235,34 @@
       ],
       "x-ms-enum": {
         "name": "JobStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "The job is waiting in the queue to be executed."
+          },
+          {
+            "name": "Executing",
+            "value": "Executing",
+            "description": "The job is being executed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The job completed with success."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The job completed with failure."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The job was cancelled."
+          }
+        ]
       }
     },
     "JobType": {
@@ -1221,12 +1275,29 @@
       ],
       "x-ms-enum": {
         "name": "JobType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown job type."
+          },
+          {
+            "name": "QuantumComputing",
+            "value": "QuantumComputing",
+            "description": "Quantum Computing job type."
+          },
+          {
+            "name": "Optimization",
+            "value": "Optimization",
+            "description": "Optimization job type."
+          }
+        ]
       }
     },
     "JsonPatchDocument": {
       "type": "object",
-      "description": "A JSONPatch document as defined by RFC 6902",
+      "description": "A JSONPatch document as defined by RFC 6902.",
       "properties": {
         "op": {
           "$ref": "#/definitions/JsonPatchOperation",
@@ -1276,7 +1347,39 @@
       ],
       "x-ms-enum": {
         "name": "JsonPatchOperation",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "add",
+            "value": "add",
+            "description": "Add value operation."
+          },
+          {
+            "name": "remove",
+            "value": "remove",
+            "description": "Remove value operation."
+          },
+          {
+            "name": "replace",
+            "value": "replace",
+            "description": "Replace value operation."
+          },
+          {
+            "name": "move",
+            "value": "move",
+            "description": "Move value operation."
+          },
+          {
+            "name": "copy",
+            "value": "copy",
+            "description": "Copy value operation."
+          },
+          {
+            "name": "test",
+            "value": "test",
+            "description": "Test value operation."
+          }
+        ]
       }
     },
     "MeterPeriod": {
@@ -1288,7 +1391,19 @@
       ],
       "x-ms-enum": {
         "name": "MeterPeriod",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The meter period is instantaneous. Used for concurrent quotas."
+          },
+          {
+            "name": "Monthly",
+            "value": "Monthly",
+            "description": "The meter period is per month."
+          }
+        ]
       }
     },
     "ProviderAvailability": {
@@ -1301,7 +1416,24 @@
       ],
       "x-ms-enum": {
         "name": "ProviderAvailability",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Provider is available."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Provider is available with degrated experience."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "Provider is unavailable."
+          }
+        ]
       }
     },
     "ProviderStatus": {
@@ -1450,6 +1582,7 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorData",
+          "description": "Details of the error",
           "readOnly": true
         }
       },
@@ -1557,7 +1690,39 @@
       ],
       "x-ms-enum": {
         "name": "SessionStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "The session is waiting in the queue to be executed."
+          },
+          {
+            "name": "Executing",
+            "value": "Executing",
+            "description": "The session is being executed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The session completed with success."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The session completed with failure."
+          },
+          {
+            "name": "Failure(s)",
+            "value": "Failure(s)",
+            "description": "The session completed with some failures."
+          },
+          {
+            "name": "TimedOut",
+            "value": "TimedOut",
+            "description": "The session timed out."
+          }
+        ]
       }
     },
     "TargetAvailability": {
@@ -1570,7 +1735,24 @@
       ],
       "x-ms-enum": {
         "name": "TargetAvailability",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Target is available."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Target is available with degrated experience."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "Target is unavailable."
+          }
+        ]
       }
     },
     "TargetStatus": {
@@ -1683,7 +1865,6 @@
       "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
       "required": true,
       "type": "string",
-      "format": "uuid",
       "minLength": 36,
       "maxLength": 36,
       "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
