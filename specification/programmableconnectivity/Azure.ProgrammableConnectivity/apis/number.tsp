@@ -65,14 +65,15 @@ model NumberVerificationWithoutCodeContent {
   networkIdentifier: NetworkIdentifier;
 
   ...NumberDevice;
+
+  @doc("Redirect URI needed for auth callback.")
+  redirectUri: string;
 }
 
 @doc("Request to verify number of device - second call")
 model NumberVerificationWithCodeContent {
   @doc("Identifier for the network to query for this device.")
   networkIdentifier: NetworkIdentifier;
-
-  ...NumberDevice;
 
   @doc("The code provided by APC in exchange for the operator code.")
   apcCode: string;
