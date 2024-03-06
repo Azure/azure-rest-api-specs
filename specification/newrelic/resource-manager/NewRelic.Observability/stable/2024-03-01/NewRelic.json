@@ -477,6 +477,12 @@
               "$ref": "#/definitions/NewRelicMonitorResource"
             }
           },
+          "201": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResource"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -484,6 +490,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Monitors_Update_MaximumSet_Gen": {
             "$ref": "./examples/Monitors_Update_MaximumSet_Gen.json"
@@ -2097,36 +2104,6 @@
         "value"
       ]
     },
-    "BillingCycle": {
-      "type": "string",
-      "description": "Different usage type like YEARLY/MONTHLY",
-      "enum": [
-        "YEARLY",
-        "MONTHLY",
-        "WEEKLY"
-      ],
-      "x-ms-enum": {
-        "name": "BillingCycle",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "YEARLY",
-            "value": "YEARLY",
-            "description": "Billing cycle is YEARLY"
-          },
-          {
-            "name": "MONTHLY",
-            "value": "MONTHLY",
-            "description": "Billing cycle is MONTHLY"
-          },
-          {
-            "name": "WEEKLY",
-            "value": "WEEKLY",
-            "description": "Billing cycle is WEEKLY"
-          }
-        ]
-      }
-    },
     "BillingSource": {
       "type": "string",
       "description": "Billing source",
@@ -2774,8 +2751,8 @@
           "description": "Different usage type like PAYG/COMMITTED. this could be enum"
         },
         "billingCycle": {
-          "$ref": "#/definitions/BillingCycle",
-          "description": "Different billing cycles like MONTHLY/WEEKLY. this could be enum"
+          "type": "string",
+          "description": "Different billing cycles like Monthly/Weekly."
         },
         "planDetails": {
           "type": "string",
