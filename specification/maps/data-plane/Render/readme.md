@@ -27,11 +27,10 @@ These are the global settings for Render Client.
 ``` yaml
 title: RenderClient
 openapi-type: data-plane
-tag: 2.1 # removed "preview" as it started causing validation errors from v0.26 of the Swagger Lintdiff.
-# at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
+tag: package-2024-04
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
-credential-scopes: https://atlas.microsoft.com/.default
+credential-scopes: 'https://atlas.microsoft.com/.default'
 track2: true
 verbose: true
 sdk-integration: true
@@ -48,9 +47,19 @@ directive:
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
 ```
 
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - stable/2024-04-01/render.json
+```
 ### Tag: 2022-08-01
 
 These settings apply only when `--tag=2022-08-01` is specified on the command line.
+
 ``` yaml $(tag) == '2022-08-01'
 input-file:
   - stable/2022-08-01/render.json
