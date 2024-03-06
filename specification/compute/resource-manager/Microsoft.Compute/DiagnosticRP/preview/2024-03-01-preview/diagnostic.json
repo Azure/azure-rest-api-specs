@@ -191,6 +191,10 @@
         ],
         "operationId": "DiskInspection_Get",
         "description": "Gets a specific Compute diagnostic for a subscription in a location.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -357,7 +361,7 @@
           }
         },
         "x-ms-examples": {
-          "Returns storageAccount value for an existing configuration entry": {
+          "Returns spot VM placement scores for given configurations.": {
             "$ref": "./examples/SpotPlacementRecommender.json"
           }
         }
@@ -653,12 +657,5 @@
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    }
   }
 }
