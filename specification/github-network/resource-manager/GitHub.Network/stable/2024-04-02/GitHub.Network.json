@@ -433,11 +433,19 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "description": "Specifies a subnet ID for vnet-injection."
+          "description": "Specifies a subnet ID for vnet-injection.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "businessId": {
           "type": "string",
-          "description": "Specifies the GitHub business (enterprise/organization) ID associated to the Azure subscription."
+          "description": "Specifies the GitHub business (enterprise/organization) ID associated to the Azure subscription.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -460,24 +468,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/NetworkSettingsResourceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "NetworkSettingsResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the NetworkSettingsResource.",
-      "properties": {
-        "subnetId": {
-          "type": "string",
-          "description": "Specifies a subnet ID for vnet-injection."
-        },
-        "businessId": {
-          "type": "string",
-          "description": "Specifies the GitHub business (enterprise/organization) ID associated to the Azure subscription."
         }
       }
     },

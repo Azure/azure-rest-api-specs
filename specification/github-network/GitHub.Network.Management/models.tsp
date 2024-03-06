@@ -35,14 +35,17 @@ enum ProvisioningState {
 @doc("NetworkSettings resource-specific properties.")
 model NetworkSettingsResourceProperties {
   @doc("Specifies a subnet ID for vnet-injection.")
+  @visibility("read", "create")
   subnetId?: string;
 
   @doc("Specifies the GitHub business (enterprise/organization) ID associated to the Azure subscription.")
   @added(Versions.`2024-04-01-preview`)
+  @visibility("read", "create")
   businessId?: string;
 
   @doc("Specifies the GitHub organization (enterprise) ID associated to the Azure subscription.")
   @removed(Versions.`2024-04-01-preview`)
+  @visibility("read", "create")
   organizationId?: string;
 
   @doc("Specifies a comma-separated list of service names the resource is associated with.")
