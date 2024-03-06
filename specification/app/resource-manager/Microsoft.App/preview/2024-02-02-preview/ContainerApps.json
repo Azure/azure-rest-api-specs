@@ -664,6 +664,13 @@
         "service": {
           "$ref": "#/definitions/Service",
           "description": "Container App to be a dev Container App Service"
+        },
+        "identitySettings":{
+          "description": "Optional settings for Managed Identities that are assigned to the Container App. This is a dictionary whose keys are ARM resource IDs for user-assigned identities, or 'system' for system-assigned identity. If a Managed Identity is not specified here, default settings will be used.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/IdentitySettings"
+          }
         }
       }
     },
@@ -1407,6 +1414,27 @@
         "type": {
           "description": "Dev ContainerApp service type",
           "type": "string"
+        }
+      }
+    },
+    "IdentitySettings": {
+      "description": "Optional settings for a Managed Identity that is assigned to the Container App.",
+      "type": "object",
+      "properties": {
+        "lifecycle": {
+          "description": "The lifecycle stages of a Container App at which the Managed Identity is available.",
+          "enum": [
+            "Init",
+            "Main",
+            "None",
+            "All"
+          ],
+          "type": "string",
+          "default": "All",
+          "x-ms-enum": {
+            "name": "IdentitySettingsLifeCycle",
+            "modelAsString": true
+          }
         }
       }
     }
