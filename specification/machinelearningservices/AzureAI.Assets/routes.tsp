@@ -22,7 +22,7 @@ interface Indexes {
   get is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
       @path
       name: string;
 
@@ -40,7 +40,7 @@ interface Indexes {
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
       @path
       name: string;
 
@@ -61,7 +61,7 @@ interface Indexes {
   list is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
       @path
       name: string;
 
@@ -85,7 +85,7 @@ interface Indexes {
   getLatest is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
       @path
       name: string;
     },
@@ -99,7 +99,7 @@ interface Indexes {
   getNextVersion is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
       @path
       name: string;
     },
