@@ -182,7 +182,7 @@ namespace Quantum.Workspace.Jobs {
     @doc("List all jobs")
     @get
     @segment("jobs")
-    @listsResource(JobDetails)
+    // @listsResource(JobDetails) -> causes conflicts with jobs list
     list is ListOperation<JobDetailsList>;
   }
 }

@@ -111,31 +111,10 @@ Copying examples from $source to $target
         tsp compile . --pretty --debug
     }
 
-    # Rename common parameters to match previous Swagger.
-    RunAndCheck "replace-param-names" \ {
-        $spec = Get-Content -Path $jsonFile
-        $spec = $spec -replace '(?:CommonParams\.)([^"]*)','$1Parameter'
-        Set-Content $jsonFile $spec        
-    }
-    
     RunAndCheck "tsp-compile-api-view" \ {
         tsp compile . --pretty --debug --emit=@azure-tools/typespec-apiview --output-dir (Join-Path $logDirectory "../api-view/")
     }
-
-    RunAndCheck "tsp-validate" \ {
-        # To run the TypeSpec Validation we need to go
-        # to the root of the azure-rest-api-specs repo
-        Push-Location (Join-Path $PSScriptRoot "../../../../")
-        try
-        {
-            npx --no tsv .\specification\quantum\Quantum.Workspace\        
-        }
-        finally
-        {
-            Pop-Location
-        }     
-    }   
-
+        
     # copy to swagger folder to easy upload to https://apiview.dev/
     New-Item -ItemType Directory -Force -Path (Join-Path $PSScriptRoot "../output/swagger/") *> $null
     Copy-Item $jsonFile (Join-Path $PSScriptRoot "../output/swagger/quantum.swagger") -Force -Recurse
@@ -155,6 +134,20 @@ Copying examples from $source to $target
 
     # Pipeline validations
     # from https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md
+
+    RunAndCheck "tsp-validate" \ {
+        # To run the TypeSpec Validation we need to go
+        # to the root of the azure-rest-api-specs repo
+        Push-Location (Join-Path $PSScriptRoot "../../../../")
+        try
+        {
+            npx --no tsv .\specification\quantum\Quantum.Workspace\        
+        }
+        finally
+        {
+            Pop-Location
+        }     
+    }   
 
     RunAndCheck "lint-swagger" \ {
         npx prettier --write $jsonFile

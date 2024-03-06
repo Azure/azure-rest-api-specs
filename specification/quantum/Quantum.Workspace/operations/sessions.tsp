@@ -131,7 +131,7 @@ namespace Quantum.Workspace.Sessions {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("List all Sessions")
     @get
-    @listsResource(SessionDetails)
+    // @listsResource(SessionDetails) -> causes conflicts with jobs list
     @segment("sessions")
     list is ListOperation<SessionDetailsList>;
   }

@@ -69,11 +69,6 @@ model CommonParams {
   @path
   @segment("workspaces")
   @doc("Name of the Azure Quantum workspace.")
-  @minLength(2)
-  @maxLength(50)
-  // https://learn.microsoft.com/azure/azure-resource-manager/management/resource-name-rules#microsoftquantum
-  @pattern("^[a-zA-Z][a-zA-Z0-9\\-_]*$")
-  @extension("x-ms-parameter-location", "client")
   workspaceName: WorkspaceName;
 }
 
