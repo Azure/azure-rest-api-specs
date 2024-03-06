@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
@@ -16,7 +18,6 @@ model EmbeddingsOptions {
     An identifier for the caller or end user of the operation. This may be used for tracking
     or rate-limiting purposes.
     """)
-  @projectedName("json", "user")
   user?: string;
 
   @doc("""
@@ -24,7 +25,6 @@ model EmbeddingsOptions {
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
-  @projectedName("json", "model")
   @projectedName("csharp", "DeploymentName")
   `model`?: string;
 
@@ -36,6 +36,11 @@ model EmbeddingsOptions {
     as we have observed inferior results when newlines are present.
     """)
   input: string[];
+
+  @doc("When using Azure OpenAI, specifies the input type to use for embedding search.")
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @encodedName("application/json", "input_type")
+  inputType?: string;
 }
 
 @doc("""
@@ -67,10 +72,10 @@ model EmbeddingItem {
 @doc("Measurement of the amount of tokens used in this request and response.")
 model EmbeddingsUsage {
   @doc("Number of tokens sent in the original request.")
-  @projectedName("json", "prompt_tokens")
+  @encodedName("application/json", "prompt_tokens")
   promptTokens: int32;
 
   @doc("Total number of tokens transacted in this request/response.")
-  @projectedName("json", "total_tokens")
+  @encodedName("application/json", "total_tokens")
   totalTokens: int32;
 }
