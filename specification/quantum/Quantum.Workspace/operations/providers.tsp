@@ -34,7 +34,7 @@ enum TargetAvailability {
   @doc("Target is available.")
   Available,
 
-  @doc("Target is available with degrated experience.")
+  @doc("Target is available with degraded experience.")
   Degraded,
 
   @doc("Target is unavailable.")

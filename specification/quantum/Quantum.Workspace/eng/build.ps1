@@ -111,6 +111,13 @@ Copying examples from $source to $target
         tsp compile . --pretty --debug
     }
 
+    # Rename common parameters to match previous Swagger.
+    RunAndCheck "replace-param-names" \ {
+        $spec = Get-Content -Path $jsonFile
+        $spec = $spec -replace '(?:CommonParams\.)([^"]*)','$1Parameter'
+        Set-Content $jsonFile $spec        
+    }
+    
     RunAndCheck "tsp-compile-api-view" \ {
         tsp compile . --pretty --debug --emit=@azure-tools/typespec-apiview --output-dir (Join-Path $logDirectory "../api-view/")
     }
@@ -128,13 +135,6 @@ Copying examples from $source to $target
             Pop-Location
         }     
     }   
-
-    # Rename common parameters to match previous Swagger.
-    RunAndCheck "replace-param-names" \ {
-        $spec = Get-Content -Path $jsonFile
-        $spec = $spec -replace '(?:CommonParams\.)([^"]*)','$1Parameter'
-        Set-Content $jsonFile $spec        
-    }
 
     # copy to swagger folder to easy upload to https://apiview.dev/
     New-Item -ItemType Directory -Force -Path (Join-Path $PSScriptRoot "../output/swagger/") *> $null
