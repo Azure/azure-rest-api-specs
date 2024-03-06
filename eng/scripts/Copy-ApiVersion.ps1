@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param (
-    [Parameter(Mandatory)]
+    [Parameter(Mandatory = $true)]
     [ValidateScript({
             if (-not (Test-Path "$PSScriptRoot/../../specification/$_")) {
                 throw "Service directory not found in the specification folder."
@@ -12,12 +12,12 @@ param (
         })]
     [string] $ServiceDirectory,
 
-    [Parameter(Mandatory)]
+    [Parameter(Mandatory = $true)]
     [ValidateSet('data-plane', 'resource-manager')]
     [ArgumentCompleter({ 'data-plane', 'resource-manager' })]
     [string] $ServiceType,
 
-    [Parameter(Mandatory)]
+    [Parameter(Mandatory = $true)]
     [ValidateScript({
             if (-not (Test-Path "$PSScriptRoot/../../specification/$ServiceDirectory/$ServiceType/$_")) {
                 $validProviders = (Get-ChildItem "$PSScriptRoot/../../specification/$ServiceDirectory/$ServiceType/" -Directory).Name -join ', '
@@ -35,7 +35,7 @@ param (
         })]
     [string] $Provider,
 
-    [Parameter(Mandatory)]
+    [Parameter(Mandatory = $true)]
     [ArgumentCompleter({ "preview/", "stable/" })]
     [ValidateScript({ 
             function script:Get-Version([string] $version) {
@@ -78,6 +78,16 @@ $readmeDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$Se
 $oldDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$oldApiVersionStatus/$oldApiVersion" -Resolve
 $newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$newApiVersionStatus/$newApiVersion"
 
+Write-Host "----------------------------------------" -ForegroundColor Green
+Write-Host "Service Directory: $ServiceDirectory" -ForegroundColor Green
+Write-Host "Service Type: $ServiceType" -ForegroundColor Green
+Write-Host "Provider: $Provider" -ForegroundColor Green
+Write-Host "Base Version: $BaseVersion" -ForegroundColor Green
+Write-Host "New Version: $NewVersion" -ForegroundColor Green
+Write-Host "----------------------------------------" -ForegroundColor Green
+
+Write-Verbose "Copying $oldDirectory to $newDirectory"
+
 # Copy the specs and create and initial commit to make it easier to diff changes to the previous version in a PR.
 Copy-Item $oldDirectory $newDirectory -Recurse -Force
 
@@ -105,7 +115,7 @@ Updated the API version from $BaseVersion to $NewVersion.
 "@ | git commit --file=-
 
 # Update readme file in the service type directory
-$jsonFile = Get-ChildItem $newDirectory -Filter '*.json' | Select-Object -First 1 -ExpandProperty Name
+$jsonFiles = Get-ChildItem $newDirectory -Filter '*.json' | Select-Object -ExpandProperty Name
 $readmeFile = Get-ChildItem $readmeDirectory -Filter 'readme.md'
 
 $readmeContentBlock = @"
@@ -115,7 +125,11 @@ These settings apply only when ``--tag=package-$newApiVersion`` is specified on 
 
 ```````yaml `$(tag) == 'package-$newApiVersion'
 input-file:
-  - $Provider/$newApiVersionStatus/$newApiVersion/$jsonFile
+$(
+foreach ($jsonFile in $jsonFiles) {
+  "  - $Provider/$newApiVersionStatus/$newApiVersion/$jsonFile"
+}
+)
 ```````
 
 "@
@@ -125,13 +139,36 @@ if ($readmeFile) {
     $readmeContent -replace '(?s)(### tag: package.*)', "$readmeContentBlock`n`$1" | Set-Content $readmeFile.FullName -NoNewline
 }
 
-# Only update the main tag when the new version is stable or there is no stable version yet.
-if ( (-not (Test-Path "$PSScriptRoot/../../specification/$ServiceDirectory/$ServiceType/$Provider/stable")) -or ($newApiVersionStatus -eq 'stable')) {    
-    Write-Host "Updating the first tag in the first yaml code block in $readmeFile"
+# Update the tag to the latest preview or stable version in the readme file
+$currentTag = $readmeContent -match '(openapi-type:.*\n+tag:\s*)(?<version>package-.*)'
+$currentTag = $Matches['version']
+$latestVersionDate = if ($currentTag -match '(\d{4})-(\d{2})-?(\d{0,2}).*') { 
+    if ($Matches[3] -eq '') { $Matches[3] = '01' }
+    [datetime]::ParseExact($Matches[1] + '-' + $Matches[2] + '-' + $Matches[3], 'yyyy-MM-dd', $null) 
+} 
+else { 
+    Write-Warning "No date found in the readme tag"
+    [datetime]::MinValue 
+}
+
+$newVersionDate = if ($newApiVersion -match '(\d{4})-(\d{2})-?(\d{0,2})') { 
+    if ($Matches[3] -eq '') { $Matches[3] = '01' }
+    [datetime]::ParseExact($Matches[1] + '-' + $Matches[2] + '-' + $Matches[3], 'yyyy-MM-dd', $null) 
+} 
+else { 
+    Write-Warning "No date found in the new version"
+    [datetime]::MinValue 
+}
+
+if ( $newVersionDate -gt $latestVersionDate) {    
+    Write-Verbose "Updating the first tag in the first yaml code block in $readmeFile"
     if ($readmeFile) {
         $providerReadmeContent = $readmeFile | Get-Content -Raw
         $providerReadmeContent -replace '(openapi-type:.*\n+tag:\s*)(package-.*)', "`$1package-$newApiVersion" | Set-Content $readmeFile.FullName -NoNewline
     }
+}
+else {
+    Write-Warning "The new version is not newer than the current version in the readme file. No changes were made."
 }
 
 git add $readmeDirectory
