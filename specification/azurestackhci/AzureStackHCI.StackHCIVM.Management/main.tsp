@@ -30,6 +30,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
 namespace Microsoft.AzureStackHCI;
 
 /**

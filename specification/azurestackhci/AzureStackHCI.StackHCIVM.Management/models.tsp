@@ -11,6 +11,7 @@ using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
 namespace Microsoft.AzureStackHCI;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -19,7 +20,13 @@ interface Operations extends Azure.ResourceManager.Operations {}
  * Datasource for the gallery image when provisioning with cloud-init [NoCloud, Azure]
  */
 enum CloudInitDataSource {
+  /**
+   * The gallery image is provisioned without cloud-init.
+   */
   NoCloud,
+  /**
+   * The gallery image is provisioned with Azure cloud-init.
+   */
   Azure,
 }
 
@@ -27,7 +34,13 @@ enum CloudInitDataSource {
  * The hypervisor generation of the Virtual Machine [V1, V2]
  */
 enum HyperVGeneration {
+  /**
+   * The first generation hypervisor for the Virtual Machine.
+   */
   V1,
+  /**
+   * The second generation hypervisor for the Virtual Machine.
+   */
   V2,
 }
 
@@ -35,11 +48,29 @@ enum HyperVGeneration {
  * Provisioning state of the gallery image.
  */
 enum ProvisioningStateEnum {
+  /**
+   * The provisioning of the gallery image has succeeded.
+   */
   Succeeded,
+  /**
+   * The provisioning of the gallery image has failed.
+   */
   Failed,
+  /**
+   * The provisioning of the gallery image is in progress.
+   */
   InProgress,
+  /**
+   * The provisioning of the gallery image has been accepted.
+   */
   Accepted,
+  /**
+   * The provisioning of the gallery image is being deleted.
+   */
   Deleting,
+  /**
+   * The provisioning of the gallery image has been canceled.
+   */
   Canceled,
 }
 
@@ -47,8 +78,17 @@ enum ProvisioningStateEnum {
  * The status of the operation performed on the gallery image [Succeeded, Failed, InProgress]
  */
 enum Status {
+  /**
+   * The operation on the gallery image has succeeded.
+   */
   Succeeded,
+  /**
+   * The operation on the gallery image has failed.
+   */
   Failed,
+  /**
+   * The operation on the gallery image is in progress.
+   */
   InProgress,
 }
 
@@ -56,6 +96,9 @@ enum Status {
  * The type of extendedLocation.
  */
 enum ExtendedLocationTypes {
+  /**
+   * Custom location type.
+   */
   CustomLocation,
 }
 
@@ -63,7 +106,13 @@ enum ExtendedLocationTypes {
  * IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'
  */
 enum IpAllocationMethodEnum {
+  /**
+   * Dynamic IP allocation method.
+   */
   Dynamic,
+  /**
+   * Static IP allocation method.
+   */
   Static,
 }
 
@@ -71,33 +120,63 @@ enum IpAllocationMethodEnum {
  * The format of the actual VHD file [vhd, vhdx]
  */
 enum DiskFileFormat {
+  /**
+   * VHDX file format.
+   */
   vhdx,
+  /**
+   * VHD file format.
+   */
   vhd,
 }
 
+/** VM enum sizes */
 enum VmSizeEnum {
+  /** Default VM size */
   Default,
+  /** Standard A2 v2 */
   Standard_A2_v2,
+  /** Standard A4 v2 */
   Standard_A4_v2,
+  /** Standard D2s v3 */
   Standard_D2s_v3,
+  /** Standard D4s v3 */
   Standard_D4s_v3,
+  /** Standard D8s v3 */
   Standard_D8s_v3,
+  /** Standard D16s v3 */
   Standard_D16s_v3,
+  /** Standard D32s v3 */
   Standard_D32s_v3,
+  /** Standard DS2 v2 */
   Standard_DS2_v2,
+  /** Standard DS3 v2 */
   Standard_DS3_v2,
+  /** Standard DS4 v2 */
   Standard_DS4_v2,
+  /** Standard DS5 v2 */
   Standard_DS5_v2,
+  /** Standard DS13 v2 */
   Standard_DS13_v2,
+  /** Standard K8S v1 */
   Standard_K8S_v1,
+  /** Standard K8S2 v1 */
   Standard_K8S2_v1,
+  /** Standard K8S3 v1 */
   Standard_K8S3_v1,
+  /** Standard K8S4 v1 */
   Standard_K8S4_v1,
+  /** Standard NK6 */
   Standard_NK6,
+  /** Standard NK12 */
   Standard_NK12,
+  /** Standard NV6 */
   Standard_NV6,
+  /** Standard NV12 */
   Standard_NV12,
+  /** Standard K8S5 v1 */
   Standard_K8S5_v1,
+  /** Custom VM size */
   Custom,
 }
 
@@ -105,7 +184,13 @@ enum VmSizeEnum {
  * Specifies the SecurityType of the virtual machine. EnableTPM and SecureBootEnabled must be set to true for SecurityType to function.
  */
 enum SecurityTypes {
+  /**
+   * Trusted launch security type.
+   */
   TrustedLaunch,
+  /**
+   * Confidential VM security type.
+   */
   ConfidentialVM,
 }
 
@@ -113,8 +198,17 @@ enum SecurityTypes {
  * The level code.
  */
 enum StatusLevelTypes {
+  /**
+   * Information level code.
+   */
   Info,
+  /**
+   * Warning level code.
+   */
   Warning,
+  /**
+   * Error level code.
+   */
   Error,
 }
 
@@ -122,12 +216,33 @@ enum StatusLevelTypes {
  * The power state of the virtual machine instance
  */
 enum PowerStateEnum {
+  /**
+   * The virtual machine instance is deallocated.
+   */
   Deallocated,
+  /**
+   * The virtual machine instance is deallocating.
+   */
   Deallocating,
+  /**
+   * The virtual machine instance is running.
+   */
   Running,
+  /**
+   * The virtual machine instance is starting.
+   */
   Starting,
+  /**
+   * The virtual machine instance is stopped.
+   */
   Stopped,
+  /**
+   * The virtual machine instance is stopping.
+   */
   Stopping,
+  /**
+   * The power state of the virtual machine instance is unknown.
+   */
   Unknown,
 }
 
@@ -135,8 +250,17 @@ enum PowerStateEnum {
  * The installation status of the hybrid machine agent installation.
  */
 enum StatusTypes {
+  /**
+   * The installation of the hybrid machine agent has succeeded.
+   */
   Succeeded,
+  /**
+   * The installation of the hybrid machine agent is in progress.
+   */
   InProgress,
+  /**
+   * The installation of the hybrid machine agent has failed.
+   */
   Failed,
 }
 
@@ -144,8 +268,17 @@ enum StatusTypes {
  * The status of whether secure boot is enabled.
  */
 enum AttestSecureBootPropertyEnum {
+  /**
+   * Secure boot is enabled.
+   */
   Enabled,
+  /**
+   * Secure boot is disabled.
+   */
   Disabled,
+  /**
+   * The status of secure boot is unknown.
+   */
   Unknown,
 }
 
@@ -153,8 +286,17 @@ enum AttestSecureBootPropertyEnum {
  * The status of whether attestation certificate is validated.
  */
 enum AttestCertPropertyEnum {
+  /**
+   * The attestation certificate is valid.
+   */
   Valid,
+  /**
+   * The attestation certificate is invalid.
+   */
   Invalid,
+  /**
+   * The status of the attestation certificate is unknown.
+   */
   Unknown,
 }
 
@@ -162,8 +304,17 @@ enum AttestCertPropertyEnum {
  * The status of whether the list of boot integrity properties is validated.
  */
 enum AttestBootIntegrityPropertyEnum {
+  /**
+   * The list of boot integrity properties is valid.
+   */
   Valid,
+  /**
+   * The list of boot integrity properties is invalid.
+   */
   Invalid,
+  /**
+   * The status of the list of boot integrity properties is unknown.
+   */
   Unknown,
 }
 
@@ -171,9 +322,21 @@ enum AttestBootIntegrityPropertyEnum {
  * The health status of attestation validation and parsing
  */
 enum AttestHealthStatusEnum {
+  /**
+   * Attestation validation and parsing is pending.
+   */
   Pending,
+  /**
+   * Attestation validation and parsing is healthy.
+   */
   Healthy,
+  /**
+   * Attestation validation and parsing is unhealthy.
+   */
   Unhealthy,
+  /**
+   * The health status of attestation validation and parsing is unknown.
+   */
   Unknown,
 }
 
@@ -181,26 +344,45 @@ enum AttestHealthStatusEnum {
  * Defines the different types of operations for guest agent.
  */
 enum ProvisioningAction {
+  /**
+   * Install operation for guest agent.
+   */
   install,
+  /**
+   * Uninstall operation for guest agent.
+   */
   uninstall,
+  /**
+   * Repair operation for guest agent.
+   */
   repair,
 }
 
 /**
  * Operating system type that the gallery image uses [Windows, Linux]
  */
-@fixed
 enum OperatingSystemTypes {
+  /**
+   * Windows operating system.
+   */
   Windows,
+  /**
+   * Linux operating system.
+   */
   Linux,
 }
 
 /**
  * Type of the IP Pool [vm, vippool]
  */
-@fixed
 enum IPPoolTypeEnum {
+  /**
+   * IP Pool type for virtual machines.
+   */
   vm,
+  /**
+   * IP Pool type for VIPs.
+   */
   vippool,
 }
 
@@ -218,7 +400,7 @@ model GalleryImageProperties {
   ]>;
 
   /**
-   * location of the image the gallery image should be created from
+   * Location of the image the gallery image should be created from
    */
   imagePath?: string;
 
@@ -283,6 +465,7 @@ model GalleryImageIdentifier {
 /**
  * Specifies information about the gallery image version that you want to create or update.
  */
+
 model GalleryImageVersion {
   /**
    * This is the version of the gallery image.
@@ -346,6 +529,9 @@ model GalleryImageStatus {
    */
   errorMessage?: string;
 
+  /**
+   * Provisioning status of gallery image
+   */
   provisioningStatus?: GalleryImageStatusProvisioningStatus;
 
   /**
@@ -376,7 +562,7 @@ model GalleryImageStatusProvisioningStatus {
  */
 model GalleryImageStatusDownloadStatus {
   /**
-   * The downloaded sized of the image in MB
+   * The downloaded size of the image in MB
    */
   downloadSizeInMB?: int64;
 }
@@ -432,6 +618,7 @@ model GalleryImagesUpdateRequest {
   /**
    * Resource tags
    */
+  @doc("Resource tags")
   tags?: Record<string>;
 }
 
@@ -456,7 +643,7 @@ model LogicalNetworkProperties {
   provisioningState?: ProvisioningStateEnum;
 
   /**
-   * name of the network switch to be used for VMs
+   * Name of the network switch to be used for VMs
    */
   vmSwitchName?: string;
 
@@ -496,7 +683,7 @@ model Subnet {
  */
 model SubnetPropertiesFormat {
   /**
-   * The address prefix for the subnet: Cidr for this subnet - IPv4, IPv6.
+   * The address prefix for the subnet: CIDR for this subnet - IPv4, IPv6.
    */
   addressPrefix?: string;
 
@@ -521,18 +708,18 @@ model SubnetPropertiesFormat {
   routeTable?: RouteTable;
 
   /**
-   * network associated pool of IP Addresses
+   * Network associated pool of IP Addresses
    */
   ipPools?: IPPool[];
 
   /**
-   * Vlan to use for the subnet
+   * VLAN to use for the subnet
    */
   vlan?: int32;
 }
 
 /**
- * IPConfigurationReference - Describes a IPConfiguration under the virtual network
+ * IPConfigurationReference - Describes an IPConfiguration under the virtual network
  */
 model SubnetPropertiesFormatIpConfigurationReferencesItem {
   /**
@@ -885,6 +1072,9 @@ model IPConfigurationPropertiesSubnet {
   id?: string;
 }
 
+/**
+ * InterfaceDNSSettings - DNS Settings for the interface.
+ */
 model InterfaceDNSSettings {
   /**
    * List of DNS server IP Addresses for the interface
@@ -893,7 +1083,7 @@ model InterfaceDNSSettings {
 }
 
 /**
- * The observed state of network interfaces
+ * The observed state of network interfaces.
  */
 model NetworkInterfaceStatus {
   /**
@@ -932,7 +1122,7 @@ model NetworkInterfacesUpdateRequest {
 }
 
 /**
- * Properties under the storage container resource
+ * Properties under the storage container resource.
  */
 model StorageContainerProperties {
   /**
@@ -954,7 +1144,7 @@ model StorageContainerProperties {
 }
 
 /**
- * The observed state of storage containers
+ * The observed state of storage containers.
  */
 model StorageContainerStatus {
   /**
@@ -1003,7 +1193,7 @@ model StorageContainersUpdateRequest {
 }
 
 /**
- * Properties under the virtual hard disk resource
+ * Properties under the virtual hard disk resource.
  */
 model VirtualHardDiskProperties {
   blockSizeBytes?: int32;
@@ -1054,7 +1244,7 @@ model VirtualHardDiskProperties {
 }
 
 /**
- * The observed state of virtual hard disks
+ * The observed state of virtual hard disks.
  */
 model VirtualHardDiskStatus {
   /**
@@ -1093,7 +1283,7 @@ model VirtualHardDisksUpdateRequest {
 }
 
 /**
- * Properties under the virtual machine instance resource
+ * Properties under the virtual machine instance resource.
  */
 model VirtualMachineInstanceProperties {
   /**
@@ -1160,6 +1350,7 @@ model VirtualMachineInstanceProperties {
    */
   resourceUid?: string;
 }
+
 
 /**
  * HardwareProfile - Specifies the hardware settings for the virtual machine instance.
@@ -1682,7 +1873,7 @@ model OsProfileUpdateLinuxConfiguration {
 
 model OsProfileUpdateWindowsConfiguration {
   /**
-   * Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.
+   * Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.
    */
   provisionVMAgent?: boolean;
 
