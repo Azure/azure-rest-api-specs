@@ -136,6 +136,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataProductsCapacityDetails/getRegionalDataProductsCapacity": {
+      "get": {
+        "operationId": "DataProductsCapacityDetails_GetRegionalCapacity",
+        "tags": [
+          "DataProductsCapacityDetails"
+        ],
+        "description": "Retrieve per region capacity for the data product.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataProductsCapacityDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductsCapacityDetails_GetRegionalCapacity_Maximum": {
+            "$ref": "./examples/DataProductsCapacityDetails_GetRegionalCapacity_MaximumSet_Gen.json"
+          },
+          "DataProductsCapacityDetails_GetRegionalCapacity_Minimum": {
+            "$ref": "./examples/DataProductsCapacityDetails_GetRegionalCapacity_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs": {
       "get": {
         "operationId": "DataProductsCatalogs_ListBySubscription",
@@ -175,45 +214,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/getRegionalDataProductsCapacity": {
-      "get": {
-        "operationId": "DataProductsCapacityDetails_GetRegionalCapacity",
-        "tags": [
-          "DataProductsCapacityDetails"
-        ],
-        "description": "Retrieve per region capacity for the data product.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DataProductsCapacityDetail"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataProductsCapacityDetails_GetRegionalCapacity_Maximum": {
-            "$ref": "./examples/DataProductsCapacityDetails_GetRegionalCapacity_MaximumSet_Gen.json"
-          },
-          "DataProductsCapacityDetails_GetRegionalCapacity_Minimum": {
-            "$ref": "./examples/DataProductsCapacityDetails_GetRegionalCapacity_MinimumSet_Gen.json"
-          }
         }
       }
     },

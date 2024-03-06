@@ -1548,7 +1548,7 @@ interface DataProducts {
 @armResourceOperations
 interface DataProductsCapacityDetails {
   @doc("Retrieve per region capacity for the data product.")
-  @segment("providers/Microsoft.NetworkAnalytics/getRegionalDataProductsCapacity")
+  @segment("providers/Microsoft.NetworkAnalytics/dataProductsCapacityDetails/getRegionalDataProductsCapacity")
   @get
   @armResourceRead(DataProductsCapacityDetail)
   getRegionalCapacity(
