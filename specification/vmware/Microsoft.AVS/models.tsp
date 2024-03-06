@@ -546,7 +546,6 @@ model PrivateCloud is TrackedResource<PrivateCloudProperties> {
   ...ArmTagsProperty;
   ...ResourceSkuRequired;
   ...ManagedSystemAssignedIdentity;
-  ...AvailabilityZones;
 
   @doc("Name of the private cloud")
   @pattern("^[-\\w\\._]+$")
@@ -2087,14 +2086,6 @@ model PSCredentialExecutionParameter extends ScriptExecutionParameter {
 model DisplayNameProperty {
   @doc("Display name of the resource.")
   displayName?: string;
-}
-
-// https://github.com/Azure/typespec-azure/issues/3856
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-@doc("Availability zones envelope.")
-model AvailabilityZones {
-  @doc("The availability zones.")
-  zones?: string[];
 }
 
 @doc("The type of DNS zone.")
