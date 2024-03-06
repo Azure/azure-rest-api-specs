@@ -37,18 +37,12 @@
               "automuting": true,
               "customMetrics": false,
               "tagRulesSet": {
-                "enableAadLogs": false,
-                "enableSubscriptionLogs": true,
-                "enableLogs": true,
-                "enableMetrics": true,
                 "enableAgents": true,
-                "monitoringTags": [
+                "includeRuleSet": [
                   {
-                    "name": "ruleSet1",
                     "monitoringType": [
                       "agent"
                     ],
-                    "filteringAction": "Include",
                     "azureResourceType": [
                       "virtualMachines"
                     ],
@@ -56,6 +50,22 @@
                       {
                         "name": "Environment",
                         "value": "Prod"
+                      }
+                    ]
+                  }
+                ],
+                "excludeRuleSet": [
+                  {
+                    "monitoringType": [
+                      "agent"
+                    ],
+                    "azureResourceType": [
+                      "virtualMachines"
+                    ],
+                    "filteringTags": [
+                      {
+                        "name": "Environment",
+                        "value": "Non-prod"
                       }
                     ]
                   }
