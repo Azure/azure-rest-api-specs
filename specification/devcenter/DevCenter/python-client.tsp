@@ -9,6 +9,7 @@ using Azure.ClientGenerator.Core;
 @useDependency(APIVersions.v2023_04_01)
 namespace PythonSdkCustomizations;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "detailed suppress description for each operation can be found in routes.tsp"
 @client({
   name: "DevCenterClient",
   service: DevCenterService,
@@ -35,9 +36,9 @@ interface DevCenterClientOperations {
   getRemoteConnection is DevCenterService.DevBoxesOperations.getRemoteConnection;
   listDevBoxActions is DevCenterService.DevBoxesOperations.listDevBoxActions;
   getDevBoxAction is DevCenterService.DevBoxesOperations.getDevBoxAction;
-  skipAction is DevCenterService.DevBoxesOperations.skipAction;
-  delayAction is DevCenterService.DevBoxesOperations.delayAction;
-  delayAllActions is DevCenterService.DevBoxesOperations.delayAllActions;
+  skipDevBoxAction is DevCenterService.DevBoxesOperations.skipAction;
+  delayDevBoxAction is DevCenterService.DevBoxesOperations.delayAction;
+  delayAllDevBoxActions is DevCenterService.DevBoxesOperations.delayAllActions;
 
   //Environments
   listAllEnvironments is DevCenterService.EnvironmentsOperations.listAllEnvironments;
