@@ -17,7 +17,7 @@ op LiveMetricsOperation<
 > is Foundations.Operation<TParams, TResponse, {}, ServiceError>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-@doc("Determine whether there is any subscription to the metrics and documents. Meanwhile, the client should periodically call this API as a way to notify its liveness to the Live Metrics service.")
+@doc("Determine whether there is any subscription to the metrics and documents.")
 @route("/QuickPulseService.svc/ping")
 @post
 op isSubscribed is LiveMetricsOperation<
@@ -32,7 +32,7 @@ op isSubscribed is LiveMetricsOperation<
 @doc("Publish live metrics to the Live Metrics service when there is an active subscription to the metrics.")
 @route("/QuickPulseService.svc/post")
 @post
-op publishLiveMetrics is LiveMetricsOperation<
+op publish is LiveMetricsOperation<
   PublishLiveMetricsRequestParameters,
   {
     ...PublishLiveMetricsResponseHeaders;

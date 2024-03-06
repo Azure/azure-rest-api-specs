@@ -63,7 +63,7 @@
     "/QuickPulseService.svc/ping": {
       "post": {
         "operationId": "IsSubscribed",
-        "description": "Determine whether there is any subscription to the metrics and documents. Meanwhile, the client should periodically call this API as a way to notify its liveness to the Live Metrics service.",
+        "description": "Determine whether there is any subscription to the metrics and documents.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -108,7 +108,7 @@
             "headers": {
               "x-ms-qps-subscribed": {
                 "type": "string",
-                "description": "A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, SDK must start collecting data and posting it to Live Metrics. Otherwise, SDK must keep pinging."
+                "description": "A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, the client must start collecting data and posting it to Live Metrics. Otherwise, the client must keep pinging."
               },
               "x-ms-qps-configuration-etag": {
                 "type": "string",
@@ -116,11 +116,11 @@
               },
               "x-ms-qps-service-polling-interval-hint": {
                 "type": "string",
-                "description": "Recommended time (in milliseconds) before an SDK should ping the service again. This header exists only when instrumentation key is not watched by UX."
+                "description": "Recommended time (in milliseconds) before the client should ping the service again. This header exists only when ikey is not subscribed to."
               },
               "x-ms-qps-service-endpoint-redirect-v2": {
                 "type": "string",
-                "description": "Contains a URI of the service endpoint that an SDK must permanently use for the particular resource. This header exists only when SDK is talking to Live Metrics global endpoint."
+                "description": "Contains a URI of the service endpoint that the client must permanently use for the particular resource. This header exists only when the client is talking to Live Metrics global endpoint."
               }
             }
           },
@@ -132,7 +132,7 @@
           }
         },
         "x-ms-examples": {
-          "Live Metrics IsSubscribed": {
+          "Live Metrics client checks if its data is subscribed to.": {
             "$ref": "./examples/LiveMetrics_IsSubscribed.json"
           }
         }
@@ -140,7 +140,7 @@
     },
     "/QuickPulseService.svc/post": {
       "post": {
-        "operationId": "PublishLiveMetrics",
+        "operationId": "Publish",
         "description": "Publish live metrics to the Live Metrics service when there is an active subscription to the metrics.",
         "parameters": [
           {
@@ -171,7 +171,7 @@
             "headers": {
               "x-ms-qps-subscribed": {
                 "type": "string",
-                "description": "Tells SDK whether the input instrumentation key is subscribed to by UX."
+                "description": "Tells the client whether the input ikey is subscribed to."
               },
               "x-ms-qps-configuration-etag": {
                 "type": "string",
@@ -187,8 +187,8 @@
           }
         },
         "x-ms-examples": {
-          "Live Metrics PublishLiveMetrics": {
-            "$ref": "./examples/LiveMetrics_PublishLiveMetrics.json"
+          "Live Metrics client publishes live metrics": {
+            "$ref": "./examples/LiveMetrics_Publish.json"
           }
         }
       }
@@ -245,7 +245,7 @@
         },
         "FullException": {
           "type": "string",
-          "description": "Exception that leads to the creation of the configuration error."
+          "description": "Exception that led to the creation of the configuration error."
         },
         "Data": {
           "type": "array",
@@ -265,7 +265,7 @@
     },
     "CollectionConfigurationErrorType": {
       "type": "string",
-      "description": "Collection configuration error type reported by SDK.",
+      "description": "Collection configuration error type reported by the client SDK.",
       "enum": [
         "Unknown",
         "PerformanceCounterParsing",
@@ -355,7 +355,7 @@
     },
     "CollectionConfigurationInfo": {
       "type": "object",
-      "description": "Represents the collection configuration - a customizable description of performance counters, metrics, and full telemetry documents to be collected by the SDK.",
+      "description": "Represents the collection configuration - a customizable description of performance counters, metrics, and full telemetry documents to be collected by the client SDK.",
       "properties": {
         "ETag": {
           "type": "string",
@@ -453,19 +453,8 @@
       "description": "Base class of the specific document types.",
       "properties": {
         "DocumentType": {
-          "type": "string",
-          "description": "Telemetry type. Types not defined in enum will get replaced with a 'Unknown' type.",
-          "enum": [
-            "Request",
-            "RemoteDependency",
-            "Exception",
-            "Event",
-            "Trace",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/DocumentType",
+          "description": "Telemetry type. Types not defined in enum will get replaced with a 'Unknown' type."
         },
         "DocumentStreamIds": {
           "type": "array",
@@ -509,6 +498,54 @@
         "Id",
         "DocumentFilterGroups"
       ]
+    },
+    "DocumentType": {
+      "type": "string",
+      "description": "Document type",
+      "enum": [
+        "Request",
+        "RemoteDependency",
+        "Exception",
+        "Event",
+        "Trace",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Request",
+            "value": "Request",
+            "description": "Represents a request telemetry type."
+          },
+          {
+            "name": "RemoteDependency",
+            "value": "RemoteDependency",
+            "description": "Represents a remote dependency telemetry type."
+          },
+          {
+            "name": "Exception",
+            "value": "Exception",
+            "description": "Represents an exception telemetry type."
+          },
+          {
+            "name": "Event",
+            "value": "Event",
+            "description": "Represents an event telemetry type."
+          },
+          {
+            "name": "Trace",
+            "value": "Trace",
+            "description": "Represents a trace telemetry type."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Represents an unknown telemetry type."
+          }
+        ]
+      }
     },
     "Event": {
       "type": "object",
@@ -575,21 +612,8 @@
           "description": "dimension name of the filter"
         },
         "Predicate": {
-          "type": "string",
-          "description": "Operator of the filter",
-          "enum": [
-            "Equal",
-            "NotEqual",
-            "LessThan",
-            "GreaterThan",
-            "LessThanOrEqual",
-            "GreaterThanOrEqual",
-            "Contains",
-            "DoesNotContain"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/PredicateType",
+          "description": "Operator of the filter"
         },
         "Comparand": {
           "type": "string",
@@ -651,11 +675,11 @@
     },
     "MonitoringDataPoint": {
       "type": "object",
-      "description": "Monitoring data point coming from SDK, which includes metrics, documents and other metadata info.",
+      "description": "Monitoring data point coming from the client, which includes metrics, documents and other metadata info.",
       "properties": {
         "Version": {
           "type": "string",
-          "description": "AI SDK version."
+          "description": "Application Insights SDK version."
         },
         "InvariantVersion": {
           "type": "integer",
@@ -664,7 +688,7 @@
         },
         "Instance": {
           "type": "string",
-          "description": "Service instance name where AI SDK lives."
+          "description": "Service instance name where Application Insights SDK lives."
         },
         "RoleName": {
           "type": "string",
@@ -672,11 +696,11 @@
         },
         "MachineName": {
           "type": "string",
-          "description": "Computer name where AI SDK lives."
+          "description": "Computer name where Application Insights SDK lives."
         },
         "StreamId": {
           "type": "string",
-          "description": "Identifies an AI SDK as a trusted agent to report metrics and documents."
+          "description": "Identifies an Application Insights SDK as a trusted agent to report metrics and documents."
         },
         "Timestamp": {
           "type": "string",
@@ -686,7 +710,7 @@
         "TransmissionTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when SDK transmits the metrics and documents to Live Metrics."
+          "description": "Timestamp when the client transmits the metrics and documents to Live Metrics."
         },
         "IsWebApp": {
           "type": "boolean",
@@ -739,6 +763,66 @@
         "IsWebApp",
         "PerformanceCollectionSupported"
       ]
+    },
+    "PredicateType": {
+      "type": "string",
+      "description": "Enum representing the different types of predicates.",
+      "enum": [
+        "Equal",
+        "NotEqual",
+        "LessThan",
+        "GreaterThan",
+        "LessThanOrEqual",
+        "GreaterThanOrEqual",
+        "Contains",
+        "DoesNotContain"
+      ],
+      "x-ms-enum": {
+        "name": "PredicateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equal",
+            "value": "Equal",
+            "description": "Represents an equality predicate."
+          },
+          {
+            "name": "NotEqual",
+            "value": "NotEqual",
+            "description": "Represents a not-equal predicate."
+          },
+          {
+            "name": "LessThan",
+            "value": "LessThan",
+            "description": "Represents a less-than predicate."
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan",
+            "description": "Represents a greater-than predicate."
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual",
+            "description": "Represents a less-than-or-equal predicate."
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "GreaterThanOrEqual",
+            "description": "Represents a greater-than-or-equal predicate."
+          },
+          {
+            "name": "Contains",
+            "value": "Contains",
+            "description": "Represents a contains predicate."
+          },
+          {
+            "name": "DoesNotContain",
+            "value": "DoesNotContain",
+            "description": "Represents a does-not-contain predicate."
+          }
+        ]
+      }
     },
     "ProcessCpuData": {
       "type": "object",
@@ -857,7 +941,7 @@
       "properties": {
         "RequestId": {
           "type": "string",
-          "description": "A globally unique identifier to identify the diagnostic context. Currently it defaults to the empty GUID.",
+          "description": "A globally unique identifier to identify the diagnostic context. It defaults to the empty GUID.",
           "default": "00000000-0000-0000-0000-000000000000"
         },
         "ResponseDateTime": {
@@ -1006,7 +1090,7 @@
     "IsSubscribedRequestParameters.ikey": {
       "name": "ikey",
       "in": "query",
-      "description": "The ikey of the target Application Insights component for which client sdk calls /ping.",
+      "description": "The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1014,7 +1098,7 @@
     "IsSubscribedRequestParameters.instanceName": {
       "name": "x-ms-qps-instance-name",
       "in": "header",
-      "description": "Service instance name where AI SDK lives. Live Metrics uses machine name with instance name as a backup.",
+      "description": "Service instance name where Application Insights SDK lives. Live Metrics uses machine name with instance name as a backup.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -1023,7 +1107,7 @@
     "IsSubscribedRequestParameters.invariantVersion": {
       "name": "x-ms-qps-invariant-version",
       "in": "header",
-      "description": "Version/generation of the data contract (MonitoringDataPoint) between SDK and Live Metrics.",
+      "description": "Version/generation of the data contract (MonitoringDataPoint) between the client and Live Metrics.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -1032,7 +1116,7 @@
     "IsSubscribedRequestParameters.machineName": {
       "name": "x-ms-qps-machine-name",
       "in": "header",
-      "description": "Computer name where AI SDK lives. Live Metrics uses machine name with instance name as a backup.",
+      "description": "Computer name where Application Insights SDK lives. Live Metrics uses machine name with instance name as a backup.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -1041,7 +1125,7 @@
     "IsSubscribedRequestParameters.monitoringDataPoint": {
       "name": "monitoringDataPoint",
       "in": "body",
-      "description": "Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+      "description": "Data contract between Application Insights client SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
       "required": false,
       "schema": {
         "$ref": "#/definitions/MonitoringDataPoint"
@@ -1060,7 +1144,7 @@
     "IsSubscribedRequestParameters.streamId": {
       "name": "x-ms-qps-stream-id",
       "in": "header",
-      "description": "Identifies an AI SDK as trusted agent to report metrics and documents.",
+      "description": "Identifies an Application Insights SDK as trusted agent to report metrics and documents.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -1069,7 +1153,7 @@
     "IsSubscribedRequestParameters.transmissionTime": {
       "name": "x-ms-qps-transmission-time",
       "in": "header",
-      "description": "Timestamp when SDK transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.",
+      "description": "Timestamp when the client transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.",
       "required": false,
       "type": "integer",
       "format": "int64",
@@ -1096,7 +1180,7 @@
     "PublishLiveMetricsRequestParameters.ikey": {
       "name": "ikey",
       "in": "query",
-      "description": "The ikey of the target Application Insights component for which client sdk calls /post.",
+      "description": "The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1104,7 +1188,7 @@
     "PublishLiveMetricsRequestParameters.monitoringDataPoints": {
       "name": "monitoringDataPoints",
       "in": "body",
-      "description": "Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+      "description": "Data contract between the client and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
       "required": false,
       "schema": {
         "type": "array",
@@ -1118,7 +1202,7 @@
     "PublishLiveMetricsRequestParameters.transmissionTime": {
       "name": "x-ms-qps-transmission-time",
       "in": "header",
-      "description": "Timestamp when SDK transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.",
+      "description": "Timestamp when the client transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.",
       "required": false,
       "type": "integer",
       "format": "int64",

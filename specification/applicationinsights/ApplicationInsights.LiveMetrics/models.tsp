@@ -15,7 +15,7 @@ namespace Azure.Monitor.LiveMetrics;
  * Live Metrics IsSubscribed request query parameters, either query strings or headers
  */
 model IsSubscribedRequestParameters {
-  @doc("The ikey of the target Application Insights component for which client sdk calls /ping.")
+  @doc("The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.")
   @query
   ikey: string;
 
@@ -23,19 +23,19 @@ model IsSubscribedRequestParameters {
   @query
   apiKey?: string;
 
-  @doc("Timestamp when SDK transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.")
+  @doc("Timestamp when the client transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.")
   @header("x-ms-qps-transmission-time")
   transmissionTime?: int64;
 
-  @doc("Computer name where AI SDK lives. Live Metrics uses machine name with instance name as a backup.")
+  @doc("Computer name where Application Insights SDK lives. Live Metrics uses machine name with instance name as a backup.")
   @header("x-ms-qps-machine-name")
   machineName?: string;
 
-  @doc("Service instance name where AI SDK lives. Live Metrics uses machine name with instance name as a backup.")
+  @doc("Service instance name where Application Insights SDK lives. Live Metrics uses machine name with instance name as a backup.")
   @header("x-ms-qps-instance-name")
   instanceName?: string;
 
-  @doc("Identifies an AI SDK as trusted agent to report metrics and documents.")
+  @doc("Identifies an Application Insights SDK as trusted agent to report metrics and documents.")
   @header("x-ms-qps-stream-id")
   streamId?: string;
 
@@ -43,7 +43,7 @@ model IsSubscribedRequestParameters {
   @header("x-ms-qps-role-name")
   roleName?: string;
 
-  @doc("Version/generation of the data contract (MonitoringDataPoint) between SDK and Live Metrics.")
+  @doc("Version/generation of the data contract (MonitoringDataPoint) between the client and Live Metrics.")
   @header("x-ms-qps-invariant-version")
   invariantVersion?: string;
 
@@ -51,7 +51,7 @@ model IsSubscribedRequestParameters {
   @header("x-ms-qps-configuration-etag")
   configurationEtag?: eTag;
 
-  @doc("Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
+  @doc("Data contract between Application Insights client SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
   @body
   monitoringDataPoint?: MonitoringDataPoint;
 }
@@ -60,7 +60,7 @@ model IsSubscribedRequestParameters {
  * Live Metrics IsSubscribed response headers
  */
 model IsSubscribedResponseHeaders {
-  @doc("A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, SDK must start collecting data and posting it to Live Metrics. Otherwise, SDK must keep pinging.")
+  @doc("A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, the client must start collecting data and posting it to Live Metrics. Otherwise, the client must keep pinging.")
   @header("x-ms-qps-subscribed")
   subscribed: string;
 
@@ -68,11 +68,11 @@ model IsSubscribedResponseHeaders {
   @header("x-ms-qps-configuration-etag")
   configurationEtag: eTag;
 
-  @doc("Recommended time (in milliseconds) before an SDK should ping the service again. This header exists only when instrumentation key is not watched by UX.")
+  @doc("Recommended time (in milliseconds) before the client should ping the service again. This header exists only when ikey is not subscribed to.")
   @header("x-ms-qps-service-polling-interval-hint")
   pollingInterval?: string;
 
-  @doc("Contains a URI of the service endpoint that an SDK must permanently use for the particular resource. This header exists only when SDK is talking to Live Metrics global endpoint.")
+  @doc("Contains a URI of the service endpoint that the client must permanently use for the particular resource. This header exists only when the client is talking to Live Metrics global endpoint.")
   @header("x-ms-qps-service-endpoint-redirect-v2")
   redirectEndpoint?: string;
 
@@ -85,7 +85,7 @@ model IsSubscribedResponseHeaders {
  * Live Metrics PublishLiveMetrics request query parameters, either query strings or headers
  */
 model PublishLiveMetricsRequestParameters {
-  @doc("The ikey of the target Application Insights component for which client sdk calls /post.")
+  @doc("The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.")
   @query
   ikey: string;
 
@@ -97,12 +97,12 @@ model PublishLiveMetricsRequestParameters {
   @header("x-ms-qps-configuration-etag")
   configurationEtag?: eTag;
 
-  @doc("Timestamp when SDK transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.")
+  @doc("Timestamp when the client transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.")
   @header("x-ms-qps-transmission-time")
   transmissionTime?: int64;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Need to follow the existing SDK contract."
-  @doc("Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
+  @doc("Data contract between the client and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
   @body
   monitoringDataPoints?: MonitoringDataPoint[];
 }
@@ -111,7 +111,7 @@ model PublishLiveMetricsRequestParameters {
  * Live Metrics PublishLiveMetrics response headers
  */
 model PublishLiveMetricsResponseHeaders {
-  @doc("Tells SDK whether the input instrumentation key is subscribed to by UX.")
+  @doc("Tells the client whether the input ikey is subscribed to.")
   @header("x-ms-qps-subscribed")
   subscribed: string;
 
@@ -121,32 +121,32 @@ model PublishLiveMetricsResponseHeaders {
 }
 
 /**
- * Monitoring data point coming from SDK, which includes metrics, documents and other metadata info.
+ * Monitoring data point coming from the client, which includes metrics, documents and other metadata info.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 model MonitoringDataPoint {
-  @doc("AI SDK version.")
+  @doc("Application Insights SDK version.")
   Version: string;
 
   @doc("Version/generation of the data contract (MonitoringDataPoint) between SDK and Live Metrics.")
   InvariantVersion: int32;
 
-  @doc("Service instance name where AI SDK lives.")
+  @doc("Service instance name where Application Insights SDK lives.")
   Instance: string;
 
   @doc("Service role name.")
   RoleName: string;
 
-  @doc("Computer name where AI SDK lives.")
+  @doc("Computer name where Application Insights SDK lives.")
   MachineName: string;
 
-  @doc("Identifies an AI SDK as a trusted agent to report metrics and documents.")
+  @doc("Identifies an Application Insights SDK as a trusted agent to report metrics and documents.")
   StreamId: string;
 
   @doc("Data point generation timestamp.")
   Timestamp?: utcDateTime;
 
-  @doc("Timestamp when SDK transmits the metrics and documents to Live Metrics.")
+  @doc("Timestamp when the client transmits the metrics and documents to Live Metrics.")
   TransmissionTime?: utcDateTime;
 
   @doc("True if the current application is an Azure Web App.")
@@ -179,7 +179,7 @@ model CollectionConfigurationError {
   @doc("Error message.")
   Message: string;
 
-  @doc("Exception that leads to the creation of the configuration error.")
+  @doc("Exception that led to the creation of the configuration error.")
   FullException: string;
 
   @doc("Custom properties to add more information to the error.")
@@ -187,7 +187,7 @@ model CollectionConfigurationError {
 }
 
 /**
- * Collection configuration error type reported by SDK.
+ * Collection configuration error type reported by the client SDK.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 enum CollectionConfigurationErrorType {
@@ -265,13 +265,7 @@ model MetricPoint {
 @discriminator("DocumentType")
 model DocumentIngress {
   @doc("Telemetry type. Types not defined in enum will get replaced with a 'Unknown' type.")
-  DocumentType:
-    | "Request"
-    | "RemoteDependency"
-    | "Exception"
-    | "Event"
-    | "Trace"
-    | "Unknown";
+  DocumentType: DocumentType;
 
   @doc("An array of document streaming ids. Each id identifies a flow of documents customized by UX customers.")
   DocumentStreamIds?: string[];
@@ -280,13 +274,34 @@ model DocumentIngress {
   Properties?: KeyValuePairStringString[];
 }
 
+@doc("Document type")
+enum DocumentType {
+  @doc("Represents a request telemetry type.")
+  Request,
+
+  @doc("Represents a remote dependency telemetry type.")
+  RemoteDependency,
+
+  @doc("Represents an exception telemetry type.")
+  Exception,
+
+  @doc("Represents an event telemetry type.")
+  Event,
+
+  @doc("Represents a trace telemetry type.")
+  Trace,
+
+  @doc("Represents an unknown telemetry type.")
+  Unknown
+}
+
 /**
  * Request document type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 model Request extends DocumentIngress {
   @doc("Telemetry type for Request.")
-  DocumentType: "Request";
+  DocumentType: DocumentType.Request;
 
   @doc("Name of the request, e.g., 'GET /values/{id}'.")
   @maxLength(1024)
@@ -310,7 +325,7 @@ model Request extends DocumentIngress {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 model RemoteDependency extends DocumentIngress {
   @doc("Telemetry type for RemoteDependency.")
-  DocumentType: "RemoteDependency";
+  DocumentType: DocumentType.RemoteDependency;
 
   @doc("Name of the command initiated with this dependency call, e.g., GET /username.")
   @maxLength(1024)
@@ -334,7 +349,7 @@ model RemoteDependency extends DocumentIngress {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 model Exception extends DocumentIngress {
   @doc("Telemetry type for Exception.")
-  DocumentType: "Exception";
+  DocumentType: DocumentType.Exception;
 
   @doc("Exception type name.")
   @maxLength(1024)
@@ -351,7 +366,7 @@ model Exception extends DocumentIngress {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 model Event extends DocumentIngress {
   @doc("Telemetry type for Event.")
-  DocumentType: "Event";
+  DocumentType: DocumentType.Event;
 
   @doc("Event name.")
   @maxLength(512)
@@ -364,7 +379,7 @@ model Event extends DocumentIngress {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 model Trace extends DocumentIngress {
   @doc("Telemetry type for Trace.")
-  DocumentType: "Trace";
+  DocumentType: DocumentType.Trace;
 
   @doc("Trace message.")
   @maxLength(32768)
@@ -383,7 +398,7 @@ model KeyValuePairStringString {
 }
 
 /**
- * Represents the collection configuration - a customizable description of performance counters, metrics, and full telemetry documents to be collected by the SDK.
+ * Represents the collection configuration - a customizable description of performance counters, metrics, and full telemetry documents to be collected by the client SDK.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 model CollectionConfigurationInfo {
@@ -520,18 +535,39 @@ model FilterInfo {
   FieldName: string;
 
   @doc("Operator of the filter")
-  Predicate:
-    | "Equal"
-    | "NotEqual"
-    | "LessThan"
-    | "GreaterThan"
-    | "LessThanOrEqual"
-    | "GreaterThanOrEqual"
-    | "Contains"
-    | "DoesNotContain";
+  Predicate: PredicateType;
 
   @doc("Comparand of the filter")
   Comparand: string;
+}
+
+/**
+ * Enum representing the different types of predicates.
+ */
+enum PredicateType {
+  @doc("Represents an equality predicate.")
+  Equal,
+
+  @doc("Represents a not-equal predicate.")
+  NotEqual,
+
+  @doc("Represents a less-than predicate.")
+  LessThan,
+
+  @doc("Represents a greater-than predicate.")
+  GreaterThan,
+
+  @doc("Represents a less-than-or-equal predicate.")
+  LessThanOrEqual,
+
+  @doc("Represents a greater-than-or-equal predicate.")
+  GreaterThanOrEqual,
+
+  @doc("Represents a contains predicate.")
+  Contains,
+
+  @doc("Represents a does-not-contain predicate.")
+  DoesNotContain
 }
 
 /**
@@ -540,7 +576,7 @@ model FilterInfo {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 @error
 model ServiceError {
-  @doc("A globally unique identifier to identify the diagnostic context. Currently it defaults to the empty GUID.")
+  @doc("A globally unique identifier to identify the diagnostic context. It defaults to the empty GUID.")
   RequestId: string = "00000000-0000-0000-0000-000000000000";
 
   @doc("Service error response date time.")
