@@ -315,7 +315,6 @@ model AnalyzeDocumentRequest {
   Base64 encoding of the document to analyze.  Either urlSource or base64Source
   must be specified.
   """)
-  @projectedName("python", "bytesSource")
   base64Source?: bytes;
 }
 
@@ -1365,7 +1364,6 @@ model ClassifyDocumentRequest {
   Base64 encoding of the document to classify.  Either urlSource or base64Source
   must be specified.
   """)
-  @projectedName("python", "bytesSource")
   base64Source?: bytes;
 }
 
