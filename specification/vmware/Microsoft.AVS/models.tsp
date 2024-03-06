@@ -577,8 +577,6 @@ model PrivateCloudUpdate {
 
 @doc("The properties of a private cloud resource that may be updated")
 model PrivateCloudUpdateProperties {
-  ...DisplayNameProperty;
-
   @doc("The default cluster used for management")
   managementCluster?: ManagementCluster;
 
@@ -609,8 +607,6 @@ this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
 
 @doc("The properties of a private cloud resource")
 model PrivateCloudProperties {
-  ...DisplayNameProperty;
-
   @doc("The default cluster used for management")
   managementCluster: ManagementCluster;
 
@@ -765,8 +761,6 @@ model ManagementCluster {
 
 @doc("The common properties of a cluster")
 model CommonClusterProperties {
-  ...DisplayNameProperty;
-
   @doc("The cluster size")
   clusterSize?: int32;
 
@@ -901,16 +895,11 @@ model ClusterUpdate {
 
 @doc("The properties of a cluster that may be updated")
 model ClusterUpdateProperties {
-  ...DisplayNameProperty;
-
   @doc("The cluster size")
   clusterSize?: int32;
 
   @doc("The hosts")
   hosts?: string[];
-
-  @doc("Name of the vsan datastore associated with the cluster")
-  vsanDatastoreName?: string;
 }
 
 @doc("List of all zones and associated hosts for a cluster")
@@ -2081,12 +2070,6 @@ model PSCredentialExecutionParameter extends ScriptExecutionParameter {
 
   @doc("The type of execution parameter")
   type: "Credential";
-}
-
-@doc("The display name property envelope")
-model DisplayNameProperty {
-  @doc("Display name of the resource.")
-  displayName?: string;
 }
 
 // https://github.com/Azure/typespec-azure/issues/3856
