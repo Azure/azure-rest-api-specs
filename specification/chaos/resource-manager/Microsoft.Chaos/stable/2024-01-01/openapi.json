@@ -491,6 +491,75 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}": {
+      "get": {
+        "operationId": "Targets_Get",
+        "tags": [
+          "Targets"
+        ],
+        "description": "Get a Target resource that extends a tracked regional resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentProviderNamespace",
+            "in": "path",
+            "description": "String that represents a resource provider namespace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "String that represents a resource type.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "String that represents a resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "targetName",
+            "in": "path",
+            "description": "String that represents a Target resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Target"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Target that extends a virtual machine resource.": {
+            "$ref": "./examples/Targets_Get.json"
+          }
+        }
+      },
       "put": {
         "operationId": "Targets_CreateOrUpdate",
         "tags": [
@@ -566,6 +635,398 @@
         "x-ms-examples": {
           "Create/update a Target that extends a virtual machine resource.": {
             "$ref": "./examples/Targets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Targets_Delete",
+        "tags": [
+          "Targets"
+        ],
+        "description": "Delete a Target resource that extends a tracked regional resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentProviderNamespace",
+            "in": "path",
+            "description": "String that represents a resource provider namespace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "String that represents a resource type.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "String that represents a resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "targetName",
+            "in": "path",
+            "description": "String that represents a Target resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Target that extends a virtual machine resource.": {
+            "$ref": "./examples/Targets_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}/capabilities": {
+      "get": {
+        "operationId": "Capabilities_List",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Get a list of Capability resources that extend a Target resource..",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentProviderNamespace",
+            "in": "path",
+            "description": "String that represents a resource provider namespace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "String that represents a resource type.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "String that represents a resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "targetName",
+            "in": "path",
+            "description": "String that represents a Target resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "String that sets the continuation token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedCapability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Capabilities that extend a virtual machine Target resource.": {
+            "$ref": "./examples/Capabilities_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}/capabilities/{capabilityName}": {
+      "get": {
+        "operationId": "Capabilities_Get",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Get a Capability resource that extends a Target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentProviderNamespace",
+            "in": "path",
+            "description": "String that represents a resource provider namespace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "String that represents a resource type.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "String that represents a resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "targetName",
+            "in": "path",
+            "description": "String that represents a Target resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "String that represents a Capability resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Capability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Capability that extends a virtual machine Target resource.": {
+            "$ref": "./examples/Capabilities_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Capabilities_CreateOrUpdate",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Create or update a Capability resource that extends a Target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentProviderNamespace",
+            "in": "path",
+            "description": "String that represents a resource provider namespace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "String that represents a resource type.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "String that represents a resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "targetName",
+            "in": "path",
+            "description": "String that represents a Target resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "String that represents a Capability resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
+          },
+          {
+            "name": "capability",
+            "in": "body",
+            "description": "Capability resource to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Capability"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Capability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/update a Capability that extends a virtual machine Target resource.": {
+            "$ref": "./examples/Capabilities_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Capabilities_Delete",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Delete a Capability that extends a Target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentProviderNamespace",
+            "in": "path",
+            "description": "String that represents a resource provider namespace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "String that represents a resource type.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "String that represents a resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "targetName",
+            "in": "path",
+            "description": "String that represents a Target resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "String that represents a Capability resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Capability that extends a virtual machine Target resource.": {
+            "$ref": "./examples/Capabilities_Delete.json"
           }
         }
       }
@@ -1162,332 +1623,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/targets/{targetName}": {
-      "get": {
-        "operationId": "Targets_Get",
-        "tags": [
-          "Targets"
-        ],
-        "description": "Get a Target resource that extends a tracked regional resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetName",
-            "in": "path",
-            "description": "String that represents a Target resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Target"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a Target that extends a virtual machine resource.": {
-            "$ref": "./examples/Targets_Get.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Targets_Delete",
-        "tags": [
-          "Targets"
-        ],
-        "description": "Delete a Target resource that extends a tracked regional resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetName",
-            "in": "path",
-            "description": "String that represents a Target resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a Target that extends a virtual machine resource.": {
-            "$ref": "./examples/Targets_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/targets/{targetName}/capabilities": {
-      "get": {
-        "operationId": "Capabilities_List",
-        "tags": [
-          "Capabilities"
-        ],
-        "description": "Get a list of Capability resources that extend a Target resource..",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "continuationToken",
-            "in": "query",
-            "description": "String that sets the continuation token.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "targetName",
-            "in": "path",
-            "description": "String that represents a Target resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CapabilityListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all Capabilities that extend a virtual machine Target resource.": {
-            "$ref": "./examples/Capabilities_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/targets/{targetName}/capabilities/{capabilityName}": {
-      "get": {
-        "operationId": "Capabilities_Get",
-        "tags": [
-          "Capabilities"
-        ],
-        "description": "Get a Capability resource that extends a Target resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetName",
-            "in": "path",
-            "description": "String that represents a Target resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "capabilityName",
-            "in": "path",
-            "description": "String that represents a Capability resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Capability"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a Capability that extends a virtual machine Target resource.": {
-            "$ref": "./examples/Capabilities_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Capabilities_CreateOrUpdate",
-        "tags": [
-          "Capabilities"
-        ],
-        "description": "Create or update a Capability resource that extends a Target resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetName",
-            "in": "path",
-            "description": "String that represents a Target resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "capabilityName",
-            "in": "path",
-            "description": "String that represents a Capability resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
-          },
-          {
-            "name": "capability",
-            "in": "body",
-            "description": "Capability resource to be created or updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Capability"
-            },
-            "x-ms-client-name": "capability"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'Capability' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Capability"
-            }
-          },
-          "201": {
-            "description": "Resource 'Capability' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Capability"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create/update a Capability that extends a virtual machine Target resource.": {
-            "$ref": "./examples/Capabilities_CreateOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Capabilities_Delete",
-        "tags": [
-          "Capabilities"
-        ],
-        "description": "Delete a Capability that extends a Target resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetName",
-            "in": "path",
-            "description": "String that represents a Target resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "capabilityName",
-            "in": "path",
-            "description": "String that represents a Capability resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a Capability that extends a virtual machine Target resource.": {
-            "$ref": "./examples/Capabilities_Delete.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1597,27 +1732,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "CapabilityListResult": {
-      "type": "object",
-      "description": "The response of a Capability list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Capability items on this page",
-          "items": {
-            "$ref": "#/definitions/Capability"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "CapabilityProperties": {
@@ -2360,6 +2474,27 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
         }
+      ]
+    },
+    "PagedCapability": {
+      "type": "object",
+      "description": "Paged collection of Capability items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Capability items on this page",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PagedCapabilityType": {

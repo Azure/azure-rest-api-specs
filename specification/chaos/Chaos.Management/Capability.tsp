@@ -32,45 +32,205 @@ interface Capabilities {
   /**
    * Get a Capability resource that extends a Target resource.
    */
-  get is ArmResourceRead<Capability>;
+  @armResourceRead(Capability)
+  @get
+  get(
+    ...SubscriptionBaseParameters;
+    ...ResourceGroupParameter;
+
+    /**
+     * String that represents a resource provider namespace.
+     */
+    @segment("providers")
+    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
+    @path
+    parentProviderNamespace: string;
+
+    /**
+     * String that represents a resource type.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceType: string;
+
+    /**
+     * String that represents a resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceName: string;
+
+    ...DefaultProviderNamespace;
+
+    /**
+     * String that represents a Target resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("targets")
+    targetName: string;
+
+    /**
+     * String that represents a Capability resource name.
+     */
+    @pattern("^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$")
+    @path
+    @segment("capabilities")
+    capabilityName: string;
+  ):ArmResponse<Capability> | ErrorResponse;
 
   /**
    * Create or update a Capability resource that extends a Target resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Capability>;
+  @armResourceCreateOrUpdate(Capability)
+  @put
+  createOrUpdate(
+    ...SubscriptionBaseParameters;
+    ...ResourceGroupParameter;
+
+    /**
+     * String that represents a resource provider namespace.
+     */
+    @segment("providers")
+    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
+    @path
+    parentProviderNamespace: string;
+
+    /**
+     * String that represents a resource type.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceType: string;
+
+    /**
+     * String that represents a resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceName: string;
+
+    ...DefaultProviderNamespace;
+
+    /**
+     * String that represents a Target resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("targets")
+    targetName: string;
+
+    /**
+     * String that represents a Capability resource name.
+     */
+    @pattern("^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$")
+    @path
+    @segment("capabilities")
+    capabilityName: string;
+
+    /**
+     * Capability resource to be created or updated.
+     */
+    @body
+    capability: Capability;
+  ):ArmResponse<Capability> | ErrorResponse;
 
   /**
    * Delete a Capability that extends a Target resource.
    */
-  delete is ArmResourceDeleteSync<Capability>;
+  @armResourceDelete(Capability)
+  @delete
+  delete(
+    ...SubscriptionBaseParameters;
+    ...ResourceGroupParameter;
+
+    /**
+     * String that represents a resource provider namespace.
+     */
+    @segment("providers")
+    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
+    @path
+    parentProviderNamespace: string;
+
+    /**
+     * String that represents a resource type.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceType: string;
+
+    /**
+     * String that represents a resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceName: string;
+
+    ...DefaultProviderNamespace;
+
+    /**
+     * String that represents a Target resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("targets")
+    targetName: string;
+
+    /**
+     * String that represents a Capability resource name.
+     */
+    @pattern("^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$")
+    @path
+    @segment("capabilities")
+    capabilityName: string;
+  ):ArmDeletedResponse | ArmNoContentResponse | ErrorResponse;
 
   /**
    * Get a list of Capability resources that extend a Target resource..
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Capabilities_List")
-  list is ArmResourceListByParent<
-    Capability,
-    {
-      ...BaseParameters<Capability>;
+  @armResourceList(Capability)
+  @get
+  @segment("capabilities")
+  list(
+    ...SubscriptionBaseParameters;
+    ...ResourceGroupParameter;
 
-      /**
-       * String that sets the continuation token.
-       */
-      @query("continuationToken")
-      continuationToken?: string;
-    }
-  >;
+    /**
+     * String that represents a resource provider namespace.
+     */
+    @segment("providers")
+    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
+    @path
+    parentProviderNamespace: string;
+
+    /**
+     * String that represents a resource type.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceType: string;
+
+    /**
+     * String that represents a resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceName: string;
+
+    ...DefaultProviderNamespace;
+
+    /**
+     * String that represents a Target resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("targets")
+    targetName: string;
+
+    /**
+     * String that sets the continuation token.
+     */
+    @query("continuationToken")
+    continuationToken?: string;
+  ): ArmResponse<Azure.Core.Page<Capability>> | ErrorResponse;
 }
-
-@@projectedName(Capabilities.createOrUpdate::parameters.resource,
-  "json",
-  "capability"
-);
-@@extension(Capabilities.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "capability"
-);
-@@doc(Capabilities.createOrUpdate::parameters.resource,
-  "Capability resource to be created or updated."
-);

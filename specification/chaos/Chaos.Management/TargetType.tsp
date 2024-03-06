@@ -14,7 +14,6 @@ namespace Microsoft.Chaos;
 /**
  * Model that represents a Target Type resource.
  */
-// @locationResource
 @subscriptionResource
 model TargetType is ProxyResource<TargetTypeProperties> {
   /**

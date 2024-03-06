@@ -30,7 +30,44 @@ interface Targets {
   /**
    * Get a Target resource that extends a tracked regional resource.
    */
-  get is ArmResourceRead<Target>;
+  @armResourceRead(Target)
+  @get
+  get(
+    ...SubscriptionBaseParameters;
+    ...ResourceGroupParameter;
+
+    /**
+     * String that represents a resource provider namespace.
+     */
+    @segment("providers")
+    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
+    @path
+    parentProviderNamespace: string;
+
+    /**
+     * String that represents a resource type.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceType: string;
+
+    /**
+     * String that represents a resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceName: string;
+
+    ...DefaultProviderNamespace;
+
+    /**
+     * String that represents a Target resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("targets")
+    targetName: string;
+  ): ArmResponse<Target> | ErrorResponse;
 
   /**
    * Create or update a Target resource that extends a tracked regional resource.
@@ -83,7 +120,44 @@ interface Targets {
   /**
    * Delete a Target resource that extends a tracked regional resource.
    */
-  delete is ArmResourceDeleteSync<Target>;
+  @armResourceDelete(Target)
+  @delete
+  delete(
+    ...SubscriptionBaseParameters;
+    ...ResourceGroupParameter;
+
+    /**
+     * String that represents a resource provider namespace.
+     */
+    @segment("providers")
+    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
+    @path
+    parentProviderNamespace: string;
+
+    /**
+     * String that represents a resource type.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceType: string;
+
+    /**
+     * String that represents a resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceName: string;
+
+    ...DefaultProviderNamespace;
+
+    /**
+     * String that represents a Target resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("targets")
+    targetName: string;
+  ): ArmDeletedResponse | ArmNoContentResponse |ErrorResponse;
 
   /**
    * Get a list of Target resources that extend a tracked regional resource.
