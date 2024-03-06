@@ -45,7 +45,7 @@ export class FlavorAzureRule implements Rule {
 
   isClientEmitter(name: string): boolean {
     const regex = new RegExp(
-      "^(@azure-tools/typespec-(csharp|java|python|ts)|@typespec/http-client-.*)$",
+      "^(@azure-tools/typespec-(csharp|java|python|ts)|@typespec/http-client-.+)$",
     );
 
     return regex.test(name);
