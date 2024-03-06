@@ -67,9 +67,9 @@ model QuotaList {
 }
 
 interface QuotaOperations {
-  @doc("List quotas for the given workspace.")
-  @get
-  @listsResource(Quota)
-  @segment("quotas")
-  list is ListOperation<QuotaList>;
+  // @doc("List quotas for the given workspace.")
+  // @get
+  // @listsResource(Quota)
+  // @segment("quotas")
+  // list is ListOperation<QuotaList>;
 }

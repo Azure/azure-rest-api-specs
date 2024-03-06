@@ -15,6 +15,8 @@ using TypeSpec.Rest.Resource;
 using Azure.Core;
 using Azure.Core.Traits;
 
+namespace Quantum.Workspace.Common;
+
 @error
 @doc("Error information returned by the API")
 @defaultResponse
@@ -84,6 +86,11 @@ op CreateOperation<TResource, TParams, TError = RestError>(
   ...TParams,
 ): RestResponse2<TResource, 200, TResource, 201, TError>;
 
+// Suppressing warnings due to backward compatibility with
+// service and Swagger.
+#suppress "@azure-tools/typespec-azure-core/request-body-problem"
+#suppress "@azure-tools/typespec-azure-core/response-schema-problem"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Operation to patch a resource.")
 op PatchOperation<TResource, TParams, TError = RestError>(
   ...CommonParams,
@@ -127,3 +134,9 @@ op ListOperation<TResourceList, TParams = {}, TError = RestError>(
   ...CommonParams,
   ...TParams,
 ): RestResponse<TResourceList, 200, TError>;
+
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+
+alias AzureStandardOperations = Azure.Core.ResourceOperations<ServiceTraits>;

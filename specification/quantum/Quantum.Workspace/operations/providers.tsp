@@ -83,9 +83,9 @@ model ProviderStatusList {
 }
 
 interface ProviderOperations {
-  @doc("Get provider status.")
-  @get
-  @listsResource(ProviderStatus)
-  @segment("providerStatus")
-  getStatus is ListOperation<ProviderStatusList>;
+  // @doc("Get provider status.")
+  // @get
+  // @listsResource(ProviderStatus)
+  // @segment("providerStatus")
+  // getStatus is ListOperation<ProviderStatusList>;
 }

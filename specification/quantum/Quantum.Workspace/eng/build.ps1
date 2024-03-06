@@ -50,7 +50,7 @@ try {
         $allVersions = New-Object System.Collections.Generic.List[string]
         foreach ($match in $reMatches) {
             $tag = $match.Groups["tag"].Value
-            $version = $match.Groups["version"].Value
+            $version = $match.Groups["version"].Value           
             $allVersions.Add($version)
             if ($tag -gt $previousTag && $tag -ne $newTag) {
                 $previousTag = $tag
@@ -68,11 +68,12 @@ try {
 
     $configFile =  Resolve-Path "../data-plane/readme.md"
     $versions = GetVersions $configFile
-    Write-Host ""
     Write-Host @"
 ------------------------------------------------------------------------
-Azure Quantum TypeSpec build
+Azure Quantum TypeSpec build - BEGIN
 ------------------------------------------------------------------------
+Started at
+    $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
 Compiling TypeSpec and generating Swagger for version
     $($versions.NewVersion)
 Comparisons will be made against previous version
@@ -82,8 +83,25 @@ Writing output logs to
 ------------------------------------------------------------------------
 "@
 
-    $jsonFile = Resolve-Path "../data-plane/Microsoft.Quantum/preview/$($versions.NewVersion)/quantum.json"
-    $jsonFilePrevious = Resolve-Path "../data-plane/Microsoft.Quantum/preview/$($versions.PreviousVersion)/quantum.json"
+    $jsonFile = Join-Path (Resolve-Path .) "../data-plane/Microsoft.Quantum/preview/$($versions.NewVersion)/quantum.json"
+    $jsonFilePrevious = Join-Path (Resolve-Path .) "../data-plane/Microsoft.Quantum/preview/$($versions.PreviousVersion)/quantum.json"
+
+    # Copy examples from previous version
+    # if they don't exist for the new version.
+    $target = ".\examples\$($versions.NewVersion)"
+    if (-not (Test-Path -Path $target)) {
+        $source = ".\examples\$($versions.PreviousVersion)"
+        Write-Host @"
+Examples not found for $($versions.NewVersion).
+Copying examples from $source to $target ...
+"@
+        Copy-Item -Path $source -Destination $target -Recurse
+        ForEach($file in Get-ChildItem -Path $target -File){
+            $example = Get-Content -Path $file
+            $example = $example -replace $versions.PreviousVersion, $versions.NewVersion
+            Set-Content $file $example                
+        }
+    }
 
     RunAndCheck "tsp-format" \ {
         tsp format **/*.tsp
@@ -175,6 +193,15 @@ Writing output logs to
     RunAndCheck "avocado" \ {
         avocado -f (Join-Path $logDirectory "/avocado-log.txt") -d (Join-Path $logDirectory "../data-plane")
     }
+
+    Write-Host @"
+------------------------------------------------------------------------
+Azure Quantum TypeSpec build - END
+------------------------------------------------------------------------
+Completed at
+    $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
+------------------------------------------------------------------------
+"@
 }
 finally
 {

@@ -91,31 +91,27 @@ alias SessionParam = {
 };
 
 interface SessionOperations {
-  @doc("Open a new session")
-  @put
-  @createsResource(SessionDetails)
-  open is CreateOperation<SessionDetails, SessionParam>;
-
-  @doc("Close an existing session")
-  @post
-  @action
-  @actionSeparator(":")
-  close is ActionOperation<SessionDetails, SessionIdParam>;
-
-  @doc("Get Session by its id")
-  @get
-  @readsResource(SessionDetails)
-  get is GetOperation<SessionDetails, SessionIdParam>;
-
-  @doc("List jobs in a session")
-  @get
-  @readsResource(JobDetails)
-  @segment("jobs")
-  jobsList is ListOperation<JobDetailsList, SessionIdParam>;
-
-  @doc("List all Sessions")
-  @get
-  @listsResource(SessionDetails)
-  @segment("sessions")
-  list is ListOperation<SessionDetailsList>;
+  // @doc("Open a new session")
+  // @put
+  // @createsResource(SessionDetails)
+  // open is CreateOperation<SessionDetails, SessionParam>;
+  // @doc("Close an existing session")
+  // @post
+  // @action
+  // @actionSeparator(":")
+  // close is ActionOperation<SessionDetails, SessionIdParam>;
+  // @doc("Get Session by its id")
+  // @get
+  // @readsResource(SessionDetails)
+  // get is GetOperation<SessionDetails, SessionIdParam>;
+  // @doc("List jobs in a session")
+  // @get
+  // @readsResource(JobDetails)
+  // @segment("jobs")
+  // jobsList is ListOperation<JobDetailsList, SessionIdParam>;
+  // @doc("List all Sessions")
+  // @get
+  // @listsResource(SessionDetails)
+  // @segment("sessions")
+  // list is ListOperation<SessionDetailsList>;
 }

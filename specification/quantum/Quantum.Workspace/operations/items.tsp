@@ -40,7 +40,7 @@ scalar WorkspaceItemId extends string;
 @doc("A workspace item.")
 model ItemDetails {
   @key
-  @doc("The id of the item.")
+  @doc("Id of the item.")
   @visibility("read", "create")
   id: WorkspaceItemId;
 
@@ -87,9 +87,9 @@ model ItemDetailsList {
 }
 
 interface TopLevelItemsOperations {
-  @doc("List top-level items.")
-  @get
-  @listsResource(ItemDetails)
-  @segment("topLevelItems")
-  list is ListOperation<ItemDetailsList>;
+  // @doc("List top-level items.")
+  // @get
+  // @listsResource(ItemDetails)
+  // @segment("topLevelItems")
+  // list is ListOperation<ItemDetailsList>;
 }
