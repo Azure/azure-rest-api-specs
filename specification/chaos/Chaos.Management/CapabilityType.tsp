@@ -32,23 +32,69 @@ interface CapabilityTypes {
   /**
    * Get a Capability Type resource for given Target Type and location.
    */
-  get is ArmResourceRead<CapabilityType>;
+  @armResourceRead(CapabilityType)
+  @get
+  get(
+    ...SubscriptionBaseParameters,
+    ...DefaultProviderNamespace,
+
+    /**
+     * String that represents a Location resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("locations")
+    locationName: string;
+
+    /**
+     * String that represents a Target Type resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("targetTypes")
+    targetTypeName: string;
+
+    /**
+     * String that represents a Capability Type resource name.
+     */
+    @pattern("^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$")
+    @path
+    @segment("capabilityTypes")
+    capabilityTypeName: string;
+  ):ArmResponse<CapabilityType> | ErrorResponse;
 
   /**
    * Get a list of Capability Type resources for given Target Type and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("CapabilityTypes_List")
-  list is ArmResourceListByParent<
-    CapabilityType,
-    {
-      ...BaseParameters<CapabilityType>;
+  @armResourceList(CapabilityType)
+  @get
+  @segment("capabilityTypes")
+  list(
+    ...SubscriptionBaseParameters,
+    ...DefaultProviderNamespace,
 
-      /**
-       * String that sets the continuation token.
-       */
-      @query("continuationToken")
-      continuationToken?: string;
-    }
-  >;
+    /**
+     * String that represents a Location resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("locations")
+    locationName: string;
+
+    /**
+     * String that represents a Target Type resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("targetTypes")
+    targetTypeName: string;
+
+    /**
+     * String that sets the continuation token.
+     */
+    @query("continuationToken")
+    continuationToken?: string;
+  ):ArmResponse<CapabilityTypeList> | ErrorResponse;
 }
+
+model CapabilityTypeList is Azure.Core.Page<CapabilityType>;

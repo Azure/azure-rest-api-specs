@@ -93,59 +93,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/locations/{locationName}/providers/Microsoft.Chaos/targetTypes": {
-      "get": {
-        "operationId": "TargetTypes_List",
-        "tags": [
-          "TargetTypes"
-        ],
-        "description": "Get a list of Target Type resources for given location.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationName",
-            "in": "path",
-            "description": "String that represents a Location resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "continuationToken",
-            "in": "query",
-            "description": "String that sets the continuation token.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TargetTypeListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all Target Types for westus2 location.": {
-            "$ref": "./examples/TargetTypes_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/experiments": {
       "get": {
         "operationId": "Experiments_ListAll",
@@ -159,6 +106,20 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "running",
+            "in": "query",
+            "description": "Optional value that indicates whether to filter results based on if the Experiment is currently running. If null, then the results will not be filtered.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "String that sets the continuation token.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -187,19 +148,17 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/operationStatuses/{asyncOperationId}": {
       "get": {
-        "operationId": "OperationStatusesOperations_Get",
+        "operationId": "OperationStatuses_Get",
         "description": "Get the status of a long running azure asynchronous operation.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The name of the Azure region.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "asyncOperationId",
@@ -207,19 +166,11 @@
             "description": "The operation Id.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "GUID that represents an Azure subscription ID.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
@@ -227,19 +178,72 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get specific operation status": {
+            "$ref": "./examples/OperationStatus_Get.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/targetTypes/{targetTypeName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{locationName}/targetTypes": {
+      "get": {
+        "operationId": "TargetTypes_List",
+        "tags": [
+          "TargetTypes"
+        ],
+        "description": "Get a list of Target Type resources for given location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "String that represents a Location resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "String that sets the continuation token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedTargetType"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Target Types for westus2 location.": {
+            "$ref": "./examples/TargetTypes_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{locationName}/targetTypes/{targetTypeName}": {
       "get": {
         "operationId": "TargetTypes_Get",
         "tags": [
@@ -252,6 +256,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "String that represents a Location resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
           },
           {
             "name": "targetTypeName",
@@ -283,7 +295,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/targetTypes/{targetTypeName}/capabilityTypes": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{locationName}/targetTypes/{targetTypeName}/capabilityTypes": {
       "get": {
         "operationId": "CapabilityTypes_List",
         "tags": [
@@ -298,11 +310,12 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "continuationToken",
-            "in": "query",
-            "description": "String that sets the continuation token.",
-            "required": false,
-            "type": "string"
+            "name": "locationName",
+            "in": "path",
+            "description": "String that represents a Location resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
           },
           {
             "name": "targetTypeName",
@@ -311,13 +324,20 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "String that sets the continuation token.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CapabilityTypeListResult"
+              "$ref": "#/definitions/PagedCapabilityType"
             }
           },
           "default": {
@@ -337,7 +357,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/targetTypes/{targetTypeName}/capabilityTypes/{capabilityTypeName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{locationName}/targetTypes/{targetTypeName}/capabilityTypes/{capabilityTypeName}": {
       "get": {
         "operationId": "CapabilityTypes_Get",
         "tags": [
@@ -350,6 +370,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "String that represents a Location resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
           },
           {
             "name": "targetTypeName",
@@ -385,6 +413,159 @@
         "x-ms-examples": {
           "Get a Capability Type for a virtual machine Target resource on westus2 location.": {
             "$ref": "./examples/CapabilityTypes_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets": {
+      "get": {
+        "operationId": "Targets_List",
+        "tags": [
+          "Targets"
+        ],
+        "description": "Get a list of Target resources that extend a tracked regional resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentProviderNamespace",
+            "in": "path",
+            "description": "String that represents a resource provider namespace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "String that represents a resource type.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "String that represents a resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "String that sets the continuation token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedTarget"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Targets that extend a virtual machine resource.": {
+            "$ref": "./examples/Targets_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}": {
+      "put": {
+        "operationId": "Targets_CreateOrUpdate",
+        "tags": [
+          "Targets"
+        ],
+        "description": "Create or update a Target resource that extends a tracked regional resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentProviderNamespace",
+            "in": "path",
+            "description": "String that represents a resource provider namespace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "String that represents a resource type.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "String that represents a resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "targetName",
+            "in": "path",
+            "description": "String that represents a Target resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "target",
+            "in": "body",
+            "description": "Target resource to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Target"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Target"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/update a Target that extends a virtual machine resource.": {
+            "$ref": "./examples/Targets_CreateOrUpdate.json"
           }
         }
       }
@@ -606,14 +787,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/Experiment"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
+            },
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -671,7 +849,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -683,9 +861,6 @@
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
-          },
-          "204": {
-            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -872,7 +1047,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/executionDetails": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/getExecutionDetails": {
       "post": {
         "operationId": "Experiments_ExecutionDetails",
         "tags": [
@@ -988,55 +1163,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/targets": {
-      "get": {
-        "operationId": "Targets_List",
-        "tags": [
-          "Targets"
-        ],
-        "description": "Get a list of Target resources that extend a tracked regional resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "continuationToken",
-            "in": "query",
-            "description": "String that sets the continuation token.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TargetListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all Targets that extend a virtual machine resource.": {
-            "$ref": "./examples/Targets_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/targets/{targetName}": {
       "get": {
         "operationId": "Targets_Get",
@@ -1080,67 +1206,6 @@
         "x-ms-examples": {
           "Get a Target that extends a virtual machine resource.": {
             "$ref": "./examples/Targets_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Targets_CreateOrUpdate",
-        "tags": [
-          "Targets"
-        ],
-        "description": "Create or update a Target resource that extends a tracked regional resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetName",
-            "in": "path",
-            "description": "String that represents a Target resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "target",
-            "in": "body",
-            "description": "Target resource to be created or updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Target"
-            },
-            "x-ms-client-name": "target"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'Target' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Target"
-            }
-          },
-          "201": {
-            "description": "Resource 'Target' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Target"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create/update a Target that extends a virtual machine resource.": {
-            "$ref": "./examples/Targets_CreateOrUpdate.json"
           }
         }
       },
@@ -1468,67 +1533,6 @@
         }
       }
     },
-    "Azure.Core.Foundations.Error": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "description": "A response containing error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Azure.Core.Foundations.InnerError": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
-        }
-      }
-    },
     "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
       "type": "object",
       "description": "A managed identity assigned by the user.",
@@ -1569,7 +1573,9 @@
             "$ref": "#/definitions/ActionStatus"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "actionId"
+          ]
         }
       }
     },
@@ -1665,27 +1671,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "CapabilityTypeListResult": {
-      "type": "object",
-      "description": "The response of a CapabilityType list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The CapabilityType items on this page",
-          "items": {
-            "$ref": "#/definitions/CapabilityType"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "CapabilityTypeProperties": {
@@ -1963,7 +1948,9 @@
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "selectorId": {
           "type": "string",
@@ -2013,7 +2000,9 @@
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "selectorId": {
           "type": "string",
@@ -2147,7 +2136,8 @@
         "properties": {
           "$ref": "#/definitions/ExperimentExecutionDetailsProperties",
           "description": "The properties of the experiment execution details.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -2270,14 +2260,19 @@
         "steps": {
           "type": "array",
           "description": "List of steps.",
+          "minItems": 1,
+          "maxItems": 4,
           "items": {
             "$ref": "#/definitions/ChaosExperimentStep"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "selectors": {
           "type": "array",
           "description": "List of selectors.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/ChaosTargetSelector"
           }
@@ -2365,6 +2360,69 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
         }
+      ]
+    },
+    "PagedCapabilityType": {
+      "type": "object",
+      "description": "Paged collection of CapabilityType items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CapabilityType items on this page",
+          "items": {
+            "$ref": "#/definitions/CapabilityType"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTarget": {
+      "type": "object",
+      "description": "Paged collection of Target items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Target items on this page",
+          "items": {
+            "$ref": "#/definitions/Target"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTargetType": {
+      "type": "object",
+      "description": "Paged collection of TargetType items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TargetType items on this page",
+          "items": {
+            "$ref": "#/definitions/TargetType"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ProvisioningState": {
@@ -2513,27 +2571,6 @@
         }
       ]
     },
-    "TargetListResult": {
-      "type": "object",
-      "description": "The response of a Target list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Target items on this page",
-          "items": {
-            "$ref": "#/definitions/Target"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "TargetReference": {
       "type": "object",
       "description": "Model that represents a reference to a Target in the selector.",
@@ -2582,27 +2619,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "TargetTypeListResult": {
-      "type": "object",
-      "description": "The response of a TargetType list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TargetType items on this page",
-          "items": {
-            "$ref": "#/definitions/TargetType"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TargetTypeProperties": {
@@ -2654,16 +2670,5 @@
       }
     }
   },
-  "parameters": {
-    "Azure.Core.Foundations.ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The API version to use for this operation.",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "apiVersion"
-    }
-  }
+  "parameters": {}
 }

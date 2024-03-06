@@ -48,6 +48,7 @@ interface ExperimentExecutions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Experiments_ExecutionDetails")
+  @action("getExecutionDetails")
   executionDetails is ArmResourceActionSync<
     ExperimentExecution,
     void,

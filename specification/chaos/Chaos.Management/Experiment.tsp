@@ -52,7 +52,13 @@ interface Experiments {
     Experiment,
     ExperimentUpdate,
     BaseParameters<Experiment>,
-    ArmLroLocationHeader
+    ArmLroLocationHeader,
+    Response = {
+      ...AcceptedResponse;
+      ...Azure.Core.Foundations.RetryAfterHeader;
+      ...ArmLroLocationHeader;
+      ...Body<Experiment>;
+    } | ErrorResponse
   >;
 
   /**
@@ -61,7 +67,8 @@ interface Experiments {
   delete is ArmResourceDeleteWithoutOkAsync<
     Experiment,
     BaseParameters<Experiment>,
-    ArmLroLocationHeader
+    ArmLroLocationHeader,
+    Response = ArmAcceptedLroResponse | ErrorResponse
   >;
 
   /**
@@ -91,7 +98,20 @@ interface Experiments {
   /**
    * Get a list of Experiment resources in a subscription.
    */
-  listAll is ArmListBySubscription<Experiment>;
+  listAll is ArmListBySubscription<Experiment, Parameters = {
+
+    /**
+     * Optional value that indicates whether to filter results based on if the Experiment is currently running. If null, then the results will not be filtered.
+     */
+    @query("running")
+    running?: boolean;
+
+    /**
+     * String that sets the continuation token.
+     */
+    @query("continuationToken")
+    continuationToken?: string;
+  }>;
 
   /**
    * Cancel a running Experiment resource.

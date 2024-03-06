@@ -6,37 +6,26 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Chaos;
 
-interface OperationStatusesOperations {
+interface OperationStatuses {
   /**
    * Get the status of a long running azure asynchronous operation.
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/operationStatuses/{asyncOperationId}")
+  @armResourceRead(OperationStatus)
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the Azure region.
-       */
-      @minLength(1)
-      @path
-      location: string;
+  get(
+    ...SubscriptionBaseParameters;
+    ...LocationParameter;
 
-      /**
-       * The operation Id.
-       */
-      @path
-      asyncOperationId: string;
-
-      /**
-       * GUID that represents an Azure subscription ID.
-       */
-      @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
-      @path
-      subscriptionId: string;
-    },
-    OperationStatus
-  >;
+    /**
+     * The operation Id.
+     */
+    @path
+    @segment("operationStatuses")
+    asyncOperationId: string;
+  ): ArmResponse<OperationStatus> | ErrorResponse;
 }

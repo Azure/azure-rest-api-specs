@@ -32,30 +32,53 @@ interface TargetTypes {
   /**
    * Get a Target Type resources for given location.
    */
-  get is ArmResourceRead<TargetType>;
+  @get
+  @armResourceRead(TargetType)
+  get(
+    ...SubscriptionBaseParameters,
+    ...DefaultProviderNamespace,
+
+    /**
+     * String that represents a Location resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("locations")
+    locationName: string;
+
+    /**
+     * String that represents a Target Type resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("targetTypes")
+    targetTypeName: string;
+  ):ArmResponse<TargetType> | ErrorResponse;
 
   /**
    * Get a list of Target Type resources for given location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("TargetTypes_List")
-  list is ArmResourceListByParent<
-    TargetType,
-    {
-      ...BaseParameters<TargetType>;
+  @segment("targetTypes")
+  @get
+  @armResourceList(TargetType)
+  list(
+    ...SubscriptionBaseParameters,
+    ...DefaultProviderNamespace,
 
-      /**
-       * String that represents a Location resource name.
-       */
-      @path
-      @segment("locations")
-      locationName: string;
+    /**
+     * String that represents a Location resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("locations")
+    locationName: string;
 
-      /**
-       * String that sets the continuation token.
-       */
-      @query("continuationToken")
-      continuationToken?: string;
-    }
-  >;
+    /**
+     * String that sets the continuation token.
+     */
+    @query("continuationToken")
+    continuationToken?: string;
+  ): ArmResponse<TargetTypeList> | ErrorResponse;
 }
+
+model TargetTypeList is Azure.Core.Page<TargetType>;

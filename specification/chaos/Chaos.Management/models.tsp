@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
 
@@ -234,11 +235,15 @@ model ExperimentProperties {
   /**
    * List of steps.
    */
+  @maxItems(4)
+  @minItems(1)
+  @extension("x-ms-identifiers", ["name"])
   steps: ChaosExperimentStep[];
 
   /**
    * List of selectors.
    */
+  @minItems(1)
   selectors: ChaosTargetSelector[];
 }
 
@@ -375,6 +380,7 @@ model ExperimentExecutionDetails {
    * The properties of the experiment execution details.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: ExperimentExecutionDetailsProperties;
 }
 
@@ -468,6 +474,7 @@ model BranchStatus {
   /**
    * The array of actions.
    */
+  @extension("x-ms-identifiers", ["actionId"])
   @visibility("read")
   actions?: ActionStatus[];
 }
@@ -651,6 +658,7 @@ model DiscreteAction extends ChaosExperimentAction {
   /**
    * List of key value pairs.
    */
+  @extension("x-ms-identifiers", ["key"])
   parameters: KeyValuePair[];
 
   /**
@@ -694,6 +702,7 @@ model ContinuousAction extends ChaosExperimentAction {
   /**
    * List of key value pairs.
    */
+  @extension("x-ms-identifiers", ["key"])
   parameters: KeyValuePair[];
 
   /**

@@ -35,7 +35,50 @@ interface Targets {
   /**
    * Create or update a Target resource that extends a tracked regional resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Target>;
+  @armResourceCreateOrUpdate(Target)
+  @put
+  createOrUpdate(
+    ...SubscriptionBaseParameters;
+    ...ResourceGroupParameter;
+
+    /**
+     * String that represents a resource provider namespace.
+     */
+    @segment("providers")
+    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
+    @path
+    parentProviderNamespace: string;
+
+    /**
+     * String that represents a resource type.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceType: string;
+
+    /**
+     * String that represents a resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceName: string;
+
+    ...DefaultProviderNamespace;
+
+    /**
+     * String that represents a Target resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("targets")
+    targetName: string;
+
+    /**
+     * Target resource to be created or updated.
+     */
+    @body
+    target: Target;
+  ):ArmResponse<Target> | ErrorResponse;
 
   /**
    * Delete a Target resource that extends a tracked regional resource.
@@ -45,27 +88,41 @@ interface Targets {
   /**
    * Get a list of Target resources that extend a tracked regional resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Targets_List")
-  list is ArmResourceListByParent<
-    Target,
-    {
-      ...BaseParameters<Target>;
+  @armResourceList(Target)
+  @get
+  @segment("targets")
+  list(
+    ...SubscriptionBaseParameters;
+    ...ResourceGroupParameter;
 
-      /**
-       * String that sets the continuation token.
-       */
-      @query("continuationToken")
-      continuationToken?: string;
-    }
-  >;
+    /**
+     * String that represents a resource provider namespace.
+     */
+    @segment("providers")
+    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
+    @path
+    parentProviderNamespace: string;
+
+    /**
+     * String that represents a resource type.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceType: string;
+
+    /**
+     * String that represents a resource name.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    parentResourceName: string;
+
+    ...DefaultProviderNamespace;
+
+    /**
+     * String that sets the continuation token.
+     */
+    @query("continuationToken")
+    continuationToken?: string;
+  ): ArmResponse<Azure.Core.Page<Target>> | ErrorResponse;
 }
-
-@@projectedName(Targets.createOrUpdate::parameters.resource, "json", "target");
-@@extension(Targets.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "target"
-);
-@@doc(Targets.createOrUpdate::parameters.resource,
-  "Target resource to be created or updated."
-);
