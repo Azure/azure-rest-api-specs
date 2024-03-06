@@ -22,7 +22,7 @@ enum ProviderAvailability {
   @doc("Provider is available.")
   Available,
 
-  @doc("Provider is available with degrated experience.")
+  @doc("Provider is available with degraded experience.")
   Degraded,
 
   @doc("Provider is unavailable.")
