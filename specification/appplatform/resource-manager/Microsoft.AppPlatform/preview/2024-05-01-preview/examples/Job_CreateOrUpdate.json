@@ -8,25 +8,31 @@
     "jobResource": {
       "properties": {
         "triggerConfig": {
-            "triggerType": "Manual"
+          "triggerType": "Manual"
         },
         "source": {
-            "type": "BuildResult",
-            "buildResultId": "<default>"  
+          "type": "BuildResult",
+          "buildResultId": "<default>"
         },
         "template": {
-            "environmentVariables": {
-                "properties": {
-                    "abc": "def",
-                    "env2": "value2"
-                },
-                "secrets": {
-                    "secretKey1": "secretValue1",
-                    "secretKey2": "secretValue2",
-                    "secretKey3": "secretValue3"
-                }
+          "environmentVariables": [
+            {
+              "name": "key1",
+              "value": "value1"
             },
-            "args": ["arg1","arg2"]
+            {
+              "name": "env2",
+              "value": "value2"
+            },
+            {
+              "name": "secretKey1",
+              "secretValue": "secretValue1"
+            }
+          ],
+          "args": [
+            "arg1",
+            "arg2"
+          ]
         }
       }
     }
@@ -41,16 +47,26 @@
           },
           "source": {
             "type": "BuildResult",
-            "buildResultId": "<default>"  
+            "buildResultId": "<default>"
           },
           "template": {
-            "environmentVariables": {
-              "properties": {
-                "env1": "value1",
-                "env2": "value2"
+            "environmentVariables": [
+              {
+                "name": "key1",
+                "value": "value1"
+              },
+              {
+                "name": "env2",
+                "value": "value2"
+              },
+              {
+                "name": "secretKey1"
               }
-            },
-            "args": ["arg1","arg2"]
+            ],
+            "args": [
+              "arg1",
+              "arg2"
+            ]
           }
         },
         "systemData": {
@@ -75,16 +91,26 @@
           },
           "source": {
             "type": "BuildResult",
-            "buildResultId": "<default>"  
+            "buildResultId": "<default>"
           },
           "template": {
-            "environmentVariables": {
-              "properties": {
-                "env1": "value1",
-                "env2": "value2"
+            "environmentVariables": [
+              {
+                "name": "key1",
+                "value": "value1"
+              },
+              {
+                "name": "env2",
+                "value": "value2"
+              },
+              {
+                "name": "secretKey1"
               }
-            },
-            "args": ["arg1","arg2"]
+            ],
+            "args": [
+              "arg1",
+              "arg2"
+            ]
           }
         },
         "systemData": {

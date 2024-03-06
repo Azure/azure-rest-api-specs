@@ -9045,7 +9045,7 @@
           "200": {
             "description": "Success. The response describes the sensitive environment variables of the Job.",
             "schema": {
-              "$ref": "#/definitions/EnvSecrets"
+              "$ref": "#/definitions/EnvSecretsCollection"
             }
           },
           "default": {
@@ -9243,7 +9243,7 @@
           "200": {
             "description": "Success. The response describes the sensitive environment variables of the Job execution.",
             "schema": {
-              "$ref": "#/definitions/EnvSecrets"
+              "$ref": "#/definitions/EnvSecretsCollection"
             }
           },
           "default": {
@@ -15816,24 +15816,13 @@
       "properties": {
         "environmentVariables": {
           "description": "Environment variables of Job execution",
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "Non-sensitive properties",
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "secrets": {
-              "description": "Sensitive properties",
-              "type": "object",
-              "x-ms-secret": true,
-              "additionalProperties": {
-                "type": "string"
-              }
-            }
-          }
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvVar"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "replicaTimeout": {
           "description": "Maximum number of seconds a replica is allowed to run.",
@@ -15925,12 +15914,42 @@
         "value"
       ]
     },
-    "EnvSecrets": {
-      "description": "Sensitive properties for environment variables",
+    "EnvVar": {
+      "description": "Azure Spring Apps components' environment variable.",
       "type": "object",
-      "x-ms-secret": true,
-      "additionalProperties": {
-        "type": "string"
+      "properties": {
+        "name": {
+          "description": "Environment variable name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Non-secret environment variable value.",
+          "type": "string"
+        },
+        "secretValue": {
+          "description": "secret environment variable value.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "EnvSecretsCollection": {
+      "description": "Secret environment variable collection.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Secret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
       }
     }
   },
