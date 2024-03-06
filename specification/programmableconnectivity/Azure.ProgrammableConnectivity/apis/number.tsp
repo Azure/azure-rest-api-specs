@@ -66,8 +66,8 @@ model NumberVerificationWithoutCodeContent {
 
   ...NumberDevice;
 
-  @doc("Redirect URI needed for auth callback.")
-  redirectUri: string;
+  @doc("Redirect URI to backend application.")
+  redirectUri: url;
 }
 
 @doc("Request to verify number of device - second call")
