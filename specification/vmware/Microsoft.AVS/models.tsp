@@ -1846,7 +1846,7 @@ model ScriptCmdletProperties {
 
   @doc("Specifies whether a script cmdlet is intended to be invoked only through automation or visible to customers")
   @visibility("read")
-  audience: ScriptCmdletAudience;
+  audience?: ScriptCmdletAudience;
 
   @doc("Parameters the script will accept")
   @visibility("read")
