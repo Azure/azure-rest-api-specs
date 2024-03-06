@@ -32,7 +32,9 @@ interface NumberVerification {
     NumberVerificationWithoutCodeContent,
     TypeSpec.Http.Response<302> & {},
     TraitOverride<ResponseHeadersTrait<{
-      @header location: string;
+      @doc("The URI of the network's authorization endpoint, which should be followed by the front-end application.")
+      @header
+      location: string;
     } & RequestIdResponseHeader>>
   >;
 
