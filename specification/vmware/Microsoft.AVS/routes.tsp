@@ -877,13 +877,6 @@ interface ScriptExecutions {
   "scriptExecution"
 );
 
-@armResourceOperations
-interface ProvisionedNetworks {
-  list is ArmResourceListByParent<ProvisionedNetwork>;
-
-  get is ArmResourceRead<ProvisionedNetwork>;
-}
-
 @doc("The location envelope.")
 model LocationHeader {
   @doc("The Location header contains the URL where the status of the long running operation can be checked.")

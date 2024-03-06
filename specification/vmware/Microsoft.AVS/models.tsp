@@ -576,8 +576,6 @@ model PrivateCloudUpdate {
 
 @doc("The properties of a private cloud resource that may be updated")
 model PrivateCloudUpdateProperties {
-  ...DisplayNameProperty;
-
   @doc("The default cluster used for management")
   managementCluster?: ManagementCluster;
 
@@ -608,8 +606,6 @@ this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
 
 @doc("The properties of a private cloud resource")
 model PrivateCloudProperties {
-  ...DisplayNameProperty;
-
   @doc("The default cluster used for management")
   managementCluster: ManagementCluster;
 
@@ -764,8 +760,6 @@ model ManagementCluster {
 
 @doc("The common properties of a cluster")
 model CommonClusterProperties {
-  ...DisplayNameProperty;
-
   @doc("The cluster size")
   clusterSize?: int32;
 
@@ -900,16 +894,11 @@ model ClusterUpdate {
 
 @doc("The properties of a cluster that may be updated")
 model ClusterUpdateProperties {
-  ...DisplayNameProperty;
-
   @doc("The cluster size")
   clusterSize?: int32;
 
   @doc("The hosts")
   hosts?: string[];
-
-  @doc("Name of the vsan datastore associated with the cluster")
-  vsanDatastoreName?: string;
 }
 
 @doc("List of all zones and associated hosts for a cluster")
@@ -2082,12 +2071,6 @@ model PSCredentialExecutionParameter extends ScriptExecutionParameter {
   type: "Credential";
 }
 
-@doc("The display name property envelope")
-model DisplayNameProperty {
-  @doc("Display name of the resource.")
-  displayName?: string;
-}
-
 @doc("The type of DNS zone.")
 enum DnsZoneType {
   @doc("Primary DNS zone.")
@@ -2095,61 +2078,6 @@ enum DnsZoneType {
 
   @doc("Private DNS zone.")
   Private,
-}
-
-@doc("A provisioned network resource")
-@parentResource(PrivateCloud)
-model ProvisionedNetwork is ProxyResource<ProvisionedNetworkProperties> {
-  @doc("Name of the cloud link.")
-  @pattern("^[-\\w\\._]+$")
-  @key("provisionedNetworkName")
-  @path
-  @segment("provisionedNetworks")
-  name: string;
-}
-
-@doc("provisioned network provisioning state")
-enum ProvisionedNetworkProvisioningState {
-  ...ResourceProvisioningState,
-}
-
-@doc("The properties of a provisioned network.")
-model ProvisionedNetworkProperties {
-  @doc("The provisioning state of the resource.")
-  @visibility("read")
-  provisioningState?: CloudLinkProvisioningState;
-
-  @doc("The address prefixes of the provisioned network in CIDR notation.")
-  @visibility("read")
-  addressPrefix?: string;
-
-  @doc("The type of network provisioned.")
-  @visibility("read")
-  networkType?: ProvisionedNetworkTypes;
-}
-
-@doc("The type of network provisioned.")
-enum ProvisionedNetworkTypes {
-  @doc("network for ESX management")
-  esxManagement,
-
-  @doc("network for ESX replication")
-  esxReplication,
-
-  @doc("network for HCX management")
-  hcxManagement,
-
-  @doc("network for HCX uplink")
-  hcxUplink,
-
-  @doc("network for vCenter management")
-  vcenterManagement,
-
-  @doc("network for vmotion")
-  vmotion,
-
-  @doc("network for vsan")
-  vsan,
 }
 
 @doc("An iSCSI path resource")

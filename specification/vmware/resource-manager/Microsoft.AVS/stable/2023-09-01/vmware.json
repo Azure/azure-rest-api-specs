@@ -97,9 +97,6 @@
       "name": "ScriptExecutions"
     },
     {
-      "name": "ProvisionedNetworks"
-    },
-    {
       "name": "IscsiPaths"
     }
   ],
@@ -3405,111 +3402,6 @@
         "x-ms-examples": {
           "PrivateClouds_ListAdminCredentials": {
             "$ref": "./examples/PrivateClouds_ListAdminCredentials.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/provisionedNetworks": {
-      "get": {
-        "operationId": "ProvisionedNetworks_ListByPrivateCloud",
-        "tags": [
-          "ProvisionedNetworks"
-        ],
-        "description": "List ProvisionedNetwork resources by PrivateCloud",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateCloudName",
-            "in": "path",
-            "description": "Name of the private cloud",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ProvisionedNetworkListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ProvisionedNetworks_ListByPrivateCloud": {
-            "$ref": "./examples/ProvisionedNetworks_ListByPrivateCloud.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/provisionedNetworks/{provisionedNetworkName}": {
-      "get": {
-        "operationId": "ProvisionedNetworks_Get",
-        "tags": [
-          "ProvisionedNetworks"
-        ],
-        "description": "Get a ProvisionedNetwork",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateCloudName",
-            "in": "path",
-            "description": "Name of the private cloud",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$"
-          },
-          {
-            "name": "provisionedNetworkName",
-            "in": "path",
-            "description": "Name of the cloud link.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ProvisionedNetwork"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ProvisionedNetworks_Get": {
-            "$ref": "./examples/ProvisionedNetworks_Get.json"
           }
         }
       }
@@ -7203,10 +7095,6 @@
       "type": "object",
       "description": "The properties of a cluster",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the resource."
-        },
         "clusterSize": {
           "type": "integer",
           "format": "int32",
@@ -7304,10 +7192,6 @@
       "type": "object",
       "description": "The properties of a cluster that may be updated",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the resource."
-        },
         "clusterSize": {
           "type": "integer",
           "format": "int32",
@@ -7319,10 +7203,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "vsanDatastoreName": {
-          "type": "string",
-          "description": "Name of the vsan datastore associated with the cluster"
         }
       }
     },
@@ -8446,10 +8326,6 @@
       "type": "object",
       "description": "The properties of a management cluster",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the resource."
-        },
         "clusterSize": {
           "type": "integer",
           "format": "int32",
@@ -8885,10 +8761,6 @@
       "type": "object",
       "description": "The properties of a private cloud resource",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the resource."
-        },
         "managementCluster": {
           "$ref": "#/definitions/ManagementCluster",
           "description": "The default cluster used for management"
@@ -9134,10 +9006,6 @@
       "type": "object",
       "description": "The properties of a private cloud resource that may be updated",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the resource."
-        },
         "managementCluster": {
           "$ref": "#/definitions/ManagementCluster",
           "description": "The default cluster used for management"
@@ -9177,122 +9045,6 @@
           "$ref": "#/definitions/DnsZoneType",
           "description": "The type of DNS zone to use."
         }
-      }
-    },
-    "ProvisionedNetwork": {
-      "type": "object",
-      "description": "A provisioned network resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProvisionedNetworkProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ProvisionedNetworkListResult": {
-      "type": "object",
-      "description": "The response of a ProvisionedNetwork list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ProvisionedNetwork items on this page",
-          "items": {
-            "$ref": "#/definitions/ProvisionedNetwork"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ProvisionedNetworkProperties": {
-      "type": "object",
-      "description": "The properties of a provisioned network.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/CloudLinkProvisioningState",
-          "description": "The provisioning state of the resource.",
-          "readOnly": true
-        },
-        "addressPrefix": {
-          "type": "string",
-          "description": "The address prefixes of the provisioned network in CIDR notation.",
-          "readOnly": true
-        },
-        "networkType": {
-          "$ref": "#/definitions/ProvisionedNetworkTypes",
-          "description": "The type of network provisioned.",
-          "readOnly": true
-        }
-      }
-    },
-    "ProvisionedNetworkTypes": {
-      "type": "string",
-      "description": "The type of network provisioned.",
-      "enum": [
-        "esxManagement",
-        "esxReplication",
-        "hcxManagement",
-        "hcxUplink",
-        "vcenterManagement",
-        "vmotion",
-        "vsan"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisionedNetworkTypes",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "esxManagement",
-            "value": "esxManagement",
-            "description": "network for ESX management"
-          },
-          {
-            "name": "esxReplication",
-            "value": "esxReplication",
-            "description": "network for ESX replication"
-          },
-          {
-            "name": "hcxManagement",
-            "value": "hcxManagement",
-            "description": "network for HCX management"
-          },
-          {
-            "name": "hcxUplink",
-            "value": "hcxUplink",
-            "description": "network for HCX uplink"
-          },
-          {
-            "name": "vcenterManagement",
-            "value": "vcenterManagement",
-            "description": "network for vCenter management"
-          },
-          {
-            "name": "vmotion",
-            "value": "vmotion",
-            "description": "network for vmotion"
-          },
-          {
-            "name": "vsan",
-            "value": "vsan",
-            "description": "network for vsan"
-          }
-        ]
       }
     },
     "Quota": {
