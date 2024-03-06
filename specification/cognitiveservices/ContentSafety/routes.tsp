@@ -69,7 +69,7 @@ interface TextOperations {
   @doc("A synchronous API for the analysis of text prompt injection attacks.")
   @route("/text:shieldPrompt")
   @post
-  detectTextPromptInjection is Azure.Core.RpcOperation<
+  detectTextPromptInjectionOptions is Azure.Core.RpcOperation<
     {
       @body
       @doc("The text prompt injection attacks analysis request.")
@@ -172,7 +172,7 @@ interface TextGroundednessDetectionOperations {
   @doc("A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.")
   @route("/text:detectGroundedness")
   @post
-  detectGroundedness is Azure.Core.RpcOperation<
+  detectGroundednessOptions is Azure.Core.RpcOperation<
     DetectGroundednessOptions,
     DetectGroundednessResult
   >;

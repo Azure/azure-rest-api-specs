@@ -381,7 +381,6 @@ model DetectGroundednessResult {
   ungroundedDetails: UngroundednessDetails[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("The text prompt injection attacks analysis request.")
 model AnalyzeTextPromptInjectionOptions {
@@ -402,7 +401,6 @@ model AnalyzeTextPromptInjectionResult {
   documentsAnalysis?: TextPromptInjectionResult[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("The text injection attacks analysis response.")
 model TextPromptInjectionResult {
