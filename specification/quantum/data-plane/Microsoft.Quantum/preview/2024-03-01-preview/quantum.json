@@ -175,74 +175,6 @@
           }
         }
       },
-      "put": {
-        "operationId": "Jobs_Create",
-        "description": "Create a new job",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/workspaceNameParameter"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "Id of the job.",
-            "required": true,
-            "type": "string",
-            "maxLength": 36,
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
-          },
-          {
-            "name": "job",
-            "in": "body",
-            "description": "The job data.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobDetails"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/JobDetails"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/JobDetails"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/RestError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "ErrorCode of the error",
-                "x-ms-client-name": "ErrorCode"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a job.": {
-            "$ref": "./examples/Jobs_Create.json"
-          }
-        }
-      },
       "patch": {
         "operationId": "Jobs_Patch",
         "description": "Update job properties",
@@ -368,6 +300,76 @@
         "x-ms-examples": {
           "Cancels a job.": {
             "$ref": "./examples/Jobs_Cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}/sessions": {
+      "put": {
+        "operationId": "Jobs_Create",
+        "description": "Create a new job",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          },
+          {
+            "name": "job",
+            "in": "body",
+            "description": "The job data.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RestError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "ErrorCode of the error",
+                "x-ms-client-name": "ErrorCode"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a job.": {
+            "$ref": "./examples/Jobs_Create.json"
           }
         }
       }
@@ -519,6 +521,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}:close": {
+      "post": {
+        "operationId": "Sessions_Close",
+        "description": "Close an existing session",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Id of the session.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RestError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "ErrorCode of the error",
+                "x-ms-client-name": "ErrorCode"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Closes a session by its id.": {
+            "$ref": "./examples/Sessions_Close.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}": {
       "get": {
         "operationId": "Sessions_Get",
@@ -572,7 +629,67 @@
             "$ref": "./examples/Sessions_Get.json"
           }
         }
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}/jobs": {
+      "get": {
+        "operationId": "Sessions_JobsList",
+        "description": "List jobs in a session",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Id of the session.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobDetailsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RestError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "ErrorCode of the error",
+                "x-ms-client-name": "ErrorCode"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List jobs in a workspace.": {
+            "$ref": "./examples/Sessions_JobsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}/sessions": {
       "put": {
         "operationId": "Sessions_Open",
         "description": "Open a new session",
@@ -639,119 +756,6 @@
           "Open a session.": {
             "$ref": "./examples/Sessions_Open.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}:close": {
-      "post": {
-        "operationId": "Sessions_Close",
-        "description": "Close an existing session",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/workspaceNameParameter"
-          },
-          {
-            "name": "sessionId",
-            "in": "path",
-            "description": "Id of the session.",
-            "required": true,
-            "type": "string",
-            "maxLength": 36,
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SessionDetails"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/RestError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "ErrorCode of the error",
-                "x-ms-client-name": "ErrorCode"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Closes a session by its id.": {
-            "$ref": "./examples/Sessions_Close.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}/jobs": {
-      "get": {
-        "operationId": "Sessions_JobsList",
-        "description": "List jobs in a session",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/workspaceNameParameter"
-          },
-          {
-            "name": "sessionId",
-            "in": "path",
-            "description": "Id of the session.",
-            "required": true,
-            "type": "string",
-            "maxLength": 36,
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/JobDetailsList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/RestError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "ErrorCode of the error",
-                "x-ms-client-name": "ErrorCode"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List jobs in a workspace.": {
-            "$ref": "./examples/Sessions_JobsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -964,7 +968,7 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/WorkspaceItemId",
-          "description": "The id of the item.",
+          "description": "Id of the item.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1043,7 +1047,7 @@
     },
     "ItemDetailsList": {
       "type": "object",
-      "description": "List of workspace jobs.",
+      "description": "List of workspace items.",
       "properties": {
         "value": {
           "type": "array",
@@ -1862,7 +1866,7 @@
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "description": "The Azure subscription ID.",
       "required": true,
       "type": "string",
       "minLength": 36,
@@ -1873,7 +1877,7 @@
     "workspaceNameParameter": {
       "name": "workspaceName",
       "in": "path",
-      "description": "Name of the workspace.",
+      "description": "Name of the Azure Quantum workspace.",
       "required": true,
       "type": "string",
       "minLength": 2,
