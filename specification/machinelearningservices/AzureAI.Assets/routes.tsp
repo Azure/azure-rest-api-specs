@@ -69,9 +69,13 @@ interface Indexes {
       @query
       listViewType: string = "ActiveOnly";
 
-      @doc("Ordering of list.")
+      @doc("Ordering of list: Please choose OrderBy value from ['createdtime', 'modifiedtime'].")
       @query
-      orderBy: string;
+      orderBy?: string;
+
+      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2.")
+      @query
+      tags?: string;
 
       ...StandardListQueryParameters;
     },
