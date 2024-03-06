@@ -32,7 +32,7 @@ interface DevBoxesClientOperations {
   listAllDevBoxesByUser is DevCenterService.DevBoxesDevCenter.listAllDevBoxesByUser;
   listDevBoxes is DevCenterService.DevBoxesOperations.listDevBoxes;
   getDevBox is DevCenterService.DevBoxesOperations.getDevBox;
-  @convenientAPI(false) // https://github.com/Azure/azure-rest-api-specs/issues/28083
+  @convenientAPI(false, "csharp") // https://github.com/Azure/azure-rest-api-specs/issues/28083
   createDevBox is DevCenterService.DevBoxesOperations.createDevBox;
   deleteDevBox is DevCenterService.DevBoxesOperations.deleteDevBox;
   startDevBox is DevCenterService.DevBoxesOperations.startDevBox;
