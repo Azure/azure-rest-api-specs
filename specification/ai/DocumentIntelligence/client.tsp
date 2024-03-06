@@ -94,3 +94,6 @@ interface DocumentIntelligenceAdministrationClient {
 @@usage(ComposeDocumentModelRequest, Usage.input, "csharp");
 @@usage(ComponentDocumentModelDetails, Usage.input, "csharp");
 @@usage(CopyAuthorization, Usage.input | Usage.output, "csharp");
+
+@@projectedName(AnalyzeDocumentRequest.base64Source, "python", "bytesSource");
+@@projectedName(ClassifyDocumentRequest.base64Source, "python", "bytesSource");
