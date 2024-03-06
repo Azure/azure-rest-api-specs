@@ -12,9 +12,9 @@ using OpenAPI;
 namespace Azure.Monitor.LiveMetrics;
 
 /**
- * Live Metrics IsSubscribed request query parameters, either query strings or headers
+ * Live Metrics IsSubscribed operation's request query parameters, either query strings or headers
  */
-model IsSubscribedRequestParameters {
+model IsSubscribedOperationRequestParameters {
   @doc("The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.")
   @query
   ikey: string;
@@ -57,9 +57,9 @@ model IsSubscribedRequestParameters {
 }
 
 /**
- * Live Metrics IsSubscribed response headers
+ * Live Metrics IsSubscribed operation's response headers
  */
-model IsSubscribedResponseHeaders {
+model IsSubscribedOperationResponseHeaders {
   @doc("A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, the client must start collecting data and posting it to Live Metrics. Otherwise, the client must keep pinging.")
   @header("x-ms-qps-subscribed")
   subscribed: string;
@@ -82,9 +82,9 @@ model IsSubscribedResponseHeaders {
 }
 
 /**
- * Live Metrics PublishLiveMetrics request query parameters, either query strings or headers
+ * Live Metrics Publish operation's request query parameters, either query strings or headers
  */
-model PublishLiveMetricsRequestParameters {
+model PublishOperationRequestParameters {
   @doc("The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.")
   @query
   ikey: string;
@@ -108,9 +108,9 @@ model PublishLiveMetricsRequestParameters {
 }
 
 /**
- * Live Metrics PublishLiveMetrics response headers
+ * Live Metrics Publish operation's response headers
  */
-model PublishLiveMetricsResponseHeaders {
+model PublishOperationResponseHeaders {
   @doc("Tells the client whether the input ikey is subscribed to.")
   @header("x-ms-qps-subscribed")
   subscribed: string;

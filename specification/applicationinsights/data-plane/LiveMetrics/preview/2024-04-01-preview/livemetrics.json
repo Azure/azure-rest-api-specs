@@ -69,34 +69,34 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/IsSubscribedRequestParameters.ikey"
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.ikey"
           },
           {
-            "$ref": "#/parameters/IsSubscribedRequestParameters.apiKey"
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.apiKey"
           },
           {
-            "$ref": "#/parameters/IsSubscribedRequestParameters.transmissionTime"
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.transmissionTime"
           },
           {
-            "$ref": "#/parameters/IsSubscribedRequestParameters.machineName"
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.machineName"
           },
           {
-            "$ref": "#/parameters/IsSubscribedRequestParameters.instanceName"
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.instanceName"
           },
           {
-            "$ref": "#/parameters/IsSubscribedRequestParameters.streamId"
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.streamId"
           },
           {
-            "$ref": "#/parameters/IsSubscribedRequestParameters.roleName"
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.roleName"
           },
           {
-            "$ref": "#/parameters/IsSubscribedRequestParameters.invariantVersion"
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.invariantVersion"
           },
           {
-            "$ref": "#/parameters/IsSubscribedRequestParameters.configurationEtag"
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.configurationEtag"
           },
           {
-            "$ref": "#/parameters/IsSubscribedRequestParameters.monitoringDataPoint"
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.monitoringDataPoint"
           }
         ],
         "responses": {
@@ -147,19 +147,19 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PublishLiveMetricsRequestParameters.ikey"
+            "$ref": "#/parameters/PublishOperationRequestParameters.ikey"
           },
           {
-            "$ref": "#/parameters/PublishLiveMetricsRequestParameters.apiKey"
+            "$ref": "#/parameters/PublishOperationRequestParameters.apiKey"
           },
           {
-            "$ref": "#/parameters/PublishLiveMetricsRequestParameters.configurationEtag"
+            "$ref": "#/parameters/PublishOperationRequestParameters.configurationEtag"
           },
           {
-            "$ref": "#/parameters/PublishLiveMetricsRequestParameters.transmissionTime"
+            "$ref": "#/parameters/PublishOperationRequestParameters.transmissionTime"
           },
           {
-            "$ref": "#/parameters/PublishLiveMetricsRequestParameters.monitoringDataPoints"
+            "$ref": "#/parameters/PublishOperationRequestParameters.monitoringDataPoints"
           }
         ],
         "responses": {
@@ -626,9 +626,9 @@
         "Comparand"
       ]
     },
-    "IsSubscribedResponseHeaders": {
+    "IsSubscribedOperationResponseHeaders": {
       "type": "object",
-      "description": "Live Metrics IsSubscribed response headers"
+      "description": "Live Metrics IsSubscribed operation's response headers"
     },
     "KeyValuePairStringString": {
       "type": "object",
@@ -843,9 +843,9 @@
         "CpuPercentage"
       ]
     },
-    "PublishLiveMetricsResponseHeaders": {
+    "PublishOperationResponseHeaders": {
       "type": "object",
-      "description": "Live Metrics PublishLiveMetrics response headers"
+      "description": "Live Metrics Publish operation's response headers"
     },
     "QuotaConfigurationInfo": {
       "type": "object",
@@ -1070,7 +1070,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "IsSubscribedRequestParameters.apiKey": {
+    "IsSubscribedOperationRequestParameters.apiKey": {
       "name": "apiKey",
       "in": "query",
       "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead.",
@@ -1078,7 +1078,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "IsSubscribedRequestParameters.configurationEtag": {
+    "IsSubscribedOperationRequestParameters.configurationEtag": {
       "name": "x-ms-qps-configuration-etag",
       "in": "header",
       "description": "An encoded string that indicates whether the collection configuration is changed.",
@@ -1087,7 +1087,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "configurationEtag"
     },
-    "IsSubscribedRequestParameters.ikey": {
+    "IsSubscribedOperationRequestParameters.ikey": {
       "name": "ikey",
       "in": "query",
       "description": "The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.",
@@ -1095,7 +1095,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "IsSubscribedRequestParameters.instanceName": {
+    "IsSubscribedOperationRequestParameters.instanceName": {
       "name": "x-ms-qps-instance-name",
       "in": "header",
       "description": "Service instance name where Application Insights SDK lives. Live Metrics uses machine name with instance name as a backup.",
@@ -1104,7 +1104,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "instanceName"
     },
-    "IsSubscribedRequestParameters.invariantVersion": {
+    "IsSubscribedOperationRequestParameters.invariantVersion": {
       "name": "x-ms-qps-invariant-version",
       "in": "header",
       "description": "Version/generation of the data contract (MonitoringDataPoint) between the client and Live Metrics.",
@@ -1113,7 +1113,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "invariantVersion"
     },
-    "IsSubscribedRequestParameters.machineName": {
+    "IsSubscribedOperationRequestParameters.machineName": {
       "name": "x-ms-qps-machine-name",
       "in": "header",
       "description": "Computer name where Application Insights SDK lives. Live Metrics uses machine name with instance name as a backup.",
@@ -1122,7 +1122,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "machineName"
     },
-    "IsSubscribedRequestParameters.monitoringDataPoint": {
+    "IsSubscribedOperationRequestParameters.monitoringDataPoint": {
       "name": "monitoringDataPoint",
       "in": "body",
       "description": "Data contract between Application Insights client SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
@@ -1132,7 +1132,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "IsSubscribedRequestParameters.roleName": {
+    "IsSubscribedOperationRequestParameters.roleName": {
       "name": "x-ms-qps-role-name",
       "in": "header",
       "description": "Cloud role name of the service.",
@@ -1141,7 +1141,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "roleName"
     },
-    "IsSubscribedRequestParameters.streamId": {
+    "IsSubscribedOperationRequestParameters.streamId": {
       "name": "x-ms-qps-stream-id",
       "in": "header",
       "description": "Identifies an Application Insights SDK as trusted agent to report metrics and documents.",
@@ -1150,7 +1150,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "streamId"
     },
-    "IsSubscribedRequestParameters.transmissionTime": {
+    "IsSubscribedOperationRequestParameters.transmissionTime": {
       "name": "x-ms-qps-transmission-time",
       "in": "header",
       "description": "Timestamp when the client transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.",
@@ -1160,7 +1160,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "transmissionTime"
     },
-    "PublishLiveMetricsRequestParameters.apiKey": {
+    "PublishOperationRequestParameters.apiKey": {
       "name": "apiKey",
       "in": "query",
       "description": "Deprecated. An alternative way to pass api key. Use AAD auth instead.",
@@ -1168,7 +1168,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "PublishLiveMetricsRequestParameters.configurationEtag": {
+    "PublishOperationRequestParameters.configurationEtag": {
       "name": "x-ms-qps-configuration-etag",
       "in": "header",
       "description": "An encoded string that indicates whether the collection configuration is changed.",
@@ -1177,7 +1177,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "configurationEtag"
     },
-    "PublishLiveMetricsRequestParameters.ikey": {
+    "PublishOperationRequestParameters.ikey": {
       "name": "ikey",
       "in": "query",
       "description": "The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.",
@@ -1185,7 +1185,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "PublishLiveMetricsRequestParameters.monitoringDataPoints": {
+    "PublishOperationRequestParameters.monitoringDataPoints": {
       "name": "monitoringDataPoints",
       "in": "body",
       "description": "Data contract between the client and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
@@ -1199,7 +1199,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "PublishLiveMetricsRequestParameters.transmissionTime": {
+    "PublishOperationRequestParameters.transmissionTime": {
       "name": "x-ms-qps-transmission-time",
       "in": "header",
       "description": "Timestamp when the client transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.",
