@@ -15733,13 +15733,6 @@
           "$ref": "#/definitions/JobExecutionTemplate",
           "description": "The template which is applied for all executions of the Job."
         },
-        "addonConfigs": {
-          "description": "Collection of addons",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
         "source": {
           "$ref": "#/definitions/UserSourceInfo",
           "description": "Uploaded source information of the Job."
@@ -15778,9 +15771,6 @@
     "JobResourceCollection": {
       "description": "List of Azure Spring Apps Jobs and a possible link for next set.",
       "type": "object",
-      "required": [
-        "value"
-      ],
       "properties": {
         "value": {
           "description": "Collection of Job resources.",
@@ -15791,8 +15781,7 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
