@@ -13,41 +13,33 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 /**
- * Defines the HybridIdentityMetadata.
+ * The attestation status of the virtual machine
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(VirtualMachineInstance)
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  HybridIdentityMetadataProperties
-)
-model HybridIdentityMetadata extends ProxyResourceBase {
-  @key("hybridIdentityMetadatum")
-  @segment("hybridIdentityMetadata")
+@Azure.ResourceManager.Private.armResourceInternal(AttestationStatusProperties)
+model AttestationStatus extends ProxyResourceBase {
+  @key("attestationStatus")
+  @segment("attestationStatus")
   @visibility("read")
   name: string;
 
   /**
-   * Resource properties.
+   * Attestation status properties.
    */
   @extension("x-ms-client-flatten", true)
-  properties: HybridIdentityMetadataProperties;
+  properties: AttestationStatusProperties;
 }
 
 @armResourceOperations
-@projectedName("client", "HybridIdentityMetadata")
-interface HybridIdentityMetadataOperationGroup {
+interface AttestationStatuses {
   /**
-   * Implements HybridIdentityMetadata GET method.
-   */
-  get is ArmResourceRead<HybridIdentityMetadata>;
-
-  /**
-   * Returns the list of HybridIdentityMetadata of the given vm.
+   * Implements AttestationStatus GET method.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("HybridIdentityMetadata_List")
-  list is ArmResourceListByParent<HybridIdentityMetadata>;
+  @operationId("AttestationStatus_Get")
+  get is ArmResourceRead<AttestationStatus>;
 }

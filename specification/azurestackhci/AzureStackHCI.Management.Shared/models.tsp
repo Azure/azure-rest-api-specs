@@ -7,6 +7,6 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.AzureStackHci;
+namespace Microsoft.AzureStackHCI;
 
 interface Operations extends Azure.ResourceManager.Operations {}

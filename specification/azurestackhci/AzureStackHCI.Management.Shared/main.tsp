@@ -16,11 +16,11 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
-  title: "Microsoft.AzureStackHci",
+  title: "Microsoft.AzureStackHCI",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.AzureStackHci;
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+namespace Microsoft.AzureStackHCI;
 
 /**
  * The available API versions.

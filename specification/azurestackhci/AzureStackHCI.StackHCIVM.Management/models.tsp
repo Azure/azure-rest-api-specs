@@ -18,63 +18,37 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * Datasource for the gallery image when provisioning with cloud-init [NoCloud, Azure]
  */
-@doc("Datasource for the gallery image when provisioning with cloud-init")
 enum CloudInitDataSource {
-  @doc("Datasource is not from the cloud")
   NoCloud,
-
-  @doc("Datasource is from Azure")
   Azure,
 }
 
 /**
  * The hypervisor generation of the Virtual Machine [V1, V2]
  */
-@doc("HyperV generation of the VM")
 enum HyperVGeneration {
-  @doc("The vm is V1")
   V1,
-
-  @doc("The vm is V2")
   V2,
 }
 
 /**
  * Provisioning state of the gallery image.
  */
-@doc("Provisioning state.")
 enum ProvisioningStateEnum {
-  @doc("Succeeded state")
   Succeeded,
-
-  @doc("Failed state")
   Failed,
-
-  @doc("InProgress state")
   InProgress,
-
-  @doc("Accepted state")
   Accepted,
-
-  @doc("Deleting state")
   Deleting,
-
-  @doc("Canceled state")
   Canceled,
 }
 
 /**
  * The status of the operation performed on the gallery image [Succeeded, Failed, InProgress]
  */
-@doc(" The status of the operation performed on the gallery image")
 enum Status {
-  @doc("Operation on gallery image succeeded")
   Succeeded,
-
-  @doc("Operation on gallery image failed")
   Failed,
-
-  @doc("Operation on gallery image is in progress")
   InProgress,
 }
 
@@ -82,261 +56,151 @@ enum Status {
  * The type of extendedLocation.
  */
 enum ExtendedLocationTypes {
-  /**
- * The custom location.
- */
   CustomLocation,
 }
 
 /**
  * IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'
  */
-@doc("The IP address allocation method")
 enum IpAllocationMethodEnum {
-  @doc("IPAllocation method is dynamic")
   Dynamic,
-
-  @doc("IPAllocation method is static")
   Static,
 }
 
 /**
  * The format of the actual VHD file [vhd, vhdx]
  */
-@doc("The format of the actual VHD file [vhd, vhdx]")
 enum DiskFileFormat {
-  @doc("DiskFileFormat is vhdx")
   vhdx,
-
-  @doc("DiskFileFormat is vhd")
   vhd,
 }
 
-@doc("List of vm sizes")
 enum VmSizeEnum {
-  @doc("VMSize is Default.")
   Default,
-
-  @doc("VMSize is Standard_A2_v2.")
   Standard_A2_v2,
-
-  @doc("VMSize is Standard_A4_v2.")
   Standard_A4_v2,
-
-  @doc("VMSize is Standard_D2s_v3.")
   Standard_D2s_v3,
-
-  @doc("VMSize is Standard_D4s_v3.")
   Standard_D4s_v3,
-
-  @doc("VMSize is Standard_D8s_v3.")
   Standard_D8s_v3,
-
-  @doc("VMSize is Standard_D16s_v3.")
   Standard_D16s_v3,
-
-  @doc("VMSize is Standard_D32s_v3.")
   Standard_D32s_v3,
-
-  @doc("VMSize is Standard_DS2_v2.")
   Standard_DS2_v2,
-
-  @doc("VMSize is Standard_DS3_v2.")
   Standard_DS3_v2,
-
-  @doc("VMSize is Standard_DS4_v2.")
   Standard_DS4_v2,
-
-  @doc("VMSize is Standard_DS5_v2.")
   Standard_DS5_v2,
-
-  @doc("VMSize is Standard_DS13_v2.")
   Standard_DS13_v2,
-
-  @doc("VMSize is Standard_K8S_v1.")
   Standard_K8S_v1,
-
-  @doc("VMSize is Standard_K8S2_v1.")
   Standard_K8S2_v1,
-
-  @doc("VMSize is Standard_K8S3_v1.")
   Standard_K8S3_v1,
-
-  @doc("VMSize is Standard_K8S4_v1.")
   Standard_K8S4_v1,
-
-  @doc("VMSize is Standard_NK6.")
   Standard_NK6,
-
-  @doc("VMSize is Standard_NK12.")
   Standard_NK12,
-
-  @doc("VMSize is Standard_NV6.")
   Standard_NV6,
-
-  @doc("VMSize is Standard_NV12.")
   Standard_NV12,
-
-  @doc("VMSize is Standard_K8S5_v1.")
   Standard_K8S5_v1,
-
-  @doc("VMSize is Custom.")
   Custom,
 }
 
 /**
  * Specifies the SecurityType of the virtual machine. EnableTPM and SecureBootEnabled must be set to true for SecurityType to function.
  */
-@doc("Specifies the SecurityType of the virtual machine. EnableTPM and SecureBootEnabled must be set to true for SecurityType to function.")
 enum SecurityTypes {
-  @doc("The securityType of the virtual machine is TrustedLaunch")
   TrustedLaunch,
-
-  @doc("The securityType of the virtual machine is ConfidentialVM")
   ConfidentialVM,
 }
 
 /**
  * The level code.
  */
-@doc("The level code")
 enum StatusLevelTypes {
-  @doc("Info")
   Info,
-
-  @doc("Warning")
   Warning,
-
-  @doc("Error")
   Error,
 }
 
 /**
  * The power state of the virtual machine instance
  */
-@doc("The power state of the virtual machine instance")
 enum PowerStateEnum {
-  @doc("virtual machine is deallocated")
   Deallocated,
-
-  @doc("virtual machine is getting deallocated")
   Deallocating,
-
-  @doc("virtual machine is running")
   Running,
-
-  @doc("virtual machine is starting")
   Starting,
-
-  @doc("virtual machine has been stopped")
   Stopped,
-
-  @doc("virtual machine is stopping")
   Stopping,
-
-  @doc("virtual machine status is unknown")
   Unknown,
 }
 
 /**
  * The installation status of the hybrid machine agent installation.
  */
-@doc("The installation status of the hybrid machine agent installation.")
 enum StatusTypes {
-  @doc("hybrid machine agent installation succeeded")
   Succeeded,
-
-  @doc("hybrid machine agent installation is inprogress")
   InProgress,
-
-  @doc("hybrid machine agent installation failed")
   Failed,
 }
 
 /**
  * The status of whether secure boot is enabled.
  */
-@doc("The status of whether secure boot is enabled.")
-enum AttestPropertyEnum {
-  @doc("Secure boot is enabled.")
+enum AttestSecureBootPropertyEnum {
   Enabled,
-
-  @doc("Secure boot is disabled.")
   Disabled,
-
-  @doc("Secure boot status is unknown.")
   Unknown,
 }
 
 /**
  * The status of whether attestation certificate is validated.
  */
-@doc("The status of whether attestation certificate is validated.")
-enum AttestPropertyEnum2 {
-  @doc("Valid attestation certificate")
+enum AttestCertPropertyEnum {
   Valid,
-
-  @doc("Invalid attestation certificate")
   Invalid,
+  Unknown,
+}
 
-  @doc("Unknown attestation certificate")
+/**
+ * The status of whether the list of boot integrity properties is validated.
+ */
+enum AttestBootIntegrityPropertyEnum {
+  Valid,
+  Invalid,
   Unknown,
 }
 
 /**
  * The health status of attestation validation and parsing
  */
-@doc("The health status of attestation validation and parsing")
 enum AttestHealthStatusEnum {
-  @doc("Attestation validation is pending")
   Pending,
-
-  @doc("Attestation validation is healthy")
   Healthy,
-
-  @doc("Attestation validation is unhealthy")
   Unhealthy,
-
-  @doc("Attestation validation is unknown")
   Unknown,
 }
 
 /**
  * Defines the different types of operations for guest agent.
  */
-@doc("Defines the different types of operations for guest agent")
 enum ProvisioningAction {
-  @doc("Install guest agent")
   install,
-
-  @doc("Uninstall guest agent")
   uninstall,
-
-  @doc("Repair guest agent")
   repair,
 }
 
 /**
  * Operating system type that the gallery image uses [Windows, Linux]
  */
-@doc("List of OSTypes.")
+@fixed
 enum OperatingSystemTypes {
-  @doc("Windows OSType")
   Windows,
-
-  @doc("Linux OSType")
   Linux,
 }
 
 /**
  * Type of the IP Pool [vm, vippool]
  */
-@doc("Type of the IP Pool")
+@fixed
 enum IPPoolTypeEnum {
-  @doc("Type of the IP Pool is vm")
   vm,
-
-  @doc("Type of the IP Pool is vmpool")
   vippool,
 }
 
@@ -482,9 +346,6 @@ model GalleryImageStatus {
    */
   errorMessage?: string;
 
-  /**
-   * Gallery image provisioning status
-   */
   provisioningStatus?: GalleryImageStatusProvisioningStatus;
 
   /**
@@ -498,9 +359,6 @@ model GalleryImageStatus {
   progressPercentage?: int64;
 }
 
-  /**
-   * Gallery Image provisioning status
-   */
 model GalleryImageStatusProvisioningStatus {
   /**
    * The ID of the operation performed on the gallery image
@@ -543,10 +401,10 @@ model ExtendedLocation {
  */
 model Resource {
   /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
   @visibility("read")
-  id?: string;
+  id?: ResourceIdentifier;
 
   /**
    * The name of the resource
@@ -618,9 +476,7 @@ model LogicalNetworkPropertiesDhcpOptions {
    */
   dnsServers?: string[];
 }
-  /**
-   * The subnet.
-   */
+
 model Subnet {
   /**
    * Properties of the subnet.
@@ -682,7 +538,7 @@ model SubnetPropertiesFormatIpConfigurationReferencesItem {
   /**
    * IPConfigurationID
    */
-  ID?: string;
+  id?: string;
 }
 
 /**
@@ -756,9 +612,6 @@ model RoutePropertiesFormat {
   nextHopIpAddress?: string;
 }
 
-  /**
-   * The IP-Pool
-   */
 model IPPool {
   /**
    * Name of the IP-Pool
@@ -780,16 +633,9 @@ model IPPool {
    */
   end?: string;
 
-    /**
-   * Information on the ip pool
-   */
-
   info?: IPPoolInfo;
 }
 
-  /**
-   * Information on the IP Pool
-   */
 model IPPoolInfo {
   /**
    * Number of IP addresses allocated from the IP Pool
@@ -821,10 +667,6 @@ model LogicalNetworkStatus {
   provisioningStatus?: LogicalNetworkStatusProvisioningStatus;
 }
 
-  
-  /**
-   * Logical network provisioning status
-   */
 model LogicalNetworkStatusProvisioningStatus {
   /**
    * The ID of the operation performed on the logical network
@@ -911,10 +753,7 @@ model MarketplaceGalleryImageStatus {
    * Descriptive error message
    */
   errorMessage?: string;
-  
-  /**
-   * marketplacegalleryimage provisioning status
-   */
+
   provisioningStatus?: MarketplaceGalleryImageStatusProvisioningStatus;
 
   /**
@@ -927,10 +766,7 @@ model MarketplaceGalleryImageStatus {
    */
   progressPercentage?: int64;
 }
-  
-  /**
-   * Marketplace gallery image provisioning status
-   */
+
 model MarketplaceGalleryImageStatusProvisioningStatus {
   /**
    * The ID of the operation performed on the gallery image
@@ -1048,10 +884,7 @@ model IPConfigurationPropertiesSubnet {
    */
   id?: string;
 }
-  
-  /**
-   * Interface DNS Settings 
-   */
+
 model InterfaceDNSSettings {
   /**
    * List of DNS server IP Addresses for the interface
@@ -1072,10 +905,7 @@ model NetworkInterfaceStatus {
    * Descriptive error message
    */
   errorMessage?: string;
-  
-  /**
-   * Network interface provisioning status
-   */
+
   provisioningStatus?: NetworkInterfaceStatusProvisioningStatus;
 }
 
@@ -1140,22 +970,16 @@ model StorageContainerStatus {
   /**
    * Amount of space available on the disk in MB
    */
-  availableSizeMBq?: int64;
+  availableSizeMB?: int64;
 
   /**
    * Total size of the disk in MB
    */
   containerSizeMB?: int64;
 
-  /**
-   * Storage container provisioning status
-   */
   provisioningStatus?: StorageContainerStatusProvisioningStatus;
 }
-  
-  /**
-   * Storage container provisioning status
-   */
+
 model StorageContainerStatusProvisioningStatus {
   /**
    * The ID of the operation performed on the storage container
@@ -1182,9 +1006,6 @@ model StorageContainersUpdateRequest {
  * Properties under the virtual hard disk resource
  */
 model VirtualHardDiskProperties {
-  /**
-   * Block size in bytes
-   */
   blockSizeBytes?: int32;
 
   /**
@@ -1197,14 +1018,7 @@ model VirtualHardDiskProperties {
    */
   dynamic?: boolean;
 
-  /**
-   * Logical sector in bytes
-   */
   logicalSectorBytes?: int32;
-
-  /**
-   * Physical sector in bytes
-   */
   physicalSectorBytes?: int32;
 
   /**
@@ -1253,15 +1067,9 @@ model VirtualHardDiskStatus {
    */
   errorMessage?: string;
 
-  /**
-   * Provisioning status of vhd
-   */
   provisioningStatus?: VirtualHardDiskStatusProvisioningStatus;
 }
 
-  /**
-   * The provisioning status of the virtual hard disk
-   */
 model VirtualHardDiskStatusProvisioningStatus {
   /**
    * The ID of the operation performed on the virtual hard disk
@@ -1357,10 +1165,6 @@ model VirtualMachineInstanceProperties {
  * HardwareProfile - Specifies the hardware settings for the virtual machine instance.
  */
 model VirtualMachineInstancePropertiesHardwareProfile {
-  
-  /**
-   * vmsize of the virtual machine instance
-   */
   vmSize?: VmSizeEnum;
 
   /**
@@ -1373,25 +1177,11 @@ model VirtualMachineInstancePropertiesHardwareProfile {
    */
   memoryMB?: int64;
 
-  
-  /**
-   * dyanamic memory config of the virtual machine instance
-   */
   dynamicMemoryConfig?: VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig;
 }
 
-  /**
-   * the dynamic memory config of the virtual machine instance
-   */
 model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
-  /**
-   * minimum memory of the virtual machine instance in MB
-   */
   maximumMemoryMB?: int64;
-
-  /**
-   *  maximum memory of the virtual machine instance in MB
-   */
   minimumMemoryMB?: int64;
 
   /**
@@ -1410,9 +1200,6 @@ model VirtualMachineInstancePropertiesNetworkProfile {
   networkInterfaces?: VirtualMachineInstancePropertiesNetworkProfileNetworkInterfacesItem[];
 }
 
-/**
- * NetworkProfile - describes the network interface item of the virtual machine instance
- */
 model VirtualMachineInstancePropertiesNetworkProfileNetworkInterfacesItem {
   /**
    * ID - Resource Id of the network interface
@@ -1535,15 +1322,7 @@ model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
  * SecurityProfile - Specifies the security settings for the virtual machine instance.
  */
 model VirtualMachineInstancePropertiesSecurityProfile {
-  
-/**
- * boolean to enable TPM 
- */
   enableTPM?: boolean;
-  
- /**
- * SecurityProfile - Specifies the uefi settings for the virtual machine instance.
- */
   uefiSettings?: VirtualMachineInstancePropertiesSecurityProfileUefiSettings;
 
   /**
@@ -1552,7 +1331,6 @@ model VirtualMachineInstancePropertiesSecurityProfile {
   securityType?: SecurityTypes;
 }
 
-@doc("Specifies whether secure boot should be enabled on the virtual machine instance.")
 model VirtualMachineInstancePropertiesSecurityProfileUefiSettings {
   /**
    * Specifies whether secure boot should be enabled on the virtual machine instance.
@@ -1588,10 +1366,7 @@ model VirtualMachineInstancePropertiesStorageProfile {
     }
   ]>;
 }
-  
-  /**
-   * Data disk of the virtual machine instance
-   */
+
 model VirtualMachineInstancePropertiesStorageProfileDataDisksItem {
   /**
    * Resource ID of the data disk
@@ -1725,15 +1500,9 @@ model VirtualMachineInstanceStatus {
    */
   powerState?: PowerStateEnum;
 
-  /**
-   * The provisioning status of the virtual machine instance
-   */
   provisioningStatus?: VirtualMachineInstanceStatusProvisioningStatus;
 }
-  
-  /**
-   * Virtual machine provisioning status
-   */
+
 model VirtualMachineInstanceStatusProvisioningStatus {
   /**
    * The ID of the operation performed on the virtual machine instance
@@ -1787,13 +1556,13 @@ model GuestAgentInstallStatus {
  */
 model Identity {
   /**
-   * The principal ID of resource identity.
+   * The principal ID of resource identity. The value must be an UUID.
    */
   @visibility("read")
   principalId?: string;
 
   /**
-   * The tenant ID of resource.
+   * The tenant ID of resource. The value must be an UUID.
    */
   @visibility("read")
   tenantId?: string;
@@ -1828,9 +1597,6 @@ model VirtualMachineInstanceUpdateProperties {
    */
   hardwareProfile?: HardwareProfileUpdate;
 
-  /**
-   * StorageProfile - Specifies the storage profile settings for the virtual machine instance.
-   */
   storageProfile?: StorageProfileUpdate;
 
   /**
@@ -1848,9 +1614,6 @@ model VirtualMachineInstanceUpdateProperties {
  * HardwareProfile - Specifies the hardware settings for the virtual machine instance.
  */
 model HardwareProfileUpdate {
-  /**
-   * vmsize for the virtual machine instance
-   */
   vmSize?: VmSizeEnum;
 
   /**
@@ -1864,9 +1627,6 @@ model HardwareProfileUpdate {
   memoryMB?: int64;
 }
 
-/**
- * StorageProfile - Specifies the storage profile settings for the virtual machine instance.
- */
 model StorageProfileUpdate {
   /**
    * adds data disks to the virtual machine instance for the update call
@@ -1874,13 +1634,7 @@ model StorageProfileUpdate {
   dataDisks?: StorageProfileUpdateDataDisksItem[];
 }
 
-/**
- * StorageProfile - Specifies the Data disks to be updated.
- */
 model StorageProfileUpdateDataDisksItem {
-  /**
- * StorageProfile - resource id of the data disk to be added to storage profile
- */
   id?: string;
 }
 
@@ -1894,7 +1648,6 @@ model NetworkProfileUpdate {
   networkInterfaces?: NetworkProfileUpdateNetworkInterfacesItem[];
 }
 
-@doc("network interface Properties")
 model NetworkProfileUpdateNetworkInterfacesItem {
   /**
    * ID - Resource ID of the network interface
@@ -1911,20 +1664,10 @@ model OsProfileUpdate {
    */
   computerName?: string;
 
-  /**
-   * LinuxConfiguration properties
-   */
   linuxConfiguration?: OsProfileUpdateLinuxConfiguration;
-
-  /**
-   * WindowsConfiguration properties
-   */
   windowsConfiguration?: OsProfileUpdateWindowsConfiguration;
 }
 
-  /**
-   * OSProfile linux configuration properties
-   */
 model OsProfileUpdateLinuxConfiguration {
   /**
    * Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.
@@ -1937,10 +1680,6 @@ model OsProfileUpdateLinuxConfiguration {
   provisionVMConfigAgent?: boolean;
 }
 
-
-  /**
-   * OSProfile windows configuration properties
-   */
 model OsProfileUpdateWindowsConfiguration {
   /**
    * Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.
@@ -1974,33 +1713,33 @@ model HybridIdentityMetadataProperties {
   identity?: Identity;
 
   /**
-   * The provisioning state.
+   * Provisioning state of the virtual machine instance.
    */
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
 }
 
 /**
- * The attestation status of the virtual machine
+ * Defines the attestation status properties
  */
-model AttestationStatus {
+model AttestationStatusProperties {
   /**
    * The status of whether secure boot is enabled.
    */
   @visibility("read")
-  attestSecureBootEnabled?: AttestPropertyEnum = AttestPropertyEnum.Unknown;
+  attestSecureBootEnabled?: AttestSecureBootPropertyEnum = AttestSecureBootPropertyEnum.Unknown;
 
   /**
    * The status of whether attestation certificate is validated.
    */
   @visibility("read")
-  attestationCertValidated?: AttestPropertyEnum2;
+  attestationCertValidated?: AttestCertPropertyEnum = AttestCertPropertyEnum.Unknown;
 
   /**
    * The status of whether the list of boot integrity properties is validated.
    */
   @visibility("read")
-  bootIntegrityValidated?: AttestPropertyEnum2;
+  bootIntegrityValidated?: AttestBootIntegrityPropertyEnum = AttestBootIntegrityPropertyEnum.Unknown;
 
   /**
    * kernel version string for Linux VM.
@@ -2025,6 +1764,12 @@ model AttestationStatus {
    */
   @visibility("read")
   errorMessage?: string;
+
+  /**
+   * Provisioning state of the virtual machine instance.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningStateEnum;
 }
 
 /**
@@ -2048,7 +1793,7 @@ model GuestAgentProperties {
   status?: string;
 
   /**
-   * The provisioning state.
+   * Provisioning state of the virtual machine instance.
    */
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;

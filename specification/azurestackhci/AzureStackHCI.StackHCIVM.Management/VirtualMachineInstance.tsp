@@ -117,26 +117,6 @@ interface VirtualMachineInstances {
     BaseParameters<VirtualMachineInstance>,
     ArmLroLocationHeader
   >;
-
-  /**
-   * Implements AttestationStatus GET method.
-   */
-  // FIXME: AttestationStatus_Get could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AttestationStatus_Get")
-  @summary("Gets AttestationStatus.")
-  @route("/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/AttestationStatus/default")
-  @get
-  getAttestationStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The fully qualified Azure Resource manager identifier of the Hybrid Compute machine resource to be extended.
-       */
-      @path
-      resourceUri: string;
-    },
-    AttestationStatus
-  >;
 }
 
 @@projectedName(VirtualMachineInstances.createOrUpdate::parameters.resource,

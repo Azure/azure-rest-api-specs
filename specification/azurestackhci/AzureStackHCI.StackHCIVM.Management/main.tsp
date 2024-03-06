@@ -11,6 +11,7 @@ import "./StorageContainers.tsp";
 import "./VirtualHardDisks.tsp";
 import "./VirtualMachineInstance.tsp";
 import "./HybridIdentityMetadata.tsp";
+import "./AttestationStatus.tsp";
 import "./GuestAgent.tsp";
 
 using TypeSpec.Rest;
@@ -28,8 +29,8 @@ using TypeSpec.Versioning;
   title: "Microsoft.AzureStackHCI",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.AzureStackHci;
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+namespace Microsoft.AzureStackHCI;
 
 /**
  * The available API versions.
