@@ -30,6 +30,60 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
+### Tag: package-2018-06-preview
+
+These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-preview'
+input-file:
+- preview/2018-06-17/DataLakeStorage.json
+```
+
+### Tag: package-2020-06
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06'
+input-file:
+- preview/2020-06-12/DataLakeStorage.json
+```
+
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10'
+input-file:
+- preview/2020-10-02/DataLakeStorage.json
+```
+
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04'
+input-file:
+- preview/2021-04-10/DataLakeStorage.json
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06'
+input-file:
+- preview/2021-06-08/DataLakeStorage.json
+```
+
+### Tag: package-2023-05-preview
+
+These settings apply only when `--tag=package-2023-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05-preview'
+input-file:
+- preview/2023-05-03/DataLakeStorage.json
+```
+
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
