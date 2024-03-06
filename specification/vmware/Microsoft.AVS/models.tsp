@@ -2106,61 +2106,6 @@ enum DnsZoneType {
   Private,
 }
 
-@doc("A provisioned network resource")
-@parentResource(PrivateCloud)
-model ProvisionedNetwork is ProxyResource<ProvisionedNetworkProperties> {
-  @doc("Name of the cloud link.")
-  @pattern("^[-\\w\\._]+$")
-  @key("provisionedNetworkName")
-  @path
-  @segment("provisionedNetworks")
-  name: string;
-}
-
-@doc("provisioned network provisioning state")
-enum ProvisionedNetworkProvisioningState {
-  ...ResourceProvisioningState,
-}
-
-@doc("The properties of a provisioned network.")
-model ProvisionedNetworkProperties {
-  @doc("The provisioning state of the resource.")
-  @visibility("read")
-  provisioningState?: CloudLinkProvisioningState;
-
-  @doc("The address prefixes of the provisioned network in CIDR notation.")
-  @visibility("read")
-  addressPrefix?: string;
-
-  @doc("The type of network provisioned.")
-  @visibility("read")
-  networkType?: ProvisionedNetworkTypes;
-}
-
-@doc("The type of network provisioned.")
-enum ProvisionedNetworkTypes {
-  @doc("network for ESX management")
-  esxManagement,
-
-  @doc("network for ESX replication")
-  esxReplication,
-
-  @doc("network for HCX management")
-  hcxManagement,
-
-  @doc("network for HCX uplink")
-  hcxUplink,
-
-  @doc("network for vCenter management")
-  vcenterManagement,
-
-  @doc("network for vmotion")
-  vmotion,
-
-  @doc("network for vsan")
-  vsan,
-}
-
 @doc("An iSCSI path resource")
 @parentResource(PrivateCloud)
 @singleton
