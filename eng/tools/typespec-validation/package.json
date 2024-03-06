@@ -21,8 +21,9 @@
         "typescript": "~5.3.3"
     },
     "scripts": {
-        "postinstall": "tsc",
-        "test": "mocha --recursive --exit"
+        "build": "tsc",
+        "postinstall": "npm run build",
+        "test": "npm run build && mocha --recursive --exit"
     },
     "engines": {
         "node": "^18.3.0 || ^20.0.0 || ^21.0.0"
