@@ -19,7 +19,7 @@ model IsSubscribedOperationRequestParameters {
   @query
   ikey: string;
 
-  @doc("Deprecated. An alternative way to pass api key. Use AAD auth instead.")
+  @doc("An alternative for authentication, but it's now deprecated. Please utilize Microsoft Entra ID as the preferred option.")
   @query
   apiKey?: string;
 
@@ -89,7 +89,7 @@ model PublishOperationRequestParameters {
   @query
   ikey: string;
 
-  @doc("Deprecated. An alternative way to pass api key. Use AAD auth instead.")
+  @doc("An alternative for authentication, but it's now deprecated. Please utilize Microsoft Entra ID as the preferred option.")
   @query
   apiKey?: string;
 
