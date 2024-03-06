@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2018-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-03'
 input-file:
-- preview/2018-03-28/queue.json
+- stable/2018-03-28/queue.json
 ```
 
 ### Suppression
