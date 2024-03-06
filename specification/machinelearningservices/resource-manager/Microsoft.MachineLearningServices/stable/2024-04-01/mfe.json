@@ -17069,6 +17069,29 @@
             "read"
           ]
         },
+        "notificationSetting": {
+          "description": "Notification setting for the job",
+          "$ref": "#/definitions/NotificationSetting",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ],
+          "x-nullable": true
+        },
+        "secretsConfiguration": {
+          "description": "Configuration for secrets to be made available during runtime.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SecretConfiguration",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "services": {
           "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
           "type": "object",
@@ -17543,7 +17566,8 @@
         "AutoML",
         "Command",
         "Sweep",
-        "Pipeline"
+        "Pipeline",
+        "Spark"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -17561,6 +17585,9 @@
           },
           {
             "value": "Pipeline"
+          },
+          {
+            "value": "Spark"
           }
         ]
       },
@@ -20793,6 +20820,31 @@
       },
       "additionalProperties": false
     },
+    "SecretConfiguration": {
+      "description": "Secret Configuration definition.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "Secret Uri.\r\nSample Uri : https://myvault.vault.azure.net/secrets/mysecretname/secretversion",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "workspaceSecretName": {
+          "description": "Name of secret in workspace key vault.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "SecretsType": {
       "description": "Enum to determine the datastore secrets type.",
       "enum": [
@@ -21067,6 +21119,293 @@
           "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.",
           "default": "Basic",
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/SkuTier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SparkJob": {
+      "description": "Spark job definition.",
+      "required": [
+        "codeId",
+        "entry"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobBase"
+        }
+      ],
+      "properties": {
+        "archives": {
+          "description": "Archive files used in the job.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "args": {
+          "description": "Arguments for the job.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "codeId": {
+          "description": "[Required] ARM resource ID of the code asset.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "conf": {
+          "description": "Spark configured properties.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "entry": {
+          "description": "[Required] The entry to execute on startup of the job.",
+          "$ref": "#/definitions/SparkJobEntry",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "environmentId": {
+          "description": "The ARM resource ID of the Environment specification for the job.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "environmentVariables": {
+          "description": "Environment variables included in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "files": {
+          "description": "Files used in the job.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "inputs": {
+          "description": "Mapping of input data bindings used in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Command job definition.",
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "jars": {
+          "description": "Jar files used in the job.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "outputs": {
+          "description": "Mapping of output data bindings used in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Job output definition container information on where to find job output/logs.",
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "pyFiles": {
+          "description": "Python files used in the job.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "queueSettings": {
+          "description": "Queue settings for the job",
+          "$ref": "#/definitions/QueueSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "resources": {
+          "description": "Compute Resource configuration for the job.",
+          "$ref": "#/definitions/SparkResourceConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Spark",
+      "additionalProperties": false
+    },
+    "SparkJobEntry": {
+      "description": "Spark job entry point definition.",
+      "required": [
+        "sparkJobEntryType"
+      ],
+      "type": "object",
+      "properties": {
+        "sparkJobEntryType": {
+          "description": "[Required] Type of the job's entry point.",
+          "$ref": "#/definitions/SparkJobEntryType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "sparkJobEntryType"
+    },
+    "SparkJobEntryType": {
+      "enum": [
+        "SparkJobPythonEntry",
+        "SparkJobScalaEntry"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SparkJobEntryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SparkJobPythonEntry"
+          },
+          {
+            "value": "SparkJobScalaEntry"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "SparkJobPythonEntry": {
+      "required": [
+        "file"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SparkJobEntry"
+        }
+      ],
+      "properties": {
+        "file": {
+          "description": "[Required] Relative python file path for job entry point.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "train.py",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SparkJobPythonEntry",
+      "additionalProperties": false
+    },
+    "SparkJobScalaEntry": {
+      "required": [
+        "className"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SparkJobEntry"
+        }
+      ],
+      "properties": {
+        "className": {
+          "description": "[Required] Scala class name used as entry point.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "microsoft.aml.sample.myapp",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SparkJobScalaEntry",
+      "additionalProperties": false
+    },
+    "SparkResourceConfiguration": {
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Optional type of VM used as supported by the compute target.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "runtimeVersion": {
+          "description": "Version of spark runtime used for the job.",
+          "default": "3.1",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "additionalProperties": false
