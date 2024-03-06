@@ -417,6 +417,7 @@ model ExperimentExecutionDetailsPropertiesRunInformation {
    * The steps of the experiment run.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["stepName"])
   steps?: StepStatus[];
 }
 
@@ -446,6 +447,7 @@ model StepStatus {
    * The array of branches.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["branchName"])
   branches?: BranchStatus[];
 }
 
