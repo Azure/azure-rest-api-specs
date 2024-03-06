@@ -46,13 +46,9 @@ model Job {
   @visibility("read")
   createdAt: utcDateTime;
 
-  @doc("Error code for complete job failures.")
+  @doc("Error when job fails in it's entirety.")
   @visibility("read")
-  errorCode?: string;
-
-  @doc("Error message for complete job failures.")
-  @visibility("read")
-  explanation?: string;
+  error?: Azure.Core.Foundations.Error;
 
   @doc("Date and time when the job was started.")
   @visibility("read")
@@ -86,11 +82,8 @@ model File {
   @doc("Status of the file.")
   status: Azure.Core.Foundations.OperationState;
 
-  @doc("Error code if the file has failed.")
-  errorCode?: string;
-
-  @doc("Explanation of current status and/or errorCode. If needed.")
-  explanation?: string;
+  @doc("Error when file fails.")
+  error?: Azure.Core.Foundations.Error;
 
   ...EtagProperty;
 }

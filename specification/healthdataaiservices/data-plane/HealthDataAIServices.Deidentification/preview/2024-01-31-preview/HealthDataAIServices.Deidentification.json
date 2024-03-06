@@ -670,13 +670,9 @@
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "Status of the file."
         },
-        "errorCode": {
-          "type": "string",
-          "description": "Error code if the file has failed."
-        },
-        "explanation": {
-          "type": "string",
-          "description": "Explanation of current status and/or errorCode. If needed."
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error when file fails."
         },
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
@@ -737,14 +733,9 @@
           "description": "Date and time when the job was created.",
           "readOnly": true
         },
-        "errorCode": {
-          "type": "string",
-          "description": "Error code for complete job failures.",
-          "readOnly": true
-        },
-        "explanation": {
-          "type": "string",
-          "description": "Error message for complete job failures.",
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error when job fails in it's entirety.",
           "readOnly": true
         },
         "startedAt": {
