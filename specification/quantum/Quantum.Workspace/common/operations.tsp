@@ -8,14 +8,16 @@ import "@azure-tools/typespec-azure-core";
 
 import "./errors.tsp";
 import "./patches.tsp";
+import "./params.tsp";
+import "./versions.tsp";
 
 using OpenAPI;
+using TypeSpec.Versioning;
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Rest.Resource;
 using Azure.Core;
 using Azure.Core.Traits;
-
-namespace Quantum.Workspace.Common;
 
 @error
 @doc("Error information returned by the API")
@@ -34,7 +36,7 @@ model RestError {
 alias StandardServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
-alias StandardOperations = Azure.Core.ResourceOperations<
+alias AzureCoreOperations = Azure.Core.ResourceOperations<
   StandardServiceTraits,
   RestError
 >;
@@ -74,69 +76,82 @@ union RestResponse2<
   error: TError,
 }
 
-@doc("Operation with common parameters, OK and ERROR responses.")
-op CommonOperation<TParams, TResponse, TError = RestError>(
-  ...CommonParams,
-  ...TParams,
-): RestResponse<TResponse, 200, TError>;
+@useDependency(DefaultAzureCoreVersion)
+namespace Quantum.Workspace.BaseOperations {
+  @doc("Operation with common parameters, OK and ERROR responses.")
+  op CommonOperation<
+    TParams extends TypeSpec.Reflection.Model,
+    TResponse extends TypeSpec.Reflection.Model,
+    TError extends TypeSpec.Reflection.Model = RestError
+  >(...CommonParams, ...TParams): RestResponse<TResponse, 200, TError>;
 
-@doc("Operation to create a resource.")
-op CreateOperation<TResource, TParams, TError = RestError>(
-  ...CommonParams,
-  ...TParams,
-): RestResponse2<TResource, 200, TResource, 201, TError>;
+  @doc("Operation to create a resource.")
+  op CreateOperation<
+    TResource extends TypeSpec.Reflection.Model,
+    TParams extends TypeSpec.Reflection.Model,
+    TError extends TypeSpec.Reflection.Model = RestError
+  >(...CommonParams, ...TParams): RestResponse2<
+    TResource,
+    200,
+    TResource,
+    201,
+    TError
+  >;
 
-// Suppressing warnings due to backward compatibility with
-// service and Swagger.
-#suppress "@azure-tools/typespec-azure-core/request-body-problem"
-#suppress "@azure-tools/typespec-azure-core/response-schema-problem"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Operation to patch a resource.")
-op PatchOperation<TResource, TParams, TError = RestError>(
-  ...CommonParams,
-  ...TParams,
+  // Suppressing warnings due to backward compatibility with
+  // service and Swagger.
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Operation to patch a resource.")
+  op PatchOperation<
+    TResource extends TypeSpec.Reflection.Model,
+    TParams extends TypeSpec.Reflection.Model,
+    TError extends TypeSpec.Reflection.Model = RestError
+  >(
+    ...CommonParams,
+    ...TParams,
 
-  @doc("HTTP body content type.")
-  @header
-  contentType: "application/merge-patch+json",
+    @doc("HTTP body content type.")
+    @header
+    contentType: "application/merge-patch+json",
 
-  @doc("A JSONPatch document as defined by RFC 6902.")
-  @body
-  body: PatchRequest,
-): RestResponse2<TResource, 200, {}, 204, TError>;
+    @doc("A JSONPatch document as defined by RFC 6902.")
+    @body
+    body: PatchRequest,
+  ): RestResponse2<TResource, 200, {}, 204, TError>;
 
-@doc("Operation to cancel a resource.")
-op CancelOperation<TResource, TParams, TError = RestError>(
-  ...CommonParams,
-  ...TParams,
-): RestResponse<TResource, 204, TError>;
+  @doc("Operation to cancel a resource.")
+  op CancelOperation<
+    TResource extends TypeSpec.Reflection.Model,
+    TParams extends TypeSpec.Reflection.Model,
+    TError extends TypeSpec.Reflection.Model = RestError
+  >(...CommonParams, ...TParams): RestResponse<TResource, 204, TError>;
 
-@doc("Operation to get a resource.")
-op GetOperation<TResource, TParams, TError = RestError>(
-  ...CommonParams,
-  ...TParams,
-): RestResponse<TResource, 200, TError>;
+  @doc("Operation to get a resource.")
+  op GetOperation<
+    TResource extends TypeSpec.Reflection.Model,
+    TParams extends TypeSpec.Reflection.Model,
+    TError extends TypeSpec.Reflection.Model = RestError
+  >(...CommonParams, ...TParams): RestResponse<TResource, 200, TError>;
 
-@doc("Operation to act on a resource.")
-op ActionOperation<TResource, TParams, TError = RestError>(
-  ...CommonParams,
-  ...TParams,
-): RestResponse<TResource, 200, TError>;
+  @doc("Operation to act on a resource.")
+  op ActionOperation<
+    TResource extends TypeSpec.Reflection.Model,
+    TParams extends TypeSpec.Reflection.Model,
+    TError extends TypeSpec.Reflection.Model = RestError
+  >(...CommonParams, ...TParams): RestResponse<TResource, 200, TError>;
 
-@extension(
-  "x-ms-pageable",
-  {
-    nextLinkName: "nextLink",
-  }
-)
-@doc("Operation to list a resource.")
-op ListOperation<TResourceList, TParams = {}, TError = RestError>(
-  ...CommonParams,
-  ...TParams,
-): RestResponse<TResourceList, 200, TError>;
-
-alias ServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
-
-alias AzureStandardOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+  @extension(
+    "x-ms-pageable",
+    {
+      nextLinkName: "nextLink",
+    }
+  )
+  @doc("Operation to list a resource.")
+  op ListOperation<
+    TResourceList extends TypeSpec.Reflection.Model,
+    TParams extends TypeSpec.Reflection.Model = {},
+    TError extends TypeSpec.Reflection.Model = RestError
+  >(...CommonParams, ...TParams): RestResponse<TResourceList, 200, TError>;
+}

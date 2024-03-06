@@ -5,11 +5,16 @@
 
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
+
 import "../common/operations.tsp";
+import "../common/versions.tsp";
 import "./cost-estimates.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using TypeSpec.Rest.Resource;
 using OpenAPI;
 
@@ -36,8 +41,10 @@ enum ItemType {
 @maxLength(36)
 scalar WorkspaceItemId extends string;
 
-@discriminator("itemType")
 @doc("A workspace item.")
+@discriminator("itemType")
+@resource("topLevelItems")
+@parentResource(QuantumWorkspace)
 model ItemDetails {
   @key
   @doc("Id of the item.")
@@ -81,15 +88,21 @@ model ItemDetails {
   errorData?: ErrorData;
 }
 
-@doc("List of workspace jobs.")
+@doc("List of workspace items.")
 model ItemDetailsList {
   ...CollectionWithNextLink<ItemDetails>;
 }
 
-interface TopLevelItemsOperations {
-  // @doc("List top-level items.")
-  // @get
-  // @listsResource(ItemDetails)
-  // @segment("topLevelItems")
-  // list is ListOperation<ItemDetailsList>;
+@useDependency(DefaultAzureCoreVersion)
+namespace Quantum.Workspace.Items {
+  using Quantum.Workspace.BaseOperations;
+
+  interface ItemsOperations {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("List top-level items.")
+    @get
+    // @listsResource(ItemDetails) -> causes conflicts with jobs list
+    @segment("topLevelItems")
+    list is ListOperation<ItemDetailsList>;
+  }
 }

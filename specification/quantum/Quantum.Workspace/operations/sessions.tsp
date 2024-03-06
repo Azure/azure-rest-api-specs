@@ -5,11 +5,17 @@
 
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
+
 import "../common/operations.tsp";
+import "../common/versions.tsp";
 import "./items.tsp";
+import "./jobs.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using TypeSpec.Rest.Resource;
 using OpenAPI;
 
@@ -48,6 +54,8 @@ enum SessionStatus {
 //   so we are adding it manually.
 @extension("x-ms-discriminator-value", ItemType.Session)
 @doc("Session, a logical grouping of jobs.")
+@resource("sessions")
+@parentResource(QuantumWorkspace)
 model SessionDetails extends ItemDetails {
   @visibility("read", "create")
   @doc("Type of the Quantum Workspace item is Session.")
@@ -90,28 +98,41 @@ alias SessionParam = {
   session: SessionDetails;
 };
 
-interface SessionOperations {
-  // @doc("Open a new session")
-  // @put
-  // @createsResource(SessionDetails)
-  // open is CreateOperation<SessionDetails, SessionParam>;
-  // @doc("Close an existing session")
-  // @post
-  // @action
-  // @actionSeparator(":")
-  // close is ActionOperation<SessionDetails, SessionIdParam>;
-  // @doc("Get Session by its id")
-  // @get
-  // @readsResource(SessionDetails)
-  // get is GetOperation<SessionDetails, SessionIdParam>;
-  // @doc("List jobs in a session")
-  // @get
-  // @readsResource(JobDetails)
-  // @segment("jobs")
-  // jobsList is ListOperation<JobDetailsList, SessionIdParam>;
-  // @doc("List all Sessions")
-  // @get
-  // @listsResource(SessionDetails)
-  // @segment("sessions")
-  // list is ListOperation<SessionDetailsList>;
+@useDependency(DefaultAzureCoreVersion)
+namespace Quantum.Workspace.Sessions {
+  using Quantum.Workspace.BaseOperations;
+  interface SessionOperations {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("Open a new session")
+    @put
+    @createsResource(SessionDetails)
+    open is CreateOperation<SessionDetails, SessionParam>;
+
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("Close an existing session")
+    @post
+    @action
+    @actionSeparator(":")
+    close is ActionOperation<SessionDetails, SessionIdParam>;
+
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("Get Session by its id")
+    @get
+    @readsResource(SessionDetails)
+    get is GetOperation<SessionDetails, SessionIdParam>;
+
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("List jobs in a session")
+    @get
+    @readsResource(JobDetails)
+    @segment("jobs")
+    jobsList is ListOperation<JobDetailsList, SessionIdParam>;
+
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("List all Sessions")
+    @get
+    @listsResource(SessionDetails)
+    @segment("sessions")
+    list is ListOperation<SessionDetailsList>;
+  }
 }

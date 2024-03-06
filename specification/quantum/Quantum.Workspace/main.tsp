@@ -13,7 +13,6 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/openapi3";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-resource-manager";
 
 import "./common/versions.tsp";
 import "./common/auth.tsp";
@@ -54,25 +53,26 @@ using OpenAPI;
 @doc("Azure Quantum Workspace Services")
 namespace Quantum.Workspace.Services;
 
-// @autoRoute
-// interface Jobs extends JobOperations {}
-
-// @autoRoute
-// interface Sessions extends SessionOperations {}
-
-// @autoRoute
-// interface Providers extends ProviderOperations {}
-
-// @autoRoute
-// interface Storage extends StorageOperations {}
-
-// @autoRoute
-// interface Quotas extends QuotaOperations {}
-
-// @autoRoute
-// interface TopLevelItems extends TopLevelItemsOperations {}
-
-///////////////////
-
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
 @autoRoute
 interface Jobs extends Quantum.Workspace.Jobs.JobOperations {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+@autoRoute
+interface Sessions extends Quantum.Workspace.Sessions.SessionOperations {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+@autoRoute
+interface Providers extends Quantum.Workspace.Providers.ProviderOperations {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+@autoRoute
+interface Storage extends Quantum.Workspace.Storage.StorageOperations {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+@autoRoute
+interface Quotas extends Quantum.Workspace.Quotas.QuotaOperations {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+@autoRoute
+interface TopLevelItems extends Quantum.Workspace.Items.ItemsOperations {}

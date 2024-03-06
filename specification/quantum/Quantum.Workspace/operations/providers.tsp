@@ -5,10 +5,15 @@
 
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
+
 import "../common/operations.tsp";
+import "../common/versions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using TypeSpec.Rest.Resource;
 using OpenAPI;
 
@@ -44,9 +49,12 @@ model Provider {
 }
 
 @doc("Provider status.")
+@resource("providerStatus")
+@parentResource(QuantumWorkspace)
 model ProviderStatus {
   @visibility("read")
   @doc("Provider id.")
+  @key
   id: string;
 
   @visibility("read")
@@ -82,10 +90,15 @@ model ProviderStatusList {
   ...CollectionWithNextLink<ProviderStatus>;
 }
 
-interface ProviderOperations {
-  // @doc("Get provider status.")
-  // @get
-  // @listsResource(ProviderStatus)
-  // @segment("providerStatus")
-  // getStatus is ListOperation<ProviderStatusList>;
+@useDependency(DefaultAzureCoreVersion)
+namespace Quantum.Workspace.Providers {
+  using Quantum.Workspace.BaseOperations;
+  interface ProviderOperations {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("Get provider status.")
+    @get
+    @listsResource(ProviderStatus)
+    @segment("providerStatus")
+    getStatus is ListOperation<ProviderStatusList>;
+  }
 }

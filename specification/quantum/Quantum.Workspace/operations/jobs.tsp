@@ -5,9 +5,11 @@
 
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
 
 import "../common/operations.tsp";
-import "../common/params.tsp";
+import "../common/versions.tsp";
 import "./items.tsp";
 
 using TypeSpec.Http;
@@ -15,10 +17,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.Rest.Resource;
 using OpenAPI;
-using Quantum.Workspace.Common;
-
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace Quantum.Workspace.Jobs;
 
 @doc("The type of the job.")
 enum JobType {
@@ -63,13 +61,8 @@ model QuantumComputingData {
 //   so we are adding it manually.
 @extension("x-ms-discriminator-value", ItemType.Job)
 @resource("jobs")
-@parentResource(Quantum.Workspace.Common.Workspace)
+@parentResource(QuantumWorkspace)
 model JobDetails extends ItemDetails {
-  @key
-  @doc("Id of the job.")
-  @visibility("read", "create")
-  id: WorkspaceItemId;
-
   @visibility("read", "create")
   @doc("Type of the Quantum Workspace item is Job.")
   itemType: ItemType.Job;
@@ -155,32 +148,41 @@ alias JobParam = {
   job: JobDetails;
 };
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
-interface JobOperations {
-  // @doc("Create a new job")
-  // @put
-  // @createsResource(JobDetails)
-  // create is CreateOperation<JobDetails, JobParam>;
+@useDependency(DefaultAzureCoreVersion)
+namespace Quantum.Workspace.Jobs {
+  using Quantum.Workspace.BaseOperations;
+  interface JobOperations {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("Create a new job")
+    @put
+    @createsResource(JobDetails)
+    create is CreateOperation<JobDetails, JobParam>;
 
-  // #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Backward compatibility with service and Swagger"
-  // #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Backward compatibility with service and Swagger"
-  // @doc("Update job properties")
-  // @patch
-  // @updatesResource(JobDetails)
-  // patch is PatchOperation<JobDetails, JobIdParam>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Backward compatibility with service and Swagger"
+    #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Backward compatibility with service and Swagger"
+    @doc("Update job properties")
+    @patch
+    @updatesResource(JobDetails)
+    patch is PatchOperation<JobDetails, JobIdParam>;
 
-  // @doc("Request the cancellation of an existing job")
-  // @delete
-  // cancel is CancelOperation<JobDetails, JobIdParam>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("Request the cancellation of an existing job")
+    @delete
+    @updatesResource(JobDetails)
+    cancel is CancelOperation<JobDetails, JobIdParam>;
 
-  @doc("Get job by its id")
-  @get
-  @readsResource(JobDetails)
-  get is AzureStandardOperations.ResourceRead<JobDetails>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("Get job by its id")
+    @get
+    @readsResource(JobDetails)
+    get is GetOperation<JobDetails, JobIdParam>;
 
-  // @doc("List all jobs")
-  // @get
-  // @listsResource(JobDetails)
-  // @segment("jobs")
-  // list is ListOperation<JobDetailsList>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("List all jobs")
+    @get
+    @segment("jobs")
+    @listsResource(JobDetails)
+    list is ListOperation<JobDetailsList>;
+  }
 }

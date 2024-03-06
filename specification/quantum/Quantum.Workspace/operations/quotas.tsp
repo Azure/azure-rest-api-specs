@@ -5,10 +5,15 @@
 
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
+
 import "../common/operations.tsp";
+import "../common/versions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using TypeSpec.Rest.Resource;
 using OpenAPI;
 
@@ -31,7 +36,15 @@ enum MeterPeriod {
 }
 
 @doc("Quota information.")
+@resource("quotas")
+@parentResource(QuantumWorkspace)
 model Quota {
+  @key
+  @visibility("read")
+  // A faux key is needed to tag the Quota as a resource.
+  @doc("Quota faux key.")
+  key: never;
+
   @visibility("read")
   @doc("The name of the dimension associated with the quota.")
   dimension: string;
@@ -66,10 +79,15 @@ model QuotaList {
   ...CollectionWithNextLink<Quota>;
 }
 
-interface QuotaOperations {
-  // @doc("List quotas for the given workspace.")
-  // @get
-  // @listsResource(Quota)
-  // @segment("quotas")
-  // list is ListOperation<QuotaList>;
+@useDependency(DefaultAzureCoreVersion)
+namespace Quantum.Workspace.Quotas {
+  using Quantum.Workspace.BaseOperations;
+  interface QuotaOperations {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    @doc("List quotas for the given workspace.")
+    @get
+    @listsResource(Quota)
+    @segment("quotas")
+    list is ListOperation<QuotaList>;
+  }
 }
