@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContainerApps API Client",
-    "version": "2024-02-02-preview"
+    "version": "2023-11-02-preview"
   },
   "schemes": [
     "https"
@@ -69,7 +69,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -130,7 +130,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -202,7 +202,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -280,7 +280,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -343,7 +343,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -401,60 +401,149 @@
         "properties": {
           "description": "Java Component resource specific properties",
           "type": "object",
-          "properties": {
-            "componentType": {
-              "description": "Type of the Java Component.",
-              "enum": [
-                "SpringBootAdmin",
-                "SpringCloudEureka",
-                "SpringCloudConfig"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "JavaComponentType",
-                "modelAsString": true
-              }
-            },
-            "provisioningState": {
-              "description": "Provisioning state of the Java Component.",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "Deleting",
-                "InProgress"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "JavaComponentProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "configurations": {
-              "description": "List of Java Components configuration properties",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JavaComponentConfigurationProperty"
-              },
-              "x-ms-identifiers": [
-                "propertyName"
-              ]
-            },
-            "serviceBinds": {
-              "description": "List of Java Components that are bound to the Java component",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JavaComponentServiceBind"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            }
-          },
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/JavaComponentProperties"
         }
       }
+    },
+    "JavaComponentProperties": {
+      "description": "Java Component common properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "properties": {
+        "componentType": {
+          "description": "Type of the Java Component.",
+          "enum": [
+            "SpringBootAdmin",
+            "SpringCloudEureka",
+            "SpringCloudConfig"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JavaComponentType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Java Component.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JavaComponentProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "configurations": {
+          "description": "List of Java Components configuration properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JavaComponentConfigurationProperty"
+          },
+          "x-ms-identifiers": [
+            "propertyName"
+          ]
+        },
+        "serviceBinds": {
+          "description": "List of Java Components that are bound to the Java component",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JavaComponentServiceBind"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "x-ms-client-flatten": true,
+      "discriminator": "componentType"
+    },
+    "SpringBootAdminComponent": {
+      "description": "Spring Boot Admin properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      ],
+      "properties": {
+        "fqdn": {
+          "description": "Hostname of the Java Component endpoint",
+          "type": "string",
+          "readOnly": true
+        },
+        "httpEndpoint": {
+          "description": "Whether the Java Component exposes an external http endpoint",
+          "default": false,
+          "enum": [
+            "External",
+            "Internal"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HttpEndpointEnum",
+            "modelAsString": true
+          }
+        }
+      },
+      "x-ms-discriminator-value": "SpringBootAdmin"
+    },
+    "SpringCloudEurekaComponent": {
+      "description": "Spring Cloud Eureka properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      ],
+      "properties": {
+        "fqdn": {
+          "description": "Hostname of the Java Component endpoint",
+          "type": "string",
+          "readOnly": true
+        },
+        "httpEndpoint": {
+          "description": "Whether the Java Component exposes an external http endpoint",
+          "default": false,
+          "enum": [
+            "External",
+            "Internal"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HttpEndpointEnum",
+            "modelAsString": true
+          }
+        }
+      },
+      "x-ms-discriminator-value": "SpringCloudEureka"
+    },
+    "SpringCloudConfigComponent": {
+      "description": "Spring Cloud Config properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "SpringCloudConfig"
     },
     "JavaComponentsCollection": {
       "description": "Java Components ARM resource.",
