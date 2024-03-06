@@ -9,15 +9,15 @@ import "@typespec/openapi";
 import "@typespec/openapi3";
 import "@typespec/versioning";
 
+import "./common/versions.tsp";
 import "./common/auth.tsp";
-import "./common/version.tsp";
 import "./common/params.tsp";
-import "./common/items.tsp";
-import "./common/jobs.tsp";
-import "./common/sessions.tsp";
-import "./common/providers.tsp";
-import "./common/storage.tsp";
-import "./common/quotas.tsp";
+import "./operations/items.tsp";
+import "./operations/jobs.tsp";
+import "./operations/sessions.tsp";
+import "./operations/providers.tsp";
+import "./operations/storage.tsp";
+import "./operations/quotas.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -28,7 +28,7 @@ using OpenAPI;
   title: "Azure Quantum Workspace Services",
 })
 @useAuth(AzureEntraAuth | AzureApiKeyAuth)
-@versioned(QuantumAPIVersion)
+@versioned(QuantumWorkspaceAPIVersion)
 @server(
   "https://{region}.{serviceBaseUrl}",
   "Endpoint for the Azure Quantum",

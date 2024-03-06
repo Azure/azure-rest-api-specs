@@ -5,10 +5,6 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "./items.tsp";
-import "./jobs.tsp";
-import "./errors.tsp";
-import "./params.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

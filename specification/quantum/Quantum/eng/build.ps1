@@ -32,32 +32,58 @@ try {
         }
         Write-Host ""
     }
+    function GetVersions {
+        param (
+            [string] $configFile
+        )
+        # get new/current tag from the Autorest config
+        $configContents = Get-Content -Path $configFile
+        $tagRegex = '(?<tag>package-(?<version>\d{4}-\d{2}-\d{2}(?<modifier>-preview)?))'    
+        $reMatches = ($configContents | Select-String "^tag:\s$tagRegex$").Matches | Select-Object -First 1
+        $newTag = $reMatches.Groups["tag"].Value
+        $newVersion = $reMatches.Groups["version"].Value
 
-    $configFile =  Resolve-Path "../data-plane/readme.md"
-
-    # get new/current tag and previous tag from the Autorest config
-    $configContents = Get-Content -Path $configFile
-    $tagRegex = '(?<tag>package-(?<version>\d{4}-\d{2}-\d{2}(?<modifier>-preview)?))'    
-    $reMatches = ($configContents | Select-String "^tag:\s$tagRegex$").Matches | Select-Object -First 1
-    $newTag = $reMatches.Groups["tag"].Value
-    $newVersion = $reMatches.Groups["version"].Value
-    $reMatches = ($configContents | Select-String "^###\sTag:\s$tagRegex$").Matches
-    $previousVersion = ""
-    $previousTag = ""
-    foreach ($match in $reMatches) {
-        $tag = $match.Groups["tag"].Value
-        if ($tag -gt $previousTag && $tag -ne $newTag) {
-            $previousTag = $tag
-            $previousVersion = $match.Groups["version"].Value
+        # get all tags from the Autorest config and determine the previous version
+        $reMatches = ($configContents | Select-String "^###\sTag:\s$tagRegex$").Matches
+        $previousVersion = ""
+        $previousTag = ""
+        $allVersions = New-Object System.Collections.Generic.List[string]
+        foreach ($match in $reMatches) {
+            $tag = $match.Groups["tag"].Value
+            $version = $match.Groups["version"].Value
+            $allVersions.Add($version)
+            if ($tag -gt $previousTag && $tag -ne $newTag) {
+                $previousTag = $tag
+                $previousVersion = $version
+            }
+        }
+        return [PSCustomObject]@{
+            NewTag = $newTag
+            NewVersion = $newVersion
+            PreviousTag = $previousTag
+            PreviousVersion = $previousVersion
+            AllVersions = $allVersions
         }
     }
-    Write-Output ""
-    Write-Output "New Tag: $newTag"
-    Write-Output "Previous Tag: $previousTag"
-    Write-Output ""
 
-    $jsonFile = Resolve-Path "../data-plane/Microsoft.Quantum/preview/$newVersion/quantum.json"
-    $jsonFilePrevious = Resolve-Path "../data-plane/Microsoft.Quantum/preview/$previousVersion/quantum.json"
+    $configFile =  Resolve-Path "../data-plane/readme.md"
+    $versions = GetVersions $configFile
+    Write-Host ""
+    Write-Host @"
+------------------------------------------------------------------------
+Azure Quantum TypeSpec build
+------------------------------------------------------------------------
+Compiling TypeSpec and generating Swagger for version
+    $($versions.NewVersion)
+Comparisons will be made against previous version
+    $($versions.PreviousVersion)
+Writing output logs to
+    $logDirectory
+------------------------------------------------------------------------
+"@
+
+    $jsonFile = Resolve-Path "../data-plane/Microsoft.Quantum/preview/$($versions.NewVersion)/quantum.json"
+    $jsonFilePrevious = Resolve-Path "../data-plane/Microsoft.Quantum/preview/$($versions.PreviousVersion)/quantum.json"
 
     RunAndCheck "tsp-format" \ {
         tsp format **/*.tsp

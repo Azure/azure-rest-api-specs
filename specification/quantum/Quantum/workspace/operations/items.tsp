@@ -5,8 +5,8 @@
 
 import "@typespec/rest";
 import "@typespec/http";
+import "../common/operations.tsp";
 import "./cost-estimates.tsp";
-import "./operations.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
