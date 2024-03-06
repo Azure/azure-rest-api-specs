@@ -2854,9 +2854,9 @@
             }
           },
           "201": {
-            "description": "Created. The response describes the new APM created and contains an Azure-AsyncOperation header to query the operation result.",
+            "description": "Created. The response describes the new build setting created and contains an Azure-AsyncOperation header to query the operation result.",
             "schema": {
-              "$ref": "#/definitions/ApmResource"
+              "$ref": "#/definitions/BuildSettingResource"
             }
           },
           "default": {
@@ -9581,6 +9581,10 @@
         "certificates": {
           "$ref": "#/definitions/CertificateReferenceCollection",
           "description": "The CA Certificates for this build"
+        },
+        "buildSettings": {
+          "$ref": "#/definitions/BuildSettingReferenceCollection",
+          "description": "The build settings for this build"
         },
         "triggeredBuildResult": {
           "$ref": "#/definitions/TriggeredBuildResult",
