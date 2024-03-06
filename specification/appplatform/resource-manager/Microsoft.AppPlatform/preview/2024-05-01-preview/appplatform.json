@@ -2618,162 +2618,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/artifactRepos/{artifactRepoName}": {
-      "get": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Get the artifact repository by name.",
-        "operationId": "ArtifactRepos_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApmNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the APM.",
-            "schema": {
-              "$ref": "#/definitions/ApmResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Apms_Get": {
-            "$ref": "./examples/ArtifactRepos_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Create or update an artifact repositories.",
-        "operationId": "ArtifactRepos_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApmNameParameter"
-          },
-          {
-            "name": "artifactRepoResource",
-            "in": "body",
-            "description": "Parameters for the create or update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApmResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the artifact repository updated.",
-            "schema": {
-              "$ref": "#/definitions/ApmResource"
-            }
-          },
-          "201": {
-            "description": "Created. The response describes the new APM created and contains an Azure-AsyncOperation header to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/ApmResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Apms_CreateOrUpdate": {
-            "$ref": "./examples/ArtifactRepos_CreateOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Operation to delete an artifact repository",
-        "operationId": "ArtifactRepos_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApmNameParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. The response indicates the delete operation is performed in the background.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Success. The response indicates the resource doesn't exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Apms_Delete": {
-            "$ref": "./examples/ArtifactRepos_Delete.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices": {
       "get": {
         "tags": [
@@ -2922,6 +2766,162 @@
         "x-ms-examples": {
           "BuildService_CreateOrUpdate": {
             "$ref": "./examples/BuildService_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/buildSettings/{buildSettingName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the build setting by name.",
+        "operationId": "BuildSettings_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildSettingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the APM.",
+            "schema": {
+              "$ref": "#/definitions/ApmResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apms_Get": {
+            "$ref": "./examples/buildSettings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update a build settings.",
+        "operationId": "BuildSetting_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildSettingNameParameter"
+          },
+          {
+            "name": "buildSettingResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildSettingResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the build setting updated.",
+            "schema": {
+              "$ref": "#/definitions/BuildSettingResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new APM created and contains an Azure-AsyncOperation header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ApmResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Apms_CreateOrUpdate": {
+            "$ref": "./examples/BuildSettings_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Operation to delete a build setting",
+        "operationId": "BuildSettings_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildSettingNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Apms_Delete": {
+            "$ref": "./examples/BuildSettings_Delete.json"
           }
         }
       }
@@ -9383,6 +9383,124 @@
         }
       }
     },
+    "BuildSettingResourceCollection": {
+      "description": "Object that includes an array of build setting resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of build setting resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildSettingResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "BuildSettingResource": {
+      "description": "Build setting resource object",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildSettingProperties",
+          "description": "Properties of a build setting",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "BuildSettingProperties": {
+      "description": "Properties of a build setting",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "build setting type",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "State of the build setting.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BuildSettingProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "secrets": {
+          "description": "Sensitive properties for the APM",
+          "type": "object",
+          "properties": {
+            "settings.xml": {
+              "description": "the context of settings.xml",
+              "type": "string"
+            },
+            "settings-security.xml": {
+              "description": "the context of settings-security.xml",
+              "type": "string"
+            },
+            "gradle.properties": {
+              "description": "the context of gradle.properties",
+              "type": "string"
+            },
+          },
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "BuildSettingReference": {
+      "description": "A reference to the build setting",
+      "required": [
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource id of the build setting",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppPlatform/Spring/buildServices/buildSettings"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "BuildSettingReferenceCollection": {
+      "description": "Collection of BuildSettingReferences",
+      "type": "array",
+      "x-ms-identifiers": [
+        "resourceId"
+      ],
+      "items": {
+        "$ref": "#/definitions/BuildSettingReference"
+      }
+    },
     "BuildCollection": {
       "description": "Object that includes an array of Build resources and a possible link for next set",
       "type": "object",
@@ -15399,6 +15517,15 @@
       "description": "The name of the build service resource.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildSettingNameParameter": {
+      "name": "buildSettingName",
+      "in": "path",
+      "description": "The name of the build setting",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
       "x-ms-parameter-location": "method"
     },
     "BuildServiceBuildpackNameParameter": {
