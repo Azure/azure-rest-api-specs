@@ -93,7 +93,7 @@ Writing output logs to
         $source = ".\examples\$($versions.PreviousVersion)"
         Write-Host @"
 Examples not found for $($versions.NewVersion).
-Copying examples from $source to $target ...
+Copying examples from $source to $target
 "@
         Copy-Item -Path $source -Destination $target -Recurse
         ForEach($file in Get-ChildItem -Path $target -File){
@@ -121,7 +121,7 @@ Copying examples from $source to $target ...
         Push-Location (Join-Path $PSScriptRoot "../../../../")
         try
         {
-            npx --no tsv .\specification\quantum\Quantum\        
+            npx --no tsv .\specification\quantum\Quantum.Workspace\        
         }
         finally
         {
