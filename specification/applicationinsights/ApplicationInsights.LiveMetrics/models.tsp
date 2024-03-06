@@ -50,6 +50,10 @@ model IsSubscribedRequestParameters {
   @doc("An encoded string that indicates whether the collection configuration is changed.")
   @header("x-ms-qps-configuration-etag")
   configurationEtag?: eTag;
+
+  @doc("Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
+  @body
+  monitoringDataPoint?: MonitoringDataPoint;
 }
 
 /**
@@ -96,13 +100,8 @@ model PublishLiveMetricsRequestParameters {
   @doc("Timestamp when SDK transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.")
   @header("x-ms-qps-transmission-time")
   transmissionTime?: int64;
-}
 
-/**
- * Live Metrics PublishLiveMetrics request body
- */
-#suppress "@azure-tools/typespec-azure-core/request-body-problem" "Need to follow the casing style of the existing SDK contract."
-model PublishLiveMetricsRequestBody {
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Need to follow the existing SDK contract."
   @doc("Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
   @body
   monitoringDataPoints?: MonitoringDataPoint[];

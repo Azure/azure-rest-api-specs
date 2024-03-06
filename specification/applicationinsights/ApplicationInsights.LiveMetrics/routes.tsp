@@ -21,7 +21,7 @@ op LiveMetricsOperation<
 @route("/QuickPulseService.svc/ping")
 @post
 op isSubscribed is LiveMetricsOperation<
-  IsSubscribedRequestParameters & MonitoringDataPoint,
+  IsSubscribedRequestParameters,
   {
     ...IsSubscribedResponseHeaders;
     ...CollectionConfigurationInfo;
@@ -33,7 +33,7 @@ op isSubscribed is LiveMetricsOperation<
 @route("/QuickPulseService.svc/post")
 @post
 op publishLiveMetrics is LiveMetricsOperation<
-  PublishLiveMetricsRequestParameters & MonitoringDataPoint,
+  PublishLiveMetricsRequestParameters,
   {
     ...PublishLiveMetricsResponseHeaders;
     ...CollectionConfigurationInfo;

@@ -96,12 +96,7 @@
             "$ref": "#/parameters/IsSubscribedRequestParameters.configurationEtag"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MonitoringDataPoint"
-            }
+            "$ref": "#/parameters/IsSubscribedRequestParameters.monitoringDataPoint"
           }
         ],
         "responses": {
@@ -164,12 +159,7 @@
             "$ref": "#/parameters/PublishLiveMetricsRequestParameters.transmissionTime"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MonitoringDataPoint"
-            }
+            "$ref": "#/parameters/PublishLiveMetricsRequestParameters.monitoringDataPoints"
           }
         ],
         "responses": {
@@ -769,20 +759,6 @@
         "CpuPercentage"
       ]
     },
-    "PublishLiveMetricsRequestBody": {
-      "type": "object",
-      "description": "Live Metrics PublishLiveMetrics request body",
-      "properties": {
-        "monitoringDataPoints": {
-          "type": "array",
-          "description": "Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
-          "items": {
-            "$ref": "#/definitions/MonitoringDataPoint"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "PublishLiveMetricsResponseHeaders": {
       "type": "object",
       "description": "Live Metrics PublishLiveMetrics response headers"
@@ -1062,6 +1038,16 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "machineName"
     },
+    "IsSubscribedRequestParameters.monitoringDataPoint": {
+      "name": "monitoringDataPoint",
+      "in": "body",
+      "description": "Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/MonitoringDataPoint"
+      },
+      "x-ms-parameter-location": "method"
+    },
     "IsSubscribedRequestParameters.roleName": {
       "name": "x-ms-qps-role-name",
       "in": "header",
@@ -1113,6 +1099,20 @@
       "description": "The ikey of the target Application Insights component for which client sdk calls /post.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PublishLiveMetricsRequestParameters.monitoringDataPoints": {
+      "name": "monitoringDataPoints",
+      "in": "body",
+      "description": "Data contract between SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+      "required": false,
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/MonitoringDataPoint"
+        },
+        "x-ms-identifiers": []
+      },
       "x-ms-parameter-location": "method"
     },
     "PublishLiveMetricsRequestParameters.transmissionTime": {
