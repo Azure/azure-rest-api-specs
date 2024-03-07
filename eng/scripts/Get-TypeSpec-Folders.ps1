@@ -1,8 +1,6 @@
 [CmdletBinding()]
 param (
-  [switch]$CheckAll = $false,
-  [string]$BaseCommitish = "HEAD^",
-  [string]$TargetCommitish = "HEAD"
+  [switch]$CheckAll = $false
 )
 Set-StrictMode -Version 3
 
@@ -15,7 +13,7 @@ if ($CheckAll) {
   $changedFiles = $checkAllPath
 }
 else {
-  $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -targetCommitish $TargetCommitish -diffFilter "")
+  $changedFiles = @(Get-ChangedFiles -diffFilter "")
   $coreChangedFiles = Get-ChangedCoreFiles $changedFiles
 
   if ($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs' -and $coreChangedFiles) {

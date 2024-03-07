@@ -1,14 +1,12 @@
 [CmdletBinding()]
 param (
   [switch]$CheckAll = $false,
-  [switch]$GitClean = $false,
-  [string]$BaseCommitish = "HEAD^",
-  [string]$TargetCommitish = "HEAD"
+  [switch]$GitClean = $false
 )
 
 . $PSScriptRoot/Logging-Functions.ps1
 
-$typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" -BaseCommitish:$BaseCommitish -TargetCommitish:$TargetCommitish -CheckAll:$CheckAll
+$typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" -CheckAll:$CheckAll
 
 $typespecFoldersWithFailures = @()
 if ($typespecFolders) {
