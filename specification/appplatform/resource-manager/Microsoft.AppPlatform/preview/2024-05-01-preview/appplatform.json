@@ -2770,6 +2770,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildSettings": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get collection of build settings.",
+        "operationId": "BuildSettings_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of build settings.",
+            "schema": {
+              "$ref": "#/definitions/BuildSettingResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apms_List": {
+            "$ref": "./examples/BuildSettings_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/buildSettings/{buildSettingName}": {
       "get": {
         "tags": [
@@ -2810,7 +2855,7 @@
         },
         "x-ms-examples": {
           "Apms_Get": {
-            "$ref": "./examples/buildSettings_Get.json"
+            "$ref": "./examples/BuildSettings_Get.json"
           }
         }
       },
