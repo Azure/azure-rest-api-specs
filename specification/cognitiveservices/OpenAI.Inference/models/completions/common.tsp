@@ -47,7 +47,7 @@ union CompletionsFinishReason {
   functionCall: "function_call",
 
   @doc("Completion ended with the model calling a provided tool for output.")
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   toolCalls: "tool_calls",
 }
 
@@ -69,6 +69,6 @@ union ChatRole {
   function: "function",
 
   @doc("The role that represents extension tool activity within a chat completions operation.")
-  @added(ServiceApiVersions.v2023_08_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   tool: "tool",
 }

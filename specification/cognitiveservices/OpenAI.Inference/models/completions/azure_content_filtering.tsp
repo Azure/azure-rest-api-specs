@@ -85,11 +85,11 @@ alias ContentFilterResultsBase = {
   @encodedName("application/json", "self_harm")
   selfHarm?: ContentFilterResult;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("Describes whether profanity was detected.")
   profanity?: ContentFilterDetectionResult;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "custom_blocklists")
   @doc("Describes detection results against configured custom blocklists.")
   customBlocklists?: ContentFilterBlocklistIdResult[];
@@ -107,7 +107,7 @@ model ContentFilterResultDetailsForPrompt {
   ...ContentFilterResultsBase;
 
   @doc("Whether a jailbreak attempt was detected in the prompt.")
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   jailbreak?: ContentFilterDetectionResult;
 }
 
@@ -116,12 +116,12 @@ model ContentFilterResultDetailsForPrompt {
 model ContentFilterResultsForChoice {
   ...ContentFilterResultsBase;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "protected_material_text")
   @doc("Information about detection of protected text material.")
   protectedMaterialText?: ContentFilterDetectionResult;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "protected_material_code")
   @doc("Information about detection of protected code material.")
   protectedMaterialCode?: ContentFilterCitedDetectionResult;
@@ -141,7 +141,7 @@ model ContentFilterResultsForPrompt {
   contentFilterResults: ContentFilterResultDetailsForPrompt;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("Represents the outcome of a detection operation performed by content filtering.")
 model ContentFilterDetectionResult {
   @doc("A value indicating whether or not the content has been filtered.")
@@ -152,7 +152,7 @@ model ContentFilterDetectionResult {
 }
 
 @doc("Represents the outcome of a detection operation against protected resources as performed by content filtering.")
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model ContentFilterCitedDetectionResult {
   ...ContentFilterDetectionResult;
 
@@ -165,7 +165,7 @@ model ContentFilterCitedDetectionResult {
 }
 
 @doc("Represents the outcome of an evaluation against a custom blocklist as performed by content filtering.")
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model ContentFilterBlocklistIdResult {
   @doc("The ID of the custom blocklist evaluated.")
   id: string;

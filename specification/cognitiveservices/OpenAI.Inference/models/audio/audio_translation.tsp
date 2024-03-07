@@ -6,7 +6,7 @@ namespace Azure.OpenAI;
 using TypeSpec.Versioning;
 
 @doc("Defines available options for the underlying response format of output translation information.")
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 union AudioTranslationFormat {
   string,
 
@@ -34,7 +34,7 @@ union AudioTranslationFormat {
 @doc("""
 The configuration information for an audio translation request.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranslationOptions {
   @doc("""
   The audio data to translate. This must be the binary content of a file in one of the supported media formats:
@@ -84,7 +84,7 @@ Extended information about a single segment of translated audio data.
 Segments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not
 necessarily sentences.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranslationSegment {
   @doc("The 0-based index of this segment within a translation.")
   id: int32;
@@ -131,7 +131,7 @@ model AudioTranslationSegment {
 }
 
 @doc("Result information for an operation that translated spoken audio into written text.")
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranslation {
   @doc("The translated text for the provided audio data.")
   text: string;
