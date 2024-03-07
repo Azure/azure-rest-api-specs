@@ -108,13 +108,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationByTokenQueryParameters.continuationToken"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -431,13 +428,10 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationByTokenQueryParameters.continuationToken"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -676,9 +670,9 @@
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "Status of the file."
         },
-        "explanation": {
-          "type": "string",
-          "description": "Explanation of current status. If needed."
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error when file fails."
         },
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
@@ -737,6 +731,11 @@
           "type": "string",
           "format": "date-time",
           "description": "Date and time when the job was created.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error when job fails in it's entirety.",
           "readOnly": true
         },
         "startedAt": {
@@ -1325,23 +1324,12 @@
       "format": "int32",
       "x-ms-parameter-location": "method"
     },
-    "Azure.Core.SkipQueryParameter": {
-      "name": "skip",
+    "PaginationByTokenQueryParameters.continuationToken": {
+      "name": "continuationToken",
       "in": "query",
-      "description": "The number of result items to skip.",
+      "description": "Token to continue a previous query.",
       "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 0,
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.TopQueryParameter": {
-      "name": "top",
-      "in": "query",
-      "description": "The number of result items to return.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

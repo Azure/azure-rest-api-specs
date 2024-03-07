@@ -31,13 +31,13 @@ interface Jobs {
   @summary("List DeID Jobs")
   list is DeidOperations.ResourceList<
     Job,
-    ListQueryParametersTrait<StandardListQueryParameters>
+    ListQueryParametersTrait<PaginationByTokenQueryParameters>
   >;
 
   @summary("List processed files within a Job")
   listFiles is DeidOperations.ResourceList<
     File,
-    ListQueryParametersTrait<StandardListQueryParameters>
+    ListQueryParametersTrait<PaginationByTokenQueryParameters>
   >;
 
   @summary("Cancel a DeID Job")

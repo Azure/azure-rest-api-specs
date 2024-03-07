@@ -46,6 +46,10 @@ model Job {
   @visibility("read")
   createdAt: utcDateTime;
 
+  @doc("Error when job fails in it's entirety.")
+  @visibility("read")
+  error?: Azure.Core.Foundations.Error;
+
   @doc("Date and time when the job was started.")
   @visibility("read")
   startedAt?: utcDateTime;
@@ -78,9 +82,8 @@ model File {
   @doc("Status of the file.")
   status: Azure.Core.Foundations.OperationState;
 
-  // TODO: Maybe this should be called reason?
-  @doc("Explanation of current status. If needed.")
-  explanation?: string;
+  @doc("Error when file fails.")
+  error?: Azure.Core.Foundations.Error;
 
   ...EtagProperty;
 }
@@ -325,4 +328,13 @@ model PhiEntity {
 
   @doc("Confidence score of the text/type pairing.")
   confidenceScore?: float64;
+}
+
+@doc("Query parameters for listing jobs.")
+model PaginationByTokenQueryParameters {
+  ...MaxPageSizeQueryParameter;
+
+  @query
+  @doc("Token to continue a previous query.")
+  continuationToken?: string;
 }
