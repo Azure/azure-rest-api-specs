@@ -74,9 +74,6 @@ model NumberVerificationWithoutCodeContent {
 
 @doc("Request to verify number of device - second call")
 model NumberVerificationWithCodeContent {
-  @doc("Identifier for the network to query for this device.")
-  networkIdentifier: NetworkIdentifier;
-
   @doc("The code provided by APC in exchange for the operator code.")
   apcCode: string;
 }
