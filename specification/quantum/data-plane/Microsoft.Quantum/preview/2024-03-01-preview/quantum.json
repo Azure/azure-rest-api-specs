@@ -75,7 +75,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs": {
       "get": {
         "operationId": "Jobs_List",
-        "description": "List all jobs",
+        "description": "List all jobs.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -147,7 +147,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}": {
       "get": {
         "operationId": "Jobs_Get",
-        "description": "Get job by its id",
+        "description": "Get job by its id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -223,7 +223,7 @@
       },
       "put": {
         "operationId": "Jobs_Create",
-        "description": "Create a new job",
+        "description": "Create a new job.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -313,8 +313,8 @@
         }
       },
       "patch": {
-        "operationId": "Jobs_Patch",
-        "description": "Update job properties",
+        "operationId": "Jobs_Update",
+        "description": "Update job properties.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -399,13 +399,13 @@
         },
         "x-ms-examples": {
           "Patches a job.": {
-            "$ref": "./examples/Jobs_Patch.json"
+            "$ref": "./examples/Jobs_Update.json"
           }
         }
       },
       "delete": {
         "operationId": "Jobs_Cancel",
-        "description": "Request the cancellation of an existing job",
+        "description": "Request the cancellation of an existing job.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -479,8 +479,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/providerStatus": {
       "get": {
-        "operationId": "Providers_GetStatus",
-        "description": "Get provider status.",
+        "operationId": "Providers_List",
+        "description": "List all providers in the workspace with their respective status.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -541,7 +541,7 @@
         },
         "x-ms-examples": {
           "Get provider and target statuses.": {
-            "$ref": "./examples/Providers_GetStatus.json"
+            "$ref": "./examples/Providers_List.json"
           }
         },
         "x-ms-pageable": {
@@ -624,7 +624,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions": {
       "get": {
         "operationId": "Sessions_List",
-        "description": "List all Sessions",
+        "description": "List all Sessions.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -696,7 +696,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}": {
       "get": {
         "operationId": "Sessions_Get",
-        "description": "Get Session by its id",
+        "description": "Get Session by its id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -772,7 +772,7 @@
       },
       "put": {
         "operationId": "Sessions_Open",
-        "description": "Open a new session",
+        "description": "Open a new session.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -865,7 +865,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}:close": {
       "post": {
         "operationId": "Sessions_Close",
-        "description": "Close an existing session",
+        "description": "Close an existing session.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -942,8 +942,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}/jobs": {
       "get": {
-        "operationId": "Sessions_JobsList",
-        "description": "List jobs in a session",
+        "operationId": "SessionsJobs_List",
+        "description": "List jobs in a session.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1013,7 +1013,7 @@
         },
         "x-ms-examples": {
           "List jobs in a workspace.": {
-            "$ref": "./examples/Sessions_JobsList.json"
+            "$ref": "./examples/SessionsJobs_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1023,7 +1023,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/storage/sasUri": {
       "post": {
-        "operationId": "Storage_SasUri",
+        "operationId": "Storage_GetSasUri",
         "description": "Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. The SAS URL can be used to upload job input and/or download job output.",
         "parameters": [
           {
@@ -1070,7 +1070,7 @@
         },
         "x-ms-examples": {
           "Gets a URL with SAS token for a container/blob.": {
-            "$ref": "./examples/Storage_SasUri.json"
+            "$ref": "./examples/Storage_GetSasUri.json"
           }
         }
       }
@@ -1287,6 +1287,40 @@
         ]
       }
     },
+    "Errors.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "ItemDetails": {
       "type": "object",
       "description": "A workspace item.",
@@ -1294,10 +1328,7 @@
         "id": {
           "$ref": "#/definitions/WorkspaceItemId",
           "description": "Id of the item.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -1356,7 +1387,7 @@
           "readOnly": true
         },
         "errorData": {
-          "$ref": "#/definitions/Quantum.Workspace.BaseOperations.Error",
+          "$ref": "#/definitions/Errors.Error",
           "description": "Error information.",
           "readOnly": true
         }
@@ -1401,10 +1432,7 @@
         "id": {
           "$ref": "#/definitions/WorkspaceItemId",
           "description": "Id of the job.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "jobType": {
           "$ref": "#/definitions/JobType",
@@ -1896,40 +1924,6 @@
         "targets"
       ]
     },
-    "Quantum.Workspace.BaseOperations.Error": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
     "QuantumComputingData": {
       "type": "object",
       "description": "Quantum computing data.",
@@ -2019,10 +2013,7 @@
         "id": {
           "$ref": "#/definitions/WorkspaceItemId",
           "description": "Id of the session.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "jobFailurePolicy": {
           "$ref": "#/definitions/SessionJobFailurePolicy",
@@ -2052,117 +2043,10 @@
     "SessionJobDetails": {
       "type": "object",
       "description": "A Session Job.",
-      "properties": {
-        "id": {
-          "$ref": "#/definitions/WorkspaceItemId",
-          "description": "Id of the job."
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Type of the Quantum Workspace item is Job.",
-          "enum": [
-            "Job"
-          ]
-        },
-        "jobType": {
-          "$ref": "#/definitions/JobType",
-          "description": "The type of job."
-        },
-        "sessionId": {
-          "type": "string",
-          "description": "The ID of the session that the job is part of."
-        },
-        "containerUri": {
-          "type": "string",
-          "description": "The blob container SAS uri, the container is used to host job data."
-        },
-        "inputDataUri": {
-          "type": "string",
-          "description": "The input blob URI, if specified, it will override the default input blob in the container."
-        },
-        "inputDataFormat": {
-          "type": "string",
-          "description": "The format of the input data."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The status of the job."
-        },
-        "metadata": {
-          "type": "object",
-          "description": "The job metadata. Metadata provides client the ability to store client-specific information"
-        },
-        "cancellationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when a job was successfully cancelled."
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of user-supplied tags associated with the job.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "quantumComputingData": {
-          "$ref": "#/definitions/QuantumComputingData",
-          "description": "Quantum computing data."
-        },
-        "inputParams": {
-          "type": "object",
-          "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data."
-        },
-        "outputDataUri": {
-          "type": "string",
-          "description": "The output blob uri. When a job finishes successfully, results will be uploaded to this blob."
-        },
-        "outputDataFormat": {
-          "type": "string",
-          "description": "The format of the output data."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the item. It is not required for the name to be unique and it's only used for display purposes."
-        },
-        "providerId": {
-          "type": "string",
-          "description": "The unique identifier for the provider."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target identifier to run the job."
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation time of the item."
-        },
-        "beginExecutionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when the item began execution."
-        },
-        "endExecutionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when the item finished execution."
-        },
-        "costEstimate": {
-          "$ref": "#/definitions/CostEstimate",
-          "description": "Cost estimate."
-        },
-        "errorData": {
-          "$ref": "#/definitions/Quantum.Workspace.BaseOperations.Error",
-          "description": "Error information."
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
         }
-      },
-      "required": [
-        "id",
-        "itemType",
-        "containerUri",
-        "name",
-        "providerId",
-        "target"
       ]
     },
     "SessionJobFailurePolicy": {

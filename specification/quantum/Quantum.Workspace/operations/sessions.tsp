@@ -50,7 +50,7 @@ enum SessionStatus {
 model SessionDetails extends ItemDetails {
   @key("sessionId")
   @doc("Id of the session.")
-  @visibility("read", "create")
+  @visibility("read")
   id: WorkspaceItemId;
 
   @visibility("read", "create")
@@ -66,32 +66,32 @@ model SessionDetails extends ItemDetails {
   status?: SessionStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/spread-discriminated-model" "The discriminator is not used in this scenario"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("A Session Job.")
 @resource("jobs")
 @parentResource(SessionDetails)
 @withVisibility("read")
-model SessionJobDetails {
-  ...JobDetails;
-}
+model SessionJobDetails extends JobDetails {}
 
 @useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
-    @doc("Open a new session")
+    @doc("Open a new session.")
     open is CreateOperation<SessionDetails>;
 
-    @doc("Close an existing session")
+    @doc("Close an existing session.")
     close is ActionOperation<SessionDetails>;
 
-    @doc("Get Session by its id")
+    @doc("Get Session by its id.")
     get is GetOperation<SessionDetails>;
 
-    @doc("List jobs in a session")
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
+    @doc("List jobs in a session.")
+    @operationId("SessionsJobs_List")
     jobsList is ListOperation<SessionJobDetails>;
 
-    @doc("List all Sessions")
+    @doc("List all Sessions.")
     list is ListOperation<SessionDetails>;
   }
 }

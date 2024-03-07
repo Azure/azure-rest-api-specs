@@ -42,6 +42,6 @@ namespace Quantum.Workspace.Operations {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
     @doc("Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. The SAS URL can be used to upload job input and/or download job output.")
     @segment("storage/sasUri")
-    sasUri is PostOperation<BlobDetailsParam, SasUriResponse>;
+    getSasUri is PostOperation<BlobDetailsParam, SasUriResponse>;
   }
 }

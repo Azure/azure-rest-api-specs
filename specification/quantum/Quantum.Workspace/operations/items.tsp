@@ -38,7 +38,7 @@ scalar WorkspaceItemId extends string;
 model ItemDetails {
   @key
   @doc("Id of the item.")
-  @visibility("read", "create")
+  @visibility("read")
   id: WorkspaceItemId;
 
   @visibility("read", "create", "update")
@@ -75,7 +75,7 @@ model ItemDetails {
 
   @visibility("read")
   @doc("Error information.")
-  errorData?: Quantum.Workspace.BaseOperations.Error;
+  errorData?: Errors.Error;
 }
 
 @useDependency(DefaultAzureCoreVersion)

@@ -59,7 +59,7 @@ model JobDetails extends ItemDetails {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"
   @key("jobId")
   @doc("Id of the job.")
-  @visibility("read", "create")
+  @visibility("read")
   id: WorkspaceItemId;
 
   @visibility("read", "create")
@@ -123,21 +123,20 @@ model JobDetails extends ItemDetails {
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface JobOperations {
-    @doc("Create a new job")
+    @doc("Create a new job.")
     create is CreateOperation<JobDetails>;
 
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body"
-    @doc("Update job properties")
-    @patch
-    patch is PatchOperation<JobDetails>;
+    @doc("Update job properties.")
+    update is PatchOperation<JobDetails>;
 
-    @doc("Request the cancellation of an existing job")
+    @doc("Request the cancellation of an existing job.")
     cancel is CancelOperation<JobDetails>;
 
-    @doc("Get job by its id")
+    @doc("Get job by its id.")
     get is GetOperation<JobDetails>;
 
-    @doc("List all jobs")
+    @doc("List all jobs.")
     list is ListOperation<JobDetails>;
   }
 }

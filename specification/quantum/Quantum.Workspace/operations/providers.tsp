@@ -73,7 +73,7 @@ model TargetStatus {
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface ProviderOperations {
-    @doc("Get provider status.")
-    getStatus is ListOperation<ProviderStatus>;
+    @doc("List all providers in the workspace with their respective status.")
+    list is ListOperation<ProviderStatus>;
   }
 }

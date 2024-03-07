@@ -3,15 +3,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@typespec/http";
-import "@typespec/openapi";
-import "@azure-tools/typespec-azure-core";
+import "./common.tsp";
 
-import "./auth.tsp";
-import "./base-operations.tsp";
-import "./common-params.tsp";
-import "./errors.tsp";
-import "./json-patch.tsp";
-import "./versions.tsp";
+using TypeSpec.Versioning;
+
+@useDependency(DefaultAzureCoreVersion)
+@doc("A versioned namespace to use the Error model in the unversioned root namespace.")
+namespace Errors {
+  @doc("The error object.")
+  model Error {
+    ...Azure.Core.Foundations.Error;
+  }
+}

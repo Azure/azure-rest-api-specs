@@ -3,12 +3,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "@typespec/rest";
-import "@azure-tools/typespec-azure-core";
-
-import "./json-patch.tsp";
-import "./common-params.tsp";
-import "./versions.tsp";
+import "./common.tsp";
 
 using OpenAPI;
 using TypeSpec.Versioning;
@@ -25,10 +20,7 @@ alias AzureCoreOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
 
 @useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.BaseOperations {
-  @doc("The error object.")
-  model Error {
-    ...Azure.Core.Foundations.Error;
-  }
+  alias ResourceOkOrNoContentResponse<Resource extends TypeSpec.Reflection.Model> = Azure.Core.Foundations.ResourceOkResponse<Resource> | TypeSpec.Http.NoContentResponse;
 
   @doc("Generic POST operation.")
   @Foundations.Private.ensureVerb("PostOperation", "POST")
@@ -47,10 +39,9 @@ namespace Quantum.Workspace.BaseOperations {
   @doc("Operation to create a resource.")
   op CreateOperation<TResource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceCreateOrReplace<TResource>;
 
-  alias ResourceOkOrNoContentResponse<Resource extends TypeSpec.Reflection.Model> = Azure.Core.Foundations.ResourceOkResponse<Resource> | TypeSpec.Http.NoContentResponse;
-
   @doc("Operation to patch a resource.")
   @updatesResource(Resource)
+  @patch
   @Azure.Core.Foundations.Private.ensureVerb("PatchOperation", "PATCH")
   op PatchOperation<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
     Resource,

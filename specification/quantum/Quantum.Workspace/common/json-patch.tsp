@@ -3,8 +3,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "@typespec/rest";
-import "@typespec/http";
+import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
