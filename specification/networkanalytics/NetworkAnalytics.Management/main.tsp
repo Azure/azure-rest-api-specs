@@ -1331,30 +1331,6 @@ model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
   name: string;
 }
 
-@doc("The data product capacity detail resource.")
-@singleton
-@added(Versions.v2024_04_01_preview)
-model DataProductsCapacityDetail
-  is ProxyResource<DataProductsCapacityDetailParameters> {
-  @doc("The data product detail name")
-  @key("dataProductsCapacityDetailName")
-  @segment("dataProductsCapacityDetails")
-  @path
-  name: string;
-}
-
-@doc("Details for data product capacity detail properties.")
-@added(Versions.v2024_04_01_preview)
-model DataProductsCapacityDetailParameters {
-  @doc("The data product capacity detail provisioning state.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-
-  @doc("Provides per region capacity available to deploy data product.")
-  @visibility("read")
-  regionalCapacity: Record<int32>;
-}
-
 @doc("Details for data catalog properties.")
 @added(Versions.v2023_11_15)
 model DataProductsCatalogProperties {
@@ -1541,18 +1517,14 @@ interface DataProducts {
 
   @doc("List data products by subscription.")
   listBySubscription is ArmListBySubscription<DataProduct>;
-}
 
-@doc("Operations on data product capacity detail resource.")
-@added(Versions.v2024_04_01_preview)
-@armResourceOperations
-interface DataProductsCapacityDetails {
-  @doc("Retrieve per region capacity for the data product.")
-  @action("providers/Microsoft.NetworkAnalytics/dataProductsCapacityDetails/getRegionalCapacity")
+  @added(Versions.v2024_04_01_preview)
+  @doc("Fetch per region capacity for the data product resource type.")
+  @action("providers/Microsoft.NetworkAnalytics/getRegionalDataProductCapacity")
   @post
-  @armResourceAction(DataProductsCapacityDetail)
+  @armResourceCollectionAction
   getRegionalCapacity(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-  ): DataProductsCapacityDetail | ArmAcceptedResponse | ErrorResponse;
+  ): ArmResponse<Record<int32>> | ArmAcceptedLroResponse | ErrorResponse;
 }

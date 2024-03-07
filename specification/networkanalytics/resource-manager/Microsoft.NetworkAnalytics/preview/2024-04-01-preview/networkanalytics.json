@@ -49,9 +49,6 @@
     },
     {
       "name": "DataProducts"
-    },
-    {
-      "name": "DataProductsCapacityDetails"
     }
   ],
   "paths": {
@@ -136,55 +133,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataProductsCapacityDetails/getRegionalCapacity": {
-      "post": {
-        "operationId": "DataProductsCapacityDetails_GetRegionalCapacity",
-        "tags": [
-          "DataProductsCapacityDetails"
-        ],
-        "description": "Retrieve per region capacity for the data product.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DataProductsCapacityDetail"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataProductsCapacityDetails_GetRegionalCapacity_Maximum": {
-            "$ref": "./examples/DataProductsCapacityDetails_GetRegionalCapacity_MaximumSet_Gen.json"
-          },
-          "DataProductsCapacityDetails_GetRegionalCapacity_Minimum": {
-            "$ref": "./examples/DataProductsCapacityDetails_GetRegionalCapacity_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs": {
       "get": {
         "operationId": "DataProductsCatalogs_ListBySubscription",
@@ -225,6 +173,64 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/getRegionalDataProductCapacity": {
+      "post": {
+        "operationId": "DataProducts_GetRegionalCapacity",
+        "tags": [
+          "DataProducts"
+        ],
+        "description": "Fetch per region capacity for the data product resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProducts_GetRegionalCapacity_Maximum": {
+            "$ref": "./examples/DataProducts_GetRegionalCapacity_MaximumSet_Gen.json"
+          },
+          "DataProducts_GetRegionalCapacity_Minimum": {
+            "$ref": "./examples/DataProducts_GetRegionalCapacity_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts": {
@@ -2133,49 +2139,6 @@
       },
       "required": [
         "version"
-      ]
-    },
-    "DataProductsCapacityDetail": {
-      "type": "object",
-      "description": "The data product capacity detail resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DataProductsCapacityDetailParameters",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "DataProductsCapacityDetailParameters": {
-      "type": "object",
-      "description": "Details for data product capacity detail properties.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The data product capacity detail provisioning state.",
-          "readOnly": true
-        },
-        "regionalCapacity": {
-          "type": "object",
-          "description": "Provides per region capacity available to deploy data product.",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "readOnly": true
-        }
-      },
-      "required": [
-        "regionalCapacity"
       ]
     },
     "DataProductsCatalog": {
