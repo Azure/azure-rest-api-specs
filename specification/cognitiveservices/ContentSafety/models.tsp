@@ -367,9 +367,6 @@ model DetectGroundednessResult {
   @doc("Indicates whether the text exhibits ungroundedness.")
   ungroundedDetected: boolean;
 
-  @doc("Assesses the likelihood of grounded content with a numerical score.The score will range from 0 to 1.")
-  confidenceScore: float32;
-
   @doc("""
   Specifies the proportion of the text identified as ungrounded, 
   expressed as a decimal between 0 and 1,
