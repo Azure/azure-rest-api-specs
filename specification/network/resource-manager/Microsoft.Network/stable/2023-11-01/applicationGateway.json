@@ -520,6 +520,198 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/prepareMigration": {
+      "post": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_PrepareMigration",
+        "description": "Validates the feasibility of the specified application gateway in a resource group for v1 to v2 migration and spins up a parallel v2 gateway.",
+        "x-ms-examples": {
+          "Prepare Application Gateway Migration": {
+            "$ref": "./examples/ApplicationGatewayPrepareMigration.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "migrationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayMigrationRequest"
+            },
+            "description": "Application gateway migration request body."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayMigrationRequestResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/executeMigration": {
+      "post": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_ExecuteMigration",
+        "description": "To switch the existing v1 data plane to v2 dataplane.",
+        "x-ms-examples": {
+          "Execute Application Gateway Migration": {
+            "$ref": "./examples/ApplicationGatewayExecuteMigration.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "migrationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayMigrationRequest"
+            },
+            "description": "Application gateway migration request body."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation switched the existing v1 gateway data plane to v2 gateway."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/commitMigration": {
+      "post": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_CommitMigration",
+        "description": "Deletes the v1 gateway.",
+        "x-ms-examples": {
+          "Commit Application Gateway Migration": {
+            "$ref": "./examples/ApplicationGatewayCommitMigration.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "migrationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayMigrationRequest"
+            },
+            "description": "Application gateway migration request body."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation deleted the underlying v1 gateway."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand": {
       "post": {
         "tags": [
@@ -1153,6 +1345,38 @@
     }
   },
   "definitions": {
+    "ApplicationGatewayMigrationRequest": {
+      "properties": {
+        "migrationType": {
+          "$ref": "#/definitions/ApplicationGatewayMigrationType",
+          "description": "Migration type of the application gateway resource."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "Subnet Id of the v2 application gateway resource."
+        },
+        "privateIp": {
+          "type": "string",
+          "description": "Private ip of the v2 application gateway resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/ApplicationGatewaySku",
+          "description": "SKU of the application gateway resource(Accepted value is Basic,applicable only in case of Standard_Small and Standard_Medium with 2 or less instances), otherwise by default standard_v1 is migrated to standard_v2 and waf_v1 is migrated to waf_v2."
+        },
+        "wafPolicyName": {
+          "type": "string",
+          "description": "Name of the WAF policy to be attached to the v2 gateway(applicable in only case of the waf_v1 to waf_v2 migration for converting the waf config associated to wafv1 gateway to a waf policy)."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting where the v2 application gateway resource needs to come from."
+        }
+      },
+      "description": "Details of application gateway migration request."
+    },
     "ApplicationGatewayOnDemandProbe": {
       "properties": {
         "protocol": {
@@ -1767,6 +1991,18 @@
         }
       },
       "description": "Properties of Backend Address Pool of an application gateway."
+    },
+    "ApplicationGatewayPrepareMigrationRequestResponse": {
+      "properties": {
+        "v2PublicIP": {
+          "type": "string",
+          "description": "Public IP address of the v2 application gateway resource."
+        },
+        "v2PrivateIP": {
+          "type": "string",
+          "description": "Private IP address of v2 application gateway resource."
+        }
+      }
     },
     "ApplicationGatewayBackendAddressPool": {
       "properties": {
@@ -3886,6 +4122,23 @@
       "x-ms-enum": {
         "name": "ApplicationGatewayRedirectType",
         "modelAsString": true
+      }
+    },
+    "ApplicationGatewayMigrationType": {
+      "type": "string",
+      "description": "Application gateway migration type.",
+      "enum": [
+        "UpgradeDeploymentToV2Sku"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewayMigrationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "UpgradeDeploymentToV2Sku",
+            "description": "Migrate from  application gateway v1 to v2 sku."
+          }
+        ]
       }
     },
     "ApplicationGatewayProtocol": {
