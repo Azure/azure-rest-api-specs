@@ -258,7 +258,7 @@
             "description": "Configuration details of the Java Component.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JavaComponent"
+              "$ref": "#/definitions/JavaComponentForPatch"
             }
           }
         ],
@@ -405,7 +405,23 @@
         }
       }
     },
-    "JavaComponentProperties": {
+    "JavaComponentForPatch": {
+      "description": "Java Component.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Java Component resource specific properties",
+          "type": "object",
+          "$ref": "#/definitions/JavaComponentPropertiesForPatch"
+        }
+      }
+    },
+    "JavaComponentPropertiesForPatch": {
       "description": "Java Component common properties.",
       "type": "object",
       "properties": {
@@ -420,11 +436,67 @@
           "x-ms-enum": {
             "name": "JavaComponentType",
             "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Java Component.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JavaComponentProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "configurations": {
+          "description": "List of Java Components configuration properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JavaComponentConfigurationProperty"
           },
-          "x-ms-mutability": [
-            "create",
-            "read"
+          "x-ms-identifiers": [
+            "propertyName"
           ]
+        },
+        "serviceBinds": {
+          "description": "List of Java Components that are bound to the Java component",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JavaComponentServiceBind"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "x-ms-client-flatten": true,
+      "discriminator": "componentType"
+    },
+    "JavaComponentProperties": {
+      "description": "Java Component common properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "properties": {
+        "componentType": {
+          "description": "Type of the Java Component.",
+          "enum": [
+            "SpringBootAdmin",
+            "SpringCloudEureka",
+            "SpringCloudConfig"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JavaComponentType",
+            "modelAsString": true
+          }
         },
         "provisioningState": {
           "description": "Provisioning state of the Java Component.",
