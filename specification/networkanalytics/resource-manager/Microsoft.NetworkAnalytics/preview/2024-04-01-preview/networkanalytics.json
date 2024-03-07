@@ -194,11 +194,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "format": "int32",
-                "type": "integer"
-              }
+              "$ref": "#/definitions/RegionalDataProductCapacities"
             }
           },
           "202": {
@@ -2598,6 +2594,14 @@
         "publisherName",
         "dataProducts"
       ]
+    },
+    "RegionalDataProductCapacities": {
+      "type": "object",
+      "description": "Details of DataProduct capacity per azure region.",
+      "additionalProperties": {
+        "format": "int32",
+        "type": "integer"
+      }
     },
     "ResourceAccessRules": {
       "type": "object",

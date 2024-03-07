@@ -1372,6 +1372,10 @@ model DataProductVersion {
   version: string;
 }
 
+@added(Versions.v2024_04_01_preview)
+@doc("Details of DataProduct capacity per azure region.")
+model RegionalDataProductCapacities is Record<int32>;
+
 @armResourceOperations
 @removed(Versions.v2023_11_15)
 interface Storage
@@ -1532,5 +1536,5 @@ interface DataProducts {
   getRegionalCapacity(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-  ): ArmResponse<Record<int32>> | ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmResponse<RegionalDataProductCapacities> | ArmAcceptedLroResponse | ErrorResponse;
 }
