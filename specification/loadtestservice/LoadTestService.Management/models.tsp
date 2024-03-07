@@ -13,6 +13,7 @@ using Azure.ResourceManager;
 using OpenAPI;
 using Autorest;
 using Azure.ResourceManager.Foundations;
+using Azure.ResourceManager.Private;
 
 namespace Microsoft.LoadTestService;
 
@@ -188,6 +189,9 @@ model CheckQuotaAvailabilityResponseProperties {
 }
 
 @doc("Common properties for resources.")
+@armCommonDefinition("Resource", Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonDefinition("Resource", Azure.ResourceManager.CommonTypes.Versions.v4)
+@armCommonDefinition("Resource", Azure.ResourceManager.CommonTypes.Versions.v5)
 model Resource {
   @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
   @visibility("read")
