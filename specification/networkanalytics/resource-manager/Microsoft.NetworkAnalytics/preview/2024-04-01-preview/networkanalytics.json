@@ -177,7 +177,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/getRegionalDataProductCapacity": {
       "post": {
-        "operationId": "DataProducts_GetRegionalCapacity",
+        "operationId": "DataProducts_GetRegionalDataProductCapacity",
         "tags": [
           "DataProducts"
         ],
@@ -223,12 +223,15 @@
           }
         },
         "x-ms-examples": {
-          "DataProducts_GetRegionalCapacity_Maximum": {
-            "$ref": "./examples/DataProducts_GetRegionalCapacity_MaximumSet_Gen.json"
+          "DataProducts_GetRegionalDataProductCapacity_Maximum": {
+            "$ref": "./examples/DataProducts_GetRegionalDataProductCapacity_MaximumSet_Gen.json"
           },
-          "DataProducts_GetRegionalCapacity_Minimum": {
-            "$ref": "./examples/DataProducts_GetRegionalCapacity_MinimumSet_Gen.json"
+          "DataProducts_GetRegionalDataProductCapacity_Minimum": {
+            "$ref": "./examples/DataProducts_GetRegionalDataProductCapacity_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }

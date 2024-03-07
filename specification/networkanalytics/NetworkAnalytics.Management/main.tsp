@@ -1523,7 +1523,13 @@ interface DataProducts {
   @action("providers/Microsoft.NetworkAnalytics/getRegionalDataProductCapacity")
   @post
   @armResourceCollectionAction
-  getRegionalCapacity(
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  getRegionalDataProductCapacity(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
   ): ArmResponse<Record<int32>> | ArmAcceptedLroResponse | ErrorResponse;
