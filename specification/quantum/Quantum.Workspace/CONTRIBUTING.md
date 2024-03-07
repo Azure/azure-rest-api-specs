@@ -6,11 +6,12 @@ This file contains instructions to make it easier to maintain and test the TypeS
 
 1. Make sure you familiar with and follow the [Contributing guidelines](https://github.com/Azure/azure-rest-api-specs/blob/main/CONTRIBUTING.md) of this repo.
 2. [Install TypeSpec](https://microsoft.github.io/typespec/introduction/installation) and its pre-reqs.
-    - `./eng/setup-dev.ps1` contains the commands to do that if you have [NVM - Node Version Manager](https://github.com/nvm-sh/nvm).
+   - `./eng/setup-dev.ps1` contains the commands to do that if you have [NVM - Node Version Manager](https://github.com/nvm-sh/nvm).
 
 ## Known issues & limitations
 
 The following are known issues & limitations that were found during the development of the TypeSpec specification for Azure Quantum.
+
 1. **`Quantum` as the service name.**<br/>
    Ideally, the service name should have been something more specific than simply `Quantum`, according to conversations with the Azure SDK team. `Quantum` is technically the service-group and we could potentially have several services inside it. However for historical reasons and a strategic decision to keep everything inside the same service, we are sticking to just use `Quantum` as the service name.
 2. **Use of namespaces.**<br/>

@@ -4,7 +4,7 @@
 
 This folder contains the [TypeSpec](https://azure.github.io/typespec-azure/)
 REST API Specification for the [Azure Quantum](https://quantum.microsoft.com) service.
- 
+
 Please see the [repository README](../../../README.md) for details on how to use
 this TypeSpec specification for generating REST API clients for the Azure Quantum service
 with support for the most popular programming languages.
