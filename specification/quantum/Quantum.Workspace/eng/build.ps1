@@ -6,9 +6,13 @@
 try {
     Push-Location (Join-Path $PSScriptRoot "../")
 
-    $logDirectory = "./output/logs/"
+    $outputDirectory = Join-Path (Resolve-Path .) "/output/"
+    Remove-Item -Path $outputDirectory -Recurse -Force *> $null
+    New-Item -ItemType Directory -Force -Path $outputDirectory *> $null
+
+    $logDirectory = Join-Path $outputDirectory "/logs/"
+    Remove-Item -Path $outputDirectory -Recurse -Force *> $null
     New-Item -ItemType Directory -Force -Path $logDirectory *> $null
-    $logDirectory = Resolve-Path $logDirectory
 
     function RunAndCheck {
         param (
@@ -65,6 +69,15 @@ try {
 
     $configFile =  Resolve-Path "../data-plane/readme.md"
     $versions = GetVersions $configFile
+
+    $newSwaggerFolder = "../data-plane/Microsoft.Quantum/preview/$($versions.NewVersion)/"
+    Remove-Item -Path $newSwaggerFolder -Recurse -Force *> $null
+    New-Item -ItemType Directory -Force -Path $newSwaggerFolder *> $null
+    $newSwaggerFolder = Resolve-Path $newSwaggerFolder
+    $newSwaggerFile = Join-Path $newSwaggerFolder "/quantum.json"
+
+    $previousSwaggerFile = Resolve-Path "../data-plane/Microsoft.Quantum/preview/$($versions.PreviousVersion)/quantum.json"
+
     Write-Host @"
 ------------------------------------------------------------------------
 Azure Quantum TypeSpec build - BEGIN
@@ -73,27 +86,26 @@ Started at
     $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
 Compiling TypeSpec and generating Swagger for version
     $($versions.NewVersion)
+    $newSwaggerFile
 Comparisons will be made against previous version
     $($versions.PreviousVersion)
+    $previousSwaggerFile
 Writing output logs to
     $logDirectory
 ------------------------------------------------------------------------
 "@
 
-    $jsonFile = Join-Path (Resolve-Path .) "../data-plane/Microsoft.Quantum/preview/$($versions.NewVersion)/quantum.json"
-    $jsonFilePrevious = Join-Path (Resolve-Path .) "../data-plane/Microsoft.Quantum/preview/$($versions.PreviousVersion)/quantum.json"
-
     # Copy examples from previous version
     # if they don't exist for the new version.
-    $target = ".\examples\$($versions.NewVersion)"
-    if (-not (Test-Path -Path $target)) {
+    $newVersionExamples = ".\examples\$($versions.NewVersion)"
+    if (-not (Test-Path -Path $newVersionExamples)) {
         $source = ".\examples\$($versions.PreviousVersion)"
         Write-Host @"
 Examples not found for $($versions.NewVersion).
-Copying examples from $source to $target
+Copying examples from $source to $newVersionExamples
 "@
-        Copy-Item -Path $source -Destination $target -Recurse
-        ForEach($file in Get-ChildItem -Path $target -File){
+        Copy-Item -Path $source -Destination $newVersionExamples -Recurse
+        ForEach($file in Get-ChildItem -Path $newVersionExamples -File){
             $example = Get-Content -Path $file
             $example = $example -replace $versions.PreviousVersion, $versions.NewVersion
             Set-Content $file $example                
@@ -102,6 +114,15 @@ Copying examples from $source to $target
 
     RunAndCheck "tsp-format" \ {
         tsp format **/*.tsp
+    }
+
+    RunAndCheck "prettify-examples" \ {
+        $examples = $newVersionExamples
+        # Uncomment this line if you need to prettify all examples
+        # $examples = ".\examples\"
+        ForEach($file in Get-ChildItem -Path $examples -File -Recurse){
+            npx prettier --write $file
+        }
     }
 
     RunAndCheck "tsp-compile" \ {
@@ -114,10 +135,10 @@ Copying examples from $source to $target
         
     # copy to swagger folder to easy upload to https://apiview.dev/
     New-Item -ItemType Directory -Force -Path (Join-Path $PSScriptRoot "../output/swagger/") *> $null
-    Copy-Item $jsonFile (Join-Path $PSScriptRoot "../output/swagger/quantum.swagger") -Force -Recurse
+    Copy-Item $newSwaggerFile (Join-Path $PSScriptRoot "../output/swagger/quantum.swagger") -Force -Recurse
 
     RunAndCheck "swagger-preview" \ {
-        $openApi = Get-Content -Path $jsonFile
+        $openApi = Get-Content -Path $newSwaggerFile
         $spec = "let spec = $openApi"
         Set-Content ./eng/swagger-ui/spec.js $spec
     }
@@ -125,8 +146,8 @@ Copying examples from $source to $target
     # RunAndCheck "generate-examples" \ {
     #     # Ideally we should use the example generation with the custom payloads, but I didn't
     #     # figured out yet what's wrong with the initial payload I created (Jobs_Cancel/204.json)).
-    #     # oav generate-examples $jsonFile -l info -p --payloadDir (Join-Path $PSScriptRoot "../example-payloads/")
-    #     oav generate-examples $jsonFile -l info -p
+    #     # oav generate-examples $newSwaggerFile -l info -p --payloadDir (Join-Path $PSScriptRoot "../example-payloads/")
+    #     oav generate-examples $newSwaggerFile -l info -p
     # }
 
     # Pipeline validations
@@ -146,20 +167,20 @@ Copying examples from $source to $target
         }     
     }   
 
-    RunAndCheck "lint-swagger" \ {
-        npx prettier --write $jsonFile
+    RunAndCheck "prettify-swagger" \ {
+        npx prettier --write $newSwaggerFile
     }
 
     RunAndCheck "example-validation" \ {
-        oav validate-example $jsonFile
+        oav validate-example $newSwaggerFile
     }
 
     RunAndCheck "semantic-validation" \ {
-        oav validate-spec $jsonFile
+        oav validate-spec $newSwaggerFile
     }
 
     RunAndCheck "model-compare" \ {
-        oad compare $jsonFilePrevious $jsonFile --logFilepath (Join-Path $logDirectory "/oad-compare-log.json") > (Join-Path $logDirectory "/model-compare.json")
+        oad compare $previousSwaggerFile $newSwaggerFile --logFilepath (Join-Path $logDirectory "/oad-compare-log.json") > (Join-Path $logDirectory "/model-compare.json")
     }
 
     RunAndCheck "model-compare-viz" \ {
@@ -167,17 +188,17 @@ Copying examples from $source to $target
         $modelCompare = "let modelCompare = $modelCompare"
         Set-Content ./eng/model-compare/model-compare.js $modelCompare
 
-        $openApi = Get-Content -Path $jsonFile
+        $openApi = Get-Content -Path $newSwaggerFile
         $spec = "let newSpec = $openApi"
         Set-Content ./eng/model-compare/new-spec.js $spec
 
-        $openApi = Get-Content -Path $jsonFilePrevious
+        $openApi = Get-Content -Path $previousSwaggerFile
         $spec = "let oldSpec = $openApi"
         Set-Content ./eng/model-compare/old-spec.js $spec
     }
 
     RunAndCheck "lint-diff" \ {
-        autorest --v3 --spectral --validation --azure-validator --use=@microsoft.azure/openapi-validator@latest --tag=$newTag $configFile
+        autorest --v3 --spectral --validation --azure-validator --openapi-type=data-plane --use=@microsoft.azure/openapi-validator@latest $newTag $configFile
     }
 
     RunAndCheck "avocado" \ {
