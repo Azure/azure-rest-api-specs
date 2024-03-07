@@ -22,7 +22,7 @@ enum TrialStatus {
   TrialDisabled,
 }
 
-@doc("quote enabled")
+@doc("quota enabled")
 enum QuotaEnabled {
   @doc("is enabled")
   Enabled,
