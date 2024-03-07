@@ -29,6 +29,7 @@
   - [Suppression Process](#suppression-process)
   - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
   - [Obsolete checks](#obsolete-checks)
+  - [APIView Failures: troubleshooting guides](#apiview-failures-troubleshooting-guides)
 
 # CI Fix Guide
 
@@ -286,3 +287,14 @@ Following checks have been removed from the validation toolchain as of August 20
 [aka.ms/azsdk/support/specreview-channel]: https://aka.ms/azsdk/support/specreview-channel
 [aka.ms/azsdk/support]: https://aka.ms/azsdk/support
 [TypeSpec Discussions Teams channel]: https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion%20%F0%9F%90%AE?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47
+
+## APIView Failures: troubleshooting guides
+
+### Passed build but APIView not generated
+
+- Check for an unexpected skip of `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
+- Look in `SDK Automation` step to verify that the API token generation completed successfully.
+- Search logs for `Read Temp File`
+- Find the .json object object below and search for the `apiViewArtifact` property.
+- If not present, the APIView parser for the language failed to generate the `APIView Token Artifacts`.
+- Further investigate by running the package through the appropriate language parser locally: [here](https://github.com/Azure/azure-sdk-tools/tree/main/tools/apiview)  or  [here](https://github.com/Azure/azure-sdk-tools/tree/main/src)

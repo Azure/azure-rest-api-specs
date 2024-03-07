@@ -1,6 +1,6 @@
-# Error scenario: Passed build but APIView not generated
+## APIView Failures: troubleshooting guides
 
-## Troubleshooting
+### Passed build but APIView not generated
 
 - Check for an unexpected skip of `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
 - Look in `SDK Automation` step to verify that the API token generation completed successfully.
