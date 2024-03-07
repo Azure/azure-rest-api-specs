@@ -676,7 +676,6 @@
             "DefenderForContainersAws",
             "DefenderForServersAws",
             "DefenderForDatabasesAws",
-            "InformationProtectionAws",
             "CspmMonitorGcp",
             "CspmMonitorGithub",
             "CspmMonitorAzureDevOps",
@@ -1031,28 +1030,6 @@
               "type": "boolean",
               "description": "Is databases data security posture management (DSPM) protection enabled"
             },
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
-            }
-          }
-        }
-      }
-    },
-    "informationProtectionAwsOffering": {
-      "type": "object",
-      "description": "The information protection for AWS offering",
-      "x-ms-discriminator-value": "InformationProtectionAws",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
-      "properties": {
-        "informationProtection": {
-          "type": "object",
-          "description": "The native cloud connection configuration",
-          "properties": {
             "cloudRoleArn": {
               "type": "string",
               "description": "The cloud role ARN in AWS for this feature"
