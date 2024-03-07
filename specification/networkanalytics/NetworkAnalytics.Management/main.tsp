@@ -1529,7 +1529,7 @@ interface DataProducts {
       `final-state-via`: "location",
     }
   )
-  getRegionalDataProductCapacity(
+  getRegionalCapacity(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
   ): ArmResponse<Record<int32>> | ArmAcceptedLroResponse | ErrorResponse;
