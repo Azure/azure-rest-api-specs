@@ -2249,35 +2249,35 @@
         }
       }
     },
-    "RecordingStorageType": {
-      "description": "Defines the type of external storage",
+    "RecordingStorageKind": {
+      "description": "Defines the kind of external storage",
       "enum": [
-        "acs",
-        "blobStorage"
+        "azureCommunicationServices",
+        "azureBlobStorage"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "RecordingStorageType",
+        "name": "RecordingStorageKind",
         "modelAsString": true
       }
     },
     "ExternalStorage": {
       "required": [
-        "storageType"
+        "recordingStorageKind"
       ],
       "type": "object",
       "properties": {
-        "storageType": {
-          "$ref": "#/definitions/RecordingStorageType"
+        "recordingStorageKind": {
+          "$ref": "#/definitions/RecordingStorageKind"
         },
-        "blobStorage": {
-          "$ref": "#/definitions/BlobStorage",
-          "description": "Defines the blob storage location where the recording will be stored"
+        "azureBlobStorage": {
+          "$ref": "#/definitions/AzureBlobStorage",
+          "description": "Defines the Azure Blob storage location where the recording will be stored"
         }
       }
     },
-    "BlobStorage": {
-      "description": "Used to specify Blob container url to recording storage",
+    "AzureBlobStorage": {
+      "description": "Used to specify Azure Blob container url to recording storage",
       "required": [
         "containerUri"
       ],
@@ -2302,7 +2302,7 @@
     },
     "RecordingKind": {
       "enum": [
-        "azureCommunication",
+        "azureCommunicationServices",
         "teams",
         "teamsCompliance",
         "others"
@@ -2684,6 +2684,9 @@
           "description": "The time of the recording started",
           "type": "string",
           "readOnly": true
+        },
+        "recordingKind": {
+          "$ref": "#/definitions/RecordingKind"
         }
       }
     },
