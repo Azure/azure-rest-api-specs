@@ -213,7 +213,7 @@
         }
       },
       "delete": {
-         "summary": "Use to delete a tileset.",
+        "summary": "Use to delete a tileset.",
         "description": "\n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `tilesetId` of the tileset to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Tileset Delete API returns a HTTP `204 No Content` response with an empty body, if the tileset was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the tileset with the passed-in `tilesetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Tileset Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
         "operationId": "Tileset_Delete",
         "x-ms-examples": {
@@ -244,7 +244,7 @@
     },
     "/tilesets:fetchConfiguration": {
       "get": {
-        "summary": "Use to get a tileset configuration.",        
+        "summary": "Use to get a tileset configuration.",
         "description": "\n\nThe Tileset `Get Configuration` request allows the caller to get a default [tileset configuration](/rest/api/maps-creator/tileset/get-configuration#tilesetconfiguration) based on the dataset provided. Then the tileset configuration can be used to create a custom tileset using [Tileset Create](/rest/api/maps-creator/tileset/create).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n### Submit Get Configuration Request\n\n The `Get Configuration` API is an HTTP `GET` request is used to get a tileset configuration based on the `datasetId.",
         "operationId": "Tileset_GetConfiguration",
         "x-ms-examples": {
@@ -321,8 +321,8 @@
     },
     "/tilesets/operations/{operationId}": {
       "get": {
-      "summary": "Use to get the status of a tileset creation.",
-      "description": "\n\nThe `Get Operation` API is an HTTP `GET` request is used to check the status of the tileset creation process and retrieve the `tilesetId` value. The path is obtained from a call to [Tileset - Create](/rest/api/maps-creator/tilesets/create).  While in progress, an HTTP 200 is returned with no extra headers. Once successfully completed an HTTP 200 is returned with a `Resource-Location` header. For more information, see [Check the status of tileset creation](/azure/azure-maps/tutorial-creator-indoor-maps#check-the-status-of-tileset-creation).",
+        "summary": "Use to get the status of a tileset creation.",
+        "description": "\n\nThe `Get Operation` API is an HTTP `GET` request is used to check the status of the tileset creation process and retrieve the `tilesetId` value. The path is obtained from a call to [Tileset - Create](/rest/api/maps-creator/tilesets/create).  While in progress, an HTTP 200 is returned with no extra headers. Once successfully completed an HTTP 200 is returned with a `Resource-Location` header. For more information, see [Check the status of tileset creation](/azure/azure-maps/tutorial-creator-indoor-maps#check-the-status-of-tileset-creation).",
         "operationId": "Tileset_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
