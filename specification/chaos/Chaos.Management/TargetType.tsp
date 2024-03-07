@@ -15,6 +15,7 @@ namespace Microsoft.Chaos;
  * Model that represents a Target Type resource.
  */
 @subscriptionResource
+@parentResource(SubscriptionLocationResource)
 model TargetType is ProxyResource<TargetTypeProperties> {
   /**
    * String that represents a Target Type resource name.
@@ -23,6 +24,7 @@ model TargetType is ProxyResource<TargetTypeProperties> {
   @path
   @key("targetTypeName")
   @segment("targetTypes")
+  @visibility("read")
   name: string;
 }
 
@@ -31,53 +33,21 @@ interface TargetTypes {
   /**
    * Get a Target Type resources for given location.
    */
-  @get
-  @armResourceRead(TargetType)
-  get(
-    ...SubscriptionBaseParameters,
-    ...DefaultProviderNamespace,
-
-    /**
-     * String that represents a Location resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    @segment("locations")
-    locationName: string;
-
-    /**
-     * String that represents a Target Type resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    @segment("targetTypes")
-    targetTypeName: string;
-  ):ArmResponse<TargetType> | ErrorResponse;
+  get is ArmResourceRead<TargetType>;
 
   /**
    * Get a list of Target Type resources for given location.
    */
-  @segment("targetTypes")
-  @get
-  @armResourceList(TargetType)
-  list(
-    ...SubscriptionBaseParameters,
-    ...DefaultProviderNamespace,
+  list is ArmResourceListByParent<
+    TargetType,
+    {
+      ...SubscriptionBaseParameters;
 
-    /**
-     * String that represents a Location resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    @segment("locations")
-    locationName: string;
-
-    /**
-     * String that sets the continuation token.
-     */
-    @query("continuationToken")
-    continuationToken?: string;
-  ): ArmResponse<TargetTypeList> | ErrorResponse;
+      /**
+       * String that sets the continuation token.
+       */
+      @query("continuationToken")
+      continuationToken?: string;
+    }
+  >;
 }
-
-model TargetTypeList is Azure.Core.Page<TargetType>;

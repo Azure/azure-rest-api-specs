@@ -23,6 +23,7 @@ model Experiment is TrackedResource<ExperimentProperties> {
   @path
   @key("experimentName")
   @segment("experiments")
+  @visibility("read")
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
@@ -38,44 +39,22 @@ interface Experiments {
   /**
    * Create or update a Experiment resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Experiment,
-    BaseParameters<Experiment>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Experiment>;
 
   /**
    * The operation to update an experiment.
    */
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    Experiment,
-    ExperimentUpdate,
-    BaseParameters<Experiment>,
-    ArmLroLocationHeader,
-    Response = {
-      ...AcceptedResponse;
-      ...Azure.Core.Foundations.RetryAfterHeader;
-      ...ArmLroLocationHeader;
-      ...Body<Experiment>;
-    } | ErrorResponse
-  >;
+  update is ArmCustomPatchAsync<Experiment, ExperimentUpdate>;
 
   /**
    * Delete a Experiment resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    Experiment,
-    BaseParameters<Experiment>,
-    ArmLroLocationHeader,
-    Response = ArmAcceptedLroResponse | ErrorResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<Experiment>;
 
   /**
    * Get a list of Experiment resources in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Experiments_List")
   list is ArmResourceListByParent<
     Experiment,
     {
@@ -98,60 +77,21 @@ interface Experiments {
   /**
    * Get a list of Experiment resources in a subscription.
    */
-  listAll is ArmListBySubscription<Experiment, Parameters = {
-
-    /**
-     * Optional value that indicates whether to filter results based on if the Experiment is currently running. If null, then the results will not be filtered.
-     */
-    @query("running")
-    running?: boolean;
-
-    /**
-     * String that sets the continuation token.
-     */
-    @query("continuationToken")
-    continuationToken?: string;
-  }>;
+  listAll is ArmListBySubscription<Experiment>;
 
   /**
    * Cancel a running Experiment resource.
    */
-  cancel is ArmResourceActionNoResponseContentAsync<
-    Experiment,
-    void,
-    BaseParameters<Experiment>,
-    ArmLroLocationHeader
-  >;
+  cancel is ArmResourceActionNoResponseContentAsync<Experiment, void>;
 
   /**
    * Start a Experiment resource.
    */
-  start is ArmResourceActionNoResponseContentAsync<
-    Experiment,
-    void,
-    BaseParameters<Experiment>,
-    ArmLroLocationHeader
-  >;
+  start is ArmResourceActionNoResponseContentAsync<Experiment, void>;
 }
 
-@@projectedName(Experiments.createOrUpdate::parameters.resource,
-  "json",
-  "experiment"
-);
-@@extension(Experiments.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "experiment"
-);
 @@doc(Experiments.createOrUpdate::parameters.resource,
   "Experiment resource to be created or updated."
-);
-@@projectedName(Experiments.update::parameters.properties,
-  "json",
-  "experiment"
-);
-@@extension(Experiments.update::parameters.properties,
-  "x-ms-client-name",
-  "experiment"
 );
 @@doc(Experiments.update::parameters.properties,
   "Parameters supplied to the Update experiment operation."

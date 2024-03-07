@@ -24,6 +24,7 @@ model ExperimentExecution is ProxyResource<ExperimentExecutionProperties> {
   @path
   @key("executionId")
   @segment("executions")
+  @visibility("read")
   name: string;
 }
 
@@ -32,23 +33,16 @@ interface ExperimentExecutions {
   /**
    * Get an execution of an Experiment resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Experiments_GetExecution")
   getExecution is ArmResourceRead<ExperimentExecution>;
 
   /**
    * Get a list of executions of an Experiment resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Experiments_ListAllExecutions")
   listAllExecutions is ArmResourceListByParent<ExperimentExecution>;
 
   /**
    * Execution details of an experiment resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Experiments_ExecutionDetails")
-  @action("getExecutionDetails")
   executionDetails is ArmResourceActionSync<
     ExperimentExecution,
     void,

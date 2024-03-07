@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
  * Chaos Management Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ChaosManagementClient",
 })

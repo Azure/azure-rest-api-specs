@@ -22,6 +22,7 @@ model Target is ProxyResource<Record<unknown>> {
   @path
   @key("targetName")
   @segment("targets")
+  @visibility("read")
   name: string;
 }
 
@@ -30,173 +31,35 @@ interface Targets {
   /**
    * Get a Target resource that extends a tracked regional resource.
    */
-  @armResourceRead(Target)
-  @get
-  get(
-    ...SubscriptionBaseParameters;
-    ...ResourceGroupParameter;
-
-    /**
-     * String that represents a resource provider namespace.
-     */
-    @segment("providers")
-    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
-    @path
-    parentProviderNamespace: string;
-
-    /**
-     * String that represents a resource type.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    parentResourceType: string;
-
-    /**
-     * String that represents a resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    parentResourceName: string;
-
-    ...DefaultProviderNamespace;
-
-    /**
-     * String that represents a Target resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    @segment("targets")
-    targetName: string;
-  ): ArmResponse<Target> | ErrorResponse;
+  get is ArmResourceRead<Target>;
 
   /**
    * Create or update a Target resource that extends a tracked regional resource.
    */
-  @armResourceCreateOrUpdate(Target)
-  @put
-  createOrUpdate(
-    ...SubscriptionBaseParameters;
-    ...ResourceGroupParameter;
-
-    /**
-     * String that represents a resource provider namespace.
-     */
-    @segment("providers")
-    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
-    @path
-    parentProviderNamespace: string;
-
-    /**
-     * String that represents a resource type.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    parentResourceType: string;
-
-    /**
-     * String that represents a resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    parentResourceName: string;
-
-    ...DefaultProviderNamespace;
-
-    /**
-     * String that represents a Target resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    @segment("targets")
-    targetName: string;
-
-    /**
-     * Target resource to be created or updated.
-     */
-    @body
-    target: Target;
-  ):ArmResponse<Target> | ErrorResponse;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Target>;
 
   /**
    * Delete a Target resource that extends a tracked regional resource.
    */
-  @armResourceDelete(Target)
-  @delete
-  delete(
-    ...SubscriptionBaseParameters;
-    ...ResourceGroupParameter;
-
-    /**
-     * String that represents a resource provider namespace.
-     */
-    @segment("providers")
-    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
-    @path
-    parentProviderNamespace: string;
-
-    /**
-     * String that represents a resource type.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    parentResourceType: string;
-
-    /**
-     * String that represents a resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    parentResourceName: string;
-
-    ...DefaultProviderNamespace;
-
-    /**
-     * String that represents a Target resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    @segment("targets")
-    targetName: string;
-  ): ArmDeletedResponse | ArmNoContentResponse |ErrorResponse;
+  delete is ArmResourceDeleteSync<Target>;
 
   /**
    * Get a list of Target resources that extend a tracked regional resource.
    */
-  @armResourceList(Target)
-  @get
-  @segment("targets")
-  list(
-    ...SubscriptionBaseParameters;
-    ...ResourceGroupParameter;
+  list is ArmResourceListByParent<
+    Target,
+    {
+      ...BaseParameters<Target>;
 
-    /**
-     * String that represents a resource provider namespace.
-     */
-    @segment("providers")
-    @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")
-    @path
-    parentProviderNamespace: string;
-
-    /**
-     * String that represents a resource type.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    parentResourceType: string;
-
-    /**
-     * String that represents a resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    parentResourceName: string;
-
-    ...DefaultProviderNamespace;
-
-    /**
-     * String that sets the continuation token.
-     */
-    @query("continuationToken")
-    continuationToken?: string;
-  ): ArmResponse<Azure.Core.Page<Target>> | ErrorResponse;
+      /**
+       * String that sets the continuation token.
+       */
+      @query("continuationToken")
+      continuationToken?: string;
+    }
+  >;
 }
+
+@@doc(Targets.createOrUpdate::parameters.resource,
+  "Target resource to be created or updated."
+);

@@ -24,6 +24,7 @@ model CapabilityType is ProxyResource<CapabilityTypeProperties> {
   @path
   @key("capabilityTypeName")
   @segment("capabilityTypes")
+  @visibility("read")
   name: string;
 }
 
@@ -32,69 +33,21 @@ interface CapabilityTypes {
   /**
    * Get a Capability Type resource for given Target Type and location.
    */
-  @armResourceRead(CapabilityType)
-  @get
-  get(
-    ...SubscriptionBaseParameters,
-    ...DefaultProviderNamespace,
-
-    /**
-     * String that represents a Location resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    @segment("locations")
-    locationName: string;
-
-    /**
-     * String that represents a Target Type resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    @segment("targetTypes")
-    targetTypeName: string;
-
-    /**
-     * String that represents a Capability Type resource name.
-     */
-    @pattern("^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$")
-    @path
-    @segment("capabilityTypes")
-    capabilityTypeName: string;
-  ):ArmResponse<CapabilityType> | ErrorResponse;
+  get is ArmResourceRead<CapabilityType>;
 
   /**
    * Get a list of Capability Type resources for given Target Type and location.
    */
-  @armResourceList(CapabilityType)
-  @get
-  @segment("capabilityTypes")
-  list(
-    ...SubscriptionBaseParameters,
-    ...DefaultProviderNamespace,
+  list is ArmResourceListByParent<
+    CapabilityType,
+    {
+      ...BaseParameters<CapabilityType>;
 
-    /**
-     * String that represents a Location resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    @segment("locations")
-    locationName: string;
-
-    /**
-     * String that represents a Target Type resource name.
-     */
-    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
-    @path
-    @segment("targetTypes")
-    targetTypeName: string;
-
-    /**
-     * String that sets the continuation token.
-     */
-    @query("continuationToken")
-    continuationToken?: string;
-  ):ArmResponse<CapabilityTypeList> | ErrorResponse;
+      /**
+       * String that sets the continuation token.
+       */
+      @query("continuationToken")
+      continuationToken?: string;
+    }
+  >;
 }
-
-model CapabilityTypeList is Azure.Core.Page<CapabilityType>;
