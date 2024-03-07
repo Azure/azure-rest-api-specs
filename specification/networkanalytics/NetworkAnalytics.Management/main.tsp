@@ -1548,11 +1548,11 @@ interface DataProducts {
 @armResourceOperations
 interface DataProductsCapacityDetails {
   @doc("Retrieve per region capacity for the data product.")
-  @segment("providers/Microsoft.NetworkAnalytics/dataProductsCapacityDetails/getRegionalCapacity")
-  @get
-  @armResourceRead(DataProductsCapacityDetail)
+  @action("providers/Microsoft.NetworkAnalytics/dataProductsCapacityDetails/getRegionalCapacity")
+  @post
+  @armResourceAction(DataProductsCapacityDetail)
   getRegionalCapacity(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-  ): ArmResponse<DataProductsCapacityDetail> | ErrorResponse;
+  ): DataProductsCapacityDetail | ArmAcceptedResponse | ErrorResponse;
 }
