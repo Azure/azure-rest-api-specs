@@ -214,6 +214,49 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "Migrations_Delete",
+        "x-ms-examples": {
+          "Migrations_Delete": {
+            "$ref": "./examples/Migrations_Delete.json"
+          }
+        },
+        "description": "Deletes a migration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDbServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDbServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDbServerName}/migrations": {
