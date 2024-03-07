@@ -210,6 +210,7 @@ input-file:
 - Microsoft.Databricks/stable/2024-05-01/vnetpeering.json
 - Microsoft.Databricks/stable/2023-05-01/accessconnector.json
 ```
+
 ---
 
 # Suppressions
