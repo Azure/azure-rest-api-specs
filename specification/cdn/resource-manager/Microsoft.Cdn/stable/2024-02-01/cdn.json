@@ -2823,18 +2823,18 @@
           "exclusiveMinimum": false
         },
         "logScrubbing": {
-          "description": "Defines rules to scrub sensitive fields in logs",
+          "description": "Defines rules that scrub sensitive fields in the Azure Front Door profile logs.",
           "$ref": "#/definitions/ProfileLogScrubbing"
         }
       }
     },
     "ProfileLogScrubbing": {
-      "description": "Defines rules to scrub sensitive fields in logs",
+      "description": "Defines rules that scrub sensitive fields in the Azure Front Door profile logs.",
       "type": "object",
       "properties": {
         "state": {
           "type": "string",
-          "description": "State of the log scrub config. Default value is Enabled.",
+          "description": "State of the log scrubbing config. Default value is Enabled.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -2850,7 +2850,7 @@
             "$ref": "#/definitions/ProfileScrubbingRules"
           },
           "x-ms-identifiers": [],
-          "description": "List of log scrub rules applied to logs."
+          "description": "List of log scrubbing rules applied to the Azure Front Door profile logs."
         }
       }
     },
@@ -2912,7 +2912,7 @@
       }
     },
     "ProfileScrubbingRules": {
-      "description": "Defines contents of a log scrub rules.",
+      "description": "Defines the contents of the log scrubbing rules.",
       "type": "object",
       "required": [
         "matchVariable",
@@ -2937,7 +2937,7 @@
           "enum": [
             "EqualsAny"
           ],
-          "description": "Comparison type to use for matching with the variable value in log.",
+          "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this rule applies to.",
           "x-ms-enum": {
             "name": " scrubbingRuleEntryMatchOperator",
             "modelAsString": true
@@ -2945,7 +2945,7 @@
         },
         "selector": {
           "type": "string",
-          "description": "Match against a specific key from the QueryString variables in the log. Default value is null."
+          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this rule applies to."
         },
         "state": {
           "type": "string",
@@ -2953,7 +2953,7 @@
             "Enabled",
             "Disabled"
           ],
-          "description": "Defines the state of log scrubbing rule. Default value is Enabled.",
+          "description": "Defines the state of a log scrubbing rule. Default value is enabled.",
           "x-ms-enum": {
             "name": " scrubbingRuleEntryState",
             "modelAsString": true
