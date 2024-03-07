@@ -11,8 +11,6 @@ using TypeSpec.Rest;
 using TypeSpec.Rest.Resource;
 using OpenAPI;
 
-alias PatchRequest = JsonPatchDocument[];
-
 @doc("The operation to be performed.")
 enum JsonPatchOperation {
   @doc("Add value operation.")
@@ -34,8 +32,8 @@ enum JsonPatchOperation {
   test,
 }
 
-@doc("A JSONPatch document as defined by RFC 6902.")
-model JsonPatchDocument {
+@doc("A JSONPatch object as defined by RFC 6902.")
+model JsonPatchObject {
   @visibility("create")
   @doc("The operation to be performed.")
   @projectedName("json", "op")
@@ -53,3 +51,6 @@ model JsonPatchDocument {
   @doc("Optional field used in copy and move operations.")
   from?: string;
 }
+
+@doc("A JSONPatch document as defined by RFC 6902.")
+model JsonPatchDocument is JsonPatchObject[];

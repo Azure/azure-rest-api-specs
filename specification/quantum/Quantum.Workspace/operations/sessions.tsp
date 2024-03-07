@@ -3,20 +3,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "@typespec/rest";
-import "@typespec/http";
-import "@typespec/versioning";
-import "@typespec/openapi";
+import "./operations.tsp";
 
-import "../common/operations.tsp";
-import "../common/versions.tsp";
-import "./items.tsp";
-import "./jobs.tsp";
-
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.Rest.Resource;
+
 using OpenAPI;
 
 @doc("Policy controlling the behavior of the Session when a job in the session fails.")
@@ -57,6 +48,11 @@ enum SessionStatus {
 @resource("sessions")
 @parentResource(QuantumWorkspace)
 model SessionDetails extends ItemDetails {
+  @key("sessionId")
+  @doc("Id of the session.")
+  @visibility("read", "create")
+  id: WorkspaceItemId;
+
   @visibility("read", "create")
   @doc("Type of the Quantum Workspace item is Session.")
   itemType: ItemType.Session;
@@ -70,69 +66,32 @@ model SessionDetails extends ItemDetails {
   status?: SessionStatus;
 }
 
-@doc("List of workspace sessions.")
-model SessionDetailsList {
-  ...CollectionWithNextLink<SessionDetails>;
+#suppress "@azure-tools/typespec-azure-core/spread-discriminated-model" "The discriminator is not used in this scenario"
+@doc("A Session Job.")
+@resource("jobs")
+@parentResource(SessionDetails)
+@withVisibility("read")
+model SessionJobDetails {
+  ...JobDetails;
 }
 
-@doc("Id of the session.")
-@pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
-@maxLength(36)
-scalar SessionId extends WorkspaceItemId;
-
-alias SessionIdParam = {
-  @path
-  @segment("sessions")
-  @doc("Id of the session.")
-  sessionId: SessionId;
-};
-
-alias SessionParam = {
-  @path
-  @segment("sessions")
-  @doc("Id of the session.")
-  sessionId: SessionId;
-
-  @body
-  @doc("The session data.")
-  session: SessionDetails;
-};
-
 @useDependency(DefaultAzureCoreVersion)
-namespace Quantum.Workspace.Sessions {
+namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("Open a new session")
-    @put
-    @createsResource(SessionDetails)
-    open is CreateOperation<SessionDetails, SessionParam>;
+    open is CreateOperation<SessionDetails>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("Close an existing session")
-    @post
-    @action
-    @actionSeparator(":")
-    close is ActionOperation<SessionDetails, SessionIdParam>;
+    close is ActionOperation<SessionDetails>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("Get Session by its id")
-    @get
-    @readsResource(SessionDetails)
-    get is GetOperation<SessionDetails, SessionIdParam>;
+    get is GetOperation<SessionDetails>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("List jobs in a session")
-    @get
-    @readsResource(JobDetails)
-    @segment("jobs")
-    jobsList is ListOperation<JobDetailsList, SessionIdParam>;
+    jobsList is ListOperation<SessionJobDetails>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("List all Sessions")
-    @get
-    // @listsResource(SessionDetails) -> causes conflicts with jobs list
-    @segment("sessions")
-    list is ListOperation<SessionDetailsList>;
+    list is ListOperation<SessionDetails>;
   }
 }

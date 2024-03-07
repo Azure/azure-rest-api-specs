@@ -16,7 +16,6 @@ import "@typespec/versioning";
 
 import "./common/versions.tsp";
 import "./common/auth.tsp";
-import "./common/params.tsp";
 import "./operations/items.tsp";
 import "./operations/jobs.tsp";
 import "./operations/sessions.tsp";
@@ -51,28 +50,19 @@ using OpenAPI;
   },
 })
 @doc("Azure Quantum Workspace Services")
-namespace Quantum.Workspace.Services;
+namespace Quantum.Workspace.Services {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body"
+  interface Jobs extends Quantum.Workspace.Operations.JobOperations {}
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
-@autoRoute
-interface Jobs extends Quantum.Workspace.Jobs.JobOperations {}
+  interface Sessions extends Quantum.Workspace.Operations.SessionOperations {}
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
-@autoRoute
-interface Sessions extends Quantum.Workspace.Sessions.SessionOperations {}
+  interface Providers extends Quantum.Workspace.Operations.ProviderOperations {}
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
-@autoRoute
-interface Providers extends Quantum.Workspace.Providers.ProviderOperations {}
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
+  interface Storage extends Quantum.Workspace.Operations.StorageOperations {}
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
-@autoRoute
-interface Storage extends Quantum.Workspace.Storage.StorageOperations {}
+  interface Quotas extends Quantum.Workspace.Operations.QuotaOperations {}
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
-@autoRoute
-interface Quotas extends Quantum.Workspace.Quotas.QuotaOperations {}
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
-@autoRoute
-interface TopLevelItems extends Quantum.Workspace.Items.ItemsOperations {}
+  interface TopLevelItems
+    extends Quantum.Workspace.Operations.ItemsOperations {}
+}

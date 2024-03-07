@@ -4,17 +4,12 @@
 // --------------------------------------------------------------------------------------------
 
 import "@typespec/rest";
+import "@typespec/versioning";
+import "@typespec/http";
+import "@typespec/openapi";
 
-using OpenAPI;
-using TypeSpec.Http;
-
-@doc("Error information.")
-model ErrorData {
-  @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
-  @visibility("read")
-  code: string;
-
-  @doc("A message describing the error, intended to be suitable for displaying in a user interface.")
-  @visibility("read")
-  message: string;
-}
+import "./auth.tsp";
+import "./base-operations.tsp";
+import "./common-params.tsp";
+import "./json-patch.tsp";
+import "./versions.tsp";

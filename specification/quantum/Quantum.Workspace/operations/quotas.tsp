@@ -3,19 +3,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "@typespec/rest";
-import "@typespec/http";
-import "@typespec/versioning";
-import "@typespec/openapi";
+import "./operations.tsp";
 
-import "../common/operations.tsp";
-import "../common/versions.tsp";
-
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.Rest.Resource;
-using OpenAPI;
 
 @doc("The scope at which the quota is applied to.")
 enum DimensionScope {
@@ -74,20 +65,11 @@ model Quota {
   period: MeterPeriod;
 }
 
-@doc("List of workspace quotas.")
-model QuotaList {
-  ...CollectionWithNextLink<Quota>;
-}
-
 @useDependency(DefaultAzureCoreVersion)
-namespace Quantum.Workspace.Quotas {
+namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface QuotaOperations {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("List quotas for the given workspace.")
-    @get
-    @listsResource(Quota)
-    @segment("quotas")
-    list is ListOperation<QuotaList>;
+    list is ListOperation<Quota>;
   }
 }

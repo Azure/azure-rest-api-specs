@@ -3,20 +3,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "@typespec/rest";
-import "@typespec/http";
-import "@typespec/versioning";
-import "@typespec/openapi";
+import "./operations.tsp";
 
-import "../common/operations.tsp";
-import "../common/versions.tsp";
-import "./cost-estimates.tsp";
-
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.Rest.Resource;
-using OpenAPI;
 
 @doc("A key-value pair.")
 model KeyValue<TValue = string> {
@@ -36,7 +26,7 @@ enum ItemType {
   Session,
 }
 
-@doc("Id of the item.")
+@doc("Id of the workspace item.")
 @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
 @maxLength(36)
 scalar WorkspaceItemId extends string;
@@ -85,24 +75,15 @@ model ItemDetails {
 
   @visibility("read")
   @doc("Error information.")
-  errorData?: ErrorData;
-}
-
-@doc("List of workspace items.")
-model ItemDetailsList {
-  ...CollectionWithNextLink<ItemDetails>;
+  errorData?: Quantum.Workspace.BaseOperations.Error;
 }
 
 @useDependency(DefaultAzureCoreVersion)
-namespace Quantum.Workspace.Items {
+namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
 
   interface ItemsOperations {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("List top-level items.")
-    @get
-    // @listsResource(ItemDetails) -> causes conflicts with jobs list
-    @segment("topLevelItems")
-    list is ListOperation<ItemDetailsList>;
+    list is ListOperation<ItemDetails>;
   }
 }

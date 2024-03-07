@@ -47,10 +47,6 @@ scalar WorkspaceName extends string;
 
 @doc("Common URL parameters.")
 model CommonParams {
-  @query("api-version")
-  @doc("The REST API version.")
-  apiVersion: ApiVersion;
-
   @path
   @segment("subscriptions")
   @doc("The Azure subscription ID.")
@@ -58,7 +54,7 @@ model CommonParams {
 
   @path
   @segment("resourceGroups")
-  @doc("Name of an Azure resource group.")
+  @doc("Name of the Azure resource group.")
   resourceGroupName: ResourceGroupName;
 
   @path
@@ -85,7 +81,7 @@ model Subscription {
 @resource("resourceGroups")
 @parentResource(Subscription)
 model ResourceGroup {
-  @doc("Name of an Azure resource group.")
+  @doc("Name of the Azure resource group.")
   @key
   @visibility("read", "create", "update", "delete")
   resourceGroupName: ResourceGroupName;
@@ -95,7 +91,7 @@ model ResourceGroup {
 @resource("providers")
 @parentResource(ResourceGroup)
 model ResourceProvider {
-  @doc("Name of an Azure resource provider.")
+  @doc("The Azure Quantum resource provider.")
   @key
   @visibility("read", "create", "update", "delete")
   providerName: ResourceProviderName;
@@ -103,9 +99,9 @@ model ResourceProvider {
 
 @doc("Azure Quantum workspace.")
 @resource("workspaces")
-@parentResource(Provider)
+@parentResource(ResourceProvider)
 model QuantumWorkspace {
-  @doc("Name of the workspace.")
+  @doc("Name of the Azure Quantum workspace.")
   @key
   @visibility("read", "create", "update", "delete")
   workspaceName: WorkspaceName;

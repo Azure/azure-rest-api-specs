@@ -18,17 +18,14 @@ try {
         )
         Write-Host "Running $name..."
         $global:LASTEXITCODE = 0
-        $errorFile = Join-Path $logDirectory "$name-error.txt"
         $outputFile = Join-Path $logDirectory "$name.txt"
-        &$expression 2> $errorFile *> $outputFile
+        &$expression *> $outputFile
         if ($LASTEXITCODE -eq 0) {
             Write-Host "$name completed with success!"
         } else {
             Write-Host "$name completed with error! Exit code: {$LASTEXITCODE}."
-            $errorFile = Resolve-Path $errorFile
             $outputFile = Resolve-Path $outputFile
             Write-Host "Check $outputFile"
-            Write-Host "Check $errorFile"
         }
         Write-Host ""
     }

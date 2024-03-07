@@ -86,12 +86,14 @@
                 let node = spec;
                 if (matches != null) {
                     for(let match of matches) {
+                        if (node == undefined) break;
                         node = node[match.groups["property"]];
                         if (match.groups["subscript"] != null) {
                             node = node[match.groups["subscript"]];
                         }
                     }
                     if (Array.isArray(node)) {
+                        console.log(spec)
                         yield Array.from(getSpecRefNodes(spec, node));
                         // for(let item of node) {
                         //     if (item["$ref"] != undefined) {

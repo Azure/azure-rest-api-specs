@@ -3,19 +3,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "@typespec/rest";
-import "@typespec/http";
-import "@typespec/versioning";
-import "@typespec/openapi";
+import "./operations.tsp";
 
-import "../common/operations.tsp";
-import "../common/versions.tsp";
-import "./items.tsp";
-
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.Rest.Resource;
+
+using TypeSpec.Http;
 using OpenAPI;
 
 @doc("The type of the job.")
@@ -63,6 +56,12 @@ model QuantumComputingData {
 @resource("jobs")
 @parentResource(QuantumWorkspace)
 model JobDetails extends ItemDetails {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"
+  @key("jobId")
+  @doc("Id of the job.")
+  @visibility("read", "create")
+  id: WorkspaceItemId;
+
   @visibility("read", "create")
   @doc("Type of the Quantum Workspace item is Job.")
   itemType: ItemType.Job;
@@ -120,69 +119,25 @@ model JobDetails extends ItemDetails {
   outputDataFormat?: string;
 }
 
-@doc("List of workspace jobs.")
-model JobDetailsList {
-  ...CollectionWithNextLink<JobDetails>;
-}
-
-@doc("Id of the job.")
-@pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
-@maxLength(36)
-scalar JobId extends WorkspaceItemId;
-
-alias JobIdParam = {
-  @path
-  @segment("jobs")
-  @doc("Id of the job.")
-  jobId: JobId;
-};
-
-alias JobParam = {
-  @path
-  @segment("jobs")
-  @doc("Id of the job.")
-  jobId: JobId;
-
-  @body
-  @doc("The job data.")
-  job: JobDetails;
-};
-
 @useDependency(DefaultAzureCoreVersion)
-namespace Quantum.Workspace.Jobs {
+namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface JobOperations {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("Create a new job")
-    @put
-    @createsResource(JobDetails)
-    create is CreateOperation<JobDetails, JobParam>;
+    create is CreateOperation<JobDetails>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
-    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Backward compatibility with service and Swagger"
-    #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Backward compatibility with service and Swagger"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body"
     @doc("Update job properties")
     @patch
-    @updatesResource(JobDetails)
-    patch is PatchOperation<JobDetails, JobIdParam>;
+    patch is PatchOperation<JobDetails>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("Request the cancellation of an existing job")
-    @delete
-    @updatesResource(JobDetails)
-    cancel is CancelOperation<JobDetails, JobIdParam>;
+    cancel is CancelOperation<JobDetails>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("Get job by its id")
-    @get
-    @readsResource(JobDetails)
-    get is GetOperation<JobDetails, JobIdParam>;
+    get is GetOperation<JobDetails>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("List all jobs")
-    @get
-    @segment("jobs")
-    // @listsResource(JobDetails) -> causes conflicts with jobs list
-    list is ListOperation<JobDetailsList>;
+    list is ListOperation<JobDetails>;
   }
 }

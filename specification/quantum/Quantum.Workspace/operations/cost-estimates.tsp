@@ -3,7 +3,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "@typespec/rest";
+import "./operations.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 @doc("The job cost billed by the provider. The final cost on your bill might be slightly different due to added taxes and currency conversion rates.")
 model CostEstimate {

@@ -3,19 +3,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "@typespec/rest";
-import "@typespec/http";
-import "@typespec/versioning";
-import "@typespec/openapi";
+import "./operations.tsp";
 
-import "../common/operations.tsp";
-import "../common/versions.tsp";
-
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.Rest.Resource;
-using OpenAPI;
+
+using TypeSpec.Http;
 
 @doc("The details (name and container) of the blob to store or download data.")
 model BlobDetails {
@@ -42,13 +35,13 @@ alias BlobDetailsParam = {
 };
 
 @useDependency(DefaultAzureCoreVersion)
-namespace Quantum.Workspace.Storage {
+namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
+  @autoRoute
   interface StorageOperations {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
     @doc("Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. The SAS URL can be used to upload job input and/or download job output.")
-    @post
     @segment("storage/sasUri")
-    sasUri is CommonOperation<BlobDetailsParam, SasUriResponse>;
+    sasUri is PostOperation<BlobDetailsParam, SasUriResponse>;
   }
 }

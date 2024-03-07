@@ -3,19 +3,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "@typespec/rest";
-import "@typespec/http";
-import "@typespec/versioning";
-import "@typespec/openapi";
+import "./operations.tsp";
 
-import "../common/operations.tsp";
-import "../common/versions.tsp";
-
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.Rest.Resource;
-using OpenAPI;
 
 @doc("Provider availability.")
 enum ProviderAvailability {
@@ -39,13 +30,6 @@ enum TargetAvailability {
 
   @doc("Target is unavailable.")
   Unavailable,
-}
-
-@doc("Provider")
-model Provider {
-  @visibility("read")
-  @doc("Provider id.")
-  id: string;
 }
 
 @doc("Provider status.")
@@ -85,20 +69,11 @@ model TargetStatus {
   statusPage?: string;
 }
 
-@doc("List of provider and target statuses.")
-model ProviderStatusList {
-  ...CollectionWithNextLink<ProviderStatus>;
-}
-
 @useDependency(DefaultAzureCoreVersion)
-namespace Quantum.Workspace.Providers {
+namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface ProviderOperations {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backward compatibility with service and Swagger"
     @doc("Get provider status.")
-    @get
-    @listsResource(ProviderStatus)
-    @segment("providerStatus")
-    getStatus is ListOperation<ProviderStatusList>;
+    getStatus is ListOperation<ProviderStatus>;
   }
 }
