@@ -10,7 +10,7 @@
 
 Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
 
-![diagram](https://github.com/Azure/azure-rest-api-specs/assets/20296335/35140fb9-639e-4e44-ac4b-38b1a20dddf9)
+![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/f5cdc159-40bd-42a5-8a1c-1e398a1d80fd)
 
 <details>
 <summary> Click here to see the details of Step 1 </summary>
