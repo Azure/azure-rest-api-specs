@@ -90,6 +90,10 @@ interface EnvironmentClientOperations {
   "csharp",
   "ScheduleFrequency"
 );
+@@projectedName(DevCenterService.ScheduledType,
+  "csharp",
+  "ScheduleType"
+);
 @@projectedName(DevCenterService.Pool, "csharp", "DevBoxPool");
 @@projectedName(DevCenterService.Pool.osType, "csharp", "OSType");
 @@projectedName(DevCenterService.Pool.localAdministrator,
@@ -115,7 +119,8 @@ interface EnvironmentClientOperations {
   "OSBuildNumber"
 );
 @@projectedName(DevCenterService.Schedule, "csharp", "DevBoxSchedule");
-@@projectedName(DevCenterService.Schedule.type, "csharp", "scheduledType");
+@@projectedName(DevCenterService.Schedule.type, "csharp", "scheduleType");
+@@projectedName(DevCenterService.Schedule.frequency, "csharp", "scheduleFrequency");
 @@projectedName(DevCenterService.DevBox.osType, "csharp", "OSType");
 @@projectedName(DevCenterService.DevBox.user, "csharp", "userId");
 @@projectedName(DevCenterService.DevBox.localAdministrator,
@@ -157,7 +162,7 @@ interface EnvironmentClientOperations {
 );
 @@projectedName(DevCenterService.OperationStatusValue,
   "csharp",
-  "DevCenterStatus"
+  "DevCenterOperationStatus"
 );
 @@projectedName(DevCenterService.OperationStatus,
   "csharp",
@@ -169,6 +174,10 @@ interface EnvironmentClientOperations {
 @@projectedName(DevCenterService.ScheduledFrequency,
   "java",
   "ScheduleFrequency"
+);
+@@projectedName(DevCenterService.ScheduledType,
+  "java",
+  "ScheduleType"
 );
 @@projectedName(DevCenterService.Pool, "java", "DevBoxPool");
 @@projectedName(DevCenterService.Pool.localAdministrator,
@@ -183,18 +192,24 @@ interface EnvironmentClientOperations {
   "java",
   "DevBoxStorageProfile"
 );
+@@projectedName(DevCenterService.OsDisk.diskSizeGB, "java", "diskSizeGb");
 @@projectedName(DevCenterService.ImageReference,
   "java",
   "DevBoxImageReference"
 );
 @@projectedName(DevCenterService.Schedule, "java", "DevBoxSchedule");
-@@projectedName(DevCenterService.Schedule.type, "java", "scheduledType");
+@@projectedName(DevCenterService.Schedule.type, "java", "scheduleType");
+@@projectedName(DevCenterService.Schedule.frequency, "java", "scheduleFrequency");
 @@projectedName(DevCenterService.DevBox.user, "java", "userId");
 @@projectedName(DevCenterService.DevBox.localAdministrator,
   "java",
   "LocalAdministratorStatus"
 );
 @@projectedName(DevCenterService.DevBoxAction.next, "java", "nextAction");
+@@projectedName(DevCenterService.DevBoxActionDelayResult.name,
+  "java",
+  "actionName"
+);
 @@projectedName(DevCenterService.ParameterType,
   "java",
   "EnvironmentDefinitionParameterType"
@@ -218,10 +233,11 @@ interface EnvironmentClientOperations {
   "java",
   "DevCenterEnvironmentType"
 );
-@@projectedName(DevCenterService.HardwareProfile.vCPUs, "java", "vcpus");
+@@projectedName(DevCenterService.HardwareProfile.vCPUs, "java", "vCpus");
+@@projectedName(DevCenterService.HardwareProfile.memoryGB, "java", "memoryGb");
 @@projectedName(DevCenterService.OperationStatusValue,
   "java",
-  "DevCenterStatus"
+  "DevCenterOperationStatus"
 );
 @@projectedName(DevCenterService.OperationStatus,
   "java",
