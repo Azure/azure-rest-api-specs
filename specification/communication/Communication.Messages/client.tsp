@@ -33,4 +33,6 @@ interface MessageTemplateClient
 );
 
 @@projectedName(Azure.Communication.MessagesService.MessageTemplate.values,
-"python", "templateValues");
+  "python",
+  "templateValues"
+);
