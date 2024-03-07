@@ -26,7 +26,6 @@ These are the global settings for the relationships.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: providerHub
 tag: package-2023-09-01-preview
 ```
 
