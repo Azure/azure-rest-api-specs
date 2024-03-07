@@ -477,10 +477,12 @@
               "$ref": "#/definitions/NewRelicMonitorResource"
             }
           },
-          "201": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NewRelicMonitorResource"
+          "202": {
+            "description": "ARM operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
