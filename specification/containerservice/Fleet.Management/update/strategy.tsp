@@ -64,8 +64,6 @@ interface FleetUpdateStrategies {
       IfNoneMatchParameters<FleetUpdateStrategy>
   >;
 
-  #suppress "deprecated" "Existing API"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   delete is FleetArmResourceDeleteAsync<
     FleetUpdateStrategy,
     BaseParameters<FleetUpdateStrategy> & IfMatchParameters<FleetUpdateStrategy>
