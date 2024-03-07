@@ -167,10 +167,6 @@ Copying examples from $source to $newVersionExamples
         }     
     }   
 
-    RunAndCheck "prettify-swagger" \ {
-        npx prettier --write $newSwaggerFile
-    }
-
     RunAndCheck "example-validation" \ {
         oav validate-example $newSwaggerFile
     }

@@ -81,5 +81,5 @@ namespace Quantum.Workspace.BaseOperations {
   >;
 
   @doc("Operation to list a resource.")
-  op ListOperation<TResourceList extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceList<TResourceList>;
+  op ListOperation<TResource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceList<TResource>;
 }
