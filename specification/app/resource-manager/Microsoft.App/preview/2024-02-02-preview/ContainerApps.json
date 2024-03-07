@@ -666,11 +666,14 @@
           "description": "Container App to be a dev Container App Service"
         },
         "identitySettings":{
-          "description": "Optional settings for Managed Identities that are assigned to the Container App. This is a dictionary whose keys are ARM resource IDs for user-assigned identities, or 'system' for system-assigned identity. If a Managed Identity is not specified here, default settings will be used.",
-          "type": "object",
-          "additionalProperties": {
+          "description": "Optional settings for Managed Identities that are assigned to the Container App. If a Managed Identity is not specified here, default settings will be used.",
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/IdentitySettings"
-          }
+          },
+          "x-ms-identifiers": [
+            "identity"
+          ]
         }
       }
     },
@@ -1421,6 +1424,10 @@
       "description": "Optional settings for a Managed Identity that is assigned to the Container App.",
       "type": "object",
       "properties": {
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
+        },
         "lifecycle": {
           "description": "The lifecycle stages of a Container App at which the Managed Identity is available.",
           "enum": [

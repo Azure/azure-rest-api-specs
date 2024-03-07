@@ -106,14 +106,16 @@
           "service": {
             "type": "redis"
           },
-          "identitySettings" : {
-            "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity" : {
-                "lifecycle" : "all"
+          "identitySettings" : [
+            {
+              "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
+              "lifecycle" : "All"
             },
-            "system": {
-                "lifecycle" : "init"
+            {
+              "identity": "system",
+              "lifecycle" : "Init"
             }
-          }
+          ]
         },
         "template": {
           "containers": [
@@ -293,14 +295,16 @@
                 "enableMetrics": true
               }
             },
-            "identitySettings" : {
-              "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity" : {
-                  "lifecycle" : "all"
+            "identitySettings" : [
+              {
+                "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
+                "lifecycle" : "All"
               },
-              "system": {
-                  "lifecycle" : "init"
+              {
+                "identity": "system",
+                "lifecycle" : "Init"
               }
-            }
+            ]
           },
           "template": {
             "containers": [
@@ -442,14 +446,16 @@
                 "enableMetrics": true
               }
             },
-            "identitySettings" : {
-              "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity" : {
-                  "lifecycle" : "all"
+            "identitySettings" : [
+              {
+                "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
+                "lifecycle" : "All"
               },
-              "system": {
-                  "lifecycle" : "init"
+              {
+                "identity": "system",
+                "lifecycle" : "Init"
               }
-            }
+            ]
           },
           "template": {
             "containers": [
