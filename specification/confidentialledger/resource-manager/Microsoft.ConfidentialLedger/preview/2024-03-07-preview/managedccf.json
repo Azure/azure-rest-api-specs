@@ -486,6 +486,18 @@
         "modelAsString": true
       }
     },
+    "EnclavePlatform": {
+      "type": "string",
+      "description": "Object representing the enclave platform for the Managed CCF application. Defaults to IntelSgx.",
+      "enum": [
+        "IntelSgx",
+        "AmdSevSnp"
+      ],
+      "x-ms-enum": {
+        "name": "EnclavePlatform",
+        "modelAsString": true
+      }
+    },
     "DeploymentType": {
       "type": "object",
       "description": "Object representing DeploymentType for Managed CCF.",
@@ -591,6 +603,11 @@
           "format": "int32",
           "description": "Number of CCF nodes in the Managed CCF.",
           "$ref": "#/definitions/NodeCount"
+        },
+        "enclavePlatform": {
+          "description": "Enclave platform of Managed CCF.",
+          "readOnly": false,
+          "$ref": "#/definitions/EnclavePlatform"
         }
       }
     },
