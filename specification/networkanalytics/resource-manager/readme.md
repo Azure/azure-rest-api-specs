@@ -73,6 +73,16 @@ input-file:
   - Microsoft.NetworkAnalytics/stable/2023-11-15/networkanalytics.json
 ```
 
+## Suppression
+
+```yaml
+suppressions:
+  - code: AvoidAnonymousTypes
+    from: networkanalytics.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/getRegionalDataProductCapacity"].post.responses["202"]
+    reason: Property represents response to provider level action which returns per region data products capacity.
+```
+
 # Code Generation
 
 ## Swagger to SDK
