@@ -104,24 +104,6 @@ model AzureExtendedZone is ProxyResource<AzureExtendedZoneProperties> {
   name: string;
 }
 
-@doc("An AzureExtendedZone register request body")
-model RegisterAzureExtendedZoneRequest {
-  @doc("Organization Name for the Azure Extended Zone registration")
-  organizationName: string;
-
-  @doc("Organization Contact Name for the Azure Extended Zone registration")
-  organizationContactName: string;
-
-  @doc("Organization Contact Email Address for the Azure Extended Zone registration")
-  organizationContactEmailAddress: string;
-
-  @doc("Azure services needed by the organization for the Azure Extended Zone registration")
-  organizationAzureServicesNeeded: string;
-
-  @doc("Azure resource capacity needed by the organization for the Azure Extended Zone registration")
-  organizationAzureResourceCapacityNeeded: string;
-}
-
 // We will use this in an interface
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations must be inside an interface declaration."
 @autoRoute
@@ -145,11 +127,7 @@ interface AzureExtendedZones {
   listBySubscription is ArmListBySubscription<AzureExtendedZone>;
 
   @doc("Registers a subscription for an Azure Extended Zone")
-  register is ArmResourceActionSync<
-    AzureExtendedZone,
-    RegisterAzureExtendedZoneRequest,
-    AzureExtendedZone
-  >;
+  register is ArmResourceActionNoBodySync<AzureExtendedZone>;
 
   @doc("Unregisters a subscription for an Azure Extended Zone")
   unregister is ArmResourceActionNoBodySync<AzureExtendedZone>;
