@@ -90,10 +90,7 @@ interface EnvironmentClientOperations {
   "csharp",
   "ScheduleFrequency"
 );
-@@projectedName(DevCenterService.ScheduledType,
-  "csharp",
-  "ScheduleType"
-);
+@@projectedName(DevCenterService.ScheduledType, "csharp", "ScheduleType");
 @@projectedName(DevCenterService.Pool, "csharp", "DevBoxPool");
 @@projectedName(DevCenterService.Pool.osType, "csharp", "OSType");
 @@projectedName(DevCenterService.Pool.localAdministrator,
@@ -120,7 +117,10 @@ interface EnvironmentClientOperations {
 );
 @@projectedName(DevCenterService.Schedule, "csharp", "DevBoxSchedule");
 @@projectedName(DevCenterService.Schedule.type, "csharp", "scheduleType");
-@@projectedName(DevCenterService.Schedule.frequency, "csharp", "scheduleFrequency");
+@@projectedName(DevCenterService.Schedule.frequency,
+  "csharp",
+  "scheduleFrequency"
+);
 @@projectedName(DevCenterService.DevBox.osType, "csharp", "OSType");
 @@projectedName(DevCenterService.DevBox.user, "csharp", "userId");
 @@projectedName(DevCenterService.DevBox.localAdministrator,
@@ -175,10 +175,7 @@ interface EnvironmentClientOperations {
   "java",
   "ScheduleFrequency"
 );
-@@projectedName(DevCenterService.ScheduledType,
-  "java",
-  "ScheduleType"
-);
+@@projectedName(DevCenterService.ScheduledType, "java", "ScheduleType");
 @@projectedName(DevCenterService.Pool, "java", "DevBoxPool");
 @@projectedName(DevCenterService.Pool.localAdministrator,
   "java",
@@ -199,7 +196,10 @@ interface EnvironmentClientOperations {
 );
 @@projectedName(DevCenterService.Schedule, "java", "DevBoxSchedule");
 @@projectedName(DevCenterService.Schedule.type, "java", "scheduleType");
-@@projectedName(DevCenterService.Schedule.frequency, "java", "scheduleFrequency");
+@@projectedName(DevCenterService.Schedule.frequency,
+  "java",
+  "scheduleFrequency"
+);
 @@projectedName(DevCenterService.DevBox.user, "java", "userId");
 @@projectedName(DevCenterService.DevBox.localAdministrator,
   "java",
