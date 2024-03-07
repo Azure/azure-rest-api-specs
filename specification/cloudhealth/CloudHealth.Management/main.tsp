@@ -25,7 +25,7 @@ namespace Microsoft.CloudHealth;
 
 alias ProviderName = "Microsoft.CloudHealth";
 
-// Regex for all our resource name validations
+// Regex for all our resource name validations. Up to 60 characters, alphanumeric and hyphens, must start and end with an alphanumeric character
 alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,58}[a-zA-Z0-9]$";
 
 @pattern(resourceNameRegex)
