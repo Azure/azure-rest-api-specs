@@ -162,6 +162,23 @@ suppressions:
 
 ```
 
+### Tag: package-policy-2023-04-only
+
+These settings apply only when `--tag=package-policy-2023-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2023-04-only'
+input-file:
+  - Microsoft.Authorization/stable/2023-04-01/policyDefinitions.json
+  - Microsoft.Authorization/stable/2023-04-01/policyDefinitionVersions.json
+  - Microsoft.Authorization/stable/2023-04-01/policySetDefinitions.json
+  - Microsoft.Authorization/stable/2023-04-01/policySetDefinitionVersions.json
+  - Microsoft.Authorization/stable/2023-04-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-deploymentscripts-2023-08
 
 These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
