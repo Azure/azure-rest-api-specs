@@ -36,7 +36,7 @@
   "paths": {
     "/.well-known/did.json": {
       "get": {
-        "operationId": "ServiceConfiguration_GetDidConfig",
+        "operationId": "GetDidConfig",
         "description": "Get the DID configuration file.",
         "parameters": [
           {
@@ -64,15 +64,15 @@
           }
         },
         "x-ms-examples": {
-          "ServiceConfiguration_GetDidConfig": {
-            "$ref": "./examples/ServiceConfiguration_GetDidConfig.json"
+          "GetDidConfig": {
+            "$ref": "./examples/GetDidConfig.json"
           }
         }
       }
     },
     "/configuration": {
       "get": {
-        "operationId": "ServiceConfiguration_GetCtsConfig",
+        "operationId": "GetCodeTransparencyConfig",
         "description": "Get CodeTransparency configuration information.",
         "parameters": [
           {
@@ -83,7 +83,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CtsConfiguration"
+              "$ref": "#/definitions/CodeTransparencyConfiguration"
             }
           },
           "default": {
@@ -100,15 +100,15 @@
           }
         },
         "x-ms-examples": {
-          "ServiceConfiguration_GetCtsConfig": {
-            "$ref": "./examples/ServiceConfiguration_GetCtsConfig.json"
+          "GetCodeTransparencyConfig": {
+            "$ref": "./examples/GetCodeTransparencyConfig.json"
           }
         }
       }
     },
     "/entries": {
       "post": {
-        "operationId": "ServiceEntries_CreateEntry",
+        "operationId": "CreateEntry",
         "description": "Post an entry to be registered on the CodeTransparency instance.",
         "consumes": [
           "application/cose"
@@ -142,15 +142,15 @@
           }
         },
         "x-ms-examples": {
-          "ServiceEntries_CreateEntry": {
-            "$ref": "./examples/ServiceEntries_CreateEntry.json"
+          "CreateEntry": {
+            "$ref": "./examples/CreateEntry.json"
           }
         }
       }
     },
     "/entries/{entryId}": {
       "get": {
-        "operationId": "ServiceEntries_GetEntry",
+        "operationId": "GetEntry",
         "description": "Get Entry with or without receipt embedded in its unprotected header",
         "produces": [
           "application/cose",
@@ -188,15 +188,15 @@
           }
         },
         "x-ms-examples": {
-          "ServiceEntries_GetEntry": {
-            "$ref": "./examples/ServiceEntries_GetEntry.json"
+          "GetEntry": {
+            "$ref": "./examples/GetEntry.json"
           }
         }
       }
     },
     "/entries/{entryId}/receipt": {
       "get": {
-        "operationId": "ServiceEntries_GetEntryReceipt",
+        "operationId": "GetEntryReceipt",
         "description": "Get the receipt of an entry given a specific entry id.",
         "produces": [
           "application/cbor",
@@ -231,15 +231,15 @@
           }
         },
         "x-ms-examples": {
-          "ServiceEntries_GetEntryReceipt": {
-            "$ref": "./examples/ServiceEntries_GetEntryReceipt.json"
+          "GetEntryReceipt": {
+            "$ref": "./examples/GetEntryReceipt.json"
           }
         }
       }
     },
     "/entries/txIds": {
       "get": {
-        "operationId": "ServiceEntries_ListEntryIds",
+        "operationId": "ListEntryIds",
         "description": "Historical query to get a list of entries of a given range",
         "parameters": [
           {
@@ -278,8 +278,8 @@
           }
         },
         "x-ms-examples": {
-          "ServiceEntries_ListEntryIds": {
-            "$ref": "./examples/ServiceEntries_ListEntryIds.json"
+          "ListEntryIds": {
+            "$ref": "./examples/ListEntryIds.json"
           }
         },
         "x-ms-pageable": {
@@ -289,7 +289,7 @@
     },
     "/operations": {
       "get": {
-        "operationId": "ServiceEntries_ListEntryStatuses",
+        "operationId": "ListEntryStatuses",
         "description": "Get the status of all entries operations",
         "parameters": [
           {
@@ -317,15 +317,15 @@
           }
         },
         "x-ms-examples": {
-          "ServiceEntries_ListEntryStatuses": {
-            "$ref": "./examples/ServiceEntries_ListEntryStatuses.json"
+          "ListEntryStatuses": {
+            "$ref": "./examples/ListEntryStatuses.json"
           }
         }
       }
     },
     "/operations/{operationId}": {
       "get": {
-        "operationId": "ServiceEntries_GetEntryStatus",
+        "operationId": "GetEntryStatus",
         "description": "Get the status the entry operation",
         "parameters": [
           {
@@ -356,15 +356,15 @@
           }
         },
         "x-ms-examples": {
-          "ServiceEntries_GetEntryStatus": {
-            "$ref": "./examples/ServiceEntries_GetEntryStatus.json"
+          "GetEntryStatus": {
+            "$ref": "./examples/GetEntryStatus.json"
           }
         }
       }
     },
     "/parameters": {
       "get": {
-        "operationId": "ServiceConfiguration_GetParameters",
+        "operationId": "GetParameters",
         "description": "Get service parameters",
         "parameters": [
           {
@@ -392,15 +392,15 @@
           }
         },
         "x-ms-examples": {
-          "ServiceConfiguration_GetParameters": {
-            "$ref": "./examples/ServiceConfiguration_GetParameters.json"
+          "GetParameters": {
+            "$ref": "./examples/GetParameters.json"
           }
         }
       }
     },
     "/version": {
       "get": {
-        "operationId": "ServiceConfiguration_GetCtsVersion",
+        "operationId": "GetCodeTransparencyVersion",
         "description": "Get CodeTransparency version information.",
         "parameters": [
           {
@@ -428,8 +428,8 @@
           }
         },
         "x-ms-examples": {
-          "ServiceConfiguration_GetCtsVersion": {
-            "$ref": "./examples/ServiceConfiguration_GetCtsVersion.json"
+          "GetCodeTransparencyVersion": {
+            "$ref": "./examples/GetCodeTransparencyVersion.json"
           }
         }
       }
@@ -497,29 +497,15 @@
         }
       }
     },
-    "CreateEntryResult": {
-      "type": "object",
-      "description": "Response of entry submission containing the operationId.",
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "String representing the operationid submitted",
-          "pattern": "^[0-9]+\\.[0-9]+$"
-        }
-      },
-      "required": [
-        "operationId"
-      ]
-    },
-    "CtsConfiguration": {
+    "CodeTransparencyConfiguration": {
       "type": "object",
       "description": "The Response body of the Configuration API.",
       "properties": {
         "policy": {
-          "$ref": "#/definitions/CtsConfigurationPolicy"
+          "$ref": "#/definitions/CodeTransparencyConfigurationPolicy"
         },
         "authentication": {
-          "$ref": "#/definitions/CtsConfigurationAuthentication"
+          "$ref": "#/definitions/CodeTransparencyConfigurationAuthentication"
         },
         "service_identifier": {
           "type": "string",
@@ -528,7 +514,7 @@
         }
       }
     },
-    "CtsConfigurationAuthentication": {
+    "CodeTransparencyConfigurationAuthentication": {
       "type": "object",
       "description": "Configuration of CCF authentication.",
       "properties": {
@@ -536,14 +522,14 @@
           "type": "boolean"
         },
         "jwt": {
-          "$ref": "#/definitions/CtsConfigurationAuthentication_JWT"
+          "$ref": "#/definitions/CodeTransparencyConfigurationAuthenticationJwt"
         }
       },
       "required": [
         "allow_unauthenticated"
       ]
     },
-    "CtsConfigurationAuthentication_JWT": {
+    "CodeTransparencyConfigurationAuthenticationJwt": {
       "type": "object",
       "description": "Configuration of JWT claims",
       "properties": {
@@ -558,7 +544,7 @@
         "required_claims"
       ]
     },
-    "CtsConfigurationPolicy": {
+    "CodeTransparencyConfigurationPolicy": {
       "type": "object",
       "description": "Configuration of CCF Authentication policies.",
       "properties": {
@@ -575,6 +561,20 @@
           }
         }
       }
+    },
+    "CreateEntryResult": {
+      "type": "object",
+      "description": "Response of entry submission containing the operationId.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "String representing the operationid submitted",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        }
+      },
+      "required": [
+        "operationId"
+      ]
     },
     "DidDocument": {
       "type": "object",
@@ -620,7 +620,7 @@
           }
         },
         "publicKeyJwk": {
-          "$ref": "#/definitions/JSONWebKey",
+          "$ref": "#/definitions/JsonWebKey",
           "description": "Serialized public key in JWK format."
         }
       },
@@ -692,7 +692,7 @@
         "status"
       ]
     },
-    "JSONWebKey": {
+    "JsonWebKey": {
       "type": "object",
       "description": "rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types",
       "properties": {

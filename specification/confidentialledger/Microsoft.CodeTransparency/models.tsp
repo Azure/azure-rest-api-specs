@@ -174,12 +174,12 @@ model DidDocumentKey {
   type: "JsonWebKey2020";
 
   @doc("Serialized public key in JWK format.")
-  publicKeyJwk: JSONWebKey;
+  publicKeyJwk: JsonWebKey;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types")
-model JSONWebKey {
+model JsonWebKey {
   @doc("The \"alg\" (algorithm) parameter identifies the algorithm intended for\nuse with the key.  The values used should either be registered in the\nIANA \"JSON Web Signature and Encryption Algorithms\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name.")
   alg?: string;
 
@@ -242,9 +242,9 @@ model VersionResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("The Response body of the Configuration API.")
-model CtsConfiguration {
-  policy?: CtsConfigurationPolicy;
-  authentication?: CtsConfigurationAuthentication;
+model CodeTransparencyConfiguration {
+  policy?: CodeTransparencyConfigurationPolicy;
+  authentication?: CodeTransparencyConfigurationAuthentication;
 
   @doc("did:web identifier")
   @pattern("^did:web:.+$")
@@ -254,22 +254,22 @@ model CtsConfiguration {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Configuration of CCF authentication.")
-model CtsConfigurationAuthentication {
+model CodeTransparencyConfigurationAuthentication {
   allow_unauthenticated: boolean;
-  jwt?: CtsConfigurationAuthenticationJwt;
+  jwt?: CodeTransparencyConfigurationAuthenticationJwt;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Configuration of JWT claims")
-model CtsConfigurationAuthenticationJwt {
+model CodeTransparencyConfigurationAuthenticationJwt {
   required_claims: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Configuration of CCF Authentication policies.")
-model CtsConfigurationPolicy {
+model CodeTransparencyConfigurationPolicy {
   accepted_algorithms?: string[];
   accepted_did_issuers?: string[];
 }
