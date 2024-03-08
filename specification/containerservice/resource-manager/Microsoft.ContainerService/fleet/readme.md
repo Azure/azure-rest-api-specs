@@ -38,15 +38,6 @@ input-file:
   - stable/2024-04-01/fleets.json
 ```
 
-### Tag: package-2023-10
-
-These settings apply only when `--tag=package-2023-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-10'
-input-file:
-  - stable/2023-10-15/fleets.json
-```
-
 ### Tag: package-2024-02-preview
 
 These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
@@ -54,6 +45,15 @@ These settings apply only when `--tag=package-2024-02-preview` is specified on t
 ```yaml $(tag) == 'package-2024-02-preview'
 input-file:
   - preview/2024-02-02-preview/fleets.json
+```
+
+### Tag: package-2023-10
+
+These settings apply only when `--tag=package-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-10'
+input-file:
+  - stable/2023-10-15/fleets.json
 ```
 
 ### Tag: package-2023-08-preview
