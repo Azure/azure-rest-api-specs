@@ -62,6 +62,7 @@ function Get-Suppression {
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
+$pathsWithWarnings = @()
 
 $filesToCheck = (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish)).Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
@@ -154,7 +155,13 @@ else {
     }
     elseif ($response.StatusCode -eq 404) {
       LogInfo "  Branch 'main' does not contain path '$servicePath/stable', so spec is new and must use TypeSpec"
-      $pathsWithErrors += $file
+      
+      if ($file.Contains("/data-plane/")) {
+        $pathsWithWarnings += $file
+      }
+      else {
+        $pathsWithErrors += $file
+      }
     }
     else {
       LogError "Unexpected response from ${logUrlToStableFolder}: ${response.StatusCode}"
@@ -164,18 +171,26 @@ else {
   }
 }
 
-if ($pathsWithErrors.Count -gt 0)
-{
-  # DevOps only adds the first 4 errors to the github checks list so lets always add the generic one first
-  # and then as many of the individual ones as can be found afterwards
+$exitCode = 0
+
+# DevOps only adds the first 4 errors to the github checks list so lets always add the generic one first
+# and then as many of the individual ones as can be found afterwards
+if ($pathsWithErrors.Count -gt 0) {
   LogError "New specs must use TypeSpec.  For more detailed docs see https://aka.ms/azsdk/typespec"
   LogJobFailure
-
-  foreach ($path in $pathsWithErrors)
-  {
-    LogErrorForFile $path "OpenAPI was not generated from TypeSpec, and spec appears to be new"
-  }
-  exit 1
+  $exitCode = 1
+} elseif ($pathsWithWarnings.Count -gt 0) {
+  LogWarning "New specs must use TypeSpec.  For more detailed docs see https://aka.ms/azsdk/typespec"
 }
 
-exit 0
+foreach ($path in $pathsWithErrors)
+{
+  LogErrorForFile $path "OpenAPI was not generated from TypeSpec, and spec appears to be new"
+}
+
+foreach ($path in $pathsWithWarnings)
+{
+  LogWarningForFile $path "OpenAPI was not generated from TypeSpec, and spec appears to be new"
+}
+
+exit $exitCode
