@@ -173,7 +173,7 @@ else {
 
 $exitCode = 0
 
-# DevOps only adds the first 4 errors to the github checks list so lets always add the generic one first
+# DevOps only adds the first 4 errors/warnings to the github checks list so lets always add the generic one first
 # and then as many of the individual ones as can be found afterwards
 if ($pathsWithErrors.Count -gt 0) {
   LogError "New specs must use TypeSpec.  For more detailed docs see https://aka.ms/azsdk/typespec"
