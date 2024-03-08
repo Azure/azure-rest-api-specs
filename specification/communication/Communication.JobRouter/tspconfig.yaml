@@ -13,7 +13,8 @@ parameters:
     default: "sdk/communication"
   "python-output-dir":
     default: "azure/communication/jobrouter/_generated"
-emit: [ "@azure-tools/typespec-autorest" ]
+emit:
+  - "@azure-tools/typespec-autorest"
 
 linter:
   extends:
@@ -34,7 +35,7 @@ options:
     package-dir: "Azure.Communication.JobRouter"
     flavor: azure
   "@azure-tools/typespec-python":
-    package-pprint-name: "\"Communication JobRouter\""
+    package-pprint-name: '"Communication JobRouter"'
     emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     package-dir: "azure-communication-jobrouter"
     package-name: "{package-dir}"

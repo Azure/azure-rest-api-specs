@@ -3,7 +3,8 @@ parameters:
     default: "sdk/eventgrid"
   "service-directory-name":
     default: "eventgrid"
-emit: [ "@azure-tools/typespec-autorest" ]
+emit:
+  - "@azure-tools/typespec-autorest"
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
@@ -15,7 +16,7 @@ options:
     output-file: "{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/SystemEvents.json"
     azure-resource-provider-folder: "data-plane"
   "@azure-tools/typespec-python":
-    package-pprint-name: "\"Azure Event Grid System Events\""
+    package-pprint-name: '"Azure Event Grid System Events"'
     package-version: 4.12.0b1
     package-dir: "azure-eventgrid"
     package-name: "{package-dir}"
