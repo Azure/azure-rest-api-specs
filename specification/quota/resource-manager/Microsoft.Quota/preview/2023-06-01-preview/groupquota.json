@@ -633,158 +633,13 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits/{resourceName}": {
-      "put": {
-        "tags": [
-          "GroupQuotaLimits"
-        ],
-        "summary": "Updates the GroupQuotaLimits for the specific resource.",
-        "description": "Updates the GroupQuotaLimits for the specific resource for a specific resource based on the resourceProviderScope. The resourceProviderScope will be provided in the request body, as resourceProviderScope. Example of resourceProviderScope for compute - /providers/{Microsoft.Compute}/locations/{eastus}. GroupQuotaLimitRequestId will be returned by the Service in the response. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI for groupQuotaRequests and full details can be checked from the Get API for groupQuotaRequests.",
-        "operationId": "GroupQuotaLimits_CreateOrUpdate",
-        "x-ms-examples": {
-          "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/GroupQuotaLimits/PutGroupQuotaLimits-Compute.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/GroupQuotaName"
-          },
-          {
-            "$ref": "#/parameters/Resource"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "groupQuotaLimitRequest",
-            "in": "body",
-            "description": "The GroupQuotaLimit Request.",
-            "schema": {
-              "$ref": "#/definitions/GroupQuotaLimit"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Create or Update",
-            "schema": {
-              "$ref": "#/definitions/GroupQuotaLimit"
-            }
-          },
-          "201": {
-            "description": "Request Created. Create or Update",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int64"
-              },
-              "Location": {
-                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/LROResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "GroupQuotaLimits"
-        ],
-        "summary": "Updates the GroupQuotaLimits for the specific resource under a Management Group.",
-        "description": "Updates the GroupQuotaLimits for the specific resource. The resourceProviderScope will be provided in the request body, as resourceProviderScope field. A groupQuotaLimitRequestId will be returned by the Service. The status will be updated periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
-        "operationId": "GroupQuotaLimits_Update",
-        "x-ms-examples": {
-          "GroupQuotaLimits_Patch_Request_ForCompute": {
-            "$ref": "./examples/GroupQuotaLimits/PatchGroupQuotaLimits-Compute.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/GroupQuotaName"
-          },
-          {
-            "$ref": "#/parameters/Resource"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "groupQuotaLimitRequest",
-            "in": "body",
-            "description": "The GroupQuotaLimit Request.",
-            "schema": {
-              "$ref": "#/definitions/GroupQuotaLimit"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Returns the quota details.",
-            "schema": {
-              "$ref": "#/definitions/GroupQuotaLimit"
-            }
-          },
-          "202": {
-            "description": "Request Accepted",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int64"
-              },
-              "Location": {
-                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaLimits/{resourceName}": {
       "get": {
         "tags": [
           "GroupQuotaLimits"
         ],
-        "summary": "Gets the resource groupQuotaLimits for the MGId for a resource.",
-        "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The $filter is a required parameter to filter out the specific resource based on the ResourceProvider/Location. It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the group quota.",
+        "summary": "Gets the GroupQuotaLimits for the specific resource.",
+        "description": "Gets the GroupQuotaLimits for the specific resource for a specific resource based on the resourceProviders and $fliter passed. The $filter=location eq {location} is required to location specific resources groupQuota.",
         "operationId": "GroupQuotaLimits_Get",
         "x-ms-examples": {
           "GroupQuotaLimits_Get_Request_ForCompute": {
@@ -797,6 +652,9 @@
           },
           {
             "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
           },
           {
             "$ref": "#/parameters/Resource"
@@ -824,7 +682,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaLimits": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -832,8 +690,8 @@
         "tags": [
           "GroupQuotaLimits"
         ],
-        "summary": "Gets the List of resources groupQuotaLimits for the MGId, based on the scope.",
-        "description": "Gets the List of resources groupQuotaLimits for the MGId, based on the filter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The list elements will be same as the Get API - It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the group quota.",
+        "summary": "Gets the GroupQuotaLimits for all the resources for the specified location in $filter=location eq {location}.",
+          "description": "Gets the GroupQuotaLimits for the all resource for a specific  resourceProvider and $fliter passed. The $filter=location eq {location} is required to location specific resources groupQuota.",
         "operationId": "GroupQuotaLimits_List",
         "x-ms-examples": {
           "GroupQuotaLimits_List_Request_ForCompute": {
@@ -846,6 +704,9 @@
           },
           {
             "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -870,7 +731,81 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}resourceProviders/{resourceProviderName}/groupQuotaRequests": {
+      "put":{
+        "tags": [
+                   "GroupQuotaLimitsRequests"
+         ],
+        "summary": "Put the GroupQuota requests for a specific ResourceProvider/Location/Resource.",
+        "description": "Put the GroupQuota requests for a specific ResourceProvider/Location/Resource. the location and resourceName properties are specified in the request body. Only 1 resource quota can be requested. ",
+        "operationId": "GroupQuotaLimitsRequests_Put",
+        "x-ms-examples": {
+          "GroupQuotaLimitsRequests_List": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/GroupQuotaLimitsRequests_Put.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "GroupQuotaRequestPutRequestBody",
+            "in": "body",
+            "description": "The GroupQuotaRequest body details for specific resourceProvider/location/resources.",
+            "schema": {
+              "$ref": "#/definitions/SubmittedResourceRequestStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, with the details of the group quota request.",
+            "schema": {
+              "$ref": "#/definitions/SubmittedResourceRequestStatus"
+            }
+          },
+          "201": {
+            "description": "Request Accepted, Create or Update",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers.  New guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#131-resource-based-long-running-operations-relo",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/LROResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -892,6 +827,9 @@
           },
           {
             "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1658,13 +1596,11 @@
             "name": {
               "type": "object",
               "x-ms-client-flatten": true,
-              "readOnly": true,
               "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
               "properties": {
                 "value": {
                   "description": "Resource name.",
-                  "type": "string",
-                  "readOnly": true
+                  "type": "string"
                 },
                 "localizedValue": {
                   "description": "Resource display name.",
@@ -1673,7 +1609,7 @@
                 }
               }
             },
-            "resourceProviderScope": {
+            "location": {
               "$ref": "#/definitions/ResourceProviderScope"
             }
           }
@@ -1720,14 +1656,14 @@
       }
     },
     "ResourceProviderScope": {
-      "description": "ResourceProviderScope  for the quota request. Format: /providers/{ResourceProviderName}/locations/{Azure region} Example: /providers/{Microsoft.Compute}/locations/{eastus}. Please replace the ResourceProviderName, Azure region as per the requested resource.",
+      "description": "Location/Azure region for the quota requested for resource.",
       "type": "string"
     },
     "GroupQuotaDetails": {
       "type": "object",
       "description": "Group Quota details.",
       "properties": {
-        "resourceProviderScope": {
+        "location": {
           "$ref": "#/definitions/ResourceProviderScope"
         },
         "limit": {
@@ -1940,7 +1876,7 @@
       "type": "object",
       "description": "Subscription Quota details.",
       "properties": {
-        "resourceProviderScope": {
+        "location": {
           "$ref": "#/definitions/ResourceProviderScope"
         },
         "limit": {
@@ -2339,7 +2275,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "| Field                    | Supported operators  \r\n|---------------------|------------------------\n\r\n|provider  eq {resourceProvider}  and location eq {location}\n Example: $filter= provider eq Microsoft.Compute and location eq eastus",
+      "description": "| Field | Supported operators  \r\n|---------------------|------------------------\n\r\n location eq {location}\n Example: $filter= location eq eastus",
       "minLength": 24
     }
   }
