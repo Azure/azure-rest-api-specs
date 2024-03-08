@@ -13,9 +13,7 @@ parameters:
     default: "sdk/communication"
   "python-output-dir":
     default: "azure/communication/messages/_generated"
-emit: [
-  "@azure-tools/typespec-autorest"
-]
+emit: ["@azure-tools/typespec-autorest"]
 
 linter:
   extends:
@@ -36,7 +34,7 @@ options:
     package-dir: "Azure.Communication.Messages"
     save-inputs: true
   "@azure-tools/typespec-python":
-    package-pprint-name: "\"Communication Messages\""
+    package-pprint-name: '"Communication Messages"'
     emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     package-dir: "azure-communication-messages"
     package-name: "{package-dir}"
