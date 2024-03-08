@@ -4,7 +4,8 @@
     "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
     "api-version": "2023-06-01-preview",
-    "$filter": "provider eq Microsoft.Compute & location eq westus"
+    "resourceProviderName": "Microsoft.Compute",
+    "$filter": "location eq westus"
   },
   "responses": {
     "200": {
@@ -16,7 +17,6 @@
             "name": "cores",
             "properties": {
               "limit": 100,
-              "resourceProviderScope": "/providers/Microsoft.Compute/locations/westus",
               "name": {
                 "value": "cores",
                 "localizedValue": "Total Regional vCPUs"
@@ -37,7 +37,6 @@
             "name": "standardav2family",
             "properties": {
               "limit": 100,
-              "resourceProviderScope": "/providers/Microsoft.Compute/locations/westus",
               "name": {
                 "value": "standardav2family",
                 "localizedValue": "Standard AV2 Family vCPUs"
