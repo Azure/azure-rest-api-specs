@@ -12,15 +12,15 @@ other consumers.
 """)
 model CompletionsUsage {
   @doc("The number of tokens generated across all completions emissions.")
-  @projectedName("json", "completion_tokens")
+  @encodedName("application/json", "completion_tokens")
   completionTokens: int32;
 
   @doc("The number of tokens in the provided prompts for the completions request.")
-  @projectedName("json", "prompt_tokens")
+  @encodedName("application/json", "prompt_tokens")
   promptTokens: int32;
 
   @doc("The total number of tokens processed for the completions request and response.")
-  @projectedName("json", "total_tokens")
+  @encodedName("application/json", "total_tokens")
   totalTokens: int32;
 }
 
@@ -45,7 +45,7 @@ enum CompletionsFinishReason {
   functionCall: "function_call",
 
   @doc("Completion ended with the model calling a provided tool for output.")
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   toolCalls: "tool_calls",
 }
 
@@ -65,6 +65,6 @@ enum ChatRole {
   function: "function",
 
   @doc("The role that represents extension tool activity within a chat completions operation.")
-  @added(ServiceApiVersions.v2023_08_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   tool: "tool",
 }

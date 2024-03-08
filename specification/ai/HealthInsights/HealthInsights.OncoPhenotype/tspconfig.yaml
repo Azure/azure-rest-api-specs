@@ -31,17 +31,20 @@ options:
     package-dir: "azure-healthinsights-cancerprofiling"
     package-name: "{package-dir}"
     emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-health-insights-cancerprofiling"
     namespace: com.azure.health.insights.cancerprofiling
     partial-update: true
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-health-insights-cancerprofiling"
+    flavor: azure
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true
     package-dir: "Azure.Health.Insights.CancerProfiling"
     namespace: "{package-dir}"
     model-namespace: false
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "azurehealthinsightscancerprofiling-rest"
     emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/health-insights-cancerprofiling-rest"
@@ -49,3 +52,4 @@ options:
     generateTest: true
     packageDetails:
       name: "@azure-rest/health-insights-cancerprofiling"
+    flavor: azure
