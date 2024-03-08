@@ -63,4 +63,3 @@ op listEntryIds is Foundations.Operation<
   ServiceTraits,
   ServiceUnavailableError
 >;
-

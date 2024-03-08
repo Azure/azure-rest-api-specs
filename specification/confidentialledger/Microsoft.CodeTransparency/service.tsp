@@ -21,10 +21,18 @@ op getDidConfig is Foundations.Operation<{}, DidDocument, ServiceTraits>;
 @doc("Get CodeTransparency configuration information.")
 @route("/configuration")
 @get
-op getCodeTransparencyConfig is Foundations.Operation<{}, CodeTransparencyConfiguration, ServiceTraits>;
+op getCodeTransparencyConfig is Foundations.Operation<
+  {},
+  CodeTransparencyConfiguration,
+  ServiceTraits
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get CodeTransparency version information.")
 @route("/version")
 @get
-op getCodeTransparencyVersion is Foundations.Operation<{}, VersionResult, ServiceTraits>;
+op getCodeTransparencyVersion is Foundations.Operation<
+  {},
+  VersionResult,
+  ServiceTraits
+>;
