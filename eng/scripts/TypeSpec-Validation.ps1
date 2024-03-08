@@ -13,8 +13,8 @@ if ($typespecFolders) {
   $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
   foreach ($typespecFolder in $typespecFolders) {
     LogGroupStart "Validating $typespecFolder"
-    LogInfo "npx --no tsv $typespecFolder"
-    npx --no tsv $typespecFolder 2>&1 | Write-Host
+    LogInfo "npm exec --no -- tsv $typespecFolder"
+    npm exec --no -- tsv $typespecFolder 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
