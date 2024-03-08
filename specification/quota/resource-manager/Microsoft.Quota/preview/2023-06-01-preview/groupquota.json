@@ -642,8 +642,106 @@
         "description": "Updates the GroupQuotaLimits for the specific resource for a specific resource based on the resourceProviderScope. The resourceProviderScope will be provided in the request body, as resourceProviderScope. Example of resourceProviderScope for compute - /providers/{Microsoft.Compute}/locations/{eastus}. GroupQuotaLimitRequestId will be returned by the Service in the response. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI for groupQuotaRequests and full details can be checked from the Get API for groupQuotaRequests.",
         "operationId": "GroupQuotaLimits_CreateOrUpdate",
         "x-ms-examples": {
-          "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/GroupQuotaLimits/PutGroupQuotaLimits-Compute.json"
+          "GroupQuotaLimits_Get_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotaLimits/GetGroupQuotaLimits-Compute.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "#/parameters/Resource"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterInQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaLimit"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaLimits": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "GroupQuotaLimits"
+        ],
+        "summary": "Gets the GroupQuotaLimits for all the resources for the specified location in $filter=location eq {location}.",
+          "description": "Gets the GroupQuotaLimits for the all resource for a specific  resourceProvider and $fliter passed. The $filter=location eq {location} is required to location specific resources groupQuota.",
+        "operationId": "GroupQuotaLimits_List",
+        "x-ms-examples": {
+          "GroupQuotaLimits_List_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotaLimits/ListGroupQuotaLimits-Compute.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterInQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaLimitList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests": {
+      "put":{
+        "tags": [
+                   "GroupQuotaLimitRequests"
+         ],
+        "summary": "Put the GroupQuota requests for a specific ResourceProvider/Location/Resource.",
+        "description": "Put the GroupQuota requests for a specific ResourceProvider/Location/Resource. the location and resourceName properties are specified in the request body. Only 1 resource quota can be requested. ",
+        "operationId": "GroupQuotaLimitsRequests_Put",
+        "x-ms-examples": {
+          "GroupQuotaLimitsRequests_List": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/PutGroupQuotaLimitsRequests-Compute.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -710,11 +808,11 @@
       },
       "patch": {
         "tags": [
-          "GroupQuotaLimits"
-        ],
-        "summary": "Updates the GroupQuotaLimits for the specific resource under a Management Group.",
-        "description": "Updates the GroupQuotaLimits for the specific resource. The resourceProviderScope will be provided in the request body, as resourceProviderScope field. A groupQuotaLimitRequestId will be returned by the Service. The status will be updated periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
-        "operationId": "GroupQuotaLimits_Update",
+                   "GroupQuotaLimitRequests"
+         ],
+        "summary": "Create the GroupQuota requests for a specific ResourceProvider/Location/Resource.",
+        "description": "Create the GroupQuota requests for a specific ResourceProvider/Location/Resource. the location and resourceName properties are specified in the request body. Only 1 resource quota can be requested. Please note that patch request creates a new groupQuota request.",
+        "operationId": "GroupQuotaLimitsRequests_Patch",
         "x-ms-examples": {
           "GroupQuotaLimits_Patch_Request_ForCompute": {
             "$ref": "./examples/GroupQuotaLimits/PatchGroupQuotaLimits-Compute.json"
@@ -781,7 +879,7 @@
       },
       "get": {
         "tags": [
-          "GroupQuotaLimits"
+          "GroupQuotaLimitRequests"
         ],
         "summary": "Gets the resource groupQuotaLimits for the MGId for a resource.",
         "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The $filter is a required parameter to filter out the specific resource based on the ResourceProvider/Location. It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the group quota.",
@@ -830,7 +928,7 @@
           "nextLinkName": "nextLink"
         },
         "tags": [
-          "GroupQuotaLimits"
+          "GroupQuotaLimitRequests"
         ],
         "summary": "Gets the List of resources groupQuotaLimits for the MGId, based on the scope.",
         "description": "Gets the List of resources groupQuotaLimits for the MGId, based on the filter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The list elements will be same as the Get API - It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the group quota.",
