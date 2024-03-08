@@ -222,6 +222,28 @@
                       }
                     ]
                   }
+                ],
+                "computedDisabledRuleGroups": [
+                  {
+                    "ruleGroupName": "REQUEST-942-APPLICATION-ATTACK-SQLI",
+                    "rules": [
+                      "942130",
+                      "942110"
+                    ]
+                  },
+                  {
+                    "ruleGroupName": "REQUEST-920-PROTOCOL-ENFORCEMENT",
+                    "rules": [
+                      "920100",
+                      "920120"
+                    ]
+                  },
+                  {
+                    "ruleGroupName": "General",
+                    "rules": [
+                      "200003"
+                    ]
+                  }
                 ]
               },
               {
@@ -232,10 +254,23 @@
                     "ruleGroupName": "UnknownBots",
                     "rules": [
                       {
+                        "ruleId": "300100",
+                        "state": "Disabled",
+                        "action": "Log"
+                      },
+                      {
                         "ruleId": "300700",
                         "state": "Enabled",
                         "action": "JSChallenge"
                       }
+                    ]
+                  }
+                ],
+                "computedDisabledRuleGroups": [
+                  {
+                    "ruleGroupName": "UnknownBots",
+                    "rules": [
+                      "300100"
                     ]
                   }
                 ]

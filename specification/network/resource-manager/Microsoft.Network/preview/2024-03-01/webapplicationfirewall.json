@@ -783,6 +783,14 @@
           "items": {
             "$ref": "#/definitions/ManagedRuleGroupOverride"
           }
+        },
+        "computedDisabledRuleGroups": {
+          "readOnly": true,
+          "description": "Stores the final list of disabled rule groups",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetRuleGroup"
+          }
         }
       }
     },
@@ -832,6 +840,25 @@
         "action": {
           "description": "Describes the override action to be applied when rule matches.",
           "$ref": "#/definitions/ActionType"
+        }
+      }
+    },
+    "ManagedRuleSetRuleGroup": {
+      "description": "Defines a managed rule set rule group",
+      "required": [
+        "ruleGroupName"
+      ],
+      "properties": {
+        "ruleGroupName": {
+          "description": "Name of the rule group",
+          "type": "string"
+        },
+        "rules": {
+          "description": "List of rules within the rule group",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
