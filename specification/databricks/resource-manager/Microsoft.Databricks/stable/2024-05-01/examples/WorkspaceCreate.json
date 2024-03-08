@@ -10,7 +10,12 @@
         "defaultCatalog": {
           "initialType": "UnityCatalog",
           "initialName": ""
-        }
+        },
+        "accessConnector": {
+          "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/adbrg/providers/Microsoft.Databricks/accessConnectors/myAccessConnector",
+          "identityType": "SystemAssigned"
+        },
+        "defaultStorageFirewall": "Enabled"
       },
       "location": "westus"
     }
@@ -27,6 +32,11 @@
         },
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "accessConnector": {
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/adbrg/providers/Microsoft.Databricks/accessConnectors/myAccessConnector",
+            "identityType": "SystemAssigned"
+          },
+          "defaultStorageFirewall": "Enabled",
           "parameters": null,
           "provisioningState": "Accepted",
           "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json",
@@ -72,6 +82,11 @@
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
           "parameters": null,
+          "accessConnector": {
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/adbrg/providers/Microsoft.Databricks/accessConnectors/myAccessConnector",
+            "identityType": "SystemAssigned"
+          },
+          "defaultStorageFirewall": "Enabled",
           "provisioningState": "Accepted",
           "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json",
           "authorizations": [
