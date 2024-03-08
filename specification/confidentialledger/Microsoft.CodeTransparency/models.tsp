@@ -30,7 +30,7 @@ model ParametersResult {
 
 @doc("Response of entry submission containing the operationId.")
 model CreateEntryResult {
-  @doc("String representing the operationid submitted")
+  @doc("String representing the operation id submitted")
   @pattern("^[0-9]+\\.[0-9]+$")
   operationId: string;
 }
