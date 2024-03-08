@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./helpers.tsp";
+import "../AzureDeployments.common/helpers.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -13,9 +13,10 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
+using Microsoft.Resources.Deployments.Common;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Resources.Deployments;
+namespace Microsoft.Resources.Deployments.Bicep;
 
 @doc("The body of the request for the decompileBicep operation.")
 model DecompileOperationRequest {

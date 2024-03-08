@@ -9,7 +9,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Microsoft.Resources.Deployments;
+namespace Microsoft.Resources.Deployments.Common;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "this is a template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "this is a template"
