@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "savingsPlanOrderId": "20000000-0000-0000-0000-000000000000",
+    "savingsPlanId": "30000000-0000-0000-0000-000000000000",
+    "api-version": "2024-04-01",
+    "body": {
+      "properties": {
+        "displayName": "sp_newName",
+        "appliedScopeType": "ManagementGroup",
+        "appliedScopeProperties": {
+          "tenantId": "80000000-0000-0000-0000-000000000000",
+          "managementGroupId": "/providers/Microsoft.Management/managementGroups/mg1"
+        },
+        "renew": true,
+        "renewProperties": {
+          "purchaseProperties": {
+            "sku": {
+              "name": "Compute_Savings_Plan"
+            },
+            "properties": {
+              "billingScopeId": "/subscriptions/50000000-0000-0000-0000-000000000000",
+              "term": "P3Y",
+              "appliedScopeType": "ManagementGroup",
+              "appliedScopeProperties": {
+                "tenantId": "80000000-0000-0000-0000-000000000000",
+                "managementGroupId": "/providers/Microsoft.Management/managementGroups/mg1"
+              },
+              "displayName": "sp_newName_renewed",
+              "billingPlan": "P1M",
+              "commitment": {
+                "grain": "Hourly",
+                "currencyCode": "USD",
+                "amount": 0.001
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000",
+        "name": "30000000-0000-0000-0000-000000000000",
+        "type": "microsoft.billing/billingAccounts/savingsPlanOrders/savingsPlans",
+        "sku": {
+          "name": "Compute_Savings_Plan"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "properties": {
+          "billingScopeId": "/subscriptions/50000000-0000-0000-0000-000000000000",
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/AAAA-BBBB-CCC-DDD",
+          "billingPlan": "P1M",
+          "productCode": "20000000-0000-0000-0000-000000000005",
+          "appliedScopeProperties": {
+            "tenantId": "80000000-0000-0000-0000-000000000000",
+            "managementGroupId": "/providers/Microsoft.Management/managementGroups/mg1",
+            "displayName": "mg1"
+          },
+          "commitment": {
+            "grain": "Hourly",
+            "currencyCode": "USD",
+            "amount": 0.001
+          },
+          "renew": true,
+          "appliedScopeType": "ManagementGroup",
+          "displayName": "sp_newName",
+          "provisioningState": "Succeeded",
+          "term": "P3Y",
+          "displayProvisioningState": "Succeeded",
+          "userFriendlyAppliedScopeType": "ManagementGroup",
+          "expiryDateTime": "2026-02-04T03:18:31.3072635Z",
+          "purchaseDateTime": "2023-02-04T03:16:38.9065505Z",
+          "benefitStartTime": "2023-02-04T03:18:31.3072635Z",
+          "effectiveDateTime": "2023-02-04T04:30:49.1982989Z",
+          "utilization": {
+            "aggregates": []
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000?api-version=2022-11-01",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000?api-version=2022-11-01",
+        "Retry-After": 120
+      }
+    }
+  }
+}
