@@ -9,6 +9,11 @@ jobs:
 
   steps:
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Requirement.ps1
-    displayName: TypeSpec Requirement
+      $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Requirement.ps1 -SpecType data-plane
+    displayName: TypeSpec Requirement - data-plane
+    ignoreLASTEXITCODE: true
+
+  - pwsh: |
+      $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Requirement.ps1 -SpecType resource-manager
+    displayName: TypeSpec Requirement - resource-manager
     ignoreLASTEXITCODE: true
