@@ -137,7 +137,7 @@
             "in": "body",
             "description": "The  GroupQuotas Patch Request.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEntityPatch"
+              "$ref": "#/definitions/GroupQuotasEntity"
             }
           }
         ],
@@ -1308,14 +1308,14 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationSettings/{location}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaEnforcements/{location}": {
       "put": {
         "tags": [
-          "GroupQuotaEnforcementLocationSettings"
+          "GroupQuotasEnforcement"
         ],
-        "summary": "Enables the GroupQuotas enforcement settings for the resource provider and the location specified.",
+        "summary": "Enables the GroupQuotas enforcement for the resource provider and the location specified.",
         "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level. The subscriptions share the GroupQuota assigned to the GroupQuota. If the GroupQuota is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource. Once the GroupQuota Enforcement is enabled then, it cannot be deleted or reverted back. To disable GroupQuota Enforcement - 1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete)",
-        "operationId": "GroupQuotaEnforcementLocationSettings_CreateOrUpdate",
+        "operationId": "GroupQuotaEnforcement_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotasEnforcement_Put": {
             "$ref": "./examples/GroupQuotasEnforcement/PutGroupQuotaEnforcement.json"
@@ -1340,14 +1340,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "LocationSettings",
-            "in": "body",
-            "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
-            "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
-            }
           }
         ],
         "responses": {
@@ -1388,11 +1380,11 @@
       },
       "patch": {
         "tags": [
-          "GroupQuotaEnforcementLocationSettings"
+          "GroupQuotasEnforcement"
         ],
-        "summary": "Enables the GroupQuotas enforcement settings for the resource provider and the location specified.",
+        "summary": "Enables the GroupQuotas enforcement for the resource provider and the location specified.",
         "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level. The subscriptions share the GroupQuota assigned to the GroupQuota. If the GroupQuota is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource. If the Enforcement is in progress for that resourceProvider/location, then Conflict will be returned.",
-        "operationId": "GroupQuotaEnforcementLocationSettings_Update",
+        "operationId": "GroupQuotaEnforcement_Update",
         "x-ms-examples": {
           "GroupQuotaEnforcement_Patch": {
             "$ref": "./examples/GroupQuotasEnforcement/PatchGroupQuotaEnforcement.json"
@@ -1414,14 +1406,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "LocationSettings",
-            "in": "body",
-            "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
-            "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
-            }
           }
         ],
         "responses": {
@@ -1459,11 +1443,11 @@
       },
       "get": {
         "tags": [
-          "GroupQuotaEnforcementLocationSettings"
+          "GroupQuotasEnforcement"
         ],
-        "summary": "Gets the GroupQuotas enforcement settings for the resource provider/location.",
-        "description": "Gets the GroupQuotas enforcement settings for the ResourceProvider/location. The locations, where GroupQuota enforcement is not enabled will return Not Found.",
-        "operationId": "GroupQuotaEnforcementLocationSettings_Get",
+        "summary": "Gets the GroupQuotas enforcement status for the resource provider/location.",
+        "description": "Gets the GroupQuotas enforcement status for the ResourceProvider/location. The locations, where GroupQuota enforcement is not enabled will return Not Found.",
+        "operationId": "GroupQuotaEnforcement_Get",
         "x-ms-examples": {
           "GroupQuotasEnforcement_Get": {
             "$ref": "./examples/GroupQuotasEnforcement/GetGroupQuotaEnforcement.json"
@@ -1502,17 +1486,17 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationSettings": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaEnforcements": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "tags": [
-          "GroupQuotaEnforcementLocationSettings"
+          "GroupQuotasEnforcement"
         ],
-        "summary": "Returns a list of the Azure regions settings, where the GroupQuotas enforcement is enabled.",
-        "description": "Returns only the list of the Azure regions settings, where the GroupQuotas enforcement is enabled. The locations not included in GroupQuota Enforcement will not be listed, the regions in failed status with listed as status Failed.",
-        "operationId": "GroupQuotaEnforcementLocationSettings_List",
+        "summary": "Returns a list of the Azure regions where the GroupQuotas enforcement is enabled.",
+        "description": "Returns only the list of the Azure regions where the GroupQuotas enforcement is enabled. The locations not included in GroupQuota Enforcement will not be listed, the regions in failed status with listed as status Failed.",
+        "operationId": "GroupQuotaEnforcement_List",
         "x-ms-examples": {
           "GroupQuotaEnforcement_List": {
             "$ref": "./examples/GroupQuotasEnforcement/ListGroupQuotaEnforcement.json"
@@ -2081,41 +2065,6 @@
         }
       }
     },
-    "GroupQuotasEntityBasePatch": {
-      "type": "object",
-      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
-      "properties": {
-        "displayName": {
-          "description": "Display name of the GroupQuota entity.",
-          "type": "string"
-        },
-        "additionalAttributes": {
-          "description": "Additional attributes to filter/restrict the subscriptions, which can be added to the subscriptionIds.",
-          "$ref": "#/definitions/AdditionalAttributesPatch"
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the operation.",
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
-        }
-      }
-    },
-    "GroupQuotasEntityPatch": {
-      "type": "object",
-      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "title": "Properties",
-          "type": "object",
-          "$ref": "#/definitions/GroupQuotasEntityBasePatch"
-        }
-      }
-    },
     "GroupQuotasEntity": {
       "type": "object",
       "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
@@ -2197,18 +2146,6 @@
         "groupId"
       ]
     },
-    "AdditionalAttributesPatch": {
-      "description": "Additional attribute or filter to allow subscriptions meeting the requirements to be part of the GroupQuota.",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "$ref": "#/definitions/GroupingId"
-        },
-        "environment": {
-          "$ref": "#/definitions/Environment"
-        }
-      }
-    },
     "GroupQuotaList": {
       "type": "object",
       "description": "List of Group Quotas at MG level.",
@@ -2257,9 +2194,9 @@
         "properties": {
           "type": "object",
           "properties": {
-            "enforcementEnabled": {
-              "type": "boolean",
-              "description": "Is the GroupQuota Enforcement enabled for the Azure region."
+            "location": {
+              "type": "string",
+              "description": "The name of the Azure region."
             },
             "provisioningState": {
               "$ref": "#/definitions/RequestState",
