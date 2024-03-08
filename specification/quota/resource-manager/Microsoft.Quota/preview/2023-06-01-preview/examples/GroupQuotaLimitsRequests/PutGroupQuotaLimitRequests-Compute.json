@@ -1,14 +1,18 @@
 {
-  "operationId": "GroupQuotaLimits_CreateOrUpdate",
+  "operationId": "GroupQuotaLimitRequests_CreateOrUpdate",
   "parameters": {
     "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
-    "resourceName": "cores",
+    "resourceProviderName": "Microsoft.Compute",
     "api-version": "2023-06-01-preview",
     "groupQuotaRequest": {
       "properties": {
-        "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
+        "location": "westus",
         "limit": 110,
+        "name":
+        {
+          "value": "standardav2family"
+        },
         "comment": "Contoso requires more quota."
       }
     }
@@ -16,21 +20,27 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Compute/locations/westus/providers/Microsoft.Quota/groupQuotas/groupquota1/groupQuotaLimits/cores",
-        "type": "Microsoft.Quota/groupQuotas/groupQuotaLimits",
-        "name": "cores",
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locations/westus/groupQuotaLimitRequests/standardav2family",
+        "type": "Microsoft.Quota/groupQuotas/groupQuotaLimitRequests",
+        "name": "westus",
         "properties": {
-          "limit": 110,
+          "limit": 100,
+          "locaton": "westus",
+          "comment": "",
           "name": {
-            "value": "cores",
-            "localizedValue": "Total Regional vCPUs"
+            "value": "standardav2family",
+            "localizedValue": "Standard AV2 Family vCPUs"
           },
           "unit": "count",
-          "availableLimit": 90,
+          "availableLimit": 40,
           "allocatedToSubscriptions": [
             {
               "subscriptionId": "00000000-0000-0000-0000-000000000000",
               "quotaAllocated": 20
+            },
+            {
+              "subscriptionId": "A0000000-0000-0000-0000-00000000000EF",
+              "quotaAllocated": 40
             }
           ],
           "provisioningState": "Succeeded"
