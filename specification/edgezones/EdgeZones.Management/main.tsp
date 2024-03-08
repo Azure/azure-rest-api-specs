@@ -14,11 +14,17 @@ using Azure.ResourceManager.Foundations;
 @armProviderNamespace("Microsoft.EdgeZones")
 @service({
   title: "Microsoft.EdgeZones",
-  version: "2024-04-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.EdgeZones;
+
+/** Api versions */
+enum Versions {
+  /** 2024-04-01-preview api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2024-04-01-preview`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
