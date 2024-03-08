@@ -1,0 +1,39 @@
+{
+  "operationId": "GroupQuotaUsages_Get",
+  "parameters": {
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "groupQuotaName": "groupquota1",
+    "resourceProviderName": "Microsoft.Compute",
+    "locations": "westus",
+    "api-version": "2023-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body":  {
+        "value": [
+          {
+
+                "limit": 100,
+                "usages": 30,
+                "unit": "count",
+                "name": {
+                  "value": "cores",
+                  "localizedValue": "Total Regional vCPUs"
+                },
+
+          },
+          {
+            "limit": 150,
+            "usages": 70,
+            "unit": "count",
+                "name": {
+                  "value": "standardav2family",
+                  "localizedValue": "standardav2family"
+                }
+            }
+          ],
+        "nextLink": "https://yourLinkHere.com"
+      }
+    }
+  }
+}
