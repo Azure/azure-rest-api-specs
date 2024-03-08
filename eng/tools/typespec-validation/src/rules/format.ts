@@ -22,6 +22,17 @@ export class FormatRule implements Rule {
     stdOutput += stdout;
     errorOutput += stderr;
 
+    [err, stdout, stderr] = await host.runCmd(
+      `npm exec --no -- prettier --write tspconfig.yaml`,
+      folder,
+    );
+    if (err) {
+      success = false;
+      errorOutput += err.message;
+    }
+    stdOutput += stdout;
+    errorOutput += stderr;
+
     return {
       success: success,
       stdOutput: stdOutput,
