@@ -13,14 +13,16 @@
         "tag2": "value2"
       },
       "properties": {
-        "connectorType": "BitCoinSource",
-        "eventHubConfig": {
-          "namespaceHostName": "ns",
-          "eventHubName": "eh",
-          "connectionString": "connectionString1"
-        },
-        "maxTasks": 1,
-        "valueConverter": "ByteArrayConverter"
+        "connectorProperties": {
+          "connectorType": "BitCoinSource",
+          "eventHubConfig": {
+            "namespaceHostName": "ns",
+            "eventHubName": "eh",
+            "connectionString": "connectionString1"
+          },
+          "maxTasks": 1,
+          "valueConverter": "ByteArrayConverter"
+        }
       }
     }
   },
@@ -36,16 +38,18 @@
           "tag2": "value2"
         },
         "properties": {
-          "connectorType": "BitCoinSource",
-          "connectorDirection": "Source",
-          "eventHubConfig": {
-            "namespaceHostName": "ns",
-            "eventHubName": "eh"
+          "connectorProperties": {
+            "connectorType": "BitCoinSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "ByteArrayConverter",
+            "connectorState": "Running"
           },
-          "maxTasks": 1,
-          "valueConverter": "ByteArrayConverter",
-          "provisioningState": "Succeeded",
-          "connectorState": "Running"
+          "provisioningState": "Succeeded"
         }
       }
     },
@@ -60,16 +64,18 @@
           "tag2": "value2"
         },
         "properties": {
-          "connectorType": "BitCoinSource",
-          "connectorDirection": "Source",
-          "eventHubConfig": {
-            "namespaceHostName": "ns",
-            "eventHubName": "eh"
+          "connectorProperties": {
+            "connectorType": "BitCoinSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "ByteArrayConverter",
+            "connectorState": "Creating"
           },
-          "maxTasks": 1,
-          "valueConverter": "ByteArrayConverter",
-          "provisioningState": "Creating",
-          "connectorState": "Creating"
+          "provisioningState": "Creating"
         }
       }
     }
