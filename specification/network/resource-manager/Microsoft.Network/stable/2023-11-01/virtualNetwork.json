@@ -507,6 +507,9 @@
           },
           "Get subnet with a delegation": {
             "$ref": "./examples/SubnetGetWithDelegation.json"
+          },
+          "Get subnet with sharing scope": {
+            "$ref": "./examples/SubnetGetWithSharingScope.json"
           }
         }
       },
@@ -587,6 +590,9 @@
           },
           "Create subnet with a delegation": {
             "$ref": "./examples/SubnetCreateWithDelegation.json"
+          },
+          "Create subnet with sharing scope": {
+            "$ref": "./examples/SubnetCreateWithSharingScope.json"
           }
         }
       }
@@ -1633,6 +1639,19 @@
             "$ref": "./applicationGateway.json#/definitions/ApplicationGatewayIPConfiguration"
           },
           "description": "Application gateway IP configurations of virtual network resource."
+        },
+        "sharingScope": {
+          "type": "string",
+          "default": null,
+          "description": "Set this property to Tenant to allow sharing subnet with other subscriptions in your AAD tenant. This property can only be set if defaultOutboundAccess is set to false, both properties can only be set if subnet is empty.",
+          "enum": [
+            "Tenant",
+            "DelegatedServices"
+          ],
+          "x-ms-enum": {
+            "name": "SharingScope",
+            "modelAsString": true
+          }
         },
         "defaultOutboundAccess": {
           "type": "boolean",
