@@ -873,6 +873,64 @@
           "readOnly": true,
           "description": "Indicates whether unity catalog enabled for the workspace or not.",
           "type": "boolean"
+        },
+        "accessConnector": {
+          "description": "Access Connector Resource that is going to be associated with Databricks Workspace",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "arm-id",
+              "description": "The resource ID of Azure Databricks Access Connector Resource.",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.Databricks/accessConnectors"
+                  }
+                ]
+              }
+            },
+            "identityType": {
+              "type": "string",
+              "description": "The identity type of the Access Connector Resource.",
+              "enum": [
+                "SystemAssigned",
+                "UserAssigned"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "IdentityType"
+              }
+            },
+            "userAssignedIdentityId": {
+              "type": "string",
+              "format": "arm-id",
+              "description": "The resource ID of the User Assigned Identity associated with the Access Connector Resource. This is required for type 'UserAssigned' and not valid for type 'SystemAssigned'.",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "id",
+            "identityType"
+          ]
+        },
+        "defaultStorageFirewall": {
+          "description": "Gets or Sets Default Storage Firewall configuration information",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "defaultStorageFirewall"
+          }
         }
       },
       "required": [
