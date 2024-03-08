@@ -867,6 +867,7 @@
         "url": {
           "description": "The URL to sync for the flux configuration OCI repository.",
           "type": "string",
+          "format": "uri",
           "x-nullable": true
         },
         "timeoutInSeconds": {
@@ -930,6 +931,7 @@
         "url": {
           "description": "The URL to sync for the flux configuration OCI repository.",
           "type": "string",
+          "format": "uri",
           "x-nullable": true
         },
         "timeoutInSeconds": {
@@ -1090,6 +1092,10 @@
         "operation": {
           "description": "The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.",
           "type": "string",
+          "enum": [
+            "extract",
+            "copy"
+          ],
           "x-nullable": true
         }
       }
@@ -1107,6 +1113,10 @@
         "operation": {
           "description": "The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.",
           "type": "string",
+          "enum": [
+            "extract",
+            "copy"
+          ],
           "x-nullable": true
         }
       }
@@ -1128,7 +1138,7 @@
             "type": "string"
           }
         },
-        "matchOIDCIdentity": {
+        "matchOidcIdentity": {
           "description": "Array defining the criteria for matching the identity while verifying an OCI artifact.",
           "type": "array",
           "items": {
@@ -1157,7 +1167,7 @@
             "type": "string"
           }
         },
-        "matchOIDCIdentity": {
+        "matchOidcIdentity": {
           "description": "Array defining the criteria for matching the OIDC identity while verifying an OCI artifact.",
           "type": "array",
           "items": {
