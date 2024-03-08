@@ -855,12 +855,25 @@
             "type": "string"
           }
         },
-        "propertiesUpdated": {
-          "description": "Router Worker Updated Properties Updated",
+        "updatedWorkerProperties": {
+          "description": "Router Worker Properties Updated",
           "type": "array",
           "items": {
             "type": "string",
-            "description": "An individual property updated in the Router Worker"
+            "description": "An individual property updated in the Router Worker",
+            "enum": [
+              "AvailableForOffers",
+              "TotalCapacity",
+              "QueueAssignments",
+              "Labels",
+              "Tags",
+              "ChannelConfigurations",
+              "MaxConcurrentOffers"
+            ],
+            "x-ms-enum": {
+              "name": "AcsRouterUpdatedWorkerProperty",
+              "modelAsString": true
+            }
           }
         },
         "x-ms-examples": {
