@@ -1746,6 +1746,42 @@
     }
   },
   "definitions": {
+    "APIServerAccessProfile": {
+      "type": "object",
+      "description": "Access profile for the Fleet hub API server.",
+      "properties": {
+        "enablePrivateCluster": {
+          "type": "boolean",
+          "description": "Whether to create the Fleet hub as a private cluster or not.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "AgentProfile": {
+      "type": "object",
+      "description": "Agent profile for the Fleet hub.",
+      "properties": {
+        "subnetId": {
+          "$ref": "#/definitions/SubnetResourceId",
+          "description": "The ID of the subnet which the Fleet hub node will join on startup. If this is not specified, a vnet and subnet will be generated and used.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine size of the Fleet hub.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
     "ClusterResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -1818,6 +1854,54 @@
           "x-ms-identifiers": [
             "name"
           ]
+        }
+      }
+    },
+    "FleetHubProfile": {
+      "type": "object",
+      "description": "The FleetHubProfile configures the fleet hub.",
+      "properties": {
+        "dnsPrefix": {
+          "type": "string",
+          "description": "DNS prefix used to create the FQDN for the Fleet hub.",
+          "minLength": 1,
+          "maxLength": 54,
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][a-zA-Z0-9-]{0,52}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "apiServerAccessProfile": {
+          "$ref": "#/definitions/APIServerAccessProfile",
+          "description": "The access profile for the Fleet hub API server.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "agentProfile": {
+          "$ref": "#/definitions/AgentProfile",
+          "description": "The agent profile for the Fleet hub.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "The FQDN of the Fleet hub.",
+          "readOnly": true
+        },
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version of the Fleet hub.",
+          "readOnly": true
+        },
+        "portalFqdn": {
+          "type": "string",
+          "description": "The Azure Portal FQDN of the Fleet hub.",
+          "readOnly": true
         }
       }
     },
@@ -2016,6 +2100,10 @@
           "$ref": "#/definitions/FleetProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "hubProfile": {
+          "$ref": "#/definitions/FleetHubProfile",
+          "description": "The FleetHubProfile configures the Fleet's hub."
         }
       }
     },
@@ -2389,6 +2477,18 @@
         "type",
         "name"
       ]
+    },
+    "SubnetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      }
     },
     "TargetType": {
       "type": "string",
