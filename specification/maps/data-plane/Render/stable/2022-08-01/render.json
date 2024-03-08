@@ -272,7 +272,8 @@
   "paths": {
     "/map/tile": {
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
+        "summary": "Use to request map tiles in vector or raster formats.",
+        "description": "**\n\nThe `Get Map Tiles` API is an HTTP `GET` request that allows users to request map tiles in vector or raster formats, typically to be integrated into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default, Azure Maps uses vector tiles for its web map control ([Web SDK](/azure/azure-maps/about-azure-maps#web-sdk)) and [Android SDK](/azure/azure-maps/about-azure-maps#android-sdk).",
         "operationId": "Render_GetMapTile",
         "x-ms-client-name": "GetMapTile",
         "x-ms-examples": {
@@ -346,7 +347,8 @@
     },
     "/map/tileset": {
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Map Tileset API allows users to request metadata for a tileset.",
+        "summary": "Use to get metadata for a tileset.",
+        "description": "**\n\nThe `Get Map Tileset` API is an HTTP `GET` request allows users to request [metadata](#maptileset) for a tileset.",
         "operationId": "Render_GetMapTileset",
         "x-ms-examples": {
           "Successful Tileset Request": {
@@ -382,7 +384,8 @@
     },
     "/map/attribution": {
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Map Attribution API allows users to request map copyright attribution information for a section of a tileset.",
+        "summary": "Use to get map copyright attribution information.",
+        "description": "\n\nThe `Get Map Attribution` API is an HTTP `GET` request that returns map copyright attribution information for a section of a tileset as defined by the 4 bounding box coordinates and zoom level.",
         "operationId": "Render_GetMapAttribution",
         "x-ms-examples": {
           "Successful Attribution Request": {
@@ -439,7 +442,8 @@
     },
     "/map/statetile": {
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nFetches state tiles in vector format typically to be integrated into indoor maps module of map control or SDK. The map control will call this API after user turns on dynamic styling (see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid))",
+        "summary": "Use to get state tiles in vector format.",
+        "description": "\n\nThe `Get Map State Tile` API is an HTTP `GET` request that fetches state tiles in vector format, typically to be integrated into the indoor maps module of a map control or SDK. The map control calls this API after dynamic styling is turned on. For more information, see [Zoom Levels and Tile Grid](/azure/azure-maps/zoom-levels-and-tile-grid).",
         "operationId": "Render_GetMapStateTile",
         "x-ms-examples": {
           "Successful State Tile Request": {
@@ -497,7 +501,8 @@
     },
     "/map/copyright/caption/{format}": {
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCopyrights API is designed to serve copyright information for Render Tile \nservice. In addition to basic copyright for the whole map, API is serving \nspecific groups of copyrights for some countries/regions.\n\nAs an alternative to copyrights for map request, one can receive captions\nfor displaying the map provider information on the map.",
+        "summary": "Use to get copyright information to use when rendering a tile.",
+        "description": "\n\nThe `Get Copyright Caption` API is an HTTP `GET` request designed to serve copyright information to be use in conjunction with tiles requested from the Render service. In addition to a basic copyright for the whole map, it can serve specific groups of copyrights for some countries/regions.\n\nAs an alternative to copyrights for map request, one can receive captions for displaying the map provider information on the map.",
         "operationId": "Render_GetCopyrightCaption",
         "x-ms-examples": {
           "Successful Copyright Caption Request": {
