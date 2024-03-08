@@ -4,11 +4,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../common/extendedLocation.tsp";
-import "../common/provisioningState.tsp";
+import "./common/extendedLocation.tsp";
+import "./common/provisioningState.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -117,19 +118,19 @@ model OwnCertificate {
 @armResourceOperations
 interface AssetEndpointProfiles {
   @Autorest.example(
-    "./examples/assetEndpointProfiles/Get_AssetEndpointProfile.json",
+    "./examples/Get_AssetEndpointProfile.json",
     "Get an Asset Endpoint Profile."
   )
   get is ArmResourceRead<AssetEndpointProfile>;
 
   @Autorest.example(
-    "./examples/assetEndpointProfiles/Create_AssetEndpointProfile.json",
+    "./examples/Create_AssetEndpointProfile.json",
     "Create an Asset Endpoint Profile."
   )
   createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
 
   @Autorest.example(
-    "./examples/assetEndpointProfiles/Update_AssetEndpointProfile.json",
+    "./examples/Update_AssetEndpointProfile.json",
     "Patch an Asset Endpoint Profile."
   )
   update is ArmResourcePatchAsync<
@@ -138,19 +139,19 @@ interface AssetEndpointProfiles {
   >;
 
   @Autorest.example(
-    "./examples/assetEndpointProfiles/Delete_AssetEndpointProfile.json",
+    "./examples/Delete_AssetEndpointProfile.json",
     "Delete an Asset Endpoint Profile."
   )
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;
 
   @Autorest.example(
-    "./examples/assetEndpointProfiles/List_AssetEndpointProfiles_ResourceGroup.json",
+    "./examples/List_AssetEndpointProfiles_ResourceGroup.json",
     "List Asset Endpoint Profiles in a Resource Group."
   )
   listByResourceGroup is ArmResourceListByParent<AssetEndpointProfile>;
 
   @Autorest.example(
-    "./examples/assetEndpointProfiles/List_AssetEndpointProfiles_Subscription.json",
+    "./examples/List_AssetEndpointProfiles_Subscription.json",
     "List Asset Endpoint Profiles in a Subscription."
   )
   listBySubscription is ArmListBySubscription<AssetEndpointProfile>;
