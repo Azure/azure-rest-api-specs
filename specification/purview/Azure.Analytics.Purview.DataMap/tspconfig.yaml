@@ -17,11 +17,13 @@ options:
     package-dir: "azure-purview-datamap"
     package-name: "{package-dir}"
     package-mode: dataplane
+    flavor: azure
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Analytics.Purview.DataMap"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "purview-datamap-rest"
     generateMetadata: true
@@ -29,9 +31,11 @@ options:
     packageDetails:
       name: "@azure-rest/purview-datamap"
       description: Purview DataMap Service"
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-analytics-purview-datamap"
     namespace: com.azure.analytics.purview.datamap
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
