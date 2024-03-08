@@ -1,37 +1,32 @@
 {
-  "operationId": "GroupQuotaSubscriptionQuotaAllocationRequest_Update",
+  "operationId": "GroupQuotaSubscriptionQuotaAllocation_Update",
   "parameters": {
     "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "groupQuotaName": "groupquota1",
-    "resourceProviderName": "Microsoft.Compute",
+    "resourceName": "cores",
     "api-version": "2023-06-01-preview",
     "allocateQuotaRequest": {
       "properties": {
-        "location": "westus",
-        "limit": 110,
-        "name":
-        {
-          "value": "standardav2family"
-        }
+        "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
+        "limit": 75
+      }
     }
-  }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locations/westus/quotaAllocations/cores",
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Quota/groupQuotas/groupquota1/quotaAllocations/cores",
         "type": "Microsoft.Quota/groupQuotas/quotaAllocations",
         "name": "cores",
         "properties": {
           "limit": 100,
-
           "name": {
             "value": "cores",
             "localizedValue": "Total Regional vCPUs"
           },
           "shareableQuota": 75,
-          "location": "westus",
+          "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
           "provisioningState": "Succeeded"
         }
       }
