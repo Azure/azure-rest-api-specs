@@ -36,16 +36,25 @@ tag: package-preview-2023-11
 ``` yaml
 modelerfour:
   flatten-models: false
+tag: package-2024-05
 ```
 
 ### Suppression
 
 
+### Tag: package-2024-05
+
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05'
+input-file:
+  - stable/2024-05-01/hdinsight.json
+```
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-11'
+``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - preview/2023-11-01-preview/hdinsight.json
   
@@ -75,9 +84,10 @@ suppressions:
 ```
 
 ### Tag: package-2023-06-preview
+
 These settings apply only when `--tag=package-2023-06-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06-preview'
+``` yaml $(tag) == 'package-2023-06-preview'
 input-file:
   - preview/2023-06-01-preview/hdinsight.json
 suppressions:
@@ -134,4 +144,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/hdinsight/Azure.ResourceManager.HDInsight.Containers/src/Generated
   clear-output-folder: true
 ```
-
