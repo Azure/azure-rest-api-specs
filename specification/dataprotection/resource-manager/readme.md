@@ -49,6 +49,21 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - Microsoft.DataProtection/preview/2024-02-01-preview/dataprotection.json
+suppressions:
+    - code: AvoidAdditionalProperties
+      from: dataprotection.json
+      reason: There are objects that need a generic key-value pair in contract.
+    - code: GetCollectionOnlyHasValueAndNextLink
+      from: dataprotection.json
+      reason: Seems like a tool bug, as the flagged contract satisfies the given condition.
+```
 
 ### Tag: package-2023-12
 
