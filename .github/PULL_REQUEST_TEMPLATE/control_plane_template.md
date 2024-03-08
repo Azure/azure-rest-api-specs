@@ -13,14 +13,14 @@ Please understand this diagram before proceeding. It explains how to get your PR
 ![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/f5cdc159-40bd-42a5-8a1c-1e398a1d80fd)
 
 <details>
-<summary> Click here to see the details of Step 1, Breaking Changes review</summary>
+<summary>Click here to see the details of Step 1, Breaking Changes review</summary>
 
 If you are in purview of Step 1 of the diagram, follow the [Breaking Changes review process].  
 **IMPORTANT!** This applies even if you believe your PR was mislabeled, for any reason, including tool failure.
 </details>
 
 <details> 
-<summary> Click here to see the details of Step 2, ARM review</summary>
+<summary>Click here to see the details of Step 2, ARM review</summary>
 
 See https://aka.ms/azsdk/pr-arm-review.
 </details>
