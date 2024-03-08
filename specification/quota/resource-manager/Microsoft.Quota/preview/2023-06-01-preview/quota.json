@@ -51,13 +51,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeInPath"
-          },
-          {
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
           }
         ],
         "responses": {
@@ -102,10 +102,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeInPath"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ScopeInPath"
           }
         ],
         "responses": {
@@ -150,13 +150,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeInPath"
-          },
-          {
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
           }
         ],
         "responses": {
@@ -206,13 +206,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeInPath"
-          },
-          {
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
           },
           {
             "name": "createQuotaRequest",
@@ -262,13 +262,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeInPath"
-          },
-          {
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
           },
           {
             "name": "createQuotaRequest",
@@ -319,10 +319,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeInPath"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ScopeInPath"
           }
         ],
         "responses": {
@@ -370,13 +370,13 @@
         "operationId": "QuotaRequestStatus_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeInPath"
-          },
-          {
             "$ref": "#/parameters/RequestIdInParameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
           }
         ],
         "responses": {
@@ -409,10 +409,10 @@
         "operationId": "QuotaRequestStatus_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeInPath"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ScopeInPath"
           },
           {
             "name": "$filter",
@@ -605,8 +605,7 @@
         },
         "resourceType": {
           "description": "The name of the resource type. Optional field.",
-          "readOnly": false,
-          "type": "string"
+          "$ref": "#/definitions/ResourceTypesName"
         },
         "quotaPeriod": {
           "description": "The time period for the summary of the quota usage values. For example:\r\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\r\nThis parameter is optional because it is not relevant for all resources such as compute.",
@@ -686,8 +685,7 @@
         },
         "resourceType": {
           "description": "The name of the resource type. Optional field.",
-          "readOnly": false,
-          "type": "string"
+          "$ref": "#/definitions/ResourceTypesName"
         },
         "quotaPeriod": {
           "description": "The time period over which the quota usage values are summarized. For example:\r\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\r\nThis parameter is optional because, for some resources like compute, the period is irrelevant.",
@@ -777,9 +775,9 @@
           "$ref": "#/definitions/ResourceName"
         },
         "resourceType": {
-          "description": "The name of the resource type. Optional field.",
-          "readOnly": false,
-          "type": "string"
+          "description": "Resource type for which the quota properties were requested.",
+          "type": "string",
+          "readOnly": true
         },
         "unit": {
           "description": " Quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
@@ -1002,8 +1000,7 @@
         },
         "resourceType": {
           "description": "The name of the resource type. Optional field.",
-          "readOnly": false,
-          "type": "string"
+          "$ref": "#/definitions/ResourceTypesName"
         },
         "quotaPeriod": {
           "description": "The time period over which the quota usage values are summarized. For example:\r\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\r\nThis parameter is optional because, for some resources like compute, the period is irrelevant.",
@@ -1135,8 +1132,7 @@
         },
         "resourceType": {
           "description": "The name of the resource type. Optional field.",
-          "readOnly": false,
-          "type": "string"
+          "$ref": "#/definitions/ResourceTypesName"
         },
         "quotaPeriod": {
           "description": "The time period over which the quota usage values are summarized. For example:\r\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\r\nThis parameter is optional because, for some resources like compute, the period is irrelevant.",
