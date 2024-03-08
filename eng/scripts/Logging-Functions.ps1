@@ -6,6 +6,15 @@ function LogInfo {
   Write-Host "$args"
 }
 
+function LogWarningForFile($file, $warningString)
+{
+  if (Test-SupportsDevOpsLogging) {
+    Write-Host ("##vso[task.logissue type=warning;sourcepath=$file;linenumber=1;columnnumber=1;]$warningString" -replace "`n", "%0D%0A")
+  }
+  else {
+    Write-Error "[Warning in file $file]$warningString"
+  }
+}
 function LogWarning {
   if (Test-SupportsDevOpsLogging) {
     Write-Host ("##vso[task.LogIssue type=warning;]$args" -replace "`n", "%0D%0A")
