@@ -1,76 +1,103 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "subscriptionId": "{subscriptionId}",
-    "periodStartDate": "2022-01-01",
-    "periodEndDate": "2022-06-30"
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "periodStartDate": "2023-01-01",
+    "periodEndDate": "2023-06-30"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000/invoices/1383723",
-            "name": "1383723",
-            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices",
+            "id": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/11111111-1111-1111-1111-111111111111/invoices/E123456789",
+            "name": "E123456789",
             "properties": {
-              "dueDate": "2022-01-16T17:32:28Z",
-              "invoiceDate": "2022-01-01T17:32:28Z",
-              "status": "Due",
               "amountDue": {
                 "currency": "USD",
-                "value": 2000.00
-              },
-              "invoicePeriodStartDate": "2022-01-01T17:32:28Z",
-              "invoicePeriodEndDate": "2022-01-15T17:32:28Z",
-              "invoiceType": "AzureServices",
-              "purchaseOrderNumber": "123456",
-              "subscriptionId": "55000000-0000-0000-0000-000000000011"
-            }
-          },
-          {
-            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000/invoices/1383724",
-            "name": "1383724",
-            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices",
-            "properties": {
-              "dueDate": "2022-02-01T17:32:28Z",
-              "invoiceDate": "2022-01-01T17:32:28Z",
-              "status": "Paid",
-              "amountDue": {
-                "currency": "USD",
-                "value": 2000.00
+                "value": 8.53
               },
               "billedAmount": {
                 "currency": "USD",
-                "value": 2000.00
+                "value": 33.99
               },
-              "invoicePeriodStartDate": "2022-01-01T17:32:28Z",
-              "invoicePeriodEndDate": "2022-01-30T17:32:28Z",
-              "invoiceType": "AzureMarketplace",
-              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
-              "billingProfileDisplayName": "Contoso Operations Billing",
+              "dueDate": "2023-02-16T17:32:28Z",
+              "invoiceDate": "2023-02-01T17:32:28Z",
+              "invoicePeriodEndDate": "2023-02-15T17:32:28Z",
+              "invoicePeriodStartDate": "2023-02-01T17:32:28Z",
+              "invoiceType": "AzureServices",
               "purchaseOrderNumber": "123456",
+              "status": "Due",
+              "subscriptionDisplayName": "Contoso Operations Billing",
+              "subscriptionId": "11111111-1111-1111-1111-111111111111"
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices"
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/11111111-1111-1111-1111-111111111111/invoices/G123456789",
+            "name": "G123456789",
+            "properties": {
+              "amountDue": {
+                "currency": "USD",
+                "value": 15.53
+              },
+              "billedAmount": {
+                "currency": "USD",
+                "value": 55.99
+              },
+              "dueDate": "2023-02-16T17:32:28Z",
+              "invoiceDate": "2023-02-01T17:32:28Z",
+              "invoicePeriodEndDate": "2023-02-15T17:32:28Z",
+              "invoicePeriodStartDate": "2023-02-01T17:32:28Z",
+              "invoiceType": "AzureMarketplace",
+              "purchaseOrderNumber": "123456",
+              "status": "Due",
+              "subscriptionDisplayName": "Contoso Operations Billing",
+              "subscriptionId": "11111111-1111-1111-1111-111111111111"
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices"
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/11111111-1111-1111-1111-111111111111/invoices/E987654321",
+            "name": "E987654321",
+            "properties": {
+              "amountDue": {
+                "currency": "USD",
+                "value": 8.53
+              },
+              "billedAmount": {
+                "currency": "USD",
+                "value": 33.99
+              },
               "documents": [
                 {
                   "kind": "Invoice",
-                  "url": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000/invoices/1383724/download",
-                  "source": "DRS"
+                  "name": "12345678"
                 }
               ],
+              "dueDate": "2023-01-16T17:32:28Z",
+              "invoiceDate": "2023-01-01T17:32:28Z",
+              "invoicePeriodEndDate": "2023-01-15T17:32:28Z",
+              "invoicePeriodStartDate": "2023-01-01T17:32:28Z",
+              "invoiceType": "AzureSupport",
               "payments": [
                 {
-                  "date": "2022-01-14T17:32:28Z",
-                  "paymentType": "credited",
                   "amount": {
                     "currency": "USD",
-                    "value": 2000.00
+                    "value": 2000
                   },
+                  "date": "2023-01-14T17:32:28Z",
                   "paymentMethodFamily": "CreditCard",
-                  "paymentMethodType": "visa"
+                  "paymentMethodType": "visa",
+                  "paymentType": "credited"
                 }
               ],
-              "subscriptionId": "55000000-0000-0000-0000-000000000011"
-            }
+              "purchaseOrderNumber": "123456",
+              "status": "Due",
+              "subscriptionDisplayName": "Contoso Operations Billing",
+              "subscriptionId": "11111111-1111-1111-1111-111111111111"
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices"
           }
         ]
       }

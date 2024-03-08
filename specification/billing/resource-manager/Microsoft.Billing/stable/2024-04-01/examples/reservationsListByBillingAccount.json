@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "billingAccountName": "{billingAccountName}",
-    "$filter": "properties/reservedResourceType eq 'VirtualMachines'",
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "$filter": "properties/reservedResourceType eq 'VirtualMachineSoftware' and properties/billingProfileId eq '/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/AAAA-AAAA-AAA-AAA'",
     "$orderby": "properties/userFriendlyAppliedScopeType asc",
     "refreshsummary": "true",
     "selectedState": "Succeeded"
@@ -12,63 +12,77 @@
       "body": {
         "value": [
           {
-            "id": "/providers/microsoft.capacity/reservationOrders/00000000-0000-0000-0000-000000000001/reservations/00000000-0000-0000-0000-000000000000",
-            "name": "00000000-0000-0000-0000-000000000001/00000000-0000-0000-0000-000000000000",
-            "type": "Microsoft.Capacity/reservationOrders/reservations",
-            "location": "westus",
+            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/reservationOrders/00000000-0000-0000-0000-000000000001/reservations/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "microsoft.billing/billingAccounts/reservationOrders/reservations",
+            "location": "global",
             "sku": {
-              "name": "Standard_D1"
+              "name": "mock_sku"
+            },
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
             },
             "properties": {
-              "appliedScopes": null,
-              "appliedScopeType": "Shared",
-              "reservedResourceType": "VirtualMachines",
-              "quantity": 2,
-              "provisioningState": "Succeeded",
-              "expiryDate": "2023-07-21",
-              "provisioningSubState": null,
-              "displayName": "VM_RI_07-21-2020_12-06",
-              "displayProvisioningState": "Succeeded",
+              "reservedResourceType": "VirtualMachineSoftware",
               "userFriendlyRenewState": "Off",
-              "userFriendlyAppliedScopeType": "Shared",
-              "effectiveDateTime": "0001-01-01T00:00:00",
-              "skuDescription": null,
-              "term": null,
+              "skuDescription": "Sku description",
               "renew": false,
-              "renewSource": null,
+              "archived": false,
+              "quantity": 1,
+              "appliedScopeType": "Shared",
+              "displayName": "VirtualMachineSoftware_01-18-2022_13-51",
+              "provisioningState": "Succeeded",
+              "term": "P3Y",
+              "displayProvisioningState": "Succeeded",
+              "userFriendlyAppliedScopeType": "Shared",
+              "expiryDateTime": "2025-01-18T21:54:31.0741034Z",
+              "purchaseDateTime": "2022-01-18T21:51:29.9063671Z",
+              "benefitStartTime": "2022-01-18T21:54:31.0741034Z",
+              "lastUpdatedDateTime": "0001-01-01T00:00:00.0000000",
+              "expiryDate": "2025-01-18",
+              "purchaseDate": "2022-01-18",
+              "effectiveDateTime": "0001-01-01T00:00:00Z",
+              "instanceFlexibility": "On",
               "utilization": {
-                "trend": "UP",
+                "trend": "SAME",
                 "aggregates": [
                   {
-                    "grain": 1.0,
+                    "grain": 1,
                     "grainUnit": "days",
-                    "value": 0.05,
+                    "value": 0,
                     "valueUnit": "percentage"
                   },
                   {
-                    "grain": 7.0,
+                    "grain": 7,
                     "grainUnit": "days",
-                    "value": 0.05,
+                    "value": 0,
                     "valueUnit": "percentage"
                   },
                   {
                     "grain": 30.0,
                     "grainUnit": "days",
-                    "value": 0.05,
+                    "value": 0,
                     "valueUnit": "percentage"
                   }
                 ]
-              }
+              },
+              "billingPlan": "Monthly",
+              "billingScopeId": "/subscriptions/eef82110-c91b-4395-9420-fcfcbefc5a47",
+              "productCode": "20000000-0000-0000-0000-000000000005"
             }
           }
         ],
         "summary": {
+          "noBenefitCount": 0,
+          "warningCount": 0,
           "succeededCount": 1,
           "failedCount": 0,
           "expiringCount": 0,
           "expiredCount": 0,
           "pendingCount": 0,
-          "cancelledCount": 0
+          "cancelledCount": 0,
+          "processingCount": 0
         },
         "nextLink": null
       }

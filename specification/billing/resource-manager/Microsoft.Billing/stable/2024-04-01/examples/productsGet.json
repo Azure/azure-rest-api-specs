@@ -1,38 +1,30 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "billingAccountName": "{billingAccountName}",
-    "productName": "{productName}"
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "productName": "11111111-1111-1111-1111-111111111111"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/products/{productName}",
-        "name": "{productName}",
-        "type": "Microsoft.Billing/billingAccounts/products",
+        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/products/90000000-0000-0000-0000-000000000000",
+        "name": "90000000-0000-0000-0000-000000000000",
         "properties": {
           "autoRenew": "On",
-          "productTypeId": "A12345",
-          "productType": "Subscription",
-          "displayName": "AIP Dev",
-          "status": "Active",
-          "purchaseDate": "2018-05-01T17:32:28Z",
-          "lastCharge": {
-            "currency": "USD",
-            "value": 5000.00
-          },
-          "lastChargeDate": "2018-06-15T17:32:28Z",
-          "billingFrequency": "Monthly",
-          "quantity": 4,
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx",
+          "billingProfileDisplayName": "Billing Profile Display Name",
+          "displayName": "My product",
+          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx/invoiceSections/yyyy-yyyy-yyy-yyy",
+          "invoiceSectionDisplayName": "Invoice Section Display Name",
+          "productType": "Seat-Based Product Type",
+          "productTypeId": "XYZ56789",
           "skuId": "0001",
-          "skuDescription": "Enterprise Agreement Development",
-          "tenantId": "515a6d36-aaf8-4ca2-a5e8-c45deb0c5cce",
-          "availabilityId": "AvailabilityId1",
-          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}",
-          "invoiceSectionDisplayName": "Contoso operations invoiceSection",
-          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
-          "billingProfileDisplayName": "Contoso operations billing"
-        }
+          "skuDescription": "SKU Description",
+          "purchaseDate": "2023-01-04T22:39:34.2606750Z",
+          "quantity": 1,
+          "status": "Active"
+        },
+        "type": "Microsoft.Billing/billingAccounts/products"
       }
     }
   }

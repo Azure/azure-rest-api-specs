@@ -1,28 +1,71 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Billing client provides access to billing resources for Azure subscriptions.",
     "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
     "version": "2024-04-01"
   },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "paths": {
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/availableBalance/default": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/availableBalance/default": {
       "get": {
-        "description": "The available credit balance for a billing profile. This is the balance that can be used for pay now to settle due or past due invoices. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "tags": [
+          "AvailableBalance"
+        ],
+        "description": "The Available Credit or Payment on Account Balance for a billing account. The credit balance can be used to settle due or past due invoices and is supported for billing accounts with agreement type Microsoft Customer Agreement. The payment on account balance is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Online Services Program.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "AvailableBalances_Get",
+        "operationId": "AvailableBalances_GetByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices.",
+            "schema": {
+              "$ref": "#/definitions/AvailableBalance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailableBalanceGetByBillingAccount": {
+            "$ref": "./examples/availableBalanceGetByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/availableBalance/default": {
+      "get": {
+        "tags": [
+          "AvailableBalance"
+        ],
+        "description": "The Available Credit or Payment on Account Balance for a billing profile. The credit balance can be used to settle due or past due invoices and is supported for billing accounts with agreement type Microsoft Customer Agreement. The payment on account balance is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "AvailableBalances_GetByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "./types.json#/parameters/billingAccountName"
@@ -36,7 +79,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices.",
             "schema": {
               "$ref": "#/definitions/AvailableBalance"
             }
@@ -44,16 +87,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "tags": [
-          "AvailableBalances"
-        ],
         "x-ms-examples": {
-          "availableBalancesGetByBillingProfile": {
-            "$ref": "./examples/availableBalancesGetByBillingProfile.json"
+          "AvailableBalanceGetByBillingProfile": {
+            "$ref": "./examples/availableBalanceGetByBillingProfile.json"
           }
         }
       }
@@ -61,41 +101,136 @@
   },
   "definitions": {
     "AvailableBalance": {
+      "description": "The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices.",
+      "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ArmResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
-      "description": "The latest Azure credit balance. This is the balance available for pay now.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AvailableBalanceProperties",
-          "title": "Available balance properties",
+          "description": "The properties of a(n) AvailableBalance",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AvailableBalanceProperties"
+            }
+          ],
           "x-ms-client-flatten": true
         }
       },
-      "type": "object"
+      "x-ms-azure-resource": true
     },
     "AvailableBalanceProperties": {
-      "description": "The properties of available balance.",
+      "description": "The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices.",
+      "type": "object",
       "properties": {
         "amount": {
-          "$ref": "./types.json#/definitions/Amount",
-          "description": "Balance amount.",
+          "description": "Credit amount for immediate payment.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "paymentsOnAccount": {
+          "description": "The list of payments on accounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentOnAccount"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "totalPaymentsOnAccount": {
+          "description": "Total amount of payments on accounts.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        }
+      }
+    },
+    "PaymentOnAccount": {
+      "description": "A Payment on Account.",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "Payment on Account amount.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile for the payments on account.",
+          "type": "string",
           "readOnly": true
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile for the payments on account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceId": {
+          "description": "The ID of the invoice for which the payments on account was generated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceName": {
+          "description": "The name of the invoice for the payments on account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "date": {
+          "format": "date-time",
+          "description": "The date of the payments on account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Payment on Account type.",
+          "enum": [
+            "Other",
+            "None",
+            "CreditCard",
+            "Credits",
+            "CheckWire",
+            "EWallet",
+            "TaskOrder",
+            "DirectDebit"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PaymentMethodFamily",
+            "modelAsString": true
+          }
         }
       }
     }
   },
   "securityDefinitions": {
     "azure_auth": {
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "description": "Azure Active Directory OAuth2 Flow.",
+      "type": "oauth2",
       "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       },
-      "type": "oauth2"
+      "description": "Azure Active Directory OAuth2 Flow."
     }
-  }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
 }

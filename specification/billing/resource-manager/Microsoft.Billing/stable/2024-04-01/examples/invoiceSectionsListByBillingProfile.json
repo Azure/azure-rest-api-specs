@@ -1,49 +1,56 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "billingAccountName": "{billingAccountName}",
-    "billingProfileName": "{billingProfileName}"
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "billingProfileName": "xxxx-xxxx-xxx-xxx",
+    "includeDeleted": true
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/22000000-0000-0000-0000-000000000000",
-            "name": "22000000-0000-0000-0000-000000000000",
-            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
+            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx/invoiceSections/invoice-section-1",
+            "name": "invoice-section-1",
             "properties": {
-              "displayName": "invoiceSection1",
-              "labels": {
-                "pcCode": "A123456",
-                "costCategory": "Support"
-              },
+              "displayName": "Invoice Section 1",
               "state": "Active",
-              "systemId": "XX1X-XXAA-XXX-ZZZ",
+              "systemId": "yyyy-yyyy-yyy-yyy",
               "tags": {
                 "pcCode": "A123456",
                 "costCategory": "Support"
               }
-            }
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections"
           },
           {
-            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/22000000-0000-0000-0000-000000000011",
-            "name": "22000000-0000-0000-0000-000000000011",
-            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
+            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx/invoiceSections/invoice-section-2",
+            "name": "invoice-section-2",
             "properties": {
-              "displayName": "invoiceSection2",
-              "labels": {
-                "pcCode": "Z223456",
-                "costCategory": "Marketing"
-              },
-              "state": "Restricted",
-              "systemId": "YY1X-BBAA-XXX-ZZZ",
+              "displayName": "Invoice Section 2",
+              "state": "Warned",
+              "reasonCode": "PastDue",
+              "systemId": "zzzz-zzzz-zzz-zzz",
               "tags": {
-                "pcCode": "Z223456",
+                "pcCode": "Z345678",
                 "costCategory": "Marketing"
-              },
-              "targetCloud": "USSec"
-            }
+              }
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections"
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx/invoiceSections/invoice-section-3",
+            "name": "invoice-section-3",
+            "properties": {
+              "displayName": "Invoice Section 3",
+              "state": "Deleted",
+              "systemId": "aaaa-aaaa-aaa-aaa",
+              "tags": {
+                "pcCode": "A123456",
+                "costCategory": "Support"
+              }
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections"
           }
         ]
       }
