@@ -18,54 +18,62 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 // Common models
 /** Provisioning state of the resource. */
+@doc("Provisioning state of resource.")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   /** The resource is being provisioned */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /** The resource is being updated */
-  Updating,
+  Updating: "Updating",
 
   /** The resource is being deleted */
-  Deleting,
+  Deleting: "Deleting",
 
   /** The resource create request has been accepted */
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Regional data boundary values.")
-enum RegionalDataBoundary {
+union RegionalDataBoundary {
+  string,
+
   /** No data boundary */
-  None,
+  "None",
 
   /** EU data boundary */
-  EU,
+  "EU",
 }
 
 @doc("Allow crash dumps values.")
-enum AllowCrashDumpCollection {
+union AllowCrashDumpCollection {
+  string,
+
   /** Crash dump collection enabled */
-  Enabled,
+  "Enabled",
 
   /** Crash dump collection disabled */
-  Disabled,
+  "Disabled",
 }
 
 @doc("Certificate status values.")
-enum CertificateStatus {
+union CertificateStatus {
+  string,
+
   /** Certificate is active */
-  Active,
+  "Active",
 
   /** Certificate is inactive */
-  Inactive,
+  "Inactive",
 
   /** Certificate has expired */
-  Expired,
+  "Expired",
 
   /** Certificate has been revoked */
-  Revoked,
+  "Revoked",
 }
 
 @doc("Provides the custom '$filter' query parameter for list operations")
@@ -103,8 +111,11 @@ alias StandardListQueryParametersWithCorrectNames = {
   ...CustomMaxPageSizeQueryParameter;
 };
 
-@doc("Response to the action call for count devices in a catalog.")
+@doc("Response to the action call for count devices in a catalog (preview API).")
 model CountDeviceResponse extends CountElementsResponse {}
+
+@doc("Response to the action call for count devices in a catalog.")
+model CountDevicesResponse extends CountElementsResponse {}
 
 @doc("Response of the count for elements.")
 model CountElementsResponse {

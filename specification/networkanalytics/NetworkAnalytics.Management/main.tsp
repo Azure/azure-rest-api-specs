@@ -28,27 +28,29 @@ enum Versions {
 }
 
 @doc("The status of the current operation.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /** Represents a succeeded operation. */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** Represents a failed operation. */
-  Failed,
+  Failed: "Failed",
 
   /** Represents a canceled operation. */
-  Canceled,
+  Canceled: "Canceled",
 
   /** Represents a pending operation. */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /** Represents a pending operation. */
-  Updating,
+  Updating: "Updating",
 
   /** Represents an operation under deletion. */
-  Deleting,
+  Deleting: "Deleting",
 
   /** Represents an accepted operation. */
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("ManagedResourceGroup related properties")
@@ -92,27 +94,31 @@ model ResourceAccessRules {
 }
 
 @doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
-enum Bypass {
+union Bypass {
+  string,
+
   @doc("Represents no bypassing of traffic.")
-  None,
+  "None",
 
   @doc("Represents bypassing logging traffic.")
-  Logging,
+  "Logging",
 
   @doc("Represents bypassing metrics traffic.")
-  Metrics,
+  "Metrics",
 
   @doc("Represents bypassing azure services traffic.")
-  AzureServices,
+  "AzureServices",
 }
 
 @doc("Specifies the default action of allow or deny when no other rules match.")
-enum DefaultAction {
+union DefaultAction {
+  string,
+
   @doc("Represents allow action.")
-  Allow,
+  "Allow",
 
   @doc("Represents deny action.")
-  Deny,
+  "Deny",
 }
 
 @doc("Data Product Network rule set")
@@ -246,12 +252,14 @@ model EncryptionKeyDetails {
 
 @doc("The data type state")
 @added(Versions.v2023_11_15)
-enum ControlState {
+union ControlState {
+  string,
+
   @doc("Field to enable a setting.")
-  Enabled,
+  "Enabled",
 
   @doc("Field to disable a setting.")
-  Disabled,
+  "Disabled",
 }
 
 @doc("Details of Consumption Properties")
@@ -378,12 +386,14 @@ model DataTypeProperties {
 
 @doc("The data type state")
 @added(Versions.v2023_11_15)
-enum DataTypeState {
+union DataTypeState {
+  string,
+
   @doc("Field to specify stopped state.")
-  Stopped,
+  "Stopped",
 
   @doc("Field to specify running state.")
-  Running,
+  "Running",
 }
 
 @doc("The details for container sas creation.")
@@ -410,15 +420,17 @@ model ListRoleAssignments {
 
 @doc("The data type state")
 @added(Versions.v2023_11_15)
-enum DataProductUserRole {
+union DataProductUserRole {
+  string,
+
   @doc("Field to specify user of type Reader.")
-  Reader,
+  "Reader",
 
   @doc("""
 Field to specify user of type SensitiveReader.
 This user has privileged access to read sensitive data of a data product.
 """)
-  SensitiveReader,
+  "SensitiveReader",
 }
 
 @doc("The details for role assignment common properties.")

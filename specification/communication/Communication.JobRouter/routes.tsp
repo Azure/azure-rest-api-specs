@@ -181,8 +181,8 @@ interface JobRouterOperations {
     RouterJobPositionDetails
   >;
 
-  @summary("Un-assign a job.")
-  @doc("Un-assign a job.")
+  @summary("Unassign a job.")
+  @doc("Unassign a job.")
   @projectedName("client", "unassignJob")
   unassign is Operations.ResourceAction<
     RouterJobAssignment,

@@ -59,17 +59,18 @@ model FleetMemberProperties {
 
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
-enum FleetMemberProvisioningState {
-  ...ResourceProvisioningState,
+union FleetMemberProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("The provisioning state of a member joining a fleet.")
-  Joining,
+  Joining: "Joining",
 
   @doc("The provisioning state of a member leaving a fleet.")
-  Leaving,
+  Leaving: "Leaving",
 
   @doc("The provisioning state of a member being updated.")
-  Updating,
+  Updating: "Updating",
 }
 
 @armResourceOperations

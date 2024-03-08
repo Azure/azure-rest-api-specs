@@ -22,6 +22,7 @@ interface JobRouterAdministrationRestClient {
 
   getDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.getDistributionPolicy;
 
+  @access(Access.internal, "csharp")
   listDistributionPolicies is AzureCommunicationRoutingService.JobRouterAdministrationOperations.listDistributionPolicies;
 
   deleteDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteDistributionPolicy;
@@ -32,6 +33,7 @@ interface JobRouterAdministrationRestClient {
 
   getClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.getClassificationPolicy;
 
+  @access(Access.internal, "csharp")
   listClassificationPolicies is AzureCommunicationRoutingService.JobRouterAdministrationOperations.listClassificationPolicies;
 
   deleteClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteClassificationPolicy;
@@ -40,8 +42,11 @@ interface JobRouterAdministrationRestClient {
   @access(Access.internal, "java")
   upsertExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertExceptionPolicy;
 
+  @access(Access.internal, "java")
   getExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.getExceptionPolicy;
 
+  @access(Access.internal, "java")
+  @access(Access.internal, "csharp")
   listExceptionPolicies is AzureCommunicationRoutingService.JobRouterAdministrationOperations.listExceptionPolicies;
 
   deleteExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteExceptionPolicy;
@@ -52,6 +57,7 @@ interface JobRouterAdministrationRestClient {
 
   getQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.getQueue;
 
+  @access(Access.internal, "csharp")
   listQueues is AzureCommunicationRoutingService.JobRouterAdministrationOperations.listQueues;
 
   deleteQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteQueue;
@@ -90,6 +96,7 @@ interface JobRouterRestClient {
   @access(Access.internal, "java")
   close is AzureCommunicationRoutingService.JobRouterOperations.close;
 
+  @access(Access.internal, "csharp")
   listJobs is AzureCommunicationRoutingService.JobRouterOperations.listJobs;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
@@ -118,5 +125,6 @@ interface JobRouterRestClient {
 
   deleteWorker is AzureCommunicationRoutingService.JobRouterOperations.deleteWorker;
 
+  @access(Access.internal, "csharp")
   listWorkers is AzureCommunicationRoutingService.JobRouterOperations.listWorkers;
 }

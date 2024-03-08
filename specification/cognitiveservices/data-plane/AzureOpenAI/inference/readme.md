@@ -141,3 +141,37 @@ directive:
   - suppress: RequiredReadOnlyProperties
     reason: Parameter is read only
 ```
+
+## AzureOpenAI 2023-09-01-preview
+These settings apply only when `--tag=release_2023_09_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2023_09_01_preview'
+input-file: preview/2023-09-01-preview/inference.json
+```
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolved without breaking compatibility to existing openai api
+directive:
+  - suppress: LroExtension
+    reason: https://github.com/Azure/typespec-azure/issues/3194
+  - suppress: RequiredReadOnlyProperties
+    reason: Parameter is read only
+```
+
+## AzureOpenAI 2023-10-01-preview
+These settings apply only when `--tag=release_2023_10_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2023_10_01_preview'
+input-file: preview/2023-10-01-preview/inference.json
+```
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolved without breaking compatibility to existing openai api
+directive:
+  - suppress: LroExtension
+    reason: https://github.com/Azure/typespec-azure/issues/3194
+  - suppress: RequiredReadOnlyProperties
+    reason: Parameter is read only
+```

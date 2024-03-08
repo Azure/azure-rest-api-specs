@@ -36,20 +36,21 @@ model CommunityTraining is TrackedResource<CommunityTrainingProperties> {
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Initial provisioning in progress")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Update in progress")
-  Updating,
+  Updating: "Updating",
 
   @doc("Deletion in progress")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Change accepted for processing")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Details of the Community CommunityTraining Identity Configuration")

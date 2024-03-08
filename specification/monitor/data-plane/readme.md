@@ -28,18 +28,28 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: data-plane
-tag: package-preview-2023-05
+tag: package-2023-10
 ```
 
+
+### Tag: package-2023-10
+
+These settings apply only when `--tag=package-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10'
+input-file:
+  - Microsoft.Insights/stable/2023-10-01/metricBatch.json
+```
 
 ### Tag: package-preview-2023-05
 
 These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-05'
+``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
   - Microsoft.Insights/preview/2023-05-01-preview/metricBatch.json
 ```
+
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
@@ -69,7 +79,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
 ```
 
 ## C#

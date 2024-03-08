@@ -14,7 +14,7 @@ This enables customers to download one EventGrid data plane library instead of h
 
 ### Guidelines for defining a new event 
 
-> **_NOTE:_** New events must not be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main. Once the PR is merged to main, the events are considered GA regardless of whether docs list them as being in preview. This is because customers cannot control which version of events they consume - it is entirely up to the service publishing the events. Any breaking changes to events would need to be implemented as a new event type. Full details can be found in the [Azure Breaking Changes Policy](http://aka.ms/AzBreakingChangesPolicy/), Section 4.
+> **_NOTE:_** New events must not be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main. The architecture board meeting will be scheduled by a member of the Azure SDK team - you do not need to use the scheduling tool. Once the PR is merged to main, the events are considered GA regardless of whether docs list them as being in preview. This is because customers cannot control which version of events they consume - it is entirely up to the service publishing the events. Any breaking changes to events would need to be implemented as a new event type. Full details can be found in the [Azure Breaking Changes Policy](http://aka.ms/AzBreakingChangesPolicy/), Section 4.
 
 In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
 - The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
@@ -143,6 +143,7 @@ input-file:
 - Microsoft.ResourceNotifications/stable/2018-01-01/common.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -177,6 +178,7 @@ input-file:
 - Microsoft.ResourceNotifications/stable/2018-01-01/common.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 ```
 
 ### Tag: package-2023-10-01-preview
@@ -207,6 +209,7 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 
 ```
 
@@ -238,6 +241,7 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
+- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 
 ```
 
@@ -333,6 +337,7 @@ input-file:
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/common.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+  - $(this-folder)/Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

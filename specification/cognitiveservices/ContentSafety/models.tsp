@@ -106,11 +106,13 @@ model AnalyzeImageOptions {
 
 @doc("The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.")
 @projectedName("csharp", "ContentSafetyImageData")
+@projectedName("java", "ContentSafetyImageData")
 model ImageData {
   @doc("The Base64 encoding of the image.")
   content?: bytes;
 
   @doc("The blob url of the image.")
+  @projectedName("csharp", "BlobUri")
   blobUrl?: url;
 }
 
@@ -137,6 +139,8 @@ model TextBlocklist {
   @key("blocklistName")
   @visibility("read", "create", "query")
   @maxLength(64)
+  @projectedName("csharp", "Name")
+  @projectedName("java", "name")
   blocklistName: string;
 
   @doc("Text blocklist description.")
@@ -179,4 +183,48 @@ model AddOrUpdateTextBlocklistItemsResult {
 model RemoveTextBlocklistItemsOptions {
   @doc("Array of blocklistItemIds to remove.")
   blocklistItemIds: string[];
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The protected material analysis request.")
+model AnalyzeTextProtectedMaterialOptions {
+  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(1000)
+  text: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The protected material analysis response.")
+model AnalyzeTextProtectedMaterialResult {
+  @doc("Analysis result for protected material.")
+  protectedMaterialAnalysis: ProtectedMaterialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text protected material analysis response.")
+model ProtectedMaterialAnalysisResult {
+  @doc("Analysis result for protected material..")
+  detected: boolean;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis request.")
+model AnalyzeTextJailbreakOptions {
+  @doc("The text needs to be analyzed if it attempt to jailbreak. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(1000)
+  text: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis request.")
+model AnalyzeTextJailbreakResult {
+  @doc("Analysis result for jailbreak.")
+  jailbreakAnalysis: JailbreakAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis response.")
+model JailbreakAnalysisResult {
+  @doc("Analysis result for jailbreak.")
+  detected: boolean;
 }

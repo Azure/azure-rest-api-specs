@@ -1,16 +1,6 @@
 ---
 - rule:
     type: label
-    label: "CI-MissingBaseCommit"
-    onLabeledComments: >-
-      Hi @${PRAuthor}! For review efficiency consideration, 
-      when creating a new API version, it is required to place API specs of the 
-      base version in the first commit, and push new version updates into successive commits. 
-      You can use OpenAPIHub to initialize the PR for adding a new version. <br/>
-      For more details refer to the [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
-
-- rule:
-    type: label
     repoAllowList:
       - Azure/azure-rest-api-specs-pr
     variables:
