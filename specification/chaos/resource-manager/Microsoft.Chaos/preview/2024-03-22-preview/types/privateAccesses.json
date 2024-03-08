@@ -36,6 +36,19 @@
             "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "description": "A readonly collection of private endpoint connection. Currently only one endpoint connection is supported."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Public Network Access Control for PrivateAccess resource.",
+          "x-nullable": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessOption",
+            "modelAsString": true
+          }
         }
       }
     },
