@@ -172,4 +172,4 @@ else {
 }
 
 git add $readmeDirectory
-git commit -am"Updated readme files"
+git commit -am"Added tag for $newApiVersion in readme file"
