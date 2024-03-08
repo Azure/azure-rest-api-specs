@@ -1,0 +1,401 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingRoleDefinitions": {
+      "get": {
+        "description": "Lists the role definitions for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleDefinitions_ListByBillingProfile",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingRoleDefinitions"
+        ],
+        "x-ms-examples": {
+          "billingRoleDefinitionsListByBillingProfile": {
+            "$ref": "./examples/billingRoleDefinitionsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingRoleDefinitions/{billingRoleDefinitionName}": {
+      "get": {
+        "description": "Gets the definition for a role on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleDefinitions_GetByBillingProfile",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "#/parameters/billingRoleDefinitionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingRoleDefinitions"
+        ],
+        "x-ms-examples": {
+          "billingRoleDefinitionsGetByBillingProfile": {
+            "$ref": "./examples/billingRoleDefinitionsGetByBillingProfile.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingRoleDefinitions": {
+      "get": {
+        "description": "Lists the role definitions for an invoice section. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleDefinitions_ListByInvoiceSection",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingRoleDefinitions"
+        ],
+        "x-ms-examples": {
+          "billingRoleDefinitionsListByInvoiceSection": {
+            "$ref": "./examples/billingRoleDefinitionsListByInvoiceSection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingRoleDefinitions/{billingRoleDefinitionName}": {
+      "get": {
+        "description": "Gets the definition for a role on an invoice section. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleDefinitions_GetByInvoiceSection",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "#/parameters/billingRoleDefinitionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingRoleDefinitions"
+        ],
+        "x-ms-examples": {
+          "billingRoleDefinitionsGetByInvoiceSection": {
+            "$ref": "./examples/billingRoleDefinitionsGetByInvoiceSection.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRoleDefinitions": {
+      "get": {
+        "description": "Lists the role definitions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleDefinitions_ListByBillingAccount",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingRoleDefinitions"
+        ],
+        "x-ms-examples": {
+          "billingRoleDefinitionsListByBillingAccount": {
+            "$ref": "./examples/billingRoleDefinitionsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRoleDefinitions/{billingRoleDefinitionName}": {
+      "get": {
+        "description": "Gets the definition for a role on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleDefinitions_GetByBillingAccount",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "#/parameters/billingRoleDefinitionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingRoleDefinitions"
+        ],
+        "x-ms-examples": {
+          "billingRoleDefinitionsGetByBillingAccount": {
+            "$ref": "./examples/billingRoleDefinitionsGetByBillingAccount.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Action": {
+      "description": "The action the caller is allowed to perform.",
+      "readOnly": true,
+      "type": "string"
+    },
+    "BillingPermissionsProperties": {
+      "description": "The set of allowed action and not allowed actions a caller has on a billing account",
+      "properties": {
+        "actions": {
+          "description": "The set of actions that the caller is allowed to perform.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "notActions": {
+          "description": "The set of actions that the caller is not allowed to perform.",
+          "items": {
+            "$ref": "#/definitions/NotAction"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "BillingRoleDefinition": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "The properties of a role definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingRoleDefinitionProperties",
+          "description": "The properties of the a role definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "BillingRoleDefinitionListResult": {
+      "description": "The list of role definitions.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The role definitions.",
+          "items": {
+            "$ref": "#/definitions/BillingRoleDefinition"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      }
+    },
+    "BillingRoleDefinitionProperties": {
+      "description": "The properties of the a role definition.",
+      "properties": {
+        "description": {
+          "description": "The role description",
+          "readOnly": true,
+          "type": "string"
+        },
+        "permissions": {
+          "description": "The billingPermissions the role has",
+          "items": {
+            "$ref": "#/definitions/BillingPermissionsProperties"
+          },
+          "type": "array"
+        },
+        "roleName": {
+          "description": "The name of the role",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "NotAction": {
+      "description": "The set of actions that the caller is not allowed to perform.",
+      "readOnly": true,
+      "type": "string"
+    }
+  },
+  "parameters": {
+    "billingRoleDefinitionName": {
+      "description": "The ID that uniquely identifies a role definition.",
+      "in": "path",
+      "name": "billingRoleDefinitionName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

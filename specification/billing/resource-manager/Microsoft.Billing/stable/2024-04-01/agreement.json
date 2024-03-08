@@ -1,0 +1,281 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements": {
+      "get": {
+        "description": "Lists the agreements for a billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Agreements_ListByBillingAccount",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "description": "May be used to expand the participants.",
+            "in": "query",
+            "name": "$expand",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgreementListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Agreements"
+        ],
+        "x-ms-examples": {
+          "agreementsListByBillingAccount": {
+            "$ref": "./examples/agreementsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}": {
+      "get": {
+        "description": "Gets an agreement by ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Agreements_Get",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "#/parameters/agreementName"
+          },
+          {
+            "description": "May be used to expand the participants.",
+            "in": "query",
+            "name": "$expand",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Agreement"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Agreements"
+        ],
+        "x-ms-examples": {
+          "agreementsGet": {
+            "$ref": "./examples/agreementsGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Agreement": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "An agreement.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgreementProperties",
+          "description": "The properties of an agreement.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "AgreementListResult": {
+      "description": "Result of listing agreements.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of agreements.",
+          "items": {
+            "$ref": "#/definitions/Agreement"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      }
+    },
+    "AgreementProperties": {
+      "description": "The properties of an agreement.",
+      "properties": {
+        "acceptanceMode": {
+          "description": "The mode of acceptance for an agreement.",
+          "enum": [
+            "ClickToAccept",
+            "ESignEmbedded",
+            "ESignOffline"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "acceptanceMode"
+          }
+        },
+        "agreementLink": {
+          "description": "The URL to download the agreement.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingProfileInfo": {
+          "$ref": "#/definitions/BillingProfileInfo",
+          "description": "The list of billing profiles associated with agreement and present only for specific agreements.",
+          "readOnly": true
+        },
+        "category": {
+          "description": "The category of the agreement signed by a customer.",
+          "enum": [
+            "MicrosoftCustomerAgreement",
+            "AffiliatePurchaseTerms",
+            "Other"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "category"
+          }
+        },
+        "effectiveDate": {
+          "description": "The date from which the agreement is effective.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "expirationDate": {
+          "description": "The date when the agreement expires.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "participants": {
+          "description": "The list of participants that participates in acceptance of an agreement.",
+          "items": {
+            "$ref": "#/definitions/Participants"
+          },
+          "type": "array"
+        },
+        "status": {
+          "description": "The current status of the agreement.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "BillingProfileInfo": {
+      "description": "Details about billing profile associated with agreement and available only for specific agreements.",
+      "type": "object",
+      "properties": {
+        "billingProfileId": {
+          "description": "The unique identifier for the billing profile.",
+          "type": "string"
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile",
+          "type": "string"
+        },
+        "indirectRelationshipOrganizationName": {
+          "description": "Billing account name. This property is available for a specific type of agreement.",
+          "type": "string"
+        }
+      }
+    },
+    "Participants": {
+      "description": "The details about a participant.",
+      "properties": {
+        "status": {
+          "description": "The acceptance status of the participant.",
+          "type": "string",
+          "readOnly": true
+        },
+        "statusDate": {
+          "description": "The date when the status got changed.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "email": {
+          "description": "The email address of the participant.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "agreementName": {
+      "description": "The ID that uniquely identifies an agreement.",
+      "in": "path",
+      "name": "agreementName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "contact": {
+      "email": "cabbpt@microsoft.com",
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/"
+    },
+    "description": "Documentation for Microsoft.Billing.",
+    "title": "Microsoft.Billing",
+    "version": "2024-04-01"
+  },
+  "paths": {},
+  "definitions": {
+    "AddressDetails": {
+      "description": "Address details.",
+      "properties": {
+        "addressLine1": {
+          "description": "Address line 1.",
+          "type": "string"
+        },
+        "addressLine2": {
+          "description": "Address line 2.",
+          "type": "string"
+        },
+        "addressLine3": {
+          "description": "Address line 3.",
+          "type": "string"
+        },
+        "city": {
+          "description": "Address city.",
+          "type": "string"
+        },
+        "companyName": {
+          "description": "Company name.",
+          "type": "string"
+        },
+        "country": {
+          "description": "Country code uses ISO2, 2-digit format.",
+          "type": "string"
+        },
+        "district": {
+          "description": "Address district.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email address.",
+          "type": "string"
+        },
+        "firstName": {
+          "description": "First name.",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name.",
+          "type": "string"
+        },
+        "middleName": {
+          "description": "Middle name.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "Phone number.",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal code.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Address region.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "addressLine1",
+        "country"
+      ]
+    },
+    "Amount": {
+      "description": "The amount.",
+      "properties": {
+        "currency": {
+          "description": "The currency for the amount value.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Amount value.",
+          "type": "number"
+        }
+      }
+    },
+    "ArmError": {
+      "description": "The error detail.",
+      "properties": {
+        "additionalInfo": {
+          "description": "The resource management error additional info.",
+          "items": {
+            "$ref": "#/definitions/ArmErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": []
+        },
+        "code": {
+          "description": "The error code.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "details": {
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/ArmError"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": []
+        },
+        "message": {
+          "description": "The error message.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "target": {
+          "description": "The error target.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ArmErrorAdditionalInfo": {
+      "description": "The resource management error additional info.",
+      "properties": {
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The additional info type.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ArmErrorResponse": {
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArmError"
+            }
+          ],
+          "description": "The error detail."
+        }
+      },
+      "type": "object"
+    },
+    "ArmResource": {
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AzurePlan": {
+      "description": "Details of the Azure plan.",
+      "properties": {
+        "skuDescription": {
+          "description": "The sku description.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The sku id.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "$count": {
+      "description": "The $count query option allows clients to request a count of the matching resources included with the resources in the response.",
+      "in": "query",
+      "name": "$count",
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "$filter": {
+      "description": "The $filter query option allows clients to filter a collection of resources that are addressed by a request URL.",
+      "in": "query",
+      "name": "$filter",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$orderBy": {
+      "description": "The $orderby query option allows clients to request resources in a particular order.",
+      "in": "query",
+      "name": "$orderBy",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$search": {
+      "description": "The $search query option allows clients to request items within a collection matching a free-text search expression. $search is only supported for string fields.",
+      "in": "query",
+      "name": "$search",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$skip": {
+      "description": "The $skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.",
+      "format": "int64",
+      "in": "query",
+      "name": "$skip",
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "$top": {
+      "description": "The $top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for $top is 50.",
+      "format": "int64",
+      "in": "query",
+      "name": "$top",
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "description": "The version of the API to be used with the client request. The current version is 2024-04-01.",
+      "in": "query",
+      "name": "api-version",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "associatedTenantName": {
+      "description": "The ID that uniquely identifies a tenant.",
+      "in": "path",
+      "name": "associatedTenantName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingAccountName": {
+      "description": "The ID that uniquely identifies a billing account.",
+      "in": "path",
+      "name": "billingAccountName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileName": {
+      "description": "The ID that uniquely identifies a billing profile.",
+      "in": "path",
+      "name": "billingProfileName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "customerName": {
+      "description": "The ID that uniquely identifies a customer.",
+      "in": "path",
+      "name": "customerName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "invoiceName": {
+      "description": "The ID that uniquely identifies an invoice.",
+      "in": "path",
+      "name": "invoiceName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "invoiceSectionName": {
+      "description": "The ID that uniquely identifies an invoice section.",
+      "in": "path",
+      "name": "invoiceSectionName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "description": "The ID that uniquely identifies an Azure subscription.",
+      "in": "path",
+      "name": "subscriptionId",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

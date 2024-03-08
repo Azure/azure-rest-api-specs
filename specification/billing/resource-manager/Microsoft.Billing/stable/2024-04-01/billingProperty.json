@@ -1,0 +1,246 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingProperty/default": {
+      "get": {
+        "description": "Get the billing properties for a subscription. This operation is not supported for billing accounts with agreement type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingProperty_Get",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProperty"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingProperties"
+        ],
+        "x-ms-examples": {
+          "billingPropertiesGet": {
+            "$ref": "./examples/billingPropertiesGet.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates the billing property of a subscription. Currently, cost center can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "BillingProperty_Update",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Request parameters that are provided to the update billing property operation.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingProperty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProperty"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingProperties"
+        ],
+        "x-ms-examples": {
+          "billingPropertiesPatch": {
+            "$ref": "./examples/billingPropertiesPatch.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingProperty": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A billing property.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingPropertyProperties",
+          "description": "A billing property.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "BillingPropertyProperties": {
+      "description": "The billing property.",
+      "properties": {
+        "accountAdminNotificationEmailAddress": {
+          "description": "The email address on which the account admin gets all Azure notifications.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingAccountDisplayName": {
+          "description": "The name of the billing account to which the subscription is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingAccountId": {
+          "description": "The ID of the billing account to which the subscription is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile to which the subscription is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile to which the subscription is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingProfileSpendingLimit": {
+          "description": "The billing profile spending limit.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BillingProfileSpendingLimit"
+          }
+        },
+        "billingProfileStatus": {
+          "description": "The status of the billing profile.",
+          "enum": [
+            "Active",
+            "Disabled",
+            "Warned"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BillingProfileStatus"
+          }
+        },
+        "billingProfileStatusReasonCode": {
+          "description": "Reason for the specified billing profile status.",
+          "enum": [
+            "PastDue",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BillingProfileStatusReasonCode"
+          }
+        },
+        "billingTenantId": {
+          "description": "The Azure AD tenant ID of the billing account for the subscription.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "The cost center applied to the subscription.",
+          "type": "string"
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section to which the subscription is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "invoiceSectionId": {
+          "description": "The ID of the invoice section to which the subscription is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "isAccountAdmin": {
+          "description": "Indicates whether user is the account admin.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "productId": {
+          "description": "The product ID of the Azure plan.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "productName": {
+          "description": "The product name of the Azure plan.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "skuDescription": {
+          "description": "The sku description of the Azure plan for the subscription.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The sku ID of the Azure plan for the subscription.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

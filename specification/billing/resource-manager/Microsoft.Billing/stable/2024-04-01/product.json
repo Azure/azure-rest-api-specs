@@ -1,0 +1,710 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/products": {
+      "get": {
+        "description": "Lists the products for an invoice section. These don't include products billed based on usage. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_ListByInvoiceSection",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "May be used to filter by product type. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value are separated by a colon (:).",
+            "in": "query",
+            "name": "$filter",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Products"
+        ],
+        "x-ms-examples": {
+          "productsListByInvoiceSection": {
+            "$ref": "./examples/productsListByInvoiceSection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/products": {
+      "get": {
+        "description": "Lists the products for a billing profile. These don't include products billed based on usage. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_ListByBillingProfile",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "May be used to filter by product type. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value are separated by a colon (:).",
+            "in": "query",
+            "name": "$filter",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Products"
+        ],
+        "x-ms-examples": {
+          "productsListByBillingProfile": {
+            "$ref": "./examples/productsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/products": {
+      "get": {
+        "description": "Lists the products for a customer. These don't include products billed based on usage.The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_ListByCustomer",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Products"
+        ],
+        "x-ms-examples": {
+          "productsListByCustomer": {
+            "$ref": "./examples/productsListByCustomer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products": {
+      "get": {
+        "description": "Lists the products for a billing account. These don't include products billed based on usage. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_ListByBillingAccount",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "May be used to filter by product type. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value are separated by a colon (:).",
+            "in": "query",
+            "name": "$filter",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Products"
+        ],
+        "x-ms-examples": {
+          "productsListByBillingAccount": {
+            "$ref": "./examples/productsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products/{productName}": {
+      "get": {
+        "description": "Gets a product by ID. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_Get",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "#/parameters/productName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Products"
+        ],
+        "x-ms-examples": {
+          "productsGet": {
+            "$ref": "./examples/productsGet.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates the properties of a Product. Currently, auto renew can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "Products_Update",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "#/parameters/productName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Request parameters that are provided to the update product operation.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Products"
+        ],
+        "x-ms-examples": {
+          "productsPatch": {
+            "$ref": "./examples/productsPatch.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products/{productName}/move": {
+      "post": {
+        "description": "Moves a product's charges to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported only for products that are purchased with a recurring charge and for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_Move",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "#/parameters/productName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Request parameters that are provided to the move product operation.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferProductRequestProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Products"
+        ],
+        "x-ms-examples": {
+          "productsMove": {
+            "$ref": "./examples/productsMove.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products/{productName}/validateMoveEligibility": {
+      "post": {
+        "description": "Validates if a product's charges can be moved to a new invoice section. This operation is supported only for products that are purchased with a recurring charge and for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Products_ValidateMove",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "#/parameters/productName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Request parameters that are provided to the validate move eligibility operation.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferProductRequestProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateProductTransferEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "productsValidateMoveFailure": {
+            "$ref": "./examples/productsValidateMoveFailure.json"
+          },
+          "productsValidateMoveSuccess": {
+            "$ref": "./examples/productsValidateMoveSuccess.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A product.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductProperties",
+          "title": "Product properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "ProductProperties": {
+      "description": "The properties of a product.",
+      "properties": {
+        "autoRenew": {
+          "description": "Indicates whether auto renewal is turned on or off for a product.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AutoRenew"
+          }
+        },
+        "availabilityId": {
+          "description": "The availability of the product.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingFrequency": {
+          "description": "The frequency at which the product will be billed.",
+          "enum": [
+            "OneTime",
+            "Monthly",
+            "UsageBased"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BillingFrequency"
+          }
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile to which the product is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile to which the product is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "customerDisplayName": {
+          "description": "The name of the customer for whom the product was purchased. The field is applicable only for Microsoft Partner Agreement billing account.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "customerId": {
+          "description": "The ID of the customer for whom the product was purchased. The field is applicable only for Microsoft Partner Agreement billing account.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the product.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "endDate": {
+          "description": "The date when the product will be renewed or canceled.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section to which the product is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "invoiceSectionId": {
+          "description": "The ID of the invoice section to which the product is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lastCharge": {
+          "$ref": "./types.json#/definitions/Amount",
+          "description": "The last month charges.",
+          "readOnly": true
+        },
+        "lastChargeDate": {
+          "description": "The date of the last charge.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "productType": {
+          "description": "The description of the type of product.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "productTypeId": {
+          "description": "The ID of the type of product.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "purchaseDate": {
+          "description": "The date when the product was purchased.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity purchased for the product.",
+          "readOnly": true,
+          "type": "number"
+        },
+        "reseller": {
+          "$ref": "#/definitions/Reseller",
+          "description": "Reseller for this product.",
+          "readOnly": true
+        },
+        "skuDescription": {
+          "description": "The sku description of the product.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The sku ID of the product.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of the product.",
+          "enum": [
+            "Active",
+            "Inactive",
+            "PastDue",
+            "Expiring",
+            "Expired",
+            "Disabled",
+            "Cancelled",
+            "AutoRenew"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ProductStatusType"
+          }
+        },
+        "tenantId": {
+          "description": "The id of the tenant in which the product is used.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ProductsListResult": {
+      "description": "The list of products. It contains a list of available product summaries in reverse chronological order by purchase date.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "format": "int32",
+          "readOnly": true,
+          "type": "number"
+        },
+        "value": {
+          "description": "The list of products.",
+          "items": {
+            "$ref": "#/definitions/Product"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      }
+    },
+    "ProductTransferValidationErrorCode": {
+      "description": "Error code of the transfer validation response.",
+      "enum": [
+        "InvalidSource",
+        "ProductNotActive",
+        "InsufficientPermissionOnSource",
+        "InsufficientPermissionOnDestination",
+        "DestinationBillingProfilePastDue",
+        "ProductTypeNotSupported",
+        "CrossBillingAccountNotAllowed",
+        "NotAvailableForDestinationMarket",
+        "OneTimePurchaseProductTransferNotAllowed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProductTransferValidationErrorCode"
+      }
+    },
+    "Reseller": {
+      "description": "Details of the reseller.",
+      "properties": {
+        "description": {
+          "description": "The name of the reseller.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "resellerId": {
+          "description": "The MPN ID of the reseller.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "TransferProductRequestProperties": {
+      "description": "The properties of the product to initiate a transfer.",
+      "properties": {
+        "destinationInvoiceSectionId": {
+          "description": "The destination invoice section id.",
+          "type": "string"
+        }
+      }
+    },
+    "ValidateProductTransferEligibilityError": {
+      "description": "Error details of the product transfer eligibility validation.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ProductTransferValidationErrorCode",
+          "description": "Error code for the product transfer validation."
+        },
+        "details": {
+          "description": "Detailed error message explaining the error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ValidateProductTransferEligibilityResult": {
+      "description": "Result of the product transfer eligibility validation.",
+      "properties": {
+        "errorDetails": {
+          "$ref": "#/definitions/ValidateProductTransferEligibilityError",
+          "description": "Validation error details."
+        },
+        "isMoveEligible": {
+          "description": "Specifies whether the transfer is eligible or not.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "productName": {
+      "description": "The ID that uniquely identifies a product.",
+      "in": "path",
+      "name": "productName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

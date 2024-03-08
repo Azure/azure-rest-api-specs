@@ -1,0 +1,297 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections": {
+      "get": {
+        "description": "Lists the invoice sections that a user has access to. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "InvoiceSections_ListByBillingProfile",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "InvoiceSections"
+        ],
+        "x-ms-examples": {
+          "invoiceSectionsListByBillingProfile": {
+            "$ref": "./examples/invoiceSectionsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}": {
+      "get": {
+        "description": "Gets an invoice section by its ID. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "InvoiceSections_Get",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "InvoiceSections"
+        ],
+        "x-ms-examples": {
+          "invoiceSectionsGet": {
+            "$ref": "./examples/invoiceSectionsGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates an invoice section. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "InvoiceSections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "description": "The new or updated invoice section.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "InvoiceSections"
+        ],
+        "x-ms-examples": {
+          "invoiceSectionsPut": {
+            "$ref": "./examples/invoiceSectionsPut.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "InvoiceSection": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "An invoice section.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InvoiceSectionProperties",
+          "description": "The properties of an invoice section.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceSectionCreationRequest": {
+      "description": "The properties of the invoice section.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the invoice section.",
+          "type": "string"
+        }
+      }
+    },
+    "InvoiceSectionListResult": {
+      "description": "The list of invoice sections.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "format": "int32",
+          "readOnly": true,
+          "type": "number"
+        },
+        "value": {
+          "description": "The list of invoice sections.",
+          "items": {
+            "$ref": "#/definitions/InvoiceSection"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      }
+    },
+    "InvoiceSectionProperties": {
+      "description": "The properties of an invoice section.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the invoice section.",
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary of metadata associated with the invoice section.",
+          "maxItems": 50,
+          "type": "object"
+        },
+        "state": {
+          "description": "Identifies the state of an invoice section.",
+          "enum": [
+            "Active",
+            "Restricted"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "InvoiceSectionState"
+          }
+        },
+        "systemId": {
+          "description": "The system generated unique identifier for an invoice section.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary of metadata associated with the invoice section. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
+          "maxItems": 50,
+          "type": "object"
+        },
+        "targetCloud": {
+          "$ref": "#/definitions/TargetCloud",
+          "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
+          "readOnly": true
+        }
+      }
+    },
+    "TargetCloud": {
+      "description": "Possible cloud environments.",
+      "enum": [
+        "USGov",
+        "USNat",
+        "USSec"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "targetCloud"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

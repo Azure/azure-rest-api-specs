@@ -1,0 +1,167 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/operations": {
+      "get": {
+        "description": "Lists the available billing REST API operations.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/OperationsErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "x-ms-examples": {
+          "operationsGet": {
+            "$ref": "./examples/operationsGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Operation": {
+      "description": "A Billing REST API operation.",
+      "properties": {
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "description": {
+              "description": "Description of operation.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type such as read, write and delete.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "provider": {
+              "description": "Service provider: Microsoft.Billing.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed such as invoice and billing subscription.",
+              "readOnly": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "isDataAction": {
+          "description": "Identifies if the operation is a data operation.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OperationListResult": {
+      "description": "The list of billing operations and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of billing operations supported by the Microsoft.Billing resource provider.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "OperationsErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OperationsErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/OperationsErrorDetails",
+          "description": "The details of the error."
+        }
+      },
+      "type": "object"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

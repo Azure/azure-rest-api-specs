@@ -1,0 +1,412 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/reservations": {
+      "get": {
+        "description": "Lists the reservations for a billing profile and the roll up counts of reservations group by provisioning state.",
+        "operationId": "Reservations_ListByBillingProfile",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'.",
+            "in": "query",
+            "name": "$filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "May be used to sort order by reservation properties.",
+            "in": "query",
+            "name": "$orderby",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To indicate whether to refresh the roll up counts of the reservations group by provisioning state",
+            "in": "query",
+            "name": "refreshSummary",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The selected provisioning state",
+            "in": "query",
+            "name": "selectedState",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Reservations"
+        ],
+        "x-ms-examples": {
+          "reservationsListByBillingProfile": {
+            "$ref": "./examples/reservationsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservations": {
+      "get": {
+        "description": "Lists the reservations for a billing account and the roll up counts of reservations group by provisioning states.",
+        "operationId": "Reservations_ListByBillingAccount",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'.",
+            "in": "query",
+            "name": "$filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "May be used to sort order by reservation properties.",
+            "in": "query",
+            "name": "$orderby",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To indicate whether to refresh the roll up counts of the reservations group by provisioning states",
+            "in": "query",
+            "name": "refreshSummary",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The selected provisioning state",
+            "in": "query",
+            "name": "selectedState",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Reservations"
+        ],
+        "x-ms-examples": {
+          "reservationsListByBillingAccount": {
+            "$ref": "./examples/reservationsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Reservation": {
+      "description": "The definition of the reservation.",
+      "properties": {
+        "id": {
+          "description": "The id of the reservation.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the reservation.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the reservation.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ReservationProperty",
+          "description": "The properties associated to this reservation ",
+          "type": "object",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ReservationSkuProperty",
+          "description": "The sku information associated to this reservation ",
+          "type": "object"
+        },
+        "type": {
+          "description": "The type of the reservation.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ReservationAppliedScope": {
+      "description": "Reservation applied scope",
+      "readOnly": true,
+      "type": "string"
+    },
+    "ReservationProperty": {
+      "description": "The property of reservation object.",
+      "properties": {
+        "appliedScopes": {
+          "description": "The array of applied scopes of a reservation. Will be null if the reservation is in Shared scope",
+          "items": {
+            "$ref": "#/definitions/ReservationAppliedScope"
+          },
+          "type": "array"
+        },
+        "appliedScopeType": {
+          "description": "The applied scope type of the reservation.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the reservation",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayProvisioningState": {
+          "description": "The provisioning state of the reservation for display, e.g. Succeeded",
+          "readOnly": true,
+          "type": "string"
+        },
+        "effectiveDateTime": {
+          "description": "The effective date time of the reservation",
+          "readOnly": true,
+          "type": "string"
+        },
+        "expiryDate": {
+          "description": "The expiry date of the reservation",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the reservation, e.g. Succeeded",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningSubState": {
+          "description": "The provisioning state of the reservation, e.g. Succeeded",
+          "readOnly": true,
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The number of the reservation.",
+          "readOnly": true,
+          "type": "number"
+        },
+        "renew": {
+          "description": "The renew state of the reservation",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "renewSource": {
+          "description": "The renew source of the reservation",
+          "readOnly": true,
+          "type": "string"
+        },
+        "reservedResourceType": {
+          "description": "The reserved source type of the reservation, e.g. virtual machine.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "skuDescription": {
+          "description": "The sku description of the reservation",
+          "readOnly": true,
+          "type": "string"
+        },
+        "term": {
+          "description": "The term of the reservation, e.g. P1Y",
+          "readOnly": true,
+          "type": "string"
+        },
+        "userFriendlyAppliedScopeType": {
+          "description": "The applied scope type of the reservation for display, e.g. Shared",
+          "readOnly": true,
+          "type": "string"
+        },
+        "userFriendlyRenewState": {
+          "description": "The renew state of the reservation for display, e.g. On",
+          "readOnly": true,
+          "type": "string"
+        },
+        "utilization": {
+          "description": "Reservation utilization",
+          "properties": {
+            "aggregates": {
+              "description": "The array of aggregates of a reservation's utilization",
+              "items": {
+                "$ref": "#/definitions/ReservationUtilizationAggregates"
+              },
+              "type": "array"
+            },
+            "trend": {
+              "description": "The number of days trend for a reservation",
+              "readOnly": true,
+              "type": "string"
+            }
+          },
+          "readOnly": true,
+          "type": "object"
+        }
+      }
+    },
+    "ReservationSkuProperty": {
+      "description": "The property of reservation sku object.",
+      "properties": {
+        "name": {
+          "description": "The name of the reservation sku.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ReservationsListResult": {
+      "description": "The list of reservations and summary of roll out count of reservations in each state.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "summary": {
+          "$ref": "#/definitions/ReservationSummary",
+          "description": "The roll out count summary of the reservations",
+          "type": "object"
+        },
+        "value": {
+          "description": "The list of reservations.",
+          "items": {
+            "$ref": "#/definitions/Reservation"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      }
+    },
+    "ReservationSummary": {
+      "description": "The roll up count summary of reservations in each state",
+      "properties": {
+        "cancelledCount": {
+          "description": "The number of reservation in Cancelled state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "expiredCount": {
+          "description": "The number of reservation in Expired state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "expiringCount": {
+          "description": "The number of reservation in Expiring state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "failedCount": {
+          "description": "The number of reservation in Failed state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "pendingCount": {
+          "description": "The number of reservation in Pending state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "succeededCount": {
+          "description": "The number of reservation in Succeeded state",
+          "readOnly": true,
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "ReservationUtilizationAggregates": {
+      "description": "The aggregate values of reservation utilization",
+      "properties": {
+        "grain": {
+          "description": "The grain of the aggregate",
+          "readOnly": true,
+          "type": "number"
+        },
+        "grainUnit": {
+          "description": "The grain unit of the aggregate",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The aggregate value",
+          "readOnly": true,
+          "type": "number"
+        },
+        "valueUnit": {
+          "description": "The aggregate value unit",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

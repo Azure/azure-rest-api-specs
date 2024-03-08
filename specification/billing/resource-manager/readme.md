@@ -26,7 +26,36 @@ These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05
+tag: package-2024-04
+```
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-04'
+title: BillingManagementClient
+description: Billing Client
+input-file:
+- Microsoft.Billing/stable/2024-04-01/agreement.json
+- Microsoft.Billing/stable/2024-04-01/availableBalance.json
+- Microsoft.Billing/stable/2024-04-01/billingAccount.json
+- Microsoft.Billing/stable/2024-04-01/billingPermission.json
+- Microsoft.Billing/stable/2024-04-01/billingProfile.json
+- Microsoft.Billing/stable/2024-04-01/billingProperty.json
+- Microsoft.Billing/stable/2024-04-01/billingRoleAssignment.json
+- Microsoft.Billing/stable/2024-04-01/billingRoleDefinition.json
+- Microsoft.Billing/stable/2024-04-01/billingSubscription.json
+- Microsoft.Billing/stable/2024-04-01/customer.json
+- Microsoft.Billing/stable/2024-04-01/instruction.json
+- Microsoft.Billing/stable/2024-04-01/invoice.json
+- Microsoft.Billing/stable/2024-04-01/invoiceSection.json
+- Microsoft.Billing/stable/2024-04-01/operation.json
+- Microsoft.Billing/stable/2024-04-01/policy.json
+- Microsoft.Billing/stable/2024-04-01/product.json
+- Microsoft.Billing/stable/2024-04-01/reservation.json
+- Microsoft.Billing/stable/2024-04-01/transaction.json
+- Microsoft.Billing/stable/2024-04-01/types.json
 ```
 
 ### Tag: package-2021-10

@@ -1,0 +1,1029 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts": {
+      "get": {
+        "description": "Lists the billing accounts that a user has access to.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_List",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "May be used to expand the soldTo, invoice sections and billing profiles.",
+            "in": "query",
+            "name": "$expand",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "billingAccountsList": {
+            "$ref": "./examples/billingAccountsList.json"
+          },
+          "billingAccountsListWithExpand": {
+            "$ref": "./examples/billingAccountsListWithExpand.json"
+          },
+          "billingAccountsListWithExpandForEnrollmentDetails": {
+            "$ref": "./examples/billingAccountsListWithExpandForEnrollmentDetails.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}": {
+      "get": {
+        "description": "Gets a billing account by its ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_Get",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "description": "May be used to expand the soldTo, invoice sections and billing profiles.",
+            "in": "query",
+            "name": "$expand",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "billingAccountsGet": {
+            "$ref": "./examples/billingAccountsGet.json"
+          },
+          "billingAccountsGetWithExpand": {
+            "$ref": "./examples/billingAccountsGetWithExpand.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "BillingAccounts_Update",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "description": "Request parameters that are provided to the update billing account operation.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingAccountUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "202": {
+            "description": "Accepted. Billing account update is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "billingAccountsPatch": {
+            "$ref": "./examples/billingAccountsPatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
+      "post": {
+        "description": "Lists the invoice sections for which the user has permission to create Azure subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_ListInvoiceSectionsByCreateSubscriptionPermission",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSectionListWithCreateSubPermissionResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "invoiceSectionsListWithCreateSubPermission": {
+            "$ref": "./examples/invoiceSectionsListWithCreateSubPermission.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/validateAddress": {
+      "post": {
+        "description": "Validates an address. Use the operation to validate an address before using it as soldTo or a billTo address.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Address_Validate",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Address details.",
+            "in": "body",
+            "name": "address",
+            "required": true,
+            "schema": {
+              "$ref": "./types.json#/definitions/AddressDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateAddressResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Address"
+        ],
+        "x-ms-examples": {
+          "addressValidateInvalid": {
+            "$ref": "./examples/addressValidateInvalid.json"
+          },
+          "addressValidateValid": {
+            "$ref": "./examples/addressValidateValid.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddressValidationStatus": {
+      "description": "Status of the address validation.",
+      "enum": [
+        "Valid",
+        "Invalid"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "addressValidationStatus"
+      }
+    },
+    "BillingAccount": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A billing account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingAccountProperties",
+          "description": "The properties of the billing account.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "BillingAccountListResult": {
+      "description": "The list of billing accounts.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of billing accounts.",
+          "items": {
+            "$ref": "#/definitions/BillingAccount"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "BillingAccountProperties": {
+      "description": "The properties of the billing account.",
+      "properties": {
+        "accountStatus": {
+          "description": "The current status of the billing account.",
+          "enum": [
+            "Active",
+            "Deleted",
+            "Disabled",
+            "Expired",
+            "Transferred",
+            "Extended",
+            "Terminated"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AccountStatus"
+          }
+        },
+        "accountType": {
+          "description": "The type of customer.",
+          "enum": [
+            "Enterprise",
+            "Individual",
+            "Partner"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AccountType"
+          }
+        },
+        "agreementType": {
+          "description": "The type of agreement.",
+          "enum": [
+            "MicrosoftCustomerAgreement",
+            "EnterpriseAgreement",
+            "MicrosoftOnlineServicesProgram",
+            "MicrosoftPartnerAgreement"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AgreementType"
+          }
+        },
+        "billingProfiles": {
+          "$ref": "#/definitions/BillingProfilesOnExpand",
+          "description": "The billing profiles associated with the billing account. By default this is not populated, unless it's specified in $expand."
+        },
+        "departments": {
+          "description": "The departments associated to the enrollment.",
+          "items": {
+            "$ref": "#/definitions/Department"
+          },
+          "type": "array",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "displayName": {
+          "description": "The billing account name.",
+          "type": "string"
+        },
+        "enrollmentAccounts": {
+          "description": "The accounts associated to the enrollment.",
+          "items": {
+            "$ref": "#/definitions/EnrollmentAccount"
+          },
+          "type": "array",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "enrollmentDetails": {
+          "$ref": "#/definitions/Enrollment",
+          "description": "The details about the associated legacy enrollment. By default this is not populated, unless it's specified in $expand.",
+          "readOnly": true
+        },
+        "hasReadAccess": {
+          "description": "Indicates whether user has read access to the billing account.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "notificationEmailAddress": {
+          "description": "Notification email address, only for legacy accounts",
+          "type": "string"
+        },
+        "soldTo": {
+          "$ref": "./types.json#/definitions/AddressDetails",
+          "description": "The address of the individual or organization that is responsible for the billing account."
+        }
+      },
+      "type": "object"
+    },
+    "BillingAccountUpdateRequest": {
+      "description": "The request properties of the billing account that can be updated.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingAccountProperties",
+          "description": "A billing property.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "BillingProfile": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A billing profile.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingProfileProperties",
+          "description": "The properties of the billing profile.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "BillingProfileProperties": {
+      "description": "The properties of the billing profile.",
+      "properties": {
+        "billingRelationshipType": {
+          "description": "Identifies which services and purchases are paid by a billing profile.",
+          "enum": [
+            "Direct",
+            "IndirectCustomer",
+            "IndirectPartner",
+            "CSPPartner"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BillingRelationshipType"
+          }
+        },
+        "billTo": {
+          "$ref": "./types.json#/definitions/AddressDetails",
+          "description": "Billing address."
+        },
+        "currency": {
+          "description": "The currency in which the charges for the billing profile are billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name of the billing profile.",
+          "type": "string"
+        },
+        "enabledAzurePlans": {
+          "description": "Information about the enabled azure plans.",
+          "items": {
+            "$ref": "./types.json#/definitions/AzurePlan"
+          },
+          "type": "array",
+          "x-ms-identifiers": []
+        },
+        "hasReadAccess": {
+          "description": "Indicates whether user has read access to the billing profile.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "indirectRelationshipInfo": {
+          "$ref": "#/definitions/IndirectRelationshipInfo",
+          "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+          "readOnly": true
+        },
+        "invoiceDay": {
+          "description": "The day of the month when the invoice for the billing profile is generated.",
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "invoiceEmailOptIn": {
+          "description": "Flag controlling whether the invoices for the billing profile are sent through email.",
+          "type": "boolean"
+        },
+        "invoiceSections": {
+          "$ref": "#/definitions/InvoiceSectionsOnExpand",
+          "description": "The invoice sections associated to the billing profile. By default this is not populated, unless it's specified in $expand."
+        },
+        "poNumber": {
+          "description": "The purchase order name that will appear on the invoices generated for the billing profile.",
+          "type": "string"
+        },
+        "spendingLimit": {
+          "description": "The billing profile spending limit.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SpendingLimit"
+          }
+        },
+        "status": {
+          "description": "The status of the billing profile.",
+          "enum": [
+            "Active",
+            "Disabled",
+            "Warned"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BillingProfileStatus"
+          }
+        },
+        "statusReasonCode": {
+          "description": "Reason for the specified billing profile status.",
+          "enum": [
+            "PastDue",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "StatusReasonCode"
+          }
+        },
+        "systemId": {
+          "description": "The system generated unique identifier for a billing profile.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags of billing profiles.",
+          "maxItems": 1000,
+          "type": "object"
+        },
+        "targetClouds": {
+          "description": "Identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.",
+          "items": {
+            "$ref": "#/definitions/TargetCloud"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": []
+        }
+      },
+      "type": "object"
+    },
+    "BillingProfilesOnExpand": {
+      "description": "The billing profiles associated with the billing account. By default this is not populated, unless it's specified in $expand.",
+      "properties": {
+        "hasMoreResults": {
+          "description": "Indicates whether there are more billing profiles than the ones listed in this collection. The collection lists a maximum of 50 billing profiles. To get all billing profiles, use the list billing profiles API.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "value": {
+          "description": "The billing profiles associated with the billing account.",
+          "items": {
+            "$ref": "#/definitions/BillingProfile"
+          },
+          "type": "array",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "Department": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A department.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DepartmentProperties",
+          "description": "A department.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "DepartmentProperties": {
+      "description": "The properties of a department.",
+      "properties": {
+        "costCenter": {
+          "description": "The cost center associated with the department.",
+          "type": "string"
+        },
+        "departmentName": {
+          "description": "The name of the department.",
+          "type": "string"
+        },
+        "enrollmentAccounts": {
+          "description": "Associated enrollment accounts. By default this is not populated, unless it's specified in $expand.",
+          "items": {
+            "$ref": "#/definitions/EnrollmentAccount"
+          },
+          "type": "array",
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "description": "The status of the department.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Enrollment": {
+      "description": "The properties of an enrollment.",
+      "properties": {
+        "billingCycle": {
+          "description": "The billing cycle for the enrollment.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "channel": {
+          "description": "The channel type of the enrollment.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "countryCode": {
+          "description": "The country code of the enrollment.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "currency": {
+          "description": "The billing currency for the enrollment.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "endDate": {
+          "description": "The end date of the enrollment.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "language": {
+          "description": "The language for the enrollment.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "policies": {
+          "$ref": "#/definitions/EnrollmentPolicies",
+          "description": "The policies for Enterprise Agreement enrollments.",
+          "readOnly": true
+        },
+        "startDate": {
+          "description": "The start date of the enrollment.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of the enrollment.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EnrollmentAccount": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "An enrollment account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnrollmentAccountProperties",
+          "description": "The properties of an enrollment account.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "EnrollmentAccountProperties": {
+      "description": "The properties of an enrollment account.",
+      "properties": {
+        "accountName": {
+          "description": "The name of the enrollment account.",
+          "type": "string"
+        },
+        "accountOwner": {
+          "description": "The owner of the enrollment account.",
+          "type": "string"
+        },
+        "accountOwnerEmail": {
+          "description": "The enrollment account owner email address.",
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "The cost center associated with the enrollment account.",
+          "type": "string"
+        },
+        "department": {
+          "$ref": "#/definitions/Department",
+          "description": "Associated department. By default this is not populated, unless it's specified in $expand."
+        },
+        "endDate": {
+          "description": "The end date of the enrollment account.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "The start date of the enrollment account.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the enrollment account.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EnrollmentPolicies": {
+      "description": "The policies for Enterprise Agreement enrollments.",
+      "properties": {
+        "accountOwnerViewCharges": {
+          "description": "The policy that controls whether Account Owners can view charges.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "departmentAdminViewCharges": {
+          "description": "The policy that controls whether Department Administrators can view charges.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "marketplaceEnabled": {
+          "description": "The policy that controls whether Azure marketplace purchases are allowed in the enrollment.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "reservedInstancesEnabled": {
+          "description": "The policy that controls whether Azure reservation purchases are allowed in the enrollment.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "IndirectRelationshipInfo": {
+      "description": "The billing profile details of the partner of the customer for an indirect motion.",
+      "properties": {
+        "billingAccountName": {
+          "description": "The billing account name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The billing profile name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the partner or customer for an indirect motion.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceSection": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "An invoice section.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InvoiceSectionProperties",
+          "description": "The properties of an invoice section.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceSectionListWithCreateSubPermissionResult": {
+      "description": "The list of invoice section properties with create subscription permission.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of invoice section properties with create subscription permission.",
+          "items": {
+            "$ref": "#/definitions/InvoiceSectionWithCreateSubPermission"
+          },
+          "type": "array",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceSectionProperties": {
+      "description": "The properties of an invoice section.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the invoice section.",
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary of metadata associated with the invoice section.",
+          "maxItems": 50,
+          "type": "object"
+        },
+        "state": {
+          "description": "Identifies the state of an invoice section.",
+          "enum": [
+            "Active",
+            "Restricted"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "InvoiceSectionState"
+          }
+        },
+        "systemId": {
+          "description": "The system generated unique identifier for an invoice section.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary of metadata associated with the invoice section. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
+          "maxItems": 50,
+          "type": "object"
+        },
+        "targetCloud": {
+          "$ref": "#/definitions/TargetCloud",
+          "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceSectionsOnExpand": {
+      "description": "The invoice sections associated to the billing profile. By default this is not populated, unless it's specified in $expand.",
+      "properties": {
+        "hasMoreResults": {
+          "description": "Indicates whether there are more invoice sections than the ones listed in this collection. The collection lists a maximum of 50 invoice sections. To get all invoice sections, use the list invoice sections API.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "value": {
+          "description": "The invoice sections associated to the billing profile.",
+          "items": {
+            "$ref": "#/definitions/InvoiceSection"
+          },
+          "type": "array",
+          "x-ms-identifiers": [
+            "invoiceSectionId"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceSectionWithCreateSubPermission": {
+      "description": "Invoice section properties with create subscription permission.",
+      "properties": {
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile for the invoice section.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile for the invoice section.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingProfileSpendingLimit": {
+          "description": "The billing profile spending limit.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SpendingLimitForBillingProfile"
+          }
+        },
+        "billingProfileStatus": {
+          "description": "The status of the billing profile.",
+          "enum": [
+            "Active",
+            "Disabled",
+            "Warned"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BillingProfileStatus"
+          }
+        },
+        "billingProfileStatusReasonCode": {
+          "description": "Reason for the specified billing profile status.",
+          "enum": [
+            "PastDue",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "StatusReasonCodeForBillingProfile"
+          }
+        },
+        "billingProfileSystemId": {
+          "description": "The system generated unique identifier for a billing profile.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "enabledAzurePlans": {
+          "description": "Enabled azure plans for the associated billing profile.",
+          "items": {
+            "$ref": "./types.json#/definitions/AzurePlan"
+          },
+          "type": "array",
+          "x-ms-identifiers": []
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "invoiceSectionId": {
+          "description": "The ID of the invoice section.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "invoiceSectionSystemId": {
+          "description": "The system generated unique identifier for an invoice section.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TargetCloud": {
+      "description": "Possible cloud environments.",
+      "enum": [
+        "USGov",
+        "USNat",
+        "USSec"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "targetCloud"
+      }
+    },
+    "ValidateAddressResponse": {
+      "description": "Result of the address validation",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AddressValidationStatus",
+          "description": "status of the address validation."
+        },
+        "suggestedAddresses": {
+          "description": "The list of suggested addresses.",
+          "items": {
+            "$ref": "./types.json#/definitions/AddressDetails"
+          },
+          "type": "array",
+          "x-ms-identifiers": []
+        },
+        "validationMessage": {
+          "description": "Validation error message.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}
