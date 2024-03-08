@@ -4504,7 +4504,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are package name and host pool."
+            "description": "OData filter expression. Valid properties for filtering are package name, host pool, package owner name, and custom data."
           }
         ],
         "responses": {
@@ -4550,7 +4550,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are package name, host pool, and resource group."
+            "description": "OData filter expression. Valid properties for filtering are package name, resource group, host pool, package owner name, and custom data."
           }
         ],
         "responses": {
@@ -7809,7 +7809,7 @@
       "properties": {
         "dependencyName": {
           "type": "string",
-          "description": "Name of package dependency.",
+          "description": "Name of the package dependency. For Msix packages, this is the other packages this package depends upon, for appv packages this is the locations of the user and deployment config files",
           "x-nullable": false
         },
         "publisher": {
@@ -7938,6 +7938,18 @@
         "failHealthCheckOnStagingFailure": {
           "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
+        },
+        "PackageOwnerName": {
+          "type": "string",
+          "description": "Specific name of package owner, is \"AppAttach\" for native app attach packages"
+        },
+        "PackageLookbackUrl": {
+          "type": "string",
+          "description": "Lookback url to third party control plane, is null for native app attach packages"
+        },
+        "CustomData": {
+          "type": "string",
+          "description": "Field that can be populated with custom data and filtered on in list GET calls"
         }
       }
     },
@@ -7963,6 +7975,14 @@
         "failHealthCheckOnStagingFailure": {
           "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
+        },
+        "PackageLookbackUrl": {
+          "type": "string",
+          "description": "Lookback url to third party control plane, should be null for first party packages"
+        },
+        "CustomData": {
+          "type": "string",
+          "description": "Field that can be populated with custom data and filtered on in list GET calls"
         }
       }
     },
@@ -7976,7 +7996,7 @@
         },
         "imagePath": {
           "type": "string",
-          "description": "VHD/CIM image path on Network Share.",
+          "description": "VHD/CIM/Appv image path on Network Share.",
           "x-nullable": false
         },
         "packageName": {
@@ -7986,12 +8006,12 @@
         },
         "packageFamilyName": {
           "type": "string",
-          "description": "Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name. ",
+          "description": "Identifier not including the package version, for Msix packages it is the family name from the appxmanifest.xml. ",
           "x-nullable": false
         },
         "packageFullName": {
           "type": "string",
-          "description": "Package Full Name from appxmanifest.xml. ",
+          "description": "Identifier including the package version, for Msix packages it is the full name from the appxmanifest.xml. ",
           "x-nullable": false
         },
         "displayName": {
@@ -8031,7 +8051,7 @@
         "lastUpdated": {
           "format": "date-time",
           "type": "string",
-          "description": "Date Package was last updated, found in the appxmanifest.xml. ",
+          "description": "Date the package source was last updated, for Msix packages this is found in the appxmanifest.xml. ",
           "x-nullable": false
         },
         "packageApplications": {
