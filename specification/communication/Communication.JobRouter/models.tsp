@@ -482,7 +482,7 @@ model RouterJob {
   @doc("Id of a queue that this job is queued to.")
   queueId?: string;
 
-  @doc("Priority of this job.")
+  @doc("Priority of this job. Value must be between -100 to 100.")
   priority?: int32;
 
   @doc("Reason code for cancelled or closed jobs.")
@@ -792,7 +792,7 @@ model RouterChannel {
   @doc("The amount of capacity that an instance of a job of this channel will consume of the total worker capacity.")
   capacityCostPerJob: int32;
 
-  @doc("The maximum number of jobs that can be supported concurrently for this channel.")
+  @doc("The maximum number of jobs that can be supported concurrently for this channel. Value must be greater than zero.")
   maxNumberOfJobs?: int32;
 }
 
