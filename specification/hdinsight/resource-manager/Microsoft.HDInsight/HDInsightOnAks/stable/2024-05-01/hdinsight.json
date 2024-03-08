@@ -1522,7 +1522,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Installing new libraries request accepted.",
+            "description": "Cluster library management operation request accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -5023,8 +5023,7 @@
           "description": "Type of the library.",
           "enum": [
             "pypi",
-            "maven",
-            "storage"
+            "maven"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5033,7 +5032,7 @@
           }
         },
         "remarks": {
-          "description": "Remark of the library.",
+          "description": "Remark of the latest library management operation.",
           "type": "string"
         },
         "timestamp": {
@@ -5049,7 +5048,6 @@
             "INSTALLED",
             "INSTALL_FAILED",
             "UNINSTALLING",
-            "UNINSTALLED",
             "UNINSTALL_FAILED"
           ],
           "type": "string",
@@ -5107,7 +5105,7 @@
       ],
       "properties": {
         "groupId": {
-          "description": "GroupId of the maven package.",
+          "description": "GroupId of the Maven package.",
           "type": "string"
         },
         "name": {
@@ -5120,30 +5118,6 @@
         }
       },
       "x-ms-discriminator-value": "maven"
-    },
-    "StorageLibraryProperties": {
-      "description": "Properties of a library stored in the remote storage.",
-      "type": "object",
-      "required": [
-        "storagePathUrl"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ClusterLibraryProperties"
-        }
-      ],
-      "properties": {
-        "name": {
-          "description": "Name of the storage library.",
-          "type": "string",
-          "readOnly": true
-        },
-        "storagePathUrl": {
-          "description": "Path of the library in the remote storage.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "storage"
     }
   },
   "parameters": {
