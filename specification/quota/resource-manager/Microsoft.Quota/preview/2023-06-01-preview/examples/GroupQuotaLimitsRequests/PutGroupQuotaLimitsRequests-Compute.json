@@ -6,23 +6,27 @@
     "resourceProviderName": "Microsoft.Compute",
     "api-version": "2023-06-01-preview",
     "groupQuotaRequest": {
-      "location": "westus",
-      "limit": 110,
-      "name": {
-        "value": "standardav2family"
-      },
-      "comment": "Contoso requires more quota."
+      "requestResource": {
+        "limit": 110,
+        "name": {
+          "value": "standardav2family"
+        },
+        "location": "westus",
+        "comment": "Contoso requires more quota."
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "limit": 100,
-        "locaton": "westus",
-        "comment": "",
-        "name": {
-          "value": "standardav2family",
-          "localizedValue": "Standard AV2 Family vCPUs"
+        "requestedResource": {
+          "limit": 100,
+          "locaton": "westus",
+          "comment": "",
+          "name": {
+            "value": "standardav2family",
+            "localizedValue": "Standard AV2 Family vCPUs"
+          }
         },
         "unit": "count",
         "provisioningState": "Succeeded"
