@@ -1,0 +1,288 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers": {
+      "get": {
+        "description": "Lists the customers that are billed to a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Customers_ListByBillingProfile",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "description": "Used for searching customers by their name. Any customer with name containing the search text will be included in the response",
+            "in": "query",
+            "name": "$search",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "May be used to filter the list of customers.",
+            "in": "query",
+            "name": "$filter",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "x-ms-examples": {
+          "customersListByBillingProfile": {
+            "$ref": "./examples/customersListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers": {
+      "get": {
+        "description": "Lists the customers that are billed to a billing account. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Customers_ListByBillingAccount",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "description": "Used for searching customers by their name. Any customer with name containing the search text will be included in the response",
+            "in": "query",
+            "name": "$search",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "May be used to filter the list of customers.",
+            "in": "query",
+            "name": "$filter",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "x-ms-examples": {
+          "customersListByBillingAccount": {
+            "$ref": "./examples/customersListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}": {
+      "get": {
+        "description": "Gets a customer by its ID. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Customers_Get",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "description": "May be used to expand enabledAzurePlans and resellers",
+            "in": "query",
+            "name": "$expand",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "x-ms-examples": {
+          "customersGet": {
+            "$ref": "./examples/customersGet.json"
+          },
+          "customersGetWithExpand": {
+            "$ref": "./examples/customersGetWithExpand.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Customer": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A partner's customer.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomerProperties",
+          "description": "The customer.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "CustomerListResult": {
+      "description": "The list of customers.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "format": "int32",
+          "readOnly": true,
+          "type": "number"
+        },
+        "value": {
+          "description": "The list of customers.",
+          "items": {
+            "$ref": "#/definitions/Customer"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      }
+    },
+    "CustomerProperties": {
+      "description": "The properties of a customer.",
+      "properties": {
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile for the invoice section.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile for the invoice section.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name of the customer.",
+          "type": "string"
+        },
+        "enabledAzurePlans": {
+          "description": "Azure plans enabled for the customer.",
+          "items": {
+            "$ref": "./types.json#/definitions/AzurePlan"
+          },
+          "type": "array"
+        },
+        "resellers": {
+          "description": "The list of resellers for which an Azure plan is enabled for the customer.",
+          "items": {
+            "$ref": "#/definitions/Reseller"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "Reseller": {
+      "description": "Details of the reseller.",
+      "properties": {
+        "description": {
+          "description": "The name of the reseller.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "resellerId": {
+          "description": "The MPN ID of the reseller.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

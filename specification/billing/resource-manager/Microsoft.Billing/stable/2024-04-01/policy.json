@@ -1,0 +1,300 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default": {
+      "get": {
+        "description": "Lists the policies for a billing profile. This operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_GetByBillingProfile",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Policies"
+        ],
+        "x-ms-examples": {
+          "policiesGetByBillingProfile": {
+            "$ref": "./examples/policiesGetByBillingProfile.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the policies for a billing profile. This operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "Policies_Update",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "description": "Request parameters that are provided to the update policies operation.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Policies"
+        ],
+        "x-ms-examples": {
+          "policiesPutByBillingProfile": {
+            "$ref": "./examples/policiesPutByBillingProfile.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/policies/default": {
+      "get": {
+        "description": "Lists the policies for a customer. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_GetByCustomer",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Policies"
+        ],
+        "x-ms-examples": {
+          "policiesGetByCustomer": {
+            "$ref": "./examples/policiesGetByCustomer.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the policies for a customer. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "operationId": "Policies_UpdateCustomer",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "description": "Request parameters that are provided to the update policies operation.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "Policies"
+        ],
+        "x-ms-examples": {
+          "policiesPutByCustomer": {
+            "$ref": "./examples/policiesPutByCustomer.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CustomerPolicy": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "The customer's Policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomerPolicyProperties",
+          "title": "Customer Policy properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "CustomerPolicyProperties": {
+      "description": "The properties of a customer's policy.",
+      "properties": {
+        "viewCharges": {
+          "description": "The policy that controls whether the users in customer's organization can view charges at pay-as-you-go prices.",
+          "enum": [
+            "Allowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ViewCharges"
+          }
+        }
+      }
+    },
+    "Policy": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyProperties",
+          "title": "Policy properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "PolicyProperties": {
+      "description": "The properties of a policy.",
+      "properties": {
+        "marketplacePurchases": {
+          "description": "The policy that controls whether Azure marketplace purchases are allowed for a billing profile.",
+          "enum": [
+            "AllAllowed",
+            "OnlyFreeAllowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "MarketplacePurchasesPolicy"
+          }
+        },
+        "reservationPurchases": {
+          "description": "The policy that controls whether Azure reservation purchases are allowed for a billing profile.",
+          "enum": [
+            "Allowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ReservationPurchasesPolicy"
+          }
+        },
+        "viewCharges": {
+          "description": "The policy that controls whether users with Azure RBAC access to a subscription can view its charges.",
+          "enum": [
+            "Allowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ViewChargesPolicy"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

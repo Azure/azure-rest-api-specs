@@ -1,0 +1,643 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingSubscriptions": {
+      "get": {
+        "description": "Lists the subscriptions that are billed to a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingSubscriptions_ListByBillingProfile",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "x-ms-examples": {
+          "billingSubscriptionsListByBillingProfile": {
+            "$ref": "./examples/billingSubscriptionsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingSubscriptions": {
+      "get": {
+        "description": "Lists the subscriptions that are billed to an invoice section. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingSubscriptions_ListByInvoiceSection",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "x-ms-examples": {
+          "billingSubscriptionsListByInvoiceSection": {
+            "$ref": "./examples/billingSubscriptionsListByInvoiceSection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions": {
+      "get": {
+        "description": "Lists the subscriptions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingSubscriptions_ListByBillingAccount",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "x-ms-examples": {
+          "billingSubscriptionsListByBillingAccount": {
+            "$ref": "./examples/billingSubscriptionsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}": {
+      "get": {
+        "description": "Gets a subscription by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement and Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingSubscriptions_Get",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "x-ms-examples": {
+          "billingSubscriptionsGet": {
+            "$ref": "./examples/billingSubscriptionsGet.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates the properties of a billing subscription. Currently, cost center can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "BillingSubscriptions_Update",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Request parameters that are provided to the update billing subscription operation.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingSubscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "x-ms-examples": {
+          "billingSubscriptionsPatch": {
+            "$ref": "./examples/billingSubscriptionsPatch.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}/move": {
+      "post": {
+        "description": "Moves a subscription's charges to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingSubscriptions_Move",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Request parameters that are provided to the move subscription operation.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscription"
+            }
+          },
+          "202": {
+            "description": "Accepted. Billing Subscription transfer is in progress.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "billingSubscriptionsMove": {
+            "$ref": "./examples/billingSubscriptionsMove.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}/validateMoveEligibility": {
+      "post": {
+        "description": "Validates if a subscription's charges can be moved to a new invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingSubscriptions_ValidateMove",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Request parameters that are provided to the validate move eligibility operation.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateSubscriptionTransferEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "billingSubscriptionsValidateMoveFailure": {
+            "$ref": "./examples/billingSubscriptionsValidateMoveFailure.json"
+          },
+          "billingSubscriptionsValidateMoveSuccess": {
+            "$ref": "./examples/billingSubscriptionsValidateMoveSuccess.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions": {
+      "get": {
+        "description": "Lists the subscriptions for a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingSubscriptions_ListByCustomer",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "x-ms-examples": {
+          "billingSubscriptionsListByCustomer": {
+            "$ref": "./examples/billingSubscriptionsListByCustomer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingSubscription": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A billing subscription.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingSubscriptionProperties",
+          "title": "Billing subscription properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "BillingSubscriptionProperties": {
+      "description": "The billing properties of a subscription.",
+      "properties": {
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile to which the subscription is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile to which the subscription is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "The cost center applied to the subscription.",
+          "type": "string"
+        },
+        "customerDisplayName": {
+          "description": "The name of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing account.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "customerId": {
+          "description": "The ID of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing account.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name of the subscription.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section to which the subscription is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "invoiceSectionId": {
+          "description": "The ID of the invoice section to which the subscription is billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lastMonthCharges": {
+          "$ref": "./types.json#/definitions/Amount",
+          "description": "The last month charges.",
+          "readOnly": true
+        },
+        "monthToDateCharges": {
+          "$ref": "./types.json#/definitions/Amount",
+          "description": "The current month to date charges.",
+          "readOnly": true
+        },
+        "reseller": {
+          "$ref": "#/definitions/Reseller",
+          "description": "Reseller for this subscription.",
+          "readOnly": true
+        },
+        "skuDescription": {
+          "description": "The sku description of the Azure plan for the subscription.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The sku ID of the Azure plan for the subscription.",
+          "type": "string"
+        },
+        "subscriptionBillingStatus": {
+          "description": "The current billing status of the subscription.",
+          "enum": [
+            "Active",
+            "Inactive",
+            "Abandoned",
+            "Deleted",
+            "Warning"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BillingSubscriptionStatusType"
+          }
+        },
+        "subscriptionId": {
+          "description": "The ID of the subscription.",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "suspensionReasons": {
+          "description": "The suspension reason for a subscription. Applies only to subscriptions in Microsoft Online Services Program billing accounts.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      }
+    },
+    "BillingSubscriptionsListResult": {
+      "description": "The list of billing subscriptions.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "format": "int32",
+          "readOnly": true,
+          "type": "number"
+        },
+        "value": {
+          "description": "The list of billing subscriptions.",
+          "items": {
+            "$ref": "#/definitions/BillingSubscription"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      }
+    },
+    "Reseller": {
+      "description": "Details of the reseller.",
+      "properties": {
+        "description": {
+          "description": "The name of the reseller.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "resellerId": {
+          "description": "The MPN ID of the reseller.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionTransferValidationErrorCode": {
+      "description": "Error code of the transfer validation response.",
+      "enum": [
+        "BillingAccountInactive",
+        "CrossBillingAccountNotAllowed",
+        "DestinationBillingProfileInactive",
+        "DestinationBillingProfileNotFound",
+        "DestinationBillingProfilePastDue",
+        "DestinationInvoiceSectionInactive",
+        "DestinationInvoiceSectionNotFound",
+        "InsufficientPermissionOnDestination",
+        "InsufficientPermissionOnSource",
+        "InvalidDestination",
+        "InvalidSource",
+        "MarketplaceNotEnabledOnDestination",
+        "NotAvailableForDestinationMarket",
+        "ProductInactive",
+        "ProductNotFound",
+        "ProductTypeNotSupported",
+        "SourceBillingProfilePastDue",
+        "SourceInvoiceSectionInactive",
+        "SubscriptionNotActive",
+        "SubscriptionTypeNotSupported"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "subscriptionTransferValidationErrorCode"
+      }
+    },
+    "TransferBillingSubscriptionRequestProperties": {
+      "description": "Request parameters to transfer billing subscription.",
+      "properties": {
+        "destinationInvoiceSectionId": {
+          "description": "The destination invoice section id.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "destinationInvoiceSectionId"
+      ],
+      "type": "object"
+    },
+    "ValidateSubscriptionTransferEligibilityError": {
+      "description": "Error details of the transfer eligibility validation",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/SubscriptionTransferValidationErrorCode",
+          "description": "Error code for the product transfer validation."
+        },
+        "details": {
+          "description": "Detailed error message explaining the error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ValidateSubscriptionTransferEligibilityResult": {
+      "description": "Result of the transfer eligibility validation.",
+      "properties": {
+        "errorDetails": {
+          "$ref": "#/definitions/ValidateSubscriptionTransferEligibilityError",
+          "description": "Validation error details."
+        },
+        "isMoveEligible": {
+          "description": "Specifies whether the subscription is eligible to be transferred.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}

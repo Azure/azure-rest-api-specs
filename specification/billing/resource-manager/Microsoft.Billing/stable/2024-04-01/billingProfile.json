@@ -1,0 +1,507 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Billing client provides access to billing resources for Azure subscriptions.",
+    "title": "BillingManagementClient",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles": {
+      "get": {
+        "description": "Lists the billing profiles that a user has access to. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingProfiles_ListByBillingAccount",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "description": "May be used to expand the invoice sections.",
+            "in": "query",
+            "name": "$expand",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "billingProfilesListByBillingAccount": {
+            "$ref": "./examples/billingProfilesListByBillingAccount.json"
+          },
+          "billingProfilesListByBillingAccountWithExpand": {
+            "$ref": "./examples/billingProfilesListByBillingAccountWithExpand.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}": {
+      "get": {
+        "description": "Gets a billing profile by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingProfiles_Get",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "description": "May be used to expand the invoice sections.",
+            "in": "query",
+            "name": "$expand",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "billingProfilesGet": {
+            "$ref": "./examples/billingProfilesGet.json"
+          },
+          "billingProfilesGetWithExpand": {
+            "$ref": "./examples/billingProfilesGetWithExpand.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "operationId": "BillingProfiles_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "description": "The new or updated billing profile.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmError"
+            }
+          }
+        },
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "billingProfilesPut": {
+            "$ref": "./examples/billingProfilesPut.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "BillingProfile": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A billing profile.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingProfileProperties",
+          "description": "The properties of the billing profile.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "BillingProfileCreationRequest": {
+      "description": "The request parameters for creating a new billing profile.",
+      "properties": {
+        "billTo": {
+          "$ref": "./types.json#/definitions/AddressDetails",
+          "description": "The address of the individual or organization that is responsible for the billing profile."
+        },
+        "displayName": {
+          "description": "The name of the billing profile.",
+          "type": "string"
+        },
+        "enabledAzurePlans": {
+          "description": "Enabled azure plans for the billing profile.",
+          "items": {
+            "$ref": "./types.json#/definitions/AzurePlan"
+          },
+          "type": "array"
+        },
+        "invoiceEmailOptIn": {
+          "description": "Flag controlling whether the invoices for the billing profile are sent through email.",
+          "type": "boolean"
+        },
+        "poNumber": {
+          "description": "The purchase order name that will appear on the invoices generated for the billing profile.",
+          "type": "string"
+        }
+      }
+    },
+    "BillingProfileListResult": {
+      "description": "The list of billing profiles.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "format": "int32",
+          "readOnly": true,
+          "type": "number"
+        },
+        "value": {
+          "description": "The list of billing profiles.",
+          "items": {
+            "$ref": "#/definitions/BillingProfile"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      }
+    },
+    "BillingProfileProperties": {
+      "description": "The properties of the billing profile.",
+      "properties": {
+        "billingRelationshipType": {
+          "description": "Identifies which services and purchases are paid by a billing profile.",
+          "enum": [
+            "Direct",
+            "IndirectCustomer",
+            "IndirectPartner",
+            "CSPPartner"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BillingRelationshipType"
+          }
+        },
+        "billTo": {
+          "$ref": "./types.json#/definitions/AddressDetails",
+          "description": "Billing address."
+        },
+        "currency": {
+          "description": "The currency in which the charges for the billing profile are billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name of the billing profile.",
+          "type": "string"
+        },
+        "enabledAzurePlans": {
+          "description": "Information about the enabled azure plans.",
+          "items": {
+            "$ref": "./types.json#/definitions/AzurePlan"
+          },
+          "type": "array"
+        },
+        "hasReadAccess": {
+          "description": "Indicates whether user has read access to the billing profile.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "indirectRelationshipInfo": {
+          "$ref": "#/definitions/IndirectRelationshipInfo",
+          "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+          "readOnly": true
+        },
+        "invoiceDay": {
+          "description": "The day of the month when the invoice for the billing profile is generated.",
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "invoiceEmailOptIn": {
+          "description": "Flag controlling whether the invoices for the billing profile are sent through email.",
+          "type": "boolean"
+        },
+        "invoiceSections": {
+          "$ref": "#/definitions/InvoiceSectionsOnExpand",
+          "description": "The invoice sections associated to the billing profile. By default this is not populated, unless it's specified in $expand."
+        },
+        "poNumber": {
+          "description": "The purchase order name that will appear on the invoices generated for the billing profile.",
+          "type": "string"
+        },
+        "spendingLimit": {
+          "description": "The billing profile spending limit.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SpendingLimit"
+          }
+        },
+        "status": {
+          "description": "The status of the billing profile.",
+          "enum": [
+            "Active",
+            "Disabled",
+            "Warned"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BillingProfileStatus"
+          }
+        },
+        "statusReasonCode": {
+          "description": "Reason for the specified billing profile status.",
+          "enum": [
+            "PastDue",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "StatusReasonCode"
+          }
+        },
+        "systemId": {
+          "description": "The system generated unique identifier for a billing profile.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags of billing profiles.",
+          "maxItems": 1000,
+          "type": "object"
+        },
+        "targetClouds": {
+          "description": "Identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.",
+          "items": {
+            "$ref": "#/definitions/TargetCloud"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      }
+    },
+    "IndirectRelationshipInfo": {
+      "description": "The billing profile details of the partner of the customer for an indirect motion.",
+      "properties": {
+        "billingAccountName": {
+          "description": "The billing account name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The billing profile name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the partner or customer for an indirect motion.",
+          "type": "string"
+        }
+      }
+    },
+    "InvoiceSection": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "An invoice section.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InvoiceSectionProperties",
+          "description": "The properties of an invoice section.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceSectionProperties": {
+      "description": "The properties of an invoice section.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the invoice section.",
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary of metadata associated with the invoice section.",
+          "maxItems": 50,
+          "type": "object"
+        },
+        "state": {
+          "description": "Identifies the state of an invoice section.",
+          "enum": [
+            "Active",
+            "Restricted"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "InvoiceSectionState"
+          }
+        },
+        "systemId": {
+          "description": "The system generated unique identifier for an invoice section.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary of metadata associated with the invoice section. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
+          "maxItems": 50,
+          "type": "object"
+        },
+        "targetCloud": {
+          "$ref": "#/definitions/TargetCloud",
+          "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
+          "readOnly": true
+        }
+      }
+    },
+    "InvoiceSectionsOnExpand": {
+      "description": "The invoice sections associated to the billing profile. By default this is not populated, unless it's specified in $expand.",
+      "properties": {
+        "hasMoreResults": {
+          "description": "Indicates whether there are more invoice sections than the ones listed in this collection. The collection lists a maximum of 50 invoice sections. To get all invoice sections, use the list invoice sections API.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "value": {
+          "description": "The invoice sections associated to the billing profile.",
+          "items": {
+            "$ref": "#/definitions/InvoiceSection"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "TargetCloud": {
+      "description": "Possible cloud environments.",
+      "enum": [
+        "USGov",
+        "USNat",
+        "USSec"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "targetCloud"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  }
+}
