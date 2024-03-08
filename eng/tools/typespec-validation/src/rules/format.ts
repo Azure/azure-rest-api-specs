@@ -12,7 +12,10 @@ export class FormatRule implements Rule {
     let errorOutput = "";
 
     // Format parent folder to include shared files
-    let [err, stdout, stderr] = await host.runCmd(`npx tsp format "../**/*.tsp"`, folder);
+    let [err, stdout, stderr] = await host.runCmd(
+      `npm exec --no -- tsp format "../**/*.tsp"`,
+      folder,
+    );
     if (err) {
       success = false;
       errorOutput += err.message;
