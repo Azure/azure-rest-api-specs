@@ -30,12 +30,6 @@ description: HDInsight Containers Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 azure-arm: true
-tag: package-preview-2023-11
-```
-
-``` yaml
-modelerfour:
-  flatten-models: false
 tag: package-2024-05
 ```
 
@@ -49,6 +43,32 @@ These settings apply only when `--tag=package-2024-05` is specified on the comma
 ```yaml $(tag) == 'package-2024-05'
 input-file:
   - stable/2024-05-01/hdinsight.json
+
+suppressions:
+  - code: ResourceNameRestriction
+    reason: Keep compatibility with old API version.
+  - code: OperationIdNounVerb
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters"].get.operationId
+    reason: The operation id is valid.
+  - code: EnumInsteadOfBoolean
+  - code: TrackedResourcePatchOperation
+    where:
+      - $.definitions.Cluster
+    reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
+  - code: PatchBodyParametersSchema
+    reason: We refers to the same models in PUT operation, and the errors checked are allowed by our service.
+  - code: EnumInsteadOfBoolean
+    where:
+      - $.definitions.ClusterAccessProfile.properties.enableInternalIngress
+      - $.definitions.ClusterPoolNetworkProfile.properties.enablePrivateApiServer
+      - $.definitions.ClusterRangerPluginProfile.properties.enabled
+      - $.definitions.RangerUsersyncSpec.properties.enabled
+      - $.definitions.KafkaProfile.properties.enableKRaft
+      - $.definitions.KafkaProfile.enablePublicEndpoints
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeClusterPool
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeAllClusterNodes
+    reason: They are used for enabling or disabling a feature. Using a boolean type is more user friendly, and they will be not extended to other values.
 ```
 ### Tag: package-preview-2023-11
 

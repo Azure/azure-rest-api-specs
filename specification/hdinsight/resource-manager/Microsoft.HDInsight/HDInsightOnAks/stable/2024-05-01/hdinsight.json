@@ -420,6 +420,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/upgradeHistories": {
+      "get": {
+        "description": "Returns a list of upgrade history.",
+        "operationId": "ClusterPoolUpgradeHistories_List",
+        "x-ms-examples": {
+          "ClusterPoolUpgradeHistoriesListResult": {
+            "$ref": "./examples/ListClusterPoolUpgradeHistory.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available cluster versions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolUpgradeHistoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters": {
       "get": {
         "operationId": "Clusters_ListByClusterPoolName",
@@ -571,6 +613,115 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/upgradeHistories": {
+      "get": {
+        "description": "Returns a list of upgrade history.",
+        "operationId": "ClusterUpgradeHistories_List",
+        "x-ms-examples": {
+          "ClusterUpgradeHistoriesListResult": {
+            "$ref": "./examples/ListClusterUpgradeHistory.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available cluster versions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgradeHistoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/rollback": {
+      "post": {
+        "description": "Manual rollback upgrade for a cluster.",
+        "operationId": "Clusters_UpgradeManualRollback",
+        "x-ms-examples": {
+          "ClusterUpgradeRollback": {
+            "$ref": "./examples/ClusterUpgradeRollback.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "ClusterRollbackUpgradeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgradeRollback"
+            },
+            "description": "Manual rollback upgrade for a cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Cluster Manual Rollback Upgrade request accepted.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to get the status of the rollback operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1267,6 +1418,130 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/libraries": {
+      "get": {
+        "operationId": "ClusterLibraries_List",
+        "description": "Get all libraries of HDInsight on AKS cluster.",
+        "x-ms-examples": {
+          "ListUserCustomClusterLibraries": {
+            "$ref": "./examples/ListUserCustomClusterLibraries.json"
+          },
+          "ListPredefinedClusterLibraries": {
+            "$ref": "./examples/ListPredefinedClusterLibraries.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "$category",
+            "in": "query",
+            "required": true,
+            "enum": [
+              "custom",
+              "predefined"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "$category",
+              "modelAsString": true
+            },
+            "description": "The system query option to filter libraries returned in the response. Allowed value is 'custom' or 'predefined'."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Collection of libraries in the cluster.",
+            "schema": {
+              "$ref": "#/definitions/ClusterLibraryList"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/manageLibraries": {
+      "post": {
+        "operationId": "ClusterLibraries_ManageLibraries",
+        "description": "Library management operations on HDInsight on AKS cluster.",
+        "x-ms-examples": {
+          "InstallNewClusterLibraries": {
+            "$ref": "./examples/InstallNewClusterLibraries.json"
+          },
+          "UninstallExistingClusterLibraries": {
+            "$ref": "./examples/UninstallExistingClusterLibraries.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "operation",
+            "description": "The library management operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterLibraryManagementOperation"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Installing new libraries request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get the status of the library management operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -1660,6 +1935,70 @@
         }
       }
     },
+    "ManagedIdentityProfile": {
+      "type": "object",
+      "description": "The details of managed identity.",
+      "required": [
+        "identityList"
+      ],
+      "properties": {
+        "identityList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedIdentitySpec"
+          },
+          "description": "The list of managed identity.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ManagedIdentitySpec": {
+      "type": "object",
+      "description": "The details of a managed identity.",
+      "required": [
+        "type",
+        "resourceId",
+        "clientId",
+        "objectId"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type of managed identity.",
+          "type": "string",
+          "enum": [
+            "cluster",
+            "user",
+            "internal"
+          ],
+          "x-ms-enum": {
+            "name": "managedIdentityType",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "ResourceId of the managed identity.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "clientId": {
+          "type": "string",
+          "description": "ClientId of the managed identity.",
+          "pattern": "^[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?$"
+        },
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of the managed identity.",
+          "pattern": "^[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?$"
+        }
+      }
+    },
     "AuthorizationProfile": {
       "type": "object",
       "description": "Authorization profile with details of AAD user Ids and group Ids authorized for data plane access.",
@@ -1944,8 +2283,12 @@
           "$ref": "#/definitions/ClusterComponents"
         },
         "identityProfile": {
-          "description": "This property is required by Trino, Spark and Flink cluster but is optional for Kafka cluster.",
+          "description": "This is deprecated. Please use managed identity profile instead.",
           "$ref": "#/definitions/IdentityProfile"
+        },
+        "managedIdentityProfile": {
+          "description": "This property is required by Trino, Spark and Flink cluster but is optional for Kafka cluster.",
+          "$ref": "#/definitions/ManagedIdentityProfile"
         },
         "authorizationProfile": {
           "$ref": "#/definitions/AuthorizationProfile"
@@ -2031,6 +2374,11 @@
           "type": "string",
           "description": "Prefix of the pod names. Pod number will be appended to the prefix. The ingress URLs for the pods will be available at <clusterFqdn>/<sshBasePath>/<prefix>-<number>",
           "readOnly": true
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine SKU.",
+          "pattern": "^[a-zA-Z0-9_\\-]{0,256}$"
         }
       }
     },
@@ -2955,11 +3303,6 @@
         "diskStorage": {
           "$ref": "#/definitions/DiskStorageProfile"
         },
-        "clusterIdentity": {
-          "description": "Identity of the internal service components inside the Kafka cluster.",
-          "$ref": "#/definitions/IdentityProfile",
-          "readOnly": true
-        },
         "connectivityEndpoints": {
           "description": "Kafka bootstrap server and brokers related connectivity endpoints.",
           "$ref": "#/definitions/KafkaConnectivityEndpoints",
@@ -3110,7 +3453,7 @@
           "description": "The number of virtual machines.",
           "type": "integer",
           "format": "int32",
-          "minimum": 1
+          "minimum": 0
         }
       }
     },
@@ -3201,6 +3544,12 @@
         },
         "scriptActionProfiles": {
           "$ref": "#/definitions/ScriptActionProfiles"
+        },
+        "secretsProfile": {
+          "$ref": "#/definitions/SecretsProfile"
+        },
+        "trinoProfile": {
+          "$ref": "#/definitions/TrinoProfile"
         }
       },
       "description": "Cluster resource patch properties."
@@ -3947,7 +4296,8 @@
           "description": "Type of upgrade.",
           "enum": [
             "AKSPatchUpgrade",
-            "HotfixUpgrade"
+            "HotfixUpgrade",
+            "PatchVersionUpgrade"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3993,9 +4343,9 @@
       },
       "x-ms-discriminator-value": "AKSPatchUpgrade"
     },
-    "ClusterAvailableUpgradeHotfixUpgradeProperties": {
+    "ClusterAvailableInPlaceUpgradeProperties": {
       "type": "object",
-      "description": "Cluster available hotfix version upgrade.",
+      "description": "Cluster available in-place upgrade.",
       "allOf": [
         {
           "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
@@ -4057,8 +4407,27 @@
           "type": "string",
           "format": "date-time"
         }
-      },
+      }
+    },
+    "ClusterAvailableUpgradeHotfixUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster available hotfix version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterAvailableInPlaceUpgradeProperties"
+        }
+      ],
       "x-ms-discriminator-value": "HotfixUpgrade"
+    },
+    "ClusterAvailableUpgradePatchVersionUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster available patch version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterAvailableInPlaceUpgradeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PatchVersionUpgrade"
     },
     "ClusterPoolUpgrade": {
       "description": "Cluster Pool Upgrade.",
@@ -4131,6 +4500,128 @@
       "properties": {},
       "x-ms-discriminator-value": "NodeOsUpgrade"
     },
+    "ClusterPoolUpgradeHistoryListResult": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "Represents a list of cluster pool upgrade history.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of cluster pool upgrade history.",
+          "items": {
+            "$ref": "#/definitions/ClusterPoolUpgradeHistory"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterPoolUpgradeHistory": {
+      "type": "object",
+      "description": "Cluster pool upgrade history.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPoolUpgradeHistoryProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterPoolUpgradeHistoryProperties": {
+      "description": "Properties of cluster pool upgrade history.",
+      "type": "object",
+      "required": [
+        "upgradeType",
+        "utcTime",
+        "upgradeResult"
+      ],
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "NodeOsUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterPoolUpgradeHistoryType",
+            "modelAsString": true
+          }
+        },
+        "utcTime": {
+          "description": "Time when created this upgrade history.",
+          "type": "string"
+        },
+        "upgradeResult": {
+          "description": "Result of this upgrade.",
+          "enum": [
+            "Succeed",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterPoolUpgradeHistoryUpgradeResultType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType"
+    },
+    "ClusterPoolNodeOsUpgradeHistoryProperties": {
+      "type": "object",
+      "description": "Cluster pool node os upgrade history properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolUpgradeHistoryProperties"
+        }
+      ],
+      "properties": {
+        "newNodeOs": {
+          "type": "string",
+          "description": "New Node Os version."
+        }
+      },
+      "x-ms-discriminator-value": "NodeOsUpgrade"
+    },
+    "ClusterPoolAksPatchUpgradeHistoryProperties": {
+      "type": "object",
+      "description": "Cluster pool aks upgrade history properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolUpgradeHistoryProperties"
+        }
+      ],
+      "properties": {
+        "upgradeClusterPool": {
+          "type": "boolean",
+          "description": "Whether upgrade cluster pool."
+        },
+        "upgradeAllClusterNodes": {
+          "type": "boolean",
+          "description": "Whether upgrade all cluster nodes."
+        },
+        "originalVersion": {
+          "type": "string",
+          "description": "Version before update."
+        },
+        "newVersion": {
+          "type": "string",
+          "description": "Version going to update."
+        }
+      },
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
     "ClusterUpgrade": {
       "description": "Cluster Upgrade.",
       "type": "object",
@@ -4151,7 +4642,8 @@
           "description": "Type of upgrade.",
           "enum": [
             "AKSPatchUpgrade",
-            "HotfixUpgrade"
+            "HotfixUpgrade",
+            "PatchVersionUpgrade"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4176,8 +4668,8 @@
       "properties": {},
       "x-ms-discriminator-value": "AKSPatchUpgrade"
     },
-    "ClusterHotfixUpgradeProperties": {
-      "description": "Properties of upgrading cluster's hotfix.",
+    "ClusterInPlaceUpgradeProperties": {
+      "description": "Properties of in-place upgrading cluster.",
       "type": "object",
       "allOf": [
         {
@@ -4201,8 +4693,457 @@
           "description": "Name of component to be upgraded.",
           "type": "string"
         }
-      },
+      }
+    },
+    "ClusterHotfixUpgradeProperties": {
+      "description": "Properties of upgrading cluster's hotfix.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterInPlaceUpgradeProperties"
+        }
+      ],
       "x-ms-discriminator-value": "HotfixUpgrade"
+    },
+    "ClusterPatchVersionUpgradeProperties": {
+      "description": "Properties of upgrading cluster's patch version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterInPlaceUpgradeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PatchVersionUpgrade"
+    },
+    "ClusterUpgradeHistoryListResult": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "Represents a list of cluster upgrade history.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of cluster upgrade history.",
+          "items": {
+            "$ref": "#/definitions/ClusterUpgradeHistory"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterUpgradeHistory": {
+      "type": "object",
+      "description": "Cluster upgrade history.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterUpgradeHistoryProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterUpgradeHistoryProperties": {
+      "description": "Properties of cluster upgrade history.",
+      "type": "object",
+      "required": [
+        "upgradeType",
+        "utcTime",
+        "upgradeResult"
+      ],
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "HotfixUpgrade",
+            "HotfixUpgradeRollback",
+            "PatchVersionUpgrade",
+            "PatchVersionUpgradeRollback"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterUpgradeHistoryType",
+            "modelAsString": true
+          }
+        },
+        "utcTime": {
+          "description": "Time when created this upgrade history.",
+          "type": "string"
+        },
+        "upgradeResult": {
+          "description": "Result of this upgrade.",
+          "enum": [
+            "Succeed",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterUpgradeHistoryUpgradeResultType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType"
+    },
+    "ClusterInPlaceUpgradeHistoryProperties": {
+      "type": "object",
+      "description": "Cluster in-place upgrade history properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterUpgradeHistoryProperties"
+        }
+      ],
+      "properties": {
+        "sourceClusterVersion": {
+          "$ref": "#/definitions/ThreePartVersionPattern"
+        },
+        "sourceOssVersion": {
+          "$ref": "#/definitions/ThreePartVersionPattern"
+        },
+        "sourceBuildNumber": {
+          "type": "string",
+          "description": "Source build number."
+        },
+        "targetClusterVersion": {
+          "$ref": "#/definitions/ThreePartVersionPattern"
+        },
+        "targetOssVersion": {
+          "$ref": "#/definitions/ThreePartVersionPattern"
+        },
+        "targetBuildNumber": {
+          "type": "string",
+          "description": "Target build number."
+        },
+        "componentName": {
+          "type": "string",
+          "description": "Component name to upgrade."
+        },
+        "severity": {
+          "description": "Severity of this upgrade.",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterUpgradeHistorySeverityType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ClusterHotfixUpgradeHistoryProperties": {
+      "type": "object",
+      "description": "Cluster hotfix upgrade history properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterInPlaceUpgradeHistoryProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "HotfixUpgrade"
+    },
+    "ClusterHotfixUpgradeRollbackHistoryProperties": {
+      "type": "object",
+      "description": "Cluster hotfix upgrade rollback history properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterInPlaceUpgradeHistoryProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "HotfixUpgradeRollback"
+    },
+    "ClusterPatchVersionUpgradeHistoryProperties": {
+      "type": "object",
+      "description": "Cluster patch version upgrade history properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterInPlaceUpgradeHistoryProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PatchVersionUpgrade"
+    },
+    "ClusterPatchVersionUpgradeRollbackHistoryProperties": {
+      "type": "object",
+      "description": "Cluster patch version upgrade rollback history properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterInPlaceUpgradeHistoryProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PatchVersionUpgradeRollback"
+    },
+    "ClusterAksPatchUpgradeHistoryProperties": {
+      "type": "object",
+      "description": "Cluster aks patch upgrade history properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterUpgradeHistoryProperties"
+        }
+      ],
+      "properties": {
+        "originalVersion": {
+          "type": "string",
+          "description": "Version before update."
+        },
+        "newVersion": {
+          "type": "string",
+          "description": "Version going to update."
+        }
+      },
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterUpgradeRollback": {
+      "description": "Cluster Upgrade.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterUpgradeRollbackProperties"
+        }
+      }
+    },
+    "ClusterUpgradeRollbackProperties": {
+      "description": "Properties for manual rollback of cluster's upgrade.",
+      "type": "object",
+      "properties": {
+        "upgradeHistory": {
+          "description": "A specific upgrade history to rollback",
+          "type": "string"
+        }
+      },
+      "required": [
+        "upgradeHistory"
+      ]
+    },
+    "ClusterLibraryManagementOperation": {
+      "description": "Library management operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterLibraryManagementOperationProperties"
+        }
+      }
+    },
+    "ClusterLibraryManagementOperationProperties": {
+      "description": "Properties of a library management operation.",
+      "type": "object",
+      "required": [
+        "action",
+        "libraries"
+      ],
+      "properties": {
+        "action": {
+          "description": "The library management action.",
+          "enum": [
+            "Install",
+            "Uninstall"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LibraryManagementAction",
+            "modelAsString": true
+          }
+        },
+        "libraries": {
+          "type": "array",
+          "description": "The libraries to be installed/updated/uninstalled.",
+          "items": {
+            "$ref": "#/definitions/ClusterLibrary"
+          }
+        }
+      }
+    },
+    "ClusterLibraryList": {
+      "description": "Collection of libraries in the cluster.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of libraries in the cluster.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ClusterLibrary"
+          }
+        },
+        "nextLink": {
+          "description": "The url of next result page.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterLibrary": {
+      "description": "Libraries in the cluster.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterLibraryProperties"
+        }
+      }
+    },
+    "ClusterLibraryProperties": {
+      "description": "Properties of a library in the cluster.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the library.",
+          "enum": [
+            "pypi",
+            "maven",
+            "storage"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        },
+        "remarks": {
+          "description": "Remark of the library.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "Timestamp of the latest library management operation.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the library.",
+          "enum": [
+            "INSTALLING",
+            "INSTALLED",
+            "INSTALL_FAILED",
+            "UNINSTALLING",
+            "UNINSTALLED",
+            "UNINSTALL_FAILED"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message of the library operation when a failure occurs.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "PyPiLibraryProperties": {
+      "description": "Properties of a PyPi library in the cluster.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterLibraryProperties"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the PyPi package.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the PyPi package.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "pypi"
+    },
+    "MavenLibraryProperties": {
+      "description": "Properties of a Maven library in the cluster.",
+      "type": "object",
+      "required": [
+        "name",
+        "groupId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterLibraryProperties"
+        }
+      ],
+      "properties": {
+        "groupId": {
+          "description": "GroupId of the maven package.",
+          "type": "string"
+        },
+        "name": {
+          "description": "ArtifactId of the Maven package.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the Maven package.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "maven"
+    },
+    "StorageLibraryProperties": {
+      "description": "Properties of a library stored in the remote storage.",
+      "type": "object",
+      "required": [
+        "storagePathUrl"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterLibraryProperties"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the storage library.",
+          "type": "string",
+          "readOnly": true
+        },
+        "storagePathUrl": {
+          "description": "Path of the library in the remote storage.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "storage"
     }
   },
   "parameters": {
