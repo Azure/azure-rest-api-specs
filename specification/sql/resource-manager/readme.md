@@ -46,6 +46,7 @@ input-file:
   - Microsoft.Sql/preview/2024-02-01-preview/DatabaseAdvancedThreatProtectionSettings.json
   - Microsoft.Sql/preview/2024-02-01-preview/DatabaseAdvisors.json
   - Microsoft.Sql/preview/2024-02-01-preview/DatabaseAutomaticTuning.json
+  - Microsoft.Sql/preview/2024-02-01-preview/DatabaseBilling.json
   - Microsoft.Sql/preview/2024-02-01-preview/DatabaseColumns.json
   - Microsoft.Sql/preview/2024-02-01-preview/DatabaseEncryptionProtectorRevalidate.json
   - Microsoft.Sql/preview/2024-02-01-preview/DatabaseEncryptionProtectorRevert.json

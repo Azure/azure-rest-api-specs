@@ -1251,6 +1251,10 @@
             "modelAsString": true
           }
         },
+        "hyperscaleBillingVersion": {
+          "$ref": "#/definitions/DatabaseBillingVersion",
+          "readOnly": true
+        },
         "maxLogSizeBytes": {
           "format": "int64",
           "description": "The max log size for this database.",
@@ -2170,6 +2174,18 @@
           "description": "The target ID for the resource",
           "type": "string"
         }
+      }
+    },
+    "DatabaseBillingVersion": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The pricing model to use when calculating billing for this database.",
+      "enum": [
+        1,
+        2
+      ],
+      "x-ms-enum": {
+        "name": "HyperscaleBillingVersion"
       }
     }
   },
