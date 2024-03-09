@@ -739,6 +739,7 @@
         "summary": "Put the GroupQuota requests for a specific ResourceProvider/Location/Resource.",
         "description": "Put the GroupQuota requests for a specific ResourceProvider/Location/Resource. the location and resourceName (\"name\": {\"value\" : \"resourceName\") properties are specified in the request body. Only 1 resource quota can be requested.\nUse the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.",
         "operationId": "GroupQuotaLimitsRequests_Put",
+        "x-ms-azure-resource": true,
         "x-ms-examples": {
           "GroupQuotaLimitsRequests_List": {
             "$ref": "./examples/GroupQuotaLimitsRequests/PutGroupQuotaLimitsRequests-Compute.json"
@@ -2037,6 +2038,11 @@
     "SubmittedResourceRequestStatus": {
       "type": "object",
       "description": "Status of a single GroupQuota request.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "requestedResource": {
           "description": "Requested Resource.",
