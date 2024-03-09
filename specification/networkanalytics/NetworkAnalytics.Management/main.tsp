@@ -7,7 +7,7 @@ import "./models/common/adxSkuName.tsp";
 import "./models/aoi/dataLakeHouse.tsp";
 import "./models/aoi/networkAnalyticsProducts.tsp";
 import "./models/aoi/dataConnector.tsp";
-import "./models/aoi/dataProductsCatalog.tsp";
+import "./models/aoi/dataproductsCatalog.tsp";
 import "./models/aoi/dataType.tsp";
 import "./models/aoi/dataProduct.tsp";
 import "./models/common/sharedModels.tsp";
