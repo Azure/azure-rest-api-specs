@@ -61,7 +61,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
@@ -103,7 +103,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CapacityListResult"
             }
@@ -145,7 +145,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CapacityListResult"
             }
@@ -195,7 +195,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Capacity"
             }
@@ -309,7 +309,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Capacity"
             }
@@ -357,7 +357,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -428,7 +428,19 @@
           "format": "int64",
           "description": "No of Units",
           "minimum": 1,
-          "maximum": 999
+          "maximum": 100
+        },
+        "crossGeoCompute": {
+          "$ref": "#/definitions/IsAllowed",
+          "description": "Is cross geo compute allowed"
+        },
+        "geo": {
+          "type": "string",
+          "description": "Geo location of the capacity unit",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -437,7 +449,9 @@
         }
       },
       "required": [
-        "numberOfUnits"
+        "numberOfUnits",
+        "crossGeoCompute",
+        "geo"
       ]
     },
     "CapacityUpdate": {
@@ -466,8 +480,36 @@
           "format": "int64",
           "description": "No of Units",
           "minimum": 1,
-          "maximum": 999
+          "maximum": 100
+        },
+        "crossGeoCompute": {
+          "$ref": "#/definitions/IsAllowed",
+          "description": "Is cross geo compute allowed"
         }
+      }
+    },
+    "IsAllowed": {
+      "type": "string",
+      "description": "Enum to represent Allowed or NotAllowed",
+      "enum": [
+        "Allowed",
+        "NotAllowed"
+      ],
+      "x-ms-enum": {
+        "name": "IsAllowed",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allowed",
+            "value": "Allowed",
+            "description": "Allowed to do"
+          },
+          {
+            "name": "NotAllowed",
+            "value": "NotAllowed",
+            "description": "Not allowed to do"
+          }
+        ]
       }
     },
     "ProvisioningState": {

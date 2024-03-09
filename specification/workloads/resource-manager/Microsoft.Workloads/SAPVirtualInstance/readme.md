@@ -27,14 +27,25 @@ These are the global settings for the workloads.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-10
+tag: package-preview-2024-02
 ```
 
+
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - preview/2024-02-01-preview/SAPVirtualInstance.json
+  - ../common-types/v3/commonTypes.json
+  - ../operations/preview/2024-02-01-preview/operations.json  
+```
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - preview/2023-10-01-preview/SAPVirtualInstance.json
   - ../common-types/v1/commonTypes.json
@@ -45,7 +56,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-10-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-10-15-preview'
+``` yaml $(tag) == 'package-preview-2022-10-15-preview'
 input-file:
   - preview/2022-10-01-preview/SAPVirtualInstance.json
   - ../common-types/v1/commonTypes.json

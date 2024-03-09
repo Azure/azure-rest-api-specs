@@ -62,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/JobListResult"
             }
@@ -110,7 +110,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Job"
             }
@@ -131,7 +131,11 @@
       "put": {
         "operationId": "Jobs_CreateOrUpdate",
         "tags": [
-          "Jobs"
+          "AddServer",
+          "RepairServer",
+          "ResumeServer",
+          "PauseServer",
+          "AddNetworkIntent"
         ],
         "description": "Create a Job",
         "parameters": [
@@ -162,13 +166,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Job' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Job"
             }
           },
           "201": {
-            "description": "Resource 'Job' create operation succeeded",
+            "description": "Resource successfully created.",
             "schema": {
               "$ref": "#/definitions/Job"
             },
@@ -199,6 +203,9 @@
           },
           "CreatePauseServerJob": {
             "$ref": "./examples/CreatePauseServerJob.json"
+          },
+          "CreateAddNetworkIntentJob": {
+            "$ref": "./examples/CreateAddNetworkIntentJob.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -267,6 +274,56 @@
     }
   },
   "definitions": {
+    "AddNetworkIntentJob": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AddNetworkIntentJobProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "x-ms-discriminator-value": "AddNetworkIntent"
+    },
+    "AddNetworkIntentJobProperties": {
+      "type": "object",
+      "properties": {
+        "hostNetwork": {
+          "$ref": "./deploymentSettings.json#/definitions/HostNetwork"
+        },
+        "deploymentMode": {
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
+          "description": "Deployment mode to trigger action plan.",
+          "default": "Deploy"
+        },
+        "secrets": {
+          "type": "array",
+          "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
+          "items": {
+            "$ref": "./hciCommon.json#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        },
+        "reportedProperties": {
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
+          "description": "Reported Properties for admin action triggered from cloud.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
+      ]
+    },
     "AddServerJob": {
       "description": "AddServer job to add node to AzureStackHCI cluster.",
       "type": "object",
@@ -282,7 +339,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AddServer"
     },
     "AddServerJobProperties": {
       "type": "object",
@@ -293,7 +351,7 @@
           "description": "Name of server to be added to Azure stack HCI Cluster."
         },
         "deploymentMode": {
-          "$ref": "./common.json#/definitions/DeploymentMode",
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
           "description": "Deployment mode to trigger action plan.",
           "default": "Deploy"
         },
@@ -305,20 +363,15 @@
           "type": "array",
           "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
           "items": {
-            "$ref": "./common.json#/definitions/EceDeploymentSecrets"
+            "$ref": "./hciCommon.json#/definitions/EceDeploymentSecrets"
           },
           "x-ms-identifiers": [
             "secretName"
           ]
         },
-        "validationStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "validation status of admin action for HCI cluster.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "deployment status of admin action for HCI cluster.",
+        "reportedProperties": {
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
+          "description": "Reported Properties for admin action triggered from cloud.",
           "readOnly": true
         }
       },
@@ -329,23 +382,25 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ],
-      "x-ms-discriminator-value": "AddServer"
+      ]
     },
     "Job": {
       "type": "object",
       "description": "Jobs resource",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/JobsProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
+        "kind": {
+          "$ref": "#/definitions/JobKind",
+          "description": "Job kind to support polymorphic resource.",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         }
       },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -373,7 +428,7 @@
         "value"
       ]
     },
-    "JobType": {
+    "JobKind": {
       "type": "string",
       "description": "Job Type supported.",
       "enum": [
@@ -381,10 +436,11 @@
         "RepairServer",
         "ResumeServer",
         "PauseServer",
+        "AddNetworkIntent",
         "SetInformation"
       ],
       "x-ms-enum": {
-        "name": "JobType",
+        "name": "JobKind",
         "modelAsString": true,
         "values": [
           {
@@ -408,6 +464,11 @@
             "description": "PauseServer job type to pause given node in AzureStackHCI cluster."
           },
           {
+            "name": "AddNetworkIntent",
+            "value": "AddNetworkIntent",
+            "description": "AddNetworkIntent job type to update storage, network, management intent for AzureStackHCI cluster."
+          },
+          {
             "name": "SetInformation",
             "value": "SetInformation",
             "description": "SetInformation job type to set deployment information of AzureStackHCI cluster."
@@ -419,16 +480,8 @@
       "type": "object",
       "description": "Job properties",
       "properties": {
-        "jobType": {
-          "$ref": "#/definitions/JobType",
-          "description": "Job Type to support polymorphic resource.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
+          "$ref": "./hciCommon.json#/definitions/ProvisioningState",
           "description": "Job provisioning state",
           "readOnly": true
         },
@@ -457,9 +510,10 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of Azure Stack HCI cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of Azure Stack HCI cluster for which job will be triggered.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id"
           },
           "x-ms-identifiers": [],
           "x-ms-mutability": [
@@ -477,11 +531,7 @@
           "description": "Status of AzureStackHCI Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
           "readOnly": true
         }
-      },
-      "discriminator": "jobType",
-      "required": [
-        "jobType"
-      ]
+      }
     },
     "Parameters": {
       "type": "object",
@@ -512,7 +562,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "PauseServer"
     },
     "PauseServerJobProperties": {
       "type": "object",
@@ -523,18 +574,13 @@
           "description": "Trigger pause action plan for given server name in Azure stack HCI Cluster."
         },
         "deploymentMode": {
-          "$ref": "./common.json#/definitions/DeploymentMode",
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
           "description": "Deployment mode to trigger action plan.",
           "default": "Deploy"
         },
-        "validationStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "validation status of admin action for HCI cluster.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "deployment status of admin action for HCI cluster.",
+        "reportedProperties": {
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
+          "description": "Reported Properties for admin action triggered from cloud.",
           "readOnly": true
         }
       },
@@ -545,8 +591,7 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ],
-      "x-ms-discriminator-value": "PauseServer"
+      ]
     },
     "RepairServerJob": {
       "type": "object",
@@ -563,7 +608,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "RepairServer"
     },
     "RepairServerJobProperties": {
       "type": "object",
@@ -574,7 +620,7 @@
           "description": "Name of server to be repaired in Azure stack HCI Cluster."
         },
         "deploymentMode": {
-          "$ref": "./common.json#/definitions/DeploymentMode",
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
           "description": "Deployment mode to trigger action plan.",
           "default": "Deploy"
         },
@@ -582,20 +628,15 @@
           "type": "array",
           "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
           "items": {
-            "$ref": "./common.json#/definitions/EceDeploymentSecrets"
+            "$ref": "./hciCommon.json#/definitions/EceDeploymentSecrets"
           },
           "x-ms-identifiers": [
             "secretName"
           ]
         },
-        "validationStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "validation status of admin action for HCI cluster.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "deployment status of admin action for HCI cluster.",
+        "reportedProperties": {
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
+          "description": "Reported Properties for admin action triggered from cloud.",
           "readOnly": true
         }
       },
@@ -606,8 +647,7 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ],
-      "x-ms-discriminator-value": "RepairServer"
+      ]
     },
     "ResumeServerJob": {
       "description": "ResumeServer job to resume given node in AzureStackHCI cluster.",
@@ -624,7 +664,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ResumeServer"
     },
     "ResumeServerJobProperties": {
       "type": "object",
@@ -635,18 +676,13 @@
           "description": "Trigger resume action plan for given server name in Azure stack HCI Cluster."
         },
         "deploymentMode": {
-          "$ref": "./common.json#/definitions/DeploymentMode",
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
           "description": "Deployment mode to trigger action plan.",
           "default": "Deploy"
         },
-        "validationStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "validation status of admin action for HCI cluster.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "deployment status of admin action for HCI cluster.",
+        "reportedProperties": {
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
+          "description": "Reported Properties for admin action triggered from cloud.",
           "readOnly": true
         }
       },
@@ -657,8 +693,7 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ],
-      "x-ms-discriminator-value": "ResumeServer"
+      ]
     },
     "SetInformationJob": {
       "type": "object",
@@ -675,7 +710,8 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "SetInformation"
     },
     "SetInformationJobProperties": {
       "type": "object",
@@ -722,18 +758,13 @@
           "description": "A string to specify the bandwidth percentage to be used for SMB."
         },
         "deploymentMode": {
-          "$ref": "./common.json#/definitions/DeploymentMode",
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
           "description": "Deployment mode to trigger action plan.",
           "default": "Deploy"
         },
-        "validationStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "validation status of admin action for HCI cluster.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "deployment status of admin action for HCI cluster.",
+        "reportedProperties": {
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
+          "description": "Reported Properties for admin action triggered from cloud.",
           "readOnly": true
         }
       },
@@ -741,8 +772,7 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ],
-      "x-ms-discriminator-value": "SetInformation"
+      ]
     }
   },
   "parameters": {
