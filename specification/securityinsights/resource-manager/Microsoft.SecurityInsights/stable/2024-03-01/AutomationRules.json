@@ -1248,7 +1248,18 @@
       "properties": {
         "incidentArmId": {
           "description": "The incident id to associate the entity with.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "Extension"
+                ],
+                "type": "Microsoft.SecurityInsights/incidents"
+              }
+            ]
+          }
         },
         "tenantId": {
           "format": "uuid",
@@ -1257,7 +1268,18 @@
         },
         "logicAppsResourceId": {
           "description": "The resource id of the playbook resource.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Logic/workflows"
+              },
+              {
+                "type": "Microsoft.Web/sites"
+              }
+            ]
+          }
         }
       }
     },
@@ -1308,7 +1330,18 @@
         },
         "logicAppsResourceId": {
           "description": "The resource id of the playbook resource.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Logic/workflows"
+              },
+              {
+                "type": "Microsoft.Web/sites"
+              }
+            ]
+          }
         }
       }
     },
@@ -1320,7 +1353,18 @@
       "properties": {
         "logicAppResourceId": {
           "description": "The resource id of the playbook resource.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Logic/workflows"
+              },
+              {
+                "type": "Microsoft.Web/sites"
+              }
+            ]
+          }
         },
         "tenantId": {
           "format": "uuid",
