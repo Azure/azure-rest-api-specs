@@ -1700,7 +1700,12 @@
     },
     "QuotaAllocationRequestBase": {
       "type": "object",
-      "description": "The new quota limit requested.",
+      "description": "The new GroupQuota limit requested.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "type": "object",
