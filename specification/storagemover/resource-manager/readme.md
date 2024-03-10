@@ -27,18 +27,27 @@ These are the global settings for the storagemover.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-10
+tag: package-preview-2024-05
 ```
 
 
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.StorageMover/preview/2024-05-01-preview/storagemover.json
+```
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-10'
+``` yaml $(tag) == 'package-2023-10'
 input-file:
   - Microsoft.StorageMover/stable/2023-10-01/storagemover.json
 ```
+
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
