@@ -259,7 +259,7 @@
             "schema": {
               "$ref": "#/definitions/QuotaBucketRequest"
             },
-            "x-ms-client-name": "body"
+            "x-ms-client-name": "QuotaBucketRequest"
           }
         ],
         "responses": {
@@ -403,7 +403,7 @@
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             },
-            "x-ms-client-name": "resource"
+            "x-ms-client-name": "LoadTestResource"
           }
         ],
         "responses": {
@@ -479,7 +479,7 @@
             "schema": {
               "$ref": "#/definitions/LoadTestResourcePatchRequestBody"
             },
-            "x-ms-client-name": "properties"
+            "x-ms-client-name": "LoadTestResourcePatchRequestBody"
           }
         ],
         "responses": {
@@ -546,9 +546,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -628,6 +625,9 @@
           "Lists the endpoints that agents may call as part of load testing.": {
             "$ref": "./examples/LoadTests_ListOutboundNetworkDependenciesEndpoints.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -816,35 +816,20 @@
           "description": "The managed service identities assigned to this resource."
         },
         "properties": {
-          "$ref": "#/definitions/LoadTestResourcePatchRequestBodyProperties",
+          "type": "object",
           "description": "LoadTest resource properties.",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of the resource.",
+              "maxLength": 512
+            },
+            "encryption": {
+              "$ref": "#/definitions/EncryptionProperties",
+              "description": "CMK Encryption property."
+            }
+          },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "LoadTestResourcePatchRequestBodyProperties": {
-      "type": "object",
-      "description": "LoadTest resource properties.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the resource.",
-          "maxLength": 512
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ResourceState",
-          "description": "Resource provisioning state.",
-          "readOnly": true
-        },
-        "dataPlaneURI": {
-          "type": "string",
-          "description": "Resource data plane URI.",
-          "maxLength": 2083,
-          "readOnly": true
-        },
-        "encryption": {
-          "$ref": "#/definitions/EncryptionProperties",
-          "description": "CMK Encryption property."
         }
       }
     },
@@ -1045,7 +1030,8 @@
             "description": "Resource creation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "type": {
       "type": "string",

@@ -39,7 +39,7 @@ model LoadTestResourcePatchRequestBody {
 
   @doc("LoadTest resource properties.")
   @extension("x-ms-client-flatten", true)
-  properties?: LoadTestResourcePatchRequestBodyProperties;
+  properties?: UpdateableProperties<LoadTestResourcePatchRequestBodyProperties>;
 }
 
 @doc("Resources provisioning states.")

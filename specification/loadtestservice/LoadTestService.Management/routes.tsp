@@ -17,33 +17,33 @@ namespace Microsoft.LoadTestService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@projectedName(LoadTests.createOrUpdate::parameters.resource,
-  "client",
+@@encodedName(LoadTests.createOrUpdate::parameters.resource,
+  "application/json",
   "LoadTestResource"
 );
 
-@@projectedName(LoadTests.createOrUpdate::parameters.resource,
-  "json",
+@@OpenAPI.extension(LoadTests.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
   "LoadTestResource"
 );
 
-@@projectedName(LoadTests.update::parameters.properties,
-  "client",
+@@encodedName(LoadTests.update::parameters.properties,
+  "application/json",
   "LoadTestResourcePatchRequestBody"
 );
 
-@@projectedName(LoadTests.update::parameters.properties,
-  "json",
+@@OpenAPI.extension(LoadTests.update::parameters.properties,
+  "x-ms-client-name",
   "LoadTestResourcePatchRequestBody"
 );
 
-@@projectedName(Quotas.checkAvailability::parameters.body,
-  "json",
+@@encodedName(Quotas.checkAvailability::parameters.body,
+  "application/json",
   "QuotaBucketRequest"
 );
 
-@@projectedName(Quotas.checkAvailability::parameters.body,
-  "client",
+@@OpenAPI.extension(Quotas.checkAvailability::parameters.body,
+  "x-ms-client-name",
   "QuotaBucketRequest"
 );
 
@@ -82,11 +82,24 @@ interface LoadTests {
     LroHeaders = AzureAsyncOperationHeader
   >;
 
-  delete is ArmResourceDeleteAsync<LoadTestResource>;
+  // update is ArmResourcePatchAsync<
+  //   LoadTestResource,
+  //   LoadTestProperties,
+  //   LroHeaders = AzureAsyncOperationHeader>;
+
+  // delete is ArmResourceDeleteWithAsync<LoadTestResource>;
+
+  delete is ArmResourceDeleteWithoutOkAsync<LoadTestResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationID already published."
   @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
   @doc("Lists the endpoints that agents may call as part of load testing.")
+  @extension(
+    "x-ms-pageable",
+    {
+      nextLinkName: "nextLink",
+    }
+  )
   outboundNetworkDependenciesEndpoints is CustomOperations.ArmResourceActionSyncCustomGet<
     LoadTestResource,
     void,
