@@ -29,19 +29,6 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   ...ManagedServiceIdentity;
 }
 
-@doc("LoadTest resource patch request body.")
-model LoadTestResourcePatchRequestBody {
-  @doc("Resource tags.")
-  @extension("x-ms-nullable", true)
-  tags?: Record<string>;
-
-  ...ManagedServiceIdentity;
-
-  @doc("LoadTest resource properties.")
-  @extension("x-ms-client-flatten", true)
-  properties?: UpdateableProperties<LoadTestResourcePatchRequestBodyProperties>;
-}
-
 @doc("Resources provisioning states.")
 enum ResourceState {
   @doc("Deleted state.")
@@ -253,54 +240,11 @@ model OutboundEnvironmentEndpointCollection {
   @visibility("read")
   @doc("The collection of outbound network dependency endpoints returned by the listing operation.")
   @extension("x-ms-identifiers", [])
-  value?: OutboundEnvironmentEndpoint[];
+  value: OutboundEnvironmentEndpoint[];
 
   @doc("The continuation token.")
   @nextLink
   nextLink?: ResourceLocation<OutboundEnvironmentEndpoint>;
-}
-
-// duplicate to remove SDK breaking changes
-@doc("LoadTest resource properties.")
-model LoadTestResourcePatchRequestBodyProperties {
-  @maxLength(512)
-  @doc("Description of the resource.")
-  description?: string;
-
-  @visibility("read")
-  @doc("Resource provisioning state.")
-  provisioningState?: ResourceState;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "URI is an abbervation and should be upper case"
-  @visibility("read")
-  @maxLength(2083)
-  @doc("Resource data plane URI.")
-  dataPlaneURI?: string;
-
-  @doc("CMK Encryption property.")
-  encryption?: EncryptionProperties;
-}
-
-@doc("The response of a {name} list operation.", LoadTestResource)
-model LoadTestResourcePageList {
-  @doc("The {name} items on this page", LoadTestResource)
-  @items
-  value?: LoadTestResource[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<LoadTestResource>;
-}
-
-@doc("The response of a {name} list operation.", QuotaResource)
-model QuotaResourceList {
-  @doc("The {name} items on this page", QuotaResource)
-  @items
-  value?: QuotaResource[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<QuotaResource>;
 }
 
 @doc("URL to query for status of the operation.")

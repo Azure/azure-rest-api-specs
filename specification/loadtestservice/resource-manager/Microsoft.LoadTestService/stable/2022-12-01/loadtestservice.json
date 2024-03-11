@@ -103,9 +103,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LoadTestResourcePageList"
+              "$ref": "#/definitions/LoadTestResourceListResult"
             }
           },
           "default": {
@@ -149,9 +149,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/QuotaResourceList"
+              "$ref": "#/definitions/QuotaResourceListResult"
             }
           },
           "default": {
@@ -303,9 +303,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LoadTestResourcePageList"
+              "$ref": "#/definitions/LoadTestResourceListResult"
             }
           },
           "default": {
@@ -477,7 +477,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LoadTestResourcePatchRequestBody"
+              "$ref": "#/definitions/LoadTestResourceUpdate"
             },
             "x-ms-client-name": "LoadTestResourcePatchRequestBody"
           }
@@ -781,7 +781,7 @@
         }
       ]
     },
-    "LoadTestResourcePageList": {
+    "LoadTestResourceListResult": {
       "type": "object",
       "description": "The response of a LoadTestResource list operation.",
       "properties": {
@@ -797,39 +797,44 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
-    "LoadTestResourcePatchRequestBody": {
+    "LoadTestResourceUpdate": {
       "type": "object",
-      "description": "LoadTest resource patch request body.",
+      "description": "The type used for update operations of the LoadTestResource.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-nullable": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          }
         },
         "properties": {
-          "type": "object",
-          "description": "LoadTest resource properties.",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "Description of the resource.",
-              "maxLength": 512
-            },
-            "encryption": {
-              "$ref": "#/definitions/EncryptionProperties",
-              "description": "CMK Encryption property."
-            }
-          },
+          "$ref": "#/definitions/LoadTestResourceUpdateProperties",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LoadTestResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the LoadTestResource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the resource.",
+          "maxLength": 512
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperties",
+          "description": "CMK Encryption property."
         }
       }
     },
@@ -873,7 +878,10 @@
           "format": "uri",
           "description": "The continuation token."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "QuotaBucketRequest": {
       "type": "object",
@@ -955,7 +963,7 @@
         }
       ]
     },
-    "QuotaResourceList": {
+    "QuotaResourceListResult": {
       "type": "object",
       "description": "The response of a QuotaResource list operation.",
       "properties": {
@@ -971,7 +979,10 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "QuotaResourceProperties": {
       "type": "object",

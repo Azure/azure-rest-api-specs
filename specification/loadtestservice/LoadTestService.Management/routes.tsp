@@ -49,25 +49,13 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
 interface LoadTests {
-  @extension(
-    "x-ms-pageable",
-    {
-      nextLinkName: "nextLink",
-    }
-  )
+  
   listBySubscription is ArmListBySubscription<
-    LoadTestResource,
-    Response = LoadTestResourcePageList
+    LoadTestResource
   >;
-  @extension(
-    "x-ms-pageable",
-    {
-      nextLinkName: "nextLink",
-    }
-  )
+  
   listByResourceGroup is ArmResourceListByParent<
-    LoadTestResource,
-    Response = LoadTestResourcePageList
+    LoadTestResource
   >;
   get is ArmResourceRead<LoadTestResource>;
 
@@ -76,18 +64,10 @@ interface LoadTests {
     LroHeaders = AzureAsyncOperationHeader
   >;
 
-  update is ArmCustomPatchAsync<
+  update is ArmResourcePatchAsync<
     LoadTestResource,
-    LoadTestResourcePatchRequestBody,
-    LroHeaders = AzureAsyncOperationHeader
-  >;
-
-  // update is ArmResourcePatchAsync<
-  //   LoadTestResource,
-  //   LoadTestProperties,
-  //   LroHeaders = AzureAsyncOperationHeader>;
-
-  // delete is ArmResourceDeleteWithAsync<LoadTestResource>;
+    LoadTestProperties,
+    LroHeaders = AzureAsyncOperationHeader>;
 
   delete is ArmResourceDeleteWithoutOkAsync<LoadTestResource>;
 
@@ -112,14 +92,8 @@ interface Quotas {
   @doc("Get the available quota for a quota bucket per region per subscription.")
   get is ArmResourceRead<QuotaResource>;
 
-  @extension(
-    "x-ms-pageable",
-    {
-      nextLinkName: "nextLink",
-    }
-  )
   @doc("List quotas for a given subscription Id.")
-  list is ArmListBySubscription<QuotaResource, Response = QuotaResourceList>;
+  list is ArmListBySubscription<QuotaResource>;
 
   @doc("Check Quota Availability on quota bucket per region per subscription.")
   checkAvailability is ArmResourceActionSync<
