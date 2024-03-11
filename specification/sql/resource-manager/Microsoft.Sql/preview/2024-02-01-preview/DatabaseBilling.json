@@ -1,0 +1,134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-02-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/billing/servers/{serverName}/databases/{databaseName}": {
+      "put": {
+        "description": "Request a specific billing version for a database.",
+        "operationId": "DatabaseBillingVersion_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The billing version was already set.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBillingVersionResponse"
+            }
+          },
+          "201": {
+            "description": "Successfully updated database billing version.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBillingVersionResponse"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidBillingVersion - Currently only moving from version 1 to 2 is supported.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceGroupNotFound - The resource group provided was not found.* 404 DatabaseDoesNotExist - The requested database was not found\n\n 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "DatabaseBilling"
+        ],
+        "x-ms-examples": {
+          "Request a specific billing version for a database.": {
+            "$ref": "./examples/UpdateBillingVersion.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "pattern": "^[-\\w\\._]+$"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "pattern": "^[-\\w\\._]+$"
+    }
+  },
+  "definitions": {
+    "DatabaseBillingVersion": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The pricing model to use when calculating billing for this database.",
+      "enum": [
+        1,
+        2
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseBillingVersion"
+      }
+    },
+    "DatabaseBillingVersionProperties": {
+      "description": "Properties of a billing version response.",
+      "type": "object",
+      "properties": {
+        "billingVersion": {
+          "$ref": "#/definitions/DatabaseBillingVersion"
+        }
+      }
+    },
+    "DatabaseBillingVersionResponse": {
+      "description": "A response containing a billing version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseBillingVersionProperties",
+          "description": "Billing Version response properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "readOnly": true,
+      "x-ms-azure-resource": true
+    }
+  }
+}
