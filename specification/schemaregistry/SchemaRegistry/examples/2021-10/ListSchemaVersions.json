@@ -1,4 +1,6 @@
 {
+  "operationId": "ListSchemaVersions",
+  "title": "List Schema Versions",
   "parameters": {
     "endpoint": "mynamespace.servicebus.windows.net",
     "groupName": "sample-sr-group",
@@ -8,11 +10,12 @@
   "responses": {
     "200": {
       "body": {
-        "schemaVersions": [
+        "Value": [
           0,
           1,
           2
-        ]
+        ],
+        "NextLink": "https://mynamespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-schema-name/versions?api-version=2021-10&skip=3"
       }
     }
   }

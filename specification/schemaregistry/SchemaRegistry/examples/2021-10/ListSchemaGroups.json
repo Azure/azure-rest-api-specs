@@ -1,4 +1,6 @@
 {
+  "operationId": "ListSchemaGroups",
+  "title": "List Schema Groups",
   "parameters": {
     "endpoint": "mynamespace.servicebus.windows.net",
     "api-version": "2021-10"
@@ -6,11 +8,12 @@
   "responses": {
     "200": {
       "body": {
-        "schemaGroups": [
+        "Value": [
           "group1",
           "group2",
           "group3"
-        ]
+        ],
+        "NextLink": "https://mynamespace.servicebus.windows.net/$schemagroups/?api-version=2021-10&skip=3"
       }
     }
   }
