@@ -74,6 +74,8 @@ interface PrivateClouds {
     placementPolicy: PrivateCloud;
   } | ErrorResponse;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<PrivateCloud>;
 
   @doc("Rotate the vCenter password")
@@ -138,6 +140,8 @@ interface Clusters {
     cluster: Cluster;
   } | ErrorResponse;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<Cluster>;
 
   @doc("List hosts by zone in a cluster")
@@ -163,6 +167,8 @@ interface Datastores {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Datastore>;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<Datastore>;
 }
 
@@ -210,6 +216,8 @@ interface Authorizations {
     BaseParameters<PrivateCloud>
   >;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<ExpressRouteAuthorization>;
 }
 
@@ -232,6 +240,8 @@ interface GlobalReachConnections {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<GlobalReachConnection>;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<GlobalReachConnection>;
 }
 
@@ -277,6 +287,8 @@ interface WorkloadNetworkSegments {
     WorkloadNetworkSegmentUpdate
   >;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteSegment")
   deleteSegment is ArmResourceDeleteAsync<WorkloadNetworkSegment>;
@@ -328,6 +340,8 @@ interface WorkloadNetworkDhcpConfigurations {
   @operationId("WorkloadNetworks_UpdateDhcp")
   update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcpUpdate>;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteDhcp")
   delete is ArmResourceDeleteAsync<WorkloadNetworkDhcp>;
@@ -714,6 +728,8 @@ interface CloudLinks {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudLink>;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<CloudLink>;
 }
 
@@ -736,6 +752,8 @@ interface Addons {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Addon>;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<Addon>;
 }
 
@@ -812,6 +830,8 @@ interface PlacementPolicies {
     placementPolicy: PlacementPolicy;
   } | ErrorResponse;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<PlacementPolicy>;
 }
 
@@ -852,6 +872,8 @@ interface ScriptExecutions {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ScriptExecution>;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<ScriptExecution>;
 
   @doc("Return the logs for a script execution resource")
@@ -892,6 +914,8 @@ interface IscsiPaths {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<IscsiPath>;
 
+  #suppress "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<IscsiPath>;
 }
 
