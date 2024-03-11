@@ -3071,7 +3071,7 @@
             "create"
           ]
         },
-        "isMtlsConnectionRequired": {
+                "isMtlsConnectionRequired": {
           "type": "boolean",
           "description": "Specifies if the Autonomous Database requires mTLS connections.",
           "x-ms-mutability": [
@@ -3772,7 +3772,7 @@
       ],
       "x-ms-discriminator-value": "Regular"
     },
-    "AutonomousDatabaseUpdate": {
+        "AutonomousDatabaseUpdate": {
       "type": "object",
       "description": "The type used for update operations of the AutonomousDatabase.",
       "properties": {
@@ -4995,6 +4995,11 @@
           "description": "HTTPS link to OCI resources exposed to Azure Customer via Azure Interface.",
           "readOnly": true
         },
+        "nsgUrl": {
+          "type": "string",
+          "description": "HTTPS link to OCI Network Security Group exposed to Azure Customer via Azure Interface.",
+          "readOnly": true
+        },
         "subnetId": {
           "$ref": "#/definitions/SubnetId",
           "description": "Client subnet",
@@ -5008,6 +5013,18 @@
           "description": "Client OCI backup subnet CIDR, default is 192.168.252.0/22",
           "minLength": 1,
           "maxLength": 32,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "nsgCidrs": {
+          "type": "array",
+          "description": "IPv4 CIDR blocks for additional NSG ingress rules. The CIDR range of the VNET used to provision the VM Cluster will be added by default.",
+          "items": {
+            "$ref": "#/definitions/NSGCidr"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -6308,7 +6325,7 @@
         "availableCoreCount"
       ]
     },
-    "DiskRedundancy": {
+        "DiskRedundancy": {
       "type": "string",
       "description": "DiskRedundancy enum",
       "enum": [
@@ -7016,6 +7033,29 @@
         ]
       }
     },
+    "NSGCidr": {
+      "type": "object",
+      "description": "Network Security Group Ingress CIDR Properties",
+      "properties": {
+        "cidr": {
+          "type": "string",
+          "description": "The IPv4 CIDR range for the NSG ingress rule",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port that the CIDR range will be allowed in",
+          "minimum": 1,
+          "maximum": 65535
+        }
+      },
+      "required": [
+        "cidr",
+        "port"
+      ]
+    },
     "Objective": {
       "type": "string",
       "description": "Objective enum",
@@ -7323,7 +7363,7 @@
         ]
       }
     },
-    "PermissionLevelType": {
+        "PermissionLevelType": {
       "type": "string",
       "description": "PermissionLevelType enum.",
       "enum": [
