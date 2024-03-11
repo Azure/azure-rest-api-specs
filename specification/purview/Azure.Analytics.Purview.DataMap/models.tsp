@@ -1767,9 +1767,9 @@ specify cardinality, an EntityDef type name and name and optionally
 whether the
 end is a container.
 RelationshipDefs can have AttributeDefs - though only
-primitive types are allowed.
+primitive types are allowed. 
 RelationshipDefs have a relationshipCategory
-specifying the UML type of relationship required
+specifying the UML type of relationship required 
 The way EntityDefs and
 RelationshipDefs are intended to be used is that EntityDefs will define
 AttributeDefs these AttributeDefs
@@ -1779,15 +1779,15 @@ RelationshipDefs introduce new attributes to the entity
 instances. For example
 EntityDef A might have attributes attr1,attr2,attr3
 
-EntityDef B might have attributes attr4,attr5,attr6
+EntityDef B might have attributes attr4,attr5,attr6 
 RelationshipDef
-AtoB might define 2 ends
+AtoB might define 2 ends 
 
 end1:  type A, name attr7
 end2:  type B, name attr8
 
 When an instance of EntityDef A is created, it
-will have attributes attr1,attr2,attr3,attr7
+will have attributes attr1,attr2,attr3,attr7 
 When an instance of EntityDef
 B is created, it will have attributes attr4,attr5,attr6,attr8
 
@@ -1927,11 +1927,11 @@ The Relationship category determines the style of relationship around
 containment and lifecycle.
 UML terminology is used for the values.
 
-ASSOCIATION is a relationship with no containment.
+ASSOCIATION is a relationship with no containment. 
 COMPOSITION and AGGREGATION are containment relationships.
 
-The difference being in the lifecycles of the container and its children.
-In the COMPOSITION case, the children cannot exist without the container.
+The difference being in the lifecycles of the container and its children. 
+In the COMPOSITION case, the children cannot exist without the container. 
 For AGGREGATION, the life cycles of the container and children are totally independent.
 """)
   relationshipCategory?: RelationshipCategory;
