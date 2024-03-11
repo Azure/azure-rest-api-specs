@@ -459,12 +459,12 @@
               },
               "x-mt-system": {
                 "type": "string",
-                "description": "Specifies the system type that was used for translation for each 'to' language requested for translation.\nThe value is a comma-separated list of strings. Each string indicates a type:\n\n* Custom - Request includes a custom system and at least one custom system was used during translation.\n* Team - All other requests"
+                "description": "Specifies the system type that was used for translation for each 'to' language requested for translation. \nThe value is a comma-separated list of strings. Each string indicates a type:\n\n* Custom - Request includes a custom system and at least one custom system was used during translation.\n* Team - All other requests"
               },
               "x-metered-usage": {
                 "type": "integer",
                 "format": "int32",
-                "description": "Specifies consumption (the number of characters for which the user will be charged) for the translation\njob request. For example, if the word \"Hello\" is translated from English (en) to French (fr),\nthis field will return the value '5'."
+                "description": "Specifies consumption (the number of characters for which the user will be charged) for the translation \njob request. For example, if the word \"Hello\" is translated from English (en) to French (fr), \nthis field will return the value '5'."
               }
             }
           },
@@ -1060,7 +1060,7 @@
       "properties": {
         "srcSentLen": {
           "type": "array",
-          "description": "An integer array representing the lengths of the sentences in the input text.\nThe length of the array is the number of sentences, and the values are the length of each sentence.",
+          "description": "An integer array representing the lengths of the sentences in the input text. \nThe length of the array is the number of sentences, and the values are the length of each sentence.",
           "items": {
             "type": "integer",
             "format": "int32"
@@ -1068,7 +1068,7 @@
         },
         "transSentLen": {
           "type": "array",
-          "description": "An integer array representing the lengths of the sentences in the translated text.\nThe length of the array is the number of sentences, and the values are the length of each sentence.",
+          "description": "An integer array representing the lengths of the sentences in the translated text. \nThe length of the array is the number of sentences, and the values are the length of each sentence.",
           "items": {
             "type": "integer",
             "format": "int32"
@@ -1181,7 +1181,7 @@
       "properties": {
         "proj": {
           "type": "string",
-          "description": "Maps input text to translated text. The alignment information is only provided when the request\nparameter includeAlignment is true. Alignment is returned as a string value of the following\nformat: [[SourceTextStartIndex]:[SourceTextEndIndex]–[TgtTextStartIndex]:[TgtTextEndIndex]].\nThe colon separates start and end index, the dash separates the languages, and space separates the words.\nOne word may align with zero, one, or multiple words in the other language, and the aligned words may\nbe non-contiguous. When no alignment information is available, the alignment element will be empty."
+          "description": "Maps input text to translated text. The alignment information is only provided when the request \nparameter includeAlignment is true. Alignment is returned as a string value of the following \nformat: [[SourceTextStartIndex]:[SourceTextEndIndex]–[TgtTextStartIndex]:[TgtTextEndIndex]]. \nThe colon separates start and end index, the dash separates the languages, and space separates the words. \nOne word may align with zero, one, or multiple words in the other language, and the aligned words may \nbe non-contiguous. When no alignment information is available, the alignment element will be empty."
         }
       },
       "required": [
@@ -1198,7 +1198,7 @@
         },
         "translations": {
           "type": "array",
-          "description": "An array of translation results. The size of the array matches the number of target\nlanguages specified through the to query parameter.",
+          "description": "An array of translation results. The size of the array matches the number of target \nlanguages specified through the to query parameter.",
           "items": {
             "$ref": "#/definitions/Translation"
           },
@@ -1206,7 +1206,7 @@
         },
         "sourceText": {
           "$ref": "#/definitions/SourceText",
-          "description": "Input text in the default script of the source language. sourceText property is present only when\nthe input is expressed in a script that's not the usual script for the language. For example,\nif the input were Arabic written in Latin script, then sourceText.text would be the same Arabic text\nconverted into Arab script."
+          "description": "Input text in the default script of the source language. sourceText property is present only when \nthe input is expressed in a script that's not the usual script for the language. For example, \nif the input were Arabic written in Latin script, then sourceText.text would be the same Arabic text \nconverted into Arab script."
         }
       },
       "required": [
@@ -1415,7 +1415,7 @@
     "TranslateParameters.allowFallback": {
       "name": "allowFallback",
       "in": "query",
-      "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.\nPossible values are: true (default) or false.\n\nallowFallback=false specifies that the translation should only use systems trained for the category specified\nby the request. If a translation for language X to language Y requires chaining through a pivot language E,\nthen all the systems in the chain (X → E and E → Y) will need to be custom and have the same category.\nIf no system is found with the specific category, the request will return a 400 status code. allowFallback=true\nspecifies that the service is allowed to fall back to a general system when a custom system doesn't exist.",
+      "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \nPossible values are: true (default) or false.\n\nallowFallback=false specifies that the translation should only use systems trained for the category specified \nby the request. If a translation for language X to language Y requires chaining through a pivot language E, \nthen all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. \nIf no system is found with the specific category, the request will return a 400 status code. allowFallback=true \nspecifies that the service is allowed to fall back to a general system when a custom system doesn't exist.",
       "required": false,
       "type": "boolean",
       "default": true,
@@ -1424,7 +1424,7 @@
     "TranslateParameters.category": {
       "name": "category",
       "in": "query",
-      "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations\nfrom a customized system built with Custom Translator. Add the Category ID from your Custom Translator\nproject details to this parameter to use your deployed customized system. Default value is: general.",
+      "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \nfrom a customized system built with Custom Translator. Add the Category ID from your Custom Translator \nproject details to this parameter to use your deployed customized system. Default value is: general.",
       "required": false,
       "type": "string",
       "default": "general",
@@ -1433,7 +1433,7 @@
     "TranslateParameters.from": {
       "name": "from",
       "in": "query",
-      "description": "Specifies the language of the input text. Find which languages are available to translate from by\nlooking up supported languages using the translation scope. If the from parameter isn't specified,\nautomatic language detection is applied to determine the source language.\n\nYou must use the from parameter rather than autodetection when using the dynamic dictionary feature.\nNote: the dynamic dictionary feature is case-sensitive.",
+      "description": "Specifies the language of the input text. Find which languages are available to translate from by \nlooking up supported languages using the translation scope. If the from parameter isn't specified, \nautomatic language detection is applied to determine the source language.\n\nYou must use the from parameter rather than autodetection when using the dynamic dictionary feature. \nNote: the dynamic dictionary feature is case-sensitive.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1499,7 +1499,7 @@
     "TranslateParameters.profanityMarker": {
       "name": "profanityMarker",
       "in": "query",
-      "description": "Specifies how profanities should be marked in translations.\nPossible values are: Asterisk (default) or Tag.",
+      "description": "Specifies how profanities should be marked in translations.\nPossible values are: Asterisk (default) or Tag. ",
       "required": false,
       "type": "string",
       "default": "Asterisk",
@@ -1526,7 +1526,7 @@
     "TranslateParameters.suggestedFrom": {
       "name": "suggestedFrom",
       "in": "query",
-      "description": "Specifies a fallback language if the language of the input text can't be identified.\nLanguage autodetection is applied when the from parameter is omitted. If detection fails,\nthe suggestedFrom language will be assumed.",
+      "description": "Specifies a fallback language if the language of the input text can't be identified. \nLanguage autodetection is applied when the from parameter is omitted. If detection fails, \nthe suggestedFrom language will be assumed.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1534,7 +1534,7 @@
     "TranslateParameters.textType": {
       "name": "textType",
       "in": "query",
-      "description": "Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed,\ncomplete element. Possible values are: plain (default) or html.",
+      "description": "Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, \ncomplete element. Possible values are: plain (default) or html.",
       "required": false,
       "type": "string",
       "default": "Plain",
@@ -1561,7 +1561,7 @@
     "TranslateParameters.to": {
       "name": "to",
       "in": "query",
-      "description": "Specifies the language of the output text. The target language must be one of the supported languages included\nin the translation scope. For example, use to=de to translate to German.\nIt's possible to translate to multiple languages simultaneously by repeating the parameter in the query string.\nFor example, use to=de&to=it to translate to German and Italian.",
+      "description": "Specifies the language of the output text. The target language must be one of the supported languages included \nin the translation scope. For example, use to=de to translate to German.\nIt's possible to translate to multiple languages simultaneously by repeating the parameter in the query string. \nFor example, use to=de&to=it to translate to German and Italian.",
       "required": true,
       "type": "array",
       "items": {
