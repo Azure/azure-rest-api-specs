@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 @doc("A versioned namespace to use the Error model in the unversioned root namespace.")
 namespace Errors {
   @doc("The error object.")
-  model Error {
+  model WorkspaceItemError {
     ...Azure.Core.Foundations.Error;
   }
 }
