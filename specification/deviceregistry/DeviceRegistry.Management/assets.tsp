@@ -4,11 +4,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../common/extendedLocation.tsp";
-import "../common/provisioningState.tsp";
+import "./common/extendedLocation.tsp";
+import "./common/provisioningState.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -199,41 +200,41 @@ model AssetStatusError {
 
 @armResourceOperations
 interface Assets {
-  @Autorest.example("./examples/assets/Get_Asset.json", "Get an Asset")
+  @Autorest.example("./examples/Get_Asset.json", "Get an Asset")
   @Autorest.example(
-    "./examples/assets/Get_Asset_With_SyncStatus.json",
+    "./examples/Get_Asset_With_SyncStatus.json",
     "Get an Asset with Sync Status."
   )
   get is ArmResourceRead<Asset>;
 
   @Autorest.example(
-    "./examples/assets/Create_Asset_With_ExternalAssetId.json",
+    "./examples/Create_Asset_With_ExternalAssetId.json",
     "Create an Asset With External Asset Id."
   )
   @Autorest.example(
-    "./examples/assets/Create_Asset_Without_ExternalAssetId.json",
+    "./examples/Create_Asset_Without_ExternalAssetId.json",
     "Create an Asset Without External Asset Id."
   )
   @Autorest.example(
-    "./examples/assets/Create_Asset_Without_DisplayName.json",
+    "./examples/Create_Asset_Without_DisplayName.json",
     "Create an Asset Without Display Name."
   )
   createOrReplace is ArmResourceCreateOrReplaceAsync<Asset>;
 
-  @Autorest.example("./examples/assets/Update_Asset.json", "Patch an Asset.")
+  @Autorest.example("./examples/Update_Asset.json", "Patch an Asset.")
   update is ArmResourcePatchAsync<Asset, AssetProperties>;
 
-  @Autorest.example("./examples/assets/Delete_Asset.json", "Delete an Asset.")
+  @Autorest.example("./examples/Delete_Asset.json", "Delete an Asset.")
   delete is ArmResourceDeleteWithoutOkAsync<Asset>;
 
   @Autorest.example(
-    "./examples/assets/List_Assets_ResourceGroup.json",
+    "./examples/List_Assets_ResourceGroup.json",
     "List Assets in a Resource Group."
   )
   listByResourceGroup is ArmResourceListByParent<Asset>;
 
   @Autorest.example(
-    "./examples/assets/List_Assets_Subscription.json",
+    "./examples/List_Assets_Subscription.json",
     "List Assets in a Subscription."
   )
   listBySubscription is ArmListBySubscription<Asset>;
