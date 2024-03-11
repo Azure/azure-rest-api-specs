@@ -438,7 +438,7 @@ model TestAppComponents {
   @doc("""
 Azure resource collection { resource id (fully qualified resource Id e.g
 subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object }
+: resource object } 
 """)
   components: Record<AppComponent>;
 
@@ -920,7 +920,7 @@ model TestRunAppComponents {
   @doc("""
 Azure resource collection { resource id (fully qualified resource Id e.g
 subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object }
+: resource object } 
 """)
   components: Record<AppComponent>;
 
