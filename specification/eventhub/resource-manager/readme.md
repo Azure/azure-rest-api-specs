@@ -246,6 +246,7 @@ input-file:
 - Microsoft.EventHub/preview/2024-01-01-preview/eventhubs.json
 - Microsoft.EventHub/preview/2024-01-01-preview/SchemaRegistry.json
 - Microsoft.EventHub/preview/2024-01-01-preview/ApplicationGroups.json
+```
 
 
 ## Suppression
