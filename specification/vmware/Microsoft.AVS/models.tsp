@@ -582,6 +582,7 @@ model PrivateCloudUpdateProperties {
   @doc("Connectivity to internet is enabled or disabled")
   internet?: InternetEnum;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("vCenter Single Sign On Identity Sources")
   identitySources?: IdentitySource[];
 
@@ -612,6 +613,7 @@ model PrivateCloudProperties {
   @doc("Connectivity to internet is enabled or disabled")
   internet?: InternetEnum = InternetEnum.Disabled;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("vCenter Single Sign On Identity Sources")
   identitySources?: IdentitySource[];
 
@@ -903,6 +905,7 @@ model ClusterUpdateProperties {
 
 @doc("List of all zones and associated hosts for a cluster")
 model ClusterZoneList {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Zone and associated hosts info")
   zones?: ClusterZone[];
 }
@@ -1182,6 +1185,7 @@ model WorkloadNetworkSegmentProperties {
   @doc("Subnet which to connect segment to.")
   subnet?: WorkloadNetworkSegmentSubnet;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Port Vif which segment is associated with.")
   @visibility("read")
   portVif?: WorkloadNetworkSegmentPortVif[];
@@ -1836,6 +1840,7 @@ model ScriptCmdletProperties {
   @visibility("read")
   audience?: ScriptCmdletAudience;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Parameters the script will accept")
   @visibility("read")
   parameters?: ScriptParameter[];
@@ -1894,9 +1899,11 @@ model ScriptExecutionProperties {
   @doc("A reference to the script cmdlet resource if user is running a AVS script")
   scriptCmdletId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Parameters the script will accept")
   parameters?: ScriptExecutionParameter[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("""
 Parameters that will be hidden/not visible to ARM, such as passwords and
 credentials
