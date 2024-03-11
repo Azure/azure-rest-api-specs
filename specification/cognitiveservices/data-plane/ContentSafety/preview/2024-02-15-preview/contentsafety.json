@@ -573,7 +573,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DetectGroundednessOptions"
+              "$ref": "#/definitions/AnalyzeTextGroundednessOptions"
             }
           }
         ],
@@ -581,7 +581,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DetectGroundednessResult"
+              "$ref": "#/definitions/AnalyzeTextGroundednessResult"
             }
           },
           "default": {
@@ -834,6 +834,94 @@
         "categoriesAnalysis"
       ]
     },
+    "AnalyzeTextGroundednessOptions": {
+      "type": "object",
+      "description": "The request of groundedness detection.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "The domain of the text for analysis. Allowed values: Medical, Generic.\nThis field is optional, with a default value of Generic.",
+          "default": "Generic",
+          "enum": [
+            "Generic",
+            "Medical"
+          ],
+          "x-ms-enum": {
+            "name": "Domain",
+            "modelAsString": true
+          }
+        },
+        "task": {
+          "type": "string",
+          "description": "The task type for the text analysis. Type of task: QnA, Summarization.\nThis field is optional, with a default value of Summarization.",
+          "default": "Summarization",
+          "enum": [
+            "Summarization",
+            "QnA"
+          ],
+          "x-ms-enum": {
+            "name": "Task",
+            "modelAsString": true
+          }
+        },
+        "qna": {
+          "$ref": "#/definitions/QnAOptions",
+          "description": "The user's question input in a QnA scenario.\nThis field is optional, but if the task type is set to QnA, it becomes required."
+        },
+        "text": {
+          "type": "string",
+          "description": "The specific text that needs to be checked.",
+          "maxLength": 7500
+        },
+        "groundingSources": {
+          "type": "array",
+          "description": "Leverages a vast array of grounding sources to validate AI-generated text.\nLimit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reasoning": {
+          "type": "boolean",
+          "description": "A value indicating if the output includes an explanation for the identified groundedness.\nThis field is optional, with a default value of false."
+        },
+        "llmResource": {
+          "$ref": "#/definitions/LLMResource",
+          "description": "Connection details for the LLM resource. \nThis field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored."
+        }
+      },
+      "required": [
+        "text",
+        "groundingSources"
+      ]
+    },
+    "AnalyzeTextGroundednessResult": {
+      "type": "object",
+      "description": "The response of groundedness detection.",
+      "properties": {
+        "ungroundedDetected": {
+          "type": "boolean",
+          "description": "Indicates whether the text exhibits ungroundedness."
+        },
+        "ungroundedPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Specifies the proportion of the text identified as ungrounded, \nexpressed as a decimal between 0 and 1,\nwhere 0 indicates no grounded content and 1 indicates entirely grounded content.."
+        },
+        "ungroundedDetails": {
+          "type": "array",
+          "description": "Provides insights into ungrounded content with specific examples and percentages.",
+          "items": {
+            "$ref": "#/definitions/UngroundednessDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "ungroundedDetected",
+        "ungroundedPercentage",
+        "ungroundedDetails"
+      ]
+    },
     "AnalyzeTextJailbreakOptions": {
       "type": "object",
       "description": "The text jailbreak analysis request.",
@@ -1065,94 +1153,6 @@
           "description": "Inner error."
         }
       }
-    },
-    "DetectGroundednessOptions": {
-      "type": "object",
-      "description": "The request of groundedness detection.",
-      "properties": {
-        "domain": {
-          "type": "string",
-          "description": "The domain of the text for analysis. Allowed values: Medical, Generic.\nThis field is optional, with a default value of Generic.",
-          "default": "Generic",
-          "enum": [
-            "Generic",
-            "Medical"
-          ],
-          "x-ms-enum": {
-            "name": "Domain",
-            "modelAsString": true
-          }
-        },
-        "task": {
-          "type": "string",
-          "description": "The task type for the text analysis. Type of task: QnA, Summarization.\nThis field is optional, with a default value of Summarization.",
-          "default": "Summarization",
-          "enum": [
-            "Summarization",
-            "QnA"
-          ],
-          "x-ms-enum": {
-            "name": "Task",
-            "modelAsString": true
-          }
-        },
-        "qna": {
-          "$ref": "#/definitions/QnAOptions",
-          "description": "The user's question input in a QnA scenario.\nThis field is optional, but if the task type is set to QnA, it becomes required."
-        },
-        "text": {
-          "type": "string",
-          "description": "The specific text that needs to be checked.",
-          "maxLength": 7500
-        },
-        "groundingSources": {
-          "type": "array",
-          "description": "Leverages a vast array of grounding sources to validate AI-generated text.\nLimit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "reasoning": {
-          "type": "boolean",
-          "description": "A value indicating if the output includes an explanation for the identified groundedness.\nThis field is optional, with a default value of false."
-        },
-        "llmResource": {
-          "$ref": "#/definitions/LLMResource",
-          "description": "Connection details for the LLM resource. \nThis field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored."
-        }
-      },
-      "required": [
-        "text",
-        "groundingSources"
-      ]
-    },
-    "DetectGroundednessResult": {
-      "type": "object",
-      "description": "The response of groundedness detection.",
-      "properties": {
-        "ungroundedDetected": {
-          "type": "boolean",
-          "description": "Indicates whether the text exhibits ungroundedness."
-        },
-        "ungroundedPercentage": {
-          "type": "number",
-          "format": "float",
-          "description": "Specifies the proportion of the text identified as ungrounded, \nexpressed as a decimal between 0 and 1,\nwhere 0 indicates no grounded content and 1 indicates entirely grounded content.."
-        },
-        "ungroundedDetails": {
-          "type": "array",
-          "description": "Provides insights into ungrounded content with specific examples and percentages.",
-          "items": {
-            "$ref": "#/definitions/UngroundednessDetails"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "ungroundedDetected",
-        "ungroundedPercentage",
-        "ungroundedDetails"
-      ]
     },
     "ImageCategoriesAnalysis": {
       "type": "object",
