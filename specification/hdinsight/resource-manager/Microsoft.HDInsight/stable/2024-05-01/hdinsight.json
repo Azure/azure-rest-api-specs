@@ -2242,6 +2242,11 @@
           "type": "string",
           "description": "Prefix of the pod names. Pod number will be appended to the prefix. The ingress URLs for the pods will be available at <clusterFqdn>/<sshBasePath>/<prefix>-<number>",
           "readOnly": true
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine SKU.",
+          "pattern": "^[a-zA-Z0-9_\\-]{0,256}$"
         }
       }
     },
@@ -3321,7 +3326,7 @@
           "description": "The number of virtual machines.",
           "type": "integer",
           "format": "int32",
-          "minimum": 1
+          "minimum": 0
         }
       }
     },
