@@ -1784,7 +1784,7 @@ RelationshipDef
 AtoB might define 2 ends 
 
 end1:  type A, name attr7
-end2:  type B, name attr8
+end2:  type B, name attr8 
 
 When an instance of EntityDef A is created, it
 will have attributes attr1,attr2,attr3,attr7 
