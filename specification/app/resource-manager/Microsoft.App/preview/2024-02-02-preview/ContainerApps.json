@@ -896,6 +896,10 @@
     "LoglevelSetting": {
       "description": "Log level settings for java workloads.",
       "type": "object",
+      "required": [
+        "logger",
+        "level"
+      ],
       "properties": {
         "logger": {
           "description": "Logger name.",
@@ -912,7 +916,6 @@
             "fatal",
             "trace"
           ],
-          "type": "string",
           "x-ms-enum": {
             "name": "level",
             "modelAsString": true
