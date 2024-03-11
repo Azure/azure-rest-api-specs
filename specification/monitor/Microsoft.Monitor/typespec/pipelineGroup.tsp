@@ -25,7 +25,7 @@ namespace Microsoft.Monitor;
 @doc("A pipeline group definition.")
 model PipelineGroup is TrackedResource<PipelineGroupProperties> {
   @doc("The name of pipeline group. The name is case insensitive.")
-  @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
+  @pattern("^(?!-)[a-zA-Z0-9-]{3,10}[^-]$")
   @key("pipelineGroupName")
   @path
   @segment("pipelineGroups")
