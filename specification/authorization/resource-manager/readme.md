@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-05-01-preview
+tag: package-2024-02-01-preview
 ```
 
 ### Suppression
@@ -93,7 +93,16 @@ directive:
     reason: common-types doesn't need to reference api version.
 ```
 
+### Tag: package-2024-02-01-preview
 
+These settings apply only when `--package-2024-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-01-preview'
+input-file:
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/common-types.json
+```
 ### Tag: package-2022-05-01-preview-only
 
 These settings apply only when `--package-2022-05-01-preview-only` is specified on the command line.
