@@ -287,7 +287,7 @@ model LLMResource {
 
 @added(Versions.v2024_02_15_Preview)
 @doc("The request of groundedness detection.")
-model DetectGroundednessOptions {
+model AnalyzeTextGroundednessOptions {
   @doc("""
   The domain of the text for analysis. Allowed values: Medical, Generic.
   This field is optional, with a default value of Generic.
@@ -363,7 +363,7 @@ model UngroundednessDetails {
 
 @added(Versions.v2024_02_15_Preview)
 @doc("The response of groundedness detection.")
-model DetectGroundednessResult {
+model AnalyzeTextGroundednessResult {
   @doc("Indicates whether the text exhibits ungroundedness.")
   ungroundedDetected: boolean;
 

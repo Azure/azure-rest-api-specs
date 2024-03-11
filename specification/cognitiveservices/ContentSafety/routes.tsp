@@ -173,7 +173,7 @@ interface TextGroundednessDetectionOperations {
   @route("/text:detectGroundedness")
   @post
   detectGroundednessOptions is Azure.Core.RpcOperation<
-    DetectGroundednessOptions,
-    DetectGroundednessResult
+    AnalyzeTextGroundednessOptions,
+    AnalyzeTextGroundednessResult
   >;
 }
