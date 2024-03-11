@@ -227,7 +227,7 @@ input-file:
 - Microsoft.EventHub/stable/2024-01-01/ApplicationGroups.json
 ```
 
-### Tag: package-2024-01-01-preview
+### Tag: package-2024-01-preview
 
 These settings apply only when `--tag=package-2024-01-preview` is specified on the command line.
 
