@@ -124,6 +124,9 @@ model Location {
   @path
   @segment("locations")
   @visibility("query", "read", "update")
+  @armCommonParameter("LocationParameter", Azure.ResourceManager.CommonTypes.Versions.v3)
+  @armCommonParameter("LocationParameter", Azure.ResourceManager.CommonTypes.Versions.v4)
+  @armCommonParameter("LocationParameter", Azure.ResourceManager.CommonTypes.Versions.v5)
   name: string;
 }
 
