@@ -29,8 +29,9 @@
           "sizeLimitInBytes": 10485763
         },
         "retentionDescription": {
-          "cleanupPolicy": "Compact",
-          "retentionTimeInHours": 96,
+          "cleanupPolicy": "DeleteCompact",
+          "retentionTimeInHours": -1,
+          "minLagCompactionLagInHours":10,
           "tombstoneRetentionTimeInHours": 1
         }
       }
@@ -73,8 +74,9 @@
             "sizeLimitInBytes": 10485763
           },
           "retentionDescription": {
-            "cleanupPolicy": "Compact",
-            "retentionTimeInHours": 96,
+            "cleanupPolicy": "DeleteCompact",
+            "retentionTimeInHours": -1,
+            "minLagCompactionLagInHours":10,
             "tombstoneRetentionTimeInHours": 1
           }
         }
