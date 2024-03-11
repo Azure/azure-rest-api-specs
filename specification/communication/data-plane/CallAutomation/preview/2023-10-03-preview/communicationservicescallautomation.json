@@ -2177,10 +2177,6 @@
         "answeredBy": {
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the call automation entity which answers the call"
-        },
-        "sourceCallerIdNumber": {
-          "$ref": "#/definitions/PhoneNumberIdentifierModel",
-          "description": "The source caller Id, a phone number, that's will be used when inviting a pstn target.\r\nRequired only when transferring call to PSTN, if this is an incoming voip call."
         }
       }
     },
@@ -2261,6 +2257,10 @@
         "operationCallbackUri": {
           "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
+        },
+        "sourceCallerIdNumber": {
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The source caller Id, a phone number, that's will be used as the transferor's(Contoso) caller id when transfering a call a pstn target."
         }
       }
     },
