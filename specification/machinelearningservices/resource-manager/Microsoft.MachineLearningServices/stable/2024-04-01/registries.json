@@ -726,10 +726,22 @@
           "description": "List of assigned identities for the managed resource group",
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+            "$ref": "#/definitions/ManagedResourceGroupAssignedIdentities"
           },
           "x-nullable": true,
           "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "ManagedResourceGroupAssignedIdentities": {
+      "description": "Details for managed resource group assigned identities.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Identity principal Id",
+          "type": "string",
+          "x-nullable": false
         }
       },
       "additionalProperties": false
