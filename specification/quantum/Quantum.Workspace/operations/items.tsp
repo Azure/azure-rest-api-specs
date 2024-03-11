@@ -75,7 +75,7 @@ model ItemDetails {
 
   @visibility("read")
   @doc("Error information.")
-  errorData?: Errors.Error;
+  errorData?: Errors.WorkspaceItemError;
 }
 
 @useDependency(DefaultAzureCoreVersion)
