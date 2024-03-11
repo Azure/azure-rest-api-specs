@@ -10,7 +10,7 @@ namespace Azure.OpenAI;
 
 @lroStatus
 @doc("The state of a job or item.")
-@removed(ServiceApiVersions.v2023_12_01_Preview)
+@removed(ServiceApiVersions.v2024_02_15_Preview)
 enum AzureOpenAIOperationState {
   @doc("The operation was created and is queued to be processed in the future.")
   notRunning,
@@ -35,7 +35,7 @@ enum AzureOpenAIOperationState {
 @Foundations.Private.needsRoute
 @post
 @doc("Long running operation template to match Azure OpenAI .")
-@removed(ServiceApiVersions.v2023_12_01_Preview)
+@removed(ServiceApiVersions.v2024_02_15_Preview)
 op OaiLongRunningRpcOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model,

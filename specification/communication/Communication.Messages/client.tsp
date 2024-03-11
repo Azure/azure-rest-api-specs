@@ -31,3 +31,8 @@ interface MessageTemplateClient
 @@access(Azure.Communication.MessagesService.MessageDataStream,
   Access.internal
 );
+
+@@projectedName(Azure.Communication.MessagesService.MessageTemplate.values,
+  "python",
+  "templateValues"
+);
