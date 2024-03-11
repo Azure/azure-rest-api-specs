@@ -1935,6 +1935,7 @@ errors or powershell threw an exception
   output?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "It is unknown."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "It is unknown."
   @doc("User-defined dictionary.")
   namedOutputs?: Record<{}>;
 
