@@ -292,7 +292,7 @@ enum DocumentType {
   Trace,
 
   @doc("Represents an unknown telemetry type.")
-  Unknown
+  Unknown,
 }
 
 /**
@@ -509,10 +509,10 @@ enum AggregationType {
 
   @doc("Sum")
   Sum,
-  
+
   @doc("Minimum")
   Min,
-  
+
   @doc("Maximum")
   Max,
 }
@@ -567,7 +567,7 @@ enum PredicateType {
   Contains,
 
   @doc("Represents a does-not-contain predicate.")
-  DoesNotContain
+  DoesNotContain,
 }
 
 /**
