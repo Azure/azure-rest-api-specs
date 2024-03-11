@@ -22,6 +22,7 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.DeviceRegistry;
 
 /** API versions */
+@doc("Microsoft.DeviceRegistry Resource Provider supported API versions.")
 enum Versions {
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2023-11-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
