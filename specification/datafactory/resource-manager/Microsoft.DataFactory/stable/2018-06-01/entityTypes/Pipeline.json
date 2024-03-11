@@ -7163,6 +7163,11 @@
           "x-ms-format": "dfe-string",
           "description": "Web activity target endpoint and path. Type: string (or Expression with resultType string)."
         },
+        "relativeUrl": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Web activity relative url for the target endpoint of linked service. Type: string (or Expression with resultType string)."
+        },
         "headers": {
           "type": "object",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
@@ -7219,8 +7224,7 @@
         }
       },
       "required": [
-        "method",
-        "url"
+        "method"
       ]
     },
     "GetMetadataActivity": {
@@ -8294,6 +8298,10 @@
           "type": "object",
           "x-ms-format": "dfe-bool",
           "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "connectVia": {
+          "description": "The integration runtime reference.",
+          "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         }
       },
       "required": [
