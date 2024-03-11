@@ -1819,9 +1819,9 @@ it  is the container end of the relationship.
 The Relationship category determines the style of relationship around
 containment and lifecycle.
 UML terminology is used for the values.
-ASSOCIATION is a relationship with no containment.
+ASSOCIATION is a relationship with no containment. 
 COMPOSITION and AGGREGATION are containment relationships.
-The difference being in the lifecycles of the container and its children.
+The difference being in the lifecycles of the container and its children. 
 In the COMPOSITION case, the children cannot exist without the container.
 For AGGREGATION, the life cycles of the container and children are totally independent.
 """)
