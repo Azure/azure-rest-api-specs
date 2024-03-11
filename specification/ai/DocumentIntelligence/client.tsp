@@ -8,9 +8,8 @@ using Azure.ClientGenerator.Core;
 using DocumentIntelligence;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-//@TypeSpec.Versioning.useDependency(DocumentIntelligence.Versions.v2023_07_31)
 @TypeSpec.Versioning.useDependency(
-  DocumentIntelligence.Versions.v2023_10_31_preview
+  DocumentIntelligence.Versions.v2024_02_29_preview
 )
 namespace ClientCustomizations;
 
@@ -95,3 +94,6 @@ interface DocumentIntelligenceAdministrationClient {
 @@usage(ComposeDocumentModelRequest, Usage.input, "csharp");
 @@usage(ComponentDocumentModelDetails, Usage.input, "csharp");
 @@usage(CopyAuthorization, Usage.input | Usage.output, "csharp");
+
+@@projectedName(AnalyzeDocumentRequest.base64Source, "python", "bytesSource");
+@@projectedName(ClassifyDocumentRequest.base64Source, "python", "bytesSource");
