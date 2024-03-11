@@ -467,6 +467,55 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/disks/{diskName}/beginGetAccess": {
+      "post": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_GrantAccessOnVMSSVMInstance",
+        "description": "Grants access to a VMSS VM Instance OS disk for DiskInspection scenario.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualmachineScaleSetsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "grantAccessData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./diskRPCommon.json#/definitions/GrantAccessData"
+            },
+            "description": "Access data object supplied in the body of the get disk access operation. The supported accessLevel for this action is 'ReadForDiskInspection' only."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./diskRPCommon.json#/definitions/AccessUri"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a sas on a VMSS VM Instance managed disk.": {
+            "$ref": "./examples/diskExamples/Disk_BeginGetAccessForVMSSVMInstanceDisk.json"
+          }
+        },
+        "x-ms-long-running-operation": false
+      }
     }
   },
   "definitions": {
@@ -896,6 +945,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualmachineScaleSetsNameParameter": {
+      "name": "vmssName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the VirtualmachineScaleSet managing the managed disk. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
       "x-ms-parameter-location": "method"
     }
   }
