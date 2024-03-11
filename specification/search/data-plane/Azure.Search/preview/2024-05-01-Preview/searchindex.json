@@ -1326,13 +1326,11 @@
         "semantic": {
           "$ref": "#/definitions/SemanticDebugInfo",
           "readOnly": true,
-          "x-nullable": true,
           "description": "Contains debugging information specific to semantic ranking requests."
         },
         "vectors": {
           "$ref": "#/definitions/VectorsDebugInfo",
           "readOnly": true,
-          "x-nullable": true,
           "description": "Contains debugging information specific to vector and hybrid search."
         }
       },
@@ -1455,7 +1453,6 @@
             "$ref": "#/definitions/TextResult"
           },
           "readOnly": true,
-          "x-nullable": true,
           "description": "The BM25 or Classic score for the text portion of the query."
         },
         "vectors": {
@@ -1464,8 +1461,13 @@
             "$ref": "#/definitions/QueryResultDocumentVectorSubscores"
           },
           "readOnly": true,
-          "x-nullable": true,
           "description": "The vector similarity and @search.score values for each vector query."
+        },
+        "documentBoost": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The BM25 or Classic score for the text portion of the query."
         }
       },
       "description": "The breakdown of subscores between the text and vector query components of the search query for this document. Each vector query is shown as a separate object in the same order they were received."
@@ -1487,7 +1489,7 @@
     "QueryResultDocumentVectorSubscores": {
       "type": "object",
       "additionalProperties": {
-        "type": "object",
+        "type": "array",
         "items": {
           "$ref": "#/definitions/SingleVectorFieldResult"
         },
@@ -1513,7 +1515,6 @@
         }
       },
       "readOnly": true,
-      "additionalProperties": true,
       "description": "A single vector field result. Both @search.score and vector similarity values are returned. Vector similarity is related to @search.score by an equation."
     },
     "SearchDocumentsResult": {
@@ -2049,7 +2050,7 @@
         }
       ],
       "properties": {
-        "base64EncodedBinary": {
+        "base64Image": {
           "type": "string",
           "description": "The base 64 encoded binary of an image to be vectorized to perform a vector search query."
         }
@@ -2201,7 +2202,7 @@
         "maxTextRecallSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Determines the maximum number of documents to be retrieved by the text query portion of a hybrid search request. The values needs to be between 1 and 100 000. Default is 1000. A higher value allows paging through more documents, at the cost of a higher latency."
+          "description": "Determines the maximum number of documents to be retrieved by the text query portion of a hybrid search request. Those documents will be combined with the documents matching the vector queries to produce a single final list of results. Choosing a larger maxTextRecallSize value will allow retrieving and paging through more documents (using the top and skip parameters), at the cost of higher resource utilization and higher latency. The value needs to be between 1 and 10,000. Default is 1000."
         },
         "countAndFacetMode": {
           "$ref": "#/definitions/HybridCountAndFacetMode",
@@ -2232,7 +2233,7 @@
           }
         ]
       },
-      "description": "Determines whether the count and facets should includes all documents that matched the search query, or only the documents that are retrieved within the 'maxTextRecallSize' window."
+      "description": "Determines whether the count and facets should includes all documents that matched the search query, or only the documents that are retrieved within the 'maxTextRecallSize' window. The default value is 'countAllResults'."
     },
     "QueryLanguage": {
       "type": "string",

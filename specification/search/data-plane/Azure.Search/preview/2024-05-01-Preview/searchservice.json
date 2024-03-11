@@ -6543,9 +6543,40 @@
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "x-nullable": true,
           "description": "The user-assigned managed identity used for outbound connections."
+        },
+        "modelName": {
+          "$ref": "#/definitions/AzureOpenAIModelName",
+          "description": "The name of the embedding model that is deployed at the provided deploymentId path."
         }
       },
       "description": "Specifies the parameters for connecting to the Azure OpenAI resource."
+    },
+    "AzureOpenAIModelName": {
+      "type": "string",
+      "enum": [
+        "text-embedding-ada-002",
+        "text-embedding-3-large",
+        "text-embedding-3-small"
+      ],
+      "x-ms-enum": {
+        "name": "AzureOpenAIModelName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "text-embedding-ada-002",
+            "name": "TextEmbeddingAda002"
+          },
+          {
+            "value": "text-embedding-3-large",
+            "name": "TextEmbedding3Large"
+          },
+          {
+            "value": "text-embedding-3-small",
+            "name": "TextEmbedding3Small"
+          }
+        ]
+      },
+      "description": "The Azure Open AI model name that will be called."
     },
     "CustomVectorizer": {
       "type": "object",
@@ -6623,14 +6654,14 @@
           "x-nullable": true,
           "description": "The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified."
         },
+        "resourceUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The resource URI of the AI Services resource."
+        },
         "apiKey": {
           "type": "string",
           "description": "API key of the designated AI Services resource."
-        },
-        "authResourceId": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "Resource id for the AI Services resource for managed identity."
         },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
@@ -6655,7 +6686,7 @@
           "description": "Specifies the properties of the AML vectorizer."
         }
       },
-      "description": "Specifies an Azure Machine Learning endpoint for generating the vector embedding of a query string."
+      "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio Model Catalog for generating the vector embedding of a query string."
     },
     "AMLParameters": {
       "type": "object",
@@ -6688,22 +6719,10 @@
           "type": "string",
           "x-nullable": true,
           "description": "(Optional for token authentication). The region the AML service is deployed in."
-        },
-        "inputKey": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "The JSON path to place the input for the request to be sent to the AML endpoint."
-        },
-        "vectorOutputKey": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "The JSON path to retrieve the output vector returned by the AML endpoint."
         }
       },
       "required": [
-        "uri",
-        "inputKey",
-        "vectorOutputKey"
+        "uri"
       ],
       "description": "Specifies the properties for connecting to an AML vectorizer."
     },
@@ -6737,7 +6756,7 @@
           {
             "value": "aml",
             "name": "AML",
-            "description": "Generate embeddings using an Azure Machine Learning endpoint at query time."
+            "description": "Generate embeddings using an Azure Machine Learning endpoint deployed via the Azure AI Studio Model Catalog at query time."
           }
         ]
       },
@@ -8223,11 +8242,6 @@
         "functionAggregation": {
           "$ref": "#/definitions/ScoringFunctionAggregation",
           "description": "A value indicating how the results of individual scoring functions should be combined. Defaults to \"Sum\". Ignored if there are no scoring functions."
-        },
-        "resultsCombinationProfile": {
-          "$ref": "#/definitions/ResultsCombinationProfile",
-          "description": "Parameters to define how documents retrieved through vector queries and documents retrieved through a text query are combined together to produce a single result set.",
-          "x-nullable": true
         }
       },
       "required": [
@@ -8279,294 +8293,6 @@
         ]
       },
       "description": "Defines the aggregation function used to combine the results of all the scoring functions in a scoring profile."
-    },
-    "ResultsCombinationProfile": {
-      "type": "object",
-      "discriminator": "kind",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ResultsCombinationProfileKind",
-          "description": "Indicates the kind of results combination profile to use. Currently, only combineVectorsAndText is available."
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "description": "Configure how documents retrieved through vector queries and documents retrieved through a text query are combined together to produce a single result set."
-    },
-    "ResultsCombinationProfileKind": {
-      "type": "string",
-      "enum": [
-        "combineVectorsAndText"
-      ],
-      "x-ms-enum": {
-        "name": "ResultsCombinationProfileKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "combineVectorsAndText",
-            "name": "CombineVectorsAndText",
-            "description": "Combine the results of each vector-query pairs with the result of the text query using a single combination method."
-          }
-        ]
-      },
-      "description": "The results combination profile kind to be used to combine vectors and text results."
-    },
-    "CombineVectorsAndText": {
-      "type": "object",
-      "x-ms-discriminator-value": "combineVectorsAndText",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResultsCombinationProfile"
-        }
-      ],
-      "properties": {
-        "CombineVectorsAndTextParameters": {
-          "$ref": "#/definitions/CombineVectorsAndTextParameters",
-          "description": "Set of parameters used to configure additional properties of the 'CombineVectorsAndText' profile.",
-          "x-nullable": true
-        }
-      },
-      "description": "Specifies how to combine the results of different vector queries, and/or different vector fields, and/or the results of a text queries, together in a single step."
-    },
-    "CombineVectorsAndTextParameters": {
-        "type": "object",
-        "properties": {
-          "method": {
-            "$ref": "#/definitions/ResultsCombinationMethod",
-            "description": "Specifies the algorithm used to combine the different result sets into a single one.",
-            "x-nullable": true
-          },
-          "textResults": {
-            "$ref": "#/definitions/TextResultsCombinationParameters",
-            "description": "Set of parameters to configure how the text result set get combined with the other vector query sets.",
-            "x-nullable": true
-          }
-          ,
-          "vectorResults": {
-            "$ref": "#/definitions/VectorResultsCombinationParameters",
-            "description": "Set of parameters to configure how the vector result sets are combined within each other and/or with the text result set.",
-            "x-nullable": true
-          }
-        },
-        "description": "Set of parameters used to configure additional properties of the 'CombineVectorsAndText' profile."
-    },
-    "ResultsCombinationMethod": {
-      "type": "object",
-      "discriminator": "kind",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ResultsCombinationMethodKind",
-          "description": "Indicates the kind of combination method to use. Valid values include reciprocalRankFusion, linear and max."
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "description": "Base type for results combination methods."
-    },
-    "ResultsCombinationMethodKind": {
-      "type": "string",
-      "enum": [
-        "reciprocalRankFusion",
-        "linear",
-        "max"
-      ],
-      "x-ms-enum": {
-        "name": "ResultsCombinationMethodKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "reciprocalRankFusion",
-            "name": "ReciprocalRankFusion",
-            "description": "Combine results and produce a new score for each document using the reciprocal rank fusion formula."
-          },
-          {
-            "value": "linear",
-            "name": "Linear",
-            "description": "Combine results and produce a new score for each document by summing up its scores in each result set."
-          },
-          {
-            "value": "max",
-            "name": "Max",
-            "description": "Combine results and produce a new score for each document by taking its maximum score among all result set."
-          }
-        ]
-      },
-      "description": "The results combination method kind to be used to generate new scores for each documents by aggregating their original scores across all result sets."
-    },
-    "ReciprocalRankFusionResultsCombinationMethod": {
-      "type": "object",
-      "x-ms-discriminator-value": "reciprocalRankFusion",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResultsCombinationMethod"
-        }
-      ],
-      "properties": {
-        "reciprocalRankFusionParameters": {
-          "$ref": "#/definitions/ReciprocalRankFusionCombinationMethodParameters",
-          "description": "Set of parameters to configure how the reciprocal rank fusion formula is applied.",
-          "x-nullable": true
-        }
-      },
-      "description": "Combine results and produce a new score for each document using the reciprocal rank fusion formula."
-    },
-    "LinearResultsCombinationMethod": {
-      "type": "object",
-      "x-ms-discriminator-value": "linear",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResultsCombinationMethod"
-        }
-      ],
-      "properties": {
-        "linearParameters": {
-          "$ref": "#/definitions/LinearCombinationMethodParameters",
-          "description": "Set of parameters to configure how the linear combination formula is applied.",
-          "x-nullable": true
-        }
-      },
-      "description": "Combine results and produce a new score for each document by summing up its scores in each result set."
-    },
-    "MaxResultsCombinationMethod": {
-      "type": "object",
-      "x-ms-discriminator-value": "max",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResultsCombinationMethod"
-        }
-      ],
-      "properties": {
-        "maxParameters": {
-          "$ref": "#/definitions/MaxCombinationMethodParameters",
-          "description": "Set of parameters to configure how the max formula is applied.",
-          "x-nullable": true
-        }
-      },
-      "description": "Combine results and produce a new score for each document by taking its maximum score among all result set."
-    },
-    "ReciprocalRankFusionCombinationMethodParameters": {
-      "type": "object",
-      "properties": {
-        "RankImpact": {
-          "type": "integer",
-          "format": "int32",
-          "description": "This is the K parameter of the Reciprocal Rank Fusion formula. This parameter adjusts the influence of lower-ranked documents in search results. A higher value means lower ranked documents will have more impact on the final rankings. The default is 60.",
-          "x-nullable": true
-        }
-      },
-      "description": "Set of parameters to configure how the reciprocal rank fusion formula is applied."
-    },
-    "LinearCombinationMethodParameters": {
-      "type": "object",
-      "properties": {
-        "RankImpact": {
-          "$ref": "#/definitions/ResultsNormalization",
-          "description": "Defines whether the document scores from each result set should be normalized before being combined with other result sets, as well as what normalization function to use. Leaving this value null means the scores will not be normalized.",
-          "x-nullable": true
-        }
-      },
-      "description": "Set of parameters to configure how the linear combination formula is applied."
-    },
-    "MaxCombinationMethodParameters": {
-      "type": "object",
-      "properties": {
-        "RankImpact": {
-          "$ref": "#/definitions/ResultsNormalization",
-          "description": "Defines whether the document scores from each result set should be normalized before being combined with other result sets, as well as what normalization function to use. Leaving this value null means the scores will not be normalized.",
-          "x-nullable": true
-        }
-      },
-      "description": "Set of parameters to configure how the linear combination formula is applied."
-    },
-    "ResultsNormalization": {
-      "type": "object",
-      "discriminator": "kind",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ResultsCombinationMethodKind",
-          "description": "Indicates the kind of combination function to use. Valid values include reciprocal rank fusion, linear and max."
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "description": "Base type for normalization function to be used when normalizing scores within a single result set, before combining them with other result sets."
-    },
-    "ResultsNormalizationKind": {
-      "type": "string",
-      "enum": [
-        "minmax"
-      ],
-      "x-ms-enum": {
-        "name": "ResultsNormalizationKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "minmax",
-            "name": "MinMax",
-            "description": "The Min-Max normalization function rescales each score in a result set to a specified range [0 to 1], by subtracting the minimum value and then dividing by the scoring range of the result set."
-          }
-        ]
-      },
-      "description": "Allow "
-    },
-    "MinMaxResultsNormalization": {
-      "type": "object",
-      "x-ms-discriminator-value": "minmax",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResultsNormalization"
-        }
-      ],
-      "description": "The Min-Max normalization function rescales each score in a result set to a specified range [0 to 1], by subtracting the minimum value and then dividing by the scoring range of the result set."
-    },
-    "TextResultsCombinationParameters": {
-      "type": "object",
-      "properties": {
-        "weight": {
-          "type": "number",
-          "format": "double",
-          "x-nullable": true,
-          "description": "A value representing the weight of documents that were retrieved by the text results set when compared against documents retrieved by the various vector queries."
-        },
-        "maxRecallSize": {
-          "type": "integer",
-          "format": "int32",
-          "x-nullable": true,
-          "description": "The maximum number of documents to be retrieved by the text query when executing a hybrid vector request."
-        }
-      },
-      "description": "Provides parameters to configure how the documents retrieved by the text query influence the final combined result sets."
-    },
-    "VectorResultsCombinationParameters": {
-      "type": "object",
-      "properties": {
-        "weights": {
-          "$ref": "#/definitions/VectorResultsFieldWeights",
-          "description": "A value representing the weight of documents that were retrieved by the text results set when compared against documents retrieved by the various vector queries."
-        }
-      },
-      "description": "Provides parameters to configure how the documents retrieved by the vector queries influence the final combined result sets."
-    },
-    "VectorResultsFieldWeights": {
-      "type": "object",
-      "properties": {
-        "weights": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "number",
-            "format": "double",
-            "x-nullable": false
-          },
-          "description": "The dictionary of per-field weights to boost result sets when combining them. The keys are field names and the values are the weights for each field."
-        }
-      },
-      "required": [
-        "weights"
-      ],
-      "description": "Defines weights on vector fields to boost their result sets when combining them with other vector field's result sets or with the text query's result set."
     },
     "CorsOptions": {
       "properties": {
@@ -10024,29 +9750,20 @@
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
+        },
+        {
+          "$ref": "#/definitions/AzureOpenAIParameters"
         }
       ],
-      "type": "object",
       "properties": {
-        "resourceUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The resource URI for your Azure OpenAI resource."
-        },
-        "deploymentId": {
-          "type": "string",
-          "description": "ID of your Azure OpenAI model deployment on the designated resource."
-        },
-        "apiKey": {
-          "type": "string",
-          "description": "API key for the designated Azure OpenAI resource."
-        },
-        "authIdentity": {
-          "$ref": "#/definitions/SearchIndexerDataIdentity",
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
           "x-nullable": true,
-          "description": "The user-assigned managed identity used for outbound connections."
+          "description": "The number of dimensions the resulting output embeddings should have. Only supported in text-embedding-3 and later models."
         }
       },
+      "type": "object",
       "description": "Allows you to generate a vector embedding for a given text input using the Azure OpenAI resource."
     },
     "VisionVectorizeSkill": {
@@ -12594,6 +12311,12 @@
           "format": "int32",
           "x-nullable": true,
           "description": "The maximum number of objects in complex collections allowed per document."
+        },
+        "maxStoragePerIndex": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true,
+          "description": "The maximum amount of storage in bytes allowed per index."
         }
       },
       "description": "Represents various service level limits."
