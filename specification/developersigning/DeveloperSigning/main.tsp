@@ -150,7 +150,7 @@ model SignResult {
   signature?: bytes;
 
   @doc("""
-Signing certificate corresponding to the private key used to sign the requested
+Signing certificate corresponding to the private key used to sign the requested 
 digest.
 """)
   signingCertificate?: bytes;
