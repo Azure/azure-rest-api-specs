@@ -10,7 +10,7 @@ The authentication types supported with Azure OpenAI On Your Data.
 @added(ServiceApiVersions.v2024_02_15_Preview)
 union OnYourDataAuthenticationType {
   string,
-  
+
   @doc("Authentication via API key.")
   apiKey: "api_key",
 

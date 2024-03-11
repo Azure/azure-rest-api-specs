@@ -13,7 +13,7 @@ namespace Azure.OpenAI;
 @removed(ServiceApiVersions.v2024_02_15_Preview)
 union AzureOpenAIOperationState {
   string,
-  
+
   @doc("The operation was created and is queued to be processed in the future.")
   notRunning: "notRunning",
 

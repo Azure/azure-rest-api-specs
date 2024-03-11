@@ -89,7 +89,7 @@ The type of Elasticsearch® retrieval query that should be executed when using i
 @added(ServiceApiVersions.v2024_02_15_Preview)
 union ElasticsearchQueryType {
   string,
-  
+
   @doc("Represents the default, simple query parser.")
   simple: "simple",
 
