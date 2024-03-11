@@ -469,14 +469,11 @@
     "RegistryPartialManagedServiceIdentity": {
       "description": "Managed service identity (system assigned and/or user assigned identities)",
       "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType"
-        },
-        "userAssignedIdentities": {
+      "allOf": [
+        {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
-      },
+      ],
       "additionalProperties": false
     },
     "PartialRegistry": {
