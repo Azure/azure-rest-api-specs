@@ -1342,34 +1342,34 @@ directive:
   - suppress: XmsParameterLocation
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-- suppress: PathForTrackedResourceTypes
+  - suppress: PathForTrackedResourceTypes
     from: resources.json
     reason: Not a tracked resource type. Cannot change anything due to design philosophy in ARM.
-- suppress: PostResponseCodes
+  - suppress: PostResponseCodes
     from: resources.json
     reason: Breaking change in order to change the API response code.
-- suppress: TenantLevelAPIsNotAllowed
+  - suppress: TenantLevelAPIsNotAllowed
     from: resources.json
     reason: Tenant level API's are allowed as an exception in ARM repo. It is a breaking change to modify it.
-- suppress: XmsPageableForListCalls
+  - suppress: XmsPageableForListCalls
     from: resources.json
     reason: Shared swagger with other teams. We cannot make changes to the API as we don't own it.
-- suppress: EvenSegmentedPathForPutOperation
+  - suppress: EvenSegmentedPathForPutOperation
     from: resources.json
     reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
-- suppress: DeleteResponseCodes
+  - suppress: DeleteResponseCodes
     from: resources.json
     reason: Breaking change in order to change the API response code.
-- suppress: PutResponseCodes
+  - suppress: PutResponseCodes
     from: resources.json
     reason: Breaking change in order to change the API response code.
-- suppress: AvoidAdditionalProperties
+  - suppress: AvoidAdditionalProperties
     from: resources.json
     reason: Breaking change in order to change the property names for multiple API's. Will fix in the future.
-- suppress: XmsExamplesRequired
+  - suppress: XmsExamplesRequired
     from: resources.json
     reason: Xms Examples required is a pre-existing lint error. Not related to this version release. Will fix in the future.
-- suppress: RequiredReadOnlySystemData
+  - suppress: RequiredReadOnlySystemData
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future
 ```
