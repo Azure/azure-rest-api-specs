@@ -53,7 +53,7 @@ model TargetProperties {
 
 @doc("The vault specific details required if using SQL authentication to connect to a target.")
 model VaultSecret {
-  @doc("The ARM ResourceId of the Key Vault instance storing database authentication secrets.")
+  @doc("The Azure ResourceId of the Key Vault instance storing database authentication secrets.")
   akvResourceId?: ResourceIdentifier<[
     {
       type: "Microsoft.KeyVault/vaults";

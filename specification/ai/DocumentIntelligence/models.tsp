@@ -221,6 +221,10 @@ enum DocumentFieldType {
 
   @doc("Boolean value, normalized to true or false.")
   boolean,
+
+  @added(Versions.v2024_02_29_preview)
+  @doc("Array of selected string values.")
+  selectionGroup,
 }
 
 @doc("Presence of signature.")
@@ -263,11 +267,28 @@ enum SplitMode {
 @lroStatus
 @doc("Operation status.")
 enum OperationStatus {
-  @doc("The operation has not started yet.") notStarted,
-  @doc("The operation is in progress.") running,
-  @doc("The operation has failed.") @lroFailed failed,
-  @doc("The operation has succeeded.") @lroSucceeded succeeded,
-  @doc("The operation has been canceled.") @lroCanceled canceled,
+  @doc("The operation has not started yet.")
+  notStarted,
+
+  @doc("The operation is in progress.")
+  running,
+
+  @doc("The operation has failed.")
+  @lroFailed
+  failed,
+
+  @doc("The operation has succeeded.")
+  @lroSucceeded
+  succeeded,
+
+  @added(Versions.v2024_02_29_preview)
+  @doc("The operation has completed.")
+  @lroSucceeded
+  completed,
+
+  @doc("The operation has been canceled.")
+  @lroCanceled
+  canceled,
 }
 
 @doc("Type of content source.")
@@ -336,9 +357,22 @@ model InnerError {
   innererror?: InnerError;
 }
 
+@doc("The error object.")
+@projectedName("csharp", "DocumentIntelligenceWarning")
+model Warning {
+  @doc("One of a server-defined set of warning codes.")
+  code: string;
+
+  @doc("A human-readable representation of the warning.")
+  message: string;
+
+  @doc("The target of the error.")
+  target?: string;
+}
+
 @doc("Status and result of the analyze operation.")
 model AnalyzeResultOperation {
-  @doc("Operation status.")
+  @doc("Operation status.  notStarted, running, succeeded, or failed")
   status: OperationStatus;
 
   @doc("Date and time (UTC) when the analyze operation was submitted.")
@@ -929,6 +963,10 @@ model DocumentField {
   @doc("Boolean value.")
   valueBoolean?: boolean;
 
+  @added(Versions.v2024_02_29_preview)
+  @doc("Selection group value.")
+  valueSelectionGroup?: string[];
+
   @doc("Field content.")
   content?: string;
 
@@ -1126,9 +1164,9 @@ model OperationDetails {
   @doc("Operation ID")
   @key
   @visibility("read", "create")
-  operationId: uuid;
+  operationId: string;
 
-  @doc("Operation status.")
+  @doc("Operation status.  notStarted, running, completed, or failed")
   status: OperationStatus;
 
   @doc("Operation progress (0-100).")
@@ -1200,6 +1238,10 @@ model DocumentModelDetails {
 
   @doc("Supported document types.")
   docTypes?: Record<DocumentTypeDetails>;
+
+  @added(Versions.v2024_02_29_preview)
+  @doc("List of warnings encountered while building the model.")
+  warnings?: Warning[];
 }
 
 @doc("Document type info.")
@@ -1248,6 +1290,11 @@ model BuildDocumentClassifierRequest {
   @maxLength(4096)
   description?: string;
 
+  @added(Versions.v2024_02_29_preview)
+  @doc("Base classifierId on top of which to train the classifier.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+  baseClassifierId?: string;
+
   @doc("List of document types to classify against.")
   docTypes: Record<ClassifierDocumentTypeDetails>;
 }
@@ -1295,8 +1342,17 @@ model DocumentClassifierDetails {
   @doc("API version used to create this document classifier.")
   apiVersion: string;
 
+  @added(Versions.v2024_02_29_preview)
+  @doc("Base classifierId on top of which the classifier was trained.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+  baseClassifierId?: string;
+
   @doc("List of document types to classify against.")
   docTypes: Record<ClassifierDocumentTypeDetails>;
+
+  @added(Versions.v2024_02_29_preview)
+  @doc("List of warnings encountered while building the classifier.")
+  warnings?: Warning[];
 }
 
 @doc("Document classification parameters.")
