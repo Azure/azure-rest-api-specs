@@ -45,6 +45,7 @@ directive:
       - logicalNetworks.json
       - marketplaceGalleryImages.json
       - networkInterfaces.json
+      - networkSecurityGroups.json
       - operations.json
       - storageContainers.json
       - virtualHardDisks.json
@@ -76,6 +77,7 @@ suppressions:
       - logicalNetworks.json
       - marketplaceGalleryImages.json
       - networkInterfaces.json
+      - networkSecurityGroups.json
       - operations.json
       - storageContainers.json
       - virtualHardDisks.json
@@ -231,6 +233,7 @@ input-file:
   - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/logicalNetworks.json
   - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/marketplaceGalleryImages.json
   - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/networkSecurityGroups.json
   - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/storageContainers.json
   - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/virtualHardDisks.json
   - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/virtualMachineInstances.json
