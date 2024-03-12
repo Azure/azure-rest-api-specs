@@ -1398,11 +1398,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success. The response indicates the default Config Server has deleted."
-          },
           "202": {
-            "description": "Accepted. The response indicates the default Config Server is now deleting."
+            "description": "Accepted. The response indicates the default Config Server is now deleting.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success. The response indicates the default Config Server doesn't exist or has deleted."
