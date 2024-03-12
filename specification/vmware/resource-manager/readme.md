@@ -120,21 +120,21 @@ swagger-to-sdk:
 ### AutoRest v2 Suppressions
 ``` yaml
 directive:
-  - suppress: pathresourceprovidernamepascalcase
-    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-    from:
-      - vmware.json
+  # - suppress: pathresourceprovidernamepascalcase
+  #   reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
+  #   from:
+  #     - vmware.json
 
-  - suppress: ParametersOrder
-    reason: Breaking change to update the parameters order
-    from: vmware.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].get
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
+  # - suppress: ParametersOrder
+  #   reason: Breaking change to update the parameters order
+  #   from: vmware.json
+  #   where:
+  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].get
+  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].delete
+  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].delete
+  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].delete
+  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
+  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
 
   - transform: $["x-ms-client-flatten"] = false
     from: vmware.json
@@ -148,40 +148,39 @@ directive:
 ``` yaml
 suppressions:
     
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: Breaking change to update existing property names
-    from: vmware.json
-    where:
-      - $.definitions.Circuit.properties.expressRouteID
-      - $.definitions.Circuit.properties.expressRoutePrivatePeeringID
-      - $.definitions.IdentitySource.properties.baseUserDN
-      - $.definitions.IdentitySource.properties.baseGroupDN
-      - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
-      - $.definitions.WorkloadNetworkPublicIPProperties.properties.publicIPBlock
-      - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
+  # - code: DefinitionsPropertiesNamesCamelCase
+  #   reason: Breaking change to update existing property names
+  #   from: vmware.json
+  #   where:
+  #     - $.definitions.Circuit.properties.expressRouteID
+  #     - $.definitions.Circuit.properties.expressRoutePrivatePeeringID
+  #     - $.definitions.IdentitySource.properties.baseUserDN
+  #     - $.definitions.IdentitySource.properties.baseGroupDN
+  #     - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
+  #     - $.definitions.WorkloadNetworkPublicIPProperties.properties.publicIPBlock
+  #     - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
 
-  - code: ArmResourcePropertiesBag
-    reason: Breaking change to update existing property names
-    from: vmware.json
-    where:
-      - $.definitions.PlacementPolicy
+  # - code: ArmResourcePropertiesBag
+  #   reason: Breaking change to update existing property names
+  #   from: vmware.json
+  #   where:
+  #     - $.definitions.PlacementPolicy
 
-
-  - code: UnSupportedPatchProperties
-    reason: Breaking change to remove name or type properties
-    from: vmware.json
+  # - code: UnSupportedPatchProperties
+  #   reason: Breaking change to remove name or type properties
+  #   from: vmware.json
     # where: 
     #   - $ $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].patch
 
-  - code: DeleteResponseCodes
-    reasons: Our deletes are modeled with ArmResourceDeleteAsync. Removing the 200 OK response is breaking.
+  # - code: DeleteResponseCodes
+  #   reasons: Our deletes are modeled with ArmResourceDeleteAsync. Removing the 200 OK response is breaking.
 
-  - code: PatchBodyParametersSchema
-    reasons: false positives
+  # - code: PatchBodyParametersSchema
+  #   reasons: false positives
     # https://github.com/Azure/azure-sdk-tools/issues/7802
 
-  - code: EvenSegmentedPathForPutOperation
-    reasons: false positives
+  # - code: EvenSegmentedPathForPutOperation
+  #   reasons: false positives
     # https://github.com/Azure/azure-sdk-tools/issues/7801
 
 ```
