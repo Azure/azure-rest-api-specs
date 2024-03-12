@@ -1,7 +1,9 @@
 import "@typespec/http";
+import "@azure-tools/typespec-client-generator-core";
 
 namespace ImageAnalysis;
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 @doc("A basic rectangle specifying a sub-region of the image.")
 model ImageBoundingBox {

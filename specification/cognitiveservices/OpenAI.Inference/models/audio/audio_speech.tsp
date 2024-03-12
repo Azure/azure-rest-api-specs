@@ -1,6 +1,8 @@
 import "@typespec/versioning";
 import "@typespec/http";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 using TypeSpec.Http;
 
