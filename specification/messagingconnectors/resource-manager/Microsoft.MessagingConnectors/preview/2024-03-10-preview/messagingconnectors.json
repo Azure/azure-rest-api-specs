@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.MessagingConnectors management service",
-    "version": "2024-01-20-preview",
+    "version": "2024-03-10-preview",
     "description": "Microsoft.MessagingConnectors Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -220,6 +220,9 @@
           "KinesisSourceConnector Get": {
             "$ref": "./examples/KinesisSourceConnector_Get.json"
           },
+          "MySqlSourceConnector Get": {
+            "$ref": "./examples/MySqlSourceConnector_Get.json"
+          },
           "PostgreSqlSourceConnector Get": {
             "$ref": "./examples/PostgreSqlSourceConnector_Get.json"
           }
@@ -295,6 +298,9 @@
           "KinesisSourceConnector CreateOrUpdate": {
             "$ref": "./examples/KinesisSourceConnector_CreateOrUpdate.json"
           },
+          "MySqlSourceConnector CreateOrUpdate": {
+            "$ref": "./examples/MySqlSourceConnector_CreateOrUpdate.json"
+          },
           "PostgreSqlSourceConnector CreateOrUpdate": {
             "$ref": "./examples/PostgreSqlSourceConnector_CreateOrUpdate.json"
           }
@@ -364,6 +370,9 @@
           "KinesisSourceConnector UpdateTags": {
             "$ref": "./examples/KinesisSourceConnector_UpdateTags.json"
           },
+          "MySqlSourceConnector UpdateTags": {
+            "$ref": "./examples/MySqlSourceConnector_UpdateTags.json"
+          },
           "PostgreSqlSourceConnector UpdateTags": {
             "$ref": "./examples/PostgreSqlSourceConnector_UpdateTags.json"
           }
@@ -423,6 +432,9 @@
           },
           "KinesisSourceConnector Delete": {
             "$ref": "./examples/KinesisSourceConnector_Delete.json"
+          },
+          "MySqlSourceConnector Delete": {
+            "$ref": "./examples/MySqlSourceConnector_Delete.json"
           },
           "PostgreSqlSourceConnector Delete": {
             "$ref": "./examples/PostgreSqlSourceConnector_Delete.json"
@@ -492,6 +504,9 @@
           "KinesisSourceConnector Pause": {
             "$ref": "./examples/KinesisSourceConnector_Pause.json"
           },
+          "MySqlSourceConnector Pause": {
+            "$ref": "./examples/MySqlSourceConnector_Pause.json"
+          },
           "PostgreSqlSourceConnector Pause": {
             "$ref": "./examples/PostgreSqlSourceConnector_Pause.json"
           }
@@ -559,6 +574,9 @@
           },
           "KinesisSourceConnector Resume": {
             "$ref": "./examples/KinesisSourceConnector_Resume.json"
+          },
+          "MySqlSourceConnector Resume": {
+            "$ref": "./examples/MySqlSourceConnector_Resume.json"
           },
           "PostgreSqlSourceConnector Resume": {
             "$ref": "./examples/PostgreSqlSourceConnector_Resume.json"
@@ -728,7 +746,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -922,7 +941,8 @@
         "CosmosDbSource",
         "BitCoinSource",
         "KafkaSource",
-        "ConfluentSource"
+        "ConfluentSource",
+        "MySqlSource"
       ],
       "x-ms-enum": {
         "name": "ConnectorType",
@@ -972,6 +992,11 @@
             "name": "ConfluentSource",
             "value": "ConfluentSource",
             "description": "confluent source connector."
+          },
+          {
+            "name": "MySqlSource",
+            "value": "MySqlSource",
+            "description": "mysql source connector."
           }
         ]
       }
@@ -1305,6 +1330,85 @@
       ],
       "x-ms-discriminator-value": "KinesisSource"
     },
+    "MySqlSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for MySqlSourceConnector",
+      "properties": {
+        "connectorDirection": {
+          "type": "string",
+          "description": "Direction of the Source Connector.",
+          "default": "Source",
+          "enum": [
+            "Unknown",
+            "Source",
+            "Sink"
+          ],
+          "x-ms-enum": {
+            "name": "Direction",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Unknown direction"
+              },
+              {
+                "name": "Source",
+                "value": "Source",
+                "description": "Source Connector"
+              },
+              {
+                "name": "Sink",
+                "value": "Sink",
+                "description": "Sink Connector"
+              }
+            ]
+          }
+        },
+        "hostName": {
+          "type": "string",
+          "description": "HostName for MySql."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port for MySql."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "DatabaseName for MySql."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username for MySql."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password for MySql.",
+          "x-ms-secret": true
+        },
+        "serverId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Server id for MySql."
+        }
+      },
+      "required": [
+        "hostName",
+        "port",
+        "databaseName",
+        "username",
+        "password",
+        "serverId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "MySqlSource"
+    },
     "OffsetPolicyForCosmosDB": {
       "type": "string",
       "description": "Enum of the OffsetPolicy for CosmosDB connector",
@@ -1512,16 +1616,16 @@
       "type": "string",
       "description": "Microsoft.MessagingConnectors api versions.",
       "enum": [
-        "2024-01-20-preview"
+        "2024-03-10-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
         "modelAsString": true,
         "values": [
           {
-            "name": "v2024_01_20_preview",
-            "value": "2024-01-20-preview",
-            "description": "2024-01-20-preview version"
+            "name": "v2024_03_10_preview",
+            "value": "2024-03-10-preview",
+            "description": "2024-03-10-preview version"
           }
         ]
       }
