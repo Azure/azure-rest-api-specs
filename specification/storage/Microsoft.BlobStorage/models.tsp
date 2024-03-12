@@ -183,6 +183,33 @@ model ApiVersionParameter {
   version: string;
 }
 
+@doc("The lease break period header.")
+model LeaseBreakPeriod {
+  @doc("For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately.")
+  @header
+  @clientName("breakPeriod")
+  `x-ms-lease-break-period`?: int32;
+}
+
+@doc("The required lease ID header.")
+model ProposedLeaseIdRequired {
+  @doc("Required.  The proposed lease ID for the container.")
+  @header `x-ms-proposed-lease-id`: string;
+}
+
+@doc("The optional lease ID header.")
+model ProposedLeaseIdOptional {
+  @doc("Optional.  The proposed lease ID for the container.")
+  @header `x-ms-proposed-lease-id`?: string;
+}
+
+@doc("The lease ID required header.")
+model LeaseIdRequired {
+  @doc("Required.  A lease ID for the source path. If specified, the source path must have an active lease and the lease ID must match.")
+  @clientName("leaseId")
+  @header `x-ms-lease-id`: string;
+}
+
 /// Models
 
 @doc("Represents an array of signed identifiers")

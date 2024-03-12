@@ -22,6 +22,8 @@ interface BlobServiceProperties {
   """)
   @put
   @operationId("Service_SetProperties")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   setServiceProperties(
     @doc("The storage service properties that specifies the analytics and CORS rules to set on the Blob service.")
     @body body: StorageServiceProperties;
@@ -41,6 +43,8 @@ interface BlobServiceProperties {
   @doc("Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.")
   @operationId("Service_GetProperties")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   getServiceProperties(
     ...TimeoutParameter;
     ...ApiVersionParameter;
@@ -64,6 +68,8 @@ interface BlobServiceStatistics {
   """)
   @operationId("Service_GetStatistics")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   getStatistics(
     ...TimeoutParameter;
     ...ApiVersionParameter;
@@ -84,10 +90,12 @@ interface BlobServiceStatistics {
 }
 
 @route("/?comp=list")
-interface ListContainerSegments {
+interface BlobServiceListContainerSegments {
   @doc("The List Containers Segment operation returns a list of the containers under the specified account")
   @get
   @operationId("Service_ListContainersSegment")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   listContainers(
     ...PrefixParameter;
     ...TimeoutParameter;
@@ -112,6 +120,8 @@ interface BlobServiceUserDelegationKey {
   @doc("The Get User Delegation Key operation gets the user delegation key for the Blob service. This is only a valid operation when using User Delegation SAS. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas\">Create a user delegation SAS</a>.")
   @post
   @operationId("Service_GetUserDelegationKey") 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   getUserDelegationKey(
     @doc("The user delegation key info.")
     @body body: KeyInfo;
@@ -136,7 +146,9 @@ interface BlobServiceAccountProperties {
   @doc("Returns the sku name and account kind.")
   @get
   @operationId("Service_GetAccountInfo")
-  get(
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  getAccountInfo(
     ...ApiVersionParameter;
   ): {
     @statusCode statusCode: 200;
@@ -166,7 +178,9 @@ interface BlobServiceBatch {
   @doc("The Batch operation allows multiple API calls to be embedded into a single HTTP request.")
   @post
   @operationId("Service_SubmitBatch")
-  post(
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  submitBatch(
     @doc("The batch request content")
     @body body: bytes; // TODO: Investigate this type
     ...ContentLengthHeader;
@@ -190,6 +204,8 @@ interface FilterBlobsService {
   @doc("The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression.")
   @get
   @operationId("Service_FilterBlobs")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   listBlobs(
     ...FilterBlobsWhere;
     ...FilterBlobsInclude;
@@ -214,10 +230,12 @@ interface FilterBlobsService {
 }
 
 @route("/{containerName}?restype=container")
-interface ContainerService {
+interface BlobServiceContainer {
   @doc("Creates a new container under the specified account. If the container with the same name already exists, the operation fails.")
   @put
   @operationId("Container_Create")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   createContainer(
     ...ContainerNameParameter;
     ...MetadataParameter;
@@ -248,6 +266,8 @@ interface ContainerService {
   @doc("returns all user-defined metadata and system properties for the specified container. The data returned does not include the container's list of blobs")
   @get
   @operationId("Container_GetProperties")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   getContainerProperties(
     ...ContainerNameParameter;
     ...TimeoutParameter;
@@ -299,6 +319,8 @@ interface ContainerService {
   @doc("operation marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection")
   @delete
   @operationId("Container_Delete")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   deleteContainer(
     ...ContainerNameParameter;
     ...TimeoutParameter;
@@ -322,10 +344,12 @@ interface ContainerService {
 }
 
 @route("/{containerName}?restype=container&comp=metadata")
-interface ContainerMetadataService {
+interface BlobServiceContainerMetadata {
   @doc("operation sets one or more user-defined name-value pairs for the specified container.")
   @put
   @operationId("Container_SetMetadata")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   setContainerMetadata(
     ...ContainerNameParameter;
     ...MetadataParameter;
@@ -354,10 +378,12 @@ interface ContainerMetadataService {
 }
 
 @route("/{containerName}?restype=container&comp=acl")
-interface ContainerAccessPolicyService {
+interface BlobServiceContainerAccessPolicy {
   @doc("gets the permissions for the specified container. The permissions indicate whether container data may be accessed publicly.")
   @get
   @operationId("Container_GetAccessPolicy")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   getContainerccessPolicy(
     ...ContainerNameParameter;
     ...TimeoutParameter;
@@ -388,6 +414,8 @@ interface ContainerAccessPolicyService {
   @doc("sets the permissions for the specified container. The permissions indicate whether blobs in a container may be accessed publicly.")
   @put
   @operationId("Container_SetAccessPolicy")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   setContainerAccessPolicy(
     ...ContainerNameParameter;
     ...ContainerAcl;
@@ -423,6 +451,8 @@ interface ContainerRestoreService {
   @doc("Restores a previously-deleted container.")
   @put
   @operationId("Container_Undelete")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   undeleteContainer(
     ...ContainerNameParameter;
     ...DeletedContainerName;
@@ -449,6 +479,8 @@ interface ContainerRenameService {
   @doc("Renames an existing container.")
   @put
   @operationId("Container_Rename")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   renameContainer(
     ...ContainerNameParameter;
     ...SourceContainerName;
@@ -475,6 +507,8 @@ interface ContainerBatchService {
   @doc("The Batch operation allows multiple API calls to be embedded into a single HTTP request.")
   @post
   @operationId("Container_SubmitBatch")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   submitBatch(
     @doc("The batch request content")
     @body body: bytes; // TODO: Investigate this type
@@ -493,4 +527,240 @@ interface ContainerBatchService {
     @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
     @header `x-ms-version`: string;
   } | StorageError;
+}
+
+@route("/{containerName}?restype=container&comp=blobs")
+interface BlobListService {
+  @doc("The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container.")
+  @get
+  @operationId("Container_FilterBlobs")
+  filterBlobs(
+    ...ContainerNameParameter;
+    ...MarkerParameter;
+    ...MaxResultsParameter;
+    ...FilterBlobsWhere;
+    ...FilterBlobsInclude;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 200;
+    @body body: FilterBlobSegment;
+    @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
+    @header `x-ms-client-request-id`?: string;
+    @doc("This header uniquely identifies the request that was made and can be used for troubleshooting the request.")
+    @header `x-ms-request-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @encode("date-time-rfc1123")
+    @header Date: utcDateTime;
+  } | StorageError;
+}
+
+@route("/{containerName}?comp=lease&restype=container&acquire")
+interface ContainerLeaseService {
+  @doc("[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite")
+  @put
+  @operationId("Container_AcquireLease")
+  acquireLease(
+    ...ContainerNameParameter;
+    ...LeaseDuration;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...ProposedLeaseId;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+  ): {
+    @statusCode statusCode: 201;
+    @doc("The lease ID specified in the request or a generated one if not specified.")
+    @header `x-ms-lease-id`: string;
+    @doc("The ETag contains a value that you can use to perform operations conditionally.")
+    @header ETag: string;
+    @doc("The date/time that the container was last modified.")
+    @encode("date-time-rfc1123")
+    @header `Last-Modified`: utcDateTime;
+    @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
+    @header `x-ms-client-request-id`?: string;
+    @doc("This header uniquely identifies the request that was made and can be used for troubleshooting the request.")
+    @header `x-ms-request-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @encode("date-time-rfc1123")
+    @header Date: utcDateTime;
+  } | StorageError;
+}
+
+@route("/{containerName}?comp=lease&restype=container&release")
+interface ContainerReleaseLeaseService {
+  @doc("[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite")
+  @put
+  @operationId("Container_ReleaseLease")
+  releaseLease(
+    ...ContainerNameParameter;
+    ...LeaseIdRequired;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+  ): {
+    @statusCode statusCode: 200;
+    @doc("The ETag contains a value that you can use to perform operations conditionally.")
+    @header ETag: string;
+    @doc("The date/time that the container was last modified.")
+    @encode("date-time-rfc1123")
+    @header `Last-Modified`: utcDateTime;
+    @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
+    @header `x-ms-client-request-id`?: string;
+    @doc("This header uniquely identifies the request that was made and can be used for troubleshooting the request.")
+    @header `x-ms-request-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @encode("date-time-rfc1123")
+    @header Date: utcDateTime;
+  } | StorageError;
+}
+
+@route("/{containerName}?comp=lease&restype=container&renew")
+interface ContainerRenewLeaseService {
+  @doc("[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite")
+  @put
+  @operationId("Container_RenewLease")
+  renewLease(
+    ...ContainerNameParameter;
+    ...LeaseIdRequired;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+  ): {
+    @statusCode statusCode: 200;
+    @doc("The lease ID specified in the request or a generated one if not specified.")
+    @header `x-ms-lease-id`: string;
+    @doc("The ETag contains a value that you can use to perform operations conditionally.")
+    @header ETag: string;
+    @doc("The date/time that the container was last modified.")
+    @encode("date-time-rfc1123")
+    @header `Last-Modified`: utcDateTime;
+    @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
+    @header `x-ms-client-request-id`?: string;
+    @doc("This header uniquely identifies the request that was made and can be used for troubleshooting the request.")
+    @header `x-ms-request-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @encode("date-time-rfc1123")
+    @header Date: utcDateTime;
+  } | StorageError;
+}
+
+@route("/{containerName}?comp=lease&restype=container&break")
+interface ConatinerBreakLeaseService {
+  @doc("[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite")
+  @put
+  @operationId("Container_BreakLease")
+  breakLease(
+    ...ContainerNameParameter;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...LeaseBreakPeriod;
+  ): {
+    @statusCode statusCode: 202;
+    @doc("The lease time remaining on the container.")
+    @header `x-ms-lease-time`: number;
+    @doc("The ETag contains a value that you can use to perform operations conditionally.")
+    @header ETag: string;
+    @doc("The date/time that the container was last modified.")
+    @encode("date-time-rfc1123")
+    @header `Last-Modified`: utcDateTime;
+    @doc("The lease ID specified in the request or a generated one if not specified.")
+    @header `x-ms-lease-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @encode("date-time-rfc1123")
+    @header Date: utcDateTime;
+  } | StorageError;
+}
+
+@route("/{containerName}?comp=lease&restype=container&change")
+interface ContainerChangeLeaseService {
+  @doc("[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite")
+  @put
+  @operationId("Container_ChangeLease")
+  changeLease(
+    ...ContainerNameParameter;
+    ...LeaseIdRequired;
+    ...ProposedLeaseIdRequired;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+  ): {
+    @statusCode statusCode: 200;
+    @doc("The lease ID specified in the request or a generated one if not specified.")
+    @header `x-ms-lease-id`: string;
+    @doc("The ETag contains a value that you can use to perform operations conditionally.")
+    @header ETag: string;
+    @doc("The date/time that the container was last modified.")
+    @encode("date-time-rfc1123")
+    @header `Last-Modified`: utcDateTime;
+    @doc("The lease time remaining on the container.")
+    @header `x-ms-lease-time`: number;
+    @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
+    @header `x-ms-client-request-id`?: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @header Date: utcDateTime;
+  } | StorageError;
+}
+
+@route("/{containerName}?restype=container&comp=list&flat")
+interface ContainerListBlobsService {
+  @doc("[Update] The List Blobs operation returns a list of the blobs under the specified container",)
+  @get
+  @operationId("Container_ListBlobs")
+  listBlobs(
+    ...ContainerNameParameter;
+    ...PrefixParameter;
+    ...MarkerParameter;
+    ...MaxResultsParameter;
+    ...IncludeParameter;
+    ...DelimiterParameter;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 200;
+    @body body: ListBlobsFlatSegment;
+    @doc("The ETag contains a value that you can use to perform operations conditionally.")
+    @header ETag: string;
+    @doc("The date/time that the container was last modified.")
+    @encode("date-time-rfc1123")
+    @header `Last-Modified`: utcDateTime;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("The value of the NextMarker header is used when the number of blobs to return exceeds the maximum that can be returned in a single response.")
+    @header `x-ms-blob-continuation-token`: string;
+    @doc("The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID")
+    @header `Content-Type`: string;
+    @doc("The value of the NextMarker header is used when the number of blobs to return exceeds the maximum that can be returned in a single response.")
+    @header `x-ms-continuation-token`: string;
+    @doc("The value of the NextMarker header is used when the number of blobs to return exceeds the maximum that can be returned in a single response.")
+    @header `x-ms-marker`: string;
+    @doc("The value of the NextMarker header is used when the number of blobs to return exceeds the maximum that can be returned in a single response.")
+    @header `x-ms-blob-continuation-token`: string;
+    @doc("The value of the NextMarker header is used when the number of blobs to return exceeds the maximum that can be returned in a single response.")
+    @header `x-ms-continuation-token`: string;
+    @doc("The value of the NextMarker header is used when
 }
