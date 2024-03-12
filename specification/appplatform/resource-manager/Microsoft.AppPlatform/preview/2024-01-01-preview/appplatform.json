@@ -10981,6 +10981,18 @@
           "description": "Indicates whether the data plane components(log stream, app connect, remote debugging) in vnet injection instance could be accessed from internet.",
           "type": "boolean",
           "default": false
+        },
+        "privateDnsZoneId": {
+          "description": "Fully qualified resource Id of the Private DNS zone to link with the customer virtual network.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateDnsZones"
+              }
+            ]
+          }
         }
       }
     },
