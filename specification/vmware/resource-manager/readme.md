@@ -146,7 +146,7 @@ directive:
 
 ### AutoRest v3 Suppressions
 ``` yaml
-suppressions:
+# suppressions:
     
   # - code: DefinitionsPropertiesNamesCamelCase
   #   reason: Breaking change to update existing property names
