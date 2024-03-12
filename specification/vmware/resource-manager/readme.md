@@ -117,29 +117,9 @@ swagger-to-sdk:
 
 ## Suppression
 
-### AutoRest v2 Suppressions
+### AutoRest Directives
 ``` yaml
 directive:
-  # - suppress: pathresourceprovidernamepascalcase
-  #   reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-  #   from:
-  #     - vmware.json
-
-
-  # - suppress: RequiredReadOnlySystemData
-  #   reason: systemData is not in this API version
-  #   from: vmware.json
-
-  # - suppress: ParametersOrder
-  #   reason: Breaking change to update the parameters order
-  #   from: vmware.json
-  #   where:
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].get
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].delete
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].delete
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].delete
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
 
   - transform: $["x-ms-client-flatten"] = false
     from: vmware.json
@@ -231,9 +211,9 @@ suppressions:
     reason: false positives
     from: vmware.json
 
-  # - code: XmsClientNameParameter
-  #   reason: this warning is false postive
-  #   from: vmware.json
+  - code: XmsClientNameParameter
+    reason: this warning is false postive
+    from: vmware.json
 
   - code: docLinkLocale
     reason: false positives
@@ -243,15 +223,11 @@ suppressions:
   #   reason: false positives
   #   from: vmware.json
 
-
-  # - code: AvoidAdditionalProperties
-  #   reasons: this is how TypeSpec models records
-  #   from: vmware.json
-
-  # - code: XmsPageableForListCalls
-  #   reasons: This is a TypeSpec @singleton.
-  #   from: vmware.json
-  #   # where: WorkloadNetworks_Get
+  - code: XmsPageableForListCalls
+    reasons: This are gets on a TypeSpec @singleton. These are false positives.
+    from: vmware.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/iscsiPaths/default"].get
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default"].get
 
   - code: DeleteResponseCodes
     reasons: ArmResourceDeleteAsync is still being used. Moving to ArmResourceDeleteWithoutOkAsync is breaking.
