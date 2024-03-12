@@ -32,7 +32,7 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 openapi-subtype: providerHub
-tag: 2023-10-01-preview
+tag: package-2023-10-01-preview
 ```
 
 ### Tag: package-2023-10-01-preview
