@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
 A specific representation of configurable options for Pinecone when using it as an Azure OpenAI chat
 extension.
@@ -27,7 +27,7 @@ model PineconeChatExtensionConfiguration
   parameters: PineconeChatExtensionParameters;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is APIKey.")
 model PineconeChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
@@ -37,36 +37,44 @@ model PineconeChatExtensionParameters {
   environment: string;
 
   @doc("The name of the Pinecone database index.")
+  @encodedName("application/json", "index_name")
   indexName: string;
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
   @clientName("FieldMappingOptions", "csharp")
+  @encodedName("application/json", "fields_mapping")
   fieldsMapping: PineconeFieldMappingOptions;
 
   @doc("The embedding dependency for vector search.")
+  @encodedName("application/json", "embedding_dependency")
   embeddingDependency: OnYourDataVectorizationSource;
 }
 
 @doc("Optional settings to control how fields are processed when using a configured Pinecone resource.")
-@added(ServiceApiVersions.v2023_08_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model PineconeFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
   @clientName("TitleFieldName", "csharp")
+  @encodedName("application/json", "title_field")
   titleField?: string;
 
   @doc("The name of the index field to use as a URL.")
   @clientName("UrlFieldName", "csharp")
+  @encodedName("application/json", "url_field")
   urlField?: string;
 
   @doc("The name of the index field to use as a filepath.")
   @clientName("FilepathFieldName", "csharp")
+  @encodedName("application/json", "filepath_field")
   filepathField?: string;
 
   @doc("The names of index fields that should be treated as content.")
   @clientName("ContentFieldNames", "csharp")
+  @encodedName("application/json", "content_fields")
   contentFields: string[];
 
   @doc("The separator pattern that content fields should use.")
   @clientName("ContentFieldSeparator", "csharp")
+  @encodedName("application/json", "content_fields_separator")
   contentFieldsSeparator?: string;
 }

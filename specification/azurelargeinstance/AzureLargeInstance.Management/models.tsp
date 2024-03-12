@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.AzureLargeInstance;
@@ -337,6 +339,7 @@ model StorageProfile {
 Specifies information about the operating system disk used by Azure Large
 Instance.
 """)
+  @extension("x-ms-identifiers", [])
   osDisks?: Disk[];
 }
 
@@ -378,6 +381,7 @@ model OsProfile {
 @doc("Specifies the network settings for the Azure Large Instance disks.")
 model NetworkProfile {
   @doc("Specifies the network interfaces for the Azure Large Instance.")
+  @extension("x-ms-identifiers", [])
   networkInterfaces?: IpAddress[];
 
   @doc("Specifies the circuit id for connecting to express route.")
@@ -404,6 +408,7 @@ model ForceState {
 
 @doc("Tags field of the AzureLargeInstance instance.")
 model Tags {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
   @clientName("tagsValue", "csharp")
   @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
