@@ -26,6 +26,7 @@ These are the global settings for the windowsesu.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: providerHub
 tag: package-2019-09-16
 ```
 
