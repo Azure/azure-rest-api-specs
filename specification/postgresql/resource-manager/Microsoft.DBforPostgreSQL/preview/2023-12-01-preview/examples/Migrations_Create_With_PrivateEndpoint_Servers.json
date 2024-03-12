@@ -8,6 +8,7 @@
     "parameters": {
       "properties": {
         "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
+        "migrationInstanceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testsourcemigration",
         "dbsToMigrate": [
           "db1",
           "db2",
@@ -21,7 +22,6 @@
           }
         },
         "migrationMode": "Offline",
-        "migrateRoles": "True",
         "overwriteDbsInTarget": "True"
       },
       "location": "westus"
@@ -52,7 +52,8 @@
           "migrationWindowStartTimeInUtc": "2021-05-06T16:05:58.895Z",
           "startDataMigration": "False",
           "triggerCutover": "False",
-          "migrateRoles": "True"
+          "migrateRoles": "False",
+          "migrationInstanceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testsourcemigration"
         },
         "tags": {
           "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -87,7 +88,8 @@
           "migrationWindowStartTimeInUtc": "2021-05-06T16:05:58.895Z",
           "startDataMigration": "False",
           "triggerCutover": "False",
-          "migrateRoles": "True"
+          "migrateRoles": "False",
+          "migrationInstanceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testsourcemigration"
         },
         "tags": {
           "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
