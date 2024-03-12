@@ -14,7 +14,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
+    "hostTemplate": "{Endpoint}/language",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -46,9 +46,9 @@
   },
   "tags": [],
   "paths": {
-    "/language/:analyze-conversations": {
+    "/:analyze-conversations": {
       "post": {
-        "operationId": "Language_AnalyzeConversations",
+        "operationId": "AnalyzeConversations",
         "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
@@ -97,9 +97,9 @@
         }
       }
     },
-    "/language/language/analyze-conversations/jobs": {
+    "/analyze-conversations/jobs": {
       "post": {
-        "operationId": "Language_AnalyzeConversationsSubmitJob",
+        "operationId": "AnalyzeConversationsSubmitJob",
         "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
@@ -164,9 +164,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/language/language/analyze-conversations/jobs/{jobId}": {
+    "/analyze-conversations/jobs/{jobId}": {
       "get": {
-        "operationId": "Language_AnalyzeConversationsJobStatus",
+        "operationId": "AnalyzeConversationsJobStatus",
         "summary": "Get analysis status and results",
         "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
         "parameters": [
@@ -233,9 +233,9 @@
         }
       }
     },
-    "/language/language/analyze-conversations/jobs/{jobId}:cancel": {
+    "/analyze-conversations/jobs/{jobId}:cancel": {
       "post": {
-        "operationId": "Language_AnalyzeConversationsCancelJob",
+        "operationId": "AnalyzeConversationsCancelJob",
         "summary": "Cancel a long-running Text Analysis conversations job",
         "description": "Cancel a long-running job for text analysis of conversations.",
         "parameters": [

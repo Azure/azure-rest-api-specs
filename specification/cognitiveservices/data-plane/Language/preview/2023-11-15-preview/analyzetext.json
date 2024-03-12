@@ -14,7 +14,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
+    "hostTemplate": "{Endpoint}/language",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -46,9 +46,9 @@
   },
   "tags": [],
   "paths": {
-    "/language/:analyze-text": {
+    "/:analyze-text": {
       "post": {
-        "operationId": "Language_AnalyzeText",
+        "operationId": "AnalyzeText",
         "description": "Request text analysis over a collection of documents.",
         "parameters": [
           {
@@ -127,9 +127,9 @@
         }
       }
     },
-    "/language/analyze-text/jobs": {
+    "/analyze-text/jobs": {
       "post": {
-        "operationId": "Language_AnalyzeTextSubmitJob",
+        "operationId": "AnalyzeTextSubmitJob",
         "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.",
         "parameters": [
           {
@@ -194,9 +194,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/language/analyze-text/jobs/{jobId}": {
+    "/analyze-text/jobs/{jobId}": {
       "get": {
-        "operationId": "Language_AnalyzeTextJobStatus",
+        "operationId": "AnalyzeTextJobStatus",
         "summary": "Get analysis status and results",
         "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
         "parameters": [
@@ -279,9 +279,9 @@
         }
       }
     },
-    "/language/analyze-text/jobs/{jobId}:cancel": {
+    "/analyze-text/jobs/{jobId}:cancel": {
       "post": {
-        "operationId": "Language_AnalyzeTextCancelJob",
+        "operationId": "AnalyzeTextCancelJob",
         "summary": "Cancel a long-running Text Analysis job.",
         "description": "Cancel a long-running Text Analysis job.",
         "parameters": [

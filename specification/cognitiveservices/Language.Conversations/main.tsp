@@ -25,7 +25,7 @@ using Azure.ClientGenerator.Core;
   title: "Microsoft Cognitive Language Service - Analyze Conversations",
 })
 @server(
-  "{Endpoint}",
+  "{Endpoint}/language",
   "Single server endpoint",
   {
     @doc("Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).")
@@ -673,7 +673,7 @@ enum AnalyzeConversationResultsKind {
 
 @doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
 @added(Versions.v2023_04_01)
-@resource("language/analyze-conversations/jobs")
+@resource("analyze-conversations/jobs")
 model AnalyzeConversationJobState {
   ...JobState;
   ...ConversationTasksState;
@@ -1742,63 +1742,60 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-@route("/language")
-interface Language {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @post
-  @doc("Analyzes the input conversation utterance.")
-  @route("/:analyze-conversations")
-  // @example("./SuccessfulAnalyzeConversations.json", "SuccessfulAnalyzeConversations")
-  // @example("./SuccessfulAnalyzeConversationsArbitration.json", "SuccessfulAnalyzeConversationsArbitration")
-  // @example("./SuccessfulAnalyzeConversationsArbitrationDirectTarget.json", "SuccessfulAnalyzeConversationsArbitrationDirectTarget")
-  analyzeConversations(
-    @doc("Collection of conversations to analyze and a single task to execute.")
-    @body
-    body: AnalyzeConversationTask,
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@post
+@doc("Analyzes the input conversation utterance.")
+@route("/:analyze-conversations")
+// @example("./SuccessfulAnalyzeConversations.json", "SuccessfulAnalyzeConversations")
+// @example("./SuccessfulAnalyzeConversationsArbitration.json", "SuccessfulAnalyzeConversationsArbitration")
+// @example("./SuccessfulAnalyzeConversationsArbitrationDirectTarget.json", "SuccessfulAnalyzeConversationsArbitrationDirectTarget")
+op analyzeConversations(
+  @doc("Collection of conversations to analyze and a single task to execute.")
+  @body
+  body: AnalyzeConversationTask,
 
-    ...Azure.Core.Foundations.ApiVersionParameter,
-  ): AnalyzeConversationTaskResult | Azure.Core.Foundations.ErrorResponse;
+  ...Azure.Core.Foundations.ApiVersionParameter,
+): AnalyzeConversationTaskResult | Azure.Core.Foundations.ErrorResponse;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @added(Versions.v2023_04_01)
-  @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
-  @summary("Get analysis status and results")
-  // @example("./SuccessfulConversationPIIExclusionTaskStatusRequest.json", "SuccessfulConversationPIIExclusionTaskStatusRequest")
-  // @example("./SuccessfulConversationPIIRedactionCharTaskStatusRequest.json", "SuccessfulConversationPIIRedactionCharTaskStatusRequest")
-  // @example("./SuccessfulConversationPIITaskStatusRequest.json", "SuccessfulConversationPIITaskStatusRequest")
-  // @example("./SuccessfulConversationSentimentTaskStatusRequest.json", "SuccessfulConversationSentimentTaskStatusRequest")
-  // @example("./SuccessfulConversationSummarizationTaskStatusRequest.json", "SuccessfulConversationSummarizationTaskStatusRequest")
-  // @example("./SuccessfulCustomConversationSummarizationTaskResult.json", "SuccessfulCustomConversationSummarizationTaskResult")
-  // @example("./SuccessfulConversationSummarizationTaskResult.json", "SuccessfulConversationSummarizationTaskResult")
-  analyzeConversationsJobStatus is Operations.ResourceRead<
-    AnalyzeConversationJobState,
-    ShowStatsQueryParameter
-  >;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.v2023_04_01)
+@doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
+@summary("Get analysis status and results")
+// @example("./SuccessfulConversationPIIExclusionTaskStatusRequest.json", "SuccessfulConversationPIIExclusionTaskStatusRequest")
+// @example("./SuccessfulConversationPIIRedactionCharTaskStatusRequest.json", "SuccessfulConversationPIIRedactionCharTaskStatusRequest")
+// @example("./SuccessfulConversationPIITaskStatusRequest.json", "SuccessfulConversationPIITaskStatusRequest")
+// @example("./SuccessfulConversationSentimentTaskStatusRequest.json", "SuccessfulConversationSentimentTaskStatusRequest")
+// @example("./SuccessfulConversationSummarizationTaskStatusRequest.json", "SuccessfulConversationSummarizationTaskStatusRequest")
+// @example("./SuccessfulCustomConversationSummarizationTaskResult.json", "SuccessfulCustomConversationSummarizationTaskResult")
+// @example("./SuccessfulConversationSummarizationTaskResult.json", "SuccessfulConversationSummarizationTaskResult")
+op analyzeConversationsJobStatus is Operations.ResourceRead<
+  AnalyzeConversationJobState,
+  ShowStatsQueryParameter
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @added(Versions.v2023_04_01)
-  @doc("Analyzes the input conversation utterance.")
-  @route("/language/analyze-conversations/jobs")
-  @pollingOperation(Language.analyzeConversationsJobStatus)
-  // @example("./SuccessfulConversationPIIExclusionSubmit.json", "SuccessfulConversationPIIExclusionSubmit")
-  // @example("./SuccessfulConversationPIIRedactionCharSubmit.json", "SuccessfulConversationPIIRedactionCharSubmit")
-  // @example("./SuccessfulConversationPIISubmit.json", "SuccessfulConversationPIISubmit")
-  // @example("./SuccessfulConversationSentimentSubmit.json", "SuccessfulConversationSentimentSubmit")
-  // @example("./SuccessfulConversationSummarySubmit.json", "SuccessfulConversationSummarySubmit")
-  // @example("./SuccessfulCustomConversationSummarizationTaskSubmit.json", "SuccessfulCustomConversationSummarizationTaskSubmit")
-  // @example("./SuccessfulConversationSummarizationTaskSubmit.json", "SuccessfulConversationSummarizationTaskSubmit")
-  analyzeConversationsSubmitJob is LanguageLongRunningOperation<
-    AnalyzeConversationJobsInput,
-    AnalyzeConversationJobState
-  >;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.v2023_04_01)
+@doc("Analyzes the input conversation utterance.")
+@route("/analyze-conversations/jobs")
+@pollingOperation(analyzeConversationsJobStatus)
+// @example("./SuccessfulConversationPIIExclusionSubmit.json", "SuccessfulConversationPIIExclusionSubmit")
+// @example("./SuccessfulConversationPIIRedactionCharSubmit.json", "SuccessfulConversationPIIRedactionCharSubmit")
+// @example("./SuccessfulConversationPIISubmit.json", "SuccessfulConversationPIISubmit")
+// @example("./SuccessfulConversationSentimentSubmit.json", "SuccessfulConversationSentimentSubmit")
+// @example("./SuccessfulConversationSummarySubmit.json", "SuccessfulConversationSummarySubmit")
+// @example("./SuccessfulCustomConversationSummarizationTaskSubmit.json", "SuccessfulCustomConversationSummarizationTaskSubmit")
+// @example("./SuccessfulConversationSummarizationTaskSubmit.json", "SuccessfulConversationSummarizationTaskSubmit")
+op analyzeConversationsSubmitJob is LanguageLongRunningOperation<
+  AnalyzeConversationJobsInput,
+  AnalyzeConversationJobState
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @added(Versions.v2023_04_01)
-  @doc("Cancel a long-running job for text analysis of conversations.")
-  @summary("Cancel a long-running Text Analysis conversations job")
-  @pollingOperation(Language.analyzeConversationsJobStatus)
-  @actionSeparator(":")
-  @action("cancel")
-  // @example("./SuccessfulAnalyzeConversationsJobsCancelRequest.json", "SuccessfulAnalyzeConversationsJobsCancelRequest")
-  analyzeConversationsCancelJob is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;
-}
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.v2023_04_01)
+@doc("Cancel a long-running job for text analysis of conversations.")
+@summary("Cancel a long-running Text Analysis conversations job")
+@pollingOperation(analyzeConversationsJobStatus)
+@actionSeparator(":")
+@action("cancel")
+// @example("./SuccessfulAnalyzeConversationsJobsCancelRequest.json", "SuccessfulAnalyzeConversationsJobsCancelRequest")
+op analyzeConversationsCancelJob is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;
