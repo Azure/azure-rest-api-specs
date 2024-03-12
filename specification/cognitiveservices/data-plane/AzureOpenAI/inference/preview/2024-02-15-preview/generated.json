@@ -1128,6 +1128,10 @@
           "type": "string",
           "description": "The file path of the citation."
         },
+        "metadata": {
+          "$ref": "#/definitions/AzureChatExtensionDataSourceResponseCitationMetadata",
+          "description": "Additional metadata related to this citation."
+        },
         "chunk_id": {
           "type": "string",
           "description": "The chunk ID of the citation."
@@ -1135,6 +1139,19 @@
       },
       "required": [
         "content"
+      ]
+    },
+    "AzureChatExtensionDataSourceResponseCitationMetadata": {
+      "type": "object",
+      "description": "A representation of additional metadata information for an On Your Data response citation.",
+      "properties": {
+        "chunking": {
+          "type": "string",
+          "description": "Additional information about chunking operations related to this citation."
+        }
+      },
+      "required": [
+        "chunking"
       ]
     },
     "AzureChatExtensionType": {

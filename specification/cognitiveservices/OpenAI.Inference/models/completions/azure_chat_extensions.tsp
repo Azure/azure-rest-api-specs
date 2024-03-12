@@ -87,9 +87,21 @@ model AzureChatExtensionDataSourceResponseCitation {
   @doc("The file path of the citation.")
   filepath?: string;
 
+  @doc("Additional metadata related to this citation.")
+  metadata?: AzureChatExtensionDataSourceResponseCitationMetadata;
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
   @doc("The chunk ID of the citation.")
   chunk_id?: string;
+}
+
+@added(ServiceApiVersions.v2024_02_15_Preview)
+@doc("""
+A representation of additional metadata information for an On Your Data response citation.
+""")
+model AzureChatExtensionDataSourceResponseCitationMetadata {
+  @doc("Additional information about chunking operations related to this citation.")
+  chunking: string;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)

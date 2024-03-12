@@ -3066,10 +3066,25 @@ components:
         filepath:
           type: string
           description: The file path of the citation.
+        metadata:
+          type:
+            $ref: '#/components/schemas/citationMetadata'
+          description: Additional metadata information for this citation.
         chunk_id:
           type: string
           description: The chunk ID of the citation.
       description: citation information for a chat completions response message.
+      required:
+        - content
+    citationMetadata:
+      type: object
+      description: Additional metadata information for a citation.
+      properties:
+        chunking:
+          type: string
+          description: Information about the chunking operations related to a citation.
+      required:
+        - chunking
     chatCompletionMessageToolCall:
       type: object
       properties:
