@@ -61,7 +61,7 @@ interface VirtualMachineInstances {
   /** The operation to restart a virtual machine instance. */
   restart is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    {}
+    void
   >;
   /** Creates a checkpoint in virtual machine instance. */
   createCheckpoint is ArmResourceActionNoResponseContentAsync<
