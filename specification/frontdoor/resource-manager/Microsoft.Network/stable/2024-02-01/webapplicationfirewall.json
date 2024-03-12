@@ -648,12 +648,12 @@
     "GroupByVariable": {
       "description": "Describes the variables available to group the rate limit requests",
       "required": [
-        "groupByDimension"
+        "variable"
       ],
       "type": "object",
       "properties": {
-        "groupByDimension": {
-          "description": "Describes the supported dimensions for group by",
+        "variable": {
+          "description": "Describes the supported variable for group by",
           "type": "string",
           "enum": [
             "SocketAddr",
@@ -661,7 +661,7 @@
             "None"
           ],
           "x-ms-enum": {
-            "name": "GroupByDimension",
+            "name": "Variable",
             "modelAsString": true
           }
         }
