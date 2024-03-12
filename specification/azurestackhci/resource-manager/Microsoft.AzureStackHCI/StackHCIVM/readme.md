@@ -42,6 +42,7 @@ directive:
       - logicalNetworks.json
       - marketplaceGalleryImages.json
       - networkInterfaces.json
+      - networkSecurityGroups.json
       - operations.json
       - storageContainers.json
       - virtualHardDisks.json
@@ -78,6 +79,7 @@ input-file:
   - preview/2024-02-01-preview/logicalNetworks.json
   - preview/2024-02-01-preview/marketplaceGalleryImages.json
   - preview/2024-02-01-preview/networkInterfaces.json
+  - preview/2024-02-01-preview/networkSecurityGroups.json
   - preview/2024-02-01-preview/storageContainers.json
   - preview/2024-02-01-preview/virtualHardDisks.json
   - preview/2024-02-01-preview/virtualMachineInstances.json
