@@ -125,37 +125,10 @@ directive:
   #   from:
   #     - vmware.json
 
-  # - suppress: TrackedResourceListByImmediateParent
-  #   reason: list by immediate parent operations are defined
-  #   from: vmware.json
-    
-  # - suppress: TrackedResourceListByResourceGroup
-  #   reason: the PrivateClouds_List operation is by resource group
-  #   from: vmware.json
-
-  # - suppress: EnumInsteadOfBoolean
-  #   reason: standard property for Operation
-  #   from: vmware.json
-  #   where: $.definitions.Operation.properties.isDataAction
-    
-  # - suppress: EnumInsteadOfBoolean
-  #   reason: standard property for MetricSpecification
-  #   from: vmware.json
-  #   where: $.definitions.MetricSpecification.properties.fillGapWithZero
-
-  # - suppress: AvoidNestedProperties
-  #   reason: x-ms-client-flatten not needed for Operation
-  #   from: vmware.json
-  #   where: $.definitions.Operation.properties.properties
 
   # - suppress: RequiredReadOnlySystemData
   #   reason: systemData is not in this API version
   #   from: vmware.json
-
-  # - suppress: EnumInsteadOfBoolean
-  #   reason: standard property defined by Geneva Metrics
-  #   from: vmware.json
-  #   where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
 
   # - suppress: ParametersOrder
   #   reason: Breaking change to update the parameters order
@@ -195,15 +168,15 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
     
-  # - code: ConsistentPatchProperties
-  #   reason: The properties are consistent for the discriminator hierarchy.
-  #   from: vmware.json
-    # where:
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch
-    #   - $.definitions.PlacementPolicyUpdate.properties.vmMembers
-    #   - $.definitions.PlacementPolicyUpdate.properties.hostMembers
-    #   - $.definitions.PlacementPolicyUpdate.properties.affinityStrength
-    #   - $.definitions.PlacementPolicyUpdate.properties.azureHybridBenefitType
+  - code: ConsistentPatchProperties
+    reason: The properties are consistent for the discriminator hierarchy.
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch
+      - $.definitions.PlacementPolicyUpdate.properties.vmMembers
+      - $.definitions.PlacementPolicyUpdate.properties.hostMembers
+      - $.definitions.PlacementPolicyUpdate.properties.affinityStrength
+      - $.definitions.PlacementPolicyUpdate.properties.azureHybridBenefitType
 
   - code: DefinitionsPropertiesNamesCamelCase
     reason: Breaking change to update existing property names
@@ -254,25 +227,22 @@ suppressions:
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
     from: vmware.json
 
-  # - code: XmsClientName
-  #   reason: false positives
-  #   from: vmware.json
+  - code: XmsClientName
+    reason: false positives
+    from: vmware.json
 
   # - code: XmsClientNameParameter
   #   reason: this warning is false postive
   #   from: vmware.json
 
-  # - code: docLinkLocale
-  #   reason: false positives
-  #   from: vmware.json
+  - code: docLinkLocale
+    reason: false positives
+    from: vmware.json
 
   # - code: PropertiesTypeObjectNoDefinition
   #   reason: false positives
   #   from: vmware.json
 
-  # - code: LatestVersionOfCommonTypesMustBeUsed
-  #   reason: this warning is TODO
-  #   from: vmware.json
 
   # - code: AvoidAdditionalProperties
   #   reasons: this is how TypeSpec models records
