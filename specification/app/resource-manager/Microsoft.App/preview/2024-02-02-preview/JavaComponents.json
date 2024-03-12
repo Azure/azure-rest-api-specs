@@ -360,6 +360,64 @@
     }
   },
   "definitions": {
+    "scgSpring": {
+      "description": "Spring Cloud Gateway spring level properties",
+      "type": "object",
+      "properties": {
+        "cloud": {
+          "$ref": "#/definitions/scgCloud",
+          "description": "Spring Cloud Gateway cloud level properties"
+        }
+      }
+    },
+    "scgCloud": {
+      "description": "Spring Cloud Gateway cloud level properties",
+      "type": "object",
+      "properties": {
+        "gateway": {
+          "$ref": "#/definitions/springCloudGateway",
+          "description": "Spring Cloud Gateway properties"
+        }
+      }
+    },
+    "springCloudGateway": {
+      "description": "Spring Cloud Gateway properties",
+      "type": "object",
+      "properties": {
+        "route": {
+          "$ref": "#/definitions/scgRoute",
+          "description": "Gateway route definition"
+        }
+      }
+    },
+    "scgRoute": {
+      "description": "Spring Cloud Gateway route definition",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the route",
+          "type": "string"
+        },
+        "url": {
+          "description": "Url of the route",
+          "type": "string"
+        },
+        "predicates": {
+          "description": "Predicates of the route",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filters": {
+          "description": "Filters of the route",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "JavaComponentConfigurationProperty": {
       "description": "Configuration properties for a Java Component",
       "type": "object",
@@ -418,7 +476,8 @@
             "SpringBootAdmin",
             "SpringCloudEureka",
             "SpringCloudConfig",
-            "Nacos"
+            "Nacos",
+            "SpringCloudGateway"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -476,6 +535,26 @@
           "readOnly": true
         }
       }
+    },
+    "SpringCloudGatewayComponent": {
+      "description": "Spring Cloud Gateway properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      ],
+      "properties": {
+        "ingress": {
+          "$ref": "#/definitions/JavaComponentIngress",
+          "description": "Java Component Ingress configurations."
+        },
+        "spring": {
+          "$ref": "#/definitions/scgSpring",
+          "description": "Spring Cloud Gateway spring level properties"
+        }
+      },
+      "x-ms-discriminator-value": "SpringCloudGateway"
     },
     "SpringBootAdminComponent": {
       "description": "Spring Boot Admin properties.",
