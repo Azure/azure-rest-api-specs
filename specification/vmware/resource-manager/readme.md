@@ -125,38 +125,6 @@ directive:
     from:
       - vmware.json
 
-  # - suppress: TrackedResourceListByImmediateParent
-  #   reason: list by immediate parent operations are defined
-  #   from: vmware.json
-    
-  # - suppress: TrackedResourceListByResourceGroup
-  #   reason: the PrivateClouds_List operation is by resource group
-  #   from: vmware.json
-
-  # - suppress: EnumInsteadOfBoolean
-  #   reason: standard property for Operation
-  #   from: vmware.json
-  #   where: $.definitions.Operation.properties.isDataAction
-    
-  # - suppress: EnumInsteadOfBoolean
-  #   reason: standard property for MetricSpecification
-  #   from: vmware.json
-  #   where: $.definitions.MetricSpecification.properties.fillGapWithZero
-
-  # - suppress: AvoidNestedProperties
-  #   reason: x-ms-client-flatten not needed for Operation
-  #   from: vmware.json
-  #   where: $.definitions.Operation.properties.properties
-
-  # - suppress: RequiredReadOnlySystemData
-  #   reason: systemData is not in this API version
-  #   from: vmware.json
-
-  # - suppress: EnumInsteadOfBoolean
-  #   reason: standard property defined by Geneva Metrics
-  #   from: vmware.json
-  #   where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
-
   - suppress: ParametersOrder
     reason: Breaking change to update the parameters order
     from: vmware.json
@@ -180,31 +148,6 @@ directive:
 ``` yaml
 suppressions:
     
-  # - code: pathresourceprovidernamepascalcase
-  #   reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-  #   from: vmware.json
-
-  # - code: ParametersOrder
-  #   reason: Breaking change to update the parameters order
-  #   from: vmware.json
-  #   where:
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].get
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].delete
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].delete
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].delete
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
-  #     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
-    
-  # - code: ConsistentPatchProperties
-  #   reason: The properties are consistent for the discriminator hierarchy.
-  #   from: vmware.json
-    # where:
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch
-    #   - $.definitions.PlacementPolicyUpdate.properties.vmMembers
-    #   - $.definitions.PlacementPolicyUpdate.properties.hostMembers
-    #   - $.definitions.PlacementPolicyUpdate.properties.affinityStrength
-    #   - $.definitions.PlacementPolicyUpdate.properties.azureHybridBenefitType
-
   - code: DefinitionsPropertiesNamesCamelCase
     reason: Breaking change to update existing property names
     from: vmware.json
@@ -254,41 +197,8 @@ suppressions:
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
     from: vmware.json
 
-  # - code: XmsClientName
-  #   reason: false positives
-  #   from: vmware.json
-
-  # - code: XmsClientNameParameter
-  #   reason: this warning is false postive
-  #   from: vmware.json
-
-  # - code: docLinkLocale
-  #   reason: false positives
-  #   from: vmware.json
-
-  # - code: PropertiesTypeObjectNoDefinition
-  #   reason: false positives
-  #   from: vmware.json
-
-  # - code: LatestVersionOfCommonTypesMustBeUsed
-  #   reason: this warning is TODO
-  #   from: vmware.json
-
-  # - code: AvoidAdditionalProperties
-  #   reasons: this is how TypeSpec models records
-  #   from: vmware.json
-
-  # - code: XmsPageableForListCalls
-  #   reasons: This is a TypeSpec @singleton.
-  #   from: vmware.json
-    # where: WorkloadNetworks_Get
-
   - code: DeleteResponseCodes
     reasons: Our deletes are modeled with ArmResourceDeleteAsync. Removing the 200 OK response is breaking.
-
-  # - code: RequestBodyMustExistForPutPatch
-  #   reasons: false positives
-    # createOrUpdate is ArmResourceCreateOrUpdateAsync<IscsiPath>;
 
   - code: PatchBodyParametersSchema
     reasons: false positives
