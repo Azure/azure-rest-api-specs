@@ -13,11 +13,11 @@ using Azure.Core.Traits;
 @doc("Live Metrics REST APIs.")
 @versioned(Versions)
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "x-ms-qps-auth-api-key"> | OAuth2Auth<[
+  OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      scopes: ["user_impersonation"],
+      scopes: ["https://monitor.azure.com/.default"],
     }
   ]>
 )

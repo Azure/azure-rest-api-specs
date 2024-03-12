@@ -35,26 +35,18 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
-    },
-    {
       "OAuth2Auth": [
-        "user_impersonation"
+        "https://monitor.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "x-ms-qps-auth-api-key",
-      "in": "header"
-    },
     "OAuth2Auth": {
       "type": "oauth2",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
+        "https://monitor.azure.com/.default": ""
       }
     }
   },
@@ -70,9 +62,6 @@
           },
           {
             "$ref": "#/parameters/IsSubscribedOperationRequestParameters.ikey"
-          },
-          {
-            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.apiKey"
           },
           {
             "$ref": "#/parameters/IsSubscribedOperationRequestParameters.transmissionTime"
@@ -116,7 +105,7 @@
               },
               "x-ms-qps-service-polling-interval-hint": {
                 "type": "string",
-                "description": "Recommended time (in milliseconds) before the client should ping the service again. This header exists only when ikey is not subscribed to."
+                "description": "Recommended time (in milliseconds) before the client should ping the service again. This header exists only when the instrumentation key is not subscribed to."
               },
               "x-ms-qps-service-endpoint-redirect-v2": {
                 "type": "string",
@@ -150,9 +139,6 @@
             "$ref": "#/parameters/PublishOperationRequestParameters.ikey"
           },
           {
-            "$ref": "#/parameters/PublishOperationRequestParameters.apiKey"
-          },
-          {
             "$ref": "#/parameters/PublishOperationRequestParameters.configurationEtag"
           },
           {
@@ -171,7 +157,7 @@
             "headers": {
               "x-ms-qps-subscribed": {
                 "type": "string",
-                "description": "Tells the client whether the input ikey is subscribed to."
+                "description": "Tells the client whether the input instrumentation key is subscribed to."
               },
               "x-ms-qps-configuration-etag": {
                 "type": "string",
@@ -1044,14 +1030,6 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "IsSubscribedOperationRequestParameters.apiKey": {
-      "name": "apiKey",
-      "in": "query",
-      "description": "An alternative for authentication, but it's now deprecated. Please utilize Microsoft Entra ID as the preferred option.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "IsSubscribedOperationRequestParameters.configurationEtag": {
       "name": "x-ms-qps-configuration-etag",
       "in": "header",
@@ -1064,7 +1042,7 @@
     "IsSubscribedOperationRequestParameters.ikey": {
       "name": "ikey",
       "in": "query",
-      "description": "The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.",
+      "description": "The instrumentation key of the target Application Insights component for which the client checks whether there's any subscription to it.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1134,14 +1112,6 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "transmissionTime"
     },
-    "PublishOperationRequestParameters.apiKey": {
-      "name": "apiKey",
-      "in": "query",
-      "description": "An alternative for authentication, but it's now deprecated. Please utilize Microsoft Entra ID as the preferred option.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "PublishOperationRequestParameters.configurationEtag": {
       "name": "x-ms-qps-configuration-etag",
       "in": "header",
@@ -1154,7 +1124,7 @@
     "PublishOperationRequestParameters.ikey": {
       "name": "ikey",
       "in": "query",
-      "description": "The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.",
+      "description": "The instrumentation key of the target Application Insights component for which the client checks whether there's any subscription to it.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

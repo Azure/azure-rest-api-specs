@@ -15,13 +15,9 @@ namespace Azure.Monitor.LiveMetrics;
  * Live Metrics IsSubscribed operation's request query parameters, either query strings or headers
  */
 model IsSubscribedOperationRequestParameters {
-  @doc("The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.")
+  @doc("The instrumentation key of the target Application Insights component for which the client checks whether there's any subscription to it.")
   @query
   ikey: string;
-
-  @doc("An alternative for authentication, but it's now deprecated. Please utilize Microsoft Entra ID as the preferred option.")
-  @query
-  apiKey?: string;
 
   @doc("Timestamp when the client transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.")
   @header("x-ms-qps-transmission-time")
@@ -68,7 +64,7 @@ model IsSubscribedOperationResponseHeaders {
   @header("x-ms-qps-configuration-etag")
   configurationEtag: eTag;
 
-  @doc("Recommended time (in milliseconds) before the client should ping the service again. This header exists only when ikey is not subscribed to.")
+  @doc("Recommended time (in milliseconds) before the client should ping the service again. This header exists only when the instrumentation key is not subscribed to.")
   @header("x-ms-qps-service-polling-interval-hint")
   pollingInterval?: string;
 
@@ -85,13 +81,9 @@ model IsSubscribedOperationResponseHeaders {
  * Live Metrics Publish operation's request query parameters, either query strings or headers
  */
 model PublishOperationRequestParameters {
-  @doc("The ikey of the target Application Insights component for which the client checks whether there's any subscription to it.")
+  @doc("The instrumentation key of the target Application Insights component for which the client checks whether there's any subscription to it.")
   @query
   ikey: string;
-
-  @doc("An alternative for authentication, but it's now deprecated. Please utilize Microsoft Entra ID as the preferred option.")
-  @query
-  apiKey?: string;
 
   @doc("An encoded string that indicates whether the collection configuration is changed.")
   @header("x-ms-qps-configuration-etag")
@@ -111,7 +103,7 @@ model PublishOperationRequestParameters {
  * Live Metrics Publish operation's response headers
  */
 model PublishOperationResponseHeaders {
-  @doc("Tells the client whether the input ikey is subscribed to.")
+  @doc("Tells the client whether the input instrumentation key is subscribed to.")
   @header("x-ms-qps-subscribed")
   subscribed: string;
 
