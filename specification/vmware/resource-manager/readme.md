@@ -117,7 +117,6 @@ swagger-to-sdk:
 
 ## Suppression
 
-### AutoRest Directives
 ``` yaml
 directive:
 
@@ -127,10 +126,7 @@ directive:
       - $.definitions.Addon.properties.properties
       - $.definitions.PlacementPolicy.properties.properties
       - $.definitions.WorkloadNetworkDhcp.properties.properties
-```
 
-### AutoRest v3 Suppressions
-``` yaml
 suppressions:
     
   - code: pathresourceprovidernamepascalcase
