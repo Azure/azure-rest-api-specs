@@ -291,6 +291,14 @@ suppressions:
     reasons: false positives
     # createOrUpdate is ArmResourceCreateOrUpdateAsync<IscsiPath>;
 
+  - code: PatchBodyParametersSchema
+    reasons: false positives
+    # https://github.com/Azure/azure-sdk-tools/issues/7802
+
+  - code: EvenSegmentedPathForPutOperation
+    reasons: false positives
+    # https://github.com/Azure/azure-sdk-tools/issues/7801
+
 ```
 
 ## TypeScript
