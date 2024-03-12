@@ -115,9 +115,6 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-## Suppression
-
-### AutoRest v2 Suppressions
 ``` yaml
 directive:
 
