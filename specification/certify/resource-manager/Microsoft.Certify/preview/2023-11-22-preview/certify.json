@@ -1,0 +1,831 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Certify",
+    "version": "2023-11-22-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ValidationJobs"
+    },
+    {
+      "name": "TestSuites"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Certify/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "summary": "List the operations for Microsoft.Certify",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Certify/testSuites": {
+      "get": {
+        "operationId": "TestSuites_ListBySubscription",
+        "summary": "List TestSuites   by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestSuitesListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TestSuites"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestSuites_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/TestSuites_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "TestSuites_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/TestSuites_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/testSuites": {
+      "get": {
+        "operationId": "TestSuites_ListByResourceGroup",
+        "summary": "List TestSuiteNameParameter resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestSuitesListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TestSuites"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestSuites_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/TestSuites_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "TestSuites_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/TestSuites_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/testSuites/{testSuiteName}": {
+      "put": {
+        "operationId": "TestSuites_CreateOrUpdate",
+        "summary": "Create or update a TestSuites.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestSuiteNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Create or update resource parameters.",
+            "schema": {
+              "$ref": "#/definitions/TestSuites"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestSuites"
+            }
+          },
+          "201": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestSuites"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TestSuites"
+        ],
+        "x-ms-examples": {
+          "TestSuites_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/TestSuites_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "TestSuites_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/TestSuites_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TestSuites_Update",
+        "description": "Update a TestSuites Resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestSuiteNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestSuitesResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestSuites"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TestSuites"
+        ],
+        "x-ms-examples": {
+          "TestSuites_Update_MaximumSet_Gen": {
+            "$ref": "./examples/TestSuites_Update_MaximumSet_Gen.json"
+          },
+          "TestSuites_Update_MinimumSet_Gen": {
+            "$ref": "./examples/TestSuites_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "TestSuites_Get",
+        "summary": "Get a TestSuites",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestSuiteNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestSuites"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TestSuites"
+        ],
+        "x-ms-examples": {
+          "TestSuites_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TestSuites_Get_MaximumSet_Gen.json"
+          },
+          "TestSuites_Get_MinimumSet_Gen": {
+            "$ref": "./examples/TestSuites_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TestSuites_Delete",
+        "description": "Delete a TestSuite",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestSuiteNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TestSuites"
+        ],
+        "x-ms-examples": {
+          "TestSuites_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/TestSuites_Delete_MaximumSet_Gen.json"
+          },
+          "TestSuites_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/TestSuites_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Certify/validationJobs": {
+      "get": {
+        "operationId": "Validations_ListBySubscription",
+        "summary": "List Validations by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationJobsListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ValidationJobs"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Validations_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Validations_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/validationJobs": {
+      "get": {
+        "operationId": "ValidationJobs_ListByResourceGroup",
+        "summary": "List validation name resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationJobsListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ValidationJobs"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Validations_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Validations_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/validationJobs/{validationJobName}": {
+      "put": {
+        "operationId": "ValidationJobs_CreateOrUpdate",
+        "summary": "Create or update a Validations Resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ValidationJobNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Create or update resource parameters.",
+            "schema": {
+              "$ref": "#/definitions/ValidationJobs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationJobs"
+            }
+          },
+          "201": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationJobs"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ValidationJobs"
+        ],
+        "x-ms-examples": {
+          "ValidationJobs_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "ValidationJobs_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "ValidationJobs_Get",
+        "summary": "Get a ValidationJobs",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ValidationJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationJobs"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ValidationJobs"
+        ],
+        "x-ms-examples": {
+          "Validations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_Get_MaximumSet_Gen.json"
+          },
+          "Validations_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ValidationJobs_Delete",
+        "description": "Delete a ValidationJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ValidationJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ValidationJobs"
+        ],
+        "x-ms-examples": {
+          "ValidationJobs_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_Delete_MaximumSet_Gen.json"
+          },
+          "ValidationJobs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TestSuites": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestSuitesProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Details about TestSuites.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TestSuitesResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestSuitesProperties",
+          "description": "The updatable resource-specific properties for a TestSuite."
+        }
+      },
+      "description": "The Update model for a TestSuite Resource"
+    },
+    "TestSuitesProperties": {
+      "type": "object",
+      "properties": {
+        "certificationResourceId": {
+          "type": "string",
+          "description": "Id of certification  object in backend."
+        }
+      },
+      "description": "Properties of TrackedCertification Resource",
+      "required": [
+        "certificationResourceId"
+      ]
+    },
+    "TestSuitesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestSuites"
+          },
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a TestSuites list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "ValidationJobs": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ValidationJobsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        }
+      },
+      "description": "The details about ValidationJobs.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ValidationJobsProperties": {
+      "type": "object",
+      "properties": {
+        "resourceCategory": {
+          "type": "string",
+          "description": "Resource Category of ValidationJob ie; VM or Container"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Type of ValidationJob ie Image"
+        },
+        "os": {
+          "type": "string",
+          "description": "OS of Image in ValidationJob"
+        },
+        "sku": {
+          "type": "string",
+          "description": "SKU of Image in ValidationJob"
+        },
+        "imageId": {
+          "type": "string",
+          "description": "ImageId of Image in ValidationJob"
+        },
+        "deleteResources": {
+          "$ref": "#/definitions/DeleteResources",
+          "description": "Status if resources needs to be deleted or not"
+        },
+        "testSuites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestSuiteDefinitionReference"
+          },
+          "x-ms-identifiers": [],
+          "description": "An array of Test definition references."
+        }
+      },
+      "description": "Properties of ValidationJobs Resource",
+      "required": [
+        "resourceCategory",
+        "resourceType",
+        "os",
+        "imageId",
+        "sku"
+      ]
+    },
+    "ValidationJobsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationJobs"
+          },
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a ValidationJobs list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Creating",
+        "Deleting",
+        "Canceled",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "DeleteResources": {
+      "type": "string",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "DeleteResources",
+        "modelAsString": true
+      }
+    },
+    "TestSuiteDefinitionReference": {
+      "type": "object",
+      "properties": {
+        "testSuiteId": {
+          "type": "string",
+          "description": "The ID of the Test Suite"
+        }
+      },
+      "description": "The Test Suite  definition reference."
+    }
+  },
+  "parameters": {
+    "ValidationJobNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "validationJobName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the validation Job Parameter.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 40
+    },
+    "TestSuiteNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "testSuiteName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the TestSuitesName Parameter.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 40
+    }
+  }
+}

@@ -9,6 +9,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./service.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -17,15 +18,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 
-@armProviderNamespace("Microsoft.StandbyPool")
-@service({
-  title: "Microsoft.StandbyPool",
-  version: "2023-06-01-preview",
-})
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.StandbyPool;
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A StandbyVirtualMachinePoolResource.")
 model StandbyVirtualMachinePoolResource
@@ -41,16 +34,32 @@ model StandbyVirtualMachinePoolResource
 
 @doc("Details of the StandbyVirtualMachinePool.")
 model StandbyVirtualMachinePoolResourceProperties {
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("Specifies maximum number of standby VMs. When the pool is attached to VMScaleSets, the limit applies to each VMScaleSet.")
   @maxValue(2000)
+  @removed(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
   maxReadyCapacity: int64;
 
-  @doc("Specifies the desired state of Virtual Machines in the pool.")
+  @doc("Specifies the elasticity profile of the standby virtual machine pools.")
+  @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
+  elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
+
+  @doc("Specifies the desired state of virtual machines in the pool.")
   @extension("x-ms-identifiers", ["vmState"])
   virtualMachineState: VirtualMachineState;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("Specifies list of VMScaleSets' fully qualified resource IDs the pool is attached to. When multiple VMScaleSets are specified, standby VMs are created for each VMScaleSet independently.")
+  @removed(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
   attachedVirtualMachineScaleSetIds?: string[];
+
+  @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
+  @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
+  attachedVirtualMachineScaleSetId?: ResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachineScaleSet";
+    }
+  ]>;
 
   @doc("The status of the last operation.")
   @visibility("read")
@@ -59,20 +68,20 @@ model StandbyVirtualMachinePoolResourceProperties {
 
 @doc("State of standby virtual machines")
 enum VirtualMachineState {
-  @doc("Virtual machine is up and running.")
+  @doc("The virtual machine is up and running.")
   Running,
 
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off.")
   Deallocated,
 }
 
-@doc("Provisioning state")
-@lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
-
-  @doc("Virtual machine is being deleted.")
-  Deleting,
+@added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
+@doc("Details of the elasticity profile.")
+model StandbyVirtualMachinePoolElasticityProfile {
+  @doc("Specifies maximum number of virtual machines in the standby virtual machine pool.")
+  @maxValue(2000)
+  @minValue(0)
+  maxReadyCapacity: int64;
 }
 
 @armResourceOperations

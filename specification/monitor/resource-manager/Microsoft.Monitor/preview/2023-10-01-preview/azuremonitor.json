@@ -64,7 +64,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -103,7 +103,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceListResult"
             }
@@ -142,7 +142,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineGroupListResult"
             }
@@ -184,7 +184,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceListResult"
             }
@@ -234,7 +234,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspace"
             }
@@ -359,7 +359,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspace"
             }
@@ -403,9 +403,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -421,7 +418,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -461,7 +458,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineGroupListResult"
             }
@@ -511,7 +508,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineGroup"
             }
@@ -596,6 +593,12 @@
           },
           "Create a PipelineGroup instance using a syslog receiver": {
             "$ref": "./examples/PipelineGroupCreateSyslogs.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver and cache.": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithCache.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver and networking configurations.": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithNetworking.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -639,7 +642,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineGroup"
             }
@@ -701,9 +704,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -719,7 +719,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -809,7 +809,7 @@
         "stream": {
           "type": "string",
           "description": "Stream name in destination. Azure Monitor stream is related to the destination table.",
-          "pattern": "^(?!-)[a-zA-Z0-9.-]{1,1000}[^-]$"
+          "pattern": "^(?!-)[a-zA-Z0-9._-]{1,1000}[^-]$"
         },
         "dataCollectionRule": {
           "type": "string",
@@ -839,6 +839,10 @@
         "concurrency": {
           "$ref": "#/definitions/ConcurrencyConfiguration",
           "description": "Concurrency configuration for the exporter."
+        },
+        "cache": {
+          "$ref": "#/definitions/CacheConfiguration",
+          "description": "Cache configurations."
         }
       },
       "required": [
@@ -910,34 +914,61 @@
         }
       }
     },
+    "BatchProcessor": {
+      "type": "object",
+      "description": "Batch processor.",
+      "properties": {
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the batch.",
+          "default": 8192,
+          "minimum": 10,
+          "maximum": 100000
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout in milliseconds.",
+          "default": 200,
+          "minimum": 10,
+          "maximum": 60000
+        }
+      }
+    },
+    "CacheConfiguration": {
+      "type": "object",
+      "description": "Cache configurations.",
+      "properties": {
+        "maxStorageUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage usage in megabytes."
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period in minutes."
+        }
+      }
+    },
     "ConcurrencyConfiguration": {
       "type": "object",
       "description": "Concurrent publishing configuration.",
       "properties": {
-        "fixedCount": {
+        "workerCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Fixed count of messages.",
-          "default": 10
+          "description": "Number of parallel workers processing the log queues.",
+          "default": 4
         },
-        "payloadQueueSize": {
+        "batchQueueSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Payload queue size.",
-          "default": 100
-        },
-        "logQueueSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Log queue size.",
+          "description": "Size of the queue for log batches.",
           "default": 100
         }
-      },
-      "required": [
-        "fixedCount",
-        "payloadQueueSize",
-        "logQueueSize"
-      ]
+      }
     },
     "Exporter": {
       "type": "object",
@@ -1021,7 +1052,7 @@
           {
             "name": "CustomLocation",
             "value": "CustomLocation",
-            "description": "CustomLocation."
+            "description": "Custom location."
           }
         ]
       }
@@ -1058,6 +1089,60 @@
         }
       }
     },
+    "NetworkingConfiguration": {
+      "type": "object",
+      "description": "Networking configuration for the pipeline group instance.",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.",
+          "pattern": "^[a-zA-Z0-9-\\.]+$"
+        },
+        "routes": {
+          "type": "array",
+          "description": "Networking routes configuration.",
+          "items": {
+            "$ref": "#/definitions/NetworkingRoute"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "host",
+        "routes"
+      ]
+    },
+    "NetworkingRoute": {
+      "type": "object",
+      "description": "Networking route configuration.",
+      "properties": {
+        "receiver": {
+          "type": "string",
+          "description": "The name of the previously defined receiver.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port that will be configured externally. If not specified, it will use the port from the receiver definition.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "path": {
+          "type": "string",
+          "description": "Route path.",
+          "pattern": "^[a-zA-Z0-9-/\\.]+$"
+        },
+        "subdomain": {
+          "type": "string",
+          "description": "Route subdomain.",
+          "pattern": "^[a-zA-Z0-9-\\.]+$"
+        }
+      },
+      "required": [
+        "receiver"
+      ]
+    },
     "OtlpReceiver": {
       "type": "object",
       "description": "OTLP Receiver.",
@@ -1071,6 +1156,29 @@
       "required": [
         "endpoint"
       ]
+    },
+    "PersistenceConfigurations": {
+      "type": "object",
+      "description": "Persistence options to all pipelines in the instance.",
+      "properties": {
+        "persistentVolumeName": {
+          "type": "string",
+          "description": "The name of the mounted persistent volume."
+        }
+      },
+      "required": [
+        "persistentVolumeName"
+      ]
+    },
+    "PersistenceConfigurationsUpdate": {
+      "type": "object",
+      "description": "Persistence options to all pipelines in the instance.",
+      "properties": {
+        "persistentVolumeName": {
+          "type": "string",
+          "description": "The name of the mounted persistent volume."
+        }
+      }
     },
     "Pipeline": {
       "type": "object",
@@ -1199,6 +1307,14 @@
           "$ref": "#/definitions/Service",
           "description": "The service section for a given pipeline group instance."
         },
+        "networkingConfigurations": {
+          "type": "array",
+          "description": "Networking configurations for the pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/NetworkingConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.",
@@ -1266,6 +1382,14 @@
         "service": {
           "$ref": "#/definitions/ServiceUpdate",
           "description": "The service section for a given pipeline group instance."
+        },
+        "networkingConfigurations": {
+          "type": "array",
+          "description": "Networking configurations for the pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/NetworkingConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1281,6 +1405,10 @@
           "type": "string",
           "description": "The name of processor.",
           "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "batch": {
+          "$ref": "#/definitions/BatchProcessor",
+          "description": "Batch processor configurations."
         }
       },
       "required": [
@@ -1292,16 +1420,16 @@
       "type": "string",
       "description": "The processor type.",
       "enum": [
-        "Filter"
+        "Batch"
       ],
       "x-ms-enum": {
         "name": "ProcessorType",
         "modelAsString": true,
         "values": [
           {
-            "name": "Filter",
-            "value": "Filter",
-            "description": "filter"
+            "name": "Batch",
+            "value": "Batch",
+            "description": "Batch processor."
           }
         ]
       }
@@ -1346,7 +1474,8 @@
             "description": "The resource is being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "PublicNetworkAccess": {
       "type": "string",
@@ -1543,6 +1672,11 @@
             "$ref": "#/definitions/Pipeline"
           },
           "x-ms-identifiers": []
+        },
+        "persistence": {
+          "$ref": "#/definitions/PersistenceConfigurations",
+          "description": "Persistence options to all pipelines in the instance.",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1560,7 +1694,60 @@
             "$ref": "#/definitions/Pipeline"
           },
           "x-ms-identifiers": []
+        },
+        "persistence": {
+          "$ref": "#/definitions/PersistenceConfigurationsUpdate",
+          "description": "Persistence options to all pipelines in the instance.",
+          "x-ms-identifiers": []
         }
+      }
+    },
+    "StreamEncodingType": {
+      "type": "string",
+      "description": "Encoding types for streams.",
+      "enum": [
+        "nop",
+        "utf-8",
+        "utf-16le",
+        "utf-16be",
+        "ascii",
+        "big5"
+      ],
+      "x-ms-enum": {
+        "name": "StreamEncodingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "nop",
+            "value": "nop",
+            "description": "No encoding validation. Treats the file as a stream of raw bytes."
+          },
+          {
+            "name": "utf_8",
+            "value": "utf-8",
+            "description": "UTF-8 encoding."
+          },
+          {
+            "name": "utf_16le",
+            "value": "utf-16le",
+            "description": "UTF-16 encoding with little-endian byte order."
+          },
+          {
+            "name": "utf_16be",
+            "value": "utf-16be",
+            "description": "UTF-16 encoding with little-endian byte order."
+          },
+          {
+            "name": "ascii",
+            "value": "ascii",
+            "description": "ASCII encoding."
+          },
+          {
+            "name": "big5",
+            "value": "big5",
+            "description": "The Big5 Chinese character encoding."
+          }
+        ]
       }
     },
     "SyslogProtocol": {
@@ -1577,12 +1764,12 @@
           {
             "name": "rfc3164",
             "value": "rfc3164",
-            "description": "rfc3164"
+            "description": "rfc3164 protocol."
           },
           {
             "name": "rfc5424",
             "value": "rfc5424",
-            "description": "rfc5424"
+            "description": "rfc5424 protocol."
           }
         ]
       }
@@ -1597,9 +1784,29 @@
           "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         },
         "protocol": {
-          "$ref": "#/definitions/SyslogProtocol",
+          "type": "string",
           "description": "Protocol to parse syslog messages. Default rfc3164",
-          "default": "rfc3164"
+          "default": "rfc3164",
+          "enum": [
+            "rfc3164",
+            "rfc5424"
+          ],
+          "x-ms-enum": {
+            "name": "SyslogProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "rfc3164",
+                "value": "rfc3164",
+                "description": "rfc3164 protocol."
+              },
+              {
+                "name": "rfc5424",
+                "value": "rfc5424",
+                "description": "rfc5424 protocol."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -1642,6 +1849,63 @@
           "type": "string",
           "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
           "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
+        },
+        "encoding": {
+          "type": "string",
+          "description": "The encoding of the stream being received.",
+          "default": "nop",
+          "enum": [
+            "nop",
+            "utf-8",
+            "utf-16le",
+            "utf-16be",
+            "ascii",
+            "big5"
+          ],
+          "x-ms-enum": {
+            "name": "StreamEncodingType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "nop",
+                "value": "nop",
+                "description": "No encoding validation. Treats the file as a stream of raw bytes."
+              },
+              {
+                "name": "utf_8",
+                "value": "utf-8",
+                "description": "UTF-8 encoding."
+              },
+              {
+                "name": "utf_16le",
+                "value": "utf-16le",
+                "description": "UTF-16 encoding with little-endian byte order."
+              },
+              {
+                "name": "utf_16be",
+                "value": "utf-16be",
+                "description": "UTF-16 encoding with little-endian byte order."
+              },
+              {
+                "name": "ascii",
+                "value": "ascii",
+                "description": "ASCII encoding."
+              },
+              {
+                "name": "big5",
+                "value": "big5",
+                "description": "The Big5 Chinese character encoding."
+              }
+            ]
+          }
+        },
+        "readQueueLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max read queue length.",
+          "default": 1000,
+          "minimum": 100,
+          "maximum": 100000
         }
       },
       "required": [

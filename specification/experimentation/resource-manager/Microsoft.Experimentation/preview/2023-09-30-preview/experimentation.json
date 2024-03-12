@@ -166,6 +166,22 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "The request to patch the experiment workspace is accepted and is running asynchronously. Check Azure-AsyncOperation headers to poll detailed status.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Azure Async Operation",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location Url to monitor progress.",
+                "type": "string"
+              }
+            }
+          },
           "200": {
             "description": "The experiment workspace is patched",
             "schema": {
@@ -178,6 +194,10 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -563,6 +583,21 @@
                   "ResourceGroup"
                 ],
                 "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "description": "User assigned identity to use for accessing storage account. This identity should have access to storage account specified in storageAccountResourceId. If not specified, defaults to first alphabetically sorted user assigned identity assigned to the workspace.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResourceTypes": [
+              {
+                "scopes": [
+                  "ResourceGroup"
+                ],
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
               }
             ]
           }

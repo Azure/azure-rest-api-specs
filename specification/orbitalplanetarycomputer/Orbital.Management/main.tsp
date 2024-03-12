@@ -61,8 +61,9 @@ enum ProvisioningState {
 
 @doc("Details of the AOPC GeoCatalog.")
 model GeoCatalogProperties {
-  @doc("Tier of the catalog. This cannot be changed after the catalog is created.")
-  tier?: CatalogTier;
+  @visibility("create", "read")
+  @doc("Tier of the catalog. This cannot be changed after the catalog is created. If not provided, defaults to Basic.")
+  tier?: CatalogTier = CatalogTier.Basic;
 
   @visibility("read")
   @doc("The URI of the catalog management UI.")

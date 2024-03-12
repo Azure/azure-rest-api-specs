@@ -37,58 +37,68 @@ model InsightUnderSubscription is ProxyResource<InsightProperties> {
 
 @doc("Impact category properties.")
 model InsightProperties is ResourceProperties {
-  @doc("summary of the insight.")
-  summary?: string;
-
   @doc("category of the insight.")
-  category?: string;
+  category: string;
 
-  @doc("status of the impact. example resolved, repaired, other.")
+  @doc("status of the insight. example resolved, repaired, other.")
   status?: string;
 
-  @doc("time at which insight has been generated.")
-  createdTime: utcDateTime;
+  @doc("Identifier of the event that has been correlated with this insight. This can be used to aggregate insights for the same event.")
+  eventId?: string;
 
-  @doc("time at which insight has been updated.")
-  updatedTime: utcDateTime;
+  @doc("Contains title & description for the insight")
+  content: Content;
 
-  @doc("list of actions performed to or for the azure resource.")
-  @extension("x-ms-identifiers", [])
-  actions: Action[];
+  @doc("Time of the event, which has been correlated the impact.")
+  eventTime?: utcDateTime;
+
+  @doc("unique id of the insight.")
+  insightUniqueId: string;
 
   @doc("details of of the impact for which insight has been generated.")
-  impactDetails: ImpactDetails;
-}
+  impact: ImpactDetails;
 
-@doc("details of the action performed to or for the azure resource.")
-model Action {
-  @doc("summary of the action performed to or for the resource.")
-  summary?: string;
-
-  @doc("time at which action was performed.")
-  time?: utcDateTime;
+  @doc("additional details of the insight.")
+  additionalDetails?: {};
 }
 
 @doc("details of of the impact for which insight has been generated.")
 model ImpactDetails {
   @doc("List of impacted Azure resources.")
-  @extension("x-ms-identifiers", [])
-  impactedResources: ImpactedResource[];
+  impactedResourceId: string;
 
   @doc("Time at which impact was started according to reported impact.")
-  impactStartTime: utcDateTime;
+  startTime: utcDateTime;
 
-  @doc("azure Id of the impact.")
+  @doc("Time at which impact was ended according to reported impact.")
+  endTime?: utcDateTime;
+
+  @doc("Azure Id of the impact.")
   impactId: string;
+}
 
-  @doc("unique (guid) id of the impact generated during impact creation.")
-  impactUniqueId: string;
+@doc("Article details of the insight like title, description etc")
+model Content {
+  @doc("Title of the insight")
+  title: string;
+
+  @doc("Description of the insight")
+  description: string;
 }
 
 @doc("impacted azure resource id.")
 model ImpactedResource {
   @doc("impacted azure resource id")
   impactedResourceId: string;
+}
+
+@doc("additional user defined field.")
+model AdditionalField {
+  @doc("name of the field.")
+  name: string;
+
+  @doc("value of the field.")
+  value: string;
 }
 
 @doc("context of post call for insight")
@@ -119,16 +129,9 @@ interface Insights {
   @doc("List Insight resources by workloadImpactName")
   listBySubscription is ArmListBySubscription<Insight>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Using subscription level action"
-  @get
-  @doc("get all insights under subscription")
-  @segment("getAllInsights")
-  getAll(
-    ...InsightCustomResourceCommonParameters,
-  ): ArmResponse<ResourceListResult<Insight>> | ErrorResponse;
+  @doc("Create Insight resource, This is Admin only operation")
+  create is ArmResourceCreateOrReplaceSync<Insight>;
 
-  /* @doc("get all insights under subscription")
-  @segment("getAllInsights")
-  getAll2 is ResourceAct<InsightUnderSubscription,insightDetails,ResourceListResult<Insight>>;
-  */
+  @doc("Delete Insight resource, This is Admin only operation")
+  delete is ArmResourceDeleteSync<Insight>;
 }

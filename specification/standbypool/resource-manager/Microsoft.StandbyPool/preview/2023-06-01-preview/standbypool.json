@@ -63,7 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -105,7 +105,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachinePoolResourceListResult"
             }
@@ -150,7 +150,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachinePoolResourceListResult"
             }
@@ -203,7 +203,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
             }
@@ -334,7 +334,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
             }
@@ -396,7 +396,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -447,7 +447,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachineResourceListResult"
             }
@@ -508,7 +508,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StandbyVirtualMachineResource"
             }
@@ -563,10 +563,11 @@
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Virtual machine is being deleted."
+            "description": "Resource is being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "StandbyVirtualMachinePoolResource": {
       "type": "object",
@@ -621,7 +622,7 @@
         },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of Virtual Machines in the pool.",
+          "description": "Specifies the desired state of virtual machines in the pool.",
           "x-ms-identifiers": [
             "vmState"
           ]
@@ -673,7 +674,7 @@
         },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of Virtual Machines in the pool.",
+          "description": "Specifies the desired state of virtual machines in the pool.",
           "x-ms-identifiers": [
             "vmState"
           ]
@@ -760,7 +761,7 @@
           {
             "name": "Running",
             "value": "Running",
-            "description": "Virtual machine is up and running."
+            "description": "The virtual machine is up and running."
           },
           {
             "name": "Deallocated",

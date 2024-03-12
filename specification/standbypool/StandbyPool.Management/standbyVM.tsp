@@ -9,6 +9,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./service.tsp";
 import "./standbyVMPool.tsp";
 
 using Azure.Core;
@@ -18,11 +19,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 
-@service({
-  title: "Microsoft.StandbyPool",
-  version: "2023-06-01-preview",
-})
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.StandbyPool;
 
 @parentResource(StandbyVirtualMachinePoolResource)

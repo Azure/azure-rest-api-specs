@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for workloads.
+This is the AutoRest configuration file for Migration Discovery for SAP.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the workloads.
+These are the global settings for the Migration Discovery for SAP.
 
 ``` yaml
 openapi-type: arm
@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - preview/2023-10-01-preview/SAPDiscoverySites.json
-  - ../common-types/v1/commonTypes.json
   - ../operations/preview/2023-10-01-preview/operations.json
 ```
 

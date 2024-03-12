@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/virtualMachineInstances",
+        "extendedLocation": {
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "storageProfile": {
+            "imageReference": {
+              "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/galleryImages/test-gallery-image"
+            },
+            "vmConfigStoragePathId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-container"
+          },
+          "hardwareProfile": {
+            "vmSize": "Default"
+          },
+          "osProfile": {
+            "computerName": "luamaster",
+            "adminUsername": "localadmin"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "test-nic"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -453,6 +453,19 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       }
     },
@@ -498,6 +511,19 @@
           "description": "What all the main ingredients of the recipe.",
           "minLength": 1,
           "pattern": "^[A-Za-z0-9-._]+$"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       },
       "description": "The updatable properties of the recipe."

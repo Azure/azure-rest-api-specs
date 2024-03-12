@@ -2202,7 +2202,9 @@
       "description": "Indicates the customer responsibility type.",
       "enum": [
         "Automated",
-        "Manual"
+        "AutoEvidence",
+        "Manual",
+        "ScopedManual"
       ],
       "readOnly": true,
       "type": "string",
@@ -3227,6 +3229,10 @@
           "type": "string",
           "description": "The path of the file in storage."
         },
+        "extraData": {
+          "type": "string",
+          "description": "Extra data considered as evidence."
+        },
         "controlId": {
           "type": "string",
           "description": "Control id."
@@ -3251,7 +3257,9 @@
       "type": "string",
       "description": "Evidence type",
       "enum": [
-        "File"
+        "File",
+        "AutoCollectedEvidence",
+        "Data"
       ],
       "x-ms-enum": {
         "name": "EvidenceType",

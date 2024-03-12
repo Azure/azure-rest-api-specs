@@ -17,16 +17,19 @@ pr:
     - eng/tools/typespec-validation
 
 jobs:
-- job: Test
+- job:
+  displayName: Test
 
   strategy:
     matrix:
       Linux:
         Pool: azsdk-pool-mms-ubuntu-2204-general
         OsVmImage: ubuntu-22.04
+        NodeVersion: 18.x
       Windows:
         Pool: azsdk-pool-mms-win-2022-general
         OsVmImage: windows-2022
+        NodeVersion: 21.x
 
   pool:
     name: $(Pool)
@@ -34,6 +37,8 @@ jobs:
 
   steps:
   - template: /eng/pipelines/templates/steps/npm-install.yml
+    parameters:
+      NodeVersion: $(NodeVersion)
 
   - script: npm test
     displayName: npm test

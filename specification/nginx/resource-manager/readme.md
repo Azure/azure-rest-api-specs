@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Nginx.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Nginx, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,31 @@ To build the SDK for Nginx, simply [Install AutoRest](https://aka.ms/autorest/in
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Nginx API.
 
 ``` yaml
 title: NginxManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-09-01
+tag: package-preview-2024-01
 ```
 
+
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - NGINX.NGINXPLUS/preview/2024-01-01-preview/swagger.json
+```
 ### Tag: package-2021-05-01-preview
 
 These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.

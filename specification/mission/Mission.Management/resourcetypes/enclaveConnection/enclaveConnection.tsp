@@ -30,6 +30,12 @@ enum EnclaveConnectionState {
 
   @doc("EnclaveConnectionState Type Failed")
   Failed,
+
+  @doc("EnclaveConnectionState Type Connected")
+  Connected,
+
+  @doc("EnclaveConnectionState Type Disconnected")
+  Disconnected,
 }
 
 @doc("Enclave Connection Resource properties")

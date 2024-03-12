@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-informatica"
-  output-folder: "$(typescript-sdks-folder)/sdk/informatica/arm-informatica"
+  package-name: "@azure/arm-informaticadatamanagement"
+  output-folder: "$(typescript-sdks-folder)/sdk/informatica/arm-informaticadatamanagement"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true

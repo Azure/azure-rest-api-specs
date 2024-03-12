@@ -35,7 +35,7 @@ tag: package-2023-02-06-preview
 
 These settings apply only when `--tag=package-2023-02-06-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-package-2023-02-06-preview'
+```yaml $(tag) == 'package-2023-02-06-preview'
 input-file:
     - Microsoft.AppSecurity/preview/2023-02-06-preview/AppSecurity.json
 ```

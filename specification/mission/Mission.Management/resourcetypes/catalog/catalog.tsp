@@ -25,7 +25,7 @@ model CatalogBase {
 }
 
 @doc("Blob Catalog type.")
-model BlobCatalog extends CatalogBase {
+model BlobCatalog is CatalogBase {
   @doc("Catalog Storage's URI.")
   uri?: string;
 }
