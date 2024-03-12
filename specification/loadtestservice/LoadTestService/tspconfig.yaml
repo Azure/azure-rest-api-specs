@@ -28,6 +28,7 @@ options:
     package-name: "{package-dir}"
     # emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     package-mode: azure-dataplane
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "load-testing-rest"
     title: Azure Load Testing
@@ -38,10 +39,12 @@ options:
       name: "@azure-rest/load-testing"
       description: "This package contains Microsoft Azure LoadTestingClient client library."
       version: 1.0.1
+    flavor: azure
   "@azure-tools/typespec-csharp":
-     package-dir: "Azure.Developer.LoadTesting"
-     clear-output-folder: true
-     namespace: "{package-dir}"
+    package-dir: "Azure.Developer.LoadTesting"
+    clear-output-folder: true
+    namespace: "{package-dir}"
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-developer-loadtesting"
     namespace: com.azure.developer.loadtesting
@@ -49,3 +52,4 @@ options:
     partial-update: true
     generate-tests: false
     service-name: Load Testing
+    flavor: azure

@@ -16,7 +16,7 @@ namespace Azure.OpenAI;
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 alias ChatMessageContent = string | ChatMessageContentItem[];
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("An abstract representation of a structured content item within a chat message.")
 @discriminator("type")
 model ChatMessageContentItem {
@@ -24,7 +24,7 @@ model ChatMessageContentItem {
   type: string;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A structured chat content item containing plain text.")
 model ChatMessageTextContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'text' for this type.")
@@ -34,9 +34,11 @@ model ChatMessageTextContentItem extends ChatMessageContentItem {
   text: string;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A representation of the possible image detail levels for image-based chat completions message content.")
-enum ChatMessageImageDetailLevel {
+union ChatMessageImageDetailLevel {
+  string,
+
   @doc("Specifies that the model should determine which detail level to apply using heuristics like image size.")
   auto: "auto",
 
@@ -53,7 +55,7 @@ enum ChatMessageImageDetailLevel {
   high: "high",
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A structured chat content item containing an image reference.")
 model ChatMessageImageContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'image_url' for this type.")
@@ -65,7 +67,7 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
 }
 
 @doc("An internet location from which the model may retrieve an image.")
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatMessageImageUrl {
   @doc("The URL of the image.")
   url: url;
@@ -128,7 +130,7 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   name?: string;
 
   @encodedName("application/json", "tool_calls")
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
   The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
   completions request to resolve as configured.
@@ -136,7 +138,6 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   toolCalls?: ChatCompletionsToolCall[];
 
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @removed(ServiceApiVersions.v2023_12_01_Preview)
   @encodedName("application/json", "function_call")
   @doc("""
   The function call that must be resolved and have its output appended to subsequent input messages for the chat
@@ -145,7 +146,7 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   functionCall?: FunctionCall;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A request chat message representing requested output from a configured tool.")
 model ChatRequestToolMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'tool' for tool messages.")
@@ -161,7 +162,6 @@ model ChatRequestToolMessage extends ChatRequestMessage {
 }
 
 @added(ServiceApiVersions.v2023_07_01_Preview)
-@removed(ServiceApiVersions.v2023_12_01_Preview)
 @doc("A request chat message representing requested output from a configured function.")
 model ChatRequestFunctionMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'function' for function messages.")
@@ -185,7 +185,7 @@ model ChatResponseMessage {
   @doc("The content of the message.")
   content: string | null;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "tool_calls")
   @doc("""
   The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
@@ -201,7 +201,7 @@ model ChatResponseMessage {
   """)
   functionCall?: FunctionCall;
 
-  @added(ServiceApiVersions.v2023_08_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
   If Azure OpenAI chat extensions are configured, this array represents the incremental steps performed by those
   extensions while processing the chat completions request.

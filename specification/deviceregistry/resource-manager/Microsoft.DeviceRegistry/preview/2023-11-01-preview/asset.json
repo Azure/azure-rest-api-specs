@@ -439,7 +439,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -941,6 +942,24 @@
         ]
       },
       "readOnly": true
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2023-11-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2023-11-01-preview",
+            "value": "2023-11-01-preview",
+            "description": "2023-11-01-preview preview version"
+          }
+        ]
+      }
     }
   },
   "parameters": {}

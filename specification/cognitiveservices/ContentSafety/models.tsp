@@ -9,35 +9,41 @@ namespace ContentSafety;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Text analyze category.")
-enum TextCategory {
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+union TextCategory {
+  string,
+  "Hate",
+  "SelfHarm",
+  "Sexual",
+  "Violence",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Image analyze category.")
-enum ImageCategory {
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+union ImageCategory {
+  string,
+  "Hate",
+  "SelfHarm",
+  "Sexual",
+  "Violence",
 }
 
 @doc("The type of text analysis output.")
-enum AnalyzeTextOutputType {
+union AnalyzeTextOutputType {
+  string,
+
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  FourSeverityLevels,
+  FourSeverityLevels: "FourSeverityLevels",
 
   @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
-  EightSeverityLevels,
+  EightSeverityLevels: "EightSeverityLevels",
 }
 
 @doc("The type of image analysis output.")
-enum AnalyzeImageOutputType {
+union AnalyzeImageOutputType {
+  string,
+
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  FourSeverityLevels,
+  FourSeverityLevels: "FourSeverityLevels",
 }
 
 @doc("The text analysis request.")

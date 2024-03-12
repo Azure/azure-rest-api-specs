@@ -3,20 +3,70 @@ param (
   [Parameter(Position = 0)]
   [string] $BaseCommitish = "HEAD^",
   [Parameter(Position = 1)]
-  [string] $TargetCommitish = "HEAD"
-
+  [string] $TargetCommitish = "HEAD",
+  [Parameter(Position = 2)]
+  [string] $SpecType = "data-plane|resource-manager"
 )
 Set-StrictMode -Version 3
 
+Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
+
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
+
+function Find-Suppressions-Yaml {
+  param (
+    [string]$fileInSpecFolder
+  )
+
+  $currentDirectory = Get-Item (Split-Path -Path $fileInSpecFolder)
+
+  while ($currentDirectory) {
+    $suppressionsFile = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yaml"
+
+    if (Test-Path $suppressionsFile) {
+      return $suppressionsFile
+    } else {
+      $currentDirectory = $currentDirectory.Parent
+    }
+  }
+
+  return $null
+}
+
+function Get-Suppression {
+  param (
+    [string]$fileInSpecFolder
+  )
+
+  $suppressionsFile = Find-Suppressions-Yaml $fileInSpecFolder
+  if ($suppressionsFile) {
+    $suppressions = Get-Content -Path $suppressionsFile -Raw | ConvertFrom-Yaml
+    foreach ($suppression in $suppressions) {
+      $tool = $suppression["tool"]
+      $path = $suppression["path"]
+
+      if ($tool -eq "TypeSpecRequirement") {
+        # Paths in suppressions.yml are relative to the file itself
+        $fullPath = Join-Path -Path (Split-Path -Path $suppressionsFile) -ChildPath $path
+
+        # If path is not specified, suppression applies to all files
+        if (!$path -or ($fileInSpecFolder -like $fullPath)) {
+          return $suppression
+        }
+      }
+    }
+  }
+
+  return $null
+}
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
 $filesToCheck = (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish)).Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
-  ($_ -match "specification/[^/]+/(data-plane|resource-manager).*?/(preview|stable)/[^/]+/[^/]+\.json$")
+  ($_ -match "specification/[^/]+/($SpecType).*?/(preview|stable)/[^/]+/[^/]+\.json$")
 })
 
 if (!$filesToCheck) {
@@ -35,8 +85,19 @@ else {
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
+    $fullPath = (Join-Path $repoPath $file)
+
+    $suppression = Get-Suppression $fullPath
+    if ($suppression) {
+      $reason = $suppression["reason"] ?? "<no reason specified>"
+
+      LogInfo "  Suppressed: $reason"
+      # Skip further checks, to avoid potential errors on files already suppressed
+      continue
+    }
+
     try {
-      $jsonContent = Get-Content (Join-Path $repoPath $file) | ConvertFrom-Json -AsHashtable
+      $jsonContent = Get-Content $fullPath | ConvertFrom-Json -AsHashtable
 
       if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
         LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
@@ -53,7 +114,7 @@ else {
     }
 
     # Extract path between "specification/" and "/(preview|stable)"
-    if ($file -match "specification/(?<servicePath>[^/]+/(data-plane|resource-manager).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
+    if ($file -match "specification/(?<servicePath>[^/]+/($SpecType).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
       $servicePath = $Matches["servicePath"]
     }
     else {
