@@ -25,7 +25,6 @@ model GuestAgent extends ProxyResourceBase {
   @key("guestAgent")
   @segment("guestAgents")
   @visibility("read")
-  @doc("The name of the guest agent")
   name: string;
 
   /**

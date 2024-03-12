@@ -7,6 +7,7 @@ import "./GalleryImages.tsp";
 import "./LogicalNetworks.tsp";
 import "./MarketplaceGalleryImages.tsp";
 import "./NetworkInterfaces.tsp";
+import "./NetworkSecurityGroup.tsp";
 import "./StorageContainers.tsp";
 import "./VirtualHardDisks.tsp";
 import "./VirtualMachineInstance.tsp";

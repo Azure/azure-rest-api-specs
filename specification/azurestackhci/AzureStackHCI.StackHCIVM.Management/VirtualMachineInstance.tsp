@@ -24,7 +24,6 @@ namespace Microsoft.AzureStackHCI;
 model VirtualMachineInstance extends ExtensionResourceBase {
   @key("virtualMachineInstance")
   @segment("virtualMachineInstances")
-  @doc("The name of the virtualmachineinstance")
   @visibility("read")
   name: string;
 
@@ -111,6 +110,28 @@ interface VirtualMachineInstances {
    * The operation to restart a virtual machine instance.
    */
   restart is ArmResourceActionAsync<
+    VirtualMachineInstance,
+    void,
+    VirtualMachineInstance,
+    BaseParameters<VirtualMachineInstance>,
+    ArmLroLocationHeader
+  >;
+
+  /**
+   * The operation to pause a virtual machine instance.
+   */
+  pause is ArmResourceActionAsync<
+    VirtualMachineInstance,
+    void,
+    VirtualMachineInstance,
+    BaseParameters<VirtualMachineInstance>,
+    ArmLroLocationHeader
+  >;
+
+  /**
+   * The operation to save a virtual machine instance.
+   */
+  save is ArmResourceActionAsync<
     VirtualMachineInstance,
     void,
     VirtualMachineInstance,
