@@ -1376,6 +1376,50 @@
             "$ref": "./examples/ConfigServers_UpdatePatch_Consumption.json"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Disable the default Config Server, only available in Enterprise Plan.",
+        "operationId": "ConfigServer_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the default Config Server has deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the default Config Server is now deleting."
+          },
+          "204": {
+            "description": "Success. The response indicates the default Config Server doesn't exist or has deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ConfigServer_Delete": {
+            "$ref": "./examples/ConfigServer_Delete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/validate": {
@@ -10705,10 +10749,12 @@
           "description": "State of the config server.",
           "enum": [
             "NotAvailable",
+            "Creating",
             "Deleted",
             "Failed",
             "Succeeded",
-            "Updating"
+            "Updating",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -10716,6 +10762,19 @@
             "name": "ConfigServerState",
             "modelAsString": true
           }
+        },
+        "resourceRequests": {
+          "description": "The requested resource quantity for required CPU and Memory, only available in Enterprise Plan.",
+          "$ref": "#/definitions/ConfigServerResourceRequests"
+        },
+        "instances": {
+          "description": "Collection of instances belong to Config Server, only available in Enterprise Plan.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigServerInstance"
+          },
+          "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/Error",
@@ -11066,6 +11125,45 @@
         }
       },
       "x-ms-discriminator-value": "Weekly"
+    },
+    "ConfigServerResourceRequests": {
+      "description": "Resource request payload of Config Server, only available in Enterprise Plan.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "cpu": {
+          "description": "Cpu allocated to each Config Server instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "memory": {
+          "description": "Memory allocated to each Config Server instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceCount": {
+          "format": "int32",
+          "description": "Instance count of the Config Server",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigServerInstance": {
+      "description": "Collection of instances belong to the Config Server, only available in Enterprise Plan.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Config Server instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the Config Server instance",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "ConfigServerSettings": {
       "description": "The settings of config server.",
