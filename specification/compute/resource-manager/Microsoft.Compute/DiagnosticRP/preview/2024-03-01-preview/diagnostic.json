@@ -425,15 +425,22 @@
       "description": "Contains metadata of a diagnostic type",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Identifier for the type of diagnostic",
+          "type": "string"
+        },
+        "name": {
+          "description": "Friendly name for the type of diagnostic",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the diagnostic",
+          "type": "string"
+        },
         "properties": {
           "$ref": "#/definitions/DiagnosticProperties"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "DiagnosticProperties": {
       "description": "Contains additional properties of a diagnostic",
