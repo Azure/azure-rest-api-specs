@@ -884,7 +884,7 @@
                   "description": "Settings of the log level for the java app.",
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/LoglevelSetting"
+                    "$ref": "#/definitions/LogLevelSetting"
                   }
                 }
               }
@@ -903,7 +903,7 @@
         }
       }
     },
-    "LoglevelSetting": {
+    "LogLevelSetting": {
       "description": "Log level settings for java workloads.",
       "type": "object",
       "required": [
@@ -919,11 +919,11 @@
           "description": "The specified logger's log level.",
           "type": "string",
           "enum": [
+            "off",
+            "error",
+            "warn",
             "info",
             "debug",
-            "warn",
-            "error",
-            "fatal",
             "trace"
           ],
           "x-ms-enum": {
