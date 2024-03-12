@@ -102,6 +102,9 @@ enum ConnectorType {
 
   @doc("confluent source connector.")
   ConfluentSource,
+
+  @doc("mysql source connector.")
+  MySqlSource,
 }
 
 @doc("Enum of the type of Converter")
@@ -360,4 +363,32 @@ model SqlServerSourceConnectorProperties extends ConnectorProperties {
   @visibility("create", "update")
   @secret
   password: string;
+}
+
+@doc("Configuration for MySqlSourceConnector")
+model MySqlSourceConnectorProperties extends ConnectorProperties {
+  @doc("Type of MySqlSourceConnector")
+  connectorType: ConnectorType.MySqlSource;
+
+  @doc("Direction of the Source Connector.")
+  connectorDirection?: Direction = Direction.Source;
+
+  @doc("HostName for MySql.")
+  hostName: string;
+
+  @doc("Port for MySql.")
+  port: int32;
+
+  @doc("DatabaseName for MySql.")
+  databaseName: string;
+
+  @doc("Username for MySql.")
+  username: string;
+
+  @doc("Password for MySql.")
+  @secret
+  password: string;
+
+  @doc("Server id for MySql.")
+  serverId: int32;
 }
