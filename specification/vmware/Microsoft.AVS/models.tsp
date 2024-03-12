@@ -526,6 +526,10 @@ model Location is ProxyResource<LocationProperties> {
   @key("location")
   @path
   @segment("locations")
+  @Azure.ResourceManager.Private.armCommonParameter(
+    "LocationParameter",
+    Azure.ResourceManager.CommonTypes.Versions.v3
+  )
   name: string;
 }
 
