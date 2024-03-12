@@ -166,22 +166,22 @@ suppressions:
     where:
       - $.definitions.PlacementPolicy
 
-  - code: DeleteOperationAsyncResponseValidation
-    reason: x-ms-long-running-operation-options does not need to be set if you follow ARM guidelines
-    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
-    from: vmware.json
+  # - code: DeleteOperationAsyncResponseValidation
+  #   reason: x-ms-long-running-operation-options does not need to be set if you follow ARM guidelines
+  #   # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+  #   from: vmware.json
 
-  - code: PatchSkuProperty
-    reason: sku can not be updated
-    from: vmware.json
+  # - code: PatchSkuProperty
+  #   reason: sku can not be updated
+  #   from: vmware.json
     # where:
     #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
     #   - $.definitions.PrivateCloudUpdate
     #   - $.definitions.ClusterUpdate
 
-  - code: LroPatch202
-    reason: Breaking change to add response
-    from: vmware.json
+  # - code: LroPatch202
+  #   reason: Breaking change to add response
+  #   from: vmware.json
     # where:
     #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
     #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
@@ -192,10 +192,10 @@ suppressions:
     # where: 
     #   - $ $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].patch
 
-  - code: XmsLongRunningOperationOptions
-    reason: This option is designed for cases where the server does NOT follow ARM guidelines
-    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
-    from: vmware.json
+  # - code: XmsLongRunningOperationOptions
+  #   reason: This option is designed for cases where the server does NOT follow ARM guidelines
+  #   # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+  #   from: vmware.json
 
   - code: DeleteResponseCodes
     reasons: Our deletes are modeled with ArmResourceDeleteAsync. Removing the 200 OK response is breaking.
