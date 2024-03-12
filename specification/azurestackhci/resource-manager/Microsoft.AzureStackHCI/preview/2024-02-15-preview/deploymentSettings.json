@@ -420,31 +420,6 @@
         }
       }
     },
-    "DeploymentMode": {
-      "type": "string",
-      "description": "The deployment mode for cluster deployment.",
-      "enum": [
-        "Validate",
-        "Deploy"
-      ],
-      "default": "Deploy",
-      "x-ms-enum": {
-        "name": "DeploymentMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Validate",
-            "value": "Validate",
-            "description": "Validate deployment settings for cluster."
-          },
-          {
-            "name": "Deploy",
-            "value": "Deploy",
-            "description": "Deploy cluster using deployment settings."
-          }
-        ]
-      }
-    },
     "DeploymentSetting": {
       "type": "object",
       "description": "Edge device resource",
@@ -491,8 +466,9 @@
       "description": "DeploymentSetting properties",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "DeploymentSetting provisioning state"
+          "$ref": "./hciCommon.json#/definitions/ProvisioningState",
+          "description": "DeploymentSetting provisioning state",
+          "readOnly": true
         },
         "arcNodeResourceIds": {
           "type": "array",
@@ -503,7 +479,7 @@
           "x-ms-identifiers": []
         },
         "deploymentMode": {
-          "$ref": "#/definitions/DeploymentMode",
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
           "description": "The deployment mode for cluster deployment."
         },
         "deploymentConfiguration": {
@@ -512,7 +488,7 @@
           "x-ms-identifiers": []
         },
         "reportedProperties": {
-          "$ref": "#/definitions/ReportedProperties",
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
           "description": "Deployment Status reported from cluster.",
           "readOnly": true
         }
@@ -522,26 +498,6 @@
         "deploymentMode",
         "deploymentConfiguration"
       ]
-    },
-    "DeploymentStatus": {
-      "type": "object",
-      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of steps of AzureStackHCI Cluster Deployment.",
-          "items": {
-            "$ref": "#/definitions/DeploymentStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
     },
     "HostNetwork": {
       "type": "object",
@@ -740,67 +696,6 @@
         }
       }
     },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource.",
-      "readOnly": true,
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "NotSpecified",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The resource provision state is not specified"
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource create request has been accepted"
-          }
-        ]
-      }
-    },
     "QosPolicyOverrides": {
       "type": "object",
       "description": "The QoSPolicyOverrides of a cluster.",
@@ -907,22 +802,6 @@
         }
       }
     },
-    "ReportedProperties": {
-      "type": "object",
-      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
-      "properties": {
-        "validationStatus": {
-          "$ref": "#/definitions/ValidationStatus",
-          "description": "validation status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/DeploymentStatus",
-          "description": "Deployment status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
-        }
-      }
-    },
     "ScaleUnits": {
       "type": "object",
       "description": "Scale units will contains list of deployment data",
@@ -1010,60 +889,6 @@
         }
       }
     },
-    "DeploymentStep": {
-      "type": "object",
-      "description": "The Step of AzureStackHCI Cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of step.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of step.",
-          "readOnly": true
-        },
-        "fullStepIndex": {
-          "type": "string",
-          "description": "FullStepIndex of step.",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "description": "Start time of step.",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "description": "End time of step.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of nested steps of AzureStackHCI Cluster Deployment.",
-          "items": {
-            "$ref": "#/definitions/DeploymentStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "exception": {
-          "type": "array",
-          "description": "List of exceptions in AzureStackHCI Cluster Deployment.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "Storage": {
       "type": "object",
       "description": "The Storage config of AzureStackHCI Cluster.",
@@ -1118,26 +943,6 @@
           "x-ms-identifiers": [
             "physicalNode"
           ]
-        }
-      }
-    },
-    "ValidationStatus": {
-      "type": "object",
-      "description": "The ValidationStatus of AzureStackHCI Cluster.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of steps of AzureStackHCI Cluster Deployment.",
-          "items": {
-            "$ref": "#/definitions/DeploymentStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
         }
       }
     },
