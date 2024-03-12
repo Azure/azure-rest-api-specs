@@ -56,7 +56,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeDeviceListResult"
             }
@@ -104,7 +104,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeDevice"
             }
@@ -156,13 +156,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'EdgeDevice' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeDevice"
             }
           },
           "201": {
-            "description": "Resource 'EdgeDevice' create operation succeeded",
+            "description": "Resource successfully created.",
             "schema": {
               "$ref": "#/definitions/EdgeDevice"
             },
@@ -186,8 +186,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create Edge Device": {
-            "$ref": "./examples/PutEdgeDevices.json"
+          "Create HCI Edge Device": {
+            "$ref": "./examples/CreateHciEdgeDevice.json"
           }
         }
       },
@@ -285,7 +285,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ValidateResponse"
             }
@@ -340,25 +340,25 @@
           "type": "string",
           "description": "device metadata details."
         }
-      },
-      "required": [
-        "nicDetails"
-      ]
+      }
     },
     "EdgeDevice": {
       "type": "object",
       "description": "Edge device resource",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/EdgeDeviceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
+        "kind": {
+          "$ref": "#/definitions/DeviceKind",
+          "description": "Job kind to support polymorphic resource.",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "read"
           ]
         }
       },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -398,10 +398,270 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of edgeDevice resource"
         }
+      }
+    },
+    "HciEdgeDevice": {
+      "type": "object",
+      "description": "Arc-enabled edge device with HCI OS.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HciEdgeDeviceProperties",
+          "description": "properties for Arc-enabled edge device with HCI OS."
+        }
       },
-      "required": [
-        "deviceConfiguration"
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDevice"
+        }
+      ],
+      "x-ms-discriminator-value": "HCI"
+    },
+    "HciEdgeDeviceProperties": {
+      "type": "object",
+      "description": "properties for Arc-enabled edge device with HCI OS.",
+      "properties": {
+        "reportedProperties": {
+          "$ref": "#/definitions/HciReportedProperties",
+          "description": "The instance view of all current configurations on HCI device.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDeviceProperties"
+        }
       ]
+    },
+    "HciReportedProperties": {
+      "type": "object",
+      "description": "The device Configuration for HCI device.",
+      "properties": {
+        "networkProfile": {
+          "$ref": "#/definitions/HciNetworkProfile",
+          "description": "HCI device network information.",
+          "readOnly": true
+        },
+        "osProfile": {
+          "$ref": "#/definitions/HciOsProfile",
+          "description": "HCI device OS specific information.",
+          "readOnly": true
+        },
+        "sbeDeploymentPackageInfo": {
+          "$ref": "#/definitions/SbeDeploymentPackageInfo",
+          "description": "Solution builder extension (SBE) deployment package information.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceKind": {
+      "type": "string",
+      "description": "Edge device kind.",
+      "enum": [
+        "HCI"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "Arc-enabled edge device with HCI OS."
+          }
+        ]
+      }
+    },
+    "SbeDeploymentPackageInfo": {
+      "type": "object",
+      "description": "Solution builder extension (SBE) deployment package information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "SBE deployment validation code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A detailed message that explains the SBE package validation result.",
+          "readOnly": true
+        },
+        "sbeManifest": {
+          "type": "string",
+          "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
+          "readOnly": true
+        }
+      }
+    },
+    "SwitchDetail": {
+      "type": "object",
+      "description": "List of switch details for edge device.",
+      "properties": {
+        "switchName": {
+          "type": "string",
+          "description": "The name of the switch.",
+          "readOnly": true
+        },
+        "switchType": {
+          "type": "string",
+          "description": "The type of the switch. e.g. external, internal.",
+          "readOnly": true
+        },
+        "extensions": {
+          "type": "array",
+          "description": "This represents extensions installed on virtualSwitch.",
+          "items": {
+            "$ref": "#/definitions/SwitchExtension"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "extensionName"
+          ]
+        }
+      }
+    },
+    "SwitchExtension": {
+      "type": "object",
+      "description": "This represents extensions installed on virtualSwitch.",
+      "properties": {
+        "switchId": {
+          "type": "string",
+          "description": "Unique identifier for virtualSwitch.",
+          "readOnly": true
+        },
+        "extensionName": {
+          "type": "string",
+          "description": "This will show extension name for virtualSwitch.",
+          "readOnly": true
+        },
+        "extensionEnabled": {
+          "type": "boolean",
+          "description": "This represents whether extension is enabled on virtualSwitch.",
+          "readOnly": true
+        }
+      }
+    },
+    "HciNetworkProfile": {
+      "type": "object",
+      "description": "The network profile of a device.",
+      "properties": {
+        "nicDetails": {
+          "type": "array",
+          "description": "List of NIC Details of device.",
+          "items": {
+            "$ref": "#/definitions/HciNicDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "adapterName"
+          ]
+        },
+        "switchDetails": {
+          "type": "array",
+          "description": "List of switch details for edge device.",
+          "items": {
+            "$ref": "#/definitions/SwitchDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "switchName"
+          ]
+        }
+      }
+    },
+    "HciNicDetail": {
+      "type": "object",
+      "description": "The NIC Detail of a device.",
+      "properties": {
+        "adapterName": {
+          "type": "string",
+          "description": "Adapter Name of NIC",
+          "readOnly": true
+        },
+        "interfaceDescription": {
+          "type": "string",
+          "description": "Interface Description of NIC",
+          "readOnly": true
+        },
+        "componentId": {
+          "type": "string",
+          "description": "Component Id of NIC",
+          "readOnly": true
+        },
+        "driverVersion": {
+          "type": "string",
+          "description": "Driver Version of NIC",
+          "readOnly": true
+        },
+        "ip4Address": {
+          "type": "string",
+          "description": "Subnet Mask of NIC",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet Mask of NIC",
+          "readOnly": true
+        },
+        "defaultGateway": {
+          "type": "string",
+          "description": "Default Gateway of NIC",
+          "readOnly": true
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "DNS Servers for NIC",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "defaultIsolationId": {
+          "type": "string",
+          "description": "Default Isolation of Management NIC",
+          "readOnly": true
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "MAC address information of NIC.",
+          "readOnly": true
+        },
+        "slot": {
+          "type": "string",
+          "description": "The slot attached to the NIC.",
+          "readOnly": true
+        },
+        "switchName": {
+          "type": "string",
+          "description": "The switch attached to the NIC, if any.",
+          "readOnly": true
+        },
+        "nicType": {
+          "type": "string",
+          "description": "The type of NIC, physical, virtual, management.",
+          "readOnly": true
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "The VLAN ID of the physical NIC.",
+          "readOnly": true
+        },
+        "nicStatus": {
+          "type": "string",
+          "description": "The status of NIC, up, disconnected.",
+          "readOnly": true
+        }
+      }
+    },
+    "HciOsProfile": {
+      "type": "object",
+      "properties": {
+        "bootType": {
+          "type": "string",
+          "description": "The boot type of the device. e.g. UEFI, Legacy etc",
+          "readOnly": true
+        }
+      }
     },
     "NicDetail": {
       "type": "object",

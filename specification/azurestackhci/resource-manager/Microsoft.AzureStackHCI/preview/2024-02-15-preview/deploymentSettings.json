@@ -392,13 +392,27 @@
           "$ref": "#/definitions/HostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster."
         },
+        "sdnIntegration": {
+          "$ref": "#/definitions/SdnIntegration",
+          "description": "SDN Integration config to deploy AzureStackHCI Cluster."
+        },
         "adouPath": {
           "type": "string",
           "description": "The path to the Active Directory Organizational Unit container object prepared for the deployment. "
         },
         "secretsLocation": {
           "type": "string",
-          "description": "The URI to the keyvault / secret store."
+          "description": "Azure keyvault endpoint. This property is deprecated from 2023-12-01-preview. Please use secrets property instead."
+        },
+        "secrets": {
+          "type": "array",
+          "description": "secrets used for cloud deployment.",
+          "items": {
+            "$ref": "./hciCommon.json#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
         },
         "optionalServices": {
           "$ref": "#/definitions/OptionalServices",
@@ -663,6 +677,24 @@
         }
       }
     },
+    "NetworkController": {
+      "type": "object",
+      "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster.",
+      "properties": {
+        "macAddressPoolStart": {
+          "type": "string",
+          "description": "macAddressPoolStart of network controller used for SDN Integration."
+        },
+        "macAddressPoolStop": {
+          "type": "string",
+          "description": "macAddressPoolStop of network controller used for SDN Integration."
+        },
+        "networkVirtualizationEnabled": {
+          "type": "boolean",
+          "description": "NetworkVirtualizationEnabled of network controller used for SDN Integration."
+        }
+      }
+    },
     "Observability": {
       "type": "object",
       "description": "The Observability of AzureStackHCI Cluster.",
@@ -787,6 +819,94 @@
         }
       }
     },
+    "SbePartnerInfo": {
+      "type": "object",
+      "description": "The solution builder extension (SBE) partner deployment info for cluster.",
+      "properties": {
+        "sbeDeploymentInfo": {
+          "$ref": "#/definitions/SbeDeploymentInfo",
+          "description": "SBE package and manifest information for the solution Builder Extension staged for AzureStackHCI cluster deployment."
+        },
+        "partnerProperties": {
+          "type": "array",
+          "description": "List of SBE partner properties for AzureStackHCI cluster deployment.",
+          "items": {
+            "$ref": "#/definitions/SbePartnerProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "credentialList": {
+          "type": "array",
+          "description": "SBE credentials list for AzureStackHCI cluster deployment.",
+          "items": {
+            "$ref": "#/definitions/SbeCredentials"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        }
+      }
+    },
+    "SbeDeploymentInfo": {
+      "type": "object",
+      "description": "Solution builder extension (SBE) package and manifest information for the solution builder extension staged for AzureStackHCI cluster deployment.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "SBE package version."
+        },
+        "family": {
+          "type": "string",
+          "description": "SBE family name."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "SBE manifest publisher."
+        },
+        "sbeManifestSource": {
+          "type": "string",
+          "description": "SBE Manifest Source."
+        },
+        "sbeManifestCreationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "SBE Manifest Creation Date."
+        }
+      }
+    },
+    "SbePartnerProperties": {
+      "type": "object",
+      "description": "Solution builder extension (SBE) partner properties object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "SBE partner property name."
+        },
+        "value": {
+          "type": "string",
+          "description": "SBE partner property value."
+        }
+      }
+    },
+    "SbeCredentials": {
+      "type": "object",
+      "description": "secrets used for solution builder extension (SBE) partner extensibility.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "secret name stored in keyvault."
+        },
+        "eceSecretName": {
+          "type": "string",
+          "description": "secret name expected for Enterprise Cloud Engine (ECE)."
+        },
+        "secretLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "secret URI stored in keyvault."
+        }
+      }
+    },
     "ReportedProperties": {
       "type": "object",
       "description": "The DeploymentStatus of AzureStackHCI Cluster.",
@@ -810,6 +930,10 @@
         "deploymentData": {
           "$ref": "#/definitions/DeploymentData",
           "description": "Deployment Data to deploy AzureStackHCI Cluster."
+        },
+        "sbePartnerInfo": {
+          "$ref": "#/definitions/SbePartnerInfo",
+          "description": "Solution builder extension (SBE) partner properties"
         }
       },
       "required": [
@@ -818,6 +942,16 @@
       "externalDocs": {
         "description": "Deploy Azure Stack HCI using an existing configuration file",
         "url": "https://learn.microsoft.com/en-us/azure-stack/hci/deploy/deployment-tool-existing-file"
+      }
+    },
+    "SdnIntegration": {
+      "type": "object",
+      "description": "SDN Integration config to deploy AzureStackHCI Cluster.",
+      "properties": {
+        "networkController": {
+          "$ref": "#/definitions/NetworkController",
+          "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster."
+        }
       }
     },
     "DeploymentSecuritySettings": {
@@ -941,6 +1075,24 @@
         }
       }
     },
+    "StorageAdapterIPInfo": {
+      "type": "object",
+      "description": "The StorageAdapter physical nodes of a cluster.",
+      "properties": {
+        "physicalNode": {
+          "type": "string",
+          "description": "storage adapter physical node name."
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        }
+      }
+    },
     "StorageNetworks": {
       "type": "object",
       "description": "The StorageNetworks of a cluster.",
@@ -956,6 +1108,16 @@
         "vlanId": {
           "type": "string",
           "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic. "
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/StorageAdapterIPInfo"
+          },
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
         }
       }
     },
