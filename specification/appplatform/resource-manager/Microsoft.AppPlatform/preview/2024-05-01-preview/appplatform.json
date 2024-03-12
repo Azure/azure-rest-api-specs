@@ -15737,6 +15737,10 @@
           "$ref": "#/definitions/UserSourceInfo",
           "description": "Uploaded source information of the Job."
         },
+        "configServers": {
+          "$ref": "#/definitions/ConfigServerCollection",
+          "description": "Binded config servers"
+        },
         "triggerConfig": {
           "$ref": "#/definitions/JobTriggerConfig",
           "description": "The Job trigger related configuration."
@@ -15813,24 +15817,19 @@
             "name"
           ]
         },
-        "replicaTimeout": {
-          "description": "Maximum number of seconds a replica is allowed to run.",
+        "timeoutInSeconds": {
+          "description": "Maximum number of seconds an execution is allowed to run.",
           "format": "int32",
           "type": "integer"
         },
         "replicaRetryLimit": {
           "format": "int32",
-          "description": "Maximum number of retries before failing the job.",
+          "description": "Maximum number of retries fro each replica before failing the job.",
           "type": "integer"
         },
-        "replicaCompletionCount": {
+        "replicaCount": {
           "format": "int32",
-          "description": "Minimum number of successful replica completions before overall job completion.",
-          "type": "integer"
-        },
-        "parallelism": {
-          "format": "int32",
-          "description": "Number of parallel replicas of a job that can run at a given time.",
+          "description": "Number of replicas running for the execution.",
           "type": "integer"
         },
         "args": {
@@ -15939,6 +15938,37 @@
             "name"
           ]
         }
+      }
+    },
+    "ConfigServerReference": {
+      "description": "A reference to the Config Server",
+      "required": [
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource Id of the Config Server",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppPlatform/Spring/configServers"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ConfigServerCollection": {
+      "description": "Collection of Config Server reference",
+      "type": "array",
+      "x-ms-identifiers": [
+        "resourceId"
+      ],
+      "items": {
+        "$ref": "#/definitions/ConfigServerReference"
       }
     }
   },
