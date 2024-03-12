@@ -11,7 +11,24 @@
           "accountName": "testsa",
           "shareName": "web",
           "accessKey": "26515^%@#*",
-          "mountPath": "/mounts/a/files"
+          "mountPath": "/mounts/a/files",
+          "protocol": "Smb"
+        },
+        "account2": {
+          "type": "AzureFiles",
+          "accountName": "testsb",
+          "shareName": "web",
+          "accessKey": "12345^%@#*",
+          "mountPath": "/mounts/b/files",
+          "protocol": "Nfs"
+        },
+        "account3": {
+          "type": "AzureBlob",
+          "accountName": "testsc",
+          "shareName": "web",
+          "accessKey": "67890^%@#*",
+          "mountPath": "/mounts/c/blobs",
+          "protocol": "Http"
         }
       }
     }
@@ -30,7 +47,24 @@
             "accountName": "testsa",
             "shareName": "web",
             "mountPath": "/mounts/a/files",
-            "state": "Ok"
+            "state": "Ok",
+            "protocol": "Smb"
+          },
+          "account2": {
+            "type": "AzureFiles",
+            "accountName": "testsb",
+            "shareName": "web",
+            "mountPath": "/mounts/b/files",
+            "state": "Ok",
+            "protocol": "Nfs"
+          },
+          "account3": {
+            "type": "AzureBlob",
+            "accountName": "testsc",
+            "shareName": "web",
+            "mountPath": "/mounts/c/blobs",
+            "state": "Ok",
+            "protocol": "Http"
           }
         }
       }
