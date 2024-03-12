@@ -21,13 +21,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
@@ -70,13 +70,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
@@ -130,13 +130,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
@@ -184,13 +184,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
@@ -235,13 +235,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
@@ -250,11 +250,13 @@
             "in": "path",
             "name": "entityIdentifier",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Entity ID"
           },
           {
             "in": "body",
             "name": "requestBody",
+            "description": "Describes the request body for triggering a playbook on an entity.",
             "schema": {
               "$ref": "#/definitions/EntityManualTriggerRequestBody"
             }
@@ -293,13 +295,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
@@ -308,11 +310,13 @@
             "in": "path",
             "name": "incidentIdentifier",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Incident ID"
           },
           {
             "in": "body",
             "name": "requestBody",
+            "description": "Describes the request body for triggering a playbook on an incident.",
             "schema": {
               "$ref": "#/definitions/ManualTriggerRequestBody"
             }
@@ -367,6 +371,7 @@
       }
     },
     "AddIncidentTaskActionProperties": {
+      "description": "Describes an automation rule action to add a task to an incident.",
       "required": [
         "title"
       ],
@@ -436,6 +441,7 @@
       "x-ms-client-flatten": true
     },
     "AutomationRuleBooleanCondition": {
+      "description": "Describes an automation rule condition with boolean operators.",
       "type": "object",
       "properties": {
         "operator": {
@@ -447,11 +453,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AutomationRuleCondition"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "AutomationRuleBooleanConditionSupportedOperator": {
+      "description": "Describes a boolean condition operator.",
       "enum": [
         "And",
         "Or"
@@ -620,6 +628,7 @@
       }
     },
     "AutomationRulePropertyArrayConditionSupportedArrayConditionType": {
+      "description": "Describes an array condition evaluation type.",
       "enum": [
         "AnyItem"
       ],
@@ -637,6 +646,7 @@
       }
     },
     "AutomationRulePropertyArrayConditionSupportedArrayType": {
+      "description": "Describes an array condition evaluated array type.",
       "enum": [
         "CustomDetails",
         "CustomDetailValues"
@@ -659,6 +669,7 @@
       }
     },
     "AutomationRulePropertyArrayValuesCondition": {
+      "description": "Describes an automation rule condition on array properties.",
       "type": "object",
       "properties": {
         "arrayType": {
@@ -672,7 +683,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AutomationRuleCondition"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1318,6 +1330,7 @@
       }
     },
     "ManualTriggerRequestBody": {
+      "description": "Describes the request body for triggering a playbook on an incident.",
       "required": [
         "logicAppsResourceId"
       ],
