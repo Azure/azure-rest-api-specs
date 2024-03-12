@@ -619,8 +619,7 @@
                 "description": "Sink Connector"
               }
             ]
-          },
-          "readOnly": true
+          }
         }
       },
       "allOf": [
@@ -663,8 +662,7 @@
                 "description": "Sink Connector"
               }
             ]
-          },
-          "readOnly": true
+          }
         },
         "bootstrapServers": {
           "type": "string",
@@ -690,10 +688,6 @@
           "type": "string",
           "format": "password",
           "description": "Password of the Confluent.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
           "x-ms-secret": true
         }
       },
@@ -782,13 +776,11 @@
         },
         "connectorDirection": {
           "$ref": "#/definitions/Direction",
-          "description": "Direction of the Connector.",
-          "readOnly": true
+          "description": "Direction of the Connector."
         },
         "connectorType": {
           "$ref": "#/definitions/ConnectorType",
-          "description": "Type of the Connector.",
-          "readOnly": true
+          "description": "Type of the Connector."
         },
         "eventHubConfig": {
           "$ref": "#/definitions/EventHubConfig",
@@ -796,8 +788,7 @@
         },
         "connectorState": {
           "$ref": "#/definitions/ConnectorState",
-          "description": "State of the MessagingConnector",
-          "readOnly": true
+          "description": "State of the MessagingConnector"
         }
       },
       "discriminator": "connectorType",
@@ -1082,8 +1073,7 @@
                 "description": "Sink Connector"
               }
             ]
-          },
-          "readOnly": true
+          }
         },
         "pollIntervalInMs": {
           "type": "integer",
@@ -1106,10 +1096,6 @@
           "type": "string",
           "format": "password",
           "description": "masterKey for CosmosDB server.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
           "x-ms-secret": true
         },
         "offsetPolicy": {
@@ -1178,10 +1164,6 @@
           "type": "string",
           "format": "password",
           "description": "connectionString of the EventHub.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
           "x-ms-secret": true
         }
       },
@@ -1224,8 +1206,7 @@
                 "description": "Sink Connector"
               }
             ]
-          },
-          "readOnly": true
+          }
         },
         "projectId": {
           "type": "string",
@@ -1239,10 +1220,6 @@
           "type": "string",
           "format": "password",
           "description": "AccountKey for pubsub server.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
           "x-ms-secret": true
         }
       },
@@ -1291,8 +1268,7 @@
                 "description": "Sink Connector"
               }
             ]
-          },
-          "readOnly": true
+          }
         },
         "awsAccessKeyId": {
           "type": "string",
@@ -1302,10 +1278,6 @@
           "type": "string",
           "format": "password",
           "description": "SecretAccessKey for AWS Kinesis Server.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
           "x-ms-secret": true
         },
         "awsKinesisRegion": {
@@ -1466,8 +1438,7 @@
                 "description": "Sink Connector"
               }
             ]
-          },
-          "readOnly": true
+          }
         },
         "hostName": {
           "type": "string",
@@ -1490,10 +1461,6 @@
           "type": "string",
           "format": "password",
           "description": "Password for PostgreSql Server.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
           "x-ms-secret": true
         },
         "replicationSlotName": {
@@ -1567,8 +1534,7 @@
                 "description": "Sink Connector"
               }
             ]
-          },
-          "readOnly": true
+          }
         },
         "hostName": {
           "type": "string",
@@ -1591,10 +1557,6 @@
           "type": "string",
           "format": "password",
           "description": "Password for SqlServer.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
           "x-ms-secret": true
         }
       },
