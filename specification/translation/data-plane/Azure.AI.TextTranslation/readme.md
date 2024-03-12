@@ -14,6 +14,7 @@ openapi-type: data-plane
 
 # Releases
 
+
 ### Release 3.0
 These settings apply only when `--tag=release_3_0` is specified on the command line.
 
