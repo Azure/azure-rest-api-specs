@@ -14,6 +14,6 @@ jobs:
   - template: /eng/pipelines/templates/steps/npm-install.yml
 
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 -GitClean -BaseCommitish HEAD~2 -Verbose
+      $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Validation.ps1 -GitClean -BaseCommitish HEAD~2 -Verbose
     displayName: Validate Impacted Specs
     ignoreLASTEXITCODE: true
