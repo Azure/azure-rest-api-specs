@@ -3953,30 +3953,53 @@
       "description": "Specifies Redeploy,Reboot and scheduledEventsAdditionalPublishingTargets Scheduled Event related configurations.",
       "properties": {
         "UserInitiatedRedeploy": {
-          "automaticallyApprove": {
-            "type": "boolean",
-            "description": "Specifies Redeploy Scheduled Event related configurations."
-          }
+          "$ref": "#/definitions/UserInitiatedRedeploy",
+          "description": "The configuration parameters used while creating userInitiatedRedeploy scheduled event setting creation."
         },
         "UserInitiatedReboot": {
-          "automaticallyApprove": {
-            "type": "boolean",
-            "description": "Specifies Reboot Scheduled Event related configurations."
-          }
+          "$ref": "#/definitions/UserInitiatedReboot",
+          "description": "The configuration parameters used while creating userInitiatedReboot scheduled event setting creation."
         },
-        "scheduledEventsAdditionalPublishingTargets": {
+        "ScheduledEventsAdditionalPublishingTargets": {
           "$ref": "#/definitions/ScheduledEventsAdditionalPublishingTargets",
           "description": "The configuration parameters used while publishing scheduledEventsAdditionalPublishingTargets."
         }
       }
     },
-    "ScheduledEventsAdditionalPublishingTargets": {
+    "UserInitiatedRedeploy": {
+      "type": "object",
+      "description": "Specifies Redeploy related Scheduled Event related configurations.",
       "properties": {
-        "eventGridAndResourceGraph": {
-          "enable": {
-            "type": "boolean",
-            "description": "Specifies if event grid and resource graph is enabled for Scheduled event related configurations."
-          }
+        "automaticallyApprove": {
+          "type": "boolean",
+          "description": "Specifies Redeploy Scheduled Event related configurations."
+        }
+      }
+    },
+    "UserInitiatedReboot": {
+      "type": "object",
+      "description": "Specifies Reboot related Scheduled Event related configurations.",
+      "properties": {
+        "automaticallyApprove": {
+          "type": "boolean",
+          "description": "Specifies Reboot Scheduled Event related configurations."
+        }
+      }
+    },
+    "ScheduledEventsAdditionalPublishingTargets": {
+      "type": "object",
+      "properties": {
+        "$ref": "#/definitions/EventGridAndResourceGraph",
+        "description": "The configuration parameters used while creating eventGridAndResourceGraph Scheduled Event setting."
+      }
+    },
+    "EventGridAndResourceGraph": {
+      "type": "object",
+      "description": "Specifies eventGridAndResourceGraph related Scheduled Event related configurations.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Specifies if event grid and resource graph is enabled for Scheduled event related configurations."
         }
       }
     },
