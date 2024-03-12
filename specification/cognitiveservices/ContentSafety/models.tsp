@@ -272,7 +272,7 @@ model TextCustomizedCategoryVersion {
 
   @doc("URL of sample jsonl blob. Read & write access to the last layer virtual directory is required.")
   @visibility("create", "read", "update")
-  sampleBlobUrl?: string;
+  sampleBlobUrl: string;
 
   @doc("Delimiter of blob url. If not provided, '/' will be used as the delimiter to parse the sampleBlobUrl.")
   @visibility("created", "update")
@@ -280,7 +280,7 @@ model TextCustomizedCategoryVersion {
 
   @doc("URL of copied sample jsonl blob. If sampleBlobUrl is not provided in the request, this field will not be shown in the response.")
   @visibility("read")
-  sampleBlobCopyUrl?: string;
+  sampleBlobCopyUrl: string;
 
   @doc("Version number of the customized category.")
   @visibility("read")
@@ -296,11 +296,11 @@ model TextCustomizedCategoryVersion {
 
   @doc("Build information for the customized category.")
   @visibility("read")
-  buildInfo: TextCustomizedCategoryBuildInfo;
+  buildInfo?: TextCustomizedCategoryBuildInfo;
 
   @doc("Build information for the customized category.")
   @visibility("read")
-  deleteInfo: TextCustomizedCategoryDeleteInfo;
+  deleteInfo?: TextCustomizedCategoryDeleteInfo;
 }
 
 @doc("Detailed information of the customized category build.")
