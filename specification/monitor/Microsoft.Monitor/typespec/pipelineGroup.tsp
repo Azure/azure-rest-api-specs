@@ -40,7 +40,7 @@ model PipelineGroup is TrackedResource<PipelineGroupProperties> {
 @doc("Properties that need to be specified to create a new pipeline group instance.")
 model PipelineGroupProperties {
   @doc("Defines the amount of replicas of the pipeline group instance.")
-  replicas?: int32 = 1;
+  replicas?: int32;
 
   @doc("The receivers specified for a pipeline group instance.")
   @extension("x-ms-identifiers", [])
