@@ -1603,52 +1603,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationSettingsOperationStatus/{requestId}": {
-      "get": {
-        "tags": [
-          "GroupQuotaLocationSettingsOperationStatus"
-        ],
-        "summary": "Returns a operations status for locationSettings put, patch calls.",
-        "description": "Returns a operations status for locationSettings put, patch calls. once the operation reaches completed state - Success orFailed. The location header will be updated to get final status.",
-        "operationId": "GroupQuotaLocationSettingsOperationStatus_Get",
-        "x-ms-examples": {
-          "GroupQuotaOperationsStatus_Get": {
-            "$ref": "./examples/GroupQuotasEnforcement/GroupQuotaEnforcementOperationStatus.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/GroupQuotaName"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderName"
-          },
-          {
-            "$ref": "#/parameters/RequestId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/LROResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
