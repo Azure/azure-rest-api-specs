@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-11-01-preview",
+    "version": "2024-03-01-preview",
     "title": "vi",
     "description": "Microsoft Azure Video Indexer"
   },
@@ -1269,6 +1269,11 @@
           "type": "object",
           "$ref": "#/definitions/StorageServicesForPutRequest"
         },
+        "openAiServices": {
+          "description": "The openAi services details",
+          "type": "object",
+          "$ref": "#/definitions/OpenAiServicesForPutRequest"
+        },
         "totalSecondsIndexed": {
           "description": "An integer representing the total seconds that have been indexed on the account",
           "type": "integer",
@@ -1334,6 +1339,11 @@
           "description": "The storage services details",
           "type": "object",
           "$ref": "#/definitions/StorageServicesForPatchRequest"
+        },
+        "openAiServices": {
+          "description": "The openAi services details",
+          "type": "object",
+          "$ref": "#/definitions/OpenAiServicesForPatchRequest"
         },
         "publicNetworkAccess": {
           "description": "Whether or not public network access is allowed for the account.",
@@ -1589,10 +1599,74 @@
         }
       }
     },
+    "OpenAiServicesForPutRequest": {
+      "description": "The openAi services details",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CognitiveServices/accounts"
+              }
+            ]
+          },
+          "description": "The openAi services resource id",
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.CognitiveServices/accounts/contoso-viopenai-ms"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          },
+          "description": "The user assigned identity to be used to grant permissions",
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoindexer-mi"
+        }
+      }
+    },
     "StorageServicesForPatchRequest": {
       "description": "The storage services details",
       "type": "object",
       "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          },
+          "description": "The user assigned identity to be used to grant permissions",
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoindexer-mi"
+        }
+      }
+    },
+    "OpenAiServicesForPatchRequest": {
+      "description": "The openAi services details",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CognitiveServices/accounts"
+              }
+            ]
+          },
+          "description": "The openAi services resource id",
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.CognitiveServices/accounts/contoso-viopenai-ms"
+        },
         "userAssignedIdentity": {
           "type": "string",
           "format": "arm-id",

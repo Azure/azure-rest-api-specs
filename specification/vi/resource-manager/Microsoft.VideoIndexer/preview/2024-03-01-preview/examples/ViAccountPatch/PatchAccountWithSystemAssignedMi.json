@@ -2,11 +2,14 @@
   "parameters": {
     "accountName": "contoso-videoindexer",
     "resourceGroupName": "contoso-videoindexer-rg",
-    "api-version": "2023-11-01-preview",
+    "api-version": "2024-03-01-preview",
     "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
     "parameters": {
       "properties": {
-        "storageServices": {}
+        "storageServices": {},
+        "openAiServices": {
+          "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.CognitiveServices/accounts/contoso-viopenai-ms"
+        }
       },
       "identity": {
         "type": "SystemAssigned"
@@ -27,6 +30,9 @@
           "accountName": "contoso-videoindexer",
           "storageServices": {
             "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoindexer-ms"
+          },
+          "openAiServices": {
+            "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.CognitiveServices/accounts/contoso-viopenai-ms"
           },
           "totalSecondsIndexed": 0,
           "provisioningState": "Succeeded"
