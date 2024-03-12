@@ -418,6 +418,7 @@
             "SpringBootAdmin",
             "SpringCloudEureka",
             "SpringCloudConfig"
+            "Nacos",
           ],
           "type": "string",
           "x-ms-enum": {
@@ -465,6 +466,17 @@
       "x-ms-client-flatten": true,
       "discriminator": "componentType"
     },
+    "JavaComponentIngress": {
+      "description": "Container App Ingress configuration.",
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "description": "Hostname of the Java Component endpoint",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SpringBootAdminComponent": {
       "description": "Spring Boot Admin properties.",
       "type": "object",
@@ -474,26 +486,28 @@
         }
       ],
       "properties": {
-        "fqdn": {
-          "description": "Hostname of the Java Component endpoint",
-          "type": "string",
-          "readOnly": true
-        },
-        "httpEndpoint": {
-          "description": "Whether the Java Component exposes an external http endpoint",
-          "default": "Internal",
-          "enum": [
-            "External",
-            "Internal"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "HttpEndpointEnum",
-            "modelAsString": true
-          }
+        "ingress": {
+          "$ref": "#/definitions/JavaComponentIngress",
+          "description": "Java Component Ingress configurations."
         }
       },
       "x-ms-discriminator-value": "SpringBootAdmin"
+    },
+    "NacosComponent": {
+      "description": "Nacos properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      ],
+      "properties": {
+        "ingress": {
+          "$ref": "#/definitions/JavaComponentIngress",
+          "description": "Java Component Ingress configurations."
+        }
+      },
+      "x-ms-discriminator-value": "Nacos"
     },
     "SpringCloudEurekaComponent": {
       "description": "Spring Cloud Eureka properties.",
@@ -504,23 +518,9 @@
         }
       ],
       "properties": {
-        "fqdn": {
-          "description": "Hostname of the Java Component endpoint",
-          "type": "string",
-          "readOnly": true
-        },
-        "httpEndpoint": {
-          "description": "Whether the Java Component exposes an external http endpoint",
-          "default": "Internal",
-          "enum": [
-            "External",
-            "Internal"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "HttpEndpointEnum",
-            "modelAsString": true
-          }
+        "ingress": {
+          "$ref": "#/definitions/JavaComponentIngress",
+          "description": "Java Component Ingress configurations."
         }
       },
       "x-ms-discriminator-value": "SpringCloudEureka"
