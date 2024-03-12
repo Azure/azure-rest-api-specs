@@ -2557,6 +2557,11 @@
           "description": "File workspace name.",
           "type": "string"
         },
+        "isTemporaryTicket": {
+          "description": "This property indicates if support ticket is a temporary ticket.",
+          "type": "string",
+          "readOnly": true
+        },
         "technicalTicketDetails": {
           "$ref": "#/definitions/TechnicalTicketDetails",
           "description": "Additional ticket details associated with a technical support ticket request."
@@ -2907,9 +2912,6 @@
     },
     "MessageProperties": {
       "description": "Describes the properties of a Message Details resource.",
-      "required": [
-        "body"
-      ],
       "type": "object",
       "properties": {
         "contentType": {
@@ -3030,17 +3032,17 @@
           "readOnly": true
         },
         "chunkSize": {
-          "description": "Size of each chunk in bytes",
+          "description": "Size of each chunk. The size of each chunk should be provided in bytes and must not exceed 2.5 megabytes (MB).",
           "type": "integer",
           "format": "int32"
         },
         "fileSize": {
-          "description": "Size of the file to be uploaded in bytes",
+          "description": "Size of the file to be uploaded. The file size must not exceed 5 MB and should be provided in bytes.",
           "type": "integer",
           "format": "int32"
         },
         "numberOfChunks": {
-          "description": "Number of chunks to be uploaded",
+          "description": "Number of chunks to be uploaded. The maximum number of allowed chunks is 2.",
           "type": "integer",
           "format": "int32"
         }
