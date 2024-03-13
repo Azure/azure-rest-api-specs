@@ -551,6 +551,23 @@
       "title": "NodeCount",
       "default": 3
     },
+    "CustomizationData": {
+      "type": "object",
+      "description": "Object representing the different fields of customization data.",
+      "title": "CustomizationData",
+      "properties": {
+        "hostLevel": {
+          "type": "string",
+          "readOnly": false,
+          "description": "CCF Property for the logging level for the untrusted host: Trace, Debug, Info, Fail, Fatal."
+        },
+        "maxBodySize": {
+          "type": "string",
+          "readOnly": false,
+          "description": "CCF Property for the maximum size of the http request body: 1MB, 5MB, 10MB."
+        }
+      }
+    },
     "ManagedCCFProperties": {
       "type": "object",
       "description": "Additional Managed CCF properties.",
@@ -601,6 +618,11 @@
           "format": "int32",
           "description": "Number of CCF nodes in the Managed CCF.",
           "$ref": "#/definitions/NodeCount"
+        },
+        "customizationData": {
+          "type": "object",
+          "description": "Additional Managed CCF deployment-time customizations.",
+          "$ref": "#/definitions/CustomizationData"
         }
       }
     },
