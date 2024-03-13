@@ -2659,46 +2659,16 @@
     "GalleryRemoteContainerImageProperties": {
       "properties": {
         "sourceProfile": {
-          "type": "object",
-          "properties": {
-            "registryCredentials": {
-              "type": "object",
-              "properties": {
-                "server": {
-                  "type": "string",
-                  "example": "registry.azurecr.io"
-                },
-                "activeKey": {
-                  "type": "object",
-                  "properties": {
-                    "sourceVault": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "/subscriptions/49d70b3e-440a-41ee-8559-6a94d952b5d6/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVault"
-                        }
-                      }
-                    },
-                    "secretUrl": {
-                      "type": "string",
-                      "example": "https://myVault.vault.azure.net/secrets/mysecret/b432becabcde4b26143250d2cb07f374"
-                    }
-                  }
-                },
-                "imageReference": {
-                  "type": "string",
-                  "example": "registry.azurecr.io/hello-world@sha256:4a1c4b21597c1b4415bdbecb28a3296c6b5e23ca4f9feeb599860a1dac6a0108"
-                }
-              }
-            },
-            "provisioningState": {
-              "type": "string",
-              "example": "Succeeded"
-            }
-          }
+          "$ref": "#/definitions/GalleryRemoteContainerImageSourceProfile"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/GalleryProvisioningState"
         }
       },
+      "required": [
+        "sourceProfile"
+      ],
       "description": "Describes the properties of a gallery remote container image."
     },
     "GalleryImageVersion": {
@@ -3571,6 +3541,51 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "GalleryRemoteContainerImageSourceProfile": {
+      "properties": {
+        "registryCredentials": {
+          "$ref": "#/definitions/RegistryCredentials"
+        },
+        "imageReference": {
+          "type": "string",
+          "description": "The fully qualified domain name of the image registry container reference."
+        }
+      },
+      "description": "This is the source profile of a Gallery Remote Container Image."
+    },
+    "RegistryCredentials": {
+      "properties": {
+        "server": {
+          "type": "string",
+          "description": "The fully qualified domain name of the image registry container reference."
+         },
+        "activeKey": {
+          "$ref": "#/definitions/ActiveKey"
+        }
+      },
+      "description": "This is the registry credentials to access the contaienr image registry for creating a Gallery Remote Container Image."
+    },
+    "ActiveKey": {
+      "properties": {
+        "secretUrl": {
+          "type": "string",
+          "description": "The path to the secret along with the version."
+         },
+        "sourceVault": {
+          "$ref": "#/definitions/SourceVault"
+        }
+      },
+      "description": "This encapsulates the KeyVault id and the secret path to access within KeyVault."
+    },
+    "SourceVault": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The KeyVault ARM resource id."
+         }
+      },
+      "description": "Contains they KeyVault ARM resource id."
     }
   },
   "parameters": {
