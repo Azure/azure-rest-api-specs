@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Microsoft.HybridOnboarding;
 
@@ -21,7 +22,33 @@ model ExtensionManager is TrackedResource<ExtensionManagerProperties> {
   @path
   name: string;
 
-  ...ManagedSystemAssignedIdentity;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Managed Identity of extension manager resource")
+  identity: ManagedIdentity;
+}
+
+@doc("Managed Identity of extension manager resource")
+model ManagedIdentity {
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @doc("The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.")
+  @visibility("read")
+  @format("uuid")
+  principalId?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @doc("The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.")
+  @visibility("read")
+  @format("uuid")
+  tenantId?: string;
+
+  @doc("Type of managed service identity")
+  type: ManagedIdentityType;
+}
+
+@doc("Type of managed service identity")
+enum ManagedIdentityType {
+  @doc("System Assigned Managed Identity")
+  SystemAssigned,
 }
 
 @doc("The properties of Extension Manager resource")
@@ -39,10 +66,8 @@ model ExtensionManagerProperties {
 
   @doc("Extension profile of the extension manager resource")
   @visibility("read")
+  @extension("x-ms-identifiers", ["name"])
   extensionProfile?: ExtensionObject[];
-
-  // @doc("Scenario profile of the extension manager resource")
-  // scenarioProfile?: ScenarioObject[];
 }
 
 @doc("Extension object inside the extension profile.")
@@ -58,40 +83,22 @@ model ExtensionObject {
   state: ExtensionState;
 
   @doc("Configuration settings, as name-value pairs for configuring this extension.")
+  @extension("x-nullable", true)
   configurationSettings?: Record<string>;
 
+  @extension("x-nullable", true)
+  @extension("x-ms-secret", true)
   @doc("Configuration settings that are sensitive, as name-value pairs for configuring this extension.")
   configurationProtectedSettings?: Record<string>;
 }
-
-// @doc("Extension details of an extension in extension profile.")
-// model ExtensionDetails {
-//   @visibility("read")
-//   @doc("Custom Location of the extension")
-//   customLocation?: string;
-
-//   @doc("Infra on which extension is deployed.")
-//   infrastructure: string;
-
-//   @doc("Azure scenario enabled. Ex: Migrate")
-//   scenario: string;
-// }
-
-// @doc("Scenario object inside the scenario profile.")
-// model ScenarioObject {
-//   @doc("Infra on which extension is deployed.")
-//   infrastructure: string;
-
-//   @doc("Azure scenario enabled. Ex: Migrate")
-//   scenario: string;
-// }
 
 @doc("Properties of a Extension Manager that can be patched.")
 model ExtensionManagerPatch {
   @doc("Resource tags.")
   tags?: Record<string>;
 
-  ...ManagedSystemAssignedIdentity;
+  @doc("Managed Identity of extension manager resource")
+  identity?: ManagedIdentity;
 }
 
 @doc("Provisioning state of the resource")
@@ -127,8 +134,11 @@ model EnableExtensionsRequestDetails {
   name: string;
 
   @doc("Configuration settings, as name-value pairs for configuring this extension.")
+  @extension("x-nullable", true)
   configurationSettings?: Record<string>;
 
+  @extension("x-nullable", true)
+  @extension("x-ms-secret", true)
   @doc("Configuration settings that are sensitive, as name-value pairs for configuring this extension.")
   configurationProtectedSettings?: Record<string>;
 }
