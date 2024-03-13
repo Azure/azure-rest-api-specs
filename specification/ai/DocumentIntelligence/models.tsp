@@ -394,7 +394,7 @@ model InnerError {
   @doc("A human-readable representation of the error.")
   message?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "Renamed with client name"
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Inner error.")
   @clientName("InnerErrorObject", "csharp")
   innererror?: InnerError;
