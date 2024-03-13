@@ -2983,6 +2983,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/supportedBuildSettingTypes": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List supported build setting types for a Service.",
+        "operationId": "Services_ListSupportedBuildSettingTypes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the supported build setting types.",
+            "schema": {
+              "$ref": "#/definitions/SupportedBuildSettingTypes"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Services_ListSupportedBuildSettingTypes": {
+            "$ref": "./examples/Services_ListSupportedBuildSettingTypes.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builds": {
       "get": {
         "tags": [
@@ -9560,6 +9608,37 @@
       ],
       "items": {
         "$ref": "#/definitions/BuildSettingReference"
+      }
+    },
+    "SupportedBuildSettingTypes": {
+      "description": "Supported build setting types payload",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of the supported build setting type",
+          "uniqueItems": false,
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "items": {
+            "$ref": "#/definitions/SupportedBuildSettingType"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "SupportedBuildSettingType": {
+      "description": "Supported build setting type",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the supported build setting type",
+          "type": "string"
+        }
       }
     },
     "BuildCollection": {
