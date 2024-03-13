@@ -385,8 +385,14 @@
       "type": "object",
       "properties": {
         "route": {
-          "$ref": "#/definitions/scgRoute",
-          "description": "Gateway route definition"
+          "description": "Gateway route definition",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/scgRoute"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
