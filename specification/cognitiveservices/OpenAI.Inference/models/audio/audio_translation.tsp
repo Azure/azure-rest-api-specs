@@ -7,7 +7,9 @@ using TypeSpec.Versioning;
 
 @doc("Defines available options for the underlying response format of output translation information.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum AudioTranslationFormat {
+union AudioTranslationFormat {
+  string,
+
   @doc("Use a response body that is a JSON object containing a single 'text' field for the translation.")
   json: "json",
 
