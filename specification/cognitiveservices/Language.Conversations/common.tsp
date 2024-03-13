@@ -194,7 +194,7 @@ model RequestStatistics {
   validDocumentsCount: int32;
 
   @doc("Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.")
-  erroneousDocumentCount: int32;
+  erroneousDocumentsCount: int32;
 
   @doc("Number of transactions for the request.")
   transactionsCount: int64;

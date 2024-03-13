@@ -32,9 +32,8 @@ model CustomEntitiesResult is CustomResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
 model CustomEntitiesResultWithDocumentDetectedLanguage is CustomResult {
-  ...DocumentDetectedLanguage;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  documents: Array<EntitiesDocumentResult>;
+  documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
 }
 
 @doc("Supported parameters for a Custom Single Classification task.")
@@ -57,9 +56,9 @@ model CustomLabelClassificationResult is CustomResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model CustomLabelClassificationResultWithDocumentDetectedLanguage
-  is CustomLabelClassificationResult {
-  ...DocumentDetectedLanguage;
+model CustomLabelClassificationResultWithDocumentDetectedLanguage is CustomResult {
+  @doc("Response by document")
+  documents: Array<ClassificationDocumentResultWithDetectedLanguage>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -87,6 +86,11 @@ model CustomMultiLabelClassificationLROTask extends AnalyzeTextLROTask {
 model ClassificationDocumentResult is DocumentResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   class: Array<ClassificationResult>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model ClassificationDocumentResultWithDetectedLanguage is ClassificationDocumentResult {
+  ...DocumentDetectedLanguage;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"

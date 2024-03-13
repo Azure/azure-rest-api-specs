@@ -1084,7 +1084,7 @@
           "description": "Language of the conversation item in BCP-47 format."
         },
         "modality": {
-          "$ref": "#/definitions/Modality",
+          "$ref": "#/definitions/InputModality",
           "description": "modality"
         },
         "domain": {
@@ -1252,7 +1252,7 @@
           "description": "The override language of a conversation item in BCP 47 language representation."
         },
         "modality": {
-          "$ref": "#/definitions/Modality",
+          "$ref": "#/definitions/InputModality",
           "description": "Enumeration of supported conversational modalities."
         },
         "role": {
@@ -1578,7 +1578,7 @@
           "format": "int32",
           "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
         },
-        "erroneousDocumentCount": {
+        "erroneousDocumentsCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
@@ -1607,7 +1607,7 @@
       "required": [
         "documentsCount",
         "validDocumentsCount",
-        "erroneousDocumentCount",
+        "erroneousDocumentsCount",
         "transactionsCount",
         "conversationsCount",
         "validConversationsCount",
@@ -2591,6 +2591,18 @@
       ],
       "additionalProperties": {}
     },
+    "InputModality": {
+      "type": "string",
+      "description": "Enumeration of supported conversational modalities.",
+      "enum": [
+        "transcript",
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "InputModality",
+        "modelAsString": true
+      }
+    },
     "InputWarning": {
       "type": "object",
       "description": "Contains details of warnings encountered during a job execution.",
@@ -3009,18 +3021,6 @@
         "key",
         "value"
       ]
-    },
-    "Modality": {
-      "type": "string",
-      "description": "Enumeration of supported conversational modalities.",
-      "enum": [
-        "transcript",
-        "text"
-      ],
-      "x-ms-enum": {
-        "name": "Modality",
-        "modelAsString": true
-      }
     },
     "MultiLanguageConversationAnalysisInput": {
       "type": "object",
@@ -3494,7 +3494,7 @@
           "format": "int32",
           "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
         },
-        "erroneousDocumentCount": {
+        "erroneousDocumentsCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
@@ -3508,7 +3508,7 @@
       "required": [
         "documentsCount",
         "validDocumentsCount",
-        "erroneousDocumentCount",
+        "erroneousDocumentsCount",
         "transactionsCount"
       ]
     },
@@ -3675,9 +3675,9 @@
         "KilometersPerMinute",
         "KilometersPerSecond",
         "MilesPerHour",
-        "Knots",
-        "FeetPerSecond",
-        "FeetPerMinute",
+        "Knot",
+        "FootPerSecond",
+        "FootPerMinute",
         "YardsPerMinute",
         "YardsPerSecond",
         "MetersPerMillisecond",
@@ -4132,7 +4132,7 @@
           "description": "The override language of a conversation item in BCP 47 language representation."
         },
         "modality": {
-          "$ref": "#/definitions/Modality",
+          "$ref": "#/definitions/InputModality",
           "description": "Enumeration of supported conversational modalities."
         },
         "role": {
@@ -4204,7 +4204,7 @@
           "description": "The override language of a conversation item in BCP 47 language representation."
         },
         "modality": {
-          "$ref": "#/definitions/Modality",
+          "$ref": "#/definitions/InputModality",
           "description": "Enumeration of supported conversational modalities."
         },
         "role": {

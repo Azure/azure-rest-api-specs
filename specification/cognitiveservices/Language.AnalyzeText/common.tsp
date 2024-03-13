@@ -121,19 +121,28 @@ alias ShowStatsQueryParameter = QueryParametersTrait<{
   showStats?: boolean;
 }>;
 
-alias AnalyzeTextQueryParameters = QueryParametersTrait<{
+alias AnalyzeTextJobQueryParameters = QueryParametersTrait<{
   @doc("(Optional) if set to true, response will contain request and document level statistics.")
   @query
   showStats?: boolean;
 
-  @doc("An offset into the collection of the first resource to be returned.")
-  @query
-  skip?: int32;
-
   @doc("The maximum number of resources to return from the collection.")
   @query
   top?: int32;
+
+  @doc("An offset into the collection of the first resource to be returned.")
+  @query
+  skip?: int32;
 }>;
+
+@doc("Query parameters for the AnalyzeText operation.")
+model AnalyzeTextQueryParameters {
+  ...Azure.Core.Foundations.ApiVersionParameter;
+  @doc("(Optional) if set to true, response will contain request and document level statistics.")
+  @query
+  showStats?: boolean;
+}
+
 
 @doc("job state")
 model JobState {
@@ -167,7 +176,7 @@ model JobState {
 @doc("job errors")
 model JobErrors {
   @doc("errors")
-  errors: Array<ErrorResponse>;
+  errors?: Array<ErrorResponse>;
 }
 
 @doc("Contains details of errors encountered during a job execution.")

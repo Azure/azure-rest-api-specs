@@ -1538,11 +1538,11 @@ enum SpeedUnit {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'MilesPerHour' should have a documentation or description, please use decorator @doc to add it."
   MilesPerHour,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Knot' should have a documentation or description, please use decorator @doc to add it."
-  Knots,
+  Knot,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'FootPerSecond' should have a documentation or description, please use decorator @doc to add it."
-  FeetPerSecond,
+  FootPerSecond,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'FootPerMinute' should have a documentation or description, please use decorator @doc to add it."
-  FeetPerMinute,
+  FootPerMinute,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'YardsPerMinute' should have a documentation or description, please use decorator @doc to add it."
   YardsPerMinute,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'YardsPerSecond' should have a documentation or description, please use decorator @doc to add it."
@@ -1754,7 +1754,6 @@ op analyzeConversations(
   @doc("Collection of conversations to analyze and a single task to execute.")
   @body
   body: AnalyzeConversationTask,
-
   ...Azure.Core.Foundations.ApiVersionParameter,
 ): AnalyzeConversationTaskResult | Azure.Core.Foundations.ErrorResponse;
 

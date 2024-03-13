@@ -55,6 +55,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/AnalyzeTextQueryParameters.showStats"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "Collection of documents to analyze and a single task to execute.",
@@ -154,17 +157,17 @@
             "type": "boolean"
           },
           {
-            "name": "skip",
+            "name": "top",
             "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
+            "description": "The maximum number of resources to return from the collection.",
             "required": false,
             "type": "integer",
             "format": "int32"
           },
           {
-            "name": "top",
+            "name": "skip",
             "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
+            "description": "An offset into the collection of the first resource to be returned.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -862,6 +865,43 @@
             "$ref": "#/definitions/ClassificationResult"
           },
           "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "class"
+      ]
+    },
+    "ClassificationDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "class": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -2184,10 +2224,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "errors"
-      ]
+      }
     },
     "JobState": {
       "type": "object",
@@ -3483,7 +3520,7 @@
       "type": "object",
       "properties": {
         "sentiment": {
-          "$ref": "#/definitions/SentimentValue"
+          "$ref": "#/definitions/TokenSentimentValue"
         },
         "confidenceScores": {
           "$ref": "#/definitions/TargetConfidenceScoreLabel"
@@ -3823,33 +3860,43 @@
       "type": "object",
       "description": "Sentiment analysis per document.",
       "properties": {
-        "errors": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
+        "sentiment": {
+          "$ref": "#/definitions/Sentiment",
+          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
         },
-        "documents": {
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores"
+        },
+        "sentences": {
           "type": "array",
-          "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/SentimentResponseWithDocumentDetectedLanguage"
-          }
+            "$ref": "#/definitions/SentenceSentiment"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "errors",
-        "modelVersion",
-        "documents"
+        "id",
+        "warnings",
+        "sentiment",
+        "confidenceScores",
+        "sentences"
       ]
     },
     "SentimentResponseWithDocumentDetectedLanguage": {
@@ -4185,6 +4232,19 @@
         "tasks"
       ]
     },
+    "TokenSentimentValue": {
+      "type": "string",
+      "description": "The predicted Sentiment for the sentence.",
+      "enum": [
+        "positive",
+        "mixed",
+        "negative"
+      ],
+      "x-ms-enum": {
+        "name": "TokenSentimentValue",
+        "modelAsString": true
+      }
+    },
     "Versions": {
       "type": "string",
       "description": "Analyze Conversations Service Versions",
@@ -4223,6 +4283,14 @@
     }
   },
   "parameters": {
+    "AnalyzeTextQueryParameters.showStats": {
+      "name": "showStats",
+      "in": "query",
+      "description": "(Optional) if set to true, response will contain request and document level statistics.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",

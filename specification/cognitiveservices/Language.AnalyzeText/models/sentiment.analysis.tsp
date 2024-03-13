@@ -36,7 +36,8 @@ model SentimentTaskResult extends AnalyzeTextTaskResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskResultsKind.SentimentAnalysisResults;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  results: SentimentResponse;
+  @typeChangedFrom(Versions.v2023_04_15_preview, SentimentResponse)
+  results: SentimentResponseWithDocumentDetectedLanguage;
 }
 
 @doc("The predicted Sentiment for the sentence.")
@@ -49,10 +50,18 @@ enum SentimentValue {
   negative,
 }
 
+@doc("The predicted Sentiment for the sentence.")
+enum TokenSentimentValue {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  positive,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  mixed,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  negative,
+}
+
 @doc("Sentiment analysis per document.")
-model SentimentResponse is PreBuiltResult {
-  @doc("Response by document")
-  documents: Array<SentimentResponseWithDocumentDetectedLanguage>;
+model SentimentResponse is SentimentDocumentResult {
 }
 
 @doc("Sentiment analysis per document.")
@@ -129,7 +138,7 @@ enum SentenceTargetSentimentValue {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentenceAssessment {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  sentiment: SentimentValue;
+  sentiment: TokenSentimentValue;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   confidenceScores: TargetConfidenceScoreLabel;
 

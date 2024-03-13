@@ -92,8 +92,7 @@ op analyzeText(
   @doc("Collection of documents to analyze and a single task to execute.")
   @body
   body: AnalyzeTextTask,
-
-  ...Azure.Core.Foundations.ApiVersionParameter,
+  ...AnalyzeTextQueryParameters
 ): AnalyzeTextTaskResult | Azure.Core.Foundations.ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -108,7 +107,7 @@ op analyzeText(
 // @example("./SuccessfulHealthcareTaskStatusRequest.json", "SuccessfulHealthcareTaskStatusRequest")
 op analyzeTextJobStatus is Operations.ResourceRead<
   AnalyzeTextJobState,
-  AnalyzeTextQueryParameters
+  AnalyzeTextJobQueryParameters
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
